@@ -141,7 +141,7 @@ void KarmWindow::makeMenus()
 		    SLOT(resetSessionTime()),actionCollection(),
 		    "reset_session_time");
   
-  (void)new KAction(i18n("&Start"), QString::fromLatin1("clock"),
+  (void)new KAction(i18n("&Start"), QString::fromLatin1("1rightarrow"),
 		    CTRL + Key_S ,_karm,
 		    SLOT(startTimer()),actionCollection(),"start");
   	
@@ -157,11 +157,11 @@ void KarmWindow::makeMenus()
                     actionCollection(), "new_sub_task");
                          
  	
-  (void)new KAction(i18n("&Delete"), QString::fromLatin1("filedel"),
+  (void)new KAction(i18n("&Delete"), QString::fromLatin1("editdelete"),
 		    Key_Delete,_karm,
 		    SLOT(deleteTask()),actionCollection(),"delete_task");
  	
-  (void)new KAction(i18n("&Edit"), QString::fromLatin1("clockedit"),
+  (void)new KAction(i18n("&Edit"), QString::fromLatin1("edit"),
 		    CTRL + Key_E,_karm,
 		    SLOT(editTask()),actionCollection(),"edit_task");
  	
