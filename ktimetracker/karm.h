@@ -44,10 +44,10 @@ public slots:
   		string		task name
 	*/
 	void load();
-	void readFromFile(const char *);
+	void readFromFile(const QString &s);
 	///
 	void save();
-	bool writeToFile(const char *fname);
+	bool writeToFile(const QString &fname);
 	
 
 	///
@@ -89,7 +89,7 @@ signals:
 
 	/** raised on file read or write error.
 	*/
-	void fileError( const char * );
+	void fileError( const QString & );
 
 	/** raised on changes to the list, rather than to a
 	* particular item.

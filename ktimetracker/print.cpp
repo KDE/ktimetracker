@@ -58,8 +58,9 @@ void MyPrinter::Print()
 		int height = metrics.height();
 		QString now = QDateTime::currentDateTime().toString();
 		
-		painter.drawText(xMargin, yoff, pageWidth, height, QPainter::AlignCenter, 
-										 "KArm - " + now);
+		painter.drawText(xMargin, yoff, pageWidth, height,
+				 QPainter::AlignCenter, 
+				 i18n("KArm - %1").arg(now));
 		
 		painter.setFont(origFont);
 		yoff += height + 10;
@@ -71,17 +72,16 @@ void MyPrinter::Print()
     painter.drawLine(xMargin, yoff, xMargin + pageWidth, yoff);
     yoff += 2;
     
-		// Now print the actual content
-		for (QListViewItem *child = _karm->firstChild(); child;
-				 child = child->nextSibling()) {
-			Task *task = (Task *) child;
-			QString totalTime = Karm::formatTime(task->totalTime());
-			QString sessionTime = Karm::formatTime(task->sessionTime());
-			QString name = task->name();
+    // Now print the actual content
+    for (QListViewItem *child = _karm->firstChild(); child;
+	 child = child->nextSibling()) {
+      Task *task = (Task *) child;
+      QString totalTime = Karm::formatTime(task->totalTime());
+      QString sessionTime = Karm::formatTime(task->sessionTime());
+      QString name = QString::fromLatin1(task->name());
 			
       PrintLine(totalTime, sessionTime, name, painter);
     }
-    
 
     yoff += 4;
     painter.drawLine(xMargin, yoff, xMargin + pageWidth, yoff);

@@ -25,6 +25,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.12  2000/06/02 17:45:39  blackie
+ * better print layout + added session time for each task
+ *
  * Revision 1.11  2000/06/02 06:04:26  kalle
  * Changing the time in the edit dialog also updates the total time tally
  * in the status bar.
@@ -53,7 +56,7 @@
 #include "adddlg.moc"
 
 AddTaskDialog::AddTaskDialog( QWidget *parent, const char *name, bool modal )
-  :KDialogBase( parent, name, modal, "task", Ok|Cancel, Ok, true )
+  :KDialogBase( parent, name, modal, i18n("Task"), Ok|Cancel, Ok, true )
 {
   QWidget *page = new QWidget( this ); 
   setMainWidget(page);
@@ -155,8 +158,8 @@ bool TimeValidator::extractTime(QString time, long *res) const
   while (!time.isEmpty()) {
 	pm = nextPm;
 		
-	int plusIndex = time.find("+");
-	int minusIndex = time.find("-");
+	int plusIndex = time.find('+');
+	int minusIndex = time.find('-');
 	if ( (plusIndex != -1 && minusIndex != -1 && plusIndex < minusIndex) ||
 		 minusIndex == -1) {
 	  if (plusIndex != -1) {
@@ -181,24 +184,22 @@ bool TimeValidator::extractTime(QString time, long *res) const
 	  }
 	}
 
-	int colonIndex = part.find(":");
+	int colonIndex = part.find(':');
 	if (colonIndex != -1) {
 	  QString hour = part.left(colonIndex);
 	  QString min = part.remove(0,colonIndex+1);
-	  if (hour.stripWhiteSpace() != "") 
+	  if (!hour.stripWhiteSpace().isEmpty()) 
 		minutes += pm * 60 * hour.toLong(&ok1);
-	  if (min.stripWhiteSpace() != "")
+	  if (!min.stripWhiteSpace().isEmpty())
 		minutes += pm * min.toLong(&ok2);
 	}
 	else {
-	  if (part.stripWhiteSpace() != "")
+	  if (!part.stripWhiteSpace().isEmpty())
 		minutes += pm * part.toLong(&ok1);
 	}
 	if (!ok1 || !ok2) {
 	  return false;
 	}
-
-		
   }
   if (minutes < 0)
 	minutes = 0;

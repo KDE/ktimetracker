@@ -53,111 +53,112 @@ void Karm::load()
   QFileInfo info;
   KConfig &config = *kapp->config();
   
-  config.setGroup( "Karm" );
+  config.setGroup( QString::fromLatin1("Karm") );
   
-  QString defaultPath( locateLocal("appdata", "karmdata.txt"));
-	
-  info.setFile( config.readEntry( "DataPath", defaultPath ) );
+  QString defaultPath( locateLocal("appdata",
+				   QString::fromLatin1("karmdata.txt")) );
+
+  info.setFile( config.readEntry( QString::fromLatin1("DataPath"),
+				  defaultPath ) );
 
   if( info.exists() ) 
   {
-		readFromFile( info.filePath().ascii() );
+    readFromFile( info.filePath() );
     return;	
   }
 }
 
-
-void Karm::readFromFile( const char *fname ) 
+void Karm::readFromFile( const QString &fname ) 
 {
-	if ( fname == 0 )
-		return;
+  if ( fname.isNull() )
+    return;
 
-	QFile file( fname );
+  QFile file( fname );
 
-	if( !file.open( IO_ReadOnly ) ) {
-		// file open error
-		emit fileError( fname );
-		return;
-	}
+  if( !file.open( IO_ReadOnly ) ) {
+    // file open error
+    emit fileError( fname );
+    return;
+  }
 
-	QString line;
+  QString line;
 
-	while( !file.atEnd() ) {
-		if ( file.readLine( line, T_LINESIZE ) == 0 )
-			break;
+  while( !file.atEnd() ) {
+    if ( file.readLine( line, T_LINESIZE ) == 0 )
+      break;
 
-		if (line.find("#") == 0) {
-			// A comment line
-			continue;
-		}
+    if (line.find('#') == 0) {
+      // A comment line
+      continue;
+    }
 		
-		int index = line.find("\t");
-		if (index == -1) {
-			// This doesn't seem like a valid record
-			continue;
-		}
+    int index = line.find('\t');
+    if (index == -1) {
+      // This doesn't seem like a valid record
+      continue;
+    }
 		
-		QString time = line.left(index);
-		QString name = line.remove(0,index);
+    QString time = line.left(index);
+    QString name = line.remove(0,index);
 		
-		bool ok;
-		long minutes = time.toLong(&ok);
+    bool ok;
+    long minutes = time.toLong(&ok);
 		
-		if (!ok) {
-			// the time field was not a number
-			continue;
-		}
-		new Task(name, minutes, 0, this);
-	}
+    if (!ok) {
+      // the time field was not a number
+      continue;
+    }
+    new Task(name, minutes, 0, this);
+  }
 }
-
 
 void Karm::save()
 {
-  KConfig &config = *kapp->config();
+  KConfig &config = *KGlobal::config();
   
-  config.setGroup("Karm");
+  config.setGroup(QString::fromLatin1("Karm"));
 
-  QString defaultPath( locateLocal("appdata", "karmdata.txt"));
-
-
+  QString defaultPath( locateLocal("appdata",
+				   QString::fromLatin1("karmdata.txt")));
 	
-	if(!writeToFile(config.readEntry("DataPath",defaultPath).ascii()))	{
-		QString msg = i18n(""
-											 "There was an error trying to save your data file.\n"	       
-											 "Time accumulated this session will NOT be saved!\n");
+	if( !writeToFile( config.readEntry(QString::fromLatin1("DataPath"),
+					   defaultPath) ) ) {
+		QString msg = i18n
+		  ("There was an error trying to save your data file.\n"
+		   "Time accumulated this session will NOT be saved!\n");
 		KMessageBox::error(0, msg );
 	}
 }
 
-bool Karm::writeToFile(const char *fname)
+bool Karm::writeToFile(const QString &fname)
 {
-	if( fname == 0 ) return 0;
+  if( fname.isNull() ) return 0;
 
-	FILE *file = fopen( fname, "w" );
+  FILE *file = fopen( QFile::encodeName(fname), "w" );
 
-	if( file == 0 ) {
-		emit fileError( fname );
-		return FALSE;
-	}
+  if( file == 0 ) {
+    emit fileError( fname );
+    return FALSE;
+  }
 
-	fputs( "# Karm save data\n", file );	// file comment
-	for (QListViewItem *child =firstChild(); child; child = child->nextSibling()) {
-		Task *task = (Task *) child;
-		fprintf(file, "%ld\t%s\n", 
-			task->totalTime(),
-			task->name());
-	}
-	fclose( file );
+  fputs( "# Karm save data\n", file );	// file comment
+  for (QListViewItem *child =firstChild(); child; child = child->nextSibling()) {
+    Task *task = (Task *) child;
+    fprintf(file, "%ld\t%s\n", 
+	    task->totalTime(),
+	    task->name());
+  }
+  fclose( file );
 
-	emit dataChanged();
+  emit dataChanged();
 
-	return TRUE;
+  return TRUE;
 }
 
 void Karm::stopClock()
 {
-  if( _timerRunning ) {
+  if( _timerRunning )
+  {
     killTimer( _timerId );
     _timerRunning = FALSE;
     
@@ -167,22 +168,24 @@ void Karm::stopClock()
 
 void Karm::startClock()
 {
- if( !_timerRunning && (childCount() > 0)) {
-	 _timerId = startTimer( 60000 );
-	 _timerRunning = TRUE;
+  if( !_timerRunning && (childCount() > 0))
+  {
+    _timerId = startTimer( 60000 );
+    _timerRunning = TRUE;
 	 
-	 emit timerStarted();
- }
+    emit timerStarted();
+  }
 }
 
 void Karm::timerEvent( QTimerEvent *ev )
 {
-	QListView::timerEvent( ev );
+  QListView::timerEvent( ev );
 	
-	if ( _timerRunning && ev->timerId() == _timerId ) {
-		((Task *) currentItem())->incrementTime( 1 );
-		emit timerTick();
-	}
+  if ( _timerRunning && ev->timerId() == _timerId )
+    {
+    ((Task *) currentItem())->incrementTime( 1 );
+    emit timerTick();
+  }
 }
 
 void Karm::newTask()
@@ -231,9 +234,9 @@ void Karm::editTask(QListViewItem *element)
 	{
 		_editDlg = new AddTaskDialog( topLevelWidget(), 0, true );
 		_editDlg->setCaption(i18n("Edit Task"));
-		_editDlg->setTask( task->name(),
-											 task->totalTime(),
-                       task->sessionTime());  
+		_editDlg->setTask( QString::fromLatin1(task->name()),
+				   task->totalTime(),
+				   task->sessionTime());  
 		connect( _editDlg, SIGNAL( finished( bool ) ),
 			 this, SLOT( updateExistingTask( bool ) ) );
 	}
