@@ -14,6 +14,7 @@
 #include<kiconloader.h>
 #include<kapp.h>
 #include <klocale.h>
+#include <kglobal.h>
 #include<ktopwidget.h>
 #include<kmenubar.h>
 #include<ktoolbar.h>
@@ -65,7 +66,7 @@ KarmWindow::KarmWindow()
 
 	// toolbar
 
-	KIconLoader *loader = kapp->getIconLoader();
+	KIconLoader *loader = KGlobal::iconLoader();
 	QPixmap icon;
 
 	icon.loadFromData(clock_xpm_data, clock_xpm_len );
