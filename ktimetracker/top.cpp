@@ -28,7 +28,7 @@ KarmWindow::KarmWindow()
 	setMenu( _mainMenu );
 
 	_toolBar = new KToolBar( this, "_toolBar" );
-	_toolBar->setPos( KToolBar::Top );
+//	_toolBar->setPos( KToolBar::Top );
 	
 	_karm = new Karm(this);
 	setView( _karm, FALSE );
