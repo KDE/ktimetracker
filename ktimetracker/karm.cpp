@@ -248,6 +248,12 @@ void Karm::updateExistingTask( bool retVal )
 	if( retVal && !_editDlg->taskName().isEmpty() ) {
 		Task *task = (Task *) currentItem();
 		task->setName( _editDlg->taskName() );
+
+		// update session time as well if the time was changed
+		if( task->time() != _editDlg->taskTime() ) {
+		  long difference = _editDlg->taskTime() - task->time();
+		  emit sessionTimeChanged( difference );
+		}
 		task->setTime( _editDlg->taskTime() );
 	}
 	

@@ -7,6 +7,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.34  2000/06/01 15:51:09  blackie
+ * added printing capabilities
+ *
  * Revision 1.33  2000/05/29 14:17:09  kalle
  * Keyboard acceleration
  *
@@ -69,6 +72,8 @@ KarmWindow::KarmWindow()
 {
   setView( _karm, FALSE );
   _karm->show();
+  connect( _karm, SIGNAL( sessionTimeChanged( long ) ),
+		   this, SLOT( updateTime( long ) ) );
 
   // status bar
 	
@@ -120,9 +125,26 @@ KarmWindow::~KarmWindow()
   quit();
 }
 
+/**
+ * Updates the total time tally by one minute.
+ */
 void KarmWindow::updateTime()
 {
   _totalTime++;
+  updateStatusBar();
+}
+
+/**
+ * Updates the total time tally by the value specified in newval.
+ */
+void KarmWindow::updateTime( long difference )
+{
+  _totalTime += difference;
+  updateStatusBar();
+}
+
+void KarmWindow::updateStatusBar()
+{
   QString time = Karm::formatTime( _totalTime );
   statusBar()->changeItem( time, 2);
 }

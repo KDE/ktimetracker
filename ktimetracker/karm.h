@@ -21,6 +21,9 @@ private:
 	AddTaskDialog	*_addDlg;
 	AddTaskDialog	*_editDlg;
 
+signals:
+	void sessionTimeChanged( long difference );
+
 public:
 	/** constructor */
 	Karm( QWidget *parent = 0, const char *name = 0 );	

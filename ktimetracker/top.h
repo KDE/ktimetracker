@@ -23,10 +23,14 @@ class KarmWindow : public KTMainWindow
     KarmWindow();
     virtual ~KarmWindow();
 
+  public slots:
+	void updateTime( long difference );
+
   protected slots:
     void prefs();
     void resetSessionTime(); 
     void updateTime();
+	void updateStatusBar();
     void clockStartMsg();
     void clockStopMsg();
     void quit();

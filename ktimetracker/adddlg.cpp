@@ -2,7 +2,7 @@
  *   karm
  *   This file only: Copyright (C) 1999  Espen Sand, espensa@online.no
  *   Modifications (see CVS log) Copyright (C) 2000 Klarälvdalens
- *   Datakonsult AB, <kalle@dalheimer.de>, Jesper Pedersen <blackie@ifad.dk>
+ *   Datakonsult AB <kalle@dalheimer.de>, Jesper Pedersen <blackie@kde.org>
  *
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -25,6 +25,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.10  2000/05/29 13:19:31  kalle
+ * Icon loading in karm
+ *
  * Revision 1.9  2000/05/29 12:30:54  kalle
  * - Replaced the two listboxes with one listview
  * - Times can be specified as HH:MM [(+|-)HH:MM]
