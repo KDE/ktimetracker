@@ -8,6 +8,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.28  1999/12/30 19:48:15  granroth
+ * loadIcon("*.xpm") => BarIcon("*")
+ *
  * Revision 1.27  1999/11/20 19:00:32  espensa
  * Cleanup. Using new Add/Edit Task dialog box
  *
@@ -166,7 +169,7 @@ void KarmWindow::initAccelItems()
 		      CTRL + Key_D );
   _accel->insertItem( i18n( "Edit Task" ), "EditTask",
 		      CTRL + Key_E );
-  _accel->insertStdItem( KAccel::Quit );
+  _accel->insertStdItem( KStdAccel::Quit );
   _accel->readSettings();
 }
 
@@ -174,7 +177,7 @@ void KarmWindow::connectAccels()
 {
   _accel->connectItem( "Prefs",		this,	SLOT(prefs()) );
   _accel->connectItem( "ResetSess",     this, SLOT( resetSessionTime() ) );
-  _accel->connectItem( KAccel::Quit,	kapp, SLOT(closeAllWindows()));
+  _accel->connectItem( KStdAccel::Quit,	kapp, SLOT(closeAllWindows()));
   _accel->connectItem( "StartClock",	_karm,	SLOT(startClock()) );
   _accel->connectItem( "StopClock",	_karm,	SLOT(stopClock()) );
   _accel->connectItem( "NewTask",	_karm,	SLOT(newTask()) );
@@ -226,7 +229,7 @@ void KarmWindow::makeMenus()
 
   _fileMenu->insertSeparator( - 1 );
   id = _fileMenu->insertItem( i18n( "&Quit" ), kapp, SLOT( quit() ) );
-  _watcher->connectAccel( id, KAccel::Quit );
+  _watcher->connectAccel( id, KStdAccel::Quit );
 	
 
   _watcher->setMenu( _clockMenu );

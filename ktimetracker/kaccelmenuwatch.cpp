@@ -39,7 +39,7 @@ void KAccelMenuWatch::connectAccel( int itemId, const char *action )
 	item->action	= action;
 }
 
-void KAccelMenuWatch::connectAccel( int itemId, KAccel::StdAccel accel )
+void KAccelMenuWatch::connectAccel( int itemId, KStdAccel::StdAccel accel )
 {
 	AccelItem *item = newAccelItem( _menu, itemId, StdAccel ) ;
 	item->stdAction	= accel;

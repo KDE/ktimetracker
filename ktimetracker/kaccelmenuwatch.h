@@ -46,7 +46,7 @@ private:
 
 		// only one of these is used at a time
 		QString		action;
-		KAccel::StdAccel stdAction;
+		KStdAccel::StdAccel stdAction;
 		
 	} AccelItem;
 
@@ -93,7 +93,7 @@ public:
 	/** 
 	 * Same as above, but connects to standard accelerators.
 	 */
-	void connectAccel( int itemId, KAccel::StdAccel );
+	void connectAccel( int itemId, KStdAccel::StdAccel );
 	
 public slots:
 	/** 
