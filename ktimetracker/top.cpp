@@ -34,7 +34,6 @@
 #include "preferences.h"
 #include "idle.h"
 
-#include "top.moc"
 KarmWindow::KarmWindow()
   : KTMainWindow(),
 	_accel( new KAccel( this ) ),
@@ -49,9 +48,8 @@ KarmWindow::KarmWindow()
 
   // status bar
 	
-  statusBar()->insertItem( i18n( "clock inactive" ), 0 );
-  statusBar()->insertItem( i18n( "This session:" ), 1 );
-  statusBar()->insertItem( i18n( "0:00" ), 2 );
+  statusBar()->insertItem( i18n( "This session: %1" )
+                           .arg(QString::fromLatin1("0:00")), 0, 0, true );
 
   // setup PreferenceDialog.
   _preferences = Preferences::instance();
@@ -61,8 +59,6 @@ KarmWindow::KarmWindow()
   _watcher->updateMenus();
 
   // connections
-  connect( _karm, SIGNAL(timerStarted()), this, SLOT(clockStartMsg()));
-  connect( _karm, SIGNAL(timerStopped()), this, SLOT(clockStopMsg()));
   connect( _karm, SIGNAL(timerTick()), this, SLOT(updateTime()));
   
   _preferences->load();
@@ -77,10 +73,15 @@ KarmWindow::KarmWindow()
   dockWidget->show();
 }
 
-void KarmWindow::quit()
+void KarmWindow::save() 
 {
   _karm->save();
   saveGeometry();
+}
+
+void KarmWindow::quit()
+{
+  save();
   kapp->quit();
 }
 
@@ -111,23 +112,8 @@ void KarmWindow::updateTime( long difference )
 void KarmWindow::updateStatusBar()
 {
   QString time = Karm::formatTime( _totalTime );
-  statusBar()->changeItem( time, 2);
+  statusBar()->changeItem( i18n("This session: %1" ).arg(time), 0);
 }
-
-void KarmWindow::clockStartMsg()
-{
-  toolBar(0)->setItemEnabled( 0, FALSE);
-  toolBar(0)->setItemEnabled( 1, TRUE );
-  statusBar()->changeItem( i18n( "clock active" ), 0);
-}
-
-void KarmWindow::clockStopMsg()
-{
-  toolBar(0)->setItemEnabled( 1, FALSE);
-  toolBar(0)->setItemEnabled( 0, TRUE );
-  statusBar()->changeItem( i18n( "clock inactive" ), 0);
-}
-
 
 void KarmWindow::saveProperties( KConfig* )
 {
@@ -142,7 +128,7 @@ void KarmWindow::keyBindings()
 void KarmWindow::resetSessionTime()
 {
   _totalTime = 0;
-  statusBar()->changeItem( i18n("0:00"), 2 );
+  statusBar()->changeItem( i18n("This session: %1").arg(QString::fromLatin1("0:00")), 0 );
 }
 
 
@@ -152,17 +138,18 @@ void KarmWindow::makeMenus()
   (void)KStdAction::print(this, SLOT(print()), actionCollection());
   (void)KStdAction::keyBindings(this, SLOT(keyBindings()),actionCollection());
   (void)KStdAction::preferences(_preferences, SLOT(showDialog()),actionCollection());
+  (void)KStdAction::save(_preferences, SLOT(save()),actionCollection());
   (void)new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
 		    SLOT(resetSessionTime()),actionCollection(),
 		    "reset_session_time");
   
   (void)new KAction(i18n("&Start"), QString::fromLatin1("clock"),
 		    CTRL + Key_S ,_karm,
-		    SLOT(startClock()),actionCollection(),"start");
+		    SLOT(startTimer()),actionCollection(),"start");
   	
   (void)new KAction(i18n("S&top"), QString::fromLatin1("stop"),
 		    CTRL + Key_T,_karm,
-		    SLOT(stopClock()),actionCollection(),"stop");
+		    SLOT(stopCurrentTimer()),actionCollection(),"stop");
   (void)KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
 			    actionCollection(),"new_task");
   

@@ -5,22 +5,28 @@
 #include <qlist.h>
 #include <qobject.h>
 #include <qlistview.h>
+#include <qvector.h>
+#include <qpixmap.h>
 #include "karm.h"
 
 class QFile;
+class QTimer;
 
 /**
 	Encapsulates a task.
 */
 
-class Task :public QListViewItem
+class Task :public QObject, public QListViewItem
 {
+Q_OBJECT
 
 private:
 	QString _name;
 	long _totalTime;
   long _sessionTime;
-  
+  QTimer *_timer;
+  int _i;
+  static QVector<QPixmap> *icons;
 
 public:
 	/** constructor */
@@ -65,10 +71,15 @@ public:
 	/** Updates the content of the QListViewItem with respect to _name and _totalTime
 	 */
 	inline void update() {
-		setText(0, Karm::formatTime(_totalTime));
+    setText(0, _name);
 		setText(1, Karm::formatTime(_sessionTime));
-    setText(2, _name);
+		setText(2, Karm::formatTime(_totalTime));
 	}
+  
+  void setRunning(bool on);
+
+protected slots:    
+  void updateActiveIcon();
 };
 
 #endif

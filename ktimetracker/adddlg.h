@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <kdialogbase.h>
 #include <qvalidator.h>
+#include "adddlg.h"
 class QLineEdit;
 
 class TimeValidator :public QValidator 

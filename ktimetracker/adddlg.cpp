@@ -24,23 +24,6 @@
 
 /* 
  * $Id$
- * $Log$
- * Revision 1.12  2000/06/02 17:45:39  blackie
- * better print layout + added session time for each task
- *
- * Revision 1.11  2000/06/02 06:04:26  kalle
- * Changing the time in the edit dialog also updates the total time tally
- * in the status bar.
- *
- * Revision 1.10  2000/05/29 13:19:31  kalle
- * Icon loading in karm
- *
- * Revision 1.9  2000/05/29 12:30:54  kalle
- * - Replaced the two listboxes with one listview
- * - Times can be specified as HH:MM [(+|-)HH:MM]
- * - uses XML GUI
- * - general KDE 2 face- and codelifting
- *
  */
 #include <qlabel.h>
 #include <qlineedit.h>
@@ -53,7 +36,6 @@
 #include "adddlg.h"
 #include "karm.h"
 
-#include "adddlg.moc"
 
 AddTaskDialog::AddTaskDialog( QWidget *parent, const char *name, bool modal )
   :KDialogBase( parent, name, modal, i18n("Task"), Ok|Cancel, Ok, true )

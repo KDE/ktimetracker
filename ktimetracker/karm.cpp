@@ -16,7 +16,6 @@
 #include "task.h"
 #include "karm.h"
 #include "adddlg.h"
-#include "karm.moc"
 #include "idle.h"
 #include "preferences.h"
 
@@ -31,21 +30,22 @@ Karm::Karm( QWidget *parent, const char *name )
   _preferences = Preferences::instance();
   
 	connect(this, SIGNAL(doubleClicked(QListViewItem *)), 
-          this, SLOT(editTask(QListViewItem *)));
+          this, SLOT(changeTimer(QListViewItem *)));
 
+	addColumn(i18n("Task Name"));
 	addColumn(i18n("Total Time"));
   addColumn(i18n("Session Time"));
-	addColumn(i18n("Task Name"));
 	setAllColumnsShowFocus(true);
 
   // set up the minuteTimer
   _minuteTimer = new QTimer(this);
   connect(_minuteTimer, SIGNAL(timeout()), this, SLOT(minuteUpdate()));
+  _minuteTimer->start(1000 * secsPerMinutes);
 
   // Set up the idle detection.
   _idleTimer = new IdleTimer(_preferences->idlenessTimeout());
   connect(_idleTimer, SIGNAL(extractTime(int)), this, SLOT(extractTime(int)));
-  connect(_idleTimer, SIGNAL(stopTimer()), this, SLOT(stopClock()));
+  connect(_idleTimer, SIGNAL(stopTimer()), this, SLOT(stopAllTimers()));
   connect(_preferences, SIGNAL(idlenessTimeout(int)), _idleTimer, SLOT(setMaxIdle(int)));
   connect(_preferences, SIGNAL(detectIdleness(bool)), _idleTimer, SLOT(toggleOverAllIdleDetection(bool)));
   
@@ -153,29 +153,55 @@ bool Karm::writeToFile(const QString &fname)
   return TRUE;
 }
 
-void Karm::stopClock()
+void Karm::startTimer()
 {
-  if(_minuteTimer->isActive()) {
-    _minuteTimer->stop();
-    _idleTimer->stopIdleDetection();    
-    emit(timerStopped());
+  Task *item = ((Task *) currentItem());
+  if (item != 0 && activeTasks.findRef(item) == -1) {
+    _idleTimer->startIdleDetection();
+    item->setRunning(true);
+    activeTasks.append(item);
   }
 }
 
-void Karm::startClock()
-{
-  if( !_minuteTimer->isActive() && (childCount() > 0) && (currentItem() != 0))
-  {
-    _minuteTimer->start(1000 * secsPerMinutes);
-    _idleTimer->startIdleDetection();
-    emit(timerStarted());
+void Karm::stopAllTimers() {
+  for(unsigned int i=0; i<activeTasks.count();i++) {
+    activeTasks.at(i)->setRunning(false);
   }
+  _idleTimer->stopIdleDetection();
+  activeTasks.clear();
+}
+
+
+void Karm::stopCurrentTimer()
+{
+  Task *item = ((Task *) currentItem());
+  if (item != 0 && activeTasks.findRef(item) != -1) {
+    activeTasks.removeRef(item);
+    item->setRunning(false);
+    if (activeTasks.count()== 0) 
+      _idleTimer->stopIdleDetection();    
+  }
+}
+
+void Karm::changeTimer(QListViewItem *)
+{
+  // Stop all the other timers.
+  for (unsigned int i=0; i<activeTasks.count();i++) {
+    (activeTasks.at(i))->setRunning(false);
+  }
+  activeTasks.clear();
+
+  // Start the new timer.
+  startTimer();
 }
 
 void Karm::minuteUpdate()
 {
-  ((Task *) currentItem())->incrementTime( 1 );
-  emit(timerTick());
+  for(unsigned int i=0; i<activeTasks.count();i++) {
+    (activeTasks.at(i))->incrementTime( 1 );
+  }
+  if (activeTasks.count() != 0)
+    emit(timerTick());
 }
 
 void Karm::newTask()
@@ -262,26 +288,35 @@ void Karm::updateExistingTask( bool retVal )
 
 void Karm::deleteTask()
 {
-	if( childCount() == 0 )
-		return;
+  Task *item = ((Task *) currentItem());
+  if (item == 0) {
+    KMessageBox::information(0,i18n("No task selected"));
+    return;
+  }
 	
 	int response = KMessageBox::questionYesNo(0,
-		i18n( "Are you sure you want to delete this task?" ),
+		i18n( "Are you sure you want to delete the task named\n\"%1\"")
+                                            .arg(QString::fromLatin1(item->name())),
 		i18n( "Deleting Task"));
 
 	if (response == KMessageBox::Yes) {
-		delete currentItem();
-		
-		if( childCount() == 0 )
-			stopClock();
+    if (activeTasks.findRef(item) != -1) {
+      activeTasks.removeRef(item);
+      if (activeTasks.count() == 0) {
+        _idleTimer->stopIdleDetection();
+      }
+    }
+		delete item;
 	}
 }
 
 
 void Karm::extractTime(int minutes) 
 {
-  Task *task = (Task *) currentItem();
-  task->decrementTime(minutes);
+  for(unsigned int i=0; i<activeTasks.count();i++) {
+    activeTasks.at(i)->decrementTime(minutes);
+  }
+  emit(sessionTimeChanged(-minutes));
 }
 
 void Karm::autoSaveChanged(bool on)
@@ -302,3 +337,4 @@ void Karm::autoSavePeriodChanged(int /*minutes*/)
 {
   autoSaveChanged(_preferences->autoSave());
 }
+

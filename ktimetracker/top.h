@@ -36,8 +36,7 @@ protected slots:
   void resetSessionTime(); 
   void updateTime();
   void updateStatusBar();
-  void clockStartMsg();
-  void clockStopMsg();
+  void save();
   void quit();
   void print();
 

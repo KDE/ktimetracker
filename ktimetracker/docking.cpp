@@ -19,10 +19,6 @@ DockWidget::~DockWidget() {
 }
 
 
-#include "docking.moc"
-
-
-
 
 
 

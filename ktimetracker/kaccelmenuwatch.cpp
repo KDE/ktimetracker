@@ -8,8 +8,6 @@
 #include<assert.h>
 #include"kaccelmenuwatch.h"
 
-#include "kaccelmenuwatch.moc"
-
 KAccelMenuWatch::KAccelMenuWatch( KAccel *accel, QObject *parent )
 	: QObject( parent ),
 	_accel( accel ),

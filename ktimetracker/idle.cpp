@@ -54,7 +54,7 @@ void IdleTimer::informOverrun(int idleMinutes)
   QString now;
   now.sprintf("%d:%02d", start.time().hour(), start.time().minute());
   
-  int id =  QMessageBox::information(0,i18n("Idle detection"),
+  int id =  QMessageBox::warning(0,i18n("Idle detection"),
                                      i18n("Desktop has been idle since %1."
                                           " What should we do?").arg(now),
                                      i18n("Revert and Stop"), i18n("Revert and Continue"),

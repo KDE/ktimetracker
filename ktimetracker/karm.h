@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <qsplitter.h>
 #include <qlistview.h>
+#include <qlist.h>
 
 class KMenuBar;
 class KToolBar;
@@ -12,6 +13,7 @@ class AddTaskDialog;
 class IdleTimer;
 class QTimer;
 class Preferences;
+class Task;
 
 class Karm : public QListView
 {
@@ -25,7 +27,8 @@ private: // member variables
 	AddTaskDialog	*_addDlg;
 	AddTaskDialog	*_editDlg;
   Preferences *_preferences;
-
+  
+  QList<Task> activeTasks;
 
 public:
 	Karm( QWidget *parent = 0, const char *name = 0 );	
@@ -43,8 +46,10 @@ public slots:
 	void save();
 	void readFromFile(const QString &s);
 	bool writeToFile(const QString &fname);
-	void stopClock();
-	void startClock();
+	void stopCurrentTimer();
+	void stopAllTimers();
+	void startTimer();
+  void changeTimer(QListViewItem *);
 	void newTask();
 	void editTask();
 	void editTask(QListViewItem *);
@@ -79,9 +84,6 @@ signals:
 	* particular item.
 	*/
 	void dataChanged();
-
-	void timerStarted();
-	void timerStopped();
 	void timerTick();
 
 
