@@ -1,3 +1,7 @@
+
+#ifndef KTIMEWIDGET_H_
+#define KTIMEWIDGET_H_
+
 class QLineEdit;
 class KarmLineEdit;
 
@@ -13,5 +17,4 @@ private:
 	KarmLineEdit *_minuteLE;
 };
 
-
-
+#endif
