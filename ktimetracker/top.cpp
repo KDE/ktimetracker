@@ -6,6 +6,7 @@
 
 #include<kiconloader.h>
 #include<kapp.h>
+#include <klocale.h>
 #include<ktopwidget.h>
 #include<kmenubar.h>
 #include<ktoolbar.h>
@@ -35,8 +36,8 @@ KarmWindow::KarmWindow()
 	_karm->show();
 
 	_statusBar = new KStatusBar( this, "_statusBar");
-	_statusBar->insertItem("clock inactive", 0);
-	_statusBar->insertItem("This session:", 1);
+       _statusBar->insertItem(klocale->translate( "clock inactive" ), 0);
+       _statusBar->insertItem(klocale->translate( "This session:" ), 1);
 	_statusBar->insertItem("0:00", 2);
 	_statusBar->show();
 	setStatusBar( _statusBar );
@@ -48,28 +49,28 @@ KarmWindow::KarmWindow()
 	_taskMenu = new QPopupMenu;
 	_helpMenu = new QPopupMenu;
 
-	_mainMenu->insertItem( "&File", _fileMenu);
-		_fileMenu->insertItem("E&xit", KApplication::getKApplication(), 
+       _mainMenu->insertItem( klocale->translate( "&File" ), _fileMenu);
+               _fileMenu->insertItem(klocale->translate( "E&xit" ), KApplication::getKApplication(), 
 						SLOT( quit() ), ALT + Key_Q );
 
-	_mainMenu->insertItem( "&Clock", _clockMenu );
-		_clockMenu->insertItem( "&Start", _karm, SLOT(startClock()) );
-		_clockMenu->insertItem( "S&top", _karm, SLOT(stopClock()) );
+       _mainMenu->insertItem( klocale->translate( "&Clock" ), _clockMenu );
+               _clockMenu->insertItem( klocale->translate( "&Start" ), _karm, SLOT(startClock()) );
+               _clockMenu->insertItem( klocale->translate( "S&top" ), _karm, SLOT(stopClock()) );
 
-	_mainMenu->insertItem( "&Task", _taskMenu);
-		_taskMenu->insertItem("&New", _karm, SLOT(newTask()), 
+       _mainMenu->insertItem( klocale->translate( "&Task" ), _taskMenu);
+               _taskMenu->insertItem( klocale->translate( "&New" ), _karm, SLOT(newTask()), 
 					Key_Insert );
-		_taskMenu->insertItem("&Delete", _karm, SLOT(deleteTask()),
+               _taskMenu->insertItem( klocale->translate( "&Delete" ), _karm, SLOT(deleteTask()),
 					Key_Delete );
-		_taskMenu->insertItem("&Edit", _karm, SLOT(editTask()),
+               _taskMenu->insertItem( klocale->translate( "&Edit" ), _karm, SLOT(editTask()),
 					CTRL + Key_E );
 
 	_mainMenu->insertSeparator();
 
-	_mainMenu->insertItem( "&Help", _helpMenu );
-		_helpMenu->insertItem("&Contents", this, SLOT( help() ) );
+       _mainMenu->insertItem( klocale->translate( "&Help" ), _helpMenu );
+               _helpMenu->insertItem( klocale->translate( "&Contents" ), this, SLOT( help() ) );
 		_helpMenu->insertSeparator();
-		_helpMenu->insertItem("&About", this, SLOT( about() ) );
+               _helpMenu->insertItem( klocale->translate( "&About" ), this, SLOT( about() ) );
 
 	// setup toolbars
 	QString directory = KApplication::getKApplication()->kdedir() 
@@ -81,29 +82,29 @@ KarmWindow::KarmWindow()
 	icon.loadFromData(clock_xpm_data, clock_xpm_len );
 	_toolBar->insertButton( icon, 0, SIGNAL(clicked()), 
 			_karm, SLOT(startClock()),
-			TRUE, "Start Clock");
+                       TRUE, klocale->translate( "Start Clock" ) );
 
 	icon.load(directory + "toolbar/stop.xpm");
 	_toolBar->insertButton( icon, 1, SIGNAL(clicked()),
 			_karm, SLOT(stopClock()),
-			FALSE, "Stop Clock");
+                       FALSE, klocale->translate( "Stop Clock" ) );
 	
 	_toolBar->insertSeparator();
 
 	icon.load(directory + "toolbar/filenew.xpm");
 	_toolBar->insertButton( icon, 2, SIGNAL(clicked()),
 			_karm, SLOT(newTask()),
-			TRUE, "New Task");
+                       TRUE, klocale->translate( "New Task" ) );
 
 	icon.load(directory + "toolbar/filedel.xpm");
 	_toolBar->insertButton( icon, 3, SIGNAL(clicked()),
 			_karm, SLOT(deleteTask()),
-			TRUE, "Delete Task");
+                       TRUE, klocale->translate( "Delete Task" ) );
 
 	icon.loadFromData( clockedit_xpm_data, clockedit_xpm_len );
 	_toolBar->insertButton( icon, 4, SIGNAL(clicked()),
 			_karm, SLOT(editTask()),
-			TRUE, "Edit Task");
+                       TRUE, klocale->translate( "Edit Task" ) );
 
 	_toolBar->show();
 	enableToolBar( KToolBar::Show, addToolBar( _toolBar ) );
@@ -141,10 +142,10 @@ void KarmWindow::help()
 
 void KarmWindow::about()
 {
-        KMsgBox::message(0, "About " + _karm->KarmName, 
-			_karm->KarmName + " 0.3 -- Sirtaj Singh Kang\n"
+        KMsgBox::message(0, klocale->translate( "About " ) + _karm->KarmName, 
+                       _karm->KarmName + klocale->translate( " 0.3 -- Sirtaj Singh Kang\n"
 			"taj@kde.org, Oct 1997\n\n"
-			"The K Desktop Environment"); 
+                       "The K Desktop Environment" )); 
 }
 
 void KarmWindow::updateTime()
@@ -160,14 +161,14 @@ void KarmWindow::clockStartMsg()
 {
 	_toolBar->setItemEnabled( 0, FALSE);
 	_toolBar->setItemEnabled( 1, TRUE );
-	_statusBar->changeItem( "clock active", 0);
+       _statusBar->changeItem( klocale->translate( "clock active" ), 0);
 }
 
 void KarmWindow::clockStopMsg()
 {
 	_toolBar->setItemEnabled( 1, FALSE);
 	_toolBar->setItemEnabled( 0, TRUE );
-	_statusBar->changeItem( "clock inactive", 0);
+       _statusBar->changeItem( klocale->translate( "clock inactive" ), 0);
 }
 
 

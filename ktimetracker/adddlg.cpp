@@ -9,6 +9,8 @@
 
 #include "adddlg.h"
 #include "adddata.h"
+#include <kapp.h>
+#include <klocale.h>
 
 #define Inherited KAddDlgData
 
@@ -21,7 +23,7 @@ KarmAddDlg::KarmAddDlg
 	Inherited( parent, name )
 {
 	// This is just a kind of default (Caption is reset in class Karm)
-	setCaption( "KArm: New Task" );
+       setCaption( klocale->translate( "KArm: New Task" ) );
 }
 
 

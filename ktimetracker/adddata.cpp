@@ -16,6 +16,8 @@
 
 #include <qframe.h>
 #include <qlabel.h>
+#include <kapp.h>
+#include <klocale.h>
 
 KAddDlgData::KAddDlgData
 (
@@ -33,13 +35,13 @@ KAddDlgData::KAddDlgData
 	QLabel* tmpQLabel;
 	tmpQLabel = new QLabel( this, "Label_1" );
 	tmpQLabel->setGeometry( 20, 20, 100, 30 );
-	tmpQLabel->setText( "Task Name" );
+       tmpQLabel->setText( klocale->translate( "Task Name" ) );
 	tmpQLabel->setAlignment( 265 );
 	tmpQLabel->setMargin( -1 );
 
 	tmpQLabel = new QLabel( this, "Label_2" );
 	tmpQLabel->setGeometry( 20, 60, 100, 30 );
-	tmpQLabel->setText( "Accumutated time (in minutes)" );
+       tmpQLabel->setText( klocale->translate( "Accumutated time (in minutes)" ) );
 	tmpQLabel->setAlignment( 1289 );
 	tmpQLabel->setMargin( -1 );
 
@@ -67,7 +69,7 @@ KAddDlgData::KAddDlgData
 	_cancelButton = new QPushButton( this, "PushButton_2" );
 	_cancelButton->setGeometry( 160, 110, 100, 30 );
 	connect( _cancelButton, SIGNAL(clicked()), SLOT(cancelClicked()) );
-	_cancelButton->setText( "&Cancel" );
+       _cancelButton->setText( klocale->translate( "&Cancel" ) );
 	_cancelButton->setAutoRepeat( FALSE );
 	_cancelButton->setAutoResize( FALSE );
 

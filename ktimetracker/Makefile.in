@@ -79,6 +79,7 @@ uninstall:
 	-rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
 
 messages:
+       @XGETTEXT@ -C --keyword=translate -x ../../kdelibs/po/kde.pot $(SRCFILES) && mv messages.po ../po/karm.pot
 
 
 ### Run a-Moc -- kmake-generated moc rules ####
