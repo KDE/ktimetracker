@@ -8,7 +8,7 @@ LDADD =  $(LIB_KDEUI)
 bin_PROGRAMS = karm
 SUBDIRS = support
 
-karm_METASOURCES =  USE_AUTOMOC
+karm_METASOURCES = AUTO
 
 karm_SOURCES =  version.h adddata.cpp adddlg.cpp karm.cpp main.cpp \
 	task.cpp top.cpp kaccelmenuwatch.h kaccelmenuwatch.cpp 
