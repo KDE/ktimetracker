@@ -56,7 +56,7 @@ DOCFILES =  doc/index-1.html doc/index-2.html doc/index-3.html doc/index-4.html 
 all: Makefile $(TARGET)
 
 Makefile: Makefile.in
-	cd .. && ./config.status
+	cd .. && CONFIG_FILES=karm/Makefile CONFIG_HEADERS= ./config.status
 
 $(TARGET): $(SRCMETA) $(OBJECTS)
 	$(LIBTOOL) --mode=link $(CXX) $(OBJECTS) -o $(TARGET) $(LDFLAGS) $(KDE_RPATH)
@@ -68,7 +68,7 @@ clean:
 distclean: clean
 	rm -f Makefile
 
-install:
+install: all
 	$(INSTALL_DIR) $(BINDIR)
 	$(INSTALL) $(TARGET) $(BINDIR)
 	$(INSTALL_DIR) $(prefix)/share/doc/HTML/en/karm
