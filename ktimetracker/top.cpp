@@ -173,7 +173,7 @@ void KarmWindow::makeMenus()
 void KarmWindow::print() 
 {
   MyPrinter printer(_karm);
-  printer.Print();
+  printer.print();
 }
 
 void KarmWindow::loadGeometry()

@@ -1,13 +1,15 @@
 #include <qprinter.h>
+#include <qpainter.h>
 #include "karm.h"
 
 class MyPrinter :public QPrinter
 {
 public:
   MyPrinter(const Karm *karm);
-  void Print();
-  void PrintLine(QString total, QString session, QString name, QPainter &);
-  
+  void print();
+  void printLine(QString total, QString session, QString name, QPainter &, int);
+  void printTask(QListViewItem *item, QPainter &,int level);  
+  int calculateReqNameWidth(QListViewItem *item, QFontMetrics &metrics, int level);
   
 private:
   const Karm *_karm;
