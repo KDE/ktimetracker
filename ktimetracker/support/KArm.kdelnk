@@ -3,6 +3,7 @@
 BinaryPattern=karm;
 Protocols=
 Name=KArm
+Name[es]=Gestor de tiempos
 Name[de]=KArm
 Name[no]=KArm
 Name[pl]=KArm
@@ -16,6 +17,7 @@ Name[hr]=KArm
 Name[zh_CN.GB2312]=KArm
 Name[ro]=Cronometru
 Comment=Personal Time Tracker
+Comment[es]=Gestor de tiempos personal
 Comment[de]=Pers\166nlicher Zeitverfolger
 Comment[no]=Personlig tidsoversikt
 Comment[fr]=Agenda personnel
