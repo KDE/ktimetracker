@@ -5,7 +5,6 @@
 #include <qlistbox.h>
 #include <qfileinfo.h>
 #include <qlayout.h>
-#include <qmessagebox.h>
 
 #include <kapp.h>
 #include <kconfig.h>
@@ -13,6 +12,7 @@
 #include <kstddirs.h>
 #include <kmenubar.h>
 #include <ktoolbar.h>
+#include <kmessagebox.h>
 
 #include "task.h"
 #include "karm.h"
@@ -80,11 +80,9 @@ void Karm::save()
   QString defaultPath( locateLocal("appdata", "karmdata.txt"));
   
   if( !_broker->writeToFile( config->readEntry("DataPath", defaultPath).ascii() ) ) {
-    
-    QMessageBox::warning(0, i18n( "Karm: Save error" ), 
+    KMessageBox::error(0,
 			 i18n( "There was an error trying to save your data file.\n"
-			       "Time accumulated this session will NOT be saved!\n" ),
-			 i18n( "Oh No!" ));
+			       "Time accumulated this session will NOT be saved!\n" ));
   }
 }
 
@@ -245,9 +243,9 @@ void Karm::deleteTask()
   if( _broker->count() == 0 )
     return;
   
-  int response = QMessageBox::information(0, KarmName + i18n( ": Deleting Task" ) , 
-					  i18n( "Are you sure you want to delete this task?" ), 
-					  i18n("&Yes"), i18n("&Cancel"));
+  int response = KMessageBox::questionYesNo(0,
+					  i18n( "Are you sure you want to delete this task?" ),
+					  i18n( "Deleting Task"));
   
   if( response == 0 ) {
     // save the current position
