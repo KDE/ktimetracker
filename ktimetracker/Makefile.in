@@ -20,11 +20,9 @@ INSTALL_DIR = $(install) -d -m 0755
 INSTALL_DIR_PRIVATE = $(install) -d -m 0700
 
 prefix = @prefix@
-KDEINC = $(prefix)/include
-BINDIR = $(prefix)/bin
-LIBDIR = $(prefix)/lib
-PICSDIR = $(LIBDIR)/pics
-APPSDIR = $(prefix)/apps
+install_root = @install_root@
+BINDIR = @kde_bindir@
+kde_appsdir = @kde_appsdir@
 
 ########### Implicit Rules ###########
 
@@ -49,7 +47,6 @@ OBJECTS  =  adddata.o adddlg.o karm.o main.o task.o top.o \
 	 moc_task.o \
 	 moc_top.o 
 PICFILES = 
-DOCFILES =  doc/index-1.html doc/index-2.html doc/index-3.html doc/index-4.html doc/karm.gif doc/index.html doc/scrn.html doc/index.sgml
 
 ######### build rules ################
 
@@ -71,12 +68,17 @@ distclean: clean
 install: all
 	$(INSTALL_DIR) $(BINDIR)
 	$(INSTALL) $(TARGET) $(BINDIR)
-	$(INSTALL_DIR) $(prefix)/share/doc/HTML/en/karm
-	$(INSTALL_DATA) $(DOCFILES) $(prefix)/share/doc/HTML/en/karm
-	$(INSTALL_DIR) $(prefix)/share/applnk/Utilities
-	$(INSTALL_DATA) support/KArm.kdelnk $(prefix)/share/applnk/Utilities
+	(cd doc && $(MAKE) install)
+	$(INSTALL_DIR) $(kde_appsdir)/Utilities
+	$(INSTALL_DATA) support/KArm.kdelnk $(kde_appsdir)/Utilities
+
+uninstall:
+	-rm -f $(BINDIR)/$(TARGET)
+	(cd doc && $(MAKE) uninstall)
+	-rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
 
 messages:
+
 
 ### Run a-Moc -- kmake-generated moc rules ####
 
