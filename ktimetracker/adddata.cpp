@@ -87,3 +87,4 @@ void KAddDlgData::okClicked()
 void KAddDlgData::cancelClicked()
 {
 }
+#undef Inherited
