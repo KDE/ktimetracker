@@ -60,12 +60,13 @@ void IdleTimer::informOverrun(int idleMinutes)
   _timer->stop();
   
   QDateTime start = QDateTime::currentDateTime();
-  QString now;
-  now.sprintf("%d:%02d", start.time().hour(), start.time().minute());
+  QDateTime idleStart = start.addSecs(-60 * _maxIdle);
+  QString backThen;
+  backThen.sprintf("%d:%02d", idleStart.time().hour(), idleStart.time().minute());
   
   int id =  QMessageBox::warning(0,i18n("Idle detection"),
                                      i18n("Desktop has been idle since %1."
-                                          " What should we do?").arg(now),
+                                          " What should we do?").arg(backThen),
                                      i18n("Revert and Stop"), i18n("Revert and Continue"),
                                      i18n("Continue Timing"),0,2);
   QDateTime end = QDateTime::currentDateTime();
