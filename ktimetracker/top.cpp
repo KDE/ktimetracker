@@ -8,6 +8,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.27  1999/11/20 19:00:32  espensa
+ * Cleanup. Using new Add/Edit Task dialog box
+ *
  */
 
 
@@ -59,7 +62,6 @@ KarmWindow::KarmWindow()
   _watcher->updateMenus();
 
   // toolbar
-  KIconLoader *loader = KGlobal::iconLoader();
   QPixmap icon;
   
   icon.loadFromData(clock_xpm_data, clock_xpm_len );
@@ -67,18 +69,18 @@ KarmWindow::KarmWindow()
 			    _karm, SLOT(startClock()),
 			    TRUE, i18n( "Start Clock" ) );
 
-  toolBar(0)->insertButton( loader->loadIcon("stop.xpm"), 1, 
+  toolBar(0)->insertButton( BarIcon("stop"), 1, 
 			    SIGNAL(clicked()),
 			    _karm, SLOT(stopClock()),
 			    FALSE, i18n( "Stop Clock" ) );
 
   toolBar(0)->insertSeparator();
 	
-  toolBar(0)->insertButton( loader->loadIcon("filenew.xpm") , 2, 
+  toolBar(0)->insertButton( BarIcon("filenew") , 2, 
 				SIGNAL(clicked()),_karm, SLOT(newTask()),
 			  TRUE, i18n( "New Task" ) );
   
-  toolBar(0)->insertButton( loader->loadIcon("filedel.xpm") , 3, 
+  toolBar(0)->insertButton( BarIcon("filedel") , 3, 
 			  SIGNAL(clicked()),_karm, SLOT(deleteTask()),
 			  TRUE, i18n( "Delete Task" ) );
 
