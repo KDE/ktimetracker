@@ -108,3 +108,5 @@ void IdleTimer::toggleOverAllIdleDetection(bool on)
 {
   _overAllIdleDetect = on;
 }
+
+#include "idle.moc"

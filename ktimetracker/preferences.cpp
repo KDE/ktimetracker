@@ -191,3 +191,5 @@ void Preferences::save()
   config.sync();
 
 }
+
+#include "preferences.moc"

@@ -196,3 +196,5 @@ void KarmWindow::saveGeometry()
   config.writeEntry( QString::fromLatin1("Height"), height());
   config.sync();
 }
+
+#include "top.moc"

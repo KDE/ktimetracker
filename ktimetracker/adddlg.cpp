@@ -176,4 +176,4 @@ bool TimeValidator::extractTime(QString time, long *res) const
   return true;
 }
 
-	
+#include "adddlg.moc"

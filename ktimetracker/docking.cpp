@@ -18,7 +18,4 @@ DockWidget::DockWidget( KarmWindow* parent, const char *name)
 DockWidget::~DockWidget() {
 }
 
-
-
-
-
+#include "docking.moc"

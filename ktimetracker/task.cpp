@@ -101,3 +101,5 @@ void Task::updateActiveIcon()
   _i = (_i+1) % 8;
   setPixmap(1, *(*icons)[_i]);
 }
+
+#include "task.moc"

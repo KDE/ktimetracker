@@ -407,3 +407,4 @@ void Karm::autoSavePeriodChanged(int /*minutes*/)
   autoSaveChanged(_preferences->autoSave());
 }
 
+#include "karm.moc"
