@@ -30,7 +30,7 @@ install-data-local:
 uninstall-local:
 	rm -f $(kde_appsdir)/karm.kdesktop
 
-messages:
+messages: rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/karm.pot
 
 
