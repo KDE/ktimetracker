@@ -7,6 +7,11 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.38  2000/06/28 21:14:50  bieker
+ * * strict compilation - fixing some unicode problems
+ * * someone forgot to i18n() some strings... (that's easy to catch with
+ *   QT_NO_CAST_ASCII :-)
+ *
  * Revision 1.37  2000/06/26 21:10:50  blackie
  * added a preference menu, where stuff soon will come ;-)
  *
@@ -221,27 +226,27 @@ void KarmWindow::makeMenus()
   (void)KStdAction::quit(this, SLOT(quit()), actionCollection());
   (void)KStdAction::print(this, SLOT(print()), actionCollection());
   (void)KStdAction::keyBindings(this, SLOT(keyBindings()),actionCollection());
-  (void)KStdAction::preferences(this,	SLOT(prefs()),actionCollection());
+  (void)KStdAction::preferences(this, SLOT(prefs()),actionCollection());
   (void)new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
 		    SLOT(resetSessionTime()),actionCollection(),
 		    "reset_session_time");
   
-  (void)new KAction(i18n("&Start"), BarIcon( QString::fromLatin1("clock") ),
+  (void)new KAction(i18n("&Start"), QString::fromLatin1("clock"),
 		    CTRL + Key_S ,_karm,
 		    SLOT(startClock()),actionCollection(),"start");
   	
-  (void)new KAction(i18n("S&top"), BarIcon(QString::fromLatin1("stop")),
+  (void)new KAction(i18n("S&top"), QString::fromLatin1("stop"),
 		    CTRL + Key_T,_karm,
 		    SLOT(stopClock()),actionCollection(),"stop");
   (void)KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
 			    actionCollection(),"new_task");
   
  	
-  (void)new KAction(i18n("&Delete"), BarIcon(QString::fromLatin1("filedel")),
+  (void)new KAction(i18n("&Delete"), QString::fromLatin1("filedel"),
 		    Key_Delete,_karm,
 		    SLOT(deleteTask()),actionCollection(),"delete_task");
  	
-  (void)new KAction(i18n("&Edit"), BarIcon(QString::fromLatin1("clockedit")),
+  (void)new KAction(i18n("&Edit"), QString::fromLatin1("clockedit"),
 		    CTRL + Key_E,_karm,
 		    SLOT(editTask()),actionCollection(),"edit_task");
  	
