@@ -5,7 +5,7 @@
 
 int main( int argc, char *argv[] )
 {
-	KApplication *myApp = new KApplication( argc, argv );
+	KApplication *myApp = new KApplication( argc, argv, "karm" );
 	KarmWindow *karm = new KarmWindow;
 
 	myApp->setMainWidget( karm );
