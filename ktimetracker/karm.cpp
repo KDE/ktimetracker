@@ -4,12 +4,12 @@
 #include <qfileinf.h>
 #include <qlayout.h>
 
-#include<kpanner.h>
-#include<kmenubar.h>
-#include<ktoolbar.h>
-#include<kapp.h>
-#include<Kconfig.h>
-#include<kmsgbox.h>
+#include <kpanner.h>
+#include <kmenubar.h>
+#include <ktoolbar.h>
+#include <kapp.h>
+#include <kconfig.h>
+#include <kmsgbox.h>
 
 #include "task.h"
 #include "karm.h"
