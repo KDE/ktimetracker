@@ -1,23 +1,22 @@
-
+#include <dirent.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+
 #include <qlistbox.h>
 #include <qfileinfo.h>
 #include <qlayout.h>
 
-#include <kpanner.h>
-#include <kmenubar.h>
-#include <ktoolbar.h>
 #include <kapp.h>
-#include <klocale.h>
 #include <kconfig.h>
+#include <klocale.h>
+#include <kmenubar.h>
 #include <kmsgbox.h>
+#include <kpanner.h>
+#include <ktoolbar.h>
 
 #include "task.h"
 #include "karm.h"
 #include "adddlg.h"
-
-#include <dirent.h>
-#include <sys/stat.h>
 
 void testDir( const char *_name );
 
