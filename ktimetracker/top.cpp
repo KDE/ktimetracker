@@ -15,7 +15,7 @@
 #include <kapp.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <ktopwidget.h>
+#include <ktmainwindow.h>
 #include <kmenubar.h>
 #include <ktoolbar.h>
 #include <kstatusbar.h>

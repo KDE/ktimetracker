@@ -1,7 +1,7 @@
 #ifndef KARM_TOP_H
 #define KARM_TOP_H
 
-#include<ktopwidget.h>
+#include<ktmainwindow.h>
 
 class QPopupMenu;
 class KMenuBar;
