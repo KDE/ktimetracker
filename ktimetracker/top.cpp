@@ -150,9 +150,14 @@ void KarmWindow::makeMenus()
   (void)new KAction(i18n("S&top"), QString::fromLatin1("stop"),
 		    CTRL + Key_T,_karm,
 		    SLOT(stopCurrentTimer()),actionCollection(),"stop");
+
   (void)KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
 			    actionCollection(),"new_task");
-  
+
+  (void)new KAction(i18n("New Subtask"), CTRL+ALT+Key_N,
+                         _karm, SLOT(newSubTask()),
+                    actionCollection(), "new_sub_task");
+                         
  	
   (void)new KAction(i18n("&Delete"), QString::fromLatin1("filedel"),
 		    Key_Delete,_karm,

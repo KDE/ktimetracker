@@ -15,6 +15,7 @@ Clock</text>
 <text>
 Task</text>
 <Action name="new_task" />
+<Action name="new_sub_task" />
 <Action name="delete_task" />
 <Action name="edit_task" />
 </Menu>

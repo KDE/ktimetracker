@@ -31,6 +31,8 @@ private:
 public:
 	/** constructor */
 	Task(const QString& taskame, long minutes, long sessionTime, QListView *parent = 0);
+	Task(const QString& taskame, long minutes, long sessionTime, QListViewItem *parent = 0);
+  void init(const QString& taskame, long minutes, long sessionTime);
 
 	/**increments the total task time
 	* @param minutes to increment by

@@ -9,8 +9,19 @@
 
 QVector<QPixmap> *Task::icons = 0;
 
-Task::Task( const QString& taskName, long minutes, long sessionTime, QListView *parent) 
+Task::Task(const QString& taskName, long minutes, long sessionTime, QListView *parent) 
 	: QObject(), QListViewItem(parent)
+{
+  init(taskName, minutes, sessionTime);
+};
+
+Task::Task(const QString& taskName, long minutes, long sessionTime, QListViewItem *parent)
+  :QObject(), QListViewItem(parent)
+{
+  init(taskName, minutes, sessionTime);
+}
+
+void Task::init(const QString& taskName, long minutes, long sessionTime)
 {
   if (icons == 0) {
     icons = new QVector<QPixmap>(8);
@@ -28,11 +39,11 @@ Task::Task( const QString& taskName, long minutes, long sessionTime, QListView *
   _sessionTime = sessionTime;
   _timer = new QTimer(this);
   connect(_timer, SIGNAL(timeout()), this, SLOT(updateActiveIcon()));
-  setPixmap(0, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+  setPixmap(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
 	update();
   _i = 0;
-  
-};
+}
+
 
 void Task::setRunning(bool on)
 {
@@ -46,7 +57,7 @@ void Task::setRunning(bool on)
   else {
     if (_timer->isActive()) {
       _timer->stop();
-      setPixmap(0, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+      setPixmap(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
     }
   }
 }
@@ -88,5 +99,5 @@ void Task::decrementTime(long minutes)
 void Task::updateActiveIcon()
 {
   _i = (_i+1) % 8;
-  setPixmap(0, *(*icons)[_i]);
+  setPixmap(1, *(*icons)[_i]);
 }

@@ -24,8 +24,6 @@ private: // member variables
   QTimer *_minuteTimer;
   QTimer *_autoSaveTimer;
 
-	AddTaskDialog	*_addDlg;
-	AddTaskDialog	*_editDlg;
   Preferences *_preferences;
   
   QList<Task> activeTasks;
@@ -44,51 +42,32 @@ public slots:
 	*/
 	void load();
 	void save();
-	void readFromFile(const QString &s);
-	bool writeToFile(const QString &fname);
+	void writeTaskToFile(FILE *, QListViewItem *, int);
+  bool parseLine(QString line, long *time, QString *name, int *level);
 	void stopCurrentTimer();
 	void stopAllTimers();
 	void startTimer();
   void changeTimer(QListViewItem *);
 	void newTask();
+  void newTask(QString caption, QListViewItem *parent);
+  void newSubTask();
 	void editTask();
-	void editTask(QListViewItem *);
 	void deleteTask();
   void extractTime(int minutes);
 
 protected slots:
-
-	/** creates a new task.
-	* Used as a callback from the new task dialog, creates
-	* a new task only if returned is TRUE.
-	*/
-	void createNewTask( bool returned );
-
-	/** updates an existing task.
-	* Used as a callback from the new task dialog, updates
-	* the task from the Dialog fields only if returned is TRUE.
-	*/
-	void updateExistingTask( bool returned );
-
   void autoSaveChanged(bool);
   void autoSavePeriodChanged(int period);
+  void minuteUpdate();
   
 signals:
 	void sessionTimeChanged( long difference );
-
-	/** raised on file read or write error.
-	*/
-	void fileError( const QString & );
-
-	/** raised on changes to the list, rather than to a
-	* particular item.
-	*/
-	void dataChanged();
 	void timerTick();
 
 
 protected slots:
-  void minuteUpdate();
+  void stopChildCounters(Task *item);
+  void addTimeToActiveTasks(int minutes);
 };
 
 inline QString Karm::formatTime( long minutes )

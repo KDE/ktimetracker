@@ -40,15 +40,11 @@ class AddTaskDialog : public KDialogBase
   Q_OBJECT
 
   public:
-    AddTaskDialog( QWidget *parent=0, const char *name=0, bool modal=true );
+    AddTaskDialog(QString caption);
     void setTask(const QString &name, long time, long sessionTime );
     QString taskName( void ) const;
     long totalTime( void ) const; 
     long sessionTime( void ) const; 
-
-  protected slots:
-    virtual void slotCancel( void );
-    virtual void slotOk( void );
 
   signals:
     /** 

@@ -11,8 +11,6 @@ class KAccelMenuWatch;
 class Preferences;
 class QTimer;
 
-
-/// The top level widget for Karm.
 class KarmWindow : public KTMainWindow
 {
   Q_OBJECT

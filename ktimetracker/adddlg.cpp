@@ -19,10 +19,6 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- */
-
-
-/* 
  * $Id$
  */
 #include <qlabel.h>
@@ -37,8 +33,8 @@
 #include "karm.h"
 
 
-AddTaskDialog::AddTaskDialog( QWidget *parent, const char *name, bool modal )
-  :KDialogBase( parent, name, modal, i18n("Task"), Ok|Cancel, Ok, true )
+AddTaskDialog::AddTaskDialog(QString caption)
+  :KDialogBase(0, "AddTaskDialog", true, caption, Ok|Cancel, Ok, true )
 {
   QWidget *page = new QWidget( this ); 
   setMainWidget(page);
@@ -72,6 +68,8 @@ AddTaskDialog::AddTaskDialog( QWidget *parent, const char *name, bool modal )
   _sessionTime->setMinimumWidth(fontMetrics().maxWidth()*15);
   _sessionTime->setValidator(_sessionValidator);
   topLayout->addWidget( _sessionTime, 2, 1 );
+
+  _name->setFocus();
 }
 
 
@@ -103,18 +101,6 @@ long AddTaskDialog::sessionTime( void ) const
   long res;
   (void) _sessionValidator->extractTime(time, &res);
   return res;
-}
-
-
-void AddTaskDialog::slotOk( void )
-{
-  emit finished( true );
-}
-
-
-void AddTaskDialog::slotCancel( void )
-{
-  emit finished( false );
 }
 
 enum QValidator::State TimeValidator::validate(QString &str, int &) const

@@ -1,3 +1,4 @@
+#include <qstack.h>
 #include <dirent.h>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -24,17 +25,14 @@
 Karm::Karm( QWidget *parent, const char *name )
   : QListView( parent, name )
 {
-  _addDlg  = 0;
-  _editDlg = 0;  
-  
   _preferences = Preferences::instance();
   
 	connect(this, SIGNAL(doubleClicked(QListViewItem *)), 
           this, SLOT(changeTimer(QListViewItem *)));
 
 	addColumn(i18n("Task Name"));
-	addColumn(i18n("Total Time"));
   addColumn(i18n("Session Time"));
+	addColumn(i18n("Total Time"));
 	setAllColumnsShowFocus(true);
 
   // set up the minuteTimer
@@ -65,92 +63,120 @@ Karm::~Karm()
 void Karm::load()
 {
   QFileInfo info;
-  info.setFile(_preferences->saveFile() );
+  QString fname = _preferences->saveFile();
+  info.setFile(fname);
 
-  if( info.exists() ) 
-  {
-    readFromFile( info.filePath() );
-    return;	
-  }
-}
-
-void Karm::readFromFile( const QString &fname ) 
-{
-  if ( fname.isNull() )
+  if( !info.exists() ) 
     return;
 
   QFile file( fname );
-
-  if( !file.open( IO_ReadOnly ) ) {
-    // file open error
-    emit fileError( fname );
+  if( !file.open( IO_ReadOnly ) )
     return;
-  }
 
   QString line;
 
+  QStack<Task> stack;
+  Task *task;
+  
   while( !file.atEnd() ) {
     if ( file.readLine( line, T_LINESIZE ) == 0 )
       break;
 
-    if (line.find('#') == 0) {
-      // A comment line
+    long minutes;
+    int level;
+    QString name;
+    
+    if (!parseLine(line, &minutes, &name, &level))
       continue;
+    
+    unsigned int stackLevel = stack.count();
+    for (unsigned int i = level; i<=stackLevel ; i++) {
+      stack.pop();
     }
-		
-    int index = line.find('\t');
-    if (index == -1) {
-      // This doesn't seem like a valid record
-      continue;
+    
+    if (level == 1) {
+      task = new Task(name, minutes, 0, this);
     }
-		
-    QString time = line.left(index);
-    QString name = line.remove(0,index);
-		
-    bool ok;
-    long minutes = time.toLong(&ok);
-		
-    if (!ok) {
-      // the time field was not a number
-      continue;
+    else {
+      Task *parent = stack.top();
+      task = new Task(name, minutes, 0, parent);
+      setRootIsDecorated(true);
+      parent->setOpen(true);
     }
-    new Task(name, minutes, 0, this);
+    stack.push(task);
   }
+}
+
+bool Karm::parseLine(QString line, long *time, QString *name, int *level)
+{
+  if (line.find('#') == 0) {
+    // A comment line
+    return false;
+  }
+		
+  int index = line.find('\t');
+  if (index == -1) {
+    // This doesn't seem like a valid record
+    return false;
+  }
+
+  QString levelStr = line.left(index);
+  QString rest = line.remove(0,index+1);
+  
+  index = rest.find('\t');
+  if (index == -1) {
+    // This doesn't seem like a valid record
+    return false;
+  }
+
+  QString timeStr = rest.left(index);
+  *name = rest.remove(0,index+1);
+		
+  bool ok;
+  *time = timeStr.toLong(&ok);
+		
+  if (!ok) {
+    // the time field was not a number
+    return false;
+  }
+  *level = levelStr.toInt(&ok);
+  if (!ok) {
+    // the time field was not a number
+    return false;
+  }
+  return true;
 }
 
 void Karm::save()
 {
-	if( !writeToFile( _preferences->saveFile() ) ) {
+  QString fname =  _preferences->saveFile();
+  FILE *file = fopen( QFile::encodeName(fname), "w" );
+
+  if( file == 0 ) {
 		QString msg = i18n
 		  ("There was an error trying to save your data file.\n"
 		   "Time accumulated this session will NOT be saved!\n");
 		KMessageBox::error(0, msg );
+    return;
 	}
-}
-
-bool Karm::writeToFile(const QString &fname)
-{
-  if( fname.isNull() ) return 0;
-
-  FILE *file = fopen( QFile::encodeName(fname), "w" );
-
-  if( file == 0 ) {
-    emit fileError( fname );
-    return FALSE;
-  }
 
   fputs( "# Karm save data\n", file );	// file comment
   for (QListViewItem *child =firstChild(); child; child = child->nextSibling()) {
-    Task *task = (Task *) child;
-    fprintf(file, "%ld\t%s\n", 
-	    task->totalTime(),
-	    task->name());
+    writeTaskToFile(file, child, 1);
   }
+  
   fclose( file );
+}
 
-  emit dataChanged();
+void Karm::writeTaskToFile(FILE *file, QListViewItem *item, int level)
+{
+  Task *task = (Task *) item;
+  fprintf(file,"%d\t%ld\t%s\n", level, task->totalTime(), task->name());
 
-  return TRUE;
+  QListViewItem *child;
+  for (child=item->firstChild(); child; child=child->nextSibling()) {
+    writeTaskToFile(file, child, level+1);
+  }
 }
 
 void Karm::startTimer()
@@ -185,105 +211,115 @@ void Karm::stopCurrentTimer()
 
 void Karm::changeTimer(QListViewItem *)
 {
-  // Stop all the other timers.
-  for (unsigned int i=0; i<activeTasks.count();i++) {
-    (activeTasks.at(i))->setRunning(false);
-  }
-  activeTasks.clear();
+  Task *item = ((Task *) currentItem());
+  if (item != 0 && activeTasks.findRef(item) == -1) {
+    // Stop all the other timers.
+    for (unsigned int i=0; i<activeTasks.count();i++) {
+      (activeTasks.at(i))->setRunning(false);
+    }
+    activeTasks.clear();
 
-  // Start the new timer.
-  startTimer();
+    // Start the new timer.
+    startTimer();
+  }
+  else {
+    stopCurrentTimer();
+  }
 }
 
 void Karm::minuteUpdate()
 {
-  for(unsigned int i=0; i<activeTasks.count();i++) {
-    (activeTasks.at(i))->incrementTime( 1 );
-  }
+  addTimeToActiveTasks(1);
   if (activeTasks.count() != 0)
     emit(timerTick());
 }
 
-void Karm::newTask()
+void Karm::addTimeToActiveTasks(int minutes) 
 {
-	if( _addDlg == 0 ) 
-	{
-		_addDlg = new AddTaskDialog( topLevelWidget(), 0, true );
-		_addDlg->setCaption(i18n("New Task"));
-		connect( _addDlg, SIGNAL( finished( bool ) ), 
-			 this, SLOT( createNewTask( bool ) ) );
-	}
-	_addDlg->show();
+  for(unsigned int i=0; i<activeTasks.count();i++) {
+    Task *task = activeTasks.at(i);
+    QListViewItem *item = task;
+    while (item) {
+      ((Task *) item)->incrementTime(minutes);
+      item = item->parent();
+    }
+  }
 }
 
-void Karm::createNewTask( bool retVal )
+void Karm::newTask()
 {
-	if( _addDlg == 0 ) {
-		warning("Karm::createNewTask called and there's no dialog!" );
-		return;
-	}
-	
-	if( retVal && !_addDlg->taskName().isEmpty() ) {
-		// create the new task
-		Task *task = new Task(_addDlg->taskName(),_addDlg->totalTime(), _addDlg->sessionTime(), this);
-		setCurrentItem(task);
-		setSelected(task, true);
-	}
-	
-	// dispose of the dialog
-	delete _addDlg;
-	_addDlg = 0;
+  newTask(i18n("New Task"), 0);
+}
+
+void Karm::newTask(QString caption, QListViewItem *parent)
+{
+  AddTaskDialog *dialog = new AddTaskDialog(caption);
+	int result = dialog->exec();
+
+  if (result == QDialog::Accepted) {
+    QString taskName = i18n("Unnamed Task");
+    if (!dialog->taskName().isEmpty()) {
+      taskName = dialog->taskName();
+    }
+    Task *task;
+    if (parent == 0)
+      task = new Task(taskName, dialog->totalTime(), dialog->sessionTime(), this);
+    else
+      task = new Task(taskName, dialog->totalTime(), dialog->sessionTime(), parent);
+
+    setCurrentItem(task);
+    setSelected(task, true);
+  }
+  delete dialog;
+}
+
+void Karm::newSubTask()
+{
+  QListViewItem *item = currentItem();
+  newTask(i18n("New Sub Task"), item);
+  item->setOpen(true);
+  setRootIsDecorated(true);
 }
 
 void Karm::editTask()
 {
-	QListViewItem *item = currentItem();
-	if (item)
-		editTask(item);
-}
+	Task *task = (Task *) currentItem();
+	if (!task)
+    return;
 
-void Karm::editTask(QListViewItem *element)
-{
-	Task *task= (Task *)element;
-	
-	if( _editDlg == 0 ) 
-	{
-		_editDlg = new AddTaskDialog( topLevelWidget(), 0, true );
-		_editDlg->setCaption(i18n("Edit Task"));
-		_editDlg->setTask( QString::fromLatin1(task->name()),
-				   task->totalTime(),
-				   task->sessionTime());  
-		connect( _editDlg, SIGNAL( finished( bool ) ),
-			 this, SLOT( updateExistingTask( bool ) ) );
-	}
-	_editDlg->show();
-}
-
-void Karm::updateExistingTask( bool retVal )
-{
-	if( _editDlg == 0 ) {
-		warning("Karm::updateExistingTask called and there's no dialog!" );
-		return;
-	}
-	
-	if( retVal && !_editDlg->taskName().isEmpty() ) {
-		Task *task = (Task *) currentItem();
-		task->setName( _editDlg->taskName() );
-
-		// update session time as well if the time was changed
-    long totalDiff = _editDlg->totalTime() - task->totalTime();
-    long sessionDiff = _editDlg->sessionTime() - task->sessionTime();
+  AddTaskDialog *dialog = new AddTaskDialog(i18n("Edit Task"));
+  dialog->setTask(QString::fromLatin1(task->name()),
+                  task->totalTime(),
+                  task->sessionTime());  
+	int result = dialog->exec();
+  if (result == QDialog::Accepted) {
+    QString taskName = i18n("Unnamed Task");   
+    if (!dialog->taskName().isEmpty()) {
+      taskName = dialog->taskName();
+    }
+    task->setName(taskName);
+    
+    // update session time as well if the time was changed
+    long totalDiff = dialog->totalTime() - task->totalTime();
+    long sessionDiff = dialog->sessionTime() - task->sessionTime();
     long difference = totalDiff + sessionDiff  ;
-		if( difference != 0 ) {
-		  emit sessionTimeChanged( difference );
-		}
+    if( difference != 0 ) {
+      emit sessionTimeChanged( difference );
+    }
+    task->setTotalTime( dialog->totalTime() + sessionDiff);
+    task->setSessionTime( dialog->sessionTime() );
 
-		task->setTotalTime( _editDlg->totalTime() + sessionDiff);
-		task->setSessionTime( _editDlg->sessionTime() );
-	}
-	
-	delete _editDlg;
-	_editDlg = 0;
+    // Update the parents for this task.
+    QListViewItem *item = ((QListViewItem *)task)->parent();
+    while (item) {
+      Task *parrentTask = (Task *) item;
+      parrentTask->setTotalTime(parrentTask->totalTime()+difference);
+      parrentTask->setSessionTime(parrentTask->sessionTime()+sessionDiff);
+      item = item->parent();
+    }
+    
+  }
+  delete dialog;
 }
 
 void Karm::deleteTask()
@@ -294,28 +330,59 @@ void Karm::deleteTask()
     return;
   }
 	
-	int response = KMessageBox::questionYesNo(0,
-		i18n( "Are you sure you want to delete the task named\n\"%1\"")
-                                            .arg(QString::fromLatin1(item->name())),
-		i18n( "Deleting Task"));
+  int response;
+  if (item->childCount() == 0) {
+    response = KMessageBox::questionYesNo(0,
+                                          i18n( "Are you sure you want to delete the task named\n\"%1\"")
+                                          .arg(QString::fromLatin1(item->name())),
+                                          i18n( "Deleting Task"));
+  }
+  else {
+    response = KMessageBox::questionYesNo(0,
+                                          i18n( "Are you sure you want to delete the task named\n\"%1\"\n"
+                                                "NOTE: all its subtasks will also be deleted!")
+                                          .arg(QString::fromLatin1(item->name())),
+                                          i18n( "Deleting Task"));
+  }
 
 	if (response == KMessageBox::Yes) {
-    if (activeTasks.findRef(item) != -1) {
-      activeTasks.removeRef(item);
-      if (activeTasks.count() == 0) {
-        _idleTimer->stopIdleDetection();
+
+    // Remove chilren from the active set of tasks.
+    stopChildCounters(item);
+
+    // Stop idle detection if no more counters is running
+    if (activeTasks.count() == 0) {
+      _idleTimer->stopIdleDetection();
+    }
+
+		delete item;
+
+    // remove root decoration if there is no more children.
+    bool anyChilds = false;
+    for(QListViewItem *child=firstChild(); child; child=child->nextSibling()) {
+      if (child->childCount() != 0) {
+        anyChilds = true;
+        break;
       }
     }
-		delete item;
+    if (!anyChilds) {
+      setRootIsDecorated(false);
+    }
 	}
+}
+
+void Karm::stopChildCounters(Task *item)
+{
+  for (QListViewItem *child=item->firstChild(); child; child=child->nextSibling()) {
+    stopChildCounters((Task *)child);
+  }
+  activeTasks.removeRef(item);
 }
 
 
 void Karm::extractTime(int minutes) 
 {
-  for(unsigned int i=0; i<activeTasks.count();i++) {
-    activeTasks.at(i)->decrementTime(minutes);
-  }
+  addTimeToActiveTasks(-minutes);
   emit(sessionTimeChanged(-minutes));
 }
 
