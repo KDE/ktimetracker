@@ -62,7 +62,7 @@ KAddDlgData::KAddDlgData
 	_okButton = new QPushButton( this, "PushButton_1" );
 	_okButton->setGeometry( 40, 110, 100, 30 );
 	connect( _okButton, SIGNAL(clicked()), SLOT(okClicked()) );
-	_okButton->setText( "&Ok" );
+	_okButton->setText( "&OK" );
 	_okButton->setAutoRepeat( FALSE );
 	_okButton->setAutoResize( FALSE );
 
