@@ -15,9 +15,33 @@
 #include "karm.h"
 #include "adddlg.h"
 
+#include <dirent.h>
+#include <sys/stat.h>
+
+void testDir( const char *_name );
+
+void testDir( const char *_name )
+{
+    DIR *dp;
+    QString c = getenv( "HOME" );
+    c += _name;
+    dp = opendir( c.data() );
+    if ( dp == NULL )
+	::mkdir( c.data(), S_IRWXU );
+    else
+	closedir( dp );
+}
+
 Karm::Karm( QWidget *parent )
 	:	KPanner( parent )
 {
+    // Torben
+    testDir( "/.kde" );
+    testDir( "/.kde/share" );
+    testDir( "/.kde/share/config" );
+    testDir( "/.kde/share/apps" );
+    testDir( "/.kde/share/apps/karm" );
+
 	QBoxLayout *layout;
 	_timerRunning = FALSE;
 
@@ -60,8 +84,8 @@ void Karm::load()
 	
 	if( !config->hasKey("DataPath") ) {
 		QString defaultPath( getenv("HOME") );
-
-		defaultPath += "/.kde/karmdata.txt";
+		// Torben
+		defaultPath += "/.kde/share/apps/karm/karmdata.txt";
 
 		// save it
 		config->writeEntry("DataPath", defaultPath, true );

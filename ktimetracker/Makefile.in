@@ -42,7 +42,7 @@ OBJECTS  =  adddata.o adddlg.o karm.o main.o task.o top.o \
 	 moc_task.o \
 	 moc_top.o 
 PICFILES = 
-DOCFILES =  doc/karm-1.html doc/karm-2.html doc/karm-3.html doc/karm-4.html doc/karm.gif doc/karm.html doc/scrn.html doc/karm.sgml
+DOCFILES =  doc/index-1.html doc/index-2.html doc/index-3.html doc/index-4.html doc/karm.gif doc/index.html doc/scrn.html doc/index.sgml
 
 ######### build rules ################
 
@@ -64,8 +64,8 @@ distclean: clean
 install:
 	$(INSTALL_DIR) $(BINDIR)
 	$(INSTALL) $(TARGET) $(BINDIR)
-	$(INSTALL_DIR) $(prefix)/share/doc/HTML/karm
-	$(INSTALL_DATA) $(DOCFILES) $(prefix)/share/doc/HTML/karm
+	$(INSTALL_DIR) $(prefix)/share/doc/HTML/en/karm
+	$(INSTALL_DATA) $(DOCFILES) $(prefix)/share/doc/HTML/en/karm
 	$(INSTALL_DIR) $(prefix)/share/applnk/Utilities
 	$(INSTALL_DATA) support/KArm.kdelnk $(prefix)/share/applnk/Utilities
 
