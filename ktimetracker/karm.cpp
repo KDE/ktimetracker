@@ -9,6 +9,7 @@
 #include <kapp.h>
 #include <kconfig.h>
 #include <klocale.h>
+#include <kstddirs.h>
 #include <kmenubar.h>
 #include <kmsgbox.h>
 #include <kpanner.h>
@@ -18,30 +19,9 @@
 #include "karm.h"
 #include "adddlg.h"
 
-void testDir( const char *_name );
-
-void testDir( const char *_name )
-{
-    DIR *dp;
-    QString c = getenv( "HOME" );
-    c += _name;
-    dp = opendir( c.data() );
-    if ( dp == NULL )
-	::mkdir( c.data(), S_IRWXU );
-    else
-	closedir( dp );
-}
-
 Karm::Karm( QWidget *parent )
 	:	KPanner( parent )
 {
-    // Torben
-    testDir( "/.kde" );
-    testDir( "/.kde/share" );
-    testDir( "/.kde/share/config" );
-    testDir( "/.kde/share/apps" );
-    testDir( "/.kde/share/apps/karm" );
-
 	QBoxLayout *layout;
 	_timerRunning = FALSE;
 
@@ -81,20 +61,12 @@ Karm::~Karm()
 void Karm::load()
 {
 	QFileInfo info;
-	KConfig *config = KApplication::getKApplication()->getConfig();
+	KConfig *config = kapp->getConfig();
 	
 	config->setGroup( "Karm" );
 	
-	if( !config->hasKey("DataPath") ) {
-		QString defaultPath;
-		defaultPath = KApplication::localkdedir() + "/share/apps/karm/karmdata.txt";
-
-		// save it
-		config->writeEntry("DataPath", defaultPath, true );
-		config->sync();
-	}
-
-	info.setFile( config->readEntry( "DataPath" ) );
+	QString defaultPath( locateLocal("appdata", "karmdata.txt"));
+	info.setFile( config->readEntry( "DataPath", defaultPath ) );
 
 	if( info.exists() ) {
 		_broker->readFromFile( info.filePath() );
@@ -105,11 +77,12 @@ void Karm::load()
 
 void Karm::save()
 {
-	KConfig *config = KApplication::getKApplication()->getConfig();
+	KConfig *config = kapp->getConfig();
 
 	config->setGroup("Karm");
+	QString defaultPath( locateLocal("appdata", "karmdata.txt"));
 
-	if( !_broker->writeToFile( config->readEntry("DataPath") ) ) {
+	if( !_broker->writeToFile( config->readEntry("DataPath", defaultPath) ) ) {
 
                KMsgBox::message(0, i18n( "Karm: Save error" ), 
                        i18n( "There was an error trying to save your data file.\n"
