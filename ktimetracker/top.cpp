@@ -126,6 +126,7 @@ KarmWindow::~KarmWindow()
 	delete _clockMenu;
 	delete _taskMenu;
 	delete _helpMenu;
+	delete _mainMenu;
 	delete _toolBar;
 	delete[] _sessionTimeBuffer;
 }
