@@ -1,19 +1,16 @@
 <!DOCTYPE kpartgui ><kpartgui name="myapp" >
 <MenuBar>
 <Menu name="file" >
-<text>
-File</text>
+<text>File</text>
 <Action name="reset_session_time" />
 </Menu>
 <Menu name="clock" >
-<text>
-Clock</text>
+<text>Clock</text>
 <Action name="start" />
 <Action name="stop" />
 </Menu>
 <Menu name="task" >
-<text>
-Task</text>
+<text>Task</text>
 <Action name="new_task" />
 <Action name="new_sub_task" />
 <Action name="delete_task" />
