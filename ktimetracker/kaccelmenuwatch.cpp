@@ -100,7 +100,7 @@ loop:
 	return;
 }
 
-KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( QPopupMenu *menu, 
+KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( QPopupMenu *, 
 		int itemId, AccelType type )
 {
 	AccelItem *item = new AccelItem;

@@ -128,5 +128,5 @@ struct {
 } embed_vec[] = {
     { 765, clock_xpm_data, "clock.xpm" },
     { 819, clockedit_xpm_data, "clockedit.xpm" },
-    { 0, 0 }
+    { 0, 0, "dummy" }
 };
