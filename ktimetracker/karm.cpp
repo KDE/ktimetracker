@@ -4,8 +4,9 @@
 #include <sys/stat.h>
 
 #include <qlistbox.h>
-#include <qfileinfo.h>
 #include <qlayout.h>
+#include <qtextstream.h>
+#include <qfile.h>
 
 #include <kapp.h>
 #include <kconfig.h>
@@ -64,15 +65,12 @@ Karm::~Karm()
 
 void Karm::load()
 {
-  QFileInfo info;
-  QString fname = _preferences->saveFile();
-  info.setFile(fname);
+  QFile f(_preferences->saveFile());
 
-  if( !info.exists() ) 
+  if( !f.exists() ) 
     return;
 
-  QFile file( fname );
-  if( !file.open( IO_ReadOnly ) )
+  if( !f.open( IO_ReadOnly ) )
     return;
 
   QString line;
@@ -80,9 +78,17 @@ void Karm::load()
   QStack<Task> stack;
   Task *task;
   
-  while( !file.atEnd() ) {
-    if ( file.readLine( line, T_LINESIZE ) == 0 )
-      break;
+  QTextStream stream(&f);
+  
+  while( !stream.atEnd() ) {
+    //lukas: this breaks for non-latin1 chars!!!  
+    //if ( file.readLine( line, T_LINESIZE ) == 0 )	
+    //	break;
+    
+    line = stream.readLine();
+    
+    if (line.isNull())
+	break;
 
     long minutes;
     int level;
@@ -107,6 +113,7 @@ void Karm::load()
     }
     stack.push(task);
   }
+  f.close();
 }
 
 bool Karm::parseLine(QString line, long *time, QString *name, int *level)
@@ -151,33 +158,40 @@ bool Karm::parseLine(QString line, long *time, QString *name, int *level)
 
 void Karm::save()
 {
-  QString fname =  _preferences->saveFile();
-  FILE *file = fopen( QFile::encodeName(fname), "w" );
+ QFile f(_preferences->saveFile());
 
-  if( file == 0 ) {
-		QString msg = i18n
-		  ("There was an error trying to save your data file.\n"
-		   "Time accumulated this session will NOT be saved!\n");
-		KMessageBox::error(0, msg );
+ if ( !f.open( IO_WriteOnly | IO_Truncate ) ) {
+        QString msg = i18n
+	("There was an error trying to save your data file.\n"
+	"Time accumulated this session will NOT be saved!\n");
+	KMessageBox::error(0, msg );
     return;
-	}
+ }
+ const char * comment = "# Karm save data\n";
+ 
+ f.writeBlock(comment, strlen(comment));  //comment
+ f.flush();
 
-  fputs( "# Karm save data\n", file );	// file comment
-  for (QListViewItem *child =firstChild(); child; child = child->nextSibling()) {
-    writeTaskToFile(file, child, 1);
-  }
-  
-  fclose( file );
+ QTextStream stream(&f);
+
+ for (QListViewItem *child =firstChild(); child; child = child->nextSibling()) {
+        writeTaskToFile(&stream, child, 1);
+ }
+ f.close();
 }
 
-void Karm::writeTaskToFile(FILE *file, QListViewItem *item, int level)
+void Karm::writeTaskToFile(QTextStream *strm, QListViewItem *item, int level)
 {
-  Task *task = (Task *) item;
-  fprintf(file,"%d\t%ld\t%s\n", level, task->totalTime(), task->name().local8Bit().data());
+  Task * task = (Task *) item;
+  //lukas: correct version for non-latin1 users
+  QString _line = QString::fromLatin1("%1\t%2\t%3\n").arg(level).
+          arg(task->totalTime()).arg(task->name());
 
-  QListViewItem *child;
+  *strm << _line;
+
+  QListViewItem * child;
   for (child=item->firstChild(); child; child=child->nextSibling()) {
-    writeTaskToFile(file, child, level+1);
+    writeTaskToFile(strm, child, level+1);
   }
 }
 
