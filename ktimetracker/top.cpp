@@ -133,39 +133,52 @@ void KarmWindow::resetSessionTime()
 
 void KarmWindow::makeMenus()
 {
-  (void)KStdAction::quit(this, SLOT(quit()), actionCollection());
-  (void)KStdAction::print(this, SLOT(print()), actionCollection());
-  (void)KStdAction::keyBindings(this, SLOT(keyBindings()),actionCollection());
-  (void)KStdAction::preferences(_preferences, SLOT(showDialog()),actionCollection());
-  (void)KStdAction::save(_preferences, SLOT(save()),actionCollection());
-  (void)new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
-		    SLOT(resetSessionTime()),actionCollection(),
-		    "reset_session_time");
+  KAction* action;
   
-  (void)new KAction(i18n("&Start"), QString::fromLatin1("1rightarrow"),
-		    CTRL + Key_S ,_karm,
-		    SLOT(startTimer()),actionCollection(),"start");
+  action = KStdAction::quit(this, SLOT(quit()), actionCollection());
+  action = KStdAction::print(this, SLOT(print()), actionCollection());
+  
+  action = KStdAction::keyBindings(this, SLOT(keyBindings()),actionCollection());
+  action->setToolTip(i18n("Configure key bindings"));
+  
+  action = KStdAction::preferences(_preferences, SLOT(showDialog()),actionCollection());
+  action = KStdAction::save(_preferences, SLOT(save()),actionCollection());
+  action = new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
+                       SLOT(resetSessionTime()),actionCollection(),
+                       "reset_session_time");
+  action->setToolTip(i18n("Reset session time"));
+  
+  action = new KAction(i18n("&Start"), QString::fromLatin1("1rightarrow"),
+                       CTRL + Key_S ,_karm,
+                       SLOT(startTimer()),actionCollection(),"start");
+  action->setToolTip(i18n("Start timing for selected task"));
   	
-  (void)new KAction(i18n("S&top"), QString::fromLatin1("stop"),
-		    CTRL + Key_T,_karm,
-		    SLOT(stopCurrentTimer()),actionCollection(),"stop");
+  action = new KAction(i18n("S&top"), QString::fromLatin1("stop"),
+                       CTRL + Key_T,_karm,
+                       SLOT(stopCurrentTimer()),actionCollection(),"stop");
+  action->setToolTip(i18n("Stop timing of the selected task"));
 
-  (void)KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
-			    actionCollection(),"new_task");
+  action= KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
+                              actionCollection(),"new_task");
+  action->setToolTip(i18n("Create new task"));
+  
 
-  (void)new KAction(i18n("New Subtask"), QString::fromLatin1("kmultiple"),
-										CTRL+ALT+Key_N,
-										_karm, SLOT(newSubTask()),
-                    actionCollection(), "new_sub_task");
+  action = new KAction(i18n("New Subtask"), QString::fromLatin1("kmultiple"),
+                       CTRL+ALT+Key_N,
+                       _karm, SLOT(newSubTask()),
+                       actionCollection(), "new_sub_task");
+  action->setToolTip(i18n("Create new sub task of selected task"));
                          
  	
-  (void)new KAction(i18n("&Delete"), QString::fromLatin1("editdelete"),
-		    Key_Delete,_karm,
-		    SLOT(deleteTask()),actionCollection(),"delete_task");
+  action = new KAction(i18n("&Delete"), QString::fromLatin1("editdelete"),
+                       Key_Delete,_karm,
+                       SLOT(deleteTask()),actionCollection(),"delete_task");
+  action->setToolTip(i18n("Delete selected task"));
  	
-  (void)new KAction(i18n("&Edit"), QString::fromLatin1("edit"),
-		    CTRL + Key_E,_karm,
-		    SLOT(editTask()),actionCollection(),"edit_task");
+  action = new KAction(i18n("&Edit"), QString::fromLatin1("edit"),
+                       CTRL + Key_E,_karm,
+                       SLOT(editTask()),actionCollection(),"edit_task");
+  action->setToolTip(i18n("Edit name or times for selected task"));  
  	
   createGUI( QString::fromLatin1("karmui.rc") );
 }
