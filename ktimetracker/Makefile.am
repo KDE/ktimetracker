@@ -6,14 +6,14 @@ LDADD =  $(LIB_KDEUI)
 
 
 bin_PROGRAMS = karm
-SUBDIRS = support
+SUBDIRS = support pics
 
-karm_METASOURCES = AUTO
+METASOURCES = adddlg.moc kaccelmenuwatch.moc karm.moc top.moc
 
-karm_SOURCES =  version.h adddlg.cpp karm.cpp main.cpp \
-	task.cpp top.cpp kaccelmenuwatch.h kaccelmenuwatch.cpp 
+karm_SOURCES =  adddlg.cpp karm.cpp main.cpp \
+	task.cpp top.cpp kaccelmenuwatch.cpp 
 
-noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h 
+noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h
 
 KDE_ICON = karm
 
@@ -25,12 +25,9 @@ rc_DATA = karmui.rc
 install-data-local:
 	$(mkinstalldirs) $(appsdir)
 	$(INSTALL_DATA) $(srcdir)/support/karm.desktop $(appsdir)
-	$(mkinstalldirs) $(kde_toolbardir)
-	$(INSTALL_DATA) $(srcdir)/support/filedel.xpm $(kde_toolbardir)
 
 uninstall-local:
-	rm -f $(kde_appsdir)/KArm.kdelnk
-	rm -f $(kde_toolbardir)/filedel.xpm
+	rm -f $(kde_appsdir)/karm.kdesktop
 
 messages:
 	$(XGETTEXT) *.cpp -o $(podir)/karm.pot
@@ -38,4 +35,5 @@ messages:
 
 srcdoc:
 	kdoc -a -p -H -d $(HOME)/web/src/karm karm *.h -lkdecore -lkdeui -lqt
+
 

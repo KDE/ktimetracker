@@ -7,6 +7,12 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.31  2000/05/29 12:30:54  kalle
+ * - Replaced the two listboxes with one listview
+ * - Times can be specified as HH:MM [(+|-)HH:MM]
+ * - uses XML GUI
+ * - general KDE 2 face- and codelifting
+ *
  * Revision 1.30  2000/05/21 16:06:28  kulow
  * adding ... behind New and Edit
  *
@@ -39,10 +45,10 @@
 
 #include "kaccelmenuwatch.h"
 #include "karm.h"
-#include "toolicons.h"
 #include "top.h"
 #include "version.h"
 
+#include "top.moc"
 
 KarmWindow::KarmWindow()
   : KTMainWindow(),
@@ -190,10 +196,7 @@ void KarmWindow::makeMenus()
   (void)new KAction(i18n("&Reset Session Time"), 0,this,
 					SLOT(resetSessionTime()),actionCollection(),"reset_session_time");
   
-  QPixmap icon;
- 	
-  icon.loadFromData(clock_xpm_data, clock_xpm_len );
-  (void)new KAction(i18n("&Start"), icon,0,_karm,
+  (void)new KAction(i18n("&Start"), BarIcon( "clock" ),0,_karm,
 					SLOT(startClock()),actionCollection(),"start");
   	
   (void)new KAction(i18n("S&top"), QIconSet(BarIcon("stop")),0,_karm,
@@ -202,12 +205,10 @@ void KarmWindow::makeMenus()
 					SLOT(newTask()),actionCollection(),"new_task");
   
  	
-  icon = QPixmap(delete_xpm);
-  (void)new KAction(i18n("&Delete"), icon,0,_karm,
+  (void)new KAction(i18n("&Delete"), BarIcon( "filedel" ),0,_karm,
 					SLOT(deleteTask()),actionCollection(),"delete_task");
  	
-  icon.loadFromData( clockedit_xpm_data, clockedit_xpm_len );
-  (void)new KAction(i18n("&Edit"), icon, 0,_karm,
+  (void)new KAction(i18n("&Edit"), BarIcon( "clockedit" ), 0,_karm,
 					SLOT(editTask()),actionCollection(),"edit_task");
  	
   createGUI("karmui.rc");

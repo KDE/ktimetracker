@@ -18,6 +18,8 @@
 #include "karm.h"
 #include "adddlg.h"
 
+#include "karm.moc"
+
 #define T_LINESIZE 1023
 
 Karm::Karm( QWidget *parent, const char *name )

@@ -23,8 +23,14 @@
 
 
 /* 
- * $Id:$
- * $Log:$
+ * $Id$
+ * $Log$
+ * Revision 1.9  2000/05/29 12:30:54  kalle
+ * - Replaced the two listboxes with one listview
+ * - Times can be specified as HH:MM [(+|-)HH:MM]
+ * - uses XML GUI
+ * - general KDE 2 face- and codelifting
+ *
  */
 #include <qlabel.h>
 #include <qlineedit.h>
@@ -36,6 +42,8 @@
 
 #include "adddlg.h"
 #include "karm.h"
+
+#include "adddlg.moc"
 
 AddTaskDialog::AddTaskDialog( QWidget *parent, const char *name, bool modal )
   :KDialogBase( parent, name, modal, "task", Ok|Cancel, Ok, true )
