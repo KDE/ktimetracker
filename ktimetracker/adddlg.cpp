@@ -25,6 +25,10 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.11  2000/06/02 06:04:26  kalle
+ * Changing the time in the edit dialog also updates the total time tally
+ * in the status bar.
+ *
  * Revision 1.10  2000/05/29 13:19:31  kalle
  * Icon loading in karm
  *
@@ -54,46 +58,65 @@ AddTaskDialog::AddTaskDialog( QWidget *parent, const char *name, bool modal )
   QWidget *page = new QWidget( this ); 
   setMainWidget(page);
 
-  QGridLayout *topLayout = new QGridLayout( page, 2, 2, 0, spacingHint() );
+  QGridLayout *topLayout = new QGridLayout( page, 2, 3, 0, spacingHint() );
 
   QString text = i18n("Task name");
   QLabel *label = new QLabel( text, page, "name" );
   topLayout->addWidget( label, 0, 0 );
   
-  mTaskName = new QLineEdit( page, "lineedit" );
-  mTaskName->setMinimumWidth(fontMetrics().maxWidth()*15);
-  topLayout->addWidget( mTaskName, 0, 1 );
+  _name = new QLineEdit( page, "lineedit" );
+  _name->setMinimumWidth(fontMetrics().maxWidth()*15);
+  topLayout->addWidget( _name, 0, 1 );
 
-  text = i18n("Accumulated time\n(HH:MM [+|- HH:MM])");
+  text = i18n("Total time\n(HH:MM [+|- HH:MM])");
   label = new QLabel( text, page, "time" );
   topLayout->addWidget( label, 1, 0 );
 
-  mValidator = new TimeValidator(this);
-  mTaskTime = new QLineEdit( page, "lineedit" );
-  mTaskTime->setMinimumWidth(fontMetrics().maxWidth()*15);
-  mTaskTime->setValidator(mValidator);
-  topLayout->addWidget( mTaskTime, 1, 1 );
+  _totalValidator = new TimeValidator(this);
+  _totalTime = new QLineEdit( page, "lineedit" );
+  _totalTime->setMinimumWidth(fontMetrics().maxWidth()*15);
+  _totalTime->setValidator(_totalValidator);
+  topLayout->addWidget( _totalTime, 1, 1 );
+
+  text = i18n("Session time\nWill be added to total too");
+  label = new QLabel( text, page, "session time" );
+  topLayout->addWidget( label, 2, 0 );
+
+  _sessionValidator = new TimeValidator(this);
+  _sessionTime = new QLineEdit( page, "lineedit" );
+  _sessionTime->setMinimumWidth(fontMetrics().maxWidth()*15);
+  _sessionTime->setValidator(_sessionValidator);
+  topLayout->addWidget( _sessionTime, 2, 1 );
 }
 
 
-void AddTaskDialog::setTask( const QString &name, long minutes )
+void AddTaskDialog::setTask( const QString &name, long minutes, long session )
 {
-  mTaskName->setText( name );
-  mTaskTime->setText(Karm::formatTime(minutes));
+  _name->setText( name );
+  _totalTime->setText(Karm::formatTime(minutes));
+  _sessionTime->setText(Karm::formatTime(session));
 }
 
 
 QString AddTaskDialog::taskName( void ) const
 { 
-  return( mTaskName->text() ); 
+  return( _name->text() ); 
 }
 
 
-long AddTaskDialog::taskTime( void ) const
+long AddTaskDialog::totalTime( void ) const
 { 
-  QString time = mTaskTime->text();
+  QString time = _totalTime->text();
   long res;
-  (void) mValidator->extractTime(time, &res);
+  (void) _totalValidator->extractTime(time, &res);
+  return res;
+}
+
+long AddTaskDialog::sessionTime( void ) const
+{ 
+  QString time = _sessionTime->text();
+  long res;
+  (void) _sessionValidator->extractTime(time, &res);
   return res;
 }
 

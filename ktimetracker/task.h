@@ -18,11 +18,13 @@ class Task :public QListViewItem
 
 private:
 	QString _name;
-	long _time;
+	long _totalTime;
+  long _sessionTime;
+  
 
 public:
 	/** constructor */
-	Task(const QString& taskame, long minutes, QListView *parent = 0);
+	Task(const QString& taskame, long minutes, long sessionTime, QListView *parent = 0);
 
 	/**increments the total task time
 	* @param minutes to increment by
@@ -37,13 +39,17 @@ public:
 	/** sets the total time accumulated by the task
 	* @param minutes time in minutes
 	*/
-	void setTime ( long minutes );
+	void setTotalTime ( long minutes );
+	void setSessionTime ( long minutes );
 
 	/** returns the total time accumulated by the task
 	* @return total time in minutes
 	*/
-	long time() const
-		{ return _time; };
+	long totalTime() const
+		{ return _totalTime; };
+
+	long sessionTime() const
+		{ return _sessionTime; };
 
 	/** sets the name of the task
 	* @param name	a pointer to the name. A deep copy will be made.
@@ -56,11 +62,12 @@ public:
 	const char *name() const
 		{ return _name.data(); };
 
-	/** Updates the content of the QListViewItem with respect to _name and _time
+	/** Updates the content of the QListViewItem with respect to _name and _totalTime
 	 */
 	inline void update() {
-		setText(0, Karm::formatTime(_time));
-		setText(1, _name);
+		setText(0, Karm::formatTime(_totalTime));
+		setText(1, Karm::formatTime(_sessionTime));
+    setText(2, _name);
 	}
 };
 

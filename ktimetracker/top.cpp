@@ -7,6 +7,10 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.35  2000/06/02 06:04:26  kalle
+ * Changing the time in the edit dialog also updates the total time tally
+ * in the status bar.
+ *
  * Revision 1.34  2000/06/01 15:51:09  blackie
  * added printing capabilities
  *
@@ -57,12 +61,9 @@
 #include "top.h"
 #include "version.h"
 #include "task.h"
-#include <qprinter.h>
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include "print.h"
 
 #include "top.moc"
-#include <iostream>
 KarmWindow::KarmWindow()
   : KTMainWindow(),
 	_accel( new KAccel( this ) ),
@@ -210,65 +211,9 @@ void KarmWindow::makeMenus()
   createGUI("karmui.rc");
 }
 
-void KarmWindow::print()
+void KarmWindow::print() 
 {
-	QPrinter printer;
-	
-	if (printer.setup()) {
-		// setup
-		QPainter painter(&printer);
-		QPaintDeviceMetrics deviceMetrics(&printer);
-		QFontMetrics metrics = painter.fontMetrics();
-		int pageHeight = deviceMetrics.height();
-		int pageWidth = deviceMetrics.width();
-		QSize margins = printer.margins();
-
-		// Calculate the maximum width of the time field
-		int timeWidth = 0;
-		for (QListViewItem *child = _karm->firstChild(); child;
-				 child = child->nextSibling()) {
-			Task *task = (Task *) child;
-			QString time = Karm::formatTime(task->time());
-			timeWidth = QMAX(timeWidth, metrics.width(time));
-		}
-
-		int offset = margins.height();
-
-		// Print the header
-		QFont origFont, newFont;
-		origFont = painter.font();
-		newFont = origFont;
-		newFont.setPixelSize(origFont.pixelSize() * 1.5);
-		painter.setFont(newFont);
-		
-		int height = metrics.height();
-		QString now = QDateTime::currentDateTime().toString();
-		
-		painter.drawText(margins.width(), offset, pageWidth, height, QPainter::AlignCenter, 
-										 "KArm - " + now);
-		
-		painter.setFont(origFont);
-		offset += height + 5;
-		
-		// Now print the actual content
-		for (QListViewItem *child = _karm->firstChild(); child;
-				 child = child->nextSibling()) {
-			Task *task = (Task *) child;
-			QString time = Karm::formatTime(task->time());
-			QString name = task->name();
-			
-			height = metrics.height();
-			int textWidth = pageWidth - margins.width() - timeWidth -5;
-			
-			painter.drawText(margins.width(), offset, timeWidth, height, QPainter::AlignRight, time);
-			painter.drawText(margins.width()+timeWidth+5, offset, textWidth, height, QPainter::AlignLeft, name);
-			
-			offset += height;
-
-			if (offset + 2* height > pageHeight) {
-				printer.newPage();
-				offset = margins.height();
-			}
-		}
-	}
+  MyPrinter printer(_karm);
+  printer.Print();
 }
+

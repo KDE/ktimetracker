@@ -40,9 +40,10 @@ class AddTaskDialog : public KDialogBase
 
   public:
     AddTaskDialog( QWidget *parent=0, const char *name=0, bool modal=true );
-    void setTask(const QString &name, long time );
+    void setTask(const QString &name, long time, long sessionTime );
     QString taskName( void ) const;
-    long taskTime( void ) const; 
+    long totalTime( void ) const; 
+    long sessionTime( void ) const; 
 
   protected slots:
     virtual void slotCancel( void );
@@ -56,9 +57,11 @@ class AddTaskDialog : public KDialogBase
     void finished( bool );
 
   private:
-  	QLineEdit *mTaskName;
-	  QLineEdit *mTaskTime;
-	  TimeValidator *mValidator;
+  	QLineEdit *_name;
+	  QLineEdit *_totalTime;
+	  QLineEdit *_sessionTime;
+	  TimeValidator *_totalValidator;
+	  TimeValidator *_sessionValidator;
 };
 
 

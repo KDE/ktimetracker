@@ -37,7 +37,8 @@ Karm::Karm( QWidget *parent, const char *name )
 	
 	connect(this, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(editTask(QListViewItem *)));
 
-	addColumn(i18n("Time"));
+	addColumn(i18n("Total Time"));
+  addColumn(i18n("Session Time"));
 	addColumn(i18n("Task Name"));
 	setAllColumnsShowFocus(true);
 }
@@ -106,7 +107,7 @@ void Karm::readFromFile( const char *fname )
 			// the time field was not a number
 			continue;
 		}
-		new Task(name, minutes, this);
+		new Task(name, minutes, 0, this);
 	}
 }
 
@@ -144,7 +145,7 @@ bool Karm::writeToFile(const char *fname)
 	for (QListViewItem *child =firstChild(); child; child = child->nextSibling()) {
 		Task *task = (Task *) child;
 		fprintf(file, "%ld\t%s\n", 
-			task->time(),
+			task->totalTime(),
 			task->name());
 	}
 	fclose( file );
@@ -205,7 +206,7 @@ void Karm::createNewTask( bool retVal )
 	
 	if( retVal && !_addDlg->taskName().isEmpty() ) {
 		// create the new task
-		Task *task = new Task(_addDlg->taskName(),_addDlg->taskTime(), this);
+		Task *task = new Task(_addDlg->taskName(),_addDlg->totalTime(), _addDlg->sessionTime(), this);
 		setCurrentItem(task);
 		setSelected(task, true);
 	}
@@ -231,7 +232,8 @@ void Karm::editTask(QListViewItem *element)
 		_editDlg = new AddTaskDialog( topLevelWidget(), 0, true );
 		_editDlg->setCaption(i18n("Edit Task"));
 		_editDlg->setTask( task->name(),
-											 task->time() );  
+											 task->totalTime(),
+                       task->sessionTime());  
 		connect( _editDlg, SIGNAL( finished( bool ) ),
 			 this, SLOT( updateExistingTask( bool ) ) );
 	}
@@ -250,11 +252,15 @@ void Karm::updateExistingTask( bool retVal )
 		task->setName( _editDlg->taskName() );
 
 		// update session time as well if the time was changed
-		if( task->time() != _editDlg->taskTime() ) {
-		  long difference = _editDlg->taskTime() - task->time();
+    long totalDiff = _editDlg->totalTime() - task->totalTime();
+    long sessionDiff = _editDlg->sessionTime() - task->sessionTime();
+    long difference = totalDiff + sessionDiff  ;
+		if( difference != 0 ) {
 		  emit sessionTimeChanged( difference );
 		}
-		task->setTime( _editDlg->taskTime() );
+
+		task->setTotalTime( _editDlg->totalTime() + sessionDiff);
+		task->setSessionTime( _editDlg->sessionTime() );
 	}
 	
 	delete _editDlg;

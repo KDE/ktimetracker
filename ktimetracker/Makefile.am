@@ -11,9 +11,9 @@ SUBDIRS = support pics
 METASOURCES = adddlg.moc kaccelmenuwatch.moc karm.moc top.moc
 
 karm_SOURCES =  adddlg.cpp karm.cpp main.cpp \
-	task.cpp top.cpp kaccelmenuwatch.cpp 
+	task.cpp top.cpp kaccelmenuwatch.cpp print.cpp
 
-noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h
+noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h print.h
 
 KDE_ICON = karm
 
