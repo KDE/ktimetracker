@@ -27,7 +27,7 @@ Preferences::Preferences() : KDialogBase(KDialogBase::Tabbed, i18n("Preferences"
   new QLabel(i18n("File to save time information to"), box3, "save label");
   _saveFileW = new QLineEdit(box3, "_saveFileW");
   
-  _doAutoSaveW = new QCheckBox(i18n("Automaticly save tasks"), autoSaveMenu, "_doAutoSaveW");
+  _doAutoSaveW = new QCheckBox(i18n("Automatically save tasks"), autoSaveMenu, "_doAutoSaveW");
   connect(_doAutoSaveW, SIGNAL(clicked()), 
           this, SLOT(autoSaveCheckBoxChanged()));
   
