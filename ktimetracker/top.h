@@ -2,6 +2,7 @@
 #define KARM_TOP_H
 
 #include <ktmainwindow.h>
+#include <kkeydialog.h>
 
 class QPopupMenu;
 class Karm;
@@ -27,15 +28,17 @@ class KarmWindow : public KTMainWindow
 	void updateTime( long difference );
 
   protected slots:
+    void keyBindings();
     void prefs();
     void resetSessionTime(); 
     void updateTime();
-	void updateStatusBar();
+   	void updateStatusBar();
     void clockStartMsg();
     void clockStopMsg();
     void quit();
     void print();
-	
+    void prefsOk();
+    void prefsCancel();
 
   protected:
     virtual void saveProperties( KConfig* );
@@ -44,6 +47,7 @@ class KarmWindow : public KTMainWindow
 
   private:
     void makeMenus();
+    KDialogBase *dialog;
 };
 
 #endif

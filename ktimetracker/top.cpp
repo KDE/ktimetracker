@@ -7,6 +7,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.36  2000/06/02 17:45:39  blackie
+ * better print layout + added session time for each task
+ *
  * Revision 1.35  2000/06/02 06:04:26  kalle
  * Changing the time in the edit dialog also updates the total time tally
  * in the status bar.
@@ -50,11 +53,11 @@
 #include <kconfig.h>
 #include <kglobal.h>
 #include <kiconloader.h>
-#include <kkeydialog.h>
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kaction.h>
 #include <kstdaction.h>
+#include <qvbox.h>
 
 #include "kaccelmenuwatch.h"
 #include "karm.h"
@@ -170,10 +173,36 @@ void KarmWindow::saveProperties( KConfig* )
   _karm->save();
 }
 
+void KarmWindow::keyBindings()
+{
+  KKeyDialog::configureKeys( actionCollection(), xmlFile());
+}
+
 
 void KarmWindow::prefs()
 {
-  KKeyDialog::configureKeys( actionCollection(), xmlFile() );
+  dialog = new KDialogBase(KDialogBase::Tabbed, "Preferences", 
+                           KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok);
+  
+  QVBox *autoSaveMenu = dialog->addVBoxPage(i18n("Auto Save"));
+  new QLabel("Auto Saving will be available from here soooooon\nJesper <blackie@kde.org>", autoSaveMenu);
+  
+  QVBox *printerMenu = dialog->addVBoxPage(i18n("Printer Options"));
+  new QLabel("Options describing the printout should come here sooooon\nJesper <blackie@kde.org>", printerMenu);
+  
+  dialog->show();
+}
+
+void KarmWindow::prefsOk() 
+{
+  qDebug("OK\n");
+  delete dialog;
+}
+
+void KarmWindow::prefsCancel() 
+{
+  qDebug("Cancel\n");
+  delete dialog;
 }
 
 
@@ -188,8 +217,8 @@ void KarmWindow::makeMenus()
 {
   (void)KStdAction::quit(this, SLOT(quit()), actionCollection());
   (void)KStdAction::print(this, SLOT(print()), actionCollection());
-  (void)KStdAction::action( KStdAction::Preferences,this,
-					SLOT(prefs()),actionCollection(),"preferences");
+  (void)KStdAction::keyBindings(this, SLOT(keyBindings()),actionCollection());
+  (void)KStdAction::preferences(this,	SLOT(prefs()),actionCollection());
   (void)new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
 					SLOT(resetSessionTime()),actionCollection(),"reset_session_time");
   

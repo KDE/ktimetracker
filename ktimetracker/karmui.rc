@@ -3,7 +3,6 @@
 <Menu name="file" >
 <text>
 File</text>
-<Action name="preferences" />
 <Action name="reset_session_time" />
 </Menu>
 <Menu name="clock" >
