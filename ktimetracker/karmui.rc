@@ -21,6 +21,7 @@
 <Action name="start" />
 <Action name="stop" />
 <Action name="new_task" />
+<Action name="new_sub_task" />
 <Action name="delete_task" />
 <Action name="edit_task" />
 </ToolBar>

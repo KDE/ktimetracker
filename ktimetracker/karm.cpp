@@ -114,6 +114,9 @@ void Karm::load()
     stack.push(task);
   }
   f.close();
+
+	setSelected(firstChild(), true);
+	setCurrentItem(firstChild());
 }
 
 bool Karm::parseLine(QString line, long *time, QString *name, int *level)

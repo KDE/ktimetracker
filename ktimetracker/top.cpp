@@ -153,8 +153,9 @@ void KarmWindow::makeMenus()
   (void)KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
 			    actionCollection(),"new_task");
 
-  (void)new KAction(i18n("New Subtask"), CTRL+ALT+Key_N,
-                         _karm, SLOT(newSubTask()),
+  (void)new KAction(i18n("New Subtask"), QString::fromLatin1("kmultiple"),
+										CTRL+ALT+Key_N,
+										_karm, SLOT(newSubTask()),
                     actionCollection(), "new_sub_task");
                          
  	
