@@ -34,14 +34,13 @@
 #include "preferences.h"
 
 KarmWindow::KarmWindow()
-  : KTMainWindow(),
+  : KMainWindow(0),
 	_accel( new KAccel( this ) ),
 	_watcher( new KAccelMenuWatch( _accel, this ) ),
 	_karm( new Karm( this ) ),
 	_totalTime( 0 )  
 {
-  setView( _karm, FALSE );
-  _karm->show();
+  setCentralWidget( _karm );
   connect( _karm, SIGNAL( sessionTimeChanged( long ) ),
 		   this, SLOT( updateTime( long ) ) );
 

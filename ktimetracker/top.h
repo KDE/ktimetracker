@@ -1,7 +1,7 @@
 #ifndef KARM_TOP_H
 #define KARM_TOP_H
 
-#include <ktmainwindow.h>
+#include <kmainwindow.h>
 #include <kkeydialog.h>
 
 class QPopupMenu;
@@ -11,7 +11,7 @@ class KAccelMenuWatch;
 class Preferences;
 class QTimer;
 
-class KarmWindow : public KTMainWindow
+class KarmWindow : public KMainWindow
 {
   Q_OBJECT
 
