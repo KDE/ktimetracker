@@ -30,12 +30,9 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/mini-karm.xpm $(kde_minidir)/karm.xpm
 
 uninstall-local:
-	rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
+	rm -f $(kde_appsdir)/KArm.kdelnk
 	rm -f $(kde_minidir)/karm.xpm
 	rm -f $(kde_toolbardir)/filedel.xpm
-	-rmdir -p $(kde_toolbardir)
-	-rmdir -p $(kde_minidir)
-	-rmdir -p $(kde_appsdir)
 
 messages:
 	$(XGETTEXT) -C -ki18n -x $(includedir)/kde.pot *.cpp && mv messages.po ../po/karm.pot
