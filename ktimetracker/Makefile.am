@@ -9,12 +9,12 @@ LDADD =  $(LIB_KDEUI)
 bin_PROGRAMS = karm
 SUBDIRS = support pics
 
-METASOURCES = adddlg.moc kaccelmenuwatch.moc karm.moc top.moc
+METASOURCES = adddlg.moc kaccelmenuwatch.moc karm.moc top.moc docking.moc
 
 karm_SOURCES =  adddlg.cpp karm.cpp main.cpp \
-	task.cpp top.cpp kaccelmenuwatch.cpp print.cpp
+	task.cpp top.cpp kaccelmenuwatch.cpp print.cpp docking.cpp
 
-noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h print.h
+noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h print.h docking.h
 
 KDE_ICON = karm
 

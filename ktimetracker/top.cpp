@@ -7,6 +7,10 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.39  2000/07/05 18:11:23  faure
+ * QIconSet(BarIcon()) removed. Gives better icons now - but KStdAction::preferences
+ * points to "options" which apparently doesn't exist anymore ?
+ *
  * Revision 1.38  2000/06/28 21:14:50  bieker
  * * strict compilation - fixing some unicode problems
  * * someone forgot to i18n() some strings... (that's easy to catch with
@@ -73,6 +77,7 @@
 #include "version.h"
 #include "task.h"
 #include "print.h"
+#include "docking.h"
 
 #include "top.moc"
 KarmWindow::KarmWindow()
@@ -115,6 +120,9 @@ KarmWindow::KarmWindow()
   w = QMAX( w, sizeHint().width() );
   h = QMAX( h, sizeHint().height() );
   resize(w, h);
+
+  DockWidget *dockWidget = new DockWidget(this,"doc widget");
+  dockWidget->show();
 }
 
 void KarmWindow::quit()
