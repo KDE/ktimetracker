@@ -3,6 +3,7 @@
 BinaryPattern=karm;
 Protocols=
 Name=KArm
+Name[is_IS]=Stimpilklukka
 Name[es]=Gestor de tiempos
 Name[de]=KArm
 Name[no]=KArm
@@ -17,6 +18,7 @@ Name[hr]=KArm
 Name[zh_CN.GB2312]=KArm
 Name[ro]=Cronometru
 Comment=Personal Time Tracker
+Comment[is_IS]=karm:  Tól til að fylgjast með í hvað tíminn fer
 Comment[es]=Gestor de tiempos personal
 Comment[de]=Pers\166nlicher Zeitverfolger
 Comment[no]=Personlig tidsoversikt
