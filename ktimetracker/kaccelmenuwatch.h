@@ -38,7 +38,7 @@ class KAccelMenuWatch : public QObject
 private:
 	enum AccelType { StdAccel, StringAccel };
 
-	typedef struct {
+	typedef struct AccelItem {
 		QPopupMenu	*menu;
 		int 		itemId;
 
