@@ -87,9 +87,8 @@ void Karm::load()
 	config->setGroup( "Karm" );
 	
 	if( !config->hasKey("DataPath") ) {
-		QString defaultPath( getenv("HOME") );
-		// Torben
-		defaultPath += "/.kde/share/apps/karm/karmdata.txt";
+		QString defaultPath;
+		defaultPath = KApplication::localkdedir() + "/share/apps/karm/karmdata.txt";
 
 		// save it
 		config->writeEntry("DataPath", defaultPath, true );

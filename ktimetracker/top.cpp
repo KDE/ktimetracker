@@ -191,10 +191,10 @@ void KarmWindow::makeMenus()
 	_helpMenu = new QPopupMenu;
 
 	QString about;
-	about.sprintf( i18n("%s %s -- Sirtaj Singh Kang\n"
+	about = i18n("%1 %2 -- Sirtaj Singh Kang\n"
 			"taj@kde.org, Oct 1997\n\n"
-			"The K Desktop Environment"), 
-			_karm->KarmName.data(), KARM_VERSION);
+			"The K Desktop Environment")
+			.arg(_karm->KarmName).arg(KARM_VERSION);
 
 	_mainMenu->insertItem( i18n( "&File" ), _fileMenu);
 	_mainMenu->insertItem( i18n( "&Clock" ), _clockMenu );
