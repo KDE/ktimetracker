@@ -141,19 +141,19 @@ AddTaskDialog::AddTaskDialog(QString caption, bool editDlg)
 	slotRelativePressed();
 
   // Whats this help.
-  QWhatsThis::add(_name, i18n("Enter the name of the task here. This name is for your eyes only"));
-  QWhatsThis::add(_absoluteRB, i18n("If you select this radio button then you specify that you want "
-                                    "to enter the time as absolute values. That is for example: "
+  QWhatsThis::add(_name, i18n("Enter the name of the task here. This name is for your eyes only."));
+  QWhatsThis::add(_absoluteRB, i18n("If you select this radio button, you specify that you want "
+                                    "to enter the time as absolute values. For example: "
                                     "total for this task is 20 hours and 15 minutes.\n\n"
                                     "The time is specified for the session time and for the total time "
                                     "separately."));
-  QWhatsThis::add(_relativeRB, i18n("If you select this radio button then you specify that you want "
-                                    "to add or subtract time for the task. That is: I've work 2 hours "
+  QWhatsThis::add(_relativeRB, i18n("If you select this radio button, you specify that you want "
+                                    "to add or subtract time for the task. For example: I've worked 2 hours "
                                     "and 20 minutes more on this task (without having the timer "
                                     "running.)\n\n"
                                     "This time will be added or subtracted for both the "
-                                    "session time and the total time"));
-  QWhatsThis::add(_totalTW, i18n("This is the overall time this task has been running"));
+                                    "session time and the total time."));
+  QWhatsThis::add(_totalTW, i18n("This is the overall time this task has been running."));
   QWhatsThis::add(_sessionTW, i18n("This is the time the task has been running this session."));
   QWhatsThis::add(_diffTW, i18n("Specify how much time to add or subtract to the overall and "
                                 "session time"));
