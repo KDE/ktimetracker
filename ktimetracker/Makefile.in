@@ -9,7 +9,7 @@ KDE_RPATH = @KDE_RPATH@
 
 ############ Autoconf-generated variables  ###################
 CXXFLAGS= @CXXFLAGS@ @all_includes@ -DHAVE_CONFIG_H -I.. 
-LDFLAGS	= @LDFLAGS@ @all_libraries@ -lkdecore -lkdeui -lqt -lXext -lX11 
+LDFLAGS	= @LDFLAGS@ @all_libraries@ -lkdecore -lkdeui -lqt -lXext -lX11 @LIBSOCKET@
 CXX     = @CXX@
 MOC   	= @MOC@
 
