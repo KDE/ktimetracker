@@ -9,32 +9,28 @@ class KMenuBar;
 class KToolBar;
 class QListBox;
 class AddTaskDialog;
+class IdleTimer;
+class QTimer;
+class Preferences;
 
-///
-class Karm	: public QListView
+class Karm : public QListView
 {
 	Q_OBJECT
-private:
-	bool _timerRunning;
-	int  _timerId;
+
+private: // member variables
+  IdleTimer *_idleTimer;
+  QTimer *_minuteTimer;
+  QTimer *_autoSaveTimer;
 
 	AddTaskDialog	*_addDlg;
 	AddTaskDialog	*_editDlg;
+  Preferences *_preferences;
 
-signals:
-	void sessionTimeChanged( long difference );
 
 public:
-	/** constructor */
 	Karm( QWidget *parent = 0, const char *name = 0 );	
-	/** destructor */
 	virtual ~Karm();
-
-	///
 	static QString formatTime(long minutes);
-
-	// Application "Name"
-	QString KarmName;
 
 public slots:
   /*
@@ -44,25 +40,19 @@ public slots:
   		string		task name
 	*/
 	void load();
-	void readFromFile(const QString &s);
-	///
 	void save();
+	void readFromFile(const QString &s);
 	bool writeToFile(const QString &fname);
-	
-
-	///
 	void stopClock();
-	///
 	void startClock();
-	///
 	void newTask();
-	///
 	void editTask();
 	void editTask(QListViewItem *);
-	///
 	void deleteTask();
+  void extractTime(int minutes);
 
 protected slots:
+
 	/** creates a new task.
 	* Used as a callback from the new task dialog, creates
 	* a new task only if returned is TRUE.
@@ -75,17 +65,11 @@ protected slots:
 	*/
 	void updateExistingTask( bool returned );
 
-protected:
-	///
-	virtual void timerEvent( QTimerEvent * );
-
+  void autoSaveChanged(bool);
+  void autoSavePeriodChanged(int period);
+  
 signals:
-	///
-	void timerStarted();
-	///
-	void timerStopped();
-	///
-	void timerTick();
+	void sessionTimeChanged( long difference );
 
 	/** raised on file read or write error.
 	*/
@@ -96,6 +80,13 @@ signals:
 	*/
 	void dataChanged();
 
+	void timerStarted();
+	void timerStopped();
+	void timerTick();
+
+
+protected slots:
+  void minuteUpdate();
 };
 
 inline QString Karm::formatTime( long minutes )

@@ -9,7 +9,6 @@
 #include <kapp.h>
 #include <kconfig.h>
 #include <klocale.h>
-#include <kstddirs.h>
 #include <kmenubar.h>
 #include <ktoolbar.h>
 #include <kmessagebox.h>
@@ -18,28 +17,44 @@
 #include "karm.h"
 #include "adddlg.h"
 #include "karm.moc"
+#include "idle.h"
+#include "preferences.h"
 
 #define T_LINESIZE 1023
 
 Karm::Karm( QWidget *parent, const char *name )
   : QListView( parent, name )
 {
-  _timerRunning = FALSE;
-  
   _addDlg  = 0;
-  _editDlg = 0;
+  _editDlg = 0;  
   
-  startClock();
+  _preferences = Preferences::instance();
   
-  // Peter Putzer: added KarmName
-  KarmName = QString(kapp->caption());
-	
-	connect(this, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(editTask(QListViewItem *)));
+	connect(this, SIGNAL(doubleClicked(QListViewItem *)), 
+          this, SLOT(editTask(QListViewItem *)));
 
 	addColumn(i18n("Total Time"));
   addColumn(i18n("Session Time"));
 	addColumn(i18n("Task Name"));
 	setAllColumnsShowFocus(true);
+
+  // set up the minuteTimer
+  _minuteTimer = new QTimer(this);
+  connect(_minuteTimer, SIGNAL(timeout()), this, SLOT(minuteUpdate()));
+
+  // Set up the idle detection.
+  _idleTimer = new IdleTimer(_preferences->idlenessTimeout());
+  connect(_idleTimer, SIGNAL(extractTime(int)), this, SLOT(extractTime(int)));
+  connect(_idleTimer, SIGNAL(stopTimer()), this, SLOT(stopClock()));
+  connect(_preferences, SIGNAL(idlenessTimeout(int)), _idleTimer, SLOT(setMaxIdle(int)));
+  connect(_preferences, SIGNAL(detectIdleness(bool)), _idleTimer, SLOT(toggleOverAllIdleDetection(bool)));
+  
+  // Setup auto save timer
+  _autoSaveTimer = new QTimer(this);
+  connect(_preferences, SIGNAL(autoSave(bool)), this, SLOT(autoSaveChanged(bool)));
+  connect(_preferences, SIGNAL(autoSavePeriod(int)), 
+          this, SLOT(autoSavePeriodChanged(int)));
+  connect(_autoSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
 }
 
 Karm::~Karm()
@@ -50,15 +65,7 @@ Karm::~Karm()
 void Karm::load()
 {
   QFileInfo info;
-  KConfig &config = *kapp->config();
-  
-  config.setGroup( QString::fromLatin1("Karm") );
-  
-  QString defaultPath( locateLocal("appdata",
-				   QString::fromLatin1("karmdata.txt")) );
-
-  info.setFile( config.readEntry( QString::fromLatin1("DataPath"),
-				  defaultPath ) );
+  info.setFile(_preferences->saveFile() );
 
   if( info.exists() ) 
   {
@@ -113,15 +120,7 @@ void Karm::readFromFile( const QString &fname )
 
 void Karm::save()
 {
-  KConfig &config = *KGlobal::config();
-  
-  config.setGroup(QString::fromLatin1("Karm"));
-
-  QString defaultPath( locateLocal("appdata",
-				   QString::fromLatin1("karmdata.txt")));
-	
-	if( !writeToFile( config.readEntry(QString::fromLatin1("DataPath"),
-					   defaultPath) ) ) {
+	if( !writeToFile( _preferences->saveFile() ) ) {
 		QString msg = i18n
 		  ("There was an error trying to save your data file.\n"
 		   "Time accumulated this session will NOT be saved!\n");
@@ -156,35 +155,27 @@ bool Karm::writeToFile(const QString &fname)
 
 void Karm::stopClock()
 {
-  if( _timerRunning )
-  {
-    killTimer( _timerId );
-    _timerRunning = FALSE;
-    
-    emit timerStopped();
+  if(_minuteTimer->isActive()) {
+    _minuteTimer->stop();
+    _idleTimer->stopIdleDetection();    
+    emit(timerStopped());
   }
 }
 
 void Karm::startClock()
 {
-  if( !_timerRunning && (childCount() > 0))
+  if( !_minuteTimer->isActive() && (childCount() > 0) && (currentItem() != 0))
   {
-    _timerId = startTimer( 60000 );
-    _timerRunning = TRUE;
-	 
-    emit timerStarted();
+    _minuteTimer->start(1000 * secsPerMinutes);
+    _idleTimer->startIdleDetection();
+    emit(timerStarted());
   }
 }
 
-void Karm::timerEvent( QTimerEvent *ev )
+void Karm::minuteUpdate()
 {
-  QListView::timerEvent( ev );
-	
-  if ( _timerRunning && ev->timerId() == _timerId )
-    {
-    ((Task *) currentItem())->incrementTime( 1 );
-    emit timerTick();
-  }
+  ((Task *) currentItem())->incrementTime( 1 );
+  emit(timerTick());
 }
 
 void Karm::newTask()
@@ -287,3 +278,27 @@ void Karm::deleteTask()
 }
 
 
+void Karm::extractTime(int minutes) 
+{
+  Task *task = (Task *) currentItem();
+  task->decrementTime(minutes);
+}
+
+void Karm::autoSaveChanged(bool on)
+{
+  if (on) {
+    if (!_autoSaveTimer->isActive()) {
+      _autoSaveTimer->start(_preferences->autoSavePeriod()*1000*secsPerMinutes);
+    }
+  }
+  else {
+    if (_autoSaveTimer->isActive()) {
+      _autoSaveTimer->stop();
+    }
+  }
+}
+
+void Karm::autoSavePeriodChanged(int /*minutes*/) 
+{
+  autoSaveChanged(_preferences->autoSave());
+}

@@ -4,7 +4,6 @@
 #include <qpainter.h>
 #include <qpaintdevicemetrics.h>
 #include <qdatetime.h>
-#include <iostream>
 
 MyPrinter::MyPrinter(const Karm *karm)
 {

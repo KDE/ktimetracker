@@ -3,18 +3,18 @@
 AM_CPPFLAGS = -DQT_NO_ASCII_CAST -DQT_NO_CAST_ASCII
 INCLUDES = $(all_includes)
 LDFLAGS	= $(all_libraries) $(KDE_RPATH)
-LDADD =  $(LIB_KDEUI)
+LDADD =  $(LIB_KDEUI) -lXss
 
 
 bin_PROGRAMS = karm
 SUBDIRS = support pics
 
-METASOURCES = adddlg.moc kaccelmenuwatch.moc karm.moc top.moc docking.moc
+METASOURCES = AUTO
 
-karm_SOURCES =  adddlg.cpp karm.cpp main.cpp \
-	task.cpp top.cpp kaccelmenuwatch.cpp print.cpp docking.cpp
-
-noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h print.h docking.h
+karm_SOURCES =  adddlg.cpp karm.cpp main.cpp idle.cpp \
+	task.cpp top.cpp kaccelmenuwatch.cpp print.cpp docking.cpp\
+	preferences.cpp
+noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h kaccelmenuwatch.h version.h print.h idle.h docking.h preferences.h
 
 KDE_ICON = karm
 

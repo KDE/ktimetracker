@@ -8,17 +8,21 @@ class QPopupMenu;
 class Karm;
 class KAccel;
 class KAccelMenuWatch;
+class Preferences;
+class QTimer;
+
 
 /// The top level widget for Karm.
 class KarmWindow : public KTMainWindow
 {
   Q_OBJECT
 
-  private:
-    KAccel		*_accel;
-    KAccelMenuWatch	*_watcher;
-    Karm		*_karm;
-    long		_totalTime;
+private:
+  KAccel		*_accel;
+  KAccelMenuWatch	*_watcher;
+  Karm		*_karm;
+  long		_totalTime;
+  Preferences *_preferences;
 
   public:
     KarmWindow();
@@ -27,23 +31,20 @@ class KarmWindow : public KTMainWindow
   public slots:
 	void updateTime( long difference );
 
-  protected slots:
-    void keyBindings();
-    void prefs();
-    void resetSessionTime(); 
-    void updateTime();
-   	void updateStatusBar();
-    void clockStartMsg();
-    void clockStopMsg();
-    void quit();
-    void print();
-    void prefsOk();
-    void prefsCancel();
+protected slots:
+  void keyBindings();
+  void resetSessionTime(); 
+  void updateTime();
+  void updateStatusBar();
+  void clockStartMsg();
+  void clockStopMsg();
+  void quit();
+  void print();
 
-  protected:
-    virtual void saveProperties( KConfig* );
-    //	virtual void readSettings( KConfig * );
-    //	virtual void writeSettings( KConfig * );
+protected:
+  virtual void saveProperties( KConfig* );
+  void saveGeometry();
+  void loadGeometry();
 
   private:
     void makeMenus();
