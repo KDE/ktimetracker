@@ -15,9 +15,7 @@ karm_SOURCES =  version.h adddata.cpp adddlg.cpp karm.cpp main.cpp \
 
 noinst_HEADERS = adddata.h adddlg.h karm.h task.h toolicons.h top.h 
 
-kde_icon_DATA = karm.xpm
-
-EXTRA_DIST = $(kde_icon_DATA) mini-karm.xpm
+KDE_ICON = karm
 
 appsdir = $(kde_appsdir)/Utilities
 
@@ -26,12 +24,9 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/support/karm.desktop $(appsdir)
 	$(mkinstalldirs) $(kde_toolbardir)
 	$(INSTALL_DATA) $(srcdir)/support/filedel.xpm $(kde_toolbardir)
-	$(mkinstalldirs) $(kde_minidir)
-	$(INSTALL_DATA) $(srcdir)/mini-karm.xpm $(kde_minidir)/karm.xpm
 
 uninstall-local:
 	rm -f $(kde_appsdir)/KArm.kdelnk
-	rm -f $(kde_minidir)/karm.xpm
 	rm -f $(kde_toolbardir)/filedel.xpm
 
 messages:
