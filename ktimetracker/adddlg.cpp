@@ -19,8 +19,7 @@ KarmAddDlg::KarmAddDlg
 	QWidget* parent,
 	const char* name
 )
-	:
-	Inherited( parent, name )
+	: Inherited( parent, name )
 {
 	// This is just a kind of default (Caption is reset in class Karm)
        setCaption( klocale->translate( "KArm: New Task" ) );

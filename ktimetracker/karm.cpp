@@ -113,10 +113,10 @@ void Karm::save()
 
 	if( !_broker->writeToFile( config->readEntry("DataPath") ) ) {
 
-               KMsgBox::message(0, klocale->translate( "Karm: Save error" ), 
-                       klocale->translate( "There was an error trying to save your data file.\n"
+               KMsgBox::message(0, i18n( "Karm: Save error" ), 
+                       i18n( "There was an error trying to save your data file.\n"
                        "Time accumulated this session will NOT be saved!\n" ),
-                       KMsgBox::STOP, klocale->translate( "Oh No!" ) );
+                       KMsgBox::STOP, i18n( "Oh No!" ) );
 	}
 }
 
@@ -202,7 +202,7 @@ void Karm::newTask()
 	if( _addDlg == 0 ) {
 		// popup a dialog asking for info
 		_addDlg = new KarmAddDlg;
-               _addDlg->setCaption(KarmName + klocale->translate( ": Add New Task" ) );
+               _addDlg->setCaption(KarmName + i18n( ": Add New Task" ) );
 
 		connect( _addDlg, SIGNAL( finished( bool ) ), 
 			this, SLOT( createNewTask( bool ) ) );
@@ -213,7 +213,7 @@ void Karm::newTask()
 void Karm::createNewTask( bool retVal )
 {
 	if( _addDlg == 0 ) {
-               warning(klocale->translate( "Karm::createNewTask called and there's no dialog!" ) );
+               warning(i18n( "Karm::createNewTask called and there's no dialog!" ) );
 		return;
 	}
 
@@ -240,7 +240,7 @@ void Karm::editTask()
 	if( _editDlg == 0 ) {
 		_editDlg = new KarmAddDlg;
 
-               _editDlg->setCaption( KarmName + klocale->translate( ": Edit Task Entry" ) );
+               _editDlg->setCaption( KarmName + i18n( ": Edit Task Entry" ) );
 		_editDlg->setTask( _broker->currentTask()->name(),
 				_broker->currentTask()->time() );
 
@@ -253,7 +253,7 @@ void Karm::editTask()
 void Karm::updateExistingTask( bool retVal )
 {
 	if( _editDlg == 0 ) {
-               warning(klocale->translate( "Karm::updateExistingTask called and there's no dlg!" ) );
+               warning(i18n( "Karm::updateExistingTask called and there's no dlg!" ) );
 		return;
 	}
 
@@ -277,10 +277,10 @@ void Karm::deleteTask()
 	if( _broker->count() == 0 )
 		return;
 
-       int response = KMsgBox::yesNo(0, KarmName + klocale->translate( ": Deleting Task" ) , 
-               klocale->translate( "Are you sure you want to delete this task?" ), 
+       int response = KMsgBox::yesNo(0, KarmName + i18n( ": Deleting Task" ) , 
+               i18n( "Are you sure you want to delete this task?" ), 
 		KMsgBox::QUESTION,
-               klocale->translate( "&Yes" ), klocale->translate( "&Cancel" ) );
+               i18n( "&Yes" ), i18n( "&Cancel" ) );
 
 	if( response == 1 ) {
 		// save the current position

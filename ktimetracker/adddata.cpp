@@ -35,13 +35,13 @@ KAddDlgData::KAddDlgData
 	QLabel* tmpQLabel;
 	tmpQLabel = new QLabel( this, "Label_1" );
 	tmpQLabel->setGeometry( 20, 20, 100, 30 );
-       tmpQLabel->setText( klocale->translate( "Task Name" ) );
+       tmpQLabel->setText( i18n( "Task Name" ) );
 	tmpQLabel->setAlignment( 265 );
 	tmpQLabel->setMargin( -1 );
 
 	tmpQLabel = new QLabel( this, "Label_2" );
 	tmpQLabel->setGeometry( 20, 60, 100, 30 );
-       tmpQLabel->setText( klocale->translate( "Accumutated time (in minutes)" ) );
+       tmpQLabel->setText( i18n( "Accumutated time (in minutes)" ) );
 	tmpQLabel->setAlignment( 1289 );
 	tmpQLabel->setMargin( -1 );
 
@@ -70,7 +70,7 @@ KAddDlgData::KAddDlgData
 	_cancelButton = new QPushButton( this, "PushButton_2" );
 	_cancelButton->setGeometry( 160, 110, 100, 30 );
 	connect( _cancelButton, SIGNAL(clicked()), SLOT(cancelClicked()) );
-       _cancelButton->setText( klocale->translate( "&Cancel" ) );
+       _cancelButton->setText( i18n( "&Cancel" ) );
 	_cancelButton->setAutoRepeat( FALSE );
 	_cancelButton->setAutoResize( FALSE );
 
