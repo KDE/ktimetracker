@@ -152,10 +152,10 @@ void KarmWindow::makeMenus()
                                    SLOT(resetSessionTime()),actionCollection(),
                                    "reset_session_time");
   actionStart = new KAction(i18n("&Start"), QString::fromLatin1("1rightarrow"),
-                            CTRL + Key_S ,_karm,
+                            Key_S ,_karm,
                             SLOT(startTimer()),actionCollection(),"start");
   actionStop = new KAction(i18n("S&top"), QString::fromLatin1("stop"),
-                           CTRL + Key_T,_karm,
+                           Key_Escape,_karm,
                            SLOT(stopCurrentTimer()),actionCollection(),"stop");
   actionNew = KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
                                   actionCollection(),"new_task");
