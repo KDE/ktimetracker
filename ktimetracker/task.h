@@ -21,7 +21,7 @@ private:
 
 public:
 	/** constructor */
-	Task( const char *name=0, long minutes=0 );
+	Task( const QString& name=QString::null, long minutes=0 );
 
 	/** destructor*/
 	~Task()
@@ -54,7 +54,7 @@ public:
 	/** sets the name of the task
 	* @param name	a pointer to the name. A deep copy will be made.
 	*/
-	void setName( const char *name )
+	void setName( const QString& name )
 		{ *_name = name; };
 
 	/** returns the name of this task.
@@ -118,7 +118,7 @@ public:
 		{ return _taskList->current(); };
 
 	/** Add a new task */
-	void addTask( const char *name, long time = 0 );
+	void addTask( const QString& name, long time = 0 );
 
 
 	/** delete the current Task */
@@ -172,7 +172,7 @@ signals:
 };
 
 
-inline Task::Task( const char *name, long minutes ) 
+inline Task::Task( const QString& name, long minutes ) 
 { 
 	_name = new QString( name ); 
 	*_name = _name->stripWhiteSpace();

@@ -69,7 +69,7 @@ void Karm::load()
 	info.setFile( config->readEntry( "DataPath", defaultPath ) );
 
 	if( info.exists() ) {
-		_broker->readFromFile( info.filePath() );
+		_broker->readFromFile( info.filePath().ascii() );
 		fillListBoxes();
 		return;	
 	}
@@ -82,7 +82,7 @@ void Karm::save()
 	config->setGroup("Karm");
 	QString defaultPath( locateLocal("appdata", "karmdata.txt"));
 
-	if( !_broker->writeToFile( config->readEntry("DataPath", defaultPath) ) ) {
+	if( !_broker->writeToFile( config->readEntry("DataPath", defaultPath).ascii() ) ) {
 
                KMsgBox::message(0, i18n( "Karm: Save error" ), 
                        i18n( "There was an error trying to save your data file.\n"
@@ -184,11 +184,11 @@ void Karm::newTask()
 void Karm::createNewTask( bool retVal )
 {
 	if( _addDlg == 0 ) {
-               warning(i18n( "Karm::createNewTask called and there's no dialog!" ) );
+               warning("Karm::createNewTask called and there's no dialog!" );
 		return;
 	}
 
-	if( retVal && strlen( _addDlg->taskName()) > 0) {
+	if( retVal && !_addDlg->taskName().isEmpty() ) {
 		// create the new task
 		_broker->addTask( _addDlg->taskName(),
 				  _addDlg->taskTime() );
@@ -224,11 +224,11 @@ void Karm::editTask()
 void Karm::updateExistingTask( bool retVal )
 {
 	if( _editDlg == 0 ) {
-               warning(i18n( "Karm::updateExistingTask called and there's no dlg!" ) );
+               warning("Karm::updateExistingTask called and there's no dialog!" );
 		return;
 	}
 
-	if( retVal && strlen( _editDlg->taskName()) > 0 ) {
+	if( retVal && !_editDlg->taskName().isEmpty() ) {
 		int currentItem = _broker->current();
 
 		_broker->currentTask()->setName( _editDlg->taskName() );

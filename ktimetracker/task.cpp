@@ -142,7 +142,7 @@ bool TaskBroker::writeToFile( const char *fname )
 	return TRUE;
 }
 
-void TaskBroker::addTask( const char *task, long time )
+void TaskBroker::addTask( const QString& task, long time )
 {
 	if( task == 0 )
 		return;

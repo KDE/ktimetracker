@@ -33,14 +33,14 @@ public:
 	void setTask(const char *name, long time);
 
 	///
-	const char *taskName() const
+	QString taskName() const
 		{ return _taskName->text(); };
 	///
 	long taskTime() const
-		{ return atol( _taskTime->text() ); };
+		{ return atol( _taskTime->text().ascii()); };
 
 signals:
-	/** raised on click of Ok or Cancel.
+	/** raised on click of OK or Cancel.
 	* TRUE if Ok clicked, FALSE if Cancel clicked.
 	*/
 	void finished( bool );
