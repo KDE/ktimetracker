@@ -26,39 +26,38 @@
 #include <qvalidator.h>
 #include "adddlg.h"
 class QLineEdit;
-
-class TimeValidator :public QValidator 
-{
-public:
-	TimeValidator(QWidget *parent=0, const char *name=0) :QValidator(parent, name) {}
-	virtual State validate(QString &, int &) const;
-	bool extractTime(QString str, long *res) const;
-};
+class KTimeWidget;
+class QRadioButton;
 
 class AddTaskDialog : public KDialogBase
 {
   Q_OBJECT
 
   public:
-    AddTaskDialog(QString caption);
+    AddTaskDialog(QString caption, bool editDlg);
     void setTask(const QString &name, long time, long sessionTime );
     QString taskName( void ) const;
-    long totalTime( void ) const; 
-    long sessionTime( void ) const; 
-
-  signals:
-    /** 
-     * raised on click of OK or Cancel.
-     * true if Ok clicked, false if Cancel clicked.
-     */
-    void finished( bool );
+	  void status( long *total, long *totalDiff, long *session, long *sessionDiff ) const;
+	
+  private slots:
+	void slotAbsolutePressed();
+	void slotRelativePressed();
 
   private:
-  	QLineEdit *_name;
-	  QLineEdit *_totalTime;
-	  QLineEdit *_sessionTime;
-	  TimeValidator *_totalValidator;
-	  TimeValidator *_sessionValidator;
+  	QLineEdit* _name;
+	  KTimeWidget* _totalTW;
+	  KTimeWidget* _sessionTW;
+	  KTimeWidget* _diffTW;
+	  QComboBox* _operator;
+
+	  long origTotal;
+  	long origSession;
+
+	  QRadioButton *_absoluteRB;
+	  QRadioButton *_relativeRB;
+
+  	QLabel* _totalLA;
+	  QLabel* _sessionLA;
 };
 
 

@@ -49,7 +49,8 @@ void MyPrinter::print()
 
     nameFieldWidth = pageWidth - xMargin - totalTimeWidth - sessionTimeWidth - 2*5;
     
-    int maxReqNameFieldWidth=0;
+    int maxReqNameFieldWidth= metrics.width(i18n("Task Name "));
+		
     for (QListViewItem *child = _karm->firstChild(); child;
          child = child->nextSibling()) {
       int width = calculateReqNameWidth(child, metrics, 0);

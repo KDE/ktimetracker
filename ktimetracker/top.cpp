@@ -127,6 +127,7 @@ void KarmWindow::resetSessionTime()
 {
   _totalTime = 0;
   statusBar()->changeItem( i18n("This session: %1").arg(QString::fromLatin1("0:00")), 0 );
+	_karm->resetSessionTimeForAllTasks();
 }
 
 

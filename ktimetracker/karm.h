@@ -34,6 +34,9 @@ public:
     virtual ~Karm();
     static QString formatTime(long minutes);
 
+private:
+	void updateParents( QListViewItem* task, long totalDiff, long sesssionDiff );
+
 public slots:
     /*
     File format:
@@ -56,6 +59,7 @@ public slots:
     void editTask();
     void deleteTask();
     void extractTime(int minutes);
+    void resetSessionTimeForAllTasks();
 
 protected slots:
     void autoSaveChanged(bool);

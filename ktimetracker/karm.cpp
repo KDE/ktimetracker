@@ -205,7 +205,8 @@ void Karm::startTimer()
   }
 }
 
-void Karm::stopAllTimers() {
+void Karm::stopAllTimers() 
+{
   for(unsigned int i=0; i<activeTasks.count();i++) {
     activeTasks.at(i)->setRunning(false);
   }
@@ -213,6 +214,12 @@ void Karm::stopAllTimers() {
   activeTasks.clear();
 }
 
+void Karm::resetSessionTimeForAllTasks()
+{
+	for(QListViewItem *child=firstChild(); child; child=child->itemBelow()) {
+		dynamic_cast<Task*>(child)->setSessionTime(0);
+  }
+}
 
 void Karm::stopCurrentTimer()
 {
@@ -269,7 +276,7 @@ void Karm::newTask()
 
 void Karm::newTask(QString caption, QListViewItem *parent)
 {
-  AddTaskDialog *dialog = new AddTaskDialog(caption);
+  AddTaskDialog *dialog = new AddTaskDialog(caption, false);
 	int result = dialog->exec();
 
   if (result == QDialog::Accepted) {
@@ -277,12 +284,16 @@ void Karm::newTask(QString caption, QListViewItem *parent)
     if (!dialog->taskName().isEmpty()) {
       taskName = dialog->taskName();
     }
+
+		long total, totalDiff, session, sessionDiff;
+		dialog->status( &total, &totalDiff, &session, &sessionDiff );
     Task *task;
     if (parent == 0)
-      task = new Task(taskName, dialog->totalTime(), dialog->sessionTime(), this);
+      task = new Task(taskName, total, session, this);
     else
-      task = new Task(taskName, dialog->totalTime(), dialog->sessionTime(), parent);
+      task = new Task(taskName, total, session, parent);
 
+		updateParents( (QListViewItem *) task, totalDiff, sessionDiff );
     setCurrentItem(task);
     setSelected(task, true);
   }
@@ -303,7 +314,7 @@ void Karm::editTask()
 	if (!task)
     return;
 
-  AddTaskDialog *dialog = new AddTaskDialog(i18n("Edit Task"));
+  AddTaskDialog *dialog = new AddTaskDialog(i18n("Edit Task"), true);
   dialog->setTask(task->name(),
                   task->totalTime(),
                   task->sessionTime());  
@@ -316,26 +327,30 @@ void Karm::editTask()
     task->setName(taskName);
     
     // update session time as well if the time was changed
-    long totalDiff = dialog->totalTime() - task->totalTime();
-    long sessionDiff = dialog->sessionTime() - task->sessionTime();
-    long difference = totalDiff + sessionDiff  ;
-    if( difference != 0 ) {
-      emit sessionTimeChanged( difference );
+		long total, session, totalDiff, sessionDiff;
+		dialog->status( &total, &totalDiff, &session, &sessionDiff );
+
+    if( sessionDiff != 0 ) {
+      emit sessionTimeChanged( sessionDiff );
     }
-    task->setTotalTime( dialog->totalTime() + sessionDiff);
-    task->setSessionTime( dialog->sessionTime() );
+    task->setTotalTime( total);
+    task->setSessionTime( session );
 
     // Update the parents for this task.
-    QListViewItem *item = ((QListViewItem *)task)->parent();
-    while (item) {
-      Task *parrentTask = (Task *) item;
-      parrentTask->setTotalTime(parrentTask->totalTime()+difference);
-      parrentTask->setSessionTime(parrentTask->sessionTime()+sessionDiff);
-      item = item->parent();
-    }
-    
+		updateParents( (QListViewItem *) task, totalDiff, sessionDiff );
   }
   delete dialog;
+}
+
+void Karm::updateParents( QListViewItem* task, long totalDiff, long sessionDiff )
+{
+	QListViewItem *item = task->parent();
+	while (item) {
+		Task *parrentTask = (Task *) item;
+		parrentTask->setTotalTime(parrentTask->totalTime()+totalDiff);
+		parrentTask->setSessionTime(parrentTask->sessionTime()+sessionDiff);
+		item = item->parent();
+	}
 }
 
 void Karm::deleteTask()
