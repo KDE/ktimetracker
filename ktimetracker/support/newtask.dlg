@@ -1,0 +1,79 @@
+DlgEdit:v1.2:Dialog:
+Dialog {
+	ClassHeader {adddlg.h}
+	ClassSource {adddlg.cpp}
+	ClassName {KarmAddDlg}
+	DataHeader {adddata.h}
+	DataSource {adddata.cpp}
+	DataName {KAddDlgData}
+	WindowBaseClass {QDialog}
+	IsModal {FALSE}
+	WindowCaption {Karm: New Task}
+}
+WidgetLayout {
+		Rect {5 102 300 150}
+		Grid {10}
+
+Frame {
+		Style {34}
+		Rect {10 10 280 90}
+		Name {Frame_1}
+}
+Label {
+		Text {Task Name}
+		Alignment {265}
+		AutoResize {FALSE}
+		Margin {-1}
+		Rect {20 20 100 30}
+		Name {Label_1}
+}
+Label {
+		Text {Accumutated time (in minutes)}
+		Alignment {1289}
+		AutoResize {FALSE}
+		Margin {-1}
+		Rect {20 60 100 30}
+		Name {Label_2}
+}
+LineEdit {
+		Text {}
+		EchoMode {Normal}
+		MaxLength {32767}
+		FrameShown {TRUE}
+		Rect {130 20 150 30}
+		Name {LineEdit_1}
+		Variable {_taskName}
+}
+LineEdit {
+		Text {}
+		EchoMode {Normal}
+		MaxLength {32767}
+		FrameShown {TRUE}
+		Rect {130 60 150 30}
+		Name {LineEdit_2}
+		Variable {_taskTime}
+}
+PushButton {
+		ToggleButton {FALSE}
+		Default {FALSE}
+		AutoDefault {FALSE}
+		Text {&Ok}
+		AutoRepeat {FALSE}
+		AutoResize {FALSE}
+		Rect {40 110 100 30}
+		Name {PushButton_1}
+		Variable {_okButton}
+		Signal {[Public]  clicked --> okClicked  ()}
+}
+PushButton {
+		ToggleButton {FALSE}
+		Default {FALSE}
+		AutoDefault {FALSE}
+		Text {&Cancel}
+		AutoRepeat {FALSE}
+		AutoResize {FALSE}
+		Rect {160 110 100 30}
+		Name {PushButton_2}
+		Variable {_cancelButton}
+		Signal {[Public]  clicked --> cancelClicked  ()}
+}}

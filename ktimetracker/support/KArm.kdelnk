@@ -1,0 +1,13 @@
+[KDE Desktop Entry]
+BinaryPattern=karm;
+Protocols=
+Comment=Personal Time Tracker
+Exec=karm
+Icon=clock.xpm
+TerminalOptions=
+Path=
+DocPath=karm/karm.html
+Extensions=
+Type=Application
+Terminal=0
+Info=Personal Time Tracker

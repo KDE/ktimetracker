@@ -1,0 +1,13 @@
+Begin3
+Title:          karm
+Version:        0.1
+Entered-Date:	Fri, 20 June 1997
+Description:    KDE/Qt based personal time tracker
+Keywords:	KDE Qt X11 PIM time tracker titrax 
+Author:         Sirtaj Singh Kang (ssk@physics.unimelb.edu.au)
+Maintained-by:  Sirtaj Singh Kang (ssk@physics.unimelb.edu.au)
+Primary-site:   ftp://ftp.ph.unimelb.edu.au/pub/users/taj/kde/
+Alternate-site: ftp://ftp.kde.org/pub/kde/apps/pim/
+Original-site:  ftp://ftp.ph.unimelb.edu.au/pub/users/taj/kde/
+Platform:       KDE-enabled platforms (X11, UNIX, KDE and Qt libs)
+End

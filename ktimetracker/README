@@ -1,0 +1,23 @@
+
+KArm 0.1
+--------
+
+In my day, I may have to work on several different projects and keep track
+separately of how much time I spent working on each project. If you are
+like me, then KArm is for you.
+
+KArm is a time tracker. You can enter a list of "tasks", start KArm's clock,
+and it will count the number of minutes you spend on the highlighted task.
+
+
+KArm was inspired by Harald Tveit Alvestrand's very useful utility called
+titrax, the only failing of which is that it is based on the Xt toolkit. One
+day KArm will do all that titrax does, but not today.
+
+The word "karm", in my mother tongue Punjabi, means "work".
+
+
+There is a screenshot at
+	http://www.ph.unimelb.edu.au/~ssk/kde/karm/karm.gif
+
+and is installed with the included (sparse) documentation.
