@@ -67,12 +67,13 @@ KarmWindow::KarmWindow()
 
 	_mainMenu->insertSeparator();
 
-	_mainMenu->insertItem( klocale->translate( "&Help" ), _helpMenu );
-	_helpMenu->insertItem( klocale->translate( "&Contents" ), 
-			       this, SLOT( help() ) );
-	_helpMenu->insertSeparator();
-	_helpMenu->insertItem( klocale->translate( "&About" ), 
-			       this, SLOT( about() ) );
+	QString about;
+	about.sprintf(i18n("%s 0.3 -- Sirtaj Singh Kang\n"
+			"taj@kde.org, Oct 1997\n\n"
+                       "The K Desktop Environment"), _karm->KarmName.data());
+	
+	_mainMenu->insertItem( klocale->translate( "&Help" ),
+		KApplication::getKApplication()->getHelpMenu(TRUE, about ) );
 	
 	KIconLoader *loader = kapp->getIconLoader();
 	QPixmap icon;
@@ -130,19 +131,6 @@ KarmWindow::~KarmWindow()
 	delete _mainMenu;
 	delete _toolBar;
 	delete[] _sessionTimeBuffer;
-}
-
-void KarmWindow::help()
-{
-	KApplication::getKApplication()->invokeHTMLHelp("", "");
-}
-
-void KarmWindow::about()
-{
-        KMsgBox::message(0, klocale->translate( "About " ) + _karm->KarmName, 
-                       _karm->KarmName + klocale->translate( " 0.3 -- Sirtaj Singh Kang\n"
-			"taj@kde.org, Oct 1997\n\n"
-                       "The K Desktop Environment" )); 
 }
 
 void KarmWindow::updateTime()

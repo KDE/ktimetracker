@@ -34,13 +34,6 @@ public:
 	///
 	virtual ~KarmWindow();
 
-public slots:
-
-	///
-	void help();
-	///
-	void about();
-
 protected slots:
 	///
 	void updateTime();
