@@ -168,7 +168,7 @@ void KarmWindow::initAccelItems()
 void KarmWindow::connectAccels()
 {
 	_accel->connectItem( "Prefs",		this,	SLOT(prefs()) );
-	_accel->connectItem( KAccel::Quit,	kapp,	SLOT(quit()) );
+	_accel->connectItem( KAccel::Quit,	kapp, SLOT(closeAllWindows()));
 	_accel->connectItem( "StartClock",	_karm,	SLOT(startClock()) );
 	_accel->connectItem( "StopClock",	_karm,	SLOT(stopClock()) );
 	_accel->connectItem( "NewTask",		_karm,	SLOT(newTask()) );
