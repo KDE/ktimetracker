@@ -108,7 +108,7 @@ int MyPrinter::calculateReqNameWidth(QListViewItem *item,
                                      int level) 
 {
   Task *task = (Task *) item;
-  int width = metrics.width(QString::fromLatin1(task->name())) + level * levelIndent;
+  int width = metrics.width(task->name()) + level * levelIndent;
 
   for (QListViewItem *child = item->firstChild(); child;
        child = child->nextSibling()) {
@@ -123,7 +123,7 @@ void MyPrinter::printTask(QListViewItem *item, QPainter &painter, int level)
   Task *task = (Task *) item;
   QString totalTime = Karm::formatTime(task->totalTime());
   QString sessionTime = Karm::formatTime(task->sessionTime());
-  QString name = QString::fromLatin1(task->name());
+  QString name = task->name();
   printLine(totalTime, sessionTime, name, painter, level);
 
   for (QListViewItem *child = item->firstChild(); child;

@@ -173,7 +173,7 @@ void Karm::save()
 void Karm::writeTaskToFile(FILE *file, QListViewItem *item, int level)
 {
   Task *task = (Task *) item;
-  fprintf(file,"%d\t%ld\t%s\n", level, task->totalTime(), task->name());
+  fprintf(file,"%d\t%ld\t%s\n", level, task->totalTime(), task->name().local8Bit().data());
 
   QListViewItem *child;
   for (child=item->firstChild(); child; child=child->nextSibling()) {
@@ -290,7 +290,7 @@ void Karm::editTask()
     return;
 
   AddTaskDialog *dialog = new AddTaskDialog(i18n("Edit Task"));
-  dialog->setTask(QString::fromLatin1(task->name()),
+  dialog->setTask(task->name(),
                   task->totalTime(),
                   task->sessionTime());  
 	int result = dialog->exec();
@@ -336,14 +336,14 @@ void Karm::deleteTask()
   if (item->childCount() == 0) {
     response = KMessageBox::questionYesNo(0,
                                           i18n( "Are you sure you want to delete the task named\n\"%1\"")
-                                          .arg(QString::fromLatin1(item->name())),
+                                          .arg(item->name()),
                                           i18n( "Deleting Task"));
   }
   else {
     response = KMessageBox::questionYesNo(0,
                                           i18n( "Are you sure you want to delete the task named\n\"%1\"\n"
                                                 "NOTE: all its subtasks will also be deleted!")
-                                          .arg(QString::fromLatin1(item->name())),
+                                          .arg(item->name()),
                                           i18n( "Deleting Task"));
   }
 

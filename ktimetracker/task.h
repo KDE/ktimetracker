@@ -67,8 +67,8 @@ public:
 	/** returns the name of this task.
 	* @return a pointer to the name.
 	*/
-	const char *name() const
-		{ return _name.data(); };
+	QString name() const
+		{ return _name; };
 
 	/** Updates the content of the QListViewItem with respect to _name and _totalTime
 	 */

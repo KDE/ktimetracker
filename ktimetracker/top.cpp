@@ -25,17 +25,13 @@
 #include <kstdaction.h>
 #include <qvbox.h>
 #include <qtimer.h>
-/*
+#include <qstring.h>
+
 #include "kaccelmenuwatch.h"
 #include "karm.h"
-#include "version.h"
-#include "task.h"
 #include "print.h"
 #include "docking.h"
 #include "preferences.h"
-#include "idle.h"
-*/
-#include <qstring.h>
 
 KarmWindow::KarmWindow()
   : KTMainWindow(),

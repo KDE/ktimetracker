@@ -1,6 +1,6 @@
 
 ############ Autoconf-generated variables  ###################
-AM_CPPFLAGS = -DQT_NO_ASCII_CAST -DQT_NO_CAST_ASCII
+AM_CPPFLAGS = -DQT_NO_CAST_ASCII
 INCLUDES = $(all_includes)
 LDFLAGS	= $(all_libraries) $(KDE_RPATH)
 LDADD =  $(LIB_KDEUI) $(LIBXSS)
