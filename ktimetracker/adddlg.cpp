@@ -118,6 +118,7 @@ AddTaskDialog::AddTaskDialog(QString caption, bool editDlg)
   
   QPixmap whatsThisIM = loader.loadIcon(QString::fromLatin1("contexthelp"), KIcon::Toolbar);
   QPushButton* whatsThisBU = new QPushButton(page, "whatsThisLA");
+  whatsThisBU->setFocusPolicy(NoFocus);
 
   connect(whatsThisBU, SIGNAL(clicked()), this, SLOT(enterWhatsThis()));
   whatsThisBU->setPixmap( whatsThisIM );
