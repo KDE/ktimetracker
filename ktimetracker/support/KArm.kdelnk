@@ -3,8 +3,10 @@
 BinaryPattern=karm;
 Protocols=
 Name[pl]=KArm
+Name[hu]=KArm
 Comment=Personal Time Tracker
 Comment[pl]=Osobisty Czasomierz
+Comment[hu]=Személyes idõ-követõ
 Exec=karm
 Icon=clock.xpm
 TerminalOptions=
