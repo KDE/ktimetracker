@@ -45,6 +45,9 @@ public:
 	///
 	static void formatTime(char *dest, long minutes);
 
+	// Application "Name"
+	QString KarmName;
+
 public slots:
 	/// 
 	void load();

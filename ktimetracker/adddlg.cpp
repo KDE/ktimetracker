@@ -20,7 +20,8 @@ KarmAddDlg::KarmAddDlg
 	:
 	Inherited( parent, name )
 {
-	setCaption( "Karm: New Task" );
+	// This is just a kind of default (Caption is reset in class Karm)
+	setCaption( "KArm: New Task" );
 }
 
 

@@ -66,6 +66,9 @@ Karm::Karm( QWidget *parent )
 	connect(_timeList, SIGNAL( highlighted(int) ), this, SLOT(moveTo(int)));
 	setSeparator( 10 );
 	startClock();
+	
+	// Peter Putzer: added KarmName
+	KarmName = QString(kapp->getCaption());
 }
 
 Karm::~Karm()
@@ -198,6 +201,8 @@ void Karm::newTask()
 	if( _addDlg == 0 ) {
 		// popup a dialog asking for info
 		_addDlg = new KarmAddDlg;
+		_addDlg->setCaption(KarmName + ": Add New Task");
+
 		connect( _addDlg, SIGNAL( finished( bool ) ), 
 			this, SLOT( createNewTask( bool ) ) );
 	}
@@ -234,7 +239,7 @@ void Karm::editTask()
 	if( _editDlg == 0 ) {
 		_editDlg = new KarmAddDlg;
 
-		_editDlg->setCaption("Karm: edit task entry");
+		_editDlg->setCaption( KarmName + ": Edit Task Entry");
 		_editDlg->setTask( _broker->currentTask()->name(),
 				_broker->currentTask()->time() );
 
@@ -271,7 +276,7 @@ void Karm::deleteTask()
 	if( _broker->count() == 0 )
 		return;
 
-	int response = KMsgBox::yesNo(0, "Karm: Deleting Task" , 
+	int response = KMsgBox::yesNo(0, KarmName + ": Deleting Task" , 
  		"Are you sure you want to delete this task?", 
 		KMsgBox::QUESTION,
 		"&Yes", "&Cancel");

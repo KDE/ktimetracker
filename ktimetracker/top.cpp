@@ -118,6 +118,9 @@ KarmWindow::KarmWindow()
 	connect( _karm, SIGNAL(timerStarted()), this, SLOT(clockStartMsg()));
 	connect( _karm, SIGNAL(timerStopped()), this, SLOT(clockStopMsg()));
 	connect( _karm, SIGNAL(timerTick()), this, SLOT(updateTime()));
+
+	// Peter Putzer: added Application "Name"
+	setCaption(_karm->KarmName);
 }
 
 KarmWindow::~KarmWindow()
@@ -138,8 +141,9 @@ void KarmWindow::help()
 
 void KarmWindow::about()
 {
-        KMsgBox::message(0, "About KArm", "KArm 0.3 -- Sirtaj Singh Kang\n"
-			"taj@kde.org, July 1997\n\n"
+        KMsgBox::message(0, "About " + _karm->KarmName, 
+			_karm->KarmName + " 0.3 -- Sirtaj Singh Kang\n"
+			"taj@kde.org, Oct 1997\n\n"
 			"The K Desktop Environment"); 
 }
 
