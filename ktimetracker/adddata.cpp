@@ -63,6 +63,7 @@ KAddDlgData::KAddDlgData
 	_okButton->setGeometry( 40, 110, 100, 30 );
 	connect( _okButton, SIGNAL(clicked()), SLOT(okClicked()) );
 	_okButton->setText( "&OK" );
+	_okButton->setDefault( TRUE );
 	_okButton->setAutoRepeat( FALSE );
 	_okButton->setAutoResize( FALSE );
 
