@@ -22,7 +22,7 @@ KarmAddDlg::KarmAddDlg
 	: Inherited( parent, name )
 {
 	// This is just a kind of default (Caption is reset in class Karm)
-       setCaption( klocale->translate( "KArm: New Task" ) );
+       setCaption( i18n( "KArm: New Task" ) );
 }
 
 

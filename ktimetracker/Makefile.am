@@ -38,7 +38,7 @@ uninstall-local:
 	-rmdir -p $(kde_appsdir)
 
 messages:
-	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot *.cpp && mv messages.po ../po/karm.pot
+	$(XGETTEXT) -C -ki18n -x $(includedir)/kde.pot *.cpp && mv messages.po ../po/karm.pot
 
 
 srcdoc:
