@@ -203,7 +203,7 @@ void KarmWindow::makeMenus()
 	_mainMenu->insertSeparator();
 
 	_mainMenu->insertItem( i18n( "&Help" ),
-		kapp->getHelpMenu(TRUE, about ) );
+		kapp->helpMenu(TRUE, about ) );
 
 	_watcher->setMenu( _fileMenu );
 	int id = _fileMenu->insertItem( i18n( "&Preferences..." ), 

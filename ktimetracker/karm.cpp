@@ -45,7 +45,7 @@ Karm::Karm( QWidget *parent )
   startClock();
   
   // Peter Putzer: added KarmName
-  KarmName = QString(kapp->getCaption());
+  KarmName = QString(kapp->caption());
 }
 
 Karm::~Karm()
@@ -58,7 +58,7 @@ Karm::~Karm()
 void Karm::load()
 {
   QFileInfo info;
-  KConfig *config = kapp->getConfig();
+  KConfig *config = kapp->config();
   
   config->setGroup( "Karm" );
   
@@ -74,7 +74,7 @@ void Karm::load()
 
 void Karm::save()
 {
-  KConfig *config = kapp->getConfig();
+  KConfig *config = kapp->config();
   
   config->setGroup("Karm");
   QString defaultPath( locateLocal("appdata", "karmdata.txt"));
