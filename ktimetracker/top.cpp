@@ -211,7 +211,7 @@ void KarmWindow::makeMenus()
 	_watcher->connectAccel( id, "Prefs" );
 
         _fileMenu->insertSeparator( - 1 );
-	id = _fileMenu->insertItem( i18n( "E&xit" ), 
+	id = _fileMenu->insertItem( i18n( "&Quit" ), 
 			kapp, SLOT( quit() ) );
 	_watcher->connectAccel( id, KAccel::Quit );
 	
