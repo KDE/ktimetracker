@@ -149,6 +149,8 @@ void KarmWindow::initAccelItems()
 {
 	_accel->insertItem( i18n( "Preferences" ), "Prefs",
 		CTRL + Key_P );
+	_accel->insertItem( i18n( "Reset Session Time" ), "ResetSess",
+						CTRL + Key_R );
 	_accel->insertItem( i18n( "Start Clock" ), "StartClock", 
 		CTRL + Key_S );
 	_accel->insertItem( i18n( "Stop Clock" ), "StopClock", 
@@ -168,6 +170,7 @@ void KarmWindow::initAccelItems()
 void KarmWindow::connectAccels()
 {
 	_accel->connectItem( "Prefs",		this,	SLOT(prefs()) );
+	_accel->connectItem( "ResetSess", this, SLOT( resetSessionTime() ) );
 	_accel->connectItem( KAccel::Quit,	kapp, SLOT(closeAllWindows()));
 	_accel->connectItem( "StartClock",	_karm,	SLOT(startClock()) );
 	_accel->connectItem( "StopClock",	_karm,	SLOT(stopClock()) );
@@ -182,6 +185,14 @@ void KarmWindow::prefs()
 		_watcher->updateMenus();
 	}
 }
+
+
+void KarmWindow::resetSessionTime()
+{
+  _totalTime = 0;
+  _statusBar->changeItem( "0:00", 2 );
+}
+
 
 void KarmWindow::makeMenus()
 {
@@ -208,6 +219,10 @@ void KarmWindow::makeMenus()
 	int id = _fileMenu->insertItem( i18n( "&Preferences..." ), 
 			this, SLOT( prefs() ) );
 	_watcher->connectAccel( id, "Prefs" );
+
+	id = _fileMenu->insertItem( i18n( "&Reset Session Time" ),
+								this, SLOT( resetSessionTime() ) );
+	_watcher->connectAccel( id, "ResetSess" );
 
         _fileMenu->insertSeparator( - 1 );
 	id = _fileMenu->insertItem( i18n( "&Quit" ), 

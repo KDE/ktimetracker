@@ -39,6 +39,7 @@ public:
 
 protected slots:
 	void prefs();
+	void resetSessionTime(); 
 	void updateTime();
 	void clockStartMsg();
 	void clockStopMsg();
