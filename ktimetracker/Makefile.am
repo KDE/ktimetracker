@@ -8,16 +8,16 @@ LDADD =  $(LIB_KDEUI)
 bin_PROGRAMS = karm
 SUBDIRS = doc support
 
-METASOURCES =  USE_AUTOMOC
+karm_METASOURCES =  USE_AUTOMOC
 
 karm_SOURCES =  version.h adddata.cpp adddlg.cpp karm.cpp main.cpp \
-	task.cpp top.cpp kaccelmenuwatch.h kaccelmenuwatch.cpp \
-	adddata.h adddlg.h karm.h task.h toolicons.h top.h 
+	task.cpp top.cpp kaccelmenuwatch.h kaccelmenuwatch.cpp 
 
-icon_DATA = karm.xpm
-icondir = $(kde_icondir)
+noinst_HEADERS = adddata.h adddlg.h karm.h task.h toolicons.h top.h 
 
-EXTRA_DIST = $(icon_DATA) mini-karm.xpm
+kde_icon_DATA = karm.xpm
+
+EXTRA_DIST = $(kde_icon_DATA) mini-karm.xpm
 
 appsdir = $(kde_appsdir)/Utilities
 
