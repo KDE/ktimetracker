@@ -42,6 +42,7 @@ class AddTaskDialog : public KDialogBase
   private slots:
 	void slotAbsolutePressed();
 	void slotRelativePressed();
+  void enterWhatsThis();
 
   private:
   	QLineEdit* _name;

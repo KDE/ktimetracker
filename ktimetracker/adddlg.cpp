@@ -32,6 +32,9 @@
 #include <kdebug.h>
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
+#include <qpixmap.h>
+#include <kiconloader.h>
+#include <qwhatsthis.h>
 #include "adddlg.h"
 #include "karm.h"
 #include "ktimewidget.h"
@@ -55,6 +58,7 @@ AddTaskDialog::AddTaskDialog(QString caption, bool editDlg)
 	
   
   _name = new QLineEdit( page, "lineedit" );
+  
   _name->setMinimumWidth(fontMetrics().maxWidth()*15);
   lay2->addWidget( _name );
 
@@ -109,6 +113,16 @@ AddTaskDialog::AddTaskDialog(QString caption, bool editDlg)
 	
 	_diffTW = new KTimeWidget( page, "_sessionAddTW" );
 	lay4->addWidget( _diffTW );
+
+  KIconLoader loader;
+  
+  QPixmap whatsThisIM = loader.loadIcon(QString::fromLatin1("contexthelp"), KIcon::Toolbar);
+  QPushButton* whatsThisBU = new QPushButton(page, "whatsThisLA");
+
+  connect(whatsThisBU, SIGNAL(clicked()), this, SLOT(enterWhatsThis()));
+  whatsThisBU->setPixmap( whatsThisIM );
+  lay4->addWidget(whatsThisBU);
+  
 	lay1->addStretch(1);
 
 
@@ -124,9 +138,33 @@ AddTaskDialog::AddTaskDialog(QString caption, bool editDlg)
 	origSession = 0;
 
 	slotRelativePressed();
+
+  // Whats this help.
+  QWhatsThis::add(_name, i18n("Enter the name of the task here. This name is for your eyes only"));
+  QWhatsThis::add(_absoluteRB, i18n("If you select this radio button then you specify that you want "
+                                    "to enter the time as absolute values. That is for example: "
+                                    "total for this task is 20 hours and 15 minutes.\n\n"
+                                    "The time is specified for the session time and for the total time "
+                                    "separately."));
+  QWhatsThis::add(_relativeRB, i18n("If you select this radio button then you specify that you want "
+                                    "to add or subtract time for the task. That is: I've work 2 hours "
+                                    "and 20 minutes more on this task (without having the timer "
+                                    "running.)\n\n"
+                                    "This time will be added or subtracted for both the "
+                                    "session time and the total time"));
+  QWhatsThis::add(_totalTW, i18n("This is the overall time this task has been running"));
+  QWhatsThis::add(_sessionTW, i18n("This is the time the task has been running this session."));
+  QWhatsThis::add(_diffTW, i18n("Specify how much time to add or subtract to the overall and "
+                                "session time"));
+  
 }
 
+void AddTaskDialog::enterWhatsThis() 
+{
+  QWhatsThis::enterWhatsThisMode ();
+}
 
+  
 void AddTaskDialog::slotAbsolutePressed()
 {
 	_relativeRB->setChecked( false );
