@@ -27,6 +27,7 @@
 
 #include <qlabel.h>
 #include <qlineedit.h>
+#include <qlayout.h>
 
 #include <kapp.h>
 #include <klocale.h>
