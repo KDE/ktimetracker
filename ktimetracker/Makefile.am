@@ -30,7 +30,7 @@ uninstall-local:
 	rm -f $(kde_toolbardir)/filedel.xpm
 
 messages:
-	$(XGETTEXT) -C -ki18n -x $(includedir)/kde.pot *.cpp && mv messages.po ../po/karm.pot
+	$(XGETTEXT) -C -ki18n -x $(includedir)/kde.pot *.cpp && mv messages.po $(podir)/karm.pot
 
 
 srcdoc:
