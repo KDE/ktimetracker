@@ -49,6 +49,8 @@ protected slots:
 	///
 	void clockStopMsg();
 
+protected:
+  virtual void saveProperties( KConfig* );
 };
 
 #endif
