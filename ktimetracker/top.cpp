@@ -2,181 +2,182 @@
 /*
 * Top Level window for KArm -- Sirtaj Singh Kang <taj@kde.org>
 * Distributed under the GPL.
-*
-* $Id$
 */
 
-#include <qpopupmenu.h>
+
+/* 
+ * $Id$
+ * $Log$
+ */
+
+
+#include <qkeycode.h>
 #include <qlayout.h>
 #include <qpixmap.h>
-#include <qkeycode.h>
+#include <qpopupmenu.h>
 
-#include <kiconloader.h>
-#include <kapp.h>
-#include <klocale.h>
-#include <kglobal.h>
-#include <ktmainwindow.h>
-#include <kmenubar.h>
-#include <ktoolbar.h>
-#include <kstatusbar.h>
 #include <kaccel.h>
+#include <kapp.h>
+#include <kconfig.h>
+#include <kglobal.h>
+#include <kiconloader.h>
 #include <kkeydialog.h>
+#include <klocale.h>
+#include <kmenubar.h>
 
+#include "kaccelmenuwatch.h"
 #include "karm.h"
 #include "toolicons.h"
 #include "top.h"
 #include "version.h"
 
-#include"kaccelmenuwatch.h"
 
 KarmWindow::KarmWindow()
-	:	KTMainWindow(),
-
-		_mainMenu( menuBar() ),
-		_toolBar( toolBar() ),
-		_statusBar( statusBar() ),
-		_accel( new KAccel( this ) ),
-		_watcher( new KAccelMenuWatch( _accel, this ) ),
-
-		_karm( new Karm( this ) ),
-		
-		_totalTime( 0 ),
-		_sessionTimeBuffer( new char[100] )
-
+  : KTMainWindow(),
+  _accel( new KAccel( this ) ),
+  _watcher( new KAccelMenuWatch( _accel, this ) ),
+  _karm( new Karm( this ) ),
+  _totalTime( 0 ),
+  _sessionTimeBuffer( new char[100] )
+  
 {
-	setMenu( _mainMenu );
+  setView( _karm, FALSE );
+  _karm->show();
 
-	setView( _karm, FALSE );
-	_karm->show();
+  // accelerators
+  initAccelItems();
 
-	// accelerators
-	initAccelItems();
-
-	// status bar
+  // status bar
 	
-	_statusBar->insertItem( i18n( "clock inactive" ), 0 );
-	_statusBar->insertItem( i18n( "This session:" ), 1 );
-	_statusBar->insertItem( "0:00", 2 );
+  statusBar()->insertItem( i18n( "clock inactive" ), 0 );
+  statusBar()->insertItem( i18n( "This session:" ), 1 );
+  statusBar()->insertItem( "0:00", 2 );
 
-	// popup menus
-	makeMenus();
-	connectAccels();
-	_watcher->updateMenus();
+  // popup menus
+  makeMenus();
+  connectAccels();
+  _watcher->updateMenus();
 
-	// toolbar
+  // toolbar
+  KIconLoader *loader = KGlobal::iconLoader();
+  QPixmap icon;
+  
+  icon.loadFromData(clock_xpm_data, clock_xpm_len );
+  toolBar(0)->insertButton( icon, 0, SIGNAL(clicked()), 
+			    _karm, SLOT(startClock()),
+			    TRUE, i18n( "Start Clock" ) );
 
-	KIconLoader *loader = KGlobal::iconLoader();
-	QPixmap icon;
+  toolBar(0)->insertButton( loader->loadIcon("stop.xpm"), 1, 
+			    SIGNAL(clicked()),
+			    _karm, SLOT(stopClock()),
+			    FALSE, i18n( "Stop Clock" ) );
 
-	icon.loadFromData(clock_xpm_data, clock_xpm_len );
-	_toolBar->insertButton( icon, 0, SIGNAL(clicked()), 
-			_karm, SLOT(startClock()),
-                       TRUE, i18n( "Start Clock" ) );
-
-	_toolBar->insertButton( loader->loadIcon("stop.xpm"), 1, 
-			SIGNAL(clicked()),
-			_karm, SLOT(stopClock()),
-			FALSE, i18n( "Stop Clock" ) );
-
-	_toolBar->insertSeparator();
+  toolBar(0)->insertSeparator();
 	
-	_toolBar->insertButton( loader->loadIcon("filenew.xpm") , 2, 
+  toolBar(0)->insertButton( loader->loadIcon("filenew.xpm") , 2, 
 				SIGNAL(clicked()),_karm, SLOT(newTask()),
-				TRUE, i18n( "New Task" ) );
+			  TRUE, i18n( "New Task" ) );
+  
+  toolBar(0)->insertButton( loader->loadIcon("filedel.xpm") , 3, 
+			  SIGNAL(clicked()),_karm, SLOT(deleteTask()),
+			  TRUE, i18n( "Delete Task" ) );
 
-	_toolBar->insertButton( loader->loadIcon("filedel.xpm") , 3, 
-				SIGNAL(clicked()),_karm, SLOT(deleteTask()),
-				TRUE, i18n( "Delete Task" ) );
+  icon.loadFromData( clockedit_xpm_data, clockedit_xpm_len );
+  toolBar(0)->insertButton( icon, 4, SIGNAL(clicked()),
+			    _karm, SLOT(editTask()),
+			    TRUE, i18n( "Edit Task" ) );
 
-	icon.loadFromData( clockedit_xpm_data, clockedit_xpm_len );
-	_toolBar->insertButton( icon, 4, SIGNAL(clicked()),
-			_karm, SLOT(editTask()),
-                       TRUE, i18n( "Edit Task" ) );
+  // FIXME: this shouldnt stay. We need to check whether the
+  // file exists and if not, create a blank one and ask whether
+  // we want to add a task.
+  _karm->load();
 
-	// FIXME: this shouldnt stay. We need to check whether the
-	// file exists and if not, create a blank one and ask whether
-	// we want to add a task.
-	_karm->load();
+  // connections
+  connect( _karm, SIGNAL(timerStarted()), this, SLOT(clockStartMsg()));
+  connect( _karm, SIGNAL(timerStopped()), this, SLOT(clockStopMsg()));
+  connect( _karm, SIGNAL(timerTick()), this, SLOT(updateTime()));
 
-	// connections
-	connect( _karm, SIGNAL(timerStarted()), this, SLOT(clockStartMsg()));
-	connect( _karm, SIGNAL(timerStopped()), this, SLOT(clockStopMsg()));
-	connect( _karm, SIGNAL(timerTick()), this, SLOT(updateTime()));
 
-	// caption
-	setCaption( _karm->KarmName );
+  KConfig &config = *kapp->config();
+  config.setGroup( "Karm" );
+  int w = config.readNumEntry("Width", 100 );
+  int h = config.readNumEntry("Height", 100 );
+  w = QMAX( w, sizeHint().width() );
+  h = QMAX( h, sizeHint().height() );
+  resize(w, h);
 }
 
 KarmWindow::~KarmWindow()
 {
-	delete _fileMenu;
-	delete _clockMenu;
-	delete _taskMenu;
-	delete _helpMenu;
-	delete[] _sessionTimeBuffer;
+  KConfig &config = *kapp->config();
+  config.setGroup( "Karm" );
+  config.writeEntry("Width", width());
+  config.writeEntry("Height", height());
+  config.sync();
+
+  delete _fileMenu;
+  delete _clockMenu;
+  delete _taskMenu;
+  delete[] _sessionTimeBuffer;
 }
 
 void KarmWindow::updateTime()
 {
-	_totalTime++;
-
-	Karm::formatTime( _sessionTimeBuffer, _totalTime );
-
-	_statusBar->changeItem( _sessionTimeBuffer, 2);
+  _totalTime++;
+  Karm::formatTime( _sessionTimeBuffer, _totalTime );
+  statusBar()->changeItem( _sessionTimeBuffer, 2);
 }
 
 void KarmWindow::clockStartMsg()
 {
-	_toolBar->setItemEnabled( 0, FALSE);
-	_toolBar->setItemEnabled( 1, TRUE );
-       _statusBar->changeItem( i18n( "clock active" ), 0);
+  toolBar(0)->setItemEnabled( 0, FALSE);
+  toolBar(0)->setItemEnabled( 1, TRUE );
+  statusBar()->changeItem( i18n( "clock active" ), 0);
 }
 
 void KarmWindow::clockStopMsg()
 {
-	_toolBar->setItemEnabled( 1, FALSE);
-	_toolBar->setItemEnabled( 0, TRUE );
-	_statusBar->changeItem( i18n( "clock inactive" ), 0);
+  toolBar(0)->setItemEnabled( 1, FALSE);
+  toolBar(0)->setItemEnabled( 0, TRUE );
+  statusBar()->changeItem( i18n( "clock inactive" ), 0);
 }
 
 
 void KarmWindow::saveProperties( KConfig* )
 {
-	_karm->save();
+  _karm->save();
 }
 
 void KarmWindow::initAccelItems()
 {
-	_accel->insertItem( i18n( "Preferences" ), "Prefs",
-		CTRL + Key_P );
-	_accel->insertItem( i18n( "Reset Session Time" ), "ResetSess",
-						CTRL + Key_R );
-	_accel->insertItem( i18n( "Start Clock" ), "StartClock", 
-		CTRL + Key_S );
-	_accel->insertItem( i18n( "Stop Clock" ), "StopClock", 
-		CTRL + Key_T );
-	_accel->insertItem( i18n( "New Task" ), "NewTask",
-		CTRL + Key_N );
-	_accel->insertItem( i18n( "Delete Task" ), "DeleteTask",
-		CTRL + Key_D );
-	_accel->insertItem( i18n( "Edit Task" ), "EditTask",
-		CTRL + Key_E );
-
-	_accel->insertStdItem( KAccel::Quit );
-
-	_accel->readSettings();
+  _accel->insertItem( i18n( "Preferences" ), "Prefs",
+		      CTRL + Key_P );
+  _accel->insertItem( i18n( "Reset Session Time" ), "ResetSess",
+		      CTRL + Key_R );
+  _accel->insertItem( i18n( "Start Clock" ), "StartClock", 
+		      CTRL + Key_S );
+  _accel->insertItem( i18n( "Stop Clock" ), "StopClock", 
+		      CTRL + Key_T );
+  _accel->insertItem( i18n( "New Task" ), "NewTask",
+		      CTRL + Key_N );
+  _accel->insertItem( i18n( "Delete Task" ), "DeleteTask",
+		      CTRL + Key_D );
+  _accel->insertItem( i18n( "Edit Task" ), "EditTask",
+		      CTRL + Key_E );
+  _accel->insertStdItem( KAccel::Quit );
+  _accel->readSettings();
 }
 
 void KarmWindow::connectAccels()
 {
-	_accel->connectItem( "Prefs",		this,	SLOT(prefs()) );
-	_accel->connectItem( "ResetSess", this, SLOT( resetSessionTime() ) );
-	_accel->connectItem( KAccel::Quit,	kapp, SLOT(closeAllWindows()));
-	_accel->connectItem( "StartClock",	_karm,	SLOT(startClock()) );
-	_accel->connectItem( "StopClock",	_karm,	SLOT(stopClock()) );
-	_accel->connectItem( "NewTask",		_karm,	SLOT(newTask()) );
-	_accel->connectItem( "DeleteTask",	_karm,	SLOT(deleteTask()) );
-	_accel->connectItem( "EditTask",	_karm,	SLOT(editTask()) );
+  _accel->connectItem( "Prefs",		this,	SLOT(prefs()) );
+  _accel->connectItem( "ResetSess",     this, SLOT( resetSessionTime() ) );
+  _accel->connectItem( KAccel::Quit,	kapp, SLOT(closeAllWindows()));
+  _accel->connectItem( "StartClock",	_karm,	SLOT(startClock()) );
+  _accel->connectItem( "StopClock",	_karm,	SLOT(stopClock()) );
+  _accel->connectItem( "NewTask",	_karm,	SLOT(newTask()) );
+  _accel->connectItem( "DeleteTask",	_karm,	SLOT(deleteTask()) );
+  _accel->connectItem( "EditTask",	_karm,	SLOT(editTask()) );
 }
 
 void KarmWindow::prefs()
@@ -190,64 +191,62 @@ void KarmWindow::prefs()
 void KarmWindow::resetSessionTime()
 {
   _totalTime = 0;
-  _statusBar->changeItem( "0:00", 2 );
+  statusBar()->changeItem( "0:00", 2 );
 }
 
 
 void KarmWindow::makeMenus()
 {
-	_fileMenu = new QPopupMenu;
-	_clockMenu= new QPopupMenu;
-	_taskMenu = new QPopupMenu;
-	_helpMenu = new QPopupMenu;
+  _fileMenu = new QPopupMenu;
+  _clockMenu= new QPopupMenu;
+  _taskMenu = new QPopupMenu;
 
-	QString about;
-	about = i18n("%1 %2 -- Sirtaj Singh Kang\n"
-			"taj@kde.org, Oct 1997\n\n"
-			"The K Desktop Environment")
-			.arg(_karm->KarmName).arg(KARM_VERSION);
+  QString about = i18n(""
+    "%1 %2 -- Sirtaj Singh Kang\n"
+    "taj@kde.org, Oct 1997\n\n"
+    "The K Desktop Environment")
+    .arg(_karm->KarmName).arg(KARM_VERSION);
+  
+  menuBar()->insertItem( i18n( "&File" ), _fileMenu);
+  menuBar()->insertItem( i18n( "&Clock" ), _clockMenu );
+  menuBar()->insertItem( i18n( "&Task" ), _taskMenu);
+  menuBar()->insertSeparator();
+  menuBar()->insertItem( i18n( "&Help" ), helpMenu( about ) );
 
-	_mainMenu->insertItem( i18n( "&File" ), _fileMenu);
-	_mainMenu->insertItem( i18n( "&Clock" ), _clockMenu );
-	_mainMenu->insertItem( i18n( "&Task" ), _taskMenu);
-	
-	_mainMenu->insertSeparator();
+  _watcher->setMenu( _fileMenu );
+  int id = _fileMenu->insertItem( i18n( "&Preferences..." ), 
+				  this, SLOT( prefs() ) );
+  _watcher->connectAccel( id, "Prefs" );
 
-	_mainMenu->insertItem( i18n( "&Help" ), helpMenu( about ) );
+  id = _fileMenu->insertItem( i18n( "&Reset Session Time" ),
+			      this, SLOT( resetSessionTime() ) );
+  _watcher->connectAccel( id, "ResetSess" );
 
-	_watcher->setMenu( _fileMenu );
-	int id = _fileMenu->insertItem( i18n( "&Preferences..." ), 
-			this, SLOT( prefs() ) );
-	_watcher->connectAccel( id, "Prefs" );
-
-	id = _fileMenu->insertItem( i18n( "&Reset Session Time" ),
-								this, SLOT( resetSessionTime() ) );
-	_watcher->connectAccel( id, "ResetSess" );
-
-        _fileMenu->insertSeparator( - 1 );
-	id = _fileMenu->insertItem( i18n( "&Quit" ), 
-			kapp, SLOT( quit() ) );
-	_watcher->connectAccel( id, KAccel::Quit );
+  _fileMenu->insertSeparator( - 1 );
+  id = _fileMenu->insertItem( i18n( "&Quit" ), kapp, SLOT( quit() ) );
+  _watcher->connectAccel( id, KAccel::Quit );
 	
 
-	_watcher->setMenu( _clockMenu );
-	id = _clockMenu->insertItem( i18n( "&Start" ), _karm, 
-			SLOT(startClock()) );
-	_watcher->connectAccel( id, "StartClock" );
+  _watcher->setMenu( _clockMenu );
+  id = _clockMenu->insertItem( i18n( "&Start" ), _karm, SLOT(startClock()) );
+  _watcher->connectAccel( id, "StartClock" );
 
-	id = _clockMenu->insertItem( i18n( "S&top" ), _karm, 
-			SLOT(stopClock()) );
-	_watcher->connectAccel( id, "StopClock" );
+  id = _clockMenu->insertItem( i18n( "S&top" ), _karm, SLOT(stopClock()) );
+  _watcher->connectAccel( id, "StopClock" );
+	
 
+  _watcher->setMenu( _taskMenu );
+  id = _taskMenu->insertItem( i18n( "&New" ), _karm, SLOT(newTask()) );
+  _watcher->connectAccel( id, "NewTask" );
 
-	_watcher->setMenu( _taskMenu );
-	id = _taskMenu->insertItem( i18n( "&New" ), _karm, SLOT(newTask()) );
-	_watcher->connectAccel( id, "NewTask" );
-
-	id = _taskMenu->insertItem( i18n( "&Delete" ), _karm, 
-			SLOT(deleteTask()) );
-	_watcher->connectAccel( id, "DeleteTask" );
-
-	id = _taskMenu->insertItem( i18n( "&Edit" ), _karm, SLOT(editTask()));
-	_watcher->connectAccel( id, "EditTask" );
+  id = _taskMenu->insertItem( i18n( "&Delete" ), _karm, SLOT(deleteTask()) );
+  _watcher->connectAccel( id, "DeleteTask" );
+  id = _taskMenu->insertItem( i18n( "&Edit" ), _karm, SLOT(editTask()));
+  _watcher->connectAccel( id, "EditTask" );
 }
+
+
+
+
+
+

@@ -1,12 +1,9 @@
 #ifndef KARM_TOP_H
 #define KARM_TOP_H
 
-#include<ktmainwindow.h>
+#include <ktmainwindow.h>
 
 class QPopupMenu;
-class KMenuBar;
-class KToolBar;
-class KStatusBar;
 class Karm;
 class KAccel;
 class KAccelMenuWatch;
@@ -14,46 +11,40 @@ class KAccelMenuWatch;
 /// The top level widget for Karm.
 class KarmWindow : public KTMainWindow
 {
-	Q_OBJECT
-private:
-	KMenuBar	*_mainMenu;
+  Q_OBJECT
 
-	QPopupMenu	*_fileMenu;
-	QPopupMenu	*_clockMenu;
-	QPopupMenu	*_taskMenu;
-	QPopupMenu	*_helpMenu;
+  private:
+    QPopupMenu	*_fileMenu;
+    QPopupMenu	*_clockMenu;
+    QPopupMenu	*_taskMenu;
+    KAccel		*_accel;
+    KAccelMenuWatch	*_watcher;
+    Karm		*_karm;
+    long		_totalTime;
+    char		*_sessionTimeBuffer;
 
-	KToolBar	*_toolBar;
-	KStatusBar	*_statusBar;
-	KAccel		*_accel;
-	KAccelMenuWatch	*_watcher;
+  public:
+    KarmWindow();
+    virtual ~KarmWindow();
 
-	Karm		*_karm;
+  protected slots:
+    void prefs();
+    void resetSessionTime(); 
+    void updateTime();
+    void clockStartMsg();
+    void clockStopMsg();
 
-	long		_totalTime;
-	char		*_sessionTimeBuffer;
+  protected:
+    virtual void saveProperties( KConfig* );
+    //	virtual void readSettings( KConfig * );
+    //	virtual void writeSettings( KConfig * );
 
-public:
-	KarmWindow();
-	virtual ~KarmWindow();
-
-protected slots:
-	void prefs();
-	void resetSessionTime(); 
-	void updateTime();
-	void clockStartMsg();
-	void clockStopMsg();
-
-protected:
-	virtual void saveProperties( KConfig* );
-
-//	virtual void readSettings( KConfig * );
-//	virtual void writeSettings( KConfig * );
-
-private:
-	void initAccelItems();
-	void connectAccels();
-	void makeMenus();
+  private:
+    void initAccelItems();
+    void connectAccels();
+    void makeMenus();
 };
 
 #endif
+
+
