@@ -67,14 +67,14 @@ KarmWindow::KarmWindow()
 
 	_mainMenu->insertSeparator();
 
-       _mainMenu->insertItem( klocale->translate( "&Help" ), _helpMenu );
-               _helpMenu->insertItem( klocale->translate( "&Contents" ), this, SLOT( help() ) );
-		_helpMenu->insertSeparator();
-               _helpMenu->insertItem( klocale->translate( "&About" ), this, SLOT( about() ) );
-
-	// setup toolbars
-	QString directory = KApplication::getKApplication()->kdedir() 
-			+ QString("/share/");
+	_mainMenu->insertItem( klocale->translate( "&Help" ), _helpMenu );
+	_helpMenu->insertItem( klocale->translate( "&Contents" ), 
+			       this, SLOT( help() ) );
+	_helpMenu->insertSeparator();
+	_helpMenu->insertItem( klocale->translate( "&About" ), 
+			       this, SLOT( about() ) );
+	
+	KIconLoader *loader = kapp->getIconLoader();
 	QPixmap icon;
 
 	// FIXME: dummy locations for icons till final
@@ -84,22 +84,19 @@ KarmWindow::KarmWindow()
 			_karm, SLOT(startClock()),
                        TRUE, klocale->translate( "Start Clock" ) );
 
-	icon.load(directory + "toolbar/stop.xpm");
-	_toolBar->insertButton( icon, 1, SIGNAL(clicked()),
-			_karm, SLOT(stopClock()),
-                       FALSE, klocale->translate( "Stop Clock" ) );
+	_toolBar->insertButton( loader->loadIcon("stop.xpm"), 1, SIGNAL(clicked()),
+				_karm, SLOT(stopClock()),
+				FALSE, klocale->translate( "Stop Clock" ) );
 	
 	_toolBar->insertSeparator();
+	
+	_toolBar->insertButton( loader->loadIcon("filenew.xpm") , 2, 
+				SIGNAL(clicked()),_karm, SLOT(newTask()),
+				TRUE, klocale->translate( "New Task" ) );
 
-	icon.load(directory + "toolbar/filenew.xpm");
-	_toolBar->insertButton( icon, 2, SIGNAL(clicked()),
-			_karm, SLOT(newTask()),
-                       TRUE, klocale->translate( "New Task" ) );
-
-	icon.load(directory + "toolbar/filedel.xpm");
-	_toolBar->insertButton( icon, 3, SIGNAL(clicked()),
-			_karm, SLOT(deleteTask()),
-                       TRUE, klocale->translate( "Delete Task" ) );
+	_toolBar->insertButton( loader->loadIcon("filedel.xpm") , 3, 
+				SIGNAL(clicked()),_karm, SLOT(deleteTask()),
+				TRUE, klocale->translate( "Delete Task" ) );
 
 	icon.loadFromData( clockedit_xpm_data, clockedit_xpm_len );
 	_toolBar->insertButton( icon, 4, SIGNAL(clicked()),
