@@ -3,11 +3,11 @@
 
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
-#include <qprinter.h>
+#include <kprinter.h>
 #include <qpainter.h>
 #include "karm.h"
 
-class MyPrinter :public QPrinter
+class MyPrinter :public KPrinter
 {
 public:
   MyPrinter(const Karm *karm);
