@@ -3,6 +3,7 @@
 BinaryPattern=karm;
 Protocols=
 Comment=Personal Time Tracker
+Comment[pl]=Osobisty Czasomierz.
 Exec=karm
 Icon=clock.xpm
 TerminalOptions=
