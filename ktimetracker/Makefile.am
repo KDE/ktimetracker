@@ -14,10 +14,15 @@ karm_SOURCES =  adddata.cpp adddlg.cpp karm.cpp main.cpp task.cpp top.cpp \
 DISTCLEANFILES = moc_adddata.cpp moc_adddlg.cpp moc_karm.cpp \
 	moc_task.cpp moc_top.cpp
 
-SUBDIRS = doc
+noinst_HEADERS = adddata.h adddlg.h karm.h task.h toolicons.h top.h
+
+SUBDIRS = doc support
 
 icon_DATA = karm.xpm
 icondir = $(kde_icondir)
+
+EXTRA_DIST = $(icon_DATA) mini-karm.xpm
+
 appsdir = $(kde_appsdir)/Utilities
 
 install-data-local:

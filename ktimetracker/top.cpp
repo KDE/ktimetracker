@@ -165,7 +165,7 @@ void KarmWindow::clockStopMsg()
 {
 	_toolBar->setItemEnabled( 1, FALSE);
 	_toolBar->setItemEnabled( 0, TRUE );
-       _statusBar->changeItem( klocale->translate( "clock inactive" ), 0);
+	_statusBar->changeItem( klocale->translate( "clock inactive" ), 0);
 }
 
 
@@ -173,3 +173,4 @@ void KarmWindow::saveProperties( KConfig* )
 {
   _karm->save();
 }
+
