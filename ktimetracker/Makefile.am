@@ -10,10 +10,10 @@ SUBDIRS = support
 
 karm_METASOURCES = AUTO
 
-karm_SOURCES =  version.h adddata.cpp adddlg.cpp karm.cpp main.cpp \
+karm_SOURCES =  version.h adddlg.cpp karm.cpp main.cpp \
 	task.cpp top.cpp kaccelmenuwatch.h kaccelmenuwatch.cpp 
 
-noinst_HEADERS = adddata.h adddlg.h karm.h task.h toolicons.h top.h 
+noinst_HEADERS = adddlg.h karm.h task.h toolicons.h top.h 
 
 KDE_ICON = karm
 
