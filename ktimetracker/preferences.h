@@ -15,6 +15,7 @@ Q_OBJECT
 
 public:
   static Preferences *instance();
+  void disableIdleDetection();
   
    // Retrive information about settings
   bool detectIdleness();
@@ -56,7 +57,8 @@ private:
   QLabel    *_idleDetectLabelW, *_autoSaveLabelW;
   QSpinBox  *_idleDetectValueW, *_autoSaveValueW;
   QLineEdit *_saveFileW;
-
+  QVBox *idleMenu;
+  
   // Values for the preferences. (All variables in in V to indicate they are Values)
   bool _doIdleDetectionV, _doAutoSaveV;
   int  _idleDetectValueV, _autoSaveValueV;

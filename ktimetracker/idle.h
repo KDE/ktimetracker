@@ -1,9 +1,12 @@
 #ifndef __IDLETIMER
 #define __IDLETIMER
 #include <qobject.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/extensions/scrnsaver.h>
+#include "config.h"
+#ifdef HAVE_LIBXSS
+ #include <X11/Xlib.h>
+ #include <X11/Xutil.h>
+ #include <X11/extensions/scrnsaver.h>
+#endif // HAVE_LIBXSS
 class QTimer;
 
 // Seconds per minutes - usefull for speeding debugging up!
@@ -70,13 +73,17 @@ public slots:
   
   
 protected:
+#ifdef HAVE_LIBXSS
   void informOverrun(int idle);
+#endif // HAVE_LIBXSS
 
 protected slots:
   void check();
   
 private:
+#ifdef HAVE_LIBXSS
   XScreenSaverInfo *_mit_info;
+#endif
   bool _idleDetectionPossible;
   bool _overAllIdleDetect; // Based on preferences.
   int _maxIdle;

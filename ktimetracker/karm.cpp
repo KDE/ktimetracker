@@ -46,6 +46,8 @@ Karm::Karm( QWidget *parent, const char *name )
   connect(_idleTimer, SIGNAL(stopTimer()), this, SLOT(stopAllTimers()));
   connect(_preferences, SIGNAL(idlenessTimeout(int)), _idleTimer, SLOT(setMaxIdle(int)));
   connect(_preferences, SIGNAL(detectIdleness(bool)), _idleTimer, SLOT(toggleOverAllIdleDetection(bool)));
+  if (!_idleTimer->isIdleDetectionPossible())
+    _preferences->disableIdleDetection();
   
   // Setup auto save timer
   _autoSaveTimer = new QTimer(this);

@@ -6,6 +6,9 @@
 
 IdleTimer::IdleTimer(int maxIdle) 
 {
+  _maxIdle = maxIdle;
+
+#ifdef HAVE_LIBXSS
   int event_base, error_base;
   if(XScreenSaverQueryExtension(qt_xdisplay(), &event_base, &error_base)) {
     _idleDetectionPossible = true;
@@ -13,10 +16,13 @@ IdleTimer::IdleTimer(int maxIdle)
   else {
     _idleDetectionPossible = false;
   }
-  _maxIdle = maxIdle;
 
   _timer = new QTimer(this);
   connect(_timer, SIGNAL(timeout()), this, SLOT(check()));
+#else
+  _idleDetectionPossible = false;
+#endif // HAVE_LIBXSS
+
 }
 
 bool IdleTimer::isIdleDetectionPossible()
@@ -26,6 +32,7 @@ bool IdleTimer::isIdleDetectionPossible()
 
 void IdleTimer::check() 
 {
+#ifdef HAVE_LIBXSS
   if (_idleDetectionPossible) {
     _mit_info = XScreenSaverAllocInfo ();
     XScreenSaverQueryInfo(qt_xdisplay(), qt_xrootwin(), _mit_info);
@@ -34,6 +41,7 @@ void IdleTimer::check()
       informOverrun(idleMinutes);
     }
   }
+#endif // HAVE_LIBXSS
 }
 
 void IdleTimer::setMaxIdle(int maxIdle)
@@ -41,6 +49,7 @@ void IdleTimer::setMaxIdle(int maxIdle)
   _maxIdle = maxIdle;
 }
 
+#ifdef HAVE_LIBXSS
 void IdleTimer::informOverrun(int idleMinutes) 
 {
   if (!_overAllIdleDetect) {
@@ -77,17 +86,22 @@ void IdleTimer::informOverrun(int idleMinutes)
     _timer->start(testInterval);      
   }
 }
+#endif // HAVE_LIBXSS
 
 void IdleTimer::startIdleDetection() 
 {
+#ifdef HAVE_LIBXSS
   if (!_timer->isActive())
     _timer->start(testInterval);
+#endif //HAVE_LIBXSS
 }
 
 void IdleTimer::stopIdleDetection()
 {
+#ifdef HAVE_LIBXSS
   if (_timer->isActive())
     _timer->stop();
+#endif // HAVE_LIBXSS
 }
 void IdleTimer::toggleOverAllIdleDetection(bool on) 
 {

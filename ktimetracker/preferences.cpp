@@ -39,7 +39,7 @@ Preferences::Preferences() : KDialogBase(KDialogBase::Tabbed, i18n("Preferences"
   //----------------------------------------------------------------------
   // Idle Detection Setup
   //----------------------------------------------------------------------
-  QVBox *idleMenu = addVBoxPage(i18n("Idle Detection"));
+  idleMenu = addVBoxPage(i18n("Idle Detection"));
   
   _doIdleDetectionW = new QCheckBox(i18n("Try to detect idleness"), 
                                    idleMenu,"_doIdleDetectionW");
@@ -59,6 +59,11 @@ Preferences *Preferences::instance()
   return _instance;
 }
 
+
+void Preferences::disableIdleDetection()
+{
+  idleMenu->setEnabled(false);
+}
 
 
 //--------------------------------------------------------------------------------
