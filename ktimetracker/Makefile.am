@@ -18,16 +18,23 @@ SUBDIRS = doc
 
 icon_DATA = karm.xpm
 icondir = $(kde_icondir)
+appsdir = $(kde_appsdir)/Utilities
 
 install-data-local:
-	$(mkinstalldirs) $(kde_appsdir)/Utilities
-	$(INSTALL_DATA) support/KArm.kdelnk $(kde_appsdir)/Utilities
+	$(mkinstalldirs) $(appsdir)
+	$(INSTALL_DATA) support/KArm.kdelnk $(appsdir)
+	$(mkinstalldirs) $(kde_toolbardir)
+	$(INSTALL_DATA) support/filedel.xpm $(kde_toolbardir)
 	$(mkinstalldirs) $(kde_minidir)
 	$(INSTALL_DATA) mini-karm.xpm $(kde_minidir)/karm.xpm
 
 uninstall-local:
-	-rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
-	-rm -f $(kde_minidir)/karm.xpm
+	rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
+	rm -f $(kde_minidir)/karm.xpm
+	rm -f $(kde_toolbardir)/filedel.xpm
+	-rmdir -p $(kde_toolbardir)
+	-rmdir -p $(kde_minidir)
+	-rmdir -p $(kde_appsdir)
 
 messages:
 	@XGETTEXT@ -C --keyword=translate -x ../../kdelibs/po/kde.pot $(karm_SOURCES) && mv messages.po ../po/karm.pot
