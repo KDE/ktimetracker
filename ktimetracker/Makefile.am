@@ -42,7 +42,7 @@ uninstall-local:
 	-rmdir -p $(kde_appsdir)
 
 messages:
-	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot $(karm_SOURCES) && mv messages.po ../po/karm.pot
+	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot *.cpp && mv messages.po ../po/karm.pot
 
 
 ### Run a-Moc -- kmake-generated moc rules ####
