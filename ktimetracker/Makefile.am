@@ -30,7 +30,7 @@ uninstall-local:
 	-rm -f $(kde_minidir)/karm.xpm
 
 messages:
-       @XGETTEXT@ -C --keyword=translate -x ../../kdelibs/po/kde.pot $(SRCFILES) && mv messages.po ../po/karm.pot
+	@XGETTEXT@ -C --keyword=translate -x ../../kdelibs/po/kde.pot $(SRCFILES) && mv messages.po ../po/karm.pot
 
 
 ### Run a-Moc -- kmake-generated moc rules ####
