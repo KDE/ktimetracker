@@ -6,6 +6,7 @@ qt_libraries = @qt_libraries@
 top_builddir = ..
 LIBTOOL = @LIBTOOL@
 KDE_RPATH = @KDE_RPATH@
+exec_prefix = @exec_prefix@
 
 ############ Autoconf-generated variables  ###################
 CXXFLAGS= @CXXFLAGS@ @all_includes@ -DHAVE_CONFIG_H -I.. 
