@@ -23,11 +23,11 @@ appsdir = $(kde_appsdir)/Utilities
 
 install-data-local:
 	$(mkinstalldirs) $(appsdir)
-	$(INSTALL_DATA) support/KArm.kdelnk $(appsdir)
+	$(INSTALL_DATA) $(srcdir)/support/KArm.kdelnk $(appsdir)
 	$(mkinstalldirs) $(kde_toolbardir)
-	$(INSTALL_DATA) support/filedel.xpm $(kde_toolbardir)
+	$(INSTALL_DATA) $(srcdir)/support/filedel.xpm $(kde_toolbardir)
 	$(mkinstalldirs) $(kde_minidir)
-	$(INSTALL_DATA) mini-karm.xpm $(kde_minidir)/karm.xpm
+	$(INSTALL_DATA) $(srcdir)/mini-karm.xpm $(kde_minidir)/karm.xpm
 
 uninstall-local:
 	rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
