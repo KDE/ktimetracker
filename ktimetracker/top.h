@@ -14,14 +14,10 @@ class KarmWindow : public KTMainWindow
   Q_OBJECT
 
   private:
-    QPopupMenu	*_fileMenu;
-    QPopupMenu	*_clockMenu;
-    QPopupMenu	*_taskMenu;
     KAccel		*_accel;
     KAccelMenuWatch	*_watcher;
     Karm		*_karm;
     long		_totalTime;
-    char		*_sessionTimeBuffer;
 
   public:
     KarmWindow();
@@ -33,6 +29,7 @@ class KarmWindow : public KTMainWindow
     void updateTime();
     void clockStartMsg();
     void clockStopMsg();
+    void quit();
 
   protected:
     virtual void saveProperties( KConfig* );

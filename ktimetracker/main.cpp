@@ -2,22 +2,23 @@
 #include <klocale.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
-
+#include "version.h"
 #include "top.h"
 
 
 static const char *description = 
 	I18N_NOOP("KDE Time tracker tool.");
 
-static const char *version = "v0.0.1";
-
 
 int main( int argc, char *argv[] )
 {
 	KAboutData aboutData( "karm", I18N_NOOP("KArm"),
-		version, description, KAboutData::License_GPL,
-		"(c) 1999, Espen Sand");
+		KARM_VERSION, description, KAboutData::License_GPL,
+		"(c) 1997-2000, Sirtaj Singh Kang, Espen Sand, Jesper Pedersen,\nKalle Dalheimer, Klarälvdalens Datakonsult AB");
+	aboutData.addAuthor( "Sirtaj Singh Kang", 0, "taj@kde.org" );
 	aboutData.addAuthor("Espen Sand",0, "espen@kde.org");
+	aboutData.addAuthor( "Jesper Pedersen", 0, "blackie@ifad.dk" );
+	aboutData.addAuthor( "Kalle Dalheimer", 0, "kalle@kde.org" );
 	
 	KCmdLineArgs::init( argc, argv, &aboutData );
 	KApplication myApp;

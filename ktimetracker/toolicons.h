@@ -58,6 +58,7 @@ static const unsigned char clock_xpm_data[] = {
     0x2b,0x2b,0x2b,0x2b,0x22,0x0a,0x7d,0x3b,0x0a
 };
 
+
 static const unsigned int  clockedit_xpm_len = 819;
 static const unsigned char clockedit_xpm_data[] = {
     0x2f,0x2a,0x20,0x58,0x50,0x4d,0x20,0x2a,0x2f,0x0a,0x73,0x74,0x61,0x74,
@@ -120,6 +121,37 @@ static const unsigned char clockedit_xpm_data[] = {
     0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,
     0x25,0x25,0x22,0x0a,0x7d,0x3b,0x0a
 };
+
+const char * delete_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"22 22 3 1",
+/* colors */
+" 	c white",
+".	c none",
+"X	c black",
+/* pixels */
+"......................",
+"......................",
+"......................",
+"......................",
+"......................",
+"....XX ........XX ....",
+"....XXXX .....XX .....",
+".....XXXX ...XX ......",
+".......XXX .X ........",
+"........XXXXX ........",
+".........XXX .........",
+"........XXXXX ........",
+".......XXX .XX .......",
+"......XXX ...XX ......",
+".....XXX .....X ......",
+".....XXX ......X .....",
+"......X ..............",
+"................X ....",
+"......................",
+"......................",
+"......................",
+"......................"};
 
 struct {
     unsigned int         size;

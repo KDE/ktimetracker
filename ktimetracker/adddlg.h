@@ -23,8 +23,16 @@
 
 #include <stdlib.h>
 #include <kdialogbase.h>
+#include <qvalidator.h>
 class QLineEdit;
 
+class TimeValidator :public QValidator 
+{
+public:
+	TimeValidator(QWidget *parent=0, const char *name=0) :QValidator(parent, name) {}
+	virtual State validate(QString &, int &) const;
+	bool extractTime(QString str, long *res) const;
+};
 
 class AddTaskDialog : public KDialogBase
 {
@@ -48,8 +56,9 @@ class AddTaskDialog : public KDialogBase
     void finished( bool );
 
   private:
-    QLineEdit *mTaskName;
-    QLineEdit *mTaskTime;
+  	QLineEdit *mTaskName;
+	  QLineEdit *mTaskTime;
+	  TimeValidator *mValidator;
 };
 
 

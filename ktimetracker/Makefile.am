@@ -19,6 +19,9 @@ KDE_ICON = karm
 
 appsdir = $(kde_appsdir)/Utilities
 
+rcdir = $(kde_datadir)/karm
+rc_DATA = karmui.rc
+
 install-data-local:
 	$(mkinstalldirs) $(appsdir)
 	$(INSTALL_DATA) $(srcdir)/support/karm.desktop $(appsdir)
