@@ -24,7 +24,7 @@ void KAccelMenuWatch::setMenu( QPopupMenu *menu )
 	// we use  _menuList to ensure that the signal is
 	// connected only once per menu.
 
-	if ( _menuList.findRef( menu ) ) {
+	if ( !_menuList.findRef( menu ) ) {
 		_menuList.append( menu );
 		connect( menu, SIGNAL(destroyed()), 
 			this, SLOT(removeDeadMenu()) );
@@ -100,7 +100,8 @@ loop:
 	return;
 }
 
-KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( QPopupMenu *menu, int itemId, AccelType type )
+KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( QPopupMenu *menu, 
+		int itemId, AccelType type )
 {
 	AccelItem *item = new AccelItem;
 
