@@ -73,7 +73,7 @@ KarmWindow::KarmWindow()
 
 	// setup toolbars
 	QString directory = KApplication::getKApplication()->kdedir() 
-			+ QString("/lib/pics/");
+			+ QString("/share/");
 	QPixmap icon;
 
 	// FIXME: dummy locations for icons till final
@@ -83,7 +83,7 @@ KarmWindow::KarmWindow()
 			_karm, SLOT(startClock()),
 			TRUE, "Start Clock");
 
-	icon.load(directory + "stop.xpm");
+	icon.load(directory + "toolbar/stop.xpm");
 	_toolBar->insertButton( icon, 1, SIGNAL(clicked()),
 			_karm, SLOT(stopClock()),
 			FALSE, "Stop Clock");
@@ -138,7 +138,7 @@ void KarmWindow::help()
 
 void KarmWindow::about()
 {
-        KMsgBox::message(0, "About KArm", "KArm 0.2 -- Sirtaj Singh Kang\n"
+        KMsgBox::message(0, "About KArm", "KArm 0.3 -- Sirtaj Singh Kang\n"
 			"taj@kde.org, July 1997\n\n"
 			"The K Desktop Environment"); 
 }

@@ -227,6 +227,10 @@ void Karm::createNewTask( bool retVal )
 
 void Karm::editTask()
 {
+	if( _broker->currentTask() == 0 ) {
+		return;
+	}
+
 	if( _editDlg == 0 ) {
 		_editDlg = new KarmAddDlg;
 
@@ -248,10 +252,14 @@ void Karm::updateExistingTask( bool retVal )
 	}
 
 	if( retVal && strlen( _editDlg->taskName()) > 0 ) {
+		int currentItem = _broker->current();
+
 		_broker->currentTask()->setName( _editDlg->taskName() );
 		_broker->currentTask()->setTime( _editDlg->taskTime() );
 
 		fillListBoxes();
+
+		_broker->moveTo( currentItem );	
 	}
 
 	delete _editDlg;
