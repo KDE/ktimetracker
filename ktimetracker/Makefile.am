@@ -3,7 +3,7 @@
 AM_CPPFLAGS = -DQT_NO_CAST_ASCII
 INCLUDES = $(all_includes)
 LDFLAGS	= $(all_libraries) $(KDE_RPATH)
-LDADD =  -lkdeprint
+LDADD =  -lkdeprint $(LIBXSS)
 
 
 bin_PROGRAMS = karm
