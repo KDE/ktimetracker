@@ -140,6 +140,7 @@ void KarmWindow::makeMenus()
   
   action = KStdAction::keyBindings(this, SLOT(keyBindings()),actionCollection());
   action->setToolTip(i18n("Configure key bindings"));
+  action->setWhatsThis(i18n("This will let you configure keybindings which is specific to karm"));
   
   action = KStdAction::preferences(_preferences, SLOT(showDialog()),actionCollection());
   action = KStdAction::save(_preferences, SLOT(save()),actionCollection());
@@ -147,38 +148,49 @@ void KarmWindow::makeMenus()
                        SLOT(resetSessionTime()),actionCollection(),
                        "reset_session_time");
   action->setToolTip(i18n("Reset session time"));
+  action->setWhatsThis(i18n("This will reset the session time for all tasks."));
   
   action = new KAction(i18n("&Start"), QString::fromLatin1("1rightarrow"),
                        CTRL + Key_S ,_karm,
                        SLOT(startTimer()),actionCollection(),"start");
   action->setToolTip(i18n("Start timing for selected task"));
+  action->setWhatsThis(i18n("This will start timing for the selected task.\n"
+                            "It is even possible to time several tasks simultaneously.\n\n"
+                            "You may also start timing of a tasks by double clicking the left mouse "
+                            "button on a given task. This will, however, stop timing of other tasks."));
   	
   action = new KAction(i18n("S&top"), QString::fromLatin1("stop"),
                        CTRL + Key_T,_karm,
                        SLOT(stopCurrentTimer()),actionCollection(),"stop");
   action->setToolTip(i18n("Stop timing of the selected task"));
+  action->setWhatsThis(i18n("Stop timing of the selected task"));
 
   action= KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
                               actionCollection(),"new_task");
-  action->setToolTip(i18n("Create new task"));
-  
+  action->setToolTip(i18n("Create new top level task"));
+  action->setWhatsThis(i18n("This will create a new top level task."));  
 
   action = new KAction(i18n("New Subtask"), QString::fromLatin1("kmultiple"),
                        CTRL+ALT+Key_N,
                        _karm, SLOT(newSubTask()),
                        actionCollection(), "new_sub_task");
   action->setToolTip(i18n("Create new sub task of selected task"));
+  action->setWhatsThis(i18n("This will create a sub task for the selected task\n"
+                            "When the timer runs for this task it will also - indirectly - "
+                            "run for all of its parent tasks"));
                          
  	
   action = new KAction(i18n("&Delete"), QString::fromLatin1("editdelete"),
                        Key_Delete,_karm,
                        SLOT(deleteTask()),actionCollection(),"delete_task");
   action->setToolTip(i18n("Delete selected task"));
+  action->setWhatsThis(i18n("This will delete the selected task and all its subtasks."));
  	
   action = new KAction(i18n("&Edit"), QString::fromLatin1("edit"),
                        CTRL + Key_E,_karm,
                        SLOT(editTask()),actionCollection(),"edit_task");
-  action->setToolTip(i18n("Edit name or times for selected task"));  
+  action->setToolTip(i18n("Edit name or times for selected task"));
+  action->setWhatsThis(i18n("This will bring up a dialog box where you may edit the parameters for the selected task."));
  	
   createGUI( QString::fromLatin1("karmui.rc") );
 }
