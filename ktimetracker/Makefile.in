@@ -64,10 +64,10 @@ distclean: clean
 install:
 	$(INSTALL_DIR) $(BINDIR)
 	$(INSTALL) $(TARGET) $(BINDIR)
-	$(INSTALL_DIR) $(prefix)/doc/HTML/karm
-	$(INSTALL_DATA) $(DOCFILES) $(prefix)/doc/HTML/karm
-	$(INSTALL_DIR) $(prefix)/apps/Utilities
-	$(INSTALL_DATA) support/KArm.kdelnk $(prefix)/apps/Utilities
+	$(INSTALL_DIR) $(prefix)/share/doc/HTML/karm
+	$(INSTALL_DATA) $(DOCFILES) $(prefix)/share/doc/HTML/karm
+	$(INSTALL_DIR) $(prefix)/share/applnk/Utilities
+	$(INSTALL_DATA) support/KArm.kdelnk $(prefix)/share/applnk/Utilities
 
 
 ### Run a-Moc -- kmake-generated moc rules ####
