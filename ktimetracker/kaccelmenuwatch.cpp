@@ -52,7 +52,7 @@ void KAccelMenuWatch::updateMenus()
 	QListIterator<AccelItem> iter( _accList );
 	AccelItem *item;
 
-	for( ; item = iter.current(); ++iter ) {
+	for( ; (item = iter.current()) ; ++iter ) {
 		switch( item->type ) {
 			case StringAccel:
 				_accel->changeMenuAccel( item->menu, 
