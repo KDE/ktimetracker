@@ -17,7 +17,7 @@ noinst_HEADERS = adddata.h adddlg.h karm.h task.h toolicons.h top.h
 
 KDE_ICON = karm
 
-appsdir = $(kde_appsdir)/Programs/Utilities
+appsdir = $(kde_appsdir)/Utilities
 
 install-data-local:
 	$(mkinstalldirs) $(appsdir)
