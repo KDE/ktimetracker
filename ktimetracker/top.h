@@ -12,7 +12,7 @@ class KAccel;
 class KAccelMenuWatch;
 
 /// The top level widget for Karm.
-class KarmWindow : public KTopLevelWidget
+class KarmWindow : public KTMainWindow
 {
 	Q_OBJECT
 private:

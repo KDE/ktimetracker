@@ -30,7 +30,7 @@
 #include"kaccelmenuwatch.h"
 
 KarmWindow::KarmWindow()
-	:	KTopLevelWidget(),
+	:	KTMainWindow(),
 
 		_mainMenu( menuBar() ),
 		_toolBar( toolBar() ),
