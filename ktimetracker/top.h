@@ -30,6 +30,8 @@ class KarmWindow : public KTMainWindow
     void clockStartMsg();
     void clockStopMsg();
     void quit();
+    void print();
+	
 
   protected:
     virtual void saveProperties( KConfig* );

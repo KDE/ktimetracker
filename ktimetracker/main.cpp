@@ -17,7 +17,7 @@ int main( int argc, char *argv[] )
 		"(c) 1997-2000, Sirtaj Singh Kang, Espen Sand, Jesper Pedersen,\nKalle Dalheimer, Klarälvdalens Datakonsult AB");
 	aboutData.addAuthor( "Sirtaj Singh Kang", 0, "taj@kde.org" );
 	aboutData.addAuthor("Espen Sand",0, "espen@kde.org");
-	aboutData.addAuthor( "Jesper Pedersen", 0, "blackie@ifad.dk" );
+	aboutData.addAuthor( "Jesper Pedersen", 0, "blackie@kde.org" );
 	aboutData.addAuthor( "Kalle Dalheimer", 0, "kalle@kde.org" );
 	
 	KCmdLineArgs::init( argc, argv, &aboutData );

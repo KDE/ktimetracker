@@ -7,6 +7,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.33  2000/05/29 14:17:09  kalle
+ * Keyboard acceleration
+ *
  * Revision 1.32  2000/05/29 13:19:31  kalle
  * Icon loading in karm
  *
@@ -50,9 +53,13 @@
 #include "karm.h"
 #include "top.h"
 #include "version.h"
+#include "task.h"
+#include <qprinter.h>
+#include <qpainter.h>
+#include <qpaintdevicemetrics.h>
 
 #include "top.moc"
-
+#include <iostream>
 KarmWindow::KarmWindow()
   : KTMainWindow(),
 	_accel( new KAccel( this ) ),
@@ -157,6 +164,7 @@ void KarmWindow::resetSessionTime()
 void KarmWindow::makeMenus()
 {
   (void)KStdAction::quit(this, SLOT(quit()), actionCollection());
+  (void)KStdAction::print(this, SLOT(print()), actionCollection());
   (void)KStdAction::action( KStdAction::Preferences,this,
 					SLOT(prefs()),actionCollection(),"preferences");
   (void)new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
@@ -180,8 +188,65 @@ void KarmWindow::makeMenus()
   createGUI("karmui.rc");
 }
 
+void KarmWindow::print()
+{
+	QPrinter printer;
+	
+	if (printer.setup()) {
+		// setup
+		QPainter painter(&printer);
+		QPaintDeviceMetrics deviceMetrics(&printer);
+		QFontMetrics metrics = painter.fontMetrics();
+		int pageHeight = deviceMetrics.height();
+		int pageWidth = deviceMetrics.width();
+		QSize margins = printer.margins();
 
+		// Calculate the maximum width of the time field
+		int timeWidth = 0;
+		for (QListViewItem *child = _karm->firstChild(); child;
+				 child = child->nextSibling()) {
+			Task *task = (Task *) child;
+			QString time = Karm::formatTime(task->time());
+			timeWidth = QMAX(timeWidth, metrics.width(time));
+		}
 
+		int offset = margins.height();
 
+		// Print the header
+		QFont origFont, newFont;
+		origFont = painter.font();
+		newFont = origFont;
+		newFont.setPixelSize(origFont.pixelSize() * 1.5);
+		painter.setFont(newFont);
+		
+		int height = metrics.height();
+		QString now = QDateTime::currentDateTime().toString();
+		
+		painter.drawText(margins.width(), offset, pageWidth, height, QPainter::AlignCenter, 
+										 "KArm - " + now);
+		
+		painter.setFont(origFont);
+		offset += height + 5;
+		
+		// Now print the actual content
+		for (QListViewItem *child = _karm->firstChild(); child;
+				 child = child->nextSibling()) {
+			Task *task = (Task *) child;
+			QString time = Karm::formatTime(task->time());
+			QString name = task->name();
+			
+			height = metrics.height();
+			int textWidth = pageWidth - margins.width() - timeWidth -5;
+			
+			painter.drawText(margins.width(), offset, timeWidth, height, QPainter::AlignRight, time);
+			painter.drawText(margins.width()+timeWidth+5, offset, textWidth, height, QPainter::AlignLeft, name);
+			
+			offset += height;
 
-
+			if (offset + 2* height > pageHeight) {
+				printer.newPage();
+				offset = margins.height();
+			}
+		}
+	}
+}
