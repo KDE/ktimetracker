@@ -1,4 +1,4 @@
-<!DOCTYPE kpartgui ><kpartgui name="myapp" >
+<!DOCTYPE kpartgui ><kpartgui name="myapp" version="1" >
 <MenuBar>
 <Menu name="file" >
 <text>File</text>
@@ -17,7 +17,7 @@
 <Action name="edit_task" />
 </Menu>
 </MenuBar>
-<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >
+<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" ><text>Main Toolbar</text>
 <Action name="start" />
 <Action name="stop" />
 <Action name="new_task" />
