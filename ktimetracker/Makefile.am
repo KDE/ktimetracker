@@ -23,7 +23,7 @@ appsdir = $(kde_appsdir)/Utilities
 
 install-data-local:
 	$(mkinstalldirs) $(appsdir)
-	$(INSTALL_DATA) $(srcdir)/support/KArm.kdelnk $(appsdir)
+	$(INSTALL_DATA) $(srcdir)/support/karm.desktop $(appsdir)
 	$(mkinstalldirs) $(kde_toolbardir)
 	$(INSTALL_DATA) $(srcdir)/support/filedel.xpm $(kde_toolbardir)
 	$(mkinstalldirs) $(kde_minidir)
