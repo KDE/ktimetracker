@@ -7,6 +7,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.32  2000/05/29 13:19:31  kalle
+ * Icon loading in karm
+ *
  * Revision 1.31  2000/05/29 12:30:54  kalle
  * - Replaced the two listboxes with one listview
  * - Times can be specified as HH:MM [(+|-)HH:MM]
@@ -60,9 +63,6 @@ KarmWindow::KarmWindow()
   setView( _karm, FALSE );
   _karm->show();
 
-  // accelerators
-  initAccelItems();
-
   // status bar
 	
   statusBar()->insertItem( i18n( "clock inactive" ), 0 );
@@ -71,7 +71,6 @@ KarmWindow::KarmWindow()
 
   // popup menus
   makeMenus();
-  connectAccels();
   _watcher->updateMenus();
 
   // FIXME: this shouldnt stay. We need to check whether the
@@ -141,43 +140,10 @@ void KarmWindow::saveProperties( KConfig* )
   _karm->save();
 }
 
-void KarmWindow::initAccelItems()
-{
-  _accel->insertItem( i18n( "Preferences" ), "Prefs",
-					  CTRL + Key_P );
-  _accel->insertItem( i18n( "Reset Session Time" ), "ResetSess",
-					  CTRL + Key_R );
-  _accel->insertItem( i18n( "Start Clock" ), "StartClock", 
-					  CTRL + Key_S );
-  _accel->insertItem( i18n( "Stop Clock" ), "StopClock", 
-					  CTRL + Key_T );
-  _accel->insertItem( i18n( "New Task" ), "NewTask",
-					  CTRL + Key_N );
-  _accel->insertItem( i18n( "Delete Task" ), "DeleteTask",
-					  CTRL + Key_D );
-  _accel->insertItem( i18n( "Edit Task" ), "EditTask",
-					  CTRL + Key_E );
-  _accel->insertStdItem( KStdAccel::Quit );
-  _accel->readSettings();
-}
-
-void KarmWindow::connectAccels()
-{
-  _accel->connectItem( "Prefs",		this,	SLOT(prefs()) );
-  _accel->connectItem( "ResetSess",     this, SLOT( resetSessionTime() ) );
-  _accel->connectItem( KStdAccel::Quit,	kapp, SLOT(closeAllWindows()));
-  _accel->connectItem( "StartClock",	_karm,	SLOT(startClock()) );
-  _accel->connectItem( "StopClock",	_karm,	SLOT(stopClock()) );
-  _accel->connectItem( "NewTask",	_karm,	SLOT(newTask()) );
-  _accel->connectItem( "DeleteTask",	_karm,	SLOT(deleteTask()) );
-  _accel->connectItem( "EditTask",	_karm,	SLOT(editTask()) );
-}
 
 void KarmWindow::prefs()
 {
-  if( KKeyDialog::configureKeys ( _accel, true, topLevelWidget() ) ) {
-	_watcher->updateMenus();
-  }
+  KKeyDialog::configureKeys( actionCollection(), xmlFile() );
 }
 
 
@@ -191,24 +157,24 @@ void KarmWindow::resetSessionTime()
 void KarmWindow::makeMenus()
 {
   (void)KStdAction::quit(this, SLOT(quit()), actionCollection());
-  (void)new KAction(i18n("&Preferences..."), 0,this,
+  (void)KStdAction::action( KStdAction::Preferences,this,
 					SLOT(prefs()),actionCollection(),"preferences");
-  (void)new KAction(i18n("&Reset Session Time"), 0,this,
+  (void)new KAction(i18n("&Reset Session Time"), CTRL + Key_R,this,
 					SLOT(resetSessionTime()),actionCollection(),"reset_session_time");
   
-  (void)new KAction(i18n("&Start"), BarIcon( "clock" ),0,_karm,
+  (void)new KAction(i18n("&Start"), BarIcon( "clock" ), CTRL + Key_S ,_karm,
 					SLOT(startClock()),actionCollection(),"start");
   	
-  (void)new KAction(i18n("S&top"), QIconSet(BarIcon("stop")),0,_karm,
+  (void)new KAction(i18n("S&top"), QIconSet(BarIcon("stop")), CTRL + Key_T,_karm,
 					SLOT(stopClock()),actionCollection(),"stop");
-  (void)new KAction(i18n("&New"), QIconSet(BarIcon("filenew")),0,_karm,
-					SLOT(newTask()),actionCollection(),"new_task");
+  (void)KStdAction::action( KStdAction::New, _karm,	SLOT(newTask()),
+								 actionCollection(),"new_task");
   
  	
-  (void)new KAction(i18n("&Delete"), BarIcon( "filedel" ),0,_karm,
+  (void)new KAction(i18n("&Delete"), BarIcon( "filedel" ),Key_Delete,_karm,
 					SLOT(deleteTask()),actionCollection(),"delete_task");
  	
-  (void)new KAction(i18n("&Edit"), BarIcon( "clockedit" ), 0,_karm,
+  (void)new KAction(i18n("&Edit"), BarIcon( "clockedit" ), CTRL + Key_E,_karm,
 					SLOT(editTask()),actionCollection(),"edit_task");
  	
   createGUI("karmui.rc");

@@ -37,8 +37,6 @@ class KarmWindow : public KTMainWindow
     //	virtual void writeSettings( KConfig * );
 
   private:
-    void initAccelItems();
-    void connectAccels();
     void makeMenus();
 };
 
