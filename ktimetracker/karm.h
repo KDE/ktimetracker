@@ -2,8 +2,7 @@
 #define SSK_KARM_H
 
 #include <stdio.h>
-
-#include <kpanner.h>
+#include <qsplitter.h>
 
 class TaskBroker;
 class KMenuBar;
@@ -12,7 +11,7 @@ class QListBox;
 class KarmAddDlg;
 
 ///
-class Karm	: public KPanner
+class Karm	: public QSplitter
 {
 	Q_OBJECT
 private:

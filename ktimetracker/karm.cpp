@@ -11,8 +11,6 @@
 #include <klocale.h>
 #include <kstddirs.h>
 #include <kmenubar.h>
-#include <kmsgbox.h>
-#include <kpanner.h>
 #include <ktoolbar.h>
 
 #include "task.h"
@@ -20,7 +18,7 @@
 #include "adddlg.h"
 
 Karm::Karm( QWidget *parent )
-	:	KPanner( parent )
+	:      QSplitter( parent )
 {
 	QBoxLayout *layout;
 	_timerRunning = FALSE;

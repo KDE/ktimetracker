@@ -6,22 +6,21 @@
 * $Id$
 */
 
-#include<qpopupmenu.h>
-#include<qlayout.h>
-#include<qpixmap.h>
-#include<qkeycode.h>
+#include <qpopupmenu.h>
+#include <qlayout.h>
+#include <qpixmap.h>
+#include <qkeycode.h>
 
-#include<kiconloader.h>
-#include<kapp.h>
+#include <kiconloader.h>
+#include <kapp.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include<ktopwidget.h>
-#include<kmenubar.h>
-#include<ktoolbar.h>
-#include<kstatusbar.h>
-#include<kmsgbox.h>
-#include<kaccel.h>
-#include<kkeydialog.h>
+#include <ktopwidget.h>
+#include <kmenubar.h>
+#include <ktoolbar.h>
+#include <kstatusbar.h>
+#include <kaccel.h>
+#include <kkeydialog.h>
 
 #include "karm.h"
 #include "toolicons.h"
