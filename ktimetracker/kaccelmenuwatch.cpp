@@ -115,3 +115,4 @@ KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( QPopupMenu *,
 }
 
 #include "kaccelmenuwatch.h"
+#include "kaccelmenuwatch.moc"
