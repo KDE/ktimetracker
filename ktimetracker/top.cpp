@@ -8,6 +8,9 @@
 /* 
  * $Id$
  * $Log$
+ * Revision 1.29  2000/02/07 21:17:31  hadacek
+ * KAccel/KStdAccel API cleanup + KAction/KAccel extension
+ *
  * Revision 1.28  1999/12/30 19:48:15  granroth
  * loadIcon("*.xpm") => BarIcon("*")
  *
@@ -241,12 +244,12 @@ void KarmWindow::makeMenus()
 	
 
   _watcher->setMenu( _taskMenu );
-  id = _taskMenu->insertItem( i18n( "&New" ), _karm, SLOT(newTask()) );
+  id = _taskMenu->insertItem( i18n( "&New..." ), _karm, SLOT(newTask()) );
   _watcher->connectAccel( id, "NewTask" );
 
   id = _taskMenu->insertItem( i18n( "&Delete" ), _karm, SLOT(deleteTask()) );
   _watcher->connectAccel( id, "DeleteTask" );
-  id = _taskMenu->insertItem( i18n( "&Edit" ), _karm, SLOT(editTask()));
+  id = _taskMenu->insertItem( i18n( "&Edit..." ), _karm, SLOT(editTask()));
   _watcher->connectAccel( id, "EditTask" );
 }
 
