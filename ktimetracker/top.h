@@ -12,7 +12,7 @@ class Karm;
 /// The top level widget for Karm.
 class KarmWindow : public KTopLevelWidget
 {
-	Q_OBJECT;
+	Q_OBJECT
 private:
 	KMenuBar	*_mainMenu;
 

@@ -172,7 +172,7 @@ signals:
 };
 
 
-inline Task::Task( const char *name=0, long minutes=0 ) 
+inline Task::Task( const char *name, long minutes ) 
 { 
 	_name = new QString( name ); 
 	*_name = _name->stripWhiteSpace();
