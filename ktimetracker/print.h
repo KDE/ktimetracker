@@ -1,3 +1,8 @@
+#ifndef ___print_h
+#define ___print_h
+
+#undef Color // X11 headers
+#undef GrayScale // X11 headers
 #include <qprinter.h>
 #include <qpainter.h>
 #include "karm.h"
@@ -23,4 +28,5 @@ private:
   int pageHeight;  
 };
 
+#endif
 

@@ -1,3 +1,6 @@
+#ifndef __preferences_h
+#define __preferences_h
+
 #include <kdialogbase.h>
 
 class QCheckBox;
@@ -61,5 +64,5 @@ private:
   
 };
 
+#endif
 
-  
