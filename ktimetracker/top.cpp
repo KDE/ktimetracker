@@ -15,7 +15,7 @@
 #include "karm.h"
 #include "toolicons.h"
 
-#include "top.moc"
+#include "top.h"
 
 KarmWindow::KarmWindow()
 	:	KTopLevelWidget()
@@ -28,7 +28,7 @@ KarmWindow::KarmWindow()
 	setMenu( _mainMenu );
 
 	_toolBar = new KToolBar( this, "_toolBar" );
-	_toolBar->setBarPos( KToolBar::Top );
+	_toolBar->setPos( KToolBar::Top );
 	
 	_karm = new Karm(this);
 	setView( _karm, FALSE );
@@ -79,29 +79,29 @@ KarmWindow::KarmWindow()
 	// FIXME: dummy locations for icons till final
 	// install script is written.
 	icon.loadFromData(clock_xpm_data, clock_xpm_len );
-	_toolBar->insertItem( icon, 0, SIGNAL(clicked()), 
+	_toolBar->insertButton( icon, 0, SIGNAL(clicked()), 
 			_karm, SLOT(startClock()),
 			TRUE, "Start Clock");
 
 	icon.load(directory + "stop.xpm");
-	_toolBar->insertItem( icon, 1, SIGNAL(clicked()),
+	_toolBar->insertButton( icon, 1, SIGNAL(clicked()),
 			_karm, SLOT(stopClock()),
 			FALSE, "Stop Clock");
 	
 	_toolBar->insertSeparator();
 
 	icon.load(directory + "toolbar/filenew.xpm");
-	_toolBar->insertItem( icon, 2, SIGNAL(clicked()),
+	_toolBar->insertButton( icon, 2, SIGNAL(clicked()),
 			_karm, SLOT(newTask()),
 			TRUE, "New Task");
 
 	icon.load(directory + "toolbar/filedel.xpm");
-	_toolBar->insertItem( icon, 3, SIGNAL(clicked()),
+	_toolBar->insertButton( icon, 3, SIGNAL(clicked()),
 			_karm, SLOT(deleteTask()),
 			TRUE, "Delete Task");
 
 	icon.loadFromData( clockedit_xpm_data, clockedit_xpm_len );
-	_toolBar->insertItem( icon, 4, SIGNAL(clicked()),
+	_toolBar->insertButton( icon, 4, SIGNAL(clicked()),
 			_karm, SLOT(editTask()),
 			TRUE, "Edit Task");
 
@@ -126,6 +126,7 @@ KarmWindow::~KarmWindow()
 	delete _clockMenu;
 	delete _taskMenu;
 	delete _helpMenu;
+	delete _toolBar;
 	delete[] _sessionTimeBuffer;
 }
 
@@ -136,8 +137,8 @@ void KarmWindow::help()
 
 void KarmWindow::about()
 {
-        KMsgBox::message(0, "About KArm", "KArm 0.1 -- Sirtaj Singh Kang\n"
-			"taj@kde.org, June 1997\n\n"
+        KMsgBox::message(0, "About KArm", "KArm 0.2 -- Sirtaj Singh Kang\n"
+			"taj@kde.org, July 1997\n\n"
 			"The K Desktop Environment"); 
 }
 

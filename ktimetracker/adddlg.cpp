@@ -7,8 +7,8 @@
 
  *********************************************************************/
 
-#include "adddlg.moc"
-#include "adddata.moc"
+#include "adddlg.h"
+#include "adddata.h"
 
 #define Inherited KAddDlgData
 

@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-#include"task.moc"
+#include"task.h"
 
 
 #define T_LINESIZE 1023

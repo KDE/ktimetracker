@@ -12,7 +12,7 @@
 #include<kmsgbox.h>
 
 #include "task.h"
-#include "karm.moc"
+#include "karm.h"
 #include "adddlg.h"
 
 Karm::Karm( QWidget *parent )
