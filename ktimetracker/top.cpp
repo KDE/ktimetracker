@@ -178,7 +178,7 @@ void KarmWindow::connectAccels()
 
 void KarmWindow::prefs()
 {
-	if( KKeyDialog::configureKeys ( _accel ) ) {
+	if( KKeyDialog::configureKeys ( _accel, true, topLevelWidget() ) ) {
 		_watcher->updateMenus();
 	}
 }
@@ -202,8 +202,7 @@ void KarmWindow::makeMenus()
 	
 	_mainMenu->insertSeparator();
 
-	_mainMenu->insertItem( i18n( "&Help" ),
-		kapp->helpMenu(TRUE, about ) );
+	_mainMenu->insertItem( i18n( "&Help" ), helpMenu( about ) );
 
 	_watcher->setMenu( _fileMenu );
 	int id = _fileMenu->insertItem( i18n( "&Preferences..." ), 
