@@ -6,7 +6,7 @@ LDADD =  $(LIB_KDEUI)
 
 
 bin_PROGRAMS = karm
-SUBDIRS = doc support
+SUBDIRS = support
 
 karm_METASOURCES =  USE_AUTOMOC
 
