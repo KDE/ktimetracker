@@ -1,0 +1,30 @@
+<!DOCTYPE kpartgui ><kpartgui name="myapp" >
+<MenuBar>
+<Menu name="file" >
+<text>
+File</text>
+<Action name="preferences" />
+<Action name="reset_session_time" />
+</Menu>
+<Menu name="clock" >
+<text>
+Clock</text>
+<Action name="start" />
+<Action name="stop" />
+</Menu>
+<Menu name="task" >
+<text>
+Task</text>
+<Action name="new_task" />
+<Action name="delete_task" />
+<Action name="edit_task" />
+</Menu>
+</MenuBar>
+<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >
+<Action name="start" />
+<Action name="stop" />
+<Action name="new_task" />
+<Action name="delete_task" />
+<Action name="edit_task" />
+</ToolBar>
+</kpartgui>
