@@ -8,6 +8,8 @@
  * $Id$
  */
 
+#include "top.h"
+#include <qstring.h>
 #include <qkeycode.h>
 #include <qlayout.h>
 #include <qpixmap.h>
@@ -23,16 +25,17 @@
 #include <kstdaction.h>
 #include <qvbox.h>
 #include <qtimer.h>
-
+/*
 #include "kaccelmenuwatch.h"
 #include "karm.h"
-#include "top.h"
 #include "version.h"
 #include "task.h"
 #include "print.h"
 #include "docking.h"
 #include "preferences.h"
 #include "idle.h"
+*/
+#include <qstring.h>
 
 KarmWindow::KarmWindow()
   : KTMainWindow(),
@@ -49,7 +52,7 @@ KarmWindow::KarmWindow()
   // status bar
 	
   statusBar()->insertItem( i18n( "This session: %1" )
-                           .arg("0:00"), 0, 0, true );
+                           .arg(QString::fromLatin1("0:00")), 0, 0, true );
 
   // setup PreferenceDialog.
   _preferences = Preferences::instance();
@@ -128,7 +131,7 @@ void KarmWindow::keyBindings()
 void KarmWindow::resetSessionTime()
 {
   _totalTime = 0;
-  statusBar()->changeItem( i18n("This session: %1").arg("0:00"), 0 );
+  statusBar()->changeItem( i18n("This session: %1").arg(QString::fromLatin1("0:00")), 0 );
 }
 
 
@@ -143,11 +146,11 @@ void KarmWindow::makeMenus()
 		    SLOT(resetSessionTime()),actionCollection(),
 		    "reset_session_time");
   
-  (void)new KAction(i18n("&Start"), "clock",
+  (void)new KAction(i18n("&Start"), QString::fromLatin1("clock"),
 		    CTRL + Key_S ,_karm,
 		    SLOT(startTimer()),actionCollection(),"start");
   	
-  (void)new KAction(i18n("S&top"), "stop",
+  (void)new KAction(i18n("S&top"), QString::fromLatin1("stop"),
 		    CTRL + Key_T,_karm,
 		    SLOT(stopCurrentTimer()),actionCollection(),"stop");
 
@@ -159,15 +162,15 @@ void KarmWindow::makeMenus()
                     actionCollection(), "new_sub_task");
                          
  	
-  (void)new KAction(i18n("&Delete"), "filedel",
+  (void)new KAction(i18n("&Delete"), QString::fromLatin1("filedel"),
 		    Key_Delete,_karm,
 		    SLOT(deleteTask()),actionCollection(),"delete_task");
  	
-  (void)new KAction(i18n("&Edit"), "clockedit",
+  (void)new KAction(i18n("&Edit"), QString::fromLatin1("clockedit"),
 		    CTRL + Key_E,_karm,
 		    SLOT(editTask()),actionCollection(),"edit_task");
  	
-  createGUI( "karmui.rc" );
+  createGUI( QString::fromLatin1("karmui.rc") );
 }
 
 void KarmWindow::print() 
@@ -180,9 +183,9 @@ void KarmWindow::loadGeometry()
 {
   KConfig &config = *kapp->config();
   
-  config.setGroup( "Main Window Geometry" );
-  int w = config.readNumEntry( "Width", 100 );
-  int h = config.readNumEntry( "Height", 100 );
+  config.setGroup( QString::fromLatin1("Main Window Geometry") );
+  int w = config.readNumEntry( QString::fromLatin1("Width"), 100 );
+  int h = config.readNumEntry( QString::fromLatin1("Height"), 100 );
   w = QMAX( w, sizeHint().width() );
   h = QMAX( h, sizeHint().height() );
   resize(w, h);
@@ -192,8 +195,8 @@ void KarmWindow::loadGeometry()
 void KarmWindow::saveGeometry()
 {
   KConfig &config = *KGlobal::config();
-  config.setGroup( "Main Window Geometry");
-  config.writeEntry( "Width", width());
-  config.writeEntry( "Height", height());
+  config.setGroup( QString::fromLatin1("Main Window Geometry"));
+  config.writeEntry( QString::fromLatin1("Width"), width());
+  config.writeEntry( QString::fromLatin1("Height"), height());
   config.sync();
 }
