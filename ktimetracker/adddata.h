@@ -14,8 +14,8 @@
 #define KAddDlgData_included
 
 #include <qdialog.h>
-#include <qlined.h>
-#include <qpushbt.h>
+#include <qlineedit.h>
+#include <qpushbutton.h>
 
 class KAddDlgData : public QDialog
 {

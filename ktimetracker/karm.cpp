@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <qlistbox.h>
-#include <qfileinf.h>
+#include <qfileinfo.h>
 #include <qlayout.h>
 
 #include <kpanner.h>

@@ -6,7 +6,7 @@
 * $Id$
 */
 
-#include<qpopmenu.h>
+#include<qpopupmenu.h>
 #include<qlayout.h>
 #include<qpixmap.h>
 #include<qkeycode.h>
