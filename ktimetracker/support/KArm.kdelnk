@@ -3,6 +3,7 @@
 BinaryPattern=karm;
 Protocols=
 Name=Personal Time Tracker
+Name[ca]=Agenda personal
 Name[cs]=KArm
 Name[da]=personli tidlogger
 Name[de]=KArm
@@ -22,6 +23,7 @@ Name[sk]=KArm
 Name[sv]=Personlig tidmätare
 Name[zh_CN.GB2312]=KArm
 Comment=Personal Time Tracker
+Comment[ca]=Agenda personal
 Comment[cs]=Obobní mìøiè èasu
 Comment[da]=Personlig tidsoversigt
 Comment[de]=Persvnlicher Zeitverfolger
