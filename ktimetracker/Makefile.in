@@ -24,6 +24,8 @@ prefix = @prefix@
 install_root = @install_root@
 BINDIR = @kde_bindir@
 kde_appsdir = @kde_appsdir@
+ICONDIR = @kde_icondir@
+MINIDIR = @kde_minidir@
 
 ########### Implicit Rules ###########
 
@@ -72,11 +74,17 @@ install: all
 	(cd doc && $(MAKE) install)
 	$(INSTALL_DIR) $(kde_appsdir)/Utilities
 	$(INSTALL_DATA) support/KArm.kdelnk $(kde_appsdir)/Utilities
-
+	$(INSTALL_DIR) $(ICONDIR)
+	$(INSTALL_DATA) karm.xpm $(ICONDIR)
+	$(INSTALL_DIR) $(MINIDIR)
+	$(INSTALL_DATA) mini-karm.xpm $(MINIDIR)/karm.xpm
+	
 uninstall:
 	-rm -f $(BINDIR)/$(TARGET)
 	(cd doc && $(MAKE) uninstall)
 	-rm -f $(kde_appsdir)/Utilities/KArm.kdelnk
+	-rm -f $(ICONDIR)/karm.xpm
+	-rm -f $(MINIDIR)/karm.xpm
 
 messages:
        @XGETTEXT@ -C --keyword=translate -x ../../kdelibs/po/kde.pot $(SRCFILES) && mv messages.po ../po/karm.pot
