@@ -1,4 +1,4 @@
 
 #ifndef KARM_VERSION
-#define KARM_VERSION "0.6"
+#define KARM_VERSION "1.0"
 #endif
