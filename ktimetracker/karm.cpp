@@ -1,3 +1,8 @@
+/* 
+ * $Id:
+ * $Log:
+ */
+
 #include <dirent.h>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -17,6 +22,7 @@
 #include "task.h"
 #include "karm.h"
 #include "adddlg.h"
+
 
 Karm::Karm( QWidget *parent )
   : QSplitter( parent )
@@ -41,7 +47,11 @@ Karm::Karm( QWidget *parent )
   _broker->moveCursor(0);
   
   connect(_nameList, SIGNAL( highlighted(int) ), this, SLOT(moveTo(int)));
-  connect(_timeList, SIGNAL( highlighted(int) ), this, SLOT(moveTo(int)));
+  connect(_timeList, SIGNAL( highlighted(int) ), this, SLOT(moveTo(int))); 
+  // 1999-11-20-Espen Sand: Double click opens edit dialog.
+  connect(_nameList, SIGNAL( selected(int) ), this, SLOT(editTask()));
+  connect(_timeList, SIGNAL( selected(int) ), this, SLOT(editTask()));
+
   startClock();
   
   // Peter Putzer: added KarmName
@@ -58,14 +68,15 @@ Karm::~Karm()
 void Karm::load()
 {
   QFileInfo info;
-  KConfig *config = kapp->config();
+  KConfig &config = *kapp->config();
   
-  config->setGroup( "Karm" );
+  config.setGroup( "Karm" );
   
   QString defaultPath( locateLocal("appdata", "karmdata.txt"));
-  info.setFile( config->readEntry( "DataPath", defaultPath ) );
+  info.setFile( config.readEntry( "DataPath", defaultPath ) );
   
-  if( info.exists() ) {
+  if( info.exists() ) 
+  {
     _broker->readFromFile( info.filePath().ascii() );
     fillListBoxes();
     return;	
@@ -74,15 +85,17 @@ void Karm::load()
 
 void Karm::save()
 {
-  KConfig *config = kapp->config();
+  KConfig &config = *kapp->config();
   
-  config->setGroup("Karm");
+  config.setGroup("Karm");
+
   QString defaultPath( locateLocal("appdata", "karmdata.txt"));
-  
-  if( !_broker->writeToFile( config->readEntry("DataPath", defaultPath).ascii() ) ) {
-    KMessageBox::error(0,
-			 i18n( "There was an error trying to save your data file.\n"
-			       "Time accumulated this session will NOT be saved!\n" ));
+  if(!_broker->writeToFile(config.readEntry("DataPath",defaultPath).ascii()))
+  {
+    QString msg = i18n(""
+      "There was an error trying to save your data file.\n"	       
+      "Time accumulated this session will NOT be saved!\n");
+    KMessageBox::error(0, msg );
   }
 }
 
@@ -165,11 +178,10 @@ void Karm::updateCurrentItem()
 
 void Karm::newTask()
 {
-  if( _addDlg == 0 ) {
-    // popup a dialog asking for info
-    _addDlg = new KarmAddDlg;
-    _addDlg->setCaption(KarmName + i18n( ": Add New Task" ) );
-    
+  if( _addDlg == 0 ) 
+  {
+    _addDlg = new AddTaskDialog( topLevelWidget(), 0, false );
+    _addDlg->setCaption(i18n("New Task"));
     connect( _addDlg, SIGNAL( finished( bool ) ), 
 	     this, SLOT( createNewTask( bool ) ) );
   }
@@ -199,17 +211,17 @@ void Karm::createNewTask( bool retVal )
 
 void Karm::editTask()
 {
-  if( _broker->currentTask() == 0 ) {
-		return;
+  if( _broker->currentTask() == 0 ) 
+  {
+    return;
   }
   
-  if( _editDlg == 0 ) {
-    _editDlg = new KarmAddDlg;
-    
-    _editDlg->setCaption( KarmName + i18n( ": Edit Task Entry" ) );
+  if( _editDlg == 0 ) 
+  {
+    _editDlg = new AddTaskDialog( topLevelWidget(), 0, false );
+    _editDlg->setCaption(i18n("Edit Task"));
     _editDlg->setTask( _broker->currentTask()->name(),
-		       _broker->currentTask()->time() );
-    
+		       _broker->currentTask()->time() );  
     connect( _editDlg, SIGNAL( finished( bool ) ),
 	     this, SLOT( updateExistingTask( bool ) ) );
   }
@@ -244,8 +256,8 @@ void Karm::deleteTask()
     return;
   
   int response = KMessageBox::questionYesNo(0,
-					  i18n( "Are you sure you want to delete this task?" ),
-					  i18n( "Deleting Task"));
+    i18n( "Are you sure you want to delete this task?" ),
+    i18n( "Deleting Task"));
   
   if( response == 0 ) {
     // save the current position

@@ -8,7 +8,7 @@ class TaskBroker;
 class KMenuBar;
 class KToolBar;
 class QListBox;
-class KarmAddDlg;
+class AddTaskDialog;
 
 ///
 class Karm	: public QSplitter
@@ -25,8 +25,8 @@ private:
 
 	char		*_timeStr;
 
-	KarmAddDlg	*_addDlg;
-	KarmAddDlg	*_editDlg;
+	AddTaskDialog	*_addDlg;
+	AddTaskDialog	*_editDlg;
 
 	
 
