@@ -2,7 +2,7 @@
 #ifndef _KARMPART_H_
 #define _KARMPART_H_
 
-#include "mainwindow.h"
+#include "taskview.h"
 #include <kparts/part.h>
 #include <kparts/factory.h>
 
@@ -62,7 +62,7 @@ protected slots:
     void fileSaveAs();
 
 private:
-    MainWindow *m_widget;
+    TaskView *m_widget;
 };
 
 class KInstance;

@@ -20,7 +20,7 @@ karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
     setInstance( karmPartFactory::instance() );
 
     // this should be your custom internal widget
-    m_widget = new MainWindow();
+    m_widget = new TaskView( parentWidget, widgetName );
 
     // notify the part that this is our internal widget
     setWidget(m_widget);
@@ -80,18 +80,7 @@ void karmPart::setModified(bool modified)
 bool karmPart::openFile()
 {
     // m_file is always local so we can use QFile on it
-    QFile file(m_file);
-    if (file.open(IO_ReadOnly) == false)
-        return false;
-
-    // our example widget is text-based, so we use QTextStream instead
-    // of a raw QDataStream
-    QTextStream stream(&file);
-    QString str("Hello World");
-    while (!stream.eof())
-        str += stream.readLine() + "\n";
-
-    file.close();
+    m_widget->load(m_file);
 
     // just for fun, set the status bar
     emit setStatusBarText( m_url.prettyURL() );
