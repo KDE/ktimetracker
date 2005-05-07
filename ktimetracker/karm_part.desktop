@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=karmPart
+Name[et]=karm komponent
+Name[ja]=karm パート
+Name[pt_BR]=Parte karm
+Name[sv]=karm-del
+Name[ta]=karmபாகம்
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
+X-KDE-Library=libkarmpart
+Type=Service
