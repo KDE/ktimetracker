@@ -9,14 +9,17 @@ METASOURCES = AUTO
 
 COMPILE_BEFORE_karm = libkdepim kresources
 
-karm_SOURCES =  kaccelmenuwatch.cpp main.cpp desktoptracker.cpp \
+noinst_LIBRARIES = libkarm_shared.a
+
+libkarm_shared_a_SOURCES = kaccelmenuwatch.cpp desktoptracker.cpp \
                 edittaskdialog.cpp idletimedetector.cpp \
                 printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp \
                 karmstorage.cpp mainwindow.cpp preferences.cpp print.cpp \
                 task.cpp taskview.cpp tray.cpp \
 		csvexportdialog_base.ui csvexportdialog.cpp plannerparser.cpp \
 		karmdcopiface.skel
-karm_LDADD = -lkdeprint $(top_builddir)/libkcal/libkcal.la \
+karm_SOURCES = main.cpp
+karm_LDADD = libkarm_shared.a -lkdeprint $(top_builddir)/libkcal/libkcal.la \
 	     $(top_builddir)/kresources/remote/libkcal_resourceremote.la \
              $(top_builddir)/libkdepim/libkdepim.la $(LIBXSS)
 karm_LDFLAGS = $(all_libraries) $(KDE_RPATH)
@@ -49,15 +52,10 @@ include $(top_srcdir)/doc/api/Doxyfile.am
 kde_module_LTLIBRARIES = libkarmpart.la
 
 # the Part's source, library search path, and link libraries
-libkarmpart_la_SOURCES = karm_part.cpp kaccelmenuwatch.cpp main.cpp desktoptracker.cpp \
-                edittaskdialog.cpp idletimedetector.cpp \
-                printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp \
-                karmstorage.cpp mainwindow.cpp preferences.cpp print.cpp \
-                task.cpp taskview.cpp tray.cpp \
-		csvexportdialog_base.ui csvexportdialog.cpp plannerparser.cpp \
-		karmdcopiface.skel
+libkarmpart_la_SOURCES = karm_part.cpp 
 libkarmpart_la_LDFLAGS = -module -avoid-version -no-undefined $(KDE_PLUGIN) $(all_libraries)
-libkarmpart_la_LIBADD  = $(LIB_KPARTS) $(LIB_KFILE) -lkdeprint $(top_builddir)/libkcal/libkcal.la \
+libkarmpart_la_LIBADD  = libkarm_shared.a $(LIB_KPARTS) $(LIB_KFILE) \
+	     -lkdeprint $(top_builddir)/libkcal/libkcal.la \
 	     $(top_builddir)/kresources/remote/libkcal_resourceremote.la \
              $(top_builddir)/libkdepim/libkdepim.la $(LIBXSS)
 
