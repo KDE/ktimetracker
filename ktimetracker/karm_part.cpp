@@ -1,5 +1,9 @@
 
 #include "karm_part.h"
+#include "task.h"
+#include "preferences.h"
+#include "tray.h"
+#include <kaccel.h>
 
 #include <kinstance.h>
 #include <kaction.h>
@@ -14,21 +18,63 @@
 
 karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name )
-    : KParts::ReadWritePart(parent, name)
+    : KParts::ReadWritePart(parent, name), 
+    _accel     ( new KAccel( parentWidget ) ),
+    _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
     // we need an instance
     setInstance( karmPartFactory::instance() );
 
     // this should be your custom internal widget
-    m_widget = new TaskView( parentWidget, widgetName );
+    _taskView = new TaskView( parentWidget, widgetName );
 
-    // notify the part that this is our internal widget
-    setWidget(m_widget);
+    // setup PreferenceDialog.
+    _preferences = Preferences::instance();
+
+   // notify the part that this is our internal widget
+    setWidget(_taskView);
 
     // create our actions
     KStdAction::open(this, SLOT(fileOpen()), actionCollection());
     KStdAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
     KStdAction::save(this, SLOT(save()), actionCollection());
+
+    makeMenus();
+
+  _watcher->updateMenus();
+
+  // connections
+
+  connect( _taskView, SIGNAL( totalTimesChanged( long, long ) ),
+           this, SLOT( updateTime( long, long ) ) );
+  connect( _taskView, SIGNAL( selectionChanged ( QListViewItem * )),
+           this, SLOT(slotSelectionChanged()));
+  connect( _taskView, SIGNAL( updateButtons() ),
+           this, SLOT(slotSelectionChanged()));
+
+  // Setup context menu request handling
+  connect( _taskView,
+           SIGNAL( contextMenuRequested( QListViewItem*, const QPoint&, int )),
+           this,
+           SLOT( contextMenuRequest( QListViewItem*, const QPoint&, int )));
+
+  _tray = new KarmTray( this );
+
+  connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
+
+  connect( _taskView, SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
+  connect( _taskView, SIGNAL( timersActive() ), this,  SLOT( enableStopAll() ));
+  connect( _taskView, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
+  connect( _taskView, SIGNAL( timersInactive() ),  this,  SLOT( disableStopAll()));
+  connect( _taskView, SIGNAL( tasksChanged( QPtrList<Task> ) ),
+                      _tray, SLOT( updateToolTip( QPtrList<Task> ) ));
+
+  _taskView->load();
+
+  // Everything that uses Preferences has been created now, we can let it
+  // emit its signals
+  _preferences->emitSignals();
+  slotSelectionChanged();
 
     // set our XML-UI resource file
     setXMLFile("karmui.rc");
@@ -44,15 +90,191 @@ karmPart::~karmPart()
 {
 }
 
+void karmPart::slotSelectionChanged()
+{
+  Task* item= _taskView->current_item();
+  actionDelete->setEnabled(item);
+  actionEdit->setEnabled(item);
+  actionStart->setEnabled(item && !item->isRunning());
+  actionStop->setEnabled(item && item->isRunning());
+}
+
+void karmPart::makeMenus()
+{
+  KAction
+    *actionKeyBindings,
+    *actionNew,
+    *actionNewSub;
+
+  (void) KStdAction::quit(  this, SLOT( quit() ),  actionCollection());
+  (void) KStdAction::print( this, SLOT( print() ), actionCollection());
+  actionKeyBindings = KStdAction::keyBindings( this, SLOT( keyBindings() ),
+      actionCollection() );
+  actionPreferences = KStdAction::preferences(_preferences,
+      SLOT(showDialog()),
+      actionCollection() );
+  (void) KStdAction::save( this, SLOT( save() ), actionCollection() );
+  KAction* actionStartNewSession = new KAction( i18n("Start &New Session"),
+      0,
+      this,
+      SLOT( startNewSession() ),
+      actionCollection(),
+      "start_new_session");
+  KAction* actionResetAll = new KAction( i18n("&Reset All Times"),
+      0,
+      this,
+      SLOT( resetAllTimes() ),
+      actionCollection(),
+      "reset_all_times");
+  actionStart = new KAction( i18n("&Start"),
+      QString::fromLatin1("1rightarrow"), Key_S,
+      _taskView,
+      SLOT( startCurrentTimer() ), actionCollection(),
+      "start");
+  actionStop = new KAction( i18n("S&top"),
+      QString::fromLatin1("stop"), 0,
+      _taskView,
+      SLOT( stopCurrentTimer() ), actionCollection(),
+      "stop");
+  actionStopAll = new KAction( i18n("Stop &All Timers"),
+      Key_Escape,
+      _taskView,
+      SLOT( stopAllTimers() ), actionCollection(),
+      "stopAll");
+  actionStopAll->setEnabled(false);
+
+  actionNew = new KAction( i18n("&New..."),
+      QString::fromLatin1("filenew"), CTRL+Key_N,
+      _taskView,
+      SLOT( newTask() ), actionCollection(),
+      "new_task");
+  actionNewSub = new KAction( i18n("New &Subtask..."),
+      QString::fromLatin1("kmultiple"), CTRL+ALT+Key_N,
+      _taskView,
+      SLOT( newSubTask() ), actionCollection(),
+      "new_sub_task");
+  actionDelete = new KAction( i18n("&Delete"),
+      QString::fromLatin1("editdelete"), Key_Delete,
+      _taskView,
+      SLOT( deleteTask() ), actionCollection(),
+      "delete_task");
+  actionEdit = new KAction( i18n("&Edit..."),
+      QString::fromLatin1("edit"), CTRL + Key_E,
+      _taskView,
+      SLOT( editTask() ), actionCollection(),
+      "edit_task");
+//  actionAddComment = new KAction( i18n("&Add Comment..."),
+//      QString::fromLatin1("document"),
+//      CTRL+ALT+Key_E,
+//      _taskView,
+//      SLOT( addCommentToTask() ),
+//      actionCollection(),
+//      "add_comment_to_task");
+  actionMarkAsComplete = new KAction( i18n("&Mark as Complete"),
+      QString::fromLatin1("document"),
+      CTRL+Key_M,
+      _taskView,
+      SLOT( markTaskAsComplete() ),
+      actionCollection(),
+      "mark_as_complete");
+  actionClipTotals = new KAction( i18n("&Copy Totals to Clipboard"),
+      QString::fromLatin1("klipper"),
+      CTRL+Key_C,
+      _taskView,
+      SLOT( clipTotals() ),
+      actionCollection(),
+      "clip_totals");
+  actionClipHistory = new KAction( i18n("Copy &History to Clipboard"),
+      QString::fromLatin1("klipper"),
+      CTRL+ALT+Key_C,
+      _taskView,
+      SLOT( clipHistory() ),
+      actionCollection(),
+      "clip_history");
+
+  new KAction( i18n("Import &Legacy Flat File..."), 0,
+      _taskView, SLOT(loadFromFlatFile()), actionCollection(),
+      "import_flatfile");
+  new KAction( i18n("&Export to CSV File..."), 0,
+      _taskView, SLOT(exportcsvFile()), actionCollection(),
+      "export_csvfile");
+  new KAction( i18n("Export &History to CSV File..."), 0,
+      this, SLOT(exportcsvHistory()), actionCollection(),
+      "export_csvhistory");
+  new KAction( i18n("Import Tasks From &Planner..."), 0,
+      _taskView, SLOT(importPlanner()), actionCollection(),
+      "import_planner");  
+
+/*
+  new KAction( i18n("Import E&vents"), 0,
+                            _taskView,
+                            SLOT( loadFromKOrgEvents() ), actionCollection(),
+                            "import_korg_events");
+  */
+
+  // Tool tops must be set after the createGUI.
+  actionKeyBindings->setToolTip( i18n("Configure key bindings") );
+  actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
+                                        "bindings which is specific to karm") );
+
+  actionStartNewSession->setToolTip( i18n("Start a new session") );
+  actionStartNewSession->setWhatsThis( i18n("This will reset the session time "
+                                            "to 0 for all tasks, to start a "
+                                            "new session, without affecting "
+                                            "the totals.") );
+  actionResetAll->setToolTip( i18n("Reset all times") );
+  actionResetAll->setWhatsThis( i18n("This will reset the session and total "
+                                     "time to 0 for all tasks, to restart from "
+                                     "scratch.") );
+
+  actionStart->setToolTip( i18n("Start timing for selected task") );
+  actionStart->setWhatsThis( i18n("This will start timing for the selected "
+                                  "task.\n"
+                                  "It is even possible to time several tasks "
+                                  "simultaneously.\n\n"
+                                  "You may also start timing of a tasks by "
+                                  "double clicking the left mouse "
+                                  "button on a given task. This will, however, "
+                                  "stop timing of other tasks."));
+
+  actionStop->setToolTip( i18n("Stop timing of the selected task") );
+  actionStop->setWhatsThis( i18n("Stop timing of the selected task") );
+
+  actionStopAll->setToolTip( i18n("Stop all of the active timers") );
+  actionStopAll->setWhatsThis( i18n("Stop all of the active timers") );
+
+  actionNew->setToolTip( i18n("Create new top level task") );
+  actionNew->setWhatsThis( i18n("This will create a new top level task.") );
+
+  actionDelete->setToolTip( i18n("Delete selected task") );
+  actionDelete->setWhatsThis( i18n("This will delete the selected task and "
+                                   "all its subtasks.") );
+
+  actionEdit->setToolTip( i18n("Edit name or times for selected task") );
+  actionEdit->setWhatsThis( i18n("This will bring up a dialog box where you "
+                                 "may edit the parameters for the selected "
+                                 "task."));
+  //actionAddComment->setToolTip( i18n("Add a comment to a task") );
+  //actionAddComment->setWhatsThis( i18n("This will bring up a dialog box where "
+  //                                     "you can add a comment to a task. The "
+  //                                     "comment can for instance add information on what you "
+  //                                     "are currently doing. The comment will "
+  //                                     "be logged in the log file."));
+  actionClipTotals->setToolTip(i18n("Copy task totals to clipboard"));
+  actionClipHistory->setToolTip(i18n("Copy time card history to clipboard."));
+
+  slotSelectionChanged();
+}
+
 void karmPart::setReadWrite(bool rw)
 {
     // notify your internal widget of the read-write state
     if (rw)
-        connect(m_widget, SIGNAL(textChanged()),
+        connect(_taskView, SIGNAL(textChanged()),
                 this,     SLOT(setModified()));
     else
     {
-        disconnect(m_widget, SIGNAL(textChanged()),
+        disconnect(_taskView, SIGNAL(textChanged()),
                    this,     SLOT(setModified()));
     }
 
@@ -80,7 +302,7 @@ void karmPart::setModified(bool modified)
 bool karmPart::openFile()
 {
     // m_file is always local so we can use QFile on it
-    m_widget->load(m_file);
+    _taskView->load(m_file);
 
     // just for fun, set the status bar
     emit setStatusBarText( m_url.prettyURL() );
