@@ -632,8 +632,8 @@ void TaskView::deleteTask(bool markingascomplete)
     {
       task->remove(activeTasks, _storage);
       task->removeFromView();
-      save();
       deleteItemState( task );
+      save();
     }
 
     // remove root decoration if there is no more children.
