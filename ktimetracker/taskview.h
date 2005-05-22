@@ -181,13 +181,16 @@ class TaskView : public KListView
     void updateParents( Task* task, long totalDiff, long sesssionDiff);
     void deleteChildTasks( Task *item );
     void addTimeToActiveTasks( int minutes, bool save_data = true );
+    /** item state stores if a task is expanded so you can see the subtasks */
     void restoreItemState( QListViewItem *item );
 
   protected slots:
     void autoSaveChanged( bool );
     void autoSavePeriodChanged( int period );
     void minuteUpdate();
+    /** item state stores if a task is expanded so you can see the subtasks */
     void itemStateChanged( QListViewItem *item );
+    /** item state stores if a task is expanded so you can see the subtasks */
     void deleteItemState( QListViewItem *item );
     void iCalFileModified(ResourceCalendar *);
 };

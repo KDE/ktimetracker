@@ -6,7 +6,6 @@
 
 class KAccel;
 class KAccelMenuWatch;
-class KDialogBase;
 class KarmTray;
 class QListViewItem;
 class QPoint;
@@ -26,13 +25,28 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
   Q_OBJECT
 
   private:
-    KAccel          *_accel;
-    KAccelMenuWatch *_watcher;
-    TaskView        *_taskView;
-    long            _totalSum;
-    long            _sessionSum;
-    Preferences     *_preferences;
-    KarmTray        *_tray;
+    void             makeMenus();
+    QString          _hastodo( Task* task, const QString &taskname ) const;
+
+    KAccel*          _accel;
+    KAccelMenuWatch* _watcher;
+    TaskView*        _taskView;
+    long             _totalSum;
+    long             _sessionSum;
+    Preferences*     _preferences;
+    KarmTray*        _tray;
+    KAction*         actionStart;
+    KAction*         actionStop;
+    KAction*         actionStopAll;
+    KAction*         actionDelete;
+    KAction*         actionEdit;
+//    KAction* actionAddComment;
+    KAction*         actionMarkAsComplete;
+    KAction*         actionPreferences;
+    KAction*         actionClipTotals;
+    KAction*         actionClipHistory;
+
+    friend class KarmTray;
 
   public:
     MainWindow( const QString &icsfile = "" );
@@ -69,23 +83,6 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     void loadGeometry();
     bool queryClose();
 
-  private:
-    void makeMenus();
-    QString _hastodo( Task* task, const QString &taskname ) const;
-
-    KDialogBase *dialog;
-    KAction* actionStart;
-    KAction* actionStop;
-    KAction* actionStopAll;
-    KAction* actionDelete;
-    KAction* actionEdit;
-//    KAction* actionAddComment;
-    KAction* actionMarkAsComplete;
-    KAction* actionPreferences;
-    KAction* actionClipTotals;
-    KAction* actionClipHistory;
-
-    friend class KarmTray;
 };
 
 #endif // KARM_MAIN_WINDOW_H

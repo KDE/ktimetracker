@@ -1,21 +1,19 @@
-
 #ifndef _KARMPART_H_
 #define _KARMPART_H_
 
-#include "taskview.h"
-#include "kaccelmenuwatch.h"
 #include <kparts/part.h>
 #include <kparts/factory.h>
 
 class KAccel;
 class KAccelMenuWatch;
+class KarmTray;
 class QWidget;
 class QPainter;
 class KURL;
-class QMultiLineEdit;
-class KarmTray;
 
 class Preferences;
+class Task;
+class TaskView;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -27,37 +25,34 @@ class Preferences;
  */
 class karmPart : public KParts::ReadWritePart
 {
-    Q_OBJECT
-private:
-    void makeMenus();
-    KAccel          *_accel;
-    KAccelMenuWatch *_watcher;
-    TaskView* _taskView;
-    Preferences* _preferences;
-    KAction* actionStart;
-    KAction* actionStop;
-    KAction* actionStopAll;
-    KAction* actionDelete;
-    KAction* actionEdit;
+  Q_OBJECT
+
+  private:
+    void             makeMenus();
+    QString          _hastodo( Task* task, const QString &taskname ) const;
+
+    KAccel*          _accel;
+    KAccelMenuWatch* _watcher;
+    TaskView*        _taskView;
+    Preferences*     _preferences;
+    KarmTray*        _tray;
+    KAction*         actionStart;
+    KAction*         actionStop;
+    KAction*         actionStopAll;
+    KAction*         actionDelete;
+    KAction*         actionEdit;
 //    KAction* actionAddComment;
-    KAction* actionMarkAsComplete;
-    KAction* actionPreferences;
-    KAction* actionClipTotals;
-    KAction* actionClipHistory;
-    KarmTray* _tray;
+    KAction*         actionMarkAsComplete;
+    KAction*         actionPreferences;
+    KAction*         actionClipTotals;
+    KAction*         actionClipHistory;
 
     friend class KarmTray;
 
 public:
-    /**
-     * Default constructor
-     */
     karmPart(QWidget *parentWidget, const char *widgetName,
-                    QObject *parent, const char *name);
+             QObject *parent, const char *name);
 
-    /**
-     * Destructor
-     */
     virtual ~karmPart();
 
     /**

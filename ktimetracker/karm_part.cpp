@@ -1,4 +1,5 @@
 
+#include "kaccelmenuwatch.h"
 #include "karm_part.h"
 #include "task.h"
 #include "preferences.h"
