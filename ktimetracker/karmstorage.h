@@ -188,7 +188,7 @@ class KarmStorage
      * @param oldname  The old name of the task.  The new name is in the task
      *   object already.
      */
-    void setName(const Task* /*task*/, const QString& /*oldname*/) {}
+    void setName(const Task* task, const QString& oldname) { Q_UNUSED(task); Q_UNUSED(oldname); }
 
 
     /**
@@ -199,7 +199,7 @@ class KarmStorage
      *
      * @param task    The task the timer was started for.
      */
-    void startTimer(const Task* /*task*/) {}
+    void startTimer(const Task* task) { Q_UNUSED(task); }
 
     /**
      * Log the event that the timer has stopped for this task.
