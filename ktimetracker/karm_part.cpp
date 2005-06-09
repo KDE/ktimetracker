@@ -398,11 +398,12 @@ KInstance* karmPartFactory::instance()
 
 extern "C"
 {
-    void* init_libkarmpart()
+    KDE_EXPORT void* init_libkarmpart()
     {
 	KGlobal::locale()->insertCatalogue("karm");
         return new karmPartFactory;
     }
-};
+}
 
+#include <qpopupmenu.h>
 #include "karm_part.moc"
