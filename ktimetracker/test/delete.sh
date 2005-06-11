@@ -24,8 +24,8 @@ tear_down
 
 if [ "$RVAL" == "" ]; then 
   echo "FAIL $0: got no version."
-  exit 0;
+  exit 1;
 else 
   echo "PASS $0"
-  exit 1;
+  exit 0;
 fi
