@@ -1,70 +1,90 @@
-#ifndef __preferences_h
-#define __preferences_h
+#ifndef KARM_PREFERENCES_H
+#define KARM_PREFERENCES_H
 
 #include <kdialogbase.h>
 
 class QCheckBox;
 class QLabel;
 class QSpinBox;
-class QLineEdit;
+class QString;
+class KURLRequester;
 
+/**
+ * Provide an interface to the configuration options for the program.
+ */
 
-class Preferences :public KDialogBase 
+class Preferences :public KDialogBase
 {
-Q_OBJECT
+  Q_OBJECT
 
-public:
-  static Preferences *instance();
-  void disableIdleDetection();
-  
-   // Retrive information about settings
-  bool detectIdleness();
-  int idlenessTimeout();
-  QString saveFile();
-  bool autoSave();
-  int autoSavePeriod();
+  public:
+    static Preferences *instance( const QString& icsfile = "" );
+    void disableIdleDetection();
 
-public slots:
-  void showDialog();
-  void load();
-  void save();
-  
+    // Retrive information about settings
+    bool detectIdleness() const;
+    int idlenessTimeout() const;
+    QString iCalFile() const;
+    QString activeCalendarFile() const;
+    bool autoSave() const;
+    bool logging() const;
+    int autoSavePeriod() const;
+    bool promptDelete() const;
+    QString setPromptDelete( bool prompt );
+    bool displayColumn(int n) const;
+    QString userRealName() const;
 
-signals:  
-  void detectIdleness(bool on);
-  void idlenessTimeout(int minutes);
-  void saveFile(QString);
-  void autoSave(bool on);
-  void autoSavePeriod(int minutes);
-  void setupChanged();
-  
-protected slots:
-  virtual void slotOk();
-  virtual void slotCancel();
-  void idleDetectCheckBoxChanged();
-  void autoSaveCheckBoxChanged();
-  
-protected:
-  void emitSignals();
+    void emitSignals();
+    bool readBoolEntry( const QString& uid );
+    void writeEntry( const QString &key, bool value );
+    void deleteEntry( const QString &key );
 
-private:
-  Preferences();
-  static Preferences *_instance;
-  bool _unsavedChanges;
+  public slots:
+    void showDialog();
+    void load();
+    void save();
 
-  // Widgets in the dialog (All variables ends in W to indicate that they are Widgets)
-  QCheckBox *_doIdleDetectionW, *_doAutoSaveW;
-  QLabel    *_idleDetectLabelW, *_autoSaveLabelW;
-  QSpinBox  *_idleDetectValueW, *_autoSaveValueW;
-  QLineEdit *_saveFileW;
-  QVBox *idleMenu;
-  
-  // Values for the preferences. (All variables in in V to indicate they are Values)
-  bool _doIdleDetectionV, _doAutoSaveV;
-  int  _idleDetectValueV, _autoSaveValueV;
-  QString _saveFileV;
-  
+  signals:
+    void detectIdleness(bool on);
+    void idlenessTimeout(int minutes);
+    void iCalFile(QString);
+    void autoSave(bool on);
+    void autoSavePeriod(int minutes);
+    void setupChanged();
+
+  protected slots:
+    virtual void slotOk();
+    virtual void slotCancel();
+    void idleDetectCheckBoxChanged();
+    void autoSaveCheckBoxChanged();
+
+  private:
+    void makeDisplayPage();
+    void makeBehaviorPage();
+    void makeStoragePage();
+
+    Preferences( const QString& icsfile = "" );
+    static Preferences *_instance;
+    bool _unsavedChanges;
+
+    // Widgets
+    QCheckBox *_doIdleDetectionW, *_doAutoSaveW, *_promptDeleteW;
+    QCheckBox *_displayTimeW, *_displaySessionW,
+              *_displayTotalTimeW, *_displayTotalSessionW;
+    QCheckBox *_loggingW;
+    QLabel    *_idleDetectLabelW, *_displayColumnsLabelW;
+    QSpinBox  *_idleDetectValueW, *_autoSaveValueW;
+    KURLRequester *_iCalFileW ;
+
+    // Values
+    bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV;
+    bool _displayColumnV[4];
+    int  _idleDetectValueV, _autoSaveValueV;
+    QString _iCalFileV;
+
+    /** real name of the user, used during ICAL saving */
+    QString _userRealName;
 };
 
-#endif
+#endif // KARM_PREFERENCES_H
 

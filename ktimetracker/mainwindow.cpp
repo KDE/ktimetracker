@@ -447,6 +447,23 @@ QString MainWindow::version() const
   return KARM_VERSION;
 }
 
+QString MainWindow::deletetodo()
+{
+  _taskView->deleteTask();
+  return "";
+}
+
+bool MainWindow::getpromptdelete()
+{
+  return _preferences->promptDelete();
+}
+
+QString MainWindow::setpromptdelete( bool prompt )
+{
+  _preferences->setPromptDelete( prompt );
+  return "";
+}
+
 QString MainWindow::hastodo( const QString &taskname ) const
 {
   QString rval = "";

@@ -56,6 +56,9 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     QString version() const;
     QString hastodo( const QString &storage ) const;
     QString addtodo( const QString &storage );
+    QString deletetodo();
+    bool    getpromptdelete();
+    QString setpromptdelete( bool prompt );
 
   public slots:
     void quit();
