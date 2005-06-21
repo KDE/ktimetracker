@@ -46,7 +46,7 @@ srcdoc:
 	kdoc -a -p -H -d $(HOME)/web/src/karm karm *.h -lkdecore -lkdeui -lqt
 
 DOXYGEN_REFERENCES = kdeui
-include $(top_srcdir)/doc/api/Doxyfile.am
+include $(top_srcdir)/admin/Doxyfile.am
 
 #########################################################################
 # KPART SECTION
