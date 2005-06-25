@@ -2,6 +2,8 @@
 
 # First test, just check version.
 
+exec >>check.log 2>&1
+
 TESTFILE="/tmp/testkarm1.ics"
 VERSION="1.6.0"
 

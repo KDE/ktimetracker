@@ -2,6 +2,8 @@
 
 # Add a todo to an iCal file stored on a webdav server.
 
+exec >>check.log 2>&1
+
 source __lib.sh
 
 # Start webdav server

@@ -2,6 +2,8 @@
 
 # check if deleting a task works
 
+exec >> check.log 2>&1
+
 TESTFILE="/tmp/testkarm1.ics"
 rm $TESTFILE
 

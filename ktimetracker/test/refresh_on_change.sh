@@ -4,6 +4,8 @@
 # I suspect the culprit is FAM.
 #   -- Mark
 
+exec >>check.log 2>&1
+
 source __lib.sh
 
 TESTFILE="/tmp/testkarm.ics"
