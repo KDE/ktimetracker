@@ -162,6 +162,7 @@ void TaskView::load( QString fileName )
   setCurrentItem(first_child());
   _desktopTracker->startTracking();
   _isloading = false;
+  refresh();
 }
 
 void TaskView::restoreItemState( QListViewItem *item )
