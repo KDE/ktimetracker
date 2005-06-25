@@ -213,16 +213,7 @@ void TaskView::refresh()
   int i = 0;
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
   {
-    if (!t->isComplete())
-    {
-      t->setOpen(true);
-      t->setEnabled(true);
-    }
-    else
-    {
-      t->setOpen(false);
-      t->setEnabled(false);
-    }
+    t->setPixmapProgress();
   }
   
   // remove root decoration if there is no more children.
@@ -509,6 +500,8 @@ QString TaskView::addTask
 
     setSelected( task, true );
 
+    task->setPixmapProgress();
+
     save();
   }
   else
@@ -586,6 +579,23 @@ void TaskView::editTask()
 //    task->addComment( comment, _storage );
 //}
 
+void TaskView::reinstateTask(int completion)
+{
+  Task* task = current_item();
+  if (task == 0) {
+    KMessageBox::information(0,i18n("No task selected."));
+    return;
+  }
+
+  if (completion<0) completion=0;
+  if (completion<100)
+  {
+    task->setPercentComplete(completion, _storage);
+    task->setPixmapProgress();
+    save();
+    emit updateButtons();
+  }
+}
 
 void TaskView::deleteTask(bool markingascomplete)
 {
@@ -619,7 +629,9 @@ void TaskView::deleteTask(bool markingascomplete)
     if (markingascomplete)
     {
       task->setPercentComplete(100, _storage);
+      task->setPixmapProgress();
       save();
+      emit updateButtons();
 
       // Have to remove after saving, as the save routine only affects tasks
       // that are in the view.  Otherwise, the new percent complete does not
@@ -743,6 +755,18 @@ void TaskView::markTaskAsComplete()
   bool markingascomplete = true;
   deleteTask(markingascomplete);
 }
+
+void TaskView::markTaskAsIncomplete()
+{
+  if (current_item())
+    kdDebug(5970) << "TaskView::markTaskAsComplete: "
+      << current_item()->uid() << endl;
+  else
+    kdDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
+
+  reinstateTask(50); // if it has been reopened, assume half-done
+}
+
 
 void TaskView::clipTotals()
 {

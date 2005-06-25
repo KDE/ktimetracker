@@ -1,28 +1,77 @@
-<!DOCTYPE kpartgui ><kpartgui name="myapp" version="1" >
+<!DOCTYPE kpartgui ><kpartgui name="karm" version="4" >
 <MenuBar>
-<Menu name="file" >
-<text>File</text>
-<Action name="reset_session_time" />
-</Menu>
-<Menu name="clock" >
-<text>Clock</text>
-<Action name="start" />
-<Action name="stop" />
-</Menu>
-<Menu name="task" >
-<text>Task</text>
-<Action name="new_task" />
-<Action name="new_sub_task" />
-<Action name="delete_task" />
-<Action name="edit_task" />
-</Menu>
+  <Menu name="file" >
+    <text>&amp;File</text>
+    <Action name="start_new_session" />
+    <Action name="reset_all_times" />
+    <Separator />
+    <Menu name="importexport">
+      <text>&amp;Import/Export</text>
+      <Action name="import_flatfile" />
+      <Action name="import_planner" />
+      <Action name="export_csvfile" />
+      <Action name="export_csvhistory" />
+    </Menu>
+    <Action name="clip_totals" />
+    <Action name="clip_history" />
+  </Menu>
+  <Menu name="clock" >
+    <text>&amp;Clock</text>
+    <Action name="start" />
+    <Action name="stop" />
+    <Action name="stopAll" />
+  </Menu>
+  <Menu name="task" >
+    <text>&amp;Task</text>
+    <Action name="new_task" />
+    <Action name="new_sub_task" />
+    <Action name="delete_task" />
+    <Action name="edit_task" />
+<!--    <Action name="add_comment_to_task" /> -->
+    <Separator />
+    <Action name="mark_as_complete" />
+    <Action name="mark_as_incomplete" />
+  </Menu>
 </MenuBar>
-<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" ><text>Main Toolbar</text>
-<Action name="start" />
-<Action name="stop" />
-<Action name="new_task" />
-<Action name="new_sub_task" />
-<Action name="delete_task" />
-<Action name="edit_task" />
+<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >
+  <text>Main Toolbar</text>
+  <Action name="start" />
+  <Action name="stop" />
+  <Action name="new_task" />
+  <Action name="new_sub_task" />
+  <Action name="delete_task" />
+  <Action name="edit_task" />
+<!--  <Action name="add_comment_to_task" /> -->
 </ToolBar>
+<Menu name="task_popup">
+  <Action name="start" />
+  <Action name="stop" />
+  <Action name="stopAll" />
+  <Separator />
+  <Action name="new_task" />
+  <Action name="new_sub_task" />
+  <Action name="delete_task" />
+  <Action name="edit_task" />
+<!--  <Action name="add_comment_to_task" /> -->
+  <Separator />
+  <Action name="mark_as_complete" />
+  <Action name="mark_as_incomplete" />
+  <Separator />
+  <Action name="clip_totals" />
+  <Action name="clip_history" />
+</Menu>
+
+<State name="readonly">
+  <Disable>
+    <Action name="file_save" />
+    <Action name="new_task" />
+    <Action name="new_sub_task" />
+    <Action name="delete_task" />
+    <Action name="edit_task" />
+    <Action name="mark_as_complete" />
+    <Action name="start_new_session" />
+    <Action name="reset_all_times" />
+<!--  <Action name="add_comment_to_task" /> -->
+  </Disable>
+</State>
 </kpartgui>

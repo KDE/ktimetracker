@@ -97,6 +97,7 @@ Task::~Task() {
 void Task::setRunning( bool on, KarmStorage* storage )
 {
   if ( on ) {
+    if (isComplete()) return; // don't start if its marked complete
     if (!_timer->isActive()) {
       _timer->start(1000);
       storage->startTimer(this);
@@ -142,11 +143,6 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
   kdDebug(5970) << "Task::setPercentComplete(" << percent << ", storage): "
     << _uid << endl;
 
-  if (isRunning()) setRunning(false, storage);
-
-  setEnabled(false);
-  setOpen(false);
-
   if (!percent)
     _percentcomplete = 0;
   else if (percent > 100)
@@ -155,6 +151,10 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
     _percentcomplete = 0;
   else
     _percentcomplete = percent;
+
+  if (isRunning() && _percentcomplete==100) setRunning(false, storage);
+
+  setPixmapProgress();
 
   // When parent marked as complete, mark all children as complete as well.
   // Complete tasks are not displayed in the task view, so if a parent is
@@ -171,6 +171,16 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
     for (Task* child= this->firstChild(); child; child = child->nextSibling())
       child->setPercentComplete(_percentcomplete, storage);
   }
+}
+
+void Task::setPixmapProgress()
+{
+  QPixmap* icon = new QPixmap();
+  if (_percentcomplete >= 100)
+    *icon = UserIcon("task-complete.xpm");
+  else
+    *icon = UserIcon("task-incomplete.xpm");
+  setPixmap(0, *icon);
 }
 
 bool Task::isComplete() { return _percentcomplete == 100; }

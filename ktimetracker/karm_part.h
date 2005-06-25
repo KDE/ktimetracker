@@ -43,6 +43,7 @@ class karmPart : public KParts::ReadWritePart
     KAction*         actionEdit;
 //    KAction* actionAddComment;
     KAction*         actionMarkAsComplete;
+    KAction*         actionMarkAsIncomplete;
     KAction*         actionPreferences;
     KAction*         actionClipTotals;
     KAction*         actionClipHistory;

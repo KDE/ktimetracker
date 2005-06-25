@@ -96,8 +96,10 @@ void karmPart::slotSelectionChanged()
   Task* item= _taskView->current_item();
   actionDelete->setEnabled(item);
   actionEdit->setEnabled(item);
-  actionStart->setEnabled(item && !item->isRunning());
+  actionStart->setEnabled(item && !item->isRunning() && !item->isComplete());
   actionStop->setEnabled(item && item->isRunning());
+  actionMarkAsComplete->setEnabled(item && !item->isComplete());
+  actionMarkAsIncomplete->setEnabled(item && item->isComplete());
 }
 
 void karmPart::makeMenus()
@@ -178,6 +180,13 @@ void karmPart::makeMenus()
       SLOT( markTaskAsComplete() ),
       actionCollection(),
       "mark_as_complete");
+  actionMarkAsIncomplete = new KAction( i18n("&Mark as Incomplete"),
+      QString::fromLatin1("document"),
+      CTRL+Key_M,
+      _taskView,
+      SLOT( markTaskAsIncomplete() ),
+      actionCollection(),
+      "mark_as_incomplete");
   actionClipTotals = new KAction( i18n("&Copy Totals to Clipboard"),
       QString::fromLatin1("klipper"),
       CTRL+Key_C,

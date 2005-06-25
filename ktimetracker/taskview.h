@@ -134,8 +134,13 @@ class TaskView : public KListView
      * list view.
      */
     void deleteTask(bool markingascomplete=false);
+
+    /** Reinstates the current task as incomplete.
+     * @param completion The percentage complete to mark the task as. */
+    void reinstateTask(int completion);
 //    void addCommentToTask();
     void markTaskAsComplete();
+    void markTaskAsIncomplete();
 
     /** Subtracts time from all active tasks, and does not log event. */
     void extractTime( int minutes );

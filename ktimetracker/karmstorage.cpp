@@ -187,13 +187,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
       Task* task = new Task(*todo, view);
       map.insert( (*todo)->uid(), task );
       view->setRootIsDecorated(true);
-      if ((*todo)->isCompleted())
-      {
-        task->setEnabled(false);
-        task->setOpen(false);
-      }
-      else
-        task->setOpen(true);
+      task->setPixmapProgress();
     }
 
     // Load each task under it's parent task.
@@ -243,13 +237,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
     Task* task = new Task(*todo, view);
     map.insert( (*todo)->uid(), task );
     view->setRootIsDecorated(true);
-    if ((*todo)->isCompleted())
-    {
-      task->setEnabled(false);
-      task->setOpen(false);
-    }
-    else
-      task->setOpen(true);
+    task->setPixmapProgress();
   }
 
   // 1.1. Load each task under it's parent task.
