@@ -37,6 +37,14 @@ class KarmDCOPIface : virtual public DCOPObject
   /** Add a top-level todo.  Return UID of new To-do.  */
   virtual QString addtodo( const QString& todoname ) = 0;
 
+  /** Start timer for all tasks with the summary taskname.  */
+  // may conflict with unitaskmode
+  virtual QString starttimerfor( const QString& taskname ) = 0;
+
+  /** Stop timer for all tasks with the summary taskname.  */
+  // may conflict with unitaskmode
+  virtual QString stoptimerfor( const QString& taskname ) = 0;
+
   /** delete the current item */
   virtual QString deletetodo() = 0;
 

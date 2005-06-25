@@ -512,6 +512,34 @@ QString MainWindow::addtodo( const QString& taskname )
   return _taskView->addTask( taskname, 0, 0, desktopList );
 }
 
+QString MainWindow::starttimerfor( const QString& taskname )
+{
+  QString err="no such task";
+  for (int i=0; i<_taskView->count(); i++)
+  {
+    if ((_taskView->item_at_index(i)->name()==taskname))
+    {
+      _taskView->startTimerFor( _taskView->item_at_index(i) );
+      err="";
+    }
+  }
+  return err;
+}
+
+QString MainWindow::stoptimerfor( const QString& taskname )
+{
+  QString err="no such task";
+  for (int i=0; i<_taskView->count(); i++)
+  {
+    if ((_taskView->item_at_index(i)->name()==taskname))
+    {
+      _taskView->stopTimerFor( _taskView->item_at_index(i) );
+      err="";
+    }
+  }
+  return err;
+}
+
 QString MainWindow::importplannerfile( QString fileName )
 {
   return _taskView->importPlanner(fileName);
