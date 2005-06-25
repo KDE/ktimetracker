@@ -46,6 +46,12 @@ class KarmDCOPIface : virtual public DCOPObject
   /** get if prompted on deleting a task */
   virtual bool getpromptdelete() = 0;
 
+  /** import planner project file */
+  virtual QString importplannerfile( QString filename ) = 0;
+
+  /** save your tasks */
+  virtual void save() = 0;
+
   /** Graceful shutdown. */
   virtual void quit() = 0;
 };

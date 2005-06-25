@@ -273,19 +273,18 @@ void TaskView::loadFromFlatFile()
   }
 }
 
-void TaskView::importPlanner()
+QString TaskView::importPlanner(QString fileName)
 {
   kdDebug(5970) << "entering importPlanner" << endl;
-  {
-    PlannerParser* handler=new PlannerParser(this);
-    QFile xmlFile(KFileDialog::getOpenFileName(QString::null, QString::null, 0) );
-    QXmlInputSource source( xmlFile );
-    QXmlSimpleReader reader;
-    reader.setContentHandler( handler );
-    reader.parse( source );
-    // we need a refresh
-    refresh();
-  }
+  PlannerParser* handler=new PlannerParser(this);
+  if (fileName=="") fileName=KFileDialog::getOpenFileName(QString::null, QString::null, 0);
+  QFile xmlFile( fileName );
+  QXmlInputSource source( xmlFile );
+  QXmlSimpleReader reader;
+  reader.setContentHandler( handler );
+  reader.parse( source );
+  refresh();
+  return "";
 }
 
 void TaskView::exportcsvFile()

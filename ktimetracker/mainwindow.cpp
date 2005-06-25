@@ -503,4 +503,10 @@ QString MainWindow::addtodo( const QString& taskname )
   return _taskView->addTask( taskname, 0, 0, desktopList );
 }
 
+QString MainWindow::importplannerfile( QString fileName )
+{
+  return _taskView->importPlanner(fileName);
+}
+
+
 #include "mainwindow.moc"

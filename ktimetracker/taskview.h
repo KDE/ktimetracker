@@ -111,7 +111,7 @@ class TaskView : public KListView
     void loadFromFlatFile();
 
     /** used to import tasks from imendio planner */
-    void importPlanner();
+    QString importPlanner( QString fileName="" );
 
     /** Export comma separated values format for task time totals. */
     void exportcsvFile();

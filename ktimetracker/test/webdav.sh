@@ -17,11 +17,16 @@ TESTFILE_LOCAL="/tmp/testkarm.ics"
 TESTTODO="testtodo"
 SKIP_TESTFILE_DELETE=true
 # Need this or karm complains there is no file
+rm -f $TESTFILE_LOCAL
 touch $TESTFILE_LOCAL
 set_up
+#wait till download is ready
+sleep 3
 
 # add a todo
 dcop $DCOPID KarmDCOPIface addtodo "$TESTTODO"
+sleep 1
+dcop $DCOPID KarmDCOPIface save
 
 sleep 1
 

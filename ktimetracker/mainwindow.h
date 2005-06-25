@@ -59,6 +59,7 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     QString deletetodo();
     bool    getpromptdelete();
     QString setpromptdelete( bool prompt );
+    QString importplannerfile( QString filename );
 
   public slots:
     void quit();
