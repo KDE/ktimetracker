@@ -2,6 +2,8 @@
 #define KARM_MAIN_WINDOW_H
 
 #include <kparts/mainwindow.h>
+
+#include "karmerrors.h"
 #include <karmdcopiface.h>
 
 class KAccel;
@@ -26,7 +28,8 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
 
   private:
     void             makeMenus();
-    QString          _hastodo( Task* task, const QString &taskname ) const;
+    QString          _hasTask( Task* task, const QString &taskname ) const;
+    Task*            _hasUid( Task* task, const QString &uid ) const;
 
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
@@ -40,14 +43,20 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     KAction*         actionStopAll;
     KAction*         actionDelete;
     KAction*         actionEdit;
-//    KAction* actionAddComment;
     KAction*         actionMarkAsComplete;
     KAction*         actionMarkAsIncomplete;
     KAction*         actionPreferences;
     KAction*         actionClipTotals;
     KAction*         actionClipHistory;
+    QString          m_error[ KARM_MAX_ERROR_NO ];
 
     friend class KarmTray;
+
+  //private:
+
+    //KDialogBase *dialog;
+
+
 
   public:
     MainWindow( const QString &icsfile = "" );
@@ -55,8 +64,11 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
 
     // DCOP
     QString version() const;
-    QString hastodo( const QString &storage ) const;
-    QString addtodo( const QString &storage );
+    QString taskIdFromName( const QString &taskName ) const;
+    int addTask( const QString &storage );
+    int bookTime( const QString& uid, const QString& datetime, long minutes );
+    QString getError( int mkb ) const;
+    int totalMinutesForTaskId( const QString& taskId );
     QString starttimerfor( const QString &taskname );
     QString stoptimerfor( const QString &taskname );
     QString deletetodo();

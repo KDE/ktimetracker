@@ -288,16 +288,27 @@ QString KarmStorage::save(TaskView* taskview)
   }
 
   if ( !_calendar->save(
-        _calendar->requestSaveTicket( _calendar->resourceManager()->standardResource() )
+        _calendar->requestSaveTicket( 
+          _calendar->resourceManager()->standardResource() 
+          )
         )
       )
   {
     err="Could not save";
   }
 
-  kdDebug(5970)
-    << "KarmStorage::save : wrote "
-    << taskview->count() << " tasks to " << _icalfile << endl;
+  if ( ! err.length() )
+  {
+    kdDebug(5970)
+      << "KarmStorage::save : wrote "
+      << taskview->count() << " tasks to " << _icalfile << endl;
+  }
+  else
+  {
+    kdDebug(5970) << QString::fromLatin1( "KarmStorage::save : %1")
+      .arg( err ) << endl;
+  }
+
   return err;
 }
 
@@ -307,12 +318,13 @@ void KarmStorage::writeTaskAsTodo(Task* task, const int level,
   KCal::Todo* todo;
 
   todo = _calendar->todo(task->uid());
+  // FIXME: raise error if todo is null.
   task->asTodo(todo);
   if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() );
   parents.push( todo );
 
-  for (Task* nextTask = task->firstChild(); nextTask;
-      nextTask = nextTask->nextSibling() )
+  for ( Task* nextTask = task->firstChild(); nextTask;
+        nextTask = nextTask->nextSibling() )
   {
     writeTaskAsTodo(nextTask, level+1, parents );
   }
@@ -672,6 +684,12 @@ QString KarmStorage::addTask(const Task* task, const Task* parent)
       todo->setRelatedTo(_calendar->todo(parent->uid()));
     uid = todo->uid();
   }
+  else
+  {
+    // Most likely a lock could not be pulled, although there are other
+    // possiblities (like a really confused resource manager).
+    uid = "";
+  }
 
   return uid;
 }
@@ -988,7 +1006,10 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   else // use remote file
   {
     KTempFile tmpFile;
-    if ( tmpFile.status() != 0 ) err = QString::fromLatin1( "Unable to get temporary file" );
+    if ( tmpFile.status() != 0 ) 
+    {
+      err = QString::fromLatin1( "Unable to get temporary file" );
+    }
     else
     {
       QTextStream *stream=tmpFile.textStream();
@@ -1004,6 +1025,26 @@ void KarmStorage::stopTimer(const Task* task)
 {
   long delta = task->startTime().secsTo(QDateTime::currentDateTime());
   changeTime(task, delta);
+}
+
+bool KarmStorage::bookTime(const Task* task, 
+                           const QDateTime& startDateTime,
+                           const long durationInSeconds)
+{
+  // Ignores preferences setting re: logging history.
+  KCal::Event* e;
+  QDateTime end;
+
+  e = baseEvent( task );
+  e->setDtStart( startDateTime );
+  e->setDtEnd( startDateTime.addSecs( durationInSeconds ) );
+
+  // Use a custom property to keep a record of negative durations
+  e->setCustomProperty( kapp->instanceName(),
+      QCString("duration"),
+      QString::number(durationInSeconds));
+
+  return _calendar->addEvent(e);
 }
 
 void KarmStorage::changeTime(const Task* task, const long deltaSeconds)

@@ -23,6 +23,7 @@
 
 #include <dcopobject.h>
 
+/** Define DCOP interface to karm.  Methods implemented in MainWindow */
 class KarmDCOPIface : virtual public DCOPObject
 {
   K_DCOP
@@ -31,11 +32,62 @@ class KarmDCOPIface : virtual public DCOPObject
   /** Return karm version. */
   virtual QString version() const = 0;
 
-  /** Return UID of todo found, empty string if no match. */
-  virtual QString hastodo( const QString& taskname ) const = 0;
+  /** Return id of task found, empty string if no match. */
+  virtual QString taskIdFromName( const QString& taskName ) const = 0;
 
-  /** Add a top-level todo.  Return UID of new To-do.  */
-  virtual QString addtodo( const QString& todoname ) = 0;
+  /** 
+   * Add a new top-level task.
+   *
+   * A top-level task is one that has no parent tasks.
+   * 
+   * @param taskname Name of new task.
+   *
+   * @return 0 on success, error number on failure.
+   */
+  virtual int addTask( const QString& taskName ) = 0;
+
+  /** 
+   * Add time to a task.  
+   *
+   * The GUI will be non-responsive until this method returns.
+   *
+   * @return 0 on success, error number on failure.
+   *
+   * @param taskId Unique ID of task to add time to 
+   *
+   * @param iso8601StartDateTime Date and time the booking starts, in extended
+   * ISO-8601 format; for example, YYYY-MM-DDTHH:MI:SS format (see
+   * Qt::ISODate).  No timezone support--time is interpreted as the local time.
+   * If just the date is passed in (i.e., YYYY-MM-DD) , then the time is set to
+   * noon.
+   *
+   * @param durationInMinutes The amount of time to book against the taskId.
+   * 
+   */ 
+  virtual int bookTime( const QString& taskId, const QString& iso8601StartDateTime, 
+                        long durationInMinutes ) = 0;
+
+  /** 
+   * Return error string associated with karm error number. 
+   *
+   * @param karmErrorNumber An integer error number.
+   *
+   * @return String associated with error number.  These strings are
+   * internationalized.  An unknown error number produces an empty string as
+   * the return value.
+   *
+   */
+  virtual QString getError( int karmErrorNumber ) const = 0;
+
+  /**
+   * Total time currently associated with a task.
+   *
+   * A task has two counters: the total session time and the total time.  Note
+   * that th euser can reset both counters.
+   *
+   * @param taskId Unique ID of task to lookup bookings for.
+   */
+  virtual int totalMinutesForTaskId( const QString& taskId ) = 0;
 
   /** Start timer for all tasks with the summary taskname.  */
   // may conflict with unitaskmode

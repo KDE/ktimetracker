@@ -8,7 +8,7 @@
 #  cpan> install File::Find::Rule::Filesys::Virtual
 #  cpan> install XML::LibXML	
 #  
-#  The last Perl modules needs the libxml2 development libraries installed
+#  The last Perl module needs the libxml2 development libraries installed
 #  (the libxml2-dev package on Debian).
 
 use Net::DAV::Server;

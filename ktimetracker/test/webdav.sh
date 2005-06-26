@@ -24,7 +24,7 @@ set_up
 sleep 3
 
 # add a todo
-dcop $DCOPID KarmDCOPIface addtodo "$TESTTODO"
+dcop $DCOPID KarmDCOPIface addTask "$TESTTODO"
 sleep 1
 dcop $DCOPID KarmDCOPIface save
 
@@ -37,7 +37,7 @@ fi
 
 # clean up
 tear_down
-if [ -e $TESTFILE_LOCAL ]; then rm $TESTFILE_LOCAL; fi
+#if [ -e $TESTFILE_LOCAL ]; then rm $TESTFILE_LOCAL; fi
 if [ -n $WEBDAV_PID ]; then kill $WEBDAV_PID; fi
 
 # return 0 on success, 1 on failure

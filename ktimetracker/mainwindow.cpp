@@ -23,6 +23,7 @@
 #include <qptrlist.h>
 #include <qstring.h>
 
+#include "karmerrors.h"
 #include "karmutility.h"
 #include "mainwindow.h"
 #include "preferences.h"
@@ -95,6 +96,22 @@ MainWindow::MainWindow( const QString &icsfile )
     kapp->dcopClient()->registerAs( "karm" );
     kapp->dcopClient()->setDefaultObject( objId() );
   }
+
+  // Set up DCOP error messages
+  m_error[ KARM_ERR_GENERIC_SAVE_FAILED ] = 
+    i18n( "Save failed, most likely because the file could not be locked." );
+  m_error[ KARM_ERR_COULD_NOT_MODIFY_RESOURCE ] = 
+    i18n( "Could not modify calendar resource." );
+  m_error[ KARM_ERR_MEMORY_EXHAUSTED ] = 
+    i18n( "Out of memory--could not create object." );
+  m_error[ KARM_ERR_UID_NOT_FOUND ] = 
+    i18n( "UID not found." );
+  m_error[ KARM_ERR_INVALID_DATE ] = 
+    i18n( "Invalidate date--format is YYYY-MM-DD." );
+  m_error[ KARM_ERR_INVALID_TIME ] = 
+    i18n( "Invalid time--format is YYYY-MM-DDTHH:MM:SS." );
+  m_error[ KARM_ERR_INVALID_DURATION ] = 
+    i18n( "Invalid task duration--must be greater than zero." );
 }
 
 void MainWindow::slotSelectionChanged()
@@ -117,7 +134,7 @@ void MainWindow::slotSelectionChanged()
 
 void MainWindow::save()
 {
-  kdDebug(5970) << i18n("Saving time data to disk.") << endl;
+  kdDebug(5970) << "Saving time data to disk." << endl;
   QString err=_taskView->save();  // untranslated error msg.
   if (err.isEmpty()) statusBar()->message(i18n("Successfully saved tasks and history"),1807);
   else statusBar()->message(i18n(err.ascii()),7707); // no msgbox since save is called when exiting
@@ -126,10 +143,10 @@ void MainWindow::save()
 
 void MainWindow::exportcsvHistory()
 {
-  kdDebug(5970) << i18n("Exporting History to disk.") << endl;
+  kdDebug(5970) << "Exporting History to disk." << endl;
   QString err=_taskView->exportcsvHistory();
   if (err.isEmpty()) statusBar()->message(i18n("Successfully exported History to CSV-file"),1807);
-  else KMessageBox::error(this, i18n(err.ascii()));
+  else KMessageBox::error(this, err.ascii());
   saveGeometry();
   
 }
@@ -142,7 +159,7 @@ void MainWindow::quit()
 
 MainWindow::~MainWindow()
 {
-  kdDebug(5970) << i18n("MainWindow::~MainWindows: Quitting karm.") << endl;
+  kdDebug(5970) << "MainWindow::~MainWindows: Quitting karm." << endl;
   _taskView->stopAllTimers();
   save();
   _taskView->closeStorage();
@@ -342,7 +359,7 @@ void MainWindow::makeMenus()
   setXMLFile( QString::fromLatin1("karmui.rc") );
   createGUI( 0 );
 
-  // Tool tops must be set after the createGUI.
+  // Tool tips must be set after the createGUI.
   actionKeyBindings->setToolTip( i18n("Configure key bindings") );
   actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
                                         "bindings which is specific to karm") );
@@ -473,21 +490,123 @@ QString MainWindow::setpromptdelete( bool prompt )
   return "";
 }
 
-QString MainWindow::hastodo( const QString &taskname ) const
+QString MainWindow::taskIdFromName( const QString &taskname ) const
 {
   QString rval = "";
 
   Task* task = _taskView->first_child();
   while ( rval.isEmpty() && task )
   {
-    rval = _hastodo( task, taskname );
+    rval = _hasTask( task, taskname );
     task = task->nextSibling();
   }
   
   return rval;
 }
 
-QString MainWindow::_hastodo( Task* task, const QString &taskname ) const
+int MainWindow::addTask( const QString& taskname ) 
+{
+  DesktopList desktopList;
+  QString uid = _taskView->addTask( taskname, 0, 0, desktopList );
+  kdDebug(5970) << "MainWindow::addTask( " << taskname << " ) returns " << uid << endl;
+  if ( uid.length() > 0 ) return 0;
+  else
+  {
+    // We can't really tell what happened, b/c the resource framework only
+    // returns a boolean.
+    return KARM_ERR_GENERIC_SAVE_FAILED;
+  }
+}
+
+int MainWindow::bookTime
+( const QString& taskId, const QString& datetime, long minutes )
+{
+  int rval = 0;
+  QDate startDate;
+  QTime startTime;
+  QDateTime startDateTime;
+  Task *task, *t;
+
+  if ( minutes <= 0 ) rval = KARM_ERR_INVALID_DURATION;
+
+  // Find task
+  task = _taskView->first_child();
+  t = NULL;
+  while ( !t && task )
+  {
+    t = _hasUid( task, taskId );
+    task = task->nextSibling();
+  }
+  if ( t == NULL ) rval = KARM_ERR_UID_NOT_FOUND;
+
+  // Parse datetime
+  if ( !rval ) 
+  {
+    startDate = QDate::fromString( datetime, Qt::ISODate );
+    if ( datetime.length() > 10 )  // "YYYY-MM-DD".length() = 10
+    {
+      startTime = QTime::fromString( datetime, Qt::ISODate );
+    }
+    else startTime = QTime( 12, 0 );
+    if ( startDate.isValid() && startTime.isValid() )
+    {
+      startDateTime = QDateTime( startDate, startTime );
+    }
+    else rval = KARM_ERR_INVALID_DATE;
+
+  }
+
+  // Update task totals (session and total) and save to disk
+  if ( !rval )
+  {
+    t->changeTotalTimes( t->sessionTime() + minutes, t->totalTime() + minutes );
+    if ( ! _taskView->storage()->bookTime( t, startDateTime, minutes * 60 ) )
+    {
+      rval = KARM_ERR_GENERIC_SAVE_FAILED;
+    }
+  }
+
+  return rval;
+}
+
+// There was something really bad going on with DCOP when I used a particular
+// argument name; if I recall correctly, the argument name was errno.
+QString MainWindow::getError( int mkb ) const
+{
+  if ( mkb < KARM_MAX_ERROR_NO + 1 ) return m_error[ mkb ];
+  else return i18n( "Invalid error number: %1" ).arg( mkb );
+}
+
+int MainWindow::totalMinutesForTaskId( const QString& taskId )
+{
+  int rval = 0;
+  Task *task, *t;
+  
+  kdDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
+
+  // Find task
+  task = _taskView->first_child();
+  t = NULL;
+  while ( !t && task )
+  {
+    t = _hasUid( task, taskId );
+    task = task->nextSibling();
+  }
+  if ( t != NULL ) 
+  {
+    rval = t->totalTime();
+    kdDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
+  }
+  else 
+  {
+    kdDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
+    rval = KARM_ERR_UID_NOT_FOUND;
+  }
+
+  return rval;
+}
+
+QString MainWindow::_hasTask( Task* task, const QString &taskname ) const
 {
   QString rval = "";
   if ( task->name() == taskname ) 
@@ -499,19 +618,31 @@ QString MainWindow::_hastodo( Task* task, const QString &taskname ) const
     Task* nexttask = task->firstChild();
     while ( rval.isEmpty() && nexttask )
     {
-      rval = _hastodo( nexttask, taskname );
+      rval = _hasTask( nexttask, taskname );
       nexttask = nexttask->nextSibling();
     }
   }
   return rval;
 }
 
-QString MainWindow::addtodo( const QString& taskname ) 
+Task* MainWindow::_hasUid( Task* task, const QString &uid ) const
 {
-  DesktopList desktopList;
-  return _taskView->addTask( taskname, 0, 0, desktopList );
-}
+  Task *rval = NULL;
 
+  //kdDebug(5970) << "MainWindow::_hasUid( " << task << ", " << uid << " )" << endl;
+
+  if ( task->uid() == uid ) rval = task;
+  else
+  {
+    Task* nexttask = task->firstChild();
+    while ( !rval && nexttask )
+    {
+      rval = _hasUid( nexttask, uid );
+      nexttask = nexttask->nextSibling();
+    }
+  }
+  return rval;
+}
 QString MainWindow::starttimerfor( const QString& taskname )
 {
   QString err="no such task";

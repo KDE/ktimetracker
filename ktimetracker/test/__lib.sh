@@ -7,7 +7,7 @@ function set_up()
 
   if [ -n "$DCOPID" ]; then dcop $DCOPID KarmDCOPIface quit; fi;
 
-  if [ $SKIP_TESTFILE_DELETE != "true" ]; then
+  if [ "x$SKIP_TESTFILE_DELETE" != "xtrue" ]; then
 	  if [ -e "$TESTFILE" ]; then rm $TESTFILE; fi
   fi
 
@@ -49,12 +49,12 @@ function set_up()
     sleep 1
   done
 
-  echo "__lib.sh: DCOPID = $DCOPID, KARM_VERSION = $KARM_VERSION"
-
   if [ "x$DCOPID" = x ]
   then
     echo "__lib.sh set_up error: could not start karm--no dcop id."
     exit 1
+  else
+    echo "__lib.sh: DCOPID = $DCOPID, KARM_VERSION = $KARM_VERSION"
   fi
 
   if [ "x$KARM_VERSION" = x ]
@@ -73,7 +73,7 @@ function tear_down()
 {
   if [ -n "$DCOPID" ]; then dcop "$DCOPID" KarmDCOPIface quit; fi;
 
-  if [ $SKIP_TESTFILE_DELETE != "true" ]; then
+  if [ "x$SKIP_TESTFILE_DELETE" != "xtrue" ]; then
 		if [ -e "$TESTFILE" ]; then rm "$TESTFILE"; fi
 	fi
 }

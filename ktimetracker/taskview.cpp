@@ -484,9 +484,12 @@ void TaskView::newTask(QString caption, Task *parent)
 }
 
 QString TaskView::addTask
-( const QString& taskname, long total, long session, const DesktopList& desktops, Task* parent )
+( const QString& taskname, long total, long session, 
+  const DesktopList& desktops, Task* parent )
 {
   Task *task;
+
+  kdDebug(5970) << "TaskView::addTask: taskname = " << taskname << endl;
 
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );

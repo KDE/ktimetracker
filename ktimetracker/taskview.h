@@ -98,7 +98,7 @@ class TaskView : public KListView
     /** Stop all running timers, and start timer on current item.  */
     void changeTimer( QListViewItem * = 0 );
 
-    /** Calls newTask with caption "New Task".  */
+    /** Calls newTask dialog with caption "New Task".  */
     void newTask();
 
     /** Display edit task dialog and create a new task with results.  */
@@ -119,10 +119,20 @@ class TaskView : public KListView
     /** Export comma-separated values format for task history. */
     QString exportcsvHistory();
 
-    /** Calls newTask with caption "New Sub Task". */
+    /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();
 
     void editTask();
+
+    /** 
+     * Returns a pointer to storage object.
+     *
+     * This is poor object oriented design--the task view should 
+     * expose wrappers around the storage methods we want to access instead of
+     * giving clients full access to objects that we own.
+     *
+     * Hopefully, this will be redesigned as part of the Qt4 migration.
+     */
     KarmStorage* storage();
 
     /**

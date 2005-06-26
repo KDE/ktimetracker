@@ -24,7 +24,7 @@ QPtrVector<QPixmap> *Task::icons = 0;
 Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent)
   : QObject(), QListViewItem(parent)
-{
+{ 
   init(taskName, minutes, sessionTime, desktops, 0);
 }
 
@@ -215,9 +215,9 @@ void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 
 void Task::changeTotalTimes( long minutesSession, long minutes )
 {
-  //kdDebug(5970)
-  //  << "Task::changeTotalTimes(" << minutesSession << ", "
-  //  << minutes << ") for " << name() << endl;
+  kdDebug(5970)
+    << "Task::changeTotalTimes(" << minutesSession << ", "
+    << minutes << ") for " << name() << endl;
 
   _totalSessionTime += minutesSession;
   _totalTime += minutes;
@@ -288,6 +288,9 @@ QString Task::fullName() const
 KCal::Todo* Task::asTodo(KCal::Todo* todo) const
 {
 
+  Q_ASSERT( todo != NULL );
+
+  kdDebug(5970) << "Task::asTodo: name() = '" << name() << "'" << endl;
   todo->setSummary( name() );
 
   // Note: if the date start is empty, the KOrganizer GUI will have the
