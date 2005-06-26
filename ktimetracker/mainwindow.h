@@ -85,7 +85,7 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     void resetAllTimes();
     void updateTime( long, long );
     void updateStatusBar();
-    void save();
+    bool save();
     void exportcsvHistory();
     void print();
     void slotSelectionChanged();

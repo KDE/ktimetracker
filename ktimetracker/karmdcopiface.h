@@ -110,7 +110,7 @@ class KarmDCOPIface : virtual public DCOPObject
   virtual QString importplannerfile( QString filename ) = 0;
 
   /** save your tasks */
-  virtual void save() = 0;
+  virtual bool save() = 0;
 
   /** Graceful shutdown. */
   virtual void quit() = 0;

@@ -2,7 +2,9 @@
 #define _KARMPART_H_
 
 #include <kparts/part.h>
+#include "karmerrors.h"
 #include <kparts/factory.h>
+#include <karmdcopiface.h>
 
 class KAccel;
 class KAccelMenuWatch;
@@ -23,13 +25,15 @@ class TaskView;
  * @author Thorsten Staerk <thorsten@staerk.de>
  * @version 0.1
  */
-class karmPart : public KParts::ReadWritePart
+class karmPart : public KParts::ReadWritePart, virtual public KarmDCOPIface
 {
   Q_OBJECT
 
   private:
     void             makeMenus();
     QString          _hastodo( Task* task, const QString &taskname ) const;
+    QString          _hasTask( Task* task, const QString &taskname ) const;
+    Task*            _hasUid( Task* task, const QString &uid ) const;
 
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
@@ -47,12 +51,29 @@ class karmPart : public KParts::ReadWritePart
     KAction*         actionPreferences;
     KAction*         actionClipTotals;
     KAction*         actionClipHistory;
+    QString          m_error[ KARM_MAX_ERROR_NO ];
 
     friend class KarmTray;
 
 public:
     karmPart(QWidget *parentWidget, const char *widgetName,
              QObject *parent, const char *name);
+
+    // DCOP
+    void quit();
+    virtual bool save();
+    QString version() const;
+    QString taskIdFromName( const QString &taskName ) const;
+    int addTask( const QString &storage );
+    int bookTime( const QString& uid, const QString& datetime, long minutes );
+    QString getError( int mkb ) const;
+    int totalMinutesForTaskId( const QString& taskId );
+    QString starttimerfor( const QString &taskname );
+    QString stoptimerfor( const QString &taskname );
+    QString deletetodo();
+    bool    getpromptdelete();
+    QString setpromptdelete( bool prompt );
+    QString importplannerfile( QString filename );
 
     virtual ~karmPart();
 
