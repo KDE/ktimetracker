@@ -65,9 +65,12 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     // DCOP
     QString version() const;
     QString taskIdFromName( const QString &taskName ) const;
+    /** @reimp from KarmDCOPIface::addTask */
     int addTask( const QString &storage );
-    int bookTime( const QString& uid, const QString& datetime, long minutes );
-    QString getError( int mkb ) const;
+    /** @reimp from KarmDCOPIface::bookTime */
+    int bookTime( const QString& taskId, const QString& iso8601StartDateTime, durationInMinutes minutes );
+    /** @reimp from KarmDCOPIface::getError */
+    QString getError( int karmErrorNumber ) const;
     int totalMinutesForTaskId( const QString& taskId );
     QString starttimerfor( const QString &taskname );
     QString stoptimerfor( const QString &taskname );

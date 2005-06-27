@@ -40,7 +40,7 @@ class KarmDCOPIface : virtual public DCOPObject
    *
    * A top-level task is one that has no parent tasks.
    * 
-   * @param taskname Name of new task.
+   * @param taskName Name of new task.
    *
    * @return 0 on success, error number on failure.
    */
