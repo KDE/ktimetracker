@@ -68,7 +68,7 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     /** @reimp from KarmDCOPIface::addTask */
     int addTask( const QString &storage );
     /** @reimp from KarmDCOPIface::bookTime */
-    int bookTime( const QString& taskId, const QString& iso8601StartDateTime, durationInMinutes minutes );
+    int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
     /** @reimp from KarmDCOPIface::getError */
     QString getError( int karmErrorNumber ) const;
     int totalMinutesForTaskId( const QString& taskId );
