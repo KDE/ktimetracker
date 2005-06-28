@@ -774,7 +774,7 @@ void TaskView::markTaskAsIncomplete()
 
 void TaskView::clipTotals()
 {
-  TimeKard *t = new TimeKard();
+  TimeKard t;
   if (current_item() && current_item()->isRoot())
   {
     int response = KMessageBox::questionYesNo( 0,
@@ -783,28 +783,27 @@ void TaskView::clipTotals()
         i18n("Copy This Task"), i18n("Copy All Tasks") );
     if (response == KMessageBox::Yes) // this task only
     {
-      KApplication::clipboard()->setText(t->totalsAsText(this));
+      KApplication::clipboard()->setText(t.totalsAsText(this));
     }
     else // only task
     {
-      KApplication::clipboard()->setText(t->totalsAsText(this, false));
+      KApplication::clipboard()->setText(t.totalsAsText(this, false));
     }
   }
   else
   {
-    KApplication::clipboard()->setText(t->totalsAsText(this));
+    KApplication::clipboard()->setText(t.totalsAsText(this));
   }
 }
 
 void TaskView::clipHistory()
 {
-
-  PrintDialog *dialog = new PrintDialog();
-  if (dialog->exec()== QDialog::Accepted)
+  PrintDialog dialog;
+  if (dialog.exec()== QDialog::Accepted)
   {
-    TimeKard *t = new TimeKard();
+    TimeKard t;
     KApplication::clipboard()->
-      setText(t->historyAsText(this, dialog->from(), dialog->to()));
+      setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek()) );
   }
 }
 

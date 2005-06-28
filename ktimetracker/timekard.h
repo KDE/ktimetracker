@@ -88,11 +88,10 @@ class TimeKard
     TimeKard() {};
 
     /**
-     * Generates ASCII text of task totals, for current task on down.
+     * Generates ascii text of task totals, for current task on down.
      *
      * Formatted for pasting into clipboard.
      *
-     * @param taskview a pointer to a TaskView object.
      * @param justThisTask Only useful when user has picked a root task.  We
      * use this parameter to distinguish between when a user just wants to
      * print the task subtree for a root task and when they want to print
@@ -106,13 +105,21 @@ class TimeKard
      * Formatted for pasting into clipboard.
      */
     QString historyAsText(TaskView* taskview, const QDate& from,
-        const QDate& to, bool justThisTask = true);
+        const QDate& to, bool justThisTask, bool perWeek);
 
+private:
     void printTask(Task *t, QString &s, int level);
 
-    void printWeekTask(const Task *t, const QMap<QString, long>& datamap,
-        QMap<QString, long>& daytotals,
-        const Week& week, const int level, QString& retval);
+    void printTaskHistory(const Task *t, const QMap<QString, long>& datamap,
+                          QMap<QString, long>& daytotals,
+                          const QDate& from, const QDate& to,
+                          const int level, QString& retval);
 
-};
+    QString sectionHistoryAsText(TaskView* taskview,
+                                 const QDate& sectionFrom, const QDate& sectionTo,
+                                 const QDate& from, const QDate& to,
+                                 const QString& name,
+                                 bool justThisTask );
+
+  };
 #endif // KARM_TIMEKARD_H
