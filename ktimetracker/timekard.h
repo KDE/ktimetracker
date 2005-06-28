@@ -92,6 +92,8 @@ class TimeKard
      *
      * Formatted for pasting into clipboard.
      *
+     * @param taskview The view whose tasks need to be formatted.
+     *
      * @param justThisTask Only useful when user has picked a root task.  We
      * use this parameter to distinguish between when a user just wants to
      * print the task subtree for a root task and when they want to print

@@ -64,9 +64,12 @@ public:
     virtual bool save();
     QString version() const;
     QString taskIdFromName( const QString &taskName ) const;
-    int addTask( const QString &storage );
-    int bookTime( const QString& uid, const QString& datetime, long minutes );
-    QString getError( int mkb ) const;
+    /** @reimp from KarmDCOPIface */
+    int addTask( const QString &taskName );
+    /** @reimp from KarmDCOPIface */
+    int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
+    /** @reimp from KarmDCOPIface */
+    QString getError( int karmErrorNumber ) const;
     int totalMinutesForTaskId( const QString& taskId );
     QString starttimerfor( const QString &taskname );
     QString stoptimerfor( const QString &taskname );
