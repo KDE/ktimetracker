@@ -48,8 +48,7 @@ PrintDialog::PrintDialog()
   setMainWidget(page);
   int year, month;
 
-  QVBoxLayout *layout = new QVBoxLayout(page);
-
+  QVBoxLayout *layout = new QVBoxLayout(page, KDialog::spacingHint());
   layout->addSpacing(10);
   layout->addStretch(1);
 
@@ -76,10 +75,15 @@ PrintDialog::PrintDialog()
   layout->addSpacing(10);
   layout->addStretch(1);
 
+  _allTasks = new QComboBox( page );
+  _allTasks->insertItem( i18n( "Selected Task" ) );
+  _allTasks->insertItem( i18n( "All Tasks" ) );
+  layout->addWidget( _allTasks );
+
   _perWeek = new QCheckBox( i18n( "Summarize per week" ), page );
   layout->addWidget( _perWeek );
-  _allTasks = new QCheckBox( i18n( "Copy All Tasks" ), page );
-  layout->addWidget( _allTasks );
+  _totalsOnly = new QCheckBox( i18n( "Totals Only" ), page );
+  layout->addWidget( _totalsOnly );
 
   layout->addSpacing(10);
   layout->addStretch(1);
@@ -102,7 +106,12 @@ bool PrintDialog::perWeek() const
 
 bool PrintDialog::allTasks() const
 {
-  return _allTasks->isChecked();
+  return _allTasks->currentItem() == 1;
+}
+
+bool PrintDialog::totalsOnly() const
+{
+  return _totalsOnly->isChecked();
 }
 
 #include "printdialog.moc"

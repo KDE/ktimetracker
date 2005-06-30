@@ -803,7 +803,7 @@ void TaskView::clipHistory()
   {
     TimeKard t;
     KApplication::clipboard()->
-      setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek()) );
+      setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek(), dialog.totalsOnly() ) );
   }
 }
 

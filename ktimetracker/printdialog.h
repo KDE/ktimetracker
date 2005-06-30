@@ -47,10 +47,14 @@ class PrintDialog : public KDialogBase
     /* Whether to print all tasks */
     bool allTasks() const;
 
+    /* Whether to print totals only, instead of per-day columns */
+    bool totalsOnly() const;
+
 private:
     KDateEdit *_from, *_to;
     QCheckBox *_perWeek;
-    QCheckBox *_allTasks;
+    QComboBox *_allTasks;
+    QCheckBox *_totalsOnly;
 };
 
 #endif // KARM_PRINT_DIALOG_H

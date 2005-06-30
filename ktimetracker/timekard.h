@@ -107,7 +107,7 @@ class TimeKard
      * Formatted for pasting into clipboard.
      */
     QString historyAsText(TaskView* taskview, const QDate& from,
-        const QDate& to, bool justThisTask, bool perWeek);
+        const QDate& to, bool justThisTask, bool perWeek, bool totalsOnly);
 
 private:
     void printTask(Task *t, QString &s, int level);
@@ -115,13 +115,13 @@ private:
     void printTaskHistory(const Task *t, const QMap<QString, long>& datamap,
                           QMap<QString, long>& daytotals,
                           const QDate& from, const QDate& to,
-                          const int level, QString& retval);
+                          const int level, QString& retval, bool totalsOnly);
 
     QString sectionHistoryAsText(TaskView* taskview,
                                  const QDate& sectionFrom, const QDate& sectionTo,
                                  const QDate& from, const QDate& to,
                                  const QString& name,
-                                 bool justThisTask );
+                                 bool justThisTask, bool totalsOnly);
 
   };
 #endif // KARM_TIMEKARD_H

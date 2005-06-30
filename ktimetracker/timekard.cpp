@@ -124,7 +124,7 @@ void TimeKard::printTaskHistory(const Task *task,
     QMap<QString,long>& daytotals,
     const QDate& from,
     const QDate& to,
-    const int level, QString& s)
+    const int level, QString& s, bool totalsOnly)
 {
   long sectionsum = 0;
   for ( QDate day = from; day <= to; day = day.addDays(1) )
@@ -136,8 +136,11 @@ void TimeKard::printTaskHistory(const Task *task,
 
     if (taskdaytotals.contains(daytaskkey))
     {
-      s += QString::fromLatin1("%1")
-        .arg(formatTime(taskdaytotals[daytaskkey]/60), timeWidth);
+      if ( !totalsOnly )
+      {
+        s += QString::fromLatin1("%1")
+             .arg(formatTime(taskdaytotals[daytaskkey]/60), timeWidth);
+      }
       sectionsum += taskdaytotals[daytaskkey];  // in seconds
 
       if (daytotals.contains(daykey))
@@ -145,7 +148,7 @@ void TimeKard::printTaskHistory(const Task *task,
       else
         daytotals.insert(daykey, taskdaytotals[daytaskkey]);
     }
-    else
+    else if ( !totalsOnly )
     {
       QString buf;
       buf.fill(' ', timeWidth);
@@ -167,7 +170,7 @@ void TimeKard::printTaskHistory(const Task *task,
       subTask = subTask->nextSibling())
   {
     // recursive
-    printTaskHistory(subTask, taskdaytotals, daytotals, from, to, level+1, s);
+    printTaskHistory(subTask, taskdaytotals, daytotals, from, to, level+1, s, totalsOnly);
   }
 }
 
@@ -176,10 +179,10 @@ QString TimeKard::sectionHistoryAsText(
   const QDate& sectionFrom, const QDate& sectionTo,
   const QDate& from, const QDate& to,
   const QString& name,
-  bool justThisTask )
+  bool justThisTask, bool totalsOnly)
 {
 
-  const int sectionReportWidth = taskWidth + sectionFrom.daysTo(sectionTo) * timeWidth + totalTimeWidth;
+  const int sectionReportWidth = taskWidth + ( totalsOnly ? 0 : sectionFrom.daysTo(sectionTo) * timeWidth ) + totalTimeWidth;
   assert( sectionReportWidth > 0 );
   QString line;
   line.fill('-', sectionReportWidth);
@@ -233,32 +236,37 @@ QString TimeKard::sectionHistoryAsText(
     buf.fill(' ', int((sectionReportWidth - name.length()) / 2));
   retval += buf + name + cr;
 
-  // day headings
-  for (QDate day = sectionFrom; day <= sectionTo; day = day.addDays(1))
+  if ( !totalsOnly )
   {
-    retval += QString::fromLatin1("%1").arg(day.day(), timeWidth);
+    // day headings
+    for (QDate day = sectionFrom; day <= sectionTo; day = day.addDays(1))
+    {
+      retval += QString::fromLatin1("%1").arg(day.day(), timeWidth);
+    }
+    retval += cr;
+    retval += line;
   }
-  retval += cr;
-  retval += line;
 
   // the tasks
   if (events.empty())
   {
-    retval += i18n("  No hours logged.");
+    retval += "  ";
+    retval += i18n("No hours logged.");
   }
   else
   {
     if (justThisTask)
     {
       printTaskHistory(taskview->current_item(), taskdaytotals, daytotals,
-                       sectionFrom, sectionTo, 0, retval);
+                       sectionFrom, sectionTo, 0, retval, totalsOnly);
     }
     else
     {
       for (Task* task= taskview->current_item(); task;
            task= task->nextSibling())
       {
-        printTaskHistory(task, taskdaytotals, daytotals, sectionFrom, sectionTo, 0, retval);
+        printTaskHistory(task, taskdaytotals, daytotals,
+                         sectionFrom, sectionTo, 0, retval, totalsOnly);
       }
     }
     retval += line;
@@ -271,11 +279,14 @@ QString TimeKard::sectionHistoryAsText(
 
       if (daytotals.contains(daykey))
       {
-        retval += QString::fromLatin1("%1")
-                  .arg(formatTime(daytotals[daykey]/60), timeWidth);
+        if ( !totalsOnly )
+        {
+          retval += QString::fromLatin1("%1")
+                    .arg(formatTime(daytotals[daykey]/60), timeWidth);
+        }
         sum += daytotals[daykey];  // in seconds
       }
-      else
+      else if ( !totalsOnly )
       {
         buf.fill(' ', timeWidth);
         retval += buf;
@@ -290,11 +301,12 @@ QString TimeKard::sectionHistoryAsText(
 }
 
 QString TimeKard::historyAsText(TaskView* taskview, const QDate& from,
-    const QDate& to, bool justThisTask, bool perWeek)
+    const QDate& to, bool justThisTask, bool perWeek, bool totalsOnly)
 {
   // header
   QString retval;
-  retval += i18n("Task History") + cr;
+  retval += totalsOnly ? i18n("Task Totals") : i18n("Task History");
+  retval += cr;
   retval += i18n("From %1 to %2")
     .arg(KGlobal::locale()->formatDate(from))
     .arg(KGlobal::locale()->formatDate(to));
@@ -308,11 +320,11 @@ QString TimeKard::historyAsText(TaskView* taskview, const QDate& from,
     QValueList<Week> weeks = Week::weeksFromDateRange(from, to);
     for (QValueList<Week>::iterator week = weeks.begin(); week != weeks.end(); ++week)
     {
-      retval += sectionHistoryAsText( taskview, (*week).start(), (*week).end(), from, to, (*week).name(), justThisTask );
+      retval += sectionHistoryAsText( taskview, (*week).start(), (*week).end(), from, to, (*week).name(), justThisTask, totalsOnly );
     }
   } else
   {
-    retval += sectionHistoryAsText( taskview, from, to, from, to, "", justThisTask );
+    retval += sectionHistoryAsText( taskview, from, to, from, to, "", justThisTask, totalsOnly );
   }
   return retval;
 }
