@@ -115,7 +115,11 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   }
 
   if ( _calendar) closeStorage(view);
-  else _calendar = new KCal::CalendarResources( QString::fromLatin1("UTC") );
+  else
+  {
+      _calendar = new KCal::CalendarResources( QString::fromLatin1("UTC") );
+      _calendar->readConfig();
+  }
 
   // Create local file resource and add to resources
   _icalfile = fileName;
