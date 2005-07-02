@@ -652,7 +652,8 @@ QString MainWindow::starttimerfor( const QString& taskname )
     if ((_taskView->item_at_index(i)->name()==taskname))
     {
       _taskView->startTimerFor( _taskView->item_at_index(i) );
-      err="";
+      if (err==QString::null) err="task name is abigious";
+      if (err=="no such task") err=QString::null;
     }
   }
   return err;
@@ -666,7 +667,8 @@ QString MainWindow::stoptimerfor( const QString& taskname )
     if ((_taskView->item_at_index(i)->name()==taskname))
     {
       _taskView->stopTimerFor( _taskView->item_at_index(i) );
-      err="";
+      if (err==QString::null) err="task name is abigious";
+      if (err=="no such task") err=QString::null;
     }
   }
   return err;
