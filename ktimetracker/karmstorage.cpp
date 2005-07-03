@@ -307,7 +307,7 @@ QString KarmStorage::save(TaskView* taskview)
     err="Could not save";
   }
 
-  if ( ! err.length() )
+  if ( err.length() == 0 )
   {
     kdDebug(5970)
       << "KarmStorage::save : wrote "

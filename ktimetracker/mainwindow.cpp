@@ -646,31 +646,35 @@ Task* MainWindow::_hasUid( Task* task, const QString &uid ) const
 }
 QString MainWindow::starttimerfor( const QString& taskname )
 {
+  int index;
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
     if ((_taskView->item_at_index(i)->name()==taskname))
     {
-      _taskView->startTimerFor( _taskView->item_at_index(i) );
+      index=i;
       if (err==QString::null) err="task name is abigious";
       if (err=="no such task") err=QString::null;
     }
   }
+  if (err==QString::null) _taskView->startTimerFor( _taskView->item_at_index(index) );
   return err;
 }
 
 QString MainWindow::stoptimerfor( const QString& taskname )
 {
+  int index;
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
     if ((_taskView->item_at_index(i)->name()==taskname))
     {
-      _taskView->stopTimerFor( _taskView->item_at_index(i) );
+      index=i;
       if (err==QString::null) err="task name is abigious";
       if (err=="no such task") err=QString::null;
     }
   }
+  if (err==QString::null) _taskView->stopTimerFor( _taskView->item_at_index(index) );
   return err;
 }
 
