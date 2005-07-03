@@ -298,7 +298,7 @@ class KarmStorage
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,
         DesktopList* desktopList);
-    void writeTaskAsTodo
+    QString writeTaskAsTodo
       (Task* task, const int level, QPtrStack< KCal::Todo >& parents);
 
     KCal::Event* baseEvent(const Task*);

@@ -289,7 +289,7 @@ QString KarmStorage::save(TaskView* taskview)
 
   for (Task* task=taskview->first_child(); task; task = task->nextSibling())
   {
-    writeTaskAsTodo(task, 1, parents );
+    err=writeTaskAsTodo(task, 1, parents );
   }
 
   ResourceCalendar* resource = _calendar->resourceManager()->standardResource();
@@ -322,13 +322,18 @@ QString KarmStorage::save(TaskView* taskview)
   return err;
 }
 
-void KarmStorage::writeTaskAsTodo(Task* task, const int level,
+QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
     QPtrStack< KCal::Todo >& parents )
 {
+  QString err=QString::null;
   KCal::Todo* todo;
 
   todo = _calendar->todo(task->uid());
-  // FIXME: raise error if todo is null.
+  if ( !todo ) 
+  {
+    kdDebug(5970) << "Could not get todo from calendar" << endl; 
+    return "Could not get todo from calendar";
+  }
   task->asTodo(todo);
   if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() );
   parents.push( todo );
@@ -336,10 +341,11 @@ void KarmStorage::writeTaskAsTodo(Task* task, const int level,
   for ( Task* nextTask = task->firstChild(); nextTask;
         nextTask = nextTask->nextSibling() )
   {
-    writeTaskAsTodo(nextTask, level+1, parents );
+    err = writeTaskAsTodo(nextTask, level+1, parents );
   }
 
   parents.pop();
+  return err;
 }
 
 bool KarmStorage::isEmpty()
