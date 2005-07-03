@@ -282,6 +282,7 @@ void KarmStorage::closeStorage(TaskView* view)
 
 QString KarmStorage::save(TaskView* taskview)
 {
+  kdDebug(5970) << "entering KarmStorage::save" << endl;
   QString err="";
 
   QPtrStack< KCal::Todo > parents;
@@ -291,10 +292,15 @@ QString KarmStorage::save(TaskView* taskview)
     writeTaskAsTodo(task, 1, parents );
   }
 
+  ResourceCalendar* resource = _calendar->resourceManager()->standardResource();
+  if ( resource == NULL ) 
+  {
+    kdDebug(5970) << "someone took away my resource. Cannot save." << endl;
+    err="Could not save, someone took away my resource";
+  }
+  else
   if ( !_calendar->save(
-        _calendar->requestSaveTicket( 
-          _calendar->resourceManager()->standardResource() 
-          )
+        _calendar->requestSaveTicket( resource )
         )
       )
   {
