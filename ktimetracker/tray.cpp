@@ -74,42 +74,7 @@ KarmTray::KarmTray(MainWindow* parent)
 KarmTray::KarmTray(karmPart * parent)
   : KSystemTray( 0 , "Karm Tray")
 {
-  // the timer that updates the "running" icon in the tray
-  _taskActiveTimer = new QTimer(this);
-  connect( _taskActiveTimer, SIGNAL( timeout() ), this,
-                             SLOT( advanceClock()) );
-
-  if (icons == 0) {
-    icons = new QPtrVector<QPixmap>(8);
-    for (int i=0; i<8; i++) {
-      QPixmap *icon = new QPixmap();
-      QString name;
-      name.sprintf("active-icon-%d.xpm",i);
-      *icon = UserIcon(name);
-      icons->insert(i,icon);
-    }
-  }
-
-  parent->actionPreferences->plug( contextMenu() ); 
-  parent->actionStopAll->plug( contextMenu() );
-
-  resetClock();
-  initToolTip();
-
-  // start of a kind of menu for the tray
-  // this are experiments/tests
-  /*
-  for (int i=0; i<30; i++)
-    _tray->insertTitle(i 18n("bla ").arg(i));
-  for (int i=0; i<30; i++)
-    _tray->insertTitle2(i 18n("bli ").arg(i));
-  */
-  // experimenting with menus for the tray
-  /*
-  trayPopupMenu = contextMenu();
-  trayPopupMenu2 = new QPopupMenu();
-  trayPopupMenu->insertItem(i18n("Submenu"), *trayPopupMenu2);
-  */
+// it is not convenient if every kpart gets an icon in the systray.
 }
 
 KarmTray::~KarmTray()
@@ -127,15 +92,21 @@ void KarmTray::insertTitle(QString title)
 
 void KarmTray::startClock()
 {
-  _taskActiveTimer->start(1000);
-  setPixmap( *(*icons)[_activeIcon] );
-  show();
+  if ( _taskActiveTimer ) 
+  {
+    _taskActiveTimer->start(1000);
+    setPixmap( *(*icons)[_activeIcon] );
+    show();
+  }
 }
 
 void KarmTray::stopClock()
 {
-  _taskActiveTimer->stop();
-  show();
+  if ( _taskActiveTimer )  
+  {  
+    _taskActiveTimer->stop();
+    show();
+  }
 }
 
 void KarmTray::advanceClock()
