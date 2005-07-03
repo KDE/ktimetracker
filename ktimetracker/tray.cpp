@@ -75,6 +75,7 @@ KarmTray::KarmTray(karmPart * parent)
   : KSystemTray( 0 , "Karm Tray")
 {
 // it is not convenient if every kpart gets an icon in the systray.
+  _taskActiveTimer = 0;
 }
 
 KarmTray::~KarmTray()
