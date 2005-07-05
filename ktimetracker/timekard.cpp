@@ -81,7 +81,7 @@ QString TimeKard::totalsAsText(TaskView* taskview, bool justThisTask)
           task= task->nextSibling())
       {
         sum += task->totalTime();
-        //if ( task->totalTime() )
+        if ( task->totalTime() )
           printTask(task, retval, 0);
       }
     }
@@ -114,8 +114,8 @@ void TimeKard::printTask(Task *task, QString &s, int level)
       subTask;
       subTask = subTask->nextSibling())
   {
-    //if ( subTask->totalTime() ) // to avoid 00:00 entries
-    printTask(subTask, s, level+1);
+    if ( subTask->totalTime() ) // to avoid 00:00 entries
+      printTask(subTask, s, level+1);
   }
 }
 
