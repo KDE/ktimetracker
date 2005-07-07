@@ -291,7 +291,7 @@ class KarmStorage
 
   private:
     static KarmStorage                *_instance;
-    KCal::CalendarResources           *_calendar;
+    KCal::ResourceCalendar            *_calendar;
     QString                           _icalfile;
 
     KarmStorage();
@@ -300,6 +300,7 @@ class KarmStorage
         DesktopList* desktopList);
     QString writeTaskAsTodo
       (Task* task, const int level, QPtrStack< KCal::Todo >& parents);
+    bool saveCalendar();
 
     KCal::Event* baseEvent(const Task*);
     bool remoteResource( const QString& file ) const;
