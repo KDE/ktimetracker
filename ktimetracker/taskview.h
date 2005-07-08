@@ -10,6 +10,7 @@
 #include "desktoplist.h"
 #include "resourcecalendar.h"
 #include "karmstorage.h"
+#include "reportcriteria.h"
 #include <qtimer.h>
 //#include "desktoptracker.h"
 
@@ -112,6 +113,9 @@ class TaskView : public KListView
 
     /** used to import tasks from imendio planner */
     QString importPlanner( QString fileName="" );
+
+    /** call export function for csv totals or history */
+    QString report( const ReportCriteria &rc );
 
     /** Export comma separated values format for task time totals. */
     void exportcsvFile();

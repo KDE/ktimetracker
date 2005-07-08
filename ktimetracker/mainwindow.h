@@ -5,6 +5,7 @@
 
 #include "karmerrors.h"
 #include <karmdcopiface.h>
+#include "reportcriteria.h"
 
 class KAccel;
 class KAccelMenuWatch;
@@ -77,6 +78,7 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     QString deletetodo();
     bool    getpromptdelete();
     QString setpromptdelete( bool prompt );
+    QString exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote );
     QString importplannerfile( QString filename );
 
   public slots:

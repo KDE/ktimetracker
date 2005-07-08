@@ -678,6 +678,20 @@ QString MainWindow::stoptimerfor( const QString& taskname )
   return err;
 }
 
+QString MainWindow::exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote )
+{
+  ReportCriteria rc;
+  rc.allTasks=allTasks;
+  rc.decimalMinutes=decimalMinutes;
+  rc.delimiter=delimiter;
+  rc.from=QDate::fromString( from );
+  rc.quote=quote;
+  rc.reportType=(ReportCriteria::REPORTTYPE) type;
+  rc.to=QDate::fromString( to );
+  rc.url=filename;
+  return _taskView->report( rc );
+}
+
 QString MainWindow::importplannerfile( QString fileName )
 {
   return _taskView->importPlanner(fileName);

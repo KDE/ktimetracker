@@ -279,6 +279,11 @@ QString TaskView::importPlanner(QString fileName)
   return "";
 }
 
+QString TaskView::report( const ReportCriteria& rc )
+{
+  return _storage->report( this, rc );
+}
+
 void TaskView::exportcsvFile()
 {
   kdDebug(5970) << "TaskView::exportcsvFile()" << endl;
