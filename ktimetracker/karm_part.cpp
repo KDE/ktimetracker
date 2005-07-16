@@ -542,7 +542,7 @@ int karmPart::bookTime
 // argument name; if I recall correctly, the argument name was errno.
 QString karmPart::getError( int mkb ) const
 {
-  if ( mkb < KARM_MAX_ERROR_NO + 1 ) return m_error[ mkb ];
+  if ( mkb <= KARM_MAX_ERROR_NO ) return m_error[ mkb ];
   else return i18n( "Invalid error number: %1" ).arg( mkb );
 }
 

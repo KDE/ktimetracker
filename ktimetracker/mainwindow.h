@@ -49,7 +49,7 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     KAction*         actionPreferences;
     KAction*         actionClipTotals;
     KAction*         actionClipHistory;
-    QString          m_error[ KARM_MAX_ERROR_NO ];
+    QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
 
     friend class KarmTray;
 
