@@ -99,6 +99,9 @@ class TaskView : public KListView
     /** Stop all running timers, and start timer on current item.  */
     void changeTimer( QListViewItem * = 0 );
 
+    /** Stop all running timers, and start timer on current item.  */
+    void reActOnClick( QListViewItem *qlvi, const QPoint & pnt, int c );
+
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();
 

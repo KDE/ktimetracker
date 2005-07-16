@@ -41,9 +41,10 @@ TaskView::TaskView(QWidget *parent, const char *name, const QString &icsfile ):K
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
 
-  connect(this, SIGNAL( doubleClicked( QListViewItem * )),
+  connect(this, SIGNAL( doubleClicked( QListViewItem *, const QPoint &, int )),
           this, SLOT( changeTimer( QListViewItem * )));
-
+  connect(this, SIGNAL( pressed ( QListViewItem *, const QPoint &, int )),
+          this, SLOT( reActOnClick( QListViewItem *, const QPoint &, int )));
   connect( this, SIGNAL( expanded( QListViewItem * ) ),
            this, SLOT( itemStateChanged( QListViewItem * ) ) );
   connect( this, SIGNAL( collapsed( QListViewItem * ) ),
@@ -440,6 +441,18 @@ void TaskView::changeTimer(QListViewItem *)
     startCurrentTimer();
   }
   else stopCurrentTimer();
+}
+
+void TaskView::reActOnClick( QListViewItem *qlvi, const QPoint & pnt, int col )
+{
+  kdDebug(5970) << "entering reActOnClick" << endl;
+  Task *task = current_item();
+  // if clicked onto the "completed" icon
+  if ( col == 0 && ( pnt.x()-QScrollView::viewport()->topLevelWidget()->x() <= 18 ) )
+  {
+    if ( task->isComplete() ) task->setPercentComplete( 0, _storage );
+    else task->setPercentComplete( 100, _storage );
+  }
 }
 
 void TaskView::minuteUpdate()
