@@ -96,12 +96,6 @@ class TaskView : public KListView
     /** Stop all running timers.  */
     void stopAllTimers();
 
-    /** Stop all running timers, and start timer on current item.  */
-    void changeTimer( QListViewItem * = 0 );
-
-    /** Stop all running timers, and start timer on current item.  */
-    void reActOnClick( QListViewItem *qlvi, const QPoint & pnt, int c );
-
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();
 
@@ -200,6 +194,8 @@ class TaskView : public KListView
     KarmStorage * _storage;
 
   private:
+    void contentsMousePressEvent ( QMouseEvent * e );
+    void contentsMouseDoubleClickEvent ( QMouseEvent * e );
     void updateParents( Task* task, long totalDiff, long sesssionDiff);
     void deleteChildTasks( Task *item );
     void addTimeToActiveTasks( int minutes, bool save_data = true );

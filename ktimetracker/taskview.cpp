@@ -41,10 +41,6 @@ TaskView::TaskView(QWidget *parent, const char *name, const QString &icsfile ):K
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
 
-  connect(this, SIGNAL( doubleClicked( QListViewItem *, const QPoint &, int )),
-          this, SLOT( changeTimer( QListViewItem * )));
-  connect(this, SIGNAL( pressed ( QListViewItem *, const QPoint &, int )),
-          this, SLOT( reActOnClick( QListViewItem *, const QPoint &, int )));
   connect( this, SIGNAL( expanded( QListViewItem * ) ),
            this, SLOT( itemStateChanged( QListViewItem * ) ) );
   connect( this, SIGNAL( collapsed( QListViewItem * ) ),
@@ -116,6 +112,40 @@ TaskView::TaskView(QWidget *parent, const char *name, const QString &icsfile ):K
 KarmStorage* TaskView::storage()
 {
   return _storage;
+}
+
+void TaskView::contentsMousePressEvent ( QMouseEvent * e )
+{
+  kdDebug(5970) << "entering contentsMousePressEvent" << endl;
+  KListView::contentsMousePressEvent(e);
+  Task *task = current_item();
+  // if clicked onto the "completed" icon
+  if ( e->x()<=18  )
+  {
+    if ( task->isComplete() ) task->setPercentComplete( 0, _storage );
+    else task->setPercentComplete( 100, _storage );
+  }
+}
+
+void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
+{
+  kdDebug(5970) << "entering contentsMouseDoubleClickEvent" << endl;
+  KListView::contentsMouseDoubleClickEvent(e);
+  
+  // start/stop timer
+  Task *task = current_item();
+
+  if ( task != 0 && activeTasks.findRef(task) == -1 )
+  {
+    // Stop all the other timers.
+    for (unsigned int i=0; i<activeTasks.count();i++)
+      (activeTasks.at(i))->setRunning(false, _storage);
+    activeTasks.clear();
+
+    // Start the new timer.
+    startCurrentTimer();
+  }
+  else stopCurrentTimer();
 }
 
 TaskView::~TaskView()
@@ -423,36 +453,6 @@ void TaskView::stopTimerFor(Task* task)
 void TaskView::stopCurrentTimer()
 {
   stopTimerFor( current_item());
-}
-
-
-void TaskView::changeTimer(QListViewItem *)
-{
-  Task *task = current_item();
-
-  if ( task != 0 && activeTasks.findRef(task) == -1 )
-  {
-    // Stop all the other timers.
-    for (unsigned int i=0; i<activeTasks.count();i++)
-      (activeTasks.at(i))->setRunning(false, _storage);
-    activeTasks.clear();
-
-    // Start the new timer.
-    startCurrentTimer();
-  }
-  else stopCurrentTimer();
-}
-
-void TaskView::reActOnClick( QListViewItem *qlvi, const QPoint & pnt, int col )
-{
-  kdDebug(5970) << "entering reActOnClick" << endl;
-  Task *task = current_item();
-  // if clicked onto the "completed" icon
-  if ( col == 0 && ( pnt.x()-QScrollView::viewport()->topLevelWidget()->x() <= 18 ) )
-  {
-    if ( task->isComplete() ) task->setPercentComplete( 0, _storage );
-    else task->setPercentComplete( 100, _storage );
-  }
 }
 
 void TaskView::minuteUpdate()
