@@ -519,6 +519,26 @@ int MainWindow::addTask( const QString& taskname )
   }
 }
 
+QString MainWindow::setPerCentComplete( const QString& taskName, int perCent )
+{
+  int index;
+  QString err="no such task";
+  for (int i=0; i<_taskView->count(); i++)
+  {
+    if ((_taskView->item_at_index(i)->name()==taskName))
+    {
+      index=i;
+      if (err==QString::null) err="task name is abigious";
+      if (err=="no such task") err=QString::null;
+    }
+  }
+  if (err==QString::null) 
+  {
+    _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
+  }
+  return err;
+}
+
 int MainWindow::bookTime
 ( const QString& taskId, const QString& datetime, long minutes )
 {

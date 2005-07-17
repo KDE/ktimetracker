@@ -47,6 +47,16 @@ class KarmDCOPIface : virtual public DCOPObject
   virtual int addTask( const QString& taskName ) = 0;
 
   /** 
+   * Set percent complete to a task
+   *
+   * @param taskName Name of new task.
+   * @param perCent  percent, e.g. 99
+   *
+   * @return "" on success, error msg on failure.
+   */
+   virtual QString setPerCentComplete( const QString& taskName, int perCent ) = 0;
+
+  /** 
    * Add time to a task.  
    *
    * The GUI will be non-responsive until this method returns.

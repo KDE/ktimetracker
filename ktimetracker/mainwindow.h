@@ -68,6 +68,8 @@ class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
     QString taskIdFromName( const QString &taskName ) const;
     /** @reimp from KarmDCOPIface::addTask */
     int addTask( const QString &storage );
+    /** @reimp from KarmDCOPIface::setPerCentComplete */
+    QString setPerCentComplete( const QString& taskName, int PerCent );
     /** @reimp from KarmDCOPIface::bookTime */
     int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
     /** @reimp from KarmDCOPIface::getError */

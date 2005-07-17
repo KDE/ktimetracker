@@ -68,6 +68,8 @@ public:
     /** @reimp from KarmDCOPIface */
     int addTask( const QString &taskName );
     /** @reimp from KarmDCOPIface */
+    QString setPerCentComplete( const QString& taskName, int PerCent );
+    /** @reimp from KarmDCOPIface */
     int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
     /** @reimp from KarmDCOPIface */
     QString getError( int karmErrorNumber ) const;
