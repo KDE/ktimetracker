@@ -216,6 +216,9 @@ void karmPart::makeMenus()
   new KAction( i18n("Import Tasks From &Planner..."), 0,
       _taskView, SLOT(importPlanner()), actionCollection(),
       "import_planner");  
+  new KAction( i18n("Configure KArm..."), 0,
+      _preferences, SLOT(showDialog()), actionCollection(),
+      "configure_karm");  
 
 /*
   new KAction( i18n("Import E&vents"), 0,
