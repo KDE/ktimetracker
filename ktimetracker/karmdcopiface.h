@@ -117,7 +117,7 @@ class KarmDCOPIface : virtual public DCOPObject
   virtual bool getpromptdelete() = 0;
 
   /** export csv history or totals file */
-  virtual QString exportcsvfile( QString filename, QString from, QString to, int type = 0, bool decimalMinutes=true, bool allTasks=true, QString delimiter=";", QString quote="\"" ) = 0;
+  virtual QString exportcsvfile( QString filename, QString from, QString to, int type = 0, bool decimalMinutes=true, bool allTasks=true, QString delimiter=";", QString quote="'" ) = 0;
 
   /** import planner project file */
   virtual QString importplannerfile( QString filename ) = 0;

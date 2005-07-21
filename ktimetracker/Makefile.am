@@ -18,11 +18,11 @@ libkarm_shared_la_SOURCES = kaccelmenuwatch.cpp desktoptracker.cpp \
                 task.cpp taskview.cpp tray.cpp \
 		csvexportdialog_base.ui csvexportdialog.cpp plannerparser.cpp \
 		karmdcopiface.skel
-
-karm_SOURCES = main.cpp
-karm_LDADD = libkarm_shared.la -lkdeprint $(top_builddir)/libkcal/libkcal.la \
+libkarm_shared_la_LIBADD = -lkdeprint $(top_builddir)/libkcal/libkcal.la \
 	     $(top_builddir)/kresources/remote/libkcal_resourceremote.la \
              $(top_builddir)/libkdepim/libkdepim.la $(LIBXSS)
+karm_SOURCES = main.cpp
+karm_LDADD = libkarm_shared.la 
 karm_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 noinst_HEADERS = desktoptracker.h edittaskdialog.h printdialog.h \
                  idletimedetector.h kaccelmenuwatch.h timekard.h \
@@ -56,10 +56,7 @@ kde_module_LTLIBRARIES = libkarmpart.la
 # the Part's source, library search path, and link libraries
 libkarmpart_la_SOURCES = karm_part.cpp 
 libkarmpart_la_LDFLAGS = -module -avoid-version -no-undefined $(KDE_PLUGIN) $(all_libraries)
-libkarmpart_la_LIBADD  = libkarm_shared.la $(LIB_KPARTS) $(LIB_KFILE) \
-	     -lkdeprint $(top_builddir)/libkcal/libkcal.la \
-	     $(top_builddir)/kresources/remote/libkcal_resourceremote.la \
-             $(top_builddir)/libkdepim/libkdepim.la $(LIBXSS)
+libkarmpart_la_LIBADD  = libkarm_shared.la $(LIB_KPARTS)
 
 # this is where the desktop file will go 
 partdesktopdir   = $(kde_servicesdir)
