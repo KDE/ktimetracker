@@ -595,9 +595,9 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
     // Surround the field with quotes if the field contains
     // a comma (delim) or a double quote
     if (task->name().contains(delim) || task->name().contains(dquote))
-      to_quote = TRUE;
+      to_quote = true;
     else
-      to_quote = FALSE;
+      to_quote = false;
     */
     to_quote = true;
 
