@@ -300,7 +300,7 @@ QString TaskView::importPlanner(QString fileName)
 {
   kdDebug(5970) << "entering importPlanner" << endl;
   PlannerParser* handler=new PlannerParser(this);
-  if (fileName=="") fileName=KFileDialog::getOpenFileName(QString::null, QString::null, 0);
+  if (fileName.isEmpty()) fileName=KFileDialog::getOpenFileName(QString::null, QString::null, 0);
   QFile xmlFile( fileName );
   QXmlInputSource source( xmlFile );
   QXmlSimpleReader reader;
