@@ -630,23 +630,23 @@ void TaskView::deleteTask(bool markingascomplete)
   int response = KMessageBox::Yes;
   if (!markingascomplete && _preferences->promptDelete()) {
     if (task->childCount() == 0) {
-      response = KMessageBox::warningYesNo( 0,
+      response = KMessageBox::warningContinueCancel( 0,
           i18n( "Are you sure you want to delete "
           "the task named\n\"%1\" and its entire history?")
           .arg(task->name()),
-          i18n( "Deleting Task"));
+          i18n( "Deleting Task"), KStdGuiItem::del());
     }
     else {
-      response = KMessageBox::warningYesNo( 0,
+      response = KMessageBox::warningContinueCancel( 0,
           i18n( "Are you sure you want to delete the task named"
           "\n\"%1\" and its entire history?\n"
           "NOTE: all its subtasks and their history will also "
           "be deleted.").arg(task->name()),
-          i18n( "Deleting Task"));
+          i18n( "Deleting Task"), KStdGuiItem::del());
     }
   }
 
-  if (response == KMessageBox::Yes)
+  if (response == KMessageBox::Continue)
   {
     if (markingascomplete)
     {
