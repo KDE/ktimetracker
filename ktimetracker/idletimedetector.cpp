@@ -1,16 +1,20 @@
-#include "idle.h"
-#include <qmessagebox.h>
-#include <klocale.h>
-#include <qtimer.h>
-#include <qdatetime.h>
+#include "idletimedetector.h"
 
-IdleTimer::IdleTimer(int maxIdle) 
+#include <qdatetime.h>
+#include <qmessagebox.h>
+#include <qtimer.h>
+
+#include <kglobal.h>
+#include <klocale.h>    // i18n
+#include <QX11Info>
+
+IdleTimeDetector::IdleTimeDetector(int maxIdle)
 {
   _maxIdle = maxIdle;
 
 #ifdef HAVE_LIBXSS
   int event_base, error_base;
-  if(XScreenSaverQueryExtension(qt_xdisplay(), &event_base, &error_base)) {
+  if(XScreenSaverQueryExtension(QX11Info::display(), &event_base, &error_base)) {
     _idleDetectionPossible = true;
   }
   else {
@@ -25,57 +29,56 @@ IdleTimer::IdleTimer(int maxIdle)
 
 }
 
-bool IdleTimer::isIdleDetectionPossible()
+bool IdleTimeDetector::isIdleDetectionPossible()
 {
   return _idleDetectionPossible;
 }
 
-void IdleTimer::check() 
+void IdleTimeDetector::check()
 {
 #ifdef HAVE_LIBXSS
-  if (_idleDetectionPossible) {
+  if (_idleDetectionPossible)
+  {
     _mit_info = XScreenSaverAllocInfo ();
-    XScreenSaverQueryInfo(qt_xdisplay(), qt_xrootwin(), _mit_info);
-    int idleMinutes = (_mit_info->idle/1000)/secsPerMinutes;;
-    if (idleMinutes >= _maxIdle) {
+    XScreenSaverQueryInfo(QX11Info::display(), QX11Info::appRootWindow(), _mit_info);
+    int idleMinutes = (_mit_info->idle/1000)/secsPerMinute;
+    if (idleMinutes >= _maxIdle)
       informOverrun(idleMinutes);
-    }
   }
 #endif // HAVE_LIBXSS
 }
 
-void IdleTimer::setMaxIdle(int maxIdle)
+void IdleTimeDetector::setMaxIdle(int maxIdle)
 {
   _maxIdle = maxIdle;
 }
 
 #ifdef HAVE_LIBXSS
-void IdleTimer::informOverrun(int idleMinutes) 
+void IdleTimeDetector::informOverrun(int idleMinutes)
 {
-  if (!_overAllIdleDetect) {
+  if (!_overAllIdleDetect)
     return; // In the preferences the user has indicated that he do not
             // want idle detection.
-  }
 
   _timer->stop();
-  
+
   QDateTime start = QDateTime::currentDateTime();
   QDateTime idleStart = start.addSecs(-60 * _maxIdle);
-  QString backThen;
-  backThen.sprintf("%d:%02d", idleStart.time().hour(), idleStart.time().minute());
-  
-  int id =  QMessageBox::warning(0,i18n("Idle detection"),
+  QString backThen = KGlobal::locale()->formatTime(idleStart.time());
+
+  int id =  QMessageBox::warning( 0, i18n("Idle Detection"),
                                      i18n("Desktop has been idle since %1."
                                           " What should we do?").arg(backThen),
-                                     i18n("Revert and Stop"), i18n("Revert and Continue"),
+                                     i18n("Revert && Stop"),
+                                     i18n("Revert && Continue"),
                                      i18n("Continue Timing"),0,2);
   QDateTime end = QDateTime::currentDateTime();
-  int diff = start.secsTo(end)/secsPerMinutes;
+  int diff = start.secsTo(end)/secsPerMinute;
 
   if (id == 0) {
     // Revert And Stop
     emit(extractTime(idleMinutes+diff));
-    emit(stopTimer());
+    emit(stopAllTimers());
   }
   else if (id == 1) {
     // Revert and Continue
@@ -84,12 +87,12 @@ void IdleTimer::informOverrun(int idleMinutes)
   }
   else {
     // Continue
-    _timer->start(testInterval);      
+    _timer->start(testInterval);
   }
 }
 #endif // HAVE_LIBXSS
 
-void IdleTimer::startIdleDetection() 
+void IdleTimeDetector::startIdleDetection()
 {
 #ifdef HAVE_LIBXSS
   if (!_timer->isActive())
@@ -97,16 +100,16 @@ void IdleTimer::startIdleDetection()
 #endif //HAVE_LIBXSS
 }
 
-void IdleTimer::stopIdleDetection()
+void IdleTimeDetector::stopIdleDetection()
 {
 #ifdef HAVE_LIBXSS
   if (_timer->isActive())
     _timer->stop();
 #endif // HAVE_LIBXSS
 }
-void IdleTimer::toggleOverAllIdleDetection(bool on) 
+void IdleTimeDetector::toggleOverAllIdleDetection(bool on)
 {
   _overAllIdleDetect = on;
 }
 
-#include "idle.moc"
+#include "idletimedetector.moc"
