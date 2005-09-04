@@ -78,7 +78,7 @@ void MyPrinter::print()
     QString now = KGlobal::locale()->formatDateTime(QDateTime::currentDateTime());
     
     painter.drawText(xMargin, yoff, pageWidth, height,
-         QPainter::AlignCenter, 
+         Qt::AlignCenter, 
          i18n("KArm - %1").arg(now));
     
     painter.setFont(origFont);

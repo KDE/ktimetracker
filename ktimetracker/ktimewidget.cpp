@@ -73,8 +73,9 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
   _hourLE = new QLineEdit( this);
   // 9999 hours > 1 year!
   // 999 hours = 41 days  (That should be enough ...)
+#warning "Qt4: fixme" 
   _hourLE->setFixedWidth( fontMetrics().maxWidth() * 3
-                          + 2 * _hourLE->frameWidth() + 2);
+                          + 2 /** _hourLE->frameWidth()*/ + 2);
   layout->addWidget(_hourLE);
   TimeValidator *validator = new TimeValidator( HOUR, _hourLE,
                                                 "Validator for _hourLE");
@@ -88,8 +89,9 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
   _minuteLE = new KarmLineEdit(this);
 
   // Minutes lineedit: Make room for 2 digits
+#warning "Qt4: fixme"
   _minuteLE->setFixedWidth( fontMetrics().maxWidth() * 2
-                            + 2 * _minuteLE->frameWidth() + 2);
+                            + 2 /** _minuteLE->frameWidth()*/ + 2);
   layout->addWidget(_minuteLE);
   validator = new TimeValidator( MINUTE, _minuteLE, "Validator for _minuteLE");
   _minuteLE->setValidator( validator );

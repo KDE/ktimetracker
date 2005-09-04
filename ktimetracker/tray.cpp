@@ -134,8 +134,8 @@ void KarmTray::updateToolTip(Q3PtrList<Task> activeTasks)
     QToolTip::add( this, i18n("No active tasks") );
     return;
   }
-
-  QFontMetrics fm( QToolTip::font() );
+#warning "qt4 : porting QToolTip::font()"
+  QFontMetrics fm( QFont("helvetica")/*QToolTip::font()*/ );
   const QString continued = i18n( ", ..." );
   const int buffer = fm.boundingRect( continued ).width();
   const int desktopWidth = KGlobalSettings::desktopGeometry(this).width();

@@ -153,7 +153,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   }
 
   // Build task view from iCal data
-  if (!err)
+  if (!err.isEmpty())
   {
     KCal::Todo::List todoList;
     KCal::Todo::List::ConstIterator todo;
@@ -206,7 +206,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
             .arg(task->name())
             .arg((*todo)->relatedToUid());
 
-        if (!err) task->move( newParent);
+        if (!err.isEmpty()) task->move( newParent);
       }
     }
 
@@ -256,7 +256,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
           .arg(task->name())
           .arg((*todo)->relatedToUid());
 
-      if (!err) task->move( newParent);
+      if (!err.isEmpty()) task->move( newParent);
     }
   }
   return err;
@@ -362,13 +362,13 @@ QString KarmStorage::loadFromFlatFile(TaskView* taskview,
   if( !f.exists() )
     err = i18n("File \"%1\" not found.").arg(filename);
 
-  if (!err)
+  if (!err.isEmpty())
   {
     if( !f.open( QIODevice::ReadOnly ) )
       err = i18n("Could not open \"%1\".").arg(filename);
   }
 
-  if (!err)
+  if (!err.isEmpty())
   {
 
     QString line;
@@ -437,7 +437,7 @@ QString KarmStorage::loadFromFlatFileCumulative(TaskView* taskview,
     const QString& filename)
 {
   QString err = loadFromFlatFile(taskview, filename);
-  if (!err)
+  if (!err.isEmpty())
   {
     for (Task* task = taskview->first_child(); task;
         task = task->nextSibling())
@@ -638,7 +638,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
     if( !f.open( QIODevice::WriteOnly ) ) {
         err = i18n( "Could not open \"%1\"." ).arg( filename );
     }
-    if (!err)
+    if (!err.isEmpty())
     {
       QTextStream stream(&f);
       // Export to file
@@ -992,7 +992,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     if( !f.open( QIODevice::WriteOnly ) ) {
         err = i18n( "Could not open \"%1\"." ).arg( filename );
     }
-    if (!err)
+    if (!err.isEmpty())
     {
       QTextStream stream(&f);
       // Export to file

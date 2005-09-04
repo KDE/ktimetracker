@@ -265,7 +265,7 @@ void MainWindow::makeMenus()
       actionCollection(),
       "reset_all_times");
   actionStart = new KAction( i18n("&Start"),
-      QString::fromLatin1("1rightarrow"), Key_S,
+      QString::fromLatin1("1rightarrow"), Qt::Key_S,
       _taskView,
       SLOT( startCurrentTimer() ), actionCollection(),
       "start");
@@ -275,63 +275,63 @@ void MainWindow::makeMenus()
       SLOT( stopCurrentTimer() ), actionCollection(),
       "stop");
   actionStopAll = new KAction( i18n("Stop &All Timers"),
-      Key_Escape,
+      Qt::Key_Escape,
       _taskView,
       SLOT( stopAllTimers() ), actionCollection(),
       "stopAll");
   actionStopAll->setEnabled(false);
 
   actionNew = new KAction( i18n("&New..."),
-      QString::fromLatin1("filenew"), CTRL+Key_N,
+      QString::fromLatin1("filenew"), Qt::CTRL+Qt::Key_N,
       _taskView,
       SLOT( newTask() ), actionCollection(),
       "new_task");
   actionNewSub = new KAction( i18n("New &Subtask..."),
-      QString::fromLatin1("kmultiple"), CTRL+ALT+Key_N,
+      QString::fromLatin1("kmultiple"), Qt::CTRL+Qt::ALT+Qt::Key_N,
       _taskView,
       SLOT( newSubTask() ), actionCollection(),
       "new_sub_task");
   actionDelete = new KAction( i18n("&Delete"),
-      QString::fromLatin1("editdelete"), Key_Delete,
+      QString::fromLatin1("editdelete"), Qt::Key_Delete,
       _taskView,
       SLOT( deleteTask() ), actionCollection(),
       "delete_task");
   actionEdit = new KAction( i18n("&Edit..."),
-      QString::fromLatin1("edit"), CTRL + Key_E,
+      QString::fromLatin1("edit"), Qt::CTRL + Qt::Key_E,
       _taskView,
       SLOT( editTask() ), actionCollection(),
       "edit_task");
 //  actionAddComment = new KAction( i18n("&Add Comment..."),
 //      QString::fromLatin1("document"),
-//      CTRL+ALT+Key_E,
+//      Qt::CTRL+Qt::ALT+Qt::Key_E,
 //      _taskView,
 //      SLOT( addCommentToTask() ),
 //      actionCollection(),
 //      "add_comment_to_task");
   actionMarkAsComplete = new KAction( i18n("&Mark as Complete"),
       QString::fromLatin1("document"),
-      CTRL+Key_M,
+      Qt::CTRL+Qt::Key_M,
       _taskView,
       SLOT( markTaskAsComplete() ),
       actionCollection(),
       "mark_as_complete");
   actionMarkAsIncomplete = new KAction( i18n("&Mark as Incomplete"),
       QString::fromLatin1("document"),
-      CTRL+Key_M,
+      Qt::CTRL+Qt::Key_M,
       _taskView,
       SLOT( markTaskAsIncomplete() ),
       actionCollection(),
       "mark_as_incomplete");
   actionClipTotals = new KAction( i18n("&Copy Totals to Clipboard"),
       QString::fromLatin1("klipper"),
-      CTRL+Key_C,
+      Qt::CTRL+Qt::Key_C,
       _taskView,
       SLOT( clipTotals() ),
       actionCollection(),
       "clip_totals");
   actionClipHistory = new KAction( i18n("Copy &History to Clipboard"),
       QString::fromLatin1("klipper"),
-      CTRL+ALT+Key_C,
+      Qt::CTRL+Qt::ALT+Qt::Key_C,
       _taskView,
       SLOT( clipHistory() ),
       actionCollection(),
