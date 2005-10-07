@@ -430,8 +430,8 @@ void MainWindow::loadGeometry()
     config.setGroup( QString::fromLatin1("Main Window Geometry") );
     int w = config.readNumEntry( QString::fromLatin1("Width"), 100 );
     int h = config.readNumEntry( QString::fromLatin1("Height"), 100 );
-    w = QMAX( w, sizeHint().width() );
-    h = QMAX( h, sizeHint().height() );
+    w = qMax( w, sizeHint().width() );
+    h = qMax( h, sizeHint().height() );
     resize(w, h);
   }
 }

@@ -47,9 +47,9 @@ void MyPrinter::print()
     }
 
     // Calculate the needed width for each of the fields
-    timeWidth = QMAX(metrics.width(i18n("Total")),
+    timeWidth = qMax(metrics.width(i18n("Total")),
                      metrics.width(formatTime(totalTotal)));
-    sessionTimeWidth = QMAX(metrics.width(i18n("Session")),
+    sessionTimeWidth = qMax(metrics.width(i18n("Session")),
                             metrics.width(formatTime(sessionTotal)));
 
     nameFieldWidth = pageWidth - xMargin - timeWidth - sessionTimeWidth - 2*5;
@@ -61,9 +61,9 @@ void MyPrinter::print()
           task = static_cast<Task *>(task->nextSibling()))
     {
       int width = calculateReqNameWidth(task, metrics, 0);
-      maxReqNameFieldWidth = QMAX(maxReqNameFieldWidth, width);
+      maxReqNameFieldWidth = qMax(maxReqNameFieldWidth, width);
     }
-    nameFieldWidth = QMIN(nameFieldWidth, maxReqNameFieldWidth);
+    nameFieldWidth = qMin(nameFieldWidth, maxReqNameFieldWidth);
 
     int realPageWidth = nameFieldWidth + timeWidth + sessionTimeWidth + 2*5;
 
@@ -120,7 +120,7 @@ int MyPrinter::calculateReqNameWidth( Task* task,
               subTask;
               subTask = subTask->nextSibling() ) {
     int subTaskWidth = calculateReqNameWidth(subTask, metrics, level+1);
-    width = QMAX(width, subTaskWidth);
+    width = qMax(width, subTaskWidth);
   }
   return width;
 }
