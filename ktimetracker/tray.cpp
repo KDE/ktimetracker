@@ -21,7 +21,7 @@
 #include <kglobalsettings.h>
 #include <kiconloader.h>        // UserIcon
 #include <klocale.h>            // i18n
-#include <kpopupmenu.h>         // plug()
+#include <kmenu.h>         // plug()
 #include <ksystemtray.h>
 
 #include "mainwindow.h"

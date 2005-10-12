@@ -417,7 +417,7 @@ extern "C"
 {
     KDE_EXPORT void* init_libkarmpart()
     {
-	KGlobal::locale()->insertCatalogue("karm");
+	KGlobal::locale()->insertCatalog("karm");
         return new karmPartFactory;
     }
 }

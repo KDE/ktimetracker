@@ -7,7 +7,7 @@
 //Added by qt3to4:
 #include <Q3PopupMenu>
 // experiement
-// #include <kpopupmenu.h>
+// #include <kmenu.h>
 #include <ksystemtray.h>
 
 #include "task.h"
@@ -21,7 +21,7 @@ class QTimer;
 class KSystemTray;
 class MainWindow;
 // experiment
-// class KPopupMenu;
+// class KMenu;
 
 class KarmTray : public KSystemTray
 {
@@ -52,7 +52,7 @@ class KarmTray : public KSystemTray
     void insertTitle(QString title);
 
   private:
-    KPopupMenu *trayPopupMenu;
+    KMenu *trayPopupMenu;
     QPopupMenu *trayPopupMenu2;
     */
 };
