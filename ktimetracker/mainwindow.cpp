@@ -43,7 +43,7 @@ MainWindow::MainWindow( const QString &icsfile )
     _sessionSum( 0 )
 {
 
-  _taskView  = new TaskView( this, 0, icsfile );
+  _taskView  = new TaskView( this, icsfile );
 
   setCentralWidget( _taskView );
   // status bar

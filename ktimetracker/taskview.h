@@ -47,7 +47,7 @@ class TaskView : public KListView
   Q_OBJECT
 
   public:
-    TaskView( QWidget *parent = 0, const char *name = 0, const QString &icsfile = "" );
+    TaskView( QWidget *parent = 0, const QString &icsfile = "" );
     virtual ~TaskView();
 
     /**  Return the first item in the view, cast to a Task pointer.  */

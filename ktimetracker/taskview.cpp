@@ -40,7 +40,7 @@
 
 class DesktopTracker;
 
-TaskView::TaskView(QWidget *parent, const char *name, const QString &icsfile ):KListView(parent)
+TaskView::TaskView(QWidget *parent, const QString &icsfile ):KListView(parent)
 {
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
@@ -153,11 +153,11 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 
   // This checks that there has been a click onto an item,
   // not into an empty part of the KListView.
-  if ( e->pos().y() >= current_item()->itemPos() && 
+  if ( task != 0 &&  
+       activeTasks.findRef(task) == -1 && 
+       e->pos().y() >= current_item()->itemPos() && 
        e->pos().y() < current_item()->itemPos()+current_item()->height() )
   {
-    if ( task != 0 &&  activeTasks.findRef(task) == -1 ) 
-    {
       // Stop all the other timers.
       for (unsigned int i=0; i<activeTasks.count();i++)
         (activeTasks.at(i))->setRunning(false, _storage);
@@ -165,9 +165,8 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 
       // Start the new timer.
       startCurrentTimer();
-    } 
-    else stopCurrentTimer();
-  }
+  } 
+  else stopCurrentTimer();
 }
 
 TaskView::~TaskView()
