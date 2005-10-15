@@ -24,7 +24,7 @@
 
 karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name )
-    : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent, name), 
+    : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent), 
     _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {

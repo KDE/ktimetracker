@@ -40,7 +40,7 @@
 
 class DesktopTracker;
 
-TaskView::TaskView(QWidget *parent, const char *name, const QString &icsfile ):KListView(parent,name)
+TaskView::TaskView(QWidget *parent, const char *name, const QString &icsfile ):KListView(parent)
 {
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
@@ -125,12 +125,15 @@ void TaskView::contentsMousePressEvent ( QMouseEvent * e )
   KListView::contentsMousePressEvent(e);
   Task* task = current_item();
 
-  if ( task != 0 ) // zero can happen e.g. if there is no task!
+  // This checks that there has been a click onto an item,
+  // not into an empty part of the KListView.
+  if ( task != 0 &&  // zero can happen if there is no task
+       e->pos().y() >= current_item()->itemPos() && 
+       e->pos().y() < current_item()->itemPos()+current_item()->height() ) 
 
-  { // see if we mark the task as completed
-
+  { 
+    // see if the click was on the completed icon
     int leftborder = treeStepSize() * ( task->depth() + ( rootIsDecorated() ? 1 : 0)) + itemMargin();
-    // if clicked onto the "completed" icon
     if ((leftborder < e->x()) && (e->x() < 19 + leftborder ))
     {
       if ( task->isComplete() ) task->setPercentComplete( 0, _storage );
@@ -148,17 +151,23 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
   // start/stop timer
   Task *task = current_item();
 
-  if ( task != 0 && activeTasks.findRef(task) == -1 )
+  // This checks that there has been a click onto an item,
+  // not into an empty part of the KListView.
+  if ( e->pos().y() >= current_item()->itemPos() && 
+       e->pos().y() < current_item()->itemPos()+current_item()->height() )
   {
-    // Stop all the other timers.
-    for (unsigned int i=0; i<activeTasks.count();i++)
-      (activeTasks.at(i))->setRunning(false, _storage);
-    activeTasks.clear();
+    if ( task != 0 &&  activeTasks.findRef(task) == -1 ) 
+    {
+      // Stop all the other timers.
+      for (unsigned int i=0; i<activeTasks.count();i++)
+        (activeTasks.at(i))->setRunning(false, _storage);
+      activeTasks.clear();
 
-    // Start the new timer.
-    startCurrentTimer();
+      // Start the new timer.
+      startCurrentTimer();
+    } 
+    else stopCurrentTimer();
   }
-  else stopCurrentTimer();
 }
 
 TaskView::~TaskView()
