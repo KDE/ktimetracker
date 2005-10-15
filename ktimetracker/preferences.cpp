@@ -125,7 +125,7 @@ void Preferences::makeStoragePage()
 
   // iCalendar
   QLabel* _iCalFileLabel = new QLabel( i18n("iCalendar file:"), storagePage);
-  _iCalFileW = new KURLRequester(storagePage, "_iCalFileW");
+  _iCalFileW = new KURLRequester( "_iCalFileW" );
   _iCalFileW->setFilter(QString::fromLatin1("*.ics"));
   _iCalFileW->setMode(KFile::File);
 

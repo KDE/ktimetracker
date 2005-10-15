@@ -96,6 +96,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   // Use KDE_CXXFLAGS=$(USE_EXCEPTIONS) in Makefile.am if you want to use
   // exceptions (David Faure)
 
+  kdDebug(5970) << "Entering KarmStorage::load" << endl;
   QString err;
   KEMailSettings settings;
   if ( fileName.isEmpty() ) fileName = preferences->iCalFile();
@@ -214,6 +215,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
       << " tasks from " << _icalfile << endl;
   }
 
+  buildTaskView(_calendar, view);
   return err;
 }
 
