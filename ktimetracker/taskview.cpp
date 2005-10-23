@@ -558,19 +558,23 @@ void TaskView::newSubTask()
 
 void TaskView::editTask()
 {
+  kdDebug(5970) << "Entering editTask";
   Task *task = current_item();
   if (!task)
     return;
 
   DesktopList desktopList = task->getDesktops();
+  DesktopList oldDeskTopList = desktopList;
   EditTaskDialog *dialog = new EditTaskDialog(i18n("Edit Task"), true, &desktopList);
   dialog->setTask( task->name(),
                    task->time(),
                    task->sessionTime() );
   int result = dialog->exec();
-  if (result == QDialog::Accepted) {
+  if (result == QDialog::Accepted) 
+  {
     QString taskName = i18n("Unnamed Task");
-    if (!dialog->taskName().isEmpty()) {
+    if (!dialog->taskName().isEmpty()) 
+    {
       taskName = dialog->taskName();
     }
     // setName only does something if the new name is different
@@ -589,11 +593,12 @@ void TaskView::editTask()
     // since it makes no sense to track for every desktop.
     if (desktopList.size() == (unsigned int)_desktopTracker->desktopCount())
       desktopList.clear();
-
-    task->setDesktopList(desktopList);
-
-    _desktopTracker->registerForDesktops( task, desktopList );
-
+    // only do something for autotracking if the new setting is different
+    if ( oldDeskTopList != desktopList )
+    { 
+      task->setDesktopList(desktopList);
+      _desktopTracker->registerForDesktops( task, desktopList );
+    }
     emit updateButtons();
   }
   delete dialog;
