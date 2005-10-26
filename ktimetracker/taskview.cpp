@@ -499,7 +499,7 @@ void TaskView::newTask(QString caption, Task *parent)
 
     // If all available desktops are checked, disable auto tracking,
     // since it makes no sense to track for every desktop.
-    if ( desktopList.size() == ( unsigned int ) _desktopTracker->desktopCount() )
+    if ( desktopList.size() ==  _desktopTracker->desktopCount() )
       desktopList.clear();
 
     QString uid = addTask( taskName, total, session, desktopList, parent );
@@ -591,7 +591,7 @@ void TaskView::editTask()
 
     // If all available desktops are checked, disable auto tracking,
     // since it makes no sense to track for every desktop.
-    if (desktopList.size() == (unsigned int)_desktopTracker->desktopCount())
+    if (desktopList.size() == _desktopTracker->desktopCount())
       desktopList.clear();
     // only do something for autotracking if the new setting is different
     if ( oldDeskTopList != desktopList )

@@ -33,7 +33,7 @@
 #include "timekard.h"
 #include "tray.h"
 #include "version.h"
-
+#include <kxmlguifactory.h>
 MainWindow::MainWindow( const QString &icsfile )
   : DCOPObject ( "KarmDCOPIface" ),
     KParts::MainWindow(), 
