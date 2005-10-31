@@ -97,7 +97,7 @@ Task::~Task() {
   delete _timer;
 }
 
-void Task::setRunning( bool on, KarmStorage* storage )
+void Task::setRunning( bool on, KarmStorage* storage, QDateTime whenStarted  )
 {
   if ( on ) {
     if (isComplete()) return; // don't start if its marked complete
@@ -105,7 +105,7 @@ void Task::setRunning( bool on, KarmStorage* storage )
       _timer->start(1000);
       storage->startTimer(this);
       _currentPic=7;
-      _lastStart = QDateTime::currentDateTime();
+      _lastStart = whenStarted;
       updateActiveIcon();
     }
   }

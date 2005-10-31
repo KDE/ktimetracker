@@ -164,8 +164,18 @@ class TaskView : public KListView
     void adaptColumns();
     /** receiving signal that a task is being deleted */
     void deletingTask(Task* deletedTask);
-    void startTimerFor( Task* task );
-    void stopTimerFor( Task* task );
+
+    /** starts timer for task.
+     * @param task      task to start timer of
+     * @param startTime if taskview has been modified by another program, we
+                            have to set the starting time to not-now. */
+    void startTimerFor( Task* task, QDateTime startTime = QDateTime::currentDateTime() );
+     void stopTimerFor( Task* task );
+
+    /** clears all active tasks. Needed e.g. if iCal file was modified by
+       another program and taskview is cleared without stopping tasks
+        IF YOU DO NOT KNOW WHAT YOU ARE DOING, CALL stopAllTimers INSTEAD */
+    void clearActiveTasks();
 
     /** User has picked a new iCalendar file on preferences screen. */
     void iCalFileChanged(QString file);

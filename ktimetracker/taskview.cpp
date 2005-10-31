@@ -243,7 +243,6 @@ void TaskView::closeStorage() { _storage->closeStorage( this ); }
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {
   kdDebug(5970) << "entering iCalFileModified" << endl;
-  stopAllTimers();
   kdDebug(5970) << rc->infoText() << endl;
   rc->dump();
   _storage->buildTaskView(rc,this);
@@ -273,6 +272,7 @@ void TaskView::refresh()
   if (!anyChilds) {
     setRootIsDecorated(false);
   }
+  emit updateButtons();
   kdDebug(5970) << "exiting TaskView::refresh()" << endl;
 }
     
@@ -404,11 +404,11 @@ long TaskView::count()
   return n;
 }
 
-void TaskView::startTimerFor(Task* task)
+void TaskView::startTimerFor(Task* task, QDateTime startTime )
 {
   if (task != 0 && activeTasks.findRef(task) == -1) {
     _idleTimeDetector->startIdleDetection();
-    task->setRunning(true, _storage);
+    task->setRunning(true, _storage, startTime);
     activeTasks.append(task);
     emit updateButtons();
     if ( activeTasks.count() == 1 )
@@ -416,6 +416,11 @@ void TaskView::startTimerFor(Task* task)
 
     emit tasksChanged( activeTasks);
   }
+}
+
+void TaskView::clearActiveTasks()
+{
+  activeTasks.clear();
 }
 
 void TaskView::stopAllTimers()

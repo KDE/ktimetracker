@@ -226,17 +226,30 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   KCal::Todo::List todoList;
   KCal::Todo::List::ConstIterator todo;
   Q3Dict< Task > map;
+  vector<QString> runningTasks;
+  vector<QDateTime> startTimes;
 
-  // 1. delete old tasks
+  // remember tasks that are running and their start times
+  for ( int i=0; i<view->count(); i++)
+  {
+    if ( view->item_at_index(i)->isRunning() )
+    {
+      runningTasks.push_back( view->item_at_index(i)->uid() );
+      startTimes.push_back( view->item_at_index(i)->lastStart() );
+    }
+  }
+
+  //view->stopAllTimers();
+  // delete old tasks
+
   while (view->item_at_index(0)) view->item_at_index(0)->cut();
 
-  // 1. insert tasks form rc into taskview
-  // 1.1. Build dictionary to look up Task object from Todo uid.  Each task is a
-  // QListViewItem, and is initially added with the view as the parent.
   todoList = rc->rawTodos();
+  int i=0;
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
     Task* task = new Task(*todo, view);
+    if ( task == view->item_at_index( i++ ) ) kdDebug() << i << " is equal";
     map.insert( (*todo)->uid(), task );
     view->setRootIsDecorated(true);
     task->setPixmapProgress();
@@ -261,6 +274,22 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
       if (!err.isEmpty()) task->move( newParent);
     }
   }
+
+  view->clearActiveTasks();
+  // restart tasks that have been running with their start times
+  for ( int i=0; i<view->count(); i++)
+  {
+    for ( int n=0; n<runningTasks.size(); n++)
+    {
+      if ( runningTasks[n] == view->item_at_index(i)->uid() )
+      {
+        view->startTimerFor( view->item_at_index(i), startTimes[n] ); 
+      }
+    }
+  }
+  
+  view->refresh();
+
   return err;
 }
 
