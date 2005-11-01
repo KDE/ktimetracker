@@ -425,7 +425,7 @@ void MainWindow::loadGeometry()
   if (initialGeometrySet()) setAutoSaveSettings();
   else
   {
-    KConfig &config = *kapp->config();
+    KConfig &config = *KGlobal::config();
 
     config.setGroup( QString::fromLatin1("Main Window Geometry") );
     int w = config.readNumEntry( QString::fromLatin1("Width"), 100 );

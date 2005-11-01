@@ -19,6 +19,7 @@
 #include <klocale.h>            // i18n
 #include <kstandarddirs.h>
 #include <kurlrequester.h>
+#include <kglobal.h>
 
 #include "preferences.h"
 
@@ -254,7 +255,7 @@ QString Preferences::userRealName()                  const { return _userRealNam
 //---------------------------------------------------------------------------
 void Preferences::load()
 {
-  KConfig &config = *kapp->config();
+  KConfig &config = *KGlobal::config();
 
   config.setGroup( QString::fromLatin1("Idle detection") );
   _doIdleDetectionV = config.readBoolEntry( QString::fromLatin1("enabled"),
