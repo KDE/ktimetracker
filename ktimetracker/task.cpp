@@ -77,7 +77,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
   }
 
   _removing = false;
-  _name = taskName.stripWhiteSpace();
+  _name = taskName.trimmed();
   _lastStart = QDateTime::currentDateTime();
   _totalTime = _time = minutes;
   _totalSessionTime = _sessionTime = sessionTime;
