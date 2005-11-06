@@ -257,17 +257,10 @@ void TaskView::refresh()
     t->setPixmapProgress();
   }
   
-  // remove root decoration if there is no more children.
-  bool anyChilds = false;
-  for(Task* child = first_child();
-            child;
-            child = child->nextSibling()) {
-    if (child->childCount() != 0) {
-      anyChilds = true;
-      break;
-    }
-  }
-  setRootIsDecorated( anyChilds );
+  // remove root decoration if there is no more child.
+  i = 0;
+  while ( item_at_index( ++i ) && ( item_at_index( i )->depth() == 0 ) );
+  setRootIsDecorated( item_at_index( i ) && ( item_at_index( i )->depth() != 0 ) );
 
   emit updateButtons();
   kdDebug(5970) << "exiting TaskView::refresh()" << endl;
