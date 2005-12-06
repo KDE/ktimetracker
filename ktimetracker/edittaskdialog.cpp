@@ -1,7 +1,7 @@
 /*
  *   karm
  *   This file only: Copyright (C) 1999  Espen Sand, espensa@online.no
- *   Modifications (see CVS log) Copyright (C) 2000 Klar‰lvdalens
+ *   Modifications (see CVS log) Copyright (C) 2000 Klar√§lvdalens
  *   Datakonsult AB <kalle@dalheimer.de>, Jesper Pedersen <blackie@kde.org>
  *
  *
