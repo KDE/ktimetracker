@@ -36,7 +36,7 @@
 #include <kxmlguifactory.h>
 MainWindow::MainWindow( const QString &icsfile )
   : DCOPObject ( "KarmDCOPIface" ),
-    KParts::MainWindow(), 
+    KParts::MainWindow(),
     _accel     ( new KAccel( this ) ),
     _watcher   ( new KAccelMenuWatch( _accel, this ) ),
     _totalSum  ( 0 ),
@@ -91,26 +91,26 @@ MainWindow::MainWindow( const QString &icsfile )
   slotSelectionChanged();
 
   // Register with DCOP
-  if ( !kapp->dcopClient()->isRegistered() ) 
+  if ( !kapp->dcopClient()->isRegistered() )
   {
     kapp->dcopClient()->registerAs( "karm" );
     kapp->dcopClient()->setDefaultObject( objId() );
   }
 
   // Set up DCOP error messages
-  m_error[ KARM_ERR_GENERIC_SAVE_FAILED ] = 
+  m_error[ KARM_ERR_GENERIC_SAVE_FAILED ] =
     i18n( "Save failed, most likely because the file could not be locked." );
-  m_error[ KARM_ERR_COULD_NOT_MODIFY_RESOURCE ] = 
+  m_error[ KARM_ERR_COULD_NOT_MODIFY_RESOURCE ] =
     i18n( "Could not modify calendar resource." );
-  m_error[ KARM_ERR_MEMORY_EXHAUSTED ] = 
+  m_error[ KARM_ERR_MEMORY_EXHAUSTED ] =
     i18n( "Out of memory--could not create object." );
-  m_error[ KARM_ERR_UID_NOT_FOUND ] = 
+  m_error[ KARM_ERR_UID_NOT_FOUND ] =
     i18n( "UID not found." );
-  m_error[ KARM_ERR_INVALID_DATE ] = 
+  m_error[ KARM_ERR_INVALID_DATE ] =
     i18n( "Invalidate date--format is YYYY-MM-DD." );
-  m_error[ KARM_ERR_INVALID_TIME ] = 
+  m_error[ KARM_ERR_INVALID_TIME ] =
     i18n( "Invalid time--format is YYYY-MM-DDTHH:MM:SS." );
-  m_error[ KARM_ERR_INVALID_DURATION ] = 
+  m_error[ KARM_ERR_INVALID_DURATION ] =
     i18n( "Invalid task duration--must be greater than zero." );
 }
 
@@ -149,7 +149,7 @@ void MainWindow::exportcsvHistory()
   if (err.isEmpty()) statusBar()->message(i18n("Successfully exported History to CSV-file"),1807);
   else KMessageBox::error(this, err.ascii());
   saveGeometry();
-  
+
 }
 
 void MainWindow::quit()
@@ -348,7 +348,7 @@ void MainWindow::makeMenus()
       "export_csvhistory");
   new KAction( i18n("Import Tasks From &Planner..."), 0,
       _taskView, SLOT(importPlanner()), actionCollection(),
-      "import_planner");  
+      "import_planner");
 
 /*
   new KAction( i18n("Import E&vents"), 0,
@@ -501,11 +501,11 @@ QString MainWindow::taskIdFromName( const QString &taskname ) const
     rval = _hasTask( task, taskname );
     task = task->nextSibling();
   }
-  
+
   return rval;
 }
 
-int MainWindow::addTask( const QString& taskname ) 
+int MainWindow::addTask( const QString& taskname )
 {
   DesktopList desktopList;
   QString uid = _taskView->addTask( taskname, 0, 0, desktopList );
@@ -528,11 +528,11 @@ QString MainWindow::setPerCentComplete( const QString& taskName, int perCent )
     if ((_taskView->item_at_index(i)->name()==taskName))
     {
       index=i;
-      if (err==QString::null) err="task name is abigious";
+      if (err.isNull()) err="task name is abigious";
       if (err=="no such task") err=QString::null;
     }
   }
-  if (err==QString::null) 
+  if (err.isNull())
   {
     _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
   }
@@ -561,7 +561,7 @@ int MainWindow::bookTime
   if ( t == NULL ) rval = KARM_ERR_UID_NOT_FOUND;
 
   // Parse datetime
-  if ( !rval ) 
+  if ( !rval )
   {
     startDate = QDate::fromString( datetime, Qt::ISODate );
     if ( datetime.length() > 10 )  // "YYYY-MM-DD".length() = 10
@@ -602,7 +602,7 @@ int MainWindow::totalMinutesForTaskId( const QString& taskId )
 {
   int rval = 0;
   Task *task, *t;
-  
+
   kdDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
 
   // Find task
@@ -613,12 +613,12 @@ int MainWindow::totalMinutesForTaskId( const QString& taskId )
     t = _hasUid( task, taskId );
     task = task->nextSibling();
   }
-  if ( t != NULL ) 
+  if ( t != NULL )
   {
     rval = t->totalTime();
     kdDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
   }
-  else 
+  else
   {
     kdDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
     rval = KARM_ERR_UID_NOT_FOUND;
@@ -630,7 +630,7 @@ int MainWindow::totalMinutesForTaskId( const QString& taskId )
 QString MainWindow::_hasTask( Task* task, const QString &taskname ) const
 {
   QString rval = "";
-  if ( task->name() == taskname ) 
+  if ( task->name() == taskname )
   {
     rval = task->uid();
   }
@@ -673,11 +673,11 @@ QString MainWindow::starttimerfor( const QString& taskname )
     if ((_taskView->item_at_index(i)->name()==taskname))
     {
       index=i;
-      if (err==QString::null) err="task name is abigious";
+      if (err.isNull() ) err="task name is abigious";
       if (err=="no such task") err=QString::null;
     }
   }
-  if (err==QString::null) _taskView->startTimerFor( _taskView->item_at_index(index) );
+  if (err.isNull()) _taskView->startTimerFor( _taskView->item_at_index(index) );
   return err;
 }
 
@@ -690,11 +690,11 @@ QString MainWindow::stoptimerfor( const QString& taskname )
     if ((_taskView->item_at_index(i)->name()==taskname))
     {
       index=i;
-      if (err==QString::null) err="task name is abigious";
+      if (err.isNull()) err="task name is abigious";
       if (err=="no such task") err=QString::null;
     }
   }
-  if (err==QString::null) _taskView->stopTimerFor( _taskView->item_at_index(index) );
+  if (err.isNull()) _taskView->stopTimerFor( _taskView->item_at_index(index) );
   return err;
 }
 
@@ -708,7 +708,7 @@ QString MainWindow::exportcsvfile( QString filename, QString from, QString to, i
   rc.to=QDate::fromString( to );
   if ( rc.to.isNull() ) rc.to=QDate::fromString( to, Qt::ISODate );
   kdDebug(5970) << "rc.to " << rc.to << endl;
-  rc.reportType=(ReportCriteria::REPORTTYPE) type;  // history report or totals report 
+  rc.reportType=(ReportCriteria::REPORTTYPE) type;  // history report or totals report
   rc.decimalMinutes=decimalMinutes;
   rc.allTasks=allTasks;
   rc.delimiter=delimiter;

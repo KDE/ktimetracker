@@ -24,7 +24,7 @@
 
 karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name )
-    : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent), 
+    : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent),
     _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
@@ -218,10 +218,10 @@ void karmPart::makeMenus()
       "export_csvhistory");
   new KAction( i18n("Import Tasks From &Planner..."), 0,
       _taskView, SLOT(importPlanner()), actionCollection(),
-      "import_planner");  
+      "import_planner");
   new KAction( i18n("Configure KArm..."), 0,
       _preferences, SLOT(showDialog()), actionCollection(),
-      "configure_karm");  
+      "configure_karm");
 
 /*
   new KAction( i18n("Import E&vents"), 0,
@@ -460,7 +460,7 @@ QString karmPart::taskIdFromName( const QString &taskname ) const
     rval = _hasTask( task, taskname );
     task = task->nextSibling();
   }
-  
+
   return rval;
 }
 
@@ -479,7 +479,7 @@ bool karmPart::save()
   return true;
 }
 
-int karmPart::addTask( const QString& taskname ) 
+int karmPart::addTask( const QString& taskname )
 {
   DesktopList desktopList;
   QString uid = _taskView->addTask( taskname, 0, 0, desktopList );
@@ -502,11 +502,11 @@ QString karmPart::setPerCentComplete( const QString& taskName, int perCent )
     if ((_taskView->item_at_index(i)->name()==taskName))
     {
       index=i;
-      if (err==QString::null) err="task name is abigious";
+      if (err.isNull()) err="task name is abigious";
       if (err=="no such task") err=QString::null;
     }
   }
-  if (err==QString::null) 
+  if (err.isNull())
   {
     _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
   }
@@ -535,7 +535,7 @@ int karmPart::bookTime
   if ( t == NULL ) rval = KARM_ERR_UID_NOT_FOUND;
 
   // Parse datetime
-  if ( !rval ) 
+  if ( !rval )
   {
     startDate = QDate::fromString( datetime, Qt::ISODate );
     if ( datetime.length() > 10 )  // "YYYY-MM-DD".length() = 10
@@ -576,7 +576,7 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
 {
   int rval = 0;
   Task *task, *t;
-  
+
   kdDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
 
   // Find task
@@ -587,12 +587,12 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
     t = _hasUid( task, taskId );
     task = task->nextSibling();
   }
-  if ( t != NULL ) 
+  if ( t != NULL )
   {
     rval = t->totalTime();
     kdDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
   }
-  else 
+  else
   {
     kdDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
     rval = KARM_ERR_UID_NOT_FOUND;
@@ -604,7 +604,7 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
 QString karmPart::_hasTask( Task* task, const QString &taskname ) const
 {
   QString rval = "";
-  if ( task->name() == taskname ) 
+  if ( task->name() == taskname )
   {
     rval = task->uid();
   }
