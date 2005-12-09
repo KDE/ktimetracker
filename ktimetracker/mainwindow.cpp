@@ -19,7 +19,7 @@
 #include <kstatusbar.h>         // statusBar()
 #include <kstdaction.h>
 #include <qnamespace.h>
-#include <q3popupmenu.h>
+#include <QMenu>
 #include <q3ptrlist.h>
 #include <qstring.h>
 
@@ -457,7 +457,7 @@ bool MainWindow::queryClose()
 
 void MainWindow::contextMenuRequest( Q3ListViewItem*, const QPoint& point, int )
 {
-    Q3PopupMenu* pop = dynamic_cast<Q3PopupMenu*>(
+    QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );
     if ( pop )
       pop->popup( point );
