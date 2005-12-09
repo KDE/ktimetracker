@@ -1,8 +1,8 @@
 #ifndef KARM_DESKTOP_LIST_H
 #define KARM_DESKTOP_LIST_H
 
-#include <q3valuevector.h>
+#include <QVector>
 
-typedef Q3ValueVector<int> DesktopList;
+typedef QVector<int> DesktopList;
 
 #endif // KARM_DESKTOP_LIST_H
