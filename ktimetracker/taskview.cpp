@@ -11,7 +11,7 @@
 #include <qxml.h>
 //Added by qt3to4:
 #include <QMouseEvent>
-#include <Q3ValueList>
+#include <QList>
 
 #include "kapplication.h"       // kapp
 #include <kconfig.h>
@@ -762,7 +762,7 @@ void TaskView::iCalFileChanged(QString file)
   load();
 }
 
-Q3ValueList<HistoryEvent> TaskView::getHistory(const QDate& from,
+QList<HistoryEvent> TaskView::getHistory(const QDate& from,
     const QDate& to) const
 {
   return _storage->getHistory(from, to);

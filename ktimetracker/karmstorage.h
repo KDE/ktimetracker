@@ -26,7 +26,7 @@
 #include <q3dict.h>
 #include <q3ptrstack.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 #include "journal.h"
 #include "reportcriteria.h"
@@ -289,7 +289,7 @@ class KarmStorage
     bool isNewStorage(const Preferences* preferences) const;
 
     /** Return a list of start/stop events for the given date range. */
-    Q3ValueList<HistoryEvent> getHistory(const QDate& from, const QDate& to);
+    QList<HistoryEvent> getHistory(const QDate& from, const QDate& to);
 
   private:
     static KarmStorage                *_instance;

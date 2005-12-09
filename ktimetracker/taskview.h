@@ -6,7 +6,7 @@
 #include <q3ptrstack.h>
 //Added by qt3to4:
 #include <QMouseEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QTextStream>
 
 #include <klistview.h>
@@ -75,7 +75,7 @@ class TaskView : public KListView
     long count();
 
     /** Return list of start/stop events for given date range. */
-    Q3ValueList<HistoryEvent> getHistory(const QDate& from, const QDate& to) const;
+    QList<HistoryEvent> getHistory(const QDate& from, const QDate& to) const;
 
     /** Schedule that we should save very soon */
     void scheduleSave();

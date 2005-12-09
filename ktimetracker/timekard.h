@@ -30,7 +30,7 @@
 
 #include "karmstorage.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 class QString;
 class QDate;
@@ -53,7 +53,7 @@ class Week
     Week(QDate from);
     QDate start() const;
     QDate end() const;
-    Q3ValueList<QDate> days() const;
+    QList<QDate> days() const;
 
     /**
      * Returns a list of weeks for the given date range.
@@ -65,7 +65,7 @@ class Week
      * days, one being a Sunday and the other being a Monday, you will get two
      * weeks back in the list.
      */
-    static Q3ValueList<Week> weeksFromDateRange(const QDate& from,
+    static QList<Week> weeksFromDateRange(const QDate& from,
         const QDate& to);
 
     /**

@@ -27,7 +27,7 @@
 #include <qpainter.h>
 #include <qmap.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 
 #include <kglobal.h>
 #include <kdebug.h>
@@ -190,7 +190,7 @@ QString TimeKard::sectionHistoryAsText(
   line.fill('-', sectionReportWidth);
   line += cr;
 
-  Q3ValueList<HistoryEvent> events;
+  QList<HistoryEvent> events;
   if ( sectionFrom < from && sectionTo > to)
   {
     events = taskview->getHistory(from, to);
@@ -216,7 +216,7 @@ QString TimeKard::sectionHistoryAsText(
   // NNNNN = the VTODO uid.  The value is the total seconds logged against
   // that task on that day.  Note the UID is the todo id, not the event id,
   // so times are accumulated for each task.
-  for (Q3ValueList<HistoryEvent>::iterator event = events.begin(); event != events.end(); ++event)
+  for (QList<HistoryEvent>::iterator event = events.begin(); event != events.end(); ++event)
   {
     QString daykey = (*event).start().date().toString(QString::fromLatin1("yyyyMMdd"));
     QString daytaskkey = QString::fromLatin1("%1_%2")
@@ -319,8 +319,8 @@ QString TimeKard::historyAsText(TaskView* taskview, const QDate& from,
   if ( perWeek )
   {
     // output one time card table for each week in the date range
-    Q3ValueList<Week> weeks = Week::weeksFromDateRange(from, to);
-    for (Q3ValueList<Week>::iterator week = weeks.begin(); week != weeks.end(); ++week)
+    QList<Week> weeks = Week::weeksFromDateRange(from, to);
+    for (QList<Week>::iterator week = weeks.begin(); week != weeks.end(); ++week)
     {
       retval += sectionHistoryAsText( taskview, (*week).start(), (*week).end(), from, to, (*week).name(), justThisTask, totalsOnly );
     }
@@ -353,10 +353,10 @@ QString Week::name() const
   return i18n("Week of %1").arg(KGlobal::locale()->formatDate(start()));
 }
 
-Q3ValueList<Week> Week::weeksFromDateRange(const QDate& from, const QDate& to)
+QList<Week> Week::weeksFromDateRange(const QDate& from, const QDate& to)
 {
   QDate start;
-  Q3ValueList<Week> weeks;
+  QList<Week> weeks;
 
   // The QDate weekNumber() method always puts monday as the first day of the
   // week.

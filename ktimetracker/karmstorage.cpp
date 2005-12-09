@@ -34,7 +34,7 @@
 #include <qstring.h>
 #include <qstringlist.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
 #include <QTextStream>
 #include <Q3CString>
 
@@ -899,8 +899,8 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   QString line, buf;
   long sum;
 
-  Q3ValueList<HistoryEvent> events;
-  Q3ValueList<HistoryEvent>::iterator event;
+  QList<HistoryEvent> events;
+  QList<HistoryEvent>::iterator event;
   QMap<QString, long> taskdaytotals;
   QMap<QString, long> daytotals;
   QString daytaskkey, daykey;
@@ -1148,10 +1148,10 @@ HistoryEvent::HistoryEvent(QString uid, QString name, long duration,
 }
 
 
-Q3ValueList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
+QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
     const QDate& to)
 {
-  Q3ValueList<HistoryEvent> retval;
+  QList<HistoryEvent> retval;
   QStringList processed;
   KCal::Event::List events;
   KCal::Event::List::iterator event;
