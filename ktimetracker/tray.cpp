@@ -131,7 +131,7 @@ void KarmTray::initToolTip()
 void KarmTray::updateToolTip(Q3PtrList<Task> activeTasks)
 {
   if ( activeTasks.isEmpty() ) {
-    QToolTip::add( this, i18n("No active tasks") );
+    this->setToolTip( i18n("No active tasks") );
     return;
   }
 #warning "qt4 : porting QToolTip::font()"
@@ -162,7 +162,7 @@ void KarmTray::updateToolTip(Q3PtrList<Task> activeTasks)
     qTip = s;
   }
 
-  QToolTip::add( this, qTip );
+  this->setToolTip( qTip );
 }
 
 #include "tray.moc"

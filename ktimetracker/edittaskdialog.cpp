@@ -31,7 +31,7 @@
 #include <qsizepolicy.h>
 #include <qstring.h>
 #include <qwidget.h>
-#include <q3whatsthis.h>
+
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -228,32 +228,32 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   slotRelativePressed();
 
   // Whats this help.
-  Q3WhatsThis::add( _name,
+  _name->setWhatsThis(
                    i18n( "Enter the name of the task here. "
                          "This name is for your eyes only."));
-  Q3WhatsThis::add( _absoluteRB,
+  _absoluteRB->setWhatsThis(
                    i18n( "Use this option to set the time spent on this task "
                          "to an absolute value.\n\nFor example, if you have "
                          "worked exactly four hours on this task during the current "
                          "session, you would set the Session time to 4 hr." ) );
-  Q3WhatsThis::add( _relativeRB,
+  _relativeRB->setWhatsThis(
                    i18n( "Use this option to change the time spent on this task "
                          "relative to its current value.\n\nFor example, if you worked "
                          "on this task for one hour without the timer running, you "
                          "would add 1 hr." ) );
-  Q3WhatsThis::add( _timeTW,
+  _timeTW->setWhatsThis(
                    i18n( "This is the time the task has been "
                          "running since all times were reset."));
-  Q3WhatsThis::add( _sessionTW,
+  _sessionTW->setWhatsThis(
                    i18n( "This is the time the task has been running this "
                          "session."));
-  Q3WhatsThis::add( _diffTW, i18n( "Specify how much time to add or subtract "
+  _diffTW->setWhatsThis( i18n( "Specify how much time to add or subtract "
                                   "to the overall and session time"));
 
-  Q3WhatsThis::add( _desktopCB, 
+  _desktopCB->setWhatsThis( 
                    i18n( "Use this option to automatically start the timer "
                          "on this task when you switch to the specified desktop(s)." ) );
-  Q3WhatsThis::add( groupBox, 
+  groupBox->setWhatsThis( 
                    i18n( "Select the desktop(s) that will automatically start the "
                          "timer on this task." ) );
 }
