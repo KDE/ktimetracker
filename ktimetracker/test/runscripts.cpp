@@ -82,7 +82,7 @@ int runscripts
     if ( ! fi->fileName().startsWith( not_a_test_filename_prefix ) ) 
     {
       s->addArgument( interpreter );
-      s->addArgument( path + QDir::separator() + fi->fileName().latin1() );
+      s->addArgument( path + QDir::separator() + fi->fileName().toLatin1() );
 
       // Thorsten's xautomation tests run with user interaction by default.
       if ( interpreter == "sh" ) s->addArgument( "--batch" );

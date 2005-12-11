@@ -186,7 +186,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
 
   lay1->addLayout(lay6);
   for (int i=0; i<desktopCount; i++) {
-    _deskBox.push_back(new QCheckBox(groupBox,QString::number(i).latin1()));
+    _deskBox.push_back(new QCheckBox(groupBox,QString::number(i).toLatin1()));
     _deskBox[i]->setText(kwinmodule.desktopName(i+1));
     _deskBox[i]->setChecked(false);
 

@@ -59,8 +59,8 @@ int main( int argc, char *argv[] )
     QString icsfile = QString::fromLocal8Bit( args->arg( 0 ) );
     // FIXME: there is probably a Qt or KDE fcn for this test
     if ( icsfile.startsWith( "/" ) 
-        || icsfile.lower().startsWith( "http://" ) 
-        || icsfile.lower().startsWith( "ftp://" ) 
+        || icsfile.toLower().startsWith( "http://" ) 
+        || icsfile.toLower().startsWith( "ftp://" ) 
         )
     {
       // leave as is

@@ -1206,7 +1206,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
 
 bool KarmStorage::remoteResource( const QString& file ) const
 {
-  QString f = file.lower();
+  QString f = file.toLower();
   bool rval = f.startsWith( "http://" ) || f.startsWith( "ftp://" );
 
   kdDebug(5970) << "KarmStorage::remoteResource( " << file << " ) returns " << rval  << endl;
