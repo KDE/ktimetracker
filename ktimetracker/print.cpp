@@ -1,7 +1,6 @@
 // #include <iostream>
 
 #include <qdatetime.h>
-#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 
 #include <kglobal.h>
@@ -25,10 +24,9 @@ void MyPrinter::print()
   if (setup(0L, i18n("Print Times"))) {
     // setup
     QPainter painter(this);
-    Q3PaintDeviceMetrics deviceMetrics(this);
     QFontMetrics metrics = painter.fontMetrics();
-    pageHeight = deviceMetrics.height();
-    int pageWidth = deviceMetrics.width();
+    pageHeight = this->height();
+    int pageWidth = this->width();
     xMargin = margins().width();
     yMargin = margins().height();
     yoff = yMargin;
