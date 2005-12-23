@@ -302,15 +302,15 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
   // todo->setDtStart( current );
 
   todo->setCustomProperty( kapp->instanceName(),
-      Q3CString( "totalTaskTime" ), QString::number( _time ) );
+      QByteArray( "totalTaskTime" ), QString::number( _time ) );
   todo->setCustomProperty( kapp->instanceName(),
-      Q3CString( "totalSessionTime" ), QString::number( _sessionTime) );
+      QByteArray( "totalSessionTime" ), QString::number( _sessionTime) );
 
   if (getDesktopStr().isEmpty())
-    todo->removeCustomProperty(kapp->instanceName(), Q3CString("desktopList"));
+    todo->removeCustomProperty(kapp->instanceName(), QByteArray("desktopList"));
   else
     todo->setCustomProperty( kapp->instanceName(),
-        Q3CString( "desktopList" ), getDesktopStr() );
+        QByteArray( "desktopList" ), getDesktopStr() );
 
   todo->setOrganizer( Preferences::instance()->userRealName() );
 
@@ -332,18 +332,18 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
 
   ok = false;
   minutes = incident->customProperty( kapp->instanceName(),
-      Q3CString( "totalTaskTime" )).toInt( &ok );
+      QByteArray( "totalTaskTime" )).toInt( &ok );
   if ( !ok )
     minutes = 0;
 
   ok = false;
   sessionMinutes = incident->customProperty( kapp->instanceName(),
-      Q3CString( "totalSessionTime" )).toInt( &ok );
+      QByteArray( "totalSessionTime" )).toInt( &ok );
   if ( !ok )
     sessionMinutes = 0;
 
   QString desktopList = incident->customProperty( kapp->instanceName(),
-      Q3CString( "desktopList" ) );
+      QByteArray( "desktopList" ) );
   QStringList desktopStrList = QStringList::split( QString::fromLatin1(","),
       desktopList );
   desktops.clear();

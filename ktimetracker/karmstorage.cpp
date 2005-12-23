@@ -36,7 +36,7 @@
 //Added by qt3to4:
 #include <QList>
 #include <QTextStream>
-#include <Q3CString>
+#include <QByteArray>
 
 #include "incidence.h"
 #include "kapplication.h"       // kapp
@@ -1069,7 +1069,7 @@ bool KarmStorage::bookTime(const Task* task,
 
   // Use a custom property to keep a record of negative durations
   e->setCustomProperty( kapp->instanceName(),
-      Q3CString("duration"),
+      QByteArray("duration"),
       QString::number(durationInSeconds));
 
   return _calendar->addEvent(e);
@@ -1094,7 +1094,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 
   // Use a custom property to keep a record of negative durations
   e->setCustomProperty( kapp->instanceName(),
-      Q3CString("duration"),
+      QByteArray("duration"),
       QString::number(deltaSeconds));
 
   _calendar->addEvent(e);
@@ -1174,7 +1174,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
         processed.append( (*event)->uid());
 
         duration = (*event)->customProperty(kapp->instanceName(),
-            Q3CString("duration"));
+            QByteArray("duration"));
         if ( ! duration.isNull() )
         {
           if ( (*event)->relatedTo()

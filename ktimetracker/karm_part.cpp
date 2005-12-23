@@ -19,7 +19,7 @@
 #include <qtextstream.h>
 #include <q3multilineedit.h>
 //Added by qt3to4:
-#include <Q3CString>
+#include <QByteArray>
 #include <Q3PtrList>
 
 karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
@@ -396,7 +396,7 @@ KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, const ch
     karmPart* obj = new karmPart( parentWidget, widgetName, parent, name );
 
     // See if we are to be read-write or not
-    if (Q3CString(classname) == "KParts::ReadOnlyPart")
+    if (QByteArray(classname) == "KParts::ReadOnlyPart")
         obj->setReadWrite(false);
 
     return obj;
