@@ -503,7 +503,7 @@ QString karmPart::setPerCentComplete( const QString& taskName, int perCent )
     {
       index=i;
       if (err.isNull()) err="task name is abigious";
-      if (err=="no such task") err=QString::null;
+      if (err=="no such task") err=QString();
     }
   }
   if (err.isNull())

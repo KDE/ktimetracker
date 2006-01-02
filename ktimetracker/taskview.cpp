@@ -272,7 +272,7 @@ void TaskView::loadFromFlatFile()
 
   //KFileDialog::getSaveFileName("icalout.ics",i18n("*.ics|ICalendars"),this);
 
-  QString fileName(KFileDialog::getOpenFileName(QString::null, QString::null,
+  QString fileName(KFileDialog::getOpenFileName(QString(), QString(),
         0));
   if (!fileName.isEmpty()) {
     QString err = _storage->loadFromFlatFile(this, fileName);
@@ -302,7 +302,7 @@ QString TaskView::importPlanner(QString fileName)
 {
   kdDebug(5970) << "entering importPlanner" << endl;
   PlannerParser* handler=new PlannerParser(this);
-  if (fileName.isEmpty()) fileName=KFileDialog::getOpenFileName(QString::null, QString::null, 0);
+  if (fileName.isEmpty()) fileName=KFileDialog::getOpenFileName(QString(), QString(), 0);
   QFile xmlFile( fileName );
   QXmlInputSource source( xmlFile );
   QXmlSimpleReader reader;

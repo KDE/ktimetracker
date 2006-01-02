@@ -26,7 +26,7 @@ TaskViewWhatsThis::~TaskViewWhatsThis()
 
 QString TaskViewWhatsThis::text ( const QPoint & pos )
 {
-  QString desc = QString::null;
+  QString desc = QString();
   kdDebug(5970) << "entering TaskViewWhatsThis::text" << endl;
   kdDebug(5970) << "x-pos:" << pos.x() << endl;
   if ( pos.x() < _listView->columnWidth( 0 ) ) 
