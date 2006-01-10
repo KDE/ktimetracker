@@ -31,8 +31,9 @@
 Q3PtrVector<QPixmap> *KarmTray::icons = 0;
 
 KarmTray::KarmTray(MainWindow* parent)
-  : KSystemTray(parent, "Karm Tray")
+  : KSystemTray(parent)
 {
+  setObjectName( "Karm Tray" );
   // the timer that updates the "running" icon in the tray
   _taskActiveTimer = new QTimer(this);
   connect( _taskActiveTimer, SIGNAL( timeout() ), this,
@@ -72,8 +73,9 @@ KarmTray::KarmTray(MainWindow* parent)
 }
 
 KarmTray::KarmTray(karmPart * parent)
-  : KSystemTray( 0 , "Karm Tray")
+  : KSystemTray( 0 )
 {
+  setObjectName( "Karm Tray" );
 // it is not convenient if every kpart gets an icon in the systray.
   _taskActiveTimer = 0;
 }

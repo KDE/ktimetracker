@@ -597,7 +597,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   int width = taskview->fontMetrics().width(title) * 3;
   QSize dialogsize;
   dialogsize.setWidth(width);
-  dialog.setInitialSize( dialogsize, true );
+  dialog.setInitialSize( dialogsize );
 
   if ( taskview->count() > 1 ) dialog.show();
 
