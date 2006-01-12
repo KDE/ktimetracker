@@ -257,7 +257,7 @@ void Preferences::load()
   KConfig &config = *KGlobal::config();
 
   config.setGroup( QString::fromLatin1("Idle detection") );
-  _doIdleDetectionV = config.readBoolEntry( QString::fromLatin1("enabled"),
+  _doIdleDetectionV = config.readEntry( QString::fromLatin1("enabled"),
      true );
   _idleDetectValueV = config.readNumEntry(QString::fromLatin1("period"), 15);
 
@@ -265,22 +265,22 @@ void Preferences::load()
   _iCalFileV = config.readPathEntry
     ( QString::fromLatin1("ical file"), 
       locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
-  _doAutoSaveV = config.readBoolEntry
+  _doAutoSaveV = config.readEntry
     ( QString::fromLatin1("auto save"), true);
   _autoSaveValueV = config.readNumEntry
     ( QString::fromLatin1("auto save period"), 5);
-  _promptDeleteV = config.readBoolEntry
+  _promptDeleteV = config.readEntry
     ( QString::fromLatin1("prompt delete"), true);
-  _loggingV = config.readBoolEntry
+  _loggingV = config.readEntry
     ( QString::fromLatin1("logging"), true);
 
-  _displayColumnV[0] = config.readBoolEntry
+  _displayColumnV[0] = config.readEntry
     ( QString::fromLatin1("display session time"), true);
-  _displayColumnV[1] = config.readBoolEntry
+  _displayColumnV[1] = config.readEntry
     ( QString::fromLatin1("display time"), true);
-  _displayColumnV[2] = config.readBoolEntry
+  _displayColumnV[2] = config.readEntry
     ( QString::fromLatin1("display total session time"), true);
-  _displayColumnV[3] = config.readBoolEntry
+  _displayColumnV[3] = config.readEntry
     ( QString::fromLatin1("display total time"), true);
 
   KEMailSettings settings;
@@ -318,7 +318,7 @@ void Preferences::save()
 bool Preferences::readBoolEntry( const QString& key )
 {
   KConfig &config = *KGlobal::config();
-  return config.readBoolEntry ( key, true );
+  return config.readEntry ( key, true );
 }
 
 void Preferences::writeEntry( const QString &key, bool value)

@@ -216,7 +216,7 @@ void MainWindow::saveProperties( KConfig* cfg )
 
 void MainWindow::readProperties( KConfig* cfg )
 {
-  if( cfg->readBoolEntry( "WindowShown", true ))
+  if( cfg->readEntry( "WindowShown", true ))
     show();
 }
 
