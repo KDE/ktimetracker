@@ -259,7 +259,7 @@ void Preferences::load()
   config.setGroup( QString::fromLatin1("Idle detection") );
   _doIdleDetectionV = config.readEntry( QString::fromLatin1("enabled"),
      true );
-  _idleDetectValueV = config.readNumEntry(QString::fromLatin1("period"), 15);
+  _idleDetectValueV = config.readEntry(QString::fromLatin1("period"), 15);
 
   config.setGroup( QString::fromLatin1("Saving") );
   _iCalFileV = config.readPathEntry
@@ -267,7 +267,7 @@ void Preferences::load()
       locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
   _doAutoSaveV = config.readEntry
     ( QString::fromLatin1("auto save"), true);
-  _autoSaveValueV = config.readNumEntry
+  _autoSaveValueV = config.readEntry
     ( QString::fromLatin1("auto save period"), 5);
   _promptDeleteV = config.readEntry
     ( QString::fromLatin1("prompt delete"), true);

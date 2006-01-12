@@ -428,8 +428,8 @@ void MainWindow::loadGeometry()
     KConfig &config = *KGlobal::config();
 
     config.setGroup( QString::fromLatin1("Main Window Geometry") );
-    int w = config.readNumEntry( QString::fromLatin1("Width"), 100 );
-    int h = config.readNumEntry( QString::fromLatin1("Height"), 100 );
+    int w = config.readEntry( QString::fromLatin1("Width"), 100 );
+    int h = config.readEntry( QString::fromLatin1("Height"), 100 );
     w = qMax( w, sizeHint().width() );
     h = qMax( h, sizeHint().height() );
     resize(w, h);
