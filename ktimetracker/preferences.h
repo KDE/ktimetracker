@@ -9,7 +9,7 @@ class QCheckBox;
 class QLabel;
 class QSpinBox;
 class QString;
-class KURLRequester;
+class KUrlRequester;
 
 /**
  * Provide an interface to the configuration options for the program.
@@ -76,7 +76,7 @@ class Preferences :public KDialogBase
     QCheckBox *_loggingW;
     QLabel    *_idleDetectLabelW, *_displayColumnsLabelW;
     QSpinBox  *_idleDetectValueW, *_autoSaveValueW;
-    KURLRequester *_iCalFileW ;
+    KUrlRequester *_iCalFileW ;
 
     // Values
     bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV;

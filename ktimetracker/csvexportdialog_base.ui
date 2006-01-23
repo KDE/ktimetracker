@@ -1,0 +1,413 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>CSVExportDialogBase</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>CSVExportDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>343</width>
+            <height>361</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>CSV Export</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <spacer row="5" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>spacer3</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>29</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="6" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>spacer1</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>160</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="KPushButton" row="6" column="2">
+            <property name="name">
+                <cstring>btnExport</cstring>
+            </property>
+            <property name="enabled">
+                <bool>false</bool>
+            </property>
+            <property name="text">
+                <string>&amp;Export</string>
+            </property>
+            <property name="default">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="KPushButton" row="6" column="3">
+            <property name="name">
+                <cstring>btnCancel</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Cancel</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>textLabel1_3</cstring>
+            </property>
+            <property name="text">
+                <string>Export to:</string>
+            </property>
+        </widget>
+        <widget class="KUrlRequester" row="0" column="1" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>urlExportTo</cstring>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>The file where Karm will write the data.</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>quotesLabel</cstring>
+            </property>
+            <property name="enabled">
+                <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>Quotes:</string>
+            </property>
+        </widget>
+        <widget class="QComboBox" row="4" column="2" rowspan="1" colspan="2">
+            <item>
+                <property name="text">
+                    <string>"</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>'</string>
+                </property>
+            </item>
+            <property name="name">
+                <cstring>cboQuote</cstring>
+            </property>
+            <property name="enabled">
+                <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>All fields are quoted in the output.</string>
+            </property>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>grpDateRange</cstring>
+            </property>
+            <property name="enabled">
+                <bool>false</bool>
+            </property>
+            <property name="title">
+                <string>Date Range</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>&lt;p&gt;An inclusive date range for reporting on time card history.  Not enabled when reporting on totals.&lt;/p&gt;</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>From:</string>
+                    </property>
+                </widget>
+                <widget class="KDateEdit" row="1" column="0">
+                    <property name="name">
+                        <cstring>dtFrom</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="focusPolicy">
+                        <enum>StrongFocus</enum>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="1">
+                    <property name="name">
+                        <cstring>textLabel1_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>To:</string>
+                    </property>
+                </widget>
+                <widget class="KDateEdit" row="1" column="1">
+                    <property name="name">
+                        <cstring>dtTo</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="focusPolicy">
+                        <enum>StrongFocus</enum>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QButtonGroup" row="2" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>grpTimeFormat</cstring>
+            </property>
+            <property name="title">
+                <string>Time Format</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>&lt;p&gt;You can choose to output time values in fractions of an hour or in minutes.&lt;/p&gt;
+&lt;p&gt;For example, if the value is 5 hours and 45 minutes, then the Decimal option would output &lt;tt&gt;5.75&lt;/tt&gt;, and the Hours:Minutes option would output &lt;tt&gt;5:45&lt;/tt&gt;&lt;/p&gt;</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton" row="0" column="1">
+                    <property name="name">
+                        <cstring>radioHoursMinutes</cstring>
+                    </property>
+                    <property name="focusPolicy">
+                        <enum>NoFocus</enum>
+                    </property>
+                    <property name="text">
+                        <string>Hours:Minutes</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="0" column="0">
+                    <property name="name">
+                        <cstring>radioDecimal</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Decimal</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QButtonGroup" row="3" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>grpDelimiter</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="title">
+                <string>Delimiter</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>The character used to seperate one field from another in the output.</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton" row="1" column="0">
+                    <property name="name">
+                        <cstring>radioTab</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Tab</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="0" column="2">
+                    <property name="name">
+                        <cstring>radioOther</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Other:</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="1" column="1">
+                    <property name="name">
+                        <cstring>radioSpace</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Space</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="0" column="0">
+                    <property name="name">
+                        <cstring>radioComma</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Comma</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="1" column="2">
+                    <property name="name">
+                        <cstring>txtOther</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>30</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property name="focusPolicy">
+                        <enum>StrongFocus</enum>
+                    </property>
+                    <property name="maxLength">
+                        <number>1</number>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="0" column="1">
+                    <property name="name">
+                        <cstring>radioSemicolon</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Semicolon</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>KDateEdit</class>
+        <header location="global">kdateedit.h</header>
+        <sizehint>
+            <width>95</width>
+            <height>21</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image name="image0">
+        <data format="XPM.GZ" length="5899">789ced97596fe3460cc7dff3298cf02d28b81e599225147dc87d1f4e7693ec167d18cf8c723a8763e75af4bb572239dac891bcfbd4264542c0c90fc321f9a74805fe34d73adedb6ecd7d9ab91be9d1996999533d6ccdd9f160f0f4e75f7f7c9f994da356a05a4aa95630fbdbcc2c8e5ba6056dfa2918a0e484784338e4733c2b99cef1d0b3e2f3a1b011ff883829e35b611fefaa648eb7ccacdaa126ff1be13022c65de144cebd7fc2e7f0e439669e670eda11e985ac60d52e2a22de63564990129f30076187f9deb3dcbf14f6f9ae899332de0e7390848aeadd2a3828ee73fde7cc9d50ea47e6d0e890788139b27d4bfe1bccb1121e11a7ca70bf6193b96324fe3573d88ef9f93e0a87c29f99e3c844c4abc296f323f5aba3a2a8db216e13e7f93aa40786cc817fde0f05872ac83b4e7c2a6c848f88b5f2f3b42a6c84ef0a8e826e94b27e43ac95cc03ac316b6d1dc5eb151c0745c78907cc615b9edfb670c88cfbcc7942d20b6725533fe1cab3e57e7488b58f0f9ab9d30eb8df9c5f27b6cffd0a998d73541fb882d3b01bf1bca0664ebdbe3eb3f7c780d8f87ec28039b2a2e794d906e24ffa7418fafeae33c7e28f17c4a53fec0ac7c2cf05f7c344497dc7ccce6531f10ab18d15ebc53be654c93c0073dfc93cee31e7f1e93e2c166ca238927a52e624e27d80b1b095795d624eadcce701b356c27d6613cbbc2e30fb7ca8987dfd40fa8dcde3f17e717cebe3c1b97024f14f845dd2a7739a671b657196d139edb375da89ff6dc91cff80d9ca7cc2beb09379bd612ee33d096b66a07d76b10b444f22ecfb49fbeb9cf1f96e3da7867885d96ae9cf33735e20e7cf84fd7cae33fbfc48ef8f2c5f7fd9fffb92293e7e65764ee6dd316701f7bb37128e657ed684b5702c9c49be6fc45916f0fee1a5702cfddb12d6d28f2f25b39e45cf12df94ccf1bbc2999cdb9233ae1701f5bb34e88d7803f3bffb6fd4349a29966be07762ee69dfa84d57e0507f28f83714f4464d86d9878237a7e0044ff10ccff182e812077885d778534385dde27022dba4cf1d8e709c5bb3cf3d3ee4191ff1699a827cda9bec7942c13c2ee0222ee132d10aaee21aaee3460d59dcc42ddc9ec856f5d9c15ddc7b5551d5a787fb798507f8f917148c2b56af80ed0b1ed2ef233cce3fbf8a9e2a7dc3362a0c26b2557d3a18d65454f58930ce3fbb423f7b0693f53b4c6a15a4802fa303bca22e68c86f8099c856b901161c647002a7537c0c9ce59fe792a356014dbb37aeff07d728800bb894196d540003b822df6bb93596699fbc41130237cd3e700b433c84bb7c177e4d4156a93f83d1a40218c33d3cd43eef97f4721e9b27e4a8a2a7de87b33ec2944d9e50904d5300cf305fd65fee1c2cd490ef7d355bc5071669429660b9d987fc566015d6a62a786eb257cfa0ec2cac23bdf76003367fbc4d5f50bd828a0f6cc176be0b3bb0dbec43b9f6a0d758ffcf14ecbf87ff68ff0b054993c1c1878237a3a0f88ef65f57daa8000e9acd7f477be7df93fffe7de61f779ef4a1</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>btnCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>CSVExportDialogBase</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>radioOther</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>txtOther</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>btnExport</sender>
+        <signal>clicked()</signal>
+        <receiver>CSVExportDialogBase</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>urlExportTo</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>CSVExportDialogBase</receiver>
+        <slot>enableExportButton()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>urlExportTo</tabstop>
+    <tabstop>dtFrom</tabstop>
+    <tabstop>dtTo</tabstop>
+    <tabstop>radioDecimal</tabstop>
+    <tabstop>radioComma</tabstop>
+    <tabstop>txtOther</tabstop>
+    <tabstop>cboQuote</tabstop>
+    <tabstop>btnExport</tabstop>
+    <tabstop>btnCancel</tabstop>
+</tabstops>
+<slots>
+    <slot>enableExportButton()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kdateedit.h</includehint>
+    <includehint>kdateedit.h</includehint>
+</includehints>
+</UI>

@@ -324,7 +324,7 @@ void TaskView::exportcsvFile()
   CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
   if ( current_item() && current_item()->isRoot() )
     dialog.enableTasksToExportQuestion();
-  dialog.urlExportTo->KURLRequester::setMode(KFile::File);
+  dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
   if ( dialog.exec() ) {
     QString err = _storage->report( this, dialog.reportCriteria() );
     if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.ascii()) );
@@ -339,7 +339,7 @@ QString TaskView::exportcsvHistory()
   CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
   if ( current_item() && current_item()->isRoot() )
     dialog.enableTasksToExportQuestion();
-  dialog.urlExportTo->KURLRequester::setMode(KFile::File);
+  dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
   if ( dialog.exec() ) {
     err = _storage->report( this, dialog.reportCriteria() );
   }
