@@ -57,6 +57,7 @@
 #include <kurl.h>
 #include <vector>
 #include <kpassworddialog.h>
+#include <kprogressdialog.h>
 //#include <calendarlocal.h>
 //#include <journal.h>
 //#include <event.h>
@@ -591,7 +592,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   KProgressDialog dialog( taskview, 0, title );
   dialog.setAutoClose( true );
   dialog.setAllowCancel( true );
-  dialog.progressBar()->setTotalSteps( 2 * taskview->count() );
+  dialog.progressBar()->setMaximum( 2 * taskview->count() );
 
   // The default dialog was not displaying all the text in the title bar.
   int width = taskview->fontMetrics().width(title) * 3;
