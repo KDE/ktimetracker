@@ -44,7 +44,7 @@
 #include <kemailsettings.h>
 #include <klocale.h>            // i18n
 #include <kmessagebox.h>
-#include <kprogress.h>
+#include <kprogressbar.h>
 #include <ktempfile.h>
 #include <resourcecalendar.h>
 #include <resourcelocal.h>
