@@ -56,7 +56,7 @@
 #include <kio/netaccess.h>
 #include <kurl.h>
 #include <vector>
-
+#include <kpassworddialog.h>
 //#include <calendarlocal.h>
 //#include <journal.h>
 //#include <event.h>
