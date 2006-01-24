@@ -129,7 +129,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   KCal::ResourceCached *resource;
   if ( remoteResource( _icalfile ) )
   {
-    KURL url( _icalfile );
+    KUrl url( _icalfile );
     resource = new KCal::ResourceRemote( url, url ); // same url for upload and download
   }
   else
