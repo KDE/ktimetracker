@@ -66,10 +66,13 @@ void Preferences::makeBehaviorPage()
   _idleDetectValueW->setSuffix(i18n(" min"));
   _promptDeleteW = new QCheckBox
     ( i18n( "Prompt before deleting tasks" ), behaviorPage, "_promptDeleteW" );
+  _uniTaskingW = new QCheckBox
+    ( i18n( "Allow only one timer at a time" ), behaviorPage, "_uniTaskingW" );
 
   layout->addWidget(_doIdleDetectionW, 0, 0 );
   layout->addWidget(_idleDetectValueW, 0, 1 );
   layout->addWidget(_promptDeleteW, 1, 0 );
+  layout->addWidget(_uniTaskingW, 2, 0);
 
   topLevel->addStretch();
 
@@ -171,6 +174,7 @@ void Preferences::showDialog()
   _loggingW->setChecked(_loggingV);
 
   _promptDeleteW->setChecked(_promptDeleteV);
+  _uniTaskingW->setChecked(_uniTaskingV);
 
   _displaySessionW->setChecked(_displayColumnV[0]);
   _displayTimeW->setChecked(_displayColumnV[1]);
@@ -200,6 +204,7 @@ void Preferences::slotOk()
 
   // behavior
   _promptDeleteV = _promptDeleteW->isChecked();
+  _uniTaskingV = _uniTaskingW->isChecked();
 
   // display
   _displayColumnV[0] = _displaySessionW->isChecked();
@@ -245,7 +250,9 @@ bool    Preferences::autoSave()                      const { return _doAutoSaveV
 int     Preferences::autoSavePeriod()                const { return _autoSaveValueV; }
 bool    Preferences::logging()                       const { return _loggingV; }
 bool    Preferences::promptDelete()                  const { return _promptDeleteV; }
+bool    Preferences::uniTasking()                    const { return _uniTaskingV; }
 QString Preferences::setPromptDelete(bool prompt)    { _promptDeleteV=prompt; return ""; }
+QString Preferences::setUniTasking(bool b)           { _uniTaskingV=b; return ""; }
 bool    Preferences::displayColumn(int n)            const { return _displayColumnV[n]; }
 QString Preferences::userRealName()                  const { return _userRealName; }
 
@@ -271,6 +278,8 @@ void Preferences::load()
     ( QString::fromLatin1("auto save period"), 5);
   _promptDeleteV = config.readEntry
     ( QString::fromLatin1("prompt delete"), true);
+  _uniTaskingV = config.readEntry
+    ( QString::fromLatin1("unitasking"), false);
   _loggingV = config.readEntry
     ( QString::fromLatin1("logging"), true);
 
@@ -301,6 +310,7 @@ void Preferences::save()
   config.writeEntry( QString::fromLatin1("logging"), _loggingV);
   config.writeEntry( QString::fromLatin1("auto save period"), _autoSaveValueV);
   config.writeEntry( QString::fromLatin1("prompt delete"), _promptDeleteV);
+  config.writeEntry( QString::fromLatin1("unitasking"), _uniTaskingV);
 
   config.writeEntry( QString::fromLatin1("display session time"),
       _displayColumnV[0]);

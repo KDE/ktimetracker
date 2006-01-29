@@ -396,7 +396,9 @@ long TaskView::count()
 
 void TaskView::startTimerFor(Task* task, QDateTime startTime )
 {
-  if (task != 0 && activeTasks.findRef(task) == -1) {
+  if (task != 0 && activeTasks.findRef(task) == -1) 
+  {
+    if (_preferences->uniTasking()) stopAllTimers();
     _idleTimeDetector->startIdleDetection();
     task->setRunning(true, _storage, startTime);
     activeTasks.append(task);

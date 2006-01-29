@@ -32,7 +32,9 @@ class Preferences :public KDialogBase
     bool logging() const;
     int autoSavePeriod() const;
     bool promptDelete() const;
+    bool uniTasking() const;
     QString setPromptDelete( bool prompt );
+    QString setUniTasking( bool b );
     bool displayColumn(int n) const;
     QString userRealName() const;
 
@@ -70,7 +72,7 @@ class Preferences :public KDialogBase
     bool _unsavedChanges;
 
     // Widgets
-    QCheckBox *_doIdleDetectionW, *_doAutoSaveW, *_promptDeleteW;
+    QCheckBox *_doIdleDetectionW, *_doAutoSaveW, *_promptDeleteW, *_uniTaskingW;
     QCheckBox *_displayTimeW, *_displaySessionW,
               *_displayTotalTimeW, *_displayTotalSessionW;
     QCheckBox *_loggingW;
@@ -79,7 +81,7 @@ class Preferences :public KDialogBase
     KUrlRequester *_iCalFileW ;
 
     // Values
-    bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV;
+    bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV, _uniTaskingV;
     bool _displayColumnV[4];
     int  _idleDetectValueV, _autoSaveValueV;
     QString _iCalFileV;
