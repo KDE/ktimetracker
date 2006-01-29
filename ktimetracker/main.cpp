@@ -57,11 +57,9 @@ int main( int argc, char *argv[] )
   if ( args->count() > 0 ) 
   {
     QString icsfile = QString::fromLocal8Bit( args->arg( 0 ) );
-    // FIXME: there is probably a Qt or KDE fcn for this test
-    if ( icsfile.startsWith( "/" ) 
-        || icsfile.toLower().startsWith( "http://" ) 
-        || icsfile.toLower().startsWith( "ftp://" ) 
-        )
+    
+    KURL* icsfileurl=new KURL(QString::fromLocal8Bit( args->arg( 0 ) ));
+    if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
     {
       // leave as is
       ;
