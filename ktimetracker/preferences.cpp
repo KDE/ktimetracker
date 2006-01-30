@@ -68,6 +68,7 @@ void Preferences::makeBehaviorPage()
     ( i18n( "Prompt before deleting tasks" ), behaviorPage, "_promptDeleteW" );
   _uniTaskingW = new QCheckBox
     ( i18n( "Allow only one timer at a time" ), behaviorPage, "_uniTaskingW" );
+  _uniTaskingW->setWhatsThis( i18n("Unitasking - allow only one task to be timed at a time. Does not stop any timer.") );
 
   layout->addWidget(_doIdleDetectionW, 0, 0 );
   layout->addWidget(_idleDetectValueW, 0, 1 );
