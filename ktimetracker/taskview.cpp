@@ -505,8 +505,6 @@ void TaskView::newTask(QString caption, Task *parent)
       KMessageBox::error( 0, i18n(
             "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
     }
-
-    delete dialog;
   }
 }
 
