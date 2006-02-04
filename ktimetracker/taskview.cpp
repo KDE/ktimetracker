@@ -553,7 +553,7 @@ void TaskView::newSubTask()
 
 void TaskView::editTask()
 {
-  kdDebug(5970) << "Entering editTask";
+  kdDebug(5970) << "Entering editTask" << endl;
   Task *task = current_item();
   if (!task)
     return;
@@ -596,7 +596,6 @@ void TaskView::editTask()
     }
     emit updateButtons();
   }
-  delete dialog;
 }
 
 //void TaskView::addCommentToTask()
