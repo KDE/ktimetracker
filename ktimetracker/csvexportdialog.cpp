@@ -93,7 +93,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
   else if ( d == "radioSpace" )     rc.delimiter = " ";
   else if ( d == "radioOther" )     rc.delimiter = txtOther->text();
   else {
-    kdDebug(5970) 
+    kDebug(5970) 
       << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '" 
       << d << "'--defaulting to a tab" << endl;
     rc.delimiter = "\t";

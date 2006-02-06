@@ -29,7 +29,7 @@ short test1()
 
   if ( !lock ) 
   {
-    kdDebug( 5970 ) << "test1(): failed to lock " << icalfilename << endl;
+    kDebug( 5970 ) << "test1(): failed to lock " << icalfilename << endl;
     rval = 1;
   }
 
@@ -39,7 +39,7 @@ short test1()
     thread.run();
     if ( thread.gotlock() )
     {
-      kdDebug( 5970 ) << "test1(): second thread was able to lock " << icalfilename << endl;
+      kDebug( 5970 ) << "test1(): second thread was able to lock " << icalfilename << endl;
       rval = 1;
     }
   }
@@ -69,7 +69,7 @@ short test2()
   thread.run();
   if ( !thread.gotlock() )
   {
-    kdDebug(5970) << "test2(): second thread was not able to lock " << icalfilename << endl;
+    kDebug(5970) << "test2(): second thread was not able to lock " << icalfilename << endl;
     rval = 1;
   }
 
@@ -95,7 +95,7 @@ short test3()
   lock = calendars->requestSaveTicket( calendar );
   if ( !lock ) 
   {
-    kdDebug( 5970 ) << "test1(): failed to lock " << icalfilename << endl;
+    kDebug( 5970 ) << "test1(): failed to lock " << icalfilename << endl;
     rval = 1;
   }
   calendars->releaseSaveTicket( lock );
@@ -107,7 +107,7 @@ short test3()
     thread.run();
     if ( !thread.gotlock() )
     {
-      kdDebug( 5970 ) << "test1(): second thread was not able to lock " << icalfilename << endl;
+      kDebug( 5970 ) << "test1(): second thread was not able to lock " << icalfilename << endl;
       rval = 1;
     }
   }

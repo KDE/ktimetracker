@@ -121,7 +121,7 @@ KarmStorage* TaskView::storage()
 
 void TaskView::contentsMousePressEvent ( QMouseEvent * e )
 {
-  kdDebug(5970) << "entering contentsMousePressEvent" << endl;
+  kDebug(5970) << "entering contentsMousePressEvent" << endl;
   KListView::contentsMousePressEvent(e);
   Task* task = current_item();
 
@@ -148,7 +148,7 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 // on that task". That means, on a doubleclick, we check if it occurs on an item
 // not in the blank space, if yes, stop all other tasks and start the new timer.
 {
-  kdDebug(5970) << "entering contentsMouseDoubleClickEvent" << endl;
+  kDebug(5970) << "entering contentsMouseDoubleClickEvent" << endl;
   KListView::contentsMouseDoubleClickEvent(e);
   
   Task *task = current_item();
@@ -231,7 +231,7 @@ void TaskView::itemStateChanged( Q3ListViewItem *item )
 {
   if ( !item || _isloading ) return;
   Task *t = (Task *)item;
-  kdDebug(5970) << "TaskView::itemStateChanged()" 
+  kDebug(5970) << "TaskView::itemStateChanged()" 
     << " uid=" << t->uid() << " state=" << t->isOpen()
     << endl;
   if( _preferences ) _preferences->writeEntry( t->uid(), t->isOpen() );
@@ -241,16 +241,16 @@ void TaskView::closeStorage() { _storage->closeStorage( this ); }
 
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {
-  kdDebug(5970) << "entering iCalFileModified" << endl;
-  kdDebug(5970) << rc->infoText() << endl;
+  kDebug(5970) << "entering iCalFileModified" << endl;
+  kDebug(5970) << rc->infoText() << endl;
   rc->dump();
   _storage->buildTaskView(rc,this);
-  kdDebug(5970) << "exiting iCalFileModified" << endl;
+  kDebug(5970) << "exiting iCalFileModified" << endl;
 }
 
 void TaskView::refresh()
 {
-  kdDebug(5970) << "entering TaskView::refresh()" << endl;
+  kDebug(5970) << "entering TaskView::refresh()" << endl;
   int i = 0;
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
   {
@@ -263,12 +263,12 @@ void TaskView::refresh()
   setRootIsDecorated( item_at_index( i ) && ( item_at_index( i )->depth() != 0 ) );
 
   emit updateButtons();
-  kdDebug(5970) << "exiting TaskView::refresh()" << endl;
+  kDebug(5970) << "exiting TaskView::refresh()" << endl;
 }
     
 void TaskView::loadFromFlatFile()
 {
-  kdDebug(5970) << "TaskView::loadFromFlatFile()" << endl;
+  kDebug(5970) << "TaskView::loadFromFlatFile()" << endl;
 
   //KFileDialog::getSaveFileName("icalout.ics",i18n("*.ics|ICalendars"),this);
 
@@ -300,7 +300,7 @@ void TaskView::loadFromFlatFile()
 
 QString TaskView::importPlanner(QString fileName)
 {
-  kdDebug(5970) << "entering importPlanner" << endl;
+  kDebug(5970) << "entering importPlanner" << endl;
   PlannerParser* handler=new PlannerParser(this);
   if (fileName.isEmpty()) fileName=KFileDialog::getOpenFileName(QString(), QString(), 0);
   QFile xmlFile( fileName );
@@ -319,7 +319,7 @@ QString TaskView::report( const ReportCriteria& rc )
 
 void TaskView::exportcsvFile()
 {
-  kdDebug(5970) << "TaskView::exportcsvFile()" << endl;
+  kDebug(5970) << "TaskView::exportcsvFile()" << endl;
 
   CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
   if ( current_item() && current_item()->isRoot() )
@@ -333,7 +333,7 @@ void TaskView::exportcsvFile()
 
 QString TaskView::exportcsvHistory()
 {
-  kdDebug(5970) << "TaskView::exportcsvHistory()" << endl;
+  kDebug(5970) << "TaskView::exportcsvHistory()" << endl;
   QString err;
   
   CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
@@ -514,7 +514,7 @@ QString TaskView::addTask
 {
   Task *task;
 
-  kdDebug(5970) << "TaskView::addTask: taskname = " << taskname << endl;
+  kDebug(5970) << "TaskView::addTask: taskname = " << taskname << endl;
 
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );
@@ -553,7 +553,7 @@ void TaskView::newSubTask()
 
 void TaskView::editTask()
 {
-  kdDebug(5970) << "Entering editTask" << endl;
+  kDebug(5970) << "Entering editTask" << endl;
   Task *task = current_item();
   if (!task)
     return;
@@ -755,7 +755,7 @@ void TaskView::deletingTask(Task* deletedTask)
 
 void TaskView::iCalFileChanged(QString file)
 {
-  kdDebug(5970) << "TaskView:iCalFileChanged: " << file << endl;
+  kDebug(5970) << "TaskView:iCalFileChanged: " << file << endl;
   stopAllTimers();
   _storage->save(this);
   load();
@@ -770,10 +770,10 @@ QList<HistoryEvent> TaskView::getHistory(const QDate& from,
 void TaskView::markTaskAsComplete()
 {
   if (current_item())
-    kdDebug(5970) << "TaskView::markTaskAsComplete: "
+    kDebug(5970) << "TaskView::markTaskAsComplete: "
       << current_item()->uid() << endl;
   else
-    kdDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
+    kDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
 
   bool markingascomplete = true;
   deleteTask(markingascomplete);
@@ -782,10 +782,10 @@ void TaskView::markTaskAsComplete()
 void TaskView::markTaskAsIncomplete()
 {
   if (current_item())
-    kdDebug(5970) << "TaskView::markTaskAsComplete: "
+    kDebug(5970) << "TaskView::markTaskAsComplete: "
       << current_item()->uid() << endl;
   else
-    kdDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
+    kDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
 
   reinstateTask(50); // if it has been reopened, assume half-done
 }

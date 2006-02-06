@@ -134,7 +134,7 @@ void MainWindow::slotSelectionChanged()
 
 bool MainWindow::save()
 {
-  kdDebug(5970) << "Saving time data to disk." << endl;
+  kDebug(5970) << "Saving time data to disk." << endl;
   QString err=_taskView->save();  // untranslated error msg.
   if (err.isEmpty()) statusBar()->message(i18n("Successfully saved tasks and history"),1807);
   else statusBar()->message(i18n(err.ascii()),7707); // no msgbox since save is called when exiting
@@ -144,7 +144,7 @@ bool MainWindow::save()
 
 void MainWindow::exportcsvHistory()
 {
-  kdDebug(5970) << "Exporting History to disk." << endl;
+  kDebug(5970) << "Exporting History to disk." << endl;
   QString err=_taskView->exportcsvHistory();
   if (err.isEmpty()) statusBar()->message(i18n("Successfully exported History to CSV-file"),1807);
   else KMessageBox::error(this, err.ascii());
@@ -160,7 +160,7 @@ void MainWindow::quit()
 
 MainWindow::~MainWindow()
 {
-  kdDebug(5970) << "MainWindow::~MainWindows: Quitting karm." << endl;
+  kDebug(5970) << "MainWindow::~MainWindows: Quitting karm." << endl;
   _taskView->stopAllTimers();
   save();
   _taskView->closeStorage();
@@ -510,7 +510,7 @@ int MainWindow::addTask( const QString& taskname )
 {
   DesktopList desktopList;
   QString uid = _taskView->addTask( taskname, 0, 0, desktopList );
-  kdDebug(5970) << "MainWindow::addTask( " << taskname << " ) returns " << uid << endl;
+  kDebug(5970) << "MainWindow::addTask( " << taskname << " ) returns " << uid << endl;
   if ( uid.length() > 0 ) return 0;
   else
   {
@@ -604,7 +604,7 @@ int MainWindow::totalMinutesForTaskId( const QString& taskId )
   int rval = 0;
   Task *task, *t;
 
-  kdDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
+  kDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
 
   // Find task
   task = _taskView->first_child();
@@ -617,11 +617,11 @@ int MainWindow::totalMinutesForTaskId( const QString& taskId )
   if ( t != NULL )
   {
     rval = t->totalTime();
-    kdDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
+    kDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
   }
   else
   {
-    kdDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
+    kDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
     rval = KARM_ERR_UID_NOT_FOUND;
   }
 
@@ -651,7 +651,7 @@ Task* MainWindow::_hasUid( Task* task, const QString &uid ) const
 {
   Task *rval = NULL;
 
-  //kdDebug(5970) << "MainWindow::_hasUid( " << task << ", " << uid << " )" << endl;
+  //kDebug(5970) << "MainWindow::_hasUid( " << task << ", " << uid << " )" << endl;
 
   if ( task->uid() == uid ) rval = task;
   else
@@ -705,10 +705,10 @@ QString MainWindow::exportcsvfile( QString filename, QString from, QString to, i
   rc.url=filename;
   rc.from=QDate::fromString( from );
   if ( rc.from.isNull() ) rc.from=QDate::fromString( from, Qt::ISODate );
-  kdDebug(5970) << "rc.from " << rc.from << endl;
+  kDebug(5970) << "rc.from " << rc.from << endl;
   rc.to=QDate::fromString( to );
   if ( rc.to.isNull() ) rc.to=QDate::fromString( to, Qt::ISODate );
-  kdDebug(5970) << "rc.to " << rc.to << endl;
+  kDebug(5970) << "rc.to " << rc.to << endl;
   rc.reportType=(ReportCriteria::REPORTTYPE) type;  // history report or totals report
   rc.decimalMinutes=decimalMinutes;
   rc.allTasks=allTasks;

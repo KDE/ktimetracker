@@ -90,7 +90,7 @@ int runscripts
 
       rval = s->run();
 
-      kdDebug() << "runscripts: " << fi->fileName() 
+      kDebug() << "runscripts: " << fi->fileName() 
         << " " << dots.left( dots.length() - fi->fileName().length() )
         << " " << ( ! rval ? "PASS" : "FAIL" ) << endl;
 

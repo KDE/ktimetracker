@@ -471,7 +471,7 @@ void karmPart::quit()
 
 bool karmPart::save()
 {
-  kdDebug(5970) << "Saving time data to disk." << endl;
+  kDebug(5970) << "Saving time data to disk." << endl;
   QString err=_taskView->save();  // untranslated error msg.
   // TODO:
   /* if (err.isEmpty()) statusBar()->message(i18n("Successfully saved tasks and history"),1807);
@@ -483,7 +483,7 @@ int karmPart::addTask( const QString& taskname )
 {
   DesktopList desktopList;
   QString uid = _taskView->addTask( taskname, 0, 0, desktopList );
-  kdDebug(5970) << "MainWindow::addTask( " << taskname << " ) returns " << uid << endl;
+  kDebug(5970) << "MainWindow::addTask( " << taskname << " ) returns " << uid << endl;
   if ( uid.length() > 0 ) return 0;
   else
   {
@@ -577,7 +577,7 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
   int rval = 0;
   Task *task, *t;
 
-  kdDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
+  kDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
 
   // Find task
   task = _taskView->first_child();
@@ -590,11 +590,11 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
   if ( t != NULL )
   {
     rval = t->totalTime();
-    kdDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
+    kDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
   }
   else
   {
-    kdDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
+    kDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
     rval = KARM_ERR_UID_NOT_FOUND;
   }
 
@@ -624,7 +624,7 @@ Task* karmPart::_hasUid( Task* task, const QString &uid ) const
 {
   Task *rval = NULL;
 
-  //kdDebug(5970) << "MainWindow::_hasUid( " << task << ", " << uid << " )" << endl;
+  //kDebug(5970) << "MainWindow::_hasUid( " << task << ", " << uid << " )" << endl;
 
   if ( task->uid() == uid ) rval = task;
   else

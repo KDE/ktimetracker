@@ -97,7 +97,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   // Use KDE_CXXFLAGS=$(USE_EXCEPTIONS) in Makefile.am if you want to use
   // exceptions (David Faure)
 
-  kdDebug(5970) << "Entering KarmStorage::load" << endl;
+  kDebug(5970) << "Entering KarmStorage::load" << endl;
   QString err;
   KEMailSettings settings;
   if ( fileName.isEmpty() ) fileName = preferences->iCalFile();
@@ -164,7 +164,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
     // Build dictionary to look up Task object from Todo uid.  Each task is a
     // QListViewItem, and is initially added with the view as the parent.
     todoList = _calendar->rawTodos();
-    kdDebug(5970) << "KarmStorage::load "
+    kDebug(5970) << "KarmStorage::load "
       << "rawTodo count (includes completed todos) ="
       << todoList.count() << endl;
     for( todo = todoList.begin(); todo != todoList.end(); ++todo )
@@ -212,7 +212,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
       }
     }
 
-    kdDebug(5970) << "KarmStorage::load - loaded " << view->count()
+    kDebug(5970) << "KarmStorage::load - loaded " << view->count()
       << " tasks from " << _icalfile << endl;
   }
 
@@ -250,7 +250,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
     Task* task = new Task(*todo, view);
-    if ( task == view->item_at_index( i++ ) ) kdDebug() << i << " is equal";
+    if ( task == view->item_at_index( i++ ) ) kDebug() << i << " is equal";
     map.insert( (*todo)->uid(), task );
     view->setRootIsDecorated(true);
     task->setPixmapProgress();
@@ -308,7 +308,7 @@ void KarmStorage::closeStorage(TaskView* view)
 
 QString KarmStorage::save(TaskView* taskview)
 {
-  kdDebug(5970) << "entering KarmStorage::save" << endl;
+  kDebug(5970) << "entering KarmStorage::save" << endl;
   QString err;
 
   Q3PtrStack< KCal::Todo > parents;
@@ -325,13 +325,13 @@ QString KarmStorage::save(TaskView* taskview)
 
   if ( err.isEmpty() )
   {
-    kdDebug(5970)
+    kDebug(5970)
       << "KarmStorage::save : wrote "
       << taskview->count() << " tasks to " << _icalfile << endl;
   }
   else
   {
-    kdWarning(5970) << "KarmStorage::save : " << err << endl;
+    kWarning(5970) << "KarmStorage::save : " << err << endl;
   }
 
   return err;
@@ -346,7 +346,7 @@ QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
   todo = _calendar->todo(task->uid());
   if ( !todo )
   {
-    kdDebug(5970) << "Could not get todo from calendar" << endl;
+    kDebug(5970) << "Could not get todo from calendar" << endl;
     return "Could not get todo from calendar";
   }
   task->asTodo(todo);
@@ -387,7 +387,7 @@ QString KarmStorage::loadFromFlatFile(TaskView* taskview,
 {
   QString err;
 
-  kdDebug(5970)
+  kDebug(5970)
     << "KarmStorage::loadFromFlatFile: " << filename << endl;
 
   QFile f(filename);
@@ -416,7 +416,7 @@ QString KarmStorage::loadFromFlatFile(TaskView* taskview,
       //   break;
 
       line = stream.readLine();
-      kdDebug(5970) << "DEBUG: line: " << line << "\n";
+      kDebug(5970) << "DEBUG: line: " << line << "\n";
 
       if (line.isNull())
         break;
@@ -434,14 +434,14 @@ QString KarmStorage::loadFromFlatFile(TaskView* taskview,
       }
 
       if (level == 1) {
-        kdDebug(5970) << "KarmStorage::loadFromFlatFile - toplevel task: "
+        kDebug(5970) << "KarmStorage::loadFromFlatFile - toplevel task: "
           << name << " min: " << minutes << "\n";
         task = new Task(name, minutes, 0, desktopList, taskview);
         task->setUid(addTask(task, 0));
       }
       else {
         Task *parent = stack.top();
-        kdDebug(5970) << "KarmStorage::loadFromFlatFile - task: " << name
+        kDebug(5970) << "KarmStorage::loadFromFlatFile - task: " << name
             << " min: " << minutes << " parent" << parent->name() << "\n";
         task = new Task(name, minutes, 0, desktopList, parent);
 
@@ -585,7 +585,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   Task* task;
   int maxdepth=0;
 
-  kdDebug(5970)
+  kDebug(5970)
     << "KarmStorage::exportcsvFile: " << rc.url << endl;
 
   QString title = i18n("Export Progress");
@@ -734,7 +734,7 @@ bool KarmStorage::removeTask(Task* task)
       i != eventList.end();
       ++i)
   {
-    //kdDebug(5970) << "KarmStorage::removeTask: "
+    //kDebug(5970) << "KarmStorage::removeTask: "
     //  << (*i)->uid() << " - relatedToUid() "
     //  << (*i)->relatedToUid()
     //  << ", relatedTo() = " << (*i)->relatedTo() <<endl;
@@ -1194,7 +1194,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
             // Something is screwy with the ics file, as this KArm history event
             // does not have a todo related to it.  Could have been deleted
             // manually?  We'll continue with report on with report ...
-            kdDebug(5970) << "KarmStorage::getHistory(): "
+            kDebug(5970) << "KarmStorage::getHistory(): "
               << "The event " << (*event)->uid()
               << " is not related to a todo.  Dropped." << endl;
         }
@@ -1210,13 +1210,13 @@ bool KarmStorage::remoteResource( const QString& file ) const
   QString f = file.toLower();
   bool rval = f.startsWith( "http://" ) || f.startsWith( "ftp://" );
 
-  kdDebug(5970) << "KarmStorage::remoteResource( " << file << " ) returns " << rval  << endl;
+  kDebug(5970) << "KarmStorage::remoteResource( " << file << " ) returns " << rval  << endl;
   return rval;
 }
 
 bool KarmStorage::saveCalendar()
 {
-  kdDebug(5970) << "KarmStorage::saveCalendar" << endl;
+  kDebug(5970) << "KarmStorage::saveCalendar" << endl;
 
   KABC::Lock *lock = _calendar->lock();
   if ( !lock || !lock->lock() )

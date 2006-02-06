@@ -131,7 +131,7 @@ bool Task::isRunning() const
 
 void Task::setName( const QString& name, KarmStorage* storage )
 {
-  kdDebug(5970) << "Task:setName: " << name << endl;
+  kDebug(5970) << "Task:setName: " << name << endl;
 
   QString oldname = _name;
   if ( oldname != name ) {
@@ -143,7 +143,7 @@ void Task::setName( const QString& name, KarmStorage* storage )
 
 void Task::setPercentComplete(const int percent, KarmStorage *storage)
 {
-  kdDebug(5970) << "Task::setPercentComplete(" << percent << ", storage): "
+  kDebug(5970) << "Task::setPercentComplete(" << percent << ", storage): "
     << _uid << endl;
 
   if (!percent)
@@ -218,7 +218,7 @@ void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 
 void Task::changeTotalTimes( long minutesSession, long minutes )
 {
-  kdDebug(5970)
+  kDebug(5970)
     << "Task::changeTotalTimes(" << minutesSession << ", "
     << minutes << ") for " << name() << endl;
 
@@ -240,7 +240,7 @@ void Task::resetTimes()
 
 void Task::changeParentTotalTimes( long minutesSession, long minutes )
 {
-  //kdDebug(5970)
+  //kDebug(5970)
   //  << "Task::changeParentTotalTimes(" << minutesSession << ", "
   //  << minutes << ") for " << name() << endl;
 
@@ -252,7 +252,7 @@ void Task::changeParentTotalTimes( long minutesSession, long minutes )
 
 bool Task::remove( Q3PtrList<Task>& activeTasks, KarmStorage* storage)
 {
-  kdDebug(5970) << "Task::remove: " << _name << endl;
+  kDebug(5970) << "Task::remove: " << _name << endl;
 
   bool ok = true;
 
@@ -293,7 +293,7 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
 
   Q_ASSERT( todo != NULL );
 
-  kdDebug(5970) << "Task::asTodo: name() = '" << name() << "'" << endl;
+  kDebug(5970) << "Task::asTodo: name() = '" << name() << "'" << endl;
   todo->setSummary( name() );
 
   // Note: if the date start is empty, the KOrganizer GUI will have the
@@ -359,7 +359,7 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
 
   percent_complete = static_cast<KCal::Todo*>(incident)->percentComplete();
 
-  //kdDebug(5970) << "Task::parseIncidence: "
+  //kDebug(5970) << "Task::parseIncidence: "
   //  << name << ", Minutes: " << minutes
   //  <<  ", desktop: " << desktopList << endl;
 
@@ -383,7 +383,7 @@ QString Task::getDesktopStr() const
 
 void Task::cut()
 {
-  //kdDebug(5970) << "Task::cut - " << name() << endl;
+  //kDebug(5970) << "Task::cut - " << name() << endl;
   changeParentTotalTimes( -_totalSessionTime, -_totalTime);
   if ( ! parent())
     listView()->takeItem(this);

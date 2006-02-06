@@ -143,7 +143,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
                                          0, 
                                          0, 
                                          _operator->sizePolicy().hasHeightForWidth()) );
-  //kdDebug() << "text width=" << fontMetrics().width( _sessionLA->text() ) << endl;
+  //kDebug() << "text width=" << fontMetrics().width( _sessionLA->text() ) << endl;
   _operator->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
   lay4->addWidget( _operator );
 
