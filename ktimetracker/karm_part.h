@@ -76,6 +76,7 @@ public:
     int totalMinutesForTaskId( const QString& taskId );
     QString starttimerfor( const QString &taskname );
     QString stoptimerfor( const QString &taskname );
+    QString stopalltimers();
     QString deletetodo();
     bool    getpromptdelete();
     QString setpromptdelete( bool prompt );

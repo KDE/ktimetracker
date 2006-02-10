@@ -699,6 +699,12 @@ QString MainWindow::stoptimerfor( const QString& taskname )
   return err;
 }
 
+QString MainWindow::stopalltimers()
+{
+  _taskView->stopAllTimers();
+  return QString();
+}
+
 QString MainWindow::exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote )
 {
   ReportCriteria rc;
