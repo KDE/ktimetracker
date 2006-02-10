@@ -670,6 +670,7 @@ QString karmPart::stoptimerfor( const QString& taskname )
 QString karmPart::stopalltimers()
 {
   _taskView->stopAllTimers();
+  return QString();
 }
 
 QString karmPart::exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote )
