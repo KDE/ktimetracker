@@ -58,7 +58,7 @@ int main( int argc, char *argv[] )
   {
     QString icsfile = QString::fromLocal8Bit( args->arg( 0 ) );
     
-    KURL* icsfileurl=new KUrl(QString::fromLocal8Bit( args->arg( 0 ) ));
+    KUrl* icsfileurl=new KUrl(QString::fromLocal8Bit( args->arg( 0 ) ));
     if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
     {
       // leave as is
