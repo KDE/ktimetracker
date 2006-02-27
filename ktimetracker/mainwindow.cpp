@@ -203,9 +203,8 @@ void MainWindow::updateStatusBar( )
 
 void MainWindow::startStatusBar()
 {
-#warning KStatusBar lost support for permanent items
-  statusBar()->insertItem( i18n("Session"), 0, 0/*, true*/ );
-  statusBar()->insertItem( i18n("Total" ), 1, 0/*, true*/ );
+  statusBar()->insertFixedItem( i18n("Session"), 0, 0 );
+  statusBar()->insertFixedItem( i18n("Total" ), 1, 0);
 }
 
 void MainWindow::saveProperties( KConfig* cfg )
