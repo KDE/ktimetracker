@@ -203,8 +203,8 @@ void MainWindow::updateStatusBar( )
 
 void MainWindow::startStatusBar()
 {
-  statusBar()->insertFixedItem( i18n("Session"), 0, 0 );
-  statusBar()->insertFixedItem( i18n("Total" ), 1, 0);
+  statusBar()->insertPermanentItem( i18n("Session"), 0, 0 );
+  statusBar()->insertPermanentItem( i18n("Total" ), 1, 0);
 }
 
 void MainWindow::saveProperties( KConfig* cfg )
