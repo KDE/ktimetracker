@@ -246,11 +246,9 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   while (view->item_at_index(0)) view->item_at_index(0)->cut();
 
   todoList = rc->rawTodos();
-  int i=0;
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
     Task* task = new Task(*todo, view);
-    if ( task == view->item_at_index( i++ ) ) kDebug() << i << " is equal";
     map.insert( (*todo)->uid(), task );
     view->setRootIsDecorated(true);
     task->setPixmapProgress();

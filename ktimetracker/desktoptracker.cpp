@@ -74,7 +74,7 @@ void DesktopTracker::startTracking()
 
 void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
 {
-  kDebug(5970) << "Entering registerForDesktops";
+  kDebug(5970) << "Entering registerForDesktops" << endl;
   // if no desktop is marked, disable auto tracking for this task
   if (desktopList.size()==0) 
   {
