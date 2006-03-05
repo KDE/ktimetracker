@@ -876,9 +876,9 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
       err = exportcsvHistory( taskview, rc.from, rc.to, rc );
   else if ( rc.reportType == ReportCriteria::CSVTotalsExport )
       err = exportcsvFile( taskview, rc );
-  else
+  else {
       // hmmmm ... assert(0)?
-      ;
+  }   
   return err;
 }
 
