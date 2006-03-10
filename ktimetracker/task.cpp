@@ -344,8 +344,8 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
 
   QString desktopList = incident->customProperty( kapp->instanceName(),
       QByteArray( "desktopList" ) );
-  QStringList desktopStrList = QStringList::split( QString::fromLatin1(","),
-      desktopList );
+  QStringList desktopStrList = desktopList.split( QString::fromLatin1(","),
+      QString::SkipEmptyParts );
   desktops.clear();
 
   for ( QStringList::iterator iter = desktopStrList.begin();
