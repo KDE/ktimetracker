@@ -45,7 +45,6 @@ private slots:
   void terminate();
 private:
   QProcess *m_proc;
-  int m_status;
   bool m_stderr;
   int m_timeoutInSeconds;
   QString *program;   // name of the program to start, typically sh, php or perl

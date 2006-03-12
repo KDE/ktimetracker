@@ -40,7 +40,6 @@ const int NICE_KILL_TIMEOUT_IN_SECS = 5;
 
 Script::Script( const QString& workingDirectory )
 {
-  m_status = 0;
   m_stderr = false;
   m_timeoutInSeconds = 5;
 
@@ -97,12 +96,10 @@ int Script::run()
   const QStringList qsl=arguments.split(" ");
   kDebug() << "Program is " << program1 << endl;
   kDebug() << "Arguments are " << qsl << endl;
-  int err;
-  m_proc->execute(program1, qsl);
   // This didn't work.  But Ctrl-C does.  :P
   //QTimer::singleShot( m_timeoutInSeconds * 1000, m_proc, SLOT( kill() ) );
   //while ( ! m_proc->normalExit() );
-  return m_status;
+  return m_proc->execute(program1, qsl);
 }
 
 void Script::terminate()
@@ -114,15 +111,12 @@ void Script::terminate()
 
 void Script::exit()
 {
-  m_status = m_proc->exitStatus();
   delete m_proc;
   m_proc = 0;
 }
 
 void Script::stderr()
 {
-  // Treat any output to std err as a script failure
-  m_status = 1;
   QString data = QString( m_proc->readAllStandardError() );
   m_stderr= true;
 }

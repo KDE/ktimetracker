@@ -97,7 +97,7 @@ int runscripts
         << " " << dots.left( dots.length() - fi->fileName().length() )
         << " " << ( ! rval ? "PASS" : "FAIL" ) << endl;
 
-      // Don't abort if one test files--run them all
+      // Don't abort if one test failes--run them all
       if ( rval ) 
       {
         oneBadApple = 1;
