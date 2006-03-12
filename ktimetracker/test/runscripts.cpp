@@ -68,25 +68,28 @@ int runscripts
 
   QDir dir( path );
 
-  Script* s = new Script( dir );
+  Script* s = new Script( path );
 
   dir.setNameFilter( extension );
   dir.setFilter( QDir::Files );
   dir.setSorting( QDir::Name | QDir::IgnoreCase );
-  const QFileInfoList *list = dir.entryInfoList();
-  QFileInfoListIterator it( *list );
+  QFileInfoList *list = new QFileInfoList(dir.entryInfoList());
+  //QFileInfoListIterator it( *list );
+  QList<QFileInfo> it( *list );
   QFileInfo *fi;
-  while ( !rval && ( fi = it.current() ) != 0 ) 
+  int current=0;
+  while ( ( current < list->count() ) && ( !rval && ( fi = new QFileInfo(it[current]) ) != 0 ) )
   {
+    kDebug() << "now testing " << fi->fileName() << endl;
     // Don't run scripts that are shared routines.
     if ( ! fi->fileName().startsWith( not_a_test_filename_prefix ) ) 
     {
-      s->addArgument( interpreter );
-      s->addArgument( path + QDir::separator() + fi->fileName().toLatin1() );
+      s->setProgram( interpreter );
+      s->addArgument( QString(path + QDir::separator() + fi->fileName().toLatin1()) );
 
       // Thorsten's xautomation tests run with user interaction by default.
-      if ( interpreter == "sh" ) s->addArgument( "--batch" );
-      if ( interpreter == "php" ) s->addArgument( "--batch" );
+      if ( interpreter == "sh" ) s->addArgument( QString("--batch") );
+      if ( interpreter == "php" ) s->addArgument( QString("--batch") );
 
       rval = s->run();
 
@@ -102,9 +105,10 @@ int runscripts
       }
 
       delete s;
-      s = new Script( dir );
+      s = new Script( path );
     }
-    ++it;
+    ++current;
+    kDebug() << "next filename" << endl;
   }
   delete s;
   s = 0;
@@ -118,12 +122,16 @@ int main( int, char** )
 
   QString path = srcdir();
 
-  if ( !rval ) rval = runscripts( "python", "*.py *.Py *.PY *.pY", path );
-
+  kDebug() << "Running sh scripts" << endl;
   if ( !rval ) rval = runscripts( "sh", "*.sh *.Sh *.SH *.sH", path );
 
+  kDebug() << "Running Python scripts" << endl;
+  if ( !rval ) rval = runscripts( "python", "*.py *.Py *.PY *.pY", path );
+
+  kDebug() << "Running Perl scripts" << endl;
   if ( !rval ) rval = runscripts( "perl", "*.pl *.Pl *.PL *.pL", path );
 
+  kDebug() << "Running PHP scripts" << endl;
   if ( !rval ) rval = runscripts( "php", "*.php *.php3 *.php4 *.php5", path );
 
   return rval;

@@ -38,7 +38,7 @@
 // kill() doesn't let script interpreter try to clean up.
 const int NICE_KILL_TIMEOUT_IN_SECS = 5;
 
-Script::Script( const QDir& workingDirectory )
+Script::Script( const QString& workingDirectory )
 {
   m_status = 0;
   m_stderr = false;
@@ -46,6 +46,9 @@ Script::Script( const QDir& workingDirectory )
 
   m_proc   = new QProcess( this );
   m_proc->setWorkingDirectory( workingDirectory );
+
+  program = new QString();
+  arguments = QString();
 
   connect ( m_proc, SIGNAL( readyReadStdout() ), 
             this  , SLOT  ( stdout() ) 
@@ -64,9 +67,21 @@ Script::~Script()
   m_proc = 0;
 }
 
-void Script::addArgument( const QString &arg )
+void Script::setProgram ( const QString &arg )
 {
-  m_proc->addArgument( arg );
+  kDebug() << "Entering setProgram" << endl;
+  program=new QString(arg);
+  kDebug() << "Leaving setProgram" << endl;
+}
+
+void Script::addArgument( QString arg )
+{
+  kDebug() << "Entering addArgument" << endl;
+  kDebug() << "argument to be added is " << arg << endl;
+  if (arguments!=QString()) arguments.append(" ");
+  arguments.append(arg);
+  kDebug() << "arguments are now " << arguments << endl;
+  kDebug() << "Leaving addArgument" << endl;
 }
 
 void Script::setTimeout( int seconds )
@@ -77,18 +92,23 @@ void Script::setTimeout( int seconds )
 
 int Script::run()
 {
-  m_proc->start();
+  kDebug() << "Entering Script::run" << endl;
+  const QString program1=program->left(program->length()); 
+  const QStringList qsl=arguments.split(" ");
+  kDebug() << "Program is " << program1 << endl;
+  kDebug() << "Arguments are " << qsl << endl;
+  int err;
+  m_proc->execute(program1, qsl);
   // This didn't work.  But Ctrl-C does.  :P
   //QTimer::singleShot( m_timeoutInSeconds * 1000, m_proc, SLOT( kill() ) );
   //while ( ! m_proc->normalExit() );
-  while ( m_proc->isRunning() );
   return m_status;
 }
 
 void Script::terminate()
 {
   // These both trigger processExited, so exit() will run.
-  m_proc->tryTerminate();
+  m_proc->terminate();
   QTimer::singleShot( NICE_KILL_TIMEOUT_IN_SECS*1000, m_proc, SLOT( kill() ) );
 }
 
@@ -103,13 +123,13 @@ void Script::stderr()
 {
   // Treat any output to std err as a script failure
   m_status = 1;
-  QString data = QString( m_proc->readStderr() );
+  QString data = QString( m_proc->readAllStandardError() );
   m_stderr= true;
 }
 
 void Script::stdout()
 {
-  QString data = QString( m_proc->readStdout() );
+  QString data = QString( m_proc->readAllStandardOutput() );
 }
 
 #include "script.moc"
