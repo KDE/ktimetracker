@@ -40,7 +40,7 @@
 
 class DesktopTracker;
 
-TaskView::TaskView(QWidget *parent, const QString &icsfile ):KListView(parent)
+TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
 {
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
@@ -122,11 +122,11 @@ KarmStorage* TaskView::storage()
 void TaskView::contentsMousePressEvent ( QMouseEvent * e )
 {
   kDebug(5970) << "entering contentsMousePressEvent" << endl;
-  KListView::contentsMousePressEvent(e);
+  K3ListView::contentsMousePressEvent(e);
   Task* task = current_item();
 
   // This checks that there has been a click onto an item,
-  // not into an empty part of the KListView.
+  // not into an empty part of the K3ListView.
   if ( task != 0 &&  // zero can happen if there is no task
        e->pos().y() >= current_item()->itemPos() && 
        e->pos().y() < current_item()->itemPos()+current_item()->height() ) 
@@ -149,7 +149,7 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 // not in the blank space, if yes, stop all other tasks and start the new timer.
 {
   kDebug(5970) << "entering contentsMouseDoubleClickEvent" << endl;
-  KListView::contentsMouseDoubleClickEvent(e);
+  K3ListView::contentsMouseDoubleClickEvent(e);
   
   Task *task = current_item();
 

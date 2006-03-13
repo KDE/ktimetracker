@@ -11,13 +11,13 @@
 //
 #include "taskviewwhatsthis.h"
 #include <kdebug.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <klocale.h>
 
 TaskViewWhatsThis::TaskViewWhatsThis( QWidget* qw )
  : Q3WhatsThis( qw )
 {
-  _listView=(KListView *) qw;
+  _listView=(K3ListView *) qw;
 }
 
 TaskViewWhatsThis::~TaskViewWhatsThis()

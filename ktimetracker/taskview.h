@@ -9,7 +9,7 @@
 #include <QList>
 #include <QTextStream>
 
-#include <klistview.h>
+#include <k3listview.h>
 
 #include "desktoplist.h"
 #include "resourcecalendar.h"
@@ -42,7 +42,7 @@ using namespace KCal;
  * Container and interface for the tasks.
  */
 
-class TaskView : public KListView
+class TaskView : public K3ListView
 {
   Q_OBJECT
 
