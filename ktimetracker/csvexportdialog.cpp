@@ -82,9 +82,9 @@ ReportCriteria CSVExportDialog::reportCriteria()
   // this choice currenly and I'm trying to minimize pre-3.3 hacking at the
   // moment.
   rc.allTasks = true;
-
-  QString t = grpTimeFormat->selected()->name(); 
-  rc.decimalMinutes = ( t == i18n( "radioDecimal" ) );
+ 
+  rc.decimalMinutes = (  combodecimalminutes->currentText() == i18n( "Decimal" ) );
+  kDebug(5970) << "rc.decimalMinutes is " << rc.decimalMinutes << endl;
 
   QString d = grpDelimiter->selected()->name(); 
   if      ( d == "radioComma" )     rc.delimiter = ",";

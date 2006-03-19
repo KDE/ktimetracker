@@ -579,7 +579,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   QString double_dquote = dquote + dquote;
   bool to_quote = true;
 
-  QString err;
+  QString err=QString();
   Task* task;
   int maxdepth=0;
 
@@ -668,7 +668,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
     if( !f.open( QIODevice::WriteOnly ) ) {
         err = i18n( "Could not open \"%1\"." ).arg( filename );
     }
-    if (!err.isEmpty())
+    if (err.length()==0)
     {
       QTextStream stream(&f);
       // Export to file

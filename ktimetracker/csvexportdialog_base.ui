@@ -206,45 +206,58 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QButtonGroup" row="2" column="0" rowspan="1" colspan="4">
-            <property name="name">
-                <cstring>grpTimeFormat</cstring>
-            </property>
-            <property name="title">
-                <string>Time Format</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>&lt;p&gt;You can choose to output time values in fractions of an hour or in minutes.&lt;/p&gt;
-&lt;p&gt;For example, if the value is 5 hours and 45 minutes, then the Decimal option would output &lt;tt&gt;5.75&lt;/tt&gt;, and the Hours:Minutes option would output &lt;tt&gt;5:45&lt;/tt&gt;&lt;/p&gt;</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QRadioButton" row="0" column="1">
-                    <property name="name">
-                        <cstring>radioHoursMinutes</cstring>
-                    </property>
-                    <property name="focusPolicy">
-                        <enum>NoFocus</enum>
-                    </property>
-                    <property name="text">
-                        <string>Hours:Minutes</string>
-                    </property>
-                </widget>
-                <widget class="QRadioButton" row="0" column="0">
-                    <property name="name">
-                        <cstring>radioDecimal</cstring>
-                    </property>
+
+
+ 
+            <widget class="QComboBox" row="2" column="0" rowspan="1" colspan="2">
+                <item>
                     <property name="text">
                         <string>Decimal</string>
                     </property>
-                    <property name="checked">
-                        <bool>true</bool>
+                </item>
+                <item>
+                     <property name="text">
+                        <string>Hours:Minutes</string>
                     </property>
-                </widget>
-            </grid>
-        </widget>
+                </item>
+                <property name="name">
+                    <cstring>combodecimalminutes</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>19</x>
+                        <y>20</y>
+                        <width>92</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+            </widget>
+             <widget class="QComboBox" row="2" column="2" rowspan="1" colspan="2">
+                <item>
+                    <property name="text">
+                        <string>All Times</string>
+                    </property>
+                </item>
+                <item>
+                     <property name="text">
+                        <string>Session Times</string>
+                    </property>
+                </item>
+                <property name="name">
+                    <cstring>combosessiontimes</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>19</x>
+                        <y>20</y>
+                        <width>92</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+            </widget>
+       
+
+
         <widget class="QButtonGroup" row="3" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>grpDelimiter</cstring>
