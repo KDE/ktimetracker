@@ -71,7 +71,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
       QPixmap *icon = new QPixmap();
       QString name;
       name.sprintf("watch-%d.xpm",i);
-      *icon = kil->loadIcon( name, KIcon::User );
+      *icon = kil->loadIcon( name, K3Icon::User );
       icons->insert(i,icon);
     }
   }

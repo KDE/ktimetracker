@@ -51,7 +51,7 @@ Preferences *Preferences::instance( const QString &icsfile )
 
 void Preferences::makeBehaviorPage()
 {
-  QPixmap icon = SmallIcon( "kcmsystem", KIcon::SizeMedium);
+  QPixmap icon = SmallIcon( "kcmsystem", K3Icon::SizeMedium);
   QFrame* behaviorPage = addPage( i18n("Behavior"), i18n("Behavior Settings"),
       icon );
 
@@ -83,7 +83,7 @@ void Preferences::makeBehaviorPage()
 
 void Preferences::makeDisplayPage()
 {
-  QPixmap icon = SmallIcon( "viewmag", KIcon::SizeMedium );
+  QPixmap icon = SmallIcon( "viewmag", K3Icon::SizeMedium );
   QFrame* displayPage = addPage( i18n("Display"), i18n("Display Settings"),
       icon );
 
@@ -113,7 +113,7 @@ void Preferences::makeDisplayPage()
 
 void Preferences::makeStoragePage()
 {
-  QPixmap icon = SmallIcon( "kfm", KIcon::SizeMedium );
+  QPixmap icon = SmallIcon( "kfm", K3Icon::SizeMedium );
   QFrame* storagePage = addPage( i18n("Storage"), i18n("Storage Settings"),
       icon );
 
