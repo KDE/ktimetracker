@@ -13,7 +13,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(runscripts ${runscripts_SRCS})
 
-target_link_libraries(runscripts  ${QT_AND_KDECORE_LIBS} )
+target_link_libraries(runscripts  ${KDE4_KDECORE_LIBS} )
 
 endif(KDE4_BUILD_TESTS)
 
@@ -27,7 +27,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(locking ${locking_SRCS})
 
-target_link_libraries(locking  ${QT_AND_KDECORE_LIBS} kcal )
+target_link_libraries(locking  ${KDE4_KDECORE_LIBS} kcal )
 
 endif(KDE4_BUILD_TESTS)
 
