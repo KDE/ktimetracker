@@ -26,7 +26,7 @@ kde4_automoc(${karm_SRCS})
 
 kde4_add_executable(karm ${karm_SRCS})
 
-target_link_libraries(karm  ${KDE4_KPARTS_LIBRARIES}  kdeprint kcal kdepim ${X11_Xss_LIB} kcal_resourceremote)
+target_link_libraries(karm  ${KDE4_KPARTS_LIBS}  kdeprint kcal kdepim ${X11_Xss_LIB} kcal_resourceremote)
 
 install_targets(/bin karm )
 
@@ -44,7 +44,7 @@ kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} karmpart )
 
-target_link_libraries(karmpart  ${KDE4_KPARTS_LIBRARIES} kcal ${X11_Xss_LIB} kdeprint kdepim kcal_resourceremote)
+target_link_libraries(karmpart  ${KDE4_KPARTS_LIBS} kcal ${X11_Xss_LIB} kdeprint kdepim kcal_resourceremote)
 
 install_targets(${LIB_INSTALL_DIR}/kde4 karmpart )
 
