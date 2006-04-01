@@ -78,6 +78,11 @@ class ReportCriteria
     bool    decimalMinutes;
 
     /**
+     True if a clipboard export is wished
+     */
+    bool    bExPortToClipBoard;
+
+    /**
      The delimiter to use when outputting comma-seperated value reports.
      */
     QString delimiter;

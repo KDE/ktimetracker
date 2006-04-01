@@ -181,10 +181,10 @@ class TaskView : public K3ListView
     void iCalFileChanged(QString file);
 
     /** Copy totals for current and all sub tasks to clipboard. */
-    void clipTotals();
+    QString clipTotals();
 
     /** Copy history for current and all sub tasks to clipboard. */
-    void clipHistory();
+    QString clipHistory();
 
   signals:
     void totalTimesChanged( long session, long total );

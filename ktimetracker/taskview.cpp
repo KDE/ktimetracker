@@ -791,8 +791,10 @@ void TaskView::markTaskAsIncomplete()
 }
 
 
-void TaskView::clipTotals()
+QString TaskView::clipTotals()
 {
+  kDebug(5970) << "Entering clipTotals" << endl;
+  QString err=QString();
   TimeKard t;
   if (current_item() && current_item()->isRoot())
   {
@@ -813,10 +815,12 @@ void TaskView::clipTotals()
   {
     KApplication::clipboard()->setText(t.totalsAsText(this));
   }
+  return err;
 }
 
-void TaskView::clipHistory()
+QString TaskView::clipHistory()
 {
+  QString err=QString();
   PrintDialog dialog;
   if (dialog.exec()== QDialog::Accepted)
   {
@@ -824,6 +828,7 @@ void TaskView::clipHistory()
     KApplication::clipboard()->
       setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek(), dialog.totalsOnly() ) );
   }
+  return err;
 }
 
 #include "taskview.moc"

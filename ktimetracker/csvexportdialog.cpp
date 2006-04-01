@@ -38,6 +38,7 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   ) 
   : CSVExportDialogBase( parent, name )
 {
+  connect(btnExportClip, SIGNAL(clicked()), this, SLOT(exPortToClipBoard()));
   switch ( rt ) {
     case ReportCriteria::CSVTotalsExport:
       grpDateRange->setEnabled( false );
@@ -70,6 +71,12 @@ void CSVExportDialog::enableTasksToExportQuestion()
 {
   return;
   //grpTasksToExport->setEnabled( true );      
+}
+
+void CSVExportDialog::exPortToClipBoard()
+{
+  rc.bExPortToClipBoard=true;
+  accept();
 }
 
 ReportCriteria CSVExportDialog::reportCriteria()
