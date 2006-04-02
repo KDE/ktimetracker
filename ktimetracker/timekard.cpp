@@ -26,7 +26,6 @@
 #include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qmap.h>
-//Added by qt3to4:
 #include <QList>
 
 #include <kglobal.h>
@@ -48,12 +47,13 @@ const int reportWidth = taskWidth + timeWidth;
 
 const QString cr = QString::fromLatin1("\n");
 
-QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc, bool justThisTask )
+QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 {
   QString retval;
   QString line;
   QString buf;
   long sum;
+  bool justThisTask=!rc.allTasks;
 
   line.fill('-', reportWidth);
   line += cr;

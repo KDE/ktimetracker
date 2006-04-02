@@ -39,6 +39,7 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
   : CSVExportDialogBase( parent, name )
 {
   connect(btnExportClip, SIGNAL(clicked()), this, SLOT(exPortToClipBoard()));
+  connect(btnExport, SIGNAL(clicked()), this, SLOT(exPortToCSVFile()));
   switch ( rt ) {
     case ReportCriteria::CSVTotalsExport:
       grpDateRange->setEnabled( false );
@@ -79,17 +80,17 @@ void CSVExportDialog::exPortToClipBoard()
   accept();
 }
 
+void CSVExportDialog::exPortToCSVFile()
+{
+  rc.bExPortToClipBoard=false;
+  accept();
+}
+
 ReportCriteria CSVExportDialog::reportCriteria()
 {
   rc.url = urlExportTo->url();
   rc.from = dtFrom->date();
   rc.to = dtTo->date();
-
-  // Hard code to true for now as the CSV export of totals does not support
-  // this choice currenly and I'm trying to minimize pre-3.3 hacking at the
-  // moment.
-  rc.allTasks = true;
- 
   rc.decimalMinutes = (  combodecimalminutes->currentText() == i18n( "Decimal" ) );
   kDebug(5970) << "rc.decimalMinutes is " << rc.decimalMinutes << endl;
 
@@ -108,6 +109,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
 
   rc.quote = cboQuote->currentText();
   rc.sessionTimes = (i18n("Session Times") == combosessiontimes->currentText());
+  rc.allTasks = (i18n("All Tasks") == comboalltasks->currentText());
 
   return rc;
 }

@@ -26,8 +26,6 @@
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
 #include <kprinter.h>
-//#include <qdate.h>
-
 #include "karmstorage.h"
 #include <QList>
 #include <reportcriteria.h>
@@ -101,7 +99,7 @@ class TimeKard
      * print the task subtree for a root task and when they want to print
      * all tasks.
      */
-    QString totalsAsText(TaskView* taskview, ReportCriteria rc, bool justThisTask=true );
+    QString totalsAsText(TaskView* taskview, ReportCriteria rc);
 
     /**
      * Generates ascii text of weekly task history, for current task on down.

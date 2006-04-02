@@ -65,13 +65,6 @@ class ReportCriteria
     QDate   to;
 
     /**
-     True if the report should contain all tasks in Karm.
-
-     Defaults to true.
-     */
-    bool    allTasks;
-
-    /**
      True if the durations should be output in decimal hours.  Otherwise,
      output durations as HH24:MI
      */
@@ -82,8 +75,13 @@ class ReportCriteria
      */
     bool    sessionTimes;
 
+    /** 
+     True if user chose to export all tasks, not only the selected one
+     */
+    bool    allTasks;
+
     /**
-     True if a clipboard export is wished
+     True if a clipboard export is wished, not an export to a file
      */
     bool    bExPortToClipBoard;
 

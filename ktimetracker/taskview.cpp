@@ -9,7 +9,6 @@
 #include <qtextstream.h>
 #include <qtimer.h>
 #include <qxml.h>
-//Added by qt3to4:
 #include <QMouseEvent>
 #include <QList>
 
@@ -798,25 +797,7 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
   kDebug(5970) << "Entering clipTotals" << endl;
   QString err=QString();
   TimeKard t;
-  if (current_item() && current_item()->isRoot())
-  {
-    int response = KMessageBox::questionYesNo( 0,
-        i18n("Copy totals for just this task and its subtasks, or copy totals for all tasks?"),
-        i18n("Copy Totals to Clipboard"),
-        i18n("Copy This Task"), i18n("Copy All Tasks") );
-    if (response == KMessageBox::Yes) // this task only
-    {
-      KApplication::clipboard()->setText(t.totalsAsText(this, rc));
-    }
-    else // only task
-    {
-      KApplication::clipboard()->setText(t.totalsAsText(this, rc, false));
-    }
-  }
-  else
-  {
-    KApplication::clipboard()->setText(t.totalsAsText(this, rc));
-  }
+  KApplication::clipboard()->setText(t.totalsAsText(this, rc));
   return err;
 }
 

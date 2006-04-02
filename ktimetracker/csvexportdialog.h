@@ -30,6 +30,7 @@ class CSVExportDialog : public CSVExportDialogBase
 
   public slots:
     void exPortToClipBoard();
+    void exPortToCSVFile();
 
   public:
     CSVExportDialog( ReportCriteria::REPORTTYPE rt,
