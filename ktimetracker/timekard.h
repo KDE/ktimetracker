@@ -29,8 +29,8 @@
 //#include <qdate.h>
 
 #include "karmstorage.h"
-//Added by qt3to4:
 #include <QList>
+#include <reportcriteria.h>
 
 class QString;
 class QDate;
@@ -101,7 +101,7 @@ class TimeKard
      * print the task subtree for a root task and when they want to print
      * all tasks.
      */
-    QString totalsAsText(TaskView* taskview, bool justThisTask = true);
+    QString totalsAsText(TaskView* taskview, ReportCriteria rc, bool justThisTask=true );
 
     /**
      * Generates ascii text of weekly task history, for current task on down.
@@ -112,7 +112,7 @@ class TimeKard
         const QDate& to, bool justThisTask, bool perWeek, bool totalsOnly);
 
 private:
-    void printTask(Task *t, QString &s, int level);
+    void printTask(Task *t, QString &s, int level, const ReportCriteria &rc);
 
     void printTaskHistory(const Task *t, const QMap<QString, long>& datamap,
                           QMap<QString, long>& daytotals,

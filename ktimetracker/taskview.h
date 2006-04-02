@@ -4,7 +4,6 @@
 #include <q3dict.h>
 #include <q3ptrlist.h>
 #include <q3ptrstack.h>
-//Added by qt3to4:
 #include <QMouseEvent>
 #include <QList>
 #include <QTextStream>
@@ -16,9 +15,6 @@
 #include "karmstorage.h"
 #include "reportcriteria.h"
 #include <qtimer.h>
-//#include "desktoptracker.h"
-
-//#include "karmutility.h"
 
 class Q3ListBox;
 class QString;
@@ -181,7 +177,7 @@ class TaskView : public K3ListView
     void iCalFileChanged(QString file);
 
     /** Copy totals for current and all sub tasks to clipboard. */
-    QString clipTotals();
+    QString clipTotals( const ReportCriteria &rc );
 
     /** Copy history for current and all sub tasks to clipboard. */
     QString clipHistory();

@@ -78,6 +78,11 @@ class ReportCriteria
     bool    decimalMinutes;
 
     /**
+     True if user chose to export session times, not all times
+     */
+    bool    sessionTimes;
+
+    /**
      True if a clipboard export is wished
      */
     bool    bExPortToClipBoard;

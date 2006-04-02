@@ -35,6 +35,7 @@
 #include <event.h>
 
 #include "karmutility.h"        // formatTime()
+#include "reportcriteria.h"     // settings the user gave in the export dialog
 #include "timekard.h"
 #include "task.h"
 #include "taskview.h"
@@ -47,7 +48,7 @@ const int reportWidth = taskWidth + timeWidth;
 
 const QString cr = QString::fromLatin1("\n");
 
-QString TimeKard::totalsAsText(TaskView* taskview, bool justThisTask)
+QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc, bool justThisTask )
 {
   QString retval;
   QString line;
@@ -72,19 +73,20 @@ QString TimeKard::totalsAsText(TaskView* taskview, bool justThisTask)
   {
     if (justThisTask)
     {
-      // a task's total time includes the sum of all subtask times
-      sum = taskview->current_item()->totalTime();
-      printTask(taskview->current_item(), retval, 0);
+      if (!rc.sessionTimes) sum = taskview->current_item()->totalTime();
+      else sum = taskview->current_item()->totalSessionTime();
+      printTask(taskview->current_item(), retval, 0, rc);
     }
-    else
+    else // print all tasks
     {
       sum = 0;
       for (Task* task= taskview->current_item(); task;
           task= task->nextSibling())
       {
-        sum += task->totalTime();
-        if ( task->totalTime() )
-          printTask(task, retval, 0);
+        if (!rc.sessionTimes) sum += task->totalTime();
+        else sum += task->totalSessionTime();
+        if ( (task->totalTime() && (!rc.sessionTimes)) || (task->totalSessionTime() && rc.sessionTimes) )
+          printTask(task, retval, 0, rc);
       }
     }
 
@@ -102,22 +104,39 @@ QString TimeKard::totalsAsText(TaskView* taskview, bool justThisTask)
 }
 
 // Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
-void TimeKard::printTask(Task *task, QString &s, int level)
+void TimeKard::printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
 {
   QString buf;
 
   s += buf.fill(' ', level);
-  s += QString(QString::fromLatin1("%1    %2"))
-    .arg(formatTime(task->totalTime()), timeWidth)
-    .arg(task->name());
+  if (!rc.sessionTimes)
+  {
+    s += QString(QString::fromLatin1("%1    %2"))
+      .arg(formatTime(task->totalTime()), timeWidth)
+      .arg(task->name());
+  }
+  else // print session times
+  {
+    s += QString(QString::fromLatin1("%1    %2"))
+      .arg(formatTime(task->totalSessionTime()), timeWidth)
+      .arg(task->name());
+  }
   s += cr;
 
   for (Task* subTask = task->firstChild();
       subTask;
       subTask = subTask->nextSibling())
   {
-    if ( subTask->totalTime() ) // to avoid 00:00 entries
-      printTask(subTask, s, level+1);
+    if ( !rc.sessionTimes )
+    {
+      if ( subTask->totalTime() ) // to avoid 00:00 entries
+        printTask(subTask, s, level+1, rc);
+    }
+    else
+    {
+      if ( subTask->totalSessionTime() ) // to avoid 00:00 entries
+        printTask(subTask, s, level+1, rc);
+    }
   }
 }
 

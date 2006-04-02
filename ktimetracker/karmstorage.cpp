@@ -33,7 +33,6 @@
 #include <qdatetime.h>
 #include <qstring.h>
 #include <qstringlist.h>
-//Added by qt3to4:
 #include <QList>
 #include <QTextStream>
 #include <QByteArray>
@@ -58,10 +57,6 @@
 #include <vector>
 #include <kpassworddialog.h>
 #include <kprogressdialog.h>
-//#include <calendarlocal.h>
-//#include <journal.h>
-//#include <event.h>
-//#include <todo.h>
 
 #include "karmstorage.h"
 #include "preferences.h"
@@ -884,7 +879,7 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
     if ( !rc.bExPortToClipBoard )
       err = exportcsvFile( taskview, rc );
     else 
-      err = taskview->clipTotals();
+      err = taskview->clipTotals( rc );
   }
   else {
       // hmmmm ... assert(0)?

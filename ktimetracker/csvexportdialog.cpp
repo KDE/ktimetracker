@@ -107,6 +107,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
   }
 
   rc.quote = cboQuote->currentText();
+  rc.sessionTimes = (i18n("Session Times") == combosessiontimes->currentText());
 
   return rc;
 }

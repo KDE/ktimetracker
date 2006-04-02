@@ -791,7 +791,9 @@ void TaskView::markTaskAsIncomplete()
 }
 
 
-QString TaskView::clipTotals()
+QString TaskView::clipTotals( const ReportCriteria &rc )
+// This function stores the user's tasks into the clipboard.
+// rc tells how the user wants his report, e.g. all times or session times
 {
   kDebug(5970) << "Entering clipTotals" << endl;
   QString err=QString();
@@ -804,16 +806,16 @@ QString TaskView::clipTotals()
         i18n("Copy This Task"), i18n("Copy All Tasks") );
     if (response == KMessageBox::Yes) // this task only
     {
-      KApplication::clipboard()->setText(t.totalsAsText(this));
+      KApplication::clipboard()->setText(t.totalsAsText(this, rc));
     }
     else // only task
     {
-      KApplication::clipboard()->setText(t.totalsAsText(this, false));
+      KApplication::clipboard()->setText(t.totalsAsText(this, rc, false));
     }
   }
   else
   {
-    KApplication::clipboard()->setText(t.totalsAsText(this));
+    KApplication::clipboard()->setText(t.totalsAsText(this, rc));
   }
   return err;
 }
