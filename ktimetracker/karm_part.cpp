@@ -21,6 +21,9 @@
 //Added by qt3to4:
 #include <QByteArray>
 #include <Q3PtrList>
+#include <q3popupmenu.h>
+#include <kxmlguifactory.h>
+#include "mainwindow.h"
 
 karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name )
@@ -420,6 +423,14 @@ extern "C"
 	KGlobal::locale()->insertCatalog("karm");
         return new karmPartFactory;
     }
+}
+
+void karmPart::contextMenuRequest( Q3ListViewItem*, const QPoint& point, int )
+{
+    QMenu* pop = dynamic_cast<QMenu*>(
+                          factory()->container( i18n( "task_popup" ), this ) );
+    if ( pop )
+      pop->popup( point );
 }
 
 //----------------------------------------------------------------------------

@@ -6,6 +6,7 @@
 #include <kparts/factory.h>
 #include <karmdcopiface.h>
 #include "reportcriteria.h"
+#include <Q3ListView>
 
 class KAccel;
 class KAccelMenuWatch;
@@ -23,7 +24,7 @@ class TaskView;
  * application.
  *
  * @short Main Part
- * @author Thorsten Staerk <thorsten@staerk.de>
+ * @author Thorsten Staerk <kde at staerk dot de>
  * @version 0.1
  */
 class karmPart : public KParts::ReadWritePart, virtual public KarmDCOPIface
@@ -60,6 +61,7 @@ public:
     karmPart(QWidget *parentWidget, const char *widgetName,
              QObject *parent, const char *name);
 
+    void contextMenuRequest( Q3ListViewItem*, const QPoint& point, int );
     // DCOP
     void quit();
     virtual bool save();
