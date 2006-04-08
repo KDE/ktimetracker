@@ -265,38 +265,6 @@ void TaskView::refresh()
   kDebug(5970) << "exiting TaskView::refresh()" << endl;
 }
     
-void TaskView::loadFromFlatFile()
-{
-  kDebug(5970) << "TaskView::loadFromFlatFile()" << endl;
-
-  //KFileDialog::getSaveFileName("icalout.ics",i18n("*.ics|ICalendars"),this);
-
-  QString fileName(KFileDialog::getOpenFileName(QString(), QString(),
-        0));
-  if (!fileName.isEmpty()) {
-    QString err = _storage->loadFromFlatFile(this, fileName);
-    if (!err.isEmpty())
-    {
-      KMessageBox::error(this, err);
-      return;
-    }
-    // Register tasks with desktop tracker
-    int task_idx = 0;
-    Task* task = item_at_index(task_idx++);
-    while (task)
-    {
-      // item_at_index returns 0 where no more items.
-      _desktopTracker->registerForDesktops( task, task->getDesktops() );
-      task = item_at_index(task_idx++);
-    }
-
-    setSelected(first_child(), true);
-    setCurrentItem(first_child());
-
-    _desktopTracker->startTracking();
-  }
-}
-
 QString TaskView::importPlanner(QString fileName)
 {
   kDebug(5970) << "entering importPlanner" << endl;

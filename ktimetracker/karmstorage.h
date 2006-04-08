@@ -122,32 +122,6 @@ class KarmStorage
     QString save(TaskView* taskview);
 
     /**
-     * Read tasks and their total times from a text file (legacy storage).
-     *
-     * This reads from one of the two legacy file formats.  In this version,
-     * the parent task times do not include the sum of all their children's
-     * times.
-     *
-     * The format of the file is zero or more lines of:
-     *    1         task id (a number)
-     *    time      in minutes
-     *    string    task name
-     *    [string]  desktops, in which to count. e.g. "1,2,5" (optional)
-     */
-    QString loadFromFlatFile(TaskView* taskview, const QString& filename);
-
-    /**
-     *  Reads tasks and their total times from text file (legacy).
-     *
-     *  This is the older legacy format, where the task totals included the
-     *  children totals.
-     *
-     *  @see loadFromFlatFile
-     */
-    QString loadFromFlatFileCumulative(TaskView* taskview,
-        const QString& filename);
-
-    /**
      Output a report based on contents of ReportCriteria.
      */
     QString report( TaskView *taskview, const ReportCriteria &rc );

@@ -5,11 +5,7 @@
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
     <Separator />
-    <Menu name="import">
-      <text>&amp;Import</text>
-      <Action name="import_flatfile" />
-      <Action name="import_planner" />
-    </Menu>
+    <Action name="import_planner" />
     <Action name="export_times" />
     <Action name="export_history" />
   </Menu>

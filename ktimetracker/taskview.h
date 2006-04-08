@@ -105,9 +105,6 @@ class TaskView : public K3ListView
      /** Used to refresh (e.g. after import) */
     void refresh();
 
-   /** Used to import a legacy file format. */
-    void loadFromFlatFile();
-
     /** used to import tasks from imendio planner */
     QString importPlanner( QString fileName="" );
 
