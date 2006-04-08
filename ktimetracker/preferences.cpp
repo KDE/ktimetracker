@@ -4,7 +4,6 @@
 #include <qstring.h>
 #include <qspinbox.h>
 #include <qlayout.h>
-//Added by qt3to4:
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QGridLayout>
@@ -88,7 +87,7 @@ void Preferences::makeDisplayPage()
       icon );
 
   QVBoxLayout* topLevel = new QVBoxLayout( displayPage, 0, spacingHint() );
-  QGridLayout* layout = new QGridLayout( topLevel, 5, 2 );
+  QGridLayout* layout = new QGridLayout( topLevel, 7, 4 );
   layout->setColStretch( 1, 1 );
 
   QLabel* _displayColumnsLabelW = new QLabel( i18n("Columns displayed:"),
@@ -102,11 +101,18 @@ void Preferences::makeDisplayPage()
   _displayTotalTimeW = new QCheckBox ( i18n("Total task time"),
       displayPage, "_displayTotalTimeW");
 
-  layout->addMultiCellWidget( _displayColumnsLabelW, 0, 0, 0, 1 );
+  QLabel* _numberFormatW = new QLabel( i18n("Number format:"),
+      displayPage );
+  _decimalFormatW = new QCheckBox( i18n("Decimal"), displayPage, "_decimalDisplayW" );
+
+  layout->addMultiCellWidget( _displayColumnsLabelW, 0, 0, 1, 2 );
   layout->addWidget(_displaySessionW, 1, 1 );
   layout->addWidget(_displayTimeW, 2, 1 );
   layout->addWidget(_displayTotalSessionW, 3, 1 );
   layout->addWidget(_displayTotalTimeW, 4, 1 );
+
+  layout->addMultiCellWidget( _numberFormatW, 6, 6, 0, 1 );
+  layout->addWidget( _decimalFormatW );
 
   topLevel->addStretch();
 }
@@ -212,6 +218,7 @@ void Preferences::slotOk()
   _displayColumnV[1] = _displayTimeW->isChecked();
   _displayColumnV[2] = _displayTotalSessionW->isChecked();
   _displayColumnV[3] = _displayTotalTimeW->isChecked();
+  _decimalFormatV = _decimalFormatW->isChecked();
 
   emitSignals();
   save();
@@ -256,6 +263,7 @@ QString Preferences::setPromptDelete(bool prompt)    { _promptDeleteV=prompt; re
 QString Preferences::setUniTasking(bool b)           { _uniTaskingV=b; return ""; }
 bool    Preferences::displayColumn(int n)            const { return _displayColumnV[n]; }
 QString Preferences::userRealName()                  const { return _userRealName; }
+bool    Preferences::decimalFormat()		     const { return _decimalFormatV; }
 
 //---------------------------------------------------------------------------
 //                                  Load and Save

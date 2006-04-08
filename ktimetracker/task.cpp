@@ -405,11 +405,12 @@ void Task::paste(Task* destination)
 
 void Task::update()
 {
+  bool b=taskView()->preferences()->decimalFormat();
   setText(0, _name);
-  setText(1, formatTime(_sessionTime));
-  setText(2, formatTime(_time));
-  setText(3, formatTime(_totalSessionTime));
-  setText(4, formatTime(_totalTime));
+  setText(1, formatTime(_sessionTime, b));
+  setText(2, formatTime(_time, b));
+  setText(3, formatTime(_totalSessionTime, b));
+  setText(4, formatTime(_totalTime, b));
 }
 
 void Task::addComment( QString comment, KarmStorage* storage )

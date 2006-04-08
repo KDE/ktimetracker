@@ -254,6 +254,7 @@ void TaskView::refresh()
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
   {
     t->setPixmapProgress();
+    t->update();  // maybe there was a change in the times's format
   }
   
   // remove root decoration if there is no more child.
@@ -708,6 +709,8 @@ void TaskView::adaptColumns()
       setColumnWidth( x, 0 );
     }
   }
+  // maybe this slot is called because the times' format changed, so do a ...
+  refresh();
 }
 
 void TaskView::deletingTask(Task* deletedTask)
