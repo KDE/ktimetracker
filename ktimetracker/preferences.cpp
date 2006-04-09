@@ -61,18 +61,21 @@ void Preferences::makeBehaviorPage()
   _doIdleDetectionW = new QCheckBox
     ( i18n("Detect desktop as idle after"), behaviorPage, "_doIdleDetectionW");
   _idleDetectValueW = new QSpinBox
-    (1,60*24, 1, behaviorPage, "_idleDetectValueW");
+    (1,30*24, 1, behaviorPage, "_idleDetectValueW");
   _idleDetectValueW->setSuffix(i18n(" min"));
   _promptDeleteW = new QCheckBox
     ( i18n( "Prompt before deleting tasks" ), behaviorPage, "_promptDeleteW" );
   _uniTaskingW = new QCheckBox
     ( i18n( "Allow only one timer at a time" ), behaviorPage, "_uniTaskingW" );
   _uniTaskingW->setWhatsThis( i18n("Unitasking - allow only one task to be timed at a time. Does not stop any timer.") );
+  _trayIconW = new QCheckBox
+    ( i18n( "Place an icon to the SysTray" ), behaviorPage, "_trayIcon" );
 
   layout->addWidget(_doIdleDetectionW, 0, 0 );
   layout->addWidget(_idleDetectValueW, 0, 1 );
   layout->addWidget(_promptDeleteW, 1, 0 );
   layout->addWidget(_uniTaskingW, 2, 0);
+  layout->addWidget(_trayIconW, 3, 0);
 
   topLevel->addStretch();
 
@@ -111,8 +114,8 @@ void Preferences::makeDisplayPage()
   layout->addWidget(_displayTotalSessionW, 3, 1 );
   layout->addWidget(_displayTotalTimeW, 4, 1 );
 
-  layout->addMultiCellWidget( _numberFormatW, 6, 6, 0, 1 );
-  layout->addWidget( _decimalFormatW );
+  layout->addMultiCellWidget( _numberFormatW, 0, 0, 2, 2 );
+  layout->addWidget( _decimalFormatW, 1, 2 );
 
   topLevel->addStretch();
 }
@@ -187,6 +190,8 @@ void Preferences::showDialog()
   _displayTimeW->setChecked(_displayColumnV[1]);
   _displayTotalSessionW->setChecked(_displayColumnV[2]);
   _displayTotalTimeW->setChecked(_displayColumnV[3]);
+  
+  _trayIconW->setChecked(_trayIconV);
 
   // adapt visibility of preference items according
   // to settings
@@ -219,6 +224,7 @@ void Preferences::slotOk()
   _displayColumnV[2] = _displayTotalSessionW->isChecked();
   _displayColumnV[3] = _displayTotalTimeW->isChecked();
   _decimalFormatV = _decimalFormatW->isChecked();
+  _trayIconV = _trayIconW->isChecked();
 
   emitSignals();
   save();
@@ -264,6 +270,7 @@ QString Preferences::setUniTasking(bool b)           { _uniTaskingV=b; return ""
 bool    Preferences::displayColumn(int n)            const { return _displayColumnV[n]; }
 QString Preferences::userRealName()                  const { return _userRealName; }
 bool    Preferences::decimalFormat()		     const { return _decimalFormatV; }
+bool    Preferences::trayIcon()                      const { return _trayIconV; }
 
 //---------------------------------------------------------------------------
 //                                  Load and Save
@@ -301,6 +308,9 @@ void Preferences::load()
   _displayColumnV[3] = config.readEntry
     ( QString::fromLatin1("display total time"), true);
 
+  _trayIconV = config.readEntry
+    ( QString::fromLatin1("tray icon"), true);
+
   KEMailSettings settings;
   _userRealName = settings.getSetting( KEMailSettings::RealName );
 }
@@ -329,7 +339,7 @@ void Preferences::save()
       _displayColumnV[2]);
   config.writeEntry( QString::fromLatin1("display total time"),
       _displayColumnV[3]);
-
+  config.writeEntry( QString::fromLatin1("tray icon"), _trayIconV );
   config.sync();
 }
 

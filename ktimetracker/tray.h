@@ -30,6 +30,7 @@ class KarmTray : public KSystemTray
   public:
     KarmTray(MainWindow * parent);
     KarmTray(karmPart * parent);
+    KarmTray();
     ~KarmTray();
 
   private:

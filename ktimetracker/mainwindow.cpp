@@ -72,7 +72,8 @@ MainWindow::MainWindow( const QString &icsfile )
            this,
            SLOT( contextMenuRequest( Q3ListViewItem*, const QPoint&, int )));
 
-  _tray = new KarmTray( this );
+  if ( _preferences->trayIcon() ) _tray = new KarmTray( this );
+  else _tray = new KarmTray( );
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
 

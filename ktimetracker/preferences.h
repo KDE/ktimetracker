@@ -2,7 +2,6 @@
 #define KARM_PREFERENCES_H
 
 #include <kdialogbase.h>
-//Added by qt3to4:
 #include <QLabel>
 
 class QCheckBox;
@@ -37,6 +36,7 @@ class Preferences :public KDialogBase
     QString setUniTasking( bool b );
     bool displayColumn(int n) const;
     bool decimalFormat() const;
+    bool trayIcon() const;
     QString userRealName() const;
 
     void emitSignals();
@@ -73,7 +73,8 @@ class Preferences :public KDialogBase
     bool _unsavedChanges;
 
     // Widgets
-    QCheckBox *_doIdleDetectionW, *_doAutoSaveW, *_promptDeleteW, *_uniTaskingW;
+    QCheckBox *_doIdleDetectionW, *_doAutoSaveW, *_promptDeleteW, *_uniTaskingW,
+              *_trayIconW;
     QCheckBox *_displayTimeW, *_displaySessionW,
               *_displayTotalTimeW, *_displayTotalSessionW,
 	      *_decimalFormatW;
@@ -83,7 +84,7 @@ class Preferences :public KDialogBase
     KUrlRequester *_iCalFileW ;
 
     // Values
-    bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV, _uniTaskingV;
+    bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV, _uniTaskingV, _trayIconV;
     bool _displayColumnV[4];
     bool _decimalFormatV;
     int  _idleDetectValueV, _autoSaveValueV;

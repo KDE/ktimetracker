@@ -80,6 +80,14 @@ KarmTray::KarmTray(karmPart * parent)
   _taskActiveTimer = 0;
 }
 
+KarmTray::KarmTray()
+  : KSystemTray( 0 )
+// will display nothing at all
+{
+  setObjectName( "Karm Tray" );
+  _taskActiveTimer = 0;
+}
+
 KarmTray::~KarmTray()
 {
 }
