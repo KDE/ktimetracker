@@ -29,10 +29,10 @@ int main( int argc, char *argv[] )
 {
   KAboutData aboutData( "karm", I18N_NOOP("KArm"),
       KARM_VERSION, description, KAboutData::License_GPL,
-      "(c) 1997-2004, KDE PIM Developers" );
+      "(c) 1997-2006, KDE PIM Developers" );
 
-  aboutData.addAuthor( "Mark Bucciarelli", I18N_NOOP( "Current Maintainer" ),
-                       "mark@hubcapconsulting.com" );
+  aboutData.addAuthor( "Thorsten Staerk", I18N_NOOP( "Current Maintainer" ),
+                       "kde@staerk.de" );
   aboutData.addAuthor( "Sirtaj Singh Kang", I18N_NOOP( "Original Author" ),
                        "taj@kde.org" );
   aboutData.addAuthor( "Allen Winter",      0, "winterz@verizon.net" );
@@ -42,8 +42,8 @@ int main( int argc, char *argv[] )
   aboutData.addAuthor( "Jan Schaumann",     0, "jschauma@netmeister.org" );
   aboutData.addAuthor( "Jesper Pedersen",   0, "blackie@kde.org" );
   aboutData.addAuthor( "Kalle Dalheimer",   0, "kalle@kde.org" );
+  aboutData.addAuthor( "Mark Bucciarelli",  0, "mark@hubcapconsulting.com" );
   aboutData.addAuthor( "Scott Monachello",  0, "smonach@cox.net" );
-  aboutData.addAuthor( "Thorsten Staerk",   0, "kde@staerk.de" );
   aboutData.addAuthor( "Tomas Pospisek",    0, "tpo_deb@sourcepole.ch" );
   aboutData.addAuthor( "Willi Richert",     0, "w.richert@gmx.net" );
 
