@@ -68,7 +68,7 @@ void IdleTimeDetector::informOverrun(int idleMinutes)
 
   int id =  QMessageBox::warning( 0, i18n("Idle Detection"),
                                      i18n("Desktop has been idle since %1."
-                                          " What should we do?").arg(backThen),
+                                          " What should we do?", backThen),
                                      i18n("Revert && Stop"),
                                      i18n("Revert && Continue"),
                                      i18n("Continue Timing"),0,2);

@@ -77,7 +77,7 @@ void MyPrinter::print()
     
     painter.drawText(xMargin, yoff, pageWidth, height,
          Qt::AlignCenter, 
-         i18n("KArm - %1").arg(now));
+         i18n("KArm - %1", now));
     
     painter.setFont(origFont);
     yoff += height + 10;

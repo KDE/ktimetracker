@@ -328,12 +328,12 @@ QString TimeKard::historyAsText(TaskView* taskview, const QDate& from,
   QString retval;
   retval += totalsOnly ? i18n("Task Totals") : i18n("Task History");
   retval += cr;
-  retval += i18n("From %1 to %2")
-    .arg(KGlobal::locale()->formatDate(from))
-    .arg(KGlobal::locale()->formatDate(to));
+  retval += i18n("From %1 to %2",
+     KGlobal::locale()->formatDate(from),
+     KGlobal::locale()->formatDate(to));
   retval += cr;
-  retval += i18n("Printed on: %1")
-    .arg(KGlobal::locale()->formatDateTime(QDateTime::currentDateTime()));
+  retval += i18n("Printed on: %1",
+     KGlobal::locale()->formatDateTime(QDateTime::currentDateTime()));
 
   if ( perWeek )
   {
@@ -369,7 +369,7 @@ QDate Week::end() const
 
 QString Week::name() const
 {
-  return i18n("Week of %1").arg(KGlobal::locale()->formatDate(start()));
+  return i18n("Week of %1", KGlobal::locale()->formatDate(start()));
 }
 
 QList<Week> Week::weeksFromDateRange(const QDate& from, const QDate& to)

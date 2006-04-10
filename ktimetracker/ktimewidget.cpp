@@ -83,7 +83,7 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
   _hourLE->setAlignment( Qt::AlignRight );
 
 
-  QLabel *hr = new QLabel( i18n( "abbreviation for hours", " hr. " ), this );
+  QLabel *hr = new QLabel( i18nc( "abbreviation for hours", " hr. " ), this );
   layout->addWidget( hr );
 
   _minuteLE = new KarmLineEdit(this);
@@ -98,7 +98,7 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
   _minuteLE->setMaxLength(2);
   _minuteLE->setAlignment( Qt::AlignRight );
 
-  QLabel *min = new QLabel( i18n( "abbreviation for minutes", " min. " ), this );
+  QLabel *min = new QLabel( i18nc( "abbreviation for minutes", " min. " ), this );
   layout->addWidget( min );
 
   layout->addStretch(1);

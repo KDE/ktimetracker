@@ -199,9 +199,9 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
 
         // Complete the loading but return a message
         if ( !newParent )
-          err = i18n("Error loading \"%1\": could not find parent (uid=%2)")
-            .arg(task->name())
-            .arg((*todo)->relatedToUid());
+          err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
+             task->name(),
+             (*todo)->relatedToUid());
 
         if (!err.isEmpty()) task->move( newParent);
       }
@@ -261,9 +261,9 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
       // Complete the loading but return a message
       if ( !newParent )
-        err = i18n("Error loading \"%1\": could not find parent (uid=%2)")
-          .arg(task->name())
-          .arg((*todo)->relatedToUid());
+        err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
+           task->name(),
+           (*todo)->relatedToUid());
 
       if (!err.isEmpty()) task->move( newParent);
     }
@@ -468,7 +468,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
     if (filename.isEmpty()) filename=rc.url.url();
     QFile f( filename );
     if( !f.open( QIODevice::WriteOnly ) ) {
-        err = i18n( "Could not open \"%1\"." ).arg( filename );
+        err = i18n( "Could not open \"%1\".", filename );
     }
     if (err.length()==0)
     {
@@ -727,12 +727,12 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
 
   // header
   retval += i18n("Task History\n");
-  retval += i18n("From %1 to %2")
-    .arg(KGlobal::locale()->formatDate(from))
-    .arg(KGlobal::locale()->formatDate(to));
+  retval += i18n("From %1 to %2",
+     KGlobal::locale()->formatDate(from),
+     KGlobal::locale()->formatDate(to));
   retval += cr;
-  retval += i18n("Printed on: %1")
-    .arg(KGlobal::locale()->formatDateTime(QDateTime::currentDateTime()));
+  retval += i18n("Printed on: %1",
+     KGlobal::locale()->formatDateTime(QDateTime::currentDateTime()));
   retval += cr;
 
   day=from;
@@ -832,7 +832,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     if (filename.isEmpty()) filename=rc.url.url();
     QFile f( filename );
     if( !f.open( QIODevice::WriteOnly ) ) {
-        err = i18n( "Could not open \"%1\"." ).arg( filename );
+        err = i18n( "Could not open \"%1\".", filename );
     }
     if (!err.isEmpty())
     {

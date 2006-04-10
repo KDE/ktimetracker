@@ -196,10 +196,10 @@ void MainWindow::updateStatusBar( )
   QString time;
 
   time = formatTime( _sessionSum );
-  statusBar()->changeItem( i18n("Session: %1").arg(time), 0 );
+  statusBar()->changeItem( i18n("Session: %1", time), 0 );
 
   time = formatTime( _totalSum );
-  statusBar()->changeItem( i18n("Total: %1" ).arg(time), 1);
+  statusBar()->changeItem( i18n("Total: %1" , time), 1);
 }
 
 void MainWindow::startStatusBar()
@@ -596,7 +596,7 @@ int MainWindow::bookTime
 QString MainWindow::getError( int mkb ) const
 {
   if ( mkb <= KARM_MAX_ERROR_NO ) return m_error[ mkb ];
-  else return i18n( "Invalid error number: %1" ).arg( mkb );
+  else return i18n( "Invalid error number: %1", mkb );
 }
 
 int MainWindow::totalMinutesForTaskId( const QString& taskId )

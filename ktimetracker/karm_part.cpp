@@ -580,7 +580,7 @@ int karmPart::bookTime
 QString karmPart::getError( int mkb ) const
 {
   if ( mkb <= KARM_MAX_ERROR_NO ) return m_error[ mkb ];
-  else return i18n( "Invalid error number: %1" ).arg( mkb );
+  else return i18n( "Invalid error number: %1", mkb );
 }
 
 int karmPart::totalMinutesForTaskId( const QString& taskId )
