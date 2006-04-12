@@ -6,7 +6,6 @@
 #include "preferences.h"
 #include "tray.h"
 #include "version.h"
-#include <kaccel.h>
 
 #include <kinstance.h>
 #include <kaction.h>
