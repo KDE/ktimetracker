@@ -1,0 +1,1240 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&karm;">
+  <!ENTITY package "kdepim">
+  <!ENTITY % English "INCLUDE" > <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The &karm; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Jonathan</firstname>
+<surname>Singer</surname>
+<affiliation>
+<address>&Jonathan.Singer.mail;</address>
+</affiliation>
+</author>
+
+<author>
+<firstname>Mark</firstname>
+<surname>Bucciarelli</surname>
+<affiliation>
+<address><email>mark@hubcapconsulting.com</email></address>
+</affiliation>
+</author>
+
+<author>
+<firstname>Sirtaj</firstname>
+<othername>Singh</othername>
+<surname>Kang</surname>
+<affiliation><address>&Sirtaj.Singh.Kang.mail;</address></affiliation>
+</author>
+
+<othercredit role="reviewer">
+<firstname>Lauri</firstname>
+<surname>Watts</surname>
+<contrib>Reviewer</contrib>
+<affiliation><address>&Lauri.Watts.mail;</address></affiliation>
+</othercredit>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<copyright>
+<year>2000-2004</year>
+<holder>J&Jonathan.Singer;</holder>
+</copyright>
+
+<copyright>
+<year>2004-2005</year>
+<holder>Mark Bucciarelli</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2005-02-02</date>
+<releaseinfo>1.5.0</releaseinfo>
+
+<abstract><para>&karm; tracks time spent on various tasks.</para></abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>karm</keyword>
+<keyword>kdeutils</keyword>
+<keyword>time</keyword>
+<keyword>tracker</keyword>
+<keyword>project</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>&karm; tracks time spent on various tasks.  It is useful for tracking
+	billable hours and can report the hours logged by task and day.</para>
+
+<para>This time history can be exported to a comma-delimited text file for
+	import into other billing and/or project management tools.</para>
+
+<para>&karm; detects when your keyboard and mouse are idle and can associate
+	different tasks with different desktops, two tools that can help keep the
+	timer running on the correct task.</para>
+
+<para>&karm; was originally written by &Sirtaj.Singh.Kang;. The word
+<quote>karm</quote> means <quote>work</quote> or <quote>deeds</quote> in the
+author's native Punjabi and is the same word (but a better transliteration)
+as <quote>karma</quote>.</para>
+
+</chapter>
+
+
+<chapter id="using-Karm">
+<title>Using &karm;</title>
+
+<sect1 id="starting">
+<title>Starting &karm;</title>
+
+<para>Type <command>karm</command> at a command prompt or select
+<guimenuitem>Personal Time Tracker</guimenuitem> from the
+<guisubmenu>Utilities</guisubmenu> group in the <guimenu>KDE start
+menu</guimenu>. The standard &Qt; and &kde; command options are
+available, and can be listed by entering
+<userinput><command>karm</command> <option>--help</option></userinput>
+at the command line.</para>
+
+<para>&karm; provides an additional command option that allows you to enter
+the name of the iCalendar file that is used to store your labor history.
+You enter a remote iCalendar file by using http or ftp as part of the file
+name; for example, http://www.mysite.com/mydata/mylabor.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title>Tasks</title>
+
+<informalexample>
+<para><emphasis>Problem:</emphasis> You are a free software consultant with
+many clients.  Some clients have multiple projects.  During the course of a
+day, you switch back and forth between different projects.  You need to track
+your time to generate monthly invoices.</para>
+<para><emphasis>Solution:</emphasis> Create one top-level task for each client
+and a subtask for each client project.  For projects that require more
+detailed tracking, create a list of project subtasks.  Track time by
+double-clicking on task you are currently working on.</para>
+</informalexample>
+
+<para>&karm; provides great flexibility in tracking your time, allowing
+unlimited tasks and task depth.  Time may be logged to any task, and more than
+one task can be active at any given time.</para>
+
+<para>
+To create a top-level task, select
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>New</guimenuitem>
+</menuchoice>
+
+To create a subtask, pick the parent task and select
+
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;&Alt;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>New Subtask</guimenuitem>
+</menuchoice>
+</para>
+
+<para>When &karm; exits, the task list is saved to the file specified in 
+<menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure KArm</guimenuitem>
+</menuchoice>.
+When it next opens, it reloads the task list from the same file.</para>
+
+<para>&karm; can import and export tasks to minimize your work. See <link linkend="interfaces">Other Systems</link>.</para>
+
+</sect1>
+
+<sect1 id="timers"><title>Timers</title>
+
+<informalexample>
+<para><emphasis>Problem:</emphasis> To remain solvent, you must bill an
+average of five hours a day.  To stay on track, you watch your daily and
+weekly totals.</para>
+<para><emphasis>Solution:</emphasis> Reset the session timer at the
+beginning of each work day and reset all timers at the beginning of each
+week.</para> </informalexample>
+
+<para>&karm; makes tracking time simple.  To start logging time against a
+task, double-click on the task.  To stop logging time, double-click
+the task again.  Active tasks display a small clock in the <guilabel>Session
+Time</guilabel> column.</para>
+	
+<para>Another visual clue of logging activity is the &karm; system tray icon.
+When a task is active, the second hand in the icon moves.  If you rest the
+mouse pointer over this icon, the name of the active task will display in a
+tooltip.  If more than one task is active, the task names in the tooltip are 
+separated by commas.</para>
+
+<para>&karm; maintains two timers for each task: one for the session time
+and one for the total time.  In the default configuration, &karm; displays
+two columns for each timer, resulting in a total of four columns for each task:</para>
+
+<variablelist>
+<varlistentry> <term><guilabel>Session Time</guilabel></term>
+<listitem><para>The time spent on the task since the session
+began.</para></listitem> </varlistentry> 
+
+<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
+<listitem><para>The time spent on the task and all it's subtasks since the
+session began.</para></listitem> </varlistentry> 
+<varlistentry> <term><guilabel>Time</guilabel></term> <listitem><para>The time
+spent on the task since all times were reset.</para></listitem>
+</varlistentry> 
+
+<varlistentry> <term><guilabel>Total Time</guilabel></term>
+<listitem><para>The time spent on the task and all it's subtasks since all
+times were reset.</para></listitem> </varlistentry> 
+</variablelist>
+
+<para>To start a new session, select
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Start New Session</guimenuitem>
+</menuchoice>
+</para>
+
+<para>To reset all times, select
+<menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Reset All Times</guimenuitem>
+</menuchoice>
+</para>
+
+<sect2><title>Desktop Tracking</title>
+
+<informalexample>
+<para><emphasis>Problem:</emphasis> You have two main projects that you
+switch between each day.  To help organize your work, you keep your project
+1 files on Desktop 1 and your project 2 files on Desktop
+2.</para>
+
+<para><emphasis>Solution:</emphasis> Associate project 1 task with Desktop 1
+and the project 2 task with Desktop 2.  When you switch from Desktop 2 to
+Desktop 1 active, &karm; automatically stops the project 2 task and starts
+the project 1 task.</para>
+</informalexample>
+
+<para>To associate a task with a one or more desktops, select
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>Edit</guimenuitem>
+</menuchoice>.
+
+Turn on <guilabel>Auto tracking</guilabel> and select the desktop or desktops
+to associate with this task.  When any of the selected desktops becomes active,
+after a short delay &karm; will be automatically start logging time against
+that task.</para>
+
+</sect2>
+
+<sect2><title>Idle Detection</title>
+
+<informalexample> <para><emphasis>Problem:</emphasis> You leave work early on
+Friday to run an errand and forget to stop the timer.  When you return on
+Monday, the timer is still running.</para>
+<para><emphasis>Solution:</emphasis> Turn on idle detection.</para>
+</informalexample>
+
+<para>&karm; can be configured to detect when the mouse and keyboard become
+ idle.  If the mouse and keyboard are idle for longer than the specified
+ number of minutes, &karm; displays the following dialog:</para>
+
+<screenshot>
+ <screeninfo>&karm; Idle Detection</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>&karm; Idle Detection Dialog</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry><term><guibutton>Revert &amp; Stop</guibutton></term>
+<listitem><para>Subtract the amount of idle time from all active timers and
+stop them.</para><para>You were not working on the task(s) while you
+computer was idle and you are still are
+not.</para></listitem></varlistentry> 
+
+<varlistentry> <term><guibutton>Revert &amp; Continue</guibutton></term>
+<listitem><para>Subtract the amount of idle time from all active timers but
+keep them running.</para><para>You were not working on the task(s) while
+your computer was idle but you are now.  </para></listitem></varlistentry> 
+
+<varlistentry> <term><guibutton>Continue Timing</guibutton></term>
+<listitem><para>Apply the idle time to all active timers and keep them
+running.</para><para>You were working on the task(s) while your computer
+was idle and still are.  </para></listitem></varlistentry> </variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="reporting"><title>Reporting</title>
+
+<para>&karm; provides three ways to report on time you have logged.  You can
+send the session and time totals to the printer, copy the time totals to the
+clipboard, or copy the time history to the clipboard.</para>
+
+<sect2><title>Print Totals</title>
+<para>To generate the totals report for the printer, select
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Print</guimenuitem>
+</menuchoice>.
+This generates a three-column report for the complete list of tasks.  The
+first column is the task name, the second column is the <guilabel>Total
+Session Time</guilabel> and the third column is the <guilabel>Total
+Time</guilabel>.</para>
+</sect2>
+
+<sect2><title>Clip Totals</title>
+<para>To generate the totals report to the clipboard, select
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Copy Totals to Clipboard</guimenuitem>
+</menuchoice>.
+</para>
+
+<para>This report is generated for the currently selected task and all it's
+subtasks.  If the current task is a top-level task, &karm; asks you if you
+want to generate the report for the current task and it's subtasks or for the
+entire task list.</para>
+
+<screenshot>
+<screeninfo>&karm; Copy This Task</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="copy-this-task.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase>&karm; Copy This Task Dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>Once the report is generated, open &kedit; or some other text editor and
+paste the report data.</para>
+
+<literallayout>
+<computeroutput>
+Task Totals
+2004-07-10 02:26
+
+  Time    Task
+----------------------------------------------
+  9:14    kde
+   9:14    karm
+    1:08    bugs
+    0:00    checkin changes
+   0:00    promo
+   0:00    web stuff
+----------------------------------------------
+  9:14 Total
+</computeroutput>
+</literallayout>
+
+<para>The first column is the <guilabel>Total Time</guilabel> and is indented
+(like the task names) to indicate task/sub-task relationships.  The reported times
+include the sub-task times.</para> 
+
+</sect2>
+
+<sect2><title>Clip History</title>
+
+<para>To generate the totals report to the clipboard, select
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;&Alt;<keycap>C</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Copy History to Clipboard</guimenuitem>
+</menuchoice>.
+</para>
+
+<important><para>You must turn on the <guilabel>Log History</guilabel> option in
+<menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
+KArm</guimenuitem> </menuchoice>.  Otherwise, &karm; only keeps track of
+totals and not the detailed task history.</para></important>
+
+<para>This report is generated for the currently selected task and all it's
+subtasks.  Unlike the totals report, this report does not give you the option
+to report on the complete task list.  You can only report on the current task
+and all it's sub-tasks.</para>
+
+<para>When you select the history report, &karm; first prompts you to enter the
+date range for the report:</para>
+
+<screenshot>
+<screeninfo>&karm; Enter Date Range</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="daterange.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase>&karm; Enter Date Range</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>After entering a date range, open &kedit; or some other text editor and
+paste the report data.</para>
+
+<literallayout>
+<computeroutput>
+Task History
+From Thursday 01 July 2004 to Monday 12 July 2004
+Printed on: 2004-07-12 17:18
+
+                               Week of Monday 05 July 2004
+     5     6     7     8     9    10    11
+-------------------------------------------------------------------------
+                                             0:00 kde
+                                             0:00  dc
+              !:22  1:46  3:14  1:44         8:06  karm
+                                             0:00   3.2 feature plan
+              1:08                           1:08   bugs
+                                             0:00   checkin changes
+                                             0:00  promo
+                                             0:00  web stuff
+-------------------------------------------------------------------------
+              2:30  1:46  3:14  1:44         9:14 Total
+</computeroutput>
+</literallayout>
+
+<para>The task history is totaled for each day and task, grouped by week.  The
+first seven columns are Monday through Sunday.  The eighth column is the total
+for the week and the ninth column is the task name.  The task names are
+indented to indicate the task/sub-task relationships.</para>
+
+</sect2>
+</sect1>
+
+<sect1 id="interfaces">
+<title>Other Systems</title>
+<sect2 id="korganizer"><title>&korganizer;</title>
+
+<para>&karm;, like &korganizer; and Apple's iCal, uses the industry standard
+<ulink
+url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink>
+format for its data.  &karm; can read and write the to do lists created by
+these two applications.</para>
+
+<warning><para>If both &karm; and &korganizer; have the same file open, if you
+edit the file with &korganizer;, you risk losing data.  To be safe,
+only edit the file with one application or the other.</para></warning>
+
+</sect2>
+
+<sect2 id="planner"><title>Planner</title>
+
+<para>As a typical usecase, you might want to plan a project with the project 
+management tool Imendio Planner 
+(from <ulink url="http://planner.imendio.org">planner.imendio.org</ulink>) 
+and import its tasks to &karm;, to have them in the industry 
+standard <ulink
+url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink> 
+format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
+to them in &karm;. That's one way to help ensure your project stays on time
+and under budget.</para>
+
+</sect2>
+
+<sect2 id="dcop"><title>&DCOP;</title>
+
+<para>&DCOP; is the mechanism &kde; programs use to communicate with each
+other.  A &kde; program provides a list of functions that other programs (a Bash
+script, for example) can use.</para>
+
+<example><title>Bash script that echo's &karm;'s version</title>
+<programlisting>
+	DCOPID=`dcop | grep karm`
+	if [ $DCOPID ]
+	then
+		VERS=`dcop $DCOPID KarmDCOPIface version`
+		echo "&karm; version is $VERS"
+	else
+		echo "&karm; not running"
+	fi
+</programlisting>
+</example>
+
+<para>&karm;'s current &DCOP; interface is currently used mainly for automated
+	testing, so it is very limited.  For the full interface definition, see
+	<link linkend="dcopappendix">&DCOP; Interface Appendix</link>.</para>
+
+<para>To see the full &DCOP; interface of the &karm; version installed on your
+	system, run the following Bash script:</para>
+
+<example><title>List &karm;'s &DCOP; interface to console</title>
+<programlisting>
+	DCOPID=`dcop | grep karm`
+	if [ $DCOPID ]
+	then
+		dcop $DCOPID KarmDCOPIface
+	else
+		echo "&karm; not running"
+	fi
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"><title>Export Totals to CSV</title>
+
+<para>&karm; can export both totals and history to a comma-delimited file
+format.  To export totals, select
+<menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Import/Export</guisubmenu>
+<guimenuitem>Export to CSV file...</guimenuitem>
+</menuchoice> and &karm; displays the following export dialog:</para>
+
+<screenshot>
+<screeninfo>&karm; CSV Export Dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="csvexport.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase>&karm; CSV Export Dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>Enter the file you would like to export the data to, and modify the
+other dialog defaults if necessary.  Note that the date range control is
+disabled since you are exporting time totals, not the history data.  Click
+<guibutton>Export</guibutton> and &karm; exports the totals for all tasks to
+the file you selected.</para>
+
+<para>Here is an example of the output format:</para>
+
+<literallayout>
+<computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"karm",,,,6.88,8.70,6.88,9.83
+,,"3.2 feature plan",,,0.00,0.00,0.00,0.00
+,,"bugs",,,0.00,1.13,0.00,1.13
+,,"checkin changes - translation strings",,,0.00,0.00,0.00,0.00
+,,"time card report",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"web stuff",,,,0.00,0.00,0.00,0.00
+</computeroutput>
+</literallayout>
+
+<para>Top-level tasks are output in the first column, sub-tasks in the second,
+and so on.  The time data is output after the maximum task depth (five in
+this example).  The first time column is <guilabel>Session Time</guilabel>,
+the second is <guilabel>Time</guilabel>, the third is <guilabel>Total Session
+Time</guilabel> and the fourth is the <guilabel>Total Time</guilabel>.
+</para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"><title>Export History to CSV</title>
+
+<para>To export task history, select
+<menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Import/Export</guisubmenu>
+<guimenuitem>Export History to CSV file...</guimenuitem>
+</menuchoice> and &karm; displays the same export dialog as shown above.</para>
+
+<para>Enter the file you would like to export the data to, and select a date
+range that you want the task history.  Modify the other dialog defaults if
+necessary.  Click <guibutton>Export</guibutton> and &karm; exports the
+task history for all tasks to the file you selected.</para>
+
+<para>Here is an example of the output format:</para>
+
+<literallayout>
+<computeroutput>
+Task History
+From Tuesday 06 July 2004 to Tuesday 13 July 2004
+Printed on: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"karm"
+,,,,,,,,0.00,,,"3.2 feature plan"
+,1.13,,,,,,,1.13,,,"bugs"
+,,,,,,,,0.00,,,"checkin changes - translation strings"
+,,,,,,,,0.00,,,"time card report"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promo"
+,,,,,,,,0.00,,"web stuff"
+</computeroutput>
+</literallayout>
+
+<para>The three lines identify when the report was generated and for which
+date range.  The fourth row is a comma-delimited list of the dates in the
+date range, in ISO 8601 format (YYYY-MM-DD).  All subsequent rows list the
+time logged against each task.   The last numeric column is the row total
+across all days.  The task name prints after the total column, and is indented
+to indicate the task/sub-task relationship.  Top level task names appear
+in the first column after the total.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title>The &karm; interface</title>
+
+<para>The main &karm; window has the following components: menubar, toolbar,
+task/time window and status bar.</para>
+
+<screenshot>
+<screeninfo>&karm; Screen</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="karm.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>&karm; Screen</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title>The Task/Time window</title>
+
+<para>The various tasks are displayed in this window, along with the
+time accumulated for each in the current session and in total. Tasks
+being timed have a small clock icon next to the session time.</para>
+
+<para>Subtasks can be created for each task. Clicking the plus sign and 
+minus sign in front of the main task toggles the view of its associated
+subtasks. The total time accrued for a task includes the times for its 
+subtasks, as well as its own accumulated time.</para>
+
+</sect1>
+
+<sect1 id="menus">
+<title>The &karm; menubar</title>
+<sect2>
+<title>The <guimenu>File</guimenu> menu</title>
+
+<variablelist>
+<varlistentry>
+<term>
+<menuchoice><shortcut>
+<keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Save</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Saves the current tasks and subtasks with their accumulated
+times</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Print</guimenuitem>
+</menuchoice></term>
+<listitem><para>
+<action>Prints</action> the &karm; window</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Start New Session</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Resets </action>all session times to zero</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Reset All Times</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Resets </action>all times to zero</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Import/Export</guisubmenu>
+<guimenuitem>Import Legacy Flat File...</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Import </action>old style &karm; save files (&karm; 
+now uses iCalendar-style save files.)</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Import/Export</guisubmenu>
+<guimenuitem>Import Tasks from Planner...</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Import </action>an imendio planner project (see <ulink
+url="http://planner.imendio.org">planner.imendio.org</ulink>). All tasks, subtasks and their "completed" flag will be imported from a .planner-file. You can import them as a subtask by creating a subtask, leaving it marked, and then importing. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Import/Export</guisubmenu>
+<guimenuitem>Export to CSV file...</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Export </action>
+<guilabel>Total Session Time</guilabel>,
+<guilabel>Session Time</guilabel>, <guilabel>Time</guilabel>, and
+<guilabel>Total Time</guilabel> to a text file.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Import/Export</guisubmenu>
+<guimenuitem>Export History to CSV file...</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Export </action> task history to a text file.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Copy Totals to Clipboard</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Copies </action> the current total time for a 
+task or all tasks to the &kde; clipboard</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;&Alt;<keycap>C</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Copy History to Clipboard</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Copies </action> daily times for a 
+given period to the &kde; clipboard</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem>
+</menuchoice></term>
+<listitem>
+<para><action>Closes</action> &karm;</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title>The <guimenu>Clock</guimenu> menu</title>
+
+<variablelist>
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut><keycap>S</keycap></shortcut>
+<guimenu>Clock</guimenu>
+<guimenuitem>Start</guimenuitem>
+</menuchoice>
+</term>
+<listitem>
+<para><action>Starts</action> timing the selected task</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<guimenu>Clock</guimenu>
+<guimenuitem>Stop</guimenuitem>
+</menuchoice>
+</term>
+<listitem>
+<para><action>Stops</action> timing the selected task</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut><keycap>&Esc;</keycap></shortcut>
+<guimenu>Clock</guimenu>
+<guimenuitem>Stop All Timers</guimenuitem>
+</menuchoice>
+</term>
+<listitem><para><action>Stops</action> timing all tasks</para></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title>The <guimenu>Task</guimenu> menu</title>
+
+<variablelist>
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>New</guimenuitem>
+</menuchoice>
+</term>
+<listitem><para><action>Add</action> a new task</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;&Alt;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>New Subtask</guimenuitem>
+</menuchoice>
+</term>
+<listitem>
+<para><action>Add</action> a new subtask to the selected task</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut>
+<keycap>Del</keycap>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>Delete</guimenuitem>
+</menuchoice>
+</term>
+<listitem>
+<para><action>Delete</action> the selected task or subtask</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
+</shortcut>
+<guimenu>Task</guimenu>
+<guimenuitem>Edit</guimenuitem>
+</menuchoice>
+</term>
+<listitem>
+<para><action>Change the name or accumulated time</action> for the
+current task</para><para>There are two options for changing the time: Edit
+Absolute, in which the session and total times can be changed separately;
+and Edit Relative, in which a certain change is added to or subtracted from
+both the session and total times.</para><para>The Auto tracking option allows 
+timing to start and stop automatically when you switch to or from a particular 
+&kde; desktop.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title>The <guimenu>Settings</guimenu> menu</title>
+<variablelist>
+
+
+<varlistentry>
+<term>
+<menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure Shortcuts</guimenuitem>
+</menuchoice>
+</term>
+<listitem><para><action>Opens</action> a dialog to allow the user to customize
+the keyboard shortcuts</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure KArm</guimenuitem>
+</menuchoice>
+</term>
+<listitem><para><action>Opens</action> a dialog to allow the user to
+configure &karm;</para>
+
+<para>The dialog has three tabbed panes: <guilabel>Behavior </guilabel>, which 
+allows you to specify an alert for no activity and a warning message when you 
+delete a task set, <guilabel>Display </guilabel>, which configures the fields 
+shown in the main window and <guilabel>Storage</guilabel>,
+which configures the location of the save file, whether auto saving is
+enabled and the auto save interval.</para> </listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2>
+<title>The <guimenu>Help</guimenu> menu</title>
+
+&help.menu.documentation;
+
+</sect2>
+
+</sect1>
+
+<sect1 id="tool-bar">
+<title>The Toolbar</title>
+<para>The toolbar contains icons for the following commands:</para>
+
+<note><para>(All behave identically to the menu command.)</para></note>
+
+<itemizedlist>
+<listitem><para><guiicon>Start</guiicon></para></listitem>
+<listitem><para><guiicon>Stop</guiicon></para></listitem>
+<listitem><para><guiicon>New</guiicon></para></listitem>
+<listitem><para><guiicon>New Subtask</guiicon></para></listitem>
+<listitem><para><guiicon>Delete</guiicon></para></listitem>
+<listitem><para><guiicon>Edit</guiicon></para></listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="status-bar">
+<title>The Statusbar</title>
+
+<para>Reports the total elapsed time for the session.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title>Credits and License</title>
+
+<para>
+&karm;
+</para>
+
+<para> Program copyright: </para>
+
+<itemizedlist>
+
+<listitem><para>1997-2000 &Sirtaj.Singh.Kang;
+&Sirtaj.Singh.Kang.mail;.</para>  </listitem> 
+
+<listitem><para>2001-2002 Tomas Pospisek
+<email>tpo_deb@sourcepole.ch</email></para></listitem>
+
+<listitem><para>2003-2004 Mark
+Bucciarelli<email>mark@hubcapconsulting.com</email></para></listitem>
+
+</itemizedlist>
+
+<para>Contributors (in alphabetical order)</para>
+<itemizedlist>
+<listitem><para>Allen Winter <email>winterz@verizon.net</email></para></listitem>
+<listitem><para>&David.Faure; &David.Faure.mail;</para></listitem>
+<listitem><para>&Espen.Sand; <email>espen@kde.org</email></para></listitem>
+<listitem><para>Gioele Barabucci <email>gioele@gioelebarabucci.com</email></para></listitem>
+<listitem><para>Jan Schaumann <email>jschauma@netmeister.org</email></para></listitem>
+<listitem><para>&Jesper.Pedersen; <email>blackie@ifad.dk</email></para></listitem>
+<listitem><para>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para></listitem>
+<listitem><para>Klar&auml;lvdalens Datakonsult AB</para></listitem>
+<listitem><para>Mark Bucciarelli <email>mark@hubcapconsulting.com</email></para></listitem>
+<listitem><para>Thorsten St&auml;rk <email>dev@staerk.de</email></para></listitem>
+<listitem><para>Tomas Pospisek <email>tpo_deb@sourcepole.ch</email></para></listitem>
+<listitem><para>Willi Richert <email>w.richert@cox.net</email></para></listitem>
+</itemizedlist>
+
+<para>&karm; was inspired by Harald Tveit Alvestrand's very useful
+utility called <application>titrax</application>, the only failing of
+which is that it is based on the Xt toolkit.</para>
+
+<para>Documentation copyright 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; and 
+&Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+&underFDL;
+&underGPL;
+
+</chapter>
+
+<glossary id="glossary">
+
+<glossentry id="gloss-active-task">
+<glossterm>active task</glossterm>
+<glossdef><para>A task which has a timer running.</para></glossdef>
+</glossentry>
+
+<glossentry id="gloss-dcop">
+<glossterm>&DCOP;</glossterm>
+<glossdef><para>The interprocess communication protocol used in &kde;.  Short
+for Desktop COmmunication Protocol.</para></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm>desktop</glossterm>
+<glossdef><para>&GNU;/&Linux;, FreeBSD and other systems that run X-Windows have
+multiple desktops.  You typically have four different desktops installed by
+default.  Each desktop can display it's own set of programs and files.  When
+&kde; first starts up, the desktop you see is Desktop 1.  If you press
+<keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo>, you will see
+Desktop 2.  Pressing <keycombo
+action="simul">&Alt;<keycap>F1</keycap></keycombo> will bring back Desktop
+1.  </para></glossdef> </glossentry>
+
+<glossentry id="gloss-history">
+<glossterm>history</glossterm>
+<glossdef><para>If &karm; is configured to log history, it will record ever
+start/stop timer event. This history is never cleared when times are reset
+cleared and remains on file until the task is deleted.</para></glossdef>
+</glossentry>
+
+<glossentry id="gloss-session"> <glossterm>session</glossterm>
+<glossdef><para>A user-defined starting point for the session timers.  A new
+session begins when you select <menuchoice> <guimenu>File</guimenu>
+<guimenuitem>Start New Session</guimenuitem> </menuchoice>.
+Session data is not saved when you create a new session.
+</para></glossdef> </glossentry>
+
+<glossentry id="gloss-system-time"> <glossterm><guilabel>Session
+Time</guilabel></glossterm> <glossdef><para>The time spent on the task
+since the session began.</para></glossdef> </glossentry> 
+
+<glossentry id="gloss-system-tray"> <glossterm>system tray</glossterm>
+<glossdef><para>The system tray is in the bar that (by default) appears at
+the bottom of the screen.  In this system tray <inlinemediaobject>
+<imageobject> <imagedata fileref="systray.png"
+format="PNG"/></imageobject> </inlinemediaobject> the &karm; icon is on the far
+right.</para></glossdef>
+</glossentry>
+
+<glossentry id="gloss-top-level-task">
+<glossterm>top level task</glossterm>
+<glossdef><para>A task with no parent tasks.</para></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"> <glossterm><guilabel>Total Session
+Time</guilabel></glossterm> <glossdef><para>The time spent on the task and
+all it's subtasks since the session began.</para></glossdef> </glossentry>
+<glossentry> <glossterm><guilabel>Time</guilabel></glossterm>
+<glossdef><para>The time spent on the task since all times were
+reset.</para></glossdef> </glossentry> 
+
+<glossentry id="gloss-total-time"> <glossterm><guilabel>Total Time</guilabel></glossterm>
+<glossdef><para>The time spent on the task and all it's subtasks since all
+times were reset.</para></glossdef> </glossentry> 
+
+</glossary>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-karm">
+<title>How to obtain &karm;</title>
+
+&install.intro.documentation;
+&install.compile.documentation;
+
+</sect1>
+
+</appendix>
+
+<appendix id="dcopappendix"><title>&DCOP; Interface</title>
+
+<refentry id="dcop-version">
+<refmeta>
+<refentrytitle>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname>version</refname>
+<refpurpose>Return &karm;'s version.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>
+QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title>Description</title>
+<para><function>version()</function> is a &DCOP; call that returns &karm;'s
+version number; for example 1.5.0.  The version number is returned as a string
+in the typical &GNU; format of major.minor.bugfix.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dcop-quit">
+<refmeta>
+<refentrytitle>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname>quit</refname>
+<refpurpose>Return &karm;'s quit.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>
+QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title>Description</title>
+<para><function>quit()</function> is a &DCOP; call that provides a way that an
+external program can gracefully shutdown &karm;.
+</para>
+</refsect1>
+</refentry>
+
+<refentry id="dcop-hastodo">
+<refmeta>
+<refentrytitle>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname>hastodo</refname>
+<refpurpose>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title>Parameters</title>
+<variablelist>
+<varlistentry>
+<term><parameter>taskname</parameter></term>
+<listitem>
+	<para>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title>Description</title>
+<para><function>hastodo(QString taskname)</function> is a &DCOP; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para>The iCalendar file that &karm; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dcop-addtodo">
+<refmeta>
+<refentrytitle>addtodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname>addtodo</refname>
+<refpurpose>Add new todo.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis>
+QString addtodo(QString todoname)
+</synopsis>
+<refsect2>
+<title>Parameters</title>
+<variablelist>
+<varlistentry>
+<term><parameter>todoname</parameter></term>
+<listitem>
+	<para>The name of new to-do.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Description</title>
+<para><function>addtodo(QString todoname)</function> is a &DCOP; call that
+	adds a new top-level to-do to the current storage.  The UID of the new to-do
+	is returned.
+</para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+-->
