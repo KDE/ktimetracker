@@ -5,6 +5,7 @@
 */
 
 #include <assert.h>
+#include <kdebug.h>
 #include <q3popupmenu.h>
 
 #include "kaccelmenuwatch.h"
@@ -47,6 +48,8 @@ void KAccelMenuWatch::connectAccel( int itemId, KStdAccel::StdAccel accel )
 
 void KAccelMenuWatch::updateMenus()
 {
+  kDebug(5970) << "This is KAccelMenuWatch::updateMenus" << endl;
+/*
   assert( _accel != 0 );
 
   Q3PtrListIterator<AccelItem> iter( _accList );
@@ -68,7 +71,7 @@ void KAccelMenuWatch::updateMenus()
         break;
     }
   }
-
+*/
 }
 
 void KAccelMenuWatch::removeDeadMenu()
