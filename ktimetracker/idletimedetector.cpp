@@ -4,8 +4,13 @@
 #include <qmessagebox.h>
 #include <qtimer.h>
 
+#include <kdialog.h>
+#include <kdialogbase.h>
 #include <kglobal.h>
 #include <klocale.h>    // i18n
+#include <qlabel.h>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QX11Info>
 
 IdleTimeDetector::IdleTimeDetector(int maxIdle)
@@ -41,9 +46,9 @@ void IdleTimeDetector::check()
   {
     _mit_info = XScreenSaverAllocInfo ();
     XScreenSaverQueryInfo(QX11Info::display(), QX11Info::appRootWindow(), _mit_info);
-    int idleMinutes = (_mit_info->idle/1000)/secsPerMinute;
-    if (idleMinutes >= _maxIdle)
-      informOverrun(idleMinutes);
+    idleminutes = (_mit_info->idle/1000)/secsPerMinute;
+    if (idleminutes >= _maxIdle)
+      informOverrun(idleminutes);
   }
 #endif // HAVE_LIBXSS
 }
@@ -51,6 +56,16 @@ void IdleTimeDetector::check()
 void IdleTimeDetector::setMaxIdle(int maxIdle)
 {
   _maxIdle = maxIdle;
+}
+
+void IdleTimeDetector::revert()
+{
+  // revert and stop
+  kDebug(5970) << "Entering IdleTimeDetector::revert" << endl;
+  QDateTime end = QDateTime::currentDateTime();
+  int diff = start.secsTo(end)/secsPerMinute;
+  emit(extractTime(idleminutes+diff));
+  emit(stopAllTimers());
 }
 
 #ifdef HAVE_LIBXSS
@@ -62,33 +77,35 @@ void IdleTimeDetector::informOverrun(int idleMinutes)
 
   _timer->stop();
 
-  QDateTime start = QDateTime::currentDateTime();
+  start = QDateTime::currentDateTime();
   QDateTime idleStart = start.addSecs(-60 * _maxIdle);
   QString backThen = KGlobal::locale()->formatTime(idleStart.time());
-
-  int id =  QMessageBox::warning( 0, i18n("Idle Detection"),
-                                     i18n("Desktop has been idle since %1."
-                                          " What should we do?", backThen),
-                                     i18n("Revert && Stop"),
-                                     i18n("Revert && Continue"),
-                                     i18n("Continue Timing"),0,2);
-  QDateTime end = QDateTime::currentDateTime();
-  int diff = start.secsTo(end)/secsPerMinute;
-
-  if (id == 0) {
-    // Revert And Stop
-    emit(extractTime(idleMinutes+diff));
-    emit(stopAllTimers());
-  }
-  else if (id == 1) {
-    // Revert and Continue
-    emit(extractTime(idleMinutes+diff));
-    _timer->start(testInterval);
-  }
+  // Create dialog  
+    KDialog *dialog=new KDialog( 0 , i18n( "Idle Time Detection" )  ,
+                                   KDialog::Ok | KDialog::Cancel );
+    QWidget* wid=new QWidget( dialog );
+    dialog->setMainWidget( wid );
+    QVBoxLayout *lay1 = new QVBoxLayout(wid);  
+    QHBoxLayout *lay2 = new QHBoxLayout();
+    lay1->addLayout(lay2);  
+    QString idlemsg=QString( "Desktop has been idle since %1. What do you want to do ?" ).arg(backThen);
+    QLabel *label = new QLabel( idlemsg, wid );
+    lay2->addWidget( label );
+    connect( dialog , SIGNAL(cancelClicked()) , this , SLOT(revert()) );
+    connect( wid , SIGNAL(changed(bool)) , wid , SLOT(enabledButtonApply(bool)) );
+    QString explanation=QString("Continue timing. Timing has started at %1").arg(backThen);
+    QString explanationrevert=QString( "Stop timing and revert back to the time at %1." ).arg(backThen);
+    dialog->setButtonText(KDialogBase::Ok, "Continue timing.");
+    dialog->setButtonText(KDialogBase::Cancel, "Revert timing");
+    dialog->setButtonWhatsThis(KDialogBase::Ok, explanation);
+    dialog->setButtonWhatsThis(KDialogBase::Cancel, explanationrevert);
+    dialog->show();
+/*
   else {
     // Continue
     _timer->start(testInterval);
   }
+*/
 }
 #endif // HAVE_LIBXSS
 
