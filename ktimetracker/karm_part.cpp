@@ -27,7 +27,8 @@
 karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
                                   QObject *parent, const char *name )
     : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent),
-    _accel     ( new KAccel( parentWidget ) ),
+#warning Port me!
+//    _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
     // we need an instance

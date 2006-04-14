@@ -36,7 +36,8 @@
 MainWindow::MainWindow( const QString &icsfile )
   : DCOPObject ( "KarmDCOPIface" ),
     KParts::MainWindow(),
-    _accel     ( new KAccel( this ) ),
+#warning Port me!
+//    _accel     ( new KAccel( this ) ),
     _watcher   ( new KAccelMenuWatch( _accel, this ) ),
     _totalSum  ( 0 ),
     _sessionSum( 0 )
@@ -222,7 +223,7 @@ void MainWindow::readProperties( KConfig* cfg )
 
 void MainWindow::keyBindings()
 {
-  KKeyDialog::configure( actionCollection(), this );
+  KKeyDialog::configure( actionCollection(), KKeyChooser::LetterShortcutsAllowed, this );
 }
 
 void MainWindow::startNewSession()

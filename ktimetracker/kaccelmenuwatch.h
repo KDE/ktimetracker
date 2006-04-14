@@ -10,8 +10,12 @@
 //Added by qt3to4:
 #include <Q3PopupMenu>
 
+#include <kstdaccel.h>
+
 
 class Q3PopupMenu;
+
+class KAccel;
 
 /**
  * Easy updating of menu accels when changing a KAccel object. 

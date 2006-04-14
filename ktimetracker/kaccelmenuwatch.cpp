@@ -57,10 +57,12 @@ void KAccelMenuWatch::updateMenus()
     // as descibed in KDE3PORTING.html
     switch( item->type ) {
       case StringAccel:
-        item->menu->setAccel( _accel->shortcut( item->action ).keyCodeQt(), item->itemId );
+#warning Port me!
+//        item->menu->setAccel( _accel->shortcut( item->action ).keyQt(), item->itemId );
         break;
       case StdAccel:
-        item->menu->setAccel( KStdAccel::shortcut( item->stdAction ).keyCodeQt(), item->itemId );
+#warning Port me!
+//        item->menu->setAccel( KStdAccel::shortcut( item->stdAction ).keyQt(), item->itemId );
         break;
       default:
         break;
