@@ -488,17 +488,13 @@ QString TaskView::addTask
   else          task = new Task( taskname, total, session, desktops, this );
 
   task->setUid( _storage->addTask( task, parent ) );
-
-  if ( ! task->uid().isNull() )
+  QString taskuid=task->uid();
+  if ( ! taskuid.isNull() )
   {
     _desktopTracker->registerForDesktops( task, desktops );
-
     setCurrentItem( task );
-
     setSelected( task, true );
-
     task->setPixmapProgress();
-
     save();
   }
   else
@@ -506,7 +502,7 @@ QString TaskView::addTask
     delete task;
   }
 
-  return task->uid();
+  return taskuid;
 }
 
 void TaskView::newSubTask()
