@@ -46,7 +46,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} karmpart )
 
 target_link_libraries(karmpart  ${KDE4_KPARTS_LIBS} kcal ${X11_Xss_LIB} kdeprint kdepim kcal_resourceremote)
 
-install_targets(${LIB_INSTALL_DIR}/kde4 karmpart )
+install_targets(${PLUGIN_INSTALL_DIR} karmpart )
 
 
 ########### install files ###############
