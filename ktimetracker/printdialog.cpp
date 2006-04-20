@@ -79,8 +79,8 @@ PrintDialog::PrintDialog()
   layout->addStretch(1);
 
   _allTasks = new QComboBox( page );
-  _allTasks->insertItem( i18n( "Selected Task" ) );
-  _allTasks->insertItem( i18n( "All Tasks" ) );
+  _allTasks->addItem( i18n( "Selected Task" ) );
+  _allTasks->addItem( i18n( "All Tasks" ) );
   layout->addWidget( _allTasks );
 
   _perWeek = new QCheckBox( i18n( "Summarize per week" ), page );
@@ -109,7 +109,7 @@ bool PrintDialog::perWeek() const
 
 bool PrintDialog::allTasks() const
 {
-  return _allTasks->currentItem() == 1;
+  return _allTasks->currentIndex() == 1;
 }
 
 bool PrintDialog::totalsOnly() const

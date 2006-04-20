@@ -142,8 +142,8 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   lay4->addSpacing(20);
   
   _operator = new QComboBox(page);
-  _operator->insertItem( QString::fromLatin1( "+" ) );
-  _operator->insertItem( QString::fromLatin1( "-" ) );
+  _operator->addItem( QString::fromLatin1( "+" ) );
+  _operator->addItem( QString::fromLatin1( "-" ) );
   _operator->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, 
                                          (QSizePolicy::SizeType)0, 
                                          0, 
@@ -331,7 +331,7 @@ void EditTaskDialog::status(long *time, long *timeDiff, long *session,
   }
   else {
     int diff = _diffTW->time();
-    if ( _operator->currentItem() == 1) {
+    if ( _operator->currentIndex() == 1) {
       diff = -diff;
     }
     *time = origTime + diff;
