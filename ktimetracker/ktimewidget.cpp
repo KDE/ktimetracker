@@ -19,8 +19,9 @@ class TimeValidator : public QValidator
 {
   public:
     TimeValidator( ValidatorType tp, QWidget *parent=0, const char *name=0)
-      : QValidator(parent, name)
+      : QValidator(parent)
     {
+      if ( name ) { setObjectName( name ); }
       _tp = tp;
     }
     State validate(QString &str, int &) const
