@@ -58,12 +58,14 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   lay1->addLayout(lay2);
   
   // The name of the widget
-  QLabel *label = new QLabel( i18n("Task &name:"), page, "name" );
+  QLabel *label = new QLabel( i18n("Task &name:"), page );
+  QLabe->setObjectName( "name" );
   lay2->addWidget( label );
   lay2->addSpacing(5);
   
   
-  _name = new QLineEdit( page, "lineedit" );
+  _name = new QLineEdit( page );
+  _name->setObjectName( "lineedit" );
   
   _name->setMinimumWidth(fontMetrics().maxWidth()*15);
   lay2->addWidget( _name );
@@ -72,8 +74,8 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
 
   // The "Edit Absolut" radio button
   lay1->addSpacing(10);lay1->addStretch(1); 
-  _absoluteRB = new QRadioButton( i18n( "Edit &absolute" ), page,
-                                  "_absoluteRB" );
+  _absoluteRB = new QRadioButton( i18n( "Edit &absolute" ), page );
+  _absoluteRB->setObjectName( "_absoluteRB" );
   lay1->addWidget( _absoluteRB );
   connect( _absoluteRB, SIGNAL( clicked() ), this, SLOT( slotAbsolutePressed() ) );
   
@@ -85,10 +87,12 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   QGridLayout *lay3 = new QGridLayout( 2, 2, -1, "lay3" );
   lay5->addLayout(lay3);
   
-  _sessionLA = new QLabel( i18n("&Session time: "), page, "session time" );
+  _sessionLA = new QLabel( i18n("&Session time: "), page );
+  _sessionLA->setObjectName( "session time" );
 
   // Time
-  _timeLA = new QLabel( i18n("&Time:"), page, "time" );
+  _timeLA = new QLabel( i18n("&Time:"), page );
+  _timeLA->setObjectName( "time" );
   lay3->addWidget( _timeLA, 0, 0 );
   _timeLA->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, 
                                          (QSizePolicy::SizeType)0, 
@@ -102,7 +106,8 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   // three date entry label controls to the same width.
   _timeLA->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
 
-  _timeTW = new KArmTimeWidget( page, "_timeTW" );
+  _timeTW = new KArmTimeWidget( page );
+  _timeTW->setObjectName( "_timeTW" );
   lay3->addWidget( _timeTW, 0, 1 );
   _timeLA->setBuddy( _timeTW );
   
@@ -110,7 +115,8 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   // Session
   lay3->addWidget( _sessionLA, 1, 0 );
 
-  _sessionTW = new KArmTimeWidget( page, "_sessionTW" );
+  _sessionTW = new KArmTimeWidget( page );
+  _sessionTW->setObjectName( "_sessionTW" );
   lay3->addWidget( _sessionTW, 1, 1 );
   _sessionLA->setBuddy( _sessionTW );
   _sessionLA->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, 
@@ -125,7 +131,8 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   lay1->addSpacing(10);
   lay1->addStretch(1);
   _relativeRB = new QRadioButton( i18n( "Edit &relative (apply to both time and"
-                                        " session time)" ), page, "_relativeRB" );
+                                        " session time)" ), page );
+  _relativeRB->setObjectName( "_relativeRB" );
   lay1->addWidget( _relativeRB );
   connect( _relativeRB, SIGNAL( clicked() ), this, SLOT(slotRelativePressed()) );
   
@@ -177,7 +184,8 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
     int lines = (int)(desktopCount/2);
     if (lines*2 != desktopCount) lines++; 
       groupBox = new Q3ButtonGroup( lines, Qt::Horizontal,
-                                   i18n("In Desktop"), page, "_desktopsGB");
+                                   i18n("In Desktop"), page);
+      groupBox->setObjectName( "_desktopsGB" );
   }
   lay1->addWidget(groupBox);
 
