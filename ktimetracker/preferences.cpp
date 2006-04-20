@@ -60,8 +60,8 @@ void Preferences::makeBehaviorPage()
 
   _doIdleDetectionW = new QCheckBox
     ( i18n("Detect desktop as idle after"), behaviorPage, "_doIdleDetectionW");
-  _idleDetectValueW = new QSpinBox
-    (1,30*24, 1, behaviorPage, "_idleDetectValueW");
+  _idleDetectValueW = new QSpinBox(behaviorPage, "_idleDetectValueW");
+  _idleDetectValueW->setRange(1,30*24);
   _idleDetectValueW->setSuffix(i18n(" min"));
   _promptDeleteW = new QCheckBox
     ( i18n( "Prompt before deleting tasks" ), behaviorPage, "_promptDeleteW" );
@@ -133,7 +133,8 @@ void Preferences::makeStoragePage()
   // autosave
   _doAutoSaveW = new QCheckBox
     ( i18n("Save tasks every"), storagePage, "_doAutoSaveW" );
-  _autoSaveValueW = new QSpinBox(1, 60*24, 1, storagePage, "_autoSaveValueW");
+  _autoSaveValueW = new QSpinBox(storagePage, "_autoSaveValueW");
+  _autoSaveValueW->setRange(1, 60*24);
   _autoSaveValueW->setSuffix(i18n(" min"));
 
   // iCalendar
