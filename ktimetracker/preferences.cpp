@@ -59,17 +59,22 @@ void Preferences::makeBehaviorPage()
   layout->setColumnStretch( 1, 1 );
 
   _doIdleDetectionW = new QCheckBox
-    ( i18n("Detect desktop as idle after"), behaviorPage, "_doIdleDetectionW");
-  _idleDetectValueW = new QSpinBox(behaviorPage, "_idleDetectValueW");
+    ( i18n("Detect desktop as idle after"), behaviorPage);
+  _doIdleDetectionW->setObjectName( "_doIdleDetectionW" );
+  _idleDetectValueW = new QSpinBox(behaviorPage);
+  _idleDetectValueW->setObjectName( "_idleDetectValueW" );
   _idleDetectValueW->setRange(1,30*24);
   _idleDetectValueW->setSuffix(i18n(" min"));
   _promptDeleteW = new QCheckBox
-    ( i18n( "Prompt before deleting tasks" ), behaviorPage, "_promptDeleteW" );
+    ( i18n( "Prompt before deleting tasks" ), behaviorPage );
+  _promptDeleteW->setObjectName( "_promptDeleteW" );
   _uniTaskingW = new QCheckBox
-    ( i18n( "Allow only one timer at a time" ), behaviorPage, "_uniTaskingW" );
+    ( i18n( "Allow only one timer at a time" ), behaviorPage );
+  _uniTaskingW->setObjectName( "_uniTaskingW" );
   _uniTaskingW->setWhatsThis( i18n("Unitasking - allow only one task to be timed at a time. Does not stop any timer.") );
   _trayIconW = new QCheckBox
-    ( i18n( "Place an icon to the SysTray" ), behaviorPage, "_trayIcon" );
+    ( i18n( "Place an icon to the SysTray" ), behaviorPage );
+  _trayIconW->setObjectName( "_trayIcon" );
 
   layout->addWidget(_doIdleDetectionW, 0, 0 );
   layout->addWidget(_idleDetectValueW, 0, 1 );
@@ -96,17 +101,22 @@ void Preferences::makeDisplayPage()
   QLabel* _displayColumnsLabelW = new QLabel( i18n("Columns displayed:"),
       displayPage );
   _displaySessionW = new QCheckBox ( i18n("Session time"),
-      displayPage, "_displaySessionW");
+      displayPage);
+  _displaySessionW->setObjectName( "_displaySessionW" );
   _displayTimeW = new QCheckBox ( i18n("Cumulative task time"),
-      displayPage, "_displayTimeW");
+      displayPage);
+  _displayTimeW->setObjectName( "_displayTimeW" );
   _displayTotalSessionW = new QCheckBox( i18n("Total session time"),
-      displayPage, "_displayTotalSessionW");
+      displayPage);
+  _displayTotalSessionW->setObjectName( "_displayTotalSessionW" );
   _displayTotalTimeW = new QCheckBox ( i18n("Total task time"),
-      displayPage, "_displayTotalTimeW");
+      displayPage);
+  _displayTotalTimeW->setObjectName( "_displayTotalTimeW" );
 
   QLabel* _numberFormatW = new QLabel( i18n("Number format:"),
       displayPage );
-  _decimalFormatW = new QCheckBox( i18n("Decimal"), displayPage, "_decimalDisplayW" );
+  _decimalFormatW = new QCheckBox( i18n("Decimal"), displayPage );
+  _decimalFormatW->setObjectName( "_decimalDisplayW" );
 
   layout->addWidget( _displayColumnsLabelW, 0, 1, 1, 2 );
   layout->addWidget(_displaySessionW, 1, 1 );
@@ -131,9 +141,10 @@ void Preferences::makeStoragePage()
   layout->setColumnStretch( 1, 1 );
 
   // autosave
-  _doAutoSaveW = new QCheckBox
-    ( i18n("Save tasks every"), storagePage, "_doAutoSaveW" );
-  _autoSaveValueW = new QSpinBox(storagePage, "_autoSaveValueW");
+  _doAutoSaveW = new QCheckBox( i18n("Save tasks every"), storagePage );
+  _doAutoSaveW->setObjectName( "_doAutoSaveW" );
+  _autoSaveValueW = new QSpinBox(storagePage);
+  _autoSaveValueW->setObjectName( "_autoSaveValueW" );
   _autoSaveValueW->setRange(1, 60*24);
   _autoSaveValueW->setSuffix(i18n(" min"));
 
@@ -144,8 +155,8 @@ void Preferences::makeStoragePage()
   _iCalFileW->setMode(KFile::File);
 
   // Log time?
-  _loggingW = new QCheckBox 
-    ( i18n("Log history"), storagePage, "_loggingW" );
+  _loggingW = new QCheckBox( i18n("Log history"), storagePage );
+  _loggingW->setObjectName( "_loggingW" );
 
   // add widgets to layout
   layout->addWidget(_doAutoSaveW, 0, 0);
