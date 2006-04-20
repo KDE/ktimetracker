@@ -59,7 +59,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   
   // The name of the widget
   QLabel *label = new QLabel( i18n("Task &name:"), page );
-  QLabe->setObjectName( "name" );
+  label->setObjectName( "name" );
   lay2->addWidget( label );
   lay2->addSpacing(5);
   
