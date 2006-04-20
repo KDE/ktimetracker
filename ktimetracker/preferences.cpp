@@ -108,13 +108,13 @@ void Preferences::makeDisplayPage()
       displayPage );
   _decimalFormatW = new QCheckBox( i18n("Decimal"), displayPage, "_decimalDisplayW" );
 
-  layout->addMultiCellWidget( _displayColumnsLabelW, 0, 0, 1, 2 );
+  layout->addWidget( _displayColumnsLabelW, 0, 1, 1, 2 );
   layout->addWidget(_displaySessionW, 1, 1 );
   layout->addWidget(_displayTimeW, 2, 1 );
   layout->addWidget(_displayTotalSessionW, 3, 1 );
   layout->addWidget(_displayTotalTimeW, 4, 1 );
 
-  layout->addMultiCellWidget( _numberFormatW, 0, 0, 2, 2 );
+  layout->addWidget( _numberFormatW, 0, 2, 1, 1);
   layout->addWidget( _decimalFormatW, 1, 2 );
 
   topLevel->addStretch();
