@@ -56,7 +56,7 @@ void Preferences::makeBehaviorPage()
 
   QVBoxLayout* topLevel = new QVBoxLayout( behaviorPage, 0, spacingHint() );
   QGridLayout* layout = new QGridLayout( topLevel, 2, 2 );
-  layout->setColStretch( 1, 1 );
+  layout->setColumnStretch( 1, 1 );
 
   _doIdleDetectionW = new QCheckBox
     ( i18n("Detect desktop as idle after"), behaviorPage, "_doIdleDetectionW");
@@ -91,7 +91,7 @@ void Preferences::makeDisplayPage()
 
   QVBoxLayout* topLevel = new QVBoxLayout( displayPage, 0, spacingHint() );
   QGridLayout* layout = new QGridLayout( topLevel, 7, 4 );
-  layout->setColStretch( 1, 1 );
+  layout->setColumnStretch( 1, 1 );
 
   QLabel* _displayColumnsLabelW = new QLabel( i18n("Columns displayed:"),
       displayPage );
@@ -128,7 +128,7 @@ void Preferences::makeStoragePage()
 
   QVBoxLayout* topLevel = new QVBoxLayout( storagePage, 0, spacingHint() );
   QGridLayout* layout = new QGridLayout( topLevel, 4, 2 );
-  layout->setColStretch( 1, 1 );
+  layout->setColumnStretch( 1, 1 );
 
   // autosave
   _doAutoSaveW = new QCheckBox
