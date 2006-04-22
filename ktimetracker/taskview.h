@@ -185,6 +185,7 @@ class TaskView : public K3ListView
     void timersActive();
     void timersInactive();
     void tasksChanged( Q3PtrList<Task> activeTasks );
+    void setStatusBarText(QString);
 
   private: // member variables
     IdleTimeDetector *_idleTimeDetector;

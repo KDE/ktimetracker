@@ -346,6 +346,7 @@ QString TaskView::save()
   if (activeTasks.count() == 0)
 #endif
   {
+    kDebug(5970) << "Entering TaskView::save()" << endl;
     return _storage->save(this);
   }
 }
@@ -480,10 +481,8 @@ QString TaskView::addTask
 ( const QString& taskname, long total, long session, 
   const DesktopList& desktops, Task* parent )
 {
+  kDebug(5970) << "Entering TaskView::addTask; taskname = " << taskname << endl;
   Task *task;
-
-  kDebug(5970) << "TaskView::addTask: taskname = " << taskname << endl;
-
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );
 
@@ -596,6 +595,7 @@ void TaskView::reinstateTask(int completion)
 
 void TaskView::deleteTask(bool markingascomplete)
 {
+  kDebug(5970) << "Entering TaskView::deleteTask" << endl;
   Task *task = current_item();
   if (task == 0) {
     KMessageBox::information(0,i18n("No task selected."));

@@ -115,6 +115,9 @@ protected slots:
     void fileSaveAs();
     void slotSelectionChanged();
 
+public slots:
+   bool setStatusBar(const QString & qs);
+
 };
 
 class KInstance;

@@ -17,7 +17,6 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <q3multilineedit.h>
-//Added by qt3to4:
 #include <QByteArray>
 #include <Q3PtrList>
 #include <q3popupmenu.h>
@@ -36,6 +35,8 @@ karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
 
     // this should be your custom internal widget
     _taskView = new TaskView( parentWidget, widgetName );
+
+    connect(_taskView, SIGNAL( setStatusBarText(QString)), this, SLOT( setStatusBar(QString) ) );
 
     // setup PreferenceDialog.
     _preferences = Preferences::instance();
@@ -331,6 +332,12 @@ bool karmPart::openFile()
     return true;
 }
 
+bool karmPart::setStatusBar(const QString & qs)
+{
+  kDebug(5970) << "Entering setStatusBar" << endl;
+  emit setStatusBarText(qs);
+}
+
 bool karmPart::saveFile()
 {
     // if we aren't read-write, return immediately
@@ -484,9 +491,9 @@ bool karmPart::save()
 {
   kDebug(5970) << "Saving time data to disk." << endl;
   QString err=_taskView->save();  // untranslated error msg.
-  // TODO:
-  /* if (err.isEmpty()) statusBar()->message(i18n("Successfully saved tasks and history"),1807);
-  else statusBar()->message(i18n(err.ascii()),7707); // no msgbox since save is called when exiting */
+
+  if (err.isEmpty()) setStatusBar("Successfully saved");
+  else setStatusBar("Saving Failed"); // no msgbox since save is called when exiting */
   return true;
 }
 
