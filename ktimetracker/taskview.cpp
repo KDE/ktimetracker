@@ -347,7 +347,10 @@ QString TaskView::save()
 #endif
   {
     kDebug(5970) << "Entering TaskView::save()" << endl;
-    return _storage->save(this);
+    QString err=_storage->save(this);
+    if (err==QString()) emit setStatusBarText("Saved successfully");
+    else emit setStatusBarText("Error during Saving");
+    return err;
   }
 }
 
