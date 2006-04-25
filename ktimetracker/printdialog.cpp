@@ -51,7 +51,8 @@ PrintDialog::PrintDialog()
   setMainWidget(page);
   int year, month;
 
-  QVBoxLayout *layout = new QVBoxLayout(page, KDialog::spacingHint());
+  QVBoxLayout *layout = new QVBoxLayout(page);
+  layout->setSpacing(KDialog::spacingHint());
   layout->addSpacing(10);
   layout->addStretch(1);
 
@@ -61,7 +62,9 @@ PrintDialog::PrintDialog()
   layout->addWidget(rangeGroup);
 
   QWidget *rangeWidget = new QWidget(rangeGroup);
-  QHBoxLayout *rangeLayout = new QHBoxLayout(rangeWidget, 0, spacingHint());
+  QHBoxLayout *rangeLayout = new QHBoxLayout(rangeWidget);
+  rangeLayout->setSpacing(spacingHint());
+  rangeLayout->setMargin(0);
 
   rangeLayout->addWidget(new QLabel(i18n("From:"), rangeWidget));
   _from = new KDateEdit(rangeWidget);

@@ -84,7 +84,9 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   QHBoxLayout *lay5 = new QHBoxLayout();
   lay1->addLayout(lay5);
   lay5->addSpacing(20);
-  QGridLayout *lay3 = new QGridLayout( 2, 2, -1, "lay3" );
+  QGridLayout *lay3 = new QGridLayout();
+  lay3->setObjectName( "lay3" );
+  lay3->setSpacing( -1 );
   lay5->addLayout(lay3);
   
   _sessionLA = new QLabel( i18n("&Session time: "), page );
