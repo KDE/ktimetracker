@@ -644,7 +644,7 @@ void TaskView::deleteTask(bool markingascomplete)
       QString uid=task->uid();
       task->remove(activeTasks, _storage);
       task->removeFromView();
-      if( _preferences ) _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
+      _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
       save();
     }
 
