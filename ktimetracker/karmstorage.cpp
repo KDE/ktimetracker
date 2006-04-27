@@ -1032,7 +1032,7 @@ bool KarmStorage::saveCalendar()
   if ( !lock || !lock->lock() )
     return false;
 
-  if ( _calendar && _calendar->save() ) {
+  if ( _calendar->save() ) {
     lock->unlock();
     return true;
   }
