@@ -11,11 +11,15 @@ const int minimumInterval = 5;  // seconds
 DesktopTracker::DesktopTracker ()
 {
   // Setup desktop change handling
+#ifdef Q_WS_X11
   connect( &kWinModule, SIGNAL( currentDesktopChanged(int) ),
            this, SLOT( handleDesktopChange(int) ));
 
   _desktopCount = kWinModule.numberOfDesktops();
   _previousDesktop = kWinModule.currentDesktop()-1;
+#else
+#warning non-X11 support missing
+#endif
   // TODO: removed? fixed by Lubos?
   // currentDesktop will return 0 if no window manager is started
   if( _previousDesktop < 0 ) _previousDesktop = 0;
@@ -59,7 +63,12 @@ void DesktopTracker::changeTimers()
 
 void DesktopTracker::startTracking()
 {
+#ifdef Q_WS_X11
   int currentDesktop = kWinModule.currentDesktop() -1;
+#else
+#warning non-X11 support missing
+  int currentDesktop = 0;
+#endif
   // TODO: removed? fixed by Lubos?
   // currentDesktop will return 0 if no window manager is started
   if ( currentDesktop < 0 ) currentDesktop = 0;
@@ -86,8 +95,12 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
         desktopTracker[i].erase(tit);
       // if the task was priviously tracking this desktop then
       // emit a signal that is not tracking it any more
+#ifdef Q_WS_X11
       if( i == kWinModule.currentDesktop() -1)
         emit leftActiveDesktop(task);
+#else
+#warning non-X11 support missing
+#endif
     }
 
     return;
@@ -112,8 +125,12 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
           v.erase(tit); // so we delete it from desktopTracker
           // if the task was priviously tracking this desktop then
           // emit a signal that is not tracking it any more
+#ifdef Q_WS_X11
           if( i == kWinModule.currentDesktop() -1)
             emit leftActiveDesktop(task);
+#else
+#warning non-X11 support missing
+#endif
         }
       }
     }

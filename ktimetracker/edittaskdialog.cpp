@@ -50,7 +50,9 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
 {
   QWidget *page = new QWidget( this ); 
   setMainWidget(page);
+#ifdef Q_WS_X11
   KWinModule kwinmodule(0, KWinModule::INFO_DESKTOP);
+#endif
 
   QVBoxLayout *lay1 = new QVBoxLayout(page);
   
@@ -158,7 +160,12 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   _diffTW = new KArmTimeWidget( page, "_sessionAddTW" );
   lay4->addWidget( _diffTW );
 
+#ifdef Q_WS_X11
   desktopCount = kwinmodule.numberOfDesktops();
+#else
+#warning non-X11 support missing
+  desktopCount = 1;
+#endif
   
   // If desktopList contains higher numbered desktops than desktopCount then
   // delete those from desktopList. This may be the case if the user has
@@ -196,7 +203,9 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   lay1->addLayout(lay6);
   for (int i=0; i<desktopCount; i++) {
     _deskBox.push_back(new QCheckBox(groupBox,QString::number(i).toLatin1()));
+#ifdef Q_WS_X11
     _deskBox[i]->setText(kwinmodule.desktopName(i+1));
+#endif
     _deskBox[i]->setChecked(false);
 
     lay6->addWidget(_deskBox[i]);
