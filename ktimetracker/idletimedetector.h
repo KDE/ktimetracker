@@ -7,7 +7,7 @@
 
 class QTimer;
 
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
  #include <X11/Xlib.h>
  #include <X11/Xutil.h>
  #include <X11/extensions/scrnsaver.h>
@@ -84,7 +84,7 @@ public slots:
 
 
 protected:
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   void informOverrun(int idle);
 #endif // HAVE_LIBXSS
 
@@ -92,7 +92,7 @@ protected slots:
   void check();
 
 private:
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   XScreenSaverInfo *_mit_info;
 #endif
   bool _idleDetectionPossible;

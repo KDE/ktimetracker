@@ -11,13 +11,15 @@
 #include <qlabel.h>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#ifdef Q_WS_X11
 #include <QX11Info>
+#endif
 
 IdleTimeDetector::IdleTimeDetector(int maxIdle)
 {
   _maxIdle = maxIdle;
 
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   int event_base, error_base;
   if(XScreenSaverQueryExtension(QX11Info::display(), &event_base, &error_base)) {
     _idleDetectionPossible = true;
@@ -41,7 +43,7 @@ bool IdleTimeDetector::isIdleDetectionPossible()
 
 void IdleTimeDetector::check()
 {
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   if (_idleDetectionPossible)
   {
     _mit_info = XScreenSaverAllocInfo ();
@@ -68,7 +70,7 @@ void IdleTimeDetector::revert()
   emit(stopAllTimers());
 }
 
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
 void IdleTimeDetector::informOverrun(int idleMinutes)
 {
   if (!_overAllIdleDetect)
@@ -111,7 +113,7 @@ void IdleTimeDetector::informOverrun(int idleMinutes)
 
 void IdleTimeDetector::startIdleDetection()
 {
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   if (!_timer->isActive())
     _timer->start(testInterval);
 #endif //HAVE_LIBXSS
@@ -119,7 +121,7 @@ void IdleTimeDetector::startIdleDetection()
 
 void IdleTimeDetector::stopIdleDetection()
 {
-#ifdef HAVE_LIBXSS
+#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   if (_timer->isActive())
     _timer->stop();
 #endif // HAVE_LIBXSS
