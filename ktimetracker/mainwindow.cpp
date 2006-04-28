@@ -138,7 +138,7 @@ bool MainWindow::save()
   kDebug(5970) << "Saving time data to disk." << endl;
   QString err=_taskView->save();  // untranslated error msg.
   if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully saved tasks and history"),1807);
-  else statusBar()->showMessage(i18n(err.ascii()),7707); // no msgbox since save is called when exiting
+  else statusBar()->showMessage(i18n(err.toAscii()),7707); // no msgbox since save is called when exiting
   saveGeometry();
   return true;
 }
@@ -148,7 +148,7 @@ void MainWindow::exportcsvHistory()
   kDebug(5970) << "Exporting History to disk." << endl;
   QString err=_taskView->exportcsvHistory();
   if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully exported History to CSV-file"),1807);
-  else KMessageBox::error(this, err.ascii());
+  else KMessageBox::error(this, err.toAscii());
   saveGeometry();
 
 }
