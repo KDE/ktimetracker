@@ -155,7 +155,7 @@ void Preferences::makeStoragePage()
   _autoSaveValueW->setSuffix(i18n(" min"));
 
   // iCalendar
-  QLabel* _iCalFileLabel = new QLabel( i18n("iCalendar file:"), storagePage);
+  QLabel* _iCalFileLabel = new QLabel( i18n("iCalendar file:"), storagePage );
   _iCalFileW = new KUrlRequester( storagePage );
   _iCalFileW->setFilter(QString::fromLatin1("*.ics"));
   _iCalFileW->setMode(KFile::File);
