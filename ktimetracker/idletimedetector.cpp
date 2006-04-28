@@ -50,7 +50,7 @@ void IdleTimeDetector::check()
     XScreenSaverQueryInfo(QX11Info::display(), QX11Info::appRootWindow(), _mit_info);
     idleminutes = (_mit_info->idle/1000)/secsPerMinute;
     if (idleminutes >= _maxIdle)
-      informOverrun(idleminutes);
+      informOverrun();
   }
 #endif // HAVE_LIBXSS
 }
@@ -71,7 +71,7 @@ void IdleTimeDetector::revert()
 }
 
 #if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
-void IdleTimeDetector::informOverrun(int idleMinutes)
+void IdleTimeDetector::informOverrun()
 {
   if (!_overAllIdleDetect)
     return; // In the preferences the user has indicated that he do not
@@ -95,10 +95,10 @@ void IdleTimeDetector::informOverrun(int idleMinutes)
     lay2->addWidget( label );
     connect( dialog , SIGNAL(cancelClicked()) , this , SLOT(revert()) );
     connect( wid , SIGNAL(changed(bool)) , wid , SLOT(enabledButtonApply(bool)) );
-    QString explanation=QString("Continue timing. Timing has started at %1").arg(backThen);
-    QString explanationrevert=QString( "Stop timing and revert back to the time at %1." ).arg(backThen);
-    dialog->setButtonText(KDialogBase::Ok, "Continue timing.");
-    dialog->setButtonText(KDialogBase::Cancel, "Revert timing");
+    QString explanation=i18n(QString("Continue timing. Timing has started at %1").arg(backThen).ascii());
+    QString explanationrevert=i18n(QString( "Stop timing and revert back to the time at %1." ).arg(backThen).ascii());
+    dialog->setButtonText(KDialogBase::Ok, i18n("Continue timing."));
+    dialog->setButtonText(KDialogBase::Cancel, i18n("Revert timing"));
     dialog->setButtonWhatsThis(KDialogBase::Ok, explanation);
     dialog->setButtonWhatsThis(KDialogBase::Cancel, explanationrevert);
     dialog->show();

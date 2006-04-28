@@ -492,8 +492,8 @@ bool karmPart::save()
   kDebug(5970) << "Saving time data to disk." << endl;
   QString err=_taskView->save();  // untranslated error msg.
 
-  if (err.isEmpty()) setStatusBar("Successfully saved");
-  else setStatusBar("Saving Failed"); // no msgbox since save is called when exiting */
+  if (err.isEmpty()) setStatusBar(i18n("Successfully saved tasks and history"));
+  else setStatusBar(i18n(err.ascii())); // no msgbox since save is called when exiting */
   return true;
 }
 

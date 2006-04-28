@@ -85,7 +85,7 @@ public slots:
 
 protected:
 #if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
-  void informOverrun(int idle);
+  void informOverrun();
 #endif // HAVE_LIBXSS
 
 protected slots:
