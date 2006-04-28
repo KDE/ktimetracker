@@ -94,7 +94,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
   rc.decimalMinutes = (  combodecimalminutes->currentText() == i18n( "Decimal" ) );
   kDebug(5970) << "rc.decimalMinutes is " << rc.decimalMinutes << endl;
 
-  QString d = grpDelimiter->selected()->name(); 
+  QString d = grpDelimiter->selected()->objectName(); 
   if      ( d == "radioComma" )     rc.delimiter = ",";
   else if ( d == "radioTab" )       rc.delimiter = "\t";
   else if ( d == "radioSemicolon" ) rc.delimiter = ";";
