@@ -620,7 +620,7 @@ long KarmStorage::printTaskHistory (
       sum += taskdaytotals[daytaskkey];  // in seconds
 
       if (daytotals.contains(daykey))
-        daytotals.replace(daykey, daytotals[daykey]+taskdaytotals[daytaskkey]);
+        daytotals.insert(daykey, daytotals[daykey]+taskdaytotals[daytaskkey]);
       else
         daytotals.insert(daykey, taskdaytotals[daytaskkey]);
     }
@@ -753,7 +753,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
         .arg((*event).todoUid());
 
     if (taskdaytotals.contains(daytaskkey))
-        taskdaytotals.replace(daytaskkey,
+        taskdaytotals.insert(daytaskkey,
                 taskdaytotals[daytaskkey] + (*event).duration());
     else
         taskdaytotals.insert(daytaskkey, (*event).duration());
