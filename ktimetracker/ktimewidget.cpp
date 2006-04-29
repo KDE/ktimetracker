@@ -53,7 +53,7 @@ class KarmLineEdit : public QLineEdit
 
   public:
     KarmLineEdit( QWidget* parent, const char* name = 0 )
-      : QLineEdit( parent, name ) {}
+      : QLineEdit( parent ) { setObjectName( name ); }
 
 protected:
 
@@ -67,8 +67,9 @@ protected:
 
 
 KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
-  : QWidget(parent, name)
+  : QWidget(parent)
 {
+  setObjecName( name );
   QHBoxLayout *layout = new QHBoxLayout(this);
 
   _hourLE = new QLineEdit( this);
