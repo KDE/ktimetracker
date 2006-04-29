@@ -69,7 +69,7 @@ protected:
 KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
   : QWidget(parent)
 {
-  setObjecName( name );
+  setObjectName( name );
   QHBoxLayout *layout = new QHBoxLayout(this);
 
   _hourLE = new QLineEdit( this);
