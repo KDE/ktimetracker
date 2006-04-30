@@ -202,13 +202,15 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
 
   lay1->addLayout(lay6);
   for (int i=0; i<desktopCount; i++) {
-    _deskBox.push_back(new QCheckBox(groupBox,QString::number(i).toLatin1()));
+    QCheckBox *tmpBx = new QCheckBox(groupBox);
+    tmpBx->setObjectName( QString::number(i).toLatin1() );
+    _deskBox.push_back( tmpBx );
 #ifdef Q_WS_X11
-    _deskBox[i]->setText(kwinmodule.desktopName(i+1));
+    tmpBx->setText(kwinmodule.desktopName(i+1));
 #endif
-    _deskBox[i]->setChecked(false);
+    tmpBx->setChecked(false);
 
-    lay6->addWidget(_deskBox[i]);
+    lay6->addWidget(tmpBx);
   }
   // check specified Desktop Check Boxes
   bool enableDesktops = false;
