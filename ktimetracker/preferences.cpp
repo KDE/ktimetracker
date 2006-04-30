@@ -57,7 +57,8 @@ void Preferences::makeBehaviorPage()
   QVBoxLayout* topLevel = new QVBoxLayout( behaviorPage );
   topLevel->setSpacing( spacingHint() );
   topLevel->setMargin( 0 );
-  QGridLayout* layout = new QGridLayout( topLevel );
+  QGridLayout* layout = new QGridLayout();
+  topLevel->addLayout( layout );
   layout->setColumnStretch( 1, 1 );
 
   _doIdleDetectionW = new QCheckBox
@@ -99,7 +100,8 @@ void Preferences::makeDisplayPage()
   QVBoxLayout* topLevel = new QVBoxLayout( displayPage );
   topLevel->setSpacing( spacingHint() );
   topLevel->setMargin( 0 );
-  QGridLayout* layout = new QGridLayout( topLevel );
+  QGridLayout* layout = new QGridLayout();
+  topLevel->addLayout( layout );
   layout->setColumnStretch( 1, 1 );
 
   QLabel* _displayColumnsLabelW = new QLabel( i18n("Columns displayed:"),
@@ -143,7 +145,8 @@ void Preferences::makeStoragePage()
   QVBoxLayout* topLevel = new QVBoxLayout( storagePage );
   topLevel->setSpacing( spacingHint() );
   topLevel->setMargin( 0 );
-  QGridLayout* layout = new QGridLayout( topLevel );
+  QGridLayout* layout = new QGridLayout();
+  topLevel->addLayout( layout );
   layout->setColumnStretch( 1, 1 );
 
   // autosave
