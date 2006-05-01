@@ -60,8 +60,6 @@ kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 install(FILES uninstall.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}${APPLNK_INSTALL_DIR}/Utilities/ RENAME karm.desktop)
 
 
-kde4_create_doxygen_docs( REFERENCES kdeui  )
-
 kde4_footer()
 
 
