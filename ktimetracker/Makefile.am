@@ -39,8 +39,6 @@ install-data-local: uninstall.desktop
 	$(mkinstalldirs) $(DESTDIR)$(kde_appsdir)/Utilities
 	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(DESTDIR)$(kde_appsdir)/Utilities/karm.desktop
 
-messages: rc.cpp
-	$(XGETTEXT) *.cpp -o $(podir)/karm.pot
 
 srcdoc:
 	kdoc -a -p -H -d $(HOME)/web/src/karm karm *.h -lkdecore -lkdeui -lqt
