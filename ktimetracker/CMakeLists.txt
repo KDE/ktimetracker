@@ -1,5 +1,8 @@
 kde4_header()
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
+
+
 add_subdirectory( support ) 
 add_subdirectory( pics ) 
 add_subdirectory( test ) 

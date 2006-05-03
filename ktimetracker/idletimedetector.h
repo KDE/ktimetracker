@@ -3,7 +3,7 @@
 
 #include <qdatetime.h>
 #include <qobject.h>
-#include "config.h"     // HAVE_LIBXSS
+#include "config-karm.h" // HAVE_LIBXSS
 
 class QTimer;
 
