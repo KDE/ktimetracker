@@ -210,14 +210,14 @@ void karmPart::makeMenus()
 
   new KAction( i18n("Import &Legacy Flat File..."), 0,
       _taskView, SLOT(loadFromFlatFile()), actionCollection(), "import_flatfile");
-  new KAction( i18n("&Export to CSV File..."), 0,
-      _taskView, SLOT(exportcsvFile()), actionCollection(), "export_csvfile");
+  KAction *action = new KAction( i18n("&Export to CSV File..."), actionCollection(), "export_csvfile");
+  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
   new KAction( i18n("Export &History to CSV File..."), 0,
       this, SLOT(exportcsvHistory()), actionCollection(), "export_csvhistory");
   KAction *action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
-  new KAction( i18n("Configure KArm..."), 0,
-      _preferences, SLOT(showDialog()), actionCollection(), "configure_karm");
+  KAction *action = new KAction( i18n("Configure KArm..."), actionCollection(), "configure_karm");
+  connect(action, SIGNAL(triggered(bool) ), _preferences, SLOT(showDialog()));
 
 /*
   new KAction( i18n("Import E&vents"), 0,

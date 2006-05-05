@@ -337,8 +337,8 @@ void MainWindow::makeMenus()
 
   new KAction( i18n("Import &Legacy Flat File..."), 0,
       _taskView, SLOT(loadFromFlatFile()), actionCollection(), "import_flatfile");
-  new KAction( i18n("&Export Times..."), 0,
-      _taskView, SLOT(exportcsvFile()), actionCollection(), "export_times");
+  KAction *action = new KAction( i18n("&Export Times..."), actionCollection(), "export_times");
+  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
   new KAction( i18n("Export &History..."), 0,
       this, SLOT(exportcsvHistory()), actionCollection(), "export_history");
   KAction *action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
