@@ -305,12 +305,12 @@ void MainWindow::makeMenus()
       QString::fromLatin1("klipper"),
       Qt::CTRL+Qt::ALT+Qt::Key_C, _taskView, SLOT( clipHistory() ), actionCollection(), "clip_history");
 
-  new KAction( i18n("Import &Legacy Flat File..."), 0,
-      _taskView, SLOT(loadFromFlatFile()), actionCollection(), "import_flatfile");
+  KAction *action = new KAction( i18n("Import &Legacy Flat File..."), actionCollection(), "import_flatfile");
+  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(loadFromFlatFile()));
   KAction *action = new KAction( i18n("&Export Times..."), actionCollection(), "export_times");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
-  new KAction( i18n("Export &History..."), 0,
-      this, SLOT(exportcsvHistory()), actionCollection(), "export_history");
+  KAction *action = new KAction( i18n("Export &History..."), actionCollection(), "export_history");
+  connect(action, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
   action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
 
