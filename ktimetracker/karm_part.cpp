@@ -214,9 +214,9 @@ void karmPart::makeMenus()
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
   new KAction( i18n("Export &History to CSV File..."), 0,
       this, SLOT(exportcsvHistory()), actionCollection(), "export_csvhistory");
-  KAction *action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
+  action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
-  KAction *action = new KAction( i18n("Configure KArm..."), actionCollection(), "configure_karm");
+  action = new KAction( i18n("Configure KArm..."), actionCollection(), "configure_karm");
   connect(action, SIGNAL(triggered(bool) ), _preferences, SLOT(showDialog()));
 
 /*

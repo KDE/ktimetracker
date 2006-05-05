@@ -341,7 +341,7 @@ void MainWindow::makeMenus()
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
   new KAction( i18n("Export &History..."), 0,
       this, SLOT(exportcsvHistory()), actionCollection(), "export_history");
-  KAction *action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
+  action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
 
 /*
