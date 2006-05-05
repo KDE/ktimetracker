@@ -130,14 +130,12 @@ void karmPart::makeMenus()
       0,
       this,
       SLOT( startNewSession() ),
-      actionCollection(),
-      "start_new_session");
+      actionCollection(), "start_new_session");
   KAction* actionResetAll = new KAction( i18n("&Reset All Times"),
       0,
       this,
       SLOT( resetAllTimes() ),
-      actionCollection(),
-      "reset_all_times");
+      actionCollection(), "reset_all_times");
   actionStart = new KAction( i18n("&Start"),
       QString::fromLatin1("1rightarrow"), Qt::Key_S,
       _taskView,
@@ -151,8 +149,7 @@ void karmPart::makeMenus()
   actionStopAll = new KAction( i18n("Stop &All Timers"),
       Qt::Key_Escape,
       _taskView,
-      SLOT( stopAllTimers() ), actionCollection(),
-      "stopAll");
+      SLOT( stopAllTimers() ), actionCollection(), "stopAll");
   actionStopAll->setEnabled(false);
 
   actionNew = new KAction( i18n("&New..."),
@@ -212,20 +209,15 @@ void karmPart::makeMenus()
       "clip_history");
 
   new KAction( i18n("Import &Legacy Flat File..."), 0,
-      _taskView, SLOT(loadFromFlatFile()), actionCollection(),
-      "import_flatfile");
+      _taskView, SLOT(loadFromFlatFile()), actionCollection(), "import_flatfile");
   new KAction( i18n("&Export to CSV File..."), 0,
-      _taskView, SLOT(exportcsvFile()), actionCollection(),
-      "export_csvfile");
+      _taskView, SLOT(exportcsvFile()), actionCollection(), "export_csvfile");
   new KAction( i18n("Export &History to CSV File..."), 0,
-      this, SLOT(exportcsvHistory()), actionCollection(),
-      "export_csvhistory");
-  new KAction( i18n("Import Tasks From &Planner..."), 0,
-      _taskView, SLOT(importPlanner()), actionCollection(),
-      "import_planner");
+      this, SLOT(exportcsvHistory()), actionCollection(), "export_csvhistory");
+  KAction *action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
+  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
   new KAction( i18n("Configure KArm..."), 0,
-      _preferences, SLOT(showDialog()), actionCollection(),
-      "configure_karm");
+      _preferences, SLOT(showDialog()), actionCollection(), "configure_karm");
 
 /*
   new KAction( i18n("Import E&vents"), 0,
