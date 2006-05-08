@@ -58,8 +58,7 @@ class karmPart : public KParts::ReadWritePart, virtual public KarmDCOPIface
     friend class KarmTray;
 
 public:
-    karmPart(QWidget *parentWidget, const char *widgetName,
-             QObject *parent, const char *name);
+    karmPart(QWidget *parentWidget, QObject *parent);
 
     void contextMenuRequest( Q3ListViewItem*, const QPoint& point, int );
     // DCOP
@@ -129,8 +128,7 @@ class karmPartFactory : public KParts::Factory
 public:
     karmPartFactory();
     virtual ~karmPartFactory();
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, const char *widgetName,
-                                            QObject *parent, const char *name,
+    virtual KParts::Part* createPartObject( QWidget *parentWidget, QObject *parent,
                                             const char *classname, const QStringList &args );
     static KInstance* instance();
  

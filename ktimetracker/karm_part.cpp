@@ -9,6 +9,7 @@
 
 #include <kinstance.h>
 #include <kaction.h>
+#include <kactioncollection.h>
 #include <kstdaction.h>
 #include <kfiledialog.h>
 #include <kglobal.h>
@@ -23,8 +24,7 @@
 #include <kxmlguifactory.h>
 #include "mainwindow.h"
 
-karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
-                                  QObject *parent, const char *name )
+karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent),
 #warning Port me!
 //    _accel     ( new KAccel( parentWidget ) ),
@@ -34,7 +34,7 @@ karmPart::karmPart( QWidget *parentWidget, const char *widgetName,
     setInstance( karmPartFactory::instance() );
 
     // this should be your custom internal widget
-    _taskView = new TaskView( parentWidget, widgetName );
+    _taskView = new TaskView( parentWidget );
 
     connect(_taskView, SIGNAL( setStatusBarText(QString)), this, SLOT( setStatusBar(QString) ) );
 
@@ -343,12 +343,11 @@ karmPartFactory::~karmPartFactory()
     s_instance = 0L;
 }
 
-KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
-                                                        QObject *parent, const char *name,
-                                                        const char *classname, const QStringList &args )
+KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, QObject *parent,
+                                                 const char* classname, const QStringList &args )
 {
     // Create an instance of our Part
-    karmPart* obj = new karmPart( parentWidget, widgetName, parent, name );
+    karmPart* obj = new karmPart( parentWidget, parent );
 
     // See if we are to be read-write or not
     if (QByteArray(classname) == "KParts::ReadOnlyPart")
