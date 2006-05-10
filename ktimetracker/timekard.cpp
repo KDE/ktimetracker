@@ -25,7 +25,7 @@
 #include <qdatetime.h>
 #include <q3paintdevicemetrics.h>
 #include <qpainter.h>
-#include <qmap.h>
+#include <QMap>
 #include <QList>
 
 #include <kglobal.h>

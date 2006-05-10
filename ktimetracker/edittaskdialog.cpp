@@ -21,16 +21,16 @@
  *
  */
 #include <q3buttongroup.h>
-#include <qcombobox.h>
+#include <QComboBox>
 #include <q3groupbox.h>
 #include <q3hbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
 #include <qradiobutton.h>
 #include <qsizepolicy.h>
-#include <qstring.h>
-#include <qwidget.h>
+#include <QString>
+#include <QWidget>
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>

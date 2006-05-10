@@ -1,11 +1,11 @@
 #include <qclipboard.h>
-#include <qfile.h>
-#include <qlayout.h>
+#include <QFile>
+#include <QLayout>
 #include <q3listbox.h>
 #include <q3listview.h>
 #include <q3ptrlist.h>
 #include <q3ptrstack.h>
-#include <qstring.h>
+#include <QString>
 #include <qtextstream.h>
 #include <qtimer.h>
 #include <qxml.h>

@@ -8,7 +8,7 @@
 #include <kdialogbase.h>
 #include <kglobal.h>
 #include <klocale.h>    // i18n
-#include <qlabel.h>
+#include <QLabel>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #ifdef Q_WS_X11

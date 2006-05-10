@@ -18,9 +18,9 @@
 */
 
 #include <kdebug.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qstring.h>
+#include <QDir>
+#include <QFile>
+#include <QString>
 #include <qstringlist.h>
 #include <qtextstream.h>
 

@@ -20,7 +20,7 @@
 #include <qnamespace.h>
 #include <QMenu>
 #include <q3ptrlist.h>
-#include <qstring.h>
+#include <QString>
 
 #include "karmerrors.h"
 #include "karmutility.h"

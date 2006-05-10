@@ -1,9 +1,9 @@
 #undef Unsorted // for --enable-final
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qstring.h>
-#include <qspinbox.h>
-#include <qlayout.h>
+#include <QCheckBox>
+#include <QLabel>
+#include <QString>
+#include <QSpinBox>
+#include <QLayout>
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QGridLayout>

@@ -9,12 +9,12 @@
 
 
 // #include <qkeycode.h>
-// #include <qlayout.h>
+// #include <QLayout>
 #include <qpixmap.h>
 #include <q3ptrlist.h>
-#include <qstring.h>
+#include <QString>
 #include <qtimer.h>
-#include <qtooltip.h>
+#include <QToolTip>
 
 #include <kaction.h>            // actionPreferences()
 #include <kglobal.h>

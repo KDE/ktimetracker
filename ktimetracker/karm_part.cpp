@@ -15,7 +15,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 
-#include <qfile.h>
+#include <QFile>
 #include <qtextstream.h>
 #include <q3multilineedit.h>
 #include <QByteArray>

@@ -20,7 +20,7 @@
 #ifndef _script_h_
 #define _script_h_
 
-//#include <qvariant.h>
+//#include <QVariant>
 #include <qobject.h>
 
 class QDir;

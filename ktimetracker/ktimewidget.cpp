@@ -1,11 +1,11 @@
 #include <stdlib.h>             // abs()
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qstring.h>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
+#include <QString>
 #include <qvalidator.h>
-#include <qwidget.h>
+#include <QWidget>
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QKeyEvent>

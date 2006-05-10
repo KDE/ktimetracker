@@ -21,15 +21,15 @@
  */
 
 #include <q3buttongroup.h>
-#include <qcheckbox.h>
+#include <QCheckBox>
 #include <q3hbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <QLabel>
+#include <QLayout>
+#include <QLineEdit>
 #include <qpixmap.h>
-#include <qpushbutton.h>
-#include <qstring.h>
-#include <qwidget.h>
+#include <QPushButton>
+#include <QString>
+#include <QWidget>
 #include <q3whatsthis.h>
 //Added by qt3to4:
 #include <QVBoxLayout>

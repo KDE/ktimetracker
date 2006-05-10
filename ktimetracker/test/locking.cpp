@@ -1,8 +1,8 @@
 #include <assert.h>
 
-#include <qstring.h>
-#include <qfile.h>
-#include <qdir.h>
+#include <QString>
+#include <QFile>
+#include <QDir>
 #include <kcmdlineargs.h>
 #include <kapplication.h>
 

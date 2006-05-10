@@ -24,7 +24,7 @@
 #include <vector>
 
 #include <kdialogbase.h>
-#include <qcheckbox.h>
+#include <QCheckBox>
 //Added by qt3to4:
 #include <QLabel>
 
