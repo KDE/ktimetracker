@@ -5,7 +5,7 @@
 #ifndef KARM_K_ACCEL_MENU_WATCH_H
 #define KARM_K_ACCEL_MENU_WATCH_H
 
-#include <qobject.h>
+#include <QObject>
 #include <q3ptrlist.h>
 //Added by qt3to4:
 #include <Q3PopupMenu>

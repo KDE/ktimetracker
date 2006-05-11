@@ -21,7 +21,7 @@
 #ifndef REPORTCRITERIA_H
 #define REPORTCRITERIA_H
 
-#include <qdatetime.h>
+#include <QDateTime>
 #include <kurl.h>
 class QString;
 

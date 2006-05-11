@@ -9,7 +9,7 @@
 //Added by qt3to4:
 #include <QPixmap>
 
-#include <qdatetime.h>
+#include <QDateTime>
 
 // Required b/c DesktopList is a typedef not a class.
 #include "desktoplist.h"

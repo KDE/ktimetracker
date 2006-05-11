@@ -1,6 +1,6 @@
 #include <algorithm>            // std::find
 
-#include <qtimer.h>
+#include <QTimer>
 #include <kdebug.h>
 
 #include "desktoptracker.h"

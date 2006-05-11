@@ -14,7 +14,7 @@
 #include "resourcecalendar.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
-#include <qtimer.h>
+#include <QTimer>
 
 class Q3ListBox;
 class QString;

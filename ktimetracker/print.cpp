@@ -1,7 +1,7 @@
 // #include <iostream>
 
-#include <qdatetime.h>
-#include <qpainter.h>
+#include <QDateTime>
+#include <QPainter>
 
 #include <kglobal.h>
 #include <klocale.h>            // i18n
