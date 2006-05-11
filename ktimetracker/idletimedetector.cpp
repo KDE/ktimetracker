@@ -95,8 +95,8 @@ void IdleTimeDetector::informOverrun()
     lay2->addWidget( label );
     connect( dialog , SIGNAL(cancelClicked()) , this , SLOT(revert()) );
     connect( wid , SIGNAL(changed(bool)) , wid , SLOT(enabledButtonApply(bool)) );
-    QString explanation=i18n(QString("Continue timing. Timing has started at %1").arg(backThen).ascii());
-    QString explanationrevert=i18n(QString( "Stop timing and revert back to the time at %1." ).arg(backThen).ascii());
+    QString explanation=i18n(QString("Continue timing. Timing has started at %1").arg(backThen).toAscii());
+    QString explanationrevert=i18n(QString( "Stop timing and revert back to the time at %1." ).arg(backThen).toAscii());
     dialog->setButtonText(KDialogBase::Ok, i18n("Continue timing."));
     dialog->setButtonText(KDialogBase::Cancel, i18n("Revert timing"));
     dialog->setButtonWhatsThis(KDialogBase::Ok, explanation);
