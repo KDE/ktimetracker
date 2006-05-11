@@ -102,6 +102,7 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
 
   // Setup manual save timer (to save changes a little while after they happen)
   _manualSaveTimer = new QTimer(this);
+  _manualSaveTimer->setSingleShot( true );
   connect( _manualSaveTimer, SIGNAL( timeout() ), this, SLOT( save() ));
 
   // Connect desktop tracker events to task starting/stopping
@@ -316,7 +317,7 @@ QString TaskView::exportcsvHistory()
 
 void TaskView::scheduleSave()
 {
-    _manualSaveTimer->start( 10, true /*single-shot*/ );
+    _manualSaveTimer->start( 10 );
 }
 
 Preferences* TaskView::preferences() { return _preferences; }
