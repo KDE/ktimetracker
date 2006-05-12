@@ -20,17 +20,17 @@
  *
  */
 
-#include <q3buttongroup.h>
+#include <Q3ButtonGroup>
 #include <QCheckBox>
-#include <q3hbox.h>
+#include <Q3HBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
-#include <qpixmap.h>
+#include <QPixmap>
 #include <QPushButton>
 #include <QString>
 #include <QWidget>
-#include <q3whatsthis.h>
+#include <Q3WhatsThis>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -44,9 +44,9 @@
 
 
 PrintDialog::PrintDialog()
-  : KDialogBase(0, "PrintDialog", true, i18n("Print Dialog"), Ok|Cancel,
-      Ok, true )
+  : KDialog(0, i18n("Print Dialog"), Ok|Cancel )
 {
+  setObjectName( "PrintDialog" );
   QWidget *page = new QWidget( this );
   setMainWidget(page);
   int year, month;

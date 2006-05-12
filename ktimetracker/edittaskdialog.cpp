@@ -24,6 +24,7 @@
 #include <QComboBox>
 #include <q3groupbox.h>
 #include <q3hbox.h>
+#include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
@@ -45,9 +46,10 @@
 
 EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
                                 DesktopList* desktopList)
-  : KDialogBase(0, "EditTaskDialog", true, caption, Ok|Cancel, Ok, true ),
+  : KDialog(0, caption, Ok|Cancel ),
     origTime( 0 ), origSession( 0 )
 {
+  setObjectName( "EditTaskDialog" );
   QWidget *page = new QWidget( this ); 
   setMainWidget(page);
 #ifdef Q_WS_X11

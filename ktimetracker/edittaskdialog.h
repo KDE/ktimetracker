@@ -23,14 +23,12 @@
 
 #include <vector>
 
-#include <kdialogbase.h>
-#include <QCheckBox>
-//Added by qt3to4:
-#include <QLabel>
+#include <kdialog.h>
 
 #include "desktoplist.h"
 
 class QComboBox;
+class QCheckBox;
 class QLabel;
 class QLineEdit;
 class QRadioButton;
@@ -42,7 +40,7 @@ class KArmTimeWidget;
  * Dialog to add a new task or edit an existing task.
  */
 
-class EditTaskDialog : public KDialogBase
+class EditTaskDialog : public KDialog
 {
   Q_OBJECT
 
