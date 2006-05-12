@@ -1,4 +1,3 @@
-kde4_header()
 
 
 
@@ -7,7 +6,6 @@ kde4_header()
 
 install_files( ${XDG_APPS_DIR} FILES karm.desktop )
 
-kde4_footer()
 
 
 

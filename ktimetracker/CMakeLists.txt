@@ -1,4 +1,3 @@
-kde4_header()
 
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
@@ -63,7 +62,6 @@ kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 install(FILES uninstall.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}${APPLNK_INSTALL_DIR}/Utilities/ RENAME karm.desktop)
 
 
-kde4_footer()
 
 
 
