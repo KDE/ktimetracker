@@ -18,10 +18,10 @@
    Boston, MA 02110-1301, USA.
 */
 #include <QDir>
-#include <qprocess.h>
+#include <QProcess>
 #include <QString>
-#include <qstringlist.h>
-#include <qtimer.h>
+#include <QStringList>
+#include <QTimer>
 
 #include <kdebug.h>
 

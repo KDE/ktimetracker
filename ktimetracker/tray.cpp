@@ -10,10 +10,10 @@
 
 // #include <qkeycode.h>
 // #include <QLayout>
-#include <qpixmap.h>
+#include <QPixmap>
 #include <q3ptrlist.h>
 #include <QString>
-#include <qtimer.h>
+#include <QTimer>
 #include <QToolTip>
 
 #include <kaction.h>            // actionPreferences()

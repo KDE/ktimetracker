@@ -1,4 +1,4 @@
-#include <qthread.h>
+#include <QThread>
 #include <QString>
 
 #include <resourcecalendar.h>

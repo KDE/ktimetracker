@@ -1,4 +1,4 @@
-#include <qclipboard.h>
+#include <QClipboard>
 #include <QFile>
 #include <QLayout>
 #include <q3listbox.h>
@@ -6,9 +6,9 @@
 #include <q3ptrlist.h>
 #include <q3ptrstack.h>
 #include <QString>
-#include <qtextstream.h>
-#include <qtimer.h>
-#include <qxml.h>
+#include <QTextStream>
+#include <QTimer>
+#include <QtXml>
 #include <QMouseEvent>
 #include <QList>
 

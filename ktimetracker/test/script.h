@@ -21,7 +21,7 @@
 #define _script_h_
 
 //#include <QVariant>
-#include <qobject.h>
+#include <QObject>
 
 class QDir;
 class QProcess;

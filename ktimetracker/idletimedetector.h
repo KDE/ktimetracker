@@ -1,8 +1,8 @@
 #ifndef KARM_IDLE_TIME_DETECTOR_H
 #define KARM_IDLE_TIME_DETECTOR_H
 
-#include <qdatetime.h>
-#include <qobject.h>
+#include <QDateTime>
+#include <QObject>
 #include "config-karm.h" // HAVE_LIBXSS
 
 class QTimer;

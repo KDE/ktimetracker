@@ -22,9 +22,9 @@
 
 // #include <iostream>
 
-#include <qdatetime.h>
+#include <QDateTime>
 #include <q3paintdevicemetrics.h>
-#include <qpainter.h>
+#include <QPainter>
 #include <QMap>
 #include <QList>
 

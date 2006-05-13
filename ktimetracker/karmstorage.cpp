@@ -28,11 +28,11 @@
 #include <cassert>
 
 #include <QFile>
-#include <qsize.h>
+#include <QSize>
 #include <q3dict.h>
-#include <qdatetime.h>
+#include <QDateTime>
 #include <QString>
-#include <qstringlist.h>
+#include <QStringList>
 #include <QList>
 #include <QTextStream>
 #include <QByteArray>

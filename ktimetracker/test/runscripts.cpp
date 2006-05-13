@@ -21,8 +21,8 @@
 #include <QDir>
 #include <QFile>
 #include <QString>
-#include <qstringlist.h>
-#include <qtextstream.h>
+#include <QStringList>
+#include <QTextStream>
 
 #include "script.h"
 

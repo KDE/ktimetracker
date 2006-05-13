@@ -28,8 +28,8 @@
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
-#include <qradiobutton.h>
-#include <qsizepolicy.h>
+#include <QRadioButton>
+#include <QSizePolicy>
 #include <QString>
 #include <QWidget>
 

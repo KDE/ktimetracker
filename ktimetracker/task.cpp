@@ -1,7 +1,7 @@
 #include <q3cstring.h>
-#include <qdatetime.h>
+#include <QDateTime>
 #include <QString>
-#include <qtimer.h>
+#include <QTimer>
 #include <QPixmap>
 #include <Q3PtrList>
 

@@ -4,7 +4,7 @@
 #include <QLayout>
 #include <QLineEdit>
 #include <QString>
-#include <qvalidator.h>
+#include <QValidator>
 #include <QWidget>
 //Added by qt3to4:
 #include <QHBoxLayout>

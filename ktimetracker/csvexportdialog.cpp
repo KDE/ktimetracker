@@ -27,7 +27,7 @@
 #include <kurlrequester.h>
 #include <q3buttongroup.h>
 #include <QComboBox>
-#include <qradiobutton.h>
+#include <QRadioButton>
 
 #include "csvexportdialog.h"
 #include "reportcriteria.h"
