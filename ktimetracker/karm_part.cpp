@@ -277,7 +277,7 @@ bool karmPart::openFile()
     return true;
 }
 
-bool karmPart::setStatusBar(const QString & qs)
+void karmPart::setStatusBar(const QString & qs)
 {
   kDebug(5970) << "Entering setStatusBar" << endl;
   emit setStatusBarText(qs);

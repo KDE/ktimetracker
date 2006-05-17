@@ -115,7 +115,7 @@ protected slots:
     void slotSelectionChanged();
 
 public slots:
-   bool setStatusBar(const QString & qs);
+   void setStatusBar(const QString & qs);
 
 };
 
