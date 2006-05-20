@@ -197,6 +197,7 @@ class TaskView : public K3ListView
     int previousColumnWidths[4];
     DesktopTracker* _desktopTracker;
     bool _isloading;
+    Task* dragTask;
 
     //KCal::CalendarLocal _calendar;
     KarmStorage * _storage;
@@ -209,6 +210,12 @@ class TaskView : public K3ListView
     void addTimeToActiveTasks( int minutes, bool save_data = true );
     /** item state stores if a task is expanded so you can see the subtasks */
     void restoreItemState( Q3ListViewItem *item );
+
+  protected:
+    void startDrag();
+    Q3DragObject* dragObject();
+    void contentsDropEvent(QDropEvent*);
+    bool acceptDrag( QDropEvent* event) const;
 
   protected slots:
     void autoSaveChanged( bool );

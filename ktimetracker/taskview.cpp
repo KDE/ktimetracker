@@ -11,6 +11,7 @@
 #include <QtXml>
 #include <QMouseEvent>
 #include <QList>
+#include <QListWidget>
 
 #include "kapplication.h"       // kapp
 #include <kconfig.h>
@@ -112,6 +113,41 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
   connect( _desktopTracker, SIGNAL( leftActiveDesktop( Task* ) ),
            this, SLOT( stopTimerFor(Task*) ));
   new TaskViewWhatsThis( this );
+  dragTask=0;
+  setDragEnabled(true);
+  setAcceptDrops(true);
+}
+
+void TaskView::contentsDropEvent(QDropEvent* qde)
+{
+  kDebug() << "This is contentsDropEvent" << endl;
+  Task* t=static_cast<Task*>(this->itemAt(qde->pos()));
+  TaskView::addTask( dragTask->name(), dragTask->totalTime(), dragTask->sessionTime(), dragTask->getDesktops(), t );
+
+  QString uid=dragTask->uid();
+  dragTask->remove(activeTasks, _storage);
+  dragTask->removeFromView();
+  _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
+  save();
+}
+
+void TaskView::startDrag()
+{
+  kDebug() << "Entering TaskView::startDrag" << endl;
+  K3ListView::startDrag();  
+}
+
+Q3DragObject* TaskView::dragObject()
+{
+  kDebug() << "Entering TaskView::dragObject" << endl;
+  dragTask=static_cast<Task *> (currentItem());
+  return K3ListView::dragObject();
+}
+
+bool TaskView::acceptDrag(QDropEvent* e) const
+{
+  kDebug() << "Entering TaskView::acceptDrag" << endl;
+  return K3ListView::acceptDrag(e);
 }
 
 KarmStorage* TaskView::storage()
