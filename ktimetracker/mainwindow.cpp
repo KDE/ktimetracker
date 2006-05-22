@@ -485,7 +485,7 @@ int MainWindow::addTask( const QString& taskname )
 
 QString MainWindow::setPerCentComplete( const QString& taskName, int perCent )
 {
-  int index;
+  int index = -1;
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
@@ -496,7 +496,7 @@ QString MainWindow::setPerCentComplete( const QString& taskName, int perCent )
       if (err=="no such task") err=QString();
     }
   }
-  if (err.isNull())
+  if (err.isNull() && index>=0)
   {
     _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
   }
@@ -630,7 +630,7 @@ Task* MainWindow::_hasUid( Task* task, const QString &uid ) const
 }
 QString MainWindow::starttimerfor( const QString& taskname )
 {
-  int index;
+  int index = -1;
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
@@ -641,13 +641,13 @@ QString MainWindow::starttimerfor( const QString& taskname )
       if (err=="no such task") err=QString();
     }
   }
-  if (err.isNull()) _taskView->startTimerFor( _taskView->item_at_index(index) );
+  if (err.isNull() && index>=0) _taskView->startTimerFor( _taskView->item_at_index(index) );
   return err;
 }
 
 QString MainWindow::stoptimerfor( const QString& taskname )
 {
-  int index;
+  int index=-1;
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
@@ -658,7 +658,7 @@ QString MainWindow::stoptimerfor( const QString& taskname )
       if (err=="no such task") err=QString();
     }
   }
-  if (err.isNull()) _taskView->stopTimerFor( _taskView->item_at_index(index) );
+  if (err.isNull() && index>=0) _taskView->stopTimerFor( _taskView->item_at_index(index) );
   return err;
 }
 

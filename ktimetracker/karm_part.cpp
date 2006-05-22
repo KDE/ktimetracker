@@ -457,7 +457,7 @@ int karmPart::addTask( const QString& taskname )
 
 QString karmPart::setPerCentComplete( const QString& taskName, int perCent )
 {
-  int index;
+  int index = -1;
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
@@ -468,7 +468,7 @@ QString karmPart::setPerCentComplete( const QString& taskName, int perCent )
       if (err=="no such task") err=QString();
     }
   }
-  if (err.isNull())
+  if (err.isNull() && index>=0 )
   {
     _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
   }
