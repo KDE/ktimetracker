@@ -272,7 +272,7 @@ bool karmPart::openFile()
     _taskView->load(m_file);
 
     // just for fun, set the status bar
-    emit setStatusBarText( m_url.prettyURL() );
+    emit setStatusBarText( m_url.prettyUrl() );
 
     return true;
 }
