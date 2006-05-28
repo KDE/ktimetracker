@@ -122,12 +122,9 @@ void TaskView::contentsDropEvent(QDropEvent* qde)
 {
   kDebug() << "This is contentsDropEvent" << endl;
   Task* t=static_cast<Task*>(this->itemAt(qde->pos()));
-  TaskView::addTask( dragTask->name(), dragTask->totalTime(), dragTask->sessionTime(), dragTask->getDesktops(), t );
 
-  QString uid=dragTask->uid();
-  dragTask->remove(activeTasks, _storage);
-  dragTask->removeFromView();
-  _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
+  takeItem(dragTask);
+  t->insertItem(dragTask);
   save();
 }
 
