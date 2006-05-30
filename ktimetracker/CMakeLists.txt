@@ -59,10 +59,6 @@ install_files( ${DATA_INSTALL_DIR}/karm FILES karmui.rc )
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
-install(FILES uninstall.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}${APPLNK_INSTALL_DIR}/Utilities/ RENAME karm.desktop)
-
-
-
 
 
 #original Makefile.am contents follow:
