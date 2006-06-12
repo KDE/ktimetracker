@@ -136,7 +136,7 @@ int main( int argc, char *argv[] )
   setenv( "KDE_FORK_SLAVES", "yes", true ); // simpler, for the final cleanup
 
   // Copied from Till's test in libkcal.  Not sure what this is for.
-  KApplication::disableAutoDcopRegistration();
+  // KApplication::disableAutoDcopRegistration();
 
   KCmdLineArgs::init(argc,argv,"testresourcelocking", 0, 0, 0, 0);
 
