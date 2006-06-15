@@ -34,8 +34,7 @@
 #include "version.h"
 #include <kxmlguifactory.h>
 MainWindow::MainWindow( const QString &icsfile )
-  : DCOPObject ( "KarmDCOPIface" ),
-    KParts::MainWindow(),
+  : KParts::MainWindow(),
 #warning Port me!
 //    _accel     ( new KAccel( this ) ),
     _watcher   ( new KAccelMenuWatch( _accel, this ) ),
@@ -91,12 +90,7 @@ MainWindow::MainWindow( const QString &icsfile )
   _preferences->emitSignals();
   slotSelectionChanged();
 
-  // Register with DCOP
-  if ( !kapp->dcopClient()->isRegistered() )
-  {
-    kapp->dcopClient()->registerAs( "karm" );
-    kapp->dcopClient()->setDefaultObject( objId() );
-  }
+  // ToDo: Register with DCOP
 
   // Set up DCOP error messages
   m_error[ KARM_ERR_GENERIC_SAVE_FAILED ] =

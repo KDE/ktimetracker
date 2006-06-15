@@ -83,9 +83,8 @@ void IdleTimeDetector::informOverrun()
   QDateTime idleStart = start.addSecs(-60 * _maxIdle);
   QString backThen = KGlobal::locale()->formatTime(idleStart.time());
   // Create dialog  
-    KDialog *dialog=new KDialog( 0 , i18n( "Idle Time Detection" )  ,
-                                   KDialog::Ok | KDialog::Cancel );
-    QWidget* wid=new QWidget( dialog );
+    KDialog *dialog=new KDialog( 0 );
+    QWidget* wid=new QWidget(dialog);
     dialog->setMainWidget( wid );
     QVBoxLayout *lay1 = new QVBoxLayout(wid);  
     QHBoxLayout *lay2 = new QHBoxLayout();

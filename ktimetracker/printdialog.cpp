@@ -31,7 +31,6 @@
 #include <QString>
 #include <QWidget>
 #include <Q3WhatsThis>
-//Added by qt3to4:
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
@@ -44,7 +43,7 @@
 
 
 PrintDialog::PrintDialog()
-  : KDialog(0, i18n("Print Dialog"), Ok|Cancel )
+  : KDialog()
 {
   setObjectName( "PrintDialog" );
   QWidget *page = new QWidget( this );

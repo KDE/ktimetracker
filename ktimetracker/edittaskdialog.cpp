@@ -43,10 +43,11 @@
 #include "edittaskdialog.h"
 #include "ktimewidget.h"
 #include "kdebug.h"
+#include "kdialog.h"
 
 EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
                                 DesktopList* desktopList)
-  : KDialog(0, caption, Ok|Cancel ),
+  : KDialog(),
     origTime( 0 ), origSession( 0 )
 {
   setObjectName( "EditTaskDialog" );
