@@ -23,7 +23,7 @@ class TaskView;
  * Main window to tie the application together.
  */
 
-class MainWindow : public KParts::MainWindow, virtual public KarmDCOPIface
+class MainWindow : public KParts::MainWindow
 {
   Q_OBJECT
 
