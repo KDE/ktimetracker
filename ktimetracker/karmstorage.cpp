@@ -253,7 +253,6 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
     Task* task = map.find( (*todo)->uid() );
-
     // No relatedTo incident just means this is a top-level task.
     if ( (*todo)->relatedTo() )
     {
@@ -264,8 +263,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
         err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
            task->name(),
            (*todo)->relatedToUid());
-
-      if (!err.isEmpty()) task->move( newParent);
+      else task->move( newParent);
     }
   }
 
