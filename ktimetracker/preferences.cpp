@@ -24,10 +24,14 @@
 Preferences *Preferences::_instance = 0;
 
 Preferences::Preferences( const QString& icsFile )
-  : KDialogBase( IconList, i18n("Preferences"), Ok|Cancel, Ok )
+  : KPageDialog()
 {
+  setCaption( i18n("Preferences") );
+  setButtons( Ok|Cancel );
+  setDefaultButton(  Ok );
+  setFaceType( KPageDialog::List );
 
-  setIconListAllVisible( true );
+  //setIconListAllVisible( true );
 
   makeBehaviorPage();
   makeDisplayPage();
@@ -35,7 +39,7 @@ Preferences::Preferences( const QString& icsFile )
 
   load();
 
-  // command-line option overrides what is stored in 
+  // command-line option overrides what is stored in
   if ( ! icsFile.isEmpty() ) _iCalFileV = icsFile;
 
 }
@@ -51,8 +55,11 @@ Preferences *Preferences::instance( const QString &icsfile )
 void Preferences::makeBehaviorPage()
 {
   QPixmap icon = SmallIcon( "kcmsystem", K3Icon::SizeMedium);
-  QFrame* behaviorPage = addPage( i18n("Behavior"), i18n("Behavior Settings"),
-      icon );
+  QFrame* behaviorPage = new QFrame();
+  KPageWidgetItem *pageItem = new KPageWidgetItem( behaviorPage, i18n("Behavior"));
+  pageItem->setHeader( i18n("Behavior Settings") );
+  pageItem->setIcon( icon );
+  addPage(pageItem);
 
   QVBoxLayout* topLevel = new QVBoxLayout( behaviorPage );
   topLevel->setSpacing( spacingHint() );
@@ -94,8 +101,12 @@ void Preferences::makeBehaviorPage()
 void Preferences::makeDisplayPage()
 {
   QPixmap icon = SmallIcon( "viewmag", K3Icon::SizeMedium );
-  QFrame* displayPage = addPage( i18n("Display"), i18n("Display Settings"),
-      icon );
+
+  QFrame* displayPage = new QFrame();
+  KPageWidgetItem *pageItem = new KPageWidgetItem( displayPage, i18n("Display"));
+  pageItem->setHeader( i18n("Display Settings") );
+  pageItem->setIcon( icon );
+  addPage(pageItem);
 
   QVBoxLayout* topLevel = new QVBoxLayout( displayPage );
   topLevel->setSpacing( spacingHint() );
@@ -139,8 +150,11 @@ void Preferences::makeDisplayPage()
 void Preferences::makeStoragePage()
 {
   QPixmap icon = SmallIcon( "kfm", K3Icon::SizeMedium );
-  QFrame* storagePage = addPage( i18n("Storage"), i18n("Storage Settings"),
-      icon );
+  QFrame* storagePage = new QFrame();
+  KPageWidgetItem *pageItem = new KPageWidgetItem( storagePage, i18n("Storage") );
+  pageItem->setHeader( i18n("Storage Settings") );
+  pageItem->setIcon( icon );
+  addPage(pageItem);
 
   QVBoxLayout* topLevel = new QVBoxLayout( storagePage );
   topLevel->setSpacing( spacingHint() );
@@ -211,7 +225,7 @@ void Preferences::showDialog()
   _displayTimeW->setChecked(_displayColumnV[1]);
   _displayTotalSessionW->setChecked(_displayColumnV[2]);
   _displayTotalTimeW->setChecked(_displayColumnV[3]);
-  
+
   _trayIconW->setChecked(_trayIconV);
 
   // adapt visibility of preference items according
@@ -249,12 +263,12 @@ void Preferences::slotOk()
 
   emitSignals();
   save();
-  KDialogBase::slotOk();
+  KDialog::accept();
 }
 
 void Preferences::slotCancel()
 {
-  KDialogBase::slotCancel();
+  KDialog::reject();
 }
 
 void Preferences::idleDetectCheckBoxChanged()
@@ -307,7 +321,7 @@ void Preferences::load()
 
   config.setGroup( QString::fromLatin1("Saving") );
   _iCalFileV = config.readPathEntry
-    ( QString::fromLatin1("ical file"), 
+    ( QString::fromLatin1("ical file"),
       locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
   _doAutoSaveV = config.readEntry
     ( QString::fromLatin1("auto save"), true);

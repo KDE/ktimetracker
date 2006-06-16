@@ -4,7 +4,6 @@
 #include <kparts/part.h>
 #include "karmerrors.h"
 #include <kparts/factory.h>
-#include <karmdcopiface.h>
 #include "reportcriteria.h"
 #include <Q3ListView>
 
@@ -27,7 +26,7 @@ class TaskView;
  * @author Thorsten Staerk <kde at staerk dot de>
  * @version 0.1
  */
-class karmPart : public KParts::ReadWritePart, virtual public KarmDCOPIface
+class karmPart : public KParts::ReadWritePart
 {
   Q_OBJECT
 

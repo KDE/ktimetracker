@@ -4,7 +4,6 @@
 #include <kparts/mainwindow.h>
 
 #include "karmerrors.h"
-#include <karmdcopiface.h>
 #include "reportcriteria.h"
 
 class KAccel;

@@ -6,7 +6,6 @@
 #include <numeric>
 
 #include "kaccelmenuwatch.h"
-#include <dcopclient.h>
 #include <kaction.h>
 #include <kapplication.h>       // kapp
 #include <kconfig.h>

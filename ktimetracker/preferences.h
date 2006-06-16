@@ -1,7 +1,7 @@
 #ifndef KARM_PREFERENCES_H
 #define KARM_PREFERENCES_H
 
-#include <kdialogbase.h>
+#include <kpagedialog.h>
 #include <QLabel>
 
 class QCheckBox;
@@ -14,7 +14,7 @@ class KUrlRequester;
  * Provide an interface to the configuration options for the program.
  */
 
-class Preferences :public KDialogBase
+class Preferences :public KPageDialog
 {
   Q_OBJECT
 

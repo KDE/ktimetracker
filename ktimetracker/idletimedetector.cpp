@@ -5,7 +5,6 @@
 #include <qtimer.h>
 
 #include <kdialog.h>
-#include <kdialogbase.h>
 #include <kglobal.h>
 #include <klocale.h>    // i18n
 #include <QLabel>
@@ -82,13 +81,13 @@ void IdleTimeDetector::informOverrun()
   start = QDateTime::currentDateTime();
   QDateTime idleStart = start.addSecs(-60 * _maxIdle);
   QString backThen = KGlobal::locale()->formatTime(idleStart.time());
-  // Create dialog  
+  // Create dialog
     KDialog *dialog=new KDialog( 0 );
     QWidget* wid=new QWidget(dialog);
     dialog->setMainWidget( wid );
-    QVBoxLayout *lay1 = new QVBoxLayout(wid);  
+    QVBoxLayout *lay1 = new QVBoxLayout(wid);
     QHBoxLayout *lay2 = new QHBoxLayout();
-    lay1->addLayout(lay2);  
+    lay1->addLayout(lay2);
     QString idlemsg=QString( "Desktop has been idle since %1. What do you want to do ?" ).arg(backThen);
     QLabel *label = new QLabel( idlemsg, wid );
     lay2->addWidget( label );
@@ -96,10 +95,10 @@ void IdleTimeDetector::informOverrun()
     connect( wid , SIGNAL(changed(bool)) , wid , SLOT(enabledButtonApply(bool)) );
     QString explanation=i18n(QString("Continue timing. Timing has started at %1").arg(backThen).toAscii());
     QString explanationrevert=i18n(QString( "Stop timing and revert back to the time at %1." ).arg(backThen).toAscii());
-    dialog->setButtonText(KDialogBase::Ok, i18n("Continue timing."));
-    dialog->setButtonText(KDialogBase::Cancel, i18n("Revert timing"));
-    dialog->setButtonWhatsThis(KDialogBase::Ok, explanation);
-    dialog->setButtonWhatsThis(KDialogBase::Cancel, explanationrevert);
+    dialog->setButtonText(KDialog::Ok, i18n("Continue timing."));
+    dialog->setButtonText(KDialog::Cancel, i18n("Revert timing"));
+    dialog->setButtonWhatsThis(KDialog::Ok, explanation);
+    dialog->setButtonWhatsThis(KDialog::Cancel, explanationrevert);
     dialog->show();
 /*
   else {

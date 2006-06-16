@@ -10,7 +10,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/libkcal ${CMAKE_SOURCE_DIR}/kresources/
 
 
 ########### next target ###############
-set(karm_shared_SRCS 
+set(karm_shared_SRCS karmadaptor.cpp 
 	kaccelmenuwatch.cpp desktoptracker.cpp 
 	edittaskdialog.cpp idletimedetector.cpp 
 	printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp
@@ -20,7 +20,6 @@ set(karm_shared_SRCS
 	taskviewwhatsthis.cpp
  )
 kde4_add_ui3_files(karm_shared_SRCS csvexportdialog_base.ui )
-kde4_add_dcop_skels(karm_shared_SRCS karmdcopiface.h )
 
 set(karm_SRCS main.cpp ${karm_shared_SRCS})
 

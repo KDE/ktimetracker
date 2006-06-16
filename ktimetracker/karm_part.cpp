@@ -24,12 +24,17 @@
 #include <kxmlguifactory.h>
 #include "mainwindow.h"
 
+#include "karmadaptor.h"
+#include <dbus/qdbus.h>
+
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
-    : DCOPObject ( "KarmDCOPIface" ), KParts::ReadWritePart(parent),
+    : KParts::ReadWritePart(parent),
 #warning Port me!
 //    _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
+  new KarmAdaptor(this);
+  QDBus::sessionBus().registerObject("/Karm", this);
     // we need an instance
     setInstance( karmPartFactory::instance() );
 
@@ -156,9 +161,9 @@ void karmPart::makeMenus()
       _taskView, SLOT( markTaskAsComplete() ), actionCollection(), "mark_as_complete");
   actionMarkAsIncomplete = new KAction( i18n("&Mark as Incomplete"), "document",
       Qt::CTRL+Qt::Key_M, _taskView, SLOT( markTaskAsIncomplete() ), actionCollection(), "mark_as_incomplete");
-  actionClipTotals = new KAction( i18n("&Copy Totals to Clipboard"), "klipper", 
+  actionClipTotals = new KAction( i18n("&Copy Totals to Clipboard"), "klipper",
       Qt::CTRL+Qt::Key_C, _taskView, SLOT( clipTotals() ), actionCollection(), "clip_totals");
-  actionClipHistory = new KAction( i18n("Copy &History to Clipboard"), "klipper", 
+  actionClipHistory = new KAction( i18n("Copy &History to Clipboard"), "klipper",
       Qt::CTRL+Qt::ALT+Qt::Key_C, _taskView, SLOT( clipHistory() ), actionCollection(), "clip_history");
 
   KAction *action = new KAction( i18n("Import &Legacy Flat File..."), actionCollection(), "import_flatfile");
