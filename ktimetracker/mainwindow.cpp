@@ -32,6 +32,10 @@
 #include "tray.h"
 #include "version.h"
 #include <kxmlguifactory.h>
+
+#include "karmadaptor.h"
+#include <dbus/qdbus.h>
+
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow(),
 #warning Port me!
@@ -40,6 +44,8 @@ MainWindow::MainWindow( const QString &icsfile )
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
+  new KarmAdaptor(this);
+  QDBus::sessionBus().registerObject("/Karm", this);
 
   _taskView  = new TaskView( this, icsfile );
 
