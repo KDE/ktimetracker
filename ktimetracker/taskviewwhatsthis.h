@@ -12,6 +12,7 @@
 
 #include <q3whatsthis.h>
 #include <k3listview.h>
+#include <taskview.h>
 
 /**
 this is the karm-taskview-specific implementation of qwhatsthis
@@ -27,6 +28,6 @@ public:
     QString text ( const QPoint & );
 
 private:
-    K3ListView* _listView;  // stores the associated listview for column widths
+    TaskView* _listView;  // stores the associated listview for column widths
 };
 #endif

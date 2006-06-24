@@ -6,7 +6,6 @@
 
 // Requred b/c/ QPtrVector is a template (?)
 #include <q3ptrvector.h>
-//Added by qt3to4:
 #include <QPixmap>
 
 #include <QDateTime>
@@ -202,7 +201,16 @@ class Task : public QObject, public Q3ListViewItem
      */
     KCal::Todo* asTodo(KCal::Todo* calendar) const;
 
-    /** Add a comment to this task. */
+    /**
+     *  Set a task's description
+     *  A description is a comment.
+     */
+    void setDescription( QString desc, KarmStorage* storage );
+
+    /** 
+     *  Add a comment to this task. 
+     *  A comment is called "description" in the context of KCal::ToDo
+     */
     void addComment( QString comment, KarmStorage* storage );
 
     /** Retrieve the entire comment for the task. */

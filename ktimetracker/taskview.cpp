@@ -5,6 +5,7 @@
 #include <q3listview.h>
 #include <q3ptrlist.h>
 #include <q3ptrstack.h>
+#include <Q3Header>
 #include <QString>
 #include <QTextStream>
 #include <QTimer>
@@ -152,9 +153,18 @@ KarmStorage* TaskView::storage()
   return _storage;
 }
 
+int TaskView::mapToLogiCal( int col )
+{
+  kDebug(5970) << "entering mapToLogiCal " << endl;
+  return header()->mapToLogical( col );
+}
+
 void TaskView::contentsMousePressEvent ( QMouseEvent * e )
 {
   kDebug(5970) << "entering contentsMousePressEvent" << endl;
+  kDebug(5970) << "header is " << header() << endl;
+  header()->setToolTip("this is header");
+  kDebug(5970) << "mapToLogical ( int a )" << header()->mapToLogical(1) << endl;
   K3ListView::contentsMousePressEvent(e);
   Task* task = current_item();
 

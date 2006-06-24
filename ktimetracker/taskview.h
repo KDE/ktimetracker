@@ -76,6 +76,9 @@ class TaskView : public K3ListView
     /** Schedule that we should save very soon */
     void scheduleSave();
 
+    /** Deliver logical Column numbers */
+    int mapToLogiCal( int col );
+
     /** Return preferences user selected on settings dialog. **/
     Preferences *preferences();
 
