@@ -19,7 +19,7 @@ set(karm_shared_SRCS
 	csvexportdialog.cpp plannerparser.cpp 
 	taskviewwhatsthis.cpp
  )
-qt4_add_dbus_adaptors(korganizer_LIB_SRCS org.kde.karm.Karm.xml )
+qt4_add_dbus_adaptors(karm_shared_SRCS org.kde.karm.Karm.xml )
 kde4_add_ui3_files(karm_shared_SRCS csvexportdialog_base.ui )
 
 set(karm_SRCS main.cpp ${karm_shared_SRCS})

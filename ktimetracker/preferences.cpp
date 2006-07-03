@@ -18,6 +18,7 @@
 #include <kstandarddirs.h>
 #include <kurlrequester.h>
 #include <kglobal.h>
+#include <kicon.h>
 
 #include "preferences.h"
 
@@ -54,7 +55,7 @@ Preferences *Preferences::instance( const QString &icsfile )
 
 void Preferences::makeBehaviorPage()
 {
-  QPixmap icon = SmallIcon( "kcmsystem", K3Icon::SizeMedium);
+  KIcon icon = KIcon( SmallIconSet( "kcmsystem", K3Icon::SizeMedium) );
   QFrame* behaviorPage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( behaviorPage, i18n("Behavior"));
   pageItem->setHeader( i18n("Behavior Settings") );
@@ -100,7 +101,7 @@ void Preferences::makeBehaviorPage()
 
 void Preferences::makeDisplayPage()
 {
-  QPixmap icon = SmallIcon( "viewmag", K3Icon::SizeMedium );
+  KIcon icon = KIcon( SmallIconSet( "viewmag", K3Icon::SizeMedium ) );
 
   QFrame* displayPage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( displayPage, i18n("Display"));
@@ -149,7 +150,7 @@ void Preferences::makeDisplayPage()
 
 void Preferences::makeStoragePage()
 {
-  QPixmap icon = SmallIcon( "kfm", K3Icon::SizeMedium );
+  KIcon icon = KIcon( SmallIconSet( "kfm", K3Icon::SizeMedium ) );
   QFrame* storagePage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( storagePage, i18n("Storage") );
   pageItem->setHeader( i18n("Storage Settings") );

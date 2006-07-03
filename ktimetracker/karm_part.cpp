@@ -25,7 +25,7 @@
 #include "mainwindow.h"
 
 #include "karmadaptor.h"
-#include <dbus/qdbus.h>
+#include <QtDBus>
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     : KParts::ReadWritePart(parent),

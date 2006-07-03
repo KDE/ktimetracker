@@ -34,7 +34,7 @@
 #include <kxmlguifactory.h>
 
 #include "karmadaptor.h"
-#include <dbus/qdbus.h>
+#include <QtDBus>
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow(),
