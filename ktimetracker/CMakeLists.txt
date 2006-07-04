@@ -33,8 +33,8 @@ kde4_add_executable(ktimetracker ${karm_SRCS})
 target_link_libraries(karm  ${KDE4_KPARTS_LIBS}  kdeprint kcal kdepim ${X11_Xss_LIB} kcal_resourceremote)
 target_link_libraries(ktimetracker  ${KDE4_KPARTS_LIBS}  kdeprint kcal kdepim ${X11_Xss_LIB} kcal_resourceremote)
 
-install_targets(/bin karm )
-install_targets(/bin ktimetracker )
+install(TARGETS karm  DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
 
 
 ########### next target ###############
@@ -53,14 +53,14 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} karmpart )
 
 target_link_libraries(karmpart  ${KDE4_KPARTS_LIBS} kcal ${X11_Xss_LIB} kdeprint kdepim kcal_resourceremote)
 
-install_targets(${PLUGIN_INSTALL_DIR} karmpart )
+install(TARGETS karmpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES karm_part.desktop )
-install_files( ${DATA_INSTALL_DIR}/karmpart FILES karmui.rc )
-install_files( ${DATA_INSTALL_DIR}/karm FILES karmui.rc )
+install( FILES karm_part.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
+install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karm)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
