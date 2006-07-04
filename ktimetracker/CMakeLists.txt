@@ -20,7 +20,7 @@ set(karm_shared_SRCS
 	taskviewwhatsthis.cpp
  )
 
-qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmain )
+qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmainadaptor )
 kde4_add_ui3_files(karm_shared_SRCS csvexportdialog_base.ui )
 
 set(karm_SRCS main.cpp ${karm_shared_SRCS})
@@ -43,7 +43,7 @@ install_targets(/bin ktimetracker )
 ########### next target ###############
 
 set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
-qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpart )
+qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpartadaptor )
 
 kde4_automoc(${karmpart_PART_SRCS})
 
