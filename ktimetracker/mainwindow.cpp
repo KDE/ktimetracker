@@ -33,7 +33,7 @@
 #include "version.h"
 #include <kxmlguifactory.h>
 
-#include "karmadaptor.h"
+#include "karmmainadaptor.h"
 #include <QtDBus>
 
 MainWindow::MainWindow( const QString &icsfile )

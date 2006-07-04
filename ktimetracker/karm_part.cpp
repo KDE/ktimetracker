@@ -24,7 +24,7 @@
 #include <kxmlguifactory.h>
 #include "mainwindow.h"
 
-#include "karmadaptor.h"
+#include "karmpartadaptor.h"
 #include <QtDBus>
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
