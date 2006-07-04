@@ -323,7 +323,7 @@ void Preferences::load()
   config.setGroup( QString::fromLatin1("Saving") );
   _iCalFileV = config.readPathEntry
     ( QString::fromLatin1("ical file"),
-      locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
+      KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
   _doAutoSaveV = config.readEntry
     ( QString::fromLatin1("auto save"), true);
   _autoSaveValueV = config.readEntry
