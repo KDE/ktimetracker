@@ -262,22 +262,26 @@ void MainWindow::makeMenus()
       this,
       SLOT( resetAllTimes() ),
       actionCollection(), "reset_all_times");
-  actionStart = new KAction( i18n("&Start"),
-      QString::fromLatin1("1rightarrow"), Qt::Key_S, _taskView, SLOT( startCurrentTimer() ), actionCollection(), "start");
-  actionStop = new KAction( i18n("S&top"),
-      QString::fromLatin1("stop"), 0, _taskView, SLOT( stopCurrentTimer() ), actionCollection(), "stop");
+  actionStart = new KAction(KIcon(QString::fromLatin1("1rightarrow")),  i18n("&Start"), actionCollection(), "start");
+  connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
+  actionStart->setShortcut(Qt::Key_S);
+  actionStop = new KAction(KIcon(QString::fromLatin1("stop")),  i18n("S&top"), actionCollection(), "stop");
+  connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
   actionStopAll = new KAction( i18n("Stop &All Timers"),
       Qt::Key_Escape,
       _taskView,
       SLOT( stopAllTimers() ), actionCollection(), "stopAll");
   actionStopAll->setEnabled(false);
 
-  actionNew = new KAction( i18n("&New..."),
-      QString::fromLatin1("filenew"), Qt::CTRL+Qt::Key_N, _taskView, SLOT( newTask() ), actionCollection(), "new_task");
-  actionNewSub = new KAction( i18n("New &Subtask..."),
-      QString::fromLatin1("kmultiple"), Qt::CTRL+Qt::ALT+Qt::Key_N, _taskView, SLOT( newSubTask() ), actionCollection(), "new_sub_task");
-  actionDelete = new KAction( i18n("&Delete"),
-      QString::fromLatin1("editdelete"), Qt::Key_Delete, _taskView, SLOT( deleteTask() ), actionCollection(), "delete_task");
+  actionNew = new KAction(KIcon(QString::fromLatin1("filenew")),  i18n("&New..."), actionCollection(), "new_task");
+  connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
+  actionNew->setShortcut(Qt::CTRL+Qt::Key_N);
+  actionNewSub = new KAction(KIcon(QString::fromLatin1("kmultiple")),  i18n("New &Subtask..."), actionCollection(), "new_sub_task");
+  connect(actionNewSub, SIGNAL(triggered(bool) ), _taskView, SLOT( newSubTask() ));
+  actionNewSub->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
+  actionDelete = new KAction(KIcon(QString::fromLatin1("editdelete")),  i18n("&Delete"), actionCollection(), "delete_task");
+  connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
+  actionDelete->setShortcut(Qt::Key_Delete);
   actionEdit = new KAction(KIcon("edit"),  i18n("&Edit..."), actionCollection(), "edit_task");
   connect(actionEdit, SIGNAL(triggered(bool) ), _taskView, SLOT( editTask() ));
   actionEdit->setShortcut(Qt::CTRL + Qt::Key_E);
@@ -288,21 +292,18 @@ void MainWindow::makeMenus()
 //      SLOT( addCommentToTask() ),
 //      actionCollection(),
 //      "add_comment_to_task");
-  actionMarkAsComplete = new KAction( i18n("&Mark as Complete"),
-      QString::fromLatin1("document"),
-      Qt::CTRL+Qt::Key_M,
-      _taskView, SLOT( markTaskAsComplete() ), actionCollection(), "mark_as_complete");
-  actionMarkAsIncomplete = new KAction( i18n("&Mark as Incomplete"),
-      QString::fromLatin1("document"),
-      Qt::CTRL+Qt::Key_M,
-      _taskView, SLOT( markTaskAsIncomplete() ), actionCollection(), "mark_as_incomplete");
-  actionClipTotals = new KAction( i18n("&Copy Totals to Clipboard"),
-      QString::fromLatin1("klipper"),
-      Qt::CTRL+Qt::Key_C,
-      _taskView, SLOT( clipTotals() ), actionCollection(), "clip_totals");
-  actionClipHistory = new KAction( i18n("Copy &History to Clipboard"),
-      QString::fromLatin1("klipper"),
-      Qt::CTRL+Qt::ALT+Qt::Key_C, _taskView, SLOT( clipHistory() ), actionCollection(), "clip_history");
+  actionMarkAsComplete = new KAction(KIcon("document"),  i18n("&Mark as Complete"), actionCollection(), "mark_as_complete");
+  connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsComplete() ));
+  actionMarkAsComplete->setShortcut(Qt::CTRL+Qt::Key_M);
+  actionMarkAsIncomplete = new KAction(KIcon("document"),  i18n("&Mark as Incomplete"), actionCollection(), "mark_as_incomplete");
+  connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
+  actionMarkAsIncomplete->setShortcut(Qt::CTRL+Qt::Key_M);
+  actionClipTotals = new KAction(KIcon("klipper"),  i18n("&Copy Totals to Clipboard"), actionCollection(), "clip_totals");
+  connect(actionClipTotals, SIGNAL(triggered(bool) ), _taskView, SLOT( clipTotals() ));
+  actionClipTotals->setShortcut(Qt::CTRL+Qt::Key_C);
+  actionClipHistory = new KAction(KIcon("klipper"),  i18n("Copy &History to Clipboard"), actionCollection(), "clip_history");
+  connect(actionClipHistory, SIGNAL(triggered(bool) ), _taskView, SLOT( clipHistory() ));
+  actionClipHistory->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_C);
 
   KAction *action = new KAction( i18n("Import &Legacy Flat File..."), actionCollection(), "import_flatfile");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(loadFromFlatFile()));
