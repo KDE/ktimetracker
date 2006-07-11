@@ -33,7 +33,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
 //    _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
-  new KarmAdaptor(this);
+  new KarmPartAdaptor(this);
   QDBus::sessionBus().registerObject("/Karm", this);
     // we need an instance
     setInstance( karmPartFactory::instance() );

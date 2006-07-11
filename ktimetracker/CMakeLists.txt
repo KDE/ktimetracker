@@ -43,7 +43,7 @@ install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
 ########### next target ###############
 
 set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
-qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpartadaptor )
+qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpartadaptor KarmPartAdaptor)
 
 kde4_automoc(${karmpart_PART_SRCS})
 
