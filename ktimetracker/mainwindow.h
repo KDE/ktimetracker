@@ -85,14 +85,13 @@ class MainWindow : public KParts::MainWindow
 
   public slots:
     void quit();
-
+	bool save();
   protected slots:
     void keyBindings();
     void startNewSession();
     void resetAllTimes();
     void updateTime( long, long );
     void updateStatusBar();
-    bool save();
     void exportcsvHistory();
     void print();
     void slotSelectionChanged();
