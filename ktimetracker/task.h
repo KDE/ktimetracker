@@ -22,8 +22,10 @@ class QString;
 class KarmStorage;
 
 class QTimer;
-class KCal::Incidence;
-class KCal::Todo;
+namespace KCal {
+class Incidence;
+class Todo;
+}
 class QObject;
 class QPixmap;
 

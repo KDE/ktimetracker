@@ -28,14 +28,14 @@
 //Added by qt3to4:
 #include <QList>
 
-#include "journal.h"
 #include "reportcriteria.h"
 
 #include "desktoplist.h"
 
-#include <calendarresources.h>
 #include <vector>
-#include "resourcecalendar.h"
+#include <kcal/journal.h>
+#include <kcal/calendarresources.h>
+#include <kcal/resourcecalendar.h>
 #include <kdepimmacros.h>
 
 class QDateTime;

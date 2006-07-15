@@ -31,7 +31,7 @@
 #include <kglobal.h>
 #include <kdebug.h>
 #include <klocale.h>            // i18n
-#include <event.h>
+#include <kcal/event.h>
 
 #include "karmutility.h"        // formatTime()
 #include "reportcriteria.h"     // settings the user gave in the export dialog

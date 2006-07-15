@@ -11,7 +11,7 @@
 #include <k3listview.h>
 
 #include "desktoplist.h"
-#include "resourcecalendar.h"
+#include "kcal/resourcecalendar.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
 #include <QTimer>

@@ -1,9 +1,9 @@
 #include <QThread>
 #include <QString>
 
-#include <resourcecalendar.h>
-#include <resourcelocal.h>
-#include <calendarresources.h>
+#include <kcal/resourcecalendar.h>
+#include <kcal/resourcelocal.h>
+#include <kcal/calendarresources.h>
 
 #include "lockerthread.h"
 
