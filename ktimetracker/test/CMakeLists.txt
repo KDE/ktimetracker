@@ -1,5 +1,5 @@
 
-include_directories( ${CMAKE_SOURCE_DIR}/kcal  )
+include_directories( ${KDE4_INCLUDE_DIR}/kcal  )
 
 
 ########### next target ###############

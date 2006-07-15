@@ -6,7 +6,7 @@ add_subdirectory( support )
 add_subdirectory( pics ) 
 add_subdirectory( test ) 
 
-include_directories( ${CMAKE_SOURCE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/remote  )
+include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/remote  )
 
 
 ########### next target ###############
