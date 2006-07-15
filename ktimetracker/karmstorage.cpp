@@ -37,7 +37,7 @@
 #include <QTextStream>
 #include <QByteArray>
 
-#include "kcal/incidence.h"
+#include <kcal/incidence.h>
 #include "kapplication.h"       // kapp
 #include <kdebug.h>
 #include <kemailsettings.h>
@@ -47,7 +47,7 @@
 #include <ktempfile.h>
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
-#include <kcal/resourceremote.h>
+#include <resourceremote.h>
 #include <kpimprefs.h>
 #include <taskview.h>
 #include <timekard.h>

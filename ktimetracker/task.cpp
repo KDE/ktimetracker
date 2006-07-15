@@ -10,7 +10,7 @@
 #include "kapplication.h"       // kapp
 #include "kdebug.h"
 
-#include "event.h"
+#include <kcal/event.h>
 
 #include "karmutility.h"
 #include "task.h"
