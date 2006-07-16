@@ -9,9 +9,9 @@
 #include <QTextStream>
 
 #include <k3listview.h>
+#include <kcal/resourcecalendar.h>
 
 #include "desktoplist.h"
-#include "kcal/resourcecalendar.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
 #include <QTimer>
@@ -83,7 +83,7 @@ class TaskView : public K3ListView
     Preferences *preferences();
 
     /** Add a task to view and storage. */
-    QString addTask( const QString& taskame, long total, long session, const DesktopList& desktops, 
+    QString addTask( const QString& taskame, long total, long session, const DesktopList& desktops,
                      Task* parent = 0 );
 
   public slots:
@@ -125,10 +125,10 @@ class TaskView : public K3ListView
 
     void editTask();
 
-    /** 
+    /**
      * Returns a pointer to storage object.
      *
-     * This is poor object oriented design--the task view should 
+     * This is poor object oriented design--the task view should
      * expose wrappers around the storage methods we want to access instead of
      * giving clients full access to objects that we own.
      *
