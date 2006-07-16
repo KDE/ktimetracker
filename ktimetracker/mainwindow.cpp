@@ -252,25 +252,18 @@ void MainWindow::makeMenus()
       SLOT(showDialog()),
       actionCollection() );
   (void) KStdAction::save( this, SLOT( save() ), actionCollection() );
-  KAction* actionStartNewSession = new KAction( i18n("Start &New Session"),
-      0,
-      this,
-      SLOT( startNewSession() ),
-      actionCollection(), "start_new_session");
-  KAction* actionResetAll = new KAction( i18n("&Reset All Times"),
-      0,
-      this,
-      SLOT( resetAllTimes() ),
-      actionCollection(), "reset_all_times");
+  KAction *actionStartNewSession = new KAction( i18n("Start &New Session"), actionCollection(), "start_new_session");
+  connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
+  KAction *actionResetAll = new KAction( i18n("&Reset All Times"), actionCollection(), "reset_all_times");
+  connect(actionResetAll, SIGNAL(triggered(bool)), SLOT( resetAllTimes() ));
   actionStart = new KAction(KIcon(QString::fromLatin1("1rightarrow")),  i18n("&Start"), actionCollection(), "start");
   connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
   actionStart->setShortcut(Qt::Key_S);
   actionStop = new KAction(KIcon(QString::fromLatin1("stop")),  i18n("S&top"), actionCollection(), "stop");
   connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
-  actionStopAll = new KAction( i18n("Stop &All Timers"),
-      Qt::Key_Escape,
-      _taskView,
-      SLOT( stopAllTimers() ), actionCollection(), "stopAll");
+  actionStopAll = new KAction( i18n("Stop &All Timers"), actionCollection(), "stopAll");
+  connect(actionStopAll, SIGNAL(triggered(bool)), _taskView, SLOT( stopAllTimers() ));
+  actionStopAll->setShortcut(Qt::Key_Escape);
   actionStopAll->setEnabled(false);
 
   actionNew = new KAction(KIcon(QString::fromLatin1("filenew")),  i18n("&New..."), actionCollection(), "new_task");
