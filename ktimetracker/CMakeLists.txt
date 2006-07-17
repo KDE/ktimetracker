@@ -1,3 +1,4 @@
+project(karm)
 
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
