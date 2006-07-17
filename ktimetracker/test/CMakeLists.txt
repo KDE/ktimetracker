@@ -26,7 +26,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(locking ${locking_SRCS})
 
-target_link_libraries(locking  ${KDE4_KDECORE_LIBS} kcal )
+target_link_libraries(locking  ${KDE4_KDECORE_LIBS} ${KDE4_KCAL_LIBS} )
 
 endif(KDE4_BUILD_TESTS)
 
