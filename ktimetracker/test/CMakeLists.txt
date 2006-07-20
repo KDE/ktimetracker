@@ -4,11 +4,10 @@ include_directories( ${KDE4_INCLUDE_DIR}/kcal  )
 
 ########### next target ###############
 
+if(KDE4_BUILD_TESTS)
 set(runscripts_SRCS script.cpp runscripts.cpp )
 
 kde4_automoc(${runscripts_SRCS})
-
-if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(runscripts ${runscripts_SRCS})
 
@@ -17,12 +16,10 @@ target_link_libraries(runscripts  ${KDE4_KDECORE_LIBS} )
 endif(KDE4_BUILD_TESTS)
 
 ########### next target ###############
-
+if(KDE4_BUILD_TESTS)
 set(locking_SRCS locking.cpp lockerthread.cpp )
 
 kde4_automoc(${locking_SRCS})
-
-if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(locking ${locking_SRCS})
 
