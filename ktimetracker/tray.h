@@ -8,7 +8,7 @@
 #include <Q3PopupMenu>
 // experiement
 // #include <kmenu.h>
-#include <ksystemtray.h>
+#include <ksystemtrayicon.h>
 
 #include "task.h"
 #include "karm_part.h"
@@ -18,12 +18,11 @@ class KarmPart;
 class Q3PopupMenu;
 class QTimer;
 
-class KSystemTray;
 class MainWindow;
 // experiment
 // class KMenu;
 
-class KarmTray : public KSystemTray
+class KarmTray : public KSystemTrayIcon
 {
   Q_OBJECT
 

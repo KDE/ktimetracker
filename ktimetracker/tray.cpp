@@ -22,7 +22,7 @@
 #include <kiconloader.h>        // UserIcon
 #include <klocale.h>            // i18n
 #include <kmenu.h>         // plug()
-#include <ksystemtray.h>
+#include <ksystemtrayicon.h>
 
 #include "mainwindow.h"
 #include "task.h"
@@ -31,7 +31,7 @@
 Q3PtrVector<QPixmap> *KarmTray::icons = 0;
 
 KarmTray::KarmTray(MainWindow* parent)
-  : KSystemTray(parent)
+  : KSystemTrayIcon(parent)
 {
   setObjectName( "Karm Tray" );
   // the timer that updates the "running" icon in the tray
@@ -50,7 +50,7 @@ KarmTray::KarmTray(MainWindow* parent)
     }
   }
 
-  contextMenu()->addAction( parent->actionPreferences ); 
+  contextMenu()->addAction( parent->actionPreferences );
   contextMenu()->addAction( parent->actionStopAll );
 
   resetClock();
@@ -73,7 +73,7 @@ KarmTray::KarmTray(MainWindow* parent)
 }
 
 KarmTray::KarmTray(karmPart * parent)
-  : KSystemTray( 0 )
+  : KSystemTrayIcon( 0 )
 {
   setObjectName( "Karm Tray" );
 // it is not convenient if every kpart gets an icon in the systray.
@@ -81,7 +81,7 @@ KarmTray::KarmTray(karmPart * parent)
 }
 
 KarmTray::KarmTray()
-  : KSystemTray( 0 )
+  : KSystemTrayIcon( 0 )
 // will display nothing at all
 {
   setObjectName( "Karm Tray" );
@@ -103,18 +103,18 @@ void KarmTray::insertTitle(QString title)
 
 void KarmTray::startClock()
 {
-  if ( _taskActiveTimer ) 
+  if ( _taskActiveTimer )
   {
     _taskActiveTimer->start(1000);
-    setPixmap( *(*icons)[_activeIcon] );
+    setIcon( *(*icons)[_activeIcon] );
     show();
   }
 }
 
 void KarmTray::stopClock()
 {
-  if ( _taskActiveTimer )  
-  {  
+  if ( _taskActiveTimer )
+  {
     _taskActiveTimer->stop();
     show();
   }
@@ -123,13 +123,13 @@ void KarmTray::stopClock()
 void KarmTray::advanceClock()
 {
   _activeIcon = (_activeIcon+1) % 8;
-  setPixmap( *(*icons)[_activeIcon]);
+  setIcon( *(*icons)[_activeIcon]);
 }
 
 void KarmTray::resetClock()
 {
   _activeIcon = 0;
-  setPixmap( *(*icons)[_activeIcon]);
+  setIcon( *(*icons)[_activeIcon]);
   show();
 }
 
@@ -148,7 +148,7 @@ void KarmTray::updateToolTip(Q3PtrList<Task> activeTasks)
   QFontMetrics fm( QFont("helvetica")/*QToolTip::font()*/ );
   const QString continued = i18n( ", ..." );
   const int buffer = fm.boundingRect( continued ).width();
-  const int desktopWidth = KGlobalSettings::desktopGeometry(this).width();
+  const int desktopWidth = KGlobalSettings::desktopGeometry(parentWidget()).width();
   const int maxWidth = desktopWidth - buffer;
 
   QString qTip;
