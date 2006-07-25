@@ -22,7 +22,6 @@
 
 #include <Q3ButtonGroup>
 #include <QCheckBox>
-#include <Q3HBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
@@ -30,7 +29,6 @@
 #include <QPushButton>
 #include <QString>
 #include <QWidget>
-#include <Q3WhatsThis>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
