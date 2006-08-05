@@ -14,6 +14,7 @@
 #include <kfiledialog.h>
 #include <kglobal.h>
 #include <klocale.h>
+#include <kicon.h>
 
 #include <QFile>
 #include <qtextstream.h>
