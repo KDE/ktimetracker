@@ -20,7 +20,7 @@
 #include <QMenu>
 #include <q3ptrlist.h>
 #include <QString>
-
+#include <kicon.h>
 #include "karmerrors.h"
 #include "karmutility.h"
 #include "mainwindow.h"
