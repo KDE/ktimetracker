@@ -28,7 +28,7 @@ set(karm_SRCS main.cpp ${karm_shared_SRCS})
 
 kde4_automoc(${karm_SRCS})
 
-kde4_add_executable(karm ${karm_SRCS})
+kde4_add_executable(karm karm.cpp)
 kde4_add_executable(ktimetracker ${karm_SRCS})
 
 target_link_libraries(karm  ${KDE4_KPARTS_LIBS}  ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim ${X11_Xss_LIB} kcal_resourceremote)
