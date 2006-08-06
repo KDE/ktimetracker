@@ -725,6 +725,7 @@ void TaskView::autoSavePeriodChanged(int /*minutes*/)
 
 void TaskView::adaptColumns()
 {
+  kDebug(5970) << "Entering TaskView::adaptColumns" << endl;
   // to hide a column X we set it's width to 0
   // at that moment we'll remember the original column within
   // previousColumnWidths[X]
@@ -746,14 +747,14 @@ void TaskView::adaptColumns()
     }
     // the column was visible before and were switching it off now
     else
-    if( ! _preferences->displayColumn(x-1)
-       && previousColumnWidths[x-1] == HIDDEN_COLUMN )
-    {
-      setColumnWidthMode( x, Q3ListView::Manual ); // we don't want update()
+      if( ! _preferences->displayColumn(x-1)
+         && previousColumnWidths[x-1] == HIDDEN_COLUMN )
+      {
+        setColumnWidthMode( x, Q3ListView::Manual ); // we don't want update()
                                                   // to resize/unhide the col
-      previousColumnWidths[x-1] = columnWidth( x );
-      setColumnWidth( x, 0 );
-    }
+        previousColumnWidths[x-1] = columnWidth( x );
+        setColumnWidth( x, 0 );
+      }
   }
   // maybe this slot is called because the times' format changed, so do a ...
   refresh();

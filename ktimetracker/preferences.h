@@ -58,6 +58,7 @@ class Preferences :public KPageDialog
     void setupChanged();
 
   protected slots:
+    virtual void slotButtonClicked(int button);
     virtual void slotOk();
     virtual void slotCancel();
     void idleDetectCheckBoxChanged();
@@ -77,7 +78,7 @@ class Preferences :public KPageDialog
               *_trayIconW;
     QCheckBox *_displayTimeW, *_displaySessionW,
               *_displayTotalTimeW, *_displayTotalSessionW,
-	      *_decimalFormatW;
+	      *_decimalFormatW, *_displayPerCentCompleteW;
     QCheckBox *_loggingW;
     QLabel    *_idleDetectLabelW, *_displayColumnsLabelW;
     QSpinBox  *_idleDetectValueW, *_autoSaveValueW;

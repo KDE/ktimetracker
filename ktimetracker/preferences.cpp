@@ -130,6 +130,9 @@ void Preferences::makeDisplayPage()
   _displayTotalTimeW = new QCheckBox ( i18n("Total task time"),
       displayPage);
   _displayTotalTimeW->setObjectName( "_displayTotalTimeW" );
+  _displayPerCentCompleteW = new QCheckBox ( i18n("Percent Complete"),
+      displayPage);
+  _displayPerCentCompleteW->setObjectName( "_perCentCompleteW" );
 
   QLabel* _numberFormatW = new QLabel( i18n("Number format:"),
       displayPage );
@@ -141,6 +144,7 @@ void Preferences::makeDisplayPage()
   layout->addWidget(_displayTimeW, 2, 1 );
   layout->addWidget(_displayTotalSessionW, 3, 1 );
   layout->addWidget(_displayTotalTimeW, 4, 1 );
+  layout->addWidget(_displayPerCentCompleteW, 5, 1 );
 
   layout->addWidget( _numberFormatW, 0, 2, 1, 1);
   layout->addWidget( _decimalFormatW, 1, 2 );
@@ -237,8 +241,15 @@ void Preferences::showDialog()
   show();
 }
 
+void Preferences::slotButtonClicked(int button)
+{
+  kDebug(5970) << "Entering Preferences::slotButtonClicked" << endl;
+  if (button == KDialog::Ok) slotOk();
+}
+
 void Preferences::slotOk()
 {
+  kDebug(5970) << "Entering Preferences::slotOk" << endl;
 
   // storage
   _iCalFileV = _iCalFileW->lineEdit()->text();
@@ -259,6 +270,7 @@ void Preferences::slotOk()
   _displayColumnV[1] = _displayTimeW->isChecked();
   _displayColumnV[2] = _displayTotalSessionW->isChecked();
   _displayColumnV[3] = _displayTotalTimeW->isChecked();
+  _displayColumnV[4] = _displayPerCentCompleteW->isChecked();
   _decimalFormatV = _decimalFormatW->isChecked();
   _trayIconV = _trayIconW->isChecked();
 
@@ -336,14 +348,16 @@ void Preferences::load()
     ( QString::fromLatin1("logging"), true);
 
   _displayColumnV[0] = config.readEntry
-    ( QString::fromLatin1("display session time"), true);
+    ( QString("display session time"), true);
   _displayColumnV[1] = config.readEntry
-    ( QString::fromLatin1("display time"), true);
+    ( QString("display time"), true);
   _displayColumnV[2] = config.readEntry
-    ( QString::fromLatin1("display total session time"), true);
+    ( QString("display total session time"), true);
   _displayColumnV[3] = config.readEntry
-    ( QString::fromLatin1("display total time"), true);
-
+    ( QString("display total time"), true);
+  _displayColumnV[4] = config.readEntry
+    ( QString("display percent complete"), false);
+  
   _trayIconV = config.readEntry
     ( QString::fromLatin1("tray icon"), true);
 
@@ -353,29 +367,27 @@ void Preferences::load()
 
 void Preferences::save()
 {
+  kDebug(5970) << "Entering Preferences::save" << endl;
   KConfig &config = *KGlobal::config();
 
-  config.setGroup( QString::fromLatin1("Idle detection"));
-  config.writeEntry( QString::fromLatin1("enabled"), _doIdleDetectionV);
-  config.writeEntry( QString::fromLatin1("period"), _idleDetectValueV);
+  config.setGroup( QString("Idle detection"));
+  config.writeEntry( QString("enabled"), _doIdleDetectionV);
+  config.writeEntry( QString("period"), _idleDetectValueV);
 
-  config.setGroup( QString::fromLatin1("Saving"));
-  config.writePathEntry( QString::fromLatin1("ical file"), _iCalFileV);
-  config.writeEntry( QString::fromLatin1("auto save"), _doAutoSaveV);
-  config.writeEntry( QString::fromLatin1("logging"), _loggingV);
-  config.writeEntry( QString::fromLatin1("auto save period"), _autoSaveValueV);
-  config.writeEntry( QString::fromLatin1("prompt delete"), _promptDeleteV);
-  config.writeEntry( QString::fromLatin1("unitasking"), _uniTaskingV);
+  config.setGroup( QString("Saving"));
+  config.writePathEntry( QString("ical file"), _iCalFileV);
+  config.writeEntry( QString("auto save"), _doAutoSaveV);
+  config.writeEntry( QString("logging"), _loggingV);
+  config.writeEntry( QString("auto save period"), _autoSaveValueV);
+  config.writeEntry( QString("prompt delete"), _promptDeleteV);
+  config.writeEntry( QString("unitasking"), _uniTaskingV);
 
-  config.writeEntry( QString::fromLatin1("display session time"),
-      _displayColumnV[0]);
-  config.writeEntry( QString::fromLatin1("display time"),
-      _displayColumnV[1]);
-  config.writeEntry( QString::fromLatin1("display total session time"),
-      _displayColumnV[2]);
-  config.writeEntry( QString::fromLatin1("display total time"),
-      _displayColumnV[3]);
-  config.writeEntry( QString::fromLatin1("tray icon"), _trayIconV );
+  config.writeEntry( QString("display session time"), _displayColumnV[0] );
+  config.writeEntry( QString("display time"), _displayColumnV[1] );
+  config.writeEntry( QString("display total session time"), _displayColumnV[2] );
+  config.writeEntry( QString("display total time"), _displayColumnV[3] );
+  config.writeEntry( QString("display percent complete"), _displayColumnV[4] );
+  config.writeEntry( QString("tray icon"), _trayIconV );
   config.sync();
 }
 
