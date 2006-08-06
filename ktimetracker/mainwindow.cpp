@@ -260,6 +260,7 @@ void MainWindow::makeMenus()
   connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
   actionStart->setShortcut(Qt::Key_S);
   actionStop = new KAction(KIcon(QString::fromLatin1("stop")),  i18n("S&top"), actionCollection(), "stop");
+  actionStop->setShortcut(Qt::Key_S);
   connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
   actionStopAll = new KAction( i18n("Stop &All Timers"), actionCollection(), "stopAll");
   connect(actionStopAll, SIGNAL(triggered(bool)), _taskView, SLOT( stopAllTimers() ));
