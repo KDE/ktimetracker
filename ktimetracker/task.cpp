@@ -173,6 +173,8 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
     for (Task* child= this->firstChild(); child; child = child->nextSibling())
       child->setPercentComplete(_percentcomplete, storage);
   }
+  // maybe there is a colum "percent completed", so do a ...
+  update(); 
 }
 
 void Task::setPixmapProgress()
@@ -403,13 +405,16 @@ void Task::paste(Task* destination)
 }
 
 void Task::update()
+// Update a row, containing one task
 {
+  kDebug(5970) << "Entering Task::update" << endl;
   bool b=taskView()->preferences()->decimalFormat();
   setText(0, _name);
   setText(1, formatTime(_sessionTime, b));
   setText(2, formatTime(_time, b));
   setText(3, formatTime(_totalSessionTime, b));
   setText(4, formatTime(_totalTime, b));
+  setText(5, QString::number(_percentcomplete));
 }
 
 void Task::addComment( QString comment, KarmStorage* storage )

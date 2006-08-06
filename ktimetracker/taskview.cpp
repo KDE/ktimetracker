@@ -60,10 +60,12 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
   addColumn( i18n("Time") );
   addColumn( i18n("Total Session Time") );
   addColumn( i18n("Total Time") );
+  addColumn( i18n("Percent Complete") );
   setColumnAlignment( 1, Qt::AlignRight );
   setColumnAlignment( 2, Qt::AlignRight );
   setColumnAlignment( 3, Qt::AlignRight );
   setColumnAlignment( 4, Qt::AlignRight );
+  setColumnAlignment( 5, Qt::AlignRight );
   adaptColumns();
   setAllColumnsShowFocus( true );
 
@@ -732,7 +734,8 @@ void TaskView::adaptColumns()
   // we restore it's width from the saved value and set
   // previousColumnWidths[X] to HIDDEN_COLUMN
 
-  for( int x=1; x <= 4; x++) {
+  for( int x=1; x <= 5; x++) 
+  {
     // the column was invisible before and were switching it on now
     if(   _preferences->displayColumn(x-1)
        && previousColumnWidths[x-1] != HIDDEN_COLUMN )
