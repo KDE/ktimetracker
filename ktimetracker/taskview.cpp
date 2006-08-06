@@ -148,8 +148,9 @@ bool TaskView::acceptDrag(QDropEvent* e) const
   kDebug() << "Entering TaskView::acceptDrag" << endl;
   // Can we drop the item here ?
   // Or is the dragged item an ancestor task of the item to drop to ?
-  Task* t=static_cast<Task*>(this->itemAt(e->pos()));
   bool isAncestor=false;  // is the drag-task a parent of the drop-task ?
+  if (this->itemAt(e->pos())==0) return false;
+  Task* t=static_cast<Task*>(this->itemAt(e->pos()));
   Task* parent=t;
   while (parent->depth() > 0)
   {
