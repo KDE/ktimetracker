@@ -125,7 +125,6 @@ void TaskView::contentsDropEvent(QDropEvent* qde)
 {
   kDebug() << "This is contentsDropEvent" << endl;
   Task* t=static_cast<Task*>(this->itemAt(qde->pos()));
-
   takeItem(dragTask);
   t->insertItem(dragTask);
   save();
@@ -147,7 +146,18 @@ Q3DragObject* TaskView::dragObject()
 bool TaskView::acceptDrag(QDropEvent* e) const
 {
   kDebug() << "Entering TaskView::acceptDrag" << endl;
-  return K3ListView::acceptDrag(e);
+  // Can we drop the item here ?
+  // Or is the dragged item an ancestor task of the item to drop to ?
+  Task* t=static_cast<Task*>(this->itemAt(e->pos()));
+  bool isAncestor=false;  // is the drag-task a parent of the drop-task ?
+  Task* parent=t;
+  while (parent->depth() > 0)
+  {
+    parent=parent->parent();
+    kDebug() << "parent->name()" << parent->name() << endl;
+    if (parent==dragTask) isAncestor=true;
+  }
+  return (!isAncestor && K3ListView::acceptDrag(e));
 }
 
 KarmStorage* TaskView::storage()
