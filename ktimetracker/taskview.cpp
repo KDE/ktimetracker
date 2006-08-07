@@ -125,9 +125,12 @@ void TaskView::contentsDropEvent(QDropEvent* qde)
 {
   kDebug() << "This is contentsDropEvent" << endl;
   Task* t=static_cast<Task*>(this->itemAt(qde->pos()));
-  takeItem(dragTask);
-  t->insertItem(dragTask);
-  save();
+  if (t!=dragTask)
+  {
+    takeItem(dragTask);
+    t->insertItem(dragTask);
+    save();
+  }
 }
 
 void TaskView::startDrag()
@@ -152,6 +155,7 @@ bool TaskView::acceptDrag(QDropEvent* e) const
   if (this->itemAt(e->pos())==0) return false;
   Task* t=static_cast<Task*>(this->itemAt(e->pos()));
   Task* parent=t;
+  kDebug() << "parent" << parent->name() << endl;
   while (parent->depth() > 0)
   {
     parent=parent->parent();
