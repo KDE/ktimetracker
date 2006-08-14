@@ -63,7 +63,7 @@ install( FILES karm_part.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
 install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karm)
 
-kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
+kde4_install_icons( ${ICON_INSTALL_DIR}   )
 
 
 
