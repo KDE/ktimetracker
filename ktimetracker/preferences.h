@@ -86,7 +86,7 @@ class Preferences :public KPageDialog
 
     // Values
     bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV, _uniTaskingV, _trayIconV;
-    bool _displayColumnV[4];
+    bool _displayColumnV[5];
     bool _decimalFormatV;
     int  _idleDetectValueV, _autoSaveValueV;
     QString _iCalFileV;
