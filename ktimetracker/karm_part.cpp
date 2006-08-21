@@ -35,7 +35,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
   new KarmPartAdaptor(this);
-  QDBus::sessionBus().registerObject("/Karm", this);
+  QDBusConnection::sessionBus().registerObject("/Karm", this);
     // we need an instance
     setInstance( karmPartFactory::instance() );
 

@@ -45,7 +45,7 @@ MainWindow::MainWindow( const QString &icsfile )
     _sessionSum( 0 )
 {
   new KarmAdaptor(this);
-  QDBus::sessionBus().registerObject("/Karm", this);
+  QDBusConnection::sessionBus().registerObject("/Karm", this);
 
   _taskView  = new TaskView( this, icsfile );
 
