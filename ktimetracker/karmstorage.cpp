@@ -141,7 +141,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   _calendar->load();
 
   // Claim ownership of iCalendar file if no one else has.
-  KCal::Person owner = resource->getOwner();
+  KCal::Person owner = resource->owner();
   if ( owner.isEmpty() )
   {
     resource->setOwner( KCal::Person(
