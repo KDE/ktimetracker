@@ -326,7 +326,7 @@ void karmPart::fileOpen()
     QString file_name = KFileDialog::getOpenFileName();
 
     if (file_name.isEmpty() == false)
-        openURL(file_name);
+        openUrl(file_name);
 }
 
 void karmPart::fileSaveAs()
