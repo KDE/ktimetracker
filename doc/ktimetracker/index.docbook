@@ -195,14 +195,14 @@ two columns for each timer, resulting in a total of four columns for each task:<
 began.</para></listitem> </varlistentry> 
 
 <varlistentry> <term><guilabel>Total Session Time</guilabel></term>
-<listitem><para>The time spent on the task and all it's subtasks since the
+<listitem><para>The time spent on the task and all its subtasks since the
 session began.</para></listitem> </varlistentry> 
 <varlistentry> <term><guilabel>Time</guilabel></term> <listitem><para>The time
 spent on the task since all times were reset.</para></listitem>
 </varlistentry> 
 
 <varlistentry> <term><guilabel>Total Time</guilabel></term>
-<listitem><para>The time spent on the task and all it's subtasks since all
+<listitem><para>The time spent on the task and all its subtasks since all
 times were reset.</para></listitem> </varlistentry> 
 </variablelist>
 
@@ -327,9 +327,9 @@ Time</guilabel>.</para>
 </menuchoice>.
 </para>
 
-<para>This report is generated for the currently selected task and all it's
+<para>This report is generated for the currently selected task and all its
 subtasks.  If the current task is a top-level task, &karm; asks you if you
-want to generate the report for the current task and it's subtasks or for the
+want to generate the report for the current task and its subtasks or for the
 entire task list.</para>
 
 <screenshot>
@@ -388,10 +388,10 @@ include the sub-task times.</para>
 KArm</guimenuitem> </menuchoice>.  Otherwise, &karm; only keeps track of
 totals and not the detailed task history.</para></important>
 
-<para>This report is generated for the currently selected task and all it's
+<para>This report is generated for the currently selected task and all its
 subtasks.  Unlike the totals report, this report does not give you the option
 to report on the complete task list.  You can only report on the current task
-and all it's sub-tasks.</para>
+and all its sub-tasks.</para>
 
 <para>When you select the history report, &karm; first prompts you to enter the
 date range for the report:</para>
@@ -1043,7 +1043,7 @@ for Desktop COmmunication Protocol.</para></glossdef>
 <glossterm>desktop</glossterm>
 <glossdef><para>&GNU;/&Linux;, FreeBSD and other systems that run X-Windows have
 multiple desktops.  You typically have four different desktops installed by
-default.  Each desktop can display it's own set of programs and files.  When
+default.  Each desktop can display its own set of programs and files.  When
 &kde; first starts up, the desktop you see is Desktop 1.  If you press
 <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo>, you will see
 Desktop 2.  Pressing <keycombo
@@ -1083,13 +1083,13 @@ right.</para></glossdef>
 
 <glossentry id="gloss-total-session-time"> <glossterm><guilabel>Total Session
 Time</guilabel></glossterm> <glossdef><para>The time spent on the task and
-all it's subtasks since the session began.</para></glossdef> </glossentry>
+all its subtasks since the session began.</para></glossdef> </glossentry>
 <glossentry> <glossterm><guilabel>Time</guilabel></glossterm>
 <glossdef><para>The time spent on the task since all times were
 reset.</para></glossdef> </glossentry> 
 
 <glossentry id="gloss-total-time"> <glossterm><guilabel>Total Time</guilabel></glossterm>
-<glossdef><para>The time spent on the task and all it's subtasks since all
+<glossdef><para>The time spent on the task and all its subtasks since all
 times were reset.</para></glossdef> </glossentry> 
 
 </glossary>
