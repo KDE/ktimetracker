@@ -406,7 +406,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   int tasknr = 0;
   while ( tasknr < taskview->count() && !dialog.wasCancelled() )
   {
-    dialog.progressBar()->advance( 1 );
+    dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
     if ( tasknr % 15 == 0 ) kapp->processEvents(); // repainting is slow
     if ( taskview->item_at_index(tasknr)->depth() > maxdepth )
       maxdepth = taskview->item_at_index(tasknr)->depth();
@@ -418,7 +418,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   while ( tasknr < taskview->count() && !dialog.wasCancelled() )
   {
     task = taskview->item_at_index( tasknr );
-    dialog.progressBar()->advance( 1 );
+    dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
     if ( tasknr % 15 == 0 ) kapp->processEvents();
 
     // indent the task in the csv-file:
