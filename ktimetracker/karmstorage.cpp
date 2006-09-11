@@ -135,7 +135,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
 
   QObject::connect (_calendar, SIGNAL(resourceChanged(ResourceCalendar *)),
   	            view, SLOT(iCalFileModified(ResourceCalendar *)));
-  _calendar->setTimeZoneId( KPimPrefs::timezone() );
+  _calendar->setTimeSpec( KPimPrefs::timeSpec() );
   _calendar->setResourceName( QString::fromLatin1("KArm") );
   _calendar->open();
   _calendar->load();
@@ -946,7 +946,7 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
 }
 
 HistoryEvent::HistoryEvent(QString uid, QString name, long duration,
-        QDateTime start, QDateTime stop, QString todoUid)
+        KDateTime start, KDateTime stop, QString todoUid)
 {
   _uid = uid;
   _name = name;

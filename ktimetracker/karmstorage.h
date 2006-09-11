@@ -325,13 +325,13 @@ class HistoryEvent
     /** Needed to be used in a value list. */
     HistoryEvent() {}
     HistoryEvent(QString uid, QString name, long duration,
-        QDateTime start, QDateTime stop, QString todoUid);
+        KDateTime start, KDateTime stop, QString todoUid);
     QString uid() {return _uid; }
     QString name() {return _name; }
     /** In seconds. */
     long duration() {return _duration; }
-    QDateTime start() {return _start; }
-    QDateTime stop() { return _stop; }
+    KDateTime start() {return _start; }
+    KDateTime stop() { return _stop; }
     QString todoUid() {return _todoUid; }
 
   private:
@@ -339,8 +339,8 @@ class HistoryEvent
     QString _todoUid;
     QString _name;
     long _duration;
-    QDateTime _start;
-    QDateTime _stop;
+    KDateTime _start;
+    KDateTime _stop;
 
 };
 
