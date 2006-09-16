@@ -364,7 +364,7 @@ QDate Week::start() const
 
 QDate Week::end() const
 {
-  return _start.addDays(7);
+  return _start.addDays(6);
 }
 
 QString Week::name() const
