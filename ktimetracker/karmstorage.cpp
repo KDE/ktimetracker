@@ -36,6 +36,7 @@
 #include <QList>
 #include <QTextStream>
 #include <QByteArray>
+#include <QProgressBar>
 
 #include <kcal/incidence.h>
 #include "kapplication.h"       // kapp
