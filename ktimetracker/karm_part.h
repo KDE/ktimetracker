@@ -112,6 +112,7 @@ protected slots:
     void fileOpen();
     void fileSaveAs();
     void slotSelectionChanged();
+    void startNewSession(); 
 
 public slots:
    void setStatusBar(const QString & qs);

@@ -670,7 +670,12 @@ QString karmPart::importplannerfile( QString fileName )
   return _taskView->importPlanner(fileName);
 }
 
-
+void karmPart::startNewSession() 
+{ 
+  _taskView->startNewSession(); 
+  _taskView->save(); 
+} 
+   
 
 #include <q3popupmenu.h>
 #include "karm_part.moc"
