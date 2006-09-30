@@ -28,8 +28,7 @@ int main (int argc, char *argv[])
   KCmdLineArgs::init( argc, argv, &aboutData );
   KApplication khello;
   cout << "Someone, probably you, has called karm.\n";
-  cout << "KArm is now called KTimeTracker. This makes it easier to recognize.\n";
-  cout << "With KDE 4, this program reminds you to call ktimetracker.\n";
-  cout << "With KDE 5, this reminder will be gone.\n";
-  KMessageBox::information(0,"Someone, probably you, has called karm. KArm is now called KTimeTracker. This makes it easier to recognize. With KDE 4, this program reminds you to call ktimetracker. With KDE 5, this reminder will have gone.","KArm is now ktimetracker");
+  cout << "KArm has been renamed to KTimeTracker. This makes it easier to recognize.\n";
+  cout << "Please learn to call ktimetracker as this reminder may be removed in the future.\n";
+  KMessageBox::information(0,"Someone, probably you, has called karm. KArm has been renamed to KTimeTracker. This makes it easier to recognize. Please learn to call ktimetracker as this reminder may be removed in the future.","KArm is now ktimetracker");
 }
