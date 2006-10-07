@@ -44,7 +44,7 @@
 #include <kemailsettings.h>
 #include <klocale.h>            // i18n
 #include <kmessagebox.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
 #include <resourceremote.h>
@@ -478,14 +478,14 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   }
   else // use remote file
   {
-    KTempFile tmpFile;
-    if ( tmpFile.status() != 0 ) err = QString::fromLatin1( "Unable to get temporary file" );
+    KTemporaryFile tmpFile;
+    if ( !tmpFile.open() ) err = QString::fromLatin1( "Unable to get temporary file" );
     else
     {
-      QTextStream *stream=tmpFile.textStream();
-      *stream << retval;
-      tmpFile.close();
-      if (!KIO::NetAccess::upload( tmpFile.name(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+      QTextStream stream ( &tmpFile );
+      stream << retval;
+      stream.flush();
+      if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
     }
   }
 
@@ -842,17 +842,17 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   }
   else // use remote file
   {
-    KTempFile tmpFile;
-    if ( tmpFile.status() != 0 )
+    KTemporaryFile tmpFile;
+    if ( !tmpFile.open() )
     {
       err = QString::fromLatin1( "Unable to get temporary file" );
     }
     else
     {
-      QTextStream *stream=tmpFile.textStream();
-      *stream << retval;
-      tmpFile.close();
-      if (!KIO::NetAccess::upload( tmpFile.name(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+      QTextStream stream ( &tmpFile );
+      stream << retval;
+      stream.flush();
+      if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
     }
   }
   return err;
