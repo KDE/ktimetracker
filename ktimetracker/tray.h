@@ -4,8 +4,6 @@
 #include <q3ptrvector.h>
 #include <QPixmap>
 #include <q3ptrlist.h>
-//Added by qt3to4:
-#include <Q3PopupMenu>
 // experiement
 // #include <kmenu.h>
 #include <ksystemtrayicon.h>
@@ -15,7 +13,6 @@
 
 class KarmPart;
 
-class Q3PopupMenu;
 class QTimer;
 
 class MainWindow;

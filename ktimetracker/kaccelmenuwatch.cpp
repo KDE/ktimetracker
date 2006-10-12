@@ -19,7 +19,7 @@ KAccelMenuWatch::KAccelMenuWatch( KAccel *accel, QObject *parent )
   _menuList.setAutoDelete( false );
 }
 
-void KAccelMenuWatch::setMenu( Q3PopupMenu *menu )
+void KAccelMenuWatch::setMenu( QMenu *menu )
 {
   assert( menu );
 
@@ -76,7 +76,7 @@ void KAccelMenuWatch::updateMenus()
 
 void KAccelMenuWatch::removeDeadMenu()
 {
-  Q3PopupMenu *sdr = (Q3PopupMenu *) sender();
+  QMenu *sdr = (QMenu *) sender();
   assert( sdr );
 
   if ( !_menuList.findRef( sdr ) )
@@ -101,7 +101,7 @@ loop:
   return;
 }
 
-KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( Q3PopupMenu *,
+KAccelMenuWatch::AccelItem *KAccelMenuWatch::newAccelItem( QMenu *,
     int itemId, AccelType type )
 {
   AccelItem *item = new AccelItem;
