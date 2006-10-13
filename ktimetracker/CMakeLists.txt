@@ -26,7 +26,7 @@ kde4_add_ui3_files(karm_shared_SRCS csvexportdialog_base.ui )
 
 set(karm_SRCS main.cpp ${karm_shared_SRCS})
 
-kde4_automoc(${karm_SRCS})
+kde4_automoc(karm ${karm_SRCS})
 
 kde4_add_executable(karm karm.cpp)
 kde4_add_executable(ktimetracker ${karm_SRCS})
@@ -54,7 +54,7 @@ install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
 set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
 qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpartadaptor KarmPartAdaptor)
 
-kde4_automoc(${karmpart_PART_SRCS})
+kde4_automoc(karmpart ${karmpart_PART_SRCS})
 
 kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
 
