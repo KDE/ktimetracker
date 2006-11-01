@@ -16,6 +16,7 @@ g++ -I/home/kde-devel/qt-unstable/include/Qt -I/home/kde-devel/qt-unstable/inclu
 #include <kaboutdata.h>
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
+#include <klocale.h>            // i18n
 #include <iostream>
 
 using namespace std;
@@ -27,8 +28,8 @@ int main (int argc, char *argv[])
       "(c) 2006" );
   KCmdLineArgs::init( argc, argv, &aboutData );
   KApplication khello;
-  cout << "Someone, probably you, has called karm.\n";
-  cout << "KArm has been renamed to KTimeTracker. This makes it easier to recognize.\n";
-  cout << "Please learn to call ktimetracker as this reminder may be removed in the future.\n";
-  KMessageBox::information(0,"Someone, probably you, has called karm. KArm has been renamed to KTimeTracker. This makes it easier to recognize. Please learn to call ktimetracker as this reminder may be removed in the future.","KArm is now ktimetracker");
+  cout << i18n("Someone, probably you, has called karm.\n").ascii();
+  cout << i18n("KArm has been renamed to KTimeTracker. This makes it easier to recognize.\n").ascii();
+  cout << i18n("Please learn to call ktimetracker as this reminder may be removed in the future.\n").ascii();
+  KMessageBox::information(0,i18n("Someone, probably you, has called karm. KArm has been renamed to KTimeTracker. This makes it easier to recognize. Please learn to call ktimetracker as this reminder may be removed in the future.").ascii(),i18n("KArm is now ktimetracker").ascii());
 }
