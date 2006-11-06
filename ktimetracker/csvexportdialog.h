@@ -21,8 +21,18 @@
 #ifndef CSVEXPORTDIALOG_H
 #define CSVEXPORTDIALOG_H
 
-#include "csvexportdialog_base.h"
+#include "ui_csvexportdialog_base.h"
 #include "reportcriteria.h"
+
+class CSVExportDialogBase : public QDialog, public Ui::CSVExportDialogBase
+{
+public:
+  CSVExportDialogBase( QWidget *parent ) : QDialog( parent ) {
+    setupUi( this );
+  }
+};
+
+
 
 class CSVExportDialog : public CSVExportDialogBase
 {
@@ -34,8 +44,7 @@ class CSVExportDialog : public CSVExportDialogBase
 
   public:
     CSVExportDialog( ReportCriteria::REPORTTYPE rt,
-                     QWidget *parent = 0, 
-                     const char *name = 0
+                     QWidget *parent = 0 
                      );
     
     /**

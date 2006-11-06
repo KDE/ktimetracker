@@ -33,13 +33,15 @@
 #include "reportcriteria.h"
 
 CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
-                                  QWidget *parent, 
-                                  const char *name
+                                  QWidget *parent 
                                   ) 
-  : CSVExportDialogBase( parent, name )
+  : CSVExportDialogBase( parent )
 {
   connect(btnExportClip, SIGNAL(clicked()), this, SLOT(exPortToClipBoard()));
   connect(btnExport, SIGNAL(clicked()), this, SLOT(exPortToCSVFile()));
+  connect(btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(btnExport, SIGNAL(clicked()), this, SLOT(accept()));
+  connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
   switch ( rt ) {
     case ReportCriteria::CSVTotalsExport:
       grpDateRange->setEnabled( false );
