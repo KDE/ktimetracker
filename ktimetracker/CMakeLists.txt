@@ -58,7 +58,7 @@ kde4_automoc(${karmpart_PART_SRCS})
 
 kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} karmpart )
+
 
 target_link_libraries(karmpart  ${KDE4_KPARTS_LIBS} ${KDE4_KCAL_LIBS}  ${KDE4_KDEPRINT_LIBS} kdepim kcal_resourceremote)
 if(UNIX)
