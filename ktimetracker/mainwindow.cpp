@@ -133,7 +133,7 @@ void MainWindow::slotSelectionChanged()
 //  actionAddComment->setEnabled( on );
 //}
 
-bool MainWindow::setStatusBar(QString qs)
+void MainWindow::setStatusBar(QString qs)
 {
   statusBar()->message(i18n(qs.ascii()));
 }
