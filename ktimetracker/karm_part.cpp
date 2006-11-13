@@ -453,7 +453,7 @@ bool karmPart::save()
   QString err=_taskView->save();  // untranslated error msg.
 
   if (err.isEmpty()) setStatusBar(i18n("Successfully saved tasks and history"));
-  else setStatusBar(i18n(err.toAscii())); // no msgbox since save is called when exiting */
+  else setStatusBar(i18n(err.toUtf8())); // no msgbox since save is called when exiting */
   return true;
 }
 

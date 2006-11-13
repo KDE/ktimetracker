@@ -133,9 +133,9 @@ void MainWindow::slotSelectionChanged()
 //  actionAddComment->setEnabled( on );
 //}
 
-void MainWindow::setStatusBar(QString qs)
+void MainWindow::setStatusBar(const QString& qs)
 {
-  statusBar()->message(i18n(qs.ascii()));
+  statusBar()->message(i18n(qs.toUtf8()));
 }
 
 bool MainWindow::save()

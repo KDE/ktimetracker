@@ -84,7 +84,7 @@ class MainWindow : public KParts::MainWindow
     QString importplannerfile( QString filename );
 
   public slots:
-    void setStatusBar( QString );
+    void setStatusBar( const QString& );
     void quit();
     bool save();
   protected slots:
