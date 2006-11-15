@@ -36,7 +36,7 @@
 #include <kcal/journal.h>
 #include <kcal/calendarresources.h>
 #include <kcal/resourcecalendar.h>
-#include <kdepimmacros.h>
+#include <kdemacros.h>
 
 class QDateTime;
 class Preferences;
