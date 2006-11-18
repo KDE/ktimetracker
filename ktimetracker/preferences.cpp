@@ -245,6 +245,7 @@ void Preferences::slotButtonClicked(int button)
 {
   kDebug(5970) << "Entering Preferences::slotButtonClicked" << endl;
   if (button == KDialog::Ok) slotOk();
+  if (button == KDialog::Cancel) slotCancel();
 }
 
 void Preferences::slotOk()
@@ -281,6 +282,7 @@ void Preferences::slotOk()
 
 void Preferences::slotCancel()
 {
+  kDebug(5970) << "Entering Preferences::slotCancel" << endl;
   KDialog::reject();
 }
 
