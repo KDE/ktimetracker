@@ -215,6 +215,12 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   return err;
 }
 
+QString KarmStorage::icalfile()
+{
+  kDebug(5970) << "Entering KarmStorage::icalfile" << endl;
+  return _icalfile;
+}
+
 QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 // makes *view contain the tasks out of *rc.
 {

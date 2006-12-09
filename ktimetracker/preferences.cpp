@@ -298,6 +298,7 @@ void Preferences::autoSaveCheckBoxChanged()
 
 void Preferences::emitSignals()
 {
+  kDebug(5970) << "Entering Preferences::emitSignals" << endl;
   emit iCalFile( _iCalFileV );
   emit detectIdleness( _doIdleDetectionV );
   emit idlenessTimeout( _idleDetectValueV );

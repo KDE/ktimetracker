@@ -104,6 +104,16 @@ class KarmStorage
      */
     QString load(TaskView* taskview, const Preferences* preferences, QString fileName="" );
 
+   /*
+    * Return the name of the iCal file
+    */
+    QString icalfile();
+
+   /*
+    * Build up the taskview.
+    *
+    * This is needed if the iCal file has been modified.
+    */
     QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
     
     /* Close calendar and clear view.  Release lock if holding one. */
