@@ -15,7 +15,7 @@
 #include <klocale.h>            // i18n
 #include <kmessagebox.h>
 #include <kstatusbar.h>         // statusBar()
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <qnamespace.h>
 #include <QMenu>
 #include <q3ptrlist.h>
@@ -250,14 +250,14 @@ void MainWindow::makeMenus()
     *actionNew,
     *actionNewSub;
 
-  (void) KStdAction::quit(  this, SLOT( quit() ),  actionCollection());
-  (void) KStdAction::print( this, SLOT( print() ), actionCollection());
-  actionKeyBindings = KStdAction::keyBindings( this, SLOT( keyBindings() ),
+  (void) KStandardAction::quit(  this, SLOT( quit() ),  actionCollection());
+  (void) KStandardAction::print( this, SLOT( print() ), actionCollection());
+  actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
-  actionPreferences = KStdAction::preferences(_preferences,
+  actionPreferences = KStandardAction::preferences(_preferences,
       SLOT(showDialog()),
       actionCollection() );
-  (void) KStdAction::save( this, SLOT( save() ), actionCollection() );
+  (void) KStandardAction::save( this, SLOT( save() ), actionCollection() );
   KAction *actionStartNewSession = new KAction( i18n("Start &New Session"), actionCollection(), "start_new_session");
   connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
   KAction *actionResetAll = new KAction( i18n("&Reset All Times"), actionCollection(), "reset_all_times");

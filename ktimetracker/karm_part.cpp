@@ -10,7 +10,7 @@
 #include <kinstance.h>
 #include <kaction.h>
 #include <kactioncollection.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kfiledialog.h>
 #include <kglobal.h>
 #include <klocale.h>
@@ -51,9 +51,9 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     setWidget(_taskView);
 
     // create our actions
-    KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-    KStdAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
-    KStdAction::save(this, SLOT(save()), actionCollection());
+    KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
+    KStandardAction::saveAs(this, SLOT(fileSaveAs()), actionCollection());
+    KStandardAction::save(this, SLOT(save()), actionCollection());
 
     makeMenus();
 
@@ -124,13 +124,13 @@ void karmPart::makeMenus()
     *actionNew,
     *actionNewSub;
 
-  (void) KStdAction::quit(  this, SLOT( quit() ),  actionCollection());
-  (void) KStdAction::print( this, SLOT( print() ), actionCollection());
-  actionKeyBindings = KStdAction::keyBindings( this, SLOT( keyBindings() ),
+  (void) KStandardAction::quit(  this, SLOT( quit() ),  actionCollection());
+  (void) KStandardAction::print( this, SLOT( print() ), actionCollection());
+  actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
-  actionPreferences = KStdAction::preferences(_preferences,
+  actionPreferences = KStandardAction::preferences(_preferences,
       SLOT(showDialog()), actionCollection() );
-  (void) KStdAction::save( this, SLOT( save() ), actionCollection() );
+  (void) KStandardAction::save( this, SLOT( save() ), actionCollection() );
   KAction *actionStartNewSession = new KAction( i18n("Start &New Session"), actionCollection(), "start_new_session");
   connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
   KAction *actionResetAll = new KAction( i18n("&Reset All Times"), actionCollection(), "reset_all_times");
@@ -267,7 +267,7 @@ void karmPart::setReadWrite(bool rw)
 void karmPart::setModified(bool modified)
 {
     // get a handle on our Save action and make sure it is valid
-    QAction *save = actionCollection()->action(KStdAction::stdName(KStdAction::Save));
+    QAction *save = actionCollection()->action(KStandardAction::stdName(KStandardAction::Save));
     if (!save)
         return;
 
