@@ -76,4 +76,4 @@ install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
 install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karm)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}   )
-
+install( FILES org.kde.karm.Karm.xml DESTINATION ${DBUS_INTERFACES_DIR} )
