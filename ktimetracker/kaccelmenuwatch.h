@@ -10,7 +10,7 @@
 //Added by qt3to4:
 #include <QMenu>
 
-#include <kstdaccel.h>
+#include <kstandardshortcut.h>
 
 
 
@@ -51,7 +51,7 @@ class KAccelMenuWatch : public QObject
 
       // only one of these is used at a time
       QString action;
-      KStdAccel::StdAccel stdAction;
+      KStandardShortcut::StandardShortcut stdAction;
     };
 
     KAccel *_accel;
@@ -97,7 +97,7 @@ class KAccelMenuWatch : public QObject
     /** 
      * Same as above, but connects to standard accelerators.
      */
-    void connectAccel( int itemId, KStdAccel::StdAccel );
+    void connectAccel( int itemId, KStandardShortcut::StandardShortcut );
   
   public slots:
     /** 

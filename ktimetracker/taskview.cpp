@@ -673,7 +673,7 @@ void TaskView::deleteTask(bool markingascomplete)
           i18n( "Are you sure you want to delete "
           "the task named\n\"%1\" and its entire history?",
            task->name()),
-          i18n( "Deleting Task"), KStdGuiItem::del());
+          i18n( "Deleting Task"), KStandardGuiItem::del());
     }
     else {
       response = KMessageBox::warningContinueCancel( 0,
@@ -681,7 +681,7 @@ void TaskView::deleteTask(bool markingascomplete)
           "\n\"%1\" and its entire history?\n"
           "NOTE: all its subtasks and their history will also "
           "be deleted.", task->name()),
-          i18n( "Deleting Task"), KStdGuiItem::del());
+          i18n( "Deleting Task"), KStandardGuiItem::del());
     }
   }
 

@@ -40,7 +40,7 @@ void KAccelMenuWatch::connectAccel( int itemId, const char *action )
   item->action  = QString::fromLocal8Bit( action );
 }
 
-void KAccelMenuWatch::connectAccel( int itemId, KStdAccel::StdAccel accel )
+void KAccelMenuWatch::connectAccel( int itemId, KStandardShortcut::StandardShortcut accel )
 {
   AccelItem *item = newAccelItem( _menu, itemId, StdAccel ) ;
   item->stdAction  = accel;
@@ -65,7 +65,7 @@ void KAccelMenuWatch::updateMenus()
         break;
       case StdAccel:
 #warning Port me!
-//        item->menu->setAccel( KStdAccel::shortcut( item->stdAction ).keyQt(), item->itemId );
+//        item->menu->setAccel( KStandardShortcut::shortcut( item->stdAction ).keyQt(), item->itemId );
         break;
       default:
         break;
