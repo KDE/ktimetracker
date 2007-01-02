@@ -1,5 +1,5 @@
 /*
-* Top Level window for KArm.
+* Top Level window for ktimetracker.
 * Distributed under the GPL.
 */
 
@@ -37,7 +37,7 @@
 #include <QtDBus>
 
 MainWindow::MainWindow( const QString &icsfile )
-  : KParts::MainWindow(),
+  : KParts::MainWindow( 0, Qt::WStyle_ContextHelp ),
 #warning Port me!
 //    _accel     ( new KAccel( this ) ),
     _watcher   ( new KAccelMenuWatch( _accel, this ) ),
