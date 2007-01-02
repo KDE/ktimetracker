@@ -27,9 +27,9 @@ static const KCmdLineOptions options[] =
 
 int main( int argc, char *argv[] )
 {
-  KAboutData aboutData( "karm", I18N_NOOP("KArm"),
+  KAboutData aboutData( "karm", I18N_NOOP("KTimeTracker"),
       KARM_VERSION, description, KAboutData::License_GPL,
-      "(c) 1997-2006, KDE PIM Developers" );
+      "(c) 1997-2007, KDE PIM Developers" );
 
   aboutData.addAuthor( "Thorsten Staerk", I18N_NOOP( "Current Maintainer" ),
                        "kde@staerk.de" );

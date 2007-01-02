@@ -62,7 +62,7 @@ class MainWindow : public KParts::MainWindow
     MainWindow( const QString &icsfile = "" );
     virtual ~MainWindow();
 
-    // DCOP
+    /** DCOP function: print out version */
     QString version() const;
     QString taskIdFromName( const QString &taskName ) const;
     /** @reimp from KarmDCOPIface::addTask */
@@ -73,11 +73,14 @@ class MainWindow : public KParts::MainWindow
     int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
     /** @reimp from KarmDCOPIface::getError */
     QString getError( int karmErrorNumber ) const;
+    /** Delivers the total minutes for taskId */
     int totalMinutesForTaskId( const QString& taskId );
+    /** starts taskname's timer */
     QString starttimerfor( const QString &taskname );
     QString stoptimerfor( const QString &taskname );
     QString stopalltimers();
     QString deletetodo();
+    /** Delivers true if ktimetracker asks before deleting a task. This is stored as a config setting. */
     bool    getpromptdelete();
     QString setpromptdelete( bool prompt );
     QString exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote );
@@ -85,7 +88,9 @@ class MainWindow : public KParts::MainWindow
 
   public slots:
     void setStatusBar( const QString& );
+    /** Quit ktimetracker (what else...) */
     void quit();
+    /** Save the calendar */
     bool save();
   protected slots:
     void keyBindings();
