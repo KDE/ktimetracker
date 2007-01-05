@@ -214,8 +214,9 @@ class KarmStorage
      * @see KarmStorage::changeTime
      *
      * @param task   The task the timer was stopped for.
+     * @param when   When the timer stopped.
      */
-    void stopTimer(const Task* task);
+    void stopTimer(const Task* task, QDateTime when=QDateTime::currentDateTime );
 
     /**
      * Log a new comment for this task.

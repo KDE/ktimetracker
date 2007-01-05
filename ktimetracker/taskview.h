@@ -96,8 +96,11 @@ class TaskView : public K3ListView
     /** Stop the timer for the current item in the view.  */
     void stopCurrentTimer();
 
-    /** Stop all running timers.  */
-    void stopAllTimers();
+    /** Stop all running timers.  
+     *  @param when When the timer stopped - this makes sense if the idletime-
+     *              detector detects the user stopped working 5 minutes ago.
+     */
+    void stopAllTimers(QDateTime when=QDateTime::currentDateTime());
 
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();

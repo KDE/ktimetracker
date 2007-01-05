@@ -448,10 +448,10 @@ void TaskView::clearActiveTasks()
   activeTasks.clear();
 }
 
-void TaskView::stopAllTimers()
+void TaskView::stopAllTimers( QDateTime when )
 {
   for ( unsigned int i = 0; i < activeTasks.count(); i++ )
-    activeTasks.at(i)->setRunning(false, _storage);
+    activeTasks.at(i)->setRunning(false, _storage, when);
 
   _idleTimeDetector->stopIdleDetection();
   activeTasks.clear();

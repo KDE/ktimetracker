@@ -181,12 +181,12 @@ class Task : public QObject, public Q3ListViewItem
       /** starts or stops a task
        *  @param on       true or false for starting or stopping a task
        *  @param storage a pointer to a KarmStorage object.
-       *  @param whenStarted time when the task was started. Normally
+       *  @param when time when the task was started or stopped. Normally
 				    QDateTime::currentDateTime, but if calendar has 
 				    been changed by another program and being reloaded
  				    the task is set to running with another start date
        */
-      void setRunning( bool on, KarmStorage* storage, QDateTime whenStarted= QDateTime::currentDateTime());
+      void setRunning( bool on, KarmStorage* storage, QDateTime when= QDateTime::currentDateTime());
 
       /** return the state of a task - if it's running or not
        *  @return         true or false depending on whether the task is running

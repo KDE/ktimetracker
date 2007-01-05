@@ -96,7 +96,7 @@ Task::~Task() {
   delete _timer;
 }
 
-void Task::setRunning( bool on, KarmStorage* storage, QDateTime whenStarted  )
+void Task::setRunning( bool on, KarmStorage* storage, QDateTime when  )
 {
   if ( on ) {
     if (isComplete()) return; // don't start if its marked complete
@@ -104,7 +104,7 @@ void Task::setRunning( bool on, KarmStorage* storage, QDateTime whenStarted  )
       _timer->start(1000);
       storage->startTimer(this);
       _currentPic=7;
-      _lastStart = whenStarted;
+      _lastStart = when;
       updateActiveIcon();
     }
   }
@@ -112,7 +112,7 @@ void Task::setRunning( bool on, KarmStorage* storage, QDateTime whenStarted  )
     if (_timer->isActive()) {
       _timer->stop();
       if ( ! _removing ) {
-        storage->stopTimer(this);
+        storage->stopTimer(this, when);
         setPixmap(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
       }
     }
