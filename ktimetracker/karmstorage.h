@@ -139,6 +139,7 @@ class KarmStorage
     /*
      * Log the change in a task's time.
      *
+     * This is also called when a timer is stopped.
      * We create an iCalendar event to store each change.  The event start
      * date is set to the current datetime.  If time is added to the task, the
      * task end date is set to start time + delta.  If the time is negative,

@@ -874,6 +874,7 @@ bool KarmStorage::bookTime(const Task* task,
                            const QDateTime& startDateTime,
                            const long durationInSeconds)
 {
+  kDebug(5970) << "Entering KarmStorage::bookTime" << endl;
   // Ignores preferences setting re: logging history.
   KCal::Event* e;
   QDateTime end;
@@ -892,6 +893,7 @@ bool KarmStorage::bookTime(const Task* task,
 
 void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 {
+  kDebug(5970) << "Entering KarmStorage::changeTime" << endl;
   KCal::Event* e;
   QDateTime end;
 

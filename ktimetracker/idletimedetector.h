@@ -99,7 +99,8 @@ private:
   bool _overAllIdleDetect; // Based on preferences.
   int _maxIdle;
   QTimer *_timer;
-  QDateTime start;
+  QDateTime start; // when the idletimedetectordialog started
+  QDateTime idlestart; // when the idleness started
   int idleminutes;
 };
 
