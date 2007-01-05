@@ -79,8 +79,8 @@ void IdleTimeDetector::informOverrun()
   _timer->stop();
 
   start = QDateTime::currentDateTime();
-  QDateTime idleStart = start.addSecs(-60 * _maxIdle);
-  QString backThen = KGlobal::locale()->formatTime(idleStart.time());
+  idlestart = start.addSecs(-60 * _maxIdle);
+  QString backThen = KGlobal::locale()->formatTime(idlestart.time());
   // Create dialog
     KDialog *dialog=new KDialog( 0 );
     QWidget* wid=new QWidget(dialog);
