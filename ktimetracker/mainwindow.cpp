@@ -298,16 +298,7 @@ void MainWindow::makeMenus()
   actionMarkAsIncomplete = new KAction(KIcon("document"),  i18n("&Mark as Incomplete"), actionCollection(), "mark_as_incomplete");
   connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
   actionMarkAsIncomplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
-  actionClipTotals = new KAction(KIcon("klipper"),  i18n("&Copy Totals to Clipboard"), actionCollection(), "clip_totals");
-  connect(actionClipTotals, SIGNAL(triggered(bool) ), _taskView, SLOT( clipTotals() ));
-  actionClipTotals->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_C));
-  actionClipHistory = new KAction(KIcon("klipper"),  i18n("Copy &History to Clipboard"), actionCollection(), "clip_history");
-  connect(actionClipHistory, SIGNAL(triggered(bool) ), _taskView, SLOT( clipHistory() ));
-  actionClipHistory->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_C));
-
-  KAction *action = new KAction( i18n("Import &Legacy Flat File..."), actionCollection(), "import_flatfile");
-  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(loadFromFlatFile()));
-  action = new KAction( i18n("&Export Times..."), actionCollection(), "export_times");
+  KAction *action = new KAction( i18n("&Export Times..."), actionCollection(), "export_times");
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
   action = new KAction( i18n("Export &History..."), actionCollection(), "export_history");
   connect(action, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
