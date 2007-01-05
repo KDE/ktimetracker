@@ -54,7 +54,7 @@ signals:
   /**
       Tells the listener to stop timing
    **/
-  void stopAllTimers();
+  void stopAllTimers(QDateTime time);
 
 public slots:
   void revert();

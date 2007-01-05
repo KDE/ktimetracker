@@ -98,9 +98,12 @@ Task::~Task() {
 
 void Task::setRunning( bool on, KarmStorage* storage, QDateTime when  )
 {
-  if ( on ) {
+  kDebug(5970) << "Entering Task::setRunning" << endl; 
+  if ( on ) 
+  {
     if (isComplete()) return; // don't start if its marked complete
-    if (!_timer->isActive()) {
+    if (!_timer->isActive()) 
+    {
       _timer->start(1000);
       storage->startTimer(this);
       _currentPic=7;
@@ -108,10 +111,13 @@ void Task::setRunning( bool on, KarmStorage* storage, QDateTime when  )
       updateActiveIcon();
     }
   }
-  else {
-    if (_timer->isActive()) {
+  else 
+  {
+    if (_timer->isActive()) 
+    {
       _timer->stop();
-      if ( ! _removing ) {
+      if ( ! _removing ) 
+      {
         storage->stopTimer(this, when);
         setPixmap(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
       }
@@ -208,6 +214,7 @@ void Task::changeTime( long minutes, KarmStorage* storage )
 
 void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 {
+  kDebug(5970) << "Entering Task::changeTimes" << endl;
   if( minutesSession != 0 || minutes != 0) 
   {
     _sessionTime += minutesSession;

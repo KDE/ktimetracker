@@ -65,8 +65,8 @@ void IdleTimeDetector::revert()
   kDebug(5970) << "Entering IdleTimeDetector::revert" << endl;
   QDateTime end = QDateTime::currentDateTime();
   int diff = start.secsTo(end)/secsPerMinute;
-  emit(extractTime(idleminutes+diff));
-  emit(stopAllTimers());
+  //emit(extractTime(idleminutes+diff));
+  emit(stopAllTimers(idlestart));
 }
 
 #if defined(HAVE_LIBXSS) && defined(Q_WS_X11)

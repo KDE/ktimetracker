@@ -87,8 +87,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
   _idleTimeDetector = new IdleTimeDetector( _preferences->idlenessTimeout() );
   connect( _idleTimeDetector, SIGNAL( extractTime(int) ),
            this, SLOT( extractTime(int) ));
-  connect( _idleTimeDetector, SIGNAL( stopAllTimers() ),
-           this, SLOT( stopAllTimers() ));
+  connect( _idleTimeDetector, SIGNAL( stopAllTimers(QDateTime) ),
+           this, SLOT( stopAllTimers(QDateTime) ));
   connect( _preferences, SIGNAL( idlenessTimeout(int) ),
            _idleTimeDetector, SLOT( setMaxIdle(int) ));
   connect( _preferences, SIGNAL( detectIdleness(bool) ),
@@ -450,6 +450,7 @@ void TaskView::clearActiveTasks()
 
 void TaskView::stopAllTimers( QDateTime when )
 {
+  kDebug(5970) << "Entering TaskView::stopAllTimers" << endl;
   for ( unsigned int i = 0; i < activeTasks.count(); i++ )
     activeTasks.at(i)->setRunning(false, _storage, when);
 

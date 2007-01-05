@@ -866,6 +866,8 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
 
 void KarmStorage::stopTimer(const Task* task, QDateTime when)
 {
+  kDebug(5970) << "Entering stopTimer when=" << when << endl;
+  kDebug(5970) << "task->startTime=" << task->startTime() << endl;
   long delta = task->startTime().secsTo(when);
   changeTime(task, delta);
 }
@@ -893,7 +895,7 @@ bool KarmStorage::bookTime(const Task* task,
 
 void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 {
-  kDebug(5970) << "Entering KarmStorage::changeTime" << endl;
+  kDebug(5970) << "Entering KarmStorage::changeTime deltaSeconds=" <<deltaSeconds << endl;
   KCal::Event* e;
   QDateTime end;
 
