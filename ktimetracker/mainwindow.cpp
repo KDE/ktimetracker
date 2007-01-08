@@ -7,6 +7,7 @@
 
 #include "kaccelmenuwatch.h"
 #include <kaction.h>
+#include <kactioncollection.h>
 #include <kapplication.h>       // kapp
 #include <kconfig.h>
 #include <kdebug.h>
@@ -258,31 +259,40 @@ void MainWindow::makeMenus()
       SLOT(showDialog()),
       actionCollection() );
   (void) KStandardAction::save( this, SLOT( save() ), actionCollection() );
-  KAction *actionStartNewSession = new KAction( i18n("Start &New Session"), actionCollection(), "start_new_session");
+  QAction *actionStartNewSession  = new KAction(i18n("Start &New Session"), this);
+  actionCollection()->addAction("start_new_session", actionStartNewSession );
   connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
-  KAction *actionResetAll = new KAction( i18n("&Reset All Times"), actionCollection(), "reset_all_times");
+  QAction *actionResetAll  = new KAction(i18n("&Reset All Times"), this);
+  actionCollection()->addAction("reset_all_times", actionResetAll );
   connect(actionResetAll, SIGNAL(triggered(bool)), SLOT( resetAllTimes() ));
-  actionStart = new KAction(KIcon(QString::fromLatin1("1rightarrow")),  i18n("&Start"), actionCollection(), "start");
+  actionStart  = new KAction(KIcon(QString::fromLatin1("1rightarrow")), i18n("&Start"), this);
+  actionCollection()->addAction("start", actionStart );
   connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
   actionStart->setShortcut(QKeySequence(Qt::Key_S));
-  actionStop = new KAction(KIcon(QString::fromLatin1("stop")),  i18n("S&top"), actionCollection(), "stop");
+  actionStop  = new KAction(KIcon(QString::fromLatin1("stop")), i18n("S&top"), this);
+  actionCollection()->addAction("stop", actionStop );
   actionStop->setShortcut(QKeySequence(Qt::Key_S));
   connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
-  actionStopAll = new KAction( i18n("Stop &All Timers"), actionCollection(), "stopAll");
+  actionStopAll  = new KAction(i18n("Stop &All Timers"), this);
+  actionCollection()->addAction("stopAll", actionStopAll );
   connect(actionStopAll, SIGNAL(triggered(bool)), _taskView, SLOT( stopAllTimers() ));
   actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
   actionStopAll->setEnabled(false);
 
-  actionNew = new KAction(KIcon(QString::fromLatin1("filenew")),  i18n("&New..."), actionCollection(), "new_task");
+  actionNew  = new KAction(KIcon(QString::fromLatin1("filenew")), i18n("&New..."), this);
+  actionCollection()->addAction("new_task", actionNew );
   connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
   actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
-  actionNewSub = new KAction(KIcon(QString::fromLatin1("kmultiple")),  i18n("New &Subtask..."), actionCollection(), "new_sub_task");
+  actionNewSub  = new KAction(KIcon(QString::fromLatin1("kmultiple")), i18n("New &Subtask..."), this);
+  actionCollection()->addAction("new_sub_task", actionNewSub );
   connect(actionNewSub, SIGNAL(triggered(bool) ), _taskView, SLOT( newSubTask() ));
   actionNewSub->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N));
-  actionDelete = new KAction(KIcon(QString::fromLatin1("editdelete")),  i18n("&Delete"), actionCollection(), "delete_task");
+  actionDelete  = new KAction(KIcon(QString::fromLatin1("editdelete")), i18n("&Delete"), this);
+  actionCollection()->addAction("delete_task", actionDelete );
   connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
   actionDelete->setShortcut(QKeySequence(Qt::Key_Delete));
-  actionEdit = new KAction(KIcon("edit"),  i18n("&Edit..."), actionCollection(), "edit_task");
+  actionEdit  = new KAction(KIcon("edit"), i18n("&Edit..."), this);
+  actionCollection()->addAction("edit_task", actionEdit );
   connect(actionEdit, SIGNAL(triggered(bool) ), _taskView, SLOT( editTask() ));
   actionEdit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 //  actionAddComment = new KAction( i18n("&Add Comment..."),
@@ -292,17 +302,22 @@ void MainWindow::makeMenus()
 //      SLOT( addCommentToTask() ),
 //      actionCollection(),
 //      "add_comment_to_task");
-  actionMarkAsComplete = new KAction(KIcon("document"),  i18n("&Mark as Complete"), actionCollection(), "mark_as_complete");
+  actionMarkAsComplete  = new KAction(KIcon("document"), i18n("&Mark as Complete"), this);
+  actionCollection()->addAction("mark_as_complete", actionMarkAsComplete );
   connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsComplete() ));
   actionMarkAsComplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
-  actionMarkAsIncomplete = new KAction(KIcon("document"),  i18n("&Mark as Incomplete"), actionCollection(), "mark_as_incomplete");
+  actionMarkAsIncomplete  = new KAction(KIcon("document"), i18n("&Mark as Incomplete"), this);
+  actionCollection()->addAction("mark_as_incomplete", actionMarkAsIncomplete );
   connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
   actionMarkAsIncomplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
-  KAction *action = new KAction( i18n("&Export Times..."), actionCollection(), "export_times");
+  QAction *action  = new KAction(i18n("&Export Times..."), this);
+  actionCollection()->addAction("export_times", action );
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
-  action = new KAction( i18n("Export &History..."), actionCollection(), "export_history");
+  action  = new KAction(i18n("Export &History..."), this);
+  actionCollection()->addAction("export_history", action );
   connect(action, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
-  action = new KAction( i18n("Import Tasks From &Planner..."), actionCollection(), "import_planner");
+  action  = new KAction(i18n("Import Tasks From &Planner..."), this);
+  actionCollection()->addAction("import_planner", action );
   connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
 
 /*
