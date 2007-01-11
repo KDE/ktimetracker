@@ -39,7 +39,9 @@
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WStyle_ContextHelp ),
+#ifdef __GNUC__
 #warning Port me!
+#endif
 //    _accel     ( new KAccel( this ) ),
     _watcher   ( new KAccelMenuWatch( _accel, this ) ),
     _totalSum  ( 0 ),

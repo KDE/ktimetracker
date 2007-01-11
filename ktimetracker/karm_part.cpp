@@ -30,7 +30,9 @@
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     : KParts::ReadWritePart(parent),
+#ifdef __GNUC__
 #warning Port me!
+#endif
 //    _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {

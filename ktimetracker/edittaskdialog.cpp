@@ -166,7 +166,9 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
 #ifdef Q_WS_X11
   desktopCount = kwinmodule.numberOfDesktops();
 #else
+#ifdef __GNUC__
 #warning non-X11 support missing
+#endif
   desktopCount = 1;
 #endif
   

@@ -18,7 +18,9 @@ DesktopTracker::DesktopTracker ()
   _desktopCount = kWinModule.numberOfDesktops();
   _previousDesktop = kWinModule.currentDesktop()-1;
 #else
+#ifdef __GNUC__
 #warning non-X11 support missing
+#endif
 #endif
   // TODO: removed? fixed by Lubos?
   // currentDesktop will return 0 if no window manager is started
@@ -67,7 +69,9 @@ void DesktopTracker::startTracking()
 #ifdef Q_WS_X11
   int currentDesktop = kWinModule.currentDesktop() -1;
 #else
+#ifdef __GNUC__
 #warning non-X11 support missing
+#endif
   int currentDesktop = 0;
 #endif
   // TODO: removed? fixed by Lubos?
@@ -100,7 +104,9 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
       if( i == kWinModule.currentDesktop() -1)
         emit leftActiveDesktop(task);
 #else
+#ifdef __GNUC__
 #warning non-X11 support missing
+#endif
 #endif
     }
 
@@ -130,7 +136,9 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
           if( i == kWinModule.currentDesktop() -1)
             emit leftActiveDesktop(task);
 #else
+#ifdef __GNUC__
 #warning non-X11 support missing
+#endif
 #endif
         }
       }

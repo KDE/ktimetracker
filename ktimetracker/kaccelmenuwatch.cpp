@@ -60,11 +60,15 @@ void KAccelMenuWatch::updateMenus()
     // as descibed in KDE3PORTING.html
     switch( item->type ) {
       case StringAccel:
+#ifdef __GNUC__
 #warning Port me!
+#endif
 //        item->menu->setAccel( _accel->shortcut( item->action ).keyQt(), item->itemId );
         break;
       case StdAccel:
+#ifdef __GNUC__
 #warning Port me!
+#endif
 //        item->menu->setAccel( KStandardShortcut::shortcut( item->stdAction ).keyQt(), item->itemId );
         break;
       default:
