@@ -43,6 +43,8 @@ Preferences::Preferences( const QString& icsFile )
   // command-line option overrides what is stored in
   if ( ! icsFile.isEmpty() ) _iCalFileV = icsFile;
 
+  connect(this,SIGNAL(okClicked()),SLOT(slotOk()));
+  connect(this,SIGNAL(cancelClicked()),SLOT(slotCancel()));
 }
 
 Preferences *Preferences::instance( const QString &icsfile )
