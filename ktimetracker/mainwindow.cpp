@@ -336,7 +336,6 @@ void MainWindow::makeMenus()
   actionKeyBindings->setToolTip( i18n("Configure key bindings") );
   actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
                                         "bindings which is specific to karm") );
-
   actionStartNewSession->setToolTip( i18n("Start a new session") );
   actionStartNewSession->setWhatsThis( i18n("This will reset the session time "
                                             "to 0 for all tasks, to start a "
@@ -346,7 +345,6 @@ void MainWindow::makeMenus()
   actionResetAll->setWhatsThis( i18n("This will reset the session and total "
                                      "time to 0 for all tasks, to restart from "
                                      "scratch.") );
-
   actionStart->setToolTip( i18n("Start timing for selected task") );
   actionStart->setWhatsThis( i18n("This will start timing for the selected "
                                   "task.\n"
@@ -356,10 +354,8 @@ void MainWindow::makeMenus()
                                   "double clicking the left mouse "
                                   "button on a given task. This will, however, "
                                   "stop timing of other tasks."));
-
   actionStop->setToolTip( i18n("Stop timing of the selected task") );
   actionStop->setWhatsThis( i18n("Stop timing of the selected task") );
-
   actionStopAll->setToolTip( i18n("Stop all of the active timers") );
   actionStopAll->setWhatsThis( i18n("Stop all of the active timers") );
 
@@ -380,8 +376,6 @@ void MainWindow::makeMenus()
   //                                     "comment can for instance add information on what you "
   //                                     "are currently doing. The comment will "
   //                                     "be logged in the log file."));
-  actionClipTotals->setToolTip(i18n("Copy task totals to clipboard"));
-  actionClipHistory->setToolTip(i18n("Copy time card history to clipboard."));
 
   slotSelectionChanged();
 }
