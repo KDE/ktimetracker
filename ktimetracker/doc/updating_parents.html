@@ -1,0 +1,39 @@
+<p>This is an outline of how times should be updated and added together.</p>
+
+<p>Start the program, create a task three levels deep and give it some time.
+You should get something like this.</p>
+<table border=2>
+	<tr><th>Task</th> <th>Session</th> <th>Total</th></tr>
+	<tr><td>A</td>                           <td>5</td> <td>5</td></tr>
+	<tr><td>&nbsp;&nbsp;a1</td>              <td>5</td> <td>5</td></tr>
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;a11</td> <td>5</td> <td>5</td></tr>
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;a12</td> <td>0</td> <td>0</td></tr>
+
+	<tr><td>&nbsp;</td> <td>Session: 15</td> <td>Total: 15</td></tr>
+</table>
+
+<p>Now exit out of the program and start it up again. You should see the following.</p>
+<table border=2>
+	<tr><th>Task</th> <th>Session</th> <th>Total</th></tr>
+	<tr><td>A</td>                           <td>0</td> <td>5</td></tr>
+	<tr><td>&nbsp;&nbsp;a1</td>              <td>0</td> <td>5</td></tr>
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;a11</td> <td>0</td> <td>5</td></tr>
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;a12</td> <td>0</td> <td>0</td></tr>
+
+	<tr><td>&nbsp;</td> <td>Session: 0</td> <td>Total: 15</td></tr>
+</table>
+
+<p>Now start the timer and let it run for a minute, then stop it.</p>
+<table border=2>
+	<tr><th>Task</th> <th>Session</th> <th>Total</th></tr>
+	<tr><td>A</td>                           <td>1</td> <td>6</td></tr>
+	<tr><td>&nbsp;&nbsp;a1</td>              <td>1</td> <td>6</td></tr>
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;a11</td> <td>1</td> <td>6</td></tr>
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;a12</td> <td>0</td> <td>0</td></tr>
+
+	<tr><td>&nbsp;</td> <td>Session: 3</td> <td>Total: 18</td></tr>
+</table>
+
+<p>Since a parent task can have a timer active on it, it needs to be included in the summary 
+Session and Total times. So, in this example, the Session time will jump three minutes for every
+minute the timer is active.</p>

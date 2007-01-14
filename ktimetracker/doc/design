@@ -1,0 +1,143 @@
+This document is meant to provide some documentation of rough consens
+of where karm should be going and how things should be done.
+
+It does not represent something set in stone. Things can be discussed
+and changed.
+---------------------------------------------------------------------
+
+* karm should not interfere if the user wants to run multiple tasks at
+  the same time that add up to more that 100%.
+  
+  It'd be nice though to have the possibility to have one task at a time
+  only (currently through double click).
+  
+  Or to let tasks' shares add up to 100%. Maybe through the context menu
+  ("share time with other task").
+
+* tasks should update their own time and pass changes on down to the root.
+  The root is responsable for updating the status bar.
+
+Subject:  Re: [Kde-pim] karm: how tasks should work
+From:     Scott Monachello <smonach@cox.net>
+Date:     2002-10-26 9:38:23
+
+On Thursday 24 October 2002 06:37 pm, tomas pospisek wrote:
+> OK guys, I'm moving this into public space. I think we're open source so
+> it's here where these things should be discussed. I hope citing your
+> proposition in public is fine with you Scott. So here it comes,
+> reformatted to fit into a mail:
+>
+> Scott Monachello propopsed [reformatted by tpo]
+>
+> > Requirements for Karm Subtask Functions
+> >
+> > This is how HEAD currently operates.
+> > Id  Description
+> > ---------------------------------------------------------------------
+> > 1   Karm shall provide a hierarchical structure of tasks. If a task
+> >     has at least one subtask it will be referred to as a parent task.
+> >     If a task has no children it will be referred to as a leaf task.
+> >     If a task has no parent tasks it will be referred to as a root
+> >     task.
+> > 2   A new task can be created as a child of any existing task.
+> > 2.1   If the parent had a timer active, it will continue to be active
+>
+> It depends on how you start it. If you double click it. Any other timer
+> will be stopped and the new task started. If you start it through the
+> start button, both tasks will be active. This a bug IMO. See at the bottom
+> for my proposal.
+>
+> > 2.2   The session time for the parent will not be changed by adding
+> >       the new child task.
+> > 2.3   The total time for the parent will not be changed by adding a
+> >       the new child task.
+> > 3     Any task (parent, leaf, or root) may have an independent timer.
+> > 4     The time (both session and total) for a parent will be the sum
+> >       of its independent timer and the sum of all of its child timers.
+> >
+> > Unstable Development
+> > This is my proposal for how Unstable_Development should operate. I
+> > changed 2.1 - 4 and added and added 2.2.1 and 1008.
+> >
+> > Id  Description
+> > ---------------------------------------------------------------------
+> > 1   Karm shall provide a hierarchical structure of tasks. If a task
+> >     has at least one subtask it will be referred to as a parent task.
+> >     If a task has no children it will be referred to as a leaf task.
+> >     If a task has no parent tasks it will be referred to as a root
+> >     task.
+> > 2   A new task can be created as a child of any existing task.
+> > 2.1 If the parent had a timer active, it will be deactivated
+> > 2.2 The session time for the parent will set to zero
+> > 2.2.1       The session time for the child will be initialized to the last
+> >     session time of the parent.
+> > 2.3 The total time for the parent will be set to zero.
+> > 2.3.1       The total time for the parent will be initialized to the last
+> >     total time of the parent.
+> > 3   Only a leaf task may have a timer. A parent may not have its own
+> >     timer.
+> > 4   The time (both session and total) for a parent will be the sum
+> >     only of its child timers.
+>
+> I see where you want to go, but I think it's not the right direction for
+> two reasons:
+>
+> 1. Let's say I'm working on karm - I have a generic task "karm". Now I
+>    start working on the docu and add a subtask "docu". Right now I can
+>    switch between a generic task "working on karm" and more specific
+>    subtask "docu". Times are added together at the task "karm". That makes
+>    sense IMO. If I don't want to be specific I can - if I do want to be
+>    more precise I can as well. With your proposal this is not possible any
+>    more.
+>
+> 2. You break current setups. People are (I guess) using karm for real life
+>    things. When you change the behaveour to what you propose this
+>    force them to reorganize their trees. As a user, personally I'm not
+>    looking forward having to do this.
+>
+> My proposition is:
+>
+> Id    Description
+> ---------------------------------------------------------------------
+> 2.1   If a new task is double clicked or started with the start
+>       button the previous task is stopped.
+
+So, only one task is ever active at one time, right? Tasks should be more like 
+radio boxes rather than check boxes.
+
+> 2.1.1 If someone feels like it s/he can add an entry/functionality into
+>       the context menu of a task to have it share proportionally the
+>       time being stopped with other tasks currently running. All the
+>         times always add up to 100%.
+>         This can be useful when doing >1 task at a time (compiling and
+>         phoning f.ex.)
+
+I've been thinking about something along these lines too. I think it's a good 
+idea but can't quite see how the interface should work.
+
+>
+> The rest stays the same as in HEAD.
+>
+> Additionaly I propose:
+>
+> Id    Description
+> ---------------------------------------------------------------------
+> 5     Times can be dragged and dropped, whereby they get transferred and
+>         added to the destination.
+> 6     We move to scheme where times have a beginning and an ending and
+>       not just an absolute value.
+>
+> Comments?
+> *t
+>
+> PS: Please follow up to the mailing list.
+
+Ok. So, I'll undo the changes related to:
+* summing only leaf tasks
+* disallowing edits on parent tasks
+_______________________________________________
+kde-pim mailing list
+kde-pim@mail.kde.org
+http://mail.kde.org/mailman/listinfo/kde-pim
+kde-pim home page at http://pim.kde.org/
+        
