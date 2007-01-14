@@ -99,6 +99,7 @@ class MainWindow : public KParts::MainWindow
     void updateTime( long, long );
     void updateStatusBar();
     void exportcsvHistory();
+    void slotedithistory();
     void print();
     void slotSelectionChanged();
     void contextMenuRequest( Q3ListViewItem*, const QPoint&, int );

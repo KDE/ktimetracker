@@ -8,6 +8,7 @@
     <Action name="import_planner" />
     <Action name="export_times" />
     <Action name="export_history" />
+    <Action name="edit_history" />
   </Menu>
   <Menu name="clock" >
     <text>&amp;Clock</text>

@@ -119,7 +119,10 @@ class KarmStorage
     /* Close calendar and clear view.  Release lock if holding one. */
     void closeStorage(TaskView* view);
 
-    /*
+    /** list of all events */
+    KCal::Event::List rawevents();
+
+    /**
      * Save all tasks and their totals to an iCalendar file.
      *
      * All tasks must have an associated VTODO object already created in the

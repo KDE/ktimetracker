@@ -129,6 +129,12 @@ void MainWindow::slotSelectionChanged()
   actionMarkAsIncomplete->setEnabled(item && item->isComplete());
 }
 
+void MainWindow::slotedithistory()
+{
+  kDebug(5970) << "This is slotedithistory" << endl;
+  _taskView->listallevents();
+}
+
 // This is _old_ code, but shows how to enable/disable add comment menu item.
 // We'll need this kind of logic when comments are implemented.
 //void MainWindow::timeLoggingChanged(bool on)
@@ -251,7 +257,8 @@ void MainWindow::makeMenus()
   KAction
     *actionKeyBindings,
     *actionNew,
-    *actionNewSub;
+    *actionNewSub,
+    *actionedithistory;
 
   (void) KStandardAction::quit(  this, SLOT( quit() ),  actionCollection());
   (void) KStandardAction::print( this, SLOT( print() ), actionCollection());
@@ -264,9 +271,18 @@ void MainWindow::makeMenus()
   QAction *actionStartNewSession  = new KAction(i18n("Start &New Session"), this);
   actionCollection()->addAction("start_new_session", actionStartNewSession );
   connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
+
+  // Edit history
+  // Show history must be changed into Edit history as soon as you can edit it.
+  actionedithistory = new KAction(i18n("Show history"), this);
+  connect(actionedithistory, SIGNAL(triggered(bool)), SLOT (slotedithistory()));
+  actionCollection()->addAction("edit_history", actionedithistory );
+
+  // Reset all times
   QAction *actionResetAll  = new KAction(i18n("&Reset All Times"), this);
   actionCollection()->addAction("reset_all_times", actionResetAll );
   connect(actionResetAll, SIGNAL(triggered(bool)), SLOT( resetAllTimes() ));
+
   actionStart  = new KAction(KIcon(QString::fromLatin1("1rightarrow")), i18n("&Start"), this);
   actionCollection()->addAction("start", actionStart );
   connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));

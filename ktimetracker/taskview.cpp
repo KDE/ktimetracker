@@ -6,7 +6,9 @@
 #include <q3ptrlist.h>
 #include <q3ptrstack.h>
 #include <Q3Header>
+#include <QHeaderView>
 #include <QString>
+#include <QTableWidget>
 #include <QTextStream>
 #include <QTimer>
 #include <QtXml>
@@ -381,6 +383,34 @@ void TaskView::scheduleSave()
 }
 
 Preferences* TaskView::preferences() { return _preferences; }
+
+QStringList TaskView::listallevents() 
+{
+  kDebug(5970) << "Entering TaskView::listallevents" << endl;
+  QTableWidget* tw=new QTableWidget;
+  QStringList labels;
+  labels << "Task" << "StartTime" << "EndTime";
+  tw->setColumnCount(3);
+  tw->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  tw->setHorizontalHeaderLabels(labels);
+  tw->horizontalHeader()->setStretchLastSection(true);
+  KCal::Event::List eventList = _storage->rawevents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    kDebug(5970) << "Event ID is " << (*i)->uid() << " Task is named " << (*i)->relatedTo()->summary() << " starttime " << (*i)->dtStart() << endl;
+    int row=tw->rowCount();
+    kDebug() << "row=" << row << endl;
+    tw->insertRow(row);
+    QTableWidgetItem* item=new QTableWidgetItem((*i)->relatedTo()->summary());
+    item->setFlags(Qt::ItemIsEnabled);
+    tw->setItem(row,0,item);
+    tw->setItem(row,1,new QTableWidgetItem((*i)->dtStart().toString()));
+    tw->setItem(row,2,new QTableWidgetItem((*i)->dtEnd().toString()));
+  }
+  tw->show(); 
+}
 
 QString TaskView::save()
 {

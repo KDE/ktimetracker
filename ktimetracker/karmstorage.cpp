@@ -28,6 +28,7 @@
 #include <cassert>
 
 #include <QFile>
+#include <QHeaderView>
 #include <QSize>
 #include <q3dict.h>
 #include <QDateTime>
@@ -54,6 +55,7 @@
 #include <karmutility.h>
 #include <kio/netaccess.h>
 #include <kurl.h>
+#include <qtablewidget.h>
 #include <vector>
 #include <kpassworddialog.h>
 #include <kprogressdialog.h>
@@ -303,6 +305,12 @@ void KarmStorage::closeStorage(TaskView* view)
   }
 }
 
+KCal::Event::List KarmStorage::rawevents()
+{
+  kDebug(5970) << "Entering KarmStorage::listallevents" << endl;
+  return _calendar->rawEvents();
+}
+
 QString KarmStorage::save(TaskView* taskview)
 {
   kDebug(5970) << "entering KarmStorage::save" << endl;
@@ -538,10 +546,6 @@ bool KarmStorage::removeTask(Task* task)
       i != eventList.end();
       ++i)
   {
-    //kDebug(5970) << "KarmStorage::removeTask: "
-    //  << (*i)->uid() << " - relatedToUid() "
-    //  << (*i)->relatedToUid()
-    //  << ", relatedTo() = " << (*i)->relatedTo() <<endl;
     if ( (*i)->relatedToUid() == task->uid()
         || ( (*i)->relatedTo()
             && (*i)->relatedTo()->uid() == task->uid()))

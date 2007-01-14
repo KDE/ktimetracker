@@ -73,6 +73,9 @@ class TaskView : public K3ListView
     /** Return list of start/stop events for given date range. */
     QList<HistoryEvent> getHistory(const QDate& from, const QDate& to) const;
 
+    /** List all events */
+    QStringList listallevents();
+
     /** Schedule that we should save very soon */
     void scheduleSave();
 
