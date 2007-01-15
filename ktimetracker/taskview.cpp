@@ -409,7 +409,8 @@ QStringList TaskView::listallevents()
     tw->setItem(row,1,new QTableWidgetItem((*i)->dtStart().toString()));
     tw->setItem(row,2,new QTableWidgetItem((*i)->dtEnd().toString()));
   }
-  tw->show(); 
+  tw->show();
+  return labels;
 }
 
 QString TaskView::save()
