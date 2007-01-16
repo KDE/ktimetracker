@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=KTimeTracker
 GenericName=Personal Time Tracker
+GenericName[el]=Προσωπικός καταγραφέας χρόνου
 GenericName[fr]=Chronomètre individuel de tâches
 GenericName[x-test]=xxPersonal Time Trackerxx
 Exec=ktimetracker  -caption "%c"
