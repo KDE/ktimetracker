@@ -1,3 +1,24 @@
+/*
+ *     Copyright (C) 2007 the ktimetracker developers
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License along
+ *   with this program; if not, write to the
+ *      Free Software Foundation, Inc.
+ *      51 Franklin Street, Fifth Floor
+ *      Boston, MA  02110-1301  USA.
+ *
+ */
+
 #include <QClipboard>
 #include <QFile>
 #include <QLayout>
@@ -387,7 +408,7 @@ Preferences* TaskView::preferences() { return _preferences; }
 QStringList TaskView::listallevents() 
 {
   kDebug(5970) << "Entering TaskView::listallevents" << endl;
-  QTableWidget* tw=new QTableWidget;
+  QTableWidget* tw=new QTableWidget();
   QStringList labels;
   labels << "Task" << "StartTime" << "EndTime";
   tw->setColumnCount(3);
@@ -395,13 +416,9 @@ QStringList TaskView::listallevents()
   tw->setHorizontalHeaderLabels(labels);
   tw->horizontalHeader()->setStretchLastSection(true);
   KCal::Event::List eventList = _storage->rawevents();
-  for(KCal::Event::List::iterator i = eventList.begin();
-      i != eventList.end();
-      ++i)
+  for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
   {
-    kDebug(5970) << "Event ID is " << (*i)->uid() << " Task is named " << (*i)->relatedTo()->summary() << " starttime " << (*i)->dtStart() << endl;
     int row=tw->rowCount();
-    kDebug() << "row=" << row << endl;
     tw->insertRow(row);
     QTableWidgetItem* item=new QTableWidgetItem((*i)->relatedTo()->summary());
     item->setFlags(Qt::ItemIsEnabled);
