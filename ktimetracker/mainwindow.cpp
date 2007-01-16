@@ -254,11 +254,6 @@ void MainWindow::resetAllTimes()
 
 void MainWindow::makeMenus()
 {
-  KAction
-    *actionKeyBindings,
-    *actionNew,
-    *actionNewSub,
-    *actionedithistory;
 
   (void) KStandardAction::quit(  this, SLOT( quit() ),  actionCollection());
   (void) KStandardAction::print( this, SLOT( print() ), actionCollection());
@@ -268,9 +263,16 @@ void MainWindow::makeMenus()
       SLOT(showDialog()),
       actionCollection() );
   (void) KStandardAction::save( this, SLOT( save() ), actionCollection() );
+
+  // Start New Session
   QAction *actionStartNewSession  = new KAction(i18n("Start &New Session"), this);
   actionCollection()->addAction("start_new_session", actionStartNewSession );
   connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
+  actionStartNewSession->setToolTip( i18n("Start a new session") );
+  actionStartNewSession->setWhatsThis( i18n("This will reset the session time "
+                                            "to 0 for all tasks, to start a "
+                                            "new session, without affecting "
+                                            "the totals.") );
 
   // Edit history
   // Show history must be changed into Edit history as soon as you can edit it.
@@ -282,85 +284,16 @@ void MainWindow::makeMenus()
   QAction *actionResetAll  = new KAction(i18n("&Reset All Times"), this);
   actionCollection()->addAction("reset_all_times", actionResetAll );
   connect(actionResetAll, SIGNAL(triggered(bool)), SLOT( resetAllTimes() ));
-
-  actionStart  = new KAction(KIcon(QString::fromLatin1("1rightarrow")), i18n("&Start"), this);
-  actionCollection()->addAction("start", actionStart );
-  connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
-  actionStart->setShortcut(QKeySequence(Qt::Key_S));
-  actionStop  = new KAction(KIcon(QString::fromLatin1("stop")), i18n("S&top"), this);
-  actionCollection()->addAction("stop", actionStop );
-  actionStop->setShortcut(QKeySequence(Qt::Key_S));
-  connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
-  actionStopAll  = new KAction(i18n("Stop &All Timers"), this);
-  actionCollection()->addAction("stopAll", actionStopAll );
-  connect(actionStopAll, SIGNAL(triggered(bool)), _taskView, SLOT( stopAllTimers() ));
-  actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
-  actionStopAll->setEnabled(false);
-
-  actionNew  = new KAction(KIcon(QString::fromLatin1("filenew")), i18n("&New..."), this);
-  actionCollection()->addAction("new_task", actionNew );
-  connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
-  actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
-  actionNewSub  = new KAction(KIcon(QString::fromLatin1("kmultiple")), i18n("New &Subtask..."), this);
-  actionCollection()->addAction("new_sub_task", actionNewSub );
-  connect(actionNewSub, SIGNAL(triggered(bool) ), _taskView, SLOT( newSubTask() ));
-  actionNewSub->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N));
-  actionDelete  = new KAction(KIcon(QString::fromLatin1("editdelete")), i18n("&Delete"), this);
-  actionCollection()->addAction("delete_task", actionDelete );
-  connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
-  actionDelete->setShortcut(QKeySequence(Qt::Key_Delete));
-  actionEdit  = new KAction(KIcon("edit"), i18n("&Edit..."), this);
-  actionCollection()->addAction("edit_task", actionEdit );
-  connect(actionEdit, SIGNAL(triggered(bool) ), _taskView, SLOT( editTask() ));
-  actionEdit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
-//  actionAddComment = new KAction( i18n("&Add Comment..."),
-//      QString::fromLatin1("document"),
-//      Qt::CTRL+Qt::ALT+Qt::Key_E,
-//      _taskView,
-//      SLOT( addCommentToTask() ),
-//      actionCollection(),
-//      "add_comment_to_task");
-  actionMarkAsComplete  = new KAction(KIcon("document"), i18n("&Mark as Complete"), this);
-  actionCollection()->addAction("mark_as_complete", actionMarkAsComplete );
-  connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsComplete() ));
-  actionMarkAsComplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
-  actionMarkAsIncomplete  = new KAction(KIcon("document"), i18n("&Mark as Incomplete"), this);
-  actionCollection()->addAction("mark_as_incomplete", actionMarkAsIncomplete );
-  connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
-  actionMarkAsIncomplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
-  QAction *action  = new KAction(i18n("&Export Times..."), this);
-  actionCollection()->addAction("export_times", action );
-  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
-  action  = new KAction(i18n("Export &History..."), this);
-  actionCollection()->addAction("export_history", action );
-  connect(action, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
-  action  = new KAction(i18n("Import Tasks From &Planner..."), this);
-  actionCollection()->addAction("import_planner", action );
-  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
-
-/*
-  new KAction( i18n("Import E&vents"), 0,
-                            _taskView,
-                            SLOT( loadFromKOrgEvents() ), actionCollection(),
-                            "import_korg_events");
-  */
-
-  setXMLFile( QString::fromLatin1("karmui.rc") );
-  createGUI( 0 );
-
-  // Tool tips must be set after the createGUI.
-  actionKeyBindings->setToolTip( i18n("Configure key bindings") );
-  actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
-                                        "bindings which is specific to karm") );
-  actionStartNewSession->setToolTip( i18n("Start a new session") );
-  actionStartNewSession->setWhatsThis( i18n("This will reset the session time "
-                                            "to 0 for all tasks, to start a "
-                                            "new session, without affecting "
-                                            "the totals.") );
   actionResetAll->setToolTip( i18n("Reset all times") );
   actionResetAll->setWhatsThis( i18n("This will reset the session and total "
                                      "time to 0 for all tasks, to restart from "
                                      "scratch.") );
+
+  // Start timing
+  actionStart  = new KAction(KIcon(QString::fromLatin1("1rightarrow")), i18n("&Start"), this);
+  actionCollection()->addAction("start", actionStart );
+  connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
+  actionStart->setShortcut(QKeySequence(Qt::Key_S));
   actionStart->setToolTip( i18n("Start timing for selected task") );
   actionStart->setWhatsThis( i18n("This will start timing for the selected "
                                   "task.\n"
@@ -370,28 +303,90 @@ void MainWindow::makeMenus()
                                   "double clicking the left mouse "
                                   "button on a given task. This will, however, "
                                   "stop timing of other tasks."));
+
+  // stop timing
+  actionStop  = new KAction(KIcon(QString::fromLatin1("stop")), i18n("S&top"), this);
+  actionCollection()->addAction("stop", actionStop );
+  connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
+  actionStop->setShortcut(QKeySequence(Qt::Key_S));
   actionStop->setToolTip( i18n("Stop timing of the selected task") );
   actionStop->setWhatsThis( i18n("Stop timing of the selected task") );
+  
+  // Stop all timers
+  actionStopAll  = new KAction(i18n("Stop &All Timers"), this);
+  actionCollection()->addAction("stopAll", actionStopAll );
+  connect(actionStopAll, SIGNAL(triggered(bool)), _taskView, SLOT( stopAllTimers() ));
+  actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
+  actionStopAll->setEnabled(false);
   actionStopAll->setToolTip( i18n("Stop all of the active timers") );
   actionStopAll->setWhatsThis( i18n("Stop all of the active timers") );
 
+  // New task
+  actionNew  = new KAction(KIcon(QString::fromLatin1("filenew")), i18n("&New..."), this);
+  actionCollection()->addAction("new_task", actionNew );
+  connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
+  actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
+
+  // New subtask
+  actionNewSub  = new KAction(KIcon(QString::fromLatin1("kmultiple")), i18n("New &Subtask..."), this);
+  actionCollection()->addAction("new_sub_task", actionNewSub );
+  connect(actionNewSub, SIGNAL(triggered(bool) ), _taskView, SLOT( newSubTask() ));
+  actionNewSub->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N));
   actionNew->setToolTip( i18n("Create new top level task") );
   actionNew->setWhatsThis( i18n("This will create a new top level task.") );
 
+  // Delete task
+  actionDelete  = new KAction(KIcon(QString::fromLatin1("editdelete")), i18n("&Delete"), this);
+  actionCollection()->addAction("delete_task", actionDelete );
+  connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
+  actionDelete->setShortcut(QKeySequence(Qt::Key_Delete));
   actionDelete->setToolTip( i18n("Delete selected task") );
   actionDelete->setWhatsThis( i18n("This will delete the selected task and "
                                    "all its subtasks.") );
 
+  // Edit task
+  actionEdit  = new KAction(KIcon("edit"), i18n("&Edit..."), this);
+  actionCollection()->addAction("edit_task", actionEdit );
+  connect(actionEdit, SIGNAL(triggered(bool) ), _taskView, SLOT( editTask() ));
+  actionEdit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
   actionEdit->setToolTip( i18n("Edit name or times for selected task") );
   actionEdit->setWhatsThis( i18n("This will bring up a dialog box where you "
                                  "may edit the parameters for the selected "
                                  "task."));
-  //actionAddComment->setToolTip( i18n("Add a comment to a task") );
-  //actionAddComment->setWhatsThis( i18n("This will bring up a dialog box where "
-  //                                     "you can add a comment to a task. The "
-  //                                     "comment can for instance add information on what you "
-  //                                     "are currently doing. The comment will "
-  //                                     "be logged in the log file."));
+
+  // Mark as complete
+  actionMarkAsComplete  = new KAction(KIcon("document"), i18n("&Mark as Complete"), this);
+  actionCollection()->addAction("mark_as_complete", actionMarkAsComplete );
+  connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsComplete() ));
+  actionMarkAsComplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
+
+  // Mark as incomplete
+  actionMarkAsIncomplete  = new KAction(KIcon("document"), i18n("&Mark as Incomplete"), this);
+  actionCollection()->addAction("mark_as_incomplete", actionMarkAsIncomplete );
+  connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
+  actionMarkAsIncomplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
+
+  // Export times
+  QAction *action  = new KAction(i18n("&Export Times..."), this);
+  actionCollection()->addAction("export_times", action );
+  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
+
+  // Export history
+  action  = new KAction(i18n("Export &History..."), this);
+  actionCollection()->addAction("export_history", action );
+  connect(action, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
+
+  // Import tasks from Planner
+  action  = new KAction(i18n("Import Tasks From &Planner..."), this);
+  actionCollection()->addAction("import_planner", action );
+  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
+
+  setXMLFile( QString::fromLatin1("karmui.rc") );
+  createGUI( 0 );
+
+  actionKeyBindings->setToolTip( i18n("Configure key bindings") );
+  actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
+                                        "bindings which is specific to karm") );
 
   slotSelectionChanged();
 }
