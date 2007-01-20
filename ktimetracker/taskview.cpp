@@ -408,26 +408,60 @@ Preferences* TaskView::preferences() { return _preferences; }
 QStringList TaskView::listallevents() 
 {
   kDebug(5970) << "Entering TaskView::listallevents" << endl;
-  QTableWidget* tw=new QTableWidget();
+  historywidget=new QTableWidget();
+  connect (historywidget, SIGNAL(cellChanged(int, int)), this, SLOT (historywidgetchanged(int, int)));
   QStringList labels;
-  labels << "Task" << "StartTime" << "EndTime";
-  tw->setColumnCount(3);
-  tw->setEditTriggers(QAbstractItemView::NoEditTriggers);
-  tw->setHorizontalHeaderLabels(labels);
-  tw->horizontalHeader()->setStretchLastSection(true);
+  labels << "Task" << "StartTime" << "EndTime" << "Comment" << "uid";
+  historywidget->setColumnCount(5);
+  historywidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
+  historywidget->setHorizontalHeaderLabels(labels);
+  historywidget->horizontalHeader()->setStretchLastSection(true);
   KCal::Event::List eventList = _storage->rawevents();
   for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
   {
-    int row=tw->rowCount();
-    tw->insertRow(row);
+    int row=historywidget->rowCount();
+    historywidget->insertRow(row);
     QTableWidgetItem* item=new QTableWidgetItem((*i)->relatedTo()->summary());
     item->setFlags(Qt::ItemIsEnabled);
-    tw->setItem(row,0,item);
-    tw->setItem(row,1,new QTableWidgetItem((*i)->dtStart().toString()));
-    tw->setItem(row,2,new QTableWidgetItem((*i)->dtEnd().toString()));
+    historywidget->setItem(row,0,item);
+    historywidget->setItem(row,1,new QTableWidgetItem((*i)->dtStart().toString()));
+    historywidget->setItem(row,2,new QTableWidgetItem((*i)->dtEnd().toString()));
+    historywidget->setItem(row,4,new QTableWidgetItem((*i)->uid()));
+    kDebug() << "(*i)->comments.count() ="  << (*i)->comments().count() << endl;
+    if ((*i)->comments().count() > 0)
+    {
+      historywidget->setItem(row,3,new QTableWidgetItem((*i)->comments().last()));
+    }
   }
-  tw->show();
+  historywidget->show();
+  historywidgetchanged(-1,-1); // signal that we are ready
+  kDebug() << "Exiting listallevents" << endl;
   return labels;
+}
+
+void TaskView::historywidgetchanged(int row, int col)
+{
+  kDebug(5970) << "Entering historywidgetchanged" << endl;
+  kDebug(5970) << "row =" << row << " col =" << col << endl;
+  static bool ready=false;
+  if (row==-1) ready=true;
+  else if (ready && (col==3))
+  {
+    kDebug(5970) << historywidget->item(row,col)->text() << endl;
+    QString uid=historywidget->item(row,4)->text();
+    kDebug() << "uid = " << uid << endl;
+    KCal::Event::List eventList = _storage->rawevents();
+    for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
+    {
+      kDebug() << "row=" << row << " col=" << col << endl;
+      if ((*i)->uid() == uid)
+      {
+        (*i)->addComment(historywidget->item(row,col)->text()); 
+        kDebug() << "added " << historywidget->item(row,col)->text() << endl;
+      }
+    }
+    ready=false;
+  }
 }
 
 QString TaskView::save()

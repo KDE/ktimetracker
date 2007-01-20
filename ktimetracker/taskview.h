@@ -36,6 +36,7 @@
 #include "karmstorage.h"
 #include "reportcriteria.h"
 #include <QTimer>
+#include <QTableWidget>
 
 class Q3ListBox;
 class QString;
@@ -111,6 +112,9 @@ class TaskView : public K3ListView
                      Task* parent = 0 );
 
   public slots:
+    /** Something in the history widget changed */
+    void historywidgetchanged(int row, int col);
+
     /** Save to persistent storage. */
     QString save();
 
@@ -230,6 +234,7 @@ class TaskView : public K3ListView
     DesktopTracker* _desktopTracker;
     bool _isloading;
     Task* dragTask;
+    QTableWidget* historywidget;
 
     //KCal::CalendarLocal _calendar;
     KarmStorage * _storage;
