@@ -27,7 +27,7 @@
 #include "tray.h"
 #include "version.h"
 
-#include <kinstance.h>
+#include <kcomponentdata.h>
 #include <kaction.h>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
@@ -59,7 +59,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
   new KarmPartAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/Karm", this);
     // we need an instance
-    setInstance( karmPartFactory::instance() );
+    setComponentData( karmPartFactory::componentData() );
 
     // this should be your custom internal widget
     _taskView = new TaskView( parentWidget );
@@ -372,7 +372,7 @@ void karmPart::fileSaveAs()
 #include <kaboutdata.h>
 #include <klocale.h>
 
-KInstance*  karmPartFactory::s_instance = 0L;
+KComponentData *karmPartFactory::s_instance = 0L;
 KAboutData* karmPartFactory::s_about = 0L;
 
 karmPartFactory::karmPartFactory()
@@ -401,15 +401,15 @@ KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, QObject 
     return obj;
 }
 
-KInstance* karmPartFactory::instance()
+const KComponentData &karmPartFactory::componentData()
 {
     if( !s_instance )
     {
         s_about = new KAboutData("karmpart", I18N_NOOP("karmPart"), "0.1");
         s_about->addAuthor("Thorsten Staerk", 0, "thorsten@staerk.de");
-        s_instance = new KInstance(s_about);
+        s_instance = new KComponentData(s_about);
     }
-    return s_instance;
+    return *s_instance;
 }
 
 extern "C"

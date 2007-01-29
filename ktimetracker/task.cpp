@@ -329,15 +329,15 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
   // time the file is opened.
   // todo->setDtStart( current );
 
-  todo->setCustomProperty( kapp->instanceName(),
+  todo->setCustomProperty( KGlobal::mainComponent().componentName(),
       QByteArray( "totalTaskTime" ), QString::number( _time ) );
-  todo->setCustomProperty( kapp->instanceName(),
+  todo->setCustomProperty( KGlobal::mainComponent().componentName(),
       QByteArray( "totalSessionTime" ), QString::number( _sessionTime) );
 
   if (getDesktopStr().isEmpty())
-    todo->removeCustomProperty(kapp->instanceName(), QByteArray("desktopList"));
+    todo->removeCustomProperty(KGlobal::mainComponent().componentName(), QByteArray("desktopList"));
   else
-    todo->setCustomProperty( kapp->instanceName(),
+    todo->setCustomProperty( KGlobal::mainComponent().componentName(),
         QByteArray( "desktopList" ), getDesktopStr() );
 
   todo->setOrganizer( Preferences::instance()->userRealName() );
@@ -359,18 +359,18 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   _comment = incident->description();
 
   ok = false;
-  minutes = incident->customProperty( kapp->instanceName(),
+  minutes = incident->customProperty( KGlobal::mainComponent().componentName(),
       QByteArray( "totalTaskTime" )).toInt( &ok );
   if ( !ok )
     minutes = 0;
 
   ok = false;
-  sessionMinutes = incident->customProperty( kapp->instanceName(),
+  sessionMinutes = incident->customProperty( KGlobal::mainComponent().componentName(),
       QByteArray( "totalSessionTime" )).toInt( &ok );
   if ( !ok )
     sessionMinutes = 0;
 
-  QString desktopList = incident->customProperty( kapp->instanceName(),
+  QString desktopList = incident->customProperty( KGlobal::mainComponent().componentName(),
       QByteArray( "desktopList" ) );
   QStringList desktopStrList = desktopList.split( QString::fromLatin1(","),
       QString::SkipEmptyParts );
