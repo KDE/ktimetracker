@@ -222,16 +222,16 @@ void MainWindow::startStatusBar()
   statusBar()->insertPermanentItem( i18n("Total" ), 1, 0);
 }
 
-void MainWindow::saveProperties( KConfig* cfg )
+void MainWindow::saveProperties( KConfigGroup &cfg )
 {
   _taskView->stopAllTimers();
   _taskView->save();
-  cfg->writeEntry( "WindowShown", isVisible());
+  cfg.writeEntry( "WindowShown", isVisible());
 }
 
-void MainWindow::readProperties( KConfig* cfg )
+void MainWindow::readProperties( KConfigGroup &cfg )
 {
-  if( cfg->readEntry( "WindowShown", true ))
+  if( cfg.readEntry( "WindowShown", true ))
     show();
 }
 
