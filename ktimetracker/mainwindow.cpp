@@ -229,7 +229,7 @@ void MainWindow::saveProperties( KConfigGroup &cfg )
   cfg.writeEntry( "WindowShown", isVisible());
 }
 
-void MainWindow::readProperties( KConfigGroup &cfg )
+void MainWindow::readProperties( const KConfigGroup &cfg )
 {
   if( cfg.readEntry( "WindowShown", true ))
     show();
