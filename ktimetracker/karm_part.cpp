@@ -159,11 +159,11 @@ void karmPart::makeMenus()
   QAction *actionResetAll  = new KAction(i18n("&Reset All Times"), this);
   actionCollection()->addAction("reset_all_times", actionResetAll );
   connect(actionResetAll, SIGNAL(triggered(bool)), SLOT( resetAllTimes() ));
-  actionStart  = new KAction(KIcon("1rightarrow"), i18n("&Start"), this);
+  actionStart  = new KAction(KIcon("arrow-right"), i18n("&Start"), this);
   actionCollection()->addAction("start", actionStart );
   connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
   actionStart->setShortcut(QKeySequence(Qt::Key_S));
-  actionStop  = new KAction(KIcon("stop"), i18n("S&top"), this);
+  actionStop  = new KAction(KIcon("process-stop"), i18n("S&top"), this);
   actionCollection()->addAction("stop", actionStop );
   connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
   actionStopAll  = new KAction(i18n("Stop &All Timers"), this);
@@ -172,7 +172,7 @@ void karmPart::makeMenus()
   actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
   actionStopAll->setEnabled(false);
 
-  actionNew  = new KAction(KIcon("filenew"), i18n("&New..."), this);
+  actionNew  = new KAction(KIcon("document-new"), i18n("&New..."), this);
   actionCollection()->addAction("new_task", actionNew );
   connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
   actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
@@ -180,7 +180,7 @@ void karmPart::makeMenus()
   actionCollection()->addAction("new_sub_task", actionNewSub );
   connect(actionNewSub, SIGNAL(triggered(bool) ), _taskView, SLOT( newSubTask() ));
   actionNewSub->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N));
-  actionDelete  = new KAction(KIcon("editdelete"), i18n("&Delete"), this);
+  actionDelete  = new KAction(KIcon("edit-delete"), i18n("&Delete"), this);
   actionCollection()->addAction("delete_task", actionDelete );
   connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
   actionDelete->setShortcut(QKeySequence(Qt::Key_Delete));

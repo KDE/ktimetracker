@@ -290,7 +290,7 @@ void MainWindow::makeMenus()
                                      "scratch.") );
 
   // Start timing
-  actionStart  = new KAction(KIcon(QString::fromLatin1("1rightarrow")), i18n("&Start"), this);
+  actionStart  = new KAction(KIcon(QString::fromLatin1("arrow-right")), i18n("&Start"), this);
   actionCollection()->addAction("start", actionStart );
   connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
   actionStart->setShortcut(QKeySequence(Qt::Key_S));
@@ -305,7 +305,7 @@ void MainWindow::makeMenus()
                                   "stop timing of other tasks."));
 
   // stop timing
-  actionStop  = new KAction(KIcon(QString::fromLatin1("stop")), i18n("S&top"), this);
+  actionStop  = new KAction(KIcon(QString::fromLatin1("process-stop")), i18n("S&top"), this);
   actionCollection()->addAction("stop", actionStop );
   connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
   actionStop->setShortcut(QKeySequence(Qt::Key_S));
@@ -322,7 +322,7 @@ void MainWindow::makeMenus()
   actionStopAll->setWhatsThis( i18n("Stop all of the active timers") );
 
   // New task
-  actionNew  = new KAction(KIcon(QString::fromLatin1("filenew")), i18n("&New..."), this);
+  actionNew  = new KAction(KIcon(QString::fromLatin1("document-new")), i18n("&New..."), this);
   actionCollection()->addAction("new_task", actionNew );
   connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
   actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
@@ -336,7 +336,7 @@ void MainWindow::makeMenus()
   actionNew->setWhatsThis( i18n("This will create a new top level task.") );
 
   // Delete task
-  actionDelete  = new KAction(KIcon(QString::fromLatin1("editdelete")), i18n("&Delete"), this);
+  actionDelete  = new KAction(KIcon(QString::fromLatin1("edit-delete")), i18n("&Delete"), this);
   actionCollection()->addAction("delete_task", actionDelete );
   connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
   actionDelete->setShortcut(QKeySequence(Qt::Key_Delete));

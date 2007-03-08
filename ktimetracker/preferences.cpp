@@ -124,7 +124,7 @@ void Preferences::makeBehaviorPage()
 
 void Preferences::makeDisplayPage()
 {
-  KIcon icon = KIcon( SmallIconSet( "viewmag", K3Icon::SizeMedium ) );
+  KIcon icon = KIcon( SmallIconSet( "zoom-original", K3Icon::SizeMedium ) );
 
   QFrame* displayPage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( displayPage, i18n("Display"));
