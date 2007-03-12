@@ -314,10 +314,10 @@ void karmPart::setModified(bool modified)
 bool karmPart::openFile()
 {
     // m_file is always local so we can use QFile on it
-    _taskView->load(m_file);
+    _taskView->load(localFilePath());
 
     // just for fun, set the status bar
-    emit setStatusBarText( m_url.prettyUrl() );
+    emit setStatusBarText( url().prettyUrl() );
 
     return true;
 }
@@ -335,7 +335,7 @@ bool karmPart::saveFile()
         return false;
 
     // m_file is always local, so we use QFile
-    QFile file(m_file);
+    QFile file(localFilePath());
     if (file.open(QIODevice::WriteOnly) == false)
         return false;
 
