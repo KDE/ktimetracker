@@ -445,6 +445,23 @@ void TaskView::historywidgetchanged(int row, int col)
   kDebug(5970) << "row =" << row << " col =" << col << endl;
   static bool ready=false;
   if (row==-1) ready=true;
+  else if (ready && (col==1)) // EndDate
+  {
+    kDebug(5970) << "user changed StartDate to " << historywidget->item(row,col)->text() << endl;
+    QString uid=historywidget->item(row,4)->text();
+    kDebug() << "uid = " << uid << endl;
+    KCal::Event::List eventList = _storage->rawevents();
+    for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
+    {
+      kDebug() << "row=" << row << " col=" << col << endl;
+      if ((*i)->uid() == uid)
+      {
+        (*i)->setDtStart(KDateTime::fromString(historywidget->item(row,col)->text())); 
+        kDebug() << "Program SetDtStart to " << historywidget->item(row,col)->text() << endl;
+      }
+    }
+    ready=false;
+  }
   else if (ready && (col==2)) // EndDate
   {
     kDebug(5970) << "user changed EndDate to " << historywidget->item(row,col)->text() << endl;
