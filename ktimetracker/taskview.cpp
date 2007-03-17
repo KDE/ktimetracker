@@ -406,6 +406,11 @@ void TaskView::scheduleSave()
 Preferences* TaskView::preferences() { return _preferences; }
 
 QStringList TaskView::listallevents() 
+/* 
+The historywidget is shown on user request. It lists all events in the calendar.
+This procedure is triggered on user request. 
+It shows the historywidget and connects the change signal to historywidgetchanged.
+*/
 {
   kDebug(5970) << "Entering TaskView::listallevents" << endl;
   historywidget=new QTableWidget();
@@ -416,6 +421,7 @@ QStringList TaskView::listallevents()
   historywidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
   historywidget->setHorizontalHeaderLabels(labels);
   historywidget->horizontalHeader()->setStretchLastSection(true);
+  historywidget->setColumnHidden(4,true);  // hide the "UID" column
   KCal::Event::List eventList = _storage->rawevents();
   for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
   {
@@ -440,6 +446,11 @@ QStringList TaskView::listallevents()
 }
 
 void TaskView::historywidgetchanged(int row, int col)
+/* 
+The historywidget contains all events and can be shown with File | Edit history. 
+The user can change dates and comments in there.
+A change triggers this procedure, it shall store the new values in the calendar.
+*/
 {
   kDebug(5970) << "Entering historywidgetchanged" << endl;
   kDebug(5970) << "row =" << row << " col =" << col << endl;
