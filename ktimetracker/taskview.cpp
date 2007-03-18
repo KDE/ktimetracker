@@ -414,6 +414,7 @@ It shows the historywidget and connects the change signal to historywidgetchange
 {
   kDebug(5970) << "Entering TaskView::listallevents" << endl;
   historywidget=new QTableWidget();
+  historywidget->setWindowFlags(Qt::WindowContextHelpButtonHint);
   connect (historywidget, SIGNAL(cellChanged(int, int)), this, SLOT (historywidgetchanged(int, int)));
   QStringList labels;
   labels << "Task" << "StartTime" << "EndTime" << "Comment" << "uid";
@@ -429,6 +430,7 @@ It shows the historywidget and connects the change signal to historywidgetchange
     historywidget->insertRow(row);
     QTableWidgetItem* item=new QTableWidgetItem((*i)->relatedTo()->summary());
     item->setFlags(Qt::ItemIsEnabled);
+    item->setWhatsThis(i18n("You can change this task's comment, start time and end time."));
     historywidget->setItem(row,0,item);
     historywidget->setItem(row,1,new QTableWidgetItem((*i)->dtStart().toString()));
     historywidget->setItem(row,2,new QTableWidgetItem((*i)->dtEnd().toString()));
