@@ -442,8 +442,8 @@ It shows the historywidget and connects the change signal to historywidgetchange
     }
   }
   historywidget->resizeColumnsToContents();
+  historywidget->resize(historywidget->columnWidth(0)+historywidget->columnWidth(1)+historywidget->columnWidth(2)+historywidget->columnWidth(3),height());
   historywidget->show();
-  historywidgetchanged(-1,-1); // signal that we are ready
   kDebug() << "Exiting listallevents" << endl;
   return labels;
 }
