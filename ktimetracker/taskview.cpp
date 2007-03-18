@@ -455,58 +455,56 @@ A change triggers this procedure, it shall store the new values in the calendar.
 {
   kDebug(5970) << "Entering historywidgetchanged" << endl;
   kDebug(5970) << "row =" << row << " col =" << col << endl;
-  static bool ready=false;  // FIXME: crashes if historywidget is opened the second time
-  if (row==-1) ready=true;
-  else if (ready && (col==1)) // StartDate
+  if (historywidget->item(row,4))  // the user did the change, not the program
   {
-    kDebug(5970) << "user changed StartDate to " << historywidget->item(row,col)->text() << endl;
-    QString uid=historywidget->item(row,4)->text();
-    kDebug() << "uid = " << uid << endl;
-    KCal::Event::List eventList = _storage->rawevents();
-    for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
+    if (col==1) // StartDate changed
     {
-      kDebug() << "row=" << row << " col=" << col << endl;
-      if ((*i)->uid() == uid)
+      kDebug(5970) << "user changed StartDate to " << historywidget->item(row,col)->text() << endl;
+      QString uid=historywidget->item(row,4)->text();
+      kDebug() << "uid = " << uid << endl;
+      KCal::Event::List eventList = _storage->rawevents();
+      for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
       {
-        (*i)->setDtStart(KDateTime::fromString(historywidget->item(row,col)->text())); 
-        kDebug() << "Program SetDtStart to " << historywidget->item(row,col)->text() << endl;
+        kDebug() << "row=" << row << " col=" << col << endl;
+        if ((*i)->uid() == uid)
+        {
+          (*i)->setDtStart(KDateTime::fromString(historywidget->item(row,col)->text())); 
+          kDebug() << "Program SetDtStart to " << historywidget->item(row,col)->text() << endl;
+        }
       }
     }
-    ready=false;
-  }
-  else if (ready && (col==2)) // EndDate
-  {
-    kDebug(5970) << "user changed EndDate to " << historywidget->item(row,col)->text() << endl;
-    QString uid=historywidget->item(row,4)->text();
-    kDebug() << "uid = " << uid << endl;
-    KCal::Event::List eventList = _storage->rawevents();
-    for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
+    if (col==2) // EndDate changed
     {
-      kDebug() << "row=" << row << " col=" << col << endl;
-      if ((*i)->uid() == uid)
+      kDebug(5970) << "user changed EndDate to " << historywidget->item(row,col)->text() << endl;
+      QString uid=historywidget->item(row,4)->text();
+      kDebug() << "uid = " << uid << endl;
+      KCal::Event::List eventList = _storage->rawevents();
+      for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
       {
-        (*i)->setDtEnd(KDateTime::fromString(historywidget->item(row,col)->text())); 
-        kDebug() << "Program SetDtEnd to " << historywidget->item(row,col)->text() << endl;
+        kDebug() << "row=" << row << " col=" << col << endl;
+        if ((*i)->uid() == uid)
+        {
+          (*i)->setDtEnd(KDateTime::fromString(historywidget->item(row,col)->text())); 
+          kDebug() << "Program SetDtEnd to " << historywidget->item(row,col)->text() << endl;
+        }
       }
     }
-    ready=false;
-  }
-  else if (ready && (col==3)) // Comment
-  {
-    kDebug(5970) << historywidget->item(row,col)->text() << endl;
-    QString uid=historywidget->item(row,4)->text();
-    kDebug() << "uid = " << uid << endl;
-    KCal::Event::List eventList = _storage->rawevents();
-    for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
+    if (col==3) // Comment changed
     {
-      kDebug() << "row=" << row << " col=" << col << endl;
-      if ((*i)->uid() == uid)
+      kDebug(5970) << "user changed Comment to " << historywidget->item(row,col)->text() << endl;
+      QString uid=historywidget->item(row,4)->text();
+      kDebug() << "uid = " << uid << endl;
+      KCal::Event::List eventList = _storage->rawevents();
+      for(KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
       {
-        (*i)->addComment(historywidget->item(row,col)->text()); 
-        kDebug() << "added " << historywidget->item(row,col)->text() << endl;
+        kDebug() << "row=" << row << " col=" << col << endl;
+        if ((*i)->uid() == uid)
+        {
+          (*i)->addComment(historywidget->item(row,col)->text()); 
+          kDebug() << "added " << historywidget->item(row,col)->text() << endl;
+        }
       }
     }
-    ready=false;
   }
 }
 
