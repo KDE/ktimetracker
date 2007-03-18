@@ -439,6 +439,7 @@ It shows the historywidget and connects the change signal to historywidgetchange
       historywidget->setItem(row,3,new QTableWidgetItem((*i)->comments().last()));
     }
   }
+  historywidget->resizeColumnsToContents();
   historywidget->show();
   historywidgetchanged(-1,-1); // signal that we are ready
   kDebug() << "Exiting listallevents" << endl;
@@ -454,9 +455,9 @@ A change triggers this procedure, it shall store the new values in the calendar.
 {
   kDebug(5970) << "Entering historywidgetchanged" << endl;
   kDebug(5970) << "row =" << row << " col =" << col << endl;
-  static bool ready=false;
+  static bool ready=false;  // FIXME: crashes if historywidget is opened the second time
   if (row==-1) ready=true;
-  else if (ready && (col==1)) // EndDate
+  else if (ready && (col==1)) // StartDate
   {
     kDebug(5970) << "user changed StartDate to " << historywidget->item(row,col)->text() << endl;
     QString uid=historywidget->item(row,4)->text();
@@ -490,7 +491,7 @@ A change triggers this procedure, it shall store the new values in the calendar.
     }
     ready=false;
   }
-  else if (ready && (col==3))
+  else if (ready && (col==3)) // Comment
   {
     kDebug(5970) << historywidget->item(row,col)->text() << endl;
     QString uid=historywidget->item(row,4)->text();
