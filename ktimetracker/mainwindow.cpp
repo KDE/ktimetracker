@@ -12,7 +12,7 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kkeydialog.h>
+#include <kshortcutsdialog.h>
 #include <klocale.h>            // i18n
 #include <kmessagebox.h>
 #include <kstatusbar.h>         // statusBar()
@@ -237,7 +237,7 @@ void MainWindow::readProperties( const KConfigGroup &cfg )
 
 void MainWindow::keyBindings()
 {
-  KKeyDialog::configure( actionCollection(), KKeyChooser::LetterShortcutsAllowed, this );
+  KShortcutsDialog::configure( actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this );
 }
 
 void MainWindow::startNewSession()
