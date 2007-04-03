@@ -20,21 +20,15 @@
  *
  */
 
-#include <Q3ButtonGroup>
+#include <Q3GroupBox>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
-#include <QPixmap>
-#include <QPushButton>
-#include <QString>
-#include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-#include <kiconloader.h>
 #include <klocale.h>            // i18n
-#include <kwm.h>
 
 #include "printdialog.h"
 #include <libkdepim/kdateedit.h>
