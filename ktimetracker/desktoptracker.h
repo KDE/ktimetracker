@@ -24,7 +24,7 @@
 
 #include <vector>
 
-#include <kwinmodule.h>
+#include <kwm.h>
 
 #include "desktoplist.h"
 
@@ -52,7 +52,7 @@ class DesktopTracker: public QObject
 
   private: // member variables
 #ifdef Q_WS_X11
-    KWinModule kWinModule;
+    KWM kWinModule;
 #endif
 
     // define vectors for at most 16 virtual desktops

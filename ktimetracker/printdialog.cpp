@@ -34,7 +34,7 @@
 
 #include <kiconloader.h>
 #include <klocale.h>            // i18n
-#include <kwinmodule.h>
+#include <kwm.h>
 
 #include "printdialog.h"
 #include <libkdepim/kdateedit.h>
