@@ -1,6 +1,6 @@
 project(karm)
 
-macro_bool_to_01(X11_Xss_FOUND HAVE_LIBXSS)
+macro_bool_to_01(X11_Xss_LIB HAVE_LIBXSS)
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
 
