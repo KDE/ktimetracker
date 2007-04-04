@@ -22,6 +22,7 @@
 
 #include <QTimer>
 #include <kdebug.h>
+#include <kwm.h>
 
 #include "desktoptracker.h"
 
@@ -32,11 +33,11 @@ DesktopTracker::DesktopTracker ()
 {
   // Setup desktop change handling
 #ifdef Q_WS_X11
-  connect( &kWinModule, SIGNAL( currentDesktopChanged(int) ),
+  connect( KWM::self(), SIGNAL( currentDesktopChanged(int) ),
            this, SLOT( handleDesktopChange(int) ));
 
-  _desktopCount = kWinModule.numberOfDesktops();
-  _previousDesktop = kWinModule.currentDesktop()-1;
+  _desktopCount = KWM::self()->numberOfDesktops();
+  _previousDesktop = KWM::self()->currentDesktop()-1;
 #else
 #ifdef __GNUC__
 #warning non-X11 support missing
@@ -87,7 +88,7 @@ void DesktopTracker::changeTimers()
 void DesktopTracker::startTracking()
 {
 #ifdef Q_WS_X11
-  int currentDesktop = kWinModule.currentDesktop() -1;
+  int currentDesktop = KWM::self()->currentDesktop() -1;
 #else
 #ifdef __GNUC__
 #warning non-X11 support missing
@@ -121,7 +122,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
       // if the task was priviously tracking this desktop then
       // emit a signal that is not tracking it any more
 #ifdef Q_WS_X11
-      if( i == kWinModule.currentDesktop() -1)
+      if( i == KWM::self()->currentDesktop() -1)
         emit leftActiveDesktop(task);
 #else
 #ifdef __GNUC__
@@ -153,7 +154,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
           // if the task was priviously tracking this desktop then
           // emit a signal that is not tracking it any more
 #ifdef Q_WS_X11
-          if( i == kWinModule.currentDesktop() -1)
+          if( i == KWM::self()->currentDesktop() -1)
             emit leftActiveDesktop(task);
 #else
 #ifdef __GNUC__

@@ -24,8 +24,6 @@
 
 #include <vector>
 
-#include <kwm.h>
-
 #include "desktoplist.h"
 
 class Task;
@@ -51,9 +49,6 @@ class DesktopTracker: public QObject
     int desktopCount() const { return _desktopCount; };
 
   private: // member variables
-#ifdef Q_WS_X11
-    KWM kWinModule;
-#endif
 
     // define vectors for at most 16 virtual desktops
     // E.g.: desktopTrackerStop[3] contains a vector with
