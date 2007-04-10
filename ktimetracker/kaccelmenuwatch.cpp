@@ -26,7 +26,7 @@
 
 #include <assert.h>
 #include <kdebug.h>
-#include <q3popupmenu.h>
+#include <QMenu>
 
 #include "kaccelmenuwatch.h"
 

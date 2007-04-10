@@ -41,7 +41,7 @@
 #include <q3multilineedit.h>
 #include <QByteArray>
 #include <Q3PtrList>
-#include <q3popupmenu.h>
+#include <QMenu>
 #include <kxmlguifactory.h>
 #include "mainwindow.h"
 
@@ -706,5 +706,4 @@ void karmPart::startNewSession()
 } 
    
 
-#include <q3popupmenu.h>
 #include "karm_part.moc"
