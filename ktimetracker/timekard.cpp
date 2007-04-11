@@ -23,7 +23,6 @@
 // #include <iostream>
 
 #include <QDateTime>
-#include <q3paintdevicemetrics.h>
 #include <QPainter>
 #include <QMap>
 #include <QList>
