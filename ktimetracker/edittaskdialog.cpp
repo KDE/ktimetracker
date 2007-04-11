@@ -23,7 +23,6 @@
 #include <q3buttongroup.h>
 #include <QComboBox>
 #include <q3groupbox.h>
-#include <q3hbox.h>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
