@@ -275,8 +275,7 @@ void MainWindow::makeMenus()
                                             "the totals.") );
 
   // Edit history
-  // Show history must be changed into Edit history as soon as you can edit it.
-  actionedithistory = new KAction(i18n("Show history"), this);
+  actionedithistory = new KAction(i18n("Edit history"), this);
   connect(actionedithistory, SIGNAL(triggered(bool)), SLOT (slotedithistory()));
   actionCollection()->addAction("edit_history", actionedithistory );
 
