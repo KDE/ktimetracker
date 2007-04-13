@@ -470,8 +470,12 @@ A change triggers this procedure, it shall store the new values in the calendar.
         kDebug() << "row=" << row << " col=" << col << endl;
         if ((*i)->uid() == uid)
         {
-          (*i)->setDtStart(KDateTime::fromString(historywidget->item(row,col)->text())); 
-          kDebug() << "Program SetDtStart to " << historywidget->item(row,col)->text() << endl;
+	  if (KDateTime::fromString(historywidget->item(row,col)->text()).isValid())
+          {
+            (*i)->setDtStart(KDateTime::fromString(historywidget->item(row,col)->text())); 
+            kDebug() << "Program SetDtStart to " << historywidget->item(row,col)->text() << endl;
+          }
+          else KMessageBox::information(0,i18n("This is not a valid Date/Time."));
         }
       }
     }
@@ -486,8 +490,12 @@ A change triggers this procedure, it shall store the new values in the calendar.
         kDebug() << "row=" << row << " col=" << col << endl;
         if ((*i)->uid() == uid)
         {
-          (*i)->setDtEnd(KDateTime::fromString(historywidget->item(row,col)->text())); 
-          kDebug() << "Program SetDtEnd to " << historywidget->item(row,col)->text() << endl;
+          if (KDateTime::fromString(historywidget->item(row,col)->text()).isValid())
+          {
+            (*i)->setDtEnd(KDateTime::fromString(historywidget->item(row,col)->text())); 
+            kDebug() << "Program SetDtEnd to " << historywidget->item(row,col)->text() << endl;
+          }
+          else KMessageBox::information(0,i18n("This is not a valid Date/Time."));
         }
       }
     }
