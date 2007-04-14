@@ -470,39 +470,4 @@ QString Task::comment() const
   return _comment;
 }
 
-int Task::compare ( QTreeWidgetItem * i, int col, bool ascending ) const
-{
-  long thistime = 0;
-  long thattime = 0;
-  Task *task = static_cast<Task*>(i);
-
-  switch ( col )
-  {
-    case 1: 
-      thistime = _sessionTime;
-      thattime = task->sessionTime();
-      break;
-    case 2:
-      thistime = _time;
-      thattime = task->time();
-      break;
-    case 3:
-      thistime = _totalSessionTime;
-      thattime = task->totalSessionTime();
-      break;
-    case 4:
-      thistime = _totalTime;
-      thattime = task->totalTime();
-      break;
-    default:
-      return 23;
-//      return key(col, ascending).localeAwareCompare( i->key(col, ascending) );
-  }
-
-  if ( thistime < thattime ) return -1;
-  if ( thistime > thattime ) return 1;
-  return 0;
-
-}
-
 #include "task.moc"

@@ -114,9 +114,6 @@ class Task : public QObject, public QTreeWidgetItem
     /** insert Task into the destination Task */
     void paste(Task* destination);
 
-    /** Sort times numerically, not alphabetically.  */
-    int compare ( QTreeWidgetItem * i, int col, bool ascending ) const;
-
     //@{ timing related functions
 
       /**
