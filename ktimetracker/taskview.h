@@ -37,6 +37,7 @@
 #include "reportcriteria.h"
 #include <QTimer>
 #include <QTableWidget>
+#include <QTreeWidget>
 
 class Q3ListBox;
 class QString;
@@ -60,7 +61,7 @@ using namespace KCal;
  * Container and interface for the tasks.
  */
 
-class TaskView : public K3ListView
+class TaskView : public QTreeWidget
 {
   Q_OBJECT
 

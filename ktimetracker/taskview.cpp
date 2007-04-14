@@ -64,7 +64,7 @@
 
 class DesktopTracker;
 
-TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
+TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 {
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
@@ -78,17 +78,9 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
   previousColumnWidths[0] = previousColumnWidths[1]
   = previousColumnWidths[2] = previousColumnWidths[3] = HIDDEN_COLUMN;
 
-  addColumn( i18n("Task Name") );
-  addColumn( i18n("Session Time") );
-  addColumn( i18n("Time") );
-  addColumn( i18n("Total Session Time") );
-  addColumn( i18n("Total Time") );
-  addColumn( i18n("Percent Complete") );
-  setColumnAlignment( 1, Qt::AlignRight );
-  setColumnAlignment( 2, Qt::AlignRight );
-  setColumnAlignment( 3, Qt::AlignRight );
-  setColumnAlignment( 4, Qt::AlignRight );
-  setColumnAlignment( 5, Qt::AlignRight );
+  QStringList labels;
+  labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
+  setHeaderLabels(labels);
   adaptColumns();
   setAllColumnsShowFocus( true );
 
@@ -146,6 +138,7 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):K3ListView(parent)
 
 void TaskView::contentsDropEvent(QDropEvent* qde)
 {
+/*
   kDebug() << "This is contentsDropEvent" << endl;
   Task* t=static_cast<Task*>(this->itemAt(qde->pos()));
   if (t!=dragTask)
@@ -154,23 +147,27 @@ void TaskView::contentsDropEvent(QDropEvent* qde)
     t->insertItem(dragTask);
     save();
   }
+*/
 }
 
 void TaskView::startDrag()
 {
   kDebug() << "Entering TaskView::startDrag" << endl;
-  K3ListView::startDrag();  
+  //QTreeWidget::startDrag();  
 }
 
 Q3DragObject* TaskView::dragObject()
 {
+/*
   kDebug() << "Entering TaskView::dragObject" << endl;
   dragTask=static_cast<Task *> (currentItem());
-  return K3ListView::dragObject();
+  return QTreeWidget::dragObject();
+*/
 }
 
 bool TaskView::acceptDrag(QDropEvent* e) const
 {
+/*
   kDebug() << "Entering TaskView::acceptDrag" << endl;
   // Can we drop the item here ?
   // Or is the dragged item an ancestor task of the item to drop to ?
@@ -185,7 +182,8 @@ bool TaskView::acceptDrag(QDropEvent* e) const
     kDebug() << "parent->name()" << parent->name() << endl;
     if (parent==dragTask) isAncestor=true;
   }
-  return (!isAncestor && K3ListView::acceptDrag(e));
+  return (!isAncestor && QTreeWidget::acceptDrag(e));
+*/
 }
 
 KarmStorage* TaskView::storage()
@@ -195,24 +193,28 @@ KarmStorage* TaskView::storage()
 
 int TaskView::mapToLogiCal( int col )
 {
+/*
   kDebug(5970) << "entering mapToLogiCal " << endl;
   return header()->mapToLogical( col );
+*/ 
+return 1;
 }
 
 void TaskView::contentsMousePressEvent ( QMouseEvent * e )
 {
+/*
   kDebug(5970) << "entering contentsMousePressEvent" << endl;
   kDebug(5970) << "header is " << header() << endl;
   header()->setToolTip("this is header");
-  kDebug(5970) << "mapToLogical ( int a )" << header()->mapToLogical(1) << endl;
-  K3ListView::contentsMousePressEvent(e);
+  //kDebug(5970) << "mapToLogical ( int a )" << header()->mapToLogical(1) << endl;
+  //QTreeWidget::contentsMousePressEvent(e);
   Task* task = current_item();
 
   // This checks that there has been a click onto an item,
   // not into an empty part of the K3ListView.
-  if ( task != 0 &&  // zero can happen if there is no task
-       e->pos().y() >= current_item()->itemPos() && 
-       e->pos().y() < current_item()->itemPos()+current_item()->height() ) 
+  if ( task != 0  ) //&&  // zero can happen if there is no task
+       //e->pos().y() >= current_item()->itemPos() && 
+       //e->pos().y() < current_item()->itemPos()+current_item()->height() ) 
 
   { 
     // see if the click was on the completed icon
@@ -224,6 +226,7 @@ void TaskView::contentsMousePressEvent ( QMouseEvent * e )
     }
     emit updateButtons();
   }
+*/
 }
 
 void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
@@ -231,8 +234,9 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
 // on that task". That means, on a doubleclick, we check if it occurs on an item
 // not in the blank space, if yes, stop all other tasks and start the new timer.
 {
+/*
   kDebug(5970) << "entering contentsMouseDoubleClickEvent" << endl;
-  K3ListView::contentsMouseDoubleClickEvent(e);
+  //QTreeWidget::contentsMouseDoubleClickEvent(e);
   
   Task *task = current_item();
 
@@ -249,6 +253,7 @@ void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
       else stopCurrentTimer();
     }
   }
+*/
 }
 
 TaskView::~TaskView()
@@ -258,23 +263,28 @@ TaskView::~TaskView()
 
 Task* TaskView::first_child() const
 {
-  return static_cast<Task*>(firstChild());
+  kDebug() << "Entering TaskView::first_child" << endl;
+  return static_cast<Task*>(topLevelItem(0));
 }
 
 Task* TaskView::current_item() const
 {
+  kDebug() << "Entering TaskView::current_item" << endl;
   return static_cast<Task*>(currentItem());
 }
 
 Task* TaskView::item_at_index(int i)
 {
-  return static_cast<Task*>(itemAtIndex(i));
+  kDebug() << "Entering TaskView::item_at_index" << endl;
+  return 0;
+  //return static_cast<Task*>(child(i));
 }
 
 void TaskView::load( QString fileName )
 {
   // if the program is used as an embedded plugin for konqueror, there may be a need
   // to load from a file without touching the preferences.
+  kDebug() << "Entering TaskView::load" << endl;
   _isloading = true;
   QString err = _storage->load(this, _preferences, fileName);
 
@@ -290,21 +300,24 @@ void TaskView::load( QString fileName )
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
     _desktopTracker->registerForDesktops( t, t->getDesktops() );
 
-  restoreItemState( first_child() );
+  //restoreItemState( first_child() );
 
-  setSelected(first_child(), true);
+  //setSelected(first_child(), true);
   setCurrentItem(first_child());
   _desktopTracker->startTracking();
   _isloading = false;
+  kDebug() << "load calling refesh" << endl;
   refresh();
+  kDebug() << "Exiting load" << endl;
 }
 
 void TaskView::restoreItemState( Q3ListViewItem *item )
 {
+  kDebug() << "Entering TaskView::restoreItemState" << endl;
   while( item ) 
   {
     Task *t = (Task *)item;
-    t->setOpen( _preferences->readBoolEntry( t->uid() ) );
+    //t->setOpen( _preferences->readBoolEntry( t->uid() ) );
     if( item->childCount() > 0 ) restoreItemState( item->firstChild() );
     item = item->nextSibling();
   }
@@ -312,12 +325,13 @@ void TaskView::restoreItemState( Q3ListViewItem *item )
 
 void TaskView::itemStateChanged( Q3ListViewItem *item )
 {
+  kDebug() << "Entering TaskView::itemStateChanged" << endl;
   if ( !item || _isloading ) return;
   Task *t = (Task *)item;
-  kDebug(5970) << "TaskView::itemStateChanged()" 
-    << " uid=" << t->uid() << " state=" << t->isOpen()
-    << endl;
-  if( _preferences ) _preferences->writeEntry( t->uid(), t->isOpen() );
+//  kDebug(5970) << "TaskView::itemStateChanged()" 
+//    << " uid=" << t->uid() << " state=" << t->isOpen()
+//    << endl;
+  //if( _preferences ) _preferences->writeEntry( t->uid(), t->isOpen() );
 }
 
 void TaskView::closeStorage() { _storage->closeStorage( this ); }
@@ -543,7 +557,7 @@ QString TaskView::save()
   if (activeTasks.count() == 0)
 #endif
   {
-    kDebug(5970) << "Entering TaskView::save()" << endl;
+    kDebug(5970) << "Entering TaskView::save(ListView)" << endl;
     QString err=_storage->save(this);
 
     emit setStatusBarText( err.isNull() ? i18n("Saved successfully") : i18n("Error during saving") );
@@ -599,20 +613,23 @@ void TaskView::stopAllTimers( QDateTime when )
 
 void TaskView::startNewSession()
 {
+/*
   Q3ListViewItemIterator item( first_child());
   for ( ; item.current(); ++item ) {
     Task * task = (Task *) item.current();
     task->startNewSession();
   }
+*/
 }
 
 void TaskView::resetTimeForAllTasks()
 {
-  Q3ListViewItemIterator item( first_child());
+ /* Q3ListViewItemIterator item( first_child());
   for ( ; item.current(); ++item ) {
     Task * task = (Task *) item.current();
     task->resetTimes();
   }
+*/
 }
 
 void TaskView::stopTimerFor(Task* task)
@@ -693,7 +710,7 @@ QString TaskView::addTask
   {
     _desktopTracker->registerForDesktops( task, desktops );
     setCurrentItem( task );
-    setSelected( task, true );
+    //setSelected( task, true );
     task->setPixmapProgress();
     save();
   }
@@ -711,7 +728,7 @@ void TaskView::newSubTask()
   if(!task)
     return;
   newTask(i18n("New Sub Task"), task);
-  task->setOpen(true);
+  //task->setOpen(true);
   refresh();
 }
 
@@ -895,14 +912,14 @@ void TaskView::adaptColumns()
     {
       setColumnWidth( x, previousColumnWidths[x-1] );
       previousColumnWidths[x-1] = HIDDEN_COLUMN;
-      setColumnWidthMode( x, Q3ListView::Maximum );
+      //setColumnWidthMode( x, Q3ListView::Maximum );
     }
     // the column was visible before and were switching it off now
     else
       if( ! _preferences->displayColumn(x-1)
          && previousColumnWidths[x-1] == HIDDEN_COLUMN )
       {
-        setColumnWidthMode( x, Q3ListView::Manual ); // we don't want update()
+        //setColumnWidthMode( x, Q3ListView::Manual ); // we don't want update()
                                                   // to resize/unhide the col
         previousColumnWidths[x-1] = columnWidth( x );
         setColumnWidth( x, 0 );

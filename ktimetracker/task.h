@@ -63,7 +63,7 @@ class QPixmap;
  * It can also contain subtasks - these are managed using the
  * QListViewItem class.
  */
-class Task : public QObject, public Q3ListViewItem
+class Task : public QObject, public QTreeWidgetItem
 {
   Q_OBJECT
 
@@ -81,17 +81,21 @@ class Task : public QObject, public Q3ListViewItem
     /** return parent Task or null in case of TaskView.
      *  same as QListViewItem::parent()
      */
-    Task* firstChild() const  { return (Task*)Q3ListViewItem::firstChild(); }
-    Task* nextSibling() const { return (Task*)Q3ListViewItem::nextSibling(); }
-    Task* parent() const      { return (Task*)Q3ListViewItem::parent(); }
+    Task* firstChild() const  { return (Task*)QTreeWidgetItem::child(0); }
+    Task* nextSibling() const { static int sibling=0; sibling++; return (Task*)QTreeWidgetItem::child(sibling); }
+    Task* parent() const      { return (Task*)QTreeWidgetItem::parent(); }
 
     /** Return task view for this task */
     TaskView* taskView() const {
-        return static_cast<TaskView *>( listView() );
+        return static_cast<TaskView *>( treeWidget() );
     }
 
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const       { return _uid; }
+ 
+    int depth();
+
+    void setPixmap(int i, QIcon qi) {};
 
     /**
      * Set unique id for the task.
@@ -111,7 +115,7 @@ class Task : public QObject, public Q3ListViewItem
     void paste(Task* destination);
 
     /** Sort times numerically, not alphabetically.  */
-    int compare ( Q3ListViewItem * i, int col, bool ascending ) const;
+    int compare ( QTreeWidgetItem * i, int col, bool ascending ) const;
 
     //@{ timing related functions
 

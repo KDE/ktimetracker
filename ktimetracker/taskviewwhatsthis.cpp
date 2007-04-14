@@ -30,7 +30,7 @@ QString TaskViewWhatsThis::text ( const QPoint & pos )
 {
   QString desc = QString();
   kDebug(5970) << "entering TaskViewWhatsThis::text" << endl;
-  int logiCol = _listView->mapToLogiCal(_listView->header()->cellAt(pos.x())); // logical Column
+  int logiCol = 1; //_listView->mapToLogiCal(_listView->header()->cellAt(pos.x())); // logical Column
   kDebug(5970) << "logical column is " << logiCol << endl;
   if ( logiCol == 0 ) 
   {

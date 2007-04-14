@@ -44,20 +44,20 @@ Q3PtrVector<QPixmap> *Task::icons = 0;
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent)
-  : QObject(), Q3ListViewItem(parent)
+  : QObject(), QTreeWidgetItem(parent)
 { 
   init(taskName, minutes, sessionTime, desktops, 0);
 }
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, Task *parent)
-  : QObject(), Q3ListViewItem(parent)
+  : QObject(), QTreeWidgetItem(parent)
 {
   init(taskName, minutes, sessionTime, desktops, 0);
 }
 
 Task::Task( KCal::Todo* todo, TaskView* parent )
-  : QObject(), Q3ListViewItem( parent )
+  : QObject(), QTreeWidgetItem( parent )
 {
   long minutes = 0;
   QString name;
@@ -69,6 +69,12 @@ Task::Task( KCal::Todo* todo, TaskView* parent )
   init(name, minutes, sessionTime, desktops, percent_complete);
 }
 
+int Task::depth()
+{
+  //TODO
+  return 0;
+}
+
 void Task::init( const QString& taskName, long minutes, long sessionTime,
                  DesktopList desktops, int percent_complete)
 {
@@ -76,10 +82,10 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
   // signal to its receiver
   if ( ! parent() )
     connect( this, SIGNAL( totalTimesChanged ( long, long ) ),
-             listView(), SLOT( taskTotalTimesChanged( long, long) ));
+             treeWidget(), SLOT( taskTotalTimesChanged( long, long) ));
 
   connect( this, SIGNAL( deletingTask( Task* ) ),
-           listView(), SLOT( deletingTask( Task* ) ));
+           treeWidget(), SLOT( deletingTask( Task* ) ));
 
   if (icons == 0) {
     icons = new Q3PtrVector<QPixmap>(8);
@@ -199,7 +205,12 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
       child->setPercentComplete(_percentcomplete, storage);
   }
   // maybe there is a colum "percent completed", so do a ...
-  update(); 
+  
+
+
+
+
+update(); 
 }
 
 void Task::setPixmapProgress()
@@ -410,12 +421,14 @@ QString Task::getDesktopStr() const
 
 void Task::cut()
 {
+/*
   //kDebug(5970) << "Task::cut - " << name() << endl;
   changeParentTotalTimes( -_totalSessionTime, -_totalTime);
   if ( ! parent())
     listView()->takeItem(this);
   else
     parent()->takeItem(this);
+*/
 }
 
 void Task::move(Task* destination)
@@ -426,8 +439,10 @@ void Task::move(Task* destination)
 
 void Task::paste(Task* destination)
 {
+/*
   destination->insertItem(this);
   changeParentTotalTimes( _totalSessionTime, _totalTime);
+*/
 }
 
 void Task::update()
@@ -441,6 +456,7 @@ void Task::update()
   setText(3, formatTime(_totalSessionTime, b));
   setText(4, formatTime(_totalTime, b));
   setText(5, QString::number(_percentcomplete));
+  kDebug(5970) << "Exiting Task::update" << endl;
 }
 
 void Task::addComment( QString comment, KarmStorage* storage )
@@ -454,7 +470,7 @@ QString Task::comment() const
   return _comment;
 }
 
-int Task::compare ( Q3ListViewItem * i, int col, bool ascending ) const
+int Task::compare ( QTreeWidgetItem * i, int col, bool ascending ) const
 {
   long thistime = 0;
   long thattime = 0;
@@ -479,7 +495,8 @@ int Task::compare ( Q3ListViewItem * i, int col, bool ascending ) const
       thattime = task->totalTime();
       break;
     default:
-      return key(col, ascending).localeAwareCompare( i->key(col, ascending) );
+      return 23;
+//      return key(col, ascending).localeAwareCompare( i->key(col, ascending) );
   }
 
   if ( thistime < thattime ) return -1;
