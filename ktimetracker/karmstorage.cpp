@@ -30,11 +30,11 @@
 #include <QFile>
 #include <QHeaderView>
 #include <QSize>
-#include <q3dict.h>
 #include <QDateTime>
 #include <QString>
 #include <QStringList>
 #include <QList>
+#include <QMultiHash>
 #include <QTextStream>
 #include <QByteArray>
 #include <QProgressBar>
@@ -156,7 +156,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   {
     KCal::Todo::List todoList;
     KCal::Todo::List::ConstIterator todo;
-    Q3Dict< Task > map;
+    QMultiHash< QString, Task* > map;
 
     // Build dictionary to look up Task object from Todo uid.  Each task is a
     // QListViewItem, and is initially added with the view as the parent.
@@ -192,12 +192,12 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
     // Load each task under it's parent task.
     for( todo = todoList.begin(); todo != todoList.end(); ++todo )
     {
-      Task* task = map.find( (*todo)->uid() );
+      Task* task = map.value( (*todo)->uid() );
 
       // No relatedTo incident just means this is a top-level task.
       if ( (*todo)->relatedTo() )
       {
-        Task* newParent = map.find( (*todo)->relatedToUid() );
+        Task* newParent = map.value( (*todo)->relatedToUid() );
 
         // Complete the loading but return a message
         if ( !newParent )
@@ -229,7 +229,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   QString err;
   KCal::Todo::List todoList;
   KCal::Todo::List::ConstIterator todo;
-  Q3Dict< Task > map;
+  QMultiHash< QString, Task* > map;
   vector<QString> runningTasks;
   vector<QDateTime> startTimes;
 
@@ -260,11 +260,11 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   // 1.1. Load each task under it's parent task.
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
-    Task* task = map.find( (*todo)->uid() );
+    Task* task = map.value( (*todo)->uid() );
     // No relatedTo incident just means this is a top-level task.
     if ( (*todo)->relatedTo() )
     {
-      Task* newParent = map.find( (*todo)->relatedToUid() );
+      Task* newParent = map.value( (*todo)->relatedToUid() );
 
       // Complete the loading but return a message
       if ( !newParent )
