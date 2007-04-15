@@ -20,8 +20,8 @@
  *
  */
 
-#include <Q3GroupBox>
 #include <QCheckBox>
+#include <QGroupBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
@@ -43,31 +43,35 @@ PrintDialog::PrintDialog()
   int year, month;
 
   QVBoxLayout *layout = new QVBoxLayout(page);
+  layout->setMargin( KDialog::marginHint() );
   layout->setSpacing(KDialog::spacingHint());
   layout->addSpacing(10);
   layout->addStretch(1);
 
   // Date Range
-  Q3GroupBox *rangeGroup = new Q3GroupBox(1, Qt::Horizontal, i18n("Date Range"),
-      page);
+  QGroupBox *rangeGroup = new QGroupBox(i18n("Date Range"), page);
   layout->addWidget(rangeGroup);
 
-  QWidget *rangeWidget = new QWidget(rangeGroup);
-  QHBoxLayout *rangeLayout = new QHBoxLayout(rangeWidget);
-  rangeLayout->setSpacing(spacingHint());
-  rangeLayout->setMargin(0);
+  QHBoxLayout *rangeLayout = new QHBoxLayout;
+  rangeLayout->setSpacing( KDialog::spacingHint() );
+  rangeLayout->setMargin( KDialog::marginHint() );
 
-  rangeLayout->addWidget(new QLabel(i18n("From:"), rangeWidget));
-  _from = new KDateEdit(rangeWidget);
+  QLabel *label = new QLabel( i18n("From:"), rangeGroup );
+  rangeLayout->addWidget( label );
+  _from = new KDateEdit(rangeGroup);
+  label->setBuddy( _from );
 
   // Default from date to beginning of the month
   year = QDate::currentDate().year();
   month = QDate::currentDate().month();
   _from->setDate(QDate(year, month, 1));
   rangeLayout->addWidget(_from);
-  rangeLayout->addWidget(new QLabel(i18n("To:"), rangeWidget));
-  _to = new KDateEdit(rangeWidget);
+  label = new QLabel( i18n("To:"), rangeGroup );
+  rangeLayout->addWidget( label );
+  _to = new KDateEdit(rangeGroup);
+  label->setBuddy( _to );
   rangeLayout->addWidget(_to);
+  rangeGroup->setLayout( rangeLayout );
 
   layout->addSpacing(10);
   layout->addStretch(1);
