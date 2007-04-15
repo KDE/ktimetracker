@@ -20,10 +20,9 @@
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  */
-#include <q3buttongroup.h>
 #include <QComboBox>
-#include <q3groupbox.h>
 #include <QCheckBox>
+#include <QGroupBox>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
@@ -189,19 +188,15 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   _desktopCB->setEnabled(true);
   lay1->addWidget(_desktopCB);
   
-  Q3GroupBox* groupBox;
-  {
-    int lines = (int)(desktopCount/2);
-    if (lines*2 != desktopCount) lines++; 
-      groupBox = new Q3ButtonGroup( lines, Qt::Horizontal,
-                                   i18n("In Desktop"), page);
-      groupBox->setObjectName( "_desktopsGB" );
-  }
+  QGroupBox* groupBox;
+  int lines = (int)(desktopCount/2);
+  if (lines*2 != desktopCount) lines++; 
+  groupBox = new QGroupBox( i18n("In Desktop"), page);
+  groupBox->setObjectName( "_desktopsGB" );
   lay1->addWidget(groupBox);
 
-  QHBoxLayout *lay6 = new QHBoxLayout();
-
-  lay1->addLayout(lay6);
+  QGridLayout *lay6 = new QGridLayout();
+  groupBox->setLayout( lay6 );
   for (int i=0; i<desktopCount; i++) {
     QCheckBox *tmpBx = new QCheckBox(groupBox);
     tmpBx->setObjectName( QString::number(i).toLatin1() );
@@ -211,7 +206,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
 #endif
     tmpBx->setChecked(false);
 
-    lay6->addWidget(tmpBx);
+    lay6->addWidget(tmpBx, i / lines, i % lines);
   }
   // check specified Desktop Check Boxes
   bool enableDesktops = false;
