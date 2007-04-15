@@ -320,12 +320,15 @@ Its state is whether it is expanded or not. If a task shall be expanded
 is stored in the _preferences object. */
 {
   kDebug(5970) << "Entering TaskView::restoreItemState" << endl;
-  QTreeWidgetItemIterator item(first_child());
-  while( *item ) 
-  {
-    Task *t = (Task *) *item;
-    t->setExpanded( _preferences->readBoolEntry( t->uid() ) );
-    ++item;
+  
+  if (first_child()) {
+    QTreeWidgetItemIterator item(first_child());
+    while( *item ) 
+    {
+      Task *t = (Task *) *item;
+      t->setExpanded( _preferences->readBoolEntry( t->uid() ) );
+      ++item;
+    }
   }
   kDebug(5970) << "Entering TaskView::restoreItemState" << endl;
 }
