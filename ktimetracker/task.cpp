@@ -429,23 +429,23 @@ void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
 {
   kDebug(5970) << "Task::cut - " << name() << endl;
-/*
+
   changeParentTotalTimes( -_totalSessionTime, -_totalTime);
   if ( ! parent())
     treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
   else
     parent()->takeChild(indexOfChild(this));
-*/
+
 }
 
 void Task::paste(Task* destination)
 // This is needed e.g. to move a task under its parent when loading.
 {
   kDebug(5970) << "Entering Task::paste" << endl;
-/*
+
   destination->QTreeWidgetItem::insertChild(0,this);
   changeParentTotalTimes( _totalSessionTime, _totalTime);
-*/
+
   kDebug(5970) << "Leaving Task::paste" << endl;
 }
 
