@@ -202,14 +202,14 @@ return 1;
 
 void TaskView::contentsMousePressEvent ( QMouseEvent * e )
 {
-/*
   kDebug(5970) << "entering contentsMousePressEvent" << endl;
   kDebug(5970) << "header is " << header() << endl;
   header()->setToolTip("this is header");
   //kDebug(5970) << "mapToLogical ( int a )" << header()->mapToLogical(1) << endl;
   //QTreeWidget::contentsMousePressEvent(e);
   Task* task = current_item();
-
+  kDebug() << current_item()->depth() << endl;
+/*
   // This checks that there has been a click onto an item,
   // not into an empty part of the K3ListView.
   if ( task != 0  ) //&&  // zero can happen if there is no task
@@ -317,7 +317,7 @@ void TaskView::restoreItemState( Q3ListViewItem *item )
   while( item ) 
   {
     Task *t = (Task *)item;
-    //t->setOpen( _preferences->readBoolEntry( t->uid() ) );
+    t->setExpanded( _preferences->readBoolEntry( t->uid() ) );
     if( item->childCount() > 0 ) restoreItemState( item->firstChild() );
     item = item->nextSibling();
   }
@@ -328,10 +328,8 @@ void TaskView::itemStateChanged( Q3ListViewItem *item )
   kDebug() << "Entering TaskView::itemStateChanged" << endl;
   if ( !item || _isloading ) return;
   Task *t = (Task *)item;
-//  kDebug(5970) << "TaskView::itemStateChanged()" 
-//    << " uid=" << t->uid() << " state=" << t->isOpen()
-//    << endl;
-  //if( _preferences ) _preferences->writeEntry( t->uid(), t->isOpen() );
+  kDebug(5970) << "TaskView::itemStateChanged()" << " uid=" << t->uid() << " state=" << t->isExpanded() << endl;
+  if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
 void TaskView::closeStorage() { _storage->closeStorage( this ); }
@@ -728,7 +726,7 @@ void TaskView::newSubTask()
   if(!task)
     return;
   newTask(i18n("New Sub Task"), task);
-  //task->setOpen(true);
+  task->setExpanded(true);
   refresh();
 }
 

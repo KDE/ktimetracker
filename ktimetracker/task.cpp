@@ -70,9 +70,15 @@ Task::Task( KCal::Todo* todo, TaskView* parent )
 }
 
 int Task::depth()
+// Deliver the depth of a task, e.g. how many tasks are supertasks to it. 
+// A toplevel task has the depth 0.
 {
-  //TODO
-  return 0;
+  kDebug(5970) << "Entering Task::depth" << endl;
+  int res=0;
+  Task* t=this;
+  while (t=t->parent()) res++;
+  kDebug(5970) << "depth is " << res << endl;
+  return res;
 }
 
 void Task::init( const QString& taskName, long minutes, long sessionTime,
@@ -420,29 +426,36 @@ QString Task::getDesktopStr() const
 }
 
 void Task::cut()
+// This is needed e.g. to move a task under its parent when loading.
 {
+  kDebug(5970) << "Task::cut - " << name() << endl;
 /*
-  //kDebug(5970) << "Task::cut - " << name() << endl;
   changeParentTotalTimes( -_totalSessionTime, -_totalTime);
   if ( ! parent())
-    listView()->takeItem(this);
+    treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
   else
-    parent()->takeItem(this);
+    parent()->takeChild(indexOfChild(this));
 */
-}
-
-void Task::move(Task* destination)
-{
-  cut();
-  paste(destination);
 }
 
 void Task::paste(Task* destination)
+// This is needed e.g. to move a task under its parent when loading.
 {
+  kDebug(5970) << "Entering Task::paste" << endl;
 /*
-  destination->insertItem(this);
+  destination->QTreeWidgetItem::insertChild(0,this);
   changeParentTotalTimes( _totalSessionTime, _totalTime);
 */
+  kDebug(5970) << "Leaving Task::paste" << endl;
+}
+
+void Task::move(Task* destination)
+// This is used e.g. to move each task under its parent after loading.
+{
+  kDebug(5970) << "Entering Task::move" << endl;
+  cut();
+  paste(destination);
+  kDebug(5970) << "Leaving Task::move" << endl;
 }
 
 void Task::update()
