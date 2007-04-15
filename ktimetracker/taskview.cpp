@@ -60,7 +60,6 @@
 #include "taskviewwhatsthis.h"
 
 #define T_LINESIZE 1023
-#define HIDDEN_COLUMN -10
 
 class DesktopTracker;
 
@@ -73,11 +72,6 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
            this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
   connect( this, SIGNAL( collapsed( Q3ListViewItem * ) ),
            this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
-
-  // setup default values
-  previousColumnWidths[0] = previousColumnWidths[1]
-  = previousColumnWidths[2] = previousColumnWidths[3] 
-  = previousColumnWidths[4] = HIDDEN_COLUMN;
 
   QStringList labels;
   labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
@@ -908,31 +902,20 @@ void TaskView::autoSavePeriodChanged(int /*minutes*/)
 void TaskView::adaptColumns()
 /* This procedure adapts the columns, it can e.g. be called when the user
 changes the time format or requests to hide some columns.
-To hide a column X we set it's width to 0 at that moment we'll remember 
-the original column within previousColumnWidths[X]
-When unhiding a previously hidden column
-(previousColumnWidths[X] != HIDDEN_COLUMN !)
-we restore it's width from the saved value and set
-previousColumnWidths[X] to HIDDEN_COLUMN */
+The columns are by default:
+x - displaycolumn - name
+0 - -             - task name
+1 - 0             - session time
+2 - 1             - time 
+3 - 2             - total session time
+4 - 3             - total time
+5 - 4             - percent complete  */
 {
   kDebug(5970) << "Entering TaskView::adaptColumns" << endl;
   for( int x=1; x <= 5; x++) 
   {
-    if(   _preferences->displayColumn(x-1)
-      && previousColumnWidths[x-1] != HIDDEN_COLUMN )
-      // the column was invisible before and were switching it on now
-    {
-      setColumnWidth( x, previousColumnWidths[x-1] );
-      previousColumnWidths[x-1] = HIDDEN_COLUMN;
-    }
-    else
-      if( ! _preferences->displayColumn(x-1)
-        && previousColumnWidths[x-1] == HIDDEN_COLUMN )
-        // the column was visible before and were switching it off now
-      {
-        previousColumnWidths[x-1] = columnWidth( x );
-        setColumnWidth( x, 0 );
-      }
+    if ( _preferences->displayColumn(x-1) ) setColumnHidden( x, false );
+    else setColumnHidden( x, true );
   }
   // maybe this slot is called because the times' format changed, so do a ...
   refresh();

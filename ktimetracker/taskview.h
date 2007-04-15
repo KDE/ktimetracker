@@ -239,7 +239,6 @@ class TaskView : public QTreeWidget
     QTimer *_manualSaveTimer;
     Preferences *_preferences;
     Q3PtrList<Task> activeTasks;
-    int previousColumnWidths[5];
     DesktopTracker* _desktopTracker;
     bool _isloading;
     Task* dragTask;
