@@ -610,24 +610,34 @@ void TaskView::stopAllTimers( QDateTime when )
 }
 
 void TaskView::startNewSession()
+/* This procedure starts a new session. Technically, a session is just an additionally 
+stored time that is always contain in the overall time. We speak of session times, 
+overalltimes (comprising all sessions) and total times (comprising all subtasks).
+That is why there is also a total session time. */
 {
-/*
-  Q3ListViewItemIterator item( first_child());
-  for ( ; item.current(); ++item ) {
-    Task * task = (Task *) item.current();
+  kDebug(5970) << "Entering TaskView::startNewSession" << endl;
+  QTreeWidgetItemIterator item( first_child() );
+  while ( *item )
+  {
+    Task * task = (Task *) *item;
     task->startNewSession();
+    ++item;
   }
-*/
+  kDebug(5970) << "Leaving TaskView::startNewSession" << endl;
 }
 
 void TaskView::resetTimeForAllTasks()
+/* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
- /* Q3ListViewItemIterator item( first_child());
-  for ( ; item.current(); ++item ) {
-    Task * task = (Task *) item.current();
+  kDebug(5970) << "Entering TaskView::resetTimeForAllTasks" << endl;
+  QTreeWidgetItemIterator item( first_child() );
+  while ( *item ) 
+  {
+    Task * task = (Task *) *item;
     task->resetTimes();
+    ++item;
   }
-*/
+  kDebug(5970) << "Leaving TaskView::resetTimeForAllTasks" << endl;
 }
 
 void TaskView::stopTimerFor(Task* task)
