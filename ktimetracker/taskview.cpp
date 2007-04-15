@@ -76,7 +76,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 
   // setup default values
   previousColumnWidths[0] = previousColumnWidths[1]
-  = previousColumnWidths[2] = previousColumnWidths[3] = HIDDEN_COLUMN;
+  = previousColumnWidths[2] = previousColumnWidths[3] 
+  = previousColumnWidths[4] = HIDDEN_COLUMN;
 
   QStringList labels;
   labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
@@ -905,34 +906,30 @@ void TaskView::autoSavePeriodChanged(int /*minutes*/)
 }
 
 void TaskView::adaptColumns()
+/* This procedure adapts the columns, it can e.g. be called when the user
+changes the time format or requests to hide some columns.
+To hide a column X we set it's width to 0 at that moment we'll remember 
+the original column within previousColumnWidths[X]
+When unhiding a previously hidden column
+(previousColumnWidths[X] != HIDDEN_COLUMN !)
+we restore it's width from the saved value and set
+previousColumnWidths[X] to HIDDEN_COLUMN */
 {
   kDebug(5970) << "Entering TaskView::adaptColumns" << endl;
-  // to hide a column X we set it's width to 0
-  // at that moment we'll remember the original column within
-  // previousColumnWidths[X]
-  //
-  // When unhiding a previously hidden column
-  // (previousColumnWidths[X] != HIDDEN_COLUMN !)
-  // we restore it's width from the saved value and set
-  // previousColumnWidths[X] to HIDDEN_COLUMN
-
   for( int x=1; x <= 5; x++) 
   {
-    // the column was invisible before and were switching it on now
     if(   _preferences->displayColumn(x-1)
-       && previousColumnWidths[x-1] != HIDDEN_COLUMN )
+      && previousColumnWidths[x-1] != HIDDEN_COLUMN )
+      // the column was invisible before and were switching it on now
     {
       setColumnWidth( x, previousColumnWidths[x-1] );
       previousColumnWidths[x-1] = HIDDEN_COLUMN;
-      //setColumnWidthMode( x, Q3ListView::Maximum );
     }
-    // the column was visible before and were switching it off now
     else
       if( ! _preferences->displayColumn(x-1)
-         && previousColumnWidths[x-1] == HIDDEN_COLUMN )
+        && previousColumnWidths[x-1] == HIDDEN_COLUMN )
+        // the column was visible before and were switching it off now
       {
-        //setColumnWidthMode( x, Q3ListView::Manual ); // we don't want update()
-                                                  // to resize/unhide the col
         previousColumnWidths[x-1] = columnWidth( x );
         setColumnWidth( x, 0 );
       }

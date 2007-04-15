@@ -253,6 +253,7 @@ void Preferences::showDialog()
   _displayTimeW->setChecked(_displayColumnV[1]);
   _displayTotalSessionW->setChecked(_displayColumnV[2]);
   _displayTotalTimeW->setChecked(_displayColumnV[3]);
+  _displayPerCentCompleteW->setChecked(_displayColumnV[4]);
 
   _trayIconW->setChecked(_trayIconV);
 
