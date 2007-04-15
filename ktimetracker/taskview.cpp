@@ -269,10 +269,18 @@ Task* TaskView::current_item() const
 }
 
 Task* TaskView::item_at_index(int i)
+/* This procedure delivers the item at the position i in the KTreeWidget.
+Every item is a task. The items are counted linearily. The uppermost item
+has the number i=0. */
 {
   kDebug() << "Entering TaskView::item_at_index" << endl;
-  return 0;
-  //return static_cast<Task*>(child(i));
+  if (!first_child()) return 0;
+
+  QTreeWidgetItemIterator item(first_child());
+  while( *item && i-- ) ++item;
+ 
+  if (!*item) return 0;
+  else return (Task*) *item;
 }
 
 void TaskView::load( QString fileName )
