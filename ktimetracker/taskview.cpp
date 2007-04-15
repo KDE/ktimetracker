@@ -300,7 +300,7 @@ void TaskView::load( QString fileName )
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
     _desktopTracker->registerForDesktops( t, t->getDesktops() );
 
-  //restoreItemState( first_child() );
+  restoreItemState();
 
   //setSelected(first_child(), true);
   setCurrentItem(first_child());
@@ -311,19 +311,23 @@ void TaskView::load( QString fileName )
   kDebug() << "Exiting load" << endl;
 }
 
-void TaskView::restoreItemState( Q3ListViewItem *item )
+void TaskView::restoreItemState()
+/* Restores the item state of every item. An item is a task in the list.
+Its state is whether it is expanded or not. If a task shall be expanded
+is stored in the _preferences object. */
 {
-  kDebug() << "Entering TaskView::restoreItemState" << endl;
-  while( item ) 
+  kDebug(5970) << "Entering TaskView::restoreItemState" << endl;
+  QTreeWidgetItemIterator item(first_child());
+  while( *item ) 
   {
-    Task *t = (Task *)item;
+    Task *t = (Task *) *item;
     t->setExpanded( _preferences->readBoolEntry( t->uid() ) );
-    if( item->childCount() > 0 ) restoreItemState( item->firstChild() );
-    item = item->nextSibling();
+    ++item;
   }
+  kDebug(5970) << "Entering TaskView::restoreItemState" << endl;
 }
 
-void TaskView::itemStateChanged( Q3ListViewItem *item )
+void TaskView::itemStateChanged( QTreeWidgetItem *item )
 {
   kDebug() << "Entering TaskView::itemStateChanged" << endl;
   if ( !item || _isloading ) return;

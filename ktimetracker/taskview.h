@@ -255,7 +255,7 @@ class TaskView : public QTreeWidget
     void deleteChildTasks( Task *item );
     void addTimeToActiveTasks( int minutes, bool save_data = true );
     /** item state stores if a task is expanded so you can see the subtasks */
-    void restoreItemState( Q3ListViewItem *item );
+    void restoreItemState();
 
   protected:
     void startDrag();
@@ -268,7 +268,7 @@ class TaskView : public QTreeWidget
     void autoSavePeriodChanged( int period );
     void minuteUpdate();
     /** item state stores if a task is expanded so you can see the subtasks */
-    void itemStateChanged( Q3ListViewItem *item );
+    void itemStateChanged( QTreeWidgetItem *item );
     /** React on another process having modified the iCal file we rely on. 
        This is not iCalFileChanged. */
     void iCalFileModified(ResourceCalendar *);
