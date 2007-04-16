@@ -258,7 +258,7 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
       && visualRect( index ).x() <= event->pos().x()
       && event->pos().x() < visualRect( index ).x() + 19) {
     QTreeWidgetItem *item = itemFromIndex( index );
-    if (item && item->isSelected()) {
+    if (item) {
       Task *task = dynamic_cast<Task*>(item);
       if (task) {
         if (task->isComplete()) {
