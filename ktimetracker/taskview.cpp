@@ -97,7 +97,7 @@ public:
         painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
       }
       
-      painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight() : option.palette.background() );
+      painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
       for (int x = rHeight; x < newWidth; x += rHeight) {
         painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
       }
@@ -183,16 +183,16 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 
 void TaskView::contentsDropEvent(QDropEvent* qde)
 {
-/*
   kDebug() << "This is contentsDropEvent" << endl;
-  Task* t=static_cast<Task*>(this->itemAt(qde->pos()));
-  if (t!=dragTask)
-  {
-    takeItem(dragTask);
-    t->insertItem(dragTask);
+  Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
+  if (t != dragTask) {
+    int indexOfDragTask = indexOfTopLevelItem( dragTask );
+    if (indexOfDragTask != -1) {
+      takeTopLevelItem( indexOfDragTask );
+      t->addChild( dragTask );
+    }
     save();
   }
-*/
 }
 
 void TaskView::startDrag()
@@ -208,9 +208,10 @@ Q3DragObject* TaskView::dragObject()
   dragTask=static_cast<Task *> (currentItem());
   return QTreeWidget::dragObject();
 */
+  return 0L;
 }
 
-bool TaskView::acceptDrag(QDropEvent* e) const
+bool TaskView::acceptDrag(QDropEvent* /*e*/) const
 {
 /*
   kDebug() << "Entering TaskView::acceptDrag" << endl;
@@ -229,6 +230,7 @@ bool TaskView::acceptDrag(QDropEvent* e) const
   }
   return (!isAncestor && QTreeWidget::acceptDrag(e));
 */
+  return false;
 }
 
 void TaskView::mouseMoveEvent( QMouseEvent *event ) {
@@ -280,7 +282,7 @@ KarmStorage* TaskView::storage()
   return _storage;
 }
 
-int TaskView::mapToLogiCal( int col )
+int TaskView::mapToLogiCal( int /*col*/ )
 {
 /*
   kDebug(5970) << "entering mapToLogiCal " << endl;
