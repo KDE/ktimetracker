@@ -224,9 +224,6 @@ class TaskView : public QTreeWidget
     /** Copy history for current and all sub tasks to clipboard. */
     QString clipHistory();
     
-  private slots:
-    void slotItemClicked( QTreeWidgetItem *item, int column );
-
   signals:
     void totalTimesChanged( long session, long total );
     void updateButtons();
@@ -251,8 +248,6 @@ class TaskView : public QTreeWidget
     KarmStorage * _storage;
 
   private:
-    void contentsMousePressEvent ( QMouseEvent * e );
-    void contentsMouseDoubleClickEvent ( QMouseEvent * e );
     void updateParents( Task* task, long totalDiff, long sesssionDiff);
     void deleteChildTasks( Task *item );
     void addTimeToActiveTasks( int minutes, bool save_data = true );
@@ -265,6 +260,7 @@ class TaskView : public QTreeWidget
     void contentsDropEvent(QDropEvent*);
     bool acceptDrag( QDropEvent* event) const;
     void mouseMoveEvent( QMouseEvent* );
+    void mousePressEvent( QMouseEvent* );
 
   protected slots:
     void autoSaveChanged( bool );
@@ -275,6 +271,7 @@ class TaskView : public QTreeWidget
     /** React on another process having modified the iCal file we rely on. 
        This is not iCalFileChanged. */
     void iCalFileModified(ResourceCalendar *);
+    void slotItemDoubleClicked( QTreeWidgetItem *item, int );
 };
 
 #endif // KARM_TASK_VIEW

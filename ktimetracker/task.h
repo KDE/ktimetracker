@@ -24,9 +24,8 @@
 // Required b/c QPtrList is a struct, not a class.
 #include <q3ptrlist.h>
 
-// Requred b/c/ QPtrVector is a template (?)
-#include <q3ptrvector.h>
 #include <QPixmap>
+#include <QVector>
 
 #include <QDateTime>
 
@@ -94,8 +93,6 @@ class Task : public QObject, public QTreeWidgetItem
     QString uid() const       { return _uid; }
  
     int depth();
-
-    void setPixmap(int i, QIcon qi) {};
 
     /**
      * Set unique id for the task.
@@ -322,7 +319,7 @@ class Task : public QObject, public QTreeWidgetItem
     DesktopList _desktops;
     QTimer *_timer;
     int _currentPic;
-    static Q3PtrVector<QPixmap> *icons;
+    static QVector<QPixmap*> *icons;
 
     /** Don't need to update storage when deleting task from list. */
     bool _removing;

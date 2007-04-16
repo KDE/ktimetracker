@@ -119,8 +119,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
            this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
   connect( this, SIGNAL( collapsed( Q3ListViewItem * ) ),
            this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
-  connect( this, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
-           this, SLOT(slotItemClicked(QTreeWidgetItem*, int)) );
+  connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
+           this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)) );
 
   QStringList labels;
   labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
@@ -241,10 +241,37 @@ void TaskView::mouseMoveEvent( QMouseEvent *event ) {
       Task *task = dynamic_cast<Task*>(item);
       if (task) {
         task->setPercentComplete( newValue, _storage );
+        
+        emit updateButtons();
       }
     }
   } else {
     QTreeWidget::mouseMoveEvent( event );
+  }
+}
+
+void TaskView::mousePressEvent( QMouseEvent *event ) {
+  QModelIndex index = indexAt( event->pos() );
+  
+  if (   index.isValid() 
+      && index.column() == 0
+      && visualRect( index ).x() <= event->pos().x()
+      && event->pos().x() < visualRect( index ).x() + 19) {
+    QTreeWidgetItem *item = itemFromIndex( index );
+    if (item && item->isSelected()) {
+      Task *task = dynamic_cast<Task*>(item);
+      if (task) {
+        if (task->isComplete()) {
+          task->setPercentComplete( 0, _storage );
+        } else {
+          task->setPercentComplete( 100, _storage );
+        }
+        
+        emit updateButtons();
+      }
+    }
+  } else {
+    QTreeWidget::mousePressEvent( event );
   }
 }
 
@@ -260,62 +287,6 @@ int TaskView::mapToLogiCal( int col )
   return header()->mapToLogical( col );
 */ 
 return 1;
-}
-
-void TaskView::contentsMousePressEvent ( QMouseEvent * e )
-{
-  kDebug(5970) << "entering contentsMousePressEvent" << endl;
-  kDebug(5970) << "header is " << header() << endl;
-  header()->setToolTip("this is header");
-  //kDebug(5970) << "mapToLogical ( int a )" << header()->mapToLogical(1) << endl;
-  //QTreeWidget::contentsMousePressEvent(e);
-  Task* task = current_item();
-  kDebug() << current_item()->depth() << endl;
-/*
-  // This checks that there has been a click onto an item,
-  // not into an empty part of the K3ListView.
-  if ( task != 0  ) //&&  // zero can happen if there is no task
-       //e->pos().y() >= current_item()->itemPos() && 
-       //e->pos().y() < current_item()->itemPos()+current_item()->height() ) 
-
-  { 
-    // see if the click was on the completed icon
-    int leftborder = treeStepSize() * ( task->depth() + ( rootIsDecorated() ? 1 : 0)) + itemMargin();
-    if ((leftborder < e->x()) && (e->x() < 19 + leftborder ))
-    {
-      if ( task->isComplete() ) task->setPercentComplete( 0, _storage );
-      else task->setPercentComplete( 100, _storage );
-    }
-    emit updateButtons();
-  }
-*/
-}
-
-void TaskView::contentsMouseDoubleClickEvent ( QMouseEvent * e )
-// if the user double-clicks onto a tasks, he says "I am now working exclusively
-// on that task". That means, on a doubleclick, we check if it occurs on an item
-// not in the blank space, if yes, stop all other tasks and start the new timer.
-{
-/*
-  kDebug(5970) << "entering contentsMouseDoubleClickEvent" << endl;
-  //QTreeWidget::contentsMouseDoubleClickEvent(e);
-  
-  Task *task = current_item();
-
-  if ( task != 0 )  // current_item() exists
-  {
-    if ( e->pos().y() >= task->itemPos() &&   // doubleclick was onto current_item()
-       e->pos().y() < task->itemPos()+task->height() )
-    {
-      if ( activeTasks.findRef(task) == -1 )  // task is active
-      {
-        stopAllTimers();
-        startCurrentTimer();
-      }
-      else stopCurrentTimer();
-    }
-  }
-*/
 }
 
 TaskView::~TaskView()
@@ -1076,15 +1047,16 @@ QString TaskView::clipHistory()
   return err;
 }
 
-void TaskView::slotItemClicked( QTreeWidgetItem *item, int column )
+void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
 {
-  if (item && column == 0) {
+  if (item) {
     Task *task = dynamic_cast<Task*>( item );
     if (task) {
-      if (task->checkState( 0 ) == Qt::Checked) {
-        markTaskAsComplete ();
-      } else if (task->checkState( 0 ) == Qt::Unchecked && task->percentComplete() == 100) {
-        markTaskAsIncomplete ();
+      if (activeTasks.findRef(task) == -1) { // task is active
+        stopAllTimers();
+        startCurrentTimer();
+      } else {
+        stopCurrentTimer();
       }
     }
   }

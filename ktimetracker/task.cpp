@@ -40,7 +40,7 @@
 const int gSecondsPerMinute = 60;
 
 
-Q3PtrVector<QPixmap> *Task::icons = 0;
+QVector<QPixmap*> *Task::icons = 0;
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent)
@@ -84,9 +84,6 @@ int Task::depth()
 void Task::init( const QString& taskName, long minutes, long sessionTime,
                  DesktopList desktops, int percent_complete)
 {
-  // QTreeWidgetItem stuff
-  setFlags( flags() | Qt::ItemIsUserCheckable );
-  
   // If our parent is the taskview then connect our totalTimesChanged
   // signal to its receiver
   if ( ! parent() )
@@ -97,7 +94,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
            treeWidget(), SLOT( deletingTask( Task* ) ));
 
   if (icons == 0) {
-    icons = new Q3PtrVector<QPixmap>(8);
+    icons = new QVector<QPixmap*>(8);
     KIconLoader* kil = new KIconLoader("karm"); // always load icons from the KArm application
     for (int i=0; i<8; i++)
     {
@@ -117,7 +114,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
   _timer = new QTimer(this);
   _desktops = desktops;
   connect(_timer, SIGNAL(timeout()), this, SLOT(updateActiveIcon()));
-  setPixmap(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+  setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
   _currentPic = 0;
   _percentcomplete = percent_complete;
 
@@ -158,7 +155,7 @@ void Task::setRunning( bool on, KarmStorage* storage, QDateTime when  )
       if ( ! _removing ) 
       {
         storage->stopTimer(this, when);
-        setPixmap(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+        setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
       }
     }
   }
@@ -234,7 +231,7 @@ void Task::setPixmapProgress()
     *icon = UserIcon("task-complete.xpm");
   else
     *icon = UserIcon("task-incomplete.xpm");
-  setPixmap(0, *icon);
+  setIcon(0, *icon);
 }
 
 bool Task::isComplete() { return _percentcomplete == 100; }
@@ -329,7 +326,7 @@ bool Task::remove( Q3PtrList<Task>& activeTasks, KarmStorage* storage)
 void Task::updateActiveIcon()
 {
   _currentPic = (_currentPic+1) % 8;
-  setPixmap(1, *(*icons)[_currentPic]);
+  setIcon(1, *(*icons)[_currentPic]);
 }
 
 QString Task::fullName() const
@@ -477,7 +474,6 @@ void Task::update()
   setText(3, formatTime(_totalSessionTime, b));
   setText(4, formatTime(_totalTime, b));
   setText(5, QString::number(_percentcomplete));
-  setCheckState( 0, _percentcomplete == 100 ? Qt::Checked : Qt::Unchecked );
   kDebug(5970) << "Exiting Task::update" << endl;
 }
 
