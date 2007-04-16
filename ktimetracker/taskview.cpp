@@ -115,10 +115,10 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
 
-  connect( this, SIGNAL( expanded( Q3ListViewItem * ) ),
-           this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
-  connect( this, SIGNAL( collapsed( Q3ListViewItem * ) ),
-           this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
+  connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
+           this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
+  connect( this, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
+           this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
   connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)) );
 
@@ -238,7 +238,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event ) {
     int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 100);
     QTreeWidgetItem *item = itemFromIndex( index );
     if (item && item->isSelected()) {
-      Task *task = dynamic_cast<Task*>(item);
+      Task *task = static_cast<Task*>(item);
       if (task) {
         task->setPercentComplete( newValue, _storage );
         
@@ -259,7 +259,7 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
       && event->pos().x() < visualRect( index ).x() + 19) {
     QTreeWidgetItem *item = itemFromIndex( index );
     if (item) {
-      Task *task = dynamic_cast<Task*>(item);
+      Task *task = static_cast<Task*>(item);
       if (task) {
         if (task->isComplete()) {
           task->setPercentComplete( 0, _storage );
@@ -1050,7 +1050,7 @@ QString TaskView::clipHistory()
 void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
 {
   if (item) {
-    Task *task = dynamic_cast<Task*>( item );
+    Task *task = static_cast<Task*>( item );
     if (task) {
       if (activeTasks.findRef(task) == -1) { // task is active
         stopAllTimers();
