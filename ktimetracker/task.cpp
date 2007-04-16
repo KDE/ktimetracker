@@ -123,6 +123,11 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
 
   update();
   changeParentTotalTimes( _sessionTime, _time);
+  
+  // alignment of the number items
+  for (int i = 1; i < columnCount(); ++i) {
+      setTextAlignment( i, Qt::AlignRight );
+  }
 }
 
 Task::~Task() {
