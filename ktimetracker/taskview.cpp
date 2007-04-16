@@ -97,9 +97,9 @@ public:
         painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
       }
       
-      painter->setPen( Qt::white );
+      painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight() : option.palette.background() );
       for (int x = rHeight; x < newWidth; x += rHeight) {
-        painter->drawLine( rX + x, rY, rX + x, rY + rHeight );
+        painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
       }
       
       painter->setPen( Qt::black );
@@ -229,6 +229,23 @@ bool TaskView::acceptDrag(QDropEvent* e) const
   }
   return (!isAncestor && QTreeWidget::acceptDrag(e));
 */
+}
+
+void TaskView::mouseMoveEvent( QMouseEvent *event ) {
+  QModelIndex index = indexAt( event->pos() );
+  
+  if (index.isValid() && index.column() == 5) {
+    int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 100);
+    QTreeWidgetItem *item = itemFromIndex( index );
+    if (item && item->isSelected()) {
+      Task *task = dynamic_cast<Task*>(item);
+      if (task) {
+        task->setPercentComplete( newValue, _storage );
+      }
+    }
+  } else {
+    QTreeWidget::mouseMoveEvent( event );
+  }
 }
 
 KarmStorage* TaskView::storage()

@@ -264,6 +264,7 @@ class TaskView : public QTreeWidget
     Q3DragObject* dragObject();
     void contentsDropEvent(QDropEvent*);
     bool acceptDrag( QDropEvent* event) const;
+    void mouseMoveEvent( QMouseEvent* );
 
   protected slots:
     void autoSaveChanged( bool );
