@@ -256,6 +256,7 @@ class Task : public QObject, public QTreeWidgetItem
      * 100.  If less than zero, set to zero.
      */
     void setPercentComplete(const int percent, KarmStorage *storage);
+    int percentComplete() const { return _percentcomplete; }
 
 
     /** Sets an appropriate icon for this task based on its level of

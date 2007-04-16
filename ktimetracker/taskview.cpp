@@ -72,6 +72,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
            this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
   connect( this, SIGNAL( collapsed( Q3ListViewItem * ) ),
            this, SLOT( itemStateChanged( Q3ListViewItem * ) ) );
+  connect( this, SIGNAL(itemClicked(QTreeWidgetItem*, int)),
+           this, SLOT(slotItemClicked(QTreeWidgetItem*, int)) );
 
   QStringList labels;
   labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
@@ -1007,6 +1009,20 @@ QString TaskView::clipHistory()
       setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek(), dialog.totalsOnly() ) );
   }
   return err;
+}
+
+void TaskView::slotItemClicked( QTreeWidgetItem *item, int column )
+{
+  if (item && column == 0) {
+    Task *task = dynamic_cast<Task*>( item );
+    if (task) {
+      if (task->checkState( 0 ) == Qt::Checked) {
+        markTaskAsComplete ();
+      } else if (task->checkState( 0 ) == Qt::Unchecked && task->percentComplete() == 100) {
+        markTaskAsIncomplete ();
+      }
+    }
+  }
 }
 
 #include "taskview.moc"

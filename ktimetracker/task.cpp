@@ -84,6 +84,9 @@ int Task::depth()
 void Task::init( const QString& taskName, long minutes, long sessionTime,
                  DesktopList desktops, int percent_complete)
 {
+  // QTreeWidgetItem stuff
+  setFlags( flags() | Qt::ItemIsUserCheckable );
+  
   // If our parent is the taskview then connect our totalTimesChanged
   // signal to its receiver
   if ( ! parent() )
@@ -469,6 +472,7 @@ void Task::update()
   setText(3, formatTime(_totalSessionTime, b));
   setText(4, formatTime(_totalTime, b));
   setText(5, QString::number(_percentcomplete));
+  setCheckState( 0, _percentcomplete == 100 ? Qt::Checked : Qt::Unchecked );
   kDebug(5970) << "Exiting Task::update" << endl;
 }
 

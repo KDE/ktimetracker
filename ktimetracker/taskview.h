@@ -223,6 +223,9 @@ class TaskView : public QTreeWidget
 
     /** Copy history for current and all sub tasks to clipboard. */
     QString clipHistory();
+    
+  private slots:
+    void slotItemClicked( QTreeWidgetItem *item, int column );
 
   signals:
     void totalTimesChanged( long session, long total );
