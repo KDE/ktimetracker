@@ -28,6 +28,8 @@
 #include <q3ptrstack.h>
 #include <Q3Header>
 #include <QHeaderView>
+#include <QItemDelegate>
+#include <QPainter>
 #include <QString>
 #include <QTableWidget>
 #include <QTextStream>
@@ -63,6 +65,51 @@
 
 class DesktopTracker;
 
+class TaskViewDelegate : public QItemDelegate {
+public:
+  TaskViewDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
+  
+  void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const {
+    if (index.column () == 5) {
+      if (option.state & QStyle::State_Selected) {
+        painter->fillRect( option.rect, option.palette.highlight() );
+      }
+      int rX = option.rect.x() + 2;
+      int rY = option.rect.y() + 2;
+      int rWidth = option.rect.width() - 4;
+      int rHeight = option.rect.height() - 4;
+      
+      int value = index.model()->data( index ).toInt();
+      int newWidth = (int)(rWidth * (value / 100.));
+      
+      int mid = rY + rHeight / 2;
+      int width = rWidth / 2;
+      
+      QLinearGradient gradient1( rX, mid, rX + width, mid);
+      gradient1.setColorAt( 0, Qt::red );
+      gradient1.setColorAt( 1, Qt::yellow );
+      painter->fillRect( rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
+      
+      if (newWidth > width) {
+        QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
+        gradient2.setColorAt( 0, Qt::yellow );
+        gradient2.setColorAt( 1, Qt::green );
+        painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
+      }
+      
+      painter->setPen( Qt::white );
+      for (int x = rHeight; x < newWidth; x += rHeight) {
+        painter->drawLine( rX + x, rY, rX + x, rY + rHeight );
+      }
+      
+      painter->setPen( Qt::black );
+      painter->drawText( option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %" );
+    } else {
+      QItemDelegate::paint( painter, option, index );
+    }
+  }
+};
+
 TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 {
   _preferences = Preferences::instance( icsfile );
@@ -80,6 +127,7 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   setHeaderLabels(labels);
   adaptColumns();
   setAllColumnsShowFocus( true );
+  setItemDelegate( new TaskViewDelegate(this) );
 
   // set up the minuteTimer
   _minuteTimer = new QTimer(this);
