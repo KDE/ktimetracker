@@ -279,7 +279,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   // restart tasks that have been running with their start times
   for ( int i=0; i<view->count(); i++)
   {
-    for ( int n=0; n<runningTasks.size(); n++)
+    for ( vector<QString>::size_type n=0; n<runningTasks.size(); n++)
     {
       if ( runningTasks[n] == view->item_at_index(i)->uid() )
       {

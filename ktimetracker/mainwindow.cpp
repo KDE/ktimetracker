@@ -144,7 +144,7 @@ void MainWindow::slotedithistory()
 
 void MainWindow::setStatusBar(const QString& qs)
 {
-  statusBar()->message(i18n(qs.toUtf8()));
+  statusBar()->showMessage(i18n(qs.toUtf8()));
 }
 
 bool MainWindow::save()
@@ -401,9 +401,7 @@ void MainWindow::loadGeometry()
   if (initialGeometrySet()) setAutoSaveSettings();
   else
   {
-    KConfig &config = *KGlobal::config();
-
-    config.setGroup( QString::fromLatin1("Main Window Geometry") );
+    KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
     int w = config.readEntry( QString::fromLatin1("Width"), 100 );
     int h = config.readEntry( QString::fromLatin1("Height"), 100 );
     w = qMax( w, sizeHint().width() );
@@ -415,8 +413,7 @@ void MainWindow::loadGeometry()
 
 void MainWindow::saveGeometry()
 {
-  KConfig &config = *KGlobal::config();
-  config.setGroup( QString::fromLatin1("Main Window Geometry"));
+  KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
   config.writeEntry( QString::fromLatin1("Width"), width());
   config.writeEntry( QString::fromLatin1("Height"), height());
   config.sync();
