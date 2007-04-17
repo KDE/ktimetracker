@@ -78,7 +78,7 @@ Preferences *Preferences::instance( const QString &icsfile )
 
 void Preferences::makeBehaviorPage()
 {
-  KIcon icon = KIcon( SmallIconSet( "kcmsystem", K3Icon::SizeMedium) );
+  KIcon icon = KIcon( "kcmsystem" );
   QFrame* behaviorPage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( behaviorPage, i18n("Behavior"));
   pageItem->setHeader( i18n("Behavior Settings") );
@@ -124,7 +124,7 @@ void Preferences::makeBehaviorPage()
 
 void Preferences::makeDisplayPage()
 {
-  KIcon icon = KIcon( SmallIconSet( "zoom-original", K3Icon::SizeMedium ) );
+  KIcon icon = KIcon( "zoom-original" );
 
   QFrame* displayPage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( displayPage, i18n("Display"));
@@ -177,7 +177,7 @@ void Preferences::makeDisplayPage()
 
 void Preferences::makeStoragePage()
 {
-  KIcon icon = KIcon( SmallIconSet( "kfm", K3Icon::SizeMedium ) );
+  KIcon icon = KIcon( "kfm" );
   QFrame* storagePage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( storagePage, i18n("Storage") );
   pageItem->setHeader( i18n("Storage Settings") );
@@ -352,40 +352,38 @@ bool    Preferences::trayIcon()                      const { return _trayIconV; 
 //---------------------------------------------------------------------------
 void Preferences::load()
 {
-  KConfig &config = *KGlobal::config();
-
-  config.setGroup( QString::fromLatin1("Idle detection") );
-  _doIdleDetectionV = config.readEntry( QString::fromLatin1("enabled"),
+  KConfigGroup configIdleDetection = KGlobal::config()->group( QString::fromLatin1("Idle detection") );
+  _doIdleDetectionV = configIdleDetection.readEntry( QString::fromLatin1("enabled"),
      true );
-  _idleDetectValueV = config.readEntry(QString::fromLatin1("period"), 15);
+  _idleDetectValueV = configIdleDetection.readEntry(QString::fromLatin1("period"), 15);
 
-  config.setGroup( QString::fromLatin1("Saving") );
-  _iCalFileV = config.readPathEntry
+  KConfigGroup configSaving = KGlobal::config()->group( QString::fromLatin1("Saving") );
+  _iCalFileV = configSaving.readPathEntry
     ( QString::fromLatin1("ical file"),
       KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
-  _doAutoSaveV = config.readEntry
+  _doAutoSaveV = configSaving.readEntry
     ( QString::fromLatin1("auto save"), true);
-  _autoSaveValueV = config.readEntry
+  _autoSaveValueV = configSaving.readEntry
     ( QString::fromLatin1("auto save period"), 5);
-  _promptDeleteV = config.readEntry
+  _promptDeleteV = configSaving.readEntry
     ( QString::fromLatin1("prompt delete"), true);
-  _uniTaskingV = config.readEntry
+  _uniTaskingV = configSaving.readEntry
     ( QString::fromLatin1("unitasking"), false);
-  _loggingV = config.readEntry
+  _loggingV = configSaving.readEntry
     ( QString::fromLatin1("logging"), true);
 
-  _displayColumnV[0] = config.readEntry
+  _displayColumnV[0] = configSaving.readEntry
     ( QString("display session time"), true);
-  _displayColumnV[1] = config.readEntry
+  _displayColumnV[1] = configSaving.readEntry
     ( QString("display time"), true);
-  _displayColumnV[2] = config.readEntry
+  _displayColumnV[2] = configSaving.readEntry
     ( QString("display total session time"), true);
-  _displayColumnV[3] = config.readEntry
+  _displayColumnV[3] = configSaving.readEntry
     ( QString("display total time"), true);
-  _displayColumnV[4] = config.readEntry
+  _displayColumnV[4] = configSaving.readEntry
     ( QString("display percent complete"), false);
   
-  _trayIconV = config.readEntry
+  _trayIconV = configSaving.readEntry
     ( QString::fromLatin1("tray icon"), true);
 
   KEMailSettings settings;
@@ -395,46 +393,44 @@ void Preferences::load()
 void Preferences::save()
 {
   kDebug(5970) << "Entering Preferences::save" << endl;
-  KConfig &config = *KGlobal::config();
+  KConfigGroup configIdleDetection = KGlobal::config()->group( QString("Idle detection") );
+  configIdleDetection.writeEntry( QString("enabled"), _doIdleDetectionV);
+  configIdleDetection.writeEntry( QString("period"), _idleDetectValueV);
+  configIdleDetection.sync();
 
-  config.setGroup( QString("Idle detection"));
-  config.writeEntry( QString("enabled"), _doIdleDetectionV);
-  config.writeEntry( QString("period"), _idleDetectValueV);
+  KConfigGroup configSaving = KGlobal::config()->group( QString("Saving") );
+  configSaving.writePathEntry( QString("ical file"), _iCalFileV);
+  configSaving.writeEntry( QString("auto save"), _doAutoSaveV);
+  configSaving.writeEntry( QString("logging"), _loggingV);
+  configSaving.writeEntry( QString("auto save period"), _autoSaveValueV);
+  configSaving.writeEntry( QString("prompt delete"), _promptDeleteV);
+  configSaving.writeEntry( QString("unitasking"), _uniTaskingV);
 
-  config.setGroup( QString("Saving"));
-  config.writePathEntry( QString("ical file"), _iCalFileV);
-  config.writeEntry( QString("auto save"), _doAutoSaveV);
-  config.writeEntry( QString("logging"), _loggingV);
-  config.writeEntry( QString("auto save period"), _autoSaveValueV);
-  config.writeEntry( QString("prompt delete"), _promptDeleteV);
-  config.writeEntry( QString("unitasking"), _uniTaskingV);
-
-  config.writeEntry( QString("display session time"), _displayColumnV[0] );
-  config.writeEntry( QString("display time"), _displayColumnV[1] );
-  config.writeEntry( QString("display total session time"), _displayColumnV[2] );
-  config.writeEntry( QString("display total time"), _displayColumnV[3] );
-  config.writeEntry( QString("display percent complete"), _displayColumnV[4] );
-  config.writeEntry( QString("tray icon"), _trayIconV );
-  config.sync();
+  configSaving.writeEntry( QString("display session time"), _displayColumnV[0] );
+  configSaving.writeEntry( QString("display time"), _displayColumnV[1] );
+  configSaving.writeEntry( QString("display total session time"), _displayColumnV[2] );
+  configSaving.writeEntry( QString("display total time"), _displayColumnV[3] );
+  configSaving.writeEntry( QString("display percent complete"), _displayColumnV[4] );
+  configSaving.writeEntry( QString("tray icon"), _trayIconV );
+  configSaving.sync();
 }
 
 // HACK: this entire config dialog should be upgraded to KConfigXT
 bool Preferences::readBoolEntry( const QString& key )
 {
-  KConfig &config = *KGlobal::config();
-  return config.readEntry ( key, true );
+  return KGlobal::config()->group( QString() ).readEntry( key, true );
 }
 
 void Preferences::writeEntry( const QString &key, bool value)
 {
-  KConfig &config = *KGlobal::config();
+  KConfigGroup config = KGlobal::config()->group( QString() );
   config.writeEntry( key, value );
   config.sync();
 }
 
 void Preferences::deleteEntry( const QString &key )
 {
-  KConfig &config = *KGlobal::config();
+  KConfigGroup config = KGlobal::config()->group( QString() );
   config.deleteEntry( key );
   config.sync();
 }
