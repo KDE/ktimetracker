@@ -272,6 +272,7 @@ class TaskView : public QTreeWidget
        This is not iCalFileChanged. */
     void iCalFileModified(ResourceCalendar *);
     void slotItemDoubleClicked( QTreeWidgetItem *item, int );
+    void slotColumnToggled( int );
 };
 
 #endif // KARM_TASK_VIEW

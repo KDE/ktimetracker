@@ -347,6 +347,12 @@ QString Preferences::userRealName()                  const { return _userRealNam
 bool    Preferences::decimalFormat()		     const { return _decimalFormatV; }
 bool    Preferences::trayIcon()                      const { return _trayIconV; }
 
+void Preferences::setDisplayColumn( int column, bool show )
+{
+  _displayColumnV[column] = show;
+  emitSignals();
+}
+
 //---------------------------------------------------------------------------
 //                                  Load and Save
 //---------------------------------------------------------------------------

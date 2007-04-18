@@ -60,6 +60,7 @@
 #include "taskview.h"
 #include "timekard.h"
 #include "taskviewwhatsthis.h"
+#include "treeviewheadercontextmenu.h"
 
 #define T_LINESIZE 1023
 
@@ -179,6 +180,10 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   dragTask=0;
   setDragEnabled(true);
   setAcceptDrops(true);
+
+  // Header context menu
+  TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
+  connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 }
 
 void TaskView::contentsDropEvent(QDropEvent* qde)
@@ -1062,6 +1067,13 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
       }
     }
   }
+}
+
+void TaskView::slotColumnToggled( int column )
+{
+  kDebug() << "column: " << column << endl;
+  _preferences->setDisplayColumn( column - 1, !isColumnHidden(column) );
+  _preferences->save();
 }
 
 #include "taskview.moc"

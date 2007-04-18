@@ -60,6 +60,8 @@ class Preferences :public KPageDialog
     bool trayIcon() const;
     QString userRealName() const;
 
+    void setDisplayColumn( int column, bool show );
+
     void emitSignals();
     bool readBoolEntry( const QString& uid );
     void writeEntry( const QString &key, bool value );
