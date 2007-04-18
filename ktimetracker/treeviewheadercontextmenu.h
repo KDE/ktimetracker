@@ -31,14 +31,28 @@ class QTreeView;
 
 class KMenu;
 
+/**
+ * ContextMenu for QTreeView::header() to toggle the
+ * visible state of the columns.
+ *
+ * It is possible to exclude columns from inserting in the
+ * menu either by the @p excludedColumns parameter in the constructor,
+ * by #addExcludedColumn or #addExcludedColumns.
+ *
+ * You can also change the display style of the items in the menu.
+ *
+ * @author Mathias Soeken <msoeken@tzi.de>
+ */
 class TreeViewHeaderContextMenu : public QObject {
   Q_OBJECT
+  Q_PROPERTY(int style READ style)
+  Q_PROPERTY(KMenu* menu READ menu)
 
   public:
     enum { AlwaysCheckBox, CheckBoxOnChecked, ShowHideText };
 
   public:
-    TreeViewHeaderContextMenu( QObject *parent, QTreeView *widget, int style = AlwaysCheckBox, QVector<int> excludedColumns = QVector<int>() );
+    explicit TreeViewHeaderContextMenu( QObject *parent, QTreeView *widget, int style = AlwaysCheckBox, QVector<int> excludedColumns = QVector<int>() );
     ~TreeViewHeaderContextMenu();
 
   private:
@@ -64,6 +78,7 @@ class TreeViewHeaderContextMenu : public QObject {
     int style() const { return mStyle; }
     void addExcludedColumn( int column ) { mExcludedColumns << column; updateActions(); }
     void addExcludedColumns( QVector<int> columns ) { mExcludedColumns << columns; updateActions(); }
+    KMenu *menu() const { return mContextMenu; }
 
   signals:
     void columnToggled( int );

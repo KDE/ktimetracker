@@ -20,6 +20,7 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
     connect( mWidget->header(), SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotCustomContextMenuRequested(const QPoint&)) );
 
     mContextMenu = new KMenu( mWidget );
+    mContextMenu->addTitle( i18n("Columns") );
     connect( mContextMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotTriggered(QAction*)) );
     connect( mContextMenu, SIGNAL(aboutToShow()), this, SLOT(slotAboutToShow()) );
     updateActions();
@@ -41,11 +42,14 @@ void TreeViewHeaderContextMenu::slotCustomContextMenuRequested( const QPoint& po
 void TreeViewHeaderContextMenu::updateActions() 
 {
   if (mWidget) {
+    QAction *action;
+    foreach (action, mActions) {
+      mContextMenu->removeAction( action );
+    }
+
+    mActionColumnMapping.clear();
     qDeleteAll( mActions );
     mActions.clear();
-
-    mContextMenu->clear();
-    mContextMenu->addTitle( i18n("Columns") );
 
     for (int c = 0; c < mWidget->model()->columnCount(); ++c) {
       if (mExcludedColumns.contains( c )) continue;
