@@ -59,7 +59,6 @@
 #include "task.h"
 #include "taskview.h"
 #include "timekard.h"
-#include "taskviewwhatsthis.h"
 #include "treeviewheadercontextmenu.h"
 
 #define T_LINESIZE 1023
@@ -178,7 +177,6 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
            this, SLOT( startTimerFor(Task*) ));
   connect( _desktopTracker, SIGNAL( leftActiveDesktop( Task* ) ),
            this, SLOT( stopTimerFor(Task*) ));
-  new TaskViewWhatsThis( this );
   dragTask=0;
   setDragEnabled(true);
   setAcceptDrops(true);
