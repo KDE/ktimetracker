@@ -14,7 +14,7 @@
 #include <q3ptrlist.h>
 #include <QString>
 #include <QTimer>
-#include <QToolTip>
+
 
 #include <kaction.h>            // actionPreferences()
 #include <kglobal.h>
