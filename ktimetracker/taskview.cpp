@@ -287,15 +287,6 @@ KarmStorage* TaskView::storage()
   return _storage;
 }
 
-int TaskView::mapToLogiCal( int /*col*/ )
-{
-/*
-  kDebug(5970) << "entering mapToLogiCal " << endl;
-  return header()->mapToLogical( col );
-*/ 
-return 1;
-}
-
 TaskView::~TaskView()
 {
   _preferences->save();
