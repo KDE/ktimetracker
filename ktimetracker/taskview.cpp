@@ -350,7 +350,7 @@ void TaskView::load( QString fileName )
 
   restoreItemState();
 
-  //setSelected(first_child(), true);
+  first_child()->setSelected(true);
   setCurrentItem(first_child());
   _desktopTracker->startTracking();
   _isloading = false;
@@ -773,7 +773,7 @@ QString TaskView::addTask
   {
     _desktopTracker->registerForDesktops( task, desktops );
     setCurrentItem( task );
-    //setSelected( task, true );
+    task->setSelected( true );
     task->setPixmapProgress();
     save();
   }
