@@ -52,21 +52,16 @@ int main( int argc, char *argv[] )
       KARM_VERSION, description, KAboutData::License_GPL,
       "(c) 1997-2007, KDE PIM Developers" );
 
-  aboutData.addAuthor( "Thorsten Staerk", I18N_NOOP( "Current Maintainer" ),
+  aboutData.addAuthor( "Thorsten St&auml;rk", I18N_NOOP( "Current Maintainer" ),
                        "kde@staerk.de" );
   aboutData.addAuthor( "Sirtaj Singh Kang", I18N_NOOP( "Original Author" ),
                        "taj@kde.org" );
   aboutData.addAuthor( "Allen Winter",      0, "winterz@verizon.net" );
   aboutData.addAuthor( "David Faure",       0, "faure@kde.org" );
-  aboutData.addAuthor( "Espen Sand",        0, "espen@kde.org" );
-  aboutData.addAuthor( "Gioele Barabucci",  0, "gioele@gioelebarabucci.com" );
-  aboutData.addAuthor( "Jan Schaumann",     0, "jschauma@netmeister.org" );
+  aboutData.addAuthor( "Mathias Soeken",    0, "msoeken@tzi.de" );
   aboutData.addAuthor( "Jesper Pedersen",   0, "blackie@kde.org" );
   aboutData.addAuthor( "Kalle Dalheimer",   0, "kalle@kde.org" );
   aboutData.addAuthor( "Mark Bucciarelli",  0, "mark@hubcapconsulting.com" );
-  aboutData.addAuthor( "Scott Monachello",  0, "smonach@cox.net" );
-  aboutData.addAuthor( "Tomas Pospisek",    0, "tpo_deb@sourcepole.ch" );
-  aboutData.addAuthor( "Willi Richert",     0, "w.richert@gmx.net" );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options );
