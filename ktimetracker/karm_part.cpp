@@ -437,7 +437,7 @@ void karmPart::contextMenuRequest( Q3ListViewItem*, const QPoint& point, int )
 
 QString karmPart::version() const
 {
-  return KARM_VERSION;
+  return KTIMETRACKER_VERSION;
 }
 
 QString karmPart::deletetodo()

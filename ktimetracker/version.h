@@ -18,6 +18,6 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
-#ifndef KARM_VERSION
-#define KARM_VERSION "1.6.0"
+#ifndef KTIMETRACKER_VERSION
+#define KTIMETRACKER_VERSION "4.0.0"
 #endif
