@@ -70,7 +70,7 @@ int runscripts
 
   Script* s = new Script( path );
 
-  dir.setNameFilter( extension );
+  dir.setNameFilters( extension.split(' ') );
   dir.setFilter( QDir::Files );
   dir.setSorting( QDir::Name | QDir::IgnoreCase );
   QFileInfoList *list = new QFileInfoList(dir.entryInfoList());
