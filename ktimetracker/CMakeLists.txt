@@ -10,6 +10,7 @@ add_subdirectory( test )
 
 include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/remote  )
 
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
 
 ########### next target ###############
 set(karm_shared_SRCS 
