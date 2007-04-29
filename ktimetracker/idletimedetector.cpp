@@ -86,7 +86,7 @@ void IdleTimeDetector::revert()
   kDebug(5970) << "Entering IdleTimeDetector::revert" << endl;
   QDateTime end = QDateTime::currentDateTime();
   int diff = start.secsTo(end)/secsPerMinute;
-  //emit(extractTime(idleminutes+diff));
+  emit(extractTime(idleminutes+diff)); // subtract the time that has been added on the display
   emit(stopAllTimers(idlestart));
 }
 

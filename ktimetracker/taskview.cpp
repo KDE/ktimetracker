@@ -938,7 +938,7 @@ void TaskView::deleteTask(bool markingascomplete)
 
 void TaskView::extractTime(int minutes)
 {
-  addTimeToActiveTasks(-minutes);
+  addTimeToActiveTasks(-minutes,false); // subtract time in memory, but do not store it
 }
 
 void TaskView::autoSaveChanged(bool on)
