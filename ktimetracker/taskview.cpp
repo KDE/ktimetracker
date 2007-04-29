@@ -295,7 +295,9 @@ TaskView::~TaskView()
 Task* TaskView::first_child() const
 {
   kDebug() << "Entering TaskView::first_child" << endl;
-  return static_cast<Task*>(topLevelItem(0));
+  Task* t = static_cast<Task*>(topLevelItem(0));
+  kDebug() << "Leaving TaskView::first_child" << endl;
+  return t;
 }
 
 Task* TaskView::current_item() const
@@ -309,12 +311,13 @@ Task* TaskView::item_at_index(int i)
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug() << "Entering TaskView::item_at_index" << endl;
+  kDebug(5970) << "Entering TaskView::item_at_index(" << i << ")" << endl;
   if (!first_child()) return 0;
 
   QTreeWidgetItemIterator item(first_child());
   while( *item && i-- ) ++item;
  
+  kDebug(5970) << "Leaving TaskView::item_at_index" << endl;
   if (!*item) return 0;
   else return (Task*) *item;
 }
@@ -323,7 +326,7 @@ void TaskView::load( QString fileName )
 {
   // if the program is used as an embedded plugin for konqueror, there may be a need
   // to load from a file without touching the preferences.
-  kDebug() << "Entering TaskView::load" << endl;
+  kDebug(5970) << "Entering TaskView::load" << endl;
   _isloading = true;
   QString err = _storage->load(this, _preferences, fileName);
 
@@ -331,6 +334,7 @@ void TaskView::load( QString fileName )
   {
     KMessageBox::error(this, err);
     _isloading = false;
+    kDebug(5970) << "Leaving TaskView::load" << endl;
     return;
   }
 
@@ -339,15 +343,17 @@ void TaskView::load( QString fileName )
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
     _desktopTracker->registerForDesktops( t, t->getDesktops() );
 
-  restoreItemState();
-
-  first_child()->setSelected(true);
-  setCurrentItem(first_child());
-  _desktopTracker->startTracking();
-  _isloading = false;
-  kDebug() << "load calling refesh" << endl;
-  refresh();
-  kDebug() << "Exiting load" << endl;
+  if (first_child())
+  {
+    restoreItemState();
+    first_child()->setSelected(true);
+    setCurrentItem(first_child());
+    _desktopTracker->startTracking();
+    _isloading = false;
+    kDebug(5970) << "load calls refesh" << endl;
+    refresh();
+  }
+  kDebug(5970) << "Leaving TaskView::load" << endl;
 }
 
 void TaskView::restoreItemState()
@@ -366,7 +372,7 @@ is stored in the _preferences object. */
       ++item;
     }
   }
-  kDebug(5970) << "Entering TaskView::restoreItemState" << endl;
+  kDebug(5970) << "Leaving TaskView::restoreItemState" << endl;
 }
 
 void TaskView::itemStateChanged( QTreeWidgetItem *item )
