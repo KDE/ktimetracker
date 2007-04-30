@@ -36,7 +36,7 @@
 #include <QGridLayout>
 
 #include <klocale.h>            // i18n
-#include <kwm.h>
+#include <kwindowsystem.h>
 
 #include "edittaskdialog.h"
 #include "ktimewidget.h"
@@ -159,7 +159,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   lay4->addWidget( _diffTW );
 
 #ifdef Q_WS_X11
-  desktopCount = KWM::numberOfDesktops();
+  desktopCount = KWindowSystem::numberOfDesktops();
 #else
 #ifdef __GNUC__
 #warning non-X11 support missing
@@ -202,7 +202,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
     tmpBx->setObjectName( QString::number(i).toLatin1() );
     _deskBox.push_back( tmpBx );
 #ifdef Q_WS_X11
-    tmpBx->setText(KWM::desktopName(i+1));
+    tmpBx->setText(KWindowSystem::desktopName(i+1));
 #endif
     tmpBx->setChecked(false);
 
