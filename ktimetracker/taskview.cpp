@@ -734,7 +734,8 @@ void TaskView::newTask(QString caption, Task *parent)
   DesktopList desktopList;
 
   int result = dialog->exec();
-  if ( result == QDialog::Accepted ) {
+  if ( result == QDialog::Accepted ) 
+  {
     QString taskName = i18n( "Unnamed Task" );
     if ( !dialog->taskName().isEmpty()) taskName = dialog->taskName();
 
@@ -753,6 +754,7 @@ void TaskView::newTask(QString caption, Task *parent)
             "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
     }
   }
+  emit updateButtons();
 }
 
 QString TaskView::addTask
