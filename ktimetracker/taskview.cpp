@@ -22,11 +22,6 @@
 #include <QClipboard>
 #include <QFile>
 #include <QLayout>
-#include <q3listbox.h>
-#include <q3listview.h>
-#include <q3ptrlist.h>
-#include <q3ptrstack.h>
-#include <Q3Header>
 #include <QHeaderView>
 #include <QItemDelegate>
 #include <QPainter>
