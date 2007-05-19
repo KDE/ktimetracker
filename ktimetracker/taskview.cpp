@@ -181,13 +181,17 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 }
 
-void TaskView::contentsDropEvent(QDropEvent* qde)
+void TaskView::dropEvent(QDropEvent* qde)
 {
-  kDebug() << "This is contentsDropEvent" << endl;
+  kDebug(5970) << "This is dropEvent" << endl;
   Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
-  if (t != dragTask) {
+  //kDebug(5970) << "dropping task " << dragTask->name() << endl;
+  kDebug(5970) << "dropping onto " << t->name() << endl;
+  if (t != dragTask) 
+  {
     int indexOfDragTask = indexOfTopLevelItem( dragTask );
-    if (indexOfDragTask != -1) {
+    if (indexOfDragTask != -1) 
+    {
       takeTopLevelItem( indexOfDragTask );
       t->addChild( dragTask );
     }
@@ -195,20 +199,22 @@ void TaskView::contentsDropEvent(QDropEvent* qde)
   }
 }
 
-void TaskView::startDrag()
+void TaskView::startDrag(Qt::DropActions action)
 {
-  kDebug() << "Entering TaskView::startDrag" << endl;
-  //QTreeWidget::startDrag();  
+  kDebug(5970) << "Entering TaskView::startDrag" << endl;
+  dragTask=(Task*) currentItem();
+  kDebug(5970) << "dragTask is " << dragTask->name() << endl;
+  QTreeWidget::startDrag(action);  
 }
 
-bool TaskView::acceptDrag(QDropEvent* /*e*/) const
+bool TaskView::acceptDrag(QDropEvent* e) const
 {
-/*
-  kDebug() << "Entering TaskView::acceptDrag" << endl;
+  kDebug(5970) << "Entering TaskView::acceptDrag" << endl;
   // Can we drop the item here ?
+  // do we drag to an empty place ?
+  if (this->itemAt(e->pos())==0) return false;
   // Or is the dragged item an ancestor task of the item to drop to ?
   bool isAncestor=false;  // is the drag-task a parent of the drop-task ?
-  if (this->itemAt(e->pos())==0) return false;
   Task* t=static_cast<Task*>(this->itemAt(e->pos()));
   Task* parent=t;
   kDebug() << "parent" << parent->name() << endl;
@@ -218,9 +224,7 @@ bool TaskView::acceptDrag(QDropEvent* /*e*/) const
     kDebug() << "parent->name()" << parent->name() << endl;
     if (parent==dragTask) isAncestor=true;
   }
-  return (!isAncestor && QTreeWidget::acceptDrag(e));
-*/
-  return false;
+  return (!isAncestor);
 }
 
 void TaskView::mouseMoveEvent( QMouseEvent *event ) {

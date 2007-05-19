@@ -247,8 +247,8 @@ class TaskView : public QTreeWidget
     void restoreItemState();
 
   protected:
-    void startDrag();
-    void contentsDropEvent(QDropEvent*);
+    void startDrag(Qt::DropActions action);
+    void dropEvent(QDropEvent*);
     bool acceptDrag( QDropEvent* event) const;
     void mouseMoveEvent( QMouseEvent* );
     void mousePressEvent( QMouseEvent* );
