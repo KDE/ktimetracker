@@ -184,18 +184,24 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 void TaskView::dropEvent(QDropEvent* qde)
 {
   kDebug(5970) << "This is dropEvent" << endl;
-  Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
-  //kDebug(5970) << "dropping task " << dragTask->name() << endl;
-  kDebug(5970) << "dropping onto " << t->name() << endl;
-  if (t != dragTask) 
+  if (this->itemAt(qde->pos())==0) 
   {
-    int indexOfDragTask = indexOfTopLevelItem( dragTask );
-    if (indexOfDragTask != -1) 
+    kDebug(5970) << "User tried to drop onto an empty place" << endl;
+  }
+  else
+  {
+    Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
+    kDebug(5970) << "dropping onto " << t->name() << endl;
+    if (t != dragTask) 
     {
-      takeTopLevelItem( indexOfDragTask );
-      t->addChild( dragTask );
+      int indexOfDragTask = indexOfTopLevelItem( dragTask );
+      if (indexOfDragTask != -1) 
+      {
+        takeTopLevelItem( indexOfDragTask );
+        t->addChild( dragTask );
+      }
+      save();
     }
-    save();
   }
 }
 
