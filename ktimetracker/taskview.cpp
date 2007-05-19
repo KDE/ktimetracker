@@ -201,16 +201,6 @@ void TaskView::startDrag()
   //QTreeWidget::startDrag();  
 }
 
-Q3DragObject* TaskView::dragObject()
-{
-/*
-  kDebug() << "Entering TaskView::dragObject" << endl;
-  dragTask=static_cast<Task *> (currentItem());
-  return QTreeWidget::dragObject();
-*/
-  return 0L;
-}
-
 bool TaskView::acceptDrag(QDropEvent* /*e*/) const
 {
 /*

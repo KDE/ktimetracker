@@ -22,16 +22,12 @@
 #ifndef KARM_TASK_VIEW_H
 #define KARM_TASK_VIEW_H
 
-#include <q3dict.h>
 #include <q3ptrlist.h>
-#include <q3ptrstack.h>
 #include <QMouseEvent>
 #include <QList>
 #include <QTextStream>
 
-#include <k3listview.h>
 #include <kcal/resourcecalendar.h>
-
 #include "desktoplist.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
@@ -39,7 +35,6 @@
 #include <QTableWidget>
 #include <QTreeWidget>
 
-class Q3ListBox;
 class QString;
 class QTextStream;
 class QTimer;
@@ -253,7 +248,6 @@ class TaskView : public QTreeWidget
 
   protected:
     void startDrag();
-    Q3DragObject* dragObject();
     void contentsDropEvent(QDropEvent*);
     bool acceptDrag( QDropEvent* event) const;
     void mouseMoveEvent( QMouseEvent* );
