@@ -207,41 +207,27 @@ void TaskView::startDrag(Qt::DropActions action)
   QTreeWidget::startDrag(action);  
 }
 
-bool TaskView::acceptDrag(QDropEvent* e) const
+void TaskView::mouseMoveEvent( QMouseEvent *event ) 
 {
-  kDebug(5970) << "Entering TaskView::acceptDrag" << endl;
-  // Can we drop the item here ?
-  // do we drag to an empty place ?
-  if (this->itemAt(e->pos())==0) return false;
-  // Or is the dragged item an ancestor task of the item to drop to ?
-  bool isAncestor=false;  // is the drag-task a parent of the drop-task ?
-  Task* t=static_cast<Task*>(this->itemAt(e->pos()));
-  Task* parent=t;
-  kDebug() << "parent" << parent->name() << endl;
-  while (parent->depth() > 0)
-  {
-    parent=parent->parent();
-    kDebug() << "parent->name()" << parent->name() << endl;
-    if (parent==dragTask) isAncestor=true;
-  }
-  return (!isAncestor);
-}
-
-void TaskView::mouseMoveEvent( QMouseEvent *event ) {
   QModelIndex index = indexAt( event->pos() );
   
-  if (index.isValid() && index.column() == 5) {
+  if (index.isValid() && index.column() == 5) 
+  {
     int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 100);
     QTreeWidgetItem *item = itemFromIndex( index );
-    if (item && item->isSelected()) {
+    if (item && item->isSelected()) 
+    {
       Task *task = static_cast<Task*>(item);
-      if (task) {
+      if (task) 
+      {
         task->setPercentComplete( newValue, _storage );
         
         emit updateButtons();
       }
     }
-  } else {
+  } 
+  else 
+  {
     QTreeWidget::mouseMoveEvent( event );
   }
 }
