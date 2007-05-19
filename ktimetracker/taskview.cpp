@@ -184,23 +184,36 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 void TaskView::dropEvent(QDropEvent* qde)
 {
   kDebug(5970) << "This is dropEvent" << endl;
-  if (this->itemAt(qde->pos())==0) 
-  {
-    kDebug(5970) << "User tried to drop onto an empty place" << endl;
-  }
+  // is the drop place empty ?
+  if (this->itemAt(qde->pos())==0) kDebug(5970) << "User tried to drop onto an empty place" << endl;
   else
   {
     Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
-    kDebug(5970) << "dropping onto " << t->name() << endl;
+    kDebug(5970) << "taking " << dragTask->name() << " dropping onto " << t->name() << endl;
+    // is t==dragTask
     if (t != dragTask) 
     {
-      int indexOfDragTask = indexOfTopLevelItem( dragTask );
-      if (indexOfDragTask != -1) 
+      // is dragTask an ancestor to t ?
+      bool isAncestor=false;
+      Task* ancestor=t->parent();
+      while (ancestor!=0)
       {
-        takeTopLevelItem( indexOfDragTask );
-        t->addChild( dragTask );
+        if (ancestor==dragTask) isAncestor=true;
+        kDebug() << "testing " << ancestor->name() << endl;
+        kDebug() << "isAncestor=" << isAncestor << endl;
+        ancestor=ancestor->parent();
       }
-      save();
+      if (isAncestor) kDebug(5970) << "User dropped a task on its subtask" << endl;
+      else
+      {
+        int indexOfDragTask = indexOfTopLevelItem( dragTask );
+        if (indexOfDragTask != -1) 
+        {
+          takeTopLevelItem( indexOfDragTask );
+          t->addChild( dragTask );
+        }
+        save();
+      }
     }
   }
 }
