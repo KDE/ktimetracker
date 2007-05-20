@@ -137,8 +137,11 @@ class TaskView : public QTreeWidget
     /** Display edit task dialog and create a new task with results.  */
     void newTask( QString caption, Task* parent );
 
-     /** Used to refresh (e.g. after import) */
+    /** Used to refresh (e.g. after import) */
     void refresh();
+
+    /** Same as refresh */
+    void reFresh();
 
     /** used to import tasks from imendio planner */
     QString importPlanner( QString fileName="" );

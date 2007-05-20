@@ -204,7 +204,7 @@ void TaskView::dropEvent(QDropEvent* qde)
         ancestor=ancestor->parent();
       }
       if (isAncestor) kDebug(5970) << "User dropped a task on its subtask" << endl;
-      else
+      else  // move the task
       {
         int indexOfDragTask = indexOfTopLevelItem( dragTask );
         if (indexOfDragTask != -1) 
@@ -213,6 +213,7 @@ void TaskView::dropEvent(QDropEvent* qde)
           t->addChild( dragTask );
         }
         save();
+        reFresh();  // setRootIsDecorated may be needed
       }
     }
   }
@@ -408,6 +409,11 @@ void TaskView::refresh()
   kDebug(5970) << "exiting TaskView::refresh()" << endl;
 }
     
+void TaskView::reFresh()
+{
+  refresh();
+}
+
 QString TaskView::importPlanner(QString fileName)
 {
   kDebug(5970) << "entering importPlanner" << endl;
