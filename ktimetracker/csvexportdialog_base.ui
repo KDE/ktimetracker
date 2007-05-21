@@ -406,7 +406,6 @@
   </images>
   <includes>
     <include location="local" >kdateedit.h</include>
-    <include location="local" >kdateedit.h</include>
   </includes>
   <connections>
     <connection>
