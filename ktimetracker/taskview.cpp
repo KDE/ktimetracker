@@ -206,11 +206,19 @@ void TaskView::dropEvent(QDropEvent* qde)
       if (isAncestor) kDebug(5970) << "User dropped a task on its subtask" << endl;
       else  // move the task
       {
-        int indexOfDragTask = indexOfTopLevelItem( dragTask );
-        if (indexOfDragTask != -1) 
+        if (dragTask->parent())
         {
-          takeTopLevelItem( indexOfDragTask );
+          dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
           t->addChild( dragTask );
+        }
+        else
+        {
+          int indexOfDragTask = indexOfTopLevelItem( dragTask );
+          if (indexOfDragTask != -1) 
+          {
+            takeTopLevelItem( indexOfDragTask );
+            t->addChild( dragTask );
+          }
         }
         save();
         reFresh();  // setRootIsDecorated may be needed
