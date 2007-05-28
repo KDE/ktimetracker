@@ -86,14 +86,6 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
-  // When I tried raising an exception from this method, the compiler
-  // complained that exceptions are not allowed.  Not sure how apps
-  // typically handle error conditions in KDE, but I'll return the error
-  // as a string (empty is no error).  -- Mark, Aug 8, 2003
-
-  // Use KDE_CXXFLAGS=$(USE_EXCEPTIONS) in Makefile.am if you want to use
-  // exceptions (David Faure)
-
   kDebug(5970) << "Entering KarmStorage::load" << endl;
   QString err;
   KEMailSettings settings;
@@ -138,7 +130,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   QObject::connect (_calendar, SIGNAL(resourceChanged(ResourceCalendar *)),
   	            view, SLOT(iCalFileModified(ResourceCalendar *)));
   _calendar->setTimeSpec( KPimPrefs::timeSpec() );
-  _calendar->setResourceName( QString::fromLatin1("KArm") );
+  _calendar->setResourceName( QString::fromLatin1("KTimeTracker") );
   _calendar->open();
   _calendar->load();
 
@@ -205,7 +197,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
              task->name(),
              (*todo)->relatedToUid());
 
-        if (!err.isEmpty()) task->move( newParent);
+        if (!err.isEmpty()) task->move( newParent );
       }
     }
 
@@ -243,7 +235,6 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
     }
   }
 
-  //view->stopAllTimers();
   // delete old tasks
 
   while (view->item_at_index(0)) view->item_at_index(0)->cut();
@@ -273,7 +264,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
         err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
            task->name(),
            (*todo)->relatedToUid());
-      else task->move( newParent);
+      else task->move( newParent );
     }
   }
 
@@ -341,6 +332,19 @@ QString KarmStorage::save(TaskView* taskview)
     kWarning(5970) << "KarmStorage::save : " << err << endl;
   }
 
+  return err;
+}
+
+QString KarmStorage::setTaskParent( Task* task, Task* parent )
+{
+  kDebug(5970) << "Entering KarmStorage::setTaskParent" << endl;
+  QString err=QString();
+  KCal::Todo* toDo;
+  toDo = _calendar->todo(task->uid());
+  toDo->setRelatedTo(_calendar->todo(parent->uid()));
+  kDebug() << toDo->relatedTo() << endl;
+ // buildTaskView(_calendar, _view);
+  kDebug(5970) << "Leaving KarmStorage::setTaskParent" << endl;
   return err;
 }
 

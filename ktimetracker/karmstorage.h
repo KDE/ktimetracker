@@ -78,6 +78,7 @@ class KarmStorage
      */
     static KarmStorage *instance();
 
+    QString setTaskParent( Task* task, Task* parent);
     /*
      * Load the list view with tasks read from iCalendar file.
      *

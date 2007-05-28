@@ -184,8 +184,18 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 void TaskView::dropEvent(QDropEvent* qde)
 {
   kDebug(5970) << "This is dropEvent" << endl;
-  // is the drop place empty ?
-  if (this->itemAt(qde->pos())==0) kDebug(5970) << "User tried to drop onto an empty place" << endl;
+  if (this->itemAt(qde->pos())==0) 
+  // the task was dropped to an empty place
+  {
+    // if the task is a sub-task, it shall be freed from its parents, otherwise, nothing happens
+    kDebug(5970) << "User drops onto an empty place" << endl;
+    if (dragTask->parent())
+    {
+      QTreeWidgetItem* item=dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
+      //_storage->setTaskParent(dragTask,0);
+      this->insertTopLevelItem(0,item); 
+    }
+  }
   else
   {
     Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
@@ -207,11 +217,15 @@ void TaskView::dropEvent(QDropEvent* qde)
       else  // move the task
       {
         if (dragTask->parent())
+        // if the task is a subtask
         {
           dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
           t->addChild( dragTask );
+          dragTask->move(t);
+          _storage->setTaskParent( dragTask, t );
         }
         else
+        // if the task is no subtask
         {
           int indexOfDragTask = indexOfTopLevelItem( dragTask );
           if (indexOfDragTask != -1) 
