@@ -32,8 +32,6 @@ class KAccel;
 class KAccelMenuWatch;
 class KarmTray;
 class QWidget;
-class QPainter;
-class KUrl;
 
 class Preferences;
 class Task;

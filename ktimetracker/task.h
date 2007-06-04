@@ -36,7 +36,6 @@
 // TaskView is a subclass or QListView?)
 #include "taskview.h"
 
-class QFile;
 class QString;
 class KarmStorage;
 

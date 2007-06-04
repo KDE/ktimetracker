@@ -39,11 +39,8 @@ class QString;
 class QTextStream;
 class QTimer;
 
-class KMenuBar;
-class KToolBar;
 
 class DesktopTracker;
-class EditTaskDialog;
 class IdleTimeDetector;
 class Preferences;
 class Task;

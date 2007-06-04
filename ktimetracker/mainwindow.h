@@ -35,7 +35,6 @@ class QPoint;
 class QString;
 
 class Preferences;
-class PrintDialog;
 class Task;
 class TaskView;
 

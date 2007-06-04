@@ -23,10 +23,8 @@
 //#include <QVariant>
 #include <QObject>
 
-class QDir;
 class QProcess;
 class QString;
-class QStringList;
 
 class Script : public QObject
 {

@@ -31,7 +31,6 @@
 #include "task.h"
 #include "karm_part.h"
 
-class KarmPart;
 
 class QTimer;
 
