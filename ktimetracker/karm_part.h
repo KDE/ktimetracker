@@ -32,7 +32,7 @@ class KAccel;
 class KAccelMenuWatch;
 class KarmTray;
 class QWidget;
-
+class KAction;
 class Preferences;
 class Task;
 class TaskView;
