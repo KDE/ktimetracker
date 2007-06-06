@@ -1,6 +1,6 @@
-project(karm)
+project(ktimetracker)
 
-macro_bool_to_01(X11_Xss_LIB HAVE_LIBXSS)
+macro_bool_to_01(X11_Xscreensaver_LIB HAVE_LIBXSS)
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
 
@@ -35,14 +35,14 @@ kde4_add_executable(ktimetracker ${karm_SRCS})
 
 
 target_link_libraries(karm  ${KDE4_KPARTS_LIBS}  ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim kcal_resourceremote)
-if(X11_Xss_LIB)
-	target_link_libraries(karm ${X11_Xss_LIB})
-endif(X11_Xss_LIB)
+if(X11_Xscreensaver_LIB)
+	target_link_libraries(karm ${X11_Xscreensaver_LIB})
+endif(X11_Xscreensaver_LIB)
 
 target_link_libraries(ktimetracker  ${KDE4_KPARTS_LIBS}  ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote)
-if(X11_Xss_LIB)
-	target_link_libraries(ktimetracker  ${X11_Xss_LIB} )
-endif(X11_Xss_LIB)
+if(X11_Xscreensaver_LIB)
+	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
+endif(X11_Xscreensaver_LIB)
 
 install(TARGETS karm  DESTINATION ${BIN_INSTALL_DIR} )
 install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
@@ -63,9 +63,9 @@ kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
 
 
 target_link_libraries(karmpart  ${KDE4_KPARTS_LIBS} ${KDE4_KCAL_LIBS}  ${KDE4_KDEPRINT_LIBS} kdepim kcal_resourceremote)
-if(X11_Xss_LIB)
-	target_link_libraries(karmpart  ${X11_Xss_LIB} )
-endif(X11_Xss_LIB)
+if(X11_Xscreensaver_LIB)
+	target_link_libraries(karmpart  ${X11_Xscreensaver_LIB} )
+endif(X11_Xscreensaver_LIB)
 
 
 install(TARGETS karmpart  DESTINATION ${PLUGIN_INSTALL_DIR})
