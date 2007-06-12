@@ -27,7 +27,6 @@
 #include <QString>
 #include <QValidator>
 #include <QWidget>
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QKeyEvent>
 
@@ -53,9 +52,6 @@ class TimeValidator : public QValidator
       bool ok;
       int val = str.toInt( &ok );
       if ( ! ok )
-        return Invalid;
-
-      if ( str.contains('-') != 0 )
         return Invalid;
 
       if ( _tp==MINUTE && val >= 60  )

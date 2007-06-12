@@ -1,5 +1,5 @@
 /*
- *   karm
+ *   ktimetracker
  *   This file only: Copyright (C) 1999  Espen Sand, espensa@online.no
  *   Modifications (see CVS log) Copyright (C) 2000 Klarälvdalens
  *   Datakonsult AB <kalle@dalheimer.de>, Jesper Pedersen <blackie@kde.org>

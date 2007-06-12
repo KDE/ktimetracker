@@ -1,5 +1,5 @@
 /*
- *   karm
+ *   ktimetracker
  *   This file only: Copyright (C) 1999  Espen Sand, espensa@online.no
  *
  *   This program is free software; you can redistribute it and/or modify
