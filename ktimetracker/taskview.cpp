@@ -191,8 +191,8 @@ void TaskView::dropEvent(QDropEvent* qde)
     kDebug(5970) << "User drops onto an empty place" << endl;
     if (dragTask->parent())
     {
+      _storage->setTaskParent(dragTask,0);
       QTreeWidgetItem* item=dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
-      //_storage->setTaskParent(dragTask,0);
       this->insertTopLevelItem(0,item); 
     }
   }

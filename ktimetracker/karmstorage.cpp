@@ -341,8 +341,8 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
   QString err=QString();
   KCal::Todo* toDo;
   toDo = _calendar->todo(task->uid());
-  toDo->setRelatedTo(_calendar->todo(parent->uid()));
-  kDebug() << toDo->relatedTo() << endl;
+  if (parent==0) toDo->removeRelation(toDo->relatedTo());
+  else toDo->setRelatedTo(_calendar->todo(parent->uid()));
  // buildTaskView(_calendar, _view);
   kDebug(5970) << "Leaving KarmStorage::setTaskParent" << endl;
   return err;
