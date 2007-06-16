@@ -27,6 +27,7 @@
 #include "tray.h"
 #include "version.h"
 
+#include <kdemacros.h>
 #include <kcomponentdata.h>
 #include <kaction.h>
 #include <kactioncollection.h>
@@ -699,11 +700,11 @@ QString karmPart::importplannerfile( QString fileName )
   return _taskView->importPlanner(fileName);
 }
 
-void karmPart::startNewSession() 
-{ 
-  _taskView->startNewSession(); 
-  _taskView->save(); 
-} 
-   
+void karmPart::startNewSession()
+{
+  _taskView->startNewSession();
+  _taskView->save();
+}
+
 
 #include "karm_part.moc"

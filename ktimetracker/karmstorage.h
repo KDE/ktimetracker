@@ -36,7 +36,6 @@
 #include <kcal/journal.h>
 #include <kcal/calendarresources.h>
 #include <kcal/resourcecalendar.h>
-#include <kdemacros.h>
 
 class QDateTime;
 class Preferences;
@@ -116,7 +115,7 @@ class KarmStorage
     * This is needed if the iCal file has been modified.
     */
     QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
-    
+
     /* Close calendar and clear view.  Release lock if holding one. */
     void closeStorage(TaskView* view);
 
@@ -184,7 +183,7 @@ class KarmStorage
      * @return true if event was added, false if not (if, for example, the
      * attempted file lock failed).
      */
-    bool bookTime(const Task* task, const QDateTime& startDateTime, 
+    bool bookTime(const Task* task, const QDateTime& startDateTime,
                   long durationInSeconds);
 
     /**
@@ -322,7 +321,7 @@ class KarmStorage
             QMap<QString,long>& daytotals,
             const QDate& from,
             const QDate& to,
-            const int level, 
+            const int level,
 	    std::vector <QString> &matrix,
             const ReportCriteria &rc
             );
