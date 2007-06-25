@@ -188,7 +188,7 @@ class TaskView : public QTreeWidget
     /** Subtracts time from all active tasks, and does not log event. */
     void extractTime( int minutes );
     void taskTotalTimesChanged( long session, long total)
-                                { emit totalTimesChanged( session, total); };
+                                { emit totalTimesChanged( session, total); }
     void adaptColumns();
     /** receiving signal that a task is being deleted */
     void deletingTask(Task* deletedTask);

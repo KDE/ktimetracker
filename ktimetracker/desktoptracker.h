@@ -46,7 +46,7 @@ class DesktopTracker: public QObject
     void printTrackers();
     void startTracking();
     void registerForDesktops( Task* task, DesktopList dl );
-    int desktopCount() const { return _desktopCount; };
+    int desktopCount() const { return _desktopCount; }
 
   private: // member variables
 

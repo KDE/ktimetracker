@@ -147,18 +147,18 @@ class Task : public QObject, public QTreeWidgetItem
       /*@{ returns the times accumulated by the task
        * @return total time in minutes
        */
-      long time() const { return _time; };
-      long totalTime() const { return _totalTime; };
-      long sessionTime() const { return _sessionTime; };
-      long totalSessionTime() const { return _totalSessionTime; };
+      long time() const { return _time; }
+      long totalTime() const { return _totalTime; }
+      long sessionTime() const { return _sessionTime; }
+      long totalSessionTime() const { return _totalSessionTime; }
 
       /**
        * Return time the task was started.
        */
-      QDateTime startTime() const { return _lastStart; };
+      QDateTime startTime() const { return _lastStart; }
 
       /** sets session time to zero. */
-      void startNewSession() { changeTimes( -_sessionTime, 0 ); };
+      void startNewSession() { changeTimes( -_sessionTime, 0 ); }
     //@}
 
     //@{ desktop related functions
@@ -180,7 +180,7 @@ class Task : public QObject, public QTreeWidgetItem
       /** returns the name of this task.
        *  @return a pointer to the name.
        */
-      QString name() const  { return _name; };
+      QString name() const  { return _name; }
 
       /**
        * Returns that task name, prefixed by parent tree up to root.

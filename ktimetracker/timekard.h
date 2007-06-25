@@ -85,7 +85,7 @@ class Week
 class TimeKard
 {
   public:
-    TimeKard() {};
+    TimeKard() {}
 
     /**
      * Generates ascii text of task totals, for current task on down.

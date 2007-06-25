@@ -17,7 +17,7 @@ class LockerThread : public QThread
     LockerThread( const QString &filename );
     //void setIcsFile( const QString &filename );
     void run();
-    bool gotlock() const { return m_gotlock; };
+    bool gotlock() const { return m_gotlock; }
 
   private:
     QString m_icsfile;
