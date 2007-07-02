@@ -138,7 +138,7 @@ int main( int argc, char *argv[] )
   // Copied from Till's test in libkcal.  Not sure what this is for.
   // KApplication::disableAutoDcopRegistration();
 
-  KCmdLineArgs::init(argc,argv,"testresourcelocking", 0, 0, 0, 0);
+  KCmdLineArgs::init(argc,argv,"testresourcelocking", 0, KLocalizedString(), 0, KLocalizedString());
 
   KApplication app;
 

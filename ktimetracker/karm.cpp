@@ -23,9 +23,9 @@ using namespace std;
 
 int main (int argc, char *argv[])
 {
-  KAboutData aboutData( "KArmReminder", "KArmReminder",
-      "1.0", "KArmReminder", KAboutData::License_GPL,
-      "(c) 2006" );
+  KAboutData aboutData( "KArmReminder", 0, ki18n("KArmReminder"),
+      "1.0", ki18n("KArmReminder"), KAboutData::License_GPL,
+      ki18n("(c) 2006") );
   KCmdLineArgs::init( argc, argv, &aboutData );
   KApplication khello;
   // outputting a string is again something that became complicated

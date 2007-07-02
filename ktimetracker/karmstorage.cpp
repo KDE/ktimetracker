@@ -896,7 +896,7 @@ bool KarmStorage::bookTime(const Task* task,
   e->setDtEnd( startDateTime.addSecs( durationInSeconds ) );
 
   // Use a custom property to keep a record of negative durations
-  e->setCustomProperty( KGlobal::mainComponent().componentName(),
+  e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray("duration"),
       QString::number(durationInSeconds));
 
@@ -922,7 +922,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
   e->setDtEnd(end);
 
   // Use a custom property to keep a record of negative durations
-  e->setCustomProperty( KGlobal::mainComponent().componentName(),
+  e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray("duration"),
       QString::number(deltaSeconds));
 
@@ -1002,7 +1002,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
         // an easy fix for a (hopefully) rare situation.
         processed.append( (*event)->uid());
 
-        duration = (*event)->customProperty(KGlobal::mainComponent().componentName(),
+        duration = (*event)->customProperty(KGlobal::mainComponent().componentName().toUtf8(),
             QByteArray("duration"));
         if ( ! duration.isNull() )
         {

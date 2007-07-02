@@ -40,30 +40,27 @@ namespace
   }
 }
 
-static const KCmdLineOptions options[] =
-{
-  { "+file", I18N_NOOP( "The iCalendar file to open" ), 0 },
-  KCmdLineLastOption
-};
-
 int main( int argc, char *argv[] )
 {
-  KAboutData aboutData( "karm", I18N_NOOP("KTimeTracker"),
-      KTIMETRACKER_VERSION, description, KAboutData::License_GPL,
-      "(c) 1997-2007, KDE PIM Developers" );
+  KAboutData aboutData( "karm", 0, ki18n("KTimeTracker"),
+      KTIMETRACKER_VERSION, ki18n(description), KAboutData::License_GPL,
+      ki18n("(c) 1997-2007, KDE PIM Developers") );
 
-  aboutData.addAuthor( "Thorsten St&auml;rk", I18N_NOOP( "Current Maintainer" ),
+  aboutData.addAuthor( ki18n("Thorsten St&auml;rk"), ki18n( "Current Maintainer" ),
                        "kde@staerk.de" );
-  aboutData.addAuthor( "Sirtaj Singh Kang", I18N_NOOP( "Original Author" ),
+  aboutData.addAuthor( ki18n("Sirtaj Singh Kang"), ki18n( "Original Author" ),
                        "taj@kde.org" );
-  aboutData.addAuthor( "Allen Winter",      0, "winterz@verizon.net" );
-  aboutData.addAuthor( "David Faure",       0, "faure@kde.org" );
-  aboutData.addAuthor( "Mathias Soeken",    0, "msoeken@tzi.de" );
-  aboutData.addAuthor( "Jesper Pedersen",   0, "blackie@kde.org" );
-  aboutData.addAuthor( "Kalle Dalheimer",   0, "kalle@kde.org" );
-  aboutData.addAuthor( "Mark Bucciarelli",  0, "mark@hubcapconsulting.com" );
+  aboutData.addAuthor( ki18n("Allen Winter"),      KLocalizedString(), "winterz@verizon.net" );
+  aboutData.addAuthor( ki18n("David Faure"),       KLocalizedString(), "faure@kde.org" );
+  aboutData.addAuthor( ki18n("Mathias Soeken"),    KLocalizedString(), "msoeken@tzi.de" );
+  aboutData.addAuthor( ki18n("Jesper Pedersen"),   KLocalizedString(), "blackie@kde.org" );
+  aboutData.addAuthor( ki18n("Kalle Dalheimer"),   KLocalizedString(), "kalle@kde.org" );
+  aboutData.addAuthor( ki18n("Mark Bucciarelli"),  KLocalizedString(), "mark@hubcapconsulting.com" );
 
   KCmdLineArgs::init( argc, argv, &aboutData );
+
+  KCmdLineOptions options;
+  options.add("+file", ki18n( "The iCalendar file to open" ));
   KCmdLineArgs::addCmdLineOptions( options );
   KApplication myApp;
 
@@ -72,9 +69,9 @@ int main( int argc, char *argv[] )
   MainWindow *mainWindow;
   if ( args->count() > 0 ) 
   {
-    QString icsfile = QString::fromLocal8Bit( args->arg( 0 ) );
+    QString icsfile = args->arg( 0 );
     
-    KUrl* icsfileurl=new KUrl(QString::fromLocal8Bit( args->arg( 0 ) ));
+    KUrl* icsfileurl=new KUrl(args->arg( 0 ));
     if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
     {
       // leave as is

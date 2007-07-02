@@ -406,8 +406,8 @@ const KComponentData &karmPartFactory::componentData()
 {
     if( !s_instance )
     {
-        s_about = new KAboutData("karmpart", I18N_NOOP("karmPart"), "0.1");
-        s_about->addAuthor("Thorsten Staerk", 0, "thorsten@staerk.de");
+        s_about = new KAboutData("karmpart", 0, ki18n("karmPart"), "0.1");
+        s_about->addAuthor(ki18n("Thorsten Staerk"), KLocalizedString(), "thorsten@staerk.de");
         s_instance = new KComponentData(s_about);
     }
     return *s_instance;
