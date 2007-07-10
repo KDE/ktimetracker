@@ -33,12 +33,12 @@ kde4_add_executable(karm karm.cpp)
 kde4_add_executable(ktimetracker ${karm_SRCS})
 
 
-target_link_libraries(karm  ${KDE4_KPARTS_LIBS}  ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim kcal_resourceremote)
+target_link_libraries(karm   ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(karm ${X11_Xscreensaver_LIB})
 endif(X11_Xscreensaver_LIB)
 
-target_link_libraries(ktimetracker  ${KDE4_KPARTS_LIBS}  ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote)
+target_link_libraries(ktimetracker   ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
@@ -60,7 +60,7 @@ kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
 
 
 
-target_link_libraries(karmpart  ${KDE4_KPARTS_LIBS} ${KDE4_KCAL_LIBS}  ${KDE4_KDEPRINT_LIBS} kdepim kcal_resourceremote)
+target_link_libraries(karmpart  ${KDE4_KCAL_LIBS}  ${KDE4_KDEPRINT_LIBS} kdepim kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(karmpart  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
