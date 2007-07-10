@@ -105,4 +105,4 @@ void TreeViewHeaderContextMenu::updateAction( QAction *action, int column )
   }
 }
 
-#include "treeviewheadercontextmenu.cpp.moc"
+#include "treeviewheadercontextmenu.moc"
