@@ -282,7 +282,7 @@
         </widget>
       </item>
       <item rowspan="1" row="3" column="0" colspan="4" >
-        <widget class="Q3ButtonGroup" name="grpDelimiter" >
+        <widget class="QGroupBox" name="grpDelimiter" >
           <property name="sizePolicy" >
             <sizepolicy>
               <hsizetype>1</hsizetype>
@@ -298,9 +298,12 @@
             <string>The character used to seperate one field from another in the output.</string>
           </property>
           <layout class="QGridLayout" >
-            <property name="margin" >
-              <number>0</number>
+            <!--<property name="margin" >
+              <number>KDialog::marginHint()</number>
             </property>
+            <property name="spacing">
+              <number>KDialog::spacingHint()</number>
+            </property>-->
             <item row="1" column="0" >
               <widget class="QRadioButton" name="radioTab" >
                 <property name="text" >
