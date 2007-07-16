@@ -66,12 +66,12 @@ MainWindow::MainWindow( const QString &icsfile )
   // connections
   connect( _taskView, SIGNAL( totalTimesChanged( long, long ) ),
            this, SLOT( updateTime( long, long ) ) );
-  connect( _taskView, SIGNAL( selectionChanged ( Q3ListViewItem * )),
-           this, SLOT(slotSelectionChanged()));
+  connect( _taskView, SIGNAL( itemSelectionChanged () ),
+           this, SLOT( slotSelectionChanged() ) );
   connect( _taskView, SIGNAL( updateButtons() ),
-           this, SLOT(slotSelectionChanged()));
+           this, SLOT( slotSelectionChanged() ) );
   connect( _taskView, SIGNAL( setStatusBarText( QString ) ),
-                 this, SLOT(setStatusBar( QString )));
+                 this, SLOT( setStatusBar( QString ) ) );
   loadGeometry();
 
   // Setup context menu request handling
