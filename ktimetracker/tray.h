@@ -21,9 +21,10 @@
 #ifndef KARM_TRAY_H
 #define KARM_TRAY_H
 
-#include <q3ptrvector.h>
+#include <QList>
 #include <QPixmap>
-#include <q3ptrlist.h>
+#include <QVector>
+
 // experiement
 // #include <kmenu.h>
 #include <ksystemtrayicon.h>
@@ -50,14 +51,14 @@ class KarmTray : public KSystemTrayIcon
 
   private:
     int _activeIcon;
-    static Q3PtrVector<QPixmap> *icons;
+    static QVector<QPixmap*> *icons;
     QTimer *_taskActiveTimer;
 
   public slots:
     void startClock();
     void stopClock();
     void resetClock();
-    void updateToolTip( Q3PtrList<Task> activeTasks);
+    void updateToolTip( QList<Task*> activeTasks);
     void initToolTip();
 
   protected slots:

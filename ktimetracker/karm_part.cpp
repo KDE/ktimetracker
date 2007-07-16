@@ -39,9 +39,7 @@
 
 #include <QFile>
 #include <qtextstream.h>
-#include <q3multilineedit.h>
 #include <QByteArray>
-#include <Q3PtrList>
 #include <QMenu>
 #include <kxmlguifactory.h>
 #include "mainwindow.h"
@@ -105,8 +103,8 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
   connect( _taskView, SIGNAL( timersActive() ), this,  SLOT( enableStopAll() ));
   connect( _taskView, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
   connect( _taskView, SIGNAL( timersInactive() ),  this,  SLOT( disableStopAll()));
-  connect( _taskView, SIGNAL( tasksChanged( Q3PtrList<Task> ) ),
-                      _tray, SLOT( updateToolTip( Q3PtrList<Task> ) ));
+  connect( _taskView, SIGNAL( tasksChanged( QList<Task*> ) ),
+                      _tray, SLOT( updateToolTip( QList<Task*> ) ));
 
   _taskView->load();
 

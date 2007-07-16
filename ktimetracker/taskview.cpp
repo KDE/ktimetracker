@@ -651,7 +651,7 @@ long TaskView::count()
 
 void TaskView::startTimerFor(Task* task, QDateTime startTime )
 {
-  if (task != 0 && activeTasks.findRef(task) == -1) 
+  if (task != 0 && activeTasks.indexOf(task) == -1) 
   {
     if (_preferences->uniTasking()) stopAllTimers();
     _idleTimeDetector->startIdleDetection();
@@ -716,8 +716,8 @@ void TaskView::resetTimeForAllTasks()
 
 void TaskView::stopTimerFor(Task* task)
 {
-  if ( task != 0 && activeTasks.findRef(task) != -1 ) {
-    activeTasks.removeRef(task);
+  if ( task != 0 && activeTasks.indexOf(task) != -1 ) {
+    activeTasks.removeAll(task);
     task->setRunning(false, _storage);
     if ( activeTasks.count() == 0 ) {
       _idleTimeDetector->stopIdleDetection();
@@ -941,7 +941,7 @@ void TaskView::deleteTask(bool markingascomplete)
     else
     {
       QString uid=task->uid();
-      task->remove(activeTasks, _storage);
+      task->remove(_storage);
       task->removeFromView();
       _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
       save();
@@ -1003,7 +1003,7 @@ void TaskView::deletingTask(Task* deletedTask)
   DesktopList desktopList;
 
   _desktopTracker->registerForDesktops( deletedTask, desktopList );
-  activeTasks.removeRef( deletedTask );
+  activeTasks.removeAll( deletedTask );
 
   emit tasksChanged( activeTasks);
 }
@@ -1080,7 +1080,7 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
   if (item) {
     Task *task = static_cast<Task*>( item );
     if (task) {
-      if (activeTasks.findRef(task) == -1) { // task is active
+      if (activeTasks.indexOf(task) == -1) { // task is active
         stopAllTimers();
         startCurrentTimer();
       } else {

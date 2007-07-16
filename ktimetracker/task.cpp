@@ -22,7 +22,6 @@
 #include <QString>
 #include <QTimer>
 #include <QPixmap>
-#include <Q3PtrList>
 
 #include <kiconloader.h>
 
@@ -299,7 +298,7 @@ void Task::changeParentTotalTimes( long minutesSession, long minutes )
     parent()->changeTotalTimes( minutesSession, minutes );
 }
 
-bool Task::remove( Q3PtrList<Task>& activeTasks, KarmStorage* storage)
+bool Task::remove( KarmStorage* storage)
 {
   kDebug(5970) << "Task::remove: " << _name << endl;
 
@@ -313,7 +312,7 @@ bool Task::remove( Q3PtrList<Task>& activeTasks, KarmStorage* storage)
   {
     if (child->isRunning())
       child->setRunning(false, storage);
-    child->remove(activeTasks, storage);
+    child->remove(storage);
   }
 
   changeParentTotalTimes( -_sessionTime, -_time);

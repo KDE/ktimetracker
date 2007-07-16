@@ -19,7 +19,6 @@
 #include <kstandardaction.h>
 #include <qnamespace.h>
 #include <QMenu>
-#include <q3ptrlist.h>
 #include <QString>
 #include <kicon.h>
 #include "karmerrors.h"
@@ -89,8 +88,8 @@ MainWindow::MainWindow( const QString &icsfile )
   connect( _taskView, SIGNAL( timersActive() ), this,  SLOT( enableStopAll() ));
   connect( _taskView, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
   connect( _taskView, SIGNAL( timersInactive() ),  this,  SLOT( disableStopAll()));
-  connect( _taskView, SIGNAL( tasksChanged( Q3PtrList<Task> ) ),
-                      _tray, SLOT( updateToolTip( Q3PtrList<Task> ) ));
+  connect( _taskView, SIGNAL( tasksChanged( QList<Task*> ) ),
+                      _tray, SLOT( updateToolTip( QList<Task*> ) ));
 
   _taskView->load();
 

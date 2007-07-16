@@ -21,13 +21,9 @@
 #ifndef KARM_TASK_H
 #define KARM_TASK_H
 
-// Required b/c QPtrList is a struct, not a class.
-#include <q3ptrlist.h>
-
+#include <QDateTime>
 #include <QPixmap>
 #include <QVector>
-
-#include <QDateTime>
 
 // Required b/c DesktopList is a typedef not a class.
 #include "desktoplist.h"
@@ -239,10 +235,9 @@ class Task : public QObject, public QTreeWidgetItem
     bool isRoot() const                 { return parent() == 0; }
 
     /** remove Task with all it's children
-     * @param   activeTasks - list of aktive tasks
      * @param storage a pointer to a KarmStorage object.
      */
-    bool remove( Q3PtrList<Task>& activeTasks, KarmStorage* storage );
+    bool remove( KarmStorage* storage );
 
     /**
      * Update percent complete for this task.

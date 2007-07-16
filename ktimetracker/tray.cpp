@@ -11,10 +11,8 @@
 // #include <qkeycode.h>
 // #include <QLayout>
 #include <QPixmap>
-#include <q3ptrlist.h>
 #include <QString>
 #include <QTimer>
-
 
 #include <kaction.h>            // actionPreferences()
 #include <kglobal.h>
@@ -28,7 +26,7 @@
 #include "task.h"
 #include "tray.h"
 
-Q3PtrVector<QPixmap> *KarmTray::icons = 0;
+QVector<QPixmap*> *KarmTray::icons = 0;
 
 KarmTray::KarmTray(MainWindow* parent)
   : KSystemTrayIcon(parent)
@@ -40,7 +38,7 @@ KarmTray::KarmTray(MainWindow* parent)
                              SLOT( advanceClock()) );
 
   if (icons == 0) {
-    icons = new Q3PtrVector<QPixmap>(8);
+    icons = new QVector<QPixmap*>(8);
     for (int i=0; i<8; i++) {
       QPixmap *icon = new QPixmap();
       QString name;
@@ -135,10 +133,10 @@ void KarmTray::resetClock()
 
 void KarmTray::initToolTip()
 {
-  updateToolTip(Q3PtrList<Task> ());
+  updateToolTip(QList<Task*> ());
 }
 
-void KarmTray::updateToolTip(Q3PtrList<Task> activeTasks)
+void KarmTray::updateToolTip(QList<Task*> activeTasks)
 {
   if ( activeTasks.isEmpty() ) {
     this->setToolTip( i18n("No active tasks") );
@@ -159,9 +157,9 @@ void KarmTray::updateToolTip(Q3PtrList<Task> activeTasks)
   // Build the tool tip with all of the names of the active tasks.
   // If at any time the width of the tool tip is larger than the desktop,
   // stop building it.
-  Q3PtrListIterator<Task> item( activeTasks );
-  for ( int i = 0; item.current(); ++item, ++i ) {
-    Task* task = item.current();
+
+  for ( int i = 0; i < activeTasks.count(); ++i ) {
+    Task* task = activeTasks.at( i );
     if ( i > 0 )
       s += i18n( ", " ) + task->name();
     else

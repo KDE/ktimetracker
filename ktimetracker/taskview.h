@@ -22,7 +22,6 @@
 #ifndef KARM_TASK_VIEW_H
 #define KARM_TASK_VIEW_H
 
-#include <q3ptrlist.h>
 #include <QMouseEvent>
 #include <QList>
 #include <QTextStream>
@@ -221,7 +220,7 @@ class TaskView : public QTreeWidget
     void updateButtons();
     void timersActive();
     void timersInactive();
-    void tasksChanged( Q3PtrList<Task> activeTasks );
+    void tasksChanged( QList<Task*> activeTasks );
     void setStatusBarText(QString);
 
   private: // member variables
@@ -230,7 +229,7 @@ class TaskView : public QTreeWidget
     QTimer *_autoSaveTimer;
     QTimer *_manualSaveTimer;
     Preferences *_preferences;
-    Q3PtrList<Task> activeTasks;
+    QList<Task*> activeTasks;
     DesktopTracker* _desktopTracker;
     bool _isloading;
     Task* dragTask;
