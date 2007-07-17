@@ -35,8 +35,6 @@ KAccelMenuWatch::KAccelMenuWatch( KAccel *accel, QObject *parent )
   _accel( accel ),
   _menu ( 0 )
 {
-  _accList.setAutoDelete( true );
-  _menuList.setAutoDelete( false );
 }
 
 void KAccelMenuWatch::setMenu( QMenu *menu )
@@ -46,7 +44,7 @@ void KAccelMenuWatch::setMenu( QMenu *menu )
   // we use  _menuList to ensure that the signal is
   // connected only once per menu.
 
-  if ( !_menuList.findRef( menu ) ) {
+  if ( _menuList.indexOf( menu ) == -1 ) {
     _menuList.append( menu );
     connect( menu, SIGNAL(destroyed()), this, SLOT(removeDeadMenu()) );
   }
@@ -103,24 +101,19 @@ void KAccelMenuWatch::removeDeadMenu()
   QMenu *sdr = (QMenu *) sender();
   assert( sdr );
 
-  if ( !_menuList.findRef( sdr ) )
+  if ( _menuList.indexOf( sdr ) == -1 )
     return;
 
   // remove all accels
-
-  AccelItem *accel;
-  for ( accel = _accList.first(); accel; accel = _accList.next() )
-  {
-loop:
-    if( accel && accel->menu == sdr ) {
-      _accList.remove();
-      accel = _accList.current();
-      goto loop;
+  foreach (AccelItem *accel, _accList) {
+    if ( accel && accel->menu == sdr ) {
+      _accList.removeAll( accel );
+      delete accel; // since setAutoDelete is not available in QList
     }
   }
 
   // remove from menu list
-  _menuList.remove( sdr );
+  _menuList.removeAll( sdr );
 
   return;
 }

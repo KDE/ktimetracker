@@ -24,13 +24,11 @@
 #define KARM_K_ACCEL_MENU_WATCH_H
 
 #include <QObject>
-#include <q3ptrlist.h>
-//Added by qt3to4:
-#include <QMenu>
+#include <QList>
 
 #include <kstandardshortcut.h>
 
-
+class QMenu;
 
 class KAccel;
 
@@ -73,8 +71,8 @@ class KAccelMenuWatch : public QObject
     };
 
     KAccel *_accel;
-    Q3PtrList<AccelItem> _accList;
-    Q3PtrList<QMenu> _menuList;
+    QList<AccelItem*> _accList;
+    QList<QMenu*> _menuList;
 
     QMenu  *_menu;
 
