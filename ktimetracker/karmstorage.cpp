@@ -890,10 +890,11 @@ bool KarmStorage::bookTime(const Task* task,
   // Ignores preferences setting re: logging history.
   KCal::Event* e;
   QDateTime end;
+  KDateTime start( startDateTime, KDateTime::Spec::LocalZone() ); //??? is LocalZone correct ???
 
   e = baseEvent( task );
-  e->setDtStart( startDateTime );
-  e->setDtEnd( startDateTime.addSecs( durationInSeconds ) );
+  e->setDtStart( start );
+  e->setDtEnd( start.addSecs( durationInSeconds ) );
 
   // Use a custom property to keep a record of negative durations
   e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
@@ -919,7 +920,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
   // duration, even though it looks like it's used in event.cpp.
   end = task->startTime();
   if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
-  e->setDtEnd(end);
+  e->setDtEnd(KDateTime(end, KDateTime::Spec::LocalZone()));
 
   // Use a custom property to keep a record of negative durations
   e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
