@@ -13,6 +13,7 @@
 #include <QPixmap>
 #include <QString>
 #include <QTimer>
+#include <QToolTip>
 
 #include <kaction.h>            // actionPreferences()
 #include <kglobal.h>
@@ -142,10 +143,8 @@ void KarmTray::updateToolTip(QList<Task*> activeTasks)
     this->setToolTip( i18n("No active tasks") );
     return;
   }
-#ifdef __GNUC__
-#warning "qt4 : porting QToolTip::font()"
-#endif
-  QFontMetrics fm( QFont("helvetica")/*QToolTip::font()*/ );
+
+  QFontMetrics fm( QToolTip::font() );
   const QString continued = i18n( ", ..." );
   const int buffer = fm.boundingRect( continued ).width();
   const int desktopWidth = KGlobalSettings::desktopGeometry(parentWidget()).width();
