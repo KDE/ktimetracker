@@ -957,7 +957,7 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
 
   // Have to turn this off to get datetimes in date fields.
   e->setFloats(false);
-  e->setDtStart(task->startTime());
+  e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
 
   // So someone can filter this mess out of their calendar display
   categories.append(i18n("KArm"));
