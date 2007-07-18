@@ -22,22 +22,15 @@
 #define KARM_TRAY_H
 
 #include <QList>
-#include <QPixmap>
 #include <QVector>
 
-// experiement
-// #include <kmenu.h>
-#include <ksystemtrayicon.h>
+#include <KSystemTrayIcon>
 
 #include "task.h"
 #include "karm_part.h"
 
-
 class QTimer;
-
 class MainWindow;
-// experiment
-// class KMenu;
 
 class KarmTray : public KSystemTrayIcon
 {
@@ -45,7 +38,7 @@ class KarmTray : public KSystemTrayIcon
 
   public:
     KarmTray(MainWindow * parent);
-    KarmTray(karmPart * parent);
+    KarmTray(karmPart *);
     KarmTray();
     ~KarmTray();
 

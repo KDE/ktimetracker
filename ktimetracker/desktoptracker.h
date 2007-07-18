@@ -29,6 +29,7 @@
 class Task;
 class QTimer;
 
+// FIXME port me to QVector eventually
 typedef std::vector<Task *> TaskVector;
 const int maxDesktops = 16;
 

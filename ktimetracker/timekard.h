@@ -25,16 +25,16 @@
 
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
-#include <kprinter.h>
-#include "karmstorage.h"
+
 #include <QList>
-#include <reportcriteria.h>
+
+#include "reportcriteria.h"
 
 class QString;
 class QDate;
 
+class Task;
 class TaskView;
-
 
 /**
  *  Seven consecutive days.

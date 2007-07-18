@@ -22,26 +22,24 @@
  */
 #include <QComboBox>
 #include <QCheckBox>
+#include <QGridLayout>
 #include <QGroupBox>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
 #include <QRadioButton>
 #include <QSizePolicy>
 #include <QString>
+#include <QVBoxLayout>
 #include <QWidget>
 
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
+#include <KDebug>
+#include <KLocale>            // i18n
+#include <KWindowSystem>
 
-#include <klocale.h>            // i18n
-#include <kwindowsystem.h>
-
-#include "edittaskdialog.h"
 #include "ktimewidget.h"
-#include "kdebug.h"
-#include "kdialog.h"
+#include "edittaskdialog.h"
 
 EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
                                 DesktopList* desktopList)

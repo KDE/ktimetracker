@@ -21,8 +21,9 @@
 #include <algorithm>            // std::find
 
 #include <QTimer>
-#include <kdebug.h>
-#include <kwindowsystem.h>
+
+#include <KDebug>
+#include <KWindowSystem>
 
 #include "desktoptracker.h"
 

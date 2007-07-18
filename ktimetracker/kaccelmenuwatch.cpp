@@ -25,8 +25,10 @@
 */
 
 #include <assert.h>
-#include <kdebug.h>
+
 #include <QMenu>
+
+#include <KDebug>
 
 #include "kaccelmenuwatch.h"
 

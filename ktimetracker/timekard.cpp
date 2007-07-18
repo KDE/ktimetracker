@@ -20,24 +20,23 @@
  *
  */
 
-// #include <iostream>
+#include <assert.h>
 
 #include <QDateTime>
-#include <QPainter>
-#include <QMap>
 #include <QList>
+#include <QMap>
 
-#include <kglobal.h>
-#include <kdebug.h>
-#include <klocale.h>            // i18n
+#include <KDebug>
+#include <KGlobal>
+#include <KLocale>
+
 #include <kcal/event.h>
 
+#include "karmstorage.h"
 #include "karmutility.h"        // formatTime()
-#include "reportcriteria.h"     // settings the user gave in the export dialog
-#include "timekard.h"
 #include "task.h"
 #include "taskview.h"
-#include <assert.h>
+#include "timekard.h"
 
 const int taskWidth = 40;
 const int timeWidth = 6;

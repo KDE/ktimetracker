@@ -21,16 +21,16 @@
 
 #include "idletimedetector.h"
 
-#include <qdatetime.h>
-#include <qmessagebox.h>
-#include <qtimer.h>
-
-#include <kdialog.h>
-#include <kglobal.h>
-#include <klocale.h>    // i18n
-#include <QLabel>
+#include <QDateTime>
 #include <QHBoxLayout>
+#include <QLabel>
+#include <QTimer>
 #include <QVBoxLayout>
+
+#include <KDialog>
+#include <KGlobal>
+#include <KLocale>    // i18n
+
 #ifdef Q_WS_X11
 #include <QX11Info>
 #endif

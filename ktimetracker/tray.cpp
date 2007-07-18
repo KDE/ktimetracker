@@ -1,5 +1,5 @@
 /*
-* KTray.
+* KarmTray.
 *
 * This implements the functionality of the little icon in the kpanel
 * tray. Among which are tool tips and the running clock animated icon
@@ -7,21 +7,15 @@
 * Distributed under the GPL.
 */
 
-
-// #include <qkeycode.h>
-// #include <QLayout>
 #include <QPixmap>
 #include <QString>
 #include <QTimer>
 #include <QToolTip>
 
-#include <kaction.h>            // actionPreferences()
-#include <kglobal.h>
-#include <kglobalsettings.h>
-#include <kiconloader.h>        // UserIcon
-#include <klocale.h>            // i18n
-#include <kmenu.h>         // plug()
-#include <ksystemtrayicon.h>
+#include <KGlobalSettings>
+#include <KIconLoader>
+#include <KLocale>
+#include <KMenu>
 
 #include "mainwindow.h"
 #include "task.h"
@@ -71,7 +65,7 @@ KarmTray::KarmTray(MainWindow* parent)
   */
 }
 
-KarmTray::KarmTray(karmPart * parent)
+KarmTray::KarmTray(karmPart *)
   : KSystemTrayIcon( 0 )
 {
   setObjectName( "Karm Tray" );

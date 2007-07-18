@@ -26,10 +26,11 @@
 #include <QObject>
 #include <QList>
 
-#include <kstandardshortcut.h>
+#include <KStandardShortcut>
 
 class QMenu;
 
+#warning Port me to QAction
 class KAccel;
 
 /**

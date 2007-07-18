@@ -23,7 +23,7 @@
 
 #include <vector>
 
-#include <kdialog.h>
+#include <KDialog>
 
 #include "desktoplist.h"
 
@@ -32,14 +32,12 @@ class QCheckBox;
 class QLabel;
 class QLineEdit;
 class QRadioButton;
-class QString;
 
 class KArmTimeWidget;
 
 /**
  * Dialog to add a new task or edit an existing task.
  */
-
 class EditTaskDialog : public KDialog
 {
   Q_OBJECT
@@ -53,7 +51,7 @@ class EditTaskDialog : public KDialog
     void status( long *time, long *timeDiff, 
                  long *session, long *sessionDiff, 
                  DesktopList *desktopList) const;
-    
+
   private slots:
     void slotAbsolutePressed();
     void slotRelativePressed();
@@ -81,9 +79,4 @@ class EditTaskDialog : public KDialog
     QLabel* _sessionLA;
 };
 
-
-
-
-
 #endif // KARM_EDIT_TASK_DIALOG
-

@@ -22,17 +22,17 @@
 
 #include <QCheckBox>
 #include <QGroupBox>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 
-#include <klocale.h>            // i18n
+#include <KLocale>            // i18n
 
-#include "printdialog.h"
 #include <libkdepim/kdateedit.h>
 
+#include "printdialog.h"
 
 PrintDialog::PrintDialog()
   : KDialog()
