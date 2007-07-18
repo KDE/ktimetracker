@@ -30,7 +30,6 @@
 class KAccel;
 class KAccelMenuWatch;
 class KarmTray;
-class Q3ListViewItem;
 class QPoint;
 class QString;
 
@@ -120,7 +119,7 @@ class MainWindow : public KParts::MainWindow
     void slotedithistory();
     void print();
     void slotSelectionChanged();
-    void contextMenuRequest( Q3ListViewItem*, const QPoint&, int );
+    void taskViewCustomContextMenuRequested( const QPoint& );
     void enableStopAll();
     void disableStopAll();
 //    void timeLoggingChanged( bool on );

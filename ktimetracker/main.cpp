@@ -88,8 +88,6 @@ int main( int argc, char *argv[] )
     mainWindow = new MainWindow();
   }
 
-  myApp.setMainWidget( mainWindow );
-
   if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
     mainWindow->restore( 1, false );
   else

@@ -309,7 +309,7 @@ QString KarmStorage::save(TaskView* taskview)
   kDebug(5970) << "entering KarmStorage::save" << endl;
   QString err;
 
-  Q3PtrStack< KCal::Todo > parents;
+  QStack<KCal::Todo*> parents;
 
   for (Task* task=taskview->first_child(); task; task = task->nextSibling())
   {
@@ -349,7 +349,7 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
 }
 
 QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
-    Q3PtrStack< KCal::Todo >& parents )
+    QStack<KCal::Todo*>& parents )
 {
   QString err;
   KCal::Todo* todo;

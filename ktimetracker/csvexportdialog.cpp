@@ -25,7 +25,6 @@
 #include <klocale.h>
 #include <kpushbutton.h>
 #include <kurlrequester.h>
-#include <q3buttongroup.h>
 #include <QComboBox>
 #include <QRadioButton>
 

@@ -96,11 +96,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   _timeLA = new QLabel( i18n("&Time:"), page );
   _timeLA->setObjectName( "time" );
   lay3->addWidget( _timeLA, 0, 0 );
-  _timeLA->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, 
-                                         (QSizePolicy::SizeType)0, 
-                                         0, 
-                                         0, 
-                                         _timeLA->sizePolicy().hasHeightForWidth()) );
+  _timeLA->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
 
   // Based on measuring pixels in a screenshot, it looks like the fontmetrics
   // call includes the ampersand when calculating the width.  To be sure
@@ -121,11 +117,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   _sessionTW->setObjectName( "_sessionTW" );
   lay3->addWidget( _sessionTW, 1, 1 );
   _sessionLA->setBuddy( _sessionTW );
-  _sessionLA->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, 
-                                         (QSizePolicy::SizeType)0, 
-                                         0, 
-                                         0, 
-                                         _sessionLA->sizePolicy().hasHeightForWidth()) );
+  _sessionLA->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
   _sessionLA->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
 
 
@@ -146,11 +138,7 @@ EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
   _operator = new QComboBox(page);
   _operator->addItem( QString::fromLatin1( "+" ) );
   _operator->addItem( QString::fromLatin1( "-" ) );
-  _operator->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, 
-                                         (QSizePolicy::SizeType)0, 
-                                         0, 
-                                         0, 
-                                         _operator->sizePolicy().hasHeightForWidth()) );
+  _operator->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
   //kDebug() << "text width=" << fontMetrics().width( _sessionLA->text() ) << endl;
   _operator->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
   lay4->addWidget( _operator );

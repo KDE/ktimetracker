@@ -23,10 +23,8 @@
 #ifndef KARM_STORAGE_H
 #define KARM_STORAGE_H
 
-#include <q3dict.h>
-#include <q3ptrstack.h>
-//Added by qt3to4:
 #include <QList>
+#include <QStack>
 
 #include "reportcriteria.h"
 
@@ -290,7 +288,7 @@ class KarmStorage
     bool parseLine(QString line, long *time, QString *name, int *level,
         DesktopList* desktopList);
     QString writeTaskAsTodo
-      (Task* task, const int level, Q3PtrStack< KCal::Todo >& parents);
+      (Task* task, const int level, QStack<KCal::Todo*>& parents);
     bool saveCalendar();
 
     KCal::Event* baseEvent(const Task*);

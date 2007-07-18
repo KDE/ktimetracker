@@ -37,7 +37,7 @@
 #include <QtDBus>
 
 MainWindow::MainWindow( const QString &icsfile )
-  : KParts::MainWindow( 0, Qt::WStyle_ContextHelp ),
+  : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
 #ifdef __GNUC__
 #warning Port me!
 #endif
@@ -74,10 +74,11 @@ MainWindow::MainWindow( const QString &icsfile )
   loadGeometry();
 
   // Setup context menu request handling
+  _taskView->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( _taskView,
-           SIGNAL( contextMenuRequested( Q3ListViewItem*, const QPoint&, int )),
+           SIGNAL( customContextMenuRequested( const QPoint& ) ),
            this,
-           SLOT( contextMenuRequest( Q3ListViewItem*, const QPoint&, int )));
+           SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
   if ( _preferences->trayIcon() ) _tray = new KarmTray( this );
   else _tray = new KarmTray( );
@@ -427,12 +428,12 @@ bool MainWindow::queryClose()
   return KMainWindow::queryClose();
 }
 
-void MainWindow::contextMenuRequest( Q3ListViewItem*, const QPoint& point, int )
+void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 {
     QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );
     if ( pop )
-      pop->popup( point );
+      pop->popup( _taskView->viewport()->mapToGlobal( point ) );
 }
 
 //----------------------------------------------------------------------------

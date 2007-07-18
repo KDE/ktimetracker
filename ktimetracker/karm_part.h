@@ -26,7 +26,6 @@
 #include "karmerrors.h"
 #include <kparts/factory.h>
 #include "reportcriteria.h"
-#include <Q3ListView>
 
 class KAccel;
 class KAccelMenuWatch;
@@ -78,7 +77,7 @@ class karmPart : public KParts::ReadWritePart
 public:
     karmPart(QWidget *parentWidget, QObject *parent);
 
-    void contextMenuRequest( Q3ListViewItem*, const QPoint& point, int );
+    void taskViewCustomContextMenuRequested( const QPoint& );
     // DCOP
     void quit();
     virtual bool save();

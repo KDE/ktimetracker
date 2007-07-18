@@ -90,10 +90,11 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
            this, SLOT( slotSelectionChanged() ) );
 
   // Setup context menu request handling
+  _taskView->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( _taskView,
-           SIGNAL( contextMenuRequested( Q3ListViewItem*, const QPoint&, int )),
+           SIGNAL( customContextMenuRequested( const QPoint& ) ),
            this,
-           SLOT( contextMenuRequest( Q3ListViewItem*, const QPoint&, int )));
+           SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
   _tray = new KarmTray( this );
 
@@ -420,12 +421,12 @@ extern "C"
     }
 }
 
-void karmPart::contextMenuRequest( Q3ListViewItem*, const QPoint& point, int )
+void karmPart::taskViewCustomContextMenuRequested( const QPoint& point )
 {
     QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );
     if ( pop )
-      pop->popup( point );
+      pop->popup( _taskView->viewport()->mapToGlobal( point ) );
 }
 
 //----------------------------------------------------------------------------
