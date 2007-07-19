@@ -126,13 +126,13 @@ protected:
      */
     virtual bool saveFile();
 
-protected slots:
+protected Q_SLOTS:
     void fileOpen();
     void fileSaveAs();
     void slotSelectionChanged();
     void startNewSession(); 
 
-public slots:
+public Q_SLOTS:
    void setStatusBar(const QString & qs);
 
 };
@@ -149,7 +149,7 @@ public:
     virtual KParts::Part* createPartObject( QWidget *parentWidget, QObject *parent,
                                             const char *classname, const QStringList &args );
     static const KComponentData &componentData();
- 
+
 private:
     static KComponentData *s_instance;
     static KAboutData* s_about;

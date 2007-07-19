@@ -52,7 +52,7 @@ class EditTaskDialog : public KDialog
                  long *session, long *sessionDiff, 
                  DesktopList *desktopList) const;
 
-  private slots:
+  private Q_SLOTS:
     void slotAbsolutePressed();
     void slotRelativePressed();
     void slotAutoTrackingPressed();

@@ -38,7 +38,7 @@ class CSVExportDialog : public CSVExportDialogBase
 {
   Q_OBJECT
 
-  public slots:
+  public Q_SLOTS:
     void exPortToClipBoard();
     void exPortToCSVFile();
 
@@ -63,7 +63,7 @@ class CSVExportDialog : public CSVExportDialogBase
      */
     ReportCriteria reportCriteria();
 
-  private slots:
+  private Q_SLOTS:
 
     /**
     Enable export button if export url entered.

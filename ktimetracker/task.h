@@ -266,12 +266,12 @@ class Task : public QObject, public QTreeWidgetItem
   protected:
     void changeParentTotalTimes( long minutesSession, long minutes );
 
-  signals:
+  Q_SIGNALS:
     void totalTimesChanged( long minutesSession, long minutes);
     /** signal that we're about to delete a task */
     void deletingTask(Task* thisTask);
 
-  protected slots:
+  protected Q_SLOTS:
     /** animate the active icon */
     void updateActiveIcon();
 

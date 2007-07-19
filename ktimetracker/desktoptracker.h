@@ -60,14 +60,14 @@ class DesktopTracker: public QObject
     int _desktop;
     QTimer *_timer;
 
-  signals:
+  Q_SIGNALS:
     void reachedtActiveDesktop( Task* task );
     void leftActiveDesktop( Task* task );
 
-  public slots:
+  public Q_SLOTS:
     void handleDesktopChange( int desktop );
 
-  private slots:
+  private Q_SLOTS:
     void changeTimers();
 };
 

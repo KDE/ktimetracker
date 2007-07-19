@@ -115,15 +115,15 @@ class KAccelMenuWatch : public QObject
      * Same as above, but connects to standard accelerators.
      */
     void connectAccel( int itemId, KStandardShortcut::StandardShortcut );
-  
-  public slots:
+
+  public Q_SLOTS:
     /** 
      * Updates all menu accelerators. Call this after all accelerators
      * have been connected or the kaccel object has been updated.
      */
     void updateMenus();
 
-  private slots:
+  private Q_SLOTS:
     void removeDeadMenu();
 
   private:

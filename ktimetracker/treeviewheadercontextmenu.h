@@ -58,10 +58,10 @@ class TreeViewHeaderContextMenu : public QObject {
   private:
     void updateAction( QAction *action, int column );
 
-  private slots:
+  private Q_SLOTS:
     void slotCustomContextMenuRequested( const QPoint& );
 
-  protected slots:
+  protected Q_SLOTS:
     void updateActions();
     void slotTriggered( QAction* );
     void slotAboutToShow();
@@ -80,7 +80,7 @@ class TreeViewHeaderContextMenu : public QObject {
     void addExcludedColumns( QVector<int> columns ) { mExcludedColumns << columns; updateActions(); }
     KMenu *menu() const { return mContextMenu; }
 
-  signals:
+  Q_SIGNALS:
     void columnToggled( int );
 };
 

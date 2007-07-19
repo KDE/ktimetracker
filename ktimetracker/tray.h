@@ -47,16 +47,16 @@ class KarmTray : public KSystemTrayIcon
     static QVector<QPixmap*> *icons;
     QTimer *_taskActiveTimer;
 
-  public slots:
+  public Q_SLOTS:
     void startClock();
     void stopClock();
     void resetClock();
     void updateToolTip( QList<Task*> activeTasks);
     void initToolTip();
 
-  protected slots:
+  protected Q_SLOTS:
     void advanceClock();
-    
+
   // experiment
   /*
     void insertTitle(QString title);

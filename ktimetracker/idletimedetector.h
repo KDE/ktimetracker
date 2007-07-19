@@ -63,7 +63,7 @@ public:
   **/
   bool isIdleDetectionPossible();
 
-signals:
+Q_SIGNALS:
   /**
      Tells the listener to extract time from current timing.
      The time to extract is due to the idle time since the dialog wass
@@ -77,7 +77,7 @@ signals:
    **/
   void stopAllTimers(QDateTime time);
 
-public slots:
+public Q_SLOTS:
   void revert();
 
   /**
@@ -109,7 +109,7 @@ protected:
   void informOverrun();
 #endif // HAVE_LIBXSS
 
-protected slots:
+protected Q_SLOTS:
   void check();
 
 private:

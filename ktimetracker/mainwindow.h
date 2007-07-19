@@ -103,13 +103,13 @@ class MainWindow : public KParts::MainWindow
     QString exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote );
     QString importplannerfile( QString filename );
 
-  public slots:
+  public Q_SLOTS:
     void setStatusBar( const QString& );
     /** Quit ktimetracker (what else...) */
     void quit();
     /** Save the calendar */
     bool save();
-  protected slots:
+  protected Q_SLOTS:
     void keyBindings();
     void startNewSession();
     void resetAllTimes();

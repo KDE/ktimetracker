@@ -67,12 +67,12 @@ class Preferences :public KPageDialog
     void writeEntry( const QString &key, bool value );
     void deleteEntry( const QString &key );
 
-  public slots:
+  public Q_SLOTS:
     void showDialog();
     void load();
     void save();
 
-  signals:
+  Q_SIGNALS:
     void detectIdleness(bool on);
     void idlenessTimeout(int minutes);
     void iCalFile(QString);
@@ -80,7 +80,7 @@ class Preferences :public KPageDialog
     void autoSavePeriod(int minutes);
     void setupChanged();
 
-  protected slots:
+  protected Q_SLOTS:
     virtual void slotButtonClicked(int button);
     virtual void slotOk();
     virtual void slotCancel();

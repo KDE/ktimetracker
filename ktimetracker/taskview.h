@@ -104,7 +104,7 @@ class TaskView : public QTreeWidget
     QString addTask( const QString& taskame, long total, long session, const DesktopList& desktops,
                      Task* parent = 0 );
 
-  public slots:
+  public Q_SLOTS:
     /** Something in the history widget changed  
         The historywidget contains all events and can be shown with File | Edit history. 
         The user can change dates and comments in there.
@@ -214,8 +214,8 @@ class TaskView : public QTreeWidget
 
     /** Copy history for current and all sub tasks to clipboard. */
     QString clipHistory();
-    
-  signals:
+
+  Q_SIGNALS:
     void totalTimesChanged( long session, long total );
     void updateButtons();
     void timersActive();
@@ -251,7 +251,7 @@ class TaskView : public QTreeWidget
     void mouseMoveEvent( QMouseEvent* );
     void mousePressEvent( QMouseEvent* );
 
-  protected slots:
+  protected Q_SLOTS:
     void autoSaveChanged( bool );
     void autoSavePeriodChanged( int period );
     void minuteUpdate();
