@@ -518,8 +518,11 @@ It shows the historywidget and connects the change signal to historywidgetchange
     item->setFlags(Qt::ItemIsEnabled);
     item->setWhatsThis(i18n("You can change this task's comment, start time and end time."));
     historywidget->setItem(row,0,item);
-    historywidget->setItem(row,1,new QTableWidgetItem((*i)->dtStart().toString()));
-    historywidget->setItem(row,2,new QTableWidgetItem((*i)->dtEnd().toString()));
+    QDateTime datetime=QDateTime::fromString((*i)->dtStart().toString(),Qt::ISODate);
+    kDebug() << datetime << endl;
+    QDateTime datetime2=QDateTime::fromString((*i)->dtEnd().toString(),Qt::ISODate);
+    historywidget->setItem(row,1,new QTableWidgetItem(datetime.toString("yyyy-MM-dd HH:mm:ss")));
+    historywidget->setItem(row,2,new QTableWidgetItem(datetime2.toString("yyyy-MM-dd HH:mm:ss")));
     historywidget->setItem(row,4,new QTableWidgetItem((*i)->uid()));
     kDebug() << "(*i)->comments.count() ="  << (*i)->comments().count() << endl;
     if ((*i)->comments().count() > 0)
@@ -558,7 +561,9 @@ A change triggers this procedure, it shall store the new values in the calendar.
         {
 	  if (KDateTime::fromString(historywidget->item(row,col)->text()).isValid())
           {
-            (*i)->setDtStart(KDateTime::fromString(historywidget->item(row,col)->text())); 
+            QDateTime datetime=QDateTime::fromString(historywidget->item(row,col)->text(),"yyyy-MM-dd HH:mm:ss");
+            KDateTime kdatetime=KDateTime::fromString(datetime.toString(Qt::ISODate));
+            (*i)->setDtStart(kdatetime); 
             kDebug() << "Program SetDtStart to " << historywidget->item(row,col)->text() << endl;
           }
           else KMessageBox::information(0,i18n("This is not a valid Date/Time."));
@@ -578,7 +583,9 @@ A change triggers this procedure, it shall store the new values in the calendar.
         {
           if (KDateTime::fromString(historywidget->item(row,col)->text()).isValid())
           {
-            (*i)->setDtEnd(KDateTime::fromString(historywidget->item(row,col)->text())); 
+            QDateTime datetime=QDateTime::fromString(historywidget->item(row,col)->text(),"yyyy-MM-dd HH:mm:ss");
+            KDateTime kdatetime=KDateTime::fromString(datetime.toString(Qt::ISODate));
+            (*i)->setDtEnd(kdatetime); 
             kDebug() << "Program SetDtEnd to " << historywidget->item(row,col)->text() << endl;
           }
           else KMessageBox::information(0,i18n("This is not a valid Date/Time."));
