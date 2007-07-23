@@ -79,7 +79,7 @@ Preferences *Preferences::instance( const QString &icsfile )
 
 void Preferences::makeBehaviorPage()
 {
-  KIcon icon = KIcon( "kcmsystem" );
+  KIcon icon = KIcon( "gear" );
   QFrame* behaviorPage = new QFrame();
   KPageWidgetItem *pageItem = new KPageWidgetItem( behaviorPage, i18n("Behavior"));
   pageItem->setHeader( i18n("Behavior Settings") );
@@ -100,6 +100,12 @@ void Preferences::makeBehaviorPage()
   _idleDetectValueW->setObjectName( "_idleDetectValueW" );
   _idleDetectValueW->setRange(1,30*24);
   _idleDetectValueW->setSuffix(i18n(" min"));
+  _minDesktopActiveTimeLabelW = new QLabel( i18n( "Minimum desktop active time" ), behaviorPage );
+  _minDesktopActiveTimeLabelW->setObjectName( "_minDesktopActiveTimeLabel" );
+  _minDesktopActiveTimeValueW = new QSpinBox( behaviorPage );
+  _minDesktopActiveTimeValueW->setObjectName( "_minDesktopActiveTimeValue" );
+  _minDesktopActiveTimeValueW->setRange( 1, 60 ); // TODO what is a good range?
+  _minDesktopActiveTimeValueW->setSuffix( i18n( " sec" ) );
   _promptDeleteW = new QCheckBox
     ( i18n( "Prompt before deleting tasks" ), behaviorPage );
   _promptDeleteW->setObjectName( "_promptDeleteW" );
@@ -111,11 +117,13 @@ void Preferences::makeBehaviorPage()
     ( i18n( "Place an icon to the SysTray" ), behaviorPage );
   _trayIconW->setObjectName( "_trayIcon" );
 
-  layout->addWidget(_doIdleDetectionW, 0, 0 );
-  layout->addWidget(_idleDetectValueW, 0, 1 );
-  layout->addWidget(_promptDeleteW, 1, 0 );
-  layout->addWidget(_uniTaskingW, 2, 0);
-  layout->addWidget(_trayIconW, 3, 0);
+  layout->addWidget( _doIdleDetectionW, 0, 0 );
+  layout->addWidget( _idleDetectValueW, 0, 1 );
+  layout->addWidget( _minDesktopActiveTimeLabelW, 1, 0 );
+  layout->addWidget( _minDesktopActiveTimeValueW, 1, 1 );
+  layout->addWidget( _promptDeleteW, 2, 0 );
+  layout->addWidget( _uniTaskingW, 3, 0 );
+  layout->addWidget( _trayIconW, 4, 0 );
 
   topLevel->addStretch();
 
@@ -242,6 +250,7 @@ void Preferences::showDialog()
 
   _doIdleDetectionW->setChecked(_doIdleDetectionV);
   _idleDetectValueW->setValue(_idleDetectValueV);
+  _minDesktopActiveTimeValueW->setValue( _minDesktopActiveTimeValueV );
 
   _doAutoSaveW->setChecked(_doAutoSaveV);
   _autoSaveValueW->setValue(_autoSaveValueV);
@@ -282,6 +291,7 @@ void Preferences::slotOk()
 
   _doIdleDetectionV = _doIdleDetectionW->isChecked();
   _idleDetectValueV = _idleDetectValueW->value();
+  _minDesktopActiveTimeValueV = _minDesktopActiveTimeValueW->value();
 
   _doAutoSaveV = _doAutoSaveW->isChecked();
   _autoSaveValueV = _autoSaveValueW->value();
@@ -336,6 +346,7 @@ QString Preferences::iCalFile()           	     const { return _iCalFileV; }
 QString Preferences::activeCalendarFile() 	     const { return _iCalFileV; }
 bool    Preferences::detectIdleness()                const { return _doIdleDetectionV; }
 int     Preferences::idlenessTimeout()               const { return _idleDetectValueV; }
+int     Preferences::minimumDesktopActiveTime() const { return _minDesktopActiveTimeValueV; }
 bool    Preferences::autoSave()                      const { return _doAutoSaveV; }
 int     Preferences::autoSavePeriod()                const { return _autoSaveValueV; }
 bool    Preferences::logging()                       const { return _loggingV; }
@@ -363,6 +374,7 @@ void Preferences::load()
   _doIdleDetectionV = configIdleDetection.readEntry( QString::fromLatin1("enabled"),
      true );
   _idleDetectValueV = configIdleDetection.readEntry(QString::fromLatin1("period"), 15);
+  _minDesktopActiveTimeValueV = configIdleDetection.readEntry( QString::fromLatin1( "minactivetime" ), 5 );
 
   KConfigGroup configSaving = KGlobal::config()->group( QString::fromLatin1("Saving") );
   _iCalFileV = configSaving.readPathEntry
@@ -400,9 +412,10 @@ void Preferences::load()
 void Preferences::save()
 {
   kDebug(5970) << "Entering Preferences::save" << endl;
-  KConfigGroup configIdleDetection = KGlobal::config()->group( QString("Idle detection") );
-  configIdleDetection.writeEntry( QString("enabled"), _doIdleDetectionV);
-  configIdleDetection.writeEntry( QString("period"), _idleDetectValueV);
+  KConfigGroup configIdleDetection = KGlobal::config()->group( QString( "Idle detection" ) );
+  configIdleDetection.writeEntry( QString( "enabled" ), _doIdleDetectionV );
+  configIdleDetection.writeEntry( QString( "period" ), _idleDetectValueV );
+  configIdleDetection.writeEntry( QString( "minactivetime" ), _minDesktopActiveTimeValueV );
   configIdleDetection.sync();
 
   KConfigGroup configSaving = KGlobal::config()->group( QString("Saving") );

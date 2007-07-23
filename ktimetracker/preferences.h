@@ -45,6 +45,7 @@ class Preferences :public KPageDialog
     // Retrive information about settings
     bool detectIdleness() const;
     int idlenessTimeout() const;
+    int minimumDesktopActiveTime() const;
     QString iCalFile() const;
     QString activeCalendarFile() const;
     bool autoSave() const;
@@ -102,15 +103,15 @@ class Preferences :public KPageDialog
               *_displayTotalTimeW, *_displayTotalSessionW,
 	      *_decimalFormatW, *_displayPerCentCompleteW;
     QCheckBox *_loggingW;
-    QLabel    *_idleDetectLabelW, *_displayColumnsLabelW;
-    QSpinBox  *_idleDetectValueW, *_autoSaveValueW;
+    QLabel    *_idleDetectLabelW, *_displayColumnsLabelW, *_minDesktopActiveTimeLabelW;
+    QSpinBox  *_idleDetectValueW, *_autoSaveValueW, *_minDesktopActiveTimeValueW;
     KUrlRequester *_iCalFileW ;
 
     // Values
     bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV, _uniTaskingV, _trayIconV;
     bool _displayColumnV[5];
     bool _decimalFormatV;
-    int  _idleDetectValueV, _autoSaveValueV;
+    int  _idleDetectValueV, _autoSaveValueV, _minDesktopActiveTimeValueV;
     QString _iCalFileV;
 
     /** real name of the user, used during ICAL saving */
