@@ -43,7 +43,7 @@ class EditTaskDialog : public KDialog
   Q_OBJECT
 
   public:
-    EditTaskDialog(QString caption, bool editDlg, DesktopList* desktopList=0);
+    EditTaskDialog(QWidget *parent, QString caption, bool editDlg, DesktopList* desktopList=0);
     void setTask(const QString &name, long time, long sessionTime);
     QString taskName() const;
 

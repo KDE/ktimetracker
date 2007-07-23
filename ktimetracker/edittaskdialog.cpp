@@ -41,11 +41,12 @@
 #include "ktimewidget.h"
 #include "edittaskdialog.h"
 
-EditTaskDialog::EditTaskDialog( QString caption, bool editDlg,
+EditTaskDialog::EditTaskDialog( QWidget *parent, QString caption, bool editDlg,
                                 DesktopList* desktopList)
-  : KDialog(),
+  : KDialog( parent ),
     origTime( 0 ), origSession( 0 )
 {
+  setWindowTitle( caption );
   setObjectName( "EditTaskDialog" );
   QWidget *page = new QWidget( this ); 
   setMainWidget(page);

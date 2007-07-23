@@ -756,7 +756,7 @@ void TaskView::newTask()
 
 void TaskView::newTask(QString caption, Task *parent)
 {
-  EditTaskDialog *dialog = new EditTaskDialog(caption, false);
+  EditTaskDialog *dialog = new EditTaskDialog( this, caption, false );
   long total, totalDiff, session, sessionDiff;
   DesktopList desktopList;
 
@@ -830,7 +830,7 @@ void TaskView::editTask()
 
   DesktopList desktopList = task->getDesktops();
   DesktopList oldDeskTopList = desktopList;
-  EditTaskDialog *dialog = new EditTaskDialog(i18n("Edit Task"), true, &desktopList);
+  EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), true, &desktopList );
   dialog->setTask( task->name(),
                    task->time(),
                    task->sessionTime() );
