@@ -36,6 +36,7 @@
 
 #include <KApplication>       // kapp
 #include <KConfig>
+#include <KDateTimeWidget>
 #include <KDebug>
 #include <KFileDialog>
 #include <KLocale>            // i18n
@@ -61,7 +62,7 @@ class DesktopTracker;
 class TaskViewDelegate : public QItemDelegate {
 public:
   TaskViewDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
-  
+
   void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const {
     if (index.column () == 5) {
       if (option.state & QStyle::State_Selected) {
@@ -71,35 +72,68 @@ public:
       int rY = option.rect.y() + 2;
       int rWidth = option.rect.width() - 4;
       int rHeight = option.rect.height() - 4;
-      
+
       int value = index.model()->data( index ).toInt();
       int newWidth = (int)(rWidth * (value / 100.));
-      
+
       int mid = rY + rHeight / 2;
       int width = rWidth / 2;
-      
+
       QLinearGradient gradient1( rX, mid, rX + width, mid);
       gradient1.setColorAt( 0, Qt::red );
       gradient1.setColorAt( 1, Qt::yellow );
       painter->fillRect( rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
-      
+
       if (newWidth > width) {
         QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
         gradient2.setColorAt( 0, Qt::yellow );
         gradient2.setColorAt( 1, Qt::green );
         painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
       }
-      
+
       painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
       for (int x = rHeight; x < newWidth; x += rHeight) {
         painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
       }
-      
+
       painter->setPen( Qt::black );
       painter->drawText( option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %" );
     } else {
       QItemDelegate::paint( painter, option, index );
     }
+  }
+};
+
+class HistoryWidgetDelegate : public QItemDelegate {
+public:
+  HistoryWidgetDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
+
+  QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const {
+    KDateTimeWidget *editor = new KDateTimeWidget( parent );
+    editor->setAutoFillBackground( true );
+    editor->setPalette( option.palette );
+    // FIXME highlight() background
+    editor->setBackgroundRole( QPalette::Background );
+
+    return editor;
+  }
+
+  void setEditorData( QWidget *editor, const QModelIndex &index ) const {
+    QDateTime dateTime = QDateTime::fromString( index.model()->data( index, Qt::DisplayRole ).toString(), "yyyy-MM-dd HH:mm:ss" );
+
+    KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
+    dateTimeWidget->setDateTime( dateTime );
+  }
+
+  void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const {
+    KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
+    QDateTime dateTime = dateTimeWidget->dateTime();
+
+    model->setData( index, dateTime.toString( "yyyy-MM-dd HH:mm:ss" ), Qt::EditRole );
+  }
+
+  void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const {
+    editor->setGeometry( option.rect );
   }
 };
 
@@ -122,7 +156,7 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
   adaptColumns();
   setAllColumnsShowFocus( true );
-  setItemDelegate( new TaskViewDelegate(this) );
+  setItemDelegateForColumn( 5, new TaskViewDelegate(this) );
 
   // set up the minuteTimer
   _minuteTimer = new QTimer(this);
@@ -497,7 +531,10 @@ It shows the historywidget and connects the change signal to historywidgetchange
 */
 {
   kDebug(5970) << "Entering TaskView::listallevents" << endl;
-  historywidget=new QTableWidget();
+  historywidget = new QTableWidget();
+  HistoryWidgetDelegate *historyWidgetDelegate = new HistoryWidgetDelegate( this );
+  historywidget->setItemDelegateForColumn( 1, historyWidgetDelegate );
+  historywidget->setItemDelegateForColumn( 2, historyWidgetDelegate );
   historywidget->setWindowFlags(Qt::WindowContextHelpButtonHint);
   connect (historywidget, SIGNAL(cellChanged(int, int)), this, SLOT (historywidgetchanged(int, int)));
   QStringList labels;
@@ -529,6 +566,8 @@ It shows the historywidget and connects the change signal to historywidgetchange
     }
   }
   historywidget->resizeColumnsToContents();
+  historywidget->setColumnWidth( 1, 300 );
+  historywidget->setColumnWidth( 2, 300 );
   historywidget->resize(historywidget->columnWidth(0)+historywidget->columnWidth(1)+historywidget->columnWidth(2)+historywidget->columnWidth(3),height());
   historywidget->show();
   kDebug() << "Exiting listallevents" << endl;
