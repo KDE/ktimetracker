@@ -22,8 +22,7 @@
 #ifndef KARM_PREFERENCES_H
 #define KARM_PREFERENCES_H
 
-#include <kpagedialog.h>
-#include <QLabel>
+#include <KPageDialog>
 
 class QCheckBox;
 class QLabel;

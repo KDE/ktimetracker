@@ -27,43 +27,42 @@
 
 #include <cassert>
 
+#include <QByteArray>
+#include <QDateTime>
 #include <QFile>
 #include <QHeaderView>
-#include <QSize>
-#include <QDateTime>
-#include <QString>
-#include <QStringList>
 #include <QList>
 #include <QMultiHash>
-#include <QTextStream>
-#include <QByteArray>
 #include <QProgressBar>
+#include <QSize>
+#include <QString>
+#include <QStringList>
+#include <QTableWidget>
+#include <QTextStream>
 
-#include <kcal/incidence.h>
-#include "kapplication.h"       // kapp
-#include <kdebug.h>
+#include <KApplication>       // kapp
+#include <KDebug>
+#include <KLocale>            // i18n
+#include <KMessageBox>
+#include <KPasswordDialog>
+#include <KProgressDialog>
+#include <KUrl>
+#include <KTemporaryFile>
+
 #include <kemailsettings.h>
-#include <klocale.h>            // i18n
-#include <kmessagebox.h>
-#include <ktemporaryfile.h>
+#include <kcal/incidence.h>
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
 #include <resourceremote.h>
 #include <kpimprefs.h>
-#include <taskview.h>
-#include <timekard.h>
-#include <karmutility.h>
 #include <kio/netaccess.h>
-#include <kurl.h>
-#include <qtablewidget.h>
-#include <vector>
-#include <kpassworddialog.h>
-#include <kprogressdialog.h>
 
+#include "taskview.h"
+#include "timekard.h"
+#include "karmutility.h"
 #include "karmstorage.h"
 #include "preferences.h"
 #include "task.h"
-#include "reportcriteria.h"
 
 using namespace std;
 

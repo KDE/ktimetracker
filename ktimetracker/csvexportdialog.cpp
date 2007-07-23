@@ -18,18 +18,18 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
-#include <kdateedit.h>
-#include <kdebug.h>
-#include <kglobal.h>
-#include <klineedit.h>
-#include <klocale.h>
-#include <kpushbutton.h>
-#include <kurlrequester.h>
 #include <QComboBox>
 #include <QRadioButton>
 
+#include <KDebug>
+#include <KGlobal>
+#include <KLineEdit>
+#include <KLocale>
+#include <KPushButton>
+#include <KUrlRequester>
+
+#include "kdateedit.h"
 #include "csvexportdialog.h"
-#include "reportcriteria.h"
 
 CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   QWidget *parent 

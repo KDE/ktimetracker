@@ -21,16 +21,17 @@
 
 #include <stdlib.h>             // abs()
 
+#include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QLayout>
 #include <QLineEdit>
 #include <QString>
 #include <QValidator>
 #include <QWidget>
-#include <QHBoxLayout>
-#include <QKeyEvent>
 
-#include <klocale.h>            // i18n
+#include <KLocale>
+
 #include "ktimewidget.h"
 
 enum ValidatorType { HOUR, MINUTE };

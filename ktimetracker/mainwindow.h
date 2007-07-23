@@ -22,7 +22,7 @@
 #ifndef KARM_MAIN_WINDOW_H
 #define KARM_MAIN_WINDOW_H
 
-#include <kparts/mainwindow.h>
+#include <KParts/MainWindow>
 
 #include "karmerrors.h"
 #include "reportcriteria.h"

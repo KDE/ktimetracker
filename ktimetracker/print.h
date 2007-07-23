@@ -24,7 +24,8 @@
 
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
-#include <kprinter.h>
+
+#include <KPrinter>
 
 class QPainter;
 class QString;

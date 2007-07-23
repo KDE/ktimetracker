@@ -21,25 +21,26 @@
 
 #undef Unsorted // for --enable-final
 #include <QCheckBox>
+#include <QGridLayout>
 #include <QLabel>
-#include <QString>
-#include <QSpinBox>
 #include <QLayout>
 #include <QPixmap>
+#include <QSpinBox>
+#include <QString>
 #include <QVBoxLayout>
-#include <QGridLayout>
 
-#include <kapplication.h>       // kapp
-#include <kconfig.h>
-#include <kdebug.h>
+#include <KApplication>       // kapp
+#include <KConfig>
+#include <KDebug>
+#include <KGlobal>
+#include <KIcon>
+#include <KIconLoader>
+#include <KLineEdit>          // lineEdit()
+#include <KLocale>            // i18n
+#include <KStandardDirs>
+#include <KUrlRequester>
+
 #include <kemailsettings.h>
-#include <kiconloader.h>
-#include <klineedit.h>          // lineEdit()
-#include <klocale.h>            // i18n
-#include <kstandarddirs.h>
-#include <kurlrequester.h>
-#include <kglobal.h>
-#include <kicon.h>
 
 #include "preferences.h"
 

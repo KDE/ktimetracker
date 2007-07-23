@@ -23,6 +23,9 @@ test cases:
 
 */
 
+#include "task.h"
+#include "taskview.h"
+
 #include "plannerparser.h"
 
 

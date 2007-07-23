@@ -22,10 +22,9 @@
 #ifndef KARM_UTILITY_H
 #define KARM_UTILITY_H
 
-#include <stdlib.h>
+#include <KGlobal>
+#include <KLocale>
 
-#include <kglobal.h>
-#include <klocale.h>
 #include "karmutility.h"
 
 QString formatTime( long minutes, bool decimal )

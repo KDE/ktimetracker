@@ -5,22 +5,24 @@
 
 #include <numeric>
 
-#include "kaccelmenuwatch.h"
-#include <kaction.h>
-#include <kactioncollection.h>
-#include <kapplication.h>       // kapp
-#include <kconfig.h>
-#include <kdebug.h>
-#include <kglobal.h>
-#include <kshortcutsdialog.h>
-#include <klocale.h>            // i18n
-#include <kmessagebox.h>
-#include <kstatusbar.h>         // statusBar()
-#include <kstandardaction.h>
-#include <qnamespace.h>
+#include <QtDBus>
 #include <QMenu>
 #include <QString>
-#include <kicon.h>
+
+#include <KAction>
+#include <KActionCollection>
+#include <KApplication>       // kapp
+#include <KConfig>
+#include <KDebug>
+#include <KGlobal>
+#include <KIcon>
+#include <KLocale>            // i18n
+#include <KMessageBox>
+#include <KShortcutsDialog>
+#include <KStandardAction>
+#include <KStatusBar>         // statusBar()
+#include <KXMLGUIFactory>
+
 #include "karmerrors.h"
 #include "karmutility.h"
 #include "mainwindow.h"
@@ -31,10 +33,9 @@
 #include "timekard.h"
 #include "tray.h"
 #include "version.h"
-#include <kxmlguifactory.h>
 
+#include "kaccelmenuwatch.h"
 #include "karmmainadaptor.h"
-#include <QtDBus>
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),

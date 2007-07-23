@@ -22,22 +22,20 @@
 #ifndef KARM_TASK_VIEW_H
 #define KARM_TASK_VIEW_H
 
-#include <QMouseEvent>
 #include <QList>
-#include <QTextStream>
+#include <QTreeWidget>
 
 #include <kcal/resourcecalendar.h>
+
 #include "desktoplist.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
-#include <QTimer>
-#include <QTableWidget>
-#include <QTreeWidget>
 
+class QMouseEvent;
 class QString;
+class QTableWidget;
 class QTextStream;
 class QTimer;
-
 
 class DesktopTracker;
 class IdleTimeDetector;

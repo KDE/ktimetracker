@@ -22,8 +22,8 @@
 #include <QDateTime>
 #include <QPainter>
 
-#include <kglobal.h>
-#include <klocale.h>            // i18n
+#include <KGlobal>
+#include <KLocale>            // i18n
 
 #include "karmutility.h"        // formatTime()
 #include "print.h"

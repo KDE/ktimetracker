@@ -34,23 +34,21 @@
 #include <QList>
 #include <QListWidget>
 
-#include "kapplication.h"       // kapp
-#include <kconfig.h>
-#include <kdebug.h>
-#include <kfiledialog.h>
-#include <klocale.h>            // i18n
-#include <kmessagebox.h>
-#include <kurlrequester.h>
+#include <KApplication>       // kapp
+#include <KConfig>
+#include <KDebug>
+#include <KFileDialog>
+#include <KLocale>            // i18n
+#include <KMessageBox>
+#include <KUrlRequester>
 
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
 #include "idletimedetector.h"
-#include "karmstorage.h"
 #include "plannerparser.h"
 #include "preferences.h"
 #include "printdialog.h"
-#include "reportcriteria.h"
 #include "task.h"
 #include "taskview.h"
 #include "timekard.h"

@@ -28,11 +28,11 @@ test cases:
 */
 
 #include <QtXml>
-#include <klocale.h>
-#include "taskview.h"
-#include "task.h"
+
 #include "karmstorage.h"
-#include "kapplication.h"
+
+class Task;
+class TaskView;
 
 class PlannerParser : public QXmlDefaultHandler
 {

@@ -23,18 +23,15 @@
 #include <QTimer>
 #include <QPixmap>
 
-#include <kiconloader.h>
-
-#include "kapplication.h"       // kapp
-#include "kdebug.h"
+#include <KApplication>
+#include <KDebug>
+#include <KIconLoader>
 
 #include <kcal/event.h>
 
 #include "karmutility.h"
 #include "task.h"
-#include "taskview.h"
 #include "preferences.h"
-
 
 const int gSecondsPerMinute = 60;
 
