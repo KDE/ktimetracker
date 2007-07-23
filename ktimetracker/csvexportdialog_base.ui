@@ -159,9 +159,6 @@
             <string>&lt;p>An inclusive date range for reporting on time card history.  Not enabled when reporting on totals.&lt;/p></string>
           </property>
           <layout class="QGridLayout" >
-            <property name="margin" >
-              <number>0</number>
-            </property>
             <item row="0" column="0" >
               <widget class="QLabel" name="textLabel1" >
                 <property name="text" >
