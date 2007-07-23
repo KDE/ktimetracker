@@ -16,6 +16,7 @@
 #include <KDebug>
 #include <KGlobal>
 #include <KIcon>
+#include <KIconLoader>
 #include <KLocale>            // i18n
 #include <KMessageBox>
 #include <KShortcutsDialog>
@@ -355,13 +356,13 @@ void MainWindow::makeMenus()
                                  "task."));
 
   // Mark as complete
-  actionMarkAsComplete  = new KAction(KIcon("document"), i18n("&Mark as Complete"), this);
+  actionMarkAsComplete  = new KAction(KIcon( UserIcon( "task-complete.xpm" ) ), i18n("&Mark as Complete"), this);
   actionCollection()->addAction("mark_as_complete", actionMarkAsComplete );
   connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsComplete() ));
   actionMarkAsComplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
 
   // Mark as incomplete
-  actionMarkAsIncomplete  = new KAction(KIcon("document"), i18n("&Mark as Incomplete"), this);
+  actionMarkAsIncomplete  = new KAction(KIcon( UserIcon( "task-incomplete.xpm" ) ), i18n("&Mark as Incomplete"), this);
   actionCollection()->addAction("mark_as_incomplete", actionMarkAsIncomplete );
   connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
   actionMarkAsIncomplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
