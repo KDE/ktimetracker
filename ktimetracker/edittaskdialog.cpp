@@ -187,7 +187,7 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, QString caption, bool editDlg,
   for (int i=0; i<desktopCount; i++) {
     QCheckBox *tmpBx = new QCheckBox(groupBox);
     tmpBx->setObjectName( QString::number(i).toLatin1() );
-    _deskBox.push_back( tmpBx );
+    _deskBox.append( tmpBx );
 #ifdef Q_WS_X11
     tmpBx->setText(KWindowSystem::desktopName(i+1));
 #endif
@@ -293,8 +293,9 @@ void EditTaskDialog::slotRelativePressed()
 void EditTaskDialog::slotAutoTrackingPressed()
 {
   bool checked = _desktopCB->isChecked();
-  for (unsigned int i=0; i<_deskBox.size(); i++)
-    _deskBox[i]->setEnabled(checked);
+  foreach (QCheckBox *deskBox, _deskBox) {
+    deskBox->setEnabled( checked );
+  }
 
   if (!checked)  // uncheck all desktop boxes
     for (int i=0; i<desktopCount; i++) 
@@ -337,9 +338,9 @@ void EditTaskDialog::status(long *time, long *timeDiff, long *session,
   *timeDiff = *time - origTime;
   *sessionDiff = *session - origSession;
 
-  for (unsigned int i=0; i<_deskBox.size(); i++) {
-    if (_deskBox[i]->isChecked())
-      desktopList->push_back(i);
+  for ( int i = 0; i < _deskBox.count(); ++i ) {
+    if ( _deskBox[i]->isChecked() )
+      desktopList->append( i );
   }
 }
 

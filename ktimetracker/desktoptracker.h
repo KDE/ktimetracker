@@ -22,15 +22,14 @@
 #ifndef KARM_DESKTOP_TRACKER_H
 #define KARM_DESKTOP_TRACKER_H
 
-#include <vector>
+#include <QVector>
 
 #include "desktoplist.h"
 
 class Task;
 class QTimer;
 
-// FIXME port me to QVector eventually
-typedef std::vector<Task *> TaskVector;
+typedef QVector<Task *> TaskVector;
 const int maxDesktops = 16;
 
 /** A utility to associate tasks with desktops

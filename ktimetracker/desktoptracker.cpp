@@ -18,8 +18,6 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
-#include <algorithm>            // std::find
-
 #include <QTimer>
 
 #include <KDebug>
@@ -115,7 +113,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
     for (int i=0; i<maxDesktops; i++)  
     {
       TaskVector *v = &(desktopTracker[i]);
-      TaskVector::iterator tit = std::find(v->begin(), v->end(), task);
+      TaskVector::iterator tit = qFind(v->begin(), v->end(), task);
       if (tit != v->end())
         desktopTracker[i].erase(tit);
       // if the task was priviously tracking this desktop then
@@ -139,9 +137,9 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
   if (desktopList.size()>0) {
     for (int i=0; i<maxDesktops; i++) {
       TaskVector& v = desktopTracker[i];
-      TaskVector::iterator tit = std::find(v.begin(), v.end(), task);
+      TaskVector::iterator tit = qFind(v.begin(), v.end(), task);
       // Is desktop i in the desktop list?
-      if ( std::find( desktopList.begin(), desktopList.end(), i)
+      if ( qFind( desktopList.begin(), desktopList.end(), i)
            != desktopList.end()) {
         if (tit == v.end())  // not yet in start vector
           v.push_back(task); // track in desk i

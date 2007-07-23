@@ -277,7 +277,7 @@ void MainWindow::makeMenus()
                                             "the totals.") );
 
   // Edit history
-  actionedithistory = new KAction(i18n("Edit history"), this);
+  actionedithistory = new KAction( i18n("Edit History..."), this );
   connect(actionedithistory, SIGNAL(triggered(bool)), SLOT (slotedithistory()));
   actionCollection()->addAction("edit_history", actionedithistory );
 

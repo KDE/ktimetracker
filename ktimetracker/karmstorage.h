@@ -25,12 +25,12 @@
 
 #include <QList>
 #include <QStack>
+#include <QVector>
 
 #include "reportcriteria.h"
 
 #include "desktoplist.h"
 
-#include <vector>
 #include <kcal/journal.h>
 #include <kcal/calendarresources.h>
 #include <kcal/resourcecalendar.h>
@@ -320,7 +320,7 @@ class KarmStorage
             const QDate& from,
             const QDate& to,
             const int level,
-	    std::vector <QString> &matrix,
+            QVector<QString> &matrix,
             const ReportCriteria &rc
             );
 };

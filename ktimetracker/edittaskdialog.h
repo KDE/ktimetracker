@@ -21,7 +21,7 @@
 #ifndef KARM_EDIT_TASK_DIALOG_H
 #define KARM_EDIT_TASK_DIALOG_H
 
-#include <vector>
+#include <QVector>
 
 #include <KDialog>
 
@@ -63,7 +63,7 @@ class EditTaskDialog : public KDialog
     KArmTimeWidget* _sessionTW;
     KArmTimeWidget* _diffTW;
     QComboBox* _operator;
-    std::vector<QCheckBox*> _deskBox; // we only need an array, but ISO forbids
+    QVector<QCheckBox*> _deskBox; // we only need an array, but ISO forbids
                                  // passing an array as a function argument
 
     long origTime;
