@@ -85,13 +85,6 @@ class TaskView : public QTreeWidget
     /** Return list of start/stop events for given date range. */
     QList<HistoryEvent> getHistory(const QDate& from, const QDate& to) const;
 
-    /** List all events  
-        The historywidget is shown on user request. It lists all events in the calendar.
-        This procedure is triggered on user request. 
-        It shows the historywidget and connects the change signal to historywidgetchanged.
-     */
-    QStringList listallevents();
-
     /** Schedule that we should save very soon */
     void scheduleSave();
 
@@ -103,13 +96,6 @@ class TaskView : public QTreeWidget
                      Task* parent = 0 );
 
   public Q_SLOTS:
-    /** Something in the history widget changed  
-        The historywidget contains all events and can be shown with File | Edit history. 
-        The user can change dates and comments in there.
-        A change triggers this procedure, it shall store the new values in the calendar.
-     */
-    void historywidgetchanged(int row, int col);
-
     /** Save to persistent storage. */
     QString save();
 

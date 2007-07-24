@@ -18,7 +18,7 @@ set(karm_shared_SRCS
 	karmstorage.cpp mainwindow.cpp preferences.cpp print.cpp 
 	task.cpp taskview.cpp tray.cpp  
 	csvexportdialog.cpp plannerparser.cpp 
-	treeviewheadercontextmenu.cpp
+	treeviewheadercontextmenu.cpp edithistorydialog.cpp
  )
 
 qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmainadaptor )

@@ -24,6 +24,7 @@
 #include <KStatusBar>         // statusBar()
 #include <KXMLGUIFactory>
 
+#include "edithistorydialog.h"
 #include "karmerrors.h"
 #include "karmutility.h"
 #include "mainwindow.h"
@@ -133,8 +134,8 @@ void MainWindow::slotSelectionChanged()
 
 void MainWindow::slotedithistory()
 {
-  kDebug(5970) << "This is slotedithistory" << endl;
-  _taskView->listallevents();
+  EditHistoryDialog *dlg = new EditHistoryDialog( _taskView );
+  dlg->exec();
 }
 
 // This is _old_ code, but shows how to enable/disable add comment menu item.
