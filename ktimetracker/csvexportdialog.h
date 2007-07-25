@@ -35,6 +35,7 @@ public:
     setButtonText( KDialog::Ok, "&Export" );
     setButtonText( KDialog::User1, "E&xport to Clipboard" );
     setButtonIcon( KDialog::User1, KIcon( "klipper" ) );
+    enableButton( KDialog::Ok, false );
   }
 };
 
