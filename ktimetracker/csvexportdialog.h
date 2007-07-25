@@ -24,11 +24,17 @@
 #include "ui_csvexportdialog_base.h"
 #include "reportcriteria.h"
 
-class CSVExportDialogBase : public QDialog, public Ui::CSVExportDialogBase
+class CSVExportDialogBase : public KDialog, public Ui::CSVExportDialogBase
 {
 public:
-  CSVExportDialogBase( QWidget *parent ) : QDialog( parent ) {
+  CSVExportDialogBase( QWidget *parent ) : KDialog( parent ) {
     setupUi( this );
+
+    setMainWidget( page );
+    setButtons( KDialog::User1 | KDialog::Ok | KDialog::Cancel );
+    setButtonText( KDialog::Ok, "&Export" );
+    setButtonText( KDialog::User1, "E&xport to Clipboard" );
+    setButtonIcon( KDialog::User1, KIcon( "klipper" ) );
   }
 };
 

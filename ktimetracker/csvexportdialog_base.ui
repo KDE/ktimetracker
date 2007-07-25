@@ -3,7 +3,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>CSVExportDialogBase</class>
-  <widget class="QDialog" name="CSVExportDialogBase" >
+  <widget class="KDialog" name="CSVExportDialogBase" >
     <property name="geometry" >
       <rect>
         <x>0</x>
@@ -15,361 +15,314 @@
     <property name="windowTitle" >
       <string>CSV Export</string>
     </property>
-    <layout class="QGridLayout" >
-      <item rowspan="1" row="5" column="1" colspan="2" >
-        <spacer name="spacer3" >
-          <property name="sizeHint" >
-            <size>
-              <width>20</width>
-              <height>29</height>
-            </size>
-          </property>
-          <property name="sizeType" >
-            <enum>Expanding</enum>
-          </property>
-          <property name="orientation" >
-            <enum>Vertical</enum>
-          </property>
-        </spacer>
-      </item>
-      <item rowspan="1" row="6" column="0" colspan="2" >
-        <spacer name="spacer1" >
-          <property name="sizeHint" >
-            <size>
-              <width>160</width>
-              <height>20</height>
-            </size>
-          </property>
-          <property name="sizeType" >
-            <enum>Expanding</enum>
-          </property>
-          <property name="orientation" >
-            <enum>Horizontal</enum>
-          </property>
-        </spacer>
-      </item>
-      <item row="6" column="1" >
-        <widget class="KPushButton" name="btnExportClip" >
-          <property name="enabled" >
-            <bool>true</bool>
-          </property>
-          <property name="text" >
-            <string>&amp;Export to Clipboard</string>
-          </property>
-          <property name="default" >
-            <bool>true</bool>
-          </property>
-        </widget>
-      </item>
-      <item row="6" column="2" >
-        <widget class="KPushButton" name="btnExport" >
-          <property name="enabled" >
-            <bool>false</bool>
-          </property>
-          <property name="text" >
-            <string>&amp;Export</string>
-          </property>
-          <property name="default" >
-            <bool>true</bool>
-          </property>
-        </widget>
-      </item>
-      <item row="6" column="3" >
-        <widget class="KPushButton" name="btnCancel" >
-          <property name="text" >
-            <string>&amp;Cancel</string>
-          </property>
-        </widget>
-      </item>
-      <item row="0" column="0" >
-        <widget class="QLabel" name="textLabel1_3" >
-          <property name="text" >
-            <string>Export to:</string>
-          </property>
-          <property name="wordWrap" >
-            <bool>false</bool>
-          </property>
-        </widget>
-      </item>
-      <item rowspan="1" row="0" column="1" colspan="3" >
-        <widget class="KUrlRequester" name="urlExportTo" >
-          <property name="whatsThis" stdset="0" >
-            <string>The file where Karm will write the data.</string>
-          </property>
-        </widget>
-      </item>
-      <item rowspan="1" row="4" column="0" colspan="2" >
-        <widget class="QLabel" name="quotesLabel" >
-          <property name="enabled" >
-            <bool>true</bool>
-          </property>
-          <property name="sizePolicy" >
-            <sizepolicy>
-              <hsizetype>1</hsizetype>
-              <vsizetype>0</vsizetype>
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-            </sizepolicy>
-          </property>
-          <property name="text" >
-            <string>Quotes:</string>
-          </property>
-          <property name="wordWrap" >
-            <bool>false</bool>
-          </property>
-        </widget>
-      </item>
-      <item rowspan="1" row="4" column="2" colspan="2" >
-        <widget class="QComboBox" name="cboQuote" >
-          <property name="enabled" >
-            <bool>true</bool>
-          </property>
-          <property name="sizePolicy" >
-            <sizepolicy>
-              <hsizetype>1</hsizetype>
-              <vsizetype>0</vsizetype>
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-            </sizepolicy>
-          </property>
-          <property name="whatsThis" stdset="0" >
-            <string>All fields are quoted in the output.</string>
-          </property>
-          <item>
+    <widget class="QWidget" name="page">
+      <layout class="QGridLayout" >
+        <item rowspan="1" row="5" column="1" colspan="2" >
+          <spacer name="spacer3" >
+            <property name="sizeHint" >
+              <size>
+                <width>20</width>
+                <height>29</height>
+              </size>
+            </property>
+            <property name="sizeType" >
+              <enum>Expanding</enum>
+            </property>
+            <property name="orientation" >
+              <enum>Vertical</enum>
+            </property>
+          </spacer>
+        </item>
+        <item row="0" column="0" >
+          <widget class="QLabel" name="textLabel1_3" >
             <property name="text" >
-              <string>"</string>
+              <string>Export to:</string>
             </property>
-          </item>
-          <item>
+            <property name="wordWrap" >
+              <bool>false</bool>
+            </property>
+          </widget>
+        </item>
+        <item rowspan="1" row="0" column="1" colspan="3" >
+          <widget class="KUrlRequester" name="urlExportTo" >
+            <property name="whatsThis" stdset="0" >
+              <string>The file where Karm will write the data.</string>
+            </property>
+          </widget>
+        </item>
+        <item rowspan="1" row="4" column="0" colspan="2" >
+          <widget class="QLabel" name="quotesLabel" >
+            <property name="enabled" >
+              <bool>true</bool>
+            </property>
+            <property name="sizePolicy" >
+              <sizepolicy>
+                <hsizetype>1</hsizetype>
+                <vsizetype>0</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+              </sizepolicy>
+            </property>
             <property name="text" >
-              <string>'</string>
+              <string>Quotes:</string>
             </property>
-          </item>
-        </widget>
-      </item>
-      <item rowspan="1" row="1" column="0" colspan="4" >
-        <widget class="QGroupBox" name="grpDateRange" >
-          <property name="enabled" >
-            <bool>false</bool>
-          </property>
-          <property name="title" >
-            <string>Date Range</string>
-          </property>
-          <property name="whatsThis" stdset="0" >
-            <string>&lt;p>An inclusive date range for reporting on time card history.  Not enabled when reporting on totals.&lt;/p></string>
-          </property>
-          <layout class="QGridLayout" >
-            <item row="0" column="0" >
-              <widget class="QLabel" name="textLabel1" >
-                <property name="text" >
-                  <string>From:</string>
-                </property>
-                <property name="wordWrap" >
-                  <bool>false</bool>
-                </property>
-              </widget>
-            </item>
-            <item row="1" column="0" >
-              <widget class="KDateEdit" name="dtFrom" >
-                <property name="sizePolicy" >
-                  <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                  </sizepolicy>
-                </property>
-                <property name="focusPolicy" >
-                  <enum>Qt::StrongFocus</enum>
-                </property>
-              </widget>
-            </item>
-            <item row="0" column="1" >
-              <widget class="QLabel" name="textLabel1_2" >
-                <property name="text" >
-                  <string>To:</string>
-                </property>
-                <property name="wordWrap" >
-                  <bool>false</bool>
-                </property>
-              </widget>
-            </item>
-            <item row="1" column="1" >
-              <widget class="KDateEdit" name="dtTo" >
-                <property name="sizePolicy" >
-                  <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                  </sizepolicy>
-                </property>
-                <property name="focusPolicy" >
-                  <enum>Qt::StrongFocus</enum>
-                </property>
-              </widget>
-            </item>
-          </layout>
-        </widget>
-      </item>
-      <item rowspan="1" row="2" column="0" colspan="2" >
-        <widget class="QComboBox" name="combodecimalminutes" >
-          <property name="geometry" >
-            <rect>
-              <x>19</x>
-              <y>20</y>
-              <width>92</width>
-              <height>22</height>
-            </rect>
-          </property>
-          <item>
-            <property name="text" >
-              <string>Decimal</string>
+            <property name="wordWrap" >
+              <bool>false</bool>
             </property>
-          </item>
-          <item>
-            <property name="text" >
-              <string>Hours:Minutes</string>
+          </widget>
+        </item>
+        <item rowspan="1" row="4" column="2" colspan="2" >
+          <widget class="QComboBox" name="cboQuote" >
+            <property name="enabled" >
+              <bool>true</bool>
             </property>
-          </item>
-        </widget>
-      </item>
-      <item rowspan="1" row="2" column="2" colspan="1" >
-        <widget class="QComboBox" name="combosessiontimes" >
-          <property name="geometry" >
-            <rect>
-              <x>19</x>
-              <y>20</y>
-              <width>92</width>
-              <height>22</height>
-            </rect>
-          </property>
-          <item>
-            <property name="text" >
-              <string>All Times</string>
+            <property name="sizePolicy" >
+              <sizepolicy>
+                <hsizetype>1</hsizetype>
+                <vsizetype>0</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+              </sizepolicy>
             </property>
-          </item>
-          <item>
-            <property name="text" >
-              <string>Session Times</string>
+            <property name="whatsThis" stdset="0" >
+              <string>All fields are quoted in the output.</string>
             </property>
-          </item>
-        </widget>
-      </item>
-      <item rowspan="1" row="2" column="3" colspan="1" >
-        <widget class="QComboBox" name="comboalltasks" >
-          <property name="geometry" >
-            <rect>
-              <x>19</x>
-              <y>20</y>
-              <width>92</width>
-              <height>22</height>
-            </rect>
-          </property>
-          <item>
-            <property name="text" >
-              <string>All Tasks</string>
+            <item>
+              <property name="text" >
+                <string>"</string>
+              </property>
+            </item>
+            <item>
+              <property name="text" >
+                <string>'</string>
+              </property>
+            </item>
+          </widget>
+        </item>
+        <item rowspan="1" row="1" column="0" colspan="4" >
+          <widget class="QGroupBox" name="grpDateRange" >
+            <property name="enabled" >
+              <bool>false</bool>
             </property>
-          </item>
-          <item>
-            <property name="text" >
-              <string>Only Selected</string>
+            <property name="title" >
+              <string>Date Range</string>
             </property>
-          </item>
-        </widget>
-      </item>
-      <item rowspan="1" row="3" column="0" colspan="4" >
-        <widget class="QGroupBox" name="grpDelimiter" >
-          <property name="sizePolicy" >
-            <sizepolicy>
-              <hsizetype>1</hsizetype>
-              <vsizetype>1</vsizetype>
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-            </sizepolicy>
-          </property>
-          <property name="title" >
-            <string>Delimiter</string>
-          </property>
-          <property name="whatsThis" stdset="0" >
-            <string>The character used to seperate one field from another in the output.</string>
-          </property>
-          <layout class="QGridLayout" >
-            <!--<property name="margin" >
-              <number>KDialog::marginHint()</number>
+            <property name="whatsThis" stdset="0" >
+              <string>&lt;p>An inclusive date range for reporting on time card history.  Not enabled when reporting on totals.&lt;/p></string>
             </property>
-            <property name="spacing">
-              <number>KDialog::spacingHint()</number>
-            </property>-->
-            <item row="1" column="0" >
-              <widget class="QRadioButton" name="radioTab" >
-                <property name="text" >
-                  <string>Tab</string>
-                </property>
-              </widget>
+            <layout class="QGridLayout" >
+              <item row="0" column="0" >
+                <widget class="QLabel" name="textLabel1" >
+                  <property name="text" >
+                    <string>From:</string>
+                  </property>
+                  <property name="wordWrap" >
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+              <item row="1" column="0" >
+                <widget class="KDateEdit" name="dtFrom" >
+                  <property name="sizePolicy" >
+                    <sizepolicy>
+                      <hsizetype>1</hsizetype>
+                      <vsizetype>0</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                  <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                  </property>
+                </widget>
+              </item>
+              <item row="0" column="1" >
+                <widget class="QLabel" name="textLabel1_2" >
+                  <property name="text" >
+                    <string>To:</string>
+                  </property>
+                  <property name="wordWrap" >
+                    <bool>false</bool>
+                  </property>
+                </widget>
+              </item>
+              <item row="1" column="1" >
+                <widget class="KDateEdit" name="dtTo" >
+                  <property name="sizePolicy" >
+                    <sizepolicy>
+                      <hsizetype>1</hsizetype>
+                      <vsizetype>0</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                  <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+        <item rowspan="1" row="2" column="0" colspan="2" >
+          <widget class="QComboBox" name="combodecimalminutes" >
+            <property name="geometry" >
+              <rect>
+                <x>19</x>
+                <y>20</y>
+                <width>92</width>
+                <height>22</height>
+              </rect>
+            </property>
+            <item>
+              <property name="text" >
+                <string>Decimal</string>
+              </property>
             </item>
-            <item row="0" column="2" >
-              <widget class="QRadioButton" name="radioOther" >
-                <property name="text" >
-                  <string>Other:</string>
-                </property>
-              </widget>
+            <item>
+              <property name="text" >
+                <string>Hours:Minutes</string>
+              </property>
             </item>
-            <item row="1" column="1" >
-              <widget class="QRadioButton" name="radioSpace" >
-                <property name="text" >
-                  <string>Space</string>
-                </property>
-              </widget>
+          </widget>
+        </item>
+        <item rowspan="1" row="2" column="2" colspan="1" >
+          <widget class="QComboBox" name="combosessiontimes" >
+            <property name="geometry" >
+              <rect>
+                <x>19</x>
+                <y>20</y>
+                <width>92</width>
+                <height>22</height>
+              </rect>
+            </property>
+            <item>
+              <property name="text" >
+                <string>All Times</string>
+              </property>
             </item>
-            <item row="0" column="0" >
-              <widget class="QRadioButton" name="radioComma" >
-                <property name="text" >
-                  <string>Comma</string>
-                </property>
-                <property name="checked" >
-                  <bool>true</bool>
-                </property>
-              </widget>
+            <item>
+              <property name="text" >
+                <string>Session Times</string>
+              </property>
             </item>
-            <item row="1" column="2" >
-              <widget class="QLineEdit" name="txtOther" >
-                <property name="enabled" >
-                  <bool>false</bool>
-                </property>
-                <property name="sizePolicy" >
-                  <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                  </sizepolicy>
-                </property>
-                <property name="maximumSize" >
-                  <size>
-                    <width>30</width>
-                    <height>32767</height>
-                  </size>
-                </property>
-                <property name="focusPolicy" >
-                  <enum>Qt::StrongFocus</enum>
-                </property>
-                <property name="maxLength" >
-                  <number>1</number>
-                </property>
-              </widget>
+          </widget>
+        </item>
+        <item rowspan="1" row="2" column="3" colspan="1" >
+          <widget class="QComboBox" name="comboalltasks" >
+            <property name="geometry" >
+              <rect>
+                <x>19</x>
+                <y>20</y>
+                <width>92</width>
+                <height>22</height>
+              </rect>
+            </property>
+            <item>
+              <property name="text" >
+                <string>All Tasks</string>
+              </property>
             </item>
-            <item row="0" column="1" >
-              <widget class="QRadioButton" name="radioSemicolon" >
-                <property name="text" >
-                  <string>Semicolon</string>
-                </property>
-              </widget>
+            <item>
+              <property name="text" >
+                <string>Only Selected</string>
+              </property>
             </item>
-          </layout>
-        </widget>
-      </item>
-    </layout>
+          </widget>
+        </item>
+        <item rowspan="1" row="3" column="0" colspan="4" >
+          <widget class="QGroupBox" name="grpDelimiter" >
+            <property name="sizePolicy" >
+              <sizepolicy>
+                <hsizetype>1</hsizetype>
+                <vsizetype>1</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+              </sizepolicy>
+            </property>
+            <property name="title" >
+              <string>Delimiter</string>
+            </property>
+            <property name="whatsThis" stdset="0" >
+              <string>The character used to seperate one field from another in the output.</string>
+            </property>
+            <layout class="QGridLayout" >
+              <!--<property name="margin" >
+                <number>KDialog::marginHint()</number>
+              </property>
+              <property name="spacing">
+                <number>KDialog::spacingHint()</number>
+              </property>-->
+              <item row="1" column="0" >
+                <widget class="QRadioButton" name="radioTab" >
+                  <property name="text" >
+                    <string>Tab</string>
+                  </property>
+                </widget>
+              </item>
+              <item row="0" column="2" >
+                <widget class="QRadioButton" name="radioOther" >
+                  <property name="text" >
+                    <string>Other:</string>
+                  </property>
+                </widget>
+              </item>
+              <item row="1" column="1" >
+                <widget class="QRadioButton" name="radioSpace" >
+                  <property name="text" >
+                    <string>Space</string>
+                  </property>
+                </widget>
+              </item>
+              <item row="0" column="0" >
+                <widget class="QRadioButton" name="radioComma" >
+                  <property name="text" >
+                    <string>Comma</string>
+                  </property>
+                  <property name="checked" >
+                    <bool>true</bool>
+                  </property>
+                </widget>
+              </item>
+              <item row="1" column="2" >
+                <widget class="QLineEdit" name="txtOther" >
+                  <property name="enabled" >
+                    <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy" >
+                    <sizepolicy>
+                      <hsizetype>0</hsizetype>
+                      <vsizetype>0</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                    </sizepolicy>
+                  </property>
+                  <property name="maximumSize" >
+                    <size>
+                      <width>30</width>
+                      <height>32767</height>
+                    </size>
+                  </property>
+                  <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                  </property>
+                  <property name="maxLength" >
+                    <number>1</number>
+                  </property>
+                </widget>
+              </item>
+              <item row="0" column="1" >
+                <widget class="QRadioButton" name="radioSemicolon" >
+                  <property name="text" >
+                    <string>Semicolon</string>
+                  </property>
+                </widget>
+              </item>
+            </layout>
+          </widget>
+        </item>
+      </layout>
+    </widget>
   </widget>
   <layoutdefault spacing="6" margin="11" />
   <customwidgets>

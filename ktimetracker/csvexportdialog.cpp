@@ -36,10 +36,10 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   ) 
   : CSVExportDialogBase( parent )
 {
-  connect(btnExportClip, SIGNAL(clicked()), this, SLOT(exPortToClipBoard()));
-  connect(btnExport, SIGNAL(clicked()), this, SLOT(exPortToCSVFile()));
-  connect(btnCancel, SIGNAL(clicked()), this, SLOT(reject()));
-  connect(btnExport, SIGNAL(clicked()), this, SLOT(accept()));
+  connect( button( User1 ), SIGNAL( clicked() ),
+           this, SLOT( exPortToClipBoard() ) );
+  connect( button( Ok ), SIGNAL( clicked() ),
+           this, SLOT( exPortToCSVFile() ) );
   connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
   switch ( rt ) {
     case ReportCriteria::CSVTotalsExport:
@@ -66,7 +66,7 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
 
 void CSVExportDialog::enableExportButton()
 {
-  btnExport->setEnabled( !urlExportTo->lineEdit()->text().isEmpty() );
+  enableButton( Ok, !urlExportTo->lineEdit()->text().isEmpty() );
 }
 
 void CSVExportDialog::enableTasksToExportQuestion()
