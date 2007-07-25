@@ -55,7 +55,7 @@ class EditTaskDialog : public KDialog
   private Q_SLOTS:
     void slotAbsolutePressed();
     void slotRelativePressed();
-    void slotAutoTrackingPressed();
+    void slotAutoTrackingPressed( bool checked );
 
   private:
     QLineEdit* _name;
@@ -72,7 +72,6 @@ class EditTaskDialog : public KDialog
     QRadioButton *_absoluteRB;
     QRadioButton *_relativeRB;
 
-    QCheckBox *_desktopCB;
     int desktopCount;
 
     QLabel* _timeLA;

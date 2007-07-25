@@ -49,102 +49,62 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, QString caption, bool editDlg,
   setWindowTitle( caption );
   setObjectName( "EditTaskDialog" );
   QWidget *page = new QWidget( this ); 
-  setMainWidget(page);
+  setMainWidget( page );
 
-  QVBoxLayout *lay1 = new QVBoxLayout(page);
-  
-  QHBoxLayout *lay2 = new QHBoxLayout();
-  lay1->addLayout(lay2);
-  
-  // The name of the widget
-  QLabel *label = new QLabel( i18n("Task &name:"), page );
-  label->setObjectName( "name" );
-  lay2->addWidget( label );
-  lay2->addSpacing(5);
-  
-  
-  _name = new QLineEdit( page );
-  _name->setObjectName( "lineedit" );
-  
-  _name->setMinimumWidth(fontMetrics().maxWidth()*15);
-  lay2->addWidget( _name );
+  QVBoxLayout *mainLayout = new QVBoxLayout;
+  mainLayout->setMargin( 0 );
+  mainLayout->setSpacing( KDialog::spacingHint() );
+
+  /* Task name */
+  QWidget *taskNameWidget = new QWidget( page );
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->setMargin( 0 );
+  layout->setSpacing( KDialog::spacingHint() );
+  QLabel *label = new QLabel( i18n( "Task &name:" ), taskNameWidget );
+  _name = new QLineEdit( taskNameWidget );
   label->setBuddy( _name );
+  layout->addWidget( label );
+  layout->addWidget( _name );
+  taskNameWidget->setLayout( layout );
 
-
-  // The "Edit Absolut" radio button
-  lay1->addSpacing(10);lay1->addStretch(1); 
-  _absoluteRB = new QRadioButton( i18n( "Edit &absolute" ), page );
-  _absoluteRB->setObjectName( "_absoluteRB" );
-  lay1->addWidget( _absoluteRB );
-  connect( _absoluteRB, SIGNAL( clicked() ), this, SLOT( slotAbsolutePressed() ) );
-  
-
-  // Absolute times
-  QHBoxLayout *lay5 = new QHBoxLayout();
-  lay1->addLayout(lay5);
-  lay5->addSpacing(20);
-  QGridLayout *lay3 = new QGridLayout();
-  lay3->setObjectName( "lay3" );
-  lay3->setSpacing( -1 );
-  lay5->addLayout(lay3);
-  
-  _sessionLA = new QLabel( i18n("&Session time: "), page );
-  _sessionLA->setObjectName( "session time" );
-
-  // Time
-  _timeLA = new QLabel( i18n("&Time:"), page );
-  _timeLA->setObjectName( "time" );
-  lay3->addWidget( _timeLA, 0, 0 );
-  _timeLA->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
-
-  // Based on measuring pixels in a screenshot, it looks like the fontmetrics
-  // call includes the ampersand when calculating the width.  To be sure
-  // things will line up (no matter what language or widget style), set all
-  // three date entry label controls to the same width.
-  _timeLA->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
-
-  _timeTW = new KArmTimeWidget( page );
-  _timeTW->setObjectName( "_timeTW" );
-  lay3->addWidget( _timeTW, 0, 1 );
+  /* The "Edit Absolut" radio button */
+  QWidget *timeWidget = new QWidget( page );
+  QGridLayout *gridLayout = new QGridLayout;
+  gridLayout->setMargin( 0 );
+  gridLayout->setSpacing( 0 );
+  gridLayout->setColumnMinimumWidth( 0, 20 );
+  gridLayout->setColumnMinimumWidth( 2, KDialog::spacingHint() );
+  _absoluteRB = new QRadioButton( i18n( "Edit &absolute" ), timeWidget );
+  connect( _absoluteRB, SIGNAL( clicked() ),
+           this, SLOT( slotAbsolutePressed() ) );
+  _timeLA = new QLabel( i18n( "&Time:" ), timeWidget );
+  _timeTW = new KArmTimeWidget( timeWidget );
   _timeLA->setBuddy( _timeTW );
-  
-
-  // Session
-  lay3->addWidget( _sessionLA, 1, 0 );
-
-  _sessionTW = new KArmTimeWidget( page );
-  _sessionTW->setObjectName( "_sessionTW" );
-  lay3->addWidget( _sessionTW, 1, 1 );
+  _sessionLA = new QLabel( i18n( "&Session time:" ), timeWidget );
+  _sessionTW = new KArmTimeWidget( timeWidget );
   _sessionLA->setBuddy( _sessionTW );
-  _sessionLA->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
-  _sessionLA->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
 
-
-  // The "Edit relative" radio button
-  lay1->addSpacing(10);
-  lay1->addStretch(1);
+  /* The "Edit relative" radio button */
   _relativeRB = new QRadioButton( i18n( "Edit &relative (apply to both time and"
-                                        " session time)" ), page );
-  _relativeRB->setObjectName( "_relativeRB" );
-  lay1->addWidget( _relativeRB );
-  connect( _relativeRB, SIGNAL( clicked() ), this, SLOT(slotRelativePressed()) );
-  
-  // The relative times
-  QHBoxLayout *lay4 = new QHBoxLayout();
-  lay1->addLayout( lay4 );
-  lay4->addSpacing(20);
-  
-  _operator = new QComboBox(page);
+      " session time)" ), timeWidget );
+  connect( _relativeRB, SIGNAL( clicked() ), 
+           this, SLOT( slotRelativePressed() ) );
+  _operator = new QComboBox( timeWidget );
   _operator->addItem( QString::fromLatin1( "+" ) );
   _operator->addItem( QString::fromLatin1( "-" ) );
-  _operator->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
-  //kDebug() << "text width=" << fontMetrics().width( _sessionLA->text() ) << endl;
-  _operator->setMinimumWidth( fontMetrics().width( _sessionLA->text() ) );
-  lay4->addWidget( _operator );
 
-  _diffTW = new KArmTimeWidget( page, "_sessionAddTW" );
-  lay4->addWidget( _diffTW );
+  _diffTW = new KArmTimeWidget( timeWidget );
+  gridLayout->addWidget(_absoluteRB, 0, 0, 1, 4 );
+  gridLayout->addWidget( _timeLA, 1, 1 );
+  gridLayout->addWidget( _timeTW, 1, 3 );
+  gridLayout->addWidget( _sessionLA, 2, 1 );
+  gridLayout->addWidget( _sessionTW, 2, 3 );
+  gridLayout->addWidget( _relativeRB, 3, 0, 1, 4 );
+  gridLayout->addWidget( _operator, 4, 1, 1, 2 );
+  gridLayout->addWidget( _diffTW, 4, 3 );
+  timeWidget->setLayout( gridLayout );
 
+  /* Auto Tracking */
 #ifdef Q_WS_X11
   desktopCount = KWindowSystem::numberOfDesktops();
 #else
@@ -153,71 +113,62 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, QString caption, bool editDlg,
 #endif
   desktopCount = 1;
 #endif
-  
-  // If desktopList contains higher numbered desktops than desktopCount then
-  // delete those from desktopList. This may be the case if the user has
-  // configured virtual desktops. The values in desktopList are sorted.
-  if ( (desktopList != 0) && (desktopList->size() > 0) ) 
-  {
+
+  if ( desktopList && (desktopList->size() > 0) ) {
     DesktopList::iterator rit = desktopList->begin();
-    while (*rit < desktopCount && rit!=desktopList->end()) 
-    {
+    while ( *rit < desktopCount && rit!=desktopList->end() ) {
       ++rit;
     }
-    desktopList->erase(rit, desktopList->end());
+    desktopList->erase( rit, desktopList->end() );
   }
 
-  // The "Choose Desktop" checkbox
-  lay1->addSpacing(10);
-  lay1->addStretch(1);
-  
-  _desktopCB = new QCheckBox(i18n("A&uto tracking"), page);
-  _desktopCB->setEnabled(true);
-  lay1->addWidget(_desktopCB);
-  
-  QGroupBox* groupBox;
   int lines = (int)(desktopCount/2);
   if (lines*2 != desktopCount) lines++; 
-  groupBox = new QGroupBox( i18n("In Desktop"), page);
-  groupBox->setObjectName( "_desktopsGB" );
-  lay1->addWidget(groupBox);
 
-  QGridLayout *lay6 = new QGridLayout();
-  groupBox->setLayout( lay6 );
-  for (int i=0; i<desktopCount; i++) {
-    QCheckBox *tmpBx = new QCheckBox(groupBox);
-    tmpBx->setObjectName( QString::number(i).toLatin1() );
+  QGroupBox *groupBox = new QGroupBox( i18n( "A&uto Tracking" ), page );
+  groupBox->setCheckable( true );
+  groupBox->setChecked( false );
+  gridLayout = new QGridLayout;
+  gridLayout->setMargin( KDialog::marginHint() );
+  gridLayout->setSpacing( KDialog::spacingHint() );
+  label = new QLabel( i18n( "In Desktop" ) );
+  gridLayout->addWidget( label, 0, 0, 1, lines );
+
+  for ( int i = 0; i < desktopCount; ++i ) {
+    QCheckBox *tmpBx = new QCheckBox( groupBox );
+    tmpBx->setObjectName( QString::number( i ).toLatin1() );
     _deskBox.append( tmpBx );
 #ifdef Q_WS_X11
-    tmpBx->setText(KWindowSystem::desktopName(i+1));
+    tmpBx->setText( KWindowSystem::desktopName( i + 1 ) );
 #endif
-    tmpBx->setChecked(false);
+    tmpBx->setChecked( false );
 
-    lay6->addWidget(tmpBx, i / lines, i % lines);
+    gridLayout->addWidget( tmpBx, i / lines + 1, i % lines );
   }
+
+  groupBox->setLayout( gridLayout );
+
   // check specified Desktop Check Boxes
   bool enableDesktops = false;
 
-  if ( (desktopList != 0) && (desktopList->size() > 0) ) 
-  {
+  if ( desktopList && ( desktopList->size() > 0 ) ) {
     DesktopList::iterator it = desktopList->begin();
-    while (it != desktopList->end()) 
-    {
-      _deskBox[*it]->setChecked(true);
-      it++;
+    while ( it != desktopList->end() ) {
+      _deskBox[*it]->setChecked( true );
+      ++it;
     }
     enableDesktops = true;
   }
   // if some desktops were specified, then enable the parent box
-  _desktopCB->setChecked(enableDesktops);
+  groupBox->setChecked( enableDesktops );
 
-  for (int i=0; i<desktopCount; i++)
-    _deskBox[i]->setEnabled(enableDesktops);
-  
-  connect(_desktopCB, SIGNAL(clicked()), this, SLOT(slotAutoTrackingPressed()));
+  connect(groupBox, SIGNAL( clicked( bool ) ),
+          this, SLOT( slotAutoTrackingPressed( bool ) ) );
 
-  lay1->addStretch(1);
-
+  mainLayout->addWidget( taskNameWidget );
+  mainLayout->addWidget( timeWidget );
+  mainLayout->addWidget( groupBox );
+  page->setLayout( mainLayout );
 
   if ( editDlg ) {
     // This is an edit dialog.
@@ -250,18 +201,16 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, QString caption, bool editDlg,
   _sessionTW->setWhatsThis(
                    i18n( "This is the time the task has been running this "
                          "session."));
-  _diffTW->setWhatsThis( i18n( "Specify how much time to add or subtract "
-                                  "to the overall and session time"));
-
-  _desktopCB->setWhatsThis( 
-                   i18n( "Use this option to automatically start the timer "
-                         "on this task when you switch to the specified desktop(s)." ) );
+  _diffTW->setWhatsThis( 
+                   i18n( "Specify how much time to add or subtract "
+                         "to the overall and session time"));
   groupBox->setWhatsThis( 
-                   i18n( "Select the desktop(s) that will automatically start the "
+                   i18n( "Use this option to automatically start the timer "
+                         "on this task when you switch to the specified desktop(s). "
+                         "Select the desktop(s) that will automatically start the "
                          "timer on this task." ) );
 }
 
-  
 void EditTaskDialog::slotAbsolutePressed()
 {
   _relativeRB->setChecked( false );
@@ -290,43 +239,35 @@ void EditTaskDialog::slotRelativePressed()
   _sessionTW->setEnabled( false );
 }
 
-void EditTaskDialog::slotAutoTrackingPressed()
+void EditTaskDialog::slotAutoTrackingPressed( bool checked ) 
 {
-  bool checked = _desktopCB->isChecked();
-  foreach (QCheckBox *deskBox, _deskBox) {
-    deskBox->setEnabled( checked );
-  }
-
   if (!checked)  // uncheck all desktop boxes
-    for (int i=0; i<desktopCount; i++) 
-      _deskBox[i]->setChecked(false);
+    for ( int i = 0; i < desktopCount; ++i ) 
+      _deskBox[i]->setChecked( false );
 }
 
 void EditTaskDialog::setTask( const QString &name, long time, long session )
 {
   _name->setText( name );
-  
+
   _timeTW->setTime( time / 60, time % 60 );
   _sessionTW->setTime( session / 60, session % 60 );
   origTime = time;
   origSession = session;
 }
 
-
 QString EditTaskDialog::taskName() const
-{ 
-  return( _name->text() ); 
+{
+  return( _name->text() );
 }
 
-
-void EditTaskDialog::status(long *time, long *timeDiff, long *session, 
-                           long *sessionDiff, DesktopList *desktopList) const
-{ 
+void EditTaskDialog::status(long *time, long *timeDiff, long *session,
+                            long *sessionDiff, DesktopList *desktopList) const
+{
   if ( _absoluteRB->isChecked() ) {
     *time = _timeTW->time();
     *session = _sessionTW->time();
-  }
-  else {
+  } else {
     int diff = _diffTW->time();
     if ( _operator->currentIndex() == 1) {
       diff = -diff;
@@ -338,7 +279,7 @@ void EditTaskDialog::status(long *time, long *timeDiff, long *session,
   *timeDiff = *time - origTime;
   *sessionDiff = *session - origSession;
 
-  for ( int i = 0; i < _deskBox.count(); ++i ) {
+  for ( int i = 0; i < _deskBox.count(); i++ ) {
     if ( _deskBox[i]->isChecked() )
       desktopList->append( i );
   }

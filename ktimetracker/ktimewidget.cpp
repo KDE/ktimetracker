@@ -89,6 +89,8 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
 {
   setObjectName( name );
   QHBoxLayout *layout = new QHBoxLayout(this);
+  layout->setMargin( 0 );
+  layout->setSpacing( 0 );
 
   _hourLE = new QLineEdit( this);
   // 9999 hours > 1 year!
