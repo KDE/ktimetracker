@@ -96,6 +96,9 @@ class TaskView : public QTreeWidget
     QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
 
+    /** Returns whether the focus tracking is currently active */
+    bool focusTrackingActive() { return focustrackingactive; }
+
   public Q_SLOTS:
     /** Save to persistent storage. */
     QString save();
@@ -112,7 +115,9 @@ class TaskView : public QTreeWidget
      */
     void stopAllTimers(QDateTime when=QDateTime::currentDateTime());
 
-    void slotfocustracking();
+    /** Toggles the automatic tracking of focused windows
+     */
+    void toggleFocusTracking();
 
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();

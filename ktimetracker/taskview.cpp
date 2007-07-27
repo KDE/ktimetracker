@@ -183,46 +183,39 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 }
 
-void TaskView::newFocusWindowDetected(const QString taskName)
+void TaskView::newFocusWindowDetected( const QString taskName )
 {
-  if (focustrackingactive)
-  {
-    bool found=false;  // has taskName been found in our tasks
-    stopTimerFor(lastTaskWithFocus);
-    int i=0;
-    for ( Task* task = item_at_index(i); task; task = item_at_index(++i) )
-    {
-      QString q1=taskName;
-      q1.replace("\n","");
-      if (q1==task->name())
-      {
-         found=true;
-         startTimerFor(task);
-         lastTaskWithFocus=task;
+  QString newTaskName( taskName );
+  newTaskName.replace( "\n", "" );
+
+  if ( focustrackingactive ) {
+    bool found = false;  // has taskName been found in our tasks
+    stopTimerFor( lastTaskWithFocus );
+    int i = 0;
+    for ( Task* task = item_at_index( i ); task; task = item_at_index( ++i ) ) {
+      if ( task->name() == newTaskName ) {
+         found = true;
+         startTimerFor( task );
+         lastTaskWithFocus = task;
       }
     }
-    if  (!found)
-    {
-      QString taskuid = addTask( taskName );
-      if ( taskuid.isNull() )
-      {
+    if ( !found ) {
+      QString taskuid = addTask( newTaskName );
+      if ( taskuid.isNull() ) {
         KMessageBox::error( 0, i18n(
         "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
       }
-      i=0;
-      for ( Task* task = item_at_index(i); task; task = item_at_index(++i) )
-      {
-        if (task->name()==taskName)
-        {
-          startTimerFor(task);
-          lastTaskWithFocus=task;
+      i = 0;
+      for ( Task* task = item_at_index( i ); task; task = item_at_index( ++i ) ) {
+        if (task->name() == newTaskName) {
+          startTimerFor( task );
+          lastTaskWithFocus = task;
         }
       }
     }
     emit updateButtons();
   } // focustrackingactive
-} 
-
+}
 
 void TaskView::dropEvent(QDropEvent* qde)
 {
@@ -615,9 +608,12 @@ void TaskView::stopAllTimers( QDateTime when )
   emit tasksChanged( activeTasks);
 }
 
-void TaskView::slotfocustracking()
+void TaskView::toggleFocusTracking()
 {
-  focustrackingactive=true;
+  focustrackingactive = !focustrackingactive;
+  if ( !focustrackingactive ) {
+    stopTimerFor( lastTaskWithFocus );
+  }
 }
 
 void TaskView::startNewSession()

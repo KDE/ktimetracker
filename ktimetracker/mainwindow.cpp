@@ -194,6 +194,11 @@ void MainWindow::disableStopAll()
   actionStopAll->setEnabled(false);
 }
 
+void MainWindow::slotFocusTracking()
+{
+  _taskView->toggleFocusTracking();
+  actionFocusTracking->setChecked( _taskView->focusTrackingActive() );
+}
 
 /**
  * Calculate the sum of the session time and the total time for all
@@ -324,9 +329,12 @@ void MainWindow::makeMenus()
   actionStopAll->setWhatsThis( i18n("Stop all of the active timers") );
 
   // Focus tracking
-  QAction* actionFocusTracking = new KAction(i18n("Track active applications"), this);
+  actionFocusTracking = new KAction(i18n("Track active applications"), this);
+  actionFocusTracking->setCheckable( true );
+  actionFocusTracking->setChecked( _taskView->focusTrackingActive() );
   actionCollection()->addAction("focustracking", actionFocusTracking );
-  connect(actionFocusTracking, SIGNAL(triggered(bool)), _taskView, SLOT( slotfocustracking()));
+  connect( actionFocusTracking, SIGNAL( triggered( bool ) ),
+           this, SLOT( slotFocusTracking() ) );
 
   // New task
   actionNew  = new KAction(KIcon(QString::fromLatin1("document-new")), i18n("&New..."), this);

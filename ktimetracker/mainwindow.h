@@ -71,6 +71,7 @@ class MainWindow : public KParts::MainWindow
     KAction*         actionNew;
     KAction*         actionNewSub;
     KAction*         actionedithistory;
+    KAction*         actionFocusTracking;
     QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
 
     friend class KarmTray;
@@ -124,6 +125,7 @@ class MainWindow : public KParts::MainWindow
     void taskViewCustomContextMenuRequested( const QPoint& );
     void enableStopAll();
     void disableStopAll();
+    void slotFocusTracking();
 //    void timeLoggingChanged( bool on );
 
   protected:
