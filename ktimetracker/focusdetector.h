@@ -26,32 +26,30 @@
 
 #include <QDateTime>
 #include <QObject>
+
 #include "config-karm.h" // HAVE_LIBXSS
 
 class QTimer;
 
-const int periodInterval = 1000;
-
 /**
  * Keep track of what window has the focus.
  */
-
-class FocusDetector :public QObject
+class FocusDetector : public QObject
 {
 Q_OBJECT
 
 public:
   /**
      Initializes the time period
-      at param periodFocus minutes before every focus detection.
+      at param periodFocus seconds before every focus detection.
   **/
-  FocusDetector(int periodFocus);
+  FocusDetector( int periodFocus );
 
   /**
      Sets the period of time before every focus search.
-      at param periodFocus period of time in minutes
+      at param periodFocus period of time in seconds
   **/
-  void setPeriodFocus(int periodFocus);
+  void setPeriodFocus( int periodFocus );
 
   /**
      Starts detecting focus
@@ -64,17 +62,17 @@ public:
   void stopFocusDetection();
 
 signals:
-    void newFocus(QString);
+    void newFocus( QString );
 
 protected slots:
   void check();
 
 private:
   int _periodFocus;
+  QString lastWindow;
   QTimer *_timer;
   QDateTime start; // when the periodFocus restarted
 
 };
 
 #endif // KARM_FOCUS_DETECTOR_H 
-

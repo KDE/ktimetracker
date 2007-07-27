@@ -591,7 +591,6 @@ void TaskView::startTimerFor(Task* task, QDateTime startTime )
 void TaskView::clearActiveTasks()
 {
   activeTasks.clear(); 
-  _focusDetector->startFocusDetection(); 
 }
 
 void TaskView::stopAllTimers( QDateTime when )
@@ -611,8 +610,12 @@ void TaskView::stopAllTimers( QDateTime when )
 void TaskView::toggleFocusTracking()
 {
   focustrackingactive = !focustrackingactive;
-  if ( !focustrackingactive ) {
+
+  if ( focustrackingactive ) {
+    _focusDetector->startFocusDetection();
+  } else {
     stopTimerFor( lastTaskWithFocus );
+    _focusDetector->stopFocusDetection();
   }
 }
 

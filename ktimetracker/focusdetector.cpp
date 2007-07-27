@@ -20,60 +20,61 @@
 *  at short Logic that gets and stores tasks from focused windows.
 *  at author René Mérou <ochominutosdearco at gmail.com>
 */
-#include <QProcess>
+
 #include "focusdetector.h"
 
-#include <qdatetime.h>
-#include <qmessagebox.h>
-#include <qtimer.h>
+#include <QProcess>
+#include <QTimer>
 
-#include <kdialog.h>
-#include <kglobal.h>
-#include <klocale.h> // i18n
-#include <QLabel>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
+#include <KDebug>
+
 #ifdef Q_WS_X11
 #include <QX11Info>
 #endif
- QString lastWindow="";
-FocusDetector::FocusDetector(int periodFocus)
+
+FocusDetector::FocusDetector( int periodFocus )
 {
-  _timer = new QTimer(this);
-  connect(_timer, SIGNAL(timeout()), this, SLOT(check()));
-  _timer->start(1000*periodFocus);
+  _timer = new QTimer( this );
+  connect( _timer, SIGNAL( timeout() ), this, SLOT( check() ) );
+
+  /* do not start the timer immediately, b/c it is focus detection
+     is activated by menu action. */
+  //_timer->start(1000*periodFocus);
+
+  setPeriodFocus( periodFocus );
 }
 
 void FocusDetector::check()
 {
   QProcess focusQuestion;
-  QString cmd="./getactivewindowtitle";
+  QString cmd = "./getactivewindowtitle";
   QString sysanswer;
-  focusQuestion.setProcessChannelMode(QProcess::MergedChannels);
+  focusQuestion.setProcessChannelMode( QProcess::MergedChannels );
   focusQuestion.start( cmd );
 
-  if (!focusQuestion.waitForFinished())
+  if ( !focusQuestion.waitForFinished() )
     kDebug() << "Command " << cmd << " failed:" << focusQuestion.errorString();
   else
-    sysanswer=focusQuestion.readAll();
+    sysanswer = focusQuestion.readAll();
+
   kDebug() << "sysanswer=" << sysanswer << endl;
-  if (lastWindow!=sysanswer) 
-  {
-    lastWindow=sysanswer;
-    kDebug() << "NEW WINDOW WITH FOCUS; Sending signal:"  << endl;
-    emit (newFocus(sysanswer));
+  if ( lastWindow != sysanswer ) {
+    lastWindow = sysanswer;
+    kDebug() << "NEW WINDOW WITH FOCUS; Sending signal:" << endl;
+    emit ( newFocus( sysanswer ) );
   }
 }
 
-void FocusDetector::setPeriodFocus(int periodFocus)
+void FocusDetector::setPeriodFocus( int periodFocus )
 {
   _periodFocus = periodFocus;
+  _timer->setInterval( _periodFocus * 1000 );
 }
 
 void FocusDetector::startFocusDetection()
 {
   if (!_timer->isActive())
-    _timer->start(periodInterval);
+    _timer->start();
 }
 
 void FocusDetector::stopFocusDetection()
