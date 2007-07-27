@@ -15,6 +15,7 @@
     <Action name="start" />
     <Action name="stop" />
     <Action name="stopAll" />
+    <Action name="focustracking" />
   </Menu>
   <Menu name="task" >
     <text>&amp;Task</text>

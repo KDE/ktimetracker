@@ -30,6 +30,7 @@
 #include "desktoplist.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
+#include "focusdetector.h"
 
 class QMouseEvent;
 class QString;
@@ -92,7 +93,7 @@ class TaskView : public QTreeWidget
     Preferences *preferences();
 
     /** Add a task to view and storage. */
-    QString addTask( const QString& taskame, long total, long session, const DesktopList& desktops,
+    QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
 
   public Q_SLOTS:
@@ -110,6 +111,8 @@ class TaskView : public QTreeWidget
      *              detector detects the user stopped working 5 minutes ago.
      */
     void stopAllTimers(QDateTime when=QDateTime::currentDateTime());
+
+    void slotfocustracking();
 
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();
@@ -138,6 +141,12 @@ class TaskView : public QTreeWidget
     /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();
 
+    /** start the autotracking system to add tasks to control time for every focused windows **/
+    void startAutoTracking(){};
+
+    /** stop the autotracking system to add tasks to control time for every focused windows **/    
+    void stopAutoTracking(){};
+ 
     void editTask();
 
     /**
@@ -208,7 +217,9 @@ class TaskView : public QTreeWidget
     void setStatusBarText(QString);
 
   private: // member variables
-    IdleTimeDetector *_idleTimeDetector;
+    IdleTimeDetector* _idleTimeDetector;
+    FocusDetector* _focusDetector;
+    bool focustrackingactive;  // do we track by which application has the focus ?
     QTimer *_minuteTimer;
     QTimer *_autoSaveTimer;
     QTimer *_manualSaveTimer;
@@ -218,6 +229,7 @@ class TaskView : public QTreeWidget
     bool _isloading;
     Task* dragTask;
     QTableWidget* historywidget;
+    Task*  lastTaskWithFocus;
 
     //KCal::CalendarLocal _calendar;
     KarmStorage * _storage;
@@ -239,12 +251,18 @@ class TaskView : public QTreeWidget
     void autoSaveChanged( bool );
     void autoSavePeriodChanged( int period );
     void minuteUpdate();
+
     /** item state stores if a task is expanded so you can see the subtasks */
     void itemStateChanged( QTreeWidgetItem *item );
+
     /** React on another process having modified the iCal file we rely on. 
        This is not iCalFileChanged. */
     void iCalFileModified(ResourceCalendar *);
     void slotItemDoubleClicked( QTreeWidgetItem *item, int );
+
+    /** React on the focus having changed to Window QString **/
+    void newFocusWindowDetected (QString);
+
     void slotColumnToggled( int );
 };
 

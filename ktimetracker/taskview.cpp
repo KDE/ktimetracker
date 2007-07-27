@@ -107,6 +107,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 {
   _preferences = Preferences::instance( icsfile );
   _storage = KarmStorage::instance();
+  _focusDetector = new FocusDetector(1);
+  focustrackingactive = false;
 
   connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
@@ -114,6 +116,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
   connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)) );
+  connect( _focusDetector, SIGNAL( newFocus(QString) ), 
+           this, SLOT(newFocusWindowDetected (QString)) ); 
 
   QStringList labels;
   labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
@@ -178,6 +182,47 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
   connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 }
+
+void TaskView::newFocusWindowDetected(const QString taskName)
+{
+  if (focustrackingactive)
+  {
+    bool found=false;  // has taskName been found in our tasks
+    stopTimerFor(lastTaskWithFocus);
+    int i=0;
+    for ( Task* task = item_at_index(i); task; task = item_at_index(++i) )
+    {
+      QString q1=taskName;
+      q1.replace("\n","");
+      if (q1==task->name())
+      {
+         found=true;
+         startTimerFor(task);
+         lastTaskWithFocus=task;
+      }
+    }
+    if  (!found)
+    {
+      QString taskuid = addTask( taskName );
+      if ( taskuid.isNull() )
+      {
+        KMessageBox::error( 0, i18n(
+        "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
+      }
+      i=0;
+      for ( Task* task = item_at_index(i); task; task = item_at_index(++i) )
+      {
+        if (task->name()==taskName)
+        {
+          startTimerFor(task);
+          lastTaskWithFocus=task;
+        }
+      }
+    }
+    emit updateButtons();
+  } // focustrackingactive
+} 
+
 
 void TaskView::dropEvent(QDropEvent* qde)
 {
@@ -552,7 +597,8 @@ void TaskView::startTimerFor(Task* task, QDateTime startTime )
 
 void TaskView::clearActiveTasks()
 {
-  activeTasks.clear();
+  activeTasks.clear(); 
+  _focusDetector->startFocusDetection(); 
 }
 
 void TaskView::stopAllTimers( QDateTime when )
@@ -562,10 +608,16 @@ void TaskView::stopAllTimers( QDateTime when )
     activeTasks.at(i)->setRunning(false, _storage, when);
 
   _idleTimeDetector->stopIdleDetection();
+  _focusDetector->stopFocusDetection(); 
   activeTasks.clear();
   emit updateButtons();
   emit timersInactive();
   emit tasksChanged( activeTasks);
+}
+
+void TaskView::slotfocustracking()
+{
+  focustrackingactive=true;
 }
 
 void TaskView::startNewSession()

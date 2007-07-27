@@ -313,7 +313,7 @@ void MainWindow::makeMenus()
   actionStop->setShortcut(QKeySequence(Qt::Key_S));
   actionStop->setToolTip( i18n("Stop timing of the selected task") );
   actionStop->setWhatsThis( i18n("Stop timing of the selected task") );
-  
+
   // Stop all timers
   actionStopAll  = new KAction(i18n("Stop &All Timers"), this);
   actionCollection()->addAction("stopAll", actionStopAll );
@@ -322,6 +322,11 @@ void MainWindow::makeMenus()
   actionStopAll->setEnabled(false);
   actionStopAll->setToolTip( i18n("Stop all of the active timers") );
   actionStopAll->setWhatsThis( i18n("Stop all of the active timers") );
+
+  // Focus tracking
+  QAction* actionFocusTracking = new KAction(i18n("Track active applications"), this);
+  actionCollection()->addAction("focustracking", actionFocusTracking );
+  connect(actionFocusTracking, SIGNAL(triggered(bool)), _taskView, SLOT( slotfocustracking()));
 
   // New task
   actionNew  = new KAction(KIcon(QString::fromLatin1("document-new")), i18n("&New..."), this);
