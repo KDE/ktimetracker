@@ -47,7 +47,10 @@ FocusDetector::FocusDetector( int periodFocus )
 void FocusDetector::check()
 {
   QProcess focusQuestion;
-  QString cmd = "./getactivewindowtitle";
+  QString cmd="bash -c \"xwininfo -id $(xprop -root | grep 'NET_ACTIVE_WINDOW(WINDOW):' | sed 's/_NET_ACTIVE_WINDOW(WINDOW): window id # //') | grep xwininfo | sed 's/xwininfo: Window id: 0x[0-9a-f]* //' | sed 's/^\\\"//' | sed 's/\\\"$//' | sed 's/\\r//'\"";
+
+  cmd="bash -c \"xwininfo -id $(xprop -root | grep 'NET_ACTIVE_WINDOW(WINDOW):' | sed 's/_NET_ACTIVE_WINDOW(WINDOW): window id # //') | grep xwininfo | sed 's/xwininfo: Window id: 0x[0-9a-f]* //' | sed 's/^.//' | sed 's/.$//' | sed 's/\\r//'\"";
+  kDebug()<< "command is " << cmd << endl;
   QString sysanswer;
   focusQuestion.setProcessChannelMode( QProcess::MergedChannels );
   focusQuestion.start( cmd );

@@ -1,3 +1,0 @@
-#!/bin/bash
-xwininfo -id $(xprop -root | grep "NET_ACTIVE_WINDOW(WINDOW):" | sed "s/_NET_ACTIVE_WINDOW(WINDOW): window id # //") | grep xwininfo | sed "s/xwininfo: Window id: 0x[0-9a-f]* //" | sed "s/^\"//" | sed "s/\"$//" | sed "s/\r//"
-
