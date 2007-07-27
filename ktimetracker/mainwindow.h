@@ -79,6 +79,7 @@ class MainWindow : public KParts::MainWindow
     MainWindow( const QString &icsfile = "" );
     virtual ~MainWindow();
 
+    // FIXME consistent method names, e.g. getError, stoptimefor, ...
     /** DCOP function: print out version */
     QString version() const;
     QString taskIdFromName( const QString &taskName ) const;
@@ -102,6 +103,7 @@ class MainWindow : public KParts::MainWindow
     QString setpromptdelete( bool prompt );
     QString exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote );
     QString importplannerfile( QString filename );
+    QStringList getActiveTasks();
 
   public Q_SLOTS:
     void setStatusBar( const QString& );

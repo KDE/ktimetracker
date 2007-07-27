@@ -699,6 +699,12 @@ QString karmPart::importplannerfile( QString fileName )
   return _taskView->importPlanner(fileName);
 }
 
+// TODO implement like MainWindow::getActiveTasks
+QStringList karmPart::getActiveTasks()
+{
+  return QStringList() << "karm";
+}
+
 void karmPart::startNewSession()
 {
   _taskView->startNewSession();

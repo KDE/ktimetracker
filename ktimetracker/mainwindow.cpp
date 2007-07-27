@@ -708,5 +708,18 @@ QString MainWindow::importplannerfile( QString fileName )
   return _taskView->importPlanner(fileName);
 }
 
+QStringList MainWindow::getActiveTasks()
+{
+  QStringList result;
+
+  for ( int i = 0; i < _taskView->count(); ++i ) {
+    if ( _taskView->item_at_index( i )->isRunning() ) {
+      result << _taskView->item_at_index( i )->name();
+    }
+  }
+
+  return result;
+}
+
 
 #include "mainwindow.moc"
