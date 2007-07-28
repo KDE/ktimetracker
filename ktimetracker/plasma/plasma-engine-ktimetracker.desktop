@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=KTimeTracker Data Engine
-ServiceTypes=Plasma/DataEngine
-Type=Service
-Icon=karm
-X-KDE-Library=plasma_engine_ktimetracker
-X-EngineName=ktimetracker
