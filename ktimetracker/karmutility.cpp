@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2007 Thorsten Staerk
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -26,6 +26,20 @@
 #include <KLocale>
 
 #include "karmutility.h"
+#include <X11/Xlib.h>
+#include <fixx11h.h>
+
+QString getfocuswindow()
+{
+  Display* display= XOpenDisplay(NULL);
+  char* name="blahblah";
+  Window window=0;
+  int i=0;
+  XGetInputFocus(display, &window, &i);
+  XFetchName (display, window , &name);
+  XCloseDisplay( display );
+  return QString(name);
+}
 
 QString formatTime( long minutes, bool decimal )
 {

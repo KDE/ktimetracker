@@ -34,4 +34,9 @@
  */
 QString formatTime( long minutes, bool decimal=false );
 
+/** 
+ * Get the name of the window that has the focus
+ */
+QString getfocuswindow();
+
 #endif
