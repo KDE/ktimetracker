@@ -30,7 +30,9 @@
 
 class QMenu;
 
+#ifdef __GNUC__
 #warning Port me to QAction
+#endif
 class KAccel;
 
 /**
