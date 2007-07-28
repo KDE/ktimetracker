@@ -7,6 +7,7 @@ configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 add_subdirectory( support ) 
 add_subdirectory( pics ) 
 add_subdirectory( test ) 
+add_subdirectory( plasma )
 
 include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/remote  )
 
