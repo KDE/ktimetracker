@@ -20,11 +20,13 @@
  */
 
 #include <signal.h>
-#include <kapplication.h>
-#include <klocale.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <kdebug.h>
+
+#include <KAboutData>
+#include <KCmdLineArgs>
+#include <KDebug>
+#include <KLocale>
+#include <KUniqueApplication>
+
 #include "version.h"
 #include "mainwindow.h"
 
@@ -62,7 +64,7 @@ int main( int argc, char *argv[] )
   KCmdLineOptions options;
   options.add("+file", ki18n( "The iCalendar file to open" ));
   KCmdLineArgs::addCmdLineOptions( options );
-  KApplication myApp;
+  KUniqueApplication myApp;
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
