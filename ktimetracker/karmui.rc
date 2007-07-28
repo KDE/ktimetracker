@@ -56,9 +56,6 @@
   <Separator />
   <Action name="mark_as_complete" />
   <Action name="mark_as_incomplete" />
-  <Separator />
-  <Action name="clip_totals" />
-  <Action name="clip_history" />
 </Menu>
 
 <State name="readonly">
