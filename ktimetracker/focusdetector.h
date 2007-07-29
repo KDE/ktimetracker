@@ -24,7 +24,6 @@
 #ifndef KARM_FOCUS_DETECTOR_H
 #define KARM_FOCUS_DETECTOR_H
 
-#include <QDateTime>
 #include <QObject>
 
 #include "config-karm.h" // HAVE_LIBXSS
@@ -40,39 +39,36 @@ Q_OBJECT
 
 public:
   /**
-     Initializes the time period
-      at param periodFocus seconds before every focus detection.
-  **/
+    Initializes the time period
+    at param periodFocus seconds before every focus detection.
+  */
   FocusDetector( int periodFocus );
 
   /**
-     Sets the period of time before every focus search.
-      at param periodFocus period of time in seconds
-  **/
+    Sets the period of time before every focus search.
+    at param periodFocus period of time in seconds
+  */
   void setPeriodFocus( int periodFocus );
 
   /**
-     Starts detecting focus
-  **/
+    Starts detecting focus
+  */
   void startFocusDetection();
 
   /**
-      Stops detecting focus.
-  **/
+    Stops detecting focus.
+  */
   void stopFocusDetection();
 
-signals:
-    void newFocus( QString );
+Q_SIGNALS:
+  void newFocus( QString );
 
-protected slots:
+protected Q_SLOTS:
   void check();
 
 private:
-  int _periodFocus;
-  QString lastWindow;
-  QTimer *_timer;
-  QDateTime start; // when the periodFocus restarted
-
+  QString mLastWindow;
+  QTimer *mTimer;
 };
 
 #endif // KARM_FOCUS_DETECTOR_H 

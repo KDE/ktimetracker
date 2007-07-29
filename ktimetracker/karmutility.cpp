@@ -22,33 +22,37 @@
 #ifndef KARM_UTILITY_H
 #define KARM_UTILITY_H
 
+#include "karmutility.h"
+
 #include <KGlobal>
 #include <KLocale>
 
-#include "karmutility.h"
 #include <X11/Xlib.h>
 #include <fixx11h.h>
 
-QString getfocuswindow()
+QString getFocusWindow()
 {
-  Display* display= XOpenDisplay(NULL);
-  char* name="blahblah";
-  Window window=0;
-  int i=0;
-  XGetInputFocus(display, &window, &i);
-  XFetchName (display, window , &name);
+  Display *display = XOpenDisplay( 0 );
+  char *name = "blahblah";
+  Window window = 0;
+  int i = 0;
+  XGetInputFocus( display, &window, &i );
+  XFetchName( display, window, &name );
   XCloseDisplay( display );
-  return QString(name);
+
+  return QString( name );
 }
 
 QString formatTime( long minutes, bool decimal )
 {
   QString time;
   if ( decimal ) {
-    time.sprintf("%.2f", minutes / 60.0);
+    time.sprintf( "%.2f", minutes / 60.0 );
     time.replace( '.', KGlobal::locale()->decimalSymbol() );
   }
-  else time.sprintf("%ld:%02ld", minutes / 60, labs(minutes % 60));
+  else 
+    time.sprintf( "%ld:%02ld", minutes / 60, labs( minutes % 60 ) );
+
   return time;
 }
 

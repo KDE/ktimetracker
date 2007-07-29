@@ -35,8 +35,8 @@
 
 FocusDetector::FocusDetector( int periodFocus )
 {
-  _timer = new QTimer( this );
-  connect( _timer, SIGNAL( timeout() ), this, SLOT( check() ) );
+  mTimer = new QTimer( this );
+  connect( mTimer, SIGNAL( timeout() ), this, SLOT( check() ) );
 
   /* do not start the timer immediately, b/c it is focus detection
      is activated by menu action. */
@@ -48,34 +48,32 @@ FocusDetector::FocusDetector( int periodFocus )
 void FocusDetector::check()
 {
   QProcess focusQuestion;
-  
-  kDebug() << "getfocuswindow = " << getfocuswindow() << endl;
-  QString sysanswer=getfocuswindow();
- 
-  kDebug() << "sysanswer=" << sysanswer << endl;
-  if ( lastWindow != sysanswer ) {
-    lastWindow = sysanswer;
-    kDebug() << "NEW WINDOW WITH FOCUS; Sending signal:" << endl;
-    emit ( newFocus( sysanswer ) );
+
+  QString sysanswer = getFocusWindow();
+  kDebug() << "getFocusWindow = " << sysanswer << endl;
+
+  if ( mLastWindow != sysanswer ) {
+    mLastWindow = sysanswer;
+    kDebug() << "NEW WINDOW WITH FOCUS; Sending signal." << endl;
+    emit( newFocus( sysanswer ) );
   }
 }
 
 void FocusDetector::setPeriodFocus( int periodFocus )
 {
-  _periodFocus = periodFocus;
-  _timer->setInterval( _periodFocus * 1000 );
+  mTimer->setInterval( periodFocus * 1000 );
 }
 
 void FocusDetector::startFocusDetection()
 {
-  if (!_timer->isActive())
-    _timer->start();
+  if ( !( mTimer->isActive() ) )
+    mTimer->start();
 }
 
 void FocusDetector::stopFocusDetection()
 {
-  if (_timer->isActive())
-    _timer->stop();
+  if ( mTimer->isActive() )
+    mTimer->stop();
 }
 
 #include "focusdetector.moc" 
