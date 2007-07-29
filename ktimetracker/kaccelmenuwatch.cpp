@@ -1,10 +1,6 @@
 /*
-* kaccelmenuwatch.cpp -- Implementation of class KAccelMenuWatch.
-* Author:    Sirtaj Singh Kang
-* Generated: Thu Jan  7 15:05:26 EST 1999
-*
-*
-*     Copyright (C) 2007 the ktimetracker developers
+*     Copyright (C) 1999 by Sirtaj Singh Kang (taj@kde.org)
+*                   2007 the ktimetracker developers
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,13 +20,13 @@
 *
 */
 
+#include "kaccelmenuwatch.h"
+
 #include <cassert>
 
 #include <QMenu>
 
 #include <KDebug>
-
-#include "kaccelmenuwatch.h"
 
 KAccelMenuWatch::KAccelMenuWatch( KAccel *accel, QObject *parent )
   : QObject( parent ),

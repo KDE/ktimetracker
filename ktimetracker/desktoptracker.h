@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Tomas Pospisek (tpo@sourcepole.ch)
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,6 +23,7 @@
 #ifndef KARM_DESKTOP_TRACKER_H
 #define KARM_DESKTOP_TRACKER_H
 
+#include <QObject>
 #include <QVector>
 
 #include "desktoplist.h"
@@ -37,30 +39,29 @@ const int maxDesktops = 16;
  *  each task tracking that all tasks that want to track that desktop
  */
 
-class DesktopTracker: public QObject
+class DesktopTracker : public QObject
 {
   Q_OBJECT
 
   public:
     DesktopTracker();
-    void printTrackers();
     void startTracking();
     void registerForDesktops( Task* task, DesktopList dl );
-    int desktopCount() const { return _desktopCount; }
+    int desktopCount() const { return mDesktopCount; }
 
   private: // member variables
 
     // define vectors for at most 16 virtual desktops
     // E.g.: desktopTrackerStop[3] contains a vector with
     // all tasks to be notified, when switching to/from desk 3.
-    TaskVector desktopTracker[maxDesktops];
-    int _previousDesktop;
-    int _desktopCount;
-    int _desktop;
-    QTimer *_timer;
+    TaskVector mDesktopTracker[maxDesktops];
+    int mPreviousDesktop;
+    int mDesktopCount;
+    int mDesktop;
+    QTimer *mTimer;
 
   Q_SIGNALS:
-    void reachedtActiveDesktop( Task* task );
+    void reachedActiveDesktop( Task* task );
     void leftActiveDesktop( Task* task );
 
   public Q_SLOTS:

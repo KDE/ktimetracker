@@ -170,7 +170,7 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
 
   // Connect desktop tracker events to task starting/stopping
   _desktopTracker = new DesktopTracker();
-  connect( _desktopTracker, SIGNAL( reachedtActiveDesktop( Task* ) ),
+  connect( _desktopTracker, SIGNAL( reachedActiveDesktop( Task* ) ),
            this, SLOT( startTimerFor(Task*) ));
   connect( _desktopTracker, SIGNAL( leftActiveDesktop( Task* ) ),
            this, SLOT( stopTimerFor(Task*) ));
