@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 1997 by Stephan Kulow <coolo@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,7 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
 #ifndef KARM_TASK_H
 #define KARM_TASK_H
 
@@ -97,7 +99,7 @@ class Task : public QObject, public QTreeWidgetItem
      *
      * @param uid  The new unique id.
      */
-    void setUid(const QString uid);
+    void setUid( const QString &uid );
 
     /** cut Task out of parent Task or the TaskView */
     void cut();
@@ -182,7 +184,7 @@ class Task : public QObject, public QTreeWidgetItem
       /**
        * Returns that task name, prefixed by parent tree up to root.
        *
-       * Task names are seperated by a forward slash:  /
+       * Task names are separated by a forward slash:  /
        */
       QString fullName() const;
     //@}
@@ -200,7 +202,8 @@ class Task : public QObject, public QTreeWidgetItem
 				    been changed by another program and being reloaded
  				    the task is set to running with another start date
        */
-      void setRunning( bool on, KarmStorage* storage, QDateTime when= QDateTime::currentDateTime());
+      void setRunning( bool on, KarmStorage* storage, 
+                       const QDateTime &when = QDateTime::currentDateTime() );
 
       /** return the state of a task - if it's running or not
        *  @return         true or false depending on whether the task is running
@@ -227,7 +230,7 @@ class Task : public QObject, public QTreeWidgetItem
      *  Add a comment to this task. 
      *  A comment is called "description" in the context of KCal::ToDo
      */
-    void addComment( QString comment, KarmStorage* storage );
+    void addComment( const QString &comment, KarmStorage* storage );
 
     /** Retrieve the entire comment for the task. */
     QString comment() const;

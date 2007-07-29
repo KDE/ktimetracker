@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2000 by Jesper Pedersen <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,8 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "preferences.h"
 
 #undef Unsorted // for --enable-final
 #include <QCheckBox>
@@ -41,8 +44,6 @@
 #include <KUrlRequester>
 
 #include <kemailsettings.h>
-
-#include "preferences.h"
 
 Preferences *Preferences::_instance = 0;
 

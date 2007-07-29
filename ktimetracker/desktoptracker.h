@@ -35,7 +35,7 @@ typedef QVector<Task *> TaskVector;
 const int maxDesktops = 16;
 
 /** A utility to associate tasks with desktops
- *  As soon as a desktop is activated/left - an signal is emited for
+ *  As soon as a desktop is activated/left - an signal is emitted for
  *  each task tracking that all tasks that want to track that desktop
  */
 

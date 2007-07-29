@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2000 by Jesper Pedersen <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -27,14 +28,12 @@
 class QCheckBox;
 class QLabel;
 class QSpinBox;
-class QString;
 class KUrlRequester;
 
 /**
- * Provide an interface to the configuration options for the program.
+  Provide an interface to the configuration options for the program.
  */
-
-class Preferences :public KPageDialog
+class Preferences : public KPageDialog
 {
   Q_OBJECT
 

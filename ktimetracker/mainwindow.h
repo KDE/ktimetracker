@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -102,8 +103,11 @@ class MainWindow : public KParts::MainWindow
     /** Delivers true if ktimetracker asks before deleting a task. This is stored as a config setting. */
     bool    getpromptdelete();
     QString setpromptdelete( bool prompt );
-    QString exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote );
-    QString importplannerfile( QString filename );
+    QString exportcsvfile( const QString &filename, const QString &from, 
+                           const QString &to, int type, bool decimalMinutes, 
+                           bool allTasks, const QString &delimiter, 
+                           const QString &quote );
+    QString importplannerfile( const QString &filename );
     QStringList getActiveTasks();
 
   public Q_SLOTS:

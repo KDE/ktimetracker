@@ -172,7 +172,7 @@ class KarmStorage
      * Creates an iCalendar event and adds it to the calendar.  Does not write
      * calender to disk, just adds event to calendar in memory.  However, the
      * resource framework does try to get a lock on the file.  After a
-     * succesful lock, the calendar marks this incidence as modified and then
+     * successful lock, the calendar marks this incidence as modified and then
      * releases the lock.
      *
      * @param task Task

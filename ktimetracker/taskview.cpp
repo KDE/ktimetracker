@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +20,8 @@
  *
  */
 
+#include "taskview.h"
+
 #include <QClipboard>
 #include <QFile>
 #include <QLayout>
@@ -29,7 +32,7 @@
 #include <QTableWidget>
 #include <QTextStream>
 #include <QTimer>
-#include <QtXml>
+#include <QtXml/QtXml>
 #include <QMouseEvent>
 #include <QList>
 #include <QListWidget>
@@ -50,7 +53,6 @@
 #include "preferences.h"
 #include "printdialog.h"
 #include "task.h"
-#include "taskview.h"
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
 
@@ -116,8 +118,8 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
   connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)) );
-  connect( _focusDetector, SIGNAL( newFocus(QString) ), 
-           this, SLOT(newFocusWindowDetected (QString)) ); 
+  connect( _focusDetector, SIGNAL( newFocus( const QString & ) ), 
+           this, SLOT( newFocusWindowDetected ( const QString & ) ) ); 
 
   QStringList labels;
   labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
@@ -183,9 +185,9 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 }
 
-void TaskView::newFocusWindowDetected( const QString taskName )
+void TaskView::newFocusWindowDetected( const QString &taskName )
 {
-  QString newTaskName( taskName );
+  QString newTaskName = taskName;
   newTaskName.replace( "\n", "" );
 
   if ( focustrackingactive ) {
@@ -375,7 +377,7 @@ has the number i=0. */
   else return (Task*) *item;
 }
 
-void TaskView::load( QString fileName )
+void TaskView::load( const QString &fileName )
 {
   // if the program is used as an embedded plugin for konqueror, there may be a need
   // to load from a file without touching the preferences.
@@ -472,12 +474,14 @@ void TaskView::reFresh()
   refresh();
 }
 
-QString TaskView::importPlanner(QString fileName)
+QString TaskView::importPlanner( const QString &fileName )
 {
-  kDebug(5970) << "entering importPlanner" << endl;
-  PlannerParser* handler=new PlannerParser(this);
-  if (fileName.isEmpty()) fileName=KFileDialog::getOpenFileName(QString(), QString(), 0);
-  QFile xmlFile( fileName );
+  kDebug( 5970 ) << "entering importPlanner" << endl;
+  PlannerParser *handler = new PlannerParser( this );
+  QString lFileName = fileName;
+  if ( lFileName.isEmpty() ) 
+    lFileName = KFileDialog::getOpenFileName( QString(), QString(), 0 );
+  QFile xmlFile( lFileName );
   QXmlInputSource source( &xmlFile );
   QXmlSimpleReader reader;
   reader.setContentHandler( handler );
@@ -572,7 +576,7 @@ long TaskView::count()
   return n;
 }
 
-void TaskView::startTimerFor(Task* task, QDateTime startTime )
+void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
   if (task != 0 && activeTasks.indexOf(task) == -1) 
   {
@@ -593,7 +597,7 @@ void TaskView::clearActiveTasks()
   activeTasks.clear(); 
 }
 
-void TaskView::stopAllTimers( QDateTime when )
+void TaskView::stopAllTimers( const QDateTime &when )
 {
   kDebug(5970) << "Entering TaskView::stopAllTimers" << endl;
   for ( unsigned int i = 0; i < activeTasks.count(); i++ )
@@ -685,7 +689,7 @@ void TaskView::newTask()
   newTask(i18n("New Task"), 0);
 }
 
-void TaskView::newTask(QString caption, Task *parent)
+void TaskView::newTask( const QString &caption, Task *parent )
 {
   EditTaskDialog *dialog = new EditTaskDialog( this, caption, false );
   long total, totalDiff, session, sessionDiff;
@@ -944,7 +948,7 @@ void TaskView::deletingTask(Task* deletedTask)
   emit tasksChanged( activeTasks);
 }
 
-void TaskView::iCalFileChanged(QString file)
+void TaskView::iCalFileChanged( const QString &file )
 // User might have picked a new file in the preferences dialog.
 // This is not iCalFileModified.
 {

@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,8 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "mainwindow.h"
 
 #include <numeric>
 
@@ -43,7 +46,6 @@
 #include "edithistorydialog.h"
 #include "karmerrors.h"
 #include "karmutility.h"
-#include "mainwindow.h"
 #include "preferences.h"
 #include "print.h"
 #include "task.h"
@@ -709,25 +711,32 @@ QString MainWindow::stopalltimers()
   return QString();
 }
 
-QString MainWindow::exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote )
+QString MainWindow::exportcsvfile( const QString &filename, const QString &from, 
+                                   const QString &to, int type, 
+                                   bool decimalMinutes, bool allTasks, 
+                                   const QString &delimiter, 
+                                   const QString &quote )
 {
   ReportCriteria rc;
-  rc.url=filename;
-  rc.from=QDate::fromString( from );
-  if ( rc.from.isNull() ) rc.from=QDate::fromString( from, Qt::ISODate );
-  kDebug(5970) << "rc.from " << rc.from << endl;
-  rc.to=QDate::fromString( to );
-  if ( rc.to.isNull() ) rc.to=QDate::fromString( to, Qt::ISODate );
-  kDebug(5970) << "rc.to " << rc.to << endl;
-  rc.reportType=(ReportCriteria::REPORTTYPE) type;  // history report or totals report
-  rc.decimalMinutes=decimalMinutes;
-  rc.allTasks=allTasks;
-  rc.delimiter=delimiter;
-  rc.quote=quote;
+  rc.url = filename;
+  rc.from = QDate::fromString( from );
+  if ( rc.from.isNull() )
+    rc.from = QDate::fromString( from, Qt::ISODate );
+  kDebug( 5970 ) << "rc.from " << rc.from << endl;
+  rc.to = QDate::fromString( to );
+  if ( rc.to.isNull() )
+    rc.to = QDate::fromString( to, Qt::ISODate );
+  kDebug( 5970 ) << "rc.to " << rc.to << endl;
+  rc.reportType = ( ReportCriteria::REPORTTYPE )type;  // history report or totals report
+  rc.decimalMinutes = decimalMinutes;
+  rc.allTasks = allTasks;
+  rc.delimiter = delimiter;
+  rc.quote = quote;
+
   return _taskView->report( rc );
 }
 
-QString MainWindow::importplannerfile( QString fileName )
+QString MainWindow::importplannerfile( const QString &fileName )
 {
   return _taskView->importPlanner(fileName);
 }

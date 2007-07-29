@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2007 by Mathias Soeken <msoeken@tzi.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,9 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "treeviewheadercontextmenu.h"
+
 #include <QAction>
 #include <QTreeView>
 #include <QHeaderView>
@@ -25,8 +29,6 @@
 
 #include <KDebug>
 #include <KLocale>
-
-#include "treeviewheadercontextmenu.h"
 
 TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView *widget, int style, QVector<int> excludedColumns )
   : QObject( parent ),
@@ -120,7 +122,7 @@ void TreeViewHeaderContextMenu::updateAction( QAction *action, int column )
     case ShowHideText:
       action->setCheckable( false );
       action->setChecked( false );
-      action->setText( (mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + " " + text );
+      action->setText( (mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + ' ' + text );
       break;
   }
 }

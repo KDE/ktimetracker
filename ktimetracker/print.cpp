@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2000 by Jesper Pedersen <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +20,8 @@
  *
  */
 
+#include "print.h"
+
 #include <QDateTime>
 #include <QPainter>
 
@@ -26,7 +29,6 @@
 #include <KLocale>            // i18n
 
 #include "karmutility.h"        // formatTime()
-#include "print.h"
 #include "task.h"
 #include "taskview.h"
 
@@ -157,26 +159,26 @@ void MyPrinter::printTask(Task *task, QPainter &painter, int level)
   }      
 }
 
-void MyPrinter::printLine( QString total, QString session, QString name, 
-                           QPainter &painter, int level )
+void MyPrinter::printLine( const QString &total, const QString &session, 
+                           const QString &name, QPainter &painter, int level )
 {
   int xoff = xMargin + 10 * level;
-  
+
   painter.drawText( xoff, yoff, nameFieldWidth, lineHeight,
                     Qt::AlignLeft, name);
   xoff = xMargin + nameFieldWidth;
-  
+
   painter.drawText( xoff, yoff, sessionTimeWidth, lineHeight,
                     Qt::AlignRight, session);
   xoff += sessionTimeWidth+ 5;
-  
+
   painter.drawText( xoff, yoff, timeWidth, lineHeight,
                     Qt::AlignRight, total);
   xoff += timeWidth+5;
 
   yoff += lineHeight;
-  
-  if (yoff + 2* lineHeight > pageHeight) {
+
+  if ( yoff + 2 * lineHeight > pageHeight ) {
     newPage();
     yoff = yMargin;
   }

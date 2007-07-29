@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2004  Mark Bucciarelli <mark@hubcapconsulting.com>
+ *     Copyright (C) 2004 by Mark Bucciarelli <mark@hubcapconsulting.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,7 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
 #ifndef CSVEXPORTDIALOG_H
 #define CSVEXPORTDIALOG_H
 
@@ -50,10 +52,10 @@ class CSVExportDialog : public CSVExportDialogBase
     void exPortToCSVFile();
 
   public:
-    CSVExportDialog( ReportCriteria::REPORTTYPE rt,
+    explicit CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                      QWidget *parent = 0 
                      );
-    
+
     /**
      Enable the "Tasks to export" question in the dialog.
 

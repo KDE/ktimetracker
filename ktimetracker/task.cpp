@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 1997 by Stephan Kulow <coolo@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,9 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "task.h"
+
 #include <QDateTime>
 #include <QString>
 #include <QTimer>
@@ -30,7 +34,6 @@
 #include <kcal/event.h>
 
 #include "karmutility.h"
-#include "task.h"
 #include "preferences.h"
 
 const int gSecondsPerMinute = 60;
@@ -128,7 +131,7 @@ Task::~Task() {
   delete _timer;
 }
 
-void Task::setRunning( bool on, KarmStorage* storage, QDateTime when  )
+void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
 {
   kDebug(5970) << "Entering Task::setRunning" << endl; 
   if ( on ) 
@@ -157,7 +160,7 @@ void Task::setRunning( bool on, KarmStorage* storage, QDateTime when  )
   }
 }
 
-void Task::setUid(QString uid) {
+void Task::setUid( const QString &uid ) {
   _uid = uid;
 }
 
@@ -211,13 +214,8 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
     for (Task* child= this->firstChild(); child; child = child->nextSibling())
       child->setPercentComplete(_percentcomplete, storage);
   }
-  // maybe there is a colum "percent completed", so do a ...
-  
-
-
-
-
-update(); 
+  // maybe there is a column "percent completed", so do a ...
+  update();
 }
 
 void Task::setPixmapProgress()
@@ -473,7 +471,7 @@ void Task::update()
   kDebug(5970) << "Exiting Task::update" << endl;
 }
 
-void Task::addComment( QString comment, KarmStorage* storage )
+void Task::addComment( const QString &comment, KarmStorage* storage )
 {
   _comment = _comment + QString::fromLatin1("\n") + comment;
   storage->addComment(this, comment);

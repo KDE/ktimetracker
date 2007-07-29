@@ -599,7 +599,7 @@ long KarmStorage::printTaskHistory (
 // to>=from is precondition
 {
   long ownline=linenr++; // the how many-th instance of this function is this
-  long colrectot=0;      // colum where to write the task's total recursive time
+  long colrectot=0;      // column where to write the task's total recursive time
   QVector<QString> cell; // each line of the matrix is stored in an array of cells, one containing the recursive total
   long add;              // total recursive time of all subtasks
   QString delim = rc.delimiter;

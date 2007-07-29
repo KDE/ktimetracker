@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2004  Mark Bucciarelli <mark@hubcapconsulting.com>
+ *     Copyright (C) 2004 by Mark Bucciarelli <mark@hubcapconsulting.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,11 +19,13 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
 #ifndef REPORTCRITERIA_H
 #define REPORTCRITERIA_H
 
 #include <QDateTime>
 #include <kurl.h>
+
 class QString;
 
 /**
@@ -86,12 +89,12 @@ class ReportCriteria
     bool    bExPortToClipBoard;
 
     /**
-     The delimiter to use when outputting comma-seperated value reports.
+     The delimiter to use when outputting comma-separated value reports.
      */
     QString delimiter;
 
     /**
-     The quote to use for text fields when outputting comma-seperated reports.
+     The quote to use for text fields when outputting comma-separated reports.
      */
     QString quote;
 };

@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -56,7 +57,7 @@ class TaskView : public QTreeWidget
   Q_OBJECT
 
   public:
-    TaskView( QWidget *parent = 0, const QString &icsfile = "" );
+    explicit TaskView( QWidget *parent = 0, const QString &icsfile = "" );
     virtual ~TaskView();
 
     /**  Return the first item in the view, cast to a Task pointer.  */
@@ -69,7 +70,7 @@ class TaskView : public QTreeWidget
     Task* item_at_index(int i);
 
     /** Load the view from storage.  */
-    void load( QString filename="" );
+    void load( const QString &filename = "" );
 
     /** Close the storage and release lock. */
     void closeStorage();
@@ -113,7 +114,7 @@ class TaskView : public QTreeWidget
      *  @param when When the timer stopped - this makes sense if the idletime-
      *              detector detects the user stopped working 5 minutes ago.
      */
-    void stopAllTimers(QDateTime when=QDateTime::currentDateTime());
+    void stopAllTimers( const QDateTime &when = QDateTime::currentDateTime() );
 
     /** Toggles the automatic tracking of focused windows
      */
@@ -123,7 +124,7 @@ class TaskView : public QTreeWidget
     void newTask();
 
     /** Display edit task dialog and create a new task with results.  */
-    void newTask( QString caption, Task* parent );
+    void newTask( const QString &caption, Task* parent );
 
     /** Used to refresh (e.g. after import) */
     void refresh();
@@ -132,7 +133,7 @@ class TaskView : public QTreeWidget
     void reFresh();
 
     /** used to import tasks from imendio planner */
-    QString importPlanner( QString fileName="" );
+    QString importPlanner( const QString &fileName = "" );
 
     /** call export function for csv totals or history */
     QString report( const ReportCriteria &rc );
@@ -194,7 +195,8 @@ class TaskView : public QTreeWidget
      * @param task      task to start timer of
      * @param startTime if taskview has been modified by another program, we
                             have to set the starting time to not-now. */
-    void startTimerFor( Task* task, QDateTime startTime = QDateTime::currentDateTime() );
+    void startTimerFor( Task* task, 
+                        const QDateTime &startTime = QDateTime::currentDateTime() );
      void stopTimerFor( Task* task );
 
     /** clears all active tasks. Needed e.g. if iCal file was modified by
@@ -205,7 +207,7 @@ class TaskView : public QTreeWidget
     /** React on user maybe having picked a new iCalendar file on preferences screen. 
        If the file is not the same as before, load the new one. 
        This is not iCalFileModified. */
-    void iCalFileChanged(QString file);
+    void iCalFileChanged( const QString &file );
 
     /** Copy totals for current and all sub tasks to clipboard. */
     QString clipTotals( const ReportCriteria &rc );
@@ -266,7 +268,7 @@ class TaskView : public QTreeWidget
     void slotItemDoubleClicked( QTreeWidgetItem *item, int );
 
     /** React on the focus having changed to Window QString **/
-    void newFocusWindowDetected (QString);
+    void newFocusWindowDetected( const QString & );
 
     void slotColumnToggled( int );
 };

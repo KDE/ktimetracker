@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2000 by Jesper Pedersen <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -34,20 +35,19 @@ class Task;
 class TaskView;
 
 /**
- * Provide printing capabilities.
+  Provide printing capabilities.
  */
-
 class MyPrinter : public KPrinter
 {
   public:
     MyPrinter( const TaskView *taskView );
     void print();
-    void printLine( QString total, QString session, QString name, QPainter &,
-                    int );
+    void printLine( const QString &total, const QString &session, 
+                    const QString &name, QPainter &, int );
     void printTask( Task *task, QPainter &, int level );  
     int calculateReqNameWidth( Task *task, QFontMetrics &metrics,
                                int level);
-  
+
   private:
     const TaskView *_taskView;
 

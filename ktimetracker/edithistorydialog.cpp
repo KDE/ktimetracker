@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2007 by Mathias Soeken <msoeken@tzi.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +20,8 @@
  *
  */
 
+#include "edithistorydialog.h"
+
 #include <QHeaderView>
 #include <QItemDelegate>
 #include <QModelIndex>
@@ -31,8 +34,6 @@
 #include <KMessageBox>
 
 #include "taskview.h"
-
-#include "edithistorydialog.h"
 
 class HistoryWidgetDelegate : public QItemDelegate {
 public:

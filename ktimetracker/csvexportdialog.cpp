@@ -1,5 +1,6 @@
 /*
- *   Copyright (C) 2004  Mark Bucciarelli <mark@hubcapconsulting.com>
+ *     Copyright (C) 2004 by Mark Bucciarelli <mark@hubcapconsulting.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,9 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "csvexportdialog.h"
+
 #include <QComboBox>
 #include <QRadioButton>
 
@@ -29,7 +33,6 @@
 #include <KUrlRequester>
 
 #include "kdateedit.h"
-#include "csvexportdialog.h"
 
 CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   QWidget *parent 
@@ -56,7 +59,7 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
 
   }
 
-  // If decimal symbol is a comma, then default field seperator to semi-colon.
+  // If decimal symbol is a comma, then default field separator to semi-colon.
   // In France and Germany, one-and-a-half is written as 1,5 not 1.5
   QString d = KGlobal::locale()->decimalSymbol();
   if ( "," == d ) CSVExportDialogBase::radioSemicolon->setChecked(true);
