@@ -1,6 +1,6 @@
 /*
- *   ktimetracker
- *   This file only: Copyright (C) 1999  Espen Sand, espensa@online.no
+ *     Copyright (C) 1999 by Espen Sand <espensa@online.no>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -12,9 +12,11 @@
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details.
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program; if not, write to the Free Software
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *   You should have received a copy of the GNU General Public License along
+ *   with this program; if not, write to the
+ *      Free Software Foundation, Inc.
+ *      51 Franklin Street, Fifth Floor
+ *      Boston, MA  02110-1301  USA.
  *
  */
 
@@ -43,8 +45,9 @@ class EditTaskDialog : public KDialog
   Q_OBJECT
 
   public:
-    EditTaskDialog(QWidget *parent, QString caption, bool editDlg, DesktopList* desktopList=0);
-    void setTask(const QString &name, long time, long sessionTime);
+    EditTaskDialog( QWidget *parent, const QString &caption, bool editDlg, 
+                    DesktopList* desktopList = 0 );
+    void setTask( const QString &name, long time, long sessionTime );
     QString taskName() const;
 
     // return user choices

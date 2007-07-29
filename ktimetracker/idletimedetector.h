@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@
 
 #include <QDateTime>
 #include <QObject>
-#include "config-karm.h" // HAVE_LIBXSS
+#include <config-karm.h> // HAVE_LIBXSS
 
 class QTimer;
 

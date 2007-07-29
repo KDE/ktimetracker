@@ -1,6 +1,6 @@
 /*
- *   This file only:
- *     Copyright (C) 2003  Mark Bucciarelli <mark@hubcapconsutling.com>
+ *     Copyright (C) 2003 by Mark Bucciarelli <mark@hubcapconsutling.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ class Week
   public:
     /** Need an empty constructor to use in a QValueList. */
     Week();
-    Week(QDate from);
+    Week( const QDate &from );
     QDate start() const;
     QDate end() const;
     QList<QDate> days() const;

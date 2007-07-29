@@ -1,6 +1,6 @@
 /*
- *   This file only:
- *     Copyright (C) 2003  Mark Bucciarelli <mark@hubcapconsutling.com>
+ *     Copyright (C) 2003 by Mark Bucciarelli <mark@hubcapconsutling.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@
  *
  */
 
+#include "printdialog.h"
+
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -31,8 +33,6 @@
 #include <KLocale>            // i18n
 
 #include <libkdepim/kdateedit.h>
-
-#include "printdialog.h"
 
 PrintDialog::PrintDialog()
   : KDialog()

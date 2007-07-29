@@ -1,9 +1,8 @@
 /*
- *   ktimetracker
- *   This file only: Copyright (C) 1999  Espen Sand, espensa@online.no
- *   Modifications (see CVS log) Copyright (C) 2000 Klarälvdalens
- *   Datakonsult AB <kalle@dalheimer.de>, Jesper Pedersen <blackie@kde.org>
- *
+ *     Copyright (C) 1999 by Espen Sand <espensa@online.no>
+ *                   2000 by Klarälvdalens Datakonsult AB <kalle@dalheimer.de>
+ *                   2000 by Jesper Pedersen <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -15,11 +14,16 @@
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details.
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program; if not, write to the Free Software
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *   You should have received a copy of the GNU General Public License along
+ *   with this program; if not, write to the
+ *      Free Software Foundation, Inc.
+ *      51 Franklin Street, Fifth Floor
+ *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "edittaskdialog.h"
+
 #include <QComboBox>
 #include <QCheckBox>
 #include <QGridLayout>
@@ -39,10 +43,9 @@
 #include <KWindowSystem>
 
 #include "ktimewidget.h"
-#include "edittaskdialog.h"
 
-EditTaskDialog::EditTaskDialog( QWidget *parent, QString caption, bool editDlg,
-                                DesktopList* desktopList)
+EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption, 
+                                bool editDlg, DesktopList* desktopList)
   : KDialog( parent ),
     origTime( 0 ), origSession( 0 )
 {

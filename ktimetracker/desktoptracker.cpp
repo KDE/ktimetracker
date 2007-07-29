@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2003 by Tomas Pospisek (tpo@sourcepole.ch)
+ *     Copyright (C) 2003 by Tomas Pospisek <tpo@sourcepole.ch>
  *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify

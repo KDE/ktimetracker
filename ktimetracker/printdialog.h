@@ -1,6 +1,6 @@
 /*
- *   This file only:
- *     Copyright (C) 2003  Mark Bucciarelli <mark@hubcapconsutling.com>
+ *     Copyright (C) 2003 by Mark Bucciarelli <mark@hubcapconsutling.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
 #ifndef KARM_PRINT_DIALOG_H
 #define KARM_PRINT_DIALOG_H
 
