@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2000 by Jesper Perderson <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -22,8 +23,9 @@
 #ifndef KARM_K_TIME_WIDGET_H
 #define KARM_K_TIME_WIDGET_H
 
+#include <QWidget>
+
 class QLineEdit;
-class QWidget;
 
 class KarmLineEdit;
 
@@ -34,7 +36,7 @@ class KarmLineEdit;
 class KArmTimeWidget : public QWidget 
 {
   public:
-    KArmTimeWidget( QWidget* parent = 0, const char* name = 0 );
+    explicit KArmTimeWidget( QWidget* parent = 0, const char* name = 0 );
     void setTime( int hour, int minute );
     long time() const;
 

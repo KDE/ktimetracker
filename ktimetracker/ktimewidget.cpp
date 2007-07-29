@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2000 by Jesper Perderson <blackie@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +20,8 @@
  *
  */
 
+#include "ktimewidget.h"
+
 #include <stdlib.h>             // abs()
 
 #include <QHBoxLayout>
@@ -31,8 +34,6 @@
 #include <QWidget>
 
 #include <KLocale>
-
-#include "ktimewidget.h"
 
 enum ValidatorType { HOUR, MINUTE };
 

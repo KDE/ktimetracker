@@ -1,6 +1,6 @@
 /*
- *   This file only:
- *     Copyright (C) 2003, 2004  Mark Bucciarelli <mark@hubcapconsulting.com>
+ *     Copyright (C) 2003, 2004 by Mark Bucciarelli <mark@hubcapconsutling.com>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
+#include "karmstorage.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -60,7 +62,6 @@
 #include "taskview.h"
 #include "timekard.h"
 #include "karmutility.h"
-#include "karmstorage.h"
 #include "preferences.h"
 #include "task.h"
 
@@ -79,17 +80,20 @@ KarmStorage::KarmStorage()
   _calendar = 0;
 }
 
-QString KarmStorage::load (TaskView* view, const Preferences* preferences, QString fileName )
+QString KarmStorage::load( TaskView* view, const Preferences* preferences, 
+                           const QString &fileName )
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
   kDebug(5970) << "Entering KarmStorage::load" << endl;
   QString err;
   KEMailSettings settings;
-  if ( fileName.isEmpty() ) fileName = preferences->iCalFile();
+  QString lFileName = fileName;
+
+  if ( lFileName.isEmpty() ) lFileName = preferences->iCalFile();
 
   // If same file, don't reload
-  if ( fileName == _icalfile ) return err;
+  if ( lFileName == _icalfile ) return err;
 
 
   // If file doesn't exist, create a blank one to avoid ResourceLocal load
@@ -99,7 +103,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
   {
     int handle;
     handle = open (
-        QFile::encodeName( fileName ),
+        QFile::encodeName( lFileName ),
         O_CREAT|O_EXCL|O_WRONLY,
         S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH
         );
@@ -110,7 +114,7 @@ QString KarmStorage::load (TaskView* view, const Preferences* preferences, QStri
     closeStorage(view);
 
   // Create local file resource and add to resources
-  _icalfile = fileName;
+  _icalfile = lFileName;
 
   KCal::ResourceCached *resource;
   if ( remoteResource( _icalfile ) )
@@ -469,7 +473,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
                                    rc.decimalMinutes )
            + delim + formatTime( task->totalTime(),
                                    rc.decimalMinutes )
-           + "\n";
+           + '\n';
     tasknr++;
   }
 

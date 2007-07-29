@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 Thorsten Staerk
+ *     Copyright (C) 2007 by Thorsten Staerk <dev@staerk.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,9 +19,6 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
-
-#ifndef KARM_UTILITY_H
-#define KARM_UTILITY_H
 
 #include "karmutility.h"
 
@@ -55,5 +53,3 @@ QString formatTime( long minutes, bool decimal )
 
   return time;
 }
-
-#endif // KARM_UTILITY_H

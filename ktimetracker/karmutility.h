@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2007 by Thorsten Staerk <dev@staerk.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,17 +26,15 @@
 #include <QString>
 
 /**
- * Format time for output.  All times output on screen or report output go
- * through this function.
- *
- * If the second argument is true, the time is output as a two-place decimal.
- * Otherwise the format is hh:mi.
- *
+  Format time for output.  All times output on screen or report output go
+  through this function.
+  If the second argument is true, the time is output as a two-place decimal.
+  Otherwise the format is hh:mi.
  */
-QString formatTime( long minutes, bool decimal=false );
+QString formatTime( long minutes, bool decimal = false );
 
-/** 
- * Get the name of the window that has the focus
+/**
+  Get the name of the window that has the focus
  */
 QString getFocusWindow();
 
