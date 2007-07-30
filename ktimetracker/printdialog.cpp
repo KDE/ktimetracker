@@ -30,6 +30,7 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+#include <KComboBox>
 #include <KLocale>            // i18n
 
 #include <libkdepim/kdateedit.h>
@@ -76,7 +77,7 @@ PrintDialog::PrintDialog()
   layout->addSpacing(10);
   layout->addStretch(1);
 
-  _allTasks = new QComboBox( page );
+  _allTasks = new KComboBox( page );
   _allTasks->addItem( i18n( "Selected Task" ) );
   _allTasks->addItem( i18n( "All Tasks" ) );
   layout->addWidget( _allTasks );

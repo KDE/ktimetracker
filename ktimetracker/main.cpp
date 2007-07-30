@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 1997 by Stephan Kulow <coolo@kde.org>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -81,7 +82,7 @@ int main( int argc, char *argv[] )
     }
     else
     {
-      icsfile = KCmdLineArgs::cwd() + "/" + icsfile;
+      icsfile = KCmdLineArgs::cwd() + '/' + icsfile;
     }
     mainWindow = new MainWindow( icsfile );
   }

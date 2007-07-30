@@ -28,11 +28,11 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLayout>
-#include <QLineEdit>
 #include <QString>
 #include <QValidator>
 #include <QWidget>
 
+#include <KLineEdit>
 #include <KLocale>
 
 enum ValidatorType { HOUR, MINUTE };
@@ -67,18 +67,18 @@ class TimeValidator : public QValidator
 };
 
 
-class KarmLineEdit : public QLineEdit
+class KarmLineEdit : public KLineEdit
 {
 
   public:
     KarmLineEdit( QWidget* parent, const char* name = 0 )
-      : QLineEdit( parent ) { setObjectName( name ); }
+      : KLineEdit( parent ) { setObjectName( name ); }
 
 protected:
 
   virtual void keyPressEvent( QKeyEvent *event )
   {
-    QLineEdit::keyPressEvent( event );
+    KLineEdit::keyPressEvent( event );
     if ( text().length() == 2 && !event->text().isEmpty() )
       focusNextPrevChild(true);
   }
@@ -93,7 +93,7 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
   layout->setMargin( 0 );
   layout->setSpacing( 0 );
 
-  _hourLE = new QLineEdit( this);
+  _hourLE = new KLineEdit( this);
   // 9999 hours > 1 year!
   // 999 hours = 41 days  (That should be enough ...)
 

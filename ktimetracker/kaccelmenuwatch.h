@@ -19,6 +19,7 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
 #ifndef KARM_K_ACCEL_MENU_WATCH_H
 #define KARM_K_ACCEL_MENU_WATCH_H
 
@@ -85,7 +86,7 @@ class KAccelMenuWatch : public QObject
     /**
      * KAccelMenuWatch Constructor
      */
-    KAccelMenuWatch( KAccel *accel, QObject *parent = 0 );
+    explicit KAccelMenuWatch( KAccel *accel, QObject *parent = 0 );
 
     /**
      * KAccelMenuWatch Destructor

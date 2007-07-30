@@ -219,7 +219,7 @@ class KarmStorage
      * @param task   The task the timer was stopped for.
      * @param when   When the timer stopped.
      */
-    void stopTimer(const Task* task, QDateTime when=QDateTime::currentDateTime() );
+    void stopTimer( const Task* task, const QDateTime &when = QDateTime::currentDateTime() );
 
     /**
      * Log a new comment for this task.
@@ -338,8 +338,9 @@ class HistoryEvent
   public:
     /** Needed to be used in a value list. */
     HistoryEvent() {}
-    HistoryEvent(QString uid, QString name, long duration,
-        KDateTime start, KDateTime stop, QString todoUid);
+    HistoryEvent( const QString &uid, const QString &name, long duration,
+                  const KDateTime &start, const KDateTime &stop, 
+                  const QString &todoUid );
     QString uid() {return _uid; }
     QString name() {return _name; }
     /** In seconds. */

@@ -29,11 +29,12 @@
 
 #include "desktoplist.h"
 
-class QComboBox;
 class QCheckBox;
 class QLabel;
-class QLineEdit;
 class QRadioButton;
+
+class KComboBox;
+class KLineEdit;
 
 class KArmTimeWidget;
 
@@ -61,11 +62,11 @@ class EditTaskDialog : public KDialog
     void slotAutoTrackingPressed( bool checked );
 
   private:
-    QLineEdit* _name;
+    KLineEdit* _name;
     KArmTimeWidget* _timeTW;
     KArmTimeWidget* _sessionTW;
     KArmTimeWidget* _diffTW;
-    QComboBox* _operator;
+    KComboBox* _operator;
     QVector<QCheckBox*> _deskBox; // we only need an array, but ISO forbids
                                  // passing an array as a function argument
 

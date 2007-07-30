@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2003 by Tomas Pospisek <tpo@sourcepole.ch>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -18,6 +19,7 @@
  *      Boston, MA  02110-1301  USA.
  *
  */
+
 //finally over 50% of the code copyright remarks
 #ifndef KARM_DESKTOP_LIST_H
 #define KARM_DESKTOP_LIST_H

@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2006 Thorsten Staerk
+ *     Copyright (C) 2006 by Thorsten Staerk <kde@staerk.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

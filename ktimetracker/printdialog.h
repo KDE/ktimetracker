@@ -26,8 +26,8 @@
 #include <KDialog>
 
 class QCheckBox;
-class QComboBox;
 
+class KComboBox;
 class KDateEdit;
 
 class PrintDialog : public KDialog
@@ -55,7 +55,7 @@ class PrintDialog : public KDialog
 private:
     KDateEdit *_from, *_to;
     QCheckBox *_perWeek;
-    QComboBox *_allTasks;
+    KComboBox *_allTasks;
     QCheckBox *_totalsOnly;
 };
 

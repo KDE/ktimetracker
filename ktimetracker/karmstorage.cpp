@@ -882,7 +882,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   return err;
 }
 
-void KarmStorage::stopTimer(const Task* task, QDateTime when)
+void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
   kDebug(5970) << "Entering stopTimer when=" << when << endl;
   kDebug(5970) << "task->startTime=" << task->startTime() << endl;
@@ -974,8 +974,9 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   return e;
 }
 
-HistoryEvent::HistoryEvent(QString uid, QString name, long duration,
-        KDateTime start, KDateTime stop, QString todoUid)
+HistoryEvent::HistoryEvent( const QString &uid, const QString &name, 
+                            long duration, const KDateTime &start, 
+                            const KDateTime &stop, const QString &todoUid )
 {
   _uid = uid;
   _name = name;

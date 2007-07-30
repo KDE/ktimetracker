@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2005 by Thorsten Staerk <kde@staerk.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -98,8 +99,12 @@ public:
     QString deletetodo();
     bool    getpromptdelete();
     QString setpromptdelete( bool prompt );
-    QString exportcsvfile( QString filename, QString from, QString to, int type = 0, bool decimalMinutes=true, bool allTasks=true, QString delimiter="r", QString quote="q" );
-    QString importplannerfile( QString filename );
+    QString exportcsvfile( const QString &filename, const QString &from, 
+                           const QString &to, int type = 0, 
+                           bool decimalMinutes = true, bool allTasks = true, 
+                           const QString &delimiter = "r", 
+                           const QString &quote = "q" );
+    QString importplannerfile( const QString &filename );
     QStringList getActiveTasks();
     QStringList getTasks();
     bool isActive( const QString &taskName );

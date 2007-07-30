@@ -24,21 +24,21 @@
 
 #include "edittaskdialog.h"
 
-#include <QComboBox>
 #include <QCheckBox>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
-#include <QLineEdit>
 #include <QRadioButton>
 #include <QSizePolicy>
 #include <QString>
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include <KComboBox>
 #include <KDebug>
+#include <KLineEdit>
 #include <KLocale>            // i18n
 #include <KWindowSystem>
 
@@ -64,7 +64,7 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
   layout->setMargin( 0 );
   layout->setSpacing( KDialog::spacingHint() );
   QLabel *label = new QLabel( i18n( "Task &name:" ), taskNameWidget );
-  _name = new QLineEdit( taskNameWidget );
+  _name = new KLineEdit( taskNameWidget );
   label->setBuddy( _name );
   layout->addWidget( label );
   layout->addWidget( _name );
@@ -92,7 +92,7 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
       " session time)" ), timeWidget );
   connect( _relativeRB, SIGNAL( clicked() ), 
            this, SLOT( slotRelativePressed() ) );
-  _operator = new QComboBox( timeWidget );
+  _operator = new KComboBox( timeWidget );
   _operator->addItem( QString::fromLatin1( "+" ) );
   _operator->addItem( QString::fromLatin1( "-" ) );
 

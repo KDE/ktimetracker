@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2007 the ktimetracker developers
+ *     Copyright (C) 2005 by Thorsten Staerk <kde@staerk.de>
+ *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -19,33 +20,35 @@
  *
  */
 
-#include "kaccelmenuwatch.h"
 #include "karm_part.h"
+
+#include <QByteArray>
+#include <QFile>
+#include <QMenu>
+#include <QTextStream>
+#include <QtDBus>
+
+#include <KAboutData>
+#include <KAction>
+#include <KActionCollection>
+#include <KComponentData>
+#include <KFileDialog>
+#include <KGlobal>
+#include <KIcon>
+#include <KLocale>
+#include <KStandardAction>
+#include <KXMLGUIFactory>
+
+#include <kdemacros.h>
+
+#include "mainwindow.h"
+#include "kaccelmenuwatch.h"
 #include "karmerrors.h"
 #include "task.h"
 #include "preferences.h"
 #include "tray.h"
 #include "version.h"
-
-#include <kdemacros.h>
-#include <kcomponentdata.h>
-#include <kaction.h>
-#include <kactioncollection.h>
-#include <kstandardaction.h>
-#include <kfiledialog.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kicon.h>
-
-#include <QFile>
-#include <qtextstream.h>
-#include <QByteArray>
-#include <QMenu>
-#include <kxmlguifactory.h>
-#include "mainwindow.h"
-
 #include "karmpartadaptor.h"
-#include <QtDBus>
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     : KParts::ReadWritePart(parent),
@@ -369,9 +372,6 @@ void karmPart::fileSaveAs()
 
 // It's usually safe to leave the factory code alone.. with the
 // notable exception of the KAboutData data
-#include <kaboutdata.h>
-#include <klocale.h>
-
 KComponentData *karmPartFactory::s_instance = 0L;
 KAboutData* karmPartFactory::s_about = 0L;
 
@@ -682,7 +682,11 @@ QString karmPart::stopalltimers()
   return QString();
 }
 
-QString karmPart::exportcsvfile( QString filename, QString from, QString to, int type, bool decimalMinutes, bool allTasks, QString delimiter, QString quote )
+QString karmPart::exportcsvfile( const QString &filename, const QString &from, 
+                                 const QString &to, int type, 
+                                 bool decimalMinutes, bool allTasks, 
+                                 const QString &delimiter, 
+                                 const QString &quote )
 {
   ReportCriteria rc;
   rc.allTasks=allTasks;
@@ -696,7 +700,7 @@ QString karmPart::exportcsvfile( QString filename, QString from, QString to, int
   return _taskView->report( rc );
 }
 
-QString karmPart::importplannerfile( QString fileName )
+QString karmPart::importplannerfile( const QString &fileName )
 {
   return _taskView->importPlanner(fileName);
 }
