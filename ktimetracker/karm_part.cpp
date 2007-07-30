@@ -397,7 +397,7 @@ KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, QObject 
   karmPart* obj = new karmPart( parentWidget, parent );
 
   // See if we are to be read-write or not
-  if (QByteArray(classname) == "KParts::ReadOnlyPart")
+  if ( QLatin1String( classname ) == QLatin1String( "KParts::ReadOnlyPart" ) )
       obj->setReadWrite(false);
 
   return obj;
