@@ -75,7 +75,7 @@ int Task::depth()
   kDebug(5970) << "Entering Task::depth" << endl;
   int res=0;
   Task* t=this;
-  while (t=t->parent()) res++;
+  while ( ( t = t->parent() ) ) res++;
   kDebug(5970) << "depth is " << res << endl;
   return res;
 }

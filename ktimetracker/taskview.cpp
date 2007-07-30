@@ -600,8 +600,8 @@ void TaskView::clearActiveTasks()
 void TaskView::stopAllTimers( const QDateTime &when )
 {
   kDebug(5970) << "Entering TaskView::stopAllTimers" << endl;
-  for ( unsigned int i = 0; i < activeTasks.count(); i++ )
-    activeTasks.at(i)->setRunning(false, _storage, when);
+  foreach ( Task *task, activeTasks )
+    task->setRunning( false, _storage, when );
 
   _idleTimeDetector->stopIdleDetection();
   _focusDetector->stopFocusDetection(); 
@@ -680,8 +680,8 @@ void TaskView::minuteUpdate()
 
 void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
 {
-  for( unsigned int i = 0; i < activeTasks.count(); i++ )
-    activeTasks.at(i)->changeTime(minutes, ( save_data ? _storage : 0 ) );
+  foreach ( Task *task, activeTasks )
+    task->changeTime( minutes, ( save_data ? _storage : 0 ) );
 }
 
 void TaskView::newTask()

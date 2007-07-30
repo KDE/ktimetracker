@@ -42,7 +42,7 @@ class TaskView;
  * application.
  *
  * @short Main Part
- * @author Thorsten Staerk <kde at staerk dot de>
+ * @author Thorsten Staerk (kde at staerk dot de)
  * @version 0.1
  */
 class karmPart : public KParts::ReadWritePart

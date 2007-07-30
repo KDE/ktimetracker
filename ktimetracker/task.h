@@ -46,7 +46,6 @@ namespace KCal {
   class Todo;
 }
 
-/// \class Task
 /** \brief A class representing a task
  *
  * A "Task" object stores information about a task such as it's name,
