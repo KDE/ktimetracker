@@ -101,6 +101,8 @@ public:
     QString exportcsvfile( QString filename, QString from, QString to, int type = 0, bool decimalMinutes=true, bool allTasks=true, QString delimiter="r", QString quote="q" );
     QString importplannerfile( QString filename );
     QStringList getActiveTasks();
+    QStringList getTasks();
+    bool isActive( const QString &taskName );
 
     virtual ~karmPart();
 

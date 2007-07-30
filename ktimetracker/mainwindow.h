@@ -109,6 +109,8 @@ class MainWindow : public KParts::MainWindow
                            const QString &quote );
     QString importplannerfile( const QString &filename );
     QStringList getActiveTasks();
+    QStringList getTasks();
+    bool isActive( const QString &taskName );
 
   public Q_SLOTS:
     void setStatusBar( const QString& );

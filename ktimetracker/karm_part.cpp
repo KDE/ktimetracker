@@ -391,14 +391,16 @@ karmPartFactory::~karmPartFactory()
 KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, QObject *parent,
                                                  const char* classname, const QStringList &args )
 {
-    // Create an instance of our Part
-    karmPart* obj = new karmPart( parentWidget, parent );
+  Q_UNUSED( args );
 
-    // See if we are to be read-write or not
-    if (QByteArray(classname) == "KParts::ReadOnlyPart")
-        obj->setReadWrite(false);
+  // Create an instance of our Part
+  karmPart* obj = new karmPart( parentWidget, parent );
 
-    return obj;
+  // See if we are to be read-write or not
+  if (QByteArray(classname) == "KParts::ReadOnlyPart")
+      obj->setReadWrite(false);
+
+  return obj;
 }
 
 const KComponentData &karmPartFactory::componentData()
@@ -699,10 +701,44 @@ QString karmPart::importplannerfile( QString fileName )
   return _taskView->importPlanner(fileName);
 }
 
-// TODO implement like MainWindow::getActiveTasks
 QStringList karmPart::getActiveTasks()
 {
-  return QStringList() << "karm";
+  QStringList result;
+
+  for ( int i = 0; i < _taskView->count(); ++i ) {
+    if ( _taskView->item_at_index( i )->isRunning() ) {
+      result << _taskView->item_at_index( i )->name();
+    }
+  }
+
+  return result;
+}
+
+QStringList karmPart::getTasks()
+{
+  QStringList result;
+
+  for ( int i = 0; i < _taskView->count(); ++i ) {
+    result << _taskView->item_at_index( i )->name();
+  }
+
+  return result;
+}
+
+bool karmPart::isActive( const QString &taskName )
+{
+  QStringList result;
+
+  Task *task;
+
+  for ( int i = 0; i < _taskView->count(); ++i ) {
+    task = _taskView->item_at_index( i );
+    if ( task->name() == taskName ) {
+      return task->isRunning();
+    }
+  }
+
+  return false;
 }
 
 void karmPart::startNewSession()

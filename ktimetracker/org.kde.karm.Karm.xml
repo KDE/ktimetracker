@@ -72,6 +72,14 @@
       <arg name="out" type="as" direction="out" />
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
     </method>
+    <method name="getTasks">
+      <arg name="out" type="as" direction="out" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
+    </method>
+    <method name="isActive">
+      <arg type="b" direction="out" />
+      <arg name="taskName" type="s" direction="in" />
+    </method>
     <method name="save">
       <arg type="b" direction="out"/>
     </method>

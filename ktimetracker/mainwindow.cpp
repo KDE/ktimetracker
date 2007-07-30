@@ -754,5 +754,31 @@ QStringList MainWindow::getActiveTasks()
   return result;
 }
 
+QStringList MainWindow::getTasks()
+{
+  QStringList result;
+
+  for ( int i = 0; i < _taskView->count(); ++i ) {
+    result << _taskView->item_at_index( i )->name();
+  }
+
+  return result;
+}
+
+bool MainWindow::isActive( const QString &taskName )
+{
+  QStringList result;
+
+  Task *task;
+
+  for ( int i = 0; i < _taskView->count(); ++i ) {
+    task = _taskView->item_at_index( i );
+    if ( task->name() == taskName ) {
+      return task->isRunning();
+    }
+  }
+
+  return false;
+}
 
 #include "mainwindow.moc"
