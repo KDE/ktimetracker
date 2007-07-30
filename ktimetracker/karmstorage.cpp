@@ -998,7 +998,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
 
   for(QDate d = from; d <= to; d = d.addDays(1))
   {
-    events = _calendar->rawEventsForDate( d );
+    events = _calendar->rawEventsForDate( d, KPimPrefs::timeSpec() );
     for (event = events.begin(); event != events.end(); ++event)
     {
 
