@@ -70,7 +70,7 @@ MainWindow::MainWindow( const QString &icsfile )
   new KarmAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/Karm", this);
 
-  _taskView  = new TaskView( this, icsfile );
+  _taskView  = new TaskView( icsfile, this );
 
   setCentralWidget( _taskView );
   // status bar
@@ -113,7 +113,7 @@ MainWindow::MainWindow( const QString &icsfile )
   connect( _taskView, SIGNAL( tasksChanged( QList<Task*> ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
 
-  _taskView->load();
+  _taskView->load( icsfile );
 
   // Everything that uses Preferences has been created now, we can let it
   // emit its signals

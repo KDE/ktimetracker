@@ -57,7 +57,7 @@ class TaskView : public QTreeWidget
   Q_OBJECT
 
   public:
-    explicit TaskView( QWidget *parent = 0, const QString &icsfile = "" );
+    explicit TaskView( const QString &icsfile, QWidget *parent = 0 );
     virtual ~TaskView();
 
     /**  Return the first item in the view, cast to a Task pointer.  */
@@ -70,7 +70,7 @@ class TaskView : public QTreeWidget
     Task* item_at_index(int i);
 
     /** Load the view from storage.  */
-    void load( const QString &filename = "" );
+    void load( const QString &filename );
 
     /** Close the storage and release lock. */
     void closeStorage();
@@ -203,11 +203,6 @@ class TaskView : public QTreeWidget
        another program and taskview is cleared without stopping tasks
         IF YOU DO NOT KNOW WHAT YOU ARE DOING, CALL stopAllTimers INSTEAD */
     void clearActiveTasks();
-
-    /** React on user maybe having picked a new iCalendar file on preferences screen. 
-       If the file is not the same as before, load the new one. 
-       This is not iCalFileModified. */
-    void iCalFileChanged( const QString &file );
 
     /** Copy totals for current and all sub tasks to clipboard. */
     QString clipTotals( const ReportCriteria &rc );

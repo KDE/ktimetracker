@@ -22,6 +22,8 @@
 
 #include "taskview.h"
 
+#include <cassert>
+
 #include <QClipboard>
 #include <QFile>
 #include <QLayout>
@@ -105,9 +107,11 @@ public:
   }
 };
 
-TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
+TaskView::TaskView( const QString &icsfile, QWidget *parent ) 
+  : QTreeWidget(parent)
 {
-  _preferences = Preferences::instance( icsfile );
+  assert( !( icsfile.isEmpty() ) );
+  _preferences = Preferences::instance();
   _storage = KarmStorage::instance();
   _focusDetector = new FocusDetector(1);
   focustrackingactive = false;
@@ -134,10 +138,6 @@ TaskView::TaskView(QWidget *parent, const QString &icsfile ):QTreeWidget(parent)
   _minuteTimer = new QTimer(this);
   connect( _minuteTimer, SIGNAL( timeout() ), this, SLOT( minuteUpdate() ));
   _minuteTimer->start(1000 * secsPerMinute);
-
-  // React when user changes iCalFile
-  connect(_preferences, SIGNAL(iCalFile(QString)),
-      this, SLOT(iCalFileChanged(QString)));
 
   // resize columns when config is changed
   connect(_preferences, SIGNAL( setupChanged() ), this,SLOT( adaptColumns() ));
@@ -379,6 +379,8 @@ has the number i=0. */
 
 void TaskView::load( const QString &fileName )
 {
+  assert( !( fileName.isEmpty() ) );
+
   // if the program is used as an embedded plugin for konqueror, there may be a need
   // to load from a file without touching the preferences.
   kDebug(5970) << "Entering TaskView::load" << endl;
@@ -946,19 +948,6 @@ void TaskView::deletingTask(Task* deletedTask)
   activeTasks.removeAll( deletedTask );
 
   emit tasksChanged( activeTasks);
-}
-
-void TaskView::iCalFileChanged( const QString &file )
-// User might have picked a new file in the preferences dialog.
-// This is not iCalFileModified.
-{
-  kDebug(5970) << "TaskView:iCalFileChanged: " << file << endl;
-  if (_storage->icalfile() != file)
-  {
-    stopAllTimers();
-    _storage->save(this);
-    load();
-  }
 }
 
 QList<HistoryEvent> TaskView::getHistory(const QDate& from,

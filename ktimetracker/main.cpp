@@ -26,6 +26,7 @@
 #include <KCmdLineArgs>
 #include <KDebug>
 #include <KLocale>
+#include <KStandardDirs>
 #include <KUniqueApplication>
 
 #include "version.h"
@@ -84,11 +85,13 @@ int main( int argc, char *argv[] )
     {
       icsfile = KCmdLineArgs::cwd() + '/' + icsfile;
     }
+
     mainWindow = new MainWindow( icsfile );
   }
   else
   {
-    mainWindow = new MainWindow();
+    mainWindow = new MainWindow( KStandardDirs::locateLocal( "appdata", 
+                                 QString::fromLatin1( "karm.ics" ) ) );
   }
 
   if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))

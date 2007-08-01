@@ -101,7 +101,7 @@ class KarmStorage
      *
      */
     QString load( TaskView* taskview, const Preferences* preferences, 
-                  const QString &fileName = "" );
+                  const QString &fileName );
 
    /*
     * Return the name of the iCal file
@@ -263,18 +263,6 @@ class KarmStorage
      *  @return true if iCalendar file has any todos
      */
     bool isEmpty();
-
-    /**
-     * Check if iCalendar file name in the preferences has changed since the
-     * last call to load.  If there is no calendar file currently loaded,
-     * return false.
-     *
-     * @param preferences  Set of KArm preferences.
-     *
-     * @return true if a previous file has been loaded and the iCalendar file
-     * specified in the preferences is different.
-     */
-    bool isNewStorage(const Preferences* preferences) const;
 
     /** Return a list of start/stop events for the given date range. */
     QList<HistoryEvent> getHistory(const QDate& from, const QDate& to);

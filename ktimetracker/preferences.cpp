@@ -47,7 +47,7 @@
 
 Preferences *Preferences::_instance = 0;
 
-Preferences::Preferences( const QString& icsFile )
+Preferences::Preferences()
   : KPageDialog()
 {
   setCaption( i18n("Preferences") );
@@ -63,17 +63,14 @@ Preferences::Preferences( const QString& icsFile )
 
   load();
 
-  // command-line option overrides what is stored in
-  if ( ! icsFile.isEmpty() ) _iCalFileV = icsFile;
-
   connect(this,SIGNAL(okClicked()),SLOT(slotOk()));
   connect(this,SIGNAL(cancelClicked()),SLOT(slotCancel()));
 }
 
-Preferences *Preferences::instance( const QString &icsfile )
+Preferences *Preferences::instance()
 {
   if (_instance == 0) {
-    _instance = new Preferences( icsfile );
+    _instance = new Preferences;
   }
   return _instance;
 }
@@ -209,12 +206,6 @@ void Preferences::makeStoragePage()
   _autoSaveValueW->setRange(1, 60*24);
   _autoSaveValueW->setSuffix(i18n(" min"));
 
-  // iCalendar
-  QLabel* _iCalFileLabel = new QLabel( i18n("iCalendar file:"), storagePage );
-  _iCalFileW = new KUrlRequester( storagePage );
-  _iCalFileW->setFilter(QString::fromLatin1("*.ics"));
-  _iCalFileW->setMode(KFile::File);
-
   // Log time?
   _loggingW = new QCheckBox( i18n("Log history"), storagePage );
   _loggingW->setObjectName( "_loggingW" );
@@ -222,9 +213,7 @@ void Preferences::makeStoragePage()
   // add widgets to layout
   layout->addWidget(_doAutoSaveW, 0, 0);
   layout->addWidget(_autoSaveValueW, 0, 1);
-  layout->addWidget(_iCalFileLabel, 1, 0 );
-  layout->addWidget(_iCalFileW, 1, 1 );
-  layout->addWidget(_loggingW, 2, 0 );
+  layout->addWidget(_loggingW, 1, 0 );
 
   topLevel->addStretch();
 
@@ -247,8 +236,6 @@ void Preferences::showDialog()
 {
 
   // set all widgets
-  _iCalFileW->lineEdit()->setText(_iCalFileV);
-
   _doIdleDetectionW->setChecked(_doIdleDetectionV);
   _idleDetectValueW->setValue(_idleDetectValueV);
   _minDesktopActiveTimeValueW->setValue( _minDesktopActiveTimeValueV );
@@ -286,9 +273,6 @@ void Preferences::slotButtonClicked(int button)
 void Preferences::slotOk()
 {
   kDebug(5970) << "Entering Preferences::slotOk" << endl;
-
-  // storage
-  _iCalFileV = _iCalFileW->lineEdit()->text();
 
   _doIdleDetectionV = _doIdleDetectionW->isChecked();
   _idleDetectValueV = _idleDetectValueW->value();
@@ -335,7 +319,6 @@ void Preferences::autoSaveCheckBoxChanged()
 void Preferences::emitSignals()
 {
   kDebug(5970) << "Entering Preferences::emitSignals" << endl;
-  emit iCalFile( _iCalFileV );
   emit detectIdleness( _doIdleDetectionV );
   emit idlenessTimeout( _idleDetectValueV );
   emit autoSave( _doAutoSaveV );
@@ -343,8 +326,6 @@ void Preferences::emitSignals()
   emit setupChanged();
 }
 
-QString Preferences::iCalFile()           	     const { return _iCalFileV; }
-QString Preferences::activeCalendarFile() 	     const { return _iCalFileV; }
 bool    Preferences::detectIdleness()                const { return _doIdleDetectionV; }
 int     Preferences::idlenessTimeout()               const { return _idleDetectValueV; }
 int     Preferences::minimumDesktopActiveTime() const { return _minDesktopActiveTimeValueV; }
@@ -378,9 +359,6 @@ void Preferences::load()
   _minDesktopActiveTimeValueV = configIdleDetection.readEntry( QString::fromLatin1( "minactivetime" ), 5 );
 
   KConfigGroup configSaving = KGlobal::config()->group( QString::fromLatin1("Saving") );
-  _iCalFileV = configSaving.readPathEntry
-    ( QString::fromLatin1("ical file"),
-      KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics")));
   _doAutoSaveV = configSaving.readEntry
     ( QString::fromLatin1("auto save"), true);
   _autoSaveValueV = configSaving.readEntry
@@ -420,7 +398,6 @@ void Preferences::save()
   configIdleDetection.sync();
 
   KConfigGroup configSaving = KGlobal::config()->group( QString("Saving") );
-  configSaving.writePathEntry( QString("ical file"), _iCalFileV);
   configSaving.writeEntry( QString("auto save"), _doAutoSaveV);
   configSaving.writeEntry( QString("logging"), _loggingV);
   configSaving.writeEntry( QString("auto save period"), _autoSaveValueV);

@@ -90,7 +90,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
   KEMailSettings settings;
   QString lFileName = fileName;
 
-  if ( lFileName.isEmpty() ) lFileName = preferences->iCalFile();
+  assert( !( lFileName.isEmpty() ) );
 
   // If same file, don't reload
   if ( lFileName == _icalfile ) return err;
@@ -378,12 +378,6 @@ bool KarmStorage::isEmpty()
 
   todoList = _calendar->rawTodos();
   return todoList.empty();
-}
-
-bool KarmStorage::isNewStorage(const Preferences* preferences) const
-{
-  if ( !_icalfile.isNull() ) return preferences->iCalFile() != _icalfile;
-  else return false;
 }
 
 //----------------------------------------------------------------------------

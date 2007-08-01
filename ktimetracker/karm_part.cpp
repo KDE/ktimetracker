@@ -37,6 +37,7 @@
 #include <KIcon>
 #include <KLocale>
 #include <KStandardAction>
+#include <KStandardDirs>
 #include <KXMLGUIFactory>
 
 #include <kdemacros.h>
@@ -64,7 +65,9 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     setComponentData( karmPartFactory::componentData() );
 
     // this should be your custom internal widget
-    _taskView = new TaskView( parentWidget );
+    _taskView = new TaskView( KStandardDirs::locateLocal( "appdata", 
+                              QString::fromLatin1( "karm.ics" ) ), 
+                              parentWidget );
 
     connect(_taskView, SIGNAL( setStatusBarText(QString)), this, SLOT( setStatusBar(QString) ) );
 
@@ -110,7 +113,8 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
   connect( _taskView, SIGNAL( tasksChanged( QList<Task*> ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
 
-  _taskView->load();
+  _taskView->load( KStandardDirs::locateLocal( "appdata", 
+                   QString::fromLatin1( "karm.ics" ) ) );
 
   // Everything that uses Preferences has been created now, we can let it
   // emit its signals
