@@ -20,7 +20,6 @@
  *
  */
 
-//finally over 50% of the code copyright remarks
 #ifndef KARM_DESKTOP_LIST_H
 #define KARM_DESKTOP_LIST_H
 
