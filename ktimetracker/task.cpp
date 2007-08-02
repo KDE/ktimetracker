@@ -72,11 +72,11 @@ int Task::depth()
 // Deliver the depth of a task, e.g. how many tasks are supertasks to it. 
 // A toplevel task has the depth 0.
 {
-  kDebug(5970) << "Entering Task::depth" << endl;
+  kDebug(5970) <<"Entering Task::depth";
   int res=0;
   Task* t=this;
   while ( ( t = t->parent() ) ) res++;
-  kDebug(5970) << "depth is " << res << endl;
+  kDebug(5970) <<"depth is" << res;
   return res;
 }
 
@@ -133,7 +133,7 @@ Task::~Task() {
 
 void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
 {
-  kDebug(5970) << "Entering Task::setRunning" << endl; 
+  kDebug(5970) <<"Entering Task::setRunning"; 
   if ( on ) 
   {
     if (isComplete()) return; // don't start if its marked complete
@@ -171,7 +171,7 @@ bool Task::isRunning() const
 
 void Task::setName( const QString& name, KarmStorage* storage )
 {
-  kDebug(5970) << "Task:setName: " << name << endl;
+  kDebug(5970) <<"Task:setName:" << name;
 
   QString oldname = _name;
   if ( oldname != name ) {
@@ -183,7 +183,7 @@ void Task::setName( const QString& name, KarmStorage* storage )
 
 void Task::setPercentComplete(const int percent, KarmStorage *storage)
 {
-  kDebug(5970) << "Task::setPercentComplete(" << percent << ", storage): "
+  kDebug(5970) <<"Task::setPercentComplete(" << percent <<", storage):"
     << _uid << endl;
 
   if (!percent)
@@ -249,7 +249,7 @@ void Task::changeTime( long minutes, KarmStorage* storage )
 
 void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 {
-  kDebug(5970) << "Entering Task::changeTimes" << endl;
+  kDebug(5970) <<"Entering Task::changeTimes";
   if( minutesSession != 0 || minutes != 0) 
   {
     _sessionTime += minutesSession;
@@ -295,7 +295,7 @@ void Task::changeParentTotalTimes( long minutesSession, long minutes )
 
 bool Task::remove( KarmStorage* storage)
 {
-  kDebug(5970) << "Task::remove: " << _name << endl;
+  kDebug(5970) <<"Task::remove:" << _name;
 
   bool ok = true;
 
@@ -336,7 +336,7 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
 
   Q_ASSERT( todo != NULL );
 
-  kDebug(5970) << "Task::asTodo: name() = '" << name() << "'" << endl;
+  kDebug(5970) <<"Task::asTodo: name() = '" << name() <<"'";
   todo->setSummary( name() );
 
   // Note: if the date start is empty, the KOrganizer GUI will have the
@@ -402,7 +402,7 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
 
   percent_complete = static_cast<KCal::Todo*>(incident)->percentComplete();
 
-  //kDebug(5970) << "Task::parseIncidence: "
+  //kDebug(5970) <<"Task::parseIncidence:"
   //  << name << ", Minutes: " << minutes
   //  <<  ", desktop: " << desktopList << endl;
 
@@ -427,7 +427,7 @@ QString Task::getDesktopStr() const
 void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
 {
-  kDebug(5970) << "Task::cut - " << name() << endl;
+  kDebug(5970) <<"Task::cut -" << name();
 
   changeParentTotalTimes( -_totalSessionTime, -_totalTime);
   if ( ! parent())
@@ -440,27 +440,27 @@ void Task::cut()
 void Task::paste(Task* destination)
 // This is needed e.g. to move a task under its parent when loading.
 {
-  kDebug(5970) << "Entering Task::paste" << endl;
+  kDebug(5970) <<"Entering Task::paste";
 
   destination->QTreeWidgetItem::insertChild(0,this);
   changeParentTotalTimes( _totalSessionTime, _totalTime);
 
-  kDebug(5970) << "Leaving Task::paste" << endl;
+  kDebug(5970) <<"Leaving Task::paste";
 }
 
 void Task::move(Task* destination)
 // This is used e.g. to move each task under its parent after loading.
 {
-  kDebug(5970) << "Entering Task::move" << endl;
+  kDebug(5970) <<"Entering Task::move";
   cut();
   paste(destination);
-  kDebug(5970) << "Leaving Task::move" << endl;
+  kDebug(5970) <<"Leaving Task::move";
 }
 
 void Task::update()
 // Update a row, containing one task
 {
-  kDebug(5970) << "Entering Task::update" << endl;
+  kDebug(5970) <<"Entering Task::update";
   bool b=taskView()->preferences()->decimalFormat();
   setText(0, _name);
   setText(1, formatTime(_sessionTime, b));
@@ -468,7 +468,7 @@ void Task::update()
   setText(3, formatTime(_totalSessionTime, b));
   setText(4, formatTime(_totalTime, b));
   setText(5, QString::number(_percentcomplete));
-  kDebug(5970) << "Exiting Task::update" << endl;
+  kDebug(5970) <<"Exiting Task::update";
 }
 
 void Task::addComment( const QString &comment, KarmStorage* storage )

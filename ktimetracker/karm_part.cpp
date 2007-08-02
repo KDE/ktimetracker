@@ -331,7 +331,7 @@ bool karmPart::openFile()
 
 void karmPart::setStatusBar(const QString & qs)
 {
-  kDebug(5970) << "Entering setStatusBar" << endl;
+  kDebug(5970) <<"Entering setStatusBar";
   emit setStatusBarText(qs);
 }
 
@@ -484,7 +484,7 @@ void karmPart::quit()
 
 bool karmPart::save()
 {
-  kDebug(5970) << "Saving time data to disk." << endl;
+  kDebug(5970) <<"Saving time data to disk.";
   QString err=_taskView->save();  // untranslated error msg.
 
   if (err.isEmpty()) setStatusBar(i18n("Successfully saved tasks and history"));
@@ -496,7 +496,7 @@ int karmPart::addTask( const QString& taskname )
 {
   DesktopList desktopList;
   QString uid = _taskView->addTask( taskname, 0, 0, desktopList );
-  kDebug(5970) << "MainWindow::addTask( " << taskname << " ) returns " << uid << endl;
+  kDebug(5970) <<"MainWindow::addTask(" << taskname <<" ) returns" << uid;
   if ( uid.length() > 0 ) return 0;
   else
   {
@@ -590,7 +590,7 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
   int rval = 0;
   Task *task, *t;
 
-  kDebug(5970) << "MainWindow::totalTimeForTask( " << taskId << " )" << endl;
+  kDebug(5970) <<"MainWindow::totalTimeForTask(" << taskId <<" )";
 
   // Find task
   task = _taskView->first_child();
@@ -603,11 +603,11 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
   if ( t != NULL )
   {
     rval = t->totalTime();
-    kDebug(5970) << "MainWindow::totalTimeForTask - task found: rval = " << rval << endl;
+    kDebug(5970) <<"MainWindow::totalTimeForTask - task found: rval =" << rval;
   }
   else
   {
-    kDebug(5970) << "MainWindow::totalTimeForTask - task not found" << endl;
+    kDebug(5970) <<"MainWindow::totalTimeForTask - task not found";
     rval = KARM_ERR_UID_NOT_FOUND;
   }
 
@@ -637,7 +637,7 @@ Task* karmPart::_hasUid( Task* task, const QString &uid ) const
 {
   Task *rval = NULL;
 
-  //kDebug(5970) << "MainWindow::_hasUid( " << task << ", " << uid << " )" << endl;
+  //kDebug(5970) <<"MainWindow::_hasUid(" << task <<"," << uid <<" )";
 
   if ( task->uid() == uid ) rval = task;
   else

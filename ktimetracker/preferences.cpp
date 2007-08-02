@@ -265,14 +265,14 @@ void Preferences::showDialog()
 
 void Preferences::slotButtonClicked(int button)
 {
-  kDebug(5970) << "Entering Preferences::slotButtonClicked" << endl;
+  kDebug(5970) <<"Entering Preferences::slotButtonClicked";
   if (button == KDialog::Ok) slotOk();
   if (button == KDialog::Cancel) slotCancel();
 }
 
 void Preferences::slotOk()
 {
-  kDebug(5970) << "Entering Preferences::slotOk" << endl;
+  kDebug(5970) <<"Entering Preferences::slotOk";
 
   _doIdleDetectionV = _doIdleDetectionW->isChecked();
   _idleDetectValueV = _idleDetectValueW->value();
@@ -302,7 +302,7 @@ void Preferences::slotOk()
 
 void Preferences::slotCancel()
 {
-  kDebug(5970) << "Entering Preferences::slotCancel" << endl;
+  kDebug(5970) <<"Entering Preferences::slotCancel";
   KDialog::reject();
 }
 
@@ -318,7 +318,7 @@ void Preferences::autoSaveCheckBoxChanged()
 
 void Preferences::emitSignals()
 {
-  kDebug(5970) << "Entering Preferences::emitSignals" << endl;
+  kDebug(5970) <<"Entering Preferences::emitSignals";
   emit detectIdleness( _doIdleDetectionV );
   emit idlenessTimeout( _idleDetectValueV );
   emit autoSave( _doAutoSaveV );
@@ -390,7 +390,7 @@ void Preferences::load()
 
 void Preferences::save()
 {
-  kDebug(5970) << "Entering Preferences::save" << endl;
+  kDebug(5970) <<"Entering Preferences::save";
   KConfigGroup configIdleDetection = KGlobal::config()->group( QString( "Idle detection" ) );
   configIdleDetection.writeEntry( QString( "enabled" ), _doIdleDetectionV );
   configIdleDetection.writeEntry( QString( "period" ), _idleDetectValueV );

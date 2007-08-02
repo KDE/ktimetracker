@@ -68,19 +68,19 @@ Script::~Script()
 
 void Script::setProgram ( const QString &arg )
 {
-  kDebug() << "Entering setProgram" << endl;
+  kDebug() <<"Entering setProgram";
   program=new QString(arg);
-  kDebug() << "Leaving setProgram" << endl;
+  kDebug() <<"Leaving setProgram";
 }
 
 void Script::addArgument( QString arg )
 {
-  kDebug() << "Entering addArgument" << endl;
-  kDebug() << "argument to be added is " << arg << endl;
+  kDebug() <<"Entering addArgument";
+  kDebug() <<"argument to be added is" << arg;
   if (arguments!=QString()) arguments.append(" ");
   arguments.append(arg);
-  kDebug() << "arguments are now " << arguments << endl;
-  kDebug() << "Leaving addArgument" << endl;
+  kDebug() <<"arguments are now" << arguments;
+  kDebug() <<"Leaving addArgument";
 }
 
 void Script::setTimeout( int seconds )
@@ -91,11 +91,11 @@ void Script::setTimeout( int seconds )
 
 int Script::run()
 {
-  kDebug() << "Entering Script::run" << endl;
+  kDebug() <<"Entering Script::run";
   const QString program1=program->left(program->length()); 
   const QStringList qsl=arguments.split(" ");
-  kDebug() << "Program is " << program1 << endl;
-  kDebug() << "Arguments are " << qsl << endl;
+  kDebug() <<"Program is" << program1;
+  kDebug() <<"Arguments are" << qsl;
   // This didn't work.  But Ctrl-C does.  :P
   //QTimer::singleShot( m_timeoutInSeconds * 1000, m_proc, SLOT( kill() ) );
   //while ( ! m_proc->normalExit() );

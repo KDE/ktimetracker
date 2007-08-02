@@ -48,7 +48,7 @@ const QString cr = QString::fromLatin1("\n");
 
 QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 {
-  kDebug(5970) << "Entering TimeKard::totalsAsText" << endl;
+  kDebug(5970) <<"Entering TimeKard::totalsAsText";
   QString retval;
   QString line;
   QString buf;
@@ -106,7 +106,7 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 // Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
 void TimeKard::printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
 {
-  kDebug(5970) << "Entering TimeKard::printTask" << endl;
+  kDebug(5970) <<"Entering TimeKard::printTask";
   QString buf;
 
   s += buf.fill(' ', level);
@@ -148,7 +148,7 @@ void TimeKard::printTaskHistory(const Task *task,
     const QDate& to,
     const int level, QString& s, bool totalsOnly)
 {
-  kDebug(5970) << "Entering TimeKard::printTaskHistory" << endl;
+  kDebug(5970) <<"Entering TimeKard::printTaskHistory";
   long sectionsum = 0;
   for ( QDate day = from; day <= to; day = day.addDays(1) )
   {
@@ -204,7 +204,7 @@ QString TimeKard::sectionHistoryAsText(
   const QString& name,
   bool justThisTask, bool totalsOnly)
 {
-  kDebug(5970) << "Entering TimeKard::sectionHistoryAsText" << endl;
+  kDebug(5970) <<"Entering TimeKard::sectionHistoryAsText";
   const int sectionReportWidth = taskWidth + ( totalsOnly ? 0 : sectionFrom.daysTo(sectionTo) * timeWidth ) + totalTimeWidth;
   assert( sectionReportWidth > 0 );
   QString line;
@@ -326,7 +326,7 @@ QString TimeKard::sectionHistoryAsText(
 QString TimeKard::historyAsText(TaskView* taskview, const QDate& from,
     const QDate& to, bool justThisTask, bool perWeek, bool totalsOnly)
 {
-  kDebug(5970) << "Entering TimeKard::historyAsText" << endl;
+  kDebug(5970) <<"Entering TimeKard::historyAsText";
   // header
   QString retval;
   retval += totalsOnly ? i18n("Task Totals") : i18n("Task History");

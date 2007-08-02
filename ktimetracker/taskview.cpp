@@ -221,12 +221,12 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
 
 void TaskView::dropEvent(QDropEvent* qde)
 {
-  kDebug(5970) << "This is dropEvent" << endl;
+  kDebug(5970) <<"This is dropEvent";
   if (this->itemAt(qde->pos())==0) 
   // the task was dropped to an empty place
   {
     // if the task is a sub-task, it shall be freed from its parents, otherwise, nothing happens
-    kDebug(5970) << "User drops onto an empty place" << endl;
+    kDebug(5970) <<"User drops onto an empty place";
     if (dragTask->parent())
     {
       _storage->setTaskParent(dragTask,0);
@@ -237,7 +237,7 @@ void TaskView::dropEvent(QDropEvent* qde)
   else
   {
     Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
-    kDebug(5970) << "taking " << dragTask->name() << " dropping onto " << t->name() << endl;
+    kDebug(5970) <<"taking" << dragTask->name() <<" dropping onto" << t->name();
     // is t==dragTask
     if (t != dragTask) 
     {
@@ -247,11 +247,11 @@ void TaskView::dropEvent(QDropEvent* qde)
       while (ancestor!=0)
       {
         if (ancestor==dragTask) isAncestor=true;
-        kDebug() << "testing " << ancestor->name() << endl;
-        kDebug() << "isAncestor=" << isAncestor << endl;
+        kDebug() <<"testing" << ancestor->name();
+        kDebug() <<"isAncestor=" << isAncestor;
         ancestor=ancestor->parent();
       }
-      if (isAncestor) kDebug(5970) << "User dropped a task on its subtask" << endl;
+      if (isAncestor) kDebug(5970) <<"User dropped a task on its subtask";
       else  // move the task
       {
         if (dragTask->parent())
@@ -281,9 +281,9 @@ void TaskView::dropEvent(QDropEvent* qde)
 
 void TaskView::startDrag(Qt::DropActions action)
 {
-  kDebug(5970) << "Entering TaskView::startDrag" << endl;
+  kDebug(5970) <<"Entering TaskView::startDrag";
   dragTask=(Task*) currentItem();
-  kDebug(5970) << "dragTask is " << dragTask->name() << endl;
+  kDebug(5970) <<"dragTask is" << dragTask->name();
   QTreeWidget::startDrag(action);  
 }
 
@@ -349,15 +349,15 @@ TaskView::~TaskView()
 
 Task* TaskView::first_child() const
 {
-  kDebug() << "Entering TaskView::first_child" << endl;
+  kDebug() <<"Entering TaskView::first_child";
   Task* t = static_cast<Task*>(topLevelItem(0));
-  kDebug() << "Leaving TaskView::first_child" << endl;
+  kDebug() <<"Leaving TaskView::first_child";
   return t;
 }
 
 Task* TaskView::current_item() const
 {
-  kDebug() << "Entering TaskView::current_item" << endl;
+  kDebug() <<"Entering TaskView::current_item";
   return static_cast<Task*>(currentItem());
 }
 
@@ -366,13 +366,13 @@ Task* TaskView::item_at_index(int i)
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug(5970) << "Entering TaskView::item_at_index(" << i << ")" << endl;
+  kDebug(5970) <<"Entering TaskView::item_at_index(" << i <<")";
   if (!first_child()) return 0;
 
   QTreeWidgetItemIterator item(first_child());
   while( *item && i-- ) ++item;
  
-  kDebug(5970) << "Leaving TaskView::item_at_index" << endl;
+  kDebug(5970) <<"Leaving TaskView::item_at_index";
   if (!*item) return 0;
   else return (Task*) *item;
 }
@@ -383,7 +383,7 @@ void TaskView::load( const QString &fileName )
 
   // if the program is used as an embedded plugin for konqueror, there may be a need
   // to load from a file without touching the preferences.
-  kDebug(5970) << "Entering TaskView::load" << endl;
+  kDebug(5970) <<"Entering TaskView::load";
   _isloading = true;
   QString err = _storage->load(this, _preferences, fileName);
 
@@ -391,7 +391,7 @@ void TaskView::load( const QString &fileName )
   {
     KMessageBox::error(this, err);
     _isloading = false;
-    kDebug(5970) << "Leaving TaskView::load" << endl;
+    kDebug(5970) <<"Leaving TaskView::load";
     return;
   }
 
@@ -407,10 +407,10 @@ void TaskView::load( const QString &fileName )
     setCurrentItem(first_child());
     _desktopTracker->startTracking();
     _isloading = false;
-    kDebug(5970) << "load calls refesh" << endl;
+    kDebug(5970) <<"load calls refesh";
     refresh();
   }
-  kDebug(5970) << "Leaving TaskView::load" << endl;
+  kDebug(5970) <<"Leaving TaskView::load";
 }
 
 void TaskView::restoreItemState()
@@ -418,7 +418,7 @@ void TaskView::restoreItemState()
 Its state is whether it is expanded or not. If a task shall be expanded
 is stored in the _preferences object. */
 {
-  kDebug(5970) << "Entering TaskView::restoreItemState" << endl;
+  kDebug(5970) <<"Entering TaskView::restoreItemState";
   
   if (first_child()) {
     QTreeWidgetItemIterator item(first_child());
@@ -429,15 +429,15 @@ is stored in the _preferences object. */
       ++item;
     }
   }
-  kDebug(5970) << "Leaving TaskView::restoreItemState" << endl;
+  kDebug(5970) <<"Leaving TaskView::restoreItemState";
 }
 
 void TaskView::itemStateChanged( QTreeWidgetItem *item )
 {
-  kDebug() << "Entering TaskView::itemStateChanged" << endl;
+  kDebug() <<"Entering TaskView::itemStateChanged";
   if ( !item || _isloading ) return;
   Task *t = (Task *)item;
-  kDebug(5970) << "TaskView::itemStateChanged()" << " uid=" << t->uid() << " state=" << t->isExpanded() << endl;
+  kDebug(5970) <<"TaskView::itemStateChanged()" <<" uid=" << t->uid() <<" state=" << t->isExpanded();
   if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
@@ -445,16 +445,16 @@ void TaskView::closeStorage() { _storage->closeStorage( this ); }
 
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {
-  kDebug(5970) << "entering iCalFileModified" << endl;
-  kDebug(5970) << rc->infoText() << endl;
+  kDebug(5970) <<"entering iCalFileModified";
+  kDebug(5970) << rc->infoText();
   rc->dump();
   _storage->buildTaskView(rc,this);
-  kDebug(5970) << "exiting iCalFileModified" << endl;
+  kDebug(5970) <<"exiting iCalFileModified";
 }
 
 void TaskView::refresh()
 {
-  kDebug(5970) << "entering TaskView::refresh()" << endl;
+  kDebug(5970) <<"entering TaskView::refresh()";
   int i = 0;
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
   {
@@ -468,7 +468,7 @@ void TaskView::refresh()
   setRootIsDecorated( item_at_index( i ) && ( item_at_index( i )->depth() != 0 ) );
 
   emit updateButtons();
-  kDebug(5970) << "exiting TaskView::refresh()" << endl;
+  kDebug(5970) <<"exiting TaskView::refresh()";
 }
     
 void TaskView::reFresh()
@@ -478,7 +478,7 @@ void TaskView::reFresh()
 
 QString TaskView::importPlanner( const QString &fileName )
 {
-  kDebug( 5970 ) << "entering importPlanner" << endl;
+  kDebug( 5970 ) <<"entering importPlanner";
   PlannerParser *handler = new PlannerParser( this );
   QString lFileName = fileName;
   if ( lFileName.isEmpty() ) 
@@ -499,7 +499,7 @@ QString TaskView::report( const ReportCriteria& rc )
 
 void TaskView::exportcsvFile()
 {
-  kDebug(5970) << "TaskView::exportcsvFile()" << endl;
+  kDebug(5970) <<"TaskView::exportcsvFile()";
 
   CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
   if ( current_item() && current_item()->isRoot() )
@@ -513,7 +513,7 @@ void TaskView::exportcsvFile()
 
 QString TaskView::exportcsvHistory()
 {
-  kDebug(5970) << "TaskView::exportcsvHistory()" << endl;
+  kDebug(5970) <<"TaskView::exportcsvHistory()";
   QString err;
   
   CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
@@ -558,7 +558,7 @@ QString TaskView::save()
   if (activeTasks.count() == 0)
 #endif
   {
-    kDebug(5970) << "Entering TaskView::save(ListView)" << endl;
+    kDebug(5970) <<"Entering TaskView::save(ListView)";
     QString err=_storage->save(this);
 
     emit setStatusBarText( err.isNull() ? i18n("Saved successfully") : i18n("Error during saving") );
@@ -601,7 +601,7 @@ void TaskView::clearActiveTasks()
 
 void TaskView::stopAllTimers( const QDateTime &when )
 {
-  kDebug(5970) << "Entering TaskView::stopAllTimers" << endl;
+  kDebug(5970) <<"Entering TaskView::stopAllTimers";
   foreach ( Task *task, activeTasks )
     task->setRunning( false, _storage, when );
 
@@ -631,7 +631,7 @@ stored time that is always contain in the overall time. We speak of session time
 overalltimes (comprising all sessions) and total times (comprising all subtasks).
 That is why there is also a total session time. */
 {
-  kDebug(5970) << "Entering TaskView::startNewSession" << endl;
+  kDebug(5970) <<"Entering TaskView::startNewSession";
   QTreeWidgetItemIterator item( first_child() );
   while ( *item )
   {
@@ -639,13 +639,13 @@ That is why there is also a total session time. */
     task->startNewSession();
     ++item;
   }
-  kDebug(5970) << "Leaving TaskView::startNewSession" << endl;
+  kDebug(5970) <<"Leaving TaskView::startNewSession";
 }
 
 void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
-  kDebug(5970) << "Entering TaskView::resetTimeForAllTasks" << endl;
+  kDebug(5970) <<"Entering TaskView::resetTimeForAllTasks";
   QTreeWidgetItemIterator item( first_child() );
   while ( *item ) 
   {
@@ -653,7 +653,7 @@ void TaskView::resetTimeForAllTasks()
     task->resetTimes();
     ++item;
   }
-  kDebug(5970) << "Leaving TaskView::resetTimeForAllTasks" << endl;
+  kDebug(5970) <<"Leaving TaskView::resetTimeForAllTasks";
 }
 
 void TaskView::stopTimerFor(Task* task)
@@ -725,7 +725,7 @@ QString TaskView::addTask
 ( const QString& taskname, long total, long session, 
   const DesktopList& desktops, Task* parent )
 {
-  kDebug(5970) << "Entering TaskView::addTask; taskname = " << taskname << endl;
+  kDebug(5970) <<"Entering TaskView::addTask; taskname =" << taskname;
   Task *task;
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );
@@ -760,7 +760,7 @@ void TaskView::newSubTask()
 
 void TaskView::editTask()
 {
-  kDebug(5970) << "Entering editTask" << endl;
+  kDebug(5970) <<"Entering editTask";
   Task *task = current_item();
   if (!task)
     return;
@@ -839,7 +839,7 @@ void TaskView::reinstateTask(int completion)
 
 void TaskView::deleteTask(bool markingascomplete)
 {
-  kDebug(5970) << "Entering TaskView::deleteTask" << endl;
+  kDebug(5970) <<"Entering TaskView::deleteTask";
   Task *task = current_item();
   if (task == 0) {
     KMessageBox::information(0,i18n("No task selected."));
@@ -930,7 +930,7 @@ x - displaycolumn - name
 4 - 3             - total time
 5 - 4             - percent complete  */
 {
-  kDebug(5970) << "Entering TaskView::adaptColumns" << endl;
+  kDebug(5970) <<"Entering TaskView::adaptColumns";
   for( int x=1; x <= 5; x++) 
   {
     if ( _preferences->displayColumn(x-1) ) setColumnHidden( x, false );
@@ -959,10 +959,10 @@ QList<HistoryEvent> TaskView::getHistory(const QDate& from,
 void TaskView::markTaskAsComplete()
 {
   if (current_item())
-    kDebug(5970) << "TaskView::markTaskAsComplete: "
+    kDebug(5970) <<"TaskView::markTaskAsComplete:"
       << current_item()->uid() << endl;
   else
-    kDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
+    kDebug(5970) <<"TaskView::markTaskAsComplete: null current_item()";
 
   bool markingascomplete = true;
   deleteTask(markingascomplete);
@@ -971,10 +971,10 @@ void TaskView::markTaskAsComplete()
 void TaskView::markTaskAsIncomplete()
 {
   if (current_item())
-    kDebug(5970) << "TaskView::markTaskAsComplete: "
+    kDebug(5970) <<"TaskView::markTaskAsComplete:"
       << current_item()->uid() << endl;
   else
-    kDebug(5970) << "TaskView::markTaskAsComplete: null current_item()" << endl;
+    kDebug(5970) <<"TaskView::markTaskAsComplete: null current_item()";
 
   reinstateTask(50); // if it has been reopened, assume half-done
 }
@@ -984,7 +984,7 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
 {
-  kDebug(5970) << "Entering clipTotals" << endl;
+  kDebug(5970) <<"Entering clipTotals";
   QString err=QString();
   TimeKard t;
   KApplication::clipboard()->setText(t.totalsAsText(this, rc));
@@ -1021,7 +1021,7 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
 
 void TaskView::slotColumnToggled( int column )
 {
-  kDebug() << "column: " << column << endl;
+  kDebug() <<"column:" << column;
   _preferences->setDisplayColumn( column - 1, !isColumnHidden(column) );
   _preferences->save();
 }

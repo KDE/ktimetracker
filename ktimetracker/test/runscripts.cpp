@@ -80,7 +80,7 @@ int runscripts
   int current=0;
   while ( ( current < list->count() ) && ( !rval && ( fi = new QFileInfo(it[current]) ) != 0 ) )
   {
-    kDebug() << "now testing " << fi->fileName() << endl;
+    kDebug() <<"now testing" << fi->fileName();
     // Don't run scripts that are shared routines.
     if ( ! fi->fileName().startsWith( not_a_test_filename_prefix ) ) 
     {
@@ -93,7 +93,7 @@ int runscripts
 
       rval = s->run();
 
-      kDebug() << "runscripts: " << fi->fileName() 
+      kDebug() <<"runscripts:" << fi->fileName() 
         << " " << dots.left( dots.length() - fi->fileName().length() )
         << " " << ( ! rval ? "PASS" : "FAIL" ) << endl;
 
@@ -108,7 +108,7 @@ int runscripts
       s = new Script( path );
     }
     ++current;
-    kDebug() << "next filename" << endl;
+    kDebug() <<"next filename";
   }
   delete s;
   s = 0;
@@ -122,16 +122,16 @@ int main( int, char** )
 
   QString path = srcdir();
 
-  kDebug() << "Running sh scripts" << endl;
+  kDebug() <<"Running sh scripts";
   if ( !rval ) rval = runscripts( "sh", "*.sh *.Sh *.SH *.sH", path );
 
-  kDebug() << "Running Python scripts" << endl;
+  kDebug() <<"Running Python scripts";
   if ( !rval ) rval = runscripts( "python", "*.py *.Py *.PY *.pY", path );
 
-  kDebug() << "Running Perl scripts" << endl;
+  kDebug() <<"Running Perl scripts";
   if ( !rval ) rval = runscripts( "perl", "*.pl *.Pl *.PL *.pL", path );
 
-  kDebug() << "Running PHP scripts" << endl;
+  kDebug() <<"Running PHP scripts";
   if ( !rval ) rval = runscripts( "php", "*.php *.php3 *.php4 *.php5", path );
 
   return rval;

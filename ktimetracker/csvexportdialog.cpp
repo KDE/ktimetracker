@@ -96,7 +96,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
   rc.from = dtFrom->date();
   rc.to = dtTo->date();
   rc.decimalMinutes = (  combodecimalminutes->currentText() == i18n( "Decimal" ) );
-  kDebug(5970) << "rc.decimalMinutes is " << rc.decimalMinutes << endl;
+  kDebug(5970) <<"rc.decimalMinutes is" << rc.decimalMinutes;
 
   if ( radioComma->isChecked() )          rc.delimiter = ",";
   else if ( radioTab->isChecked() )       rc.delimiter = "\t";

@@ -64,7 +64,7 @@ void KAccelMenuWatch::connectAccel( int itemId, KStandardShortcut::StandardShort
 
 void KAccelMenuWatch::updateMenus()
 {
-  kDebug(5970) << "This is KAccelMenuWatch::updateMenus" << endl;
+  kDebug(5970) <<"This is KAccelMenuWatch::updateMenus";
 /*
   assert( _accel != 0 );
 

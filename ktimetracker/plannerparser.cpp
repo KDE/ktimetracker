@@ -45,7 +45,7 @@ test cases:
   // if there are, put the top-level tasks of planner on the same level as current_item.
   // So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
   {
-    kDebug() << "entering constructor to import planner tasks" << endl;
+    kDebug() <<"entering constructor to import planner tasks";
     _taskView=tv;
     level=0;
     if (_taskView->current_item()) if (_taskView->current_item()->parent()) 
@@ -63,7 +63,7 @@ test cases:
   
   bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
   {
-    kDebug() << "entering startElement" << endl;
+    kDebug() <<"entering startElement";
     QString taskName;
     int     taskComplete=0;
     
@@ -91,7 +91,7 @@ test cases:
       else
       {
         task = new Task(taskName, 0, 0, dl, _taskView);
-        kDebug() << "added" << taskName << endl;
+        kDebug() <<"added" << taskName;
         task->setUid(_taskView->storage()->addTask(task, 0));	  
       }
     

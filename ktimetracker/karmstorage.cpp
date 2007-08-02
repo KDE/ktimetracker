@@ -85,7 +85,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
-  kDebug(5970) << "Entering KarmStorage::load" << endl;
+  kDebug(5970) <<"Entering KarmStorage::load";
   QString err;
   KEMailSettings settings;
   QString lFileName = fileName;
@@ -154,7 +154,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
     // Build dictionary to look up Task object from Todo uid.  Each task is a
     // QListViewItem, and is initially added with the view as the parent.
     todoList = _calendar->rawTodos();
-    kDebug(5970) << "KarmStorage::load "
+    kDebug(5970) <<"KarmStorage::load"
       << "rawTodo count (includes completed todos) ="
       << todoList.count() << endl;
     for( todo = todoList.begin(); todo != todoList.end(); ++todo )
@@ -202,7 +202,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
       }
     }
 
-    kDebug(5970) << "KarmStorage::load - loaded " << view->count()
+    kDebug(5970) <<"KarmStorage::load - loaded" << view->count()
       << " tasks from " << _icalfile << endl;
   }
 
@@ -212,7 +212,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
 
 QString KarmStorage::icalfile()
 {
-  kDebug(5970) << "Entering KarmStorage::icalfile" << endl;
+  kDebug(5970) <<"Entering KarmStorage::icalfile";
   return _icalfile;
 }
 
@@ -298,13 +298,13 @@ void KarmStorage::closeStorage(TaskView* view)
 
 KCal::Event::List KarmStorage::rawevents()
 {
-  kDebug(5970) << "Entering KarmStorage::listallevents" << endl;
+  kDebug(5970) <<"Entering KarmStorage::listallevents";
   return _calendar->rawEvents();
 }
 
 QString KarmStorage::save(TaskView* taskview)
 {
-  kDebug(5970) << "entering KarmStorage::save" << endl;
+  kDebug(5970) <<"entering KarmStorage::save";
   QString err;
 
   QStack<KCal::Todo*> parents;
@@ -327,7 +327,7 @@ QString KarmStorage::save(TaskView* taskview)
   }
   else
   {
-    kWarning(5970) << "KarmStorage::save : " << err << endl;
+    kWarning(5970) <<"KarmStorage::save :" << err;
   }
 
   return err;
@@ -335,14 +335,14 @@ QString KarmStorage::save(TaskView* taskview)
 
 QString KarmStorage::setTaskParent( Task* task, Task* parent )
 {
-  kDebug(5970) << "Entering KarmStorage::setTaskParent" << endl;
+  kDebug(5970) <<"Entering KarmStorage::setTaskParent";
   QString err=QString();
   KCal::Todo* toDo;
   toDo = _calendar->todo(task->uid());
   if (parent==0) toDo->removeRelation(toDo->relatedTo());
   else toDo->setRelatedTo(_calendar->todo(parent->uid()));
  // buildTaskView(_calendar, _view);
-  kDebug(5970) << "Leaving KarmStorage::setTaskParent" << endl;
+  kDebug(5970) <<"Leaving KarmStorage::setTaskParent";
   return err;
 }
 
@@ -355,7 +355,7 @@ QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
   todo = _calendar->todo(task->uid());
   if ( !todo )
   {
-    kDebug(5970) << "Could not get todo from calendar" << endl;
+    kDebug(5970) <<"Could not get todo from calendar";
     return "Could not get todo from calendar";
   }
   task->asTodo(todo);
@@ -878,8 +878,8 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
 
 void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
-  kDebug(5970) << "Entering stopTimer when=" << when << endl;
-  kDebug(5970) << "task->startTime=" << task->startTime() << endl;
+  kDebug(5970) <<"Entering stopTimer when=" << when;
+  kDebug(5970) <<"task->startTime=" << task->startTime();
   long delta = task->startTime().secsTo(when);
   changeTime(task, delta);
 }
@@ -888,7 +888,7 @@ bool KarmStorage::bookTime(const Task* task,
                            const QDateTime& startDateTime,
                            const long durationInSeconds)
 {
-  kDebug(5970) << "Entering KarmStorage::bookTime" << endl;
+  kDebug(5970) <<"Entering KarmStorage::bookTime";
   // Ignores preferences setting re: logging history.
   KCal::Event* e;
   QDateTime end;
@@ -908,7 +908,7 @@ bool KarmStorage::bookTime(const Task* task,
 
 void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 {
-  kDebug(5970) << "Entering KarmStorage::changeTime deltaSeconds=" <<deltaSeconds << endl;
+  kDebug(5970) <<"Entering KarmStorage::changeTime deltaSeconds=" <<deltaSeconds;
   KCal::Event* e;
   QDateTime end;
 
@@ -1026,7 +1026,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
             // Something is screwy with the ics file, as this KArm history event
             // does not have a todo related to it.  Could have been deleted
             // manually?  We'll continue with report on with report ...
-            kDebug(5970) << "KarmStorage::getHistory(): "
+            kDebug(5970) <<"KarmStorage::getHistory():"
               << "The event " << (*event)->uid()
               << " is not related to a todo.  Dropped." << endl;
         }
@@ -1042,13 +1042,13 @@ bool KarmStorage::remoteResource( const QString& file ) const
   QString f = file.toLower();
   bool rval = f.startsWith( "http://" ) || f.startsWith( "ftp://" );
 
-  kDebug(5970) << "KarmStorage::remoteResource( " << file << " ) returns " << rval  << endl;
+  kDebug(5970) <<"KarmStorage::remoteResource(" << file <<" ) returns" << rval;
   return rval;
 }
 
 bool KarmStorage::saveCalendar()
 {
-  kDebug(5970) << "KarmStorage::saveCalendar" << endl;
+  kDebug(5970) <<"KarmStorage::saveCalendar";
 
   KABC::Lock *lock = _calendar->lock();
   if ( !lock || !lock->lock() )

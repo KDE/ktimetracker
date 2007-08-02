@@ -49,11 +49,11 @@ void FocusDetector::check()
   QProcess focusQuestion;
 
   QString sysanswer = getFocusWindow();
-  kDebug() << "getFocusWindow = " << sysanswer << endl;
+  kDebug() <<"getFocusWindow =" << sysanswer;
 
   if ( mLastWindow != sysanswer ) {
     mLastWindow = sysanswer;
-    kDebug() << "NEW WINDOW WITH FOCUS; Sending signal." << endl;
+    kDebug() <<"NEW WINDOW WITH FOCUS; Sending signal.";
     emit( newFocus( sysanswer ) );
   }
 }
