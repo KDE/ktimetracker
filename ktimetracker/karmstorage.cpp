@@ -156,7 +156,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
     todoList = _calendar->rawTodos();
     kDebug(5970) <<"KarmStorage::load"
       << "rawTodo count (includes completed todos) ="
-      << todoList.count() << endl;
+      << todoList.count();
     for( todo = todoList.begin(); todo != todoList.end(); ++todo )
     {
       // Initially, if a task was complete, it was removed from the view.
@@ -203,7 +203,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
     }
 
     kDebug(5970) <<"KarmStorage::load - loaded" << view->count()
-      << " tasks from " << _icalfile << endl;
+      << "tasks from" << _icalfile;
   }
 
   buildTaskView(_calendar, view);
@@ -322,8 +322,8 @@ QString KarmStorage::save(TaskView* taskview)
   if ( err.isEmpty() )
   {
     kDebug(5970)
-      << "KarmStorage::save : wrote "
-      << taskview->count() << " tasks to " << _icalfile << endl;
+      << "KarmStorage::save : wrote"
+      << taskview->count() << "tasks to" << _icalfile;
   }
   else
   {
@@ -396,7 +396,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   int maxdepth=0;
 
   kDebug(5970)
-    << "KarmStorage::exportcsvFile: " << rc.url << endl;
+    << "KarmStorage::exportcsvFile:" << rc.url;
 
   QString title = i18n("Export Progress");
   KProgressDialog dialog( taskview, 0, title );
@@ -1027,8 +1027,8 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
             // does not have a todo related to it.  Could have been deleted
             // manually?  We'll continue with report on with report ...
             kDebug(5970) <<"KarmStorage::getHistory():"
-              << "The event " << (*event)->uid()
-              << " is not related to a todo.  Dropped." << endl;
+              << "The event" << (*event)->uid()
+              << "is not related to a todo.  Dropped.";
         }
       }
     }

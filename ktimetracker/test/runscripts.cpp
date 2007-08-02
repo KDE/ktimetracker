@@ -94,8 +94,8 @@ int runscripts
       rval = s->run();
 
       kDebug() <<"runscripts:" << fi->fileName() 
-        << " " << dots.left( dots.length() - fi->fileName().length() )
-        << " " << ( ! rval ? "PASS" : "FAIL" ) << endl;
+        << dots.left( dots.length() - fi->fileName().length() )
+        << ( ! rval ? "PASS" : "FAIL" );
 
       // Don't abort if one test failes--run them all
       if ( rval ) 

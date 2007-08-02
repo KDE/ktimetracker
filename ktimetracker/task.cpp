@@ -184,7 +184,7 @@ void Task::setName( const QString& name, KarmStorage* storage )
 void Task::setPercentComplete(const int percent, KarmStorage *storage)
 {
   kDebug(5970) <<"Task::setPercentComplete(" << percent <<", storage):"
-    << _uid << endl;
+    << _uid;
 
   if (!percent)
     _percentcomplete = 0;
@@ -262,8 +262,8 @@ void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 void Task::changeTotalTimes( long minutesSession, long minutes )
 {
   kDebug(5970)
-    << "Task::changeTotalTimes(" << minutesSession << ", "
-    << minutes << ") for " << name() << endl;
+    << "Task::changeTotalTimes(" << minutesSession << ","
+    << minutes << ") for" << name();
 
   _totalSessionTime += minutesSession;
   _totalTime += minutes;
@@ -284,8 +284,8 @@ void Task::resetTimes()
 void Task::changeParentTotalTimes( long minutesSession, long minutes )
 {
   //kDebug(5970)
-  //  << "Task::changeParentTotalTimes(" << minutesSession << ", "
-  //  << minutes << ") for " << name() << endl;
+  //  << "Task::changeParentTotalTimes(" << minutesSession << ","
+  //  << minutes << ") for" << name();
 
   if ( isRoot() )
     emit totalTimesChanged( minutesSession, minutes );
@@ -403,8 +403,8 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   percent_complete = static_cast<KCal::Todo*>(incident)->percentComplete();
 
   //kDebug(5970) <<"Task::parseIncidence:"
-  //  << name << ", Minutes: " << minutes
-  //  <<  ", desktop: " << desktopList << endl;
+  //  << name << ", Minutes:" << minutes
+  //  <<  ", desktop:" << desktopList;
 
   return true;
 }

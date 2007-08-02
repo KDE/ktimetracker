@@ -105,8 +105,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
   else if ( radioOther->isChecked() )     rc.delimiter = txtOther->text();
   else {
     kDebug(5970) 
-        << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '"
-        << endl;
+        << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
     rc.delimiter = "\t";
   }
 

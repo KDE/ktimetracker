@@ -960,7 +960,7 @@ void TaskView::markTaskAsComplete()
 {
   if (current_item())
     kDebug(5970) <<"TaskView::markTaskAsComplete:"
-      << current_item()->uid() << endl;
+      << current_item()->uid();
   else
     kDebug(5970) <<"TaskView::markTaskAsComplete: null current_item()";
 
@@ -972,7 +972,7 @@ void TaskView::markTaskAsIncomplete()
 {
   if (current_item())
     kDebug(5970) <<"TaskView::markTaskAsComplete:"
-      << current_item()->uid() << endl;
+      << current_item()->uid();
   else
     kDebug(5970) <<"TaskView::markTaskAsComplete: null current_item()";
 
