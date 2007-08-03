@@ -90,6 +90,8 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
   taskView->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( taskView, SIGNAL( customContextMenuRequested( const QPoint& ) ), 
            this, SIGNAL( contextMenuRequested( const QPoint& ) ) );
+  connect( taskView, SIGNAL( tasksChanged( const QList< Task* >& ) ),
+           this, SLOT( updateTabs() ) );
 
   addTab( taskView, 
           isNew ? KIcon( "document-save" ) : KIcon( "karm" ), 
@@ -239,7 +241,8 @@ void TimetrackerWidget::slotCurrentChanged()
     disconnect( d->mLastView, SIGNAL( setStatusBarText( QString ) ) );
     disconnect( d->mLastView, SIGNAL( timersActive() ) );
     disconnect( d->mLastView, SIGNAL( timersInactive() ) );
-    disconnect( d->mLastView, SIGNAL( tasksChanged( const QList< Task* >& ) ) );
+    disconnect( d->mLastView, SIGNAL( tasksChanged( const QList< Task* >& ) ),
+                this, SIGNAL( tasksChanged( const QList< Task* > & ) ) );
   }
 
   d->mLastView = qobject_cast< TaskView* >( currentWidget() );
@@ -259,6 +262,20 @@ void TimetrackerWidget::slotCurrentChanged()
             this, SIGNAL( timersInactive() ) );
     connect( d->mLastView, SIGNAL( tasksChanged( QList< Task* > ) ), // FIXME signature
             this, SIGNAL( tasksChanged( const QList< Task* > &) ) );
+  }
+}
+
+void TimetrackerWidget::updateTabs()
+{
+  TaskView *taskView;
+  for ( int i = 0; i < count(); ++i ) {
+    taskView = qobject_cast< TaskView* >( widget( i ) );
+
+    if ( taskView->activeTasks().count() == 0 ) {
+      setTabTextColor( i, palette().color( QPalette::Foreground ) );
+    } else {
+      setTabTextColor( i, Qt::darkGreen );
+    }
   }
 }
 

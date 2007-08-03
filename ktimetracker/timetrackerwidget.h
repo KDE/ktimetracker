@@ -111,6 +111,7 @@ class TimetrackerWidget : public KTabWidget {
 
   private Q_SLOTS:
     void slotCurrentChanged();
+    void updateTabs();
 
   Q_SIGNALS:
     void currentTaskChanged();

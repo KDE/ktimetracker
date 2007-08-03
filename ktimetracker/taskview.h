@@ -94,8 +94,11 @@ class TaskView : public QTreeWidget
     QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
 
-    /** Returns whether the focus tracking is currently active */
+    /** Returns whether the focus tracking is currently active. */
     bool isFocusTrackingActive() const;
+
+    /** Returns a list of the current active tasks. */
+    QList< Task* > activeTasks() const;
 
   public Q_SLOTS:
     /** Save to persistent storage. */
@@ -224,7 +227,6 @@ class TaskView : public QTreeWidget
     QTimer *_autoSaveTimer;
     QTimer *_manualSaveTimer;
     Preferences *_preferences;
-    QList<Task*> activeTasks;
     DesktopTracker* _desktopTracker;
     bool _isloading;
     Task* dragTask;

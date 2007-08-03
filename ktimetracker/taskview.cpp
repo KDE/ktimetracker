@@ -120,6 +120,7 @@ class TaskView::Private {
 
     KarmStorage *mStorage;
     bool mFocusTrackingActive;
+    QList<Task*> mActiveTasks;
 };
 //@endcond
 //END
@@ -546,14 +547,14 @@ QString TaskView::save()
   // drag.  However, it does ensure that the data will be consistent.  And
   // if the most common use case is that one task is running most of the time,
   // it won't make any difference.
-  for (unsigned int i = 0; i < activeTasks.count(); i++)
+  for (unsigned int i = 0; i < d->mActiveTasks.count(); i++)
   {
-    activeTasks.at(i)->setRunning(false, d->mStorage);
-    activeTasks.at(i)->setRunning(true, d->mStorage);
+    d->mActiveTasks.at(i)->setRunning(false, d->mStorage);
+    d->mActiveTasks.at(i)->setRunning(true, d->mStorage);
   }
 
   // If there was an active task, the iCal file has already been saved.
-  if (activeTasks.count() == 0)
+  if (d->mActiveTasks.count() == 0)
 #endif
   {
     kDebug(5970) <<"Entering TaskView::save(ListView)";
@@ -578,37 +579,37 @@ long TaskView::count()
 
 void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
-  if (task != 0 && activeTasks.indexOf(task) == -1) 
+  if (task != 0 && d->mActiveTasks.indexOf(task) == -1) 
   {
     if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
     _idleTimeDetector->startIdleDetection();
     task->setRunning(true, d->mStorage, startTime);
-    activeTasks.append(task);
+    d->mActiveTasks.append(task);
     emit updateButtons();
-    if ( activeTasks.count() == 1 )
+    if ( d->mActiveTasks.count() == 1 )
         emit timersActive();
 
-    emit tasksChanged( activeTasks);
+    emit tasksChanged( d->mActiveTasks );
   }
 }
 
 void TaskView::clearActiveTasks()
 {
-  activeTasks.clear(); 
+  d->mActiveTasks.clear(); 
 }
 
 void TaskView::stopAllTimers( const QDateTime &when )
 {
   kDebug(5970) <<"Entering TaskView::stopAllTimers";
-  foreach ( Task *task, activeTasks )
+  foreach ( Task *task, d->mActiveTasks )
     task->setRunning( false, d->mStorage, when );
 
   _idleTimeDetector->stopIdleDetection();
   _focusDetector->stopFocusDetection(); 
-  activeTasks.clear();
+  d->mActiveTasks.clear();
   emit updateButtons();
   emit timersInactive();
-  emit tasksChanged( activeTasks);
+  emit tasksChanged( d->mActiveTasks );
 }
 
 void TaskView::toggleFocusTracking()
@@ -656,16 +657,16 @@ void TaskView::resetTimeForAllTasks()
 
 void TaskView::stopTimerFor(Task* task)
 {
-  if ( task != 0 && activeTasks.indexOf(task) != -1 ) {
-    activeTasks.removeAll(task);
+  if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 ) {
+    d->mActiveTasks.removeAll(task);
     task->setRunning(false, d->mStorage);
-    if ( activeTasks.count() == 0 ) {
+    if ( d->mActiveTasks.count() == 0 ) {
       _idleTimeDetector->stopIdleDetection();
       emit timersInactive();
     }
     emit updateButtons();
   }
-  emit tasksChanged( activeTasks);
+  emit tasksChanged( d->mActiveTasks );
 }
 
 void TaskView::stopCurrentTimer()
@@ -680,7 +681,7 @@ void TaskView::minuteUpdate()
 
 void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
 {
-  foreach ( Task *task, activeTasks )
+  foreach ( Task *task, d->mActiveTasks )
     task->changeTime( minutes, ( save_data ? d->mStorage : 0 ) );
 }
 
@@ -891,12 +892,12 @@ void TaskView::deleteTask(bool markingascomplete)
     refresh();
 
     // Stop idle detection if no more counters are running
-    if (activeTasks.count() == 0) {
+    if (d->mActiveTasks.count() == 0) {
       _idleTimeDetector->stopIdleDetection();
       emit timersInactive();
     }
 
-    emit tasksChanged( activeTasks );
+    emit tasksChanged( d->mActiveTasks );
   }
 }
 
@@ -910,9 +911,9 @@ void TaskView::deletingTask(Task* deletedTask)
   DesktopList desktopList;
 
   _desktopTracker->registerForDesktops( deletedTask, desktopList );
-  activeTasks.removeAll( deletedTask );
+  d->mActiveTasks.removeAll( deletedTask );
 
-  emit tasksChanged( activeTasks);
+  emit tasksChanged( d->mActiveTasks );
 }
 
 QList<HistoryEvent> TaskView::getHistory(const QDate& from,
@@ -974,7 +975,7 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
   if (item) {
     Task *task = static_cast<Task*>( item );
     if (task) {
-      if (activeTasks.indexOf(task) == -1) { // task is active
+      if (d->mActiveTasks.indexOf(task) == -1) { // task is active
         stopAllTimers();
         startCurrentTimer();
       } else {
@@ -1010,6 +1011,11 @@ void TaskView::slotColumnToggled( int column )
 bool TaskView::isFocusTrackingActive() const
 {
   return d->mFocusTrackingActive;
+}
+
+QList< Task* > TaskView::activeTasks() const
+{
+  return d->mActiveTasks;
 }
 
 void TaskView::reconfigure()
