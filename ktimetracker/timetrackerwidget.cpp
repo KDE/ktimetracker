@@ -92,7 +92,7 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
            this, SIGNAL( contextMenuRequested( const QPoint& ) ) );
 
   addTab( taskView, 
-          isNew ? KIcon( "document-new" ) : KIcon( "karm" ), 
+          isNew ? KIcon( "document-save" ) : KIcon( "karm" ), 
           isNew ? i18n( "Untitled" ) : QFileInfo( lFileName ).fileName() );
   setCurrentWidget( taskView );
   taskView->load( lFileName );
@@ -168,7 +168,7 @@ void TimetrackerWidget::closeFile( bool canCancel )
   // is it an unsaved file?
   if ( d->mIsNewVector.contains( taskView ) ) {
     QString message = i18n( "This document has not been saved yet. Do you want to save it?" );
-    QString caption = tabText( currentIndex() );
+    QString caption = i18n( "Untitled" );
 
     int result;
     if ( canCancel ) {

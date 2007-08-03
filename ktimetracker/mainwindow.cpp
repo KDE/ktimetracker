@@ -310,7 +310,9 @@ void MainWindow::resetAllTimes()
 void MainWindow::makeMenus()
 {
 
-  (void) KStandardAction::openNew( mainWidget, SLOT( newFile() ), actionCollection() );
+  (KStandardAction::openNew( mainWidget, 
+                             SLOT( newFile() ), 
+                             actionCollection() ))->setIcon( KIcon( "tab-new" ) );
   (void) KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
   actionClose = KStandardAction::close( mainWidget, SLOT( closeFile() ), actionCollection() );
   (void) KStandardAction::quit(  this, SLOT( quit() ),  actionCollection());
@@ -388,11 +390,11 @@ void MainWindow::makeMenus()
 
   // New task
   actionNew  = new KAction( KIcon( QString::fromLatin1( "document-new" ) ), 
-                            i18n( "&New..." ), this );
+                            i18n( "&New Task..." ), this );
   actionCollection()->addAction( "new_task", actionNew );
   connect( actionNew, SIGNAL( triggered( bool ) ), 
            mainWidget, SLOT( newTask() ) );
-  actionNew->setShortcut( QKeySequence( Qt::CTRL+Qt::Key_N ) );
+  actionNew->setShortcut( QKeySequence( Qt::CTRL+Qt::Key_T ) );
   actionNew->setToolTip( i18n( "Create new top level task" ) );
   actionNew->setWhatsThis( i18n( "This will create a new top level task." ) );
 
