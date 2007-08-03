@@ -110,20 +110,30 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
   }
 }
 
-void TimetrackerWidget::saveCurrentTaskView()
+bool TimetrackerWidget::saveCurrentTaskView()
 {
   QString fileName = KFileDialog::getSaveFileName( QString(), QString(), this );
   if ( !fileName.isEmpty() ) {
     TaskView *taskView = qobject_cast< TaskView* >( currentWidget() );
+    taskView->stopAllTimers();
+    taskView->save();
+    taskView->closeStorage();
+
     QString currentFilename = taskView->storage()->icalfile();
     KIO::file_move( currentFilename, fileName, -1, true, false, false );
     d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
+
     taskView->load( fileName );
     KIO::file_delete( currentFilename, false );
+
     setTabIcon( currentIndex(), KIcon( "karm" ) );
     setTabText( currentIndex(), QFileInfo( fileName ).fileName() );
     setTabToolTip( currentIndex(), fileName );
+
+    return true;
   }
+
+  return false;
 }
 
 TaskView* TimetrackerWidget::currentTaskView()
@@ -171,15 +181,17 @@ void TimetrackerWidget::closeFile( bool canCancel )
       return;
     }
 
-    taskView->stopAllTimers();
-    taskView->save();
-    taskView->closeStorage();
-
     if ( result == KMessageBox::Yes ) {
-      saveCurrentTaskView();
+      if ( !saveCurrentTaskView() ) {
+        return;
+      }
     } else { // result == No
       d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
     }
+
+    taskView->stopAllTimers();
+    taskView->save();
+    taskView->closeStorage();
   }
 
   removeTab( currentIndex() );
@@ -208,7 +220,7 @@ QString TimetrackerWidget::saveFile()
 
 void TimetrackerWidget::slotCurrentChanged()
 {
-  kDebug() << "entering KTimetrackerWidget::slotCurrentChanged" << endl;
+  kDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
 
   if ( d->mLastView ) {
     disconnect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ) );

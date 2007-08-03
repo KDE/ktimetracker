@@ -39,7 +39,13 @@ class TimetrackerWidget : public KTabWidget {
 
   private:
     void addTaskView( const QString &fileName = "" );
-    void saveCurrentTaskView();
+
+    /**
+      Opens a file dialog to save the current taskView.
+
+      @returns true if save was successfully, false otherwise.
+     */
+    bool saveCurrentTaskView();
 
   public:
     /**
