@@ -43,7 +43,7 @@ class HistoryEvent;
 class KCal::Todo;
 
 /**
- * Singleton to store/retrieve KArm data to/from persistent storage.
+ * Class to store/retrieve KArm data to/from persistent storage.
  *
  * The storage is an iCalendar file.  Also included are methods to
  * import KArm data from the two legacy file formats.
@@ -67,41 +67,33 @@ class KCal::Todo;
 class KarmStorage
 {
   public:
-    /*
-     * Return reference to storage singleton.
-     *
-     * The constructors are private, so this must be used to create a
-     * KarmStorage instance.
-     */
-    static KarmStorage *instance();
+    KarmStorage();
 
     QString setTaskParent( Task* task, Task* parent);
-    /*
-     * Load the list view with tasks read from iCalendar file.
-     *
-     * Parses iCalendar file, builds list view items in the proper
-     * hierarchy, and loads them into the list view widget.
-     *
-     * If the file name passed in is the same as the last file name that was
-     * loaded, this method does nothing.
-     *
-     * This method considers any of the following conditions errors:
-     *
-     *    @li the iCalendar file does not exist
-     *    @li the iCalendar file is not readable
-     *    @li the list group currently has list items
-     *    @li an iCalendar todo has no related to attribute
-     *    @li a todo is related to another todo which does not exist
-     *
-     * @param taskview     The list group used in the TaskView
-     * @param preferences  The current KArm preferences.
-     * @param fileName     Override preferences' filename
-     *
-     * @return empty string if success, error message if error.
-     *
+
+    /**
+      Load the list view with tasks read from iCalendar file.
+
+      Parses iCalendar file, builds list view items in the proper
+      hierarchy, and loads them into the list view widget.
+
+      If the file name passed in is the same as the last file name that was
+      loaded, this method does nothing.
+
+      This method considers any of the following conditions errors:
+
+         @li the iCalendar file does not exist
+         @li the iCalendar file is not readable
+         @li the list group currently has list items
+         @li an iCalendar todo has no related to attribute
+         @li a todo is related to another todo which does not exist
+
+      @param taskview     The list group used in the TaskView
+      @param fileName     Override preferences' filename
+
+      @return empty string if success, error message if error.
      */
-    QString load( TaskView* taskview, const Preferences* preferences, 
-                  const QString &fileName );
+    QString load( TaskView* taskview, const QString &fileName );
 
    /*
     * Return the name of the iCal file
@@ -268,11 +260,13 @@ class KarmStorage
     QList<HistoryEvent> getHistory(const QDate& from, const QDate& to);
 
   private:
-    static KarmStorage                *_instance;
+    //@cond PRIVATE
+    class Private;
+    Private *const d;
+    //@endcond
     KCal::ResourceCalendar            *_calendar;
     QString                           _icalfile;
 
-    KarmStorage();
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,
         DesktopList* desktopList);

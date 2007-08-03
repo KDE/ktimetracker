@@ -65,9 +65,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     setComponentData( karmPartFactory::componentData() );
 
     // this should be your custom internal widget
-    _taskView = new TaskView( KStandardDirs::locateLocal( "appdata", 
-                              QString::fromLatin1( "karm.ics" ) ), 
-                              parentWidget );
+    _taskView = new TaskView( parentWidget );
 
     connect(_taskView, SIGNAL( setStatusBarText(QString)), this, SLOT( setStatusBar(QString) ) );
 
@@ -706,7 +704,8 @@ QString karmPart::exportcsvfile( const QString &filename, const QString &from,
 
 QString karmPart::importplannerfile( const QString &fileName )
 {
-  return _taskView->importPlanner(fileName);
+  _taskView->importPlanner(fileName);
+  return "";
 }
 
 QStringList karmPart::getActiveTasks()

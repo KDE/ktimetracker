@@ -33,13 +33,16 @@
 #include <KApplication>       // kapp
 #include <KConfig>
 #include <KDebug>
+#include <KFileDialog>
 #include <KGlobal>
 #include <KIcon>
 #include <KIconLoader>
 #include <KLocale>            // i18n
 #include <KMessageBox>
+#include <KPushButton>
 #include <KShortcutsDialog>
 #include <KStandardAction>
+#include <KStandardGuiItem>
 #include <KStatusBar>         // statusBar()
 #include <KXMLGUIFactory>
 
@@ -56,6 +59,7 @@
 
 #include "kaccelmenuwatch.h"
 #include "karmmainadaptor.h"
+#include "timetrackerwidget.h"
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
@@ -67,12 +71,16 @@ MainWindow::MainWindow( const QString &icsfile )
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
-  new KarmAdaptor(this);
-  QDBusConnection::sessionBus().registerObject("/Karm", this);
+  // FIXME move dbus to TimetrackerWidget
+  //new KarmAdaptor(this);
+  //QDBusConnection::sessionBus().registerObject("/Karm", this);
 
-  _taskView  = new TaskView( icsfile, this );
+  mainWidget = new TimetrackerWidget( this );
+  //mainWidget->setCornerWidget( new KPushButton( KStandardGuiItem::close(), this ), 
+  //                             Qt::TopRightCorner );
+  setCentralWidget( mainWidget );
+  mainWidget->openFile( icsfile );
 
-  setCentralWidget( _taskView );
   // status bar
   startStatusBar();
 
@@ -84,20 +92,21 @@ MainWindow::MainWindow( const QString &icsfile )
   _watcher->updateMenus();
 
   // connections
-  connect( _taskView, SIGNAL( totalTimesChanged( long, long ) ),
+  connect( mainWidget, SIGNAL( totalTimesChanged( long, long ) ),
            this, SLOT( updateTime( long, long ) ) );
-  connect( _taskView, SIGNAL( itemSelectionChanged () ),
+  connect( mainWidget, SIGNAL( currentTaskChanged() ),
            this, SLOT( slotSelectionChanged() ) );
-  connect( _taskView, SIGNAL( updateButtons() ),
+  connect( mainWidget, SIGNAL( currentTaskViewChanged() ),
            this, SLOT( slotSelectionChanged() ) );
-  connect( _taskView, SIGNAL( setStatusBarText( QString ) ),
+  connect( mainWidget, SIGNAL( updateButtons() ),
+           this, SLOT( slotSelectionChanged() ) );
+  connect( mainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
   loadGeometry();
 
   // Setup context menu request handling
-  _taskView->setContextMenuPolicy( Qt::CustomContextMenu );
-  connect( _taskView,
-           SIGNAL( customContextMenuRequested( const QPoint& ) ),
+  connect( mainWidget,
+           SIGNAL( contextMenuRequested( const QPoint& ) ),
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
@@ -106,14 +115,12 @@ MainWindow::MainWindow( const QString &icsfile )
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
 
-  connect( _taskView, SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
-  connect( _taskView, SIGNAL( timersActive() ), this,  SLOT( enableStopAll() ));
-  connect( _taskView, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
-  connect( _taskView, SIGNAL( timersInactive() ),  this,  SLOT( disableStopAll()));
-  connect( _taskView, SIGNAL( tasksChanged( QList<Task*> ) ),
+  connect( mainWidget, SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
+  connect( mainWidget, SIGNAL( timersActive() ), this,  SLOT( enableStopAll() ));
+  connect( mainWidget, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
+  connect( mainWidget, SIGNAL( timersInactive() ),  this,  SLOT( disableStopAll()));
+  connect( mainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
-
-  _taskView->load( icsfile );
 
   // Everything that uses Preferences has been created now, we can let it
   // emit its signals
@@ -141,18 +148,33 @@ MainWindow::MainWindow( const QString &icsfile )
 
 void MainWindow::slotSelectionChanged()
 {
-  Task* item= _taskView->current_item();
-  actionDelete->setEnabled(item);
-  actionEdit->setEnabled(item);
-  actionStart->setEnabled(item && !item->isRunning() && !item->isComplete());
-  actionStop->setEnabled(item && item->isRunning());
-  actionMarkAsComplete->setEnabled(item && !item->isComplete());
-  actionMarkAsIncomplete->setEnabled(item && item->isComplete());
+  Task* item = mainWidget->currentTask();
+  actionDelete->setEnabled( item );
+  actionEdit->setEnabled( item );
+  actionStart->setEnabled( item && !item->isRunning() && !item->isComplete() );
+  actionStop->setEnabled( item && item->isRunning() );
+  actionMarkAsComplete->setEnabled( item && !item->isComplete() );
+  actionMarkAsIncomplete->setEnabled( item && item->isComplete() );
+  actionFocusTracking->setEnabled( 
+    mainWidget->currentTaskView() && 
+    mainWidget->currentTaskView()->isFocusTrackingActive() 
+  );
+  actionNew->setEnabled( mainWidget->currentTaskView() );
+  actionNewSub->setEnabled( mainWidget->currentTaskView() );
+  actionedithistory->setEnabled( mainWidget->currentTaskView() );
+  actionResetAll->setEnabled( mainWidget->currentTaskView() );
+  actionStartNewSession->setEnabled( mainWidget->currentTaskView() );
+  actionExportTimes->setEnabled( mainWidget->currentTaskView() );
+  actionExportHistory->setEnabled( mainWidget->currentTaskView() );
+  actionImportPlanner->setEnabled( mainWidget->currentTaskView() );
+  actionSave->setEnabled( mainWidget->currentTaskView() );
+  actionClose->setEnabled( mainWidget->currentTaskView() );
+  actionPrint->setEnabled( mainWidget->currentTaskView() );
 }
 
 void MainWindow::slotedithistory()
 {
-  EditHistoryDialog *dlg = new EditHistoryDialog( _taskView );
+  EditHistoryDialog *dlg = new EditHistoryDialog( mainWidget->currentTaskView() );
   dlg->exec();
 }
 
@@ -171,7 +193,7 @@ void MainWindow::setStatusBar(const QString& qs)
 bool MainWindow::save()
 {
   kDebug(5970) <<"Saving time data to disk.";
-  QString err=_taskView->save();  // untranslated error msg.
+  QString err = mainWidget->saveFile();  // untranslated error msg.
   if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully saved tasks and history"),1807);
   else statusBar()->showMessage(i18n(err.toAscii()),7707); // no msgbox since save is called when exiting
   saveGeometry();
@@ -181,7 +203,7 @@ bool MainWindow::save()
 void MainWindow::exportcsvHistory()
 {
   kDebug(5970) <<"Exporting History to disk.";
-  QString err=_taskView->exportcsvHistory();
+  QString err=mainWidget->currentTaskView()->exportcsvHistory();
   if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully exported History to CSV-file"),1807);
   else KMessageBox::error(this, err.toAscii());
   saveGeometry();
@@ -197,9 +219,7 @@ void MainWindow::quit()
 MainWindow::~MainWindow()
 {
   kDebug(5970) <<"MainWindow::~MainWindows: Quitting karm.";
-  _taskView->stopAllTimers();
-  save();
-  _taskView->closeStorage();
+  saveGeometry();
 }
 
 void MainWindow::enableStopAll()
@@ -214,8 +234,16 @@ void MainWindow::disableStopAll()
 
 void MainWindow::slotFocusTracking()
 {
-  _taskView->toggleFocusTracking();
-  actionFocusTracking->setChecked( _taskView->focusTrackingActive() );
+  mainWidget->currentTaskView()->toggleFocusTracking();
+  actionFocusTracking->setChecked( mainWidget->currentTaskView()->isFocusTrackingActive() );
+}
+
+void MainWindow::openFile()
+{
+  QString fileName = KFileDialog::getOpenFileName( QString(), QString(), this );
+  if ( !fileName.isEmpty() ) {
+    mainWidget->openFile( fileName );
+  }
 }
 
 /**
@@ -250,8 +278,9 @@ void MainWindow::startStatusBar()
 
 void MainWindow::saveProperties( KConfigGroup &cfg )
 {
-  _taskView->stopAllTimers();
-  _taskView->save();
+  // FIXME how to handle this?
+  //_taskView->stopAllTimers();
+  //_taskView->save();
   cfg.writeEntry( "WindowShown", isVisible());
 }
 
@@ -268,30 +297,33 @@ void MainWindow::keyBindings()
 
 void MainWindow::startNewSession()
 {
-  _taskView->startNewSession();
+  mainWidget->currentTaskView()->startNewSession();
 }
 
 void MainWindow::resetAllTimes()
 {
   if ( KMessageBox::warningContinueCancel( this, i18n( "Do you really want to reset the time to zero for all tasks?" ),
        i18n( "Confirmation Required" ), KGuiItem( i18n( "Reset All Times" ) ) ) == KMessageBox::Continue )
-    _taskView->resetTimeForAllTasks();
+    mainWidget->currentTaskView()->resetTimeForAllTasks();
 }
 
 void MainWindow::makeMenus()
 {
 
+  (void) KStandardAction::openNew( mainWidget, SLOT( newFile() ), actionCollection() );
+  (void) KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
+  actionClose = KStandardAction::close( mainWidget, SLOT( closeFile() ), actionCollection() );
   (void) KStandardAction::quit(  this, SLOT( quit() ),  actionCollection());
-  (void) KStandardAction::print( this, SLOT( print() ), actionCollection());
+  actionPrint = KStandardAction::print( this, SLOT( print() ), actionCollection());
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
   actionPreferences = KStandardAction::preferences(_preferences,
       SLOT(showDialog()),
       actionCollection() );
-  (void) KStandardAction::save( this, SLOT( save() ), actionCollection() );
+  actionSave = KStandardAction::save( this, SLOT( save() ), actionCollection() );
 
   // Start New Session
-  QAction *actionStartNewSession  = new KAction(i18n("Start &New Session"), this);
+  actionStartNewSession  = new KAction(i18n("Start &New Session"), this);
   actionCollection()->addAction("start_new_session", actionStartNewSession );
   connect(actionStartNewSession, SIGNAL(triggered(bool)), SLOT( startNewSession() ));
   actionStartNewSession->setToolTip( i18n("Start a new session") );
@@ -306,7 +338,7 @@ void MainWindow::makeMenus()
   actionCollection()->addAction("edit_history", actionedithistory );
 
   // Reset all times
-  QAction *actionResetAll  = new KAction(i18n("&Reset All Times"), this);
+  actionResetAll  = new KAction(i18n("&Reset All Times"), this);
   actionCollection()->addAction("reset_all_times", actionResetAll );
   connect(actionResetAll, SIGNAL(triggered(bool)), SLOT( resetAllTimes() ));
   actionResetAll->setToolTip( i18n("Reset all times") );
@@ -317,7 +349,7 @@ void MainWindow::makeMenus()
   // Start timing
   actionStart  = new KAction(KIcon(QString::fromLatin1("arrow-right")), i18n("&Start"), this);
   actionCollection()->addAction("start", actionStart );
-  connect(actionStart, SIGNAL(triggered(bool) ), _taskView, SLOT( startCurrentTimer() ));
+  connect(actionStart, SIGNAL(triggered(bool) ), mainWidget, SLOT( startCurrentTimer() ));
   actionStart->setShortcut(QKeySequence(Qt::Key_S));
   actionStart->setToolTip( i18n("Start timing for selected task") );
   actionStart->setWhatsThis( i18n("This will start timing for the selected "
@@ -332,7 +364,7 @@ void MainWindow::makeMenus()
   // stop timing
   actionStop  = new KAction(KIcon(QString::fromLatin1("process-stop")), i18n("S&top"), this);
   actionCollection()->addAction("stop", actionStop );
-  connect(actionStop, SIGNAL(triggered(bool) ), _taskView, SLOT( stopCurrentTimer() ));
+  connect(actionStop, SIGNAL(triggered(bool) ), mainWidget, SLOT( stopCurrentTimer() ));
   actionStop->setShortcut(QKeySequence(Qt::Key_S));
   actionStop->setToolTip( i18n("Stop timing of the selected task") );
   actionStop->setWhatsThis( i18n("Stop timing of the selected task") );
@@ -340,7 +372,7 @@ void MainWindow::makeMenus()
   // Stop all timers
   actionStopAll  = new KAction(i18n("Stop &All Timers"), this);
   actionCollection()->addAction("stopAll", actionStopAll );
-  connect(actionStopAll, SIGNAL(triggered(bool)), _taskView, SLOT( stopAllTimers() ));
+  connect(actionStopAll, SIGNAL(triggered(bool)), mainWidget, SLOT( stopAllTimers() ));
   actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
   actionStopAll->setEnabled(false);
   actionStopAll->setToolTip( i18n("Stop all of the active timers") );
@@ -349,29 +381,31 @@ void MainWindow::makeMenus()
   // Focus tracking
   actionFocusTracking = new KAction(i18n("Track active applications"), this);
   actionFocusTracking->setCheckable( true );
-  actionFocusTracking->setChecked( _taskView->focusTrackingActive() );
+  actionFocusTracking->setChecked( mainWidget->currentTaskView()->isFocusTrackingActive() );
   actionCollection()->addAction("focustracking", actionFocusTracking );
   connect( actionFocusTracking, SIGNAL( triggered( bool ) ),
            this, SLOT( slotFocusTracking() ) );
 
   // New task
-  actionNew  = new KAction(KIcon(QString::fromLatin1("document-new")), i18n("&New..."), this);
-  actionCollection()->addAction("new_task", actionNew );
-  connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
-  actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
+  actionNew  = new KAction( KIcon( QString::fromLatin1( "document-new" ) ), 
+                            i18n( "&New..." ), this );
+  actionCollection()->addAction( "new_task", actionNew );
+  connect( actionNew, SIGNAL( triggered( bool ) ), 
+           mainWidget, SLOT( newTask() ) );
+  actionNew->setShortcut( QKeySequence( Qt::CTRL+Qt::Key_N ) );
+  actionNew->setToolTip( i18n( "Create new top level task" ) );
+  actionNew->setWhatsThis( i18n( "This will create a new top level task." ) );
 
   // New subtask
   actionNewSub  = new KAction(KIcon(QString::fromLatin1("kmultiple")), i18n("New &Subtask..."), this);
   actionCollection()->addAction("new_sub_task", actionNewSub );
-  connect(actionNewSub, SIGNAL(triggered(bool) ), _taskView, SLOT( newSubTask() ));
+  connect(actionNewSub, SIGNAL(triggered(bool) ), mainWidget, SLOT( newSubTask() ));
   actionNewSub->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N));
-  actionNew->setToolTip( i18n("Create new top level task") );
-  actionNew->setWhatsThis( i18n("This will create a new top level task.") );
 
   // Delete task
   actionDelete  = new KAction(KIcon(QString::fromLatin1("edit-delete")), i18n("&Delete"), this);
   actionCollection()->addAction("delete_task", actionDelete );
-  connect(actionDelete, SIGNAL(triggered(bool) ), _taskView, SLOT( deleteTask() ));
+  connect(actionDelete, SIGNAL(triggered(bool) ), mainWidget, SLOT( deleteTask() ));
   actionDelete->setShortcut(QKeySequence(Qt::Key_Delete));
   actionDelete->setToolTip( i18n("Delete selected task") );
   actionDelete->setWhatsThis( i18n("This will delete the selected task and "
@@ -380,7 +414,7 @@ void MainWindow::makeMenus()
   // Edit task
   actionEdit  = new KAction(KIcon("edit"), i18n("&Edit..."), this);
   actionCollection()->addAction("edit_task", actionEdit );
-  connect(actionEdit, SIGNAL(triggered(bool) ), _taskView, SLOT( editTask() ));
+  connect(actionEdit, SIGNAL(triggered(bool) ), mainWidget, SLOT( editTask() ));
   actionEdit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
   actionEdit->setToolTip( i18n("Edit name or times for selected task") );
   actionEdit->setWhatsThis( i18n("This will bring up a dialog box where you "
@@ -390,29 +424,29 @@ void MainWindow::makeMenus()
   // Mark as complete
   actionMarkAsComplete  = new KAction(KIcon( UserIcon( "task-complete.xpm" ) ), i18n("&Mark as Complete"), this);
   actionCollection()->addAction("mark_as_complete", actionMarkAsComplete );
-  connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsComplete() ));
+  connect(actionMarkAsComplete, SIGNAL(triggered(bool) ), mainWidget, SLOT( markTaskAsComplete() ));
   actionMarkAsComplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
 
   // Mark as incomplete
   actionMarkAsIncomplete  = new KAction(KIcon( UserIcon( "task-incomplete.xpm" ) ), i18n("&Mark as Incomplete"), this);
   actionCollection()->addAction("mark_as_incomplete", actionMarkAsIncomplete );
-  connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), _taskView, SLOT( markTaskAsIncomplete() ));
+  connect(actionMarkAsIncomplete, SIGNAL(triggered(bool) ), mainWidget, SLOT( markTaskAsIncomplete() ));
   actionMarkAsIncomplete->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_M));
 
   // Export times
-  QAction *action  = new KAction(i18n("&Export Times..."), this);
-  actionCollection()->addAction("export_times", action );
-  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(exportcsvFile()));
+  actionExportTimes = new KAction(i18n("&Export Times..."), this);
+  actionCollection()->addAction("export_times", actionExportTimes );
+  connect(actionExportTimes, SIGNAL(triggered(bool) ), mainWidget, SLOT(exportcsvFile()));
 
   // Export history
-  action  = new KAction(i18n("Export &History..."), this);
-  actionCollection()->addAction("export_history", action );
-  connect(action, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
+  actionExportHistory = new KAction(i18n("Export &History..."), this);
+  actionCollection()->addAction("export_history", actionExportHistory );
+  connect(actionExportHistory, SIGNAL(triggered(bool) ), SLOT(exportcsvHistory()));
 
   // Import tasks from Planner
-  action  = new KAction(i18n("Import Tasks From &Planner..."), this);
-  actionCollection()->addAction("import_planner", action );
-  connect(action, SIGNAL(triggered(bool) ), _taskView, SLOT(importPlanner()));
+  actionImportPlanner = new KAction(i18n("Import Tasks From &Planner..."), this);
+  actionCollection()->addAction("import_planner", actionImportPlanner );
+  connect(actionImportPlanner, SIGNAL(triggered(bool) ), mainWidget, SLOT(importPlanner()));
 
   setXMLFile( QString::fromLatin1("karmui.rc") );
   createGUI( 0 );
@@ -426,7 +460,7 @@ void MainWindow::makeMenus()
 
 void MainWindow::print()
 {
-  MyPrinter printer(_taskView);
+  MyPrinter printer(mainWidget->currentTaskView());
   printer.print();
 }
 
@@ -467,7 +501,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
     QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );
     if ( pop )
-      pop->popup( _taskView->viewport()->mapToGlobal( point ) );
+      pop->popup( mainWidget->currentTaskView()->viewport()->mapToGlobal( point ) );
 }
 
 //----------------------------------------------------------------------------
@@ -476,7 +510,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 //
 //----------------------------------------------------------------------------
 
-QString MainWindow::version() const
+/*QString MainWindow::version() const
 {
   return KTIMETRACKER_VERSION;
 }
@@ -779,6 +813,6 @@ bool MainWindow::isActive( const QString &taskName )
   }
 
   return false;
-}
+}*/
 
 #include "mainwindow.moc"

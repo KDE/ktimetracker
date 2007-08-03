@@ -2,6 +2,13 @@
 <MenuBar>
   <Menu name="file" >
     <text>&amp;File</text>
+    <Action name="file_new" />
+    <Separator />
+    <Action name="file_open" />
+    <Action name="file_save" />
+    <Separator />
+    <Action name="file_print" />
+    <Separator />
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
     <Separator />
@@ -9,6 +16,10 @@
     <Action name="export_times" />
     <Action name="export_history" />
     <Action name="edit_history" />
+    <Separator />
+    <Action name="file_close" />
+    <Separator />
+    <Action name="file_quit" />
   </Menu>
   <Menu name="clock" >
     <text>&amp;Clock</text>
@@ -35,6 +46,14 @@
 </MenuBar>
 <ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >
   <text>Main Toolbar</text>
+  <Action name="file_new" />
+  <Action name="file_open" />
+  <Action name="file_save" />
+  <Separator />
+  <Action name="file_close" />
+</ToolBar>
+<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="taskToolBar" >
+  <text>Tasks</text>
   <Action name="start" />
   <Action name="stop" />
   <Action name="new_task" />

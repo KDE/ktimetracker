@@ -62,6 +62,7 @@
 
 class DesktopTracker;
 
+//BEGIN TaskViewDelegate (custom painting of the progress column)
 class TaskViewDelegate : public QItemDelegate {
 public:
   TaskViewDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
@@ -106,15 +107,26 @@ public:
     }
   }
 };
+//END
 
-TaskView::TaskView( const QString &icsfile, QWidget *parent ) 
-  : QTreeWidget(parent)
+//BEGIN Private Data
+//@cond PRIVATE
+class TaskView::Private {
+  public:
+    Private() : 
+      mStorage( new KarmStorage() ), 
+      mFocusTrackingActive( false ) {}
+
+    KarmStorage *mStorage;
+    bool mFocusTrackingActive;
+};
+//@endcond
+//END
+
+TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 {
-  assert( !( icsfile.isEmpty() ) );
   _preferences = Preferences::instance();
-  _storage = KarmStorage::instance();
   _focusDetector = new FocusDetector(1);
-  focustrackingactive = false;
 
   connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
@@ -190,7 +202,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
   QString newTaskName = taskName;
   newTaskName.replace( "\n", "" );
 
-  if ( focustrackingactive ) {
+  if ( d->mFocusTrackingActive ) {
     bool found = false;  // has taskName been found in our tasks
     stopTimerFor( lastTaskWithFocus );
     int i = 0;
@@ -229,7 +241,7 @@ void TaskView::dropEvent(QDropEvent* qde)
     kDebug(5970) <<"User drops onto an empty place";
     if (dragTask->parent())
     {
-      _storage->setTaskParent(dragTask,0);
+      d->mStorage->setTaskParent(dragTask,0);
       QTreeWidgetItem* item=dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
       this->insertTopLevelItem(0,item); 
     }
@@ -260,7 +272,7 @@ void TaskView::dropEvent(QDropEvent* qde)
           dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
           t->addChild( dragTask );
           dragTask->move(t);
-          _storage->setTaskParent( dragTask, t );
+          d->mStorage->setTaskParent( dragTask, t );
         }
         else
         // if the task is no subtask
@@ -300,7 +312,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
       Task *task = static_cast<Task*>(item);
       if (task) 
       {
-        task->setPercentComplete( newValue, _storage );
+        task->setPercentComplete( newValue, d->mStorage );
         
         emit updateButtons();
       }
@@ -324,9 +336,9 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
       Task *task = static_cast<Task*>(item);
       if (task) {
         if (task->isComplete()) {
-          task->setPercentComplete( 0, _storage );
+          task->setPercentComplete( 0, d->mStorage );
         } else {
-          task->setPercentComplete( 100, _storage );
+          task->setPercentComplete( 100, d->mStorage );
         }
         
         emit updateButtons();
@@ -339,7 +351,7 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
 
 KarmStorage* TaskView::storage()
 {
-  return _storage;
+  return d->mStorage;
 }
 
 TaskView::~TaskView()
@@ -385,7 +397,7 @@ void TaskView::load( const QString &fileName )
   // to load from a file without touching the preferences.
   kDebug(5970) <<"Entering TaskView::load";
   _isloading = true;
-  QString err = _storage->load(this, _preferences, fileName);
+  QString err = d->mStorage->load(this, fileName);
 
   if (!err.isEmpty())
   {
@@ -441,14 +453,14 @@ void TaskView::itemStateChanged( QTreeWidgetItem *item )
   if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
-void TaskView::closeStorage() { _storage->closeStorage( this ); }
+void TaskView::closeStorage() { d->mStorage->closeStorage( this ); }
 
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {
   kDebug(5970) <<"entering iCalFileModified";
   kDebug(5970) << rc->infoText();
   rc->dump();
-  _storage->buildTaskView(rc,this);
+  d->mStorage->buildTaskView(rc,this);
   kDebug(5970) <<"exiting iCalFileModified";
 }
 
@@ -476,7 +488,7 @@ void TaskView::reFresh()
   refresh();
 }
 
-QString TaskView::importPlanner( const QString &fileName )
+void TaskView::importPlanner( const QString &fileName )
 {
   kDebug( 5970 ) <<"entering importPlanner";
   PlannerParser *handler = new PlannerParser( this );
@@ -489,12 +501,11 @@ QString TaskView::importPlanner( const QString &fileName )
   reader.setContentHandler( handler );
   reader.parse( source );
   refresh();
-  return "";
 }
 
 QString TaskView::report( const ReportCriteria& rc )
 {
-  return _storage->report( this, rc );
+  return d->mStorage->report( this, rc );
 }
 
 void TaskView::exportcsvFile()
@@ -506,7 +517,7 @@ void TaskView::exportcsvFile()
     dialog.enableTasksToExportQuestion();
   dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
   if ( dialog.exec() ) {
-    QString err = _storage->report( this, dialog.reportCriteria() );
+    QString err = d->mStorage->report( this, dialog.reportCriteria() );
     if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toAscii()) );
   }
 }
@@ -521,7 +532,7 @@ QString TaskView::exportcsvHistory()
     dialog.enableTasksToExportQuestion();
   dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
   if ( dialog.exec() ) {
-    err = _storage->report( this, dialog.reportCriteria() );
+    err = d->mStorage->report( this, dialog.reportCriteria() );
   }
   return err;
 }
@@ -550,8 +561,8 @@ QString TaskView::save()
   // it won't make any difference.
   for (unsigned int i = 0; i < activeTasks.count(); i++)
   {
-    activeTasks.at(i)->setRunning(false, _storage);
-    activeTasks.at(i)->setRunning(true, _storage);
+    activeTasks.at(i)->setRunning(false, d->mStorage);
+    activeTasks.at(i)->setRunning(true, d->mStorage);
   }
 
   // If there was an active task, the iCal file has already been saved.
@@ -559,7 +570,7 @@ QString TaskView::save()
 #endif
   {
     kDebug(5970) <<"Entering TaskView::save(ListView)";
-    QString err=_storage->save(this);
+    QString err=d->mStorage->save(this);
 
     emit setStatusBarText( err.isNull() ? i18n("Saved successfully") : i18n("Error during saving") );
     return err;
@@ -584,7 +595,7 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
   {
     if (_preferences->uniTasking()) stopAllTimers();
     _idleTimeDetector->startIdleDetection();
-    task->setRunning(true, _storage, startTime);
+    task->setRunning(true, d->mStorage, startTime);
     activeTasks.append(task);
     emit updateButtons();
     if ( activeTasks.count() == 1 )
@@ -603,7 +614,7 @@ void TaskView::stopAllTimers( const QDateTime &when )
 {
   kDebug(5970) <<"Entering TaskView::stopAllTimers";
   foreach ( Task *task, activeTasks )
-    task->setRunning( false, _storage, when );
+    task->setRunning( false, d->mStorage, when );
 
   _idleTimeDetector->stopIdleDetection();
   _focusDetector->stopFocusDetection(); 
@@ -615,9 +626,9 @@ void TaskView::stopAllTimers( const QDateTime &when )
 
 void TaskView::toggleFocusTracking()
 {
-  focustrackingactive = !focustrackingactive;
+  d->mFocusTrackingActive = !d->mFocusTrackingActive;
 
-  if ( focustrackingactive ) {
+  if ( d->mFocusTrackingActive ) {
     _focusDetector->startFocusDetection();
   } else {
     stopTimerFor( lastTaskWithFocus );
@@ -660,7 +671,7 @@ void TaskView::stopTimerFor(Task* task)
 {
   if ( task != 0 && activeTasks.indexOf(task) != -1 ) {
     activeTasks.removeAll(task);
-    task->setRunning(false, _storage);
+    task->setRunning(false, d->mStorage);
     if ( activeTasks.count() == 0 ) {
       _idleTimeDetector->stopIdleDetection();
       emit timersInactive();
@@ -683,7 +694,7 @@ void TaskView::minuteUpdate()
 void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
 {
   foreach ( Task *task, activeTasks )
-    task->changeTime( minutes, ( save_data ? _storage : 0 ) );
+    task->changeTime( minutes, ( save_data ? d->mStorage : 0 ) );
 }
 
 void TaskView::newTask()
@@ -730,7 +741,7 @@ QString TaskView::addTask
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );
 
-  task->setUid( _storage->addTask( task, parent ) );
+  task->setUid( d->mStorage->addTask( task, parent ) );
   QString taskuid=task->uid();
   if ( ! taskuid.isNull() )
   {
@@ -780,7 +791,7 @@ void TaskView::editTask()
       taskName = dialog->taskName();
     }
     // setName only does something if the new name is different
-    task->setName(taskName, _storage);
+    task->setName(taskName, d->mStorage);
 
     // update session time as well if the time was changed
     long total, session, totalDiff, sessionDiff;
@@ -789,7 +800,7 @@ void TaskView::editTask()
     dialog->status( &total, &totalDiff, &session, &sessionDiff, &desktopList);
 
     if( totalDiff != 0 || sessionDiff != 0)
-      task->changeTimes( sessionDiff, totalDiff, _storage );
+      task->changeTimes( sessionDiff, totalDiff, d->mStorage );
 
     // If all available desktops are checked, disable auto tracking,
     // since it makes no sense to track for every desktop.
@@ -816,7 +827,7 @@ void TaskView::editTask()
 //                       i18n("Log comment for task '%1':").arg(task->name()),
 //                       QString(), &ok, this);
 //  if ( ok )
-//    task->addComment( comment, _storage );
+//    task->addComment( comment, d->mStorage );
 //}
 
 void TaskView::reinstateTask(int completion)
@@ -830,7 +841,7 @@ void TaskView::reinstateTask(int completion)
   if (completion<0) completion=0;
   if (completion<100)
   {
-    task->setPercentComplete(completion, _storage);
+    task->setPercentComplete(completion, d->mStorage);
     task->setPixmapProgress();
     save();
     emit updateButtons();
@@ -869,7 +880,7 @@ void TaskView::deleteTask(bool markingascomplete)
   {
     if (markingascomplete)
     {
-      task->setPercentComplete(100, _storage);
+      task->setPercentComplete(100, d->mStorage);
       task->setPixmapProgress();
       save();
       emit updateButtons();
@@ -883,7 +894,7 @@ void TaskView::deleteTask(bool markingascomplete)
     else
     {
       QString uid=task->uid();
-      task->remove(_storage);
+      task->remove(d->mStorage);
       task->removeFromView();
       _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
       save();
@@ -953,7 +964,7 @@ void TaskView::deletingTask(Task* deletedTask)
 QList<HistoryEvent> TaskView::getHistory(const QDate& from,
     const QDate& to) const
 {
-  return _storage->getHistory(from, to);
+  return d->mStorage->getHistory(from, to);
 }
 
 void TaskView::markTaskAsComplete()
@@ -1024,6 +1035,11 @@ void TaskView::slotColumnToggled( int column )
   kDebug() <<"column:" << column;
   _preferences->setDisplayColumn( column - 1, !isColumnHidden(column) );
   _preferences->save();
+}
+
+bool TaskView::isFocusTrackingActive() const
+{
+  return d->mFocusTrackingActive;
 }
 
 #include "taskview.moc"

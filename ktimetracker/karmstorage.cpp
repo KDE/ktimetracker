@@ -65,23 +65,23 @@
 #include "preferences.h"
 #include "task.h"
 
-KarmStorage *KarmStorage::_instance = 0;
 static long linenr;  // how many lines written by printTaskHistory so far
 
+//@cond PRIVATE
+class KarmStorage::Private {
+  public:
+    Private() : mCalendar( 0 ) {}
 
-KarmStorage *KarmStorage::instance()
+    KCal::ResourceCalendar *mCalendar;
+    QString mICalFile;
+};
+//@endcond
+
+KarmStorage::KarmStorage() : d( new Private() )
 {
-  if (_instance == 0) _instance = new KarmStorage();
-  return _instance;
 }
 
-KarmStorage::KarmStorage()
-{
-  _calendar = 0;
-}
-
-QString KarmStorage::load( TaskView* view, const Preferences* preferences, 
-                           const QString &fileName )
+QString KarmStorage::load( TaskView* view, const QString &fileName )
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
@@ -93,47 +93,48 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
   assert( !( lFileName.isEmpty() ) );
 
   // If same file, don't reload
-  if ( lFileName == _icalfile ) return err;
+  if ( lFileName == d->mICalFile ) return err;
 
 
   // If file doesn't exist, create a blank one to avoid ResourceLocal load
   // error.  We make it user and group read/write, others read.  This is
   // masked by the users umask.  (See man creat)
-  if ( ! remoteResource( _icalfile ) )
-  {
+  if ( !( remoteResource( lFileName ) ) ) {
     int handle;
     handle = open (
-        QFile::encodeName( lFileName ),
-        O_CREAT|O_EXCL|O_WRONLY,
-        S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH
-        );
-    if (handle != -1) close(handle);
+               QFile::encodeName( lFileName ),
+               O_CREAT | O_EXCL | O_WRONLY,
+               S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH
+             );
+    if ( handle != -1 ) {
+      close( handle );
+    }
   }
 
-  if ( _calendar)
+  if ( d->mCalendar)
     closeStorage(view);
 
   // Create local file resource and add to resources
-  _icalfile = lFileName;
+  d->mICalFile = lFileName;
 
   KCal::ResourceCached *resource;
-  if ( remoteResource( _icalfile ) )
+  if ( remoteResource( d->mICalFile ) )
   {
-    KUrl url( _icalfile );
+    KUrl url( d->mICalFile );
     resource = new KCal::ResourceRemote( url, url ); // same url for upload and download
   }
   else
   {
-    resource = new KCal::ResourceLocal( _icalfile );
+    resource = new KCal::ResourceLocal( d->mICalFile );
   }
-  _calendar = resource;
+  d->mCalendar = resource;
 
-  QObject::connect (_calendar, SIGNAL(resourceChanged(ResourceCalendar *)),
+  QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar *)),
   	            view, SLOT(iCalFileModified(ResourceCalendar *)));
-  _calendar->setTimeSpec( KPimPrefs::timeSpec() );
-  _calendar->setResourceName( QString::fromLatin1("KTimeTracker") );
-  _calendar->open();
-  _calendar->load();
+  d->mCalendar->setTimeSpec( KPimPrefs::timeSpec() );
+  d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
+  d->mCalendar->open();
+  d->mCalendar->load();
 
   // Claim ownership of iCalendar file if no one else has.
   KCal::Person owner = resource->owner();
@@ -153,7 +154,7 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
 
     // Build dictionary to look up Task object from Todo uid.  Each task is a
     // QListViewItem, and is initially added with the view as the parent.
-    todoList = _calendar->rawTodos();
+    todoList = d->mCalendar->rawTodos();
     kDebug(5970) <<"KarmStorage::load"
       << "rawTodo count (includes completed todos) ="
       << todoList.count();
@@ -202,18 +203,18 @@ QString KarmStorage::load( TaskView* view, const Preferences* preferences,
       }
     }
 
-    kDebug(5970) <<"KarmStorage::load - loaded" << view->count()
-      << "tasks from" << _icalfile;
+    kDebug(5970) << "KarmStorage::load - loaded" << view->count()
+      << "tasks from" << d->mICalFile;
   }
 
-  buildTaskView(_calendar, view);
+  buildTaskView(d->mCalendar, view);
   return err;
 }
 
 QString KarmStorage::icalfile()
 {
   kDebug(5970) <<"Entering KarmStorage::icalfile";
-  return _icalfile;
+  return d->mICalFile;
 }
 
 QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
@@ -286,11 +287,11 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
 void KarmStorage::closeStorage(TaskView* view)
 {
-  if ( _calendar )
+  if ( d->mCalendar )
   {
-    _calendar->close();
-    delete _calendar;
-    _calendar = 0;
+    d->mCalendar->close();
+    delete d->mCalendar;
+    d->mCalendar = 0;
 
     view->clear();
   }
@@ -299,7 +300,7 @@ void KarmStorage::closeStorage(TaskView* view)
 KCal::Event::List KarmStorage::rawevents()
 {
   kDebug(5970) <<"Entering KarmStorage::listallevents";
-  return _calendar->rawEvents();
+  return d->mCalendar->rawEvents();
 }
 
 QString KarmStorage::save(TaskView* taskview)
@@ -323,7 +324,7 @@ QString KarmStorage::save(TaskView* taskview)
   {
     kDebug(5970)
       << "KarmStorage::save : wrote"
-      << taskview->count() << "tasks to" << _icalfile;
+      << taskview->count() << "tasks to" << d->mICalFile;
   }
   else
   {
@@ -338,10 +339,10 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
   kDebug(5970) <<"Entering KarmStorage::setTaskParent";
   QString err=QString();
   KCal::Todo* toDo;
-  toDo = _calendar->todo(task->uid());
+  toDo = d->mCalendar->todo(task->uid());
   if (parent==0) toDo->removeRelation(toDo->relatedTo());
-  else toDo->setRelatedTo(_calendar->todo(parent->uid()));
- // buildTaskView(_calendar, _view);
+  else toDo->setRelatedTo(d->mCalendar->todo(parent->uid()));
+ // buildTaskView(d->mCalendar, _view);
   kDebug(5970) <<"Leaving KarmStorage::setTaskParent";
   return err;
 }
@@ -352,7 +353,7 @@ QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
   QString err;
   KCal::Todo* todo;
 
-  todo = _calendar->todo(task->uid());
+  todo = d->mCalendar->todo(task->uid());
   if ( !todo )
   {
     kDebug(5970) <<"Could not get todo from calendar";
@@ -376,7 +377,7 @@ bool KarmStorage::isEmpty()
 {
   KCal::Todo::List todoList;
 
-  todoList = _calendar->rawTodos();
+  todoList = d->mCalendar->rawTodos();
   return todoList.empty();
 }
 
@@ -518,11 +519,11 @@ QString KarmStorage::addTask(const Task* task, const Task* parent)
   QString uid;
 
   todo = new KCal::Todo();
-  if ( _calendar->addTodo( todo ) )
+  if ( d->mCalendar->addTodo( todo ) )
   {
     task->asTodo( todo  );
     if (parent)
-      todo->setRelatedTo(_calendar->todo(parent->uid()));
+      todo->setRelatedTo(d->mCalendar->todo(parent->uid()));
     uid = todo->uid();
   }
   else
@@ -539,7 +540,7 @@ bool KarmStorage::removeTask(Task* task)
 {
 
   // delete history
-  KCal::Event::List eventList = _calendar->rawEvents();
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
   for(KCal::Event::List::iterator i = eventList.begin();
       i != eventList.end();
       ++i)
@@ -548,13 +549,13 @@ bool KarmStorage::removeTask(Task* task)
         || ( (*i)->relatedTo()
             && (*i)->relatedTo()->uid() == task->uid()))
     {
-      _calendar->deleteEvent(*i);
+      d->mCalendar->deleteEvent(*i);
     }
   }
 
   // delete todo
-  KCal::Todo *todo = _calendar->todo(task->uid());
-  _calendar->deleteTodo(todo);
+  KCal::Todo *todo = d->mCalendar->todo(task->uid());
+  d->mCalendar->deleteTodo(todo);
 
   // Save entire file
   saveCalendar();
@@ -567,7 +568,7 @@ void KarmStorage::addComment(const Task* task, const QString& comment)
 
   KCal::Todo* todo;
 
-  todo = _calendar->todo(task->uid());
+  todo = d->mCalendar->todo(task->uid());
 
   // Do this to avoid compiler warnings about comment not being used.  once we
   // transition to using the addComment method, we need this second param.
@@ -903,7 +904,7 @@ bool KarmStorage::bookTime(const Task* task,
       QByteArray("duration"),
       QString::number(durationInSeconds));
 
-  return _calendar->addEvent(e);
+  return d->mCalendar->addEvent(e);
 }
 
 void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
@@ -929,7 +930,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
       QByteArray("duration"),
       QString::number(deltaSeconds));
 
-  _calendar->addEvent(e);
+  d->mCalendar->addEvent(e);
 
   // This saves the entire iCal file each time, which isn't efficient but
   // ensures no data loss.  A faster implementation would be to append events
@@ -952,7 +953,7 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   e->setSummary(task->name());
 
   // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
-  e->setRelatedTo(_calendar->todo(task->uid()));
+  e->setRelatedTo(d->mCalendar->todo(task->uid()));
 
   // Debugging: some events where not getting a related-to field written.
   assert(e->relatedTo()->uid() == task->uid());
@@ -990,15 +991,12 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
   KCal::Event::List::iterator event;
   QString duration;
 
-  for(QDate d = from; d <= to; d = d.addDays(1))
-  {
-    events = _calendar->rawEventsForDate( d, KPimPrefs::timeSpec() );
-    for (event = events.begin(); event != events.end(); ++event)
-    {
+  for( QDate date = from; date <= to; date = date.addDays( 1 ) ) {
+    events = d->mCalendar->rawEventsForDate( date, KPimPrefs::timeSpec() );
+    for (event = events.begin(); event != events.end(); ++event) {
 
       // KArm events have the custom property X-KDE-Karm-duration
-      if (! processed.contains( (*event)->uid()))
-      {
+      if (! processed.contains( (*event)->uid())) {
         // If an event spans multiple days, CalendarLocal::rawEventsForDate
         // will return the same event on both days.  To avoid double-counting
         // such events, we (arbitrarily) attribute the hours from both days on
@@ -1050,11 +1048,11 @@ bool KarmStorage::saveCalendar()
 {
   kDebug(5970) <<"KarmStorage::saveCalendar";
 
-  KABC::Lock *lock = _calendar->lock();
+  KABC::Lock *lock = d->mCalendar->lock();
   if ( !lock || !lock->lock() )
     return false;
 
-  if ( _calendar->save() ) {
+  if ( d->mCalendar->save() ) {
     lock->unlock();
     return true;
   }

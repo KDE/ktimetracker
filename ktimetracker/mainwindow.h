@@ -37,6 +37,7 @@ class QString;
 class Preferences;
 class Task;
 class TaskView;
+class TimetrackerWidget;
 
 /**
  * Main window to tie the application together.
@@ -53,7 +54,6 @@ class MainWindow : public KParts::MainWindow
 
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
-    TaskView*        _taskView;
     long             _totalSum;
     long             _sessionSum;
     Preferences*     _preferences;
@@ -73,7 +73,17 @@ class MainWindow : public KParts::MainWindow
     KAction*         actionNewSub;
     KAction*         actionedithistory;
     KAction*         actionFocusTracking;
+    KAction*         actionResetAll;
+    KAction*         actionStartNewSession;
+    KAction*         actionExportTimes;
+    KAction*         actionExportHistory;
+    KAction*         actionImportPlanner;
+    KAction*         actionClose;
+    KAction*         actionPrint;
+    KAction*         actionSave;
     QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
+
+    TimetrackerWidget *mainWidget;
 
     friend class KarmTray;
 
@@ -83,34 +93,34 @@ class MainWindow : public KParts::MainWindow
 
     // FIXME consistent method names, e.g. getError, stoptimefor, ...
     /** DCOP function: print out version */
-    QString version() const;
-    QString taskIdFromName( const QString &taskName ) const;
-    /** @reimp from KarmDCOPIface::addTask */
-    int addTask( const QString &storage );
-    /** @reimp from KarmDCOPIface::setPerCentComplete */
-    QString setPerCentComplete( const QString& taskName, int PerCent );
-    /** @reimp from KarmDCOPIface::bookTime */
-    int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
-    /** @reimp from KarmDCOPIface::getError */
-    QString getError( int karmErrorNumber ) const;
-    /** Delivers the total minutes for taskId */
-    int totalMinutesForTaskId( const QString& taskId );
-    /** starts taskname's timer */
-    QString starttimerfor( const QString &taskname );
-    QString stoptimerfor( const QString &taskname );
-    QString stopalltimers();
-    QString deletetodo();
-    /** Delivers true if ktimetracker asks before deleting a task. This is stored as a config setting. */
-    bool    getpromptdelete();
-    QString setpromptdelete( bool prompt );
-    QString exportcsvfile( const QString &filename, const QString &from, 
-                           const QString &to, int type, bool decimalMinutes, 
-                           bool allTasks, const QString &delimiter, 
-                           const QString &quote );
-    QString importplannerfile( const QString &filename );
-    QStringList getActiveTasks();
-    QStringList getTasks();
-    bool isActive( const QString &taskName );
+//     QString version() const;
+//     QString taskIdFromName( const QString &taskName ) const;
+//     /** @reimp from KarmDCOPIface::addTask */
+//     int addTask( const QString &storage );
+//     /** @reimp from KarmDCOPIface::setPerCentComplete */
+//     QString setPerCentComplete( const QString& taskName, int PerCent );
+//     /** @reimp from KarmDCOPIface::bookTime */
+//     int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
+//     /** @reimp from KarmDCOPIface::getError */
+//     QString getError( int karmErrorNumber ) const;
+//     /** Delivers the total minutes for taskId */
+//     int totalMinutesForTaskId( const QString& taskId );
+//     /** starts taskname's timer */
+//     QString starttimerfor( const QString &taskname );
+//     QString stoptimerfor( const QString &taskname );
+//     QString stopalltimers();
+//     QString deletetodo();
+//     /** Delivers true if ktimetracker asks before deleting a task. This is stored as a config setting. */
+//     bool    getpromptdelete();
+//     QString setpromptdelete( bool prompt );
+//     QString exportcsvfile( const QString &filename, const QString &from, 
+//                            const QString &to, int type, bool decimalMinutes, 
+//                            bool allTasks, const QString &delimiter, 
+//                            const QString &quote );
+//     QString importplannerfile( const QString &filename );
+//     QStringList getActiveTasks();
+//     QStringList getTasks();
+//     bool isActive( const QString &taskName );
 
   public Q_SLOTS:
     void setStatusBar( const QString& );
@@ -132,6 +142,7 @@ class MainWindow : public KParts::MainWindow
     void enableStopAll();
     void disableStopAll();
     void slotFocusTracking();
+    void openFile();
 //    void timeLoggingChanged( bool on );
 
   protected:

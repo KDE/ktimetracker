@@ -57,7 +57,7 @@ class TaskView : public QTreeWidget
   Q_OBJECT
 
   public:
-    explicit TaskView( const QString &icsfile, QWidget *parent = 0 );
+    explicit TaskView( QWidget *parent = 0 );
     virtual ~TaskView();
 
     /**  Return the first item in the view, cast to a Task pointer.  */
@@ -98,7 +98,7 @@ class TaskView : public QTreeWidget
                      Task* parent = 0 );
 
     /** Returns whether the focus tracking is currently active */
-    bool focusTrackingActive() { return focustrackingactive; }
+    bool isFocusTrackingActive() const;
 
   public Q_SLOTS:
     /** Save to persistent storage. */
@@ -133,7 +133,7 @@ class TaskView : public QTreeWidget
     void reFresh();
 
     /** used to import tasks from imendio planner */
-    QString importPlanner( const QString &fileName = "" );
+    void importPlanner( const QString &fileName = "" );
 
     /** call export function for csv totals or history */
     QString report( const ReportCriteria &rc );
@@ -221,7 +221,6 @@ class TaskView : public QTreeWidget
   private: // member variables
     IdleTimeDetector* _idleTimeDetector;
     FocusDetector* _focusDetector;
-    bool focustrackingactive;  // do we track by which application has the focus ?
     QTimer *_minuteTimer;
     QTimer *_autoSaveTimer;
     QTimer *_manualSaveTimer;
@@ -233,8 +232,10 @@ class TaskView : public QTreeWidget
     QTableWidget* historywidget;
     Task*  lastTaskWithFocus;
 
-    //KCal::CalendarLocal _calendar;
-    KarmStorage * _storage;
+    //@cond PRIVATE
+    class Private;
+    Private *const d;
+    //@endcond
 
   private:
     void updateParents( Task* task, long totalDiff, long sesssionDiff);
