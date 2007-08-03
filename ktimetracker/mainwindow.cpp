@@ -60,7 +60,6 @@
 #include "ktimetracker.h"
 
 #include "kaccelmenuwatch.h"
-#include "karmmainadaptor.h"
 #include "timetrackerwidget.h"
 #include "ui_cfgbehavior.h"
 #include "ui_cfgdisplay.h"
