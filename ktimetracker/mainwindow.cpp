@@ -267,7 +267,8 @@ void MainWindow::showSettingsDialog()
   storageUi->setupUi( storagePage );
   dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
 
-  dialog->show();
+  dialog->exec();
+  mainWidget->reconfigureFiles();
 }
 
 /**

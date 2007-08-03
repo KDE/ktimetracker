@@ -90,9 +90,6 @@ class TaskView : public QTreeWidget
     /** Schedule that we should save very soon */
     void scheduleSave();
 
-    /** Return preferences user selected on settings dialog. **/
-    Preferences *preferences();
-
     /** Add a task to view and storage. */
     QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
@@ -187,7 +184,6 @@ class TaskView : public QTreeWidget
     void extractTime( int minutes );
     void taskTotalTimesChanged( long session, long total)
                                 { emit totalTimesChanged( session, total); }
-    void adaptColumns();
     /** receiving signal that a task is being deleted */
     void deletingTask(Task* deletedTask);
 
@@ -209,6 +205,9 @@ class TaskView : public QTreeWidget
 
     /** Copy history for current and all sub tasks to clipboard. */
     QString clipHistory();
+
+    /** Reconfigures taskView depending on current configuration. */
+    void reconfigure();
 
   Q_SIGNALS:
     void totalTimesChanged( long session, long total );
@@ -251,8 +250,6 @@ class TaskView : public QTreeWidget
     void mousePressEvent( QMouseEvent* );
 
   protected Q_SLOTS:
-    void autoSaveChanged( bool );
-    void autoSavePeriodChanged( int period );
     void minuteUpdate();
 
     /** item state stores if a task is expanded so you can see the subtasks */

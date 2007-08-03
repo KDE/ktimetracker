@@ -87,6 +87,12 @@ class TimetrackerWidget : public KTabWidget {
     */
     QString saveFile();
 
+    /**
+      call this method when the preferences changed to adjust all
+      taskviews.
+     */
+    void reconfigureFiles();
+
     /*
      * The following slots are wrapper slots which fires the corresponding 
      * slot of the current taskview.

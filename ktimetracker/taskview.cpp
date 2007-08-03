@@ -143,7 +143,6 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   setHeaderLabels(labels);
   headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
-  adaptColumns();
   setAllColumnsShowFocus( true );
   setItemDelegateForColumn( 5, new TaskViewDelegate(this) );
 
@@ -152,30 +151,17 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   connect( _minuteTimer, SIGNAL( timeout() ), this, SLOT( minuteUpdate() ));
   _minuteTimer->start(1000 * secsPerMinute);
 
-  // resize columns when config is changed
-  connect(_preferences, SIGNAL( setupChanged() ), this,SLOT( adaptColumns() ));
-
-  _minuteTimer->start(1000 * secsPerMinute);
-
   // Set up the idle detection.
   _idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
   connect( _idleTimeDetector, SIGNAL( extractTime(int) ),
            this, SLOT( extractTime(int) ));
   connect( _idleTimeDetector, SIGNAL( stopAllTimers(QDateTime) ),
            this, SLOT( stopAllTimers(QDateTime) ));
-  connect( _preferences, SIGNAL( idlenessTimeout(int) ),
-           _idleTimeDetector, SLOT( setMaxIdle(int) ));
-  connect( _preferences, SIGNAL( detectIdleness(bool) ),
-           _idleTimeDetector, SLOT( toggleOverAllIdleDetection(bool) ));
   if (!_idleTimeDetector->isIdleDetectionPossible())
     KTimeTrackerSettings::setEnabled( false );
 
   // Setup auto save timer
   _autoSaveTimer = new QTimer(this);
-  connect( _preferences, SIGNAL( autoSave(bool) ),
-           this, SLOT( autoSaveChanged(bool) ));
-  connect( _preferences, SIGNAL( autoSavePeriod(int) ),
-           this, SLOT( autoSavePeriodChanged(int) ));
   connect( _autoSaveTimer, SIGNAL( timeout() ), this, SLOT( save() ));
 
   // Setup manual save timer (to save changes a little while after they happen)
@@ -196,6 +182,8 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   // Header context menu
   TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
   connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
+
+  reconfigure();
 }
 
 void TaskView::newFocusWindowDetected( const QString &taskName )
@@ -542,8 +530,6 @@ void TaskView::scheduleSave()
 {
     _manualSaveTimer->start( 10 );
 }
-
-Preferences* TaskView::preferences() { return _preferences; }
 
 QString TaskView::save()
 {
@@ -919,44 +905,6 @@ void TaskView::extractTime(int minutes)
   addTimeToActiveTasks(-minutes,false); // subtract time in memory, but do not store it
 }
 
-void TaskView::autoSaveChanged(bool on)
-{
-  if (on) {
-    _autoSaveTimer->start( 
-      KTimeTrackerSettings::autoSavePeriod() * 1000 * secsPerMinute );
-  }
-  else if (_autoSaveTimer->isActive()) _autoSaveTimer->stop();
-}
-
-void TaskView::autoSavePeriodChanged(int /*minutes*/)
-{
-  autoSaveChanged( KTimeTrackerSettings::autoSave() );
-}
-
-void TaskView::adaptColumns()
-/* This procedure adapts the columns, it can e.g. be called when the user
-changes the time format or requests to hide some columns.
-The columns are by default:
-x - displaycolumn - name
-0 - -             - task name
-1 - 0             - session time
-2 - 1             - time 
-3 - 2             - total session time
-4 - 3             - total time
-5 - 4             - percent complete  */
-{
-  kDebug(5970) <<"Entering TaskView::adaptColumns";
-
-  setColumnHidden( 1, !KTimeTrackerSettings::displaySessionTime() );
-  setColumnHidden( 2, !KTimeTrackerSettings::displayTime() );
-  setColumnHidden( 3, !KTimeTrackerSettings::displayTotalSessionTime() );
-  setColumnHidden( 4, !KTimeTrackerSettings::displayTotalTime() );
-  setColumnHidden( 5, !KTimeTrackerSettings::displayPercentComplete() );
-
-  // maybe this slot is called because the times' format changed, so do a ...
-  refresh();
-}
-
 void TaskView::deletingTask(Task* deletedTask)
 {
   DesktopList desktopList;
@@ -1062,6 +1010,34 @@ void TaskView::slotColumnToggled( int column )
 bool TaskView::isFocusTrackingActive() const
 {
   return d->mFocusTrackingActive;
+}
+
+void TaskView::reconfigure()
+{
+  /* Adapt columns */
+  setColumnHidden( 1, !KTimeTrackerSettings::displaySessionTime() );
+  setColumnHidden( 2, !KTimeTrackerSettings::displayTime() );
+  setColumnHidden( 3, !KTimeTrackerSettings::displayTotalSessionTime() );
+  setColumnHidden( 4, !KTimeTrackerSettings::displayTotalTime() );
+  setColumnHidden( 5, !KTimeTrackerSettings::displayPercentComplete() );
+
+  /* idleness */
+  _idleTimeDetector->setMaxIdle( KTimeTrackerSettings::period() );
+  _idleTimeDetector->toggleOverAllIdleDetection( 
+    KTimeTrackerSettings::enabled() 
+  );
+
+  /* auto save */
+  if ( KTimeTrackerSettings::autoSave() ) {
+    _autoSaveTimer->start( 
+      KTimeTrackerSettings::autoSavePeriod() * 1000 * secsPerMinute 
+    );
+  }
+  else if ( _autoSaveTimer->isActive() ) {
+    _autoSaveTimer->stop();
+  }
+
+  refresh();
 }
 
 #include "taskview.moc"

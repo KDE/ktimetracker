@@ -218,6 +218,16 @@ QString TimetrackerWidget::saveFile()
   return taskView->save();
 }
 
+void TimetrackerWidget::reconfigureFiles()
+{
+  TaskView *taskView;
+  for ( int i = 0; i < count(); ++i ) {
+    taskView = qobject_cast< TaskView* >( widget( i ) );
+
+    taskView->reconfigure();
+  }
+}
+
 void TimetrackerWidget::slotCurrentChanged()
 {
   kDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
