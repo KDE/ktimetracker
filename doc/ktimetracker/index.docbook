@@ -388,10 +388,8 @@ include the sub-task times.</para>
 KArm</guimenuitem> </menuchoice>.  Otherwise, &karm; only keeps track of
 totals and not the detailed task history.</para></important>
 
-<para>This report is generated for the currently selected task and all its
-subtasks.  Unlike the totals report, this report does not give you the option
-to report on the complete task list.  You can only report on the current task
-and all its sub-tasks.</para>
+<para>This report is generated for the currently selected task and all it's
+subtasks. You also have the choice to generate it for all tasks.</para>
 
 <para>When you select the history report, &karm; first prompts you to enter the
 date range for the report:</para>
