@@ -34,6 +34,7 @@
 #include <kcal/event.h>
 
 #include "karmutility.h"
+#include "ktimetracker.h"
 #include "preferences.h"
 
 const int gSecondsPerMinute = 60;
@@ -460,8 +461,8 @@ void Task::move(Task* destination)
 void Task::update()
 // Update a row, containing one task
 {
-  kDebug(5970) <<"Entering Task::update";
-  bool b=taskView()->preferences()->decimalFormat();
+  kDebug( 5970 ) << "Entering Task::update";
+  bool b = KTimeTrackerSettings::decimalFormat();
   setText(0, _name);
   setText(1, formatTime(_sessionTime, b));
   setText(2, formatTime(_time, b));

@@ -62,7 +62,7 @@
 #include "taskview.h"
 #include "timekard.h"
 #include "karmutility.h"
-#include "preferences.h"
+#include "ktimetracker.h"
 #include "task.h"
 
 static long linenr;  // how many lines written by printTaskHistory so far
@@ -915,7 +915,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 
   // Don't write events (with timer start/stop duration) if user has turned
   // this off in the settings dialog.
-  if ( ! task->taskView()->preferences()->logging() ) return;
+  if ( !( KTimeTrackerSettings::logging() ) ) return;
 
   e = baseEvent(task);
 

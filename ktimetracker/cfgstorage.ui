@@ -1,0 +1,47 @@
+<ui version="4.0" >
+ <class>StoragePage</class>
+ <widget class="QWidget" name="StoragePage" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>230</width>
+    <height>70</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>StoragePage</string>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QCheckBox" name="kcfg_autoSave" >
+     <property name="text" >
+      <string>Save tasks every</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" >
+    <widget class="QSpinBox" name="kcfg_autoSavePeriod" >
+     <property name="suffix" >
+      <string> min</string>
+     </property>
+     <property name="minimum" >
+      <number>1</number>
+     </property>
+     <property name="maximum" >
+      <number>1440</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QCheckBox" name="kcfg_logging" >
+     <property name="text" >
+      <string>Log history</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

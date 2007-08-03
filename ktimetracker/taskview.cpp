@@ -53,6 +53,7 @@
 #include "idletimedetector.h"
 #include "plannerparser.h"
 #include "preferences.h"
+#include "ktimetracker.h"
 #include "printdialog.h"
 #include "task.h"
 #include "timekard.h"
@@ -157,7 +158,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   _minuteTimer->start(1000 * secsPerMinute);
 
   // Set up the idle detection.
-  _idleTimeDetector = new IdleTimeDetector( _preferences->idlenessTimeout() );
+  _idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
   connect( _idleTimeDetector, SIGNAL( extractTime(int) ),
            this, SLOT( extractTime(int) ));
   connect( _idleTimeDetector, SIGNAL( stopAllTimers(QDateTime) ),
@@ -167,7 +168,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   connect( _preferences, SIGNAL( detectIdleness(bool) ),
            _idleTimeDetector, SLOT( toggleOverAllIdleDetection(bool) ));
   if (!_idleTimeDetector->isIdleDetectionPossible())
-    _preferences->disableIdleDetection();
+    KTimeTrackerSettings::setEnabled( false );
 
   // Setup auto save timer
   _autoSaveTimer = new QTimer(this);
@@ -356,7 +357,7 @@ KarmStorage* TaskView::storage()
 
 TaskView::~TaskView()
 {
-  _preferences->save();
+  KTimeTrackerSettings::self()->writeConfig();
 }
 
 Task* TaskView::first_child() const
@@ -593,7 +594,7 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
   if (task != 0 && activeTasks.indexOf(task) == -1) 
   {
-    if (_preferences->uniTasking()) stopAllTimers();
+    if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
     _idleTimeDetector->startIdleDetection();
     task->setRunning(true, d->mStorage, startTime);
     activeTasks.append(task);
@@ -858,7 +859,7 @@ void TaskView::deleteTask(bool markingascomplete)
   }
 
   int response = KMessageBox::Continue;
-  if (!markingascomplete && _preferences->promptDelete()) {
+  if (!markingascomplete && KTimeTrackerSettings::promptDelete()) {
     if (task->childCount() == 0) {
       response = KMessageBox::warningContinueCancel( 0,
           i18n( "Are you sure you want to delete "
@@ -920,13 +921,16 @@ void TaskView::extractTime(int minutes)
 
 void TaskView::autoSaveChanged(bool on)
 {
-  if (on) _autoSaveTimer->start(_preferences->autoSavePeriod()*1000*secsPerMinute);
+  if (on) {
+    _autoSaveTimer->start( 
+      KTimeTrackerSettings::autoSavePeriod() * 1000 * secsPerMinute );
+  }
   else if (_autoSaveTimer->isActive()) _autoSaveTimer->stop();
 }
 
 void TaskView::autoSavePeriodChanged(int /*minutes*/)
 {
-  autoSaveChanged(_preferences->autoSave());
+  autoSaveChanged( KTimeTrackerSettings::autoSave() );
 }
 
 void TaskView::adaptColumns()
@@ -942,11 +946,13 @@ x - displaycolumn - name
 5 - 4             - percent complete  */
 {
   kDebug(5970) <<"Entering TaskView::adaptColumns";
-  for( int x=1; x <= 5; x++) 
-  {
-    if ( _preferences->displayColumn(x-1) ) setColumnHidden( x, false );
-    else setColumnHidden( x, true );
-  }
+
+  setColumnHidden( 1, !KTimeTrackerSettings::displaySessionTime() );
+  setColumnHidden( 2, !KTimeTrackerSettings::displayTime() );
+  setColumnHidden( 3, !KTimeTrackerSettings::displayTotalSessionTime() );
+  setColumnHidden( 4, !KTimeTrackerSettings::displayTotalTime() );
+  setColumnHidden( 5, !KTimeTrackerSettings::displayPercentComplete() );
+
   // maybe this slot is called because the times' format changed, so do a ...
   refresh();
 }
@@ -1032,9 +1038,25 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
 
 void TaskView::slotColumnToggled( int column )
 {
-  kDebug() <<"column:" << column;
-  _preferences->setDisplayColumn( column - 1, !isColumnHidden(column) );
-  _preferences->save();
+  switch ( column ) {
+    case 1:
+      KTimeTrackerSettings::setDisplaySessionTime( !isColumnHidden( 1 ) );
+      break;
+    case 2:
+      KTimeTrackerSettings::setDisplayTime( !isColumnHidden( 2 ) );
+      break;
+    case 3:
+      KTimeTrackerSettings::setDisplayTotalSessionTime( !isColumnHidden( 3 ) );
+      break;
+    case 4:
+      KTimeTrackerSettings::setDisplayTotalTime( !isColumnHidden( 4 ) );
+      break;
+    case 5:
+      KTimeTrackerSettings::setDisplayPercentComplete( !isColumnHidden( 5 ) );
+      break;
+  }
+
+  KTimeTrackerSettings::self()->writeConfig();
 }
 
 bool TaskView::isFocusTrackingActive() const

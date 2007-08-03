@@ -34,7 +34,6 @@ class KarmTray;
 class QPoint;
 class QString;
 
-class Preferences;
 class Task;
 class TaskView;
 class TimetrackerWidget;
@@ -56,7 +55,6 @@ class MainWindow : public KParts::MainWindow
     KAccelMenuWatch* _watcher;
     long             _totalSum;
     long             _sessionSum;
-    Preferences*     _preferences;
     KarmTray*        _tray;
     KAction*         actionStart;
     KAction*         actionStop;
@@ -143,6 +141,7 @@ class MainWindow : public KParts::MainWindow
     void disableStopAll();
     void slotFocusTracking();
     void openFile();
+    void showSettingsDialog();
 //    void timeLoggingChanged( bool on );
 
   protected:

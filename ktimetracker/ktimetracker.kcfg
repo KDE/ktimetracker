@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM 
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+  <kcfgfile name="ktimetrackerrc" />
+  <group name="Idle detection">
+    <entry name="enabled" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="period" type="UInt">
+      <default>15</default>
+    </entry>
+    <entry name="minActiveTime" type="UInt">
+      <default>5</default>
+    </entry>
+  </group>
+  <group name="Saving">
+    <entry name="autoSave" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="autoSavePeriod" type="UInt">
+      <default>5</default>
+    </entry>
+    <entry name="promptDelete" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="uniTasking" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="logging" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="displaySessionTime" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="displayTime" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="displayTotalSessionTime" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="displayTotalTime" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="displayPercentComplete" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="decimalFormat" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="trayIcon" type="Bool">
+      <default>true</default>
+    </entry>
+  </group>
+</kcfg>

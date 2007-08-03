@@ -22,7 +22,12 @@ set(karm_shared_SRCS
  )
 
 #qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmainadaptor )
-kde4_add_ui_files(karm_shared_SRCS csvexportdialog_base.ui )
+kde4_add_ui_files( karm_shared_SRCS 
+  csvexportdialog_base.ui 
+  cfgbehavior.ui 
+  cfgdisplay.ui
+  cfgstorage.ui )
+kde4_add_kcfg_files( karm_shared_SRCS ktimetracker.kcfgc )
 
 set(karm_SRCS main.cpp ${karm_shared_SRCS})
 

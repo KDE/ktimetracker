@@ -39,77 +39,18 @@ class Preferences : public KPageDialog
 
   public:
     static Preferences *instance();
-    void disableIdleDetection();
 
-    // Retrive information about settings
-    bool detectIdleness() const;
-    int idlenessTimeout() const;
-    int minimumDesktopActiveTime() const;
-    bool autoSave() const;
-    bool logging() const;
-    int autoSavePeriod() const;
-    bool promptDelete() const;
-    bool uniTasking() const;
-    QString setPromptDelete( bool prompt );
-    QString setUniTasking( bool b );
-    bool displayColumn(int n) const;
-    bool decimalFormat() const;
-    bool trayIcon() const;
     QString userRealName() const;
-
-    void setDisplayColumn( int column, bool show );
-
-    void emitSignals();
     bool readBoolEntry( const QString& uid );
     void writeEntry( const QString &key, bool value );
     void deleteEntry( const QString &key );
 
-  public Q_SLOTS:
-    void showDialog();
-    void load();
-    void save();
-
-  Q_SIGNALS:
-    void detectIdleness(bool on);
-    void idlenessTimeout(int minutes);
-    void autoSave(bool on);
-    void autoSavePeriod(int minutes);
-    void setupChanged();
-
-  protected Q_SLOTS:
-    virtual void slotButtonClicked(int button);
-    virtual void slotOk();
-    virtual void slotCancel();
-    void idleDetectCheckBoxChanged();
-    void autoSaveCheckBoxChanged();
-
   private:
-    void makeDisplayPage();
-    void makeBehaviorPage();
-    void makeStoragePage();
-
     Preferences();
-    static Preferences *_instance;
-    bool _unsavedChanges;
-
-    // Widgets
-    QCheckBox *_doIdleDetectionW, *_doAutoSaveW, *_promptDeleteW, *_uniTaskingW,
-              *_trayIconW;
-    QCheckBox *_displayTimeW, *_displaySessionW,
-              *_displayTotalTimeW, *_displayTotalSessionW,
-              *_decimalFormatW, *_displayPerCentCompleteW;
-    QCheckBox *_loggingW;
-    QLabel    *_idleDetectLabelW, *_displayColumnsLabelW, *_minDesktopActiveTimeLabelW;
-    QSpinBox  *_idleDetectValueW, *_autoSaveValueW, *_minDesktopActiveTimeValueW;
-
-    // Values
-    bool _doIdleDetectionV, _doAutoSaveV, _promptDeleteV, _loggingV, _uniTaskingV, _trayIconV;
-    bool _displayColumnV[5];
-    bool _decimalFormatV;
-    int  _idleDetectValueV, _autoSaveValueV, _minDesktopActiveTimeValueV;
+    static Preferences *mInstance;
 
     /** real name of the user, used during ICAL saving */
-    QString _userRealName;
+    QString mUserRealName;
 };
 
 #endif // KARM_PREFERENCES_H

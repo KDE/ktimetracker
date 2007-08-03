@@ -50,6 +50,7 @@
 #include "tray.h"
 #include "version.h"
 #include "karmpartadaptor.h"
+#include "ktimetracker.h"
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
     : KParts::ReadWritePart(parent),
@@ -116,7 +117,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
 
   // Everything that uses Preferences has been created now, we can let it
   // emit its signals
-  _preferences->emitSignals();
+  //_preferences->emitSignals(); FIXME relocate effects
   slotSelectionChanged();
 
     // set our XML-UI resource file
@@ -452,12 +453,12 @@ QString karmPart::deletetodo()
 
 bool karmPart::getpromptdelete()
 {
-  return _preferences->promptDelete();
+  return KTimeTrackerSettings::promptDelete();
 }
 
 QString karmPart::setpromptdelete( bool prompt )
 {
-  _preferences->setPromptDelete( prompt );
+  KTimeTrackerSettings::setPromptDelete( prompt );
   return "";
 }
 

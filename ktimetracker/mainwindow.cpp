@@ -32,6 +32,7 @@
 #include <KActionCollection>
 #include <KApplication>       // kapp
 #include <KConfig>
+#include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
@@ -49,17 +50,21 @@
 #include "edithistorydialog.h"
 #include "karmerrors.h"
 #include "karmutility.h"
-#include "preferences.h"
+#include "ktimetracker.h"
 #include "print.h"
 #include "task.h"
 #include "taskview.h"
 #include "timekard.h"
 #include "tray.h"
 #include "version.h"
+#include "ktimetracker.h"
 
 #include "kaccelmenuwatch.h"
 #include "karmmainadaptor.h"
 #include "timetrackerwidget.h"
+#include "ui_cfgbehavior.h"
+#include "ui_cfgdisplay.h"
+#include "ui_cfgstorage.h"
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
@@ -84,9 +89,6 @@ MainWindow::MainWindow( const QString &icsfile )
   // status bar
   startStatusBar();
 
-  // setup PreferenceDialog.
-  _preferences = Preferences::instance();
-
   // popup menus
   makeMenus();
   _watcher->updateMenus();
@@ -110,7 +112,7 @@ MainWindow::MainWindow( const QString &icsfile )
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
-  if ( _preferences->trayIcon() ) _tray = new KarmTray( this );
+  if ( KTimeTrackerSettings::trayIcon() ) _tray = new KarmTray( this );
   else _tray = new KarmTray( );
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
@@ -124,7 +126,7 @@ MainWindow::MainWindow( const QString &icsfile )
 
   // Everything that uses Preferences has been created now, we can let it
   // emit its signals
-  _preferences->emitSignals();
+  //_preferences->emitSignals(); // FIXME find a workaround
   slotSelectionChanged();
 
   // ToDo: Register with DCOP
@@ -246,6 +248,29 @@ void MainWindow::openFile()
   }
 }
 
+void MainWindow::showSettingsDialog()
+{
+  KConfigDialog *dialog = new KConfigDialog( 
+    this, "settings", KTimeTrackerSettings::self() );
+
+  Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
+  QWidget *behaviorPage = new QWidget;
+  behaviorUi->setupUi( behaviorPage );
+  dialog->addPage( behaviorPage, i18n( "Behavior" ), "gear" );
+
+  Ui::DisplayPage *displayUi = new Ui::DisplayPage;
+  QWidget *displayPage = new QWidget;
+  displayUi->setupUi( displayPage );
+  dialog->addPage( displayPage, i18n( "Display" ), "zoom-original" );
+
+  Ui::StoragePage *storageUi = new Ui::StoragePage;
+  QWidget *storagePage = new QWidget;
+  storageUi->setupUi( storagePage );
+  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
+
+  dialog->show();
+}
+
 /**
  * Calculate the sum of the session time and the total time for all
  * toplevel tasks and put it in the statusbar.
@@ -319,9 +344,9 @@ void MainWindow::makeMenus()
   actionPrint = KStandardAction::print( this, SLOT( print() ), actionCollection());
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
-  actionPreferences = KStandardAction::preferences(_preferences,
-      SLOT(showDialog()),
-      actionCollection() );
+  actionPreferences = KStandardAction::preferences( this,
+    SLOT( showSettingsDialog() ),
+    actionCollection() );
   actionSave = KStandardAction::save( this, SLOT( save() ), actionCollection() );
 
   // Start New Session
