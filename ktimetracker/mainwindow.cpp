@@ -248,6 +248,11 @@ void MainWindow::openFile()
 
 void MainWindow::showSettingsDialog()
 {
+  /* show myself b/c if this method was started from tray icon and the window
+     is not visible the applications quits after accepting the settings dialog.
+   */
+  show();
+
   KConfigDialog *dialog = new KConfigDialog( 
     this, "settings", KTimeTrackerSettings::self() );
 
