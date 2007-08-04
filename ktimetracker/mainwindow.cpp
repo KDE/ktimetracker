@@ -57,7 +57,6 @@
 #include "timekard.h"
 #include "tray.h"
 #include "version.h"
-#include "ktimetracker.h"
 
 #include "kaccelmenuwatch.h"
 #include "timetrackerwidget.h"
