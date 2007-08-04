@@ -83,6 +83,7 @@ MainWindow::MainWindow( const QString &icsfile )
   //                             Qt::TopRightCorner );
   setCentralWidget( mainWidget );
   mainWidget->openFile( icsfile );
+  mainWidget->showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
 
   // status bar
   startStatusBar();
@@ -273,6 +274,14 @@ void MainWindow::showSettingsDialog()
 
   dialog->exec();
   mainWidget->reconfigureFiles();
+}
+
+void MainWindow::slotSearchBar()
+{
+  bool currentVisible = KTimeTrackerSettings::self()->showSearchBar();
+  KTimeTrackerSettings::self()->setShowSearchBar( !currentVisible );
+  actionSearchBar->setChecked( !currentVisible );
+  mainWidget->showSearchBar( !currentVisible );
 }
 
 /**
@@ -478,6 +487,14 @@ void MainWindow::makeMenus()
   actionImportPlanner = new KAction(i18n("Import Tasks From &Planner..."), this);
   actionCollection()->addAction("import_planner", actionImportPlanner );
   connect(actionImportPlanner, SIGNAL(triggered(bool) ), mainWidget, SLOT(importPlanner()));
+
+  // Show/Hide SearchBar
+  actionSearchBar = new KAction( i18n( "Show Searchbar"), this );
+  actionSearchBar->setCheckable( true );
+  actionSearchBar->setChecked( KTimeTrackerSettings::self()->showSearchBar() );
+  actionCollection()->addAction( "searchbar", actionSearchBar );
+  connect( actionSearchBar, SIGNAL( triggered(bool) ), 
+           this, SLOT( slotSearchBar() ) );
 
   setXMLFile( QString::fromLatin1("karmui.rc") );
   createGUI( 0 );

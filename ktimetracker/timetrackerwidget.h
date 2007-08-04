@@ -23,14 +23,14 @@
 #ifndef TIMETRACKER_WIDGET_H
 #define TIMETRACKER_WIDGET_H
 
-#include <KTabWidget>
+#include <QWidget>
 
 #include <QDateTime>
 
 class Task;
 class TaskView;
 
-class TimetrackerWidget : public KTabWidget {
+class TimetrackerWidget : public QWidget {
   Q_OBJECT
 
   public:
@@ -93,6 +93,11 @@ class TimetrackerWidget : public KTabWidget {
      */
     void reconfigureFiles();
 
+    /**
+      shows/hides the search bar.
+     */
+    void showSearchBar( bool visible );
+
     /*
      * The following slots are wrapper slots which fires the corresponding 
      * slot of the current taskview.
@@ -112,6 +117,7 @@ class TimetrackerWidget : public KTabWidget {
   private Q_SLOTS:
     void slotCurrentChanged();
     void updateTabs();
+    void slotAddTask( const QString &taskName );
 
   Q_SIGNALS:
     void currentTaskChanged();

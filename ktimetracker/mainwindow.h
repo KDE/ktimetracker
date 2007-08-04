@@ -79,6 +79,7 @@ class MainWindow : public KParts::MainWindow
     KAction*         actionClose;
     KAction*         actionPrint;
     KAction*         actionSave;
+    KAction*         actionSearchBar;
     QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
 
     TimetrackerWidget *mainWidget;
@@ -142,6 +143,7 @@ class MainWindow : public KParts::MainWindow
     void slotFocusTracking();
     void openFile();
     void showSettingsDialog();
+    void slotSearchBar();
 //    void timeLoggingChanged( bool on );
 
   protected:

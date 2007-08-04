@@ -3,6 +3,11 @@
     "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
 <kcfg>
   <kcfgfile name="ktimetrackerrc" />
+  <group name="General">
+    <entry name="showSearchBar" type="Bool">
+      <default>true</default>
+    </entry>
+  </group>
   <group name="Idle detection">
     <entry name="enabled" type="Bool">
       <default>true</default>

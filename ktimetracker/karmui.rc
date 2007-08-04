@@ -41,6 +41,8 @@
   </Menu>
   <Menu name="settings" > 
     <text>&amp;Settings</text>
+    <Action name="searchbar" />
+    <Separator />
     <Action name="configure_karm" />
   </Menu>
 </MenuBar>
