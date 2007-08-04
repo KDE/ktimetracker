@@ -87,8 +87,8 @@ class Task : public QObject, public QTreeWidgetItem
     }
 
     /** Return unique iCalendar Todo ID for this task. */
-    QString uid() const       { return _uid; }
- 
+    QString uid() const;
+
     int depth();
 
     /**
@@ -145,24 +145,24 @@ class Task : public QObject, public QTreeWidgetItem
       /*@{ returns the times accumulated by the task
        * @return total time in minutes
        */
-      long time() const { return _time; }
-      long totalTime() const { return _totalTime; }
-      long sessionTime() const { return _sessionTime; }
-      long totalSessionTime() const { return _totalSessionTime; }
+      long time() const;
+      long totalTime() const;
+      long sessionTime() const;
+      long totalSessionTime() const;
 
       /**
        * Return time the task was started.
        */
-      QDateTime startTime() const { return _lastStart; }
+      QDateTime startTime() const;
 
       /** sets session time to zero. */
-      void startNewSession() { changeTimes( -_sessionTime, 0 ); }
+      void startNewSession();
     //@}
 
     //@{ desktop related functions
 
       void setDesktopList ( DesktopList dl );
-      DesktopList getDesktops() const { return _desktops;}
+      DesktopList desktops() const;
 
       QString getDesktopStr() const;
     //@}
@@ -178,7 +178,7 @@ class Task : public QObject, public QTreeWidgetItem
       /** returns the name of this task.
        *  @return a pointer to the name.
        */
-      QString name() const  { return _name; }
+      QString name() const;
 
       /**
        * Returns that task name, prefixed by parent tree up to root.
@@ -250,7 +250,7 @@ class Task : public QObject, public QTreeWidgetItem
      * 100.  If less than zero, set to zero.
      */
     void setPercentComplete(const int percent, KarmStorage *storage);
-    int percentComplete() const { return _percentcomplete; }
+    int percentComplete() const;
 
 
     /** Sets an appropriate icon for this task based on its level of
@@ -262,9 +262,6 @@ class Task : public QObject, public QTreeWidgetItem
 
     /** Remove current task and all it's children from the view.  */
     void removeFromView();
-
-    /** delivers when the task was started last */
-    QDateTime lastStart() { return _lastStart; }
 
   protected:
     void changeParentTotalTimes( long minutesSession, long minutes );
@@ -279,16 +276,10 @@ class Task : public QObject, public QTreeWidgetItem
     void updateActiveIcon();
 
   private:
-
-    /** The iCal unique ID of the Todo for this task. */
-    QString _uid;
-
-    /** The comment associated with this Task. */
-    QString _comment;
-
-    int _percentcomplete;
-
-    long totalTimeInSeconds() const      { return _totalTime * 60; }
+    //@cond PRIVATE
+    class Private;
+    Private *const d;
+    //@endcond
 
     /** if the time or session time is negative set them to zero */
     void noNegativeTimes();
@@ -297,29 +288,7 @@ class Task : public QObject, public QTreeWidgetItem
     void init( const QString& taskame, long minutes, long sessionTime,
                DesktopList desktops, int percent_complete);
 
-
-    /** task name */
-    QString _name;
-
-    /** Last time this task was started. */
-    QDateTime _lastStart;
-
-    //@{ totals of the whole subtree including self
-      long _totalTime;
-      long _totalSessionTime;
-    //@}
-
-    //@{ times spend on the task itself
-      long _time;
-      long _sessionTime;
-    //@}
-    DesktopList _desktops;
-    QTimer *_timer;
-    int _currentPic;
     static QVector<QPixmap*> *icons;
-
-    /** Don't need to update storage when deleting task from list. */
-    bool _removing;
 
 };
 

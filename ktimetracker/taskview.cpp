@@ -400,7 +400,7 @@ void TaskView::load( const QString &fileName )
   // Register tasks with desktop tracker
   int i = 0;
   for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
-    _desktopTracker->registerForDesktops( t, t->getDesktops() );
+    _desktopTracker->registerForDesktops( t, t->desktops() );
 
   if (first_child())
   {
@@ -764,7 +764,7 @@ void TaskView::editTask()
   if (!task)
     return;
 
-  DesktopList desktopList = task->getDesktops();
+  DesktopList desktopList = task->desktops();
   DesktopList oldDeskTopList = desktopList;
   EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), true, &desktopList );
   dialog->setTask( task->name(),

@@ -233,7 +233,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
     if ( view->item_at_index(i)->isRunning() )
     {
       runningTasks.append( view->item_at_index(i)->uid() );
-      startTimes.append( view->item_at_index(i)->lastStart() );
+      startTimes.append( view->item_at_index(i)->startTime() );
     }
   }
 
