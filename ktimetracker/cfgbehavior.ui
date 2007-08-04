@@ -9,9 +9,6 @@
     <height>156</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>BehaviorPage</string>
-  </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >
     <widget class="QCheckBox" name="kcfg_enabled" >
