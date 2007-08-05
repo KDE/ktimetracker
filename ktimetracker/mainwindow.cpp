@@ -439,7 +439,7 @@ void MainWindow::makeMenus()
   actionNew->setWhatsThis( i18n( "This will create a new top level task." ) );
 
   // New subtask
-  actionNewSub  = new KAction(KIcon(QString::fromLatin1("kmultiple")), i18n("New &Subtask..."), this);
+  actionNewSub  = new KAction(KIcon(QString::fromLatin1("new-subtask")), i18n("New &Subtask..."), this);
   actionCollection()->addAction("new_sub_task", actionNewSub );
   connect(actionNewSub, SIGNAL(triggered(bool) ), mainWidget, SLOT( newSubTask() ));
   actionNewSub->setShortcut(QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N));
