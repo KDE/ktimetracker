@@ -213,7 +213,9 @@ void MainWindow::exportcsvHistory()
 
 void MainWindow::quit()
 {
-  kapp->quit();
+  if ( mainWidget->closeAllFiles() ) {
+    kapp->quit();
+  }
 }
 
 

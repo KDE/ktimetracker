@@ -74,10 +74,9 @@ class TimetrackerWidget : public QWidget {
       closes the current opened tab widget and saves the data
       of the corresponding taskview.
 
-      @param canCancel If true, the user is allowed to cancel the close
-                       progress when the current widget is unsaved
+      @returns whether the file has been closed.
      */
-    void closeFile( bool canCancel = true );
+    bool closeFile();
 
     /**
       saves the current taskview. This is especially important on unsaved
@@ -98,6 +97,16 @@ class TimetrackerWidget : public QWidget {
      */
     void showSearchBar( bool visible );
 
+    /**
+      trys to close all files. This slot has to be called before quitting
+      the application to ensure that no data is lost.
+
+      @returns true if the user has saved or consciously not saved all files,
+               otherwise false.
+     */
+    bool closeAllFiles();
+
+    //BEGIN wrapper slots
     /*
      * The following slots are wrapper slots which fires the corresponding 
      * slot of the current taskview.
@@ -113,6 +122,13 @@ class TimetrackerWidget : public QWidget {
     void markTaskAsIncomplete();
     void exportcsvFile();
     void importPlanner( const QString &fileName = "" );
+    //END
+
+    //BEGIN dbus slots
+    QString version() const;
+    QStringList tasks() const;
+    QStringList activeTasks() const;
+    //END
 
   private Q_SLOTS:
     void slotCurrentChanged();
