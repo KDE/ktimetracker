@@ -41,10 +41,12 @@
 #include <KLocale>            // i18n
 #include <KMessageBox>
 #include <KPushButton>
+#include <KRecentFilesAction>
 #include <KShortcutsDialog>
 #include <KStandardAction>
 #include <KStandardGuiItem>
 #include <KStatusBar>         // statusBar()
+#include <KUrl>
 #include <KXMLGUIFactory>
 
 #include "edithistorydialog.h"
@@ -104,6 +106,7 @@ MainWindow::MainWindow( const QString &icsfile )
   connect( mainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
   loadGeometry();
+  actionRecentFiles->loadEntries( KGlobal::config()->group( "Recent Files" ) );
 
   // Setup context menu request handling
   connect( mainWidget,
@@ -222,6 +225,7 @@ void MainWindow::quit()
 MainWindow::~MainWindow()
 {
   kDebug(5970) <<"MainWindow::~MainWindows: Quitting karm.";
+  actionRecentFiles->saveEntries( KGlobal::config()->group( "Recent Files" ) );
   saveGeometry();
 }
 
@@ -245,8 +249,14 @@ void MainWindow::openFile()
 {
   QString fileName = KFileDialog::getOpenFileName( QString(), QString(), this );
   if ( !fileName.isEmpty() ) {
+    actionRecentFiles->addUrl( fileName );
     mainWidget->openFile( fileName );
   }
+}
+
+void MainWindow::openFile( const KUrl &url )
+{
+  mainWidget->openFile( url.path() );
 }
 
 void MainWindow::showSettingsDialog()
@@ -363,6 +373,8 @@ void MainWindow::makeMenus()
     SLOT( showSettingsDialog() ),
     actionCollection() );
   actionSave = KStandardAction::save( this, SLOT( save() ), actionCollection() );
+  actionRecentFiles = KStandardAction::openRecent( this, SLOT( openFile( const KUrl &) ), this );
+  actionCollection()->addAction( actionRecentFiles->objectName(), actionRecentFiles );
 
   // Start New Session
   actionStartNewSession  = new KAction(i18n("Start &New Session"), this);

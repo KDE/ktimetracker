@@ -30,6 +30,7 @@
 
 class KAccel;
 class KAccelMenuWatch;
+class KRecentFilesAction;
 class KarmTray;
 class QPoint;
 class QString;
@@ -80,6 +81,7 @@ class MainWindow : public KParts::MainWindow
     KAction*         actionPrint;
     KAction*         actionSave;
     KAction*         actionSearchBar;
+    KRecentFilesAction* actionRecentFiles;
     QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
 
     TimetrackerWidget *mainWidget;
@@ -142,6 +144,7 @@ class MainWindow : public KParts::MainWindow
     void disableStopAll();
     void slotFocusTracking();
     void openFile();
+    void openFile( const KUrl & );
     void showSettingsDialog();
     void slotSearchBar();
 //    void timeLoggingChanged( bool on );
