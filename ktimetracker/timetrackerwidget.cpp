@@ -329,6 +329,7 @@ void TimetrackerWidget::slotAddTask( const QString &taskName )
   taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
 
   d->mSearchWidget->clear();
+  d->mTabWidget->setFocus( Qt::OtherFocusReason );
 }
 
 //BEGIN wrapper slots
