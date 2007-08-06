@@ -25,14 +25,10 @@
 #include <KConfig>
 #include <KGlobal>
 
-#include <kemailsettings.h>
-
 Preferences *Preferences::mInstance = 0;
 
 Preferences::Preferences() 
 {
-  KEMailSettings settings;
-  mUserRealName = settings.getSetting( KEMailSettings::RealName );
 }
 
 Preferences *Preferences::instance()
@@ -42,11 +38,6 @@ Preferences *Preferences::instance()
   }
 
   return mInstance;
-}
-
-QString Preferences::userRealName() const
-{
-  return mUserRealName;
 }
 
 bool Preferences::readBoolEntry( const QString& key )

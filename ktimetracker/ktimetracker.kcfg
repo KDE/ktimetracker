@@ -3,9 +3,18 @@
     "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
 <kcfg>
   <kcfgfile name="ktimetrackerrc" />
+  <include>kemailsettings.h</include>
   <group name="General">
     <entry name="showSearchBar" type="Bool">
       <default>true</default>
+    </entry>
+    <entry name="userRealName" type="String">
+    <code>
+      QString _userRealName;
+      KEMailSettings settings;
+      _userRealName = settings.getSetting( KEMailSettings::RealName );
+    </code>
+    <default code="true">_userRealName</default>
     </entry>
   </group>
   <group name="Idle detection">

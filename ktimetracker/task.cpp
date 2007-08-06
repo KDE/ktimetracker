@@ -393,7 +393,7 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
     todo->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
         QByteArray( "desktopList" ), getDesktopStr() );
 
-  todo->setOrganizer( Preferences::instance()->userRealName() );
+  todo->setOrganizer( KTimeTrackerSettings::userRealName() );
 
   todo->setPercentComplete(d->mPercentComplete);
 

@@ -40,7 +40,6 @@ class Preferences : public KPageDialog
   public:
     static Preferences *instance();
 
-    QString userRealName() const;
     bool readBoolEntry( const QString& uid );
     void writeEntry( const QString &key, bool value );
     void deleteEntry( const QString &key );
@@ -48,9 +47,6 @@ class Preferences : public KPageDialog
   private:
     Preferences();
     static Preferences *mInstance;
-
-    /** real name of the user, used during ICAL saving */
-    QString mUserRealName;
 };
 
 #endif // KARM_PREFERENCES_H
