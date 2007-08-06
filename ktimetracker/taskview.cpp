@@ -292,10 +292,20 @@ void TaskView::startDrag(Qt::DropActions action)
 void TaskView::mouseMoveEvent( QMouseEvent *event ) 
 {
   QModelIndex index = indexAt( event->pos() );
-  
+
   if (index.isValid() && index.column() == 5) 
   {
     int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 100);
+
+    if ( event->modifiers() & Qt::ShiftModifier ) {
+      int delta = newValue % 10;
+      if ( delta >= 5 ) {
+        newValue += (10 - delta);
+      } else {
+        newValue -= delta;
+      }
+    }
+
     QTreeWidgetItem *item = itemFromIndex( index );
     if (item && item->isSelected()) 
     {
@@ -303,7 +313,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
       if (task) 
       {
         task->setPercentComplete( newValue, d->mStorage );
-        
+
         emit updateButtons();
       }
     }
