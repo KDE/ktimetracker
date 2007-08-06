@@ -13,9 +13,15 @@
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
     <Separator />
-    <Action name="import_planner" />
-    <Action name="export_times" />
-    <Action name="export_history" />
+    <Menu name="import" icon="file-import" >
+      <text>&amp;Import</text>
+      <Action name="import_planner" />
+    </Menu>
+    <Menu name="export" icon="file-export">
+      <text>&amp;Export</text>
+      <Action name="export_times" />
+      <Action name="export_history" />
+    </Menu>
     <Action name="edit_history" />
     <Separator />
     <Action name="file_close" />
