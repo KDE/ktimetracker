@@ -26,14 +26,14 @@
 /**
 this class is here to import tasks from a planner project file to karm.
 the import shall not be limited to karm (kPlaTo sends greetings)
-it imports planner's top-level-tasks on the same level-depth as current_item.
-if there is no current_item, planner's top-level-tasks will become top-level-tasks in karm.
+it imports planner's top-level-tasks on the same level-depth as currentItem.
+if there is no currentItem, planner's top-level-tasks will become top-level-tasks in karm.
 it imports as well the level-depth of each task, as its name, as its percent-complete.
 test cases:
  - deleting all tasks away, then import!
  - having started with an empty ics, import!
- - with current_item being a top-level-task, import!
- - with current_item being a subtask, import!
+ - with currentItem being a top-level-task, import!
+ - with currentItem being a subtask, import!
 
 @author Thorsten Staerk
 */

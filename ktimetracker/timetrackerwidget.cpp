@@ -110,8 +110,7 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
   }
 
   TaskView *taskView = new TaskView( this );
-  taskView->setContextMenuPolicy( Qt::CustomContextMenu );
-  connect( taskView, SIGNAL( customContextMenuRequested( const QPoint& ) ), 
+  connect( taskView, SIGNAL( contextMenuRequested( const QPoint& ) ), 
            this, SIGNAL( contextMenuRequested( const QPoint& ) ) );
   connect( taskView, SIGNAL( tasksChanged( const QList< Task* >& ) ),
            this, SLOT( updateTabs() ) );
@@ -172,7 +171,7 @@ Task* TimetrackerWidget::currentTask()
 {
   TaskView *taskView = 0;
   if ( ( taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) ) ) {
-    return taskView->current_item();
+    return taskView->currentItem();
   } else {
     return 0;
   }
@@ -427,7 +426,7 @@ QStringList TimetrackerWidget::tasks() const
     if ( !taskView ) continue;
 
     for ( int j = 0; j < taskView->count(); ++j ) {
-      result << taskView->item_at_index( j )->name();
+      result << taskView->itemAt( j )->name();
     }
   }
 
@@ -444,8 +443,8 @@ QStringList TimetrackerWidget::activeTasks() const
     if ( !taskView ) continue;
 
     for ( int j = 0; j < taskView->count(); ++j ) {
-      if ( taskView->item_at_index( j )->isRunning() ) {
-        result << taskView->item_at_index( j )->name();
+      if ( taskView->itemAt( j )->isRunning() ) {
+        result << taskView->itemAt( j )->name();
       }
     }
   }

@@ -24,14 +24,14 @@
 
 this class is here to import tasks from a planner project file to karm.
 the import shall not be limited to karm (kPlaTo sends greetings)
-it imports planner's top-level-tasks on the same level-depth as current_item.
-if there is no current_item, planner's top-level-tasks will become top-level-tasks in karm.
+it imports planner's top-level-tasks on the same level-depth as currentItem.
+if there is no currentItem, planner's top-level-tasks will become top-level-tasks in karm.
 it imports as well the level-depth of each task, as its name, as its percent-complete.
 test cases:
  - deleting all tasks away, then import!
  - having started with an empty ics, import!
- - with current_item being a top-level-task, import!
- - with current_item being a subtask, import!
+ - with currentItem being a top-level-task, import!
+ - with currentItem being a subtask, import!
 */
 
 #include "plannerparser.h"
@@ -40,17 +40,17 @@ test cases:
 #include "taskview.h"
 
   PlannerParser::PlannerParser(TaskView * tv)
-  // if there is a task one level above current_item, make it the father of all imported tasks. Set level accordingly.
+  // if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
   // import as well if there a no task in the taskview as if there are.
-  // if there are, put the top-level tasks of planner on the same level as current_item.
+  // if there are, put the top-level tasks of planner on the same level as currentItem.
   // So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
   {
     kDebug() <<"entering constructor to import planner tasks";
     _taskView=tv;
     level=0;
-    if (_taskView->current_item()) if (_taskView->current_item()->parent()) 
+    if (_taskView->currentItem()) if (_taskView->currentItem()->parent()) 
     {
-      task = _taskView->current_item()->parent(); 
+      task = _taskView->currentItem()->parent(); 
       level=1;
     }
   }

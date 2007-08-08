@@ -563,7 +563,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
     QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );
     if ( pop )
-      pop->popup( mainWidget->currentTaskView()->viewport()->mapToGlobal( point ) );
+      pop->popup( point );
 }
 
 //----------------------------------------------------------------------------
@@ -598,7 +598,7 @@ QString MainWindow::taskIdFromName( const QString &taskname ) const
 {
   QString rval = "";
 
-  Task* task = _taskView->first_child();
+  Task* task = _taskView->firstChild();
   while ( rval.isEmpty() && task )
   {
     rval = _hasTask( task, taskname );
@@ -628,7 +628,7 @@ QString MainWindow::setPerCentComplete( const QString& taskName, int perCent )
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
-    if ((_taskView->item_at_index(i)->name()==taskName))
+    if ((_taskView->itemAt(i)->name()==taskName))
     {
       index=i;
       if (err.isNull()) err="task name is abigious";
@@ -637,7 +637,7 @@ QString MainWindow::setPerCentComplete( const QString& taskName, int perCent )
   }
   if (err.isNull() && index>=0)
   {
-    _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
+    _taskView->itemAt(index)->setPercentComplete( perCent, _taskView->storage() );
   }
   return err;
 }
@@ -654,7 +654,7 @@ int MainWindow::bookTime
   if ( minutes <= 0 ) rval = KARM_ERR_INVALID_DURATION;
 
   // Find task
-  task = _taskView->first_child();
+  task = _taskView->firstChild();
   t = NULL;
   while ( !t && task )
   {
@@ -709,7 +709,7 @@ int MainWindow::totalMinutesForTaskId( const QString& taskId )
   kDebug(5970) <<"MainWindow::totalTimeForTask(" << taskId <<" )";
 
   // Find task
-  task = _taskView->first_child();
+  task = _taskView->firstChild();
   t = NULL;
   while ( !t && task )
   {
@@ -773,14 +773,14 @@ QString MainWindow::starttimerfor( const QString& taskname )
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
-    if ((_taskView->item_at_index(i)->name()==taskname))
+    if ((_taskView->itemAt(i)->name()==taskname))
     {
       index=i;
       if (err.isNull() ) err="task name is abigious";
       if (err=="no such task") err=QString();
     }
   }
-  if (err.isNull() && index>=0) _taskView->startTimerFor( _taskView->item_at_index(index) );
+  if (err.isNull() && index>=0) _taskView->startTimerFor( _taskView->itemAt(index) );
   return err;
 }
 
@@ -790,14 +790,14 @@ QString MainWindow::stoptimerfor( const QString& taskname )
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
-    if ((_taskView->item_at_index(i)->name()==taskname))
+    if ((_taskView->itemAt(i)->name()==taskname))
     {
       index=i;
       if (err.isNull()) err="task name is abigious";
       if (err=="no such task") err=QString();
     }
   }
-  if (err.isNull() && index>=0) _taskView->stopTimerFor( _taskView->item_at_index(index) );
+  if (err.isNull() && index>=0) _taskView->stopTimerFor( _taskView->itemAt(index) );
   return err;
 }
 
@@ -842,8 +842,8 @@ QStringList MainWindow::getActiveTasks()
   QStringList result;
 
   for ( int i = 0; i < _taskView->count(); ++i ) {
-    if ( _taskView->item_at_index( i )->isRunning() ) {
-      result << _taskView->item_at_index( i )->name();
+    if ( _taskView->itemAt( i )->isRunning() ) {
+      result << _taskView->itemAt( i )->name();
     }
   }
 
@@ -855,7 +855,7 @@ QStringList MainWindow::getTasks()
   QStringList result;
 
   for ( int i = 0; i < _taskView->count(); ++i ) {
-    result << _taskView->item_at_index( i )->name();
+    result << _taskView->itemAt( i )->name();
   }
 
   return result;
@@ -868,7 +868,7 @@ bool MainWindow::isActive( const QString &taskName )
   Task *task;
 
   for ( int i = 0; i < _taskView->count(); ++i ) {
-    task = _taskView->item_at_index( i );
+    task = _taskView->itemAt( i );
     if ( task->name() == taskName ) {
       return task->isRunning();
     }

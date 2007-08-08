@@ -136,7 +136,7 @@ karmPart::~karmPart()
 
 void karmPart::slotSelectionChanged()
 {
-  Task* item= _taskView->current_item();
+  Task* item= _taskView->currentItem();
   actionDelete->setEnabled(item);
   actionEdit->setEnabled(item);
   actionStart->setEnabled(item && !item->isRunning() && !item->isComplete());
@@ -466,7 +466,7 @@ QString karmPart::taskIdFromName( const QString &taskname ) const
 {
   QString rval = "";
 
-  Task* task = _taskView->first_child();
+  Task* task = _taskView->firstChild();
   while ( rval.isEmpty() && task )
   {
     rval = _hasTask( task, taskname );
@@ -511,7 +511,7 @@ QString karmPart::setPerCentComplete( const QString& taskName, int perCent )
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
-    if ((_taskView->item_at_index(i)->name()==taskName))
+    if ((_taskView->itemAt(i)->name()==taskName))
     {
       index=i;
       if (err.isNull()) err="task name is abigious";
@@ -520,7 +520,7 @@ QString karmPart::setPerCentComplete( const QString& taskName, int perCent )
   }
   if (err.isNull() && index>=0 )
   {
-    _taskView->item_at_index(index)->setPercentComplete( perCent, _taskView->storage() );
+    _taskView->itemAt(index)->setPercentComplete( perCent, _taskView->storage() );
   }
   return err;
 }
@@ -537,7 +537,7 @@ int karmPart::bookTime
   if ( minutes <= 0 ) rval = KARM_ERR_INVALID_DURATION;
 
   // Find task
-  task = _taskView->first_child();
+  task = _taskView->firstChild();
   t = NULL;
   while ( !t && task )
   {
@@ -592,7 +592,7 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
   kDebug(5970) <<"MainWindow::totalTimeForTask(" << taskId <<" )";
 
   // Find task
-  task = _taskView->first_child();
+  task = _taskView->firstChild();
   t = NULL;
   while ( !t && task )
   {
@@ -656,9 +656,9 @@ QString karmPart::starttimerfor( const QString& taskname )
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
-    if ((_taskView->item_at_index(i)->name()==taskname))
+    if ((_taskView->itemAt(i)->name()==taskname))
     {
-      _taskView->startTimerFor( _taskView->item_at_index(i) );
+      _taskView->startTimerFor( _taskView->itemAt(i) );
       err="";
     }
   }
@@ -670,9 +670,9 @@ QString karmPart::stoptimerfor( const QString& taskname )
   QString err="no such task";
   for (int i=0; i<_taskView->count(); i++)
   {
-    if ((_taskView->item_at_index(i)->name()==taskname))
+    if ((_taskView->itemAt(i)->name()==taskname))
     {
-      _taskView->stopTimerFor( _taskView->item_at_index(i) );
+      _taskView->stopTimerFor( _taskView->itemAt(i) );
       err="";
     }
   }
@@ -714,8 +714,8 @@ QStringList karmPart::getActiveTasks()
   QStringList result;
 
   for ( int i = 0; i < _taskView->count(); ++i ) {
-    if ( _taskView->item_at_index( i )->isRunning() ) {
-      result << _taskView->item_at_index( i )->name();
+    if ( _taskView->itemAt( i )->isRunning() ) {
+      result << _taskView->itemAt( i )->name();
     }
   }
 
@@ -727,7 +727,7 @@ QStringList karmPart::getTasks()
   QStringList result;
 
   for ( int i = 0; i < _taskView->count(); ++i ) {
-    result << _taskView->item_at_index( i )->name();
+    result << _taskView->itemAt( i )->name();
   }
 
   return result;
@@ -740,7 +740,7 @@ bool karmPart::isActive( const QString &taskName )
   Task *task;
 
   for ( int i = 0; i < _taskView->count(); ++i ) {
-    task = _taskView->item_at_index( i );
+    task = _taskView->itemAt( i );
     if ( task->name() == taskName ) {
       return task->isRunning();
     }

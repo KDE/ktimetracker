@@ -60,15 +60,18 @@ class TaskView : public QTreeWidget
     explicit TaskView( QWidget *parent = 0 );
     virtual ~TaskView();
 
+    //BEGIN view specified
     /**  Return the first item in the view, cast to a Task pointer.  */
-    Task* first_child() const;
+    Task* firstChild() const;
 
     /**  Return the current item in the view, cast to a Task pointer.  */
-    Task* current_item() const;
+    Task* currentItem() const;
 
     /**  Return the i'th item (zero-based), cast to a Task pointer.  */
-    Task* item_at_index(int i);
+    Task* itemAt( int i );
+    //END
 
+    //BEGIN model specified
     /** Load the view from storage.  */
     void load( const QString &filename );
 
@@ -94,11 +97,14 @@ class TaskView : public QTreeWidget
     QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
 
-    /** Returns whether the focus tracking is currently active. */
-    bool isFocusTrackingActive() const;
-
     /** Returns a list of the current active tasks. */
     QList< Task* > activeTasks() const;
+    //END
+
+    //BEGIN behavior
+    /** Returns whether the focus tracking is currently active. */
+    bool isFocusTrackingActive() const;
+    //END
 
   public Q_SLOTS:
     /** Save to persistent storage. */
@@ -129,9 +135,6 @@ class TaskView : public QTreeWidget
     /** Used to refresh (e.g. after import) */
     void refresh();
 
-    /** Same as refresh */
-    void reFresh();
-
     /** used to import tasks from imendio planner */
     void importPlanner( const QString &fileName = "" );
 
@@ -147,12 +150,7 @@ class TaskView : public QTreeWidget
     /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();
 
-    /** start the autotracking system to add tasks to control time for every focused windows **/
-    void startAutoTracking(){};
-
-    /** stop the autotracking system to add tasks to control time for every focused windows **/    
-    void stopAutoTracking(){};
- 
+    /** Calls editTask dialog for the current task. */
     void editTask();
 
     /**
@@ -219,6 +217,7 @@ class TaskView : public QTreeWidget
     void timersInactive();
     void tasksChanged( QList<Task*> activeTasks );
     void setStatusBarText(QString);
+    void contextMenuRequested( const QPoint & );
 
   private: // member variables
     IdleTimeDetector* _idleTimeDetector;
@@ -266,6 +265,8 @@ class TaskView : public QTreeWidget
     void newFocusWindowDetected( const QString & );
 
     void slotColumnToggled( int );
+    void slotCustomContextMenuRequested( const QPoint & );
+    void slotSetPercentage( QAction * );
 };
 
 #endif // KARM_TASK_VIEW

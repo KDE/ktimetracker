@@ -69,18 +69,18 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
   retval += line;
 
   // tasks
-  if (taskview->current_item())
+  if (taskview->currentItem())
   {
     if (justThisTask)
     {
-      if (!rc.sessionTimes) sum = taskview->current_item()->totalTime();
-      else sum = taskview->current_item()->totalSessionTime();
-      printTask(taskview->current_item(), retval, 0, rc);
+      if (!rc.sessionTimes) sum = taskview->currentItem()->totalTime();
+      else sum = taskview->currentItem()->totalSessionTime();
+      printTask(taskview->currentItem(), retval, 0, rc);
     }
     else // print all tasks
     {
       sum = 0;
-      for (Task* task= taskview->item_at_index(0); task;
+      for (Task* task= taskview->itemAt(0); task;
           task= task->nextSibling())
       {
         if (!rc.sessionTimes) sum += task->totalTime();
@@ -280,12 +280,12 @@ QString TimeKard::sectionHistoryAsText(
   {
     if (justThisTask)
     {
-      printTaskHistory(taskview->current_item(), taskdaytotals, daytotals,
+      printTaskHistory(taskview->currentItem(), taskdaytotals, daytotals,
                        sectionFrom, sectionTo, 0, retval, totalsOnly);
     }
     else
     {
-      for (Task* task= taskview->current_item(); task;
+      for (Task* task= taskview->currentItem(); task;
            task= task->nextSibling())
       {
         printTaskHistory(task, taskdaytotals, daytotals,

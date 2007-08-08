@@ -29,6 +29,7 @@
 #include <QLayout>
 #include <QHeaderView>
 #include <QItemDelegate>
+#include <QMenu>
 #include <QPainter>
 #include <QString>
 #include <QTableWidget>
@@ -121,6 +122,8 @@ class TaskView::Private {
     KarmStorage *mStorage;
     bool mFocusTrackingActive;
     QList<Task*> mActiveTasks;
+    QMenu *mPopupPercentageMenu;
+    QMap<QAction*, int> mPercentage;
 };
 //@endcond
 //END
@@ -184,6 +187,19 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
   connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 
+  // Context Menu
+  d->mPopupPercentageMenu = new QMenu( this );
+  for ( int i = 0; i <= 100; i += 10 ) {
+    QString label = QString( "%1 %" ).arg( i );
+    d->mPercentage[ d->mPopupPercentageMenu->addAction( label ) ] = i;
+  }
+  connect( d->mPopupPercentageMenu, SIGNAL( triggered( QAction * ) ),
+           this, SLOT( slotSetPercentage( QAction * ) ) );
+
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint & ) ),
+           this, SLOT( slotCustomContextMenuRequested( const QPoint & ) ) );
+
   reconfigure();
 }
 
@@ -196,7 +212,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
     bool found = false;  // has taskName been found in our tasks
     stopTimerFor( lastTaskWithFocus );
     int i = 0;
-    for ( Task* task = item_at_index( i ); task; task = item_at_index( ++i ) ) {
+    for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) ) {
       if ( task->name() == newTaskName ) {
          found = true;
          startTimerFor( task );
@@ -210,7 +226,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
         "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
       }
       i = 0;
-      for ( Task* task = item_at_index( i ); task; task = item_at_index( ++i ) ) {
+      for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) ) {
         if (task->name() == newTaskName) {
           startTimerFor( task );
           lastTaskWithFocus = task;
@@ -224,9 +240,8 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
 void TaskView::dropEvent(QDropEvent* qde)
 {
   kDebug(5970) <<"This is dropEvent";
-  if (this->itemAt(qde->pos())==0) 
-  // the task was dropped to an empty place
-  {
+
+  if ( QTreeWidget::itemAt( qde->pos() ) == 0 ) { // the task was dropped to an empty place
     // if the task is a sub-task, it shall be freed from its parents, otherwise, nothing happens
     kDebug(5970) <<"User drops onto an empty place";
     if (dragTask->parent())
@@ -238,7 +253,7 @@ void TaskView::dropEvent(QDropEvent* qde)
   }
   else
   {
-    Task* t = static_cast<Task*>( this->itemAt(qde->pos()) );
+    Task* t = static_cast<Task*>( QTreeWidget::itemAt( qde->pos() ) );
     kDebug(5970) <<"taking" << dragTask->name() <<" dropping onto" << t->name();
     // is t==dragTask
     if (t != dragTask) 
@@ -275,7 +290,7 @@ void TaskView::dropEvent(QDropEvent* qde)
           }
         }
         save();
-        reFresh();  // setRootIsDecorated may be needed
+        refresh();  // setRootIsDecorated may be needed
       }
     }
   }
@@ -284,7 +299,7 @@ void TaskView::dropEvent(QDropEvent* qde)
 void TaskView::startDrag(Qt::DropActions action)
 {
   kDebug(5970) <<"Entering TaskView::startDrag";
-  dragTask=(Task*) currentItem();
+  dragTask = currentItem();
   kDebug(5970) <<"dragTask is" << dragTask->name();
   QTreeWidget::startDrag(action);  
 }
@@ -359,32 +374,32 @@ TaskView::~TaskView()
   KTimeTrackerSettings::self()->writeConfig();
 }
 
-Task* TaskView::first_child() const
+Task* TaskView::firstChild() const
 {
-  kDebug() <<"Entering TaskView::first_child";
+  kDebug() <<"Entering TaskView::firstChild";
   Task* t = static_cast<Task*>(topLevelItem(0));
-  kDebug() <<"Leaving TaskView::first_child";
+  kDebug() <<"Leaving TaskView::firstChild";
   return t;
 }
 
-Task* TaskView::current_item() const
+Task* TaskView::currentItem() const
 {
-  kDebug() <<"Entering TaskView::current_item";
-  return static_cast<Task*>(currentItem());
+  kDebug() <<"Entering TaskView::currentItem";
+  return static_cast< Task* >( QTreeWidget::currentItem() );
 }
 
-Task* TaskView::item_at_index(int i)
+Task* TaskView::itemAt(int i)
 /* This procedure delivers the item at the position i in the KTreeWidget.
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug(5970) <<"Entering TaskView::item_at_index(" << i <<")";
-  if (!first_child()) return 0;
+  kDebug(5970) <<"Entering TaskView::itemAt(" << i <<")";
+  if (!firstChild()) return 0;
 
-  QTreeWidgetItemIterator item(first_child());
+  QTreeWidgetItemIterator item(firstChild());
   while( *item && i-- ) ++item;
  
-  kDebug(5970) <<"Leaving TaskView::item_at_index";
+  kDebug(5970) <<"Leaving TaskView::itemAt";
   if (!*item) return 0;
   else return (Task*) *item;
 }
@@ -409,14 +424,14 @@ void TaskView::load( const QString &fileName )
 
   // Register tasks with desktop tracker
   int i = 0;
-  for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
+  for ( Task* t = itemAt(i); t; t = itemAt(++i) )
     _desktopTracker->registerForDesktops( t, t->desktops() );
 
-  if (first_child())
+  if (firstChild())
   {
     restoreItemState();
-    first_child()->setSelected(true);
-    setCurrentItem(first_child());
+    firstChild()->setSelected(true);
+    setCurrentItem(firstChild());
     _desktopTracker->startTracking();
     _isloading = false;
     kDebug(5970) <<"load calls refesh";
@@ -432,8 +447,8 @@ is stored in the _preferences object. */
 {
   kDebug(5970) <<"Entering TaskView::restoreItemState";
   
-  if (first_child()) {
-    QTreeWidgetItemIterator item(first_child());
+  if (firstChild()) {
+    QTreeWidgetItemIterator item(firstChild());
     while( *item ) 
     {
       Task *t = (Task *) *item;
@@ -468,7 +483,7 @@ void TaskView::refresh()
 {
   kDebug(5970) <<"entering TaskView::refresh()";
   int i = 0;
-  for ( Task* t = item_at_index(i); t; t = item_at_index(++i) )
+  for ( Task* t = itemAt(i); t; t = itemAt(++i) )
   {
     t->setPixmapProgress();
     t->update();  // maybe there was a change in the times's format
@@ -476,19 +491,14 @@ void TaskView::refresh()
   
   // remove root decoration if there is no more child.
   i = 0;
-  while ( item_at_index( ++i ) && ( item_at_index( i )->depth() == 0 ) );
-  //setRootIsDecorated( item_at_index( i ) && ( item_at_index( i )->depth() != 0 ) );
+  while ( itemAt( ++i ) && ( itemAt( i )->depth() == 0 ) );
+  //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
   // FIXME workaround? seems that the QItemDelegate for the procent column only
   // works properly if rootIsDecorated == true.
   setRootIsDecorated( true );
 
   emit updateButtons();
   kDebug(5970) <<"exiting TaskView::refresh()";
-}
-    
-void TaskView::reFresh()
-{
-  refresh();
 }
 
 void TaskView::importPlanner( const QString &fileName )
@@ -516,7 +526,7 @@ void TaskView::exportcsvFile()
   kDebug(5970) <<"TaskView::exportcsvFile()";
 
   CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
-  if ( current_item() && current_item()->isRoot() )
+  if ( currentItem() && currentItem()->isRoot() )
     dialog.enableTasksToExportQuestion();
   dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
   if ( dialog.exec() ) {
@@ -531,7 +541,7 @@ QString TaskView::exportcsvHistory()
   QString err;
   
   CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
-  if ( current_item() && current_item()->isRoot() )
+  if ( currentItem() && currentItem()->isRoot() )
     dialog.enableTasksToExportQuestion();
   dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
   if ( dialog.exec() ) {
@@ -580,13 +590,13 @@ QString TaskView::save()
 
 void TaskView::startCurrentTimer()
 {
-  startTimerFor( current_item() );
+  startTimerFor( currentItem() );
 }
 
 long TaskView::count()
 {
   long n = 0;
-  for (Task* t = item_at_index(n); t; t=item_at_index(++n));
+  for (Task* t = itemAt(n); t; t=itemAt(++n));
   return n;
 }
 
@@ -644,7 +654,7 @@ overalltimes (comprising all sessions) and total times (comprising all subtasks)
 That is why there is also a total session time. */
 {
   kDebug(5970) <<"Entering TaskView::startNewSession";
-  QTreeWidgetItemIterator item( first_child() );
+  QTreeWidgetItemIterator item( firstChild() );
   while ( *item )
   {
     Task * task = (Task *) *item;
@@ -658,7 +668,7 @@ void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
   kDebug(5970) <<"Entering TaskView::resetTimeForAllTasks";
-  QTreeWidgetItemIterator item( first_child() );
+  QTreeWidgetItemIterator item( firstChild() );
   while ( *item ) 
   {
     Task * task = (Task *) *item;
@@ -684,7 +694,7 @@ void TaskView::stopTimerFor(Task* task)
 
 void TaskView::stopCurrentTimer()
 {
-  stopTimerFor( current_item());
+  stopTimerFor( currentItem());
 }
 
 void TaskView::minuteUpdate()
@@ -762,7 +772,7 @@ QString TaskView::addTask
 
 void TaskView::newSubTask()
 {
-  Task* task = current_item();
+  Task* task = currentItem();
   if(!task)
     return;
   newTask(i18n("New Sub Task"), task);
@@ -773,7 +783,7 @@ void TaskView::newSubTask()
 void TaskView::editTask()
 {
   kDebug(5970) <<"Entering editTask";
-  Task *task = current_item();
+  Task *task = currentItem();
   if (!task)
     return;
 
@@ -819,7 +829,7 @@ void TaskView::editTask()
 
 //void TaskView::addCommentToTask()
 //{
-//  Task *task = current_item();
+//  Task *task = currentItem();
 //  if (!task)
 //    return;
 
@@ -833,7 +843,7 @@ void TaskView::editTask()
 
 void TaskView::reinstateTask(int completion)
 {
-  Task* task = current_item();
+  Task* task = currentItem();
   if (task == 0) {
     KMessageBox::information(0,i18n("No task selected."));
     return;
@@ -852,7 +862,7 @@ void TaskView::reinstateTask(int completion)
 void TaskView::deleteTask(bool markingascomplete)
 {
   kDebug(5970) <<"Entering TaskView::deleteTask";
-  Task *task = current_item();
+  Task *task = currentItem();
   if (task == 0) {
     KMessageBox::information(0,i18n("No task selected."));
     return;
@@ -937,11 +947,11 @@ QList<HistoryEvent> TaskView::getHistory(const QDate& from,
 
 void TaskView::markTaskAsComplete()
 {
-  if (current_item())
+  if (currentItem())
     kDebug(5970) <<"TaskView::markTaskAsComplete:"
-      << current_item()->uid();
+      << currentItem()->uid();
   else
-    kDebug(5970) <<"TaskView::markTaskAsComplete: null current_item()";
+    kDebug(5970) <<"TaskView::markTaskAsComplete: null currentItem()";
 
   bool markingascomplete = true;
   deleteTask(markingascomplete);
@@ -949,11 +959,11 @@ void TaskView::markTaskAsComplete()
 
 void TaskView::markTaskAsIncomplete()
 {
-  if (current_item())
+  if (currentItem())
     kDebug(5970) <<"TaskView::markTaskAsComplete:"
-      << current_item()->uid();
+      << currentItem()->uid();
   else
-    kDebug(5970) <<"TaskView::markTaskAsComplete: null current_item()";
+    kDebug(5970) <<"TaskView::markTaskAsComplete: null currentItem()";
 
   reinstateTask(50); // if it has been reopened, assume half-done
 }
@@ -1019,6 +1029,30 @@ void TaskView::slotColumnToggled( int column )
   }
 
   KTimeTrackerSettings::self()->writeConfig();
+}
+
+void TaskView::slotCustomContextMenuRequested( const QPoint &pos )
+{
+  QPoint newPos = viewport()->mapToGlobal( pos );
+  int column = columnAt( pos.x() );
+
+  switch (column) {
+    case 5: /* percentage */
+      d->mPopupPercentageMenu->popup( newPos );
+      break;
+
+    default:
+      emit contextMenuRequested( newPos );
+      break;
+  }
+}
+
+void TaskView::slotSetPercentage( QAction *action )
+{
+  if ( currentItem() ) {
+    currentItem()->setPercentComplete( d->mPercentage[ action ], storage() );
+    emit updateButtons();
+  }
 }
 
 bool TaskView::isFocusTrackingActive() const

@@ -230,16 +230,16 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   // remember tasks that are running and their start times
   for ( int i=0; i<view->count(); i++)
   {
-    if ( view->item_at_index(i)->isRunning() )
+    if ( view->itemAt(i)->isRunning() )
     {
-      runningTasks.append( view->item_at_index(i)->uid() );
-      startTimes.append( view->item_at_index(i)->startTime() );
+      runningTasks.append( view->itemAt(i)->uid() );
+      startTimes.append( view->itemAt(i)->startTime() );
     }
   }
 
   // delete old tasks
 
-  while (view->item_at_index(0)) view->item_at_index(0)->cut();
+  while (view->itemAt(0)) view->itemAt(0)->cut();
 
   todoList = rc->rawTodos();
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
@@ -274,8 +274,8 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   // restart tasks that have been running with their start times
   for ( int i=0; i<view->count(); i++) {
     for ( int n = 0; n < runningTasks.count(); ++n ) {
-      if ( runningTasks[n] == view->item_at_index(i)->uid() ) {
-        view->startTimerFor( view->item_at_index(i), startTimes[n] );
+      if ( runningTasks[n] == view->itemAt(i)->uid() ) {
+        view->startTimerFor( view->itemAt(i), startTimes[n] );
       }
     }
   }
@@ -310,7 +310,7 @@ QString KarmStorage::save(TaskView* taskview)
 
   QStack<KCal::Todo*> parents;
 
-  for (Task* task=taskview->first_child(); task; task = task->nextSibling())
+  for (Task* task=taskview->firstChild(); task; task = task->nextSibling())
   {
     err=writeTaskAsTodo(task, 1, parents );
   }
@@ -421,8 +421,8 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   {
     dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
     if ( tasknr % 15 == 0 ) kapp->processEvents(); // repainting is slow
-    if ( taskview->item_at_index(tasknr)->depth() > maxdepth )
-      maxdepth = taskview->item_at_index(tasknr)->depth();
+    if ( taskview->itemAt(tasknr)->depth() > maxdepth )
+      maxdepth = taskview->itemAt(tasknr)->depth();
     tasknr++;
   }
 
@@ -430,7 +430,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   tasknr = 0;
   while ( tasknr < taskview->count() && !dialog.wasCancelled() )
   {
-    task = taskview->item_at_index( tasknr );
+    task = taskview->itemAt( tasknr );
     dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
     if ( tasknr % 15 == 0 ) kapp->processEvents();
 
@@ -801,7 +801,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   {
     if ( rc.allTasks )
     {
-      for ( Task* task= taskview->item_at_index(0);
+      for ( Task* task= taskview->itemAt(0);
             task; task= task->nextSibling() )
       {
         printTaskHistory( task, taskdaytotals, daytotals, from, to, 0,
@@ -810,7 +810,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     }
     else
     {
-      printTaskHistory( taskview->current_item(), taskdaytotals, daytotals,
+      printTaskHistory( taskview->currentItem(), taskdaytotals, daytotals,
                         from, to, 0, matrix, rc );
     }
     for (int i=0; i<matrix.count(); i++) retval+=matrix[i];
