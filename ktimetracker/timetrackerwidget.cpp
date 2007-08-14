@@ -425,8 +425,10 @@ QStringList TimetrackerWidget::tasks() const
 
     if ( !taskView ) continue;
 
-    for ( int j = 0; j < taskView->count(); ++j ) {
-      result << taskView->itemAt( j )->name();
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      result << static_cast< Task* >( *it )->name();
+      ++it;
     }
   }
 

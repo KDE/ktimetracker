@@ -228,12 +228,12 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   QVector<QDateTime> startTimes;
 
   // remember tasks that are running and their start times
-  for ( int i=0; i<view->count(); i++)
-  {
-    if ( view->itemAt(i)->isRunning() )
-    {
-      runningTasks.append( view->itemAt(i)->uid() );
-      startTimes.append( view->itemAt(i)->startTime() );
+  QTreeWidgetItemIterator it( view );
+  while ( *it ) {
+    Task *task = static_cast< Task* >( *it );
+    if ( task->isRunning() ) {
+      runningTasks.append( task->uid() );
+      startTimes.append( task->startTime() );
     }
   }
 
