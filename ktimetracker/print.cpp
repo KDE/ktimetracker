@@ -58,9 +58,8 @@ void MyPrinter::print()
     // totals are increased together with its children.
     int totalTotal = 0;
     int sessionTotal = 0;
-    for (Task* task = _taskView->firstChild();
-               task;
-               task = static_cast<Task *>(task->nextSibling())) {
+    for ( int i = 0; i < _taskView->topLevelItemCount(); ++i ) {
+      Task *task = static_cast< Task* >( _taskView->topLevelItem( i ) );
       totalTotal += task->totalTime();
       sessionTotal += task->totalSessionTime();
     }
@@ -75,10 +74,8 @@ void MyPrinter::print()
     
     int maxReqNameFieldWidth= metrics.width(i18n("Task Name "));
     
-    for ( Task* task = _taskView->firstChild();
-          task;
-          task = static_cast<Task *>(task->nextSibling()))
-    {
+    for ( int i = 0; i < _taskView->topLevelItemCount(); ++i ) {
+      Task *task = static_cast< Task* >( _taskView->topLevelItem( i ) );
       int width = calculateReqNameWidth(task, metrics, 0);
       maxReqNameFieldWidth = qMax(maxReqNameFieldWidth, width);
     }
@@ -111,10 +108,8 @@ void MyPrinter::print()
     yoff += 2;
     
     // Now print the actual content
-    for ( Task* task = _taskView->firstChild();
-                task;
-                task = static_cast<Task *>(task->nextSibling()) )
-    {
+    for ( int i = 0; i < _taskView->topLevelItemCount(); ++i ) {
+      Task *task = static_cast< Task* >( _taskView->topLevelItem( i ) );
       printTask(task, painter, 0);
     }
 
@@ -135,9 +130,8 @@ int MyPrinter::calculateReqNameWidth( Task* task,
 {
   int width = metrics.width(task->name()) + level * levelIndent;
 
-  for ( Task* subTask = task->firstChild();
-              subTask;
-              subTask = subTask->nextSibling() ) {
+  for ( int i = 0; i < task->childCount(); ++i ) {
+    Task *subTask = static_cast< Task* >( task->child( i ) );
     int subTaskWidth = calculateReqNameWidth(subTask, metrics, level+1);
     width = qMax(width, subTaskWidth);
   }
@@ -151,10 +145,8 @@ void MyPrinter::printTask(Task *task, QPainter &painter, int level)
   QString name = task->name();
   printLine(time, sessionTime, name, painter, level);
 
-  for ( Task* subTask = task->firstChild();
-              subTask;
-              subTask = subTask->nextSibling())
-  {
+  for ( int i = 0; i < task->childCount(); ++i ) {
+    Task *subTask = static_cast< Task* >( task->child( i ) );
     printTask(subTask, painter, level+1);
   }      
 }

@@ -56,6 +56,9 @@
     <entry name="displayTotalTime" type="Bool">
       <default>true</default>
     </entry>
+    <entry name="displayPriority" type="Bool">
+      <default>false</default>
+    </entry>
     <entry name="displayPercentComplete" type="Bool">
       <default>false</default>
     </entry>

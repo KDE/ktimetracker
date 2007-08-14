@@ -70,7 +70,7 @@ public:
   TaskViewDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
 
   void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const {
-    if (index.column () == 5) {
+    if (index.column () == 6) {
       if (option.state & QStyle::State_Selected) {
         painter->fillRect( option.rect, option.palette.highlight() );
       }
@@ -122,8 +122,11 @@ class TaskView::Private {
     KarmStorage *mStorage;
     bool mFocusTrackingActive;
     QList<Task*> mActiveTasks;
+
     QMenu *mPopupPercentageMenu;
     QMap<QAction*, int> mPercentage;
+    QMenu *mPopupPriorityMenu;
+    QMap<QAction*, int> mPriority;
 };
 //@endcond
 //END
@@ -143,12 +146,14 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT( newFocusWindowDetected ( const QString & ) ) ); 
 
   QStringList labels;
-  labels << i18n("Task Name") << i18n("Session Time") << i18n("Time") << i18n("Total Session Time") << i18n("Total Time") << i18n("Percent Complete") ;
-  setHeaderLabels(labels);
+  labels << i18n( "Task Name" ) << i18n( "Session Time" ) << i18n( "Time" ) 
+         << i18n( "Total Session Time" ) << i18n( "Total Time" ) 
+         << i18n( "Priority" ) << i18n( "Percent Complete" );
+  setHeaderLabels( labels );
   headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
   setAllColumnsShowFocus( true );
-  setItemDelegateForColumn( 5, new TaskViewDelegate(this) );
+  setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
   // set up the minuteTimer
   _minuteTimer = new QTimer(this);
@@ -195,6 +200,31 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   }
   connect( d->mPopupPercentageMenu, SIGNAL( triggered( QAction * ) ),
            this, SLOT( slotSetPercentage( QAction * ) ) );
+
+  d->mPopupPriorityMenu = new QMenu( this );
+  for ( int i = 0; i <= 9; ++i ) {
+    QString label;
+    switch ( i ) {
+      case 0:
+        label = i18n( "unspecified" );
+        break;
+      case 1:
+        label = i18n( "1 (highest)" );
+        break;
+      case 5:
+        label = i18n( "5 (medium)" );
+        break;
+      case 9:
+        label = i18n( "9 (lowest)" );
+        break;
+      default:
+        label = QString( "%1" ).arg( i );
+        break;
+    }
+    d->mPriority[ d->mPopupPriorityMenu->addAction( label ) ] = i;
+  }
+  connect( d->mPopupPriorityMenu, SIGNAL( triggered( QAction * ) ),
+           this, SLOT( slotSetPriority( QAction * ) ) );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint & ) ),
@@ -308,7 +338,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
 {
   QModelIndex index = indexAt( event->pos() );
 
-  if (index.isValid() && index.column() == 5) 
+  if (index.isValid() && index.column() == 6) 
   {
     int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 100);
 
@@ -374,14 +404,6 @@ TaskView::~TaskView()
   KTimeTrackerSettings::self()->writeConfig();
 }
 
-Task* TaskView::firstChild() const
-{
-  kDebug() <<"Entering TaskView::firstChild";
-  Task* t = static_cast<Task*>(topLevelItem(0));
-  kDebug() <<"Leaving TaskView::firstChild";
-  return t;
-}
-
 Task* TaskView::currentItem() const
 {
   kDebug() <<"Entering TaskView::currentItem";
@@ -393,15 +415,17 @@ Task* TaskView::itemAt(int i)
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug(5970) <<"Entering TaskView::itemAt(" << i <<")";
-  if (!firstChild()) return 0;
+  kDebug( 5970 ) << "Entering TaskView::itemAt(" << i << ")";
+  if ( topLevelItemCount() == 0 ) return 0;
 
-  QTreeWidgetItemIterator item(firstChild());
+  QTreeWidgetItemIterator item( this );
   while( *item && i-- ) ++item;
- 
-  kDebug(5970) <<"Leaving TaskView::itemAt";
-  if (!*item) return 0;
-  else return (Task*) *item;
+
+  kDebug( 5970 ) << "Leaving TaskView::itemAt";
+  if ( !( *item ) )
+    return 0;
+  else
+    return (Task*)*item;
 }
 
 void TaskView::load( const QString &fileName )
@@ -427,11 +451,10 @@ void TaskView::load( const QString &fileName )
   for ( Task* t = itemAt(i); t; t = itemAt(++i) )
     _desktopTracker->registerForDesktops( t, t->desktops() );
 
-  if (firstChild())
+  if ( topLevelItemCount() > 0 )
   {
     restoreItemState();
-    firstChild()->setSelected(true);
-    setCurrentItem(firstChild());
+    setCurrentItem(topLevelItem( 0 ));
     _desktopTracker->startTracking();
     _isloading = false;
     kDebug(5970) <<"load calls refesh";
@@ -447,8 +470,8 @@ is stored in the _preferences object. */
 {
   kDebug(5970) <<"Entering TaskView::restoreItemState";
   
-  if (firstChild()) {
-    QTreeWidgetItemIterator item(firstChild());
+  if ( topLevelItemCount() > 0 ) {
+    QTreeWidgetItemIterator item( this );
     while( *item ) 
     {
       Task *t = (Task *) *item;
@@ -654,7 +677,7 @@ overalltimes (comprising all sessions) and total times (comprising all subtasks)
 That is why there is also a total session time. */
 {
   kDebug(5970) <<"Entering TaskView::startNewSession";
-  QTreeWidgetItemIterator item( firstChild() );
+  QTreeWidgetItemIterator item( this );
   while ( *item )
   {
     Task * task = (Task *) *item;
@@ -668,7 +691,7 @@ void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
   kDebug(5970) <<"Entering TaskView::resetTimeForAllTasks";
-  QTreeWidgetItemIterator item( firstChild() );
+  QTreeWidgetItemIterator item( this );
   while ( *item ) 
   {
     Task * task = (Task *) *item;
@@ -1024,7 +1047,10 @@ void TaskView::slotColumnToggled( int column )
       KTimeTrackerSettings::setDisplayTotalTime( !isColumnHidden( 4 ) );
       break;
     case 5:
-      KTimeTrackerSettings::setDisplayPercentComplete( !isColumnHidden( 5 ) );
+      KTimeTrackerSettings::setDisplayPriority( !isColumnHidden( 5 ) );
+      break;
+    case 6:
+      KTimeTrackerSettings::setDisplayPercentComplete( !isColumnHidden( 6 ) );
       break;
   }
 
@@ -1037,8 +1063,12 @@ void TaskView::slotCustomContextMenuRequested( const QPoint &pos )
   int column = columnAt( pos.x() );
 
   switch (column) {
-    case 5: /* percentage */
+    case 6: /* percentage */
       d->mPopupPercentageMenu->popup( newPos );
+      break;
+
+    case 5: /* priority */
+      d->mPopupPriorityMenu->popup( newPos );
       break;
 
     default:
@@ -1052,6 +1082,13 @@ void TaskView::slotSetPercentage( QAction *action )
   if ( currentItem() ) {
     currentItem()->setPercentComplete( d->mPercentage[ action ], storage() );
     emit updateButtons();
+  }
+}
+
+void TaskView::slotSetPriority( QAction *action )
+{
+  if ( currentItem() ) {
+    currentItem()->setPriority( d->mPriority[ action ] );
   }
 }
 
@@ -1072,7 +1109,8 @@ void TaskView::reconfigure()
   setColumnHidden( 2, !KTimeTrackerSettings::displayTime() );
   setColumnHidden( 3, !KTimeTrackerSettings::displayTotalSessionTime() );
   setColumnHidden( 4, !KTimeTrackerSettings::displayTotalTime() );
-  setColumnHidden( 5, !KTimeTrackerSettings::displayPercentComplete() );
+  setColumnHidden( 5, !KTimeTrackerSettings::displayPriority() );
+  setColumnHidden( 6, !KTimeTrackerSettings::displayPercentComplete() );
 
   /* idleness */
   _idleTimeDetector->setMaxIdle( KTimeTrackerSettings::period() );

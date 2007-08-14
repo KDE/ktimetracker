@@ -310,9 +310,10 @@ QString KarmStorage::save(TaskView* taskview)
 
   QStack<KCal::Todo*> parents;
 
-  for (Task* task=taskview->firstChild(); task; task = task->nextSibling())
-  {
-    err=writeTaskAsTodo(task, 1, parents );
+  for (int i = 0; i < taskview->topLevelItemCount(); ++i ) {
+    Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
+    kDebug( 5970 ) << "write task" << task->name();
+    err = writeTaskAsTodo( task, parents );
   }
 
   if ( !saveCalendar() )
@@ -347,8 +348,7 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
   return err;
 }
 
-QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
-    QStack<KCal::Todo*>& parents )
+QString KarmStorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
 {
   QString err;
   KCal::Todo* todo;
@@ -363,10 +363,9 @@ QString KarmStorage::writeTaskAsTodo(Task* task, const int level,
   if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() );
   parents.push( todo );
 
-  for ( Task* nextTask = task->firstChild(); nextTask;
-        nextTask = nextTask->nextSibling() )
-  {
-    err = writeTaskAsTodo(nextTask, level+1, parents );
+  for ( int i = 0; i < task->childCount(); ++i ) {
+    Task *nextTask = static_cast< Task* >( task->child( i ) );
+    err = writeTaskAsTodo( nextTask, parents );
   }
 
   parents.pop();
@@ -673,10 +672,8 @@ long KarmStorage::printTaskHistory (
   cell.append( cr );
 
   add=0;
-  for (Task* subTask = task->firstChild();
-      subTask;
-      subTask = subTask->nextSibling())
-  {
+  for ( int i = 0; i < task->childCount(); ++i ) {
+    Task *subTask = static_cast< Task* >( task->child( i ) );
     add += printTaskHistory( subTask, taskdaytotals, daytotals, from, to , level+1, matrix,
                       rc );
   }
@@ -801,9 +798,8 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   {
     if ( rc.allTasks )
     {
-      for ( Task* task= taskview->itemAt(0);
-            task; task= task->nextSibling() )
-      {
+      for ( int i = 0; i < taskview->topLevelItemCount(); ++i ) {
+        Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
         printTaskHistory( task, taskdaytotals, daytotals, from, to, 0,
                           matrix, rc );
       }

@@ -71,6 +71,9 @@ class Task::Private {
 
     /** Don't need to update storage when deleting task from list. */
     bool mRemoving;
+
+    /** Priority of the task. */
+    int mPriority;
 };
 //@endcond
 //END
@@ -83,14 +86,14 @@ Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent)
   : QObject(), QTreeWidgetItem(parent), d( new Private() )
 { 
-  init(taskName, minutes, sessionTime, desktops, 0);
+  init( taskName, minutes, sessionTime, desktops, 0, 0 );
 }
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, Task *parent)
   : QObject(), QTreeWidgetItem(parent), d( new Private() )
 {
-  init(taskName, minutes, sessionTime, desktops, 0);
+  init( taskName, minutes, sessionTime, desktops, 0, 0 );
 }
 
 Task::Task( KCal::Todo* todo, TaskView* parent )
@@ -100,10 +103,12 @@ Task::Task( KCal::Todo* todo, TaskView* parent )
   QString name;
   long sessionTime = 0;
   int percent_complete = 0;
+  int priority = 0;
   DesktopList desktops;
 
-  parseIncidence(todo, minutes, sessionTime, name, desktops, percent_complete);
-  init(name, minutes, sessionTime, desktops, percent_complete);
+  parseIncidence( todo, minutes, sessionTime, name, desktops, percent_complete,
+                  priority );
+  init( name, minutes, sessionTime, desktops, percent_complete, priority );
 }
 
 int Task::depth()
@@ -119,7 +124,7 @@ int Task::depth()
 }
 
 void Task::init( const QString& taskName, long minutes, long sessionTime,
-                 DesktopList desktops, int percent_complete)
+                 DesktopList desktops, int percent_complete, int priority )
 {
   // If our parent is the taskview then connect our totalTimesChanged
   // signal to its receiver
@@ -154,6 +159,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
   setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
   d->mCurrentPic = 0;
   d->mPercentComplete = percent_complete;
+  d->mPriority = priority;
 
   update();
   changeParentTotalTimes( d->mSessionTime, d->mTime);
@@ -162,6 +168,9 @@ void Task::init( const QString& taskName, long minutes, long sessionTime,
   for (int i = 1; i < columnCount(); ++i) {
       setTextAlignment( i, Qt::AlignRight );
   }
+
+  // .. but not the priority column
+  setTextAlignment( 5, Qt::AlignCenter );
 }
 
 Task::~Task() {
@@ -249,10 +258,24 @@ void Task::setPercentComplete(const int percent, KarmStorage *storage)
   // This behavior is consistent with KOrganizer (as of 2003-09-24).
   if (d->mPercentComplete == 100)
   {
-    for (Task* child= this->firstChild(); child; child = child->nextSibling())
-      child->setPercentComplete(d->mPercentComplete, storage);
+    for ( int i = 0; i < childCount(); ++i ) {
+      Task *task = static_cast< Task* >( child( i ) );
+      task->setPercentComplete(d->mPercentComplete, storage);
+    }
   }
   // maybe there is a column "percent completed", so do a ...
+  update();
+}
+
+void Task::setPriority( int priority )
+{
+  if ( priority < 0 ) {
+    priority = 0;
+  } else if ( priority > 9 ) {
+    priority = 9;
+  }
+
+  d->mPriority = priority;
   update();
 }
 
@@ -270,8 +293,9 @@ bool Task::isComplete() { return d->mPercentComplete == 100; }
 
 void Task::removeFromView()
 {
-  while (Task* child = this->firstChild())
-    child->removeFromView();
+  while ( childCount() > 0 ) {
+    static_cast< Task* >( child( 0 ) )->removeFromView();
+  }
   delete this;
 }
 
@@ -341,11 +365,11 @@ bool Task::remove( KarmStorage* storage)
   storage->removeTask(this);
   if( isRunning() ) setRunning( false, storage );
 
-  for (Task* child = this->firstChild(); child; child = child->nextSibling())
-  {
-    if (child->isRunning())
-      child->setRunning(false, storage);
-    child->remove(storage);
+  for ( int i = 0; i < childCount(); ++i ) {
+    Task *task = static_cast< Task* >( child( i ) );
+    if ( task->isRunning() )
+      task->setRunning( false, storage );
+    task->remove( storage );
   }
 
   changeParentTotalTimes( -d->mSessionTime, -d->mTime);
@@ -396,13 +420,14 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
   todo->setOrganizer( KTimeTrackerSettings::userRealName() );
 
   todo->setPercentComplete(d->mPercentComplete);
+  todo->setPriority( d->mPriority );
 
   return todo;
 }
 
 bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
     long& sessionMinutes, QString& name, DesktopList& desktops,
-    int& percent_complete )
+    int& percent_complete, int& priority )
 {
   bool ok;
 
@@ -439,6 +464,7 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   }
 
   percent_complete = static_cast<KCal::Todo*>(incident)->percentComplete();
+  priority = incident->priority();
 
   //kDebug(5970) <<"Task::parseIncidence:"
   //  << name << ", Minutes:" << minutes
@@ -500,13 +526,14 @@ void Task::update()
 {
   kDebug( 5970 ) << "Entering Task::update";
   bool b = KTimeTrackerSettings::decimalFormat();
-  setText(0, d->mName);
-  setText(1, formatTime(d->mSessionTime, b));
-  setText(2, formatTime(d->mTime, b));
-  setText(3, formatTime(d->mTotalSessionTime, b));
-  setText(4, formatTime(d->mTotalTime, b));
-  setText(5, QString::number(d->mPercentComplete));
-  kDebug(5970) <<"Exiting Task::update";
+  setText( 0, d->mName );
+  setText( 1, formatTime( d->mSessionTime, b ) );
+  setText( 2, formatTime( d->mTime, b ) );
+  setText( 3, formatTime( d->mTotalSessionTime, b ) );
+  setText( 4, formatTime( d->mTotalTime, b ) );
+  setText( 5, d->mPriority > 0 ? QString::number( d->mPriority ) : "--" );
+  setText( 6, QString::number( d->mPercentComplete ) );
+  kDebug( 5970 ) << "Exiting Task::update";
 }
 
 void Task::addComment( const QString &comment, KarmStorage* storage )
@@ -534,6 +561,11 @@ QString Task::comment() const
 int Task::percentComplete() const
 {
   return d->mPercentComplete;
+}
+
+int Task::priority() const
+{
+  return d->mPriority;
 }
 
 QString Task::name() const

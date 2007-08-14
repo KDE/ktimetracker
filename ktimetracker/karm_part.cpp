@@ -466,11 +466,13 @@ QString karmPart::taskIdFromName( const QString &taskname ) const
 {
   QString rval = "";
 
-  Task* task = _taskView->firstChild();
-  while ( rval.isEmpty() && task )
-  {
+  for ( int i = 0; i < _taskView->topLevelItemCount(); ++i ) {
+    Task *task = static_cast< Task* >( _taskView->topLevelItem( i ) );
     rval = _hasTask( task, taskname );
-    task = task->nextSibling();
+
+    if ( !( rval.isEmpty() ) ) {
+      break;
+    }
   }
 
   return rval;
@@ -537,14 +539,12 @@ int karmPart::bookTime
   if ( minutes <= 0 ) rval = KARM_ERR_INVALID_DURATION;
 
   // Find task
-  task = _taskView->firstChild();
-  t = NULL;
-  while ( !t && task )
-  {
+  for ( int i = 0; i < _taskView->topLevelItemCount(); ++i ) {
+    task = static_cast< Task* >( _taskView->topLevelItem( i ) );
     t = _hasUid( task, taskId );
-    task = task->nextSibling();
+    if ( t ) break;
   }
-  if ( t == NULL ) rval = KARM_ERR_UID_NOT_FOUND;
+  if ( !t ) rval = KARM_ERR_UID_NOT_FOUND;
 
   // Parse datetime
   if ( !rval )
@@ -592,20 +592,17 @@ int karmPart::totalMinutesForTaskId( const QString& taskId )
   kDebug(5970) <<"MainWindow::totalTimeForTask(" << taskId <<" )";
 
   // Find task
-  task = _taskView->firstChild();
-  t = NULL;
-  while ( !t && task )
-  {
+  for ( int i = 0; i < _taskView->topLevelItemCount(); ++i ) {
+    task = static_cast< Task* >( _taskView->topLevelItem( i ) );
     t = _hasUid( task, taskId );
-    task = task->nextSibling();
+    if ( t ) break;
   }
-  if ( t != NULL )
-  {
+
+  if ( t ) {
     rval = t->totalTime();
     kDebug(5970) <<"MainWindow::totalTimeForTask - task found: rval =" << rval;
   }
-  else
-  {
+  else {
     kDebug(5970) <<"MainWindow::totalTimeForTask - task not found";
     rval = KARM_ERR_UID_NOT_FOUND;
   }
@@ -622,11 +619,10 @@ QString karmPart::_hasTask( Task* task, const QString &taskname ) const
   }
   else
   {
-    Task* nexttask = task->firstChild();
-    while ( rval.isEmpty() && nexttask )
-    {
+    for ( int i = 0; i < task->childCount(); ++i ) {
+      Task *nexttask = static_cast< Task* >( task->child( i ) );
       rval = _hasTask( nexttask, taskname );
-      nexttask = nexttask->nextSibling();
+      if ( !( rval.isEmpty() ) ) break;
     }
   }
   return rval;
@@ -634,18 +630,17 @@ QString karmPart::_hasTask( Task* task, const QString &taskname ) const
 
 Task* karmPart::_hasUid( Task* task, const QString &uid ) const
 {
-  Task *rval = NULL;
+  Task *rval = 0;
 
   //kDebug(5970) <<"MainWindow::_hasUid(" << task <<"," << uid <<" )";
 
   if ( task->uid() == uid ) rval = task;
   else
   {
-    Task* nexttask = task->firstChild();
-    while ( !rval && nexttask )
-    {
+    for ( int i = 0; i < task->childCount(); ++i ) {
+      Task *nexttask = static_cast< Task* >( task->child( i ) );
       rval = _hasUid( nexttask, uid );
-      nexttask = nexttask->nextSibling();
+      if ( rval ) break;
     }
   }
   return rval;

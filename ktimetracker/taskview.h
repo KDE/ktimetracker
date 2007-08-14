@@ -61,9 +61,6 @@ class TaskView : public QTreeWidget
     virtual ~TaskView();
 
     //BEGIN view specified
-    /**  Return the first item in the view, cast to a Task pointer.  */
-    Task* firstChild() const;
-
     /**  Return the current item in the view, cast to a Task pointer.  */
     Task* currentItem() const;
 
@@ -267,6 +264,7 @@ class TaskView : public QTreeWidget
     void slotColumnToggled( int );
     void slotCustomContextMenuRequested( const QPoint & );
     void slotSetPercentage( QAction * );
+    void slotSetPriority( QAction * );
 };
 
 #endif // KARM_TASK_VIEW

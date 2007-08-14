@@ -80,9 +80,8 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
     else // print all tasks
     {
       sum = 0;
-      for (Task* task= taskview->itemAt(0); task;
-          task= task->nextSibling())
-      {
+      for ( int i = 0; i < taskview->topLevelItemCount(); ++i ) {
+        Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
         if (!rc.sessionTimes) sum += task->totalTime();
         else sum += task->totalSessionTime();
         if ( (task->totalTime() && (!rc.sessionTimes)) || (task->totalSessionTime() && rc.sessionTimes) )
@@ -124,10 +123,8 @@ void TimeKard::printTask(Task *task, QString &s, int level, const ReportCriteria
   }
   s += cr;
 
-  for (Task* subTask = task->firstChild();
-      subTask;
-      subTask = subTask->nextSibling())
-  {
+  for ( int i = 0; i < task->childCount(); ++i ) {
+    Task *subTask = static_cast< Task* >( task->child( i ) );
     if ( !rc.sessionTimes )
     {
       if ( subTask->totalTime() ) // to avoid 00:00 entries
@@ -188,10 +185,8 @@ void TimeKard::printTaskHistory(const Task *task,
   s += QString::fromLatin1("%1").arg(task->name());
   s += cr;
 
-  for (Task* subTask = task->firstChild();
-      subTask;
-      subTask = subTask->nextSibling())
-  {
+  for ( int i = 0; i < task->childCount(); ++i ) {
+    Task *subTask = static_cast< Task* >( task->child( i ) );
     // recursive
     printTaskHistory(subTask, taskdaytotals, daytotals, from, to, level+1, s, totalsOnly);
   }
@@ -285,11 +280,21 @@ QString TimeKard::sectionHistoryAsText(
     }
     else
     {
-      for (Task* task= taskview->currentItem(); task;
-           task= task->nextSibling())
-      {
-        printTaskHistory(task, taskdaytotals, daytotals,
-                         sectionFrom, sectionTo, 0, retval, totalsOnly);
+      Task *task = taskview->currentItem();
+      if ( task->parent() ) {
+        for ( int i = task->parent()->indexOfChild( task ); 
+              i < task->parent()->childCount(); ++i ) {
+          task = static_cast< Task* >(task->parent()->child( i ) );
+          printTaskHistory( task, taskdaytotals, daytotals,
+                            sectionFrom, sectionTo, 0, retval, totalsOnly );
+        }
+      } else {
+        for ( int i = taskview->indexOfTopLevelItem( task ); 
+              i < taskview->topLevelItemCount(); ++i ) {
+          task = static_cast< Task* >(taskview->topLevelItem( i ) );
+          printTaskHistory( task, taskdaytotals, daytotals,
+                            sectionFrom, sectionTo, 0, retval, totalsOnly );
+        }
       }
     }
     retval += line;

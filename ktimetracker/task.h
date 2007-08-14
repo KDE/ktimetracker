@@ -77,8 +77,6 @@ class Task : public QObject, public QTreeWidgetItem
     /** return parent Task or null in case of TaskView.
      *  same as QListViewItem::parent()
      */
-    Task* firstChild() const  { return (Task*)QTreeWidgetItem::child(0); }
-    Task* nextSibling() const { static int sibling=0; sibling++; return (Task*)QTreeWidgetItem::child(sibling); }
     Task* parent() const      { return (Task*)QTreeWidgetItem::parent(); }
 
     /** Return task view for this task */
@@ -210,9 +208,9 @@ class Task : public QObject, public QTreeWidgetItem
       bool isRunning() const;
     //@}
 
-    bool parseIncidence(KCal::Incidence*, long& minutes,
+    bool parseIncidence( KCal::Incidence*, long& minutes,
         long& sessionMinutes, QString& name, DesktopList& desktops,
-        int& percent_complete);
+        int& percent_complete, int& priority );
 
     /**
      *  Load the todo passed in with this tasks info.
@@ -252,6 +250,14 @@ class Task : public QObject, public QTreeWidgetItem
     void setPercentComplete(const int percent, KarmStorage *storage);
     int percentComplete() const;
 
+    /**
+     * Update priority for this task.
+     *
+     * Priority is allowed from 0 to 9. 0 unspecified, 1 highest and 9 lowest.
+     */
+    void setPriority( int priority );
+    int priority() const;
+
 
     /** Sets an appropriate icon for this task based on its level of
      * completion */
@@ -286,7 +292,7 @@ class Task : public QObject, public QTreeWidgetItem
 
     /** initialize a task */
     void init( const QString& taskame, long minutes, long sessionTime,
-               DesktopList desktops, int percent_complete);
+               DesktopList desktops, int percent_complete, int priority );
 
     static QVector<QPixmap*> *icons;
 
