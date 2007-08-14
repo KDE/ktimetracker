@@ -98,7 +98,7 @@ class TimetrackerWidget : public QWidget {
     void showSearchBar( bool visible );
 
     /**
-      trys to close all files. This slot has to be called before quitting
+      tries to close all files. This slot has to be called before quitting
       the application to ensure that no data is lost.
 
       @returns true if the user has saved or consciously not saved all files,
