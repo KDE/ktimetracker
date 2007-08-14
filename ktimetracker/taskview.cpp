@@ -153,6 +153,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
   setAllColumnsShowFocus( true );
+  setSortingEnabled( true );
   setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
   // set up the minuteTimer
@@ -231,6 +232,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT( slotCustomContextMenuRequested( const QPoint & ) ) );
 
   reconfigure();
+  sortByColumn( 0, Qt::AscendingOrder );
 }
 
 void TaskView::newFocusWindowDetected( const QString &taskName )
