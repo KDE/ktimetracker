@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=KTimeTracker
+Name[ne]=केडीई समय ट्रयाकर
 Name[sv]=Ktimetracker
 Name[x-test]=xxKTimeTrackerxx
 GenericName=Personal Time Tracker
@@ -37,7 +38,7 @@ GenericName[mk]=Следење на личното време
 GenericName[ms]=Penjejak Waktu Peribadi
 GenericName[nb]=Personlig tidsoversikt
 GenericName[nds]=Persöönlich Tietlogbook
-GenericName[ne]=व्यक्तिगत समय ट्र्याकर
+GenericName[ne]=व्यक्तिगत समय ट्रयाकर
 GenericName[nl]=Tijdsregistratie
 GenericName[nn]=Personleg tidsmålar
 GenericName[pa]=ਨਿੱਜੀ ਟਾਇਮ ਟਰੈਕਰ
