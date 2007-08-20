@@ -71,8 +71,10 @@ void FocusDetector::startFocusDetection()
 
 void FocusDetector::stopFocusDetection()
 {
-  if ( mTimer->isActive() )
+  if ( mTimer->isActive() ) {
     mTimer->stop();
+    mLastWindow = "";
+  }
 }
 
 #include "focusdetector.moc" 

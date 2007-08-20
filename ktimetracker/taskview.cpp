@@ -121,6 +121,7 @@ class TaskView::Private {
 
     KarmStorage *mStorage;
     bool mFocusTrackingActive;
+    Task* mLastTaskWithFocus;
     QList<Task*> mActiveTasks;
 
     QMenu *mPopupPercentageMenu;
@@ -242,13 +243,13 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
 
   if ( d->mFocusTrackingActive ) {
     bool found = false;  // has taskName been found in our tasks
-    stopTimerFor( lastTaskWithFocus );
+    stopTimerFor( d->mLastTaskWithFocus );
     int i = 0;
     for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) ) {
       if ( task->name() == newTaskName ) {
          found = true;
          startTimerFor( task );
-         lastTaskWithFocus = task;
+         d->mLastTaskWithFocus = task;
       }
     }
     if ( !found ) {
@@ -261,7 +262,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
       for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) ) {
         if (task->name() == newTaskName) {
           startTimerFor( task );
-          lastTaskWithFocus = task;
+          d->mLastTaskWithFocus = task;
         }
       }
     }
@@ -667,9 +668,11 @@ void TaskView::toggleFocusTracking()
   if ( d->mFocusTrackingActive ) {
     _focusDetector->startFocusDetection();
   } else {
-    stopTimerFor( lastTaskWithFocus );
+    stopTimerFor( d->mLastTaskWithFocus );
     _focusDetector->stopFocusDetection();
   }
+
+  emit updateButtons();
 }
 
 void TaskView::startNewSession()
@@ -719,7 +722,10 @@ void TaskView::stopTimerFor(Task* task)
 
 void TaskView::stopCurrentTimer()
 {
-  stopTimerFor( currentItem());
+  stopTimerFor( currentItem() );
+  if ( d->mFocusTrackingActive && d->mLastTaskWithFocus == currentItem() ) {
+    toggleFocusTracking();
+  }
 }
 
 void TaskView::minuteUpdate()

@@ -159,7 +159,8 @@ void MainWindow::slotSelectionChanged()
   actionStop->setEnabled( item && item->isRunning() );
   actionMarkAsComplete->setEnabled( item && !item->isComplete() );
   actionMarkAsIncomplete->setEnabled( item && item->isComplete() );
-  actionFocusTracking->setEnabled( 
+  actionFocusTracking->setEnabled( mainWidget->currentTaskView() );
+  actionFocusTracking->setChecked( 
     mainWidget->currentTaskView() && 
     mainWidget->currentTaskView()->isFocusTrackingActive() 
   );

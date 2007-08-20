@@ -227,7 +227,6 @@ class TaskView : public QTreeWidget
     bool _isloading;
     Task* dragTask;
     QTableWidget* historywidget;
-    Task*  lastTaskWithFocus;
 
     //@cond PRIVATE
     class Private;
