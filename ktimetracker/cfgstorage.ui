@@ -6,10 +6,22 @@
     <x>0</x>
     <y>0</y>
     <width>230</width>
-    <height>70</height>
+    <height>98</height>
    </rect>
   </property>
   <layout class="QGridLayout" >
+   <property name="leftMargin" >
+    <number>9</number>
+   </property>
+   <property name="topMargin" >
+    <number>9</number>
+   </property>
+   <property name="rightMargin" >
+    <number>9</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>9</number>
+   </property>
    <item row="0" column="0" >
     <widget class="QCheckBox" name="kcfg_autoSave" >
      <property name="text" >
@@ -37,8 +49,23 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="0" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
+ <layoutfunction spacing="KDialog::spacingHint" margin="KDialog::marginHint" />
+ <includes/>
  <resources/>
  <connections/>
 </ui>
