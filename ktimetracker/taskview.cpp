@@ -59,6 +59,8 @@
 #include "task.h"
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
+#include "focusdetector.h"
+#include "focusdetectornotifier.h"
 
 #define T_LINESIZE 1023
 
@@ -135,7 +137,6 @@ class TaskView::Private {
 TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 {
   _preferences = Preferences::instance();
-  _focusDetector = new FocusDetector(1);
 
   connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
@@ -143,7 +144,8 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
   connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)) );
-  connect( _focusDetector, SIGNAL( newFocus( const QString & ) ), 
+  connect( FocusDetectorNotifier::instance()->focusDetector(), 
+           SIGNAL( newFocus( const QString & ) ), 
            this, SLOT( newFocusWindowDetected ( const QString & ) ) ); 
 
   QStringList labels;
@@ -404,6 +406,8 @@ KarmStorage* TaskView::storage()
 
 TaskView::~TaskView()
 {
+  FocusDetectorNotifier::instance()->detach( this );
+  delete d;
   KTimeTrackerSettings::self()->writeConfig();
 }
 
@@ -654,7 +658,7 @@ void TaskView::stopAllTimers( const QDateTime &when )
     task->setRunning( false, d->mStorage, when );
 
   _idleTimeDetector->stopIdleDetection();
-  _focusDetector->stopFocusDetection(); 
+  FocusDetectorNotifier::instance()->detach( this );
   d->mActiveTasks.clear();
   emit updateButtons();
   emit timersInactive();
@@ -666,10 +670,10 @@ void TaskView::toggleFocusTracking()
   d->mFocusTrackingActive = !d->mFocusTrackingActive;
 
   if ( d->mFocusTrackingActive ) {
-    _focusDetector->startFocusDetection();
+    FocusDetectorNotifier::instance()->attach( this );
   } else {
     stopTimerFor( d->mLastTaskWithFocus );
-    _focusDetector->stopFocusDetection();
+    FocusDetectorNotifier::instance()->detach( this );
   }
 
   emit updateButtons();

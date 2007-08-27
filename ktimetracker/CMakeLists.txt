@@ -19,6 +19,7 @@ set(karm_shared_SRCS
 	task.cpp taskview.cpp tray.cpp  focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp 
 	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp 
+  focusdetectornotifier.cpp
  )
 
 #qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmainadaptor )

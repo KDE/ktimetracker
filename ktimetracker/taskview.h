@@ -31,7 +31,6 @@
 #include "desktoplist.h"
 #include "karmstorage.h"
 #include "reportcriteria.h"
-#include "focusdetector.h"
 
 class QMouseEvent;
 class QString;
@@ -218,7 +217,6 @@ class TaskView : public QTreeWidget
 
   private: // member variables
     IdleTimeDetector* _idleTimeDetector;
-    FocusDetector* _focusDetector;
     QTimer *_minuteTimer;
     QTimer *_autoSaveTimer;
     QTimer *_manualSaveTimer;
