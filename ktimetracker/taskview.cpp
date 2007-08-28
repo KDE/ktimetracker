@@ -388,6 +388,7 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
         if (task->isComplete()) {
           task->setPercentComplete( 0, d->mStorage );
         } else {
+          stopTimerFor( task );  // Use our own method instead of calling setRunning() directly
           task->setPercentComplete( 100, d->mStorage );
         }
         
