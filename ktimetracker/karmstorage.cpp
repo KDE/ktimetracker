@@ -832,7 +832,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     retval += QString::fromLatin1("%1%2%3%4")
         .arg( formatTime( sum/60, rc.decimalMinutes ) )
         .arg( delim ).arg( delim )
-        .arg( i18n( "Total" ) );
+        .arg( i18nc( "total time of all tasks", "Total" ) );
   }
 
   // above taken from timekard.cpp

@@ -178,7 +178,7 @@ void karmPart::makeMenus()
   actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
   actionStopAll->setEnabled(false);
 
-  actionNew  = new KAction(KIcon("document-new"), i18n("&New..."), this);
+  actionNew  = new KAction(KIcon("document-new"), i18nc( "creating a new task", "&New..." ), this);
   actionCollection()->addAction("new_task", actionNew );
   connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
   actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));

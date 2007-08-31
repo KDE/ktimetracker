@@ -65,7 +65,7 @@ void MyPrinter::print()
     }
 
     // Calculate the needed width for each of the fields
-    timeWidth = qMax(metrics.width(i18n("Total")),
+    timeWidth = qMax(metrics.width(i18nc( "total time of all tasks", "Total" )),
                      metrics.width(formatTime(totalTotal)));
     sessionTimeWidth = qMax(metrics.width(i18n("Session")),
                             metrics.width(formatTime(sessionTotal)));
@@ -101,7 +101,7 @@ void MyPrinter::print()
     yoff += height + 10;
 
     // Print the second header.
-    printLine(i18n("Total"), i18n("Session"), i18n("Task Name"), painter, 0);
+    printLine(i18nc( "total time of all tasks", "Total" ), i18n("Session"), i18n("Task Name"), painter, 0);
     
     yoff += 4;
     painter.drawLine(xMargin, yoff, xMargin + realPageWidth, yoff);

@@ -213,13 +213,13 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
         label = i18n( "unspecified" );
         break;
       case 1:
-        label = i18n( "1 (highest)" );
+        label = i18nc( "combox entry for highest priority", "1 (highest)" );
         break;
       case 5:
-        label = i18n( "5 (medium)" );
+        label = i18nc( "combox entry for medium priority", "5 (medium)" );
         break;
       case 9:
-        label = i18n( "9 (lowest)" );
+        label = i18nc( "combox entry for lowest priority", "9 (lowest)" );
         break;
       default:
         label = QString( "%1" ).arg( i );

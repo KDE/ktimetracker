@@ -94,7 +94,7 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
     retval += QString(QString::fromLatin1("%1")).arg(buf, timeWidth) + cr;
     retval += QString(QString::fromLatin1("%1 %2"))
       .arg(formatTime(sum),timeWidth)
-      .arg(i18n("Total"));
+      .arg(i18nc( "total time of all tasks", "Total" ));
   }
   else
     retval += i18n("No tasks.");
@@ -323,7 +323,7 @@ QString TimeKard::sectionHistoryAsText(
 
     retval += QString::fromLatin1("%1 %2")
               .arg(formatTime(sum/60), totalTimeWidth)
-              .arg(i18n("Total"));
+              .arg( i18nc( "total time of all tasks", "Total" ) );
   }
   return retval;
 }

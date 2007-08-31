@@ -278,7 +278,7 @@ void MainWindow::showSettingsDialog()
   Ui::DisplayPage *displayUi = new Ui::DisplayPage;
   QWidget *displayPage = new QWidget;
   displayUi->setupUi( displayPage );
-  dialog->addPage( displayPage, i18n( "Display" ), "zoom-original" );
+  dialog->addPage( displayPage, i18nc( "settings page for customizing user interface", "Display" ), "zoom-original" );
 
   Ui::StoragePage *storageUi = new Ui::StoragePage;
   QWidget *storagePage = new QWidget;
@@ -318,13 +318,13 @@ void MainWindow::updateStatusBar( )
   statusBar()->changeItem( i18n("Session: %1", time), 0 );
 
   time = formatTime( _totalSum );
-  statusBar()->changeItem( i18n("Total: %1" , time), 1);
+  statusBar()->changeItem( i18nc( "total time of all tasks", "Total: %1", time ), 1);
 }
 
 void MainWindow::startStatusBar()
 {
   statusBar()->insertPermanentItem( i18n("Session"), 0, 0 );
-  statusBar()->insertPermanentItem( i18n("Total" ), 1, 0);
+  statusBar()->insertPermanentItem( i18nc( "total time of all tasks", "Total" ), 1, 0);
 }
 
 void MainWindow::saveProperties( KConfigGroup &cfg )

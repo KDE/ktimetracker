@@ -37,6 +37,8 @@ class TaskView;
  */
 class FocusDetectorNotifier : public QObject
 {
+  Q_OBJECT
+
   public:
     virtual ~FocusDetectorNotifier();
     static FocusDetectorNotifier *instance();
