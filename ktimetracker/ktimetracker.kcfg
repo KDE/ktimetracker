@@ -65,6 +65,9 @@
     <entry name="decimalFormat" type="Bool">
       <default>false</default>
     </entry>
+    <entry name="alternatingRowColors" type="Bool">
+      <default>true</default>
+    </entry>
     <entry name="trayIcon" type="Bool">
       <default>true</default>
     </entry>

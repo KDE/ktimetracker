@@ -157,6 +157,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
   setAllColumnsShowFocus( true );
   setSortingEnabled( true );
+  setAlternatingRowColors( KTimeTrackerSettings::alternatingRowColors() );
   setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
   // set up the minuteTimer
@@ -1139,6 +1140,9 @@ void TaskView::reconfigure()
   else if ( _autoSaveTimer->isActive() ) {
     _autoSaveTimer->stop();
   }
+
+  /* display */
+  setAlternatingRowColors( KTimeTrackerSettings::alternatingRowColors() );
 
   refresh();
 }
