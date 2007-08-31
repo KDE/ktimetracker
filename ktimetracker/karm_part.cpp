@@ -49,7 +49,6 @@
 #include "preferences.h"
 #include "tray.h"
 #include "version.h"
-#include "karmpartadaptor.h"
 #include "ktimetracker.h"
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
@@ -60,8 +59,6 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
 //    _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
-  //new KarmPartAdaptor(this);
-  //QDBusConnection::sessionBus().registerObject("/Karm", this);
     // we need an instance
     setComponentData( karmPartFactory::componentData() );
 
