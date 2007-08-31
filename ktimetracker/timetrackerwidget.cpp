@@ -40,6 +40,7 @@
 #include <KTreeWidgetSearchLine>
 #include <KIO/Job>
 
+#include "karmerrors.h"
 #include "mainadaptor.h"
 #include "task.h"
 #include "taskview.h"
@@ -450,6 +451,173 @@ void TimetrackerWidget::addTask( const QString &taskName )
 
   if ( taskView ) {
     taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
+  }
+}
+
+void TimetrackerWidget::setPercentComplete( const QString &taskId, int percent )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+      if ( task && task->uid() == taskId ) {
+        task->setPercentComplete( percent, taskView->storage() );
+      }
+      ++it;
+    }
+  }
+}
+
+int TimetrackerWidget::bookTime( const QString &taskId, QString dateTime, int minutes )
+{
+  QDate startDate;
+  QTime startTime;
+  QDateTime startDateTime;
+  Task *task = 0, *t = 0;
+
+  if ( minutes <= 0 ) return KARM_ERR_INVALID_DURATION;
+
+  // Find task
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      t = static_cast< Task* >( *it );
+      if ( t && t->uid() == taskId ) {
+        task = t;
+        break;
+      }
+      ++it;
+    }
+
+    if ( task ) break;
+  }
+
+  if ( !task ) return KARM_ERR_UID_NOT_FOUND;
+
+  // Parse datetime
+  startDate = QDate::fromString( dateTime, Qt::ISODate );
+
+  if ( dateTime.length() > 10 ) { // "YYYY-MM-DD".length() = 10
+    startTime = QTime::fromString( dateTime, Qt::ISODate );
+  } else startTime = QTime( 12, 0 );
+
+  if ( startDate.isValid() && startTime.isValid() ) {
+    startDateTime = QDateTime( startDate, startTime );
+  } else return KARM_ERR_INVALID_DATE;
+
+  // Update task totals (session and total) and save to disk
+  task->changeTotalTimes( task->sessionTime() + minutes, 
+                          task->totalTime() + minutes );
+  if ( !( task->taskView()->storage()->bookTime( task, 
+                                                 startDateTime, 
+                                                 minutes * 60 ) ) )
+    return KARM_ERR_GENERIC_SAVE_FAILED;
+
+  return 0;
+}
+
+QString TimetrackerWidget::error( int errorCode ) const
+{
+  switch ( errorCode ) {
+    case KARM_ERR_GENERIC_SAVE_FAILED:
+      return i18n( "Save failed, most likely because the file could not be locked." );
+    case KARM_ERR_COULD_NOT_MODIFY_RESOURCE:
+      return i18n( "Could not modify calendar resource." );
+    case KARM_ERR_MEMORY_EXHAUSTED:
+      return i18n( "Out of memory--could not create object." );
+    case KARM_ERR_UID_NOT_FOUND:
+      return i18n( "UID not found." );
+    case KARM_ERR_INVALID_DATE:
+      return i18n( "Invalidate date--format is YYYY-MM-DD." );
+    case KARM_ERR_INVALID_TIME:
+      return i18n( "Invalid time--format is YYYY-MM-DDTHH:MM:SS." );
+    case KARM_ERR_INVALID_DURATION:
+      return i18n( "Invalid task duration--must be greater than zero." );
+    default:
+      return i18n( "Invalid error number: %1", errorCode );
+  }
+}
+
+int TimetrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        return task->totalTime();
+      }
+
+      ++it;
+    }
+  }
+
+  return -1;
+}
+
+void TimetrackerWidget::startTimerFor( const QString &taskId )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        taskView->startTimerFor( task );
+        return;
+      }
+
+      ++it;
+    }
+  }
+}
+
+void TimetrackerWidget::stopTimerFor( const QString &taskId )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        taskView->stopTimerFor( task );
+        return;
+      }
+
+      ++it;
+    }
+  }
+}
+
+void TimetrackerWidget::stopAllTimersDBUS()
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    taskView->stopAllTimers();
   }
 }
 

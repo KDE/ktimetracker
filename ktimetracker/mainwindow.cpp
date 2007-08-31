@@ -126,28 +126,7 @@ MainWindow::MainWindow( const QString &icsfile )
   connect( mainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
 
-  // Everything that uses Preferences has been created now, we can let it
-  // emit its signals
-  //_preferences->emitSignals(); // FIXME find a workaround
   slotSelectionChanged();
-
-  // ToDo: Register with DCOP
-
-  // Set up DCOP error messages
-  m_error[ KARM_ERR_GENERIC_SAVE_FAILED ] =
-    i18n( "Save failed, most likely because the file could not be locked." );
-  m_error[ KARM_ERR_COULD_NOT_MODIFY_RESOURCE ] =
-    i18n( "Could not modify calendar resource." );
-  m_error[ KARM_ERR_MEMORY_EXHAUSTED ] =
-    i18n( "Out of memory--could not create object." );
-  m_error[ KARM_ERR_UID_NOT_FOUND ] =
-    i18n( "UID not found." );
-  m_error[ KARM_ERR_INVALID_DATE ] =
-    i18n( "Invalidate date--format is YYYY-MM-DD." );
-  m_error[ KARM_ERR_INVALID_TIME ] =
-    i18n( "Invalid time--format is YYYY-MM-DDTHH:MM:SS." );
-  m_error[ KARM_ERR_INVALID_DURATION ] =
-    i18n( "Invalid task duration--must be greater than zero." );
 }
 
 void MainWindow::slotSelectionChanged()

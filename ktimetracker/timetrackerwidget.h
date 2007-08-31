@@ -128,6 +128,14 @@ class TimetrackerWidget : public QWidget {
     QString version() const;
     QStringList taskIdsFromName( const QString &taskName ) const;
     void addTask( const QString &taskName );
+    void setPercentComplete( const QString &taskId, int percent );
+    int bookTime( const QString &taskId, QString dateTime, int minutes );
+    QString error( int errorCode ) const;
+    int totalMinutesForTaskId( const QString &taskId ) const;
+    void startTimerFor( const QString &taskId );
+    void stopTimerFor( const QString &taskId );
+    // FIXME rename, when the wrapper slot is removed
+    void stopAllTimersDBUS();
     QStringList tasks() const;
     QStringList activeTasks() const;
     void quit();

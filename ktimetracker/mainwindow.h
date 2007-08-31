@@ -82,7 +82,6 @@ class MainWindow : public KParts::MainWindow
     KAction*         actionSave;
     KAction*         actionSearchBar;
     KRecentFilesAction* actionRecentFiles;
-    QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
 
     TimetrackerWidget *mainWidget;
 
