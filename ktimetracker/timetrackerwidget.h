@@ -126,6 +126,8 @@ class TimetrackerWidget : public QWidget {
 
     //BEGIN dbus slots
     QString version() const;
+    QStringList taskIdsFromName( const QString &taskName ) const;
+    void addTask( const QString &taskName );
     QStringList tasks() const;
     QStringList activeTasks() const;
     void quit();

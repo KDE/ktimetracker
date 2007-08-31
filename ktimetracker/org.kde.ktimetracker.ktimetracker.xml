@@ -5,6 +5,14 @@
     <method name="version">
       <arg type="s" direction="out"/>
     </method>
+    <method name="taskIdsFromName">
+      <arg name="out" type="as" direction="out" />
+      <arg name="taskName" type="s" direction="in"/>
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
+    </method>
+    <method name="addTask">
+      <arg name="taskName" type="s" direction="in"/>
+    </method>
     <method name="activeTasks">
       <arg name="out" type="as" direction="out" />
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />

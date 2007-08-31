@@ -422,6 +422,37 @@ QString TimetrackerWidget::version() const
   return KTIMETRACKER_VERSION;
 }
 
+QStringList TimetrackerWidget::taskIdsFromName( const QString &taskName ) const
+{
+  QStringList result;
+
+  for ( int i = 0; i < d->mTabWidget->count(); ++i) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+      if ( task && task->name() == taskName ) {
+        result << task->uid();
+      }
+      ++it;
+    }
+  }
+
+  return result;
+}
+
+void TimetrackerWidget::addTask( const QString &taskName )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( taskView ) {
+    taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
+  }
+}
+
 QStringList TimetrackerWidget::tasks() const
 {
   QStringList result;
