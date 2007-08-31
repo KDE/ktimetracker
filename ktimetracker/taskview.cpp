@@ -158,6 +158,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   setAllColumnsShowFocus( true );
   setSortingEnabled( true );
   setAlternatingRowColors( KTimeTrackerSettings::alternatingRowColors() );
+  setDragDropMode( QAbstractItemView::InternalMove );
   setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
   // set up the minuteTimer
@@ -189,9 +190,6 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT( startTimerFor(Task*) ));
   connect( _desktopTracker, SIGNAL( leftActiveDesktop( Task* ) ),
            this, SLOT( stopTimerFor(Task*) ));
-  dragTask=0;
-  setDragEnabled(true);
-  setAcceptDrops(true);
 
   // Header context menu
   TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
@@ -271,73 +269,6 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
     }
     emit updateButtons();
   } // focustrackingactive
-}
-
-void TaskView::dropEvent(QDropEvent* qde)
-{
-  kDebug(5970) <<"This is dropEvent";
-
-  if ( QTreeWidget::itemAt( qde->pos() ) == 0 ) { // the task was dropped to an empty place
-    // if the task is a sub-task, it shall be freed from its parents, otherwise, nothing happens
-    kDebug(5970) <<"User drops onto an empty place";
-    if (dragTask->parent())
-    {
-      d->mStorage->setTaskParent(dragTask,0);
-      QTreeWidgetItem* item=dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
-      this->insertTopLevelItem(0,item); 
-    }
-  }
-  else
-  {
-    Task* t = static_cast<Task*>( QTreeWidget::itemAt( qde->pos() ) );
-    kDebug(5970) <<"taking" << dragTask->name() <<" dropping onto" << t->name();
-    // is t==dragTask
-    if (t != dragTask) 
-    {
-      // is dragTask an ancestor to t ?
-      bool isAncestor=false;
-      Task* ancestor=t->parent();
-      while (ancestor!=0)
-      {
-        if (ancestor==dragTask) isAncestor=true;
-        kDebug() <<"testing" << ancestor->name();
-        kDebug() <<"isAncestor=" << isAncestor;
-        ancestor=ancestor->parent();
-      }
-      if (isAncestor) kDebug(5970) <<"User dropped a task on its subtask";
-      else  // move the task
-      {
-        if (dragTask->parent())
-        // if the task is a subtask
-        {
-          dragTask->parent()->takeChild(dragTask->parent()->indexOfChild(dragTask));
-          t->addChild( dragTask );
-          dragTask->move(t);
-          d->mStorage->setTaskParent( dragTask, t );
-        }
-        else
-        // if the task is no subtask
-        {
-          int indexOfDragTask = indexOfTopLevelItem( dragTask );
-          if (indexOfDragTask != -1) 
-          {
-            takeTopLevelItem( indexOfDragTask );
-            t->addChild( dragTask );
-          }
-        }
-        save();
-        refresh();  // setRootIsDecorated may be needed
-      }
-    }
-  }
-}
-
-void TaskView::startDrag(Qt::DropActions action)
-{
-  kDebug(5970) <<"Entering TaskView::startDrag";
-  dragTask = currentItem();
-  kDebug(5970) <<"dragTask is" << dragTask->name();
-  QTreeWidget::startDrag(action);  
 }
 
 void TaskView::mouseMoveEvent( QMouseEvent *event ) 
