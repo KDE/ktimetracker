@@ -42,6 +42,7 @@
 
 #include "karmerrors.h"
 #include "mainadaptor.h"
+#include "reportcriteria.h"
 #include "task.h"
 #include "taskview.h"
 #include "version.h"
@@ -621,6 +622,66 @@ void TimetrackerWidget::stopAllTimersDBUS()
   }
 }
 
+QString TimetrackerWidget::exportCSVFile( const QString &filename, 
+                                          const QString &from, 
+                                          const QString &to, int type, 
+                                          bool decimalMinutes, 
+                                          bool allTasks, 
+                                          const QString &delimiter, 
+                                          const QString &quote )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( !taskView ) return "";
+
+  ReportCriteria rc;
+  rc.url = filename;
+  rc.from = QDate::fromString( from );
+  if ( rc.from.isNull() )
+    rc.from = QDate::fromString( from, Qt::ISODate );
+  rc.to = QDate::fromString( to );
+  if ( rc.to.isNull() )
+    rc.to = QDate::fromString( to, Qt::ISODate );
+  rc.reportType = ( ReportCriteria::REPORTTYPE )type;
+  rc.decimalMinutes = decimalMinutes;
+  rc.allTasks = allTasks;
+  rc.delimiter = delimiter;
+  rc.quote = quote;
+
+  return taskView->report( rc );
+}
+
+void TimetrackerWidget::importPlannerFile( const QString &filename )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( !taskView ) return;
+
+  taskView->importPlanner( filename );
+}
+
+bool TimetrackerWidget::isActive( const QString &taskId ) const
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        return task->isRunning();
+      }
+
+      ++it;
+    }
+  }
+
+  return false;
+}
+
 QStringList TimetrackerWidget::tasks() const
 {
   QStringList result;
@@ -657,6 +718,22 @@ QStringList TimetrackerWidget::activeTasks() const
   }
 
   return result;
+}
+
+void TimetrackerWidget::saveAll()
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    // is it an unsaved file?
+    if ( d->mIsNewVector.contains( taskView ) ) {
+      saveCurrentTaskView();
+    }
+
+    taskView->save();
+  }
 }
 
 void TimetrackerWidget::quit()

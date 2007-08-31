@@ -22,7 +22,6 @@ set(karm_shared_SRCS
   focusdetectornotifier.cpp
  )
 
-#qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmainadaptor )
 qt4_add_dbus_adaptor( karm_shared_SRCS 
                       org.kde.ktimetracker.ktimetracker.xml 
                       timetrackerwidget.h 

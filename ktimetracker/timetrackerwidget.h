@@ -136,8 +136,15 @@ class TimetrackerWidget : public QWidget {
     void stopTimerFor( const QString &taskId );
     // FIXME rename, when the wrapper slot is removed
     void stopAllTimersDBUS();
+    QString exportCSVFile( const QString &filename, const QString &from, 
+                        const QString &to, int type, bool decimalMinutes, 
+                        bool allTasks, const QString &delimiter, 
+                         const QString &quote );
+    void importPlannerFile( const QString &filename );
     QStringList tasks() const;
     QStringList activeTasks() const;
+    bool isActive( const QString &taskId ) const;
+    void saveAll();
     void quit();
     //END
 

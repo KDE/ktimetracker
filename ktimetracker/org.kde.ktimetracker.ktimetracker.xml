@@ -46,6 +46,25 @@
       <arg name="out" type="as" direction="out" />
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
     </method>
+    <method name="exportCSVFile">
+      <arg type="s" direction="out"/>
+      <arg name="filename" type="s" direction="in"/>
+      <arg name="from" type="s" direction="in"/>
+      <arg name="to" type="s" direction="in"/>
+      <arg name="type" type="i" direction="in"/>
+      <arg name="decimalMinutes" type="b" direction="in"/>
+      <arg name="allTasks" type="b" direction="in"/>
+      <arg name="delimiter" type="s" direction="in"/>
+      <arg name="quote" type="s" direction="in"/>
+    </method>
+    <method name="importPlannerFile">
+      <arg name="filename" type="s" direction="in"/>
+    </method>
+    <method name="isActive">
+      <arg type="b" direction="out" />
+      <arg name="taskId" type="s" direction="in" />
+    </method>
+    <method name="saveAll" />
     <method name="quit" />
   </interface>
 </node>
