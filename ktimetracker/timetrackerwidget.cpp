@@ -22,12 +22,14 @@
 
 #include "timetrackerwidget.h"
 
+#include <QDBusConnection>
 #include <QFileInfo>
 #include <QHBoxLayout>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QVector>
 
+#include <KApplication>
 #include <KDebug>
 #include <KFileDialog>
 #include <KIcon>
@@ -38,6 +40,7 @@
 #include <KTreeWidgetSearchLine>
 #include <KIO/Job>
 
+#include "mainadaptor.h"
 #include "task.h"
 #include "taskview.h"
 #include "version.h"
@@ -59,6 +62,9 @@ class TimetrackerWidget::Private {
 TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   d( new TimetrackerWidget::Private() )
 {
+  new MainAdaptor( this );
+  QDBusConnection::sessionBus().registerObject( "/KTimeTracker", this );
+
   QLayout *layout = new QVBoxLayout;
   layout->setMargin( 0 );
   layout->setSpacing( 0 );
@@ -452,6 +458,13 @@ QStringList TimetrackerWidget::activeTasks() const
   }
 
   return result;
+}
+
+void TimetrackerWidget::quit()
+{
+  if ( closeAllFiles() ) {
+    kapp->quit();
+  }
 }
 //END
 

@@ -128,6 +128,7 @@ class TimetrackerWidget : public QWidget {
     QString version() const;
     QStringList tasks() const;
     QStringList activeTasks() const;
+    void quit();
     //END
 
   private Q_SLOTS:

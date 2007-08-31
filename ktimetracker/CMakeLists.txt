@@ -23,6 +23,12 @@ set(karm_shared_SRCS
  )
 
 #qt4_add_dbus_adaptor(karm_shared_SRCS org.kde.karm.Karm.xml mainwindow.h MainWindow karmmainadaptor )
+qt4_add_dbus_adaptor( karm_shared_SRCS 
+                      org.kde.ktimetracker.ktimetracker.xml 
+                      timetrackerwidget.h 
+                      TimetrackerWidget 
+                      mainadaptor
+                      MainAdaptor )
 kde4_add_ui_files( karm_shared_SRCS 
   csvexportdialog_base.ui 
   cfgbehavior.ui 
@@ -57,7 +63,7 @@ install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
 ########### next target ###############
 
 set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
-qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpartadaptor KarmPartAdaptor)
+#qt4_add_dbus_adaptor(karmpart_PART_SRCS org.kde.karm.Karm.xml karm_part.h karmPart karmpartadaptor KarmPartAdaptor)
 
 
 kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
