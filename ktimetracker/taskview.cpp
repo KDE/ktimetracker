@@ -964,12 +964,12 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
 {
   if (item) {
     Task *task = static_cast<Task*>( item );
-    if (task) {
-      if (d->mActiveTasks.indexOf(task) == -1) { // task is active
+    if ( task ) {
+      if ( task->isRunning() ) {
+        stopCurrentTimer();
+      } else if ( !task->isComplete() ) {
         stopAllTimers();
         startCurrentTimer();
-      } else {
-        stopCurrentTimer();
       }
     }
   }
