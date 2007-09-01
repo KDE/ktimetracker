@@ -327,6 +327,11 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
   slotUpdateButtons();
 }
 
+KAction* TimetrackerWidget::action( const QString &name ) const
+{
+  return d->mActions.value( name );
+}
+
 void TimetrackerWidget::newFile()
 {
   addTaskView();

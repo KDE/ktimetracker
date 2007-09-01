@@ -41,6 +41,7 @@
 
 #include "mainwindow.h"
 #include "task.h"
+#include "timetrackerwidget.h"
 
 QVector<QPixmap*> *KarmTray::icons = 0;
 
@@ -65,8 +66,12 @@ KarmTray::KarmTray(MainWindow* parent)
   }
 
   contextMenu()->addAction( parent->actionPreferences );
-// FIXME
-//  contextMenu()->addAction( parent->actionStopAll );
+
+  TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
+  if ( timetrackerWidget ) {
+    KAction *action = timetrackerWidget->action( "stopAll" );
+    if ( action ) contextMenu()->addAction( action );
+  }
 
   resetClock();
   initToolTip();

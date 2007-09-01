@@ -27,6 +27,7 @@
 
 #include <QDateTime>
 
+class KAction;
 class KActionCollection;
 class KUrl;
 
@@ -69,6 +70,14 @@ class TimetrackerWidget : public QWidget {
       object.
      */
     void setupActions( KActionCollection *actionCollection );
+
+    /**
+      returns a generated action by name. You have to call setupActions before.
+
+      @param name The name of the action
+      @returns A pointer to a KAction instance
+     */
+    KAction *action( const QString &name ) const;
 
   public Q_SLOTS:
     /**
