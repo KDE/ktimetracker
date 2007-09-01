@@ -718,7 +718,7 @@ void TimetrackerWidget::setPercentComplete( const QString &taskId, int percent )
   }
 }
 
-int TimetrackerWidget::bookTime( const QString &taskId, QString dateTime, int minutes )
+int TimetrackerWidget::bookTime( const QString &taskId, const QString &dateTime, int minutes )
 {
   QDate startDate;
   QTime startTime;
