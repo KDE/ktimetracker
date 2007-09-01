@@ -116,6 +116,8 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
            this, SIGNAL( currentTaskViewChanged() ) );
   connect( d->mTabWidget, SIGNAL( currentChanged( int ) ),
            this, SLOT( slotCurrentChanged() ) );
+  connect( d->mTabWidget, SIGNAL( mouseDoubleClick() ),
+           this, SLOT( newFile() ) );
 
   showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
 }
