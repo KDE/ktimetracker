@@ -65,7 +65,8 @@ KarmTray::KarmTray(MainWindow* parent)
   }
 
   contextMenu()->addAction( parent->actionPreferences );
-  contextMenu()->addAction( parent->actionStopAll );
+// FIXME
+//  contextMenu()->addAction( parent->actionStopAll );
 
   resetClock();
   initToolTip();

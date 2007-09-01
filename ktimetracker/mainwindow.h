@@ -30,7 +30,6 @@
 
 class KAccel;
 class KAccelMenuWatch;
-class KRecentFilesAction;
 class KarmTray;
 class QPoint;
 class QString;
@@ -57,31 +56,8 @@ class MainWindow : public KParts::MainWindow
     long             _totalSum;
     long             _sessionSum;
     KarmTray*        _tray;
-    KAction*         actionStart;
-    KAction*         actionStop;
-    KAction*         actionStopAll;
-    KAction*         actionDelete;
-    KAction*         actionEdit;
-    KAction*         actionMarkAsComplete;
-    KAction*         actionMarkAsIncomplete;
     KAction*         actionPreferences;
-    KAction*         actionClipTotals;
-    KAction*         actionClipHistory;
     KAction*         actionKeyBindings;
-    KAction*         actionNew;
-    KAction*         actionNewSub;
-    KAction*         actionedithistory;
-    KAction*         actionFocusTracking;
-    KAction*         actionResetAll;
-    KAction*         actionStartNewSession;
-    KAction*         actionExportTimes;
-    KAction*         actionExportHistory;
-    KAction*         actionImportPlanner;
-    KAction*         actionClose;
-    KAction*         actionPrint;
-    KAction*         actionSave;
-    KAction*         actionSearchBar;
-    KRecentFilesAction* actionRecentFiles;
 
     TimetrackerWidget *mainWidget;
 
@@ -95,26 +71,13 @@ class MainWindow : public KParts::MainWindow
     void setStatusBar( const QString& );
     /** Quit ktimetracker (what else...) */
     void quit();
-    /** Save the calendar */
-    bool save();
   protected Q_SLOTS:
     void keyBindings();
     void startNewSession();
-    void resetAllTimes();
     void updateTime( long, long );
     void updateStatusBar();
-    void exportcsvHistory();
-    void slotedithistory();
-    void print();
-    void slotSelectionChanged();
     void taskViewCustomContextMenuRequested( const QPoint& );
-    void enableStopAll();
-    void disableStopAll();
-    void slotFocusTracking();
-    void openFile();
-    void openFile( const KUrl & );
     void showSettingsDialog();
-    void slotSearchBar();
 //    void timeLoggingChanged( bool on );
 
   protected:

@@ -27,6 +27,9 @@
 
 #include <QDateTime>
 
+class KActionCollection;
+class KUrl;
+
 class Task;
 class TaskView;
 
@@ -58,6 +61,15 @@ class TimetrackerWidget : public QWidget {
      */
     Task* currentTask();
 
+    /**
+      initializes the KActionCollection object of a main window for example.
+      The actions are connected to the TreeWidget itself to ensure reusability.
+
+      @param actionCollection The KActionCollection instance of the host
+      object.
+     */
+    void setupActions( KActionCollection *actionCollection );
+
   public Q_SLOTS:
     /**
       opens a new untitled file which is stored firstly as temporary file
@@ -68,7 +80,12 @@ class TimetrackerWidget : public QWidget {
     /**
       opens an existing ics file.
      */
-    void openFile( const QString &fileName );
+    void openFile( const QString &fileName = QString() );
+
+    /**
+      opens an existing ics file (wrapper for KUrl).
+     */
+    void openFile( const KUrl &fileName );
 
     /**
       closes the current opened tab widget and saves the data
@@ -81,10 +98,8 @@ class TimetrackerWidget : public QWidget {
     /**
       saves the current taskview. This is especially important on unsaved
       files to give them a non-temporary filename.
-
-      @returns the output of TaskView::save
     */
-    QString saveFile();
+    void saveFile();
 
     /**
       call this method when the preferences changed to adjust all
@@ -106,6 +121,11 @@ class TimetrackerWidget : public QWidget {
      */
     bool closeAllFiles();
 
+    /**
+      prints the current task view.
+     */
+    void printFile();
+
     //BEGIN wrapper slots
     /*
      * The following slots are wrapper slots which fires the corresponding 
@@ -121,7 +141,13 @@ class TimetrackerWidget : public QWidget {
     void markTaskAsComplete();
     void markTaskAsIncomplete();
     void exportcsvFile();
+    void exportcsvHistory();
     void importPlanner( const QString &fileName = "" );
+    void startNewSession();
+    void editHistory();
+    void resetAllTimes();
+    void focusTracking();
+    void slotSearchBar();
     //END
 
     //BEGIN dbus slots
@@ -152,6 +178,7 @@ class TimetrackerWidget : public QWidget {
     void slotCurrentChanged();
     void updateTabs();
     void slotAddTask( const QString &taskName );
+    void slotUpdateButtons();
 
   Q_SIGNALS:
     void currentTaskChanged();
