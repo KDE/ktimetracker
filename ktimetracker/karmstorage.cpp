@@ -955,7 +955,7 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   assert(e->relatedTo()->uid() == task->uid());
 
   // Have to turn this off to get datetimes in date fields.
-  e->setFloats(false);
+  e->setAllDay(false);
   e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
 
   // So someone can filter this mess out of their calendar display
