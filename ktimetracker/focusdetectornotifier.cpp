@@ -77,3 +77,5 @@ FocusDetector *FocusDetectorNotifier::focusDetector() const
 {
   return d->mDetector;
 }
+
+#include "focusdetectornotifier.moc"

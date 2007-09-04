@@ -22,22 +22,39 @@
 
 #include "timetrackerwidget.h"
 
+#include <QDBusConnection>
 #include <QFileInfo>
 #include <QHBoxLayout>
+#include <QKeySequence>
+#include <QMap>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QVector>
 
+#include <KAction>
+#include <KActionCollection>
+#include <KApplication>
 #include <KDebug>
 #include <KFileDialog>
+#include <KGlobal>
 #include <KIcon>
+#include <KIconLoader>
 #include <KLocale>
 #include <KMessageBox>
+#include <KRecentFilesAction>
+#include <KStandardAction>
 #include <KTabWidget>
 #include <KTemporaryFile>
 #include <KTreeWidgetSearchLine>
+#include <KUrl>
 #include <KIO/Job>
 
+#include "edithistorydialog.h"
+#include "karmerrors.h"
+#include "ktimetracker.h"
+#include "mainadaptor.h"
+#include "print.h"
+#include "reportcriteria.h"
 #include "task.h"
 #include "taskview.h"
 #include "version.h"
@@ -46,19 +63,33 @@
 class TimetrackerWidget::Private {
   public:
     Private() :
-      mLastView( 0 ) {}
+      mLastView( 0 ), mRecentFilesAction( 0 ) {}
 
     QWidget *mSearchLine;
     KTabWidget *mTabWidget;
     KTreeWidgetSearchLine *mSearchWidget;
     TaskView *mLastView;
     QVector<TaskView*> mIsNewVector;
+    QMap<QString, KAction*> mActions;
+    KRecentFilesAction *mRecentFilesAction;
+
+    struct ActionData {
+      QString iconName;
+      char* caption;
+      char* slot;
+      QString name;
+      char* toolTip;
+      char* whatsThis;
+    };
 };
 //@endcond
 
 TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   d( new TimetrackerWidget::Private() )
 {
+  new MainAdaptor( this );
+  QDBusConnection::sessionBus().registerObject( "/KTimeTracker", this );
+
   QLayout *layout = new QVBoxLayout;
   layout->setMargin( 0 );
   layout->setSpacing( 0 );
@@ -85,10 +116,18 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
            this, SIGNAL( currentTaskViewChanged() ) );
   connect( d->mTabWidget, SIGNAL( currentChanged( int ) ),
            this, SLOT( slotCurrentChanged() ) );
+  connect( d->mTabWidget, SIGNAL( mouseDoubleClick() ),
+           this, SLOT( newFile() ) );
+
+  showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
 }
 
 TimetrackerWidget::~TimetrackerWidget()
 {
+  if ( d->mRecentFilesAction ) {
+    d->mRecentFilesAction->saveEntries( KGlobal::config()->group( "Recent Files" ) );
+  }
+
   delete d;
 }
 
@@ -177,6 +216,122 @@ Task* TimetrackerWidget::currentTask()
   }
 }
 
+void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
+{
+  d->mActions.insert( "file_new",
+    KStandardAction::openNew( this, SLOT( newFile() ), actionCollection ) );
+  d->mActions[ "file_new" ]->setIcon( KIcon( "tab-new" ) );
+
+  d->mActions.insert ("file_open",
+    KStandardAction::open( this, SLOT( openFile() ), actionCollection ) );
+
+  d->mRecentFilesAction = KStandardAction::openRecent( 
+      this, SLOT( openFile( const KUrl & ) ), this );
+  actionCollection->addAction( d->mRecentFilesAction->objectName(), 
+                               d->mRecentFilesAction );
+  d->mRecentFilesAction->loadEntries( KGlobal::config()->group( "Recent Files" ) );
+
+  d->mActions.insert ("file_save",
+    KStandardAction::save( this, SLOT( saveFile() ), actionCollection ) );
+  d->mActions.insert ("file_close",
+    KStandardAction::close( this, SLOT( closeFile() ), actionCollection ) );
+  d->mActions.insert ("file_quit",
+    KStandardAction::quit( this, SLOT( quit() ), actionCollection ) );
+  d->mActions.insert ("file_print",
+    KStandardAction::print( this, SLOT( printFile() ), actionCollection ) );
+
+  Private::ActionData actions[] = {
+    { QString(), "Start &New Session", SLOT( startNewSession() ),
+      "start_new_session", "Starts a new session", "This will reset the "
+      "session time to 0 for all tasks, to start a new session, without "
+      "affecting the totals." },
+    { "history", "Edit History...", SLOT( editHistory() ), "edit_history",
+      "", "" },
+    { QString(), "&Reset All Times", SLOT( resetAllTimes() ),
+      "reset_all_times", "Resets all times", "This will reset the session "
+      "and total time to 0 for all tasks, to restart from scratch." },
+    { "arrow-right", "&Start", SLOT( startCurrentTimer() ), "start",
+      "Starts timing for selected task", "This will start timing for the "
+      "selected task.\nIt is even possible to time several tasks "
+      "simultanously.\n\nYou may also start timing of tasks by double clicking "
+      "the left mouse button on a given task. This will, however, stop timing "
+      "of other tasks." },
+    { "process-stop", "S&top", SLOT( stopCurrentTimer() ), "stop", "Stops "
+      "timing of the selected task", "Stops timing of the selected task" },
+    { QString(), "Stop &All Timers", SLOT( stopAllTimers() ), "stopAll",
+      "Stops all of the active timers", "Stops all of the active timers" },
+    { QString(), "Track Active Applications", SLOT( focusTracking() ),
+      "focustracking", "", "" },
+    { "document-new", "&New Task...", SLOT( newTask() ), "new_task", "Creates "
+      "new top level task", "This will create a new top level task." },
+    { "new-subtask", "New &Subtask...", SLOT( newSubTask() ), "new_sub_task",
+      "", "" },
+    { "edit-delete", "&Delete", SLOT( deleteTask() ), "delete_task", "Deletes "
+      "selected task", "This will delete the selected task and all its "
+      "subtasks" },
+    { "edit", "&Edit...", SLOT( editTask() ), "edit_task", "Edits name or "
+      "times for selected task", "This will bring up a dialog box where you "
+       "may edit the parameters for the selected task." },
+    { "", "&Mark as Complete", SLOT( markTaskAsComplete() ), "mark_as_complete", 
+      "", "" },
+    { "", "&Mark as Incomplete", SLOT( markTaskAsIncomplete() ),
+      "mark_as_incomplete", "", "" },
+    { "", "&Export Times...", SLOT( exportcsvFile() ), "export_times", "", "" },
+    { "", "Export &History...", SLOT( exportcsvHistory() ), "export_history",
+      "", "" },
+    { "", "Import Tasks From &Planner...", SLOT( importPlanner() ),
+      "import_planner", "", "" },
+    { "", "Show Searchbar", SLOT( slotSearchBar() ), "searchbar", "", "" }
+  };
+
+  for ( int i = 0; 
+        i < ( sizeof( actions ) / sizeof( Private::ActionData ) ); ++i ) {
+    Private::ActionData actionData = actions[i];
+    KAction *action;
+    if ( actionData.iconName.isEmpty() ) {
+      action = new KAction( i18n( actionData.caption ), this );
+    } else {
+      action = new KAction( KIcon( actionData.iconName ), 
+                            i18n( actionData.caption ), this );
+    }
+
+    actionCollection->addAction( actionData.name, action );
+    connect( action, SIGNAL( triggered( bool ) ), actionData.slot );
+    action->setToolTip( i18n( actionData.toolTip ) );
+    action->setWhatsThis( i18n( actionData.whatsThis ) );
+
+    d->mActions.insert( actionData.name, action );
+  }
+
+  // custom shortcuts
+  d->mActions[ "stopAll" ]->setShortcut( QKeySequence( Qt::Key_Escape ) );
+  d->mActions[ "new_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_T ) );
+  d->mActions[ "new_sub_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::ALT + Qt::Key_N ) );
+  d->mActions[ "delete_task" ]->setShortcut( QKeySequence( Qt::Key_Delete ) );
+  d->mActions[ "edit_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_E ) );
+  d->mActions[ "mark_as_complete" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_M ) );
+  d->mActions[ "mark_as_incomplete" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_M ) );
+
+  d->mActions[ "mark_as_complete" ]->setIcon( UserIcon( "task-complete.xpm" ) );
+  d->mActions[ "mark_as_incomplete" ]->setIcon( UserIcon( "task-incomplete.xpm" ) );
+
+  d->mActions[ "searchbar" ]->setChecked( KTimeTrackerSettings::self()->showSearchBar() );
+
+  connect( this, SIGNAL( currentTaskChanged() ),
+           this, SLOT( slotUpdateButtons() ) );
+  connect( this, SIGNAL( currentTaskViewChanged() ),
+           this, SLOT( slotUpdateButtons() ) );
+  connect( this, SIGNAL( updateButtons() ),
+           this, SLOT( slotUpdateButtons() ) );
+
+  slotUpdateButtons();
+}
+
+KAction* TimetrackerWidget::action( const QString &name ) const
+{
+  return d->mActions.value( name );
+}
+
 void TimetrackerWidget::newFile()
 {
   addTaskView();
@@ -184,7 +339,24 @@ void TimetrackerWidget::newFile()
 
 void TimetrackerWidget::openFile( const QString &fileName )
 {
-  addTaskView( fileName );
+  QString newFileName = fileName;
+  if ( newFileName.isEmpty() ) {
+    newFileName = KFileDialog::getOpenFileName( QString(), QString(), 
+                                                        this );
+    if ( newFileName.isEmpty() ) {
+      return;
+    }
+  }
+
+  if ( d->mRecentFilesAction ) {
+    d->mRecentFilesAction->addUrl( newFileName );
+  }
+  addTaskView( newFileName );
+}
+
+void TimetrackerWidget::openFile( const KUrl &fileName )
+{
+  openFile( fileName.path() );
 }
 
 bool TimetrackerWidget::closeFile()
@@ -230,7 +402,7 @@ bool TimetrackerWidget::closeFile()
   return true;
 }
 
-QString TimetrackerWidget::saveFile() 
+void TimetrackerWidget::saveFile() 
 {
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
@@ -239,7 +411,10 @@ QString TimetrackerWidget::saveFile()
     saveCurrentTaskView();
   }
 
-  return taskView->save();
+  taskView->save();
+
+  // TODO get eventually error message from save and emit
+  // a error message signal.
 }
 
 void TimetrackerWidget::reconfigureFiles()
@@ -268,6 +443,12 @@ bool TimetrackerWidget::closeAllFiles()
   }
 
   return true;
+}
+
+void TimetrackerWidget::printFile()
+{
+  MyPrinter printer( currentTaskView() );
+  printer.print();
 }
 
 void TimetrackerWidget::slotCurrentChanged()
@@ -329,6 +510,34 @@ void TimetrackerWidget::slotAddTask( const QString &taskName )
 
   d->mSearchWidget->clear();
   d->mTabWidget->setFocus( Qt::OtherFocusReason );
+}
+
+void TimetrackerWidget::slotUpdateButtons()
+{
+  Task *item = currentTask();
+
+  d->mActions[ "start" ]->setEnabled( item && !item->isRunning() && 
+      !item->isComplete() );
+  d->mActions[ "stop" ]->setEnabled( item && item->isRunning() );
+  d->mActions[ "delete_task" ]->setEnabled( item );
+  d->mActions[ "edit_task" ]->setEnabled( item );
+  d->mActions[ "mark_as_complete" ]->setEnabled( item && !item->isComplete() );
+  d->mActions[ "mark_as_incomplete" ]->setEnabled( item && item->isComplete() );
+
+  d->mActions[ "new_task" ]->setEnabled( currentTaskView() );
+  d->mActions[ "new_sub_task" ]->setEnabled( currentTaskView() );
+  d->mActions[ "focustracking" ]->setEnabled( currentTaskView() );
+  d->mActions[ "focustracking" ]->setChecked( currentTaskView() && 
+      currentTaskView()->isFocusTrackingActive() );
+  d->mActions[ "start_new_session" ]->setEnabled( currentTaskView() );
+  d->mActions[ "edit_history" ]->setEnabled( currentTaskView() );
+  d->mActions[ "reset_all_times" ]->setEnabled( currentTaskView() );
+  d->mActions[ "export_times" ]->setEnabled( currentTaskView() );
+  d->mActions[ "export_history" ]->setEnabled( currentTaskView() );
+  d->mActions[ "import_planner" ]->setEnabled( currentTaskView() );
+  d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
+  d->mActions[ "file_close" ]->setEnabled( currentTaskView() );
+  d->mActions[ "file_print" ]->setEnabled( currentTaskView() );
 }
 
 //BEGIN wrapper slots
@@ -402,11 +611,60 @@ void TimetrackerWidget::exportcsvFile()
   }
 }
 
+void TimetrackerWidget::exportcsvHistory()
+{
+  if ( d->mTabWidget->currentWidget() ) {
+    qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->exportcsvHistory();
+  }
+}
+
 void TimetrackerWidget::importPlanner( const QString &fileName )
 {
   if ( d->mTabWidget->currentWidget() ) {
     qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->importPlanner( fileName );
   }
+}
+
+void TimetrackerWidget::startNewSession()
+{
+  if ( d->mTabWidget->currentWidget() ) {
+    qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->startNewSession();
+  }
+}
+
+void TimetrackerWidget::editHistory()
+{
+  if ( d->mTabWidget->currentWidget() ) {
+    EditHistoryDialog *dlg = new EditHistoryDialog( qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) );
+    dlg->exec();
+  }
+}
+
+void TimetrackerWidget::resetAllTimes()
+{
+  if ( d->mTabWidget->currentWidget() ) {
+    if ( KMessageBox::warningContinueCancel( this, 
+         i18n( "Do you really want to reset the time to zero for all tasks?" ),
+         i18n( "Confirmation Required" ), KGuiItem( i18n( "Reset All Times" ) ) ) == KMessageBox::Continue )
+      currentTaskView()->resetTimeForAllTasks();
+  }
+}
+
+void TimetrackerWidget::focusTracking()
+{
+  if ( d->mTabWidget->currentWidget() ) {
+    currentTaskView()->toggleFocusTracking();
+    d->mActions[ "focustracking" ]->setChecked( 
+      currentTaskView()->isFocusTrackingActive() );
+  }
+}
+
+void TimetrackerWidget::slotSearchBar()
+{
+  bool currentVisible = KTimeTrackerSettings::self()->showSearchBar();
+  KTimeTrackerSettings::self()->setShowSearchBar( !currentVisible );
+  d->mActions[ "searchbar" ]->setChecked( !currentVisible );
+  showSearchBar( !currentVisible );
 }
 //END
 
@@ -414,6 +672,264 @@ void TimetrackerWidget::importPlanner( const QString &fileName )
 QString TimetrackerWidget::version() const
 {
   return KTIMETRACKER_VERSION;
+}
+
+QStringList TimetrackerWidget::taskIdsFromName( const QString &taskName ) const
+{
+  QStringList result;
+
+  for ( int i = 0; i < d->mTabWidget->count(); ++i) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+      if ( task && task->name() == taskName ) {
+        result << task->uid();
+      }
+      ++it;
+    }
+  }
+
+  return result;
+}
+
+void TimetrackerWidget::addTask( const QString &taskName )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( taskView ) {
+    taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
+  }
+}
+
+void TimetrackerWidget::setPercentComplete( const QString &taskId, int percent )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+      if ( task && task->uid() == taskId ) {
+        task->setPercentComplete( percent, taskView->storage() );
+      }
+      ++it;
+    }
+  }
+}
+
+int TimetrackerWidget::bookTime( const QString &taskId, const QString &dateTime, int minutes )
+{
+  QDate startDate;
+  QTime startTime;
+  QDateTime startDateTime;
+  Task *task = 0, *t = 0;
+
+  if ( minutes <= 0 ) return KARM_ERR_INVALID_DURATION;
+
+  // Find task
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      t = static_cast< Task* >( *it );
+      if ( t && t->uid() == taskId ) {
+        task = t;
+        break;
+      }
+      ++it;
+    }
+
+    if ( task ) break;
+  }
+
+  if ( !task ) return KARM_ERR_UID_NOT_FOUND;
+
+  // Parse datetime
+  startDate = QDate::fromString( dateTime, Qt::ISODate );
+
+  if ( dateTime.length() > 10 ) { // "YYYY-MM-DD".length() = 10
+    startTime = QTime::fromString( dateTime, Qt::ISODate );
+  } else startTime = QTime( 12, 0 );
+
+  if ( startDate.isValid() && startTime.isValid() ) {
+    startDateTime = QDateTime( startDate, startTime );
+  } else return KARM_ERR_INVALID_DATE;
+
+  // Update task totals (session and total) and save to disk
+  task->changeTotalTimes( task->sessionTime() + minutes, 
+                          task->totalTime() + minutes );
+  if ( !( task->taskView()->storage()->bookTime( task, 
+                                                 startDateTime, 
+                                                 minutes * 60 ) ) )
+    return KARM_ERR_GENERIC_SAVE_FAILED;
+
+  return 0;
+}
+
+QString TimetrackerWidget::error( int errorCode ) const
+{
+  switch ( errorCode ) {
+    case KARM_ERR_GENERIC_SAVE_FAILED:
+      return i18n( "Save failed, most likely because the file could not be locked." );
+    case KARM_ERR_COULD_NOT_MODIFY_RESOURCE:
+      return i18n( "Could not modify calendar resource." );
+    case KARM_ERR_MEMORY_EXHAUSTED:
+      return i18n( "Out of memory--could not create object." );
+    case KARM_ERR_UID_NOT_FOUND:
+      return i18n( "UID not found." );
+    case KARM_ERR_INVALID_DATE:
+      return i18n( "Invalidate date--format is YYYY-MM-DD." );
+    case KARM_ERR_INVALID_TIME:
+      return i18n( "Invalid time--format is YYYY-MM-DDTHH:MM:SS." );
+    case KARM_ERR_INVALID_DURATION:
+      return i18n( "Invalid task duration--must be greater than zero." );
+    default:
+      return i18n( "Invalid error number: %1", errorCode );
+  }
+}
+
+int TimetrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        return task->totalTime();
+      }
+
+      ++it;
+    }
+  }
+
+  return -1;
+}
+
+void TimetrackerWidget::startTimerFor( const QString &taskId )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        taskView->startTimerFor( task );
+        return;
+      }
+
+      ++it;
+    }
+  }
+}
+
+void TimetrackerWidget::stopTimerFor( const QString &taskId )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        taskView->stopTimerFor( task );
+        return;
+      }
+
+      ++it;
+    }
+  }
+}
+
+void TimetrackerWidget::stopAllTimersDBUS()
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    taskView->stopAllTimers();
+  }
+}
+
+QString TimetrackerWidget::exportCSVFile( const QString &filename, 
+                                          const QString &from, 
+                                          const QString &to, int type, 
+                                          bool decimalMinutes, 
+                                          bool allTasks, 
+                                          const QString &delimiter, 
+                                          const QString &quote )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( !taskView ) return "";
+
+  ReportCriteria rc;
+  rc.url = filename;
+  rc.from = QDate::fromString( from );
+  if ( rc.from.isNull() )
+    rc.from = QDate::fromString( from, Qt::ISODate );
+  rc.to = QDate::fromString( to );
+  if ( rc.to.isNull() )
+    rc.to = QDate::fromString( to, Qt::ISODate );
+  rc.reportType = ( ReportCriteria::REPORTTYPE )type;
+  rc.decimalMinutes = decimalMinutes;
+  rc.allTasks = allTasks;
+  rc.delimiter = delimiter;
+  rc.quote = quote;
+
+  return taskView->report( rc );
+}
+
+void TimetrackerWidget::importPlannerFile( const QString &filename )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( !taskView ) return;
+
+  taskView->importPlanner( filename );
+}
+
+bool TimetrackerWidget::isActive( const QString &taskId ) const
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) {
+      Task *task = static_cast< Task* >( *it );
+
+      if ( task && task->uid() == taskId ) {
+        return task->isRunning();
+      }
+
+      ++it;
+    }
+  }
+
+  return false;
 }
 
 QStringList TimetrackerWidget::tasks() const
@@ -452,6 +968,29 @@ QStringList TimetrackerWidget::activeTasks() const
   }
 
   return result;
+}
+
+void TimetrackerWidget::saveAll()
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    // is it an unsaved file?
+    if ( d->mIsNewVector.contains( taskView ) ) {
+      saveCurrentTaskView();
+    }
+
+    taskView->save();
+  }
+}
+
+void TimetrackerWidget::quit()
+{
+  if ( closeAllFiles() ) {
+    kapp->quit();
+  }
 }
 //END
 

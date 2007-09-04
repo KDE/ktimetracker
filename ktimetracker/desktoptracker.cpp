@@ -66,7 +66,6 @@ void DesktopTracker::changeTimers()
 {
   --mDesktop; // desktopTracker starts with 0 for desktop 1
   // notify start all tasks setup for running on desktop
-  TaskVector::iterator it;
 
   // stop trackers for mPreviousDesktop
   foreach ( Task *task, mDesktopTracker[mPreviousDesktop] ) {

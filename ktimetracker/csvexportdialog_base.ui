@@ -176,7 +176,7 @@
             </property>
             <item>
               <property name="text" >
-                <string>Decimal</string>
+                <string comment="format to display times">Decimal</string>
               </property>
             </item>
             <item>
@@ -244,7 +244,7 @@
               <string>Delimiter</string>
             </property>
             <property name="whatsThis" stdset="0" >
-              <string>The character used to seperate one field from another in the output.</string>
+              <string>The character used to separate one field from another in the output.</string>
             </property>
             <layout class="QGridLayout" >
               <!--<property name="margin" >
@@ -256,14 +256,14 @@
               <item row="1" column="0" >
                 <widget class="QRadioButton" name="radioTab" >
                   <property name="text" >
-                    <string>Tab</string>
+                    <string comment="tabulator delimiter">Tab</string>
                   </property>
                 </widget>
               </item>
               <item row="0" column="2" >
                 <widget class="QRadioButton" name="radioOther" >
                   <property name="text" >
-                    <string>Other:</string>
+                    <string comment="user can set an user defined delimiter">Other:</string>
                   </property>
                 </widget>
               </item>

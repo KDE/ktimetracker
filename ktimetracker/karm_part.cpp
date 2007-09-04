@@ -49,7 +49,6 @@
 #include "preferences.h"
 #include "tray.h"
 #include "version.h"
-#include "karmpartadaptor.h"
 #include "ktimetracker.h"
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent )
@@ -60,8 +59,6 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
 //    _accel     ( new KAccel( parentWidget ) ),
     _watcher   ( new KAccelMenuWatch( _accel, parentWidget ) )
 {
-  new KarmPartAdaptor(this);
-  QDBusConnection::sessionBus().registerObject("/Karm", this);
     // we need an instance
     setComponentData( karmPartFactory::componentData() );
 
@@ -178,7 +175,7 @@ void karmPart::makeMenus()
   actionStopAll->setShortcut(QKeySequence(Qt::Key_Escape));
   actionStopAll->setEnabled(false);
 
-  actionNew  = new KAction(KIcon("document-new"), i18n("&New..."), this);
+  actionNew  = new KAction(KIcon("document-new"), i18nc( "creating a new task", "&New..." ), this);
   actionCollection()->addAction("new_task", actionNew );
   connect(actionNew, SIGNAL(triggered(bool) ), _taskView, SLOT( newTask() ));
   actionNew->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));

@@ -27,6 +27,10 @@
 
 #include <QDateTime>
 
+class KAction;
+class KActionCollection;
+class KUrl;
+
 class Task;
 class TaskView;
 
@@ -58,6 +62,23 @@ class TimetrackerWidget : public QWidget {
      */
     Task* currentTask();
 
+    /**
+      initializes the KActionCollection object of a main window for example.
+      The actions are connected to the TreeWidget itself to ensure reusability.
+
+      @param actionCollection The KActionCollection instance of the host
+      object.
+     */
+    void setupActions( KActionCollection *actionCollection );
+
+    /**
+      returns a generated action by name. You have to call setupActions before.
+
+      @param name The name of the action
+      @returns A pointer to a KAction instance
+     */
+    KAction *action( const QString &name ) const;
+
   public Q_SLOTS:
     /**
       opens a new untitled file which is stored firstly as temporary file
@@ -68,7 +89,12 @@ class TimetrackerWidget : public QWidget {
     /**
       opens an existing ics file.
      */
-    void openFile( const QString &fileName );
+    void openFile( const QString &fileName = QString() );
+
+    /**
+      opens an existing ics file (wrapper for KUrl).
+     */
+    void openFile( const KUrl &fileName );
 
     /**
       closes the current opened tab widget and saves the data
@@ -81,10 +107,8 @@ class TimetrackerWidget : public QWidget {
     /**
       saves the current taskview. This is especially important on unsaved
       files to give them a non-temporary filename.
-
-      @returns the output of TaskView::save
     */
-    QString saveFile();
+    void saveFile();
 
     /**
       call this method when the preferences changed to adjust all
@@ -106,6 +130,11 @@ class TimetrackerWidget : public QWidget {
      */
     bool closeAllFiles();
 
+    /**
+      prints the current task view.
+     */
+    void printFile();
+
     //BEGIN wrapper slots
     /*
      * The following slots are wrapper slots which fires the corresponding 
@@ -121,19 +150,44 @@ class TimetrackerWidget : public QWidget {
     void markTaskAsComplete();
     void markTaskAsIncomplete();
     void exportcsvFile();
+    void exportcsvHistory();
     void importPlanner( const QString &fileName = "" );
+    void startNewSession();
+    void editHistory();
+    void resetAllTimes();
+    void focusTracking();
+    void slotSearchBar();
     //END
 
     //BEGIN dbus slots
     QString version() const;
+    QStringList taskIdsFromName( const QString &taskName ) const;
+    void addTask( const QString &taskName );
+    void setPercentComplete( const QString &taskId, int percent );
+    int bookTime( const QString &taskId, const QString &dateTime, int minutes );
+    QString error( int errorCode ) const;
+    int totalMinutesForTaskId( const QString &taskId ) const;
+    void startTimerFor( const QString &taskId );
+    void stopTimerFor( const QString &taskId );
+    // FIXME rename, when the wrapper slot is removed
+    void stopAllTimersDBUS();
+    QString exportCSVFile( const QString &filename, const QString &from, 
+                        const QString &to, int type, bool decimalMinutes, 
+                        bool allTasks, const QString &delimiter, 
+                         const QString &quote );
+    void importPlannerFile( const QString &filename );
     QStringList tasks() const;
     QStringList activeTasks() const;
+    bool isActive( const QString &taskId ) const;
+    void saveAll();
+    void quit();
     //END
 
   private Q_SLOTS:
     void slotCurrentChanged();
     void updateTabs();
     void slotAddTask( const QString &taskName );
+    void slotUpdateButtons();
 
   Q_SIGNALS:
     void currentTaskChanged();

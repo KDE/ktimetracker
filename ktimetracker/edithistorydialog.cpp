@@ -90,8 +90,9 @@ EditHistoryDialog::EditHistoryDialog( TaskView *parent )
                   << i18n( "Comment" ) );
   mHistoryWidget->horizontalHeader()->setStretchLastSection( true );
   mHistoryWidget->setColumnHidden( 4, true );  // hide the "UID" column
-  listAllEvents();
 
+  listAllEvents();
+  mHistoryWidget->setSortingEnabled( true ); 
   setMainWidget( mHistoryWidget );
 }
 

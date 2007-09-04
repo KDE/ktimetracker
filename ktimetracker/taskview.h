@@ -223,7 +223,6 @@ class TaskView : public QTreeWidget
     Preferences *_preferences;
     DesktopTracker* _desktopTracker;
     bool _isloading;
-    Task* dragTask;
     QTableWidget* historywidget;
 
     //@cond PRIVATE
@@ -239,8 +238,6 @@ class TaskView : public QTreeWidget
     void restoreItemState();
 
   protected:
-    void startDrag(Qt::DropActions action);
-    void dropEvent(QDropEvent*);
     void mouseMoveEvent( QMouseEvent* );
     void mousePressEvent( QMouseEvent* );
 
