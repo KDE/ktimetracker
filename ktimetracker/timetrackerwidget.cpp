@@ -246,7 +246,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "session time to 0 for all tasks, to start a new session, without "
       "affecting the totals." },
     { "history", "Edit History...", SLOT( editHistory() ), "edit_history",
-      "", "" },
+      "Edits history of all tasks of the current document", "A window will "
+      "be opened where you can change start and stop times of tasks or add a "
+      "comment to them." },
     { QString(), "&Reset All Times", SLOT( resetAllTimes() ),
       "reset_all_times", "Resets all times", "This will reset the session "
       "and total time to 0 for all tasks, to restart from scratch." },
@@ -261,14 +263,19 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     { QString(), "Stop &All Timers", SLOT( stopAllTimers() ), "stopAll",
       "Stops all of the active timers", "Stops all of the active timers" },
     { QString(), "Track Active Applications", SLOT( focusTracking() ),
-      "focustracking", "", "" },
+      "focustracking", "Auto-creates and updates tasks when the focus of the "
+       "current window has changed", "If the focus of a window changes for the "
+       "first time when this action is enabled, a new task will be created "
+       "with the title of the window as its name and will be started. If there "
+       "already exists such an task it will be started." },
     { "document-new", "&New Task...", SLOT( newTask() ), "new_task", "Creates "
       "new top level task", "This will create a new top level task." },
     { "new-subtask", "New &Subtask...", SLOT( newSubTask() ), "new_sub_task",
-      "", "" },
+      "Creates a new subtask to the current selected task", "This will create "
+      "a new subtask to the current selected task." },
     { "edit-delete", "&Delete", SLOT( deleteTask() ), "delete_task", "Deletes "
       "selected task", "This will delete the selected task and all its "
-      "subtasks" },
+      "subtasks." },
     { "edit", "&Edit...", SLOT( editTask() ), "edit_task", "Edits name or "
       "times for selected task", "This will bring up a dialog box where you "
        "may edit the parameters for the selected task." },
