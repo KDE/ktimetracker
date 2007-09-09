@@ -909,10 +909,6 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
   KCal::Event* e;
   QDateTime end;
 
-  // Don't write events (with timer start/stop duration) if user has turned
-  // this off in the settings dialog.
-  if ( !( KTimeTrackerSettings::logging() ) ) return;
-
   e = baseEvent(task);
 
   // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
