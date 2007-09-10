@@ -52,7 +52,6 @@
 #include "timekard.h"
 #include "tray.h"
 
-#include "kaccelmenuwatch.h"
 #include "timetrackerwidget.h"
 
 MainWindow::MainWindow( const QString &icsfile )
@@ -60,23 +59,16 @@ MainWindow::MainWindow( const QString &icsfile )
 #ifdef __GNUC__
 #warning Port me!
 #endif
-//    _accel     ( new KAccel( this ) ),
-    _watcher   ( new KAccelMenuWatch( _accel, this ) ),
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
   mainWidget = new TimetrackerWidget( this );
-  //mainWidget->setCornerWidget( new KPushButton( KStandardGuiItem::close(), this ), 
-  //                             Qt::TopRightCorner );
   setCentralWidget( mainWidget );
   makeMenus();
   mainWidget->openFile( icsfile );
 
   // status bar
   startStatusBar();
-
-  // popup menus
-  _watcher->updateMenus();
 
   // connections
   connect( mainWidget, SIGNAL( totalTimesChanged( long, long ) ),
@@ -201,7 +193,7 @@ void MainWindow::makeMenus()
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
 
-  setXMLFile( QString::fromLatin1( "karm.rc" ) );
+  setXMLFile( QString::fromLatin1( "karmui.rc" ) );
   createGUI( 0 );
 
   actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
