@@ -104,7 +104,7 @@ void karmPart::makeMenus()
   // Tool tops must be set after the createGUI.
   actionKeyBindings->setToolTip( i18n("Configure key bindings") );
   actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
-                                        "bindings which is specific to ktimetracer") );
+                                        "bindings which is specific to ktimetracker") );
 }
 
 void karmPart::setStatusBar(const QString & qs)
