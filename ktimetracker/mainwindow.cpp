@@ -56,9 +56,6 @@
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
-#ifdef __GNUC__
-#warning Port me!
-#endif
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
@@ -198,7 +195,7 @@ void MainWindow::makeMenus()
 
   actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
   actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
-                                         "bindings which is specific to karm" ) );
+                                         "bindings which is specific to ktimetracker" ) );
 }
 
 void MainWindow::loadGeometry()
