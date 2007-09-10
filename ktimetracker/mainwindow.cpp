@@ -175,9 +175,6 @@ void MainWindow::startStatusBar()
 
 void MainWindow::saveProperties( KConfigGroup &cfg )
 {
-  // FIXME how to handle this?
-  //_taskView->stopAllTimers();
-  //_taskView->save();
   cfg.writeEntry( "WindowShown", isVisible());
 }
 
@@ -204,12 +201,12 @@ void MainWindow::makeMenus()
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
 
-  setXMLFile( QString::fromLatin1("karmui.rc") );
+  setXMLFile( QString::fromLatin1( "karm.rc" ) );
   createGUI( 0 );
 
-  actionKeyBindings->setToolTip( i18n("Configure key bindings") );
-  actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
-                                        "bindings which is specific to karm") );
+  actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
+  actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
+                                         "bindings which is specific to karm" ) );
 }
 
 void MainWindow::loadGeometry()
