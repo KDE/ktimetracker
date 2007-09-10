@@ -275,8 +275,6 @@ void karmPart::makeMenus()
   //                                     "comment can for instance add information on what you "
   //                                     "are currently doing. The comment will "
   //                                     "be logged in the log file."));
-  actionClipTotals->setToolTip(i18n("Copy task totals to clipboard"));
-  actionClipHistory->setToolTip(i18n("Copy time card history to clipboard."));
 
   slotSelectionChanged();
 }
