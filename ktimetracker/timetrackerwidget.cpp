@@ -34,6 +34,8 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KApplication>
+#include <KConfig>
+#include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
@@ -58,6 +60,9 @@
 #include "task.h"
 #include "taskview.h"
 #include "version.h"
+#include "ui_cfgbehavior.h"
+#include "ui_cfgdisplay.h"
+#include "ui_cfgstorage.h"
 
 //@cond PRIVATE
 class TimetrackerWidget::Private {
@@ -239,6 +244,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     KStandardAction::quit( this, SLOT( quit() ), actionCollection ) );
   d->mActions.insert ("file_print",
     KStandardAction::print( this, SLOT( printFile() ), actionCollection ) );
+  d->mActions.insert ("configure_ktimetracker",
+    KStandardAction::preferences( this, SLOT( showSettingsDialog() ),
+                                  actionCollection ) );
 
   Private::ActionData actions[] = {
     { QString(), "Start &New Session", SLOT( startNewSession() ),
@@ -548,6 +556,38 @@ void TimetrackerWidget::slotUpdateButtons()
   d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_close" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_print" ]->setEnabled( currentTaskView() );
+}
+
+void TimetrackerWidget::showSettingsDialog()
+{
+  /* show main window b/c if this method was started from tray icon and the window
+     is not visible the applications quits after accepting the settings dialog.
+  */
+  window()->show();
+
+  KConfigDialog *dialog = new KConfigDialog(
+    this, "settings", KTimeTrackerSettings::self() );
+
+  Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
+  QWidget *behaviorPage = new QWidget;
+  behaviorUi->setupUi( behaviorPage );
+  dialog->addPage( behaviorPage, i18n( "Behavior" ), "gear" );
+
+  Ui::DisplayPage *displayUi = new Ui::DisplayPage;
+  QWidget *displayPage = new QWidget;
+  displayUi->setupUi( displayPage );
+  dialog->addPage( displayPage, 
+                   i18nc( "settings page for customizing user interface", 
+                          "Display" ), 
+                   "zoom-original" );
+
+  Ui::StoragePage *storageUi = new Ui::StoragePage;
+  QWidget *storagePage = new QWidget;
+  storageUi->setupUi( storagePage );
+  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
+
+  dialog->exec();
+  reconfigureFiles();
 }
 
 //BEGIN wrapper slots

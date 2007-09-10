@@ -48,15 +48,12 @@ class MainWindow : public KParts::MainWindow
 
   private:
     void             makeMenus();
-    QString          _hasTask( Task* task, const QString &taskname ) const;
-    Task*            _hasUid( Task* task, const QString &uid ) const;
 
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
     long             _totalSum;
     long             _sessionSum;
     TrayIcon*        _tray;
-    KAction*         actionPreferences;
     KAction*         actionKeyBindings;
 
     TimetrackerWidget *mainWidget;
@@ -77,8 +74,6 @@ class MainWindow : public KParts::MainWindow
     void updateTime( long, long );
     void updateStatusBar();
     void taskViewCustomContextMenuRequested( const QPoint& );
-    void showSettingsDialog();
-//    void timeLoggingChanged( bool on );
 
   protected:
     void startStatusBar();
@@ -87,7 +82,6 @@ class MainWindow : public KParts::MainWindow
     void saveGeometry();
     void loadGeometry();
     bool queryClose();
-
 };
 
 #endif // KARM_MAIN_WINDOW_H

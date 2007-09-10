@@ -30,8 +30,6 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KApplication>       // kapp
-#include <KConfig>
-#include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
@@ -56,9 +54,6 @@
 
 #include "kaccelmenuwatch.h"
 #include "timetrackerwidget.h"
-#include "ui_cfgbehavior.h"
-#include "ui_cfgdisplay.h"
-#include "ui_cfgstorage.h"
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
@@ -148,35 +143,6 @@ MainWindow::~MainWindow()
   saveGeometry();
 }
 
-void MainWindow::showSettingsDialog()
-{
-  /* show myself b/c if this method was started from tray icon and the window
-     is not visible the applications quits after accepting the settings dialog.
-   */
-  show();
-
-  KConfigDialog *dialog = new KConfigDialog( 
-    this, "settings", KTimeTrackerSettings::self() );
-
-  Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
-  QWidget *behaviorPage = new QWidget;
-  behaviorUi->setupUi( behaviorPage );
-  dialog->addPage( behaviorPage, i18n( "Behavior" ), "gear" );
-
-  Ui::DisplayPage *displayUi = new Ui::DisplayPage;
-  QWidget *displayPage = new QWidget;
-  displayUi->setupUi( displayPage );
-  dialog->addPage( displayPage, i18nc( "settings page for customizing user interface", "Display" ), "zoom-original" );
-
-  Ui::StoragePage *storageUi = new Ui::StoragePage;
-  QWidget *storagePage = new QWidget;
-  storageUi->setupUi( storagePage );
-  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
-
-  dialog->exec();
-  mainWidget->reconfigureFiles();
-}
-
 /**
  * Calculate the sum of the session time and the total time for all
  * toplevel tasks and put it in the statusbar.
@@ -237,9 +203,6 @@ void MainWindow::makeMenus()
 
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
-  actionPreferences = KStandardAction::preferences( this,
-    SLOT( showSettingsDialog() ),
-    actionCollection() );
 
   setXMLFile( QString::fromLatin1("karmui.rc") );
   createGUI( 0 );

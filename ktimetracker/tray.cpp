@@ -65,11 +65,11 @@ TrayIcon::TrayIcon(MainWindow* parent)
     }
   }
 
-  contextMenu()->addAction( parent->actionPreferences );
-
   TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
   if ( timetrackerWidget ) {
-    KAction *action = timetrackerWidget->action( "stopAll" );
+    KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
+    if ( action ) contextMenu()->addAction( action );
+    action = timetrackerWidget->action( "stopAll" );
     if ( action ) contextMenu()->addAction( action );
   }
 
