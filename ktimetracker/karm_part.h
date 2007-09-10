@@ -79,35 +79,6 @@ public:
     karmPart(QWidget *parentWidget, QObject *parent);
 
     void taskViewCustomContextMenuRequested( const QPoint& );
-    // DCOP
-    void quit();
-    virtual bool save();
-    QString version() const;
-    QString taskIdFromName( const QString &taskName ) const;
-    /** @reimp from KarmDCOPIface */
-    int addTask( const QString &taskName );
-    /** @reimp from KarmDCOPIface */
-    QString setPerCentComplete( const QString& taskName, int PerCent );
-    /** @reimp from KarmDCOPIface */
-    int bookTime( const QString& taskId, const QString& iso8601StartDateTime, long durationInMinutes );
-    /** @reimp from KarmDCOPIface */
-    QString getError( int karmErrorNumber ) const;
-    int totalMinutesForTaskId( const QString& taskId );
-    QString starttimerfor( const QString &taskname );
-    QString stoptimerfor( const QString &taskname );
-    QString stopalltimers();
-    QString deletetodo();
-    bool    getpromptdelete();
-    QString setpromptdelete( bool prompt );
-    QString exportcsvfile( const QString &filename, const QString &from, 
-                           const QString &to, int type = 0, 
-                           bool decimalMinutes = true, bool allTasks = true, 
-                           const QString &delimiter = "r", 
-                           const QString &quote = "q" );
-    QString importplannerfile( const QString &filename );
-    QStringList getActiveTasks();
-    QStringList getTasks();
-    bool isActive( const QString &taskName );
 
     virtual ~karmPart();
 
