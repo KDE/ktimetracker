@@ -41,9 +41,6 @@
     <entry name="uniTasking" type="Bool">
       <default>false</default>
     </entry>
-    <entry name="logging" type="Bool">
-      <default>true</default>
-    </entry>
     <entry name="displaySessionTime" type="Bool">
       <default>true</default>
     </entry>
