@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef KARM_TRAY_H
-#define KARM_TRAY_H
+#ifndef TRAY_ICON_H
+#define TRAY_ICON_H
 
 #include <QList>
 #include <QVector>
@@ -34,15 +34,15 @@
 class QTimer;
 class MainWindow;
 
-class KarmTray : public KSystemTrayIcon
+class TrayIcon : public KSystemTrayIcon
 {
   Q_OBJECT
 
   public:
-    KarmTray(MainWindow * parent);
-    KarmTray(karmPart *);
-    KarmTray();
-    ~KarmTray();
+    TrayIcon(MainWindow * parent);
+    TrayIcon(karmPart *);
+    TrayIcon();
+    ~TrayIcon();
 
   private:
     int _activeIcon;

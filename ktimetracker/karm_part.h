@@ -30,7 +30,7 @@
 
 class KAccel;
 class KAccelMenuWatch;
-class KarmTray;
+class TrayIcon;
 class QWidget;
 class KAction;
 class Preferences;
@@ -59,7 +59,7 @@ class karmPart : public KParts::ReadWritePart
     KAccelMenuWatch* _watcher;
     TaskView*        _taskView;
     Preferences*     _preferences;
-    KarmTray*        _tray;
+    TrayIcon*        _tray;
     KAction*         actionStart;
     KAction*         actionStop;
     KAction*         actionStopAll;
@@ -73,7 +73,7 @@ class karmPart : public KParts::ReadWritePart
     KAction*         actionClipHistory;
     QString          m_error[ KARM_MAX_ERROR_NO + 1 ];
 
-    friend class KarmTray;
+    friend class TrayIcon;
 
 public:
     karmPart(QWidget *parentWidget, QObject *parent);

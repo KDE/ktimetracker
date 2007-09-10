@@ -96,8 +96,8 @@ MainWindow::MainWindow( const QString &icsfile )
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
-  if ( KTimeTrackerSettings::trayIcon() ) _tray = new KarmTray( this );
-  else _tray = new KarmTray( );
+  if ( KTimeTrackerSettings::trayIcon() ) _tray = new TrayIcon( this );
+  else _tray = new TrayIcon( );
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
 

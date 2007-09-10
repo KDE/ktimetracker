@@ -98,7 +98,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent )
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
-  _tray = new KarmTray( this );
+  _tray = new TrayIcon( this );
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
 

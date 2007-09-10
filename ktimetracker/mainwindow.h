@@ -30,7 +30,7 @@
 
 class KAccel;
 class KAccelMenuWatch;
-class KarmTray;
+class TrayIcon;
 class QPoint;
 class QString;
 
@@ -55,13 +55,13 @@ class MainWindow : public KParts::MainWindow
     KAccelMenuWatch* _watcher;
     long             _totalSum;
     long             _sessionSum;
-    KarmTray*        _tray;
+    TrayIcon*        _tray;
     KAction*         actionPreferences;
     KAction*         actionKeyBindings;
 
     TimetrackerWidget *mainWidget;
 
-    friend class KarmTray;
+    friend class TrayIcon;
 
   public:
     MainWindow( const QString &icsfile = "" );
