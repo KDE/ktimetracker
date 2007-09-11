@@ -188,6 +188,7 @@ class TimetrackerWidget : public QWidget {
     void updateTabs();
     void slotAddTask( const QString &taskName );
     void slotUpdateButtons();
+    void showSettingsDialog();
 
   Q_SIGNALS:
     void currentTaskChanged();

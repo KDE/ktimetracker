@@ -30,8 +30,6 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KApplication>       // kapp
-#include <KConfig>
-#include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
@@ -54,34 +52,20 @@
 #include "timekard.h"
 #include "tray.h"
 
-#include "kaccelmenuwatch.h"
 #include "timetrackerwidget.h"
-#include "ui_cfgbehavior.h"
-#include "ui_cfgdisplay.h"
-#include "ui_cfgstorage.h"
 
 MainWindow::MainWindow( const QString &icsfile )
   : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
-#ifdef __GNUC__
-#warning Port me!
-#endif
-//    _accel     ( new KAccel( this ) ),
-    _watcher   ( new KAccelMenuWatch( _accel, this ) ),
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
   mainWidget = new TimetrackerWidget( this );
-  //mainWidget->setCornerWidget( new KPushButton( KStandardGuiItem::close(), this ), 
-  //                             Qt::TopRightCorner );
   setCentralWidget( mainWidget );
   makeMenus();
   mainWidget->openFile( icsfile );
 
   // status bar
   startStatusBar();
-
-  // popup menus
-  _watcher->updateMenus();
 
   // connections
   connect( mainWidget, SIGNAL( totalTimesChanged( long, long ) ),
@@ -96,8 +80,8 @@ MainWindow::MainWindow( const QString &icsfile )
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
-  if ( KTimeTrackerSettings::trayIcon() ) _tray = new KarmTray( this );
-  else _tray = new KarmTray( );
+  if ( KTimeTrackerSettings::trayIcon() ) _tray = new TrayIcon( this );
+  else _tray = new TrayIcon( );
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
 
@@ -148,35 +132,6 @@ MainWindow::~MainWindow()
   saveGeometry();
 }
 
-void MainWindow::showSettingsDialog()
-{
-  /* show myself b/c if this method was started from tray icon and the window
-     is not visible the applications quits after accepting the settings dialog.
-   */
-  show();
-
-  KConfigDialog *dialog = new KConfigDialog( 
-    this, "settings", KTimeTrackerSettings::self() );
-
-  Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
-  QWidget *behaviorPage = new QWidget;
-  behaviorUi->setupUi( behaviorPage );
-  dialog->addPage( behaviorPage, i18n( "Behavior" ), "gear" );
-
-  Ui::DisplayPage *displayUi = new Ui::DisplayPage;
-  QWidget *displayPage = new QWidget;
-  displayUi->setupUi( displayPage );
-  dialog->addPage( displayPage, i18nc( "settings page for customizing user interface", "Display" ), "zoom-original" );
-
-  Ui::StoragePage *storageUi = new Ui::StoragePage;
-  QWidget *storagePage = new QWidget;
-  storageUi->setupUi( storagePage );
-  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
-
-  dialog->exec();
-  mainWidget->reconfigureFiles();
-}
-
 /**
  * Calculate the sum of the session time and the total time for all
  * toplevel tasks and put it in the statusbar.
@@ -209,9 +164,6 @@ void MainWindow::startStatusBar()
 
 void MainWindow::saveProperties( KConfigGroup &cfg )
 {
-  // FIXME how to handle this?
-  //_taskView->stopAllTimers();
-  //_taskView->save();
   cfg.writeEntry( "WindowShown", isVisible());
 }
 
@@ -237,16 +189,13 @@ void MainWindow::makeMenus()
 
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
-  actionPreferences = KStandardAction::preferences( this,
-    SLOT( showSettingsDialog() ),
-    actionCollection() );
 
-  setXMLFile( QString::fromLatin1("karmui.rc") );
+  setXMLFile( QString::fromLatin1( "karmui.rc" ) );
   createGUI( 0 );
 
-  actionKeyBindings->setToolTip( i18n("Configure key bindings") );
-  actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
-                                        "bindings which is specific to karm") );
+  actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
+  actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
+                                         "bindings which are specific to ktimetracker" ) );
 }
 
 void MainWindow::loadGeometry()

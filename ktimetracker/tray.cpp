@@ -21,7 +21,7 @@
  */
 
 /*
- * KarmTray.
+ * TrayIcon.
  *
  * This implements the functionality of the little icon in the kpanel
  * tray. Among which are tool tips and the running clock animated icon
@@ -43,9 +43,9 @@
 #include "task.h"
 #include "timetrackerwidget.h"
 
-QVector<QPixmap*> *KarmTray::icons = 0;
+QVector<QPixmap*> *TrayIcon::icons = 0;
 
-KarmTray::KarmTray(MainWindow* parent)
+TrayIcon::TrayIcon(MainWindow* parent)
   : KSystemTrayIcon(parent)
 {
   setObjectName( "Karm Tray" );
@@ -65,11 +65,11 @@ KarmTray::KarmTray(MainWindow* parent)
     }
   }
 
-  contextMenu()->addAction( parent->actionPreferences );
-
   TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
   if ( timetrackerWidget ) {
-    KAction *action = timetrackerWidget->action( "stopAll" );
+    KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
+    if ( action ) contextMenu()->addAction( action );
+    action = timetrackerWidget->action( "stopAll" );
     if ( action ) contextMenu()->addAction( action );
   }
 
@@ -92,7 +92,7 @@ KarmTray::KarmTray(MainWindow* parent)
   */
 }
 
-KarmTray::KarmTray(karmPart *)
+TrayIcon::TrayIcon(karmPart *)
   : KSystemTrayIcon( 0 )
 {
   setObjectName( "Karm Tray" );
@@ -100,7 +100,7 @@ KarmTray::KarmTray(karmPart *)
   _taskActiveTimer = 0;
 }
 
-KarmTray::KarmTray()
+TrayIcon::TrayIcon()
   : KSystemTrayIcon( 0 )
 // will display nothing at all
 {
@@ -108,20 +108,20 @@ KarmTray::KarmTray()
   _taskActiveTimer = 0;
 }
 
-KarmTray::~KarmTray()
+TrayIcon::~TrayIcon()
 {
 }
 
 
 // experiment
 /*
-void KarmTray::insertTitle(QString title)
+void TrayIcon::insertTitle(QString title)
 {
   trayPopupMenu->insertTitle(title);
 }
 */
 
-void KarmTray::startClock()
+void TrayIcon::startClock()
 {
   if ( _taskActiveTimer )
   {
@@ -131,7 +131,7 @@ void KarmTray::startClock()
   }
 }
 
-void KarmTray::stopClock()
+void TrayIcon::stopClock()
 {
   if ( _taskActiveTimer )
   {
@@ -140,25 +140,25 @@ void KarmTray::stopClock()
   }
 }
 
-void KarmTray::advanceClock()
+void TrayIcon::advanceClock()
 {
   _activeIcon = (_activeIcon+1) % 8;
   setIcon( *(*icons)[_activeIcon]);
 }
 
-void KarmTray::resetClock()
+void TrayIcon::resetClock()
 {
   _activeIcon = 0;
   setIcon( *(*icons)[_activeIcon]);
   show();
 }
 
-void KarmTray::initToolTip()
+void TrayIcon::initToolTip()
 {
   updateToolTip(QList<Task*> ());
 }
 
-void KarmTray::updateToolTip(QList<Task*> activeTasks)
+void TrayIcon::updateToolTip(QList<Task*> activeTasks)
 {
   if ( activeTasks.isEmpty() ) {
     this->setToolTip( i18n("No active tasks") );

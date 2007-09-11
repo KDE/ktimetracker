@@ -50,7 +50,7 @@
     <text>&amp;Settings</text>
     <Action name="searchbar" />
     <Separator />
-    <Action name="configure_karm" />
+    <Action name="configure_ktimetracker" />
   </Menu>
 </MenuBar>
 <ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >

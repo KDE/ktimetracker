@@ -42,13 +42,6 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <widget class="QCheckBox" name="kcfg_logging" >
-     <property name="text" >
-      <string>Log history</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0" >
     <spacer>
      <property name="orientation" >

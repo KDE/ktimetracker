@@ -34,6 +34,8 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KApplication>
+#include <KConfig>
+#include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
@@ -58,6 +60,9 @@
 #include "task.h"
 #include "taskview.h"
 #include "version.h"
+#include "ui_cfgbehavior.h"
+#include "ui_cfgdisplay.h"
+#include "ui_cfgstorage.h"
 
 //@cond PRIVATE
 class TimetrackerWidget::Private {
@@ -155,7 +160,7 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
            this, SLOT( updateTabs() ) );
 
   d->mTabWidget->addTab( taskView, 
-          isNew ? KIcon( "document-save" ) : KIcon( "karm" ), 
+          isNew ? KIcon( "document-save" ) : KIcon( "ktimetracker" ), 
           isNew ? i18n( "Untitled" ) : QFileInfo( lFileName ).fileName() );
   d->mTabWidget->setCurrentWidget( taskView );
   taskView->load( lFileName );
@@ -239,6 +244,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     KStandardAction::quit( this, SLOT( quit() ), actionCollection ) );
   d->mActions.insert ("file_print",
     KStandardAction::print( this, SLOT( printFile() ), actionCollection ) );
+  d->mActions.insert ("configure_ktimetracker",
+    KStandardAction::preferences( this, SLOT( showSettingsDialog() ),
+                                  actionCollection ) );
 
   Private::ActionData actions[] = {
     { QString(), "Start &New Session", SLOT( startNewSession() ),
@@ -246,7 +254,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "session time to 0 for all tasks, to start a new session, without "
       "affecting the totals." },
     { "history", "Edit History...", SLOT( editHistory() ), "edit_history",
-      "", "" },
+      "Edits history of all tasks of the current document", "A window will "
+      "be opened where you can change start and stop times of tasks or add a "
+      "comment to them." },
     { QString(), "&Reset All Times", SLOT( resetAllTimes() ),
       "reset_all_times", "Resets all times", "This will reset the session "
       "and total time to 0 for all tasks, to restart from scratch." },
@@ -261,14 +271,19 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     { QString(), "Stop &All Timers", SLOT( stopAllTimers() ), "stopAll",
       "Stops all of the active timers", "Stops all of the active timers" },
     { QString(), "Track Active Applications", SLOT( focusTracking() ),
-      "focustracking", "", "" },
+      "focustracking", "Auto-creates and updates tasks when the focus of the "
+       "current window has changed", "If the focus of a window changes for the "
+       "first time when this action is enabled, a new task will be created "
+       "with the title of the window as its name and will be started. If there "
+       "already exists such an task it will be started." },
     { "document-new", "&New Task...", SLOT( newTask() ), "new_task", "Creates "
       "new top level task", "This will create a new top level task." },
     { "new-subtask", "New &Subtask...", SLOT( newSubTask() ), "new_sub_task",
-      "", "" },
+      "Creates a new subtask to the current selected task", "This will create "
+      "a new subtask to the current selected task." },
     { "edit-delete", "&Delete", SLOT( deleteTask() ), "delete_task", "Deletes "
       "selected task", "This will delete the selected task and all its "
-      "subtasks" },
+      "subtasks." },
     { "edit", "&Edit...", SLOT( editTask() ), "edit_task", "Edits name or "
       "times for selected task", "This will bring up a dialog box where you "
        "may edit the parameters for the selected task." },
@@ -314,6 +329,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 
   d->mActions[ "mark_as_complete" ]->setIcon( UserIcon( "task-complete.xpm" ) );
   d->mActions[ "mark_as_incomplete" ]->setIcon( UserIcon( "task-incomplete.xpm" ) );
+
+  d->mActions[ "focustracking" ]->setCheckable( true );
+  d->mActions[ "searchbar" ]->setCheckable( true );
 
   d->mActions[ "searchbar" ]->setChecked( KTimeTrackerSettings::self()->showSearchBar() );
 
@@ -538,6 +556,38 @@ void TimetrackerWidget::slotUpdateButtons()
   d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_close" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_print" ]->setEnabled( currentTaskView() );
+}
+
+void TimetrackerWidget::showSettingsDialog()
+{
+  /* show main window b/c if this method was started from tray icon and the window
+     is not visible the applications quits after accepting the settings dialog.
+  */
+  window()->show();
+
+  KConfigDialog *dialog = new KConfigDialog(
+    this, "settings", KTimeTrackerSettings::self() );
+
+  Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
+  QWidget *behaviorPage = new QWidget;
+  behaviorUi->setupUi( behaviorPage );
+  dialog->addPage( behaviorPage, i18n( "Behavior" ), "gear" );
+
+  Ui::DisplayPage *displayUi = new Ui::DisplayPage;
+  QWidget *displayPage = new QWidget;
+  displayUi->setupUi( displayPage );
+  dialog->addPage( displayPage, 
+                   i18nc( "settings page for customizing user interface", 
+                          "Display" ), 
+                   "zoom-original" );
+
+  Ui::StoragePage *storageUi = new Ui::StoragePage;
+  QWidget *storagePage = new QWidget;
+  storageUi->setupUi( storagePage );
+  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
+
+  dialog->exec();
+  reconfigureFiles();
 }
 
 //BEGIN wrapper slots
