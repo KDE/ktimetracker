@@ -46,7 +46,7 @@ namespace
 
 int main( int argc, char *argv[] )
 {
-  KAboutData aboutData( "karm", 0, ki18n("KTimeTracker"),
+  KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
       KTIMETRACKER_VERSION, ki18n(description), KAboutData::License_GPL,
       ki18n("(c) 1997-2007, KDE PIM Developers") );
 

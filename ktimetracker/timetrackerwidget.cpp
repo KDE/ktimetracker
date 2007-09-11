@@ -160,7 +160,7 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
            this, SLOT( updateTabs() ) );
 
   d->mTabWidget->addTab( taskView, 
-          isNew ? KIcon( "document-save" ) : KIcon( "karm" ), 
+          isNew ? KIcon( "document-save" ) : KIcon( "ktimetracker" ), 
           isNew ? i18n( "Untitled" ) : QFileInfo( lFileName ).fileName() );
   d->mTabWidget->setCurrentWidget( taskView );
   taskView->load( lFileName );

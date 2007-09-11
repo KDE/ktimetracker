@@ -80,7 +80,7 @@ install(TARGETS karmpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install( FILES karm_part.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
-install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karm)
+install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}   )
 install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
