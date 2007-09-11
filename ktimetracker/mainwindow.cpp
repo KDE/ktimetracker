@@ -195,7 +195,7 @@ void MainWindow::makeMenus()
 
   actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
   actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
-                                         "bindings which is specific to ktimetracker" ) );
+                                         "bindings which are specific to ktimetracker" ) );
 }
 
 void MainWindow::loadGeometry()
