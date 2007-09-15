@@ -56,7 +56,7 @@
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
 #include <resourceremote.h>
-#include <kpimprefs.h>
+#include <kpimprefs.h>  // for timezone
 #include <kio/netaccess.h>
 
 #include "taskview.h"
@@ -131,7 +131,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 
   QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar *)),
   	            view, SLOT(iCalFileModified(ResourceCalendar *)));
-  d->mCalendar->setTimeSpec( KPimPrefs::timeSpec() );
+  d->mCalendar->setTimeSpec( KPIM::KPimPrefs::timeSpec() );
   d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
   d->mCalendar->open();
   d->mCalendar->load();
@@ -622,7 +622,7 @@ long KarmStorage::printTaskHistory (
     if (taskdaytotals.contains(daytaskkey))
     {
       cell.append(
-        QString::fromLatin1( "%1" ).arg( 
+        QString::fromLatin1( "%1" ).arg(
           formatTime( taskdaytotals[ daytaskkey ] / 60, rc.decimalMinutes )
         )
       );
@@ -640,7 +640,7 @@ long KarmStorage::printTaskHistory (
 
   // Total for task
   cell.append(
-    QString::fromLatin1( "%1" ).arg( 
+    QString::fromLatin1( "%1" ).arg(
       formatTime( sum / 60, rc.decimalMinutes )
     )
   );
@@ -696,12 +696,12 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
   {
     if ( !rc.bExPortToClipBoard )
       err = exportcsvFile( taskview, rc );
-    else 
+    else
       err = taskview->clipTotals( rc );
   }
   else {
       // hmmmm ... assert(0)?
-  }   
+  }
   return err;
 }
 
@@ -892,7 +892,7 @@ void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
   {
     if ( (*i)->relatedToUid() == task->uid() )
     {
-      if (!(*i)->hasEndDate()) 
+      if (!(*i)->hasEndDate())
       {
 	QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
 	KDateTime kwhen=KDateTime::fromString(s);
@@ -975,8 +975,8 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   return e;
 }
 
-HistoryEvent::HistoryEvent( const QString &uid, const QString &name, 
-                            long duration, const KDateTime &start, 
+HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
+                            long duration, const KDateTime &start,
                             const KDateTime &stop, const QString &todoUid )
 {
   _uid = uid;
@@ -998,7 +998,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
   QString duration;
 
   for( QDate date = from; date <= to; date = date.addDays( 1 ) ) {
-    events = d->mCalendar->rawEventsForDate( date, KPimPrefs::timeSpec() );
+    events = d->mCalendar->rawEventsForDate( date, KPIM::KPimPrefs::timeSpec() );
     for (event = events.begin(); event != events.end(); ++event) {
 
       // KArm events have the custom property X-KDE-Karm-duration
