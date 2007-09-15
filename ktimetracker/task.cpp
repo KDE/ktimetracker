@@ -437,6 +437,17 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   d->mComment = incident->description();
 
   ok = false;
+
+  // if a KDE-karm-duration exists and not KDE-ktimetracker-duration, change this
+  if (
+  incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalTaskTime" )) == QString::null && incident->customProperty( "karm",
+      QByteArray( "totalTaskTime" )) != QString::null )
+    incident->setCustomProperty(  
+      KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalTaskTime" ), incident->customProperty( "karm",
+      QByteArray( "totalTaskTime" )));
+
   minutes = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray( "totalTaskTime" )).toInt( &ok );
   if ( !ok )
