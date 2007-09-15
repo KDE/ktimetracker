@@ -106,17 +106,6 @@ void MainWindow::setStatusBar(const QString& qs)
   return true;
 }*/
 
-// FIXME
-/*void MainWindow::exportcsvHistory()
-{
-  kDebug(5970) <<"Exporting History to disk.";
-  QString err=mainWidget->currentTaskView()->exportcsvHistory();
-  if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully exported History to CSV-file"),1807);
-  else KMessageBox::error(this, err.toAscii());
-  saveGeometry();
-
-}*/
-
 void MainWindow::quit()
 {
   if ( mainWidget->closeAllFiles() ) {
