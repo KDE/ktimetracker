@@ -454,6 +454,17 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
     minutes = 0;
 
   ok = false;
+
+  // if a KDE-karm-totalSessionTime exists and not KDE-ktimetracker-totalSessionTime, change this
+  if (
+  incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalSessionTime" )) == QString::null && incident->customProperty( "karm",
+      QByteArray( "totalSessionTime" )) != QString::null )
+    incident->setCustomProperty(  
+      KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalSessionTime" ), incident->customProperty( "karm",
+      QByteArray( "totalSessionTime" )));
+
   sessionMinutes = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray( "totalSessionTime" )).toInt( &ok );
   if ( !ok )
