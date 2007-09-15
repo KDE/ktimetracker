@@ -166,15 +166,18 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
   taskView->load( lFileName );
   d->mSearchWidget->addTreeWidget( taskView );
 
-  if ( isNew ) {
+  if ( isNew ) 
+  {
     d->mIsNewVector.append( taskView );
-  } else {
+  } else  
+  {
     // FIXME does not work for the startup page
     d->mTabWidget->setTabToolTip( d->mTabWidget->currentIndex(), lFileName );
   }
 
   // When adding the first tab currentChanged is not emitted, so...
-  if ( !d->mLastView ) {
+  if ( !d->mLastView ) 
+  {
     emit currentTaskViewChanged();
     slotCurrentChanged();
   }
@@ -214,9 +217,11 @@ TaskView* TimetrackerWidget::currentTaskView()
 Task* TimetrackerWidget::currentTask()
 {
   TaskView *taskView = 0;
-  if ( ( taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) ) ) {
+  if ( ( taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) ) ) 
+  {
     return taskView->currentItem();
-  } else {
+  } else 
+  {
     return 0;
   }
 }
@@ -300,12 +305,15 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
   };
 
   for ( int i = 0; 
-        i < ( sizeof( actions ) / sizeof( Private::ActionData ) ); ++i ) {
+        i < ( sizeof( actions ) / sizeof( Private::ActionData ) ); ++i ) 
+  {
     Private::ActionData actionData = actions[i];
     KAction *action;
-    if ( actionData.iconName.isEmpty() ) {
+    if ( actionData.iconName.isEmpty() ) 
+    {
       action = new KAction( i18n( actionData.caption ), this );
-    } else {
+    } else  
+    {
       action = new KAction( KIcon( actionData.iconName ), 
                             i18n( actionData.caption ), this );
     }
@@ -358,15 +366,18 @@ void TimetrackerWidget::newFile()
 void TimetrackerWidget::openFile( const QString &fileName )
 {
   QString newFileName = fileName;
-  if ( newFileName.isEmpty() ) {
+  if ( newFileName.isEmpty() ) 
+  {
     newFileName = KFileDialog::getOpenFileName( QString(), QString(), 
                                                         this );
-    if ( newFileName.isEmpty() ) {
+    if ( newFileName.isEmpty() ) 
+    {
       return;
     }
   }
 
-  if ( d->mRecentFilesAction ) {
+  if ( d->mRecentFilesAction ) 
+  {
     d->mRecentFilesAction->addUrl( newFileName );
   }
   addTaskView( newFileName );
@@ -382,7 +393,8 @@ bool TimetrackerWidget::closeFile()
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
   // is it an unsaved file?
-  if ( d->mIsNewVector.contains( taskView ) ) {
+  if ( d->mIsNewVector.contains( taskView ) ) 
+  {
     QString message = i18n( "This document has not been saved yet. Do you want to save it?" );
     QString caption = i18n( "Untitled" );
 
@@ -425,7 +437,8 @@ void TimetrackerWidget::saveFile()
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
   // is it an unsaved file?
-  if ( d->mIsNewVector.contains( taskView ) ) {
+  if ( d->mIsNewVector.contains( taskView ) ) 
+  {
     saveCurrentTaskView();
   }
 
@@ -438,7 +451,8 @@ void TimetrackerWidget::saveFile()
 void TimetrackerWidget::reconfigureFiles()
 {
   TaskView *taskView;
-  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) 
+  {
     taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
 
     taskView->reconfigure();
@@ -452,14 +466,13 @@ void TimetrackerWidget::showSearchBar( bool visible )
 
 bool TimetrackerWidget::closeAllFiles()
 {
-  while ( d->mTabWidget->count() > 0 ) {
+  while ( d->mTabWidget->count() > 0 ) 
+  {
     TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( 0 ) );
-
     d->mTabWidget->setCurrentWidget( taskView );
     if ( !( closeFile() ) )
       return false;
   }
-
   return true;
 }
 
@@ -473,7 +486,8 @@ void TimetrackerWidget::slotCurrentChanged()
 {
   kDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
 
-  if ( d->mLastView ) {
+  if ( d->mLastView ) 
+  {
     disconnect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ) );
     disconnect( d->mLastView, SIGNAL( itemSelectionChanged() ) );
     disconnect( d->mLastView, SIGNAL( updateButtons() ) );
