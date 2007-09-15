@@ -199,7 +199,7 @@ class KarmStorage
      *
      * @param task    The task the timer was started for.
      */
-    void startTimer(const Task* task) { Q_UNUSED(task); }
+    void startTimer(const Task* task, const KDateTime &when=KDateTime::currentLocalDateTime());
 
     /**
      * Log the event that the timer has stopped for this task.

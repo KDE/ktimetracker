@@ -644,10 +644,12 @@ void TaskView::resetTimeForAllTasks()
 
 void TaskView::stopTimerFor(Task* task)
 {
-  if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 ) {
+  if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 ) 
+  {
     d->mActiveTasks.removeAll(task);
     task->setRunning(false, d->mStorage);
-    if ( d->mActiveTasks.count() == 0 ) {
+    if ( d->mActiveTasks.count() == 0 ) 
+    {
       _idleTimeDetector->stopIdleDetection();
       emit timersInactive();
     }
@@ -659,7 +661,8 @@ void TaskView::stopTimerFor(Task* task)
 void TaskView::stopCurrentTimer()
 {
   stopTimerFor( currentItem() );
-  if ( d->mFocusTrackingActive && d->mLastTaskWithFocus == currentItem() ) {
+  if ( d->mFocusTrackingActive && d->mLastTaskWithFocus == currentItem() ) 
+  {
     toggleFocusTracking();
   }
 }

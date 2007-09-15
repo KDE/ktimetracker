@@ -873,12 +873,34 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   return err;
 }
 
+void KarmStorage::startTimer( const Task* task, const KDateTime &when )
+{
+  KCal::Event* e;
+  e = baseEvent(task);
+  e->setDtStart(when);
+  d->mCalendar->addEvent(e);
+  task->taskView()->scheduleSave();
+}
+
 void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
   kDebug(5970) <<"Entering stopTimer when=" << when;
-  kDebug(5970) <<"task->startTime=" << task->startTime();
-  long delta = task->startTime().secsTo(when);
-  changeTime(task, delta);
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    if ( (*i)->relatedToUid() == task->uid() )
+    {
+      if (!(*i)->hasEndDate()) 
+      {
+	QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
+	KDateTime kwhen=KDateTime::fromString(s);
+	kDebug() << "kwhen ==" <<  kwhen;
+        (*i)->setDtEnd(kwhen);
+      }
+    };
+  }
 }
 
 bool KarmStorage::bookTime(const Task* task,
@@ -924,14 +946,6 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 
   d->mCalendar->addEvent(e);
 
-  // This saves the entire iCal file each time, which isn't efficient but
-  // ensures no data loss.  A faster implementation would be to append events
-  // to a file, and then when KArm closes, append the data in this file to the
-  // iCal file.
-  //
-  // Meanwhile, we simply use a timer to delay the full-saving until the GUI
-  // has updated, for better user feedback. Feel free to get rid of this
-  // if/when implementing the faster saving (DF).
   task->taskView()->scheduleSave();
 }
 
