@@ -35,7 +35,6 @@
 class QMouseEvent;
 class QString;
 class QTableWidget;
-class QTextStream;
 class QTimer;
 
 class DesktopTracker;

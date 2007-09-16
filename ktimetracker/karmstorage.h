@@ -36,7 +36,6 @@
 #include <kcal/resourcecalendar.h>
 
 class QDateTime;
-class Preferences;
 class Task;
 class TaskView;
 class HistoryEvent;

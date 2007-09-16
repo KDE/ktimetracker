@@ -25,10 +25,6 @@
 
 #include <KPageDialog>
 
-class QCheckBox;
-class QLabel;
-class QSpinBox;
-class KUrlRequester;
 
 /**
   Provide an interface to the configuration options for the program.

@@ -37,7 +37,6 @@
 class QObject;
 class QPixmap;
 class QString;
-class QTimer;
 
 class KarmStorage;
 
