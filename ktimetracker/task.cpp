@@ -470,6 +470,16 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   if ( !ok )
     sessionMinutes = 0;
 
+  // if a KDE-karm-deskTopList exists and no KDE-ktimetracker-DeskTopList, change this
+  if (
+  incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "desktopList" )) == QString::null && incident->customProperty( "karm",
+      QByteArray( "desktopList" )) != QString::null )
+    incident->setCustomProperty(  
+      KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "desktopList" ), incident->customProperty( "karm",
+      QByteArray( "desktopList" )));
+
   QString desktopList = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray( "desktopList" ) );
   QStringList desktopStrList = desktopList.split( QString::fromLatin1(","),

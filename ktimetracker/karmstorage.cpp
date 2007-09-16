@@ -999,16 +999,30 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
 
   for( QDate date = from; date <= to; date = date.addDays( 1 ) ) {
     events = d->mCalendar->rawEventsForDate( date, KPIM::KPimPrefs::timeSpec() );
-    for (event = events.begin(); event != events.end(); ++event) {
+    for (event = events.begin(); event != events.end(); ++event) 
+    {
 
       // KArm events have the custom property X-KDE-Karm-duration
-      if (! processed.contains( (*event)->uid())) {
+      if (! processed.contains( (*event)->uid())) 
+      {
         // If an event spans multiple days, CalendarLocal::rawEventsForDate
         // will return the same event on both days.  To avoid double-counting
         // such events, we (arbitrarily) attribute the hours from both days on
         // the first day.  This mis-reports the actual time spent, but it is
         // an easy fix for a (hopefully) rare situation.
         processed.append( (*event)->uid());
+
+        // ktimetracker was name karm till KDE 3 incl.
+        // if a KDE-karm-duRation exists and no KDE-ktimetracker-Duration, change this
+        if (
+          (*event)->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+          QByteArray( "duration" )) == QString::null && (*event)->customProperty( "karm",
+          QByteArray( "duration" )) != QString::null )
+
+          (*event)->setCustomProperty(  
+            KGlobal::mainComponent().componentName().toUtf8(),
+            QByteArray( "duration" ), (*event)->customProperty( "karm",
+            QByteArray( "duration" )));
 
         duration = (*event)->customProperty(KGlobal::mainComponent().componentName().toUtf8(),
             QByteArray("duration"));
