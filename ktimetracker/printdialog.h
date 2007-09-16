@@ -30,7 +30,7 @@ class QCheckBox;
 class KComboBox;
 namespace KPIM {
   class KDateEdit;
-};
+}
 
 class PrintDialog : public KDialog
 {
