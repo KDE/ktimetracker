@@ -59,7 +59,7 @@ PrintDialog::PrintDialog()
 
   QLabel *label = new QLabel( i18n("From:"), rangeGroup );
   rangeLayout->addWidget( label );
-  _from = new KDateEdit(rangeGroup);
+  _from = new KPIM::KDateEdit(rangeGroup);
   label->setBuddy( _from );
 
   // Default from date to beginning of the month
@@ -69,7 +69,7 @@ PrintDialog::PrintDialog()
   rangeLayout->addWidget(_from);
   label = new QLabel( i18n("To:"), rangeGroup );
   rangeLayout->addWidget( label );
-  _to = new KDateEdit(rangeGroup);
+  _to = new KPIM::KDateEdit(rangeGroup);
   label->setBuddy( _to );
   rangeLayout->addWidget(_to);
   rangeGroup->setLayout( rangeLayout );

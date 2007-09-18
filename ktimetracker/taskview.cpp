@@ -198,7 +198,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   // Context Menu
   d->mPopupPercentageMenu = new QMenu( this );
   for ( int i = 0; i <= 100; i += 10 ) {
-    QString label = QString( "%1 %" ).arg( i );
+    QString label = i18n( "%1 %" , i );
     d->mPercentage[ d->mPopupPercentageMenu->addAction( label ) ] = i;
   }
   connect( d->mPopupPercentageMenu, SIGNAL( triggered( QAction * ) ),
@@ -644,10 +644,12 @@ void TaskView::resetTimeForAllTasks()
 
 void TaskView::stopTimerFor(Task* task)
 {
-  if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 ) {
+  if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 ) 
+  {
     d->mActiveTasks.removeAll(task);
     task->setRunning(false, d->mStorage);
-    if ( d->mActiveTasks.count() == 0 ) {
+    if ( d->mActiveTasks.count() == 0 ) 
+    {
       _idleTimeDetector->stopIdleDetection();
       emit timersInactive();
     }
@@ -659,7 +661,8 @@ void TaskView::stopTimerFor(Task* task)
 void TaskView::stopCurrentTimer()
 {
   stopTimerFor( currentItem() );
-  if ( d->mFocusTrackingActive && d->mLastTaskWithFocus == currentItem() ) {
+  if ( d->mFocusTrackingActive && d->mLastTaskWithFocus == currentItem() ) 
+  {
     toggleFocusTracking();
   }
 }

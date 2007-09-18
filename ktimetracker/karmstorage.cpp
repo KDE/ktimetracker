@@ -56,7 +56,7 @@
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
 #include <resourceremote.h>
-#include <kpimprefs.h>
+#include <kpimprefs.h>  // for timezone
 #include <kio/netaccess.h>
 
 #include "taskview.h"
@@ -131,7 +131,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 
   QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar *)),
   	            view, SLOT(iCalFileModified(ResourceCalendar *)));
-  d->mCalendar->setTimeSpec( KPimPrefs::timeSpec() );
+  d->mCalendar->setTimeSpec( KPIM::KPimPrefs::timeSpec() );
   d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
   d->mCalendar->open();
   d->mCalendar->load();
@@ -622,7 +622,7 @@ long KarmStorage::printTaskHistory (
     if (taskdaytotals.contains(daytaskkey))
     {
       cell.append(
-        QString::fromLatin1( "%1" ).arg( 
+        QString::fromLatin1( "%1" ).arg(
           formatTime( taskdaytotals[ daytaskkey ] / 60, rc.decimalMinutes )
         )
       );
@@ -640,7 +640,7 @@ long KarmStorage::printTaskHistory (
 
   // Total for task
   cell.append(
-    QString::fromLatin1( "%1" ).arg( 
+    QString::fromLatin1( "%1" ).arg(
       formatTime( sum / 60, rc.decimalMinutes )
     )
   );
@@ -696,12 +696,12 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
   {
     if ( !rc.bExPortToClipBoard )
       err = exportcsvFile( taskview, rc );
-    else 
+    else
       err = taskview->clipTotals( rc );
   }
   else {
       // hmmmm ... assert(0)?
-  }   
+  }
   return err;
 }
 
@@ -873,12 +873,34 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   return err;
 }
 
+void KarmStorage::startTimer( const Task* task, const KDateTime &when )
+{
+  KCal::Event* e;
+  e = baseEvent(task);
+  e->setDtStart(when);
+  d->mCalendar->addEvent(e);
+  task->taskView()->scheduleSave();
+}
+
 void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
   kDebug(5970) <<"Entering stopTimer when=" << when;
-  kDebug(5970) <<"task->startTime=" << task->startTime();
-  long delta = task->startTime().secsTo(when);
-  changeTime(task, delta);
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    if ( (*i)->relatedToUid() == task->uid() )
+    {
+      if (!(*i)->hasEndDate())
+      {
+	QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
+	KDateTime kwhen=KDateTime::fromString(s);
+	kDebug() << "kwhen ==" <<  kwhen;
+        (*i)->setDtEnd(kwhen);
+      }
+    };
+  }
 }
 
 bool KarmStorage::bookTime(const Task* task,
@@ -924,14 +946,6 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 
   d->mCalendar->addEvent(e);
 
-  // This saves the entire iCal file each time, which isn't efficient but
-  // ensures no data loss.  A faster implementation would be to append events
-  // to a file, and then when KArm closes, append the data in this file to the
-  // iCal file.
-  //
-  // Meanwhile, we simply use a timer to delay the full-saving until the GUI
-  // has updated, for better user feedback. Feel free to get rid of this
-  // if/when implementing the faster saving (DF).
   task->taskView()->scheduleSave();
 }
 
@@ -961,8 +975,8 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   return e;
 }
 
-HistoryEvent::HistoryEvent( const QString &uid, const QString &name, 
-                            long duration, const KDateTime &start, 
+HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
+                            long duration, const KDateTime &start,
                             const KDateTime &stop, const QString &todoUid )
 {
   _uid = uid;
@@ -984,17 +998,31 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
   QString duration;
 
   for( QDate date = from; date <= to; date = date.addDays( 1 ) ) {
-    events = d->mCalendar->rawEventsForDate( date, KPimPrefs::timeSpec() );
-    for (event = events.begin(); event != events.end(); ++event) {
+    events = d->mCalendar->rawEventsForDate( date, KPIM::KPimPrefs::timeSpec() );
+    for (event = events.begin(); event != events.end(); ++event) 
+    {
 
       // KArm events have the custom property X-KDE-Karm-duration
-      if (! processed.contains( (*event)->uid())) {
+      if (! processed.contains( (*event)->uid())) 
+      {
         // If an event spans multiple days, CalendarLocal::rawEventsForDate
         // will return the same event on both days.  To avoid double-counting
         // such events, we (arbitrarily) attribute the hours from both days on
         // the first day.  This mis-reports the actual time spent, but it is
         // an easy fix for a (hopefully) rare situation.
         processed.append( (*event)->uid());
+
+        // ktimetracker was name karm till KDE 3 incl.
+        // if a KDE-karm-duRation exists and no KDE-ktimetracker-Duration, change this
+        if (
+          (*event)->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+          QByteArray( "duration" )) == QString::null && (*event)->customProperty( "karm",
+          QByteArray( "duration" )) != QString::null )
+
+          (*event)->setCustomProperty(  
+            KGlobal::mainComponent().componentName().toUtf8(),
+            QByteArray( "duration" ), (*event)->customProperty( "karm",
+            QByteArray( "duration" )));
 
         duration = (*event)->customProperty(KGlobal::mainComponent().componentName().toUtf8(),
             QByteArray("duration"));

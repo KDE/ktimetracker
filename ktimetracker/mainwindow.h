@@ -35,7 +35,6 @@ class QPoint;
 class QString;
 
 class Task;
-class TaskView;
 class TimetrackerWidget;
 
 /**

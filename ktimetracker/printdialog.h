@@ -28,7 +28,9 @@
 class QCheckBox;
 
 class KComboBox;
-class KDateEdit;
+namespace KPIM {
+  class KDateEdit;
+}
 
 class PrintDialog : public KDialog
 {
@@ -53,7 +55,7 @@ class PrintDialog : public KDialog
     bool totalsOnly() const;
 
 private:
-    KDateEdit *_from, *_to;
+    KPIM::KDateEdit *_from, *_to;
     QCheckBox *_perWeek;
     KComboBox *_allTasks;
     QCheckBox *_totalsOnly;

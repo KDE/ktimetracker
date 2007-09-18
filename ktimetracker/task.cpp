@@ -437,16 +437,48 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   d->mComment = incident->description();
 
   ok = false;
+
+  // if a KDE-karm-duration exists and not KDE-ktimetracker-duration, change this
+  if (
+  incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalTaskTime" )) == QString::null && incident->customProperty( "karm",
+      QByteArray( "totalTaskTime" )) != QString::null )
+    incident->setCustomProperty(  
+      KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalTaskTime" ), incident->customProperty( "karm",
+      QByteArray( "totalTaskTime" )));
+
   minutes = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray( "totalTaskTime" )).toInt( &ok );
   if ( !ok )
     minutes = 0;
 
   ok = false;
+
+  // if a KDE-karm-totalSessionTime exists and not KDE-ktimetracker-totalSessionTime, change this
+  if (
+  incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalSessionTime" )) == QString::null && incident->customProperty( "karm",
+      QByteArray( "totalSessionTime" )) != QString::null )
+    incident->setCustomProperty(  
+      KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "totalSessionTime" ), incident->customProperty( "karm",
+      QByteArray( "totalSessionTime" )));
+
   sessionMinutes = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray( "totalSessionTime" )).toInt( &ok );
   if ( !ok )
     sessionMinutes = 0;
+
+  // if a KDE-karm-deskTopList exists and no KDE-ktimetracker-DeskTopList, change this
+  if (
+  incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "desktopList" )) == QString::null && incident->customProperty( "karm",
+      QByteArray( "desktopList" )) != QString::null )
+    incident->setCustomProperty(  
+      KGlobal::mainComponent().componentName().toUtf8(),
+      QByteArray( "desktopList" ), incident->customProperty( "karm",
+      QByteArray( "desktopList" )));
 
   QString desktopList = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
       QByteArray( "desktopList" ) );

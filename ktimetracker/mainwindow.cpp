@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -107,17 +106,6 @@ void MainWindow::setStatusBar(const QString& qs)
   return true;
 }*/
 
-// FIXME
-/*void MainWindow::exportcsvHistory()
-{
-  kDebug(5970) <<"Exporting History to disk.";
-  QString err=mainWidget->currentTaskView()->exportcsvHistory();
-  if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully exported History to CSV-file"),1807);
-  else KMessageBox::error(this, err.toAscii());
-  saveGeometry();
-
-}*/
-
 void MainWindow::quit()
 {
   if ( mainWidget->closeAllFiles() ) {
@@ -128,7 +116,7 @@ void MainWindow::quit()
 
 MainWindow::~MainWindow()
 {
-  kDebug(5970) <<"MainWindow::~MainWindows: Quitting karm.";
+  kDebug(5970) <<"MainWindow::~MainWindows: Quitting ktimetracker.";
   saveGeometry();
 }
 
