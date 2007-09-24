@@ -1,3 +1,4 @@
+set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 include_directories( ${KDE4_INCLUDE_DIR}/kcal  )
 
@@ -7,7 +8,7 @@ include_directories( ${KDE4_INCLUDE_DIR}/kcal  )
 set(runscripts_SRCS script.cpp runscripts.cpp )
 
 
-kde4_add_test_executable(runscripts ${runscripts_SRCS})
+kde4_add_executable(runscripts TEST ${runscripts_SRCS})
 
 target_link_libraries(runscripts  ${KDE4_KDECORE_LIBS} )
 
@@ -16,7 +17,7 @@ target_link_libraries(runscripts  ${KDE4_KDECORE_LIBS} )
 set(locking_SRCS locking.cpp lockerthread.cpp )
 
 
-kde4_add_test_executable(locking ${locking_SRCS})
+kde4_add_executable(locking TEST ${locking_SRCS})
 
 target_link_libraries(locking  ${KDE4_KDECORE_LIBS} ${KDE4_KCAL_LIBS} )
 

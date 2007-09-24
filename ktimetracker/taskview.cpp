@@ -84,26 +84,49 @@ public:
       int value = index.model()->data( index ).toInt();
       int newWidth = (int)(rWidth * (value / 100.));
 
-      int mid = rY + rHeight / 2;
-      int width = rWidth / 2;
+      if(QApplication::isLeftToRight())
+      {
+         int mid = rY + rHeight / 2;
+         int width = rWidth / 2;
+         QLinearGradient gradient1( rX, mid, rX + width, mid);
+         gradient1.setColorAt( 0, Qt::red );
+         gradient1.setColorAt( 1, Qt::yellow );
+         painter->fillRect( rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
 
-      QLinearGradient gradient1( rX, mid, rX + width, mid);
-      gradient1.setColorAt( 0, Qt::red );
-      gradient1.setColorAt( 1, Qt::yellow );
-      painter->fillRect( rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
+         if (newWidth > width) {
+            QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
+            gradient2.setColorAt( 0, Qt::yellow );
+            gradient2.setColorAt( 1, Qt::green );
+            painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
+         }
 
-      if (newWidth > width) {
-        QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
-        gradient2.setColorAt( 0, Qt::yellow );
-        gradient2.setColorAt( 1, Qt::green );
-        painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
+         painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
+         for (int x = rHeight; x < newWidth; x += rHeight) {
+            painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
+         }
       }
+      else
+      {
+         int mid = option.rect.height() - rHeight / 2;
+         int width = rWidth / 2;
+         QLinearGradient gradient1( rX, mid, rX + width, mid);
+         gradient1.setColorAt( 0, Qt::red );
+         gradient1.setColorAt( 1, Qt::yellow );
+         painter->fillRect( option.rect.height(), rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
 
-      painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
-      for (int x = rHeight; x < newWidth; x += rHeight) {
-        painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
+         if (newWidth > width) {
+            QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
+            gradient2.setColorAt( 0, Qt::yellow );
+            gradient2.setColorAt( 1, Qt::green );
+            painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
+         }
+
+         painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
+         for (int x = rWidth- rHeight; x > newWidth; x -= rHeight) {
+            painter->drawLine( rWidth - x, rY, rWidth - x, rY + rHeight - 1 );
+         }
+
       }
-
       painter->setPen( Qt::black );
       painter->drawText( option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %" );
     } else {
