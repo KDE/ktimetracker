@@ -57,6 +57,7 @@ GenericName[uk]=Персональний лічильник часу
 GenericName[vi]=Trình đo thời gian 
 GenericName[x-test]=xxPersonal Time Trackerxx
 GenericName[xh]=Umfumani Wexesha Lobuqu
+GenericName[zh_CN]=个人时间记录
 GenericName[zh_TW]=個人時程記錄
 Exec=ktimetracker  -caption "%c"
 Icon=karm
