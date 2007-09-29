@@ -93,6 +93,7 @@ EditHistoryDialog::EditHistoryDialog( TaskView *parent )
 
   listAllEvents();
   mHistoryWidget->setSortingEnabled( true ); 
+  mHistoryWidget->resizeColumnsToContents();
   setMainWidget( mHistoryWidget );
 }
 
