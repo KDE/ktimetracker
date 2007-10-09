@@ -192,11 +192,11 @@ bool TimetrackerWidget::saveCurrentTaskView()
     taskView->closeStorage();
 
     QString currentFilename = taskView->storage()->icalfile();
-    KIO::file_move( currentFilename, fileName, -1, true, false, false );
+    KIO::file_move( currentFilename, fileName, -1, KIO::Overwrite | KIO::HideProgressInfo );
     d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
 
     taskView->load( fileName );
-    KIO::file_delete( currentFilename, false );
+    KIO::file_delete( currentFilename, KIO::HideProgressInfo );
 
     d->mTabWidget->setTabIcon( d->mTabWidget->currentIndex(), KIcon( "karm" ) );
     d->mTabWidget->setTabText( d->mTabWidget->currentIndex(), QFileInfo( fileName ).fileName() );

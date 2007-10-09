@@ -25,6 +25,7 @@
 #include <KGlobal>
 #include <KLocale>
 
+#include <stdlib.h>
 #include <X11/Xlib.h>
 #include <fixx11h.h>
 

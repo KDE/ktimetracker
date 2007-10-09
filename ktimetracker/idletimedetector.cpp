@@ -32,6 +32,8 @@
 #include <KGlobal>
 #include <KLocale>    // i18n
 
+#include <kdebug.h>
+
 #ifdef Q_WS_X11
 #include <QX11Info>
 #endif
