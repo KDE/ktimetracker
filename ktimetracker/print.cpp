@@ -24,6 +24,7 @@
 
 #include <QDateTime>
 #include <QPainter>
+#include <QtGui/QPrintDialog>
 
 #include <KGlobal>
 #include <KLocale>            // i18n
@@ -41,15 +42,18 @@ MyPrinter::MyPrinter(const TaskView *taskView)
 
 void MyPrinter::print()
 {
+
+  QPrintDialog printDialog(this, 0L);
   // FIXME: make a better caption for the printingdialog
-  if (setup(0L, i18n("Print Times"))) {
+  printDialog.setWindowTitle(i18n("Print Times"));
+  if (printDialog.exec()) {
     // setup
     QPainter painter(this);
     QFontMetrics metrics = painter.fontMetrics();
     pageHeight = this->height();
     int pageWidth = this->width();
-    xMargin = margins().width();
-    yMargin = margins().height();
+    xMargin = paperRect().left() - pageRect().left();
+    yMargin = paperRect().top() - pageRect().top();
     yoff = yMargin;
     lineHeight = metrics.height();
     

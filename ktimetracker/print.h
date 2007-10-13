@@ -26,7 +26,7 @@
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
 
-#include <KPrinter>
+#include <QtGui/QPrinter>
 
 class QPainter;
 class QString;
@@ -37,7 +37,7 @@ class TaskView;
 /**
   Provide printing capabilities.
  */
-class MyPrinter : public KPrinter
+class MyPrinter : public QPrinter
 {
   public:
     MyPrinter( const TaskView *taskView );
