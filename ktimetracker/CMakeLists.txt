@@ -15,7 +15,7 @@ set(karm_shared_SRCS
 	kaccelmenuwatch.cpp desktoptracker.cpp 
 	edittaskdialog.cpp idletimedetector.cpp 
 	printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp
-	karmstorage.cpp mainwindow.cpp preferences.cpp print.cpp 
+	karmstorage.cpp mainwindow.cpp preferences.cpp 
 	task.cpp taskview.cpp tray.cpp  focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp 
 	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp 

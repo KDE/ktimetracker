@@ -8,8 +8,6 @@
     <Action name="file_open_recent" />
     <Action name="file_save" />
     <Separator />
-    <Action name="file_print" />
-    <Separator />
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
     <Separator />

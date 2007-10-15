@@ -54,7 +54,6 @@
 #include "karmerrors.h"
 #include "ktimetracker.h"
 #include "mainadaptor.h"
-#include "print.h"
 #include "reportcriteria.h"
 #include "task.h"
 #include "taskview.h"
@@ -246,8 +245,6 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     KStandardAction::close( this, SLOT( closeFile() ), actionCollection ) );
   d->mActions.insert ("file_quit",
     KStandardAction::quit( this, SLOT( quit() ), actionCollection ) );
-  d->mActions.insert ("file_print",
-    KStandardAction::print( this, SLOT( printFile() ), actionCollection ) );
   d->mActions.insert ("configure_ktimetracker",
     KStandardAction::preferences( this, SLOT( showSettingsDialog() ),
                                   actionCollection ) );
@@ -475,12 +472,6 @@ bool TimetrackerWidget::closeAllFiles()
   return true;
 }
 
-void TimetrackerWidget::printFile()
-{
-  MyPrinter printer( currentTaskView() );
-  printer.print();
-}
-
 void TimetrackerWidget::slotCurrentChanged()
 {
   kDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
@@ -568,7 +559,6 @@ void TimetrackerWidget::slotUpdateButtons()
   d->mActions[ "import_planner" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_close" ]->setEnabled( currentTaskView() );
-  d->mActions[ "file_print" ]->setEnabled( currentTaskView() );
 }
 
 void TimetrackerWidget::showSettingsDialog()
