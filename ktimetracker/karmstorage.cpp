@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2003, 2004 by Mark Bucciarelli <mark@hubcapconsutling.com>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -59,6 +58,7 @@
 #include <kpimprefs.h>  // for timezone
 #include <kio/netaccess.h>
 
+#include "edithistorydialog.h"
 #include "taskview.h"
 #include "timekard.h"
 #include "karmutility.h"
@@ -711,12 +711,131 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
 {
+  // build up an edithistorydialog, sort its start date column, and write a csv formated output into retval
+  // ToDo: what if a task spans over several days ?
+  // ToDo: what if a user gets the dates displayed differently ?
+  kDebug(5970) << "Entering KarmStorage::exportcsvHistory";
   QString delim = rc.delimiter;
   const QString cr = QString::fromLatin1("\n");
-  QString err;
+  QString err=QString::null;
+  QString retval;
+
+  if (true) // switch for trying out new stuff
+  {
+    EditHistoryDialog* historyWidget=new EditHistoryDialog(taskview);
+    QTableWidget* table = historyWidget->tableWidget();
+    table->sortItems(2,Qt::AscendingOrder);  // sort by StartDate
+  
+    // parameter-plausi
+    if ( from > to )
+    {
+      err = QString("'to' has to be a date later than or equal to 'from'.");
+    }
+    else
+    {
+      retval=QString("Task Name").append(delim);
+      for (QDate date=from; date<to; date=date.addDays(1) )
+      {
+        retval.append(KGlobal::locale()->formatDate(date).append(delim));
+        kDebug() << date.toString();
+      }
+      retval.append(KGlobal::locale()->formatDate(to)).append("\n");
+
+      if ( rc.allTasks )
+      {
+        for ( int i = 0; i < taskview->count(); ++i ) 
+        {
+          Task *task = static_cast< Task* >( taskview->itemAt( i ) );
+          retval.append(task->name());
+          kDebug(5970) << "appending task " << taskview->itemAt(i)->name();
+          QDate date=from;
+          int row=0; // row in table. The table is sorted by StartTime.
+          while (date<=to)
+          {
+            kDebug(5970) << "date is now " << date;
+            row=0;
+            QDate dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
+            kDebug(5970) << "date in the history table is now " << dateintable;
+	    while ((dateintable<date) && (row<(table->rowCount())))
+            {
+              dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
+              if (dateintable<date) row++;            
+            }
+	    // now, we have a task, a date and a dateintable.
+            // dateintable is now date, row is at the uppermost line with date
+            int durationsecs=0; // duration of a task spent in one or more events on one day.
+            kDebug() << "Calculating duration for task " << task->name() << " on date " << dateintable;
+            if (row<(table->rowCount())) dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
+            kDebug() << "dateintable is now " << dateintable << "rowcount is " << table->rowCount() << " row is " << row;
+            while (dateintable==date && row<table->rowCount()) 
+            {
+              kDebug() << "dateintable is " << dateintable;
+              kDebug() << "table item is " << table->item(row,0)->text() << "task is " << task->name();
+              if (table->item(row,0)->text()==task->name())
+              {
+                kDebug(5970) << "found " << task->name() << "in historytable";
+                QTime startTime=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").time();
+                QTime endTime=QDateTime::fromString(table->item(row,2)->text(),"yyyy-MM-dd HH:mm:ss").time();
+                durationsecs+=startTime.secsTo(endTime);
+                kDebug(5970) << "the duration was " << durationsecs;
+              }
+              row++;
+              if (row<table->rowCount()) dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
+            }
+            retval+=delim+formatTime( durationsecs/60, rc.decimalMinutes );
+            date=date.addDays(1);
+          }
+          retval.append("\n");
+        }
+      }
+      else
+      {
+        Task *task = static_cast< Task* >( taskview->currentItem( ) );
+      }
+      kDebug() << retval;
+    }
+
+    // store the file locally or remote
+    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+    {
+      kDebug(5970) << "storing a local file";
+      QString filename=rc.url.path();
+      if (filename.isEmpty()) filename=rc.url.url();
+      QFile f( filename );
+      if( !f.open( QIODevice::WriteOnly ) ) 
+      {
+        err = i18n( "Could not open \"%1\".", filename );
+        kDebug(5970) << "Could not open file";
+      }
+      kDebug() << "Err is " << err;
+      if (err.length()==0)
+      {
+        QTextStream stream(&f);
+        kDebug(5970) << "Writing to file: " << retval;
+        // Export to file
+        stream << retval;
+        f.close();
+      }
+    } 
+    else // use remote file
+    {
+      KTemporaryFile tmpFile;
+      if ( !tmpFile.open() )
+      {
+        err = QString::fromLatin1( "Unable to get temporary file" );
+      }
+      else
+      {
+        QTextStream stream ( &tmpFile );
+        stream << retval;
+        stream.flush();
+        if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+      }
+    }
+  }
+  return 0;
 
   // below taken from timekard.cpp
-  QString retval;
   QString taskhdr, totalhdr;
   QString line, buf;
   long sum;
@@ -732,19 +851,16 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   // parameter-plausi
   if ( from > to )
   {
-    err = QString::fromLatin1 (
-            "'to' has to be a date later than or equal to 'from'.");
+    err = QString("'to' has to be a date later than or equal to 'from'.");
   }
 
   // header
   retval += i18n("Task History\n");
-  retval += i18n("From %1 to %2",
+  retval += i18n("From %1 to %2\n",
      KGlobal::locale()->formatDate(from),
      KGlobal::locale()->formatDate(to));
-  retval += cr;
-  retval += i18n("Printed on: %1",
+  retval += i18n("Printed on: %1\n",
      KGlobal::locale()->formatDateTime(QDateTime::currentDateTime()));
-  retval += cr;
 
   day=from;
   events = taskview->getHistory(from, to);
@@ -847,7 +963,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     if( !f.open( QIODevice::WriteOnly ) ) {
         err = i18n( "Could not open \"%1\".", filename );
     }
-    if (!err.isEmpty())
+    if (err.length()!=0)
     {
       QTextStream stream(&f);
       // Export to file
