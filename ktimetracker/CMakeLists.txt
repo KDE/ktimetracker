@@ -15,7 +15,7 @@ set(karm_shared_SRCS
 	kaccelmenuwatch.cpp desktoptracker.cpp 
 	edittaskdialog.cpp idletimedetector.cpp 
 	printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp
-	karmstorage.cpp mainwindow.cpp preferences.cpp print.cpp 
+	karmstorage.cpp mainwindow.cpp preferences.cpp 
 	task.cpp taskview.cpp tray.cpp  focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp 
 	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp 
@@ -42,12 +42,12 @@ kde4_add_executable(karm karm.cpp)
 kde4_add_executable(ktimetracker ${karm_SRCS})
 
 
-target_link_libraries(karm   ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim kcal_resourceremote)
+target_link_libraries(karm   ${KDE4_KIO_LIBS} ${KDE4_KCAL_LIBS} kdepim kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(karm ${X11_Xscreensaver_LIB})
 endif(X11_Xscreensaver_LIB)
 
-target_link_libraries(ktimetracker   ${KDE4_KDEPRINT_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote)
+target_link_libraries(ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
@@ -67,7 +67,7 @@ kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
 
 
 
-target_link_libraries(karmpart  ${KDE4_KCAL_LIBS}  ${KDE4_KDEPRINT_LIBS} kdepim kcal_resourceremote)
+target_link_libraries(karmpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} kdepim kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(karmpart  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)

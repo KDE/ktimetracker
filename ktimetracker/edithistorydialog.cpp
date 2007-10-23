@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2007 by Mathias Soeken <msoeken@tzi.de>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -95,6 +94,11 @@ EditHistoryDialog::EditHistoryDialog( TaskView *parent )
   mHistoryWidget->setSortingEnabled( true ); 
   mHistoryWidget->resizeColumnsToContents();
   setMainWidget( mHistoryWidget );
+}
+
+QTableWidget* EditHistoryDialog::tableWidget()
+{
+  return mHistoryWidget;
 }
 
 void EditHistoryDialog::listAllEvents()
