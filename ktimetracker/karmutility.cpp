@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2007 by Thorsten Staerk <dev@staerk.de>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,6 +24,7 @@
 #include <KGlobal>
 #include <KLocale>
 
+#include <math.h>
 #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <fixx11h.h>
@@ -42,15 +42,23 @@ QString getFocusWindow()
   return QString( name );
 }
 
-QString formatTime( long minutes, bool decimal )
+QString formatTime( double minutes, bool decimal )
+/* 
+Delivers a formatted time. E.g. 30 seconds are 0.5 minutes. 
+The output of formatTiMe(0.5,true) is 0.008333, because 0.5 minutes are 0.008333 hours.
+The output of formatTiMe(0.5,false) is 0:01, because 0.5 minutes are 0:01 hours rounded.
+*/
 {
+  kDebug(5970) << "Entering formatTime(minutes=" << minutes << ",decimal=" << decimal << ");";
   QString time;
-  if ( decimal ) {
+  if ( decimal ) 
+  {
     time.sprintf( "%.2f", minutes / 60.0 );
     time.replace( '.', KGlobal::locale()->decimalSymbol() );
   }
   else 
-    time.sprintf( "%ld:%02ld", minutes / 60, labs( minutes % 60 ) );
-
+  {
+    time.sprintf( "%.0f:%02d", minutes / 60.0, (int)round(((int)(minutes*60) % 3600)/60.0));
+  }
   return time;
 }
