@@ -796,7 +796,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
           row++;
           if (row<table->rowCount()) dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
         }
-        retval+=delim+formatTime( durationsecs/60, rc.decimalMinutes );
+        retval+=delim+formatTime( durationsecs/60.0, rc.decimalMinutes );
         date=date.addDays(1);
       }
       retval.append("\n");

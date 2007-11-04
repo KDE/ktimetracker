@@ -23,6 +23,7 @@
 #ifndef KARMUTILITY_H
 #define KARMUTILITY_H
 
+#include <KDebug>
 #include <QString>
 
 /**
@@ -31,7 +32,7 @@
   If the second argument is true, the time is output as a two-place decimal.
   Otherwise the format is hh:mi.
  */
-QString formatTime( long minutes, bool decimal = false );
+QString formatTime( double minutes, bool decimal = false );
 
 /**
   Get the name of the window that has the focus
