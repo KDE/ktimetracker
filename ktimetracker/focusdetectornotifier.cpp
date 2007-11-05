@@ -27,7 +27,8 @@
 //@cond PRIVATE
 class FocusDetectorNotifier::Private {
   public:
-    Private() {
+    Private() 
+    {
       mDetector = new FocusDetector( 1 );
     }
 
@@ -45,7 +46,8 @@ FocusDetectorNotifier::FocusDetectorNotifier( QObject *parent )
 
 FocusDetectorNotifier* FocusDetectorNotifier::instance()
 {
-  if ( !mInstance ) {
+  if ( !mInstance ) 
+  {
     mInstance = new FocusDetectorNotifier;
   }
 
@@ -60,16 +62,18 @@ FocusDetectorNotifier::~FocusDetectorNotifier()
 void FocusDetectorNotifier::attach( TaskView *view )
 {
   d->mViews.append( view );
-  if ( d->mViews.count() == 1 ) {
-    d->mDetector->startFocusDetection();
+  if ( d->mViews.count() == 1 ) 
+  {
+    //d->mDetector->startFocusDetection();
   }
 }
 
 void FocusDetectorNotifier::detach( TaskView *view )
 {
   d->mViews.removeAll( view );
-  if ( d->mViews.count() == 0) {
-    d->mDetector->stopFocusDetection();
+  if ( d->mViews.count() == 0) 
+  {
+    //d->mDetector->stopFocusDetection();
   }
 }
 
