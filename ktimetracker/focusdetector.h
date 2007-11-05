@@ -23,6 +23,7 @@
 #ifndef KARM_FOCUS_DETECTOR_H
 #define KARM_FOCUS_DETECTOR_H
 
+#include <kwindowsystem.h>
 #include <QObject>
 
 #include <config-karm.h> // HAVE_LIBXSS
@@ -43,31 +44,11 @@ public:
    */
   FocusDetector( int periodFocus );
 
-  /**
-     Sets the period of time before every focus search.
-    atparam periodFocus period of time in seconds
-   */
-  void setPeriodFocus( int periodFocus );
-
-  /**
-    Starts detecting focus
-   */
-  void startFocusDetection();
-
-  /**
-    Stops detecting focus.
-   */
-  void stopFocusDetection();
+public slots:
+  void slotfocuschanged();
 
 Q_SIGNALS:
   void newFocus( const QString & );
-
-protected Q_SLOTS:
-  void check();
-
-private:
-  QString mLastWindow;
-  QTimer *mTimer;
 };
 
 #endif // KARM_FOCUS_DETECTOR_H 
