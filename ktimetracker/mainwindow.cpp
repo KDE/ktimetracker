@@ -54,10 +54,13 @@
 #include "timetrackerwidget.h"
 
 MainWindow::MainWindow( const QString &icsfile )
-  : KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
+  : KXmlGuiWindow( 0 ),
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
+  setWindowIcon( KIcon( "karm" ) );
+  setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
+
   mainWidget = new TimetrackerWidget( this );
   setCentralWidget( mainWidget );
   makeMenus();
