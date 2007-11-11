@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QToolTip>
 
+#include <KAction>
 #include <KGlobalSettings>
 #include <KIconLoader>
 #include <KLocale>
@@ -67,9 +68,9 @@ TrayIcon::TrayIcon(MainWindow* parent)
 
   TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
   if ( timetrackerWidget ) {
-    QAction *action = ( QAction* )timetrackerWidget->action( "configure_ktimetracker" );
+    KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
     if ( action ) contextMenu()->addAction( action );
-    action = ( QAction* )timetrackerWidget->action( "stopAll" );
+    action = timetrackerWidget->action( "stopAll" );
     if ( action ) contextMenu()->addAction( action );
   }
 
