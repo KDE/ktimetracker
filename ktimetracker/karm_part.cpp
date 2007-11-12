@@ -173,7 +173,7 @@ const KComponentData &karmPartFactory::componentData()
 
 extern "C"
 {
-    KDE_EXPORT void* init_libkarmpart()
+    KDE_EXPORT void* init_karmpart()
     {
 	KGlobal::locale()->insertCatalog("karm");
         return new karmPartFactory;

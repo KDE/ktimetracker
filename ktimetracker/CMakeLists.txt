@@ -63,7 +63,7 @@ install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
 
 set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
 
-kde4_add_plugin(karmpart WITH_PREFIX ${karmpart_PART_SRCS})
+kde4_add_plugin(karmpart ${karmpart_PART_SRCS})
 
 
 
