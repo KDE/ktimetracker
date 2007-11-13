@@ -339,17 +339,21 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
     QTreeWidgetItem *item = itemFromIndex( index );
     if (item) {
       Task *task = static_cast<Task*>(item);
-      if (task) {
-        if (task->isComplete()) {
+      if (task) 
+      {
+        if (task->isComplete()) 
+        {
           task->setPercentComplete( 0, d->mStorage );
-        } else {
+        } else 
+        {
           task->setPercentComplete( 100, d->mStorage );
         }
         
         emit updateButtons();
       }
     }
-  } else {
+  } else 
+  {
     QTreeWidget::mousePressEvent( event );
   }
 }
@@ -379,11 +383,11 @@ has the number i=0. */
 {
   kDebug( 5970 ) << "Entering TaskView::itemAt(" << i << ")";
   if ( topLevelItemCount() == 0 ) return 0;
-
+  
   QTreeWidgetItemIterator item( this );
   while( *item && i-- ) ++item;
-
-  kDebug( 5970 ) << "Leaving TaskView::itemAt";
+  
+  kDebug( 5970 ) << "Leaving TaskView::itemAt" << "returning " << (*item==0);
   if ( !( *item ) )
     return 0;
   else
@@ -484,6 +488,39 @@ void TaskView::refresh()
 
   emit updateButtons();
   kDebug(5970) <<"exiting TaskView::refresh()";
+}
+
+QString TaskView::reFreshTimes()
+/** Refresh the times of the tasks, e.g. when the history has been changed by the user */
+{
+  kDebug(5970) << "Entering reFreshTimes()";
+  QString err=QString();
+  int n=-1;
+  while (itemAt(++n))
+  {
+    itemAt(n)->resetTimes();
+  }
+
+  KCal::Event::List eventList = storage()->rawevents();
+  n=-1;
+  while (itemAt(++n))
+  {
+    itemAt(n)->setTime(0,d->mStorage);
+    for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) 
+    {
+      if ( (*i)->relatedToUid() == itemAt(n)->uid() ) 
+      {
+        KDateTime kdatetimestart = (*i)->dtStart();
+        KDateTime kdatetimeend = (*i)->dtEnd();
+        int duration=kdatetimestart.secsTo(kdatetimeend)/60;
+        itemAt(n)->setTime(itemAt(n)->time()+duration,d->mStorage);
+        kDebug(5970) << "duration is " << duration;
+      }
+    }
+  }
+  refresh();
+  kDebug(5970) << "Leaving TaskView::reFreshTimes()";
+  return err;
 }
 
 void TaskView::importPlanner( const QString &fileName )
@@ -624,9 +661,12 @@ void TaskView::toggleFocusTracking()
 {
   d->mFocusTrackingActive = !d->mFocusTrackingActive;
 
-  if ( d->mFocusTrackingActive ) {
+  if ( d->mFocusTrackingActive ) 
+  {
     FocusDetectorNotifier::instance()->attach( this );
-  } else {
+  } 
+  else  
+  {
     stopTimerFor( d->mLastTaskWithFocus );
     FocusDetectorNotifier::instance()->detach( this );
   }

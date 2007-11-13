@@ -34,11 +34,13 @@
 
 #include "taskview.h"
 
-class HistoryWidgetDelegate : public QItemDelegate {
+class HistoryWidgetDelegate : public QItemDelegate 
+{
 public:
   HistoryWidgetDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
 
-  QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &) const {
+  QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &) const 
+  {
     KDateTimeWidget *editor = new KDateTimeWidget( parent );
     editor->setAutoFillBackground( true );
     editor->setPalette( option.palette );
@@ -48,21 +50,24 @@ public:
     return editor;
   }
 
-  void setEditorData( QWidget *editor, const QModelIndex &index ) const {
+  void setEditorData( QWidget *editor, const QModelIndex &index ) const 
+  {
     QDateTime dateTime = QDateTime::fromString( index.model()->data( index, Qt::DisplayRole ).toString(), "yyyy-MM-dd HH:mm:ss" );
 
     KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
     dateTimeWidget->setDateTime( dateTime );
   }
 
-  void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const {
+  void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const 
+  {
     KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
     QDateTime dateTime = dateTimeWidget->dateTime();
 
     model->setData( index, dateTime.toString( "yyyy-MM-dd HH:mm:ss" ), Qt::EditRole );
   }
 
-  void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const {
+  void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const 
+  {
     editor->setGeometry( option.rect );
   }
 };
@@ -108,7 +113,8 @@ void EditHistoryDialog::listAllEvents()
 
   KCal::Event::List eventList = mParent->storage()->rawevents();
   for ( KCal::Event::List::iterator i = eventList.begin(); 
-        i != eventList.end(); ++i ) {
+        i != eventList.end(); ++i ) 
+  {
     int row = mHistoryWidget->rowCount();
     mHistoryWidget->insertRow( row );
     QTableWidgetItem* item = new QTableWidgetItem( (*i)->relatedTo()->summary() );
@@ -139,39 +145,48 @@ void EditHistoryDialog::historyWidgetCellChanged( int row, int col )
 {
   kDebug( 5970 ) <<"Entering mHistoryWidgetchanged";
   kDebug( 5970 ) <<"row =" << row <<" col =" << col;
-  if ( mHistoryWidget->item( row, 4 ) ) { // the user did the change, not the program
-    if ( col == 1 ) { // StartDate changed
-      kDebug( 5970 ) <<"user changed StartDate to" << mHistoryWidget->item( row, col )->text();
+  if ( mHistoryWidget->item( row, 4 ) ) 
+  { // the user did the change, not the program
+    if ( col == 1 ) 
+    { // StartDate changed
+      kDebug( 5970 ) << "user changed StartDate to" << mHistoryWidget->item( row, col )->text();
       QString uid = mHistoryWidget->item( row, 4 )->text();
-      kDebug() <<"uid =" << uid;
       KCal::Event::List eventList = mParent->storage()->rawevents();
-      for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) {
-        kDebug() <<"row=" << row <<" col=" << col;
-        if ( (*i)->uid() == uid ) {
-          if ( KDateTime::fromString( mHistoryWidget->item( row, col )->text() ).isValid() ) {
+      for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) 
+      {
+        kDebug(5970) << "row=" << row <<" col=" << col;
+        if ( (*i)->uid() == uid ) 
+        {
+          if ( KDateTime::fromString( mHistoryWidget->item( row, col )->text() ).isValid() ) 
+          {
             QDateTime datetime = QDateTime::fromString( mHistoryWidget->item( row, col )->text(), "yyyy-MM-dd HH:mm:ss" );
             KDateTime kdatetime = KDateTime::fromString( datetime.toString( Qt::ISODate ) );
             (*i)->setDtStart( kdatetime );
-            kDebug() <<"Program SetDtStart to" << mHistoryWidget->item( row, col )->text();
+            mParent->reFreshTimes();
+            kDebug(5970) <<"Program SetDtStart to" << mHistoryWidget->item( row, col )->text();
           }
           else 
             KMessageBox::information( 0, i18n( "This is not a valid Date/Time." ) );
         }
       }
     }
-    if ( col == 2 ) { // EndDate changed
+    if ( col == 2 ) 
+    { // EndDate changed
       kDebug( 5970 ) <<"user changed EndDate to" << mHistoryWidget->item(row,col)->text();
       QString uid = mHistoryWidget->item( row, 4 )->text();
-      kDebug() <<"uid =" << uid;
       KCal::Event::List eventList = mParent->storage()->rawevents();
-      for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i) {
+      for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i) 
+      {
         kDebug() <<"row=" << row <<" col=" << col;
-        if ( (*i)->uid() == uid ) {
-          if ( KDateTime::fromString( mHistoryWidget->item( row, col )->text() ).isValid() ) {
+        if ( (*i)->uid() == uid ) 
+        {
+          if ( KDateTime::fromString( mHistoryWidget->item( row, col )->text() ).isValid() ) 
+          {
             QDateTime datetime = QDateTime::fromString( mHistoryWidget->item( row, col )->text(), "yyyy-MM-dd HH:mm:ss" );
             KDateTime kdatetime = KDateTime::fromString( datetime.toString( Qt::ISODate ) );
             (*i)->setDtEnd( kdatetime ); 
-            kDebug() <<"Program SetDtEnd to" << mHistoryWidget->item( row, col )->text();
+            mParent->reFreshTimes();
+            kDebug(5970) <<"Program SetDtEnd to" << mHistoryWidget->item( row, col )->text();
           }
           else 
             KMessageBox::information( 0, i18n( "This is not a valid Date/Time." ) );
