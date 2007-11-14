@@ -27,7 +27,8 @@
 class TaskView;
 class QTableWidget;
 
-class EditHistoryDialog : public KDialog {
+class EditHistoryDialog : public KDialog 
+{
   Q_OBJECT
 
 public:
