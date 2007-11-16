@@ -54,7 +54,7 @@
 #include "timetrackerwidget.h"
 
 MainWindow::MainWindow( const QString &icsfile )
-  : KXmlGuiWindow( 0 ),
+  :  KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {

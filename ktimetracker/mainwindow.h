@@ -23,7 +23,7 @@
 #ifndef KARM_MAIN_WINDOW_H
 #define KARM_MAIN_WINDOW_H
 
-#include <KXmlGuiWindow>
+#include <KParts/MainWindow>
 
 #include "karmerrors.h"
 #include "reportcriteria.h"
@@ -42,7 +42,7 @@ class TimetrackerWidget;
  * Main window to tie the application together.
  */
 
-class MainWindow : public KXmlGuiWindow
+class MainWindow : public KParts::MainWindow
 {
   Q_OBJECT
 
