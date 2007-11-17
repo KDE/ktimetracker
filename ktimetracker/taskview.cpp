@@ -172,6 +172,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT( newFocusWindowDetected ( const QString & ) ) ); 
 
   QStringList labels;
+  setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
   labels << i18n( "Task Name" ) << i18n( "Session Time" ) << i18n( "Time" ) 
          << i18n( "Total Session Time" ) << i18n( "Total Time" ) 
          << i18n( "Priority" ) << i18n( "Percent Complete" );
@@ -579,35 +580,14 @@ void TaskView::scheduleSave()
 
 QString TaskView::save()
 {
-    // DF: this code created a new event for the running task(s),
-    // at every call (very frequent with autosave) !!!
-    // -> if one wants autosave to save the current event, then
-    // Task needs to store the "current event" and we need to update
-    // it before calling save.
-#if 0
-  // Stop then start all timers so history entries are written.  This is
-  // inefficient if more than one task running, but it is correct.  It is
-  // inefficient because the iCalendar file is saved every time a task's
-  // setRunning(false, ...) is called.  For a big ics file, this could be a
-  // drag.  However, it does ensure that the data will be consistent.  And
-  // if the most common use case is that one task is running most of the time,
-  // it won't make any difference.
-  for (unsigned int i = 0; i < d->mActiveTasks.count(); i++)
-  {
-    d->mActiveTasks.at(i)->setRunning(false, d->mStorage);
-    d->mActiveTasks.at(i)->setRunning(true, d->mStorage);
-  }
+  kDebug(5970) <<"Entering TaskView::save()";
+  QString err=d->mStorage->save(this);
 
-  // If there was an active task, the iCal file has already been saved.
-  if (d->mActiveTasks.count() == 0)
-#endif
-  {
-    kDebug(5970) <<"Entering TaskView::save(ListView)";
-    QString err=d->mStorage->save(this);
-
-    emit setStatusBarText( err.isNull() ? i18n("Saved successfully") : i18n("Error during saving") );
-    return err;
-  }
+  if (err.isNull()) emit setStatusBarText( i18n("Saved successfully") );
+  else
+    if (err==QString("Could not save. Could not lock file.")) emit setStatusBarText( i18n("Could not save. Disk full ?") );
+    else emit setStatusBarText( i18n("Could not save.") );
+  return err;
 }
 
 void TaskView::startCurrentTimer()

@@ -76,6 +76,7 @@ EditHistoryDialog::EditHistoryDialog( TaskView *parent )
   : KDialog( parent, Qt::WindowContextHelpButtonHint ),
     mParent( parent )
 {
+  kDebug(5970) << "Entering EditHistoryDialog::EditHistoryDialog";
   setButtons( KDialog::Close );
   setWindowTitle( i18n( "Edit History" ) );
 

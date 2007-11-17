@@ -316,10 +316,7 @@ QString KarmStorage::save(TaskView* taskview)
     err = writeTaskAsTodo( task, parents );
   }
 
-  if ( !saveCalendar() )
-  {
-    err="Could not save";
-  }
+  if ( saveCalendar() != QString() ) err=saveCalendar();
 
   if ( err.isEmpty() )
   {
@@ -1035,19 +1032,20 @@ bool KarmStorage::remoteResource( const QString& file ) const
   return rval;
 }
 
-bool KarmStorage::saveCalendar()
+QString KarmStorage::saveCalendar()
 {
   kDebug(5970) <<"KarmStorage::saveCalendar";
 
+  QString err=QString();
   KABC::Lock *lock = d->mCalendar->lock();
-  if ( !lock || !lock->lock() )
-    return false;
+  if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
 
-  if ( d->mCalendar->save() ) {
+  if ( d->mCalendar->save() ) 
+  {
     lock->unlock();
-    return true;
   }
+  else err=QString("Could not save. Could lock file.");
 
   lock->unlock();
-  return false;
+  return err;
 }
