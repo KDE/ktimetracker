@@ -513,9 +513,25 @@ QString TaskView::reFreshTimes()
       {
         KDateTime kdatetimestart = (*i)->dtStart();
         KDateTime kdatetimeend = (*i)->dtEnd();
-        int duration=kdatetimestart.secsTo(kdatetimeend)/60;
+        KDateTime kdatetimestart2 = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
+        KDateTime kdatetimeend2 = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
+        kDebug() << "kdatetimestart2" << kdatetimestart2;
+	kDebug() << "kdatetimeend2" << kdatetimeend2;
+        kDebug() << "kdatetimestart2.secsTo(kdatetimeend2)" << kdatetimestart2.secsTo(kdatetimeend2);
+        int duration=kdatetimestart2.secsTo(kdatetimeend2)/60;
         itemAt(n)->setTime(itemAt(n)->time()+duration,d->mStorage);
+	kDebug() << "setting time "<< itemAt(n)->time()+duration;
         kDebug(5970) << "duration is " << duration;
+
+        if ( itemAt(n)->sessionStartTiMe().isValid() )
+        // if there is a session
+          if ((itemAt(n)->sessionStartTiMe().secsTo((*i)->dtStart())>0) &&        
+              (itemAt(n)->sessionStartTiMe().secsTo((*i)->dtEnd())>0))
+          // if the event is after the session start
+          {
+            int sessionTime=(*i)->dtStart().secsTo((*i)->dtEnd())/60;
+            itemAt(n)->setSessionTime(itemAt(n)->sessionTime()+sessionTime,d->mStorage);
+          }
       }
     }
   }
@@ -655,8 +671,7 @@ void TaskView::toggleFocusTracking()
 }
 
 void TaskView::startNewSession()
-/* This procedure starts a new session. Technically, a session is just an additionally 
-stored time that is always contain in the overall time. We speak of session times, 
+/* This procedure starts a new session. We speak of session times, 
 overalltimes (comprising all sessions) and total times (comprising all subtasks).
 That is why there is also a total session time. */
 {

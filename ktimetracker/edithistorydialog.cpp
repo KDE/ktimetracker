@@ -185,7 +185,7 @@ void EditHistoryDialog::historyWidgetCellChanged( int row, int col )
           {
             QDateTime datetime = QDateTime::fromString( mHistoryWidget->item( row, col )->text(), "yyyy-MM-dd HH:mm:ss" );
             KDateTime kdatetime = KDateTime::fromString( datetime.toString( Qt::ISODate ) );
-            (*i)->setDtEnd( kdatetime ); 
+            (*i)->setDtEnd( kdatetime );
             mParent->reFreshTimes();
             kDebug(5970) <<"Program SetDtEnd to" << mHistoryWidget->item( row, col )->text();
           }

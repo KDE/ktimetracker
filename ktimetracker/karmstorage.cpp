@@ -316,7 +316,7 @@ QString KarmStorage::save(TaskView* taskview)
     err = writeTaskAsTodo( task, parents );
   }
 
-  if ( saveCalendar() != QString() ) err=saveCalendar();
+  err=saveCalendar();
 
   if ( err.isEmpty() )
   {

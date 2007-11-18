@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 1997 by Stephan Kulow <coolo@kde.org>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -141,6 +140,13 @@ class Task : public QObject, public QTreeWidgetItem
        */
       QString setTime( long minutes, KarmStorage* storage );
 
+      /** Sets the session time (without influence to the time). This does not add an event.
+       *
+       *  @param minutes          minutes to set session time to
+       *
+       */
+      QString setSessionTime( long minutes, KarmStorage* storage );
+
       /**
        * Reset all times to 0
        */
@@ -153,6 +159,7 @@ class Task : public QObject, public QTreeWidgetItem
       long totalTime() const;
       long sessionTime() const;
       long totalSessionTime() const;
+      KDateTime sessionStartTiMe() const;
 
       /**
        * Return time the task was started.
@@ -214,8 +221,13 @@ class Task : public QObject, public QTreeWidgetItem
       bool isRunning() const;
     //@}
 
+    /**
+     *  Parses an incidence. This is needed e.g. when you create a task out of a todo.
+     *  You read the todo, extract its custom properties (like session time)
+     *  and use these data to initialize the task.
+     */
     bool parseIncidence( KCal::Incidence*, long& minutes,
-        long& sessionMinutes, QString& name, DesktopList& desktops,
+        long& sessionMinutes, QString& sessionStartTiMe, QString& name, DesktopList& desktops,
         int& percent_complete, int& priority );
 
     /**
@@ -288,20 +300,50 @@ class Task : public QObject, public QTreeWidgetItem
     void updateActiveIcon();
 
   private:
-    //@cond PRIVATE
-    class Private;
-    Private *const d;
-    //@endcond
 
     /** if the time or session time is negative set them to zero */
     void noNegativeTimes();
 
     /** initialize a task */
-    void init( const QString& taskame, long minutes, long sessionTime,
+    void init( const QString& taskame, long minutes, long sessionTime, QString sessionStartTiMe, 
                DesktopList desktops, int percent_complete, int priority );
 
     static QVector<QPixmap*> *icons;
 
+    /** The iCal unique ID of the Todo for this task. */
+    QString mUid;
+
+    /** The comment associated with this Task. */
+    QString mComment;
+
+    int mPercentComplete;
+
+    /** task name */
+    QString mName;
+
+    /** Last time this task was started. */
+    QDateTime mLastStart;
+
+    /** totals of the whole subtree including self */
+    long mTotalTime;
+    long mTotalSessionTime;
+
+    /** times spend on the task itself */
+    long mTime;
+    long mSessionTime;
+
+    /** time when the session was started */
+    KDateTime mSessionStartTiMe;
+
+    DesktopList mDesktops;
+    QTimer *mTimer;
+    int mCurrentPic;
+
+    /** Don't need to update storage when deleting task from list. */
+    bool mRemoving;
+
+    /** Priority of the task. */
+    int mPriority;
 };
 
 #endif // KARM_TASK_H
