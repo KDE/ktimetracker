@@ -172,6 +172,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT( newFocusWindowDetected ( const QString & ) ) ); 
 
   QStringList labels;
+  setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
   labels << i18n( "Task Name" ) << i18n( "Session Time" ) << i18n( "Time" ) 
          << i18n( "Total Session Time" ) << i18n( "Total Time" ) 
          << i18n( "Priority" ) << i18n( "Percent Complete" );
@@ -339,17 +340,21 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
     QTreeWidgetItem *item = itemFromIndex( index );
     if (item) {
       Task *task = static_cast<Task*>(item);
-      if (task) {
-        if (task->isComplete()) {
+      if (task) 
+      {
+        if (task->isComplete()) 
+        {
           task->setPercentComplete( 0, d->mStorage );
-        } else {
+        } else 
+        {
           task->setPercentComplete( 100, d->mStorage );
         }
         
         emit updateButtons();
       }
     }
-  } else {
+  } else 
+  {
     QTreeWidget::mousePressEvent( event );
   }
 }
@@ -379,11 +384,11 @@ has the number i=0. */
 {
   kDebug( 5970 ) << "Entering TaskView::itemAt(" << i << ")";
   if ( topLevelItemCount() == 0 ) return 0;
-
+  
   QTreeWidgetItemIterator item( this );
   while( *item && i-- ) ++item;
-
-  kDebug( 5970 ) << "Leaving TaskView::itemAt";
+  
+  kDebug( 5970 ) << "Leaving TaskView::itemAt" << "returning " << (*item==0);
   if ( !( *item ) )
     return 0;
   else
@@ -486,6 +491,39 @@ void TaskView::refresh()
   kDebug(5970) <<"exiting TaskView::refresh()";
 }
 
+QString TaskView::reFreshTimes()
+/** Refresh the times of the tasks, e.g. when the history has been changed by the user */
+{
+  kDebug(5970) << "Entering reFreshTimes()";
+  QString err=QString();
+  int n=-1;
+  while (itemAt(++n))
+  {
+    itemAt(n)->resetTimes();
+  }
+
+  KCal::Event::List eventList = storage()->rawevents();
+  n=-1;
+  while (itemAt(++n))
+  {
+    itemAt(n)->setTime(0,d->mStorage);
+    for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) 
+    {
+      if ( (*i)->relatedToUid() == itemAt(n)->uid() ) 
+      {
+        KDateTime kdatetimestart = (*i)->dtStart();
+        KDateTime kdatetimeend = (*i)->dtEnd();
+        int duration=kdatetimestart.secsTo(kdatetimeend)/60;
+        itemAt(n)->setTime(itemAt(n)->time()+duration,d->mStorage);
+        kDebug(5970) << "duration is " << duration;
+      }
+    }
+  }
+  refresh();
+  kDebug(5970) << "Leaving TaskView::reFreshTimes()";
+  return err;
+}
+
 void TaskView::importPlanner( const QString &fileName )
 {
   kDebug( 5970 ) <<"entering importPlanner";
@@ -542,35 +580,14 @@ void TaskView::scheduleSave()
 
 QString TaskView::save()
 {
-    // DF: this code created a new event for the running task(s),
-    // at every call (very frequent with autosave) !!!
-    // -> if one wants autosave to save the current event, then
-    // Task needs to store the "current event" and we need to update
-    // it before calling save.
-#if 0
-  // Stop then start all timers so history entries are written.  This is
-  // inefficient if more than one task running, but it is correct.  It is
-  // inefficient because the iCalendar file is saved every time a task's
-  // setRunning(false, ...) is called.  For a big ics file, this could be a
-  // drag.  However, it does ensure that the data will be consistent.  And
-  // if the most common use case is that one task is running most of the time,
-  // it won't make any difference.
-  for (unsigned int i = 0; i < d->mActiveTasks.count(); i++)
-  {
-    d->mActiveTasks.at(i)->setRunning(false, d->mStorage);
-    d->mActiveTasks.at(i)->setRunning(true, d->mStorage);
-  }
+  kDebug(5970) <<"Entering TaskView::save()";
+  QString err=d->mStorage->save(this);
 
-  // If there was an active task, the iCal file has already been saved.
-  if (d->mActiveTasks.count() == 0)
-#endif
-  {
-    kDebug(5970) <<"Entering TaskView::save(ListView)";
-    QString err=d->mStorage->save(this);
-
-    emit setStatusBarText( err.isNull() ? i18n("Saved successfully") : i18n("Error during saving") );
-    return err;
-  }
+  if (err.isNull()) emit setStatusBarText( i18n("Saved successfully") );
+  else
+    if (err==QString("Could not save. Could not lock file.")) emit setStatusBarText( i18n("Could not save. Disk full ?") );
+    else emit setStatusBarText( i18n("Could not save.") );
+  return err;
 }
 
 void TaskView::startCurrentTimer()
@@ -624,9 +641,12 @@ void TaskView::toggleFocusTracking()
 {
   d->mFocusTrackingActive = !d->mFocusTrackingActive;
 
-  if ( d->mFocusTrackingActive ) {
+  if ( d->mFocusTrackingActive ) 
+  {
     FocusDetectorNotifier::instance()->attach( this );
-  } else {
+  } 
+  else  
+  {
     stopTimerFor( d->mLastTaskWithFocus );
     FocusDetectorNotifier::instance()->detach( this );
   }

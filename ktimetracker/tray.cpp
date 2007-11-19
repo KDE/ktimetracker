@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QToolTip>
 
+#include <KAction>
 #include <KGlobalSettings>
 #include <KIconLoader>
 #include <KLocale>

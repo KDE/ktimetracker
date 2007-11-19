@@ -189,7 +189,7 @@ class TaskView : public QTreeWidget
                             have to set the starting time to not-now. */
     void startTimerFor( Task* task, 
                         const QDateTime &startTime = QDateTime::currentDateTime() );
-     void stopTimerFor( Task* task );
+    void stopTimerFor( Task* task );
 
     /** clears all active tasks. Needed e.g. if iCal file was modified by
        another program and taskview is cleared without stopping tasks
@@ -204,6 +204,9 @@ class TaskView : public QTreeWidget
 
     /** Reconfigures taskView depending on current configuration. */
     void reconfigure();
+
+    /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
+    QString reFreshTimes();
 
   Q_SIGNALS:
     void totalTimesChanged( long session, long total );

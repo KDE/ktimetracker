@@ -108,7 +108,7 @@ class Task : public QObject, public QTreeWidgetItem
     //@{ timing related functions
 
       /**
-       * Change task time.  Adds minutes to both total time and session time.
+       * Change task time.  Adds minutes to both total time and session time by adding an event.
        *
        *  @param minutes        minutes to add to - may be negative
        *  @param storage        Pointer to KarmStorage instance.
@@ -117,7 +117,7 @@ class Task : public QObject, public QTreeWidgetItem
       void changeTime( long minutes, KarmStorage* storage );
 
       /**
-       * Add minutes to time and session time, and write to storage.
+       * Add minutes to time and session time by adding an event, and write to storage.
        *
        *  @param minutesSession   minutes to add to task session time
        *  @param minutes          minutes to add to task time
@@ -127,12 +127,19 @@ class Task : public QObject, public QTreeWidgetItem
       void changeTimes
         ( long minutesSession, long minutes, KarmStorage* storage=0);
 
-      /** adds minutes to total and session time
+      /** adds minutes to total and session time by adding an event
        *
        *  @param minutesSession   minutes to add to task total session time
        *  @param minutes          minutes to add to task total time
        */
       void changeTotalTimes( long minutesSession, long minutes );
+
+      /** Sets the time (not session time). This does not add an event.
+       *
+       *  @param minutes          minutes to set time to
+       *
+       */
+      QString setTime( long minutes, KarmStorage* storage );
 
       /**
        * Reset all times to 0

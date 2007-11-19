@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2003 by Mark Bucciarelli <mark@hubcapconsutling.com>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -270,7 +269,7 @@ class KarmStorage
     bool parseLine(QString line, long *time, QString *name, int *level,
         DesktopList* desktopList);
     QString writeTaskAsTodo( Task* task, QStack<KCal::Todo*>& parents );
-    bool saveCalendar();
+    QString saveCalendar();
 
     KCal::Event* baseEvent(const Task*);
     bool remoteResource( const QString& file ) const;

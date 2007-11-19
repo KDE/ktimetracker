@@ -687,9 +687,11 @@ void TimetrackerWidget::startNewSession()
 
 void TimetrackerWidget::editHistory()
 {
-  if ( d->mTabWidget->currentWidget() ) {
+  if ( d->mTabWidget->currentWidget() ) 
+  {
     EditHistoryDialog *dlg = new EditHistoryDialog( qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) );
-    dlg->exec();
+    if (currentTaskView()->storage()->rawevents().count()!=0) dlg->exec();
+    else KMessageBox::information(0,"There is no history yet. Start and stop a task and you will have an entry in your history.");
   }
 }
 

@@ -309,6 +309,14 @@ void Task::changeTime( long minutes, KarmStorage* storage )
   changeTimes( minutes, minutes, storage); 
 }
 
+QString Task::setTime( long minutes, KarmStorage* storage )
+{
+  QString err=QString();
+  d->mTime=minutes;
+  d->mTotalTime+=minutes;
+  return err;
+}
+
 void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 {
   kDebug(5970) <<"Entering Task::changeTimes";
