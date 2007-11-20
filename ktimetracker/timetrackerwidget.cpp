@@ -581,8 +581,8 @@ void TimetrackerWidget::showSettingsDialog()
   displayUi->setupUi( displayPage );
   dialog->addPage( displayPage, 
                    i18nc( "settings page for customizing user interface", 
-                          "Display" ), 
-                   "zoom-original" );
+                          "Appearance" ),
+                          "preferences-desktop-default-applications" );
 
   Ui::StoragePage *storageUi = new Ui::StoragePage;
   QWidget *storagePage = new QWidget;
