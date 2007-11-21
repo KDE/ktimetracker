@@ -120,6 +120,11 @@ class TimetrackerWidget : public QWidget {
      */
     void showSearchBar( bool visible );
 
+     /**
+      shows/hides the tabbar.
+     */
+    void showTabBar( bool visible );
+
     /**
       tries to close all files. This slot has to be called before quitting
       the application to ensure that no data is lost.

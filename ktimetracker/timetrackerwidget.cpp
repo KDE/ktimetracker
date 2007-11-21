@@ -123,6 +123,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
            this, SLOT( newFile() ) );
 
   showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
+  showTabBar( false );
 }
 
 TimetrackerWidget::~TimetrackerWidget()
@@ -178,6 +179,11 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
   {
     emit currentTaskViewChanged();
     slotCurrentChanged();
+  }
+
+  if ( d->mTabWidget->count() > 1 )
+  {
+    showTabBar( true );
   }
 }
 
@@ -424,6 +430,12 @@ bool TimetrackerWidget::closeFile()
     slotCurrentChanged();
   }
 
+  /* hide the tabbar if there's only one tab left */
+  if ( d->mTabWidget->count() < 2 ) 
+  {
+    showTabBar( false );
+  }
+
   delete taskView; // removeTab does not delete its widget.
   return true;
 }
@@ -442,6 +454,11 @@ void TimetrackerWidget::saveFile()
 
   // TODO get eventually error message from save and emit
   // a error message signal.
+}
+
+void TimetrackerWidget::showTabBar( bool visible )
+{
+  d->mTabWidget->setTabBarHidden( !visible );
 }
 
 void TimetrackerWidget::reconfigureFiles()
