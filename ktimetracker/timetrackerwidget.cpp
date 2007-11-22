@@ -24,6 +24,7 @@
 #include <QDBusConnection>
 #include <QFileInfo>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QKeySequence>
 #include <QMap>
 #include <QTimer>
@@ -103,6 +104,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   innerLayout->setSpacing( KDialog::spacingHint() );
   d->mSearchWidget = new KTreeWidgetSearchLine( d->mSearchLine );
   d->mSearchWidget->setClickMessage( i18n( "Search or add task" ) );
+  d->mSearchWidget->installEventFilter( this );
   innerLayout->addWidget( d->mSearchWidget );
   d->mSearchLine->setLayout( innerLayout );
 
@@ -113,8 +115,6 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
 
   d->mTabWidget->setFocus( Qt::OtherFocusReason );
 
-  connect( d->mSearchWidget, SIGNAL( returnPressed( const QString& ) ),
-           this, SLOT( slotAddTask( const QString& ) ) );
   connect( d->mTabWidget, SIGNAL( currentChanged( int ) ), 
            this, SIGNAL( currentTaskViewChanged() ) );
   connect( d->mTabWidget, SIGNAL( currentChanged( int ) ),
@@ -539,6 +539,22 @@ void TimetrackerWidget::updateTabs()
       d->mTabWidget->setTabTextColor( i, Qt::darkGreen );
     }
   }
+}
+
+bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
+{
+  if ( obj == d->mSearchWidget ) {
+    if ( event->type() == QEvent::KeyPress ) {
+      QKeyEvent *keyEvent = static_cast< QKeyEvent* >( event );
+      if ( keyEvent->key() == Qt::Key_Enter ||
+           keyEvent->key() == Qt::Key_Return ) {
+        slotAddTask( d->mSearchWidget->displayText() );
+        return true;
+      }
+    }
+  }
+
+  return QObject::eventFilter( obj, event );
 }
 
 void TimetrackerWidget::slotAddTask( const QString &taskName )

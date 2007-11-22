@@ -50,6 +50,8 @@ class TimetrackerWidget : public QWidget {
      */
     bool saveCurrentTaskView();
 
+    bool eventFilter( QObject *obj, QEvent *event );
+
   public:
     /**
       Returns the TaskView widget of the current opened tabpage.
