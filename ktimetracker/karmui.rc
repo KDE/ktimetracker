@@ -11,11 +11,11 @@
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
     <Separator />
-    <Menu name="import" icon="file-import" >
+    <Menu name="import" icon="document-import" >
       <text>&amp;Import</text>
       <Action name="import_planner" />
     </Menu>
-    <Menu name="export" icon="file-export">
+    <Menu name="export" icon="document-export">
       <text>&amp;Export</text>
       <Action name="export_times" />
       <Action name="export_history" />

@@ -58,7 +58,6 @@ MainWindow::MainWindow( const QString &icsfile )
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
-  setWindowIcon( KIcon( "karm" ) );
   setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
   mainWidget = new TimetrackerWidget( this );
