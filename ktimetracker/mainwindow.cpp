@@ -90,23 +90,20 @@ MainWindow::MainWindow( const QString &icsfile )
   connect( mainWidget, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
   connect( mainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
+  _totalSum=0;
+  _sessionSum=0;
+  for (int i=0; i<mainWidget->currentTaskView()->count(); ++i)
+  {
+    _totalSum+=mainWidget->currentTaskView()->itemAt(i)->time();
+    _sessionSum+=mainWidget->currentTaskView()->itemAt(i)->sessionTime();
+  }
+  updateStatusBar();
 }
 
 void MainWindow::setStatusBar(const QString& qs)
 {
   statusBar()->showMessage(i18n(qs.toUtf8()));
 }
-
-// FIXME send saving slot
-/*bool MainWindow::save()
-{
-  kDebug(5970) <<"Saving time data to disk.";
-  QString err = mainWidget->saveFile();  // untranslated error msg.
-  if (err.isEmpty()) statusBar()->showMessage(i18n("Successfully saved tasks and history"),1807);
-  else statusBar()->showMessage(i18n(err.toAscii()),7707); // no msgbox since save is called when exiting
-  saveGeometry();
-  return true;
-}*/
 
 void MainWindow::quit()
 {
@@ -129,14 +126,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateTime( long sessionDiff, long totalDiff )
 {
+  kDebug(5970) << "Entering MainWindow::updateTime(sessionDiff=" << sessionDiff << " totalDiff=" << totalDiff << ")";
   _sessionSum += sessionDiff;
   _totalSum   += totalDiff;
 
   updateStatusBar();
+  kDebug(5970) << "Exiting MainWindow::updateTime";
 }
 
 void MainWindow::updateStatusBar( )
 {
+  kDebug(5970) << "Entering MainWindow::updateStatusBar( )";
   QString time;
 
   time = formatTime( _sessionSum );
@@ -144,6 +144,7 @@ void MainWindow::updateStatusBar( )
 
   time = formatTime( _totalSum );
   statusBar()->changeItem( i18nc( "total time of all tasks", "Total: %1", time ), 1);
+  kDebug(5970) << "Exiting MainWindow::updateStatusBar( )";
 }
 
 void MainWindow::startStatusBar()

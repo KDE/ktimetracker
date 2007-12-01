@@ -499,7 +499,8 @@ QString TaskView::reFreshTimes()
   int n=-1;
   while (itemAt(++n))
   {
-    itemAt(n)->resetTimes();
+    itemAt(n)->setTime(0, d->mStorage);
+    itemAt(n)->setSessionTime(0, d->mStorage);
   }
 
   KCal::Event::List eventList = storage()->rawevents();
