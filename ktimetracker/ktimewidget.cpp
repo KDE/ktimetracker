@@ -31,7 +31,7 @@
 #include <QString>
 #include <QValidator>
 #include <QWidget>
-
+#include <kdebug.h>
 #include <KLineEdit>
 #include <KLocale>
 
@@ -54,9 +54,6 @@ class TimeValidator : public QValidator
       bool ok;
       int val = str.toInt( &ok );
       if ( ! ok )
-        return Invalid;
-
-      if ( _tp==MINUTE && val >= 60  )
         return Invalid;
       else
         return Acceptable;
@@ -130,13 +127,15 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
 
 void KArmTimeWidget::setTime( int hour, int minute )
 {
+  kDebug(5970) << "Entering KArmTimeWidget::setTime( "<< hour << ", " << minute << " )";
   QString dummy;
 
-  dummy.setNum( hour );
+  dummy.setNum( hour + (minute/60));
   _hourLE->setText( dummy );
 
-  dummy.setNum( abs(minute) );
-  if (abs(minute) < 10 ) {
+  dummy.setNum( abs(minute%60) );
+  if (abs(minute) < 10 ) 
+  {
     dummy = QString::fromLatin1( "0" ) + dummy;
   }
   _minuteLE->setText( dummy );
