@@ -107,7 +107,9 @@ void MainWindow::setStatusBar(const QString& qs)
 
 void MainWindow::quit()
 {
-  if ( mainWidget->closeAllFiles() ) {
+  kDebug() << "Entering MainWindow::quit";
+  if ( mainWidget->closeAllFiles() ) 
+  {
     kapp->quit();
   }
 }

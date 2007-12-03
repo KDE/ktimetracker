@@ -392,6 +392,7 @@ void TimetrackerWidget::openFile( const KUrl &fileName )
 
 bool TimetrackerWidget::closeFile()
 {
+  kDebug(5970) << "Entering TimetrackerWidget::closeFile";
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
   // is it an unsaved file?
@@ -402,20 +403,24 @@ bool TimetrackerWidget::closeFile()
 
     int result = KMessageBox::questionYesNoCancel( this, message, caption );
 
-    if ( result == KMessageBox::Cancel ) {
+    if ( result == KMessageBox::Cancel ) 
+    {
       return false;
     }
 
-    if ( result == KMessageBox::Yes ) {
-      if ( !saveCurrentTaskView() ) {
+    if ( result == KMessageBox::Yes ) 
+    {
+      if ( !saveCurrentTaskView() ) 
+      {
         return false;
       }
-    } else { // result == No
+    } 
+    else 
+    { // result == No
       d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
     }
   }
 
-  taskView->stopAllTimers();
   taskView->save();
   taskView->closeStorage();
 
@@ -425,7 +430,8 @@ bool TimetrackerWidget::closeFile()
   /* emit signals and call slots since currentChanged is not emitted if
    * we close the last tab
    */
-  if ( d->mTabWidget->count() == 0 ) {
+  if ( d->mTabWidget->count() == 0 ) 
+  {
     emit currentTaskViewChanged();
     slotCurrentChanged();
   }
@@ -479,6 +485,7 @@ void TimetrackerWidget::showSearchBar( bool visible )
 
 bool TimetrackerWidget::closeAllFiles()
 {
+  kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
   while ( d->mTabWidget->count() > 0 ) 
   {
     TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( 0 ) );
@@ -1076,7 +1083,9 @@ void TimetrackerWidget::saveAll()
 
 void TimetrackerWidget::quit()
 {
-  if ( closeAllFiles() ) {
+  kDebug(5970) << "Entering TimetrackerWidget::quit";
+  if ( closeAllFiles() ) 
+  {
     kapp->quit();
   }
 }
