@@ -260,21 +260,21 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "start_new_session", "Starts a new session", "This will reset the "
       "session time to 0 for all tasks, to start a new session, without "
       "affecting the totals." },
-    { "history", "Edit History...", SLOT( editHistory() ), "edit_history",
+    { "view-history", "Edit History...", SLOT( editHistory() ), "edit_history",
       "Edits history of all tasks of the current document", "A window will "
       "be opened where you can change start and stop times of tasks or add a "
       "comment to them." },
     { QString(), "&Reset All Times", SLOT( resetAllTimes() ),
       "reset_all_times", "Resets all times", "This will reset the session "
       "and total time to 0 for all tasks, to restart from scratch." },
-    { "arrow-right", "&Start", SLOT( startCurrentTimer() ), "start",
+    { "media-playback-start", "&Start", SLOT( startCurrentTimer() ), "start",
       "Starts timing for selected task", "This will start timing for the "
       "selected task.\nIt is even possible to time several tasks "
       "simultanously.\n\nYou may also start timing of tasks by double clicking "
       "the left mouse button on a given task. This will, however, stop timing "
       "of other tasks." },
-    { "process-stop", "S&top", SLOT( stopCurrentTimer() ), "stop", "Stops "
-      "timing of the selected task", "Stops timing of the selected task" },
+    { "media-playback-stop", "S&top", SLOT( stopCurrentTimer() ), "stop",
+      "Stops timing of the selected task", "Stops timing of the selected task" },
     { QString(), "Stop &All Timers", SLOT( stopAllTimers() ), "stopAll",
       "Stops all of the active timers", "Stops all of the active timers" },
     { QString(), "Track Active Applications", SLOT( focusTracking() ),
@@ -285,25 +285,27 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
        "already exists such an task it will be started." },
     { "document-new", "&New Task...", SLOT( newTask() ), "new_task", "Creates "
       "new top level task", "This will create a new top level task." },
-    { "new-subtask", "New &Subtask...", SLOT( newSubTask() ), "new_sub_task",
-      "Creates a new subtask to the current selected task", "This will create "
-      "a new subtask to the current selected task." },
+    { "subtask-new-ktimetracker", "New &Subtask...", SLOT( newSubTask() ),
+      "new_sub_task", "Creates a new subtask to the current selected task",
+      "This will create a new subtask to the current selected task." },
     { "edit-delete", "&Delete", SLOT( deleteTask() ), "delete_task", "Deletes "
       "selected task", "This will delete the selected task and all its "
       "subtasks." },
-    { "edit", "&Edit...", SLOT( editTask() ), "edit_task", "Edits name or "
-      "times for selected task", "This will bring up a dialog box where you "
-       "may edit the parameters for the selected task." },
-    { "", "&Mark as Complete", SLOT( markTaskAsComplete() ), "mark_as_complete", 
-      "", "" },
-    { "", "&Mark as Incomplete", SLOT( markTaskAsIncomplete() ),
+    { "document-properties", "&Edit...", SLOT( editTask() ), "edit_task",
+      "Edits name or times for selected task", "This will bring up a dialog "
+      "box where you may edit the parameters for the selected task." },
+    { QString(), "&Mark as Complete", SLOT( markTaskAsComplete() ),
+      "mark_as_complete", "", "" },
+    { QString(), "&Mark as Incomplete", SLOT( markTaskAsIncomplete() ),
       "mark_as_incomplete", "", "" },
-    { "", "&Export Times...", SLOT( exportcsvFile() ), "export_times", "", "" },
-    { "", "Export &History...", SLOT( exportcsvHistory() ), "export_history",
+    { QString(), "&Export Times...", SLOT( exportcsvFile() ), "export_times",
       "", "" },
-    { "", "Import Tasks From &Planner...", SLOT( importPlanner() ),
+    { QString(), "Export &History...", SLOT( exportcsvHistory() ),
+      "export_history", "", "" },
+    { QString(), "Import Tasks From &Planner...", SLOT( importPlanner() ),
       "import_planner", "", "" },
-    { "", "Show Searchbar", SLOT( slotSearchBar() ), "searchbar", "", "" }
+    { QString(), "Show Searchbar", SLOT( slotSearchBar() ), "searchbar",
+      "", "" }
   };
 
   for ( int i = 0; 
