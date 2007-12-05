@@ -143,11 +143,11 @@ Task::~Task()
 }
 
 void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
+// This is the back-end, the front-end is StartTimerFor()
 {
   kDebug(5970) <<"Entering Task::setRunning"; 
   if ( on ) 
   {
-    if (isComplete()) return; // don't start if its marked complete
     if (!mTimer->isActive()) 
     {
       mTimer->start(1000);

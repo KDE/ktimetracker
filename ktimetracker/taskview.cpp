@@ -627,15 +627,18 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
   if (task != 0 && d->mActiveTasks.indexOf(task) == -1) 
   {
-    if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
-    _idleTimeDetector->startIdleDetection();
-    task->setRunning(true, d->mStorage, startTime);
-    d->mActiveTasks.append(task);
-    emit updateButtons();
-    if ( d->mActiveTasks.count() == 1 )
-        emit timersActive();
-
-    emit tasksChanged( d->mActiveTasks );
+    if (!task->isComplete())
+    {
+      if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
+      _idleTimeDetector->startIdleDetection();
+      task->setRunning(true, d->mStorage, startTime);
+      d->mActiveTasks.append(task);
+      emit updateButtons();
+      if ( d->mActiveTasks.count() == 1 )
+          emit timersActive();
+  
+      emit tasksChanged( d->mActiveTasks );
+    }
   }
 }
 
