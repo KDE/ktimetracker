@@ -1,2 +1,2 @@
 #! /bin/sh
-$XGETTEXT *.cpp -o $podir/karm.pot
+$XGETTEXT *.cpp -o $podir/ktimetracker.pot
