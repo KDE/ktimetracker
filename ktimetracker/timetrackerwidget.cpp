@@ -629,7 +629,7 @@ void TimetrackerWidget::showSettingsDialog()
   Ui::StoragePage *storageUi = new Ui::StoragePage;
   QWidget *storagePage = new QWidget;
   storageUi->setupUi( storagePage );
-  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
+  dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
 
   dialog->exec();
   reconfigureFiles();
