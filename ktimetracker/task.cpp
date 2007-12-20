@@ -450,8 +450,6 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
   if ( !ok )
     sessionMinutes = 0;
   sessionStartTiMe=incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(), QByteArray( "sessionStartTiMe" ));
-  kDebug() << "**********************************************************************";
-  kDebug() << "sessionStartTiMe.toString() = " << sessionStartTiMe;
 
   // if a KDE-karm-deskTopList exists and no KDE-ktimetracker-DeskTopList, change this
   if (

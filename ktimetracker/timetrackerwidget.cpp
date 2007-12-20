@@ -137,9 +137,10 @@ TimetrackerWidget::~TimetrackerWidget()
 
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
+  kDebug(5970) << "Entering TimetrackerWidget::addTaskView(fileName=" << fileName << ")";
   bool isNew = fileName.isEmpty();
   QString lFileName = fileName;
-
+  
   if ( isNew ) {
     KTemporaryFile tempFile;
     tempFile.setAutoRemove( false );
@@ -308,7 +309,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "", "" }
   };
 
-  for ( int i = 0; 
+  for ( unsigned int i = 0; 
         i < ( sizeof( actions ) / sizeof( Private::ActionData ) ); ++i ) 
   {
     Private::ActionData actionData = actions[i];
