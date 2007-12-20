@@ -245,7 +245,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
     Task* task = new Task(*todo, view);
-    task->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
+    task->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
     task->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
     map.insert( (*todo)->uid(), task );
     view->setRootIsDecorated(true);

@@ -104,6 +104,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   innerLayout->setSpacing( KDialog::spacingHint() );
   d->mSearchWidget = new KTreeWidgetSearchLine( d->mSearchLine );
   d->mSearchWidget->setClickMessage( i18n( "Search or add task" ) );
+  d->mSearchWidget->setWhatsThis( i18n( "This is a combined field. Type a string and do not press enter. Then only tasks matching this string will be displayed. Type a string and press enter, then your string will be added as a new task." ) );
   d->mSearchWidget->installEventFilter( this );
   innerLayout->addWidget( d->mSearchWidget );
   d->mSearchLine->setLayout( innerLayout );
@@ -553,12 +554,15 @@ void TimetrackerWidget::updateTabs()
 
 bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
 {
-  if ( obj == d->mSearchWidget ) {
-    if ( event->type() == QEvent::KeyPress ) {
+  if ( obj == d->mSearchWidget ) 
+  {
+    if ( event->type() == QEvent::KeyPress ) 
+    {
       QKeyEvent *keyEvent = static_cast< QKeyEvent* >( event );
       if ( keyEvent->key() == Qt::Key_Enter ||
-           keyEvent->key() == Qt::Key_Return ) {
-        slotAddTask( d->mSearchWidget->displayText() );
+           keyEvent->key() == Qt::Key_Return ) 
+      {
+        if ( d->mSearchWidget->displayText() != QString() ) slotAddTask( d->mSearchWidget->displayText() );
         return true;
       }
     }

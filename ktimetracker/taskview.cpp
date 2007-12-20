@@ -176,7 +176,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
          << i18n( "Total Session Time" ) << i18n( "Total Time" ) 
          << i18n( "Priority" ) << i18n( "Percent Complete" );
   setHeaderLabels( labels );
-  headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
+  headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
   setAllColumnsShowFocus( true );
   setSortingEnabled( true );
