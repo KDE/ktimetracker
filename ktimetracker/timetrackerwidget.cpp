@@ -1084,6 +1084,12 @@ void TimetrackerWidget::saveAll()
   }
 }
 
+bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
+{
+  if (event->type()==QEvent::QueryWhatsThis) setWhatsThis("this is whatsthis help");
+  QWidget::event(event);
+}
+
 void TimetrackerWidget::quit()
 {
   kDebug(5970) << "Entering TimetrackerWidget::quit";

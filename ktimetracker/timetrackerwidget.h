@@ -185,6 +185,9 @@ class TimetrackerWidget : public QWidget {
     void quit();
     //END
 
+  protected:
+    bool event ( QEvent * event ); // inherited from QWidget
+
   private Q_SLOTS:
     void slotCurrentChanged();
     void updateTabs();
