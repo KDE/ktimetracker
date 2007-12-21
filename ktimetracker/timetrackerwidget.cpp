@@ -104,7 +104,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   innerLayout->setSpacing( KDialog::spacingHint() );
   d->mSearchWidget = new KTreeWidgetSearchLine( d->mSearchLine );
   d->mSearchWidget->setClickMessage( i18n( "Search or add task" ) );
-  d->mSearchWidget->setWhatsThis( i18n( "This is a combined field. Type a string and do not press enter. Then only tasks matching this string will be displayed. Type a string and press enter, then your string will be added as a new task." ) );
+  d->mSearchWidget->setWhatsThis( i18n( "This is a combined field. As long as you do not type ENTER, it acts as a filter. Then, only tasks that match your input are shown. As soon as you type ENTER, your input is used as name to create a new task." ) );
   d->mSearchWidget->installEventFilter( this );
   innerLayout->addWidget( d->mSearchWidget );
   d->mSearchLine->setLayout( innerLayout );
@@ -1080,7 +1080,8 @@ void TimetrackerWidget::saveAll()
     if ( !taskView ) continue;
 
     // is it an unsaved file?
-    if ( d->mIsNewVector.contains( taskView ) ) {
+    if ( d->mIsNewVector.contains( taskView ) ) 
+    {
       saveCurrentTaskView();
     }
 
@@ -1093,8 +1094,8 @@ bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
   if (event->type()==QEvent::QueryWhatsThis)
   {
     if ( d->mLastView->count() == 0 ) 
-      setWhatsThis(QString("This is ktimetracker, KDE's program to help you track your time. Your first step is to add a task that you will be working on. You can start and stop timing then."));
-    else setWhatsThis(QString("You have already set a task up. You can now start and stop timing"));
+      setWhatsThis( i18n("This is ktimetracker, KDE's program to help you track your time. Best, start with creating your first task - enter it into the field where you see \"search or add task\".") );
+    else setWhatsThis( i18n("You have already created a task. You can now start and stop timing") );
   }  
   QWidget::event(event);
 }
