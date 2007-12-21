@@ -1090,7 +1090,12 @@ void TimetrackerWidget::saveAll()
 
 bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
 {
-  if (event->type()==QEvent::QueryWhatsThis) setWhatsThis("this is whatsthis help");
+  if (event->type()==QEvent::QueryWhatsThis)
+  {
+    if ( d->mLastView->count() == 0 ) 
+      setWhatsThis(QString("This is ktimetracker, KDE's program to help you track your time. Your first step is to add a task that you will be working on. You can start and stop timing then."));
+    else setWhatsThis(QString("You have already set a task up. You can now start and stop timing"));
+  }  
   QWidget::event(event);
 }
 
