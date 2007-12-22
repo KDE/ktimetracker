@@ -258,55 +258,55 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
                                   actionCollection ) );
 
   Private::ActionData actions[] = {
-    { QString(), "Start &New Session", SLOT( startNewSession() ),
-      "start_new_session", "Starts a new session", "This will reset the "
+    { QString(), I18N_NOOP("Start &New Session"), SLOT( startNewSession() ),
+      "start_new_session", I18N_NOOP("Starts a new session"), I18N_NOOP("This will reset the "
       "session time to 0 for all tasks, to start a new session, without "
-      "affecting the totals." },
-    { "view-history", "Edit History...", SLOT( editHistory() ), "edit_history",
-      "Edits history of all tasks of the current document", "A window will "
+      "affecting the totals.") },
+    { "view-history", I18N_NOOP("Edit History..."), SLOT( editHistory() ), "edit_history",
+      I18N_NOOP("Edits history of all tasks of the current document"), I18N_NOOP("A window will "
       "be opened where you can change start and stop times of tasks or add a "
-      "comment to them." },
-    { QString(), "&Reset All Times", SLOT( resetAllTimes() ),
-      "reset_all_times", "Resets all times", "This will reset the session "
-      "and total time to 0 for all tasks, to restart from scratch." },
-    { "media-playback-start", "&Start", SLOT( startCurrentTimer() ), "start",
-      "Starts timing for selected task", "This will start timing for the "
+      "comment to them.") },
+    { QString(), I18N_NOOP("&Reset All Times"), SLOT( resetAllTimes() ),
+      "reset_all_times", I18N_NOOP("Resets all times"), I18N_NOOP("This will reset the session "
+      "and total time to 0 for all tasks, to restart from scratch.") },
+    { "media-playback-start", I18N_NOOP("&Start"), SLOT( startCurrentTimer() ), "start",
+      I18N_NOOP("Starts timing for selected task"), I18N_NOOP("This will start timing for the "
       "selected task.\nIt is even possible to time several tasks "
       "simultanously.\n\nYou may also start timing of tasks by double clicking "
       "the left mouse button on a given task. This will, however, stop timing "
-      "of other tasks." },
-    { "media-playback-stop", "S&top", SLOT( stopCurrentTimer() ), "stop",
-      "Stops timing of the selected task", "Stops timing of the selected task" },
-    { QString(), "Stop &All Timers", SLOT( stopAllTimers() ), "stopAll",
-      "Stops all of the active timers", "Stops all of the active timers" },
-    { QString(), "Track Active Applications", SLOT( focusTracking() ),
-      "focustracking", "Auto-creates and updates tasks when the focus of the "
-       "current window has changed", "If the focus of a window changes for the "
+      "of other tasks.") },
+    { "media-playback-stop", I18N_NOOP("S&top"), SLOT( stopCurrentTimer() ), "stop",
+      I18N_NOOP("Stops timing of the selected task"), I18N_NOOP("Stops timing of the selected task") },
+    { QString(), I18N_NOOP("Stop &All Timers"), SLOT( stopAllTimers() ), "stopAll",
+      I18N_NOOP("Stops all of the active timers"), I18N_NOOP("Stops all of the active timers") },
+    { QString(), I18N_NOOP("Track Active Applications"), SLOT( focusTracking() ),
+      "focustracking", I18N_NOOP("Auto-creates and updates tasks when the focus of the "
+       "current window has changed"), I18N_NOOP("If the focus of a window changes for the "
        "first time when this action is enabled, a new task will be created "
        "with the title of the window as its name and will be started. If there "
-       "already exists such an task it will be started." },
-    { "document-new", "&New Task...", SLOT( newTask() ), "new_task", "Creates "
-      "new top level task", "This will create a new top level task." },
-    { "subtask-new-ktimetracker", "New &Subtask...", SLOT( newSubTask() ),
-      "new_sub_task", "Creates a new subtask to the current selected task",
-      "This will create a new subtask to the current selected task." },
-    { "edit-delete", "&Delete", SLOT( deleteTask() ), "delete_task", "Deletes "
-      "selected task", "This will delete the selected task and all its "
-      "subtasks." },
-    { "document-properties", "&Edit...", SLOT( editTask() ), "edit_task",
-      "Edits name or times for selected task", "This will bring up a dialog "
-      "box where you may edit the parameters for the selected task." },
-    { QString(), "&Mark as Complete", SLOT( markTaskAsComplete() ),
+       "already exists such an task it will be started.") },
+    { "document-new", I18N_NOOP("&New Task..."), SLOT( newTask() ), "new_task", I18N_NOOP("Creates "
+      "new top level task"), I18N_NOOP("This will create a new top level task.") },
+    { "subtask-new-ktimetracker", I18N_NOOP("New &Subtask..."), SLOT( newSubTask() ),
+      "new_sub_task", I18N_NOOP("Creates a new subtask to the current selected task"),
+      I18N_NOOP("This will create a new subtask to the current selected task.") },
+    { "edit-delete", I18N_NOOP("&Delete"), SLOT( deleteTask() ), "delete_task", I18N_NOOP("Deletes "
+      "selected task"), I18N_NOOP("This will delete the selected task and all its "
+      "subtasks.") },
+    { "document-properties", I18N_NOOP("&Edit..."), SLOT( editTask() ), "edit_task",
+      I18N_NOOP("Edits name or times for selected task"), I18N_NOOP("This will bring up a dialog "
+      "box where you may edit the parameters for the selected task.") },
+    { QString(), I18N_NOOP("&Mark as Complete"), SLOT( markTaskAsComplete() ),
       "mark_as_complete", "", "" },
-    { QString(), "&Mark as Incomplete", SLOT( markTaskAsIncomplete() ),
+    { QString(), I18N_NOOP("&Mark as Incomplete"), SLOT( markTaskAsIncomplete() ),
       "mark_as_incomplete", "", "" },
-    { QString(), "&Export Times...", SLOT( exportcsvFile() ), "export_times",
+    { QString(), I18N_NOOP("&Export Times..."), SLOT( exportcsvFile() ), "export_times",
       "", "" },
-    { QString(), "Export &History...", SLOT( exportcsvHistory() ),
+    { QString(), I18N_NOOP("Export &History..."), SLOT( exportcsvHistory() ),
       "export_history", "", "" },
-    { QString(), "Import Tasks From &Planner...", SLOT( importPlanner() ),
+    { QString(), I18N_NOOP("Import Tasks From &Planner..."), SLOT( importPlanner() ),
       "import_planner", "", "" },
-    { QString(), "Show Searchbar", SLOT( slotSearchBar() ), "searchbar",
+    { QString(), I18N_NOOP("Show Searchbar"), SLOT( slotSearchBar() ), "searchbar",
       "", "" }
   };
 
@@ -738,7 +738,7 @@ void TimetrackerWidget::editHistory()
   {
     EditHistoryDialog *dlg = new EditHistoryDialog( qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) );
     if (currentTaskView()->storage()->rawevents().count()!=0) dlg->exec();
-    else KMessageBox::information(0,"There is no history yet. Start and stop a task and you will have an entry in your history.");
+    else KMessageBox::information(0, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
   }
 }
 
