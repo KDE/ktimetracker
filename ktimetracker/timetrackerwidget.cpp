@@ -1097,7 +1097,7 @@ bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
       setWhatsThis( i18n("This is ktimetracker, KDE's program to help you track your time. Best, start with creating your first task - enter it into the field where you see \"search or add task\".") );
     else setWhatsThis( i18n("You have already created a task. You can now start and stop timing") );
   }  
-  QWidget::event(event);
+  return QWidget::event(event);
 }
 
 void TimetrackerWidget::quit()
