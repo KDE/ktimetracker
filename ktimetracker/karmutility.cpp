@@ -58,7 +58,7 @@ The output of formatTiMe(0.5,false) is 0:01, because 0.5 minutes are 0:01 hours 
   }
   else 
   {
-    time.sprintf( "%.0f:%02d", minutes / 60.0, (int)round(((int)(minutes*60) % 3600)/60.0));
+    time.sprintf( "%i:%02d", (int) (minutes / 60), (int)round(((int)(minutes*60) % 3600)/60.0));
   }
   return time;
 }

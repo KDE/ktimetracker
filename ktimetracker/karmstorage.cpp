@@ -245,7 +245,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {
     Task* task = new Task(*todo, view);
-    task->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
+    task->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
     task->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
     map.insert( (*todo)->uid(), task );
     view->setRootIsDecorated(true);
@@ -287,14 +287,14 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
 void KarmStorage::closeStorage(TaskView* view)
 {
+  kDebug(5970) << "Entering KarmStorage::closeStorage";
   if ( d->mCalendar )
   {
     d->mCalendar->close();
     delete d->mCalendar;
     d->mCalendar = 0;
-
-    view->clear();
   }
+  kDebug(5970) << "Exiting KarmStorage::closeStorage";
 }
 
 KCal::Event::List KarmStorage::rawevents()
@@ -310,13 +310,14 @@ QString KarmStorage::save(TaskView* taskview)
 
   QStack<KCal::Todo*> parents;
 
-  for (int i = 0; i < taskview->topLevelItemCount(); ++i ) {
+  for (int i = 0; i < taskview->topLevelItemCount(); ++i ) 
+  {
     Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
     kDebug( 5970 ) << "write task" << task->name();
     err = writeTaskAsTodo( task, parents );
   }
 
-  if ( saveCalendar() != QString() ) err=saveCalendar();
+  err=saveCalendar();
 
   if ( err.isEmpty() )
   {
@@ -1034,7 +1035,7 @@ bool KarmStorage::remoteResource( const QString& file ) const
 
 QString KarmStorage::saveCalendar()
 {
-  kDebug(5970) <<"KarmStorage::saveCalendar";
+  kDebug(5970) << "Entering KarmStorage::saveCalendar";
 
   QString err=QString();
   KABC::Lock *lock = d->mCalendar->lock();

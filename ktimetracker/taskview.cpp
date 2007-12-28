@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -177,7 +176,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
          << i18n( "Total Session Time" ) << i18n( "Total Time" ) 
          << i18n( "Priority" ) << i18n( "Percent Complete" );
   setHeaderLabels( labels );
-  headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chose freely.");
+  headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
   setAllColumnsShowFocus( true );
   setSortingEnabled( true );
@@ -499,7 +498,8 @@ QString TaskView::reFreshTimes()
   int n=-1;
   while (itemAt(++n))
   {
-    itemAt(n)->resetTimes();
+    itemAt(n)->setTime(0, d->mStorage);
+    itemAt(n)->setSessionTime(0, d->mStorage);
   }
 
   KCal::Event::List eventList = storage()->rawevents();
@@ -513,9 +513,30 @@ QString TaskView::reFreshTimes()
       {
         KDateTime kdatetimestart = (*i)->dtStart();
         KDateTime kdatetimeend = (*i)->dtEnd();
-        int duration=kdatetimestart.secsTo(kdatetimeend)/60;
+        KDateTime kdatetimestart2 = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
+        KDateTime kdatetimeend2 = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
+        int duration=kdatetimestart2.secsTo(kdatetimeend2)/60;
         itemAt(n)->setTime(itemAt(n)->time()+duration,d->mStorage);
+	kDebug() << "setting time "<< itemAt(n)->time()+duration;
         kDebug(5970) << "duration is " << duration;
+
+        if ( itemAt(n)->sessionStartTiMe().isValid() )
+        {
+        // if there is a session
+          if ((itemAt(n)->sessionStartTiMe().secsTo(kdatetimestart2)>0) &&        
+              (itemAt(n)->sessionStartTiMe().secsTo(kdatetimeend2)>0))
+          // if the event is after the session start
+          {
+            int sessionTime=kdatetimestart2.secsTo(kdatetimeend2)/60;
+            itemAt(n)->setSessionTime(itemAt(n)->sessionTime()+sessionTime,d->mStorage);
+          }
+        }
+	else 
+	// so there is no session at all
+        {
+          int sessionTime=kdatetimestart2.secsTo(kdatetimeend2)/60;
+          itemAt(n)->setSessionTime(itemAt(n)->sessionTime()+sessionTime,d->mStorage);
+        };
       }
     }
   }
@@ -606,15 +627,18 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
   if (task != 0 && d->mActiveTasks.indexOf(task) == -1) 
   {
-    if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
-    _idleTimeDetector->startIdleDetection();
-    task->setRunning(true, d->mStorage, startTime);
-    d->mActiveTasks.append(task);
-    emit updateButtons();
-    if ( d->mActiveTasks.count() == 1 )
-        emit timersActive();
-
-    emit tasksChanged( d->mActiveTasks );
+    if (!task->isComplete())
+    {
+      if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
+      _idleTimeDetector->startIdleDetection();
+      task->setRunning(true, d->mStorage, startTime);
+      d->mActiveTasks.append(task);
+      emit updateButtons();
+      if ( d->mActiveTasks.count() == 1 )
+          emit timersActive();
+  
+      emit tasksChanged( d->mActiveTasks );
+    }
   }
 }
 
@@ -655,8 +679,7 @@ void TaskView::toggleFocusTracking()
 }
 
 void TaskView::startNewSession()
-/* This procedure starts a new session. Technically, a session is just an additionally 
-stored time that is always contain in the overall time. We speak of session times, 
+/* This procedure starts a new session. We speak of session times, 
 overalltimes (comprising all sessions) and total times (comprising all subtasks).
 That is why there is also a total session time. */
 {

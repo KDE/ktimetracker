@@ -79,7 +79,7 @@ class TaskView : public QTreeWidget
     /** Reset session and total time to zero for all tasks.  */
     void resetTimeForAllTasks();
 
-    /** Return the total number if items in the view.  */
+    /** Return the total number of items in the view.  */
     long count();
 
     /** Return list of start/stop events for given date range. */

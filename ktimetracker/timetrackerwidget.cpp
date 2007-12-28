@@ -24,6 +24,7 @@
 #include <QDBusConnection>
 #include <QFileInfo>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QKeySequence>
 #include <QMap>
 #include <QTimer>
@@ -103,6 +104,8 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   innerLayout->setSpacing( KDialog::spacingHint() );
   d->mSearchWidget = new KTreeWidgetSearchLine( d->mSearchLine );
   d->mSearchWidget->setClickMessage( i18n( "Search or add task" ) );
+  d->mSearchWidget->setWhatsThis( i18n( "This is a combined field. As long as you do not type ENTER, it acts as a filter. Then, only tasks that match your input are shown. As soon as you type ENTER, your input is used as name to create a new task." ) );
+  d->mSearchWidget->installEventFilter( this );
   innerLayout->addWidget( d->mSearchWidget );
   d->mSearchLine->setLayout( innerLayout );
 
@@ -113,8 +116,6 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
 
   d->mTabWidget->setFocus( Qt::OtherFocusReason );
 
-  connect( d->mSearchWidget, SIGNAL( returnPressed( const QString& ) ),
-           this, SLOT( slotAddTask( const QString& ) ) );
   connect( d->mTabWidget, SIGNAL( currentChanged( int ) ), 
            this, SIGNAL( currentTaskViewChanged() ) );
   connect( d->mTabWidget, SIGNAL( currentChanged( int ) ),
@@ -123,6 +124,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
            this, SLOT( newFile() ) );
 
   showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
+  showTabBar( false );
 }
 
 TimetrackerWidget::~TimetrackerWidget()
@@ -136,9 +138,10 @@ TimetrackerWidget::~TimetrackerWidget()
 
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
+  kDebug(5970) << "Entering TimetrackerWidget::addTaskView(fileName=" << fileName << ")";
   bool isNew = fileName.isEmpty();
   QString lFileName = fileName;
-
+  
   if ( isNew ) {
     KTemporaryFile tempFile;
     tempFile.setAutoRemove( false );
@@ -178,6 +181,11 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
   {
     emit currentTaskViewChanged();
     slotCurrentChanged();
+  }
+
+  if ( d->mTabWidget->count() > 1 )
+  {
+    showTabBar( true );
   }
 }
 
@@ -250,57 +258,59 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
                                   actionCollection ) );
 
   Private::ActionData actions[] = {
-    { QString(), "Start &New Session", SLOT( startNewSession() ),
-      "start_new_session", "Starts a new session", "This will reset the "
+    { QString(), I18N_NOOP("Start &New Session"), SLOT( startNewSession() ),
+      "start_new_session", I18N_NOOP("Starts a new session"), I18N_NOOP("This will reset the "
       "session time to 0 for all tasks, to start a new session, without "
-      "affecting the totals." },
-    { "history", "Edit History...", SLOT( editHistory() ), "edit_history",
-      "Edits history of all tasks of the current document", "A window will "
+      "affecting the totals.") },
+    { "view-history", I18N_NOOP("Edit History..."), SLOT( editHistory() ), "edit_history",
+      I18N_NOOP("Edits history of all tasks of the current document"), I18N_NOOP("A window will "
       "be opened where you can change start and stop times of tasks or add a "
-      "comment to them." },
-    { QString(), "&Reset All Times", SLOT( resetAllTimes() ),
-      "reset_all_times", "Resets all times", "This will reset the session "
-      "and total time to 0 for all tasks, to restart from scratch." },
-    { "arrow-right", "&Start", SLOT( startCurrentTimer() ), "start",
-      "Starts timing for selected task", "This will start timing for the "
+      "comment to them.") },
+    { QString(), I18N_NOOP("&Reset All Times"), SLOT( resetAllTimes() ),
+      "reset_all_times", I18N_NOOP("Resets all times"), I18N_NOOP("This will reset the session "
+      "and total time to 0 for all tasks, to restart from scratch.") },
+    { "media-playback-start", I18N_NOOP("&Start"), SLOT( startCurrentTimer() ), "start",
+      I18N_NOOP("Starts timing for selected task"), I18N_NOOP("This will start timing for the "
       "selected task.\nIt is even possible to time several tasks "
       "simultanously.\n\nYou may also start timing of tasks by double clicking "
       "the left mouse button on a given task. This will, however, stop timing "
-      "of other tasks." },
-    { "process-stop", "S&top", SLOT( stopCurrentTimer() ), "stop", "Stops "
-      "timing of the selected task", "Stops timing of the selected task" },
-    { QString(), "Stop &All Timers", SLOT( stopAllTimers() ), "stopAll",
-      "Stops all of the active timers", "Stops all of the active timers" },
-    { QString(), "Track Active Applications", SLOT( focusTracking() ),
-      "focustracking", "Auto-creates and updates tasks when the focus of the "
-       "current window has changed", "If the focus of a window changes for the "
+      "of other tasks.") },
+    { "media-playback-stop", I18N_NOOP("S&top"), SLOT( stopCurrentTimer() ), "stop",
+      I18N_NOOP("Stops timing of the selected task"), I18N_NOOP("Stops timing of the selected task") },
+    { QString(), I18N_NOOP("Stop &All Timers"), SLOT( stopAllTimers() ), "stopAll",
+      I18N_NOOP("Stops all of the active timers"), I18N_NOOP("Stops all of the active timers") },
+    { QString(), I18N_NOOP("Track Active Applications"), SLOT( focusTracking() ),
+      "focustracking", I18N_NOOP("Auto-creates and updates tasks when the focus of the "
+       "current window has changed"), I18N_NOOP("If the focus of a window changes for the "
        "first time when this action is enabled, a new task will be created "
        "with the title of the window as its name and will be started. If there "
-       "already exists such an task it will be started." },
-    { "document-new", "&New Task...", SLOT( newTask() ), "new_task", "Creates "
-      "new top level task", "This will create a new top level task." },
-    { "new-subtask", "New &Subtask...", SLOT( newSubTask() ), "new_sub_task",
-      "Creates a new subtask to the current selected task", "This will create "
-      "a new subtask to the current selected task." },
-    { "edit-delete", "&Delete", SLOT( deleteTask() ), "delete_task", "Deletes "
-      "selected task", "This will delete the selected task and all its "
-      "subtasks." },
-    { "edit", "&Edit...", SLOT( editTask() ), "edit_task", "Edits name or "
-      "times for selected task", "This will bring up a dialog box where you "
-       "may edit the parameters for the selected task." },
-    { "", "&Mark as Complete", SLOT( markTaskAsComplete() ), "mark_as_complete", 
-      "", "" },
-    { "", "&Mark as Incomplete", SLOT( markTaskAsIncomplete() ),
+       "already exists such an task it will be started.") },
+    { "document-new", I18N_NOOP("&New Task..."), SLOT( newTask() ), "new_task", I18N_NOOP("Creates "
+      "new top level task"), I18N_NOOP("This will create a new top level task.") },
+    { "subtask-new-ktimetracker", I18N_NOOP("New &Subtask..."), SLOT( newSubTask() ),
+      "new_sub_task", I18N_NOOP("Creates a new subtask to the current selected task"),
+      I18N_NOOP("This will create a new subtask to the current selected task.") },
+    { "edit-delete", I18N_NOOP("&Delete"), SLOT( deleteTask() ), "delete_task", I18N_NOOP("Deletes "
+      "selected task"), I18N_NOOP("This will delete the selected task and all its "
+      "subtasks.") },
+    { "document-properties", I18N_NOOP("&Edit..."), SLOT( editTask() ), "edit_task",
+      I18N_NOOP("Edits name or times for selected task"), I18N_NOOP("This will bring up a dialog "
+      "box where you may edit the parameters for the selected task.") },
+    { QString(), I18N_NOOP("&Mark as Complete"), SLOT( markTaskAsComplete() ),
+      "mark_as_complete", "", "" },
+    { QString(), I18N_NOOP("&Mark as Incomplete"), SLOT( markTaskAsIncomplete() ),
       "mark_as_incomplete", "", "" },
-    { "", "&Export Times...", SLOT( exportcsvFile() ), "export_times", "", "" },
-    { "", "Export &History...", SLOT( exportcsvHistory() ), "export_history",
+    { QString(), I18N_NOOP("&Export Times..."), SLOT( exportcsvFile() ), "export_times",
       "", "" },
-    { "", "Import Tasks From &Planner...", SLOT( importPlanner() ),
+    { QString(), I18N_NOOP("Export &History..."), SLOT( exportcsvHistory() ),
+      "export_history", "", "" },
+    { QString(), I18N_NOOP("Import Tasks From &Planner..."), SLOT( importPlanner() ),
       "import_planner", "", "" },
-    { "", "Show Searchbar", SLOT( slotSearchBar() ), "searchbar", "", "" }
+    { QString(), I18N_NOOP("Show Searchbar"), SLOT( slotSearchBar() ), "searchbar",
+      "", "" }
   };
 
-  for ( int i = 0; 
+  for ( unsigned int i = 0; 
         i < ( sizeof( actions ) / sizeof( Private::ActionData ) ); ++i ) 
   {
     Private::ActionData actionData = actions[i];
@@ -386,6 +396,7 @@ void TimetrackerWidget::openFile( const KUrl &fileName )
 
 bool TimetrackerWidget::closeFile()
 {
+  kDebug(5970) << "Entering TimetrackerWidget::closeFile";
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
   // is it an unsaved file?
@@ -396,20 +407,24 @@ bool TimetrackerWidget::closeFile()
 
     int result = KMessageBox::questionYesNoCancel( this, message, caption );
 
-    if ( result == KMessageBox::Cancel ) {
+    if ( result == KMessageBox::Cancel ) 
+    {
       return false;
     }
 
-    if ( result == KMessageBox::Yes ) {
-      if ( !saveCurrentTaskView() ) {
+    if ( result == KMessageBox::Yes ) 
+    {
+      if ( !saveCurrentTaskView() ) 
+      {
         return false;
       }
-    } else { // result == No
+    } 
+    else 
+    { // result == No
       d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
     }
   }
 
-  taskView->stopAllTimers();
   taskView->save();
   taskView->closeStorage();
 
@@ -419,9 +434,16 @@ bool TimetrackerWidget::closeFile()
   /* emit signals and call slots since currentChanged is not emitted if
    * we close the last tab
    */
-  if ( d->mTabWidget->count() == 0 ) {
+  if ( d->mTabWidget->count() == 0 ) 
+  {
     emit currentTaskViewChanged();
     slotCurrentChanged();
+  }
+
+  /* hide the tabbar if there's only one tab left */
+  if ( d->mTabWidget->count() < 2 ) 
+  {
+    showTabBar( false );
   }
 
   delete taskView; // removeTab does not delete its widget.
@@ -444,6 +466,11 @@ void TimetrackerWidget::saveFile()
   // a error message signal.
 }
 
+void TimetrackerWidget::showTabBar( bool visible )
+{
+  d->mTabWidget->setTabBarHidden( !visible );
+}
+
 void TimetrackerWidget::reconfigureFiles()
 {
   TaskView *taskView;
@@ -462,6 +489,7 @@ void TimetrackerWidget::showSearchBar( bool visible )
 
 bool TimetrackerWidget::closeAllFiles()
 {
+  kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
   while ( d->mTabWidget->count() > 0 ) 
   {
     TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( 0 ) );
@@ -524,6 +552,25 @@ void TimetrackerWidget::updateTabs()
   }
 }
 
+bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
+{
+  if ( obj == d->mSearchWidget ) 
+  {
+    if ( event->type() == QEvent::KeyPress ) 
+    {
+      QKeyEvent *keyEvent = static_cast< QKeyEvent* >( event );
+      if ( keyEvent->key() == Qt::Key_Enter ||
+           keyEvent->key() == Qt::Key_Return ) 
+      {
+        if ( d->mSearchWidget->displayText() != QString() ) slotAddTask( d->mSearchWidget->displayText() );
+        return true;
+      }
+    }
+  }
+
+  return QObject::eventFilter( obj, event );
+}
+
 void TimetrackerWidget::slotAddTask( const QString &taskName )
 {
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
@@ -581,13 +628,13 @@ void TimetrackerWidget::showSettingsDialog()
   displayUi->setupUi( displayPage );
   dialog->addPage( displayPage, 
                    i18nc( "settings page for customizing user interface", 
-                          "Display" ), 
-                   "zoom-original" );
+                          "Appearance" ),
+                          "preferences-desktop-default-applications" );
 
   Ui::StoragePage *storageUi = new Ui::StoragePage;
   QWidget *storagePage = new QWidget;
   storageUi->setupUi( storagePage );
-  dialog->addPage( storagePage, i18n( "Storage" ), "kfm" );
+  dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
 
   dialog->exec();
   reconfigureFiles();
@@ -691,7 +738,7 @@ void TimetrackerWidget::editHistory()
   {
     EditHistoryDialog *dlg = new EditHistoryDialog( qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) );
     if (currentTaskView()->storage()->rawevents().count()!=0) dlg->exec();
-    else KMessageBox::information(0,"There is no history yet. Start and stop a task and you will have an entry in your history.");
+    else KMessageBox::information(0, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
   }
 }
 
@@ -1033,7 +1080,8 @@ void TimetrackerWidget::saveAll()
     if ( !taskView ) continue;
 
     // is it an unsaved file?
-    if ( d->mIsNewVector.contains( taskView ) ) {
+    if ( d->mIsNewVector.contains( taskView ) ) 
+    {
       saveCurrentTaskView();
     }
 
@@ -1041,9 +1089,22 @@ void TimetrackerWidget::saveAll()
   }
 }
 
+bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
+{
+  if (event->type()==QEvent::QueryWhatsThis)
+  {
+    if ( d->mLastView->count() == 0 ) 
+      setWhatsThis( i18n("This is ktimetracker, KDE's program to help you track your time. Best, start with creating your first task - enter it into the field where you see \"search or add task\".") );
+    else setWhatsThis( i18n("You have already created a task. You can now start and stop timing") );
+  }  
+  return QWidget::event(event);
+}
+
 void TimetrackerWidget::quit()
 {
-  if ( closeAllFiles() ) {
+  kDebug(5970) << "Entering TimetrackerWidget::quit";
+  if ( closeAllFiles() ) 
+  {
     kapp->quit();
   }
 }
