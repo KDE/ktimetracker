@@ -25,6 +25,7 @@
 #include <QAction>
 #include <QTreeView>
 #include <QHeaderView>
+
 #include <KMenu>
 
 #include <KDebug>

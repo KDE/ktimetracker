@@ -31,7 +31,6 @@ Compile it like this:
 g++ -I/home/kde-devel/qt-unstable/include/Qt -I/home/kde-devel/qt-unstable/include -I/home/kde-devel/qt-unstable/include/QtCore -I/home/kde-devel/qt-unstable/include/QtGui -I/home/kde-devel/kde/include -lQtCore_debug -L/home/kde-devel/qt-unstable/lib -L/home/kde-devel/kde/lib -lkdeui karm.cpp -o karm
 */
 
-#include <QString>
 #include <kapplication.h>
 #include <kaboutdata.h>
 #include <kmessagebox.h>

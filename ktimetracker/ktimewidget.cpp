@@ -27,7 +27,6 @@
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QLabel>
-#include <QLayout>
 #include <QString>
 #include <QValidator>
 #include <QWidget>

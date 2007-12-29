@@ -23,13 +23,10 @@
 #include "focusdetector.h"
 #include "karmutility.h"
 
-#include <QProcess>
-#include <QTimer>
 
 #include <KDebug>
 
 #ifdef Q_WS_X11
-#include <QX11Info>
 #endif
 
 FocusDetector::FocusDetector( int periodFocus )

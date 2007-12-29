@@ -27,22 +27,17 @@
 #include <QString>
 
 #include <KAction>
-#include <KActionCollection>
 #include <KApplication>       // kapp
 #include <KDebug>
-#include <KFileDialog>
 #include <KGlobal>
 #include <KIcon>
-#include <KIconLoader>
 #include <KLocale>            // i18n
-#include <KMessageBox>
 #include <KPushButton>
 #include <KShortcutsDialog>
 #include <KStandardAction>
-#include <KStandardGuiItem>
 #include <KStatusBar>         // statusBar()
-#include <KUrl>
 #include <KXMLGUIFactory>
+#include <KActionCollection>
 
 #include "karmutility.h"
 #include "ktimetracker.h"

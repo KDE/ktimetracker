@@ -29,9 +29,7 @@
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QLayout>
 #include <QRadioButton>
-#include <QSizePolicy>
 #include <QString>
 #include <QVBoxLayout>
 #include <QWidget>

@@ -26,8 +26,6 @@
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QLayout>
-#include <QLineEdit>
 #include <QVBoxLayout>
 
 #include <KComboBox>

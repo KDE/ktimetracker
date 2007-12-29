@@ -22,15 +22,12 @@
 
 #include "csvexportdialog.h"
 
-#include <QComboBox>
-#include <QRadioButton>
 
 #include <KDebug>
 #include <KGlobal>
-#include <KLineEdit>
 #include <KLocale>
 #include <KPushButton>
-#include <KUrlRequester>
+#include <KLineEdit>
 
 #include "kdateedit.h"
 

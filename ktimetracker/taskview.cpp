@@ -23,24 +23,17 @@
 
 #include <cassert>
 
-#include <QClipboard>
 #include <QFile>
-#include <QLayout>
-#include <QHeaderView>
 #include <QItemDelegate>
 #include <QMenu>
 #include <QPainter>
 #include <QString>
-#include <QTableWidget>
-#include <QTextStream>
 #include <QTimer>
-#include <QtXml/QtXml>
 #include <QMouseEvent>
 #include <QList>
-#include <QListWidget>
+#include <QClipboard>
 
 #include <KApplication>       // kapp
-#include <KConfig>
 #include <KDebug>
 #include <KFileDialog>
 #include <KLocale>            // i18n

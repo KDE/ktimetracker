@@ -27,20 +27,18 @@
 #include <QKeyEvent>
 #include <QKeySequence>
 #include <QMap>
-#include <QTimer>
 #include <QVBoxLayout>
 #include <QVector>
 
+#include <KApplication>
 #include <KAction>
 #include <KActionCollection>
-#include <KApplication>
 #include <KConfig>
 #include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
 #include <KIcon>
-#include <KIconLoader>
 #include <KLocale>
 #include <KMessageBox>
 #include <KRecentFilesAction>
