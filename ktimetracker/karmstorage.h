@@ -173,7 +173,7 @@ class KarmStorage
      * attempted file lock failed).
      */
     bool bookTime(const Task* task, const QDateTime& startDateTime,
-                  long durationInSeconds);
+                  const long durationInSeconds);
 
     /**
      * Log a change to a task name.

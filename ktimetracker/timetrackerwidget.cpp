@@ -27,20 +27,18 @@
 #include <QKeyEvent>
 #include <QKeySequence>
 #include <QMap>
-#include <QTimer>
 #include <QVBoxLayout>
 #include <QVector>
 
+#include <KApplication>
 #include <KAction>
 #include <KActionCollection>
-#include <KApplication>
 #include <KConfig>
 #include <KConfigDialog>
 #include <KDebug>
 #include <KFileDialog>
 #include <KGlobal>
 #include <KIcon>
-#include <KIconLoader>
 #include <KLocale>
 #include <KMessageBox>
 #include <KRecentFilesAction>
@@ -621,7 +619,7 @@ void TimetrackerWidget::showSettingsDialog()
   Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
   QWidget *behaviorPage = new QWidget;
   behaviorUi->setupUi( behaviorPage );
-  dialog->addPage( behaviorPage, i18n( "Behavior" ), "gear" );
+  dialog->addPage( behaviorPage, i18n( "Behavior" ), "preferences-other" );
 
   Ui::DisplayPage *displayUi = new Ui::DisplayPage;
   QWidget *displayPage = new QWidget;
@@ -629,7 +627,7 @@ void TimetrackerWidget::showSettingsDialog()
   dialog->addPage( displayPage, 
                    i18nc( "settings page for customizing user interface", 
                           "Appearance" ),
-                          "preferences-desktop-default-applications" );
+                          "preferences-desktop-theme" );
 
   Ui::StoragePage *storageUi = new Ui::StoragePage;
   QWidget *storagePage = new QWidget;

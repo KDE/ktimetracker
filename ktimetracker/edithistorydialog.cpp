@@ -21,11 +21,11 @@
 
 #include "edithistorydialog.h"
 
-#include <QHeaderView>
 #include <QItemDelegate>
 #include <QModelIndex>
 #include <QStyleOptionViewItem>
 #include <QTableWidget>
+#include <QHeaderView>
 
 #include <KDateTimeWidget>
 #include <KDebug>

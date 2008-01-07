@@ -22,23 +22,17 @@
 
 #include "karm_part.h"
 
-#include <QByteArray>
-#include <QFile>
 #include <QMenu>
-#include <QTextStream>
-#include <QtDBus>
 
 #include <KAboutData>
 #include <KAction>
-#include <KActionCollection>
 #include <KComponentData>
-#include <KFileDialog>
 #include <KGlobal>
-#include <KIcon>
 #include <KLocale>
 #include <KStandardAction>
 #include <KStandardDirs>
 #include <KXMLGUIFactory>
+#include <KActionCollection>
 
 #include <kdemacros.h>
 

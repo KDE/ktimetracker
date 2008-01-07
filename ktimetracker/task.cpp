@@ -27,7 +27,6 @@
 #include <QTimer>
 #include <QPixmap>
 
-#include <KApplication>
 #include <KDebug>
 #include <KIconLoader>
 

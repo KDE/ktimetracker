@@ -33,12 +33,11 @@
 #include <QString>
 #include <QTimer>
 #include <QToolTip>
+#include <QMenu>
 
 #include <KAction>
 #include <KGlobalSettings>
-#include <KIconLoader>
 #include <KLocale>
-#include <KMenu>
 
 #include "mainwindow.h"
 #include "task.h"

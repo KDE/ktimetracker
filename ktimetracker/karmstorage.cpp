@@ -31,10 +31,8 @@
 #include <QByteArray>
 #include <QDateTime>
 #include <QFile>
-#include <QHeaderView>
 #include <QList>
 #include <QMultiHash>
-#include <QProgressBar>
 #include <QSize>
 #include <QString>
 #include <QStringList>
@@ -44,8 +42,6 @@
 #include <KApplication>       // kapp
 #include <KDebug>
 #include <KLocale>            // i18n
-#include <KMessageBox>
-#include <KPasswordDialog>
 #include <KProgressDialog>
 #include <KUrl>
 #include <KTemporaryFile>

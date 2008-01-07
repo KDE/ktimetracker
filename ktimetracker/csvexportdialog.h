@@ -34,8 +34,8 @@ public:
 
     setMainWidget( page );
     setButtons( KDialog::User1 | KDialog::Ok | KDialog::Cancel );
-    setButtonText( KDialog::Ok, "&Export" );
-    setButtonText( KDialog::User1, "E&xport to Clipboard" );
+    setButtonText( KDialog::Ok, i18nc("@action:button", "&Export") );
+    setButtonText( KDialog::User1, i18nc("@action:button", "E&xport to Clipboard") );
     setButtonIcon( KDialog::User1, KIcon( "klipper" ) );
     enableButton( KDialog::Ok, false );
   }
