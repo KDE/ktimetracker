@@ -90,16 +90,13 @@ int main( int argc, char *argv[] )
   }
   else
   {
-    KStandardDirs tmp;
-    tmp.localkdedir();
-    QString newKarmFile(tmp.localkdedir() + "/share/apps/ktimetracker/karm.ics" );
+    QString newKarmFile(KStandardDirs::locate( "data", "ktimetracker/karm.ics" ));
     if ( !QFile::exists( newKarmFile ) )
     {
-      QFile oldFile( tmp.localkdedir() + "/share/apps/karm/karm.ics" );
+      QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
+      newKarmFile = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
       if ( oldFile.exists() )
         oldFile.copy( newKarmFile );
-      else
-        newKarmFile = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
     }
     mainWindow = new MainWindow( newKarmFile );
   }
