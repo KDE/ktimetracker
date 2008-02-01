@@ -21,7 +21,7 @@
  */
 
 #include <signal.h>
-
+#include <QFile>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KDebug>
@@ -31,7 +31,7 @@
 
 #include "version.h"
 #include "mainwindow.h"
-
+#include <QDebug>
 
 namespace
 {
@@ -71,10 +71,10 @@ int main( int argc, char *argv[] )
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
   MainWindow *mainWindow;
-  if ( args->count() > 0 ) 
+  if ( args->count() > 0 )
   {
     QString icsfile = args->arg( 0 );
-    
+
     KUrl* icsfileurl=new KUrl(args->arg( 0 ));
     if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
     {
@@ -90,8 +90,18 @@ int main( int argc, char *argv[] )
   }
   else
   {
-    mainWindow = new MainWindow( KStandardDirs::locateLocal( "appdata", 
-                                 QString::fromLatin1( "karm.ics" ) ) );
+    KStandardDirs tmp;
+    tmp.localkdedir();
+    QString newKarmFile(tmp.localkdedir() + "/share/apps/ktimetracker/karm.ics" );
+    if ( !QFile::exists( newKarmFile ) )
+    {
+      QFile oldFile( tmp.localkdedir() + "/share/apps/karm/karm.ics" );
+      if ( oldFile.exists() )
+        oldFile.copy( newKarmFile );
+      else
+        newKarmFile = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
+    }
+    mainWindow = new MainWindow( newKarmFile );
   }
 
   if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
