@@ -251,6 +251,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 
   reconfigure();
   sortByColumn( 0, Qt::AscendingOrder );
+  for (int i=0; i<=columnCount(); i++) resizeColumnToContents(i);
 }
 
 void TaskView::newFocusWindowDetected( const QString &taskName )
