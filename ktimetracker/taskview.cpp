@@ -420,6 +420,7 @@ void TaskView::load( const QString &fileName )
     kDebug(5970) <<"load calls refesh";
     refresh();
   }
+  for (int i=0; i<=columnCount(); i++) resizeColumnToContents(i);
   kDebug(5970) <<"Leaving TaskView::load";
 }
 
