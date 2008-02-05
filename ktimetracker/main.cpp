@@ -48,7 +48,7 @@ int main( int argc, char *argv[] )
 {
   KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
       KTIMETRACKER_VERSION, ki18n(description), KAboutData::License_GPL,
-      ki18n("(c) 1997-2007, KDE PIM Developers") );
+      ki18n("(c) 1997-2008, KDE PIM Developers") );
 
   aboutData.addAuthor( ki18n("Thorsten St&auml;rk"), ki18n( "Current Maintainer" ),
                        "kde@staerk.de" );
