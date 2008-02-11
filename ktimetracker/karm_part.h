@@ -53,11 +53,12 @@ class karmPart : public KParts::ReadWritePart
     friend class TrayIcon;
 
 public:
-    karmPart(QWidget *parentWidget, QObject *parent);
+    karmPart(QWidget *parentWidget, QObject *parent, const QStringList&);
 
     void taskViewCustomContextMenuRequested( const QPoint& );
 
     virtual ~karmPart();
+    static KAboutData *createAboutData();
 protected:
     virtual bool saveFile();
     virtual bool openFile();
@@ -65,24 +66,6 @@ protected:
 public Q_SLOTS:
    void setStatusBar(const QString & qs);
 
-};
-
-class KComponentData;
-class KAboutData;
-
-class karmPartFactory : public KParts::Factory
-{
-    Q_OBJECT
-public:
-    karmPartFactory();
-    virtual ~karmPartFactory();
-    virtual KParts::Part* createPartObject( QWidget *parentWidget, QObject *parent,
-                                            const char *classname, const QStringList &args );
-    static const KComponentData &componentData();
-
-private:
-    static KComponentData *s_instance;
-    static KAboutData* s_about;
 };
 
 #endif // _KARMPART_H_

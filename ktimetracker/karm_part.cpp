@@ -35,7 +35,7 @@
 #include <KActionCollection>
 
 #include <kdemacros.h>
-
+#include <kparts/genericfactory.h>
 #include "mainwindow.h"
 #include "kaccelmenuwatch.h"
 #include "karmerrors.h"
@@ -46,7 +46,11 @@
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
-karmPart::karmPart( QWidget *parentWidget, QObject *parent )
+typedef KParts::GenericFactory<karmPart> karmPartFactory;
+
+K_EXPORT_COMPONENT_FACTORY( karmPart, karmPartFactory)
+
+karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QStringList& )
     : KParts::ReadWritePart(parent)
 {
   // we need an instance
@@ -85,6 +89,16 @@ karmPart::~karmPart()
 {
 }
 
+KAboutData *karmPart::createAboutData()
+{
+  const QByteArray& ba=QByteArray("test");
+  const KLocalizedString name=ki18n("myName");
+  KAboutData* aboutData=new KAboutData( ba, ba, name, ba, name);
+  return aboutData;
+  //return KABCore::createAboutData();
+  #warning not implemented
+}
+
 void karmPart::makeMenus()
 {
   mMainWidget->setupActions( actionCollection() );
@@ -119,50 +133,6 @@ bool karmPart::saveFile()
   mMainWidget->saveFile();
 
   return true;
-}
-
-// It's usually safe to leave the factory code alone.. with the
-// notable exception of the KAboutData data
-KComponentData *karmPartFactory::s_instance = 0L;
-KAboutData* karmPartFactory::s_about = 0L;
-
-karmPartFactory::karmPartFactory()
-    : KParts::Factory()
-{
-}
-
-karmPartFactory::~karmPartFactory()
-{
-    delete s_instance;
-    delete s_about;
-
-    s_instance = 0L;
-}
-
-KParts::Part* karmPartFactory::createPartObject( QWidget *parentWidget, QObject *parent,
-                                                 const char* classname, const QStringList &args )
-{
-  Q_UNUSED( args );
-
-  // Create an instance of our Part
-  karmPart* obj = new karmPart( parentWidget, parent );
-
-  // See if we are to be read-write or not
-  if ( QLatin1String( classname ) == QLatin1String( "KParts::ReadOnlyPart" ) )
-      obj->setReadWrite(false);
-
-  return obj;
-}
-
-const KComponentData &karmPartFactory::componentData()
-{
-    if( !s_instance )
-    {
-        s_about = new KAboutData("karmpart", 0, ki18n("karmPart"), "0.1");
-        s_about->addAuthor(ki18n("Thorsten Staerk"), KLocalizedString(), "thorsten@staerk.de");
-        s_instance = new KComponentData(s_about);
-    }
-    return *s_instance;
 }
 
 extern "C"
