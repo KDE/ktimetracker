@@ -37,7 +37,6 @@
 #include <kdemacros.h>
 #include <kparts/genericfactory.h>
 #include "mainwindow.h"
-#include "kaccelmenuwatch.h"
 #include "karmerrors.h"
 #include "task.h"
 #include "preferences.h"

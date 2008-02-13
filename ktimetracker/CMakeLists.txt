@@ -10,9 +10,10 @@ add_subdirectory( test )
 
 include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/remote  )
 
+
 ########### next target ###############
 set(karm_shared_SRCS 
-	kaccelmenuwatch.cpp desktoptracker.cpp 
+	desktoptracker.cpp 
 	edittaskdialog.cpp idletimedetector.cpp 
 	printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp
 	karmstorage.cpp mainwindow.cpp preferences.cpp 
@@ -58,14 +59,9 @@ install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### next target ###############
 
-
-########### next target ###############
-
 set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
 
 kde4_add_plugin(karmpart ${karmpart_PART_SRCS})
-
-
 
 target_link_libraries(karmpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} kdepim kcal_resourceremote)
 if(X11_Xscreensaver_LIB)
