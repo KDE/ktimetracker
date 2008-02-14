@@ -134,6 +134,17 @@ TimetrackerWidget::~TimetrackerWidget()
   delete d;
 }
 
+void TimetrackerWidget::saveProperties( KConfigGroup &cfg )
+{
+  cfg.writeEntry( "WindowShown", isVisible());
+}
+
+void TimetrackerWidget::readProperties( const KConfigGroup &cfg )
+{
+  if( cfg.readEntry( "WindowShown", true ))
+    show();
+}
+
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
   kDebug(5970) << "Entering TimetrackerWidget::addTaskView(fileName=" << fileName << ")";

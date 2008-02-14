@@ -77,8 +77,6 @@ class MainWindow : public KParts::MainWindow
 
   protected:
     void startStatusBar();
-    virtual void saveProperties( KConfigGroup& );
-    virtual void readProperties( const KConfigGroup& );
     void saveGeometry();
     void loadGeometry();
     bool queryClose();

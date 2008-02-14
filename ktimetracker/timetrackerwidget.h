@@ -22,8 +22,8 @@
 #ifndef TIMETRACKER_WIDGET_H
 #define TIMETRACKER_WIDGET_H
 
+#include <kconfiggroup.h>
 #include <QWidget>
-
 #include <QDateTime>
 
 class KAction;
@@ -39,6 +39,8 @@ class TimetrackerWidget : public QWidget {
   public:
     explicit TimetrackerWidget( QWidget *parent = 0 );
     ~TimetrackerWidget();
+    virtual void saveProperties( KConfigGroup& );
+    virtual void readProperties( const KConfigGroup& );
 
   private:
     void addTaskView( const QString &fileName = "" );

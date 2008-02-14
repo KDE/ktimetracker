@@ -150,17 +150,6 @@ void MainWindow::startStatusBar()
   statusBar()->insertPermanentItem( i18nc( "total time of all tasks", "Total" ), 1, 0);
 }
 
-void MainWindow::saveProperties( KConfigGroup &cfg )
-{
-  cfg.writeEntry( "WindowShown", isVisible());
-}
-
-void MainWindow::readProperties( const KConfigGroup &cfg )
-{
-  if( cfg.readEntry( "WindowShown", true ))
-    show();
-}
-
 void MainWindow::keyBindings()
 {
   KShortcutsDialog::configure( actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this );

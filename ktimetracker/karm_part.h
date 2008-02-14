@@ -56,6 +56,7 @@ public:
     karmPart(QWidget *parentWidget, QObject *parent, const QStringList&);
 
     void taskViewCustomContextMenuRequested( const QPoint& );
+    TimetrackerWidget* MainWidget() { return mMainWidget; };
 
     virtual ~karmPart();
     static KAboutData *createAboutData();
