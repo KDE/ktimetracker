@@ -495,10 +495,9 @@ QString TaskView::reFreshTimes()
 
   KCal::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
   int n=-1;
+  resetTimeForAllTasks();
   while (itemAt(++n)) // loop over all tasks
   {
-    itemAt(n)->setTime( 0 );
-    itemAt(n)->setSessionTime( 0 );
     for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
     {
       if ( (*i)->relatedToUid() == itemAt(n)->uid() ) // if event i belongs to task n
