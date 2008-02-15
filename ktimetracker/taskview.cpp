@@ -489,47 +489,43 @@ QString TaskView::reFreshTimes()
 /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
 {
   kDebug(5970) << "Entering reFreshTimes()";
-  QString err=QString();
+  QString err;
+
+  // re-calculate the time for every task based on events in the history
+
+  KCal::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
   int n=-1;
-  while (itemAt(++n))
+  while (itemAt(++n)) // loop over all tasks
   {
     itemAt(n)->setTime( 0 );
     itemAt(n)->setSessionTime( 0 );
-  }
-
-  KCal::Event::List eventList = storage()->rawevents();
-  n=-1;
-  while (itemAt(++n))
-  {
-    itemAt(n)->setTime( 0 );
-    for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) 
+    for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
     {
-      if ( (*i)->relatedToUid() == itemAt(n)->uid() ) 
+      if ( (*i)->relatedToUid() == itemAt(n)->uid() ) // if event i belongs to task n
       {
         KDateTime kdatetimestart = (*i)->dtStart();
         KDateTime kdatetimeend = (*i)->dtEnd();
-        KDateTime kdatetimestart2 = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
-        KDateTime kdatetimeend2 = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
-        int duration=kdatetimestart2.secsTo( kdatetimeend2 )/60;
+        KDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
+        KDateTime eventend = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
+        int duration=eventstart.secsTo( eventend )/60;
         itemAt(n)->setTime( itemAt(n)->time()+duration );
-	kDebug() << "setting time "<< itemAt(n)->time()+duration;
         kDebug(5970) << "duration is " << duration;
 
         if ( itemAt(n)->sessionStartTiMe().isValid() )
         {
         // if there is a session
-          if ((itemAt(n)->sessionStartTiMe().secsTo( kdatetimestart2 )>0) &&        
-              (itemAt(n)->sessionStartTiMe().secsTo( kdatetimeend2 )>0))
+          if ((itemAt(n)->sessionStartTiMe().secsTo( eventstart )>0) &&        
+              (itemAt(n)->sessionStartTiMe().secsTo( eventend )>0))
           // if the event is after the session start
           {
-            int sessionTime=kdatetimestart2.secsTo( kdatetimeend2 )/60;
+            int sessionTime=eventstart.secsTo( eventend )/60;
             itemAt(n)->setSessionTime( itemAt(n)->sessionTime()+sessionTime );
           }
         }
 	else 
 	// so there is no session at all
         {
-          int sessionTime=kdatetimestart2.secsTo( kdatetimeend2 )/60;
+          int sessionTime=eventstart.secsTo( eventend )/60;
           itemAt(n)->setSessionTime( itemAt(n)->sessionTime()+sessionTime );
         };
       }
