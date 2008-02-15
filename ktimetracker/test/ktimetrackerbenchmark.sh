@@ -11,10 +11,15 @@ time(
 
   # start ktimetracker and make sure its dbus interface is ready
   ktimetracker /tmp/ktimetrackerbenchmark.ics & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done                                                      
+  for n in $(seq 1 1 2)
+  do 
+    # add 300 tasks
+    for i in $(seq 1 1 300)
+    do qdbus org.kde.ktimetracker /KTimeTracker addTask task$n-$i
+      qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.startTimerFor $(qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.taskIdsFromName task$n-$i); 
+    done 
+    qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.saveAll
+    qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.stopAllTimersDBUS
+  done 
   
-  # add 300 tasks
-  for i in $(seq 1 1 300); do qdbus org.kde.ktimetracker /KTimeTracker addTask task$i; done 
-  qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.saveAll
-  for i in $(seq 1 1 300); do qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.startTimerFor $(qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.taskIdsFromName task$i); done  
-  qdbus org.kde.ktimetracker /KTimeTracker  org.kde.ktimetracker.ktimetracker.stopAllTimersDBUS
 )

@@ -51,7 +51,7 @@ class TimeValidator : public QValidator
         return Acceptable;
 
       bool ok;
-      int val = str.toInt( &ok );
+      str.toInt( &ok );
       if ( ! ok )
         return Invalid;
       else

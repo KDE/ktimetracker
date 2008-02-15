@@ -71,14 +71,14 @@ Task::Task( KCal::Todo* todo, TaskView* parent )
 }
 
 int Task::depth()
-// Deliver the depth of a task, e.g. how many tasks are supertasks to it. 
+// Deliver the depth of a task, i.e. how many tasks are supertasks to it. 
 // A toplevel task has the depth 0.
 {
-  kDebug(5970) <<"Entering Task::depth";
+  kDebug(5970) <<"Entering function";
   int res=0;
   Task* t=this;
   while ( ( t = t->parent() ) ) res++;
-  kDebug(5970) <<"depth is" << res;
+  kDebug(5970) << "Leaving function. depth is:" << res;
   return res;
 }
 
@@ -272,23 +272,27 @@ void Task::changeTime( long minutes, KarmStorage* storage )
 
 QString Task::setTime( long minutes, KarmStorage* storage )
 {
-  QString err=QString();
+  kDebug(5970) <<"Entering function";
+  QString err;
   mTime=minutes;
   mTotalTime+=minutes;
+  kDebug(5970) <<"Leaving function";
   return err;
 }
 
 QString Task::setSessionTime( long minutes, KarmStorage* storage )
 {
-  QString err=QString();
+  kDebug(5970) <<"Entering function";
+  QString err;
   mSessionTime=minutes;
   mTotalSessionTime+=minutes;
+  kDebug(5970) <<"Leaving function";
   return err;
 }
 
 void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 {
-  kDebug(5970) <<"Entering Task::changeTimes";
+  kDebug(5970) <<"Entering function";
   kDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
   if( minutesSession != 0 || minutes != 0) 
   {
@@ -297,6 +301,7 @@ void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
     if ( storage ) storage->changeTime(this, minutes * gSecondsPerMinute);
     changeTotalTimes( minutesSession, minutes );
   }
+  kDebug(5970) <<"Leaving function";
 }
 
 void Task::changeTotalTimes( long minutesSession, long minutes )
@@ -309,16 +314,19 @@ void Task::changeTotalTimes( long minutesSession, long minutes )
   mTotalTime += minutes;
   update();
   changeParentTotalTimes( minutesSession, minutes );
+  kDebug(5970) <<"Leaving function";
 }
 
 void Task::resetTimes()
 {
+  kDebug(5970) <<"Entering function";
   mTotalSessionTime -= mSessionTime;
   mTotalTime -= mTime;
   changeParentTotalTimes( -mSessionTime, -mTime);
   mSessionTime = 0;
   mTime = 0;
   update();
+  kDebug(5970) <<"Leaving function";
 }
 
 void Task::changeParentTotalTimes( long minutesSession, long minutes )
@@ -498,40 +506,37 @@ QString Task::getDesktopStr() const
 void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
 {
-  kDebug(5970) <<"Task::cut -" << name();
-
+  kDebug(5970) <<"Entering function";
   changeParentTotalTimes( -mTotalSessionTime, -mTotalTime);
   if ( ! parent())
     treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
   else
     parent()->takeChild(indexOfChild(this));
-
+  kDebug(5970) <<"Leaving function";
 }
 
 void Task::paste(Task* destination)
 // This is needed e.g. to move a task under its parent when loading.
 {
-  kDebug(5970) <<"Entering Task::paste";
-
+  kDebug(5970) << "Entering function";
   destination->QTreeWidgetItem::insertChild(0,this);
   changeParentTotalTimes( mTotalSessionTime, mTotalTime);
-
-  kDebug(5970) <<"Leaving Task::paste";
+  kDebug(5970) << "Leaving function";
 }
 
 void Task::move(Task* destination)
 // This is used e.g. to move each task under its parent after loading.
 {
-  kDebug(5970) <<"Entering Task::move";
+  kDebug(5970) << "Entering function";
   cut();
   paste(destination);
-  kDebug(5970) <<"Leaving Task::move";
+  kDebug(5970) << "Leaving function";
 }
 
 void Task::update()
 // Update a row, containing one task
 {
-  kDebug( 5970 ) << "Entering Task::update";
+  kDebug( 5970 ) << "Entering function";
   bool b = KTimeTrackerSettings::decimalFormat();
   setText( 0, mName );
   setText( 1, formatTime( mSessionTime, b ) );
@@ -540,7 +545,7 @@ void Task::update()
   setText( 4, formatTime( mTotalTime, b ) );
   setText( 5, mPriority > 0 ? QString::number( mPriority ) : "--" );
   setText( 6, QString::number( mPercentComplete ) );
-  kDebug( 5970 ) << "Exiting Task::update";
+  kDebug( 5970 ) << "Leaving Task::update";
 }
 
 void Task::addComment( const QString &comment, KarmStorage* storage )
