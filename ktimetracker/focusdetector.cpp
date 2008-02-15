@@ -29,7 +29,7 @@
 #ifdef Q_WS_X11
 #endif
 
-FocusDetector::FocusDetector( int periodFocus )
+FocusDetector::FocusDetector()
 {
   KWindowSystem* kw=KWindowSystem::self();
   connect(kw, SIGNAL(activeWindowChanged(WId)), SLOT( slotfocuschanged() ) );
@@ -37,10 +37,10 @@ FocusDetector::FocusDetector( int periodFocus )
 
 void FocusDetector::slotfocuschanged()
 {
-  kDebug(5970) << "The focus changed";
+  kDebug(5970) << "Entering function";
   QString sysanswer = getFocusWindow();
-  kDebug(5970) <<"getFocusWindow =" << sysanswer;
   emit( newFocus( sysanswer ) );
+  kDebug(5970) << "Leaving function";
 }
 
 #include "focusdetector.moc" 

@@ -29,7 +29,7 @@ class FocusDetectorNotifier::Private {
   public:
     Private() 
     {
-      mDetector = new FocusDetector( 1 );
+      mDetector = new FocusDetector();
     }
 
     FocusDetector *mDetector;

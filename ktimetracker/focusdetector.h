@@ -40,9 +40,8 @@ Q_OBJECT
 public:
   /**
     Initializes the time period
-    at param periodFocus seconds before every focus detection.
    */
-  FocusDetector( int periodFocus );
+  FocusDetector();
 
 public slots:
   void slotfocuschanged();

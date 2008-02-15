@@ -32,7 +32,7 @@
 QString getFocusWindow()
 {
   Display *display = XOpenDisplay( 0 );
-  char *name = "blahblah";
+  char *name;
   Window window = 0;
   int i = 0;
   XGetInputFocus( display, &window, &i );
