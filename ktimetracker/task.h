@@ -124,7 +124,7 @@ class Task : public QObject, public QTreeWidgetItem
        *                          If zero, don't save changes.
        */
       void changeTimes
-        ( long minutesSession, long minutes, KarmStorage* storage=0);
+        ( long minutesSession, long minutes, KarmStorage* storage=0 );
 
       /** adds minutes to total and session time by adding an event
        *
@@ -138,7 +138,7 @@ class Task : public QObject, public QTreeWidgetItem
        *  @param minutes          minutes to set time to
        *
        */
-      QString setTime( long minutes, KarmStorage* storage );
+      QString setTime( long minutes );
 
       /** Sets the session time.
        * Set the session time without changing totalTime nor sessionTime. 
@@ -149,7 +149,7 @@ class Task : public QObject, public QTreeWidgetItem
        *  @param minutes          minutes to set session time to
        *
        */
-      QString setSessionTime( long minutes, KarmStorage* storage );
+      QString setSessionTime( long minutes );
 
       /**
        * Reset all times to 0 and adjust parent task's totalTiMes.

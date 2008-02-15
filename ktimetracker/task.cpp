@@ -270,7 +270,7 @@ void Task::changeTime( long minutes, KarmStorage* storage )
   changeTimes( minutes, minutes, storage); 
 }
 
-QString Task::setTime( long minutes, KarmStorage* storage )
+QString Task::setTime( long minutes )
 {
   kDebug(5970) <<"Entering function";
   QString err;
@@ -280,7 +280,7 @@ QString Task::setTime( long minutes, KarmStorage* storage )
   return err;
 }
 
-QString Task::setSessionTime( long minutes, KarmStorage* storage )
+QString Task::setSessionTime( long minutes )
 {
   kDebug(5970) <<"Entering function";
   QString err;

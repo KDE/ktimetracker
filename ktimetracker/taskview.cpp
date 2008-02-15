@@ -493,15 +493,15 @@ QString TaskView::reFreshTimes()
   int n=-1;
   while (itemAt(++n))
   {
-    itemAt(n)->setTime(0, d->mStorage);
-    itemAt(n)->setSessionTime(0, d->mStorage);
+    itemAt(n)->setTime( 0 );
+    itemAt(n)->setSessionTime( 0 );
   }
 
   KCal::Event::List eventList = storage()->rawevents();
   n=-1;
   while (itemAt(++n))
   {
-    itemAt(n)->setTime(0,d->mStorage);
+    itemAt(n)->setTime( 0 );
     for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) 
     {
       if ( (*i)->relatedToUid() == itemAt(n)->uid() ) 
@@ -510,27 +510,27 @@ QString TaskView::reFreshTimes()
         KDateTime kdatetimeend = (*i)->dtEnd();
         KDateTime kdatetimestart2 = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
         KDateTime kdatetimeend2 = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
-        int duration=kdatetimestart2.secsTo(kdatetimeend2)/60;
-        itemAt(n)->setTime(itemAt(n)->time()+duration,d->mStorage);
+        int duration=kdatetimestart2.secsTo( kdatetimeend2 )/60;
+        itemAt(n)->setTime( itemAt(n)->time()+duration );
 	kDebug() << "setting time "<< itemAt(n)->time()+duration;
         kDebug(5970) << "duration is " << duration;
 
         if ( itemAt(n)->sessionStartTiMe().isValid() )
         {
         // if there is a session
-          if ((itemAt(n)->sessionStartTiMe().secsTo(kdatetimestart2)>0) &&        
-              (itemAt(n)->sessionStartTiMe().secsTo(kdatetimeend2)>0))
+          if ((itemAt(n)->sessionStartTiMe().secsTo( kdatetimestart2 )>0) &&        
+              (itemAt(n)->sessionStartTiMe().secsTo( kdatetimeend2 )>0))
           // if the event is after the session start
           {
-            int sessionTime=kdatetimestart2.secsTo(kdatetimeend2)/60;
-            itemAt(n)->setSessionTime(itemAt(n)->sessionTime()+sessionTime,d->mStorage);
+            int sessionTime=kdatetimestart2.secsTo( kdatetimeend2 )/60;
+            itemAt(n)->setSessionTime( itemAt(n)->sessionTime()+sessionTime );
           }
         }
 	else 
 	// so there is no session at all
         {
-          int sessionTime=kdatetimestart2.secsTo(kdatetimeend2)/60;
-          itemAt(n)->setSessionTime(itemAt(n)->sessionTime()+sessionTime,d->mStorage);
+          int sessionTime=kdatetimestart2.secsTo( kdatetimeend2 )/60;
+          itemAt(n)->setSessionTime( itemAt(n)->sessionTime()+sessionTime );
         };
       }
     }
