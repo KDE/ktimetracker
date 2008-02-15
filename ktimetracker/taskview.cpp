@@ -452,7 +452,7 @@ void TaskView::itemStateChanged( QTreeWidgetItem *item )
   if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
-void TaskView::closeStorage() { d->mStorage->closeStorage( this ); }
+void TaskView::closeStorage() { d->mStorage->closeStorage(); }
 
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {

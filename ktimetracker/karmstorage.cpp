@@ -108,7 +108,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
   }
 
   if ( d->mCalendar)
-    closeStorage(view);
+    closeStorage();
 
   // Create local file resource and add to resources
   d->mICalFile = lFileName;
@@ -281,7 +281,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   return err;
 }
 
-void KarmStorage::closeStorage(TaskView* view)
+void KarmStorage::closeStorage()
 {
   kDebug(5970) << "Entering KarmStorage::closeStorage";
   if ( d->mCalendar )

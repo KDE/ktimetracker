@@ -77,11 +77,11 @@ class TimetrackerWidget::Private {
 
     struct ActionData {
       QString iconName;
-      char* caption;
-      char* slot;
+      const char* caption;
+      const char* slot;
       QString name;
-      char* toolTip;
-      char* whatsThis;
+      const char* toolTip;
+      const char* whatsThis;
     };
 };
 //@endcond

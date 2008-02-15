@@ -106,7 +106,7 @@ class KarmStorage
     QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
 
     /* Close calendar and clear view.  Release lock if holding one. */
-    void closeStorage(TaskView* view);
+    void closeStorage();
 
     /** list of all events */
     KCal::Event::List rawevents();
