@@ -171,6 +171,8 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   setHeaderLabels( labels );
   headerItem()->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
   headerItem()->setWhatsThis(1,"The session time is the time since you last chose \"start new session.\"");
+  headerItem()->setWhatsThis(3,"The total session time is the session time of this task and all its subtasks.");
+  headerItem()->setWhatsThis(4,"The total time is the time of this task and all its subtasks.");
   setAllColumnsShowFocus( true );
   setSortingEnabled( true );
   setAlternatingRowColors( KTimeTrackerSettings::alternatingRowColors() );
