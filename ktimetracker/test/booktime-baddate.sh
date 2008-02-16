@@ -4,6 +4,8 @@
 # This test script tests time booking
 
 testfile="/tmp/testktimetracker1.ics"
+killall ktimetracker
+rm $testfile
 
 # start ktimetracker and make sure its dbus interface is ready
 ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
