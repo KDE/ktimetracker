@@ -1,16 +1,16 @@
 #!/bin/sh
+# This is a test script for ktimetracker. To make sure ktimetracker run correctly, run this script. Most probably, you will 
+# only run this script if you modified the source code of ktimetracker.
+# This test script tests time booking
 
-TESTFILE="/tmp/testkarm1.ics"
+testfile="/tmp/testktimetracker1.ics"
 
-source __lib.sh
+# start ktimetracker and make sure its dbus interface is ready
+ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 
-set_up
-
-dcop $DCOPID KarmDCOPIface addTask Task1 2>/dev/null
-TASKID=`dcop $DCOPID KarmDCOPIface taskIdFromName Task1 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface bookTime $TASKID notadate 360 2>/dev/null`
-
-tear_down
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.addTask Task1
+TASKID=`qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.taskIdsFromName Task1|grep -m 1 ".*"`
+RVAL=`qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.bookTime $TASKID notadate 360 2>/dev/null`
 
 EXPECTED=5
 if [ "$RVAL" == "$EXPECTED" ]; then 
