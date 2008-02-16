@@ -150,7 +150,7 @@ class TimetrackerWidget : public QWidget {
     void newTask();
     void newSubTask();
     void editTask();
-    void deleteTask( bool markingascomplete = false );
+    void deleteTask();
     void markTaskAsComplete();
     void markTaskAsIncomplete();
     void exportcsvFile();

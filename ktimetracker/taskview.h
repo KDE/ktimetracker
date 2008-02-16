@@ -160,14 +160,9 @@ class TaskView : public QTreeWidget
     KarmStorage* storage();
 
     /**
-     * Delete task (and children) from view.
-     *
-     * @param markingascomplete  If false (the default), deletes history for
-     * current task and all children.  If markingascomplete is true, then sets
-     * percent complete to 100 and removes task and all it's children from the
-     * list view.
+     * Deletes the current task (and children) from the view.
      */
-    void deleteTask(bool markingascomplete=false);
+    void deleteTask();
 
     /** Reinstates the current task as incomplete.
      * @param completion The percentage complete to mark the task as. */

@@ -853,20 +853,6 @@ void TaskView::editTask()
   }
 }
 
-//void TaskView::addCommentToTask()
-//{
-//  Task *task = currentItem();
-//  if (!task)
-//    return;
-
-//  bool ok;
-//  QString comment = KLineEditDlg::getText(i18n("Comment"),
-//                       i18n("Log comment for task '%1':").arg(task->name()),
-//                       QString(), &ok, this);
-//  if ( ok )
-//    task->addComment( comment, d->mStorage );
-//}
-
 void TaskView::reinstateTask(int completion)
 {
   Task* task = currentItem();
@@ -885,25 +871,29 @@ void TaskView::reinstateTask(int completion)
   }
 }
 
-void TaskView::deleteTask(bool markingascomplete)
+void TaskView::deleteTask()
 {
-  kDebug(5970) <<"Entering TaskView::deleteTask";
+  kDebug(5970) <<"Entering function";
   Task *task = currentItem();
-  if (task == 0) {
+  if (task == 0) 
+  {
     KMessageBox::information(0,i18n("No task selected."));
     return;
   }
 
   int response = KMessageBox::Continue;
-  if (!markingascomplete && KTimeTrackerSettings::promptDelete()) {
-    if (task->childCount() == 0) {
+  if (KTimeTrackerSettings::promptDelete()) 
+  {
+    if (task->childCount() == 0) 
+    {
       response = KMessageBox::warningContinueCancel( 0,
           i18n( "Are you sure you want to delete "
           "the task named\n\"%1\" and its entire history?",
            task->name()),
           i18n( "Deleting Task"), KStandardGuiItem::del());
     }
-    else {
+    else 
+    {
       response = KMessageBox::warningContinueCancel( 0,
           i18n( "Are you sure you want to delete the task named"
           "\n\"%1\" and its entire history?\n"
@@ -915,39 +905,36 @@ void TaskView::deleteTask(bool markingascomplete)
 
   if (response == KMessageBox::Continue)
   {
-    if (markingascomplete)
-    {
-      task->setPercentComplete(100, d->mStorage);
-      task->setPixmapProgress();
-      save();
-      emit updateButtons();
+    QString uid=task->uid();
+    task->remove(d->mStorage);
+    task->removeFromView();
+    _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
+    save();
 
-      // Have to remove after saving, as the save routine only affects tasks
-      // that are in the view.  Otherwise, the new percent complete does not
-      // get saved.   (No longer remove when marked as complete.)
-      //task->removeFromView();
-
-    }
-    else
-    {
-      QString uid=task->uid();
-      task->remove(d->mStorage);
-      task->removeFromView();
-      _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
-      save();
-    }
-
-    // remove root decoration if there is no more children.
+    // remove root decoration if there is no more child
     refresh();
 
     // Stop idle detection if no more counters are running
-    if (d->mActiveTasks.count() == 0) {
+    if (d->mActiveTasks.count() == 0) 
+    {
       _idleTimeDetector->stopIdleDetection();
       emit timersInactive();
     }
-
     emit tasksChanged( d->mActiveTasks );
   }
+}
+
+void TaskView::markTaskAsComplete()
+{
+  if (currentItem() == 0) 
+  {
+    KMessageBox::information(0,i18n("No task selected."));
+    return;
+  }
+  currentItem()->setPercentComplete(100, d->mStorage);
+  currentItem()->setPixmapProgress();
+  save();
+  emit updateButtons();
 }
 
 void TaskView::extractTime(int minutes)
@@ -969,18 +956,6 @@ QList<HistoryEvent> TaskView::getHistory(const QDate& from,
     const QDate& to) const
 {
   return d->mStorage->getHistory(from, to);
-}
-
-void TaskView::markTaskAsComplete()
-{
-  if (currentItem())
-    kDebug(5970) <<"TaskView::markTaskAsComplete:"
-      << currentItem()->uid();
-  else
-    kDebug(5970) <<"TaskView::markTaskAsComplete: null currentItem()";
-
-  bool markingascomplete = true;
-  deleteTask(markingascomplete);
 }
 
 void TaskView::markTaskAsIncomplete()

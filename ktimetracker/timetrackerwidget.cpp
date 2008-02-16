@@ -692,10 +692,10 @@ void TimetrackerWidget::editTask()
   }
 }
 
-void TimetrackerWidget::deleteTask( bool markingascomplete )
+void TimetrackerWidget::deleteTask()
 {
   if ( d->mTabWidget->currentWidget() ) {
-    qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->deleteTask( markingascomplete );
+    qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->deleteTask();
   }
 }
 
