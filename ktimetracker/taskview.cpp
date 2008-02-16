@@ -871,10 +871,10 @@ void TaskView::reinstateTask(int completion)
   }
 }
 
-void TaskView::deleteTask()
+void TaskView::deleteTask( Task* task )
 {
-  kDebug(5970) <<"Entering function";
-  Task *task = currentItem();
+  kDebug(5970) << "Entering function";
+  if (task == 0) task = currentItem();
   if (task == 0) 
   {
     KMessageBox::information(0,i18n("No task selected."));

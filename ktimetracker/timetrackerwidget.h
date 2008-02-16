@@ -167,6 +167,7 @@ class TimetrackerWidget : public QWidget {
     QString version() const;
     QStringList taskIdsFromName( const QString &taskName ) const;
     void addTask( const QString &taskName );
+    void deleteTask( const QString &taskId );
     void setPercentComplete( const QString &taskId, int percent );
     int bookTime( const QString &taskId, const QString &dateTime, int minutes );
     QString error( int errorCode ) const;

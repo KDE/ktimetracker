@@ -160,9 +160,11 @@ class TaskView : public QTreeWidget
     KarmStorage* storage();
 
     /**
-     * Deletes the current task (and children) from the view.
+     * Deletes the given or the current task (and children) from the view.
+     * @param task Task to be deleted. If empty, the current task is deleted. 
+     *             if non-existant, an error message is displayed.
      */
-    void deleteTask();
+    void deleteTask( Task* task=0 );
 
     /** Reinstates the current task as incomplete.
      * @param completion The percentage complete to mark the task as. */

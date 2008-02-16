@@ -816,6 +816,27 @@ void TimetrackerWidget::addTask( const QString &taskName )
   }
 }
 
+void TimetrackerWidget::deleteTask( const QString &taskId )
+{
+  for ( int i = 0; i < d->mTabWidget->count(); ++i) 
+  {
+    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+
+    if ( !taskView ) continue;
+
+    QTreeWidgetItemIterator it( taskView );
+    while ( *it ) 
+    {
+      Task *task = static_cast< Task* >( *it );
+      if ( task && task->uid() == taskId ) 
+      {
+        taskView->deleteTask( task );
+      }
+      ++it;
+    }
+  }
+}
+
 void TimetrackerWidget::setPercentComplete( const QString &taskId, int percent )
 {
   for ( int i = 0; i < d->mTabWidget->count(); ++i) {
