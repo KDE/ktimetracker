@@ -1,24 +1,22 @@
 #!/bin/sh
-
+# This is a test script for ktimetracker. To make sure ktimetracker run correctly, run this script. Most probably, you will 
+# only run this script if you modified the source code of ktimetracker.
 # Create files relative to current directory if no "/" prefix
 # in file name given on command line
 
-exec >>check.log 2>&1
+testfile="testktimetracker1.ics"
+testtodo="testtodo"
+killall ktimetracker
 
-TESTFILE="testkarm.ics"
-TESTTODO="testtodo"
+# start ktimetracker and make sure its dbus interface is ready
+cd /tmp
+rm $testfile
+ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 
-source __lib.sh 
-
-set_up
-
-# make karm create the file.
-dcop $DCOPID KarmDCOPIface addtodo "$TESTTODO"
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.addTask $testtodo
 
 RVAL=1
-if [ -e $TESTFILE ]; then RVAL=0; fi
-
-tear_down
+if [ -e $testfile ]; then RVAL=0; fi
 
 if [ $RVAL -eq 0 ]
 then 
