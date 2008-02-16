@@ -1,30 +1,33 @@
 #!/bin/sh
+# This is a test script for ktimetracker. To make sure ktimetracker run correctly, run this script. Most probably, you will 
+# only run this script if you modified the source code of ktimetracker.
+# This test script tests time booking
 
-TESTFILE="/tmp/testkarm1.ics"
+testfile="/tmp/testktimetracker1.ics"
+killall ktimetracker
+rm $testfile
 
-source __lib.sh
+# start ktimetracker and make sure its dbus interface is ready
+ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 
-set_up
-
-DURATION=12
-dcop $DCOPID KarmDCOPIface addTask Task1 2>/dev/null
-TASKID=`dcop $DCOPID KarmDCOPIface taskIdFromName Task1 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface bookTime $TASKID 2005-06-19 $DURATION 2>/dev/null`
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.addTask Task1
+TASKID=`qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.taskIdsFromName Task1|grep -m 1 ".*"`
+duration=12
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.bookTime $TASKID 2005-06-19 $duration
+RVAL=$?
 
 if [ "x$RVAL" != "x0" ]; then 
+  echo "command did not succeed"
   echo "FAIL $0: got /$RVAL/, expected /$EXPECTED/"
   exit 1;
 fi
 
-RVAL=`dcop $DCOPID KarmDCOPIface totalMinutesForTaskId $TASKID 2>/dev/null`
+RVAL=`qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.totalMinutesForTaskId $TASKID 2>/dev/null`
 
-SKIP_TESTFILE_DELETE=true
-tear_down
-
-if [ "x$RVAL" == "x$DURATION" ]; then 
+if [ "x$RVAL" == "x$duration" ]; then 
   echo "PASS $0"
   exit 0;
 else 
-  echo "FAIL $0: got /$RVAL/, expected /$DURATION/"
+  echo "FAIL $0: got /$RVAL/, expected /$duration/"
   exit 1;
 fi
