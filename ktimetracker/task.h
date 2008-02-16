@@ -133,6 +133,38 @@ class Task : public QObject, public QTreeWidgetItem
        */
       void changeTotalTimes( long minutesSession, long minutes );
 
+      /** Adds minutes to the time of the task and the total time of its supertasks. This does not add an event.
+       *
+       *  @param minutes          minutes to add to the time
+       *  @returns                A QString with the error message, in case of no error an empty QString.
+       *
+       */
+      QString addTime( long minutes );
+
+      /** Adds minutes to the total time of the task and its supertasks. This does not add an event.
+       *
+       *  @param minutes          minutes to add to the time
+       *  @returns                A QString with the error message, in case of no error an empty QString.
+       *
+       */
+      QString addTotalTime( long minutes );
+
+      /** Adds minutes to the task's session time and its supertasks' total session time. This does not add an event.
+       *
+       *  @param minutes          minutes to add to the session time
+       *  @returns                A QString with the error message, in case of no error an empty QString.
+       *
+       */
+      QString addSessionTime( long minutes );
+
+      /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
+       *
+       *  @param minutes          minutes to add to the session time
+       *  @returns                A QString with the error message, in case of no error an empty QString.
+       *
+       */
+      QString addTotalSessionTime( long minutes );
+
       /** Sets the time (not session time). This does not add an event.
        *
        *  @param minutes          minutes to set time to

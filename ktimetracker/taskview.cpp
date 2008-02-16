@@ -509,7 +509,7 @@ QString TaskView::reFreshTimes()
         KDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
         KDateTime eventend = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
         int duration=eventstart.secsTo( eventend )/60;
-        itemAt(n)->setTime( itemAt(n)->time()+duration );
+        itemAt(n)->addTime( duration );
         kDebug(5970) << "duration is " << duration;
 
         if ( itemAt(n)->sessionStartTiMe().isValid() )
@@ -526,8 +526,7 @@ QString TaskView::reFreshTimes()
 	else 
 	// so there is no session at all
         {
-          int sessionTime=eventstart.secsTo( eventend )/60;
-          itemAt(n)->setSessionTime( itemAt(n)->sessionTime()+sessionTime );
+          itemAt(n)->addSessionTime( duration );
         };
       }
     }
@@ -962,12 +961,6 @@ QList<HistoryEvent> TaskView::getHistory(const QDate& from,
 
 void TaskView::markTaskAsIncomplete()
 {
-  if (currentItem())
-    kDebug(5970) <<"TaskView::markTaskAsComplete:"
-      << currentItem()->uid();
-  else
-    kDebug(5970) <<"TaskView::markTaskAsComplete: null currentItem()";
-
   reinstateTask(50); // if it has been reopened, assume half-done
 }
 
@@ -976,7 +969,7 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
 {
-  kDebug(5970) <<"Entering clipTotals";
+  kDebug(5970) << "Entering function";
   QString err=QString();
   TimeKard t;
   KApplication::clipboard()->setText(t.totalsAsText(this, rc));

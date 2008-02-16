@@ -270,29 +270,69 @@ void Task::changeTime( long minutes, KarmStorage* storage )
   changeTimes( minutes, minutes, storage); 
 }
 
+QString Task::addTime( long minutes )
+{
+  kDebug(5970) << "Entering function";
+  QString err;
+  mTime+=minutes;
+  this->addTotalTime( minutes );
+  kDebug(5970) << "Leaving function";
+  return err;
+}
+
+QString Task::addTotalTime( long minutes )
+{
+  kDebug(5970) << "Entering function";
+  QString err;
+  mTotalTime+=minutes;
+  if ( parent() ) parent()->addTotalTime( minutes );
+  kDebug(5970) << "Leaving function";
+  return err;
+}
+
+QString Task::addSessionTime( long minutes )
+{
+  kDebug(5970) << "Entering function";
+  QString err;
+  mSessionTime+=minutes;
+  this->addTotalSessionTime( minutes );
+  kDebug(5970) << "Leaving function";
+  return err;
+}
+
+QString Task::addTotalSessionTime( long minutes )
+{
+  kDebug(5970) << "Entering function";
+  QString err;
+  mTotalSessionTime+=minutes;
+  if ( parent() ) parent()->addTotalSessionTime( minutes );
+  kDebug(5970) << "Leaving function";
+  return err;
+}
+
 QString Task::setTime( long minutes )
 {
-  kDebug(5970) <<"Entering function";
+  kDebug(5970) << "Entering function";
   QString err;
   mTime=minutes;
   mTotalTime+=minutes;
-  kDebug(5970) <<"Leaving function";
+  kDebug(5970) << "Leaving function";
   return err;
 }
 
 QString Task::setSessionTime( long minutes )
 {
-  kDebug(5970) <<"Entering function";
+  kDebug(5970) << "Entering function";
   QString err;
   mSessionTime=minutes;
   mTotalSessionTime+=minutes;
-  kDebug(5970) <<"Leaving function";
+  kDebug(5970) << "Leaving function";
   return err;
 }
 
 void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 {
-  kDebug(5970) <<"Entering function";
+  kDebug(5970) << "Entering function";
   kDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
   if( minutesSession != 0 || minutes != 0) 
   {
@@ -301,7 +341,7 @@ void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
     if ( storage ) storage->changeTime(this, minutes * gSecondsPerMinute);
     changeTotalTimes( minutesSession, minutes );
   }
-  kDebug(5970) <<"Leaving function";
+  kDebug(5970) << "Leaving function";
 }
 
 void Task::changeTotalTimes( long minutesSession, long minutes )
