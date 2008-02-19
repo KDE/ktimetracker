@@ -1,24 +1,21 @@
 #!/bin/sh
 
+# This is a test script for ktimetracker. To make sure ktimetracker run correctly, run this script. Most probably, you will 
+# only run this script if you modified the source code of ktimetracker.
 # First test, just check version.
 
-exec >>check.log 2>&1
+testfile="/tmp/testktimetracker1.ics"
+killall ktimetracker
+rm $testfile
 
-TESTFILE="/tmp/testkarm1.ics"
-VERSION="1.6.0"
+# start ktimetracker and make sure its dbus interface is ready
+ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 
-source __lib.sh
-
-set_up
-
-RVAL=`dcop $DCOPID KarmDCOPIface version 2>/dev/null`
-
-tear_down
-
-if [ "$RVAL" == "$VERSION" ]; then 
+version=$(qdbus org.kde.ktimetracker /KTimeTracker version)
+if [ "x" != "x$version" ]; then 
   echo "PASS $0"
   exit 0;
 else 
-  echo "FAIL $0: got /$RVAL/, expected /$VERSION/"
+  echo "FAIL $0: got //, expected version"
   exit 1;
 fi
