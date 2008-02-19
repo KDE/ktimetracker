@@ -1,28 +1,23 @@
 #!/bin/sh
 
+# This is a test script for ktimetracker. To make sure ktimetracker run correctly, run this script. Most probably, you will 
+# only run this script if you modified the source code of ktimetracker.
 # check if deleting a task works
+# you still need to set Settings->Configure KTimeTracker->Prompt before deleting tasks to false, but this should be fixed soon.
 
-exec >> check.log 2>&1
+testfile="/tmp/testktimetracker1.ics"
+killall ktimetracker
+rm $testfile
 
-TESTFILE="/tmp/testkarm1.ics"
-rm $TESTFILE
+# start ktimetracker and make sure its dbus interface is ready
+ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 
-source __lib.sh
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.addTask Task1
+TASKID=`qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.taskIdsFromName Task1|grep -m 1 ".*"`
 
-set_up
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.deleteTask $TASKID
 
-# do not prompt on deleting a task
-GPOD=`dcop $DCOPID KarmDCOPIface getpromptdelete 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface setpromptdelete 0 2>/dev/null`
-
-RVAL=`dcop $DCOPID KarmDCOPIface addTask todo1 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface addTask todo2 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface deletetodo 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface deletetodo 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface setpromptdelete $GPOD 2>/dev/null`
-RVAL=`dcop $DCOPID KarmDCOPIface version 2>/dev/null`
-
-tear_down
+RVAL=`qdbus org.kde.ktimetracker /KTimeTracker version`
 
 if [ "$RVAL" == "" ]; then 
   echo "FAIL $0: got no version."
