@@ -225,12 +225,14 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
   // remember tasks that are running and their start times
   QTreeWidgetItemIterator it( view );
-  while ( *it ) {
+  while ( *it ) 
+  {
     Task *task = static_cast< Task* >( *it );
     if ( task->isRunning() ) {
       runningTasks.append( task->uid() );
       startTimes.append( task->startTime() );
     }
+    ++it;
   }
 
   // delete old tasks
