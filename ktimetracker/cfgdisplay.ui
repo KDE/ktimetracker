@@ -48,7 +48,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Columns displayed</string>
+      <string>Columns Displayed</string>
      </property>
      <layout class="QVBoxLayout" >
       <item>
@@ -89,7 +89,7 @@
       <item>
        <widget class="QCheckBox" name="kcfg_displayPercentComplete" >
         <property name="text" >
-         <string>Percent Complete</string>
+         <string>Percent complete</string>
         </property>
        </widget>
       </item>
