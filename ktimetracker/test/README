@@ -1,7 +1,7 @@
 This directory holds automated tests for ktimetracker.
 
 Start it using like this:
- for n in *.sh; do bash $n; done
+ for n in *.sh; do if bash $n; then echo success; else echo fail; break; fi; done 
 
 --
 Mark Bucciarelli <mark@hubcapconsulting.com>
