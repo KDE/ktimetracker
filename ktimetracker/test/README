@@ -1,76 +1,11 @@
-This directory holds automated tests for karm.
+This directory holds automated tests for ktimetracker.
 
-It's in very rough shape.
-
-
-How you start:
-
-  (1) get and install kdepim including karm
-
-  (2) get and install xautomation from http://hoopajoo.net/projects/xautomation.html
-
-  (3) get and install Net::DAV::Server with CPAN
-
-  (4) start the automated tests with the command make check
-
-
-Here are some of the issues:
-
-  (1) The tests require KDE to be running in English.
-
-      The automated XTests use shortcut keys to drive the app.  These key
-      combinations are language specific.
-
-  (2) The tests require that you "make install" first.
-
-      The XAutomation tests and tests that use DCOP run karm from the bash
-      prompt.
-
-  (3) The tests are destructive.
-
-      If you have an already running instance of karm, the tests will kill
-      that instance.  So you cannot, for example, record time spent running
-      karm automated tests.
-
-      The tests are smart enough to use test iCalendar files.  But they will
-      alter the karm storage settings for the ics file name.
-
-  (4) The runscripts program does not kill scripts that never return.
-  
-      You have to monitor the progress and press Control-C if you think a
-      script is hung.
-
-  (5) No attempt is made to check for installed script interpreters.
-
-      In addition to required interpreters (Python 2.2, for example), the bash
-      scripts use xte, which on Debian is in the xautomation package.
-
-      If a required library is not found, runscripts will consider this a
-      script failure and stop.
-
-  (6) I have only tested this with Bash on GNU/Linux.
-
-  (7) When a test fails, it is really hard to figure out why.  There is too
-      much stuff mixed together on the console output, and the tests
-      themselves do not give much info when they fail.
-
-That having been said, I find it so useful that I will keep working on this so
-it should get better shortly.
-
-
-Some notes on runscripts.cpp:
-
-  Parses this directory for script files (Python, PHP, Perl and Bash).  It
-  identifies a script file by the extension.
-  
-  It runs any script files it finds.  Within each script type, it runs the
-  scripts in alphabetical order.  Scripts that start with a double underscore
-  are skipped.
-
-  When a script fails runscripts stops.
-
-  Script files should return a non-zero exit code to indicate a failure.
+Start it using like this:
+ for n in *.sh; do bash $n; done
 
 --
 Mark Bucciarelli <mark@hubcapconsulting.com>
 December 6, 2004
+
+Thorsten Staerk
+February 29, 2008
