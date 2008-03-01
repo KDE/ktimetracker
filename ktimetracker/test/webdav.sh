@@ -1,33 +1,29 @@
 #!/bin/sh
+# This is a test script for ktimetracker. To make sure ktimetracker run correctly, run this script. Most probably, you will 
+# only run this script if you modified the source code of ktimetracker.
 
 # Add a todo to an iCal file stored on a webdav server.
-
-exec >>check.log 2>&1
-
-source __lib.sh
 
 # Start webdav server
 perl __webdav.pl &
 sleep 2
 WEBDAV_PID=`ps -C "perl __webdav.pl" -o pid=`
 
-# Start karm
-TESTFILE="http://localhost:4242/testkarm.ics"
+# Start ktimetracker and make sure its dbus interface is ready
+testfile="http://localhost:4242/testkarm.ics"
 TESTFILE_LOCAL="/tmp/testkarm.ics"
 TESTTODO="testtodo"
 SKIP_TESTFILE_DELETE=true
+ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 # Need this or karm complains there is no file
 rm -f $TESTFILE_LOCAL
 touch $TESTFILE_LOCAL
-set_up
 #wait till download is ready
 sleep 3
 
 # add a todo
-dcop $DCOPID KarmDCOPIface addTask "$TESTTODO"
-sleep 1
-dcop $DCOPID KarmDCOPIface save
-
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.addTask "$TESTTODO"
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.save
 sleep 1
 
 if grep $TESTTODO $TESTFILE_LOCAL
@@ -35,8 +31,6 @@ if grep $TESTTODO $TESTFILE_LOCAL
 	else RVAL=1
 fi
 
-# clean up
-tear_down
 #if [ -e $TESTFILE_LOCAL ]; then rm $TESTFILE_LOCAL; fi
 if [ -n $WEBDAV_PID ]; then kill $WEBDAV_PID; fi
 
