@@ -14,6 +14,7 @@ testfile="http://localhost:4242/testkarm.ics"
 TESTFILE_LOCAL="/tmp/testkarm.ics"
 TESTTODO="testtodo"
 SKIP_TESTFILE_DELETE=true
+killall ktimetracker
 ktimetracker $testfile & while ! qdbus org.kde.ktimetracker /KTimeTracker version; do i=5; done
 # Need this or karm complains there is no file
 rm -f $TESTFILE_LOCAL
@@ -23,12 +24,12 @@ sleep 3
 
 # add a todo
 qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.addTask "$TESTTODO"
-qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.save
+qdbus org.kde.ktimetracker /KTimeTracker org.kde.ktimetracker.ktimetracker.saveAll
 sleep 1
 
 if grep $TESTTODO $TESTFILE_LOCAL
 	then RVAL=0
-	else RVAL=1
+	else RVAL=1; echo "$TESTTODO not contained in $TESTFILE_LOCAL"
 fi
 
 #if [ -e $TESTFILE_LOCAL ]; then rm $TESTFILE_LOCAL; fi
