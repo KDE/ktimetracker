@@ -14,7 +14,7 @@
       <arg name="taskName" type="s" direction="in"/>
     </method>
     <method name="deleteTask">
-      <arg name="taskName" type="s" direction="in"/>
+      <arg name="taskId" type="s" direction="in"/>
     </method>
     <method name="activeTasks">
       <arg name="out" type="as" direction="out" />
