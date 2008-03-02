@@ -90,7 +90,7 @@ int main( int argc, char *argv[] )
   }
   else
   {
-    QString newKarmFile(KStandardDirs::locate( "data", "ktimetracker/karm.ics" ));
+    QString newKarmFile(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
     if ( !QFile::exists( newKarmFile ) )
     {
       QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
