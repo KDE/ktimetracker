@@ -65,51 +65,56 @@ int main( int argc, char *argv[] )
 
   KCmdLineOptions options;
   options.add("+file", ki18n( "The iCalendar file to open" ));
+  options.add("konsolemode", ki18n( "Switch off gui, run in konsole mode (e.g. as engine for a web service)" ));
   KCmdLineArgs::addCmdLineOptions( options );
   KUniqueApplication myApp;
-
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-  MainWindow *mainWindow;
-  if ( args->count() > 0 )
-  {
-    QString icsfile = args->arg( 0 );
-
-    KUrl* icsfileurl=new KUrl(args->arg( 0 ));
-    if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
+  if (!args->isSet( "konsolemode" ))
+  {  
+    MainWindow *mainWindow;
+    if ( args->count() > 0 )
     {
-      // leave as is
-      ;
+      QString icsfile = args->arg( 0 );
+      KUrl* icsfileurl=new KUrl(args->arg( 0 ));
+      if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
+      {
+        // leave as is
+        ;
+      }
+      else
+      {
+        icsfile = KCmdLineArgs::cwd() + '/' + icsfile;
+      }
+      mainWindow = new MainWindow( icsfile );
     }
     else
     {
-      icsfile = KCmdLineArgs::cwd() + '/' + icsfile;
+      QString newKarmFile(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
+      if ( !QFile::exists( newKarmFile ) )
+      {
+        QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
+        newKarmFile = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
+        if ( oldFile.exists() )
+          oldFile.copy( newKarmFile );
+      }
+      mainWindow = new MainWindow( newKarmFile );
     }
+    if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
+      mainWindow->restore( 1, false );
+    else
+      mainWindow->show();
+  
+    signal( SIGQUIT, cleanup );
+    signal( SIGINT, cleanup );
+    int ret = myApp.exec();
 
-    mainWindow = new MainWindow( icsfile );
+    delete mainWindow;
+    return ret;
   }
-  else
-  {
-    QString newKarmFile(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
-    if ( !QFile::exists( newKarmFile ) )
-    {
-      QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
-      newKarmFile = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
-      if ( oldFile.exists() )
-        oldFile.copy( newKarmFile );
-    }
-    mainWindow = new MainWindow( newKarmFile );
+  else // we are running in konsole mode
+  {  
+    KApplication mykapp;
+    return mykapp.exec();
   }
-
-  if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
-    mainWindow->restore( 1, false );
-  else
-    mainWindow->show();
-
-  signal( SIGQUIT, cleanup );
-  signal( SIGINT, cleanup );
-  int ret = myApp.exec();
-
-  delete mainWindow;
-  return ret;
 }
+  
