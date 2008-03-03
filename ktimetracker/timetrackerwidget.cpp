@@ -830,7 +830,7 @@ void TimetrackerWidget::deleteTask( const QString &taskId )
       Task *task = static_cast< Task* >( *it );
       if ( task && task->uid() == taskId ) 
       {
-        taskView->deleteTask( task );
+        taskView->deleteTaskBatch( task );
       }
       ++it;
     }

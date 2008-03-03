@@ -872,6 +872,24 @@ void TaskView::reinstateTask(int completion)
   }
 }
 
+void TaskView::deleteTaskBatch( Task* task )
+{
+  QString uid=task->uid();
+  task->remove(d->mStorage);
+  task->removeFromView();
+  _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
+  save();
+
+  // Stop idle detection if no more counters are running
+  if (d->mActiveTasks.count() == 0) 
+  {
+    _idleTimeDetector->stopIdleDetection();
+    emit timersInactive();
+  }
+  emit tasksChanged( d->mActiveTasks );
+}
+
+
 void TaskView::deleteTask( Task* task )
 {
   kDebug(5970) << "Entering function";
@@ -904,25 +922,7 @@ void TaskView::deleteTask( Task* task )
     }
   }
 
-  if (response == KMessageBox::Continue)
-  {
-    QString uid=task->uid();
-    task->remove(d->mStorage);
-    task->removeFromView();
-    _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
-    save();
-
-    // remove root decoration if there is no more child
-    refresh();
-
-    // Stop idle detection if no more counters are running
-    if (d->mActiveTasks.count() == 0) 
-    {
-      _idleTimeDetector->stopIdleDetection();
-      emit timersInactive();
-    }
-    emit tasksChanged( d->mActiveTasks );
-  }
+  if (response == KMessageBox::Continue) deleteTaskBatch( task );
 }
 
 void TaskView::markTaskAsComplete()
