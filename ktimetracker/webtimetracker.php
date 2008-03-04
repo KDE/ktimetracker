@@ -17,19 +17,19 @@ FIXME: adding two tasks with the same name leads to unpredictable behavior
 <body>
 <h1>WebTimeTracker 0.01</h1>
 <?php
-if ($_GET['task'])
+$task=escapeshellcmd($_GET['task']);
+$taskname=escapeshellcmd($_GET['taskname']);
+if ($task)
 { 
-  exec("qdbus org.kde.ktimetracker /KTimeTracker addTask ".$_GET['task']);
+  exec("qdbus org.kde.ktimetracker /KTimeTracker addTask ".$task);
 }
-if ($_GET['taskname'])
+if ($taskname)
 {
-  exec("qdbus org.kde.ktimetracker /KTimeTracker taskIdsFromName ".$_GET['taskname'],$output,$errorput);
+  exec("qdbus org.kde.ktimetracker /KTimeTracker taskIdsFromName ".$taskname,$output,$errorput);
   if ($_GET['action'] == "start") exec("qdbus org.kde.ktimetracker /KTimeTracker startTimerFor ".$output[0]);
   if ($_GET['action'] == "stop") exec("qdbus org.kde.ktimetracker /KTimeTracker stopTimerFor ".$output[0]);
   if ($_GET['action'] == "delete") exec("qdbus org.kde.ktimetracker /KTimeTracker deleteTask ".$output[0]);
 }
-echo $HTTP_GET_VARS['task'];
-echo $HTTP_POST_VARS['task'];
 $handle=popen("/home/kde-devel/kde/bin/ktimetracker","r");
 $errorlevel=1;
 while ($errorlevel!=0)
