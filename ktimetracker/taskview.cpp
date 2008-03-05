@@ -909,7 +909,7 @@ void TaskView::deleteTask( Task* task )
 {
   kDebug(5970) << "Entering function";
   if (task == 0) task = currentItem();
-  if (task == 0) 
+  if (currentItem() == 0) 
   {
     KMessageBox::information(0,i18n("No task selected."));
     return;
@@ -921,23 +921,23 @@ void TaskView::deleteTask( Task* task )
     if (task->childCount() == 0) 
     {
       response = KMessageBox::warningContinueCancel( 0,
-          i18n( "Are you sure you want to delete "
-          "the task named\n\"%1\" and its entire history?",
-           task->name()),
-          i18n( "Deleting Task"), KStandardGuiItem::del());
-    }
-    else 
-    {
-      response = KMessageBox::warningContinueCancel( 0,
-          i18n( "Are you sure you want to delete the task named"
-          "\n\"%1\" and its entire history?\n"
-          "NOTE: all its subtasks and their history will also "
-          "be deleted.", task->name()),
-          i18n( "Deleting Task"), KStandardGuiItem::del());
+          i18n( "Are you sure you want to delete the selected"
+          " task(s) and their entire history?\n"
+          "NOTE: all subtasks and their history will also "
+          "be deleted."),
+          i18n( "Deleting Task(s)"), KStandardGuiItem::del());
     }
   }
 
-  if (response == KMessageBox::Continue) deleteTaskBatch( task );
+  if (response == KMessageBox::Continue) 
+  {
+    int i=0;
+    while ( itemAt(i) )
+    {
+      if ( itemAt( i )->isSelected()) deleteTaskBatch(itemAt(i));
+      else i++;
+    }
+  }
 }
 
 void TaskView::markTaskAsComplete()

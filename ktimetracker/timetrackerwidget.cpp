@@ -300,7 +300,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "new_sub_task", I18N_NOOP("Creates a new subtask to the current selected task"),
       I18N_NOOP("This will create a new subtask to the current selected task.") },
     { "edit-delete", I18N_NOOP("&Delete"), SLOT( deleteTask() ), "delete_task", I18N_NOOP("Deletes "
-      "selected task"), I18N_NOOP("This will delete the selected task and all its "
+      "selected task"), I18N_NOOP("This will delete the selected task(s) and all "
       "subtasks.") },
     { "document-properties", I18N_NOOP("&Edit..."), SLOT( editTask() ), "edit_task",
       I18N_NOOP("Edits name or times for selected task"), I18N_NOOP("This will bring up a dialog "
