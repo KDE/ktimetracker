@@ -31,6 +31,8 @@
 
 #include "version.h"
 #include "mainwindow.h"
+#include "mainadaptor.h"
+#include "karmstorage.h"
 #include <QDebug>
 
 namespace
@@ -114,6 +116,7 @@ int main( int argc, char *argv[] )
   else // we are running in konsole mode
   {  
     KApplication mykapp;
+    KarmStorage* sto=new KarmStorage();
     return mykapp.exec();
   }
 }

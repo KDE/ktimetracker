@@ -60,6 +60,7 @@
 #include "karmutility.h"
 #include "ktimetracker.h"
 #include "task.h"
+#include "storageadaptor.h"
 
 static long linenr;  // how many lines written by printTaskHistory so far
 
@@ -75,6 +76,8 @@ class KarmStorage::Private {
 
 KarmStorage::KarmStorage() : d( new Private() )
 {
+    new StorageAdaptor( this );
+    QDBusConnection::sessionBus().registerObject( "/ktimetrackerstorage", this );
 }
 
 QString KarmStorage::load( TaskView* view, const QString &fileName )

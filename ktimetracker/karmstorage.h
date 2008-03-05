@@ -62,7 +62,7 @@ class KCal::Todo;
  * @author Mark Bucciarelli <mark@hubcapconsulting.com>
  */
 
-class KarmStorage
+class KarmStorage : public QObject
 {
   public:
     KarmStorage();
