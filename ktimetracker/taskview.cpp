@@ -617,7 +617,7 @@ QString TaskView::save()
   kDebug(5970) <<"Entering TaskView::save()";
   QString err=d->mStorage->save(this);
 
-  if (err.isNull()) emit setStatusBarText( i18n("Saved successfully") );
+  if (err.isNull()) emit setStatusBarText( i18n("Successfully saved file ").append( d->mStorage->icalfile() ));
   else
     if (err==QString("Could not save. Could not lock file.")) emit setStatusBarText( i18n("Could not save. Disk full ?") );
     else emit setStatusBarText( i18n("Could not save.") );

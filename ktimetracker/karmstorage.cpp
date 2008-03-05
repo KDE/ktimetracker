@@ -82,7 +82,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
-  kDebug(5970) <<"Entering KarmStorage::load";
+  kDebug(5970) << "Entering function";
   QString err;
   KEMailSettings settings;
   QString lFileName = fileName;
@@ -210,7 +210,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 
 QString KarmStorage::icalfile()
 {
-  kDebug(5970) <<"Entering KarmStorage::icalfile";
+  kDebug(5970) << "Entering function";
   return d->mICalFile;
 }
 
@@ -286,7 +286,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
 void KarmStorage::closeStorage()
 {
-  kDebug(5970) << "Entering KarmStorage::closeStorage";
+  kDebug(5970) << "Entering function";
   if ( d->mCalendar )
   {
     d->mCalendar->close();
@@ -298,13 +298,13 @@ void KarmStorage::closeStorage()
 
 KCal::Event::List KarmStorage::rawevents()
 {
-  kDebug(5970) <<"Entering KarmStorage::listallevents";
+  kDebug(5970) << "Entering function";
   return d->mCalendar->rawEvents();
 }
 
 QString KarmStorage::save(TaskView* taskview)
 {
-  kDebug(5970) <<"entering KarmStorage::save";
+  kDebug(5970) << "entering function";
   QString err;
 
   QStack<KCal::Todo*> parents;
@@ -334,7 +334,7 @@ QString KarmStorage::save(TaskView* taskview)
 
 QString KarmStorage::setTaskParent( Task* task, Task* parent )
 {
-  kDebug(5970) <<"Entering KarmStorage::setTaskParent";
+  kDebug(5970) << "Entering function";
   QString err=QString();
   KCal::Todo* toDo;
   toDo = d->mCalendar->todo(task->uid());
@@ -711,7 +711,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   // build up an edithistorydialog, sort its start date column, and write a csv formated output into retval
   // ToDo: what if a task spans over several days ?
   // ToDo: what if a user gets the dates displayed differently ?
-  kDebug(5970) << "Entering KarmStorage::exportcsvHistory";
+  kDebug(5970) << "Entering function";
   QString delim = rc.delimiter;
   const QString cr = QString::fromLatin1("\n");
   QString err=QString::null;
@@ -852,7 +852,7 @@ void KarmStorage::startTimer( const Task* task, const KDateTime &when )
 
 void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
-  kDebug(5970) <<"Entering stopTimer when=" << when;
+  kDebug(5970) <<"Entering function; when=" << when;
   KCal::Event::List eventList = d->mCalendar->rawEvents();
   for(KCal::Event::List::iterator i = eventList.begin();
       i != eventList.end();
@@ -875,7 +875,7 @@ bool KarmStorage::bookTime(const Task* task,
                            const QDateTime& startDateTime,
                            const long durationInSeconds)
 {
-  kDebug(5970) <<"Entering KarmStorage::bookTime";
+  kDebug(5970) << "Entering function";
   // Ignores preferences setting re: logging history.
   KCal::Event* e;
   QDateTime end;
@@ -895,7 +895,7 @@ bool KarmStorage::bookTime(const Task* task,
 
 void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 {
-  kDebug(5970) <<"Entering KarmStorage::changeTime deltaSeconds=" <<deltaSeconds;
+  kDebug(5970) << "Entering function; deltaSeconds=" << deltaSeconds;
   KCal::Event* e;
   QDateTime end;
 
@@ -1034,7 +1034,7 @@ bool KarmStorage::remoteResource( const QString& file ) const
 
 QString KarmStorage::saveCalendar()
 {
-  kDebug(5970) << "Entering KarmStorage::saveCalendar";
+  kDebug(5970) << "Entering function";
 
   QString err=QString();
   KABC::Lock *lock = d->mCalendar->lock();
