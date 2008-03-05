@@ -88,6 +88,8 @@ class TaskView : public QTreeWidget
     /** Schedule that we should save very soon */
     void scheduleSave();
 
+    QStringList tasks();
+    
     /** Add a task to view and storage. */
     QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );

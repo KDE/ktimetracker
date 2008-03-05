@@ -31,8 +31,8 @@ qt4_add_dbus_adaptor( karm_shared_SRCS
                       MainAdaptor )
 qt4_add_dbus_adaptor( karm_shared_SRCS 
                       org.kde.ktimetracker.storage.xml 
-                      karmstorage.h 
-                      KarmStorage
+                      taskview.h 
+                      TaskView
                       storageadaptor
                       StorageAdaptor )
 kde4_add_ui_files( karm_shared_SRCS 

@@ -33,6 +33,7 @@
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "karmstorage.h"
+#include "taskview.h"
 #include <QDebug>
 
 namespace
@@ -116,7 +117,8 @@ int main( int argc, char *argv[] )
   else // we are running in konsole mode
   {  
     KApplication mykapp;
-    KarmStorage* sto=new KarmStorage();
+    TaskView* view=new TaskView(0);
+    view->load("/tmp/ktimetrackerkonsole.ics");
     return mykapp.exec();
   }
 }

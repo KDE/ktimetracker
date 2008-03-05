@@ -53,6 +53,7 @@
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
 #include "focusdetectornotifier.h"
+#include "storageadaptor.h"
 
 #define T_LINESIZE 1023
 
@@ -152,6 +153,8 @@ class TaskView::Private {
 TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 {
   _preferences = Preferences::instance();
+    new StorageAdaptor( this );
+    QDBusConnection::sessionBus().registerObject( "/ktimetrackerstorage", this );
 
   connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
@@ -585,6 +588,25 @@ QString TaskView::exportcsvHistory()
   return err;
 }
 
+long TaskView::count()
+{
+  long n = 0;
+  for (Task* t = itemAt(n); t; t=itemAt(++n));
+  return n;
+}
+
+QStringList TaskView::tasks()
+{
+  QStringList result;
+  int i=0;
+  while ( itemAt(i) ) 
+  {
+    result << itemAt(i)->name();
+    ++i;
+  }
+  return result;
+}
+
 void TaskView::scheduleSave()
 {
     _manualSaveTimer->start( 10 );
@@ -605,13 +627,6 @@ QString TaskView::save()
 void TaskView::startCurrentTimer()
 {
   startTimerFor( currentItem() );
-}
-
-long TaskView::count()
-{
-  long n = 0;
-  for (Task* t = itemAt(n); t; t=itemAt(++n));
-  return n;
 }
 
 void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
