@@ -603,7 +603,7 @@ void TimetrackerWidget::slotUpdateButtons()
   d->mActions[ "mark_as_incomplete" ]->setEnabled( item && item->isComplete() );
 
   d->mActions[ "new_task" ]->setEnabled( currentTaskView() );
-  d->mActions[ "new_sub_task" ]->setEnabled( currentTaskView() );
+  d->mActions[ "new_sub_task" ]->setEnabled( currentTaskView() && currentTaskView()->count() );
   d->mActions[ "focustracking" ]->setEnabled( currentTaskView() );
   d->mActions[ "focustracking" ]->setChecked( currentTaskView() && 
       currentTaskView()->isFocusTrackingActive() );
