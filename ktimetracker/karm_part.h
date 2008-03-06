@@ -53,7 +53,7 @@ class karmPart : public KParts::ReadWritePart
     friend class TrayIcon;
 
 public:
-    karmPart(QWidget *parentWidget, QObject *parent, const QStringList&);
+    karmPart(QWidget *parentWidget, QObject *parent, const QVariantList&);
 
     void taskViewCustomContextMenuRequested( const QPoint& );
     TimetrackerWidget* MainWidget() { return mMainWidget; };

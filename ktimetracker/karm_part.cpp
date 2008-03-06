@@ -45,11 +45,10 @@
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
-typedef KParts::GenericFactory<karmPart> karmPartFactory;
+K_PLUGIN_FACTORY(karmPartFactory, registerPlugin<karmPart>();)
+K_EXPORT_PLUGIN( karmPartFactory )
 
-K_EXPORT_COMPONENT_FACTORY( karmPart, karmPartFactory)
-
-karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QStringList& )
+karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
   // we need an instance
