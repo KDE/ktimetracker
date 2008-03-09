@@ -204,7 +204,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
       << "tasks from" << d->mICalFile;
   }
 
-  buildTaskView(d->mCalendar, view);
+  if ( view ) buildTaskView(d->mCalendar, view);
   return err;
 }
 
@@ -308,12 +308,14 @@ QString KarmStorage::save(TaskView* taskview)
   QString err;
 
   QStack<KCal::Todo*> parents;
-
-  for (int i = 0; i < taskview->topLevelItemCount(); ++i ) 
+  if ( taskview ) // we may also be in konsole mode
   {
-    Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
-    kDebug( 5970 ) << "write task" << task->name();
-    err = writeTaskAsTodo( task, parents );
+    for (int i = 0; i < taskview->topLevelItemCount(); ++i ) 
+    {
+      Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
+      kDebug( 5970 ) << "write task" << task->name();
+      err = writeTaskAsTodo( task, parents );
+    }
   }
 
   err=saveCalendar();
@@ -321,8 +323,7 @@ QString KarmStorage::save(TaskView* taskview)
   if ( err.isEmpty() )
   {
     kDebug(5970)
-      << "KarmStorage::save : wrote"
-      << taskview->count() << "tasks to" << d->mICalFile;
+      << "KarmStorage::save : wrote tasks to" << d->mICalFile;
   }
   else
   {
@@ -551,6 +552,33 @@ bool KarmStorage::removeTask(Task* task)
 
   // delete todo
   KCal::Todo *todo = d->mCalendar->todo(task->uid());
+  d->mCalendar->deleteTodo(todo);
+
+  // Save entire file
+  saveCalendar();
+
+  return true;
+}
+
+bool KarmStorage::removeTask(QString taskid)
+{
+
+  // delete history
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    if ( (*i)->relatedToUid() == taskid
+        || ( (*i)->relatedTo()
+            && (*i)->relatedTo()->uid() == taskid))
+    {
+      d->mCalendar->deleteEvent(*i);
+    }
+  }
+
+  // delete todo
+  KCal::Todo *todo = d->mCalendar->todo(taskid);
   d->mCalendar->deleteTodo(todo);
 
   // Save entire file

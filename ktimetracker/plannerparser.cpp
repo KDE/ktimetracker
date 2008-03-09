@@ -63,7 +63,7 @@ test cases:
   
   bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
   {
-    kDebug() <<"entering startElement";
+    kDebug() << "entering function";
     QString taskName;
     int     taskComplete=0;
     

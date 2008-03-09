@@ -115,7 +115,7 @@ void karmPart::makeMenus()
 
 void karmPart::setStatusBar(const QString & qs)
 {
-  kDebug(5970) <<"Entering setStatusBar";
+  kDebug(5970) << "Entering function";
   emit setStatusBarText(qs);
 }
 

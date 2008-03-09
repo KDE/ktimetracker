@@ -380,7 +380,7 @@ Task* TaskView::itemAt(int i)
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug( 5970 ) << "Entering TaskView::itemAt(" << i << ")";
+  kDebug( 5970 ) << "Entering function(" << i << ")";
   if ( topLevelItemCount() == 0 ) return 0;
   
   QTreeWidgetItemIterator item( this );
@@ -399,7 +399,7 @@ void TaskView::load( const QString &fileName )
 
   // if the program is used as an embedded plugin for konqueror, there may be a need
   // to load from a file without touching the preferences.
-  kDebug(5970) <<"Entering TaskView::load";
+  kDebug(5970) << "Entering function";
   _isloading = true;
   QString err = d->mStorage->load(this, fileName);
 
@@ -450,7 +450,7 @@ is stored in the _preferences object. */
 
 void TaskView::itemStateChanged( QTreeWidgetItem *item )
 {
-  kDebug() <<"Entering TaskView::itemStateChanged";
+  kDebug() << "Entering function";
   if ( !item || _isloading ) return;
   Task *t = (Task *)item;
   kDebug(5970) <<"TaskView::itemStateChanged()" <<" uid=" << t->uid() <<" state=" << t->isExpanded();
@@ -461,7 +461,7 @@ void TaskView::closeStorage() { d->mStorage->closeStorage(); }
 
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {
-  kDebug(5970) <<"entering iCalFileModified";
+  kDebug(5970) <<"entering function";
   kDebug(5970) << rc->infoText();
   rc->dump();
   d->mStorage->buildTaskView(rc,this);
@@ -470,7 +470,7 @@ void TaskView::iCalFileModified(ResourceCalendar *rc)
 
 void TaskView::refresh()
 {
-  kDebug(5970) <<"entering TaskView::refresh()";
+  kDebug(5970) << "entering function";
   int i = 0;
   for ( Task* t = itemAt(i); t; t = itemAt(++i) )
   {
@@ -487,13 +487,13 @@ void TaskView::refresh()
   setRootIsDecorated( true );
 
   emit updateButtons();
-  kDebug(5970) <<"exiting TaskView::refresh()";
+  kDebug(5970) << "exiting TaskView::refresh()";
 }
 
 QString TaskView::reFreshTimes()
 /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
 {
-  kDebug(5970) << "Entering reFreshTimes()";
+  kDebug(5970) << "Entering function";
   QString err;
 
   // re-calculate the time for every task based on events in the history
@@ -789,7 +789,7 @@ QString TaskView::addTask
 ( const QString& taskname, long total, long session, 
   const DesktopList& desktops, Task* parent )
 {
-  kDebug(5970) <<"Entering TaskView::addTask; taskname =" << taskname;
+  kDebug(5970) << "Entering function; taskname =" << taskname;
   Task *task;
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );

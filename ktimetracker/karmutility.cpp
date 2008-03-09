@@ -49,7 +49,7 @@ The output of formatTiMe(0.5,true) is 0.008333, because 0.5 minutes are 0.008333
 The output of formatTiMe(0.5,false) is 0:01, because 0.5 minutes are 0:01 hours rounded.
 */
 {
-  kDebug(5970) << "Entering formatTime(minutes=" << minutes << ",decimal=" << decimal << ");";
+  kDebug(5970) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
   QString time;
   if ( decimal ) 
   {

@@ -20,6 +20,7 @@
  *
  */
 
+#include "desktoplist.h"
 #include <signal.h>
 #include <QFile>
 #include <KAboutData>
@@ -33,6 +34,7 @@
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "karmstorage.h"
+#include "task.h"
 #include "taskview.h"
 #include <QDebug>
 
@@ -69,6 +71,8 @@ int main( int argc, char *argv[] )
   KCmdLineOptions options;
   options.add("+file", ki18n( "The iCalendar file to open" ));
   options.add("konsolemode", ki18n( "Switch off gui, run in konsole mode (e.g. as engine for a web service)" ));
+  options.add("addtask <taskname>", ki18n( "Add task <taskname>" ));
+  options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
   KCmdLineArgs::addCmdLineOptions( options );
   KUniqueApplication myApp;
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -116,10 +120,28 @@ int main( int argc, char *argv[] )
   }
   else // we are running in konsole mode
   {  
-    KApplication mykapp;
-    TaskView* view=new TaskView(0);
-    view->load("/tmp/ktimetrackerkonsole.ics");
-    return mykapp.exec();
+    // addtask
+    if ( !args->getOption("addtask").isEmpty() )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      const QString& s=args->getOption("addtask");
+      QVector<int> vec;
+      vec.push_back(0);
+      DesktopList dl=vec;
+      Task* t=0;
+      Task* task=new Task( s,(long int) 0,(long int) 0, dl, t );
+      sto->addTask( task );
+      sto->save( 0 );
+    }
+    // deletetask
+    if ( !args->getOption("deletetask").isEmpty() )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      const QString& taskid=args->getOption("deletetask");
+      sto->removeTask( taskid );
+    }
   }
 }
   

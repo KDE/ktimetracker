@@ -126,7 +126,7 @@ KArmTimeWidget::KArmTimeWidget( QWidget* parent, const char* name )
 
 void KArmTimeWidget::setTime( int hour, int minute )
 {
-  kDebug(5970) << "Entering KArmTimeWidget::setTime( "<< hour << ", " << minute << " )";
+  kDebug(5970) << "Entering function( "<< hour << ", " << minute << " )";
   QString dummy;
 
   dummy.setNum( hour + (minute/60));

@@ -102,7 +102,7 @@ void MainWindow::setStatusBar(const QString& qs)
 
 void MainWindow::quit()
 {
-  kDebug() << "Entering MainWindow::quit";
+  kDebug() << "Entering function";
   if ( mainWidget->closeAllFiles() ) 
   {
     kapp->quit();
@@ -112,7 +112,7 @@ void MainWindow::quit()
 
 MainWindow::~MainWindow()
 {
-  kDebug(5970) <<"MainWindow::~MainWindows: Quitting ktimetracker.";
+  kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
   saveGeometry();
 }
 
@@ -123,7 +123,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateTime( long sessionDiff, long totalDiff )
 {
-  kDebug(5970) << "Entering MainWindow::updateTime(sessionDiff=" << sessionDiff << " totalDiff=" << totalDiff << ")";
+  kDebug(5970) << "Entering function(sessionDiff=" << sessionDiff << " totalDiff=" << totalDiff << ")";
   _sessionSum += sessionDiff;
   _totalSum   += totalDiff;
 

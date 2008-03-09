@@ -76,7 +76,7 @@ EditHistoryDialog::EditHistoryDialog( TaskView *parent )
   : KDialog( parent, Qt::WindowContextHelpButtonHint ),
     mParent( parent )
 {
-  kDebug(5970) << "Entering EditHistoryDialog::EditHistoryDialog";
+  kDebug(5970) << "Entering function";
   setButtons( KDialog::Close );
   setWindowTitle( i18n( "Edit History" ) );
 
@@ -144,7 +144,7 @@ void EditHistoryDialog::listAllEvents()
 
 void EditHistoryDialog::historyWidgetCellChanged( int row, int col )
 {
-  kDebug( 5970 ) <<"Entering mHistoryWidgetchanged";
+  kDebug( 5970 ) <<"Entering function";
   kDebug( 5970 ) <<"row =" << row <<" col =" << col;
   if ( mHistoryWidget->item( row, 4 ) ) 
   { // the user did the change, not the program

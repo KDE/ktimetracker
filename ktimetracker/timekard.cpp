@@ -48,7 +48,7 @@ const QString cr = QString::fromLatin1("\n");
 
 QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 {
-  kDebug(5970) <<"Entering TimeKard::totalsAsText";
+  kDebug(5970) << "Entering function";
   QString retval;
   QString line;
   QString buf;

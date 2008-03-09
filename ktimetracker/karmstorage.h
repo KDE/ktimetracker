@@ -234,6 +234,16 @@ class KarmStorage : public QObject
     bool removeTask(Task* task);
 
     /**
+     * Remove this task from iCalendar file.
+     *
+     * Removes task as well as all event history for this task.
+     *
+     * @param task   The task to be removed.
+     * @return true if change was saved, false otherwise
+     */
+    bool removeTask(QString taskid);
+
+    /**
      * Add this task from iCalendar file.
      *
      * Create a new KCal::Todo object and load with task information.  If
@@ -245,7 +255,7 @@ class KarmStorage : public QObject
      * @return The unique ID for the new VTODO.  Return an null QString if
      * there was an error creating the new calendar object.
      */
-    QString addTask(const Task* task, const Task* parent);
+    QString addTask(const Task* task, const Task* parent=0);
 
     /**
      *  Check if the iCalendar file currently loaded has any Todos in it.

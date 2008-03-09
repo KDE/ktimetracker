@@ -144,7 +144,7 @@ Task::~Task()
 void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
 // This is the back-end, the front-end is StartTimerFor()
 {
-  kDebug(5970) <<"Entering Task::setRunning"; 
+  kDebug(5970) << "Entering function"; 
   if ( on ) 
   {
     if (!mTimer->isActive()) 
@@ -195,7 +195,7 @@ void Task::setName( const QString& name, KarmStorage* storage )
 
 void Task::setPercentComplete(const int percent, KarmStorage *storage)
 {
-  kDebug(5970) <<"Entering Task::setPercentComplete(" << percent <<", storage):"
+  kDebug(5970) << "Entering function(" << percent <<", storage):"
     << mUid;
 
   if (!percent)
@@ -455,7 +455,7 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
     long& sessionMinutes, QString& sessionStartTiMe, QString& name, DesktopList& desktops,
     int& percent_complete, int& priority )
 {
-  kDebug(5970) << "Entering Task::parseIncidence";
+  kDebug(5970) << "Entering function";
   bool ok;
 
   name = incident->summary();
