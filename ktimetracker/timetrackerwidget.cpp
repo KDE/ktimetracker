@@ -120,6 +120,10 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
            this, SLOT( slotCurrentChanged() ) );
   connect( d->mTabWidget, SIGNAL( mouseDoubleClick() ),
            this, SLOT( newFile() ) );
+  connect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ),
+            this, SIGNAL( totalTimesChanged( long, long ) ) ); 
+  connect( d->mLastView, SIGNAL( reSetTimes() ),
+            this, SIGNAL( reSetTimes() ) );
 
   showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
   showTabBar( false );
@@ -516,6 +520,7 @@ void TimetrackerWidget::slotCurrentChanged()
   if ( d->mLastView ) 
   {
     disconnect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ) );
+    disconnect( d->mLastView, SIGNAL( reSetTimes() ) );
     disconnect( d->mLastView, SIGNAL( itemSelectionChanged() ) );
     disconnect( d->mLastView, SIGNAL( updateButtons() ) );
     disconnect( d->mLastView, SIGNAL( setStatusBarText( QString ) ) );
@@ -530,6 +535,8 @@ void TimetrackerWidget::slotCurrentChanged()
   if ( d->mLastView ) {
     connect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ),
             this, SIGNAL( totalTimesChanged( long, long ) ) ); 
+    connect( d->mLastView, SIGNAL( reSetTimes() ),
+            this, SIGNAL( reSetTimes() ) );
     connect( d->mLastView, SIGNAL( itemSelectionChanged() ),
             this, SIGNAL( currentTaskChanged() ) );
     connect( d->mLastView, SIGNAL( updateButtons() ),

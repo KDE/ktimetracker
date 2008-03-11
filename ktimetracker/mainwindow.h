@@ -72,6 +72,11 @@ class MainWindow : public KParts::MainWindow
     void keyBindings();
     void startNewSession();
     void updateTime( long, long );
+    /** Set total application time and total application session time to zero.
+      Typically, these times are shown as the lowest and rightest figures in
+      the widget.
+     */
+    void reSetTimes();
     void updateStatusBar();
     void taskViewCustomContextMenuRequested( const QPoint& );
 

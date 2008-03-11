@@ -217,6 +217,7 @@ class TaskView : public QTreeWidget
 
   Q_SIGNALS:
     void totalTimesChanged( long session, long total );
+    void reSetTimes();
     void updateButtons();
     void timersActive();
     void timersInactive();

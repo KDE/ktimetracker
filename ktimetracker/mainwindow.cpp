@@ -66,8 +66,12 @@ MainWindow::MainWindow( const QString &icsfile )
   // connections
   connect( mainWidget, SIGNAL( totalTimesChanged( long, long ) ),
            this, SLOT( updateTime( long, long ) ) );
+  connect( mainWidget, SIGNAL( reSetTimes() ),
+           this, SLOT( reSetTimes() ) );
   connect( mainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
+  connect( mainWidget, SIGNAL( reSetTimes() ),
+           this, SLOT( reSetTimes() ) );
   loadGeometry();
 
   // Setup context menu request handling
@@ -129,6 +133,20 @@ void MainWindow::updateTime( long sessionDiff, long totalDiff )
 
   updateStatusBar();
   kDebug(5970) << "Exiting MainWindow::updateTime";
+}
+
+/**
+ * Set the total application time and total application session time to zero.
+ */
+
+void MainWindow::reSetTimes()
+{
+  kDebug(5970) << "Entering function";
+  _sessionSum = 0;
+  _totalSum   = 0;
+
+  updateStatusBar();
+  kDebug(5970) << "Exiting MainWindow::reSetTimes";
 }
 
 void MainWindow::updateStatusBar( )

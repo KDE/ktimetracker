@@ -371,7 +371,7 @@ TaskView::~TaskView()
 
 Task* TaskView::currentItem() const
 {
-  kDebug() <<"Entering TaskView::currentItem";
+  kDebug(5970) << "Entering function";
   return static_cast< Task* >( QTreeWidget::currentItem() );
 }
 
@@ -501,6 +501,7 @@ QString TaskView::reFreshTimes()
   KCal::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
   int n=-1;
   resetTimeForAllTasks();
+  emit reSetTimes();
   while (itemAt(++n)) // loop over all tasks
   {
     for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
@@ -513,6 +514,7 @@ QString TaskView::reFreshTimes()
         KDateTime eventend = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
         int duration=eventstart.secsTo( eventend )/60;
         itemAt(n)->addTime( duration );
+        emit totalTimesChanged( 0, duration );
         kDebug(5970) << "duration is " << duration;
 
         if ( itemAt(n)->sessionStartTiMe().isValid() )
@@ -530,6 +532,7 @@ QString TaskView::reFreshTimes()
 	// so there is no session at all
         {
           itemAt(n)->addSessionTime( duration );
+          emit totalTimesChanged( duration, 0 );
         };
       }
     }
