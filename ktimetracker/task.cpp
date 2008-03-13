@@ -97,13 +97,13 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
   if (icons == 0) 
   {
     icons = new QVector<QPixmap*>(8);
-    KIconLoader* kil = new KIconLoader("karm"); // always load icons from the KArm application
+    KIconLoader kil("karm"); // always load icons from the KArm application
     for (int i=0; i<8; i++)
     {
       QPixmap *icon = new QPixmap();
       QString name;
       name.sprintf("watch-%d.xpm",i);
-      *icon = kil->loadIcon( name, KIconLoader::User );
+      *icon = kil.loadIcon( name, KIconLoader::User );
       icons->insert(i,icon);
     }
   }
