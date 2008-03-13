@@ -56,9 +56,8 @@ The output of formatTiMe(0.5,false) is 0:01, because 0.5 minutes are 0:01 hours 
     time.sprintf( "%.2f", minutes / 60.0 );
     time.replace( '.', KGlobal::locale()->decimalSymbol() );
   }
-  else 
-  {
-    time.sprintf( "%i:%02d", (int) (minutes / 60), (int)round(((int)(minutes*60) % 3600)/60.0));
-  }
+  else time.sprintf("%s%ld:%02ld",
+    (minutes < 0) ? KGlobal::locale()->negativeSign().toUtf8().data() : "",
+    labs(minutes / 60), labs(((int) round(minutes)) % 60));
   return time;
 }
