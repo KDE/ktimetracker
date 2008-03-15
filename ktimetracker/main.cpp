@@ -21,6 +21,7 @@
  */
 
 #include "desktoplist.h"
+#include <iostream>
 #include <signal.h>
 #include <QFile>
 #include <KAboutData>
@@ -73,6 +74,8 @@ int main( int argc, char *argv[] )
   options.add("konsolemode", ki18n( "Switch off gui, run in konsole mode (e.g. as engine for a web service)" ));
   options.add("addtask <taskname>", ki18n( "Add task <taskname>" ));
   options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
+  options.add("taskidsfromname <taskname>", ki18n( "Print the task ids for all tasks named <taskname>" ));
+  options.add("starttask <taskid>", ki18n( "Start timer for task <taskid>" ));
   KCmdLineArgs::addCmdLineOptions( options );
   KUniqueApplication myApp;
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -141,6 +144,19 @@ int main( int argc, char *argv[] )
       sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
       const QString& taskid=args->getOption("deletetask");
       sto->removeTask( taskid );
+    }
+    // taskidsfromname
+    if ( !args->getOption("taskidsfromname").isEmpty() )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      const QString& taskname=args->getOption("taskidsfromname");
+      QStringList taskids=sto->taskidsfromname( taskname );
+      for ( int i=0; i<taskids.count(); ++i )
+      {
+        char* line = taskids[i].toLatin1().data();
+        std::cout << line << std::endl;
+      }
     }
   }
 }

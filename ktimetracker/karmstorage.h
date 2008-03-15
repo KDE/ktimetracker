@@ -264,6 +264,8 @@ class KarmStorage : public QObject
      */
     bool isEmpty();
 
+    QStringList taskidsfromname(QString taskname);
+
     /** Return a list of start/stop events for the given date range. */
     QList<HistoryEvent> getHistory(const QDate& from, const QDate& to);
 

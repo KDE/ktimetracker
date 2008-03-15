@@ -327,7 +327,7 @@ QString KarmStorage::save(TaskView* taskview)
   }
   else
   {
-    kWarning(5970) <<"KarmStorage::save :" << err;
+    kWarning(5970) << "KarmStorage::save :" << err;
   }
 
   return err;
@@ -531,6 +531,24 @@ QString KarmStorage::addTask(const Task* task, const Task* parent)
   }
 
   return uid;
+}
+
+QStringList KarmStorage::taskidsfromname(QString taskname)
+{
+  QStringList result;
+  KCal::Todo::List todoList = d->mCalendar->rawTodos();
+  for(KCal::Todo::List::iterator i = todoList.begin();
+      i != todoList.end();
+      ++i)
+  {
+    kDebug(5970) << (*i)->uid();
+    if ( (*i)->summary() == taskname )
+    {
+      kDebug(5970) << "really " << (*i)->uid();
+      result << (*i)->uid();
+    }
+  }
+  return result;
 }
 
 bool KarmStorage::removeTask(Task* task)
