@@ -33,6 +33,7 @@
 #include <kcal/journal.h>
 #include <kcal/calendarresources.h>
 #include <kcal/resourcecalendar.h>
+#include <kcal/todo.h>
 
 class QDateTime;
 class Task;
@@ -199,6 +200,8 @@ class KarmStorage : public QObject
      */
     void startTimer(const Task* task, const KDateTime &when=KDateTime::currentLocalDateTime());
 
+    void startTimer( QString taskID );
+
     /**
      * Log the event that the timer has stopped for this task.
      *
@@ -284,6 +287,7 @@ class KarmStorage : public QObject
     QString saveCalendar();
 
     KCal::Event* baseEvent(const Task*);
+    KCal::Event* baseEvent(const KCal::Todo*);
     bool remoteResource( const QString& file ) const;
 
     /**

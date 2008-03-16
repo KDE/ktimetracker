@@ -896,6 +896,27 @@ void KarmStorage::startTimer( const Task* task, const KDateTime &when )
   task->taskView()->scheduleSave();
 }
 
+void KarmStorage::startTimer( QString taskID )
+{
+  KCal::Todo::List todoList;
+  KCal::Todo::List::ConstIterator todo;
+  todoList = d->mCalendar->rawTodos();
+  for( todo = todoList.begin(); todo != todoList.end(); ++todo )
+  {
+    kDebug(5970) << (*todo)->uid();
+    kDebug(5970) << taskID;
+    if ( (*todo)->uid() == taskID )
+    {
+      kDebug(5970) << "adding event";
+      KCal::Event* e;
+      e = baseEvent((*todo));
+      e->setDtStart(KDateTime::currentLocalDateTime());
+      d->mCalendar->addEvent(e);
+    }
+  }
+  saveCalendar();
+}
+
 void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
   kDebug(5970) <<"Entering function; when=" << when;
@@ -983,7 +1004,29 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
 
   // So someone can filter this mess out of their calendar display
-  categories.append(i18n("KArm"));
+  categories.append(i18n("KTimeTracker"));
+  e->setCategories(categories);
+
+  return e;
+}
+
+KCal::Event* KarmStorage::baseEvent(const Todo* todo)
+{
+  KCal::Event* e;
+  QStringList categories;
+
+  e = new KCal::Event;
+  e->setSummary(todo->summary());
+
+  // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
+  e->setRelatedTo(d->mCalendar->todo(todo->uid()));
+
+  // Have to turn this off to get datetimes in date fields.
+  e->setAllDay(false);
+  e->setDtStart(KDateTime(todo->dtStart()));
+
+  // So someone can filter this mess out of their calendar display
+  categories.append(i18n("KTimeTracker"));
   e->setCategories(categories);
 
   return e;

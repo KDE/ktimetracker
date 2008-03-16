@@ -158,6 +158,13 @@ int main( int argc, char *argv[] )
         std::cout << line << std::endl;
       }
     }
+    // starttask
+    if ( !args->getOption("starttask").isEmpty() )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->startTimer(args->getOption("starttask"));
+    }
   }
 }
   
