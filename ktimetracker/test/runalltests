@@ -1,0 +1,2 @@
+#!/bin/bash
+for n in *.sh; do if bash $n; then echo success; else echo fail; break; fi; done
