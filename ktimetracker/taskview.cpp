@@ -921,15 +921,12 @@ void TaskView::deleteTask( Task* task )
   int response = KMessageBox::Continue;
   if (KTimeTrackerSettings::promptDelete()) 
   {
-    if (task->childCount() == 0) 
-    {
-      response = KMessageBox::warningContinueCancel( 0,
-          i18n( "Are you sure you want to delete the selected"
-          " task(s) and their entire history?\n"
-          "NOTE: all subtasks and their history will also "
-          "be deleted."),
-          i18n( "Deleting Task(s)"), KStandardGuiItem::del());
-    }
+    response = KMessageBox::warningContinueCancel( 0,
+        i18n( "Are you sure you want to delete the selected"
+        " task(s) and their entire history?\n"
+        "NOTE: all subtasks and their history will also "
+        "be deleted."),
+        i18n( "Deleting Task(s)"), KStandardGuiItem::del());
   }
 
   if (response == KMessageBox::Continue) 
