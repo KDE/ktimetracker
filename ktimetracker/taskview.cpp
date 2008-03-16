@@ -932,11 +932,13 @@ void TaskView::deleteTask( Task* task )
   if (response == KMessageBox::Continue) 
   {
     int i=0;
+    QList<int> delendum;
     while ( itemAt(i) )
     {
-      if ( itemAt( i )->isSelected()) deleteTaskBatch(itemAt(i));
-      else i++;
+      if ( itemAt( i )->isSelected()) delendum << i;
+      i++;
     }
+    for (int n=delendum.size()-1; n>=0; --n) deleteTaskBatch(itemAt(delendum[n]));
   }
 }
 
