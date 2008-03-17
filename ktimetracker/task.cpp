@@ -253,6 +253,7 @@ bool Task::isComplete() { return mPercentComplete == 100; }
 
 void Task::removeFromView()
 {
+  kDebug(5970) << "Entering function";
   while ( childCount() > 0 ) 
   {
     static_cast< Task* >( child( 0 ) )->removeFromView();

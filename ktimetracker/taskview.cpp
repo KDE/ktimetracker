@@ -719,6 +719,7 @@ void TaskView::resetTimeForAllTasks()
 
 void TaskView::stopTimerFor(Task* task)
 {
+  kDebug(5970) << "Entering function";
   if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 ) 
   {
     d->mActiveTasks.removeAll(task);
@@ -935,10 +936,12 @@ void TaskView::deleteTask( Task* task )
     QList<int> delendum;
     while ( itemAt(i) )
     {
-      if ( itemAt( i )->isSelected()) delendum << i;
+      if ( itemAt( i )->isSelected()) 
+        delendum << i;
       i++;
     }
-    for (int n=delendum.size()-1; n>=0; --n) deleteTaskBatch(itemAt(delendum[n]));
+    for (int n=delendum.size()-1; n>=0; --n) 
+      deleteTaskBatch(itemAt(delendum[n]));
   }
 }
 
@@ -962,6 +965,7 @@ void TaskView::extractTime(int minutes)
 
 void TaskView::deletingTask(Task* deletedTask)
 {
+  kDebug(5970) << "Entering function";
   DesktopList desktopList;
 
   _desktopTracker->registerForDesktops( deletedTask, desktopList );

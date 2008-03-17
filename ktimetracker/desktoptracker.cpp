@@ -99,12 +99,14 @@ void DesktopTracker::startTracking()
   }
 }
 
-void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
+void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
 {
-  kDebug( 5970 ) << "Entering function";
+  kDebug(5970) << "Entering function";
   // if no desktop is marked, disable auto tracking for this task
-  if ( desktopList.size() == 0 ) {
-    for ( int i = 0; i < maxDesktops; ++i ) {
+  if ( desktopList.size() == 0 ) 
+  {
+    for ( int i = 0; i < maxDesktops; ++i ) 
+    {
       TaskVector *v = &( mDesktopTracker[i] );
       TaskVector::iterator tit = qFind( v->begin(), v->end(), task );
       if ( tit != v->end() )
@@ -120,23 +122,28 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
 #endif
 #endif
     }
-
+    kDebug(5970) << "Leaving function, desktopList.size=0";
     return;
   }
 
   // If desktop contains entries then configure desktopTracker
   // If a desktop was disabled, it will not be stopped automatically.
   // If enabled: Start it now.
-  if ( desktopList.size() > 0 ) {
-    for ( int i = 0; i < maxDesktops; ++i ) {
+  if ( desktopList.size() > 0 ) 
+  {
+    for ( int i = 0; i < maxDesktops; ++i ) 
+    {
       TaskVector& v = mDesktopTracker[i];
       TaskVector::iterator tit = qFind( v.begin(), v.end(), task );
       // Is desktop i in the desktop list?
       if ( qFind( desktopList.begin(), desktopList.end(), i )
-           != desktopList.end() ) {
+           != desktopList.end() ) 
+      {
         if ( tit == v.end() )  // not yet in start vector
           v.push_back( task ); // track in desk i
-      } else { // delete it
+      } 
+      else 
+      { // delete it
         if ( tit != v.end() ) // not in start vector any more
         {
           v.erase( tit ); // so we delete it from desktopTracker
@@ -155,6 +162,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList)
     }
     startTracking();
   }
+  kDebug(5970) << "Leaving function";
 }
 
 #include "desktoptracker.moc"
