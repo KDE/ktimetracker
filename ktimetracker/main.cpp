@@ -66,7 +66,6 @@ int main( int argc, char *argv[] )
   aboutData.addAuthor( ki18n("Jesper Pedersen"),   KLocalizedString(), "blackie@kde.org" );
   aboutData.addAuthor( ki18n("Kalle Dalheimer"),   KLocalizedString(), "kalle@kde.org" );
   aboutData.addAuthor( ki18n("Mark Bucciarelli"),  KLocalizedString(), "mark@hubcapconsulting.com" );
-
   KCmdLineArgs::init( argc, argv, &aboutData );
 
   KCmdLineOptions options;
@@ -76,11 +75,11 @@ int main( int argc, char *argv[] )
   options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
   options.add("taskidsfromname <taskname>", ki18n( "Print the task ids for all tasks named <taskname>" ));
   options.add("starttask <taskid>", ki18n( "Start timer for task <taskid>" ));
-  KCmdLineArgs::addCmdLineOptions( options );
-  KUniqueApplication myApp;
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  if (!args->isSet( "konsolemode" ))
-  {  
+  if ( (argc==1) || ((argc>1) && (strcmp(argv[1],"--konsolemode")) ) )
+  {  // no konsole mode
+    KCmdLineArgs::addCmdLineOptions( options );
+    KUniqueApplication myApp;
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs(); 
     MainWindow *mainWindow;
     if ( args->count() > 0 )
     {
@@ -123,6 +122,10 @@ int main( int argc, char *argv[] )
   }
   else // we are running in konsole mode
   {  
+    kDebug(5970) << "We are running in konsole mode";
+    KCmdLineArgs::addCmdLineOptions( options );
+    KApplication myApp(false);
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs(); 
     // addtask
     if ( !args->getOption("addtask").isEmpty() )
     {
@@ -132,8 +135,7 @@ int main( int argc, char *argv[] )
       QVector<int> vec;
       vec.push_back(0);
       DesktopList dl=vec;
-      Task* t=0;
-      Task* task=new Task( s,(long int) 0,(long int) 0, dl, t );
+      Task* task=new Task( s,(long int) 0,(long int) 0, dl, 0, true );
       sto->addTask( task );
       sto->save( 0 );
     }

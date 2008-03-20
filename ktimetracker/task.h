@@ -64,7 +64,7 @@ class Task : public QObject, public QTreeWidgetItem
   public:
     //@{ constructors
     Task( const QString& taskame, long minutes, long sessionTime,
-          DesktopList desktops, TaskView* parent = 0);
+          DesktopList desktops, TaskView* parent = 0, bool konsolemode=false );
     Task( const QString& taskame, long minutes, long sessionTime,
           DesktopList desktops, Task* parent = 0);
     Task( KCal::Todo* incident, TaskView* parent );
@@ -342,7 +342,7 @@ class Task : public QObject, public QTreeWidgetItem
 
     /** initialize a task */
     void init( const QString& taskame, long minutes, long sessionTime, QString sessionStartTiMe, 
-               DesktopList desktops, int percent_complete, int priority );
+               DesktopList desktops, int percent_complete, int priority, bool konsolemode=false );
 
     static QVector<QPixmap*> *icons;
 

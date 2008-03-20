@@ -41,10 +41,10 @@ const int gSecondsPerMinute = 60;
 QVector<QPixmap*> *Task::icons = 0;
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
-            DesktopList desktops, TaskView *parent)
+            DesktopList desktops, TaskView *parent, bool konsolemode )
   : QObject(), QTreeWidgetItem(parent)
 { 
-  init( taskName, minutes, sessionTime, 0, desktops, 0, 0 );
+  init( taskName, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
 }
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
@@ -83,7 +83,7 @@ int Task::depth()
 }
 
 void Task::init( const QString& taskName, long minutes, long sessionTime, QString sessionStartTiMe,
-                 DesktopList desktops, int percent_complete, int priority )
+                 DesktopList desktops, int percent_complete, int priority, bool konsolemode )
 {
   // If our parent is the taskview then connect our totalTimesChanged
   // signal to its receiver
@@ -97,14 +97,17 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
   if (icons == 0) 
   {
     icons = new QVector<QPixmap*>(8);
-    KIconLoader kil("karm"); // always load icons from the KArm application
-    for (int i=0; i<8; i++)
+    if (!konsolemode) 
     {
-      QPixmap *icon = new QPixmap();
-      QString name;
-      name.sprintf("watch-%d.xpm",i);
-      *icon = kil.loadIcon( name, KIconLoader::User );
-      icons->insert(i,icon);
+      KIconLoader kil("karm"); // always load icons from the KArm application
+      for (int i=0; i<8; i++)
+      {
+        QPixmap *icon = new QPixmap();
+        QString name;
+        name.sprintf("watch-%d.xpm",i);
+        *icon = kil.loadIcon( name, KIconLoader::User );
+        icons->insert(i,icon);
+      } 
     }
   }
 
@@ -116,7 +119,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
   mTimer = new QTimer(this);
   mDesktops = desktops;
   connect(mTimer, SIGNAL(timeout()), this, SLOT(updateActiveIcon()));
-  setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+  if ( !konsolemode ) setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
   mCurrentPic = 0;
   mPercentComplete = percent_complete;
   mPriority = priority;
