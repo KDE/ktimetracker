@@ -133,11 +133,13 @@ void TrayIcon::startClock()
 
 void TrayIcon::stopClock()
 {
+  kDebug(5970) << "Entering function";
   if ( _taskActiveTimer )
   {
     _taskActiveTimer->stop();
     show();
   }
+  kDebug(5970) << "Leaving function";
 }
 
 void TrayIcon::advanceClock()

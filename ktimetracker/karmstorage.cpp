@@ -535,6 +535,7 @@ QString KarmStorage::addTask(const Task* task, const Task* parent)
 
 QStringList KarmStorage::taskidsfromname(QString taskname)
 {
+  kDebug(5970) << "Entering function";
   QStringList result;
   KCal::Todo::List todoList = d->mCalendar->rawTodos();
   for(KCal::Todo::List::iterator i = todoList.begin();
@@ -542,12 +543,19 @@ QStringList KarmStorage::taskidsfromname(QString taskname)
       ++i)
   {
     kDebug(5970) << (*i)->uid();
-    if ( (*i)->summary() == taskname )
-    {
-      kDebug(5970) << "really " << (*i)->uid();
-      result << (*i)->uid();
-    }
+    if ( (*i)->summary() == taskname ) result << (*i)->uid();
   }
+  return result;
+}
+
+QStringList KarmStorage::listtasknames()
+{
+  kDebug(5970) << "Entering function";
+  QStringList result;
+  KCal::Todo::List todoList = d->mCalendar->rawTodos();
+  for(KCal::Todo::List::iterator i = todoList.begin();
+      i != todoList.end();
+      ++i) result << (*i)->summary();
   return result;
 }
 

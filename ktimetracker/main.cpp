@@ -71,6 +71,7 @@ int main( int argc, char *argv[] )
   KCmdLineOptions options;
   options.add("+file", ki18n( "The iCalendar file to open" ));
   options.add("konsolemode", ki18n( "Switch off gui, run in konsole mode (e.g. as engine for a web service)" ));
+  options.add("listtasknames", ki18n( "List all tasks in the konsole" ));
   options.add("addtask <taskname>", ki18n( "Add task <taskname>" ));
   options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
   options.add("taskidsfromname <taskname>", ki18n( "Print the task ids for all tasks named <taskname>" ));
@@ -126,6 +127,18 @@ int main( int argc, char *argv[] )
     KCmdLineArgs::addCmdLineOptions( options );
     KApplication myApp(false);
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs(); 
+    // listtasks
+    if ( args->isSet("listtasknames") )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      QStringList tasknameslist=sto->listtasknames();
+      for ( int i=0; i<tasknameslist.count(); ++i )
+      {
+        char* line = tasknameslist[i].toLatin1().data();
+        std::cout << line << std::endl;
+      }
+    }
     // addtask
     if ( !args->getOption("addtask").isEmpty() )
     {

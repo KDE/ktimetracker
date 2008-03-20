@@ -556,16 +556,22 @@ void TimetrackerWidget::slotCurrentChanged()
 
 void TimetrackerWidget::updateTabs()
 {
+  kDebug(5970) << "Entering function";
   TaskView *taskView;
-  for ( int i = 0; i < d->mTabWidget->count(); ++i ) {
+  for ( int i = 0; i < d->mTabWidget->count(); ++i ) 
+  {
     taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
 
-    if ( taskView->activeTasks().count() == 0 ) {
+    if ( taskView->activeTasks().count() == 0 ) 
+    {
       d->mTabWidget->setTabTextColor( i, palette().color( QPalette::Foreground ) );
-    } else {
+    } 
+    else 
+    {
       d->mTabWidget->setTabTextColor( i, Qt::darkGreen );
     }
   }
+  kDebug(5970) << "Leaving function";
 }
 
 bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
@@ -599,6 +605,7 @@ void TimetrackerWidget::slotAddTask( const QString &taskName )
 
 void TimetrackerWidget::slotUpdateButtons()
 {
+  kDebug(5970) << "Entering function";
   Task *item = currentTask();
 
   d->mActions[ "start" ]->setEnabled( item && !item->isRunning() && 
@@ -622,6 +629,7 @@ void TimetrackerWidget::slotUpdateButtons()
   d->mActions[ "import_planner" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
   d->mActions[ "file_close" ]->setEnabled( currentTaskView() );
+  kDebug(5970) << "Leaving function";
 }
 
 void TimetrackerWidget::showSettingsDialog()
