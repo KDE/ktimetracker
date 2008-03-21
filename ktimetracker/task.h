@@ -67,7 +67,7 @@ class Task : public QObject, public QTreeWidgetItem
           DesktopList desktops, TaskView* parent = 0, bool konsolemode=false );
     Task( const QString& taskame, long minutes, long sessionTime,
           DesktopList desktops, Task* parent = 0);
-    Task( KCal::Todo* incident, TaskView* parent );
+    Task( KCal::Todo* incident, TaskView* parent, bool konsolemode=false );
     //@}
     /* destructor */
     ~Task();

@@ -270,6 +270,9 @@ class KarmStorage : public QObject
     /** Return a list of all task ids for taskname */
     QStringList taskidsfromname(QString taskname);
 
+    /** Return the task with the uid uid */
+    Task* task( QString uid, TaskView* view );
+
     /** Return a list of all task names */
     QStringList listtasknames();
 

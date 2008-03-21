@@ -71,11 +71,13 @@ int main( int argc, char *argv[] )
   KCmdLineOptions options;
   options.add("+file", ki18n( "The iCalendar file to open" ));
   options.add("konsolemode", ki18n( "Switch off gui, run in konsole mode (e.g. as engine for a web service)" ));
-  options.add("listtasknames", ki18n( "List all tasks in the konsole" ));
+  options.add("listtasknames", ki18n( "List all tasks as text output" ));
   options.add("addtask <taskname>", ki18n( "Add task <taskname>" ));
   options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
   options.add("taskidsfromname <taskname>", ki18n( "Print the task ids for all tasks named <taskname>" ));
   options.add("starttask <taskid>", ki18n( "Start timer for task <taskid>" ));
+  options.add("totalminutesfortaskid <taskid>", ki18n( "Deliver total minutes for task id" ));
+  options.add("version", ki18n( "Outputs the version" ));
   if ( (argc==1) || ((argc>1) && (strcmp(argv[1],"--konsolemode")) ) )
   {  // no konsole mode
     KCmdLineArgs::addCmdLineOptions( options );
@@ -127,6 +129,11 @@ int main( int argc, char *argv[] )
     KCmdLineArgs::addCmdLineOptions( options );
     KApplication myApp(false);
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs(); 
+    // version 
+    if ( args->isSet("version") )
+    {
+      std::cout << KTIMETRACKER_VERSION << endl;
+    }
     // listtasks
     if ( args->isSet("listtasknames") )
     {
@@ -171,6 +178,18 @@ int main( int argc, char *argv[] )
       {
         char* line = taskids[i].toLatin1().data();
         std::cout << line << std::endl;
+      }
+    }
+    // totalminutesfortaskid
+    if ( !args->getOption("totalminutesfortaskid").isEmpty() )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      Task* task=sto->task( args->getOption("totalminutesfortaskid"), 0 );
+      if (task!=0)
+      {
+        kDebug(5970) << "taskname=" << task->name();
+        std::cout << task->totalTime();
       }
     }
     // starttask

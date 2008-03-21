@@ -1,9 +1,9 @@
-<!-- WebTimeTracker
-WebTimeTracker is a php web application that allows you to track how much time you spent on various tasks.
+<!-- WebKTimeTracker
+WebKTimeTracker is a php web application that allows you to track how much time you spent on various tasks.
 When you start a new task, you start a timer for it. At the end of the day, you can see how much time
 you spent on various task.
-WebTimeTracker uses ktimetracker as its engine, the php site starts ktimetracker on the server and 
-communicates with it via dbus.
+WebKTimeTracker uses ktimetracker as its engine, the php site starts ktimetracker on the server and 
+communicates with it via dbus or via command options.
 
 TODO: what happens if apache cannot start a gui ?
 FIXME: where are my dbus bindings ?
@@ -12,10 +12,10 @@ FIXME: adding two tasks with the same name leads to unpredictable behavior
 -->
 <html>
 <head>
-<title>This is WebTimeTracker</title>
+<title>This is WebKTimeTracker</title>
 <head>
 <body>
-<h1>WebTimeTracker 0.01</h1>
+<h1>WebKTimeTracker 0.01</h1>
 <?php
 $task=escapeshellcmd($_GET['task']);
 $taskname=escapeshellcmd($_GET['taskname']);
@@ -30,12 +30,11 @@ if ($taskname)
   if ($_GET['action'] == "stop") exec("qdbus org.kde.ktimetracker /KTimeTracker stopTimerFor ".$output[0]);
   if ($_GET['action'] == "delete") exec("qdbus org.kde.ktimetracker /KTimeTracker deleteTask ".$output[0]);
 }
-$handle=popen("/home/kde-devel/kde/bin/ktimetracker","r");
 $errorlevel=1;
 while ($errorlevel!=0)
 {
   sleep (1);
-  exec("qdbus org.kde.ktimetracker /KTimeTracker version",$output2,$errorlevel);
+  exec("/home/kde-devel/kde/bin/ktimetracker --konsolemode --version",$output2,$errorlevel);
 }
 echo "Your ktimetracker is version $output2[0]<br />";
 ?>
@@ -46,12 +45,12 @@ New Task:
 </form>
 <table>
 <?php
-  exec("qdbus org.kde.ktimetracker /KTimeTracker tasks ",$tasknames,$errorlevel);
+  exec("/home/kde-devel/kde/bin/ktimetracker --konsolemode --listtasknames ",$tasknames,$errorlevel);
   for ($i=0; $i<sizeof($tasknames); $i++)
   {
     $output3=""; $output4="";
-    exec("qdbus org.kde.ktimetracker /KTimeTracker taskIdsFromName ".$tasknames[$i],$output3);
-    exec("qdbus org.kde.ktimetracker /KTimeTracker totalMinutesForTaskId ".$output3[0],$output4);    
+    exec("/home/kde-devel/kde/bin/ktimetracker --konsolemode --taskidsfromname ".$tasknames[$i],$output3);
+    exec("/home/kde-devel/kde/bin/ktimetracker --konsolemode --totalminutesfortaskid ".$output3[0],$output4);    
     echo "<tr bgcolor=#FFEEEE><td>".$tasknames[$i]."</td><td>$output4[0]</td><td>";
     echo "<form action=\"index.php\">";
     echo "<input name=\"taskname\" type=\"hidden\" value=\"$tasknames[$i]\">";

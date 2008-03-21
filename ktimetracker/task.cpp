@@ -54,7 +54,7 @@ Task::Task( const QString& taskName, long minutes, long sessionTime,
   init( taskName, minutes, sessionTime, 0, desktops, 0, 0 );
 }
 
-Task::Task( KCal::Todo* todo, TaskView* parent )
+Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
   : QObject(), QTreeWidgetItem( parent )
 {
   long minutes = 0;
@@ -67,7 +67,7 @@ Task::Task( KCal::Todo* todo, TaskView* parent )
 
   parseIncidence( todo, minutes, sessionTime, sessionStartTiMe, name, desktops, percent_complete,
                   priority );
-  init( name, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority );
+  init( name, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority, konsolemode );
 }
 
 int Task::depth()

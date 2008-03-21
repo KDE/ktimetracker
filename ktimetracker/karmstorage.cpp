@@ -55,6 +55,7 @@
 #include <kio/netaccess.h>
 
 #include "edithistorydialog.h"
+#include "task.h"
 #include "taskview.h"
 #include "timekard.h"
 #include "karmutility.h"
@@ -206,6 +207,29 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 
   if ( view ) buildTaskView(d->mCalendar, view);
   return err;
+}
+
+Task* KarmStorage::task( QString uid, TaskView* view )
+{
+  kDebug(5970) << "Entering function";
+  KCal::Todo::List todoList;
+  KCal::Todo::List::ConstIterator todo;
+  todoList = d->mCalendar->rawTodos();
+  todo = todoList.begin();
+  Task* result=0;
+  bool konsolemode=false;
+  if ( view == 0 ) konsolemode=true;
+  kDebug(5970) << "We are searching for " << uid;
+  kDebug(5970) << "(*todo)->uid() = " << (*todo)->uid();
+  while ( todo != todoList.end() && ( (*todo)->uid() != uid ) ) 
+  {
+    kDebug(5970) << ((*todo)->uid());
+    ++todo;
+  }
+  if ( (*todo)->uid() == uid ) result = new Task((*todo), view, konsolemode);
+  else result=0;
+  kDebug(5970) << "Leaving function, returning " << result;
+  return result;
 }
 
 QString KarmStorage::icalfile()
