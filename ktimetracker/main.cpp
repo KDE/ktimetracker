@@ -134,12 +134,12 @@ int main( int argc, char *argv[] )
     {
       std::cout << KTIMETRACKER_VERSION << endl;
     }
-    // listtasks
+    // listtasknames
     if ( args->isSet("listtasknames") )
     {
       KarmStorage* sto=new KarmStorage();
       sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
-      QStringList tasknameslist=sto->listtasknames();
+      QStringList tasknameslist=sto->taskNames();
       for ( int i=0; i<tasknameslist.count(); ++i )
       {
         char* line = tasknameslist[i].toLatin1().data();

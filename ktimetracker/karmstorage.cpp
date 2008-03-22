@@ -209,7 +209,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
   return err;
 }
 
-Task* KarmStorage::task( QString uid, TaskView* view )
+Task* KarmStorage::task( const QString& uid, TaskView* view )
 {
   kDebug(5970) << "Entering function";
   KCal::Todo::List todoList;
@@ -219,15 +219,8 @@ Task* KarmStorage::task( QString uid, TaskView* view )
   Task* result=0;
   bool konsolemode=false;
   if ( view == 0 ) konsolemode=true;
-  kDebug(5970) << "We are searching for " << uid;
-  kDebug(5970) << "(*todo)->uid() = " << (*todo)->uid();
-  while ( todo != todoList.end() && ( (*todo)->uid() != uid ) ) 
-  {
-    kDebug(5970) << ((*todo)->uid());
-    ++todo;
-  }
+  while ( todo != todoList.end() && ( (*todo)->uid() != uid ) ) ++todo;
   if ( (*todo)->uid() == uid ) result = new Task((*todo), view, konsolemode);
-  else result=0;
   kDebug(5970) << "Leaving function, returning " << result;
   return result;
 }
@@ -572,7 +565,7 @@ QStringList KarmStorage::taskidsfromname(QString taskname)
   return result;
 }
 
-QStringList KarmStorage::listtasknames()
+QStringList KarmStorage::taskNames() const
 {
   kDebug(5970) << "Entering function";
   QStringList result;
