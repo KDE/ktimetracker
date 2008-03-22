@@ -76,13 +76,17 @@ int main( int argc, char *argv[] )
   options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
   options.add("taskidsfromname <taskname>", ki18n( "Print the task ids for all tasks named <taskname>" ));
   options.add("starttask <taskid>", ki18n( "Start timer for task <taskid>" ));
+  options.add("stoptask <taskid>", ki18n( "Stop timer for task <taskid>" ));
   options.add("totalminutesfortaskid <taskid>", ki18n( "Deliver total minutes for task id" ));
   options.add("version", ki18n( "Outputs the version" ));
-  if ( (argc==1) || ((argc>1) && (strcmp(argv[1],"--konsolemode")) ) )
+  KCmdLineArgs::addCmdLineOptions( options );
+  KUniqueApplication::addCmdLineOptions();
+  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  if ( !args->isSet("konsolemode") )
   {  // no konsole mode
-    KCmdLineArgs::addCmdLineOptions( options );
+
     KUniqueApplication myApp;
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs(); 
+
     MainWindow *mainWindow;
     if ( args->count() > 0 )
     {
@@ -198,6 +202,13 @@ int main( int argc, char *argv[] )
       KarmStorage* sto=new KarmStorage();
       sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
       sto->startTimer(args->getOption("starttask"));
+    }
+    // starttask
+    if ( !args->getOption("stoptask").isEmpty() )
+    {
+      KarmStorage* sto=new KarmStorage();
+      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      //sto->stopTimer(args->getOption("stoptask"));
     }
   }
 }
