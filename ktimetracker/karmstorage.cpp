@@ -19,15 +19,22 @@
  *
  */
 
-#include "karmstorage.h"
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-
 #include <cassert>
-
+#include "edithistorydialog.h"
+#include <fcntl.h>
+#include <kcal/incidence.h>
+#include <KApplication>       // kapp
+#include "karmstorage.h"
+#include "karmutility.h"
+#include <KDebug>
+#include <kemailsettings.h>
+#include <KLocale>            // i18n
+#include <kpimprefs.h>        // for timezone
+#include <KProgressDialog>
+#include <KTemporaryFile>
+#include "ktimetracker.h"
+#include <KUrl>
+#include <kio/netaccess.h>
 #include <QByteArray>
 #include <QDateTime>
 #include <QFile>
@@ -38,30 +45,17 @@
 #include <QStringList>
 #include <QTableWidget>
 #include <QTextStream>
-
-#include <KApplication>       // kapp
-#include <KDebug>
-#include <KLocale>            // i18n
-#include <KProgressDialog>
-#include <KUrl>
-#include <KTemporaryFile>
-
-#include <kemailsettings.h>
-#include <kcal/incidence.h>
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
 #include <resourceremote.h>
-#include <kpimprefs.h>  // for timezone
-#include <kio/netaccess.h>
-
-#include "edithistorydialog.h"
+#include <sys/stat.h>
+#include "storageadaptor.h"
 #include "task.h"
 #include "taskview.h"
 #include "timekard.h"
-#include "karmutility.h"
-#include "ktimetracker.h"
-#include "task.h"
-#include "storageadaptor.h"
+#include <sys/types.h>
+#include <unistd.h>
+
 
 static long linenr;  // how many lines written by printTaskHistory so far
 
