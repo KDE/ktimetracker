@@ -70,7 +70,6 @@ int main( int argc, char *argv[] )
 
   KCmdLineOptions options;
   options.add("+file", ki18n( "The iCalendar file to open" ));
-  options.add("konsolemode", ki18n( "Switch off gui, run in konsole mode (e.g. as engine for a web service)" ));
   options.add("listtasknames", ki18n( "List all tasks as text output" ));
   options.add("addtask <taskname>", ki18n( "Add task <taskname>" ));
   options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
@@ -82,11 +81,16 @@ int main( int argc, char *argv[] )
   KCmdLineArgs::addCmdLineOptions( options );
   KUniqueApplication::addCmdLineOptions();
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  if ( !args->isSet("konsolemode") )
+  /* when do we open a gui, when do we use konsole mode ?
+     call                                    argc args->count konsolemode
+     ktimetracker                               1           0          no
+     ktimetracker /tmp/test                     2           1          no
+     ktimetracker /tmp/test --listtasknames     3           1         yes
+     ktimetracker --listtasknames               2           0         yes
+  */
+  if ( argc-( args->count() ) <= 1)
   {  // no konsole mode
-
     KUniqueApplication myApp;
-
     MainWindow *mainWindow;
     if ( args->count() > 0 )
     {
@@ -132,12 +136,7 @@ int main( int argc, char *argv[] )
     kDebug(5970) << "We are running in konsole mode";
     KCmdLineArgs::addCmdLineOptions( options );
     KApplication myApp(false);
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs(); 
-    // version 
-    if ( args->isSet("version") )
-    {
-      std::cout << KTIMETRACKER_VERSION << endl;
-    }
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
     // listtasknames
     if ( args->isSet("listtasknames") )
     {
