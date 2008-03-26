@@ -46,6 +46,10 @@ set(karm_SRCS main.cpp ${karm_shared_SRCS})
 
 
 kde4_add_executable(karm karm.cpp)
+
+# todo: move to Oxygen icon
+kde4_add_app_icon(karm_SRCS "hi*-app-ktimetracker.png")
+
 kde4_add_executable(ktimetracker ${karm_SRCS})
 
 
