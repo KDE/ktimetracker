@@ -51,6 +51,8 @@ K_EXPORT_PLUGIN( karmPartFactory )
 karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
+  KGlobal::locale()->insertCatalog("karm");
+
   // we need an instance
   setComponentData( karmPartFactory::componentData() );
 
@@ -131,15 +133,6 @@ bool karmPart::saveFile()
   mMainWidget->saveFile();
 
   return true;
-}
-
-extern "C"
-{
-    KDE_EXPORT void* init_karmpart()
-    {
-	KGlobal::locale()->insertCatalog("karm");
-        return new karmPartFactory;
-    }
 }
 
 void karmPart::taskViewCustomContextMenuRequested( const QPoint& point )
