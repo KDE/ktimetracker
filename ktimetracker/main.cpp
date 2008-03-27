@@ -202,12 +202,12 @@ int main( int argc, char *argv[] )
       sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
       sto->startTimer(args->getOption("starttask"));
     }
-    // starttask
+    // stoptask
     if ( !args->getOption("stoptask").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
       sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
-      //sto->stopTimer(args->getOption("stoptask"));
+      sto->stopTimer(sto->task( args->getOption("stoptask"), 0 ));
     }
   }
 }

@@ -938,7 +938,7 @@ void KarmStorage::startTimer( QString taskID )
 
 void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 {
-  kDebug(5970) <<"Entering function; when=" << when;
+  kDebug(5970) << "Entering function; when=" << when;
   KCal::Event::List eventList = d->mCalendar->rawEvents();
   for(KCal::Event::List::iterator i = eventList.begin();
       i != eventList.end();
@@ -946,15 +946,23 @@ void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
   {
     if ( (*i)->relatedToUid() == task->uid() )
     {
+      kDebug(5970) << "found an event for task, event=" << (*i)->uid();
       if (!(*i)->hasEndDate())
       {
+        kDebug(5970) << "this event has no enddate";
 	QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
 	KDateTime kwhen=KDateTime::fromString(s);
 	kDebug() << "kwhen ==" <<  kwhen;
         (*i)->setDtEnd(kwhen);
       }
+      else 
+      {
+        kDebug(5970) << "this event has an enddate";
+        kDebug(5970) << "end date is " << (*i)->dtEnd();
+      }
     };
   }
+  saveCalendar();
 }
 
 bool KarmStorage::bookTime(const Task* task,
