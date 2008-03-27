@@ -46,7 +46,7 @@
 #include "timetrackerwidget.h"
 
 K_PLUGIN_FACTORY(karmPartFactory, registerPlugin<karmPart>();)
-K_EXPORT_PLUGIN( karmPartFactory )
+K_EXPORT_PLUGIN( karmPartFactory("karm","karm") )
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
