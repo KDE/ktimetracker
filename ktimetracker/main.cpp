@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 1997 by Stephan Kulow <coolo@kde.org>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -50,6 +49,37 @@ namespace
   }
 }
 
+QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar file to be used
+{
+  QString result;
+  if ( args->count() > 0 )
+  {
+    result = args->arg( 0 );
+    KUrl* icsfileurl=new KUrl(args->arg( 0 ));
+    if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
+    {
+      // leave as is
+      ;
+    }
+    else
+    {
+      result = KCmdLineArgs::cwd() + '/' + result;
+    }
+  }
+  else
+  {
+    result=QString(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
+    if ( !QFile::exists( result ) )
+    {
+      QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
+      result = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
+      if ( oldFile.exists() )
+        oldFile.copy( result );
+    }
+  }
+  return result;
+}
+
 int main( int argc, char *argv[] )
 {
   KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
@@ -92,33 +122,7 @@ int main( int argc, char *argv[] )
   {  // no konsole mode
     KUniqueApplication myApp;
     MainWindow *mainWindow;
-    if ( args->count() > 0 )
-    {
-      QString icsfile = args->arg( 0 );
-      KUrl* icsfileurl=new KUrl(args->arg( 0 ));
-      if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
-      {
-        // leave as is
-        ;
-      }
-      else
-      {
-        icsfile = KCmdLineArgs::cwd() + '/' + icsfile;
-      }
-      mainWindow = new MainWindow( icsfile );
-    }
-    else
-    {
-      QString newKarmFile(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
-      if ( !QFile::exists( newKarmFile ) )
-      {
-        QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
-        newKarmFile = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
-        if ( oldFile.exists() )
-          oldFile.copy( newKarmFile );
-      }
-      mainWindow = new MainWindow( newKarmFile );
-    }
+    mainWindow = new MainWindow( icsfile( args ) );
     if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
       mainWindow->restore( 1, false );
     else
@@ -141,7 +145,7 @@ int main( int argc, char *argv[] )
     if ( args->isSet("listtasknames") )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       QStringList tasknameslist=sto->taskNames();
       for ( int i=0; i<tasknameslist.count(); ++i )
       {
@@ -153,7 +157,7 @@ int main( int argc, char *argv[] )
     if ( !args->getOption("addtask").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       const QString& s=args->getOption("addtask");
       QVector<int> vec;
       vec.push_back(0);
@@ -166,7 +170,7 @@ int main( int argc, char *argv[] )
     if ( !args->getOption("deletetask").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       const QString& taskid=args->getOption("deletetask");
       sto->removeTask( taskid );
     }
@@ -174,7 +178,7 @@ int main( int argc, char *argv[] )
     if ( !args->getOption("taskidsfromname").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       const QString& taskname=args->getOption("taskidsfromname");
       QStringList taskids=sto->taskidsfromname( taskname );
       for ( int i=0; i<taskids.count(); ++i )
@@ -187,7 +191,7 @@ int main( int argc, char *argv[] )
     if ( !args->getOption("totalminutesfortaskid").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       Task* task=sto->task( args->getOption("totalminutesfortaskid"), 0 );
       if (task!=0)
       {
@@ -199,14 +203,14 @@ int main( int argc, char *argv[] )
     if ( !args->getOption("starttask").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       sto->startTimer(args->getOption("starttask"));
     }
     // stoptask
     if ( !args->getOption("stoptask").isEmpty() )
     {
       KarmStorage* sto=new KarmStorage();
-      sto->load( 0,"/tmp/ktimetrackerkonsole.ics" );
+      sto->load( 0, icsfile( args ) );
       sto->stopTimer(sto->task( args->getOption("stoptask"), 0 ));
     }
   }
