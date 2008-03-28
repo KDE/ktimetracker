@@ -214,7 +214,7 @@ Task* KarmStorage::task( const QString& uid, TaskView* view )
   bool konsolemode=false;
   if ( view == 0 ) konsolemode=true;
   while ( todo != todoList.end() && ( (*todo)->uid() != uid ) ) ++todo;
-  if ( (*todo)->uid() == uid ) result = new Task((*todo), view, konsolemode);
+  if ( todo != todoList.end() ) result = new Task((*todo), view, konsolemode);
   kDebug(5970) << "Leaving function, returning " << result;
   return result;
 }
