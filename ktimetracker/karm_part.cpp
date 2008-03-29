@@ -61,13 +61,14 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& 
   makeMenus();
   mMainWidget->openFile( KStandardDirs::locateLocal( "appdata", 
                         QString::fromLatin1( "karm.ics" ) ) );
-
+  emit setWindowCaption( KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) ) );
   // connections
   connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
            this, SLOT( updateTime( long, long ) ) );
   connect( mMainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
-
+  connect( mMainWidget, SIGNAL( setCaption( const QString& ) ),
+                 this, SIGNAL( setWindowCaption( const QString& ) ) );
   // Setup context menu request handling
   connect( mMainWidget,
            SIGNAL( contextMenuRequested( const QPoint& ) ),

@@ -210,7 +210,8 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
 bool TimetrackerWidget::saveCurrentTaskView()
 {
   QString fileName = KFileDialog::getSaveFileName( QString(), QString(), this );
-  if ( !fileName.isEmpty() ) {
+  if ( !fileName.isEmpty() ) 
+  {
     TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
     taskView->stopAllTimers();
     taskView->save();
@@ -244,7 +245,8 @@ Task* TimetrackerWidget::currentTask()
   if ( ( taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) ) ) 
   {
     return taskView->currentItem();
-  } else 
+  } 
+  else 
   {
     return 0;
   }
@@ -455,6 +457,7 @@ bool TimetrackerWidget::closeFile()
   if ( d->mTabWidget->count() == 0 ) 
   {
     emit currentTaskViewChanged();
+    emit setCaption( QString() );
     slotCurrentChanged();
   }
 
@@ -537,7 +540,8 @@ void TimetrackerWidget::slotCurrentChanged()
 
   d->mLastView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
-  if ( d->mLastView ) {
+  if ( d->mLastView ) 
+  {
     connect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ),
             this, SIGNAL( totalTimesChanged( long, long ) ) ); 
     connect( d->mLastView, SIGNAL( reSetTimes() ),
@@ -554,6 +558,7 @@ void TimetrackerWidget::slotCurrentChanged()
             this, SIGNAL( timersInactive() ) );
     connect( d->mLastView, SIGNAL( tasksChanged( QList< Task* > ) ), // FIXME signature
             this, SIGNAL( tasksChanged( const QList< Task* > &) ) );
+    emit setCaption( d->mLastView->storage()->icalfile() );
   }
 
   d->mSearchWidget->setEnabled( d->mLastView );
