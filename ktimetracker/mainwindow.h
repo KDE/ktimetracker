@@ -65,6 +65,7 @@ class MainWindow : public KParts::MainWindow
     virtual ~MainWindow();
 
   public Q_SLOTS:
+    void slotSetCaption( const QString& );
     void setStatusBar( const QString& );
     /** Quit ktimetracker (what else...) */
     void quit();

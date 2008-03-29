@@ -151,17 +151,21 @@ void TimetrackerWidget::readProperties( const KConfigGroup &cfg )
 
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
-  kDebug(5970) << "Entering TimetrackerWidget::addTaskView(fileName=" << fileName << ")";
+  kDebug(5970) << "Entering function (fileName=" << fileName << ")";
   bool isNew = fileName.isEmpty();
   QString lFileName = fileName;
   
-  if ( isNew ) {
+  if ( isNew ) 
+  {
     KTemporaryFile tempFile;
     tempFile.setAutoRemove( false );
-    if ( tempFile.open() ) {
+    if ( tempFile.open() ) 
+    {
       lFileName = tempFile.fileName();
       tempFile.close();
-    } else {
+    } 
+    else 
+    {
       KMessageBox::error( this, i18n( "Cannot create new file." ) );
       return;
     }
@@ -177,6 +181,7 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
           isNew ? KIcon( "document-save" ) : KIcon( "ktimetracker" ), 
           isNew ? i18n( "Untitled" ) : QFileInfo( lFileName ).fileName() );
   d->mTabWidget->setCurrentWidget( taskView );
+  emit setCaption( fileName );
   taskView->load( lFileName );
   d->mSearchWidget->addTreeWidget( taskView );
 

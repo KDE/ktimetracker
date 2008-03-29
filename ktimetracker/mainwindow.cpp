@@ -59,6 +59,7 @@ MainWindow::MainWindow( const QString &icsfile )
   setCentralWidget( mainWidget );
   makeMenus();
   mainWidget->openFile( icsfile );
+  slotSetCaption( icsfile );
 
   // status bar
   startStatusBar();
@@ -72,6 +73,8 @@ MainWindow::MainWindow( const QString &icsfile )
                  this, SLOT( setStatusBar( QString ) ) );
   connect( mainWidget, SIGNAL( reSetTimes() ),
            this, SLOT( reSetTimes() ) );
+  connect( mainWidget, SIGNAL( setCaption( const QString& ) ),
+                 this, SLOT( slotSetCaption( const QString& ) ) );
   loadGeometry();
 
   // Setup context menu request handling
@@ -97,6 +100,11 @@ MainWindow::MainWindow( const QString &icsfile )
     _sessionSum+=mainWidget->currentTaskView()->itemAt(i)->sessionTime();
   }
   updateStatusBar();
+}
+
+void MainWindow::slotSetCaption( const QString& qs )
+{
+  setCaption( qs );
 }
 
 void MainWindow::setStatusBar(const QString& qs)

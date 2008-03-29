@@ -199,6 +199,7 @@ class TimetrackerWidget : public QWidget {
     void showSettingsDialog();
 
   Q_SIGNALS:
+    void setCaption( const QString& qs );
     void currentTaskChanged();
     void currentTaskViewChanged();
     void updateButtons();
