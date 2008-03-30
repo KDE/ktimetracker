@@ -1,14 +1,5 @@
 [Desktop Entry]
 Name=KTimeTracker Component
-Name[cs]=KTimeTracker komponenta
-Name[de]=KTimeTracker Komponente
-Name[et]=KArmi komponent
-Name[fr]=Composant KTimeTracker
-Name[is]=KTimeTracker hluti
-Name[nds]=KTimeTracker-Komponent
-Name[sv]=KTimeTracker-delprogram
-Name[tr]=KTimeTracker part
-Name[x-test]=xxkarmPartxx
 MimeType=text/calendar;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
 X-KDE-Library=karmpart
