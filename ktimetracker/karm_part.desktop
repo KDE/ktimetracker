@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=KTimeTracker Component
+Name[ga]=Comhpháirt KTimeTracker
+Name[zh_TW]=KTimeTracker 組件
 MimeType=text/calendar;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
 X-KDE-Library=karmpart
