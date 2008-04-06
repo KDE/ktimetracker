@@ -295,6 +295,12 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   return err;
 }
 
+QString KarmStorage::buildTaskView(TaskView *view)
+// makes *view contain the tasks out of mCalendar
+{
+  return buildTaskView(d->mCalendar, view);
+}
+
 void KarmStorage::closeStorage()
 {
   kDebug(5970) << "Entering function";

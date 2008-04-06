@@ -106,6 +106,13 @@ class KarmStorage : public QObject
     */
     QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
 
+   /*
+    * Build up the taskview.
+    *
+    * This is needed if a subtask has been deleted.
+    */
+    QString buildTaskView(TaskView *view);
+
     /* Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
 
