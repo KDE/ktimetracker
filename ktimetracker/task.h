@@ -320,9 +320,6 @@ class Task : public QObject, public QTreeWidgetItem
     /** Return true if task is complete (percent complete equals 100).  */
     bool isComplete();
 
-    /** Remove current task and all it's children from the view.  */
-    void removeFromView();
-
   protected:
     void changeParentTotalTimes( long minutesSession, long minutes );
 

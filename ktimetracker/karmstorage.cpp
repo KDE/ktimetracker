@@ -247,10 +247,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
     ++it;
   }
 
-  // delete old tasks
-
-  while (view->itemAt(0)) view->itemAt(0)->cut();
-
+  view->clear();
   todoList = rc->rawTodos();
   for( todo = todoList.begin(); todo != todoList.end(); ++todo )
   {

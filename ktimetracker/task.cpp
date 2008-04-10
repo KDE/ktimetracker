@@ -254,16 +254,6 @@ void Task::setPixmapProgress()
 
 bool Task::isComplete() { return mPercentComplete == 100; }
 
-void Task::removeFromView()
-{
-  kDebug(5970) << "Entering function";
-  while ( childCount() > 0 ) 
-  {
-    static_cast< Task* >( child( 0 ) )->removeFromView();
-  }
-  delete this;
-}
-
 void Task::setDesktopList ( DesktopList desktopList )
 {
   mDesktops = desktopList;
@@ -550,13 +540,13 @@ QString Task::getDesktopStr() const
 void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
 {
-  kDebug(5970) <<"Entering function";
+  kDebug(5970) << "Entering function";
   changeParentTotalTimes( -mTotalSessionTime, -mTotalTime);
-  if ( ! parent())
+  if ( ! parent() )
     treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
   else
     parent()->takeChild(indexOfChild(this));
-  kDebug(5970) <<"Leaving function";
+  kDebug(5970) << "Leaving function";
 }
 
 void Task::paste(Task* destination)

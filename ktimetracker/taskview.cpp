@@ -895,7 +895,6 @@ void TaskView::deleteTaskBatch( Task* task )
 {
   QString uid=task->uid();
   task->remove(d->mStorage);
-  task->removeFromView();
   _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
   save();
 
