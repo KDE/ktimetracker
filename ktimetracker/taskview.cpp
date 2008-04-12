@@ -477,7 +477,7 @@ void TaskView::refresh()
     t->setPixmapProgress();
     t->update();  // maybe there was a change in the times's format
   }
-  
+
   // remove root decoration if there is no more child.
   i = 0;
   while ( itemAt( ++i ) && ( itemAt( i )->depth() == 0 ) );
@@ -608,6 +608,11 @@ QStringList TaskView::tasks()
     ++i;
   }
   return result;
+}
+
+Task* TaskView::task( const QString& taskId )
+{
+  return d->mStorage->task( taskId, this );
 }
 
 void TaskView::scheduleSave()
@@ -812,7 +817,7 @@ QString TaskView::addTask
   {
     delete task;
   }
-
+  d->mStorage->buildTaskView( this );
   return taskuid;
 }
 

@@ -836,8 +836,20 @@ void TimetrackerWidget::addTask( const QString &taskName )
 {
   TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
 
-  if ( taskView ) {
+  if ( taskView ) 
+  {
     taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
+  }
+}
+
+void TimetrackerWidget::addSubTask( const QString& taskName, const QString &taskId )
+{
+  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+
+  if ( taskView ) 
+  {
+    taskView->addTask( taskName, 0, 0, DesktopList(), taskView->task( taskId) );
+    taskView->refresh();
   }
 }
 

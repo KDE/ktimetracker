@@ -42,15 +42,13 @@ class HistoryEvent;
 class KCal::Todo;
 
 /**
- * Class to store/retrieve KArm data to/from persistent storage.
+ * Class to store/retrieve KTimeTracker data to/from persistent storage.
  *
- * The storage is an iCalendar file.  Also included are methods to
- * import KArm data from the two legacy file formats.
+ * The storage is an iCalendar file.
  *
- * All logic that deals with getting and saving data should go here.  The
+ * All logic that deals with getting and saving data should go here. The
  * storage logic has changed at least twice already in KArm's history, and
- * chances are good it will change again (for example, allowing KOrganizer and
- * KArm to access the same iCalendar file simultaneously).
+ * chances are good it will change again.
  *
  * Prior to KDE 3.2, KArm just stored totals for each task--a session total
  * and a task total.  The session total was reset to zero each time KArm
@@ -59,7 +57,7 @@ class KCal::Todo;
  * the history of each start/stop event; that is, every time you start a timer
  * and then stop a timer on a task, KArm records this as an iCalendar event.
  *
- * @short Logic that gets and stores KArm data to disk.
+ * @short Logic that gets and stores KTimeTracker data to disk.
  * @author Mark Bucciarelli <mark@hubcapconsulting.com>
  */
 

@@ -13,6 +13,10 @@
     <method name="addTask">
       <arg name="taskName" type="s" direction="in"/>
     </method>
+    <method name="addSubTask">
+      <arg name="taskName" type="s" direction="in"/>
+      <arg name="taskId" type="s" direction="in"/>      
+    </method>
     <method name="deleteTask">
       <arg name="taskId" type="s" direction="in"/>
     </method>

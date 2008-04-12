@@ -88,8 +88,12 @@ class TaskView : public QTreeWidget
     /** Schedule that we should save very soon */
     void scheduleSave();
 
+    /** return all task names, e.g. for batch processing */
     QStringList tasks();
-    
+
+    /** return the task with the given UID */
+    Task* task( const QString& uid );
+
     /** Add a task to view and storage. */
     QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
