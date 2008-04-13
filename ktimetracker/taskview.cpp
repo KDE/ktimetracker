@@ -544,7 +544,7 @@ QString TaskView::reFreshTimes()
 
 void TaskView::importPlanner( const QString &fileName )
 {
-  kDebug( 5970 ) <<"entering importPlanner";
+  kDebug( 5970 ) << "entering importPlanner";
   PlannerParser *handler = new PlannerParser( this );
   QString lFileName = fileName;
   if ( lFileName.isEmpty() ) 
@@ -564,7 +564,7 @@ QString TaskView::report( const ReportCriteria& rc )
 
 void TaskView::exportcsvFile()
 {
-  kDebug(5970) <<"TaskView::exportcsvFile()";
+  kDebug(5970) << "TaskView::exportcsvFile()";
 
   CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
   if ( currentItem() && currentItem()->isRoot() )
@@ -578,7 +578,7 @@ void TaskView::exportcsvFile()
 
 QString TaskView::exportcsvHistory()
 {
-  kDebug(5970) <<"TaskView::exportcsvHistory()";
+  kDebug(5970) << "TaskView::exportcsvHistory()";
   QString err;
   
   CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
@@ -612,7 +612,12 @@ QStringList TaskView::tasks()
 
 Task* TaskView::task( const QString& taskId )
 {
-  return d->mStorage->task( taskId, this );
+  Task* result=0;
+  int i=-1;
+  while ( itemAt(++i) ) 
+    if ( itemAt( i ) ) 
+      if ( itemAt( i )->uid() == taskId ) result=itemAt( i );
+  return result;
 }
 
 void TaskView::scheduleSave()
@@ -817,7 +822,6 @@ QString TaskView::addTask
   {
     delete task;
   }
-  d->mStorage->buildTaskView( this );
   return taskuid;
 }
 
