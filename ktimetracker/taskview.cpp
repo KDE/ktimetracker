@@ -407,7 +407,7 @@ void TaskView::load( const QString &fileName )
   {
     KMessageBox::error(this, err);
     _isloading = false;
-    kDebug(5970) <<"Leaving TaskView::load";
+    kDebug(5970) << "Leaving TaskView::load";
     return;
   }
 
@@ -420,13 +420,13 @@ void TaskView::load( const QString &fileName )
   {
     restoreItemState();
     setCurrentItem(topLevelItem( 0 ));
-    _desktopTracker->startTracking();
+    if ( _desktopTracker->startTracking() != QString() )
+      KMessageBox::error( 0, "Your virtual desktop number is too high, desktop tracking will not work" );
     _isloading = false;
-    kDebug(5970) <<"load calls refesh";
     refresh();
   }
   for (int i=0; i<=columnCount(); i++) resizeColumnToContents(i);
-  kDebug(5970) <<"Leaving TaskView::load";
+  kDebug(5970) << "Leaving function";
 }
 
 void TaskView::restoreItemState()

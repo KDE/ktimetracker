@@ -80,8 +80,9 @@ void DesktopTracker::changeTimers()
   mPreviousDesktop = mDesktop;
 }
 
-void DesktopTracker::startTracking()
+QString DesktopTracker::startTracking()
 {
+  QString err;
 #ifdef Q_WS_X11
   int currentDesktop = KWindowSystem::self()->currentDesktop() -1;
 #else
@@ -93,10 +94,13 @@ void DesktopTracker::startTracking()
   // TODO: removed? fixed by Lubos?
   // currentDesktop will return 0 if no window manager is started
   if ( currentDesktop < 0 ) currentDesktop = 0;
-
-  foreach ( Task *task, mDesktopTracker[ currentDesktop ] ) {
-    emit reachedActiveDesktop( task );
-  }
+  if ( currentDesktop >= maxDesktops ) err="desktop number too high, desktop tracking will not work";
+  else 
+    foreach ( Task *task, mDesktopTracker[ currentDesktop ] ) 
+    {
+      emit reachedActiveDesktop( task );
+    }
+  return err;
 }
 
 void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
