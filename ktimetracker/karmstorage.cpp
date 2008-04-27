@@ -204,6 +204,8 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 }
 
 Task* KarmStorage::task( const QString& uid, TaskView* view )
+// return the tasks with the uid uid out of view.
+// If !view, return the todo with the uid uid.
 {
   kDebug(5970) << "Entering function";
   KCal::Todo::List todoList;
@@ -316,9 +318,26 @@ KCal::Event::List KarmStorage::rawevents()
   return d->mCalendar->rawEvents();
 }
 
+bool KarmStorage::allEventsHaveEndTiMe(Task* task)
+{
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    if ( (*i)->relatedToUid() == task->uid()
+        || ( (*i)->relatedTo()
+            && (*i)->relatedTo()->uid() == task->uid() ) )
+    {
+      if ( !(*i)->hasEndDate() ) return false;
+    }
+  }
+  return true;
+}
+
 QString KarmStorage::save(TaskView* taskview)
 {
-  kDebug(5970) << "entering function";
+  kDebug(5970) << "Entering function";
   QString err;
 
   QStack<KCal::Todo*> parents;
@@ -355,8 +374,7 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
   toDo = d->mCalendar->todo(task->uid());
   if (parent==0) toDo->removeRelation(toDo->relatedTo());
   else toDo->setRelatedTo(d->mCalendar->todo(parent->uid()));
- // buildTaskView(d->mCalendar, _view);
-  kDebug(5970) <<"Leaving KarmStorage::setTaskParent";
+  kDebug(5970) << "Leaving function";
   return err;
 }
 

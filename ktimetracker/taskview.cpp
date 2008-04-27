@@ -415,13 +415,29 @@ void TaskView::load( const QString &fileName )
   int i = 0;
   for ( Task* t = itemAt(i); t; t = itemAt(++i) )
     _desktopTracker->registerForDesktops( t, t->desktops() );
+  // till here
+  // Start all tasks that have an event without endtime
+  i = 0;
+  for ( Task* t = itemAt(i); t; t = itemAt(++i) )
+  {
+    if ( !d->mStorage->allEventsHaveEndTiMe( t ) )
+    {
+      t->resumeRunning();
+      d->mActiveTasks.append(t);
+      emit updateButtons();
+      if ( d->mActiveTasks.count() == 1 )
+        emit timersActive();  
+      emit tasksChanged( d->mActiveTasks );
+    }
+  }
+  // till here
 
   if ( topLevelItemCount() > 0 )
   {
     restoreItemState();
     setCurrentItem(topLevelItem( 0 ));
     if ( _desktopTracker->startTracking() != QString() )
-      KMessageBox::error( 0, "Your virtual desktop number is too high, desktop tracking will not work" );
+      KMessageBox::error( 0, i18n( "Your virtual desktop number is too high, desktop tracking will not work" ) );
     _isloading = false;
     refresh();
   }
@@ -434,7 +450,7 @@ void TaskView::restoreItemState()
 Its state is whether it is expanded or not. If a task shall be expanded
 is stored in the _preferences object. */
 {
-  kDebug(5970) <<"Entering TaskView::restoreItemState";
+  kDebug(5970) << "Entering function";
   
   if ( topLevelItemCount() > 0 ) {
     QTreeWidgetItemIterator item( this );
@@ -445,7 +461,7 @@ is stored in the _preferences object. */
       ++item;
     }
   }
-  kDebug(5970) <<"Leaving TaskView::restoreItemState";
+  kDebug(5970) << "Leaving function";
 }
 
 void TaskView::itemStateChanged( QTreeWidgetItem *item )

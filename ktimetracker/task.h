@@ -39,7 +39,8 @@ class QString;
 
 class KarmStorage;
 
-namespace KCal {
+namespace KCal 
+{
   class Incidence;
   class Todo;
 }
@@ -98,9 +99,11 @@ class Task : public QObject, public QTreeWidgetItem
 
     /** cut Task out of parent Task or the TaskView */
     void cut();
+
     /** cut Task out of parent Task or the TaskView and into the
      *  destination Task */
     void move(Task* destination);
+
     /** insert Task into the destination Task */
     void paste(Task* destination);
 
@@ -250,6 +253,11 @@ class Task : public QObject, public QTreeWidgetItem
        */
       void setRunning( bool on, KarmStorage* storage, 
                        const QDateTime &when = QDateTime::currentDateTime() );
+
+      /** Resume the running state of a task.
+        * This is the same as setrunning, but the storage is not modified.
+        */
+      QString resumeRunning();
 
       /** return the state of a task - if it's running or not
        *  @return         true or false depending on whether the task is running

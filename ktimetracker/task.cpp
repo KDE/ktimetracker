@@ -173,6 +173,19 @@ void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
   }
 }
 
+QString Task::resumeRunning()
+// setRunning is the back-end, the front-end is StartTimerFor().
+// resumeRunning is the same as setRunning, but with no storage access.
+{
+  kDebug(5970) << "Entering function"; 
+  if (!mTimer->isActive()) 
+  {
+    mTimer->start(1000);
+    mCurrentPic=7;
+    updateActiveIcon();
+  }
+}
+
 void Task::setUid( const QString &uid ) 
 {
   mUid = uid;
@@ -185,7 +198,7 @@ bool Task::isRunning() const
 
 void Task::setName( const QString& name, KarmStorage* storage )
 {
-  kDebug(5970) <<"Entering Task:setName:" << name;
+  kDebug(5970) << "Entering function, name=" << name;
 
   QString oldname = mName;
   if ( oldname != name ) 
@@ -579,7 +592,7 @@ void Task::update()
   setText( 4, formatTime( mTotalTime, b ) );
   setText( 5, mPriority > 0 ? QString::number( mPriority ) : "--" );
   setText( 6, QString::number( mPercentComplete ) );
-  kDebug( 5970 ) << "Leaving Task::update";
+  kDebug( 5970 ) << "Leaving function";
 }
 
 void Task::addComment( const QString &comment, KarmStorage* storage )
