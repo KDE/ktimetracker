@@ -6,6 +6,7 @@ Name[km]=សមាសភាគ​កម្មវិធីតាមដាន​�
 Name[pt]=Componente do KTimeTracker
 Name[pt_BR]=Componente do KTimeTracker
 Name[sv]=Tidmätningskomponent
+Name[uk]=Компонент KTimeTracker
 Name[zh_TW]=KTimeTracker 組件
 MimeType=text/calendar;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
