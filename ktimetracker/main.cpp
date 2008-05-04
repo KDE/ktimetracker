@@ -52,7 +52,7 @@ namespace
 QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar file to be used
 {
   QString result;
-  if ( args->count() > 0 )
+  if ( args->count() > 0 ) // file is given as parameter
   {
     result = args->arg( 0 );
     KUrl* icsfileurl=new KUrl(args->arg( 0 ));
@@ -66,13 +66,13 @@ QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar
       result = KCmdLineArgs::cwd() + '/' + result;
     }
   }
-  else
+  else // file is not given as parameter
   {
     result=QString(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
     if ( !QFile::exists( result ) )
     {
       QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
-      result = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) );
+      result = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "ktimetracker.ics" ) );
       if ( oldFile.exists() )
         oldFile.copy( result );
     }

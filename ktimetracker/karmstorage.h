@@ -92,26 +92,26 @@ class KarmStorage : public QObject
      */
     QString load( TaskView* taskview, const QString &fileName );
 
-   /*
+   /**
     * Return the name of the iCal file
     */
     QString icalfile();
 
-   /*
+   /**
     * Build up the taskview.
     *
     * This is needed if the iCal file has been modified.
     */
     QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
 
-   /*
+   /**
     * Build up the taskview.
     *
     * This is needed if a subtask has been deleted.
     */
     QString buildTaskView(TaskView *view);
 
-    /* Close calendar and clear view.  Release lock if holding one. */
+    /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
 
     /** list of all events */
@@ -144,7 +144,7 @@ class KarmStorage : public QObject
      */
     QString report( TaskView *taskview, const ReportCriteria &rc );
 
-    /*
+    /**
      * Log the change in a task's time.
      *
      * This is also called when a timer is stopped.
@@ -154,18 +154,17 @@ class KarmStorage : public QObject
      * the end date is set to the start time.
      *
      * In both cases (postive or negative delta), we create a custom iCalendar
-     * property that stores the delta (in seconds).  This property is called
-     * X-KDE-karm-duration.
+     * property that stores the delta (in seconds). This property is called
+     * X-KDE-ktimetracker-duration.
      *
-     * Note that the KArm UI allows the user to change both the session and
+     * Note that the ktimetracker UI allows the user to change both the session and
      * the total task time, and this routine does not account for all posibile
      * cases.  For example, it is possible for the user to do something crazy
      * like add 10 minutes to the session time and subtract 50 minutes from
-     * the total time.  Although this change violates a basic law of physics,
+     * the total time. Although this change violates a basic law of physics,
      * it is allowed.
      *
      * For now, you should pass in the change to the total task time.
-     * Eventually, the UI should be changed.
      *
      * @param task   The task the change is for.
      * @param delta  Change in task time, in seconds.  Can be negative.
@@ -215,6 +214,11 @@ class KarmStorage : public QObject
      */
     void startTimer(const Task* task, const KDateTime &when=KDateTime::currentLocalDateTime());
 
+    /** 
+     * Start the timer for a given task ID
+     * 
+     * @param taskID  The task ID of the task to be started
+     */
     void startTimer( QString taskID );
 
     /**
