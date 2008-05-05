@@ -147,28 +147,11 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
     // Build dictionary to look up Task object from Todo uid.  Each task is a
     // QListViewItem, and is initially added with the view as the parent.
     todoList = d->mCalendar->rawTodos();
-    kDebug(5970) <<"KarmStorage::load"
+    kDebug(5970) << "KarmStorage::load"
       << "rawTodo count (includes completed todos) ="
       << todoList.count();
     for( todo = todoList.begin(); todo != todoList.end(); ++todo )
     {
-      // Initially, if a task was complete, it was removed from the view.
-      // However, this increased the complexity of reporting on task history.
-      //
-      // For example, if a task is complete yet has time logged to it during
-      // the date range specified on the history report, we have to figure out
-      // how that task fits into the task hierarchy.  Currently, this
-      // structure is held in memory by the structure in the list view.
-      //
-      // I considered creating a second tree that held the full structure of
-      // all complete and incomplete tasks.  But this seemed to much of a
-      // change with an impending beta release and a full todo list.
-      //
-      // Hence this "solution".  Include completed tasks, but mark them as
-      // inactive in the view.
-      //
-      //if ((*todo)->isCompleted()) continue;
-
       Task* task = new Task(*todo, view);
       map.insert( (*todo)->uid(), task );
       view->setRootIsDecorated(true);
