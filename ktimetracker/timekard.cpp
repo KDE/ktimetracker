@@ -199,7 +199,7 @@ QString TimeKard::sectionHistoryAsText(
   const QString& name,
   bool justThisTask, bool totalsOnly)
 {
-  kDebug(5970) <<"Entering TimeKard::sectionHistoryAsText";
+  kDebug(5970) << "Entering function";
   const int sectionReportWidth = taskWidth + ( totalsOnly ? 0 : sectionFrom.daysTo(sectionTo) * timeWidth ) + totalTimeWidth;
   assert( sectionReportWidth > 0 );
   QString line;
@@ -331,7 +331,7 @@ QString TimeKard::sectionHistoryAsText(
 QString TimeKard::historyAsText(TaskView* taskview, const QDate& from,
     const QDate& to, bool justThisTask, bool perWeek, bool totalsOnly)
 {
-  kDebug(5970) <<"Entering TimeKard::historyAsText";
+  kDebug(5970) << "Entering function";
   // header
   QString retval;
   retval += totalsOnly ? i18n("Task Totals") : i18n("Task History");

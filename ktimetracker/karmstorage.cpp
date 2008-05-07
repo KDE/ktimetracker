@@ -777,19 +777,16 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
 {
-  // build up an edithistorydialog, sort its start date column, and write a csv formated output into retval
-  // ToDo: what if a task spans over several days ?
-  // ToDo: what if a user gets the dates displayed differently ?
   kDebug(5970) << "Entering function";
   QString delim = rc.delimiter;
   const QString cr = QString::fromLatin1("\n");
   QString err=QString::null;
   QString retval;
+  Task* task;
 
-  EditHistoryDialog* historyWidget=new EditHistoryDialog(taskview);
-  QTableWidget* table = historyWidget->tableWidget();
-  table->sortItems(2,Qt::AscendingOrder);  // sort by StartDate
-  
+  QTableWidget* itab=new QTableWidget(); // hello, ABAP
+  itab->setRowCount(taskview->count()+1);
+  itab->setColumnCount(from.daysTo(to)+2);
   // parameter-plausi
   if ( from > to )
   {
@@ -797,79 +794,66 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   }
   else
   {
-    retval=QString("Task Name").append(delim);
-    for (QDate date=from; date<to; date=date.addDays(1) )
+    itab->setItem(0,0,new QTableWidgetItem("Task name"));
+    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) ) 
     {
-      retval.append(KGlobal::locale()->formatDate(date).append(delim));
-      kDebug() << date.toString();
-    } 
-    retval.append(KGlobal::locale()->formatDate(to)).append("\n");
-
-    int taskstart, endtask;
-    if ( rc.allTasks )
-    {
-      taskstart=0;
-      endtask=taskview->count()-1;
-    }
-    else 
-    {
-      for ( int i=0; i<taskview->count(); ++i)
+      kDebug(5970) << mdate.toString();
+      itab->setItem(0,1+from.daysTo(mdate),new QTableWidgetItem(mdate.toString()));
+      for ( int n=0; n<taskview->count(); n++ )
       {
-        if (taskview->itemAt(i) == taskview->currentItem())
+        task=taskview->itemAt(n);
+        itab->setItem(n+1,0,new QTableWidgetItem(taskview->itemAt(n)->name()));
+        KCal::Event::List eventList = d->mCalendar->rawEvents();
+        for(KCal::Event::List::iterator i = eventList.begin();
+            i != eventList.end();
+            ++i)
         {
-          taskstart=i;
-          endtask=i;
-        }
-      }
-    }
-    for ( int i = taskstart; i <= endtask; ++i ) 
-    {
-      Task *task = static_cast< Task* >( taskview->itemAt( i ) );
-      retval.append(task->name());
-      kDebug(5970) << "appending task " << taskview->itemAt(i)->name();
-      QDate date=from;
-      int row=0; // row in table. The table is sorted by StartTime.
-      while (date<=to)
-      {
-        kDebug(5970) << "date is now " << date;
-        row=0;
-        QDate dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
-        kDebug(5970) << "date in the history table is now " << dateintable;
-
-        while ((dateintable<date) && (row<(table->rowCount())))
-        {
-          dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
-          if (dateintable<date) row++;
-        }
-        // now, we have a task, a date and a dateintable.
-        // dateintable is now date, row is at the uppermost line with date
-        int durationsecs=0; // duration of a task spent in one or more events on one day.
-        kDebug() << "Calculating duration for task " << task->name() << " on date " << dateintable;
-        if (row<(table->rowCount())) dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
-        kDebug() << "dateintable is now " << dateintable << "rowcount is " << table->rowCount() << " row is " << row;
-        while (dateintable==date && row<table->rowCount()) 
-        {
-          kDebug() << "dateintable is " << dateintable;
-          kDebug() << "table item is " << table->item(row,0)->text() << "task is " << task->name();
-          if (table->item(row,0)->text()==task->name())
+          if ( (*i)->relatedToUid() == task->uid() )
           {
-            kDebug(5970) << "found " << task->name() << "in historytable";
-            QTime startTime=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").time();
-            QTime endTime=QDateTime::fromString(table->item(row,2)->text(),"yyyy-MM-dd HH:mm:ss").time();
-            durationsecs+=startTime.secsTo(endTime);
-            kDebug(5970) << "the duration was " << durationsecs;
-          }
-          row++;
-          if (row<table->rowCount()) dateintable=QDateTime::fromString(table->item(row,1)->text(),"yyyy-MM-dd HH:mm:ss").date();
+            kDebug(5970) << "found an event for task, event=" << (*i)->uid();
+            // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
+            // dtEnd is stored like DTEND:20080327T231509Z
+            // we need to subtract the offset from UTC.  
+            KDateTime startTime=(*i)->dtStart().addSecs((*i)->dtStart().utcOffset());
+            KDateTime endTime=(*i)->dtEnd().addSecs((*i)->dtEnd().utcOffset());
+            KDateTime NextMidNight=startTime;
+            NextMidNight.setTime(QTime ( 0,0 ));
+            NextMidNight=NextMidNight.addDays(1);
+            // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
+              KDateTime LastMidNight=KDateTime::currentLocalDateTime();
+              LastMidNight.setDate(mdate);
+              LastMidNight.setTime(QTime(0,0));
+            int secsstartTillMidNight=startTime.secsTo(NextMidNight);
+            int secondsToAdd=0; // seconds that need to be added to the actual cell
+            if ( (startTime.date()==mdate) && ((*i)->dtEnd().date()==mdate) ) // all the event occurred today
+              secondsToAdd=startTime.secsTo(endTime);
+            if ( (startTime.date()==mdate) && (endTime.date()>mdate) ) // the event started today, but ended later
+              secondsToAdd=secsstartTillMidNight;
+            if ( (startTime.date()<mdate) && (endTime.date()==mdate) ) // the event started before today and ended today
+              secondsToAdd=LastMidNight.secsTo((*i)->dtEnd());
+            if ( (startTime.date()<mdate) && (endTime.date()>mdate) ) // the event started before today and ended after
+              secondsToAdd=86400;
+            int secondsSum=secondsToAdd;
+            if (itab->item(n+1,from.daysTo(mdate)+1))
+              secondsSum=itab->item(n+1,from.daysTo(mdate)+1)->text().toInt()+secondsToAdd;
+            itab->setItem(n+1,from.daysTo(mdate)+1,new QTableWidgetItem(QString::number(secondsSum)));
+          };
         }
-        retval+=delim+formatTime( durationsecs/60.0, rc.decimalMinutes );
-        date=date.addDays(1);
-      }
+      } 
+    }
+    for ( int y=0; y<=(taskview->count()); y++ )
+    {
+      if (itab->item(y,0)) retval.append(itab->item(y,0)->text());
+      for ( int x=1; x<=from.daysTo(to)+1; x++ )
+      {
+        retval.append(rc.delimiter);
+        if (itab->item(y,x)) retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
+      };
       retval.append("\n");
     }
-    kDebug() << retval;
+    kDebug() << "Retval is \n" << retval;
   }
-
+  // itab->show(); // GREAT for debugging purposes :)
   // store the file locally or remote
   if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
   {
