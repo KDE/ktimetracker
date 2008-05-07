@@ -843,11 +843,22 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     }
     for ( int y=0; y<=(taskview->count()); y++ )
     {
-      if (itab->item(y,0)) retval.append(itab->item(y,0)->text());
+      if (itab->item(y,0)) retval.append(itab->item(y,0)->text());  // task names
       for ( int x=1; x<=from.daysTo(to)+1; x++ )
       {
         retval.append(rc.delimiter);
-        if (itab->item(y,x)) retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
+        kDebug(5970) << "itab->item(y,x)="<<itab->item(y,x)->text();
+        if (y>0)
+        {
+          if (itab->item(y,x)) 
+          {
+            retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
+          }
+        }
+        else // heading
+        {
+          retval.append(itab->item(y,x)->text());
+        }
       };
       retval.append("\n");
     }
