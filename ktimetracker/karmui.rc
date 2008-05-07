@@ -52,23 +52,23 @@
   </Menu>
 </MenuBar>
 <ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >
-  <text>Main Toolbar</text>
+	<text>Main Toolbar</text>
+	<Action name="new_task" />
+	<Action name="new_sub_task" />
+	<Action name="start" />
+	<Action name="stop" />
+	<Action name="delete_task" />
+        <Action name="edit_task" />
+</ToolBar>
+<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="taskToolBar" >
+  <text>Tasks</text>
   <Action name="file_new" />
   <Action name="file_open" />
   <Action name="file_save" />
   <Separator />
   <Action name="file_close" />
 </ToolBar>
-<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="taskToolBar" >
-  <text>Tasks</text>
-  <Action name="start" />
-  <Action name="stop" />
-  <Action name="new_task" />
-  <Action name="new_sub_task" />
-  <Action name="delete_task" />
-  <Action name="edit_task" />
-<!--  <Action name="add_comment_to_task" /> -->
-</ToolBar>
+
 <Menu name="task_popup">
   <Action name="start" />
   <Action name="stop" />
@@ -78,7 +78,6 @@
   <Action name="new_sub_task" />
   <Action name="delete_task" />
   <Action name="edit_task" />
-<!--  <Action name="add_comment_to_task" /> -->
   <Separator />
   <Action name="mark_as_complete" />
   <Action name="mark_as_incomplete" />
@@ -94,7 +93,6 @@
     <Action name="mark_as_complete" />
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
-<!--  <Action name="add_comment_to_task" /> -->
   </Disable>
 </State>
 </kpartgui>
