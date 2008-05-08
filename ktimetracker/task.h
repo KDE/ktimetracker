@@ -257,7 +257,7 @@ class Task : public QObject, public QTreeWidgetItem
       /** Resume the running state of a task.
         * This is the same as setrunning, but the storage is not modified.
         */
-      QString resumeRunning();
+      void resumeRunning();
 
       /** return the state of a task - if it's running or not
        *  @return         true or false depending on whether the task is running

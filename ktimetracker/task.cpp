@@ -173,7 +173,7 @@ void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
   }
 }
 
-QString Task::resumeRunning()
+void Task::resumeRunning()
 // setRunning is the back-end, the front-end is StartTimerFor().
 // resumeRunning is the same as setRunning, but with no storage access.
 {
