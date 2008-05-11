@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2007 by René Mérou <ochominutosdearco@gmail.com>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -37,10 +36,8 @@ FocusDetector::FocusDetector()
 
 void FocusDetector::slotfocuschanged()
 {
-  kDebug(5970) << "Entering function";
   QString sysanswer = getFocusWindow();
   emit( newFocus( sysanswer ) );
-  kDebug(5970) << "Leaving function";
 }
 
 #include "focusdetector.moc" 

@@ -213,6 +213,7 @@ QString KarmStorage::icalfile()
 QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 // makes *view contain the tasks out of *rc.
 {
+  kDebug(5970) << "Entering function";
   QString err;
   KCal::Todo::List todoList;
   KCal::Todo::List::ConstIterator todo;
@@ -292,7 +293,7 @@ void KarmStorage::closeStorage()
     delete d->mCalendar;
     d->mCalendar = 0;
   }
-  kDebug(5970) << "Exiting KarmStorage::closeStorage";
+  kDebug(5970) << "Leaving function";
 }
 
 KCal::Event::List KarmStorage::rawevents()
@@ -303,6 +304,7 @@ KCal::Event::List KarmStorage::rawevents()
 
 bool KarmStorage::allEventsHaveEndTiMe(Task* task)
 {
+  kDebug(5970) << "Entering function";
   KCal::Event::List eventList = d->mCalendar->rawEvents();
   for(KCal::Event::List::iterator i = eventList.begin();
       i != eventList.end();
@@ -363,20 +365,22 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
 
 QString KarmStorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
 {
+  kDebug(5970) << "Entering function";
   QString err;
   KCal::Todo* todo;
 
   todo = d->mCalendar->todo(task->uid());
   if ( !todo )
   {
-    kDebug(5970) <<"Could not get todo from calendar";
+    kDebug(5970) << "Could not get todo from calendar";
     return "Could not get todo from calendar";
   }
   task->asTodo(todo);
   if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() );
   parents.push( todo );
 
-  for ( int i = 0; i < task->childCount(); ++i ) {
+  for ( int i = 0; i < task->childCount(); ++i ) 
+  {
     Task *nextTask = static_cast< Task* >( task->child( i ) );
     err = writeTaskAsTodo( nextTask, parents );
   }
@@ -387,6 +391,7 @@ QString KarmStorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
 
 bool KarmStorage::isEmpty()
 {
+  kDebug(5970) << "Entering function";
   KCal::Todo::List todoList;
 
   todoList = d->mCalendar->rawTodos();
@@ -399,6 +404,7 @@ bool KarmStorage::isEmpty()
 QString KarmStorage::exportcsvFile( TaskView *taskview,
                                     const ReportCriteria &rc )
 {
+  kDebug(5970) << "Entering function";
   QString delim = rc.delimiter;
   QString dquote = rc.quote;
   QString double_dquote = dquote + dquote;
@@ -407,9 +413,6 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   QString err=QString();
   Task* task;
   int maxdepth=0;
-
-  kDebug(5970)
-    << "KarmStorage::exportcsvFile:" << rc.url;
 
   QString title = i18n("Export Progress");
   KProgressDialog dialog( taskview, 0, title );
@@ -527,6 +530,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
 
 QString KarmStorage::addTask(const Task* task, const Task* parent)
 {
+  kDebug(5970) << "Entering function";
   KCal::Todo* todo;
   QString uid;
 
@@ -576,7 +580,7 @@ QStringList KarmStorage::taskNames() const
 
 bool KarmStorage::removeTask(Task* task)
 {
-
+  kDebug(5970) << "Entering function";
   // delete history
   KCal::Event::List eventList = d->mCalendar->rawEvents();
   for(KCal::Event::List::iterator i = eventList.begin();
@@ -603,7 +607,7 @@ bool KarmStorage::removeTask(Task* task)
 
 bool KarmStorage::removeTask(QString taskid)
 {
-
+  kDebug(5970) << "Entering function";
   // delete history
   KCal::Event::List eventList = d->mCalendar->rawEvents();
   for(KCal::Event::List::iterator i = eventList.begin();
@@ -630,7 +634,7 @@ bool KarmStorage::removeTask(QString taskid)
 
 void KarmStorage::addComment(const Task* task, const QString& comment)
 {
-
+  kDebug(5970) << "Entering function";
   KCal::Todo* todo;
 
   todo = d->mCalendar->todo(task->uid());
@@ -658,6 +662,7 @@ long KarmStorage::printTaskHistory (
         const ReportCriteria     &rc)
 // to>=from is precondition
 {
+  kDebug(5970) << "Entering function";
   long ownline=linenr++; // the how many-th instance of this function is this
   long colrectot=0;      // column where to write the task's total recursive time
   QVector<QString> cell; // each line of the matrix is stored in an array of cells, one containing the recursive total
@@ -750,6 +755,7 @@ long KarmStorage::printTaskHistory (
 
 QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
 {
+  kDebug(5970) << "Entering function";
   QString err;
   if ( rc.reportType == ReportCriteria::CSVHistoryExport )
   {
@@ -907,6 +913,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
 
 void KarmStorage::startTimer( const Task* task, const KDateTime &when )
 {
+  kDebug(5970) << "Entering function";
   KCal::Event* e;
   e = baseEvent(task);
   e->setDtStart(when);
@@ -916,6 +923,7 @@ void KarmStorage::startTimer( const Task* task, const KDateTime &when )
 
 void KarmStorage::startTimer( QString taskID )
 {
+  kDebug(5970) << "Entering function";
   KCal::Todo::List todoList;
   KCal::Todo::List::ConstIterator todo;
   todoList = d->mCalendar->rawTodos();
@@ -1013,6 +1021,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 
 KCal::Event* KarmStorage::baseEvent(const Task * task)
 {
+  kDebug(5970) << "Entering function";
   KCal::Event* e;
   QStringList categories;
 
@@ -1038,6 +1047,7 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
 
 KCal::Event* KarmStorage::baseEvent(const Todo* todo)
 {
+  kDebug(5970) << "Entering function";
   KCal::Event* e;
   QStringList categories;
 
@@ -1074,6 +1084,7 @@ HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
 QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
     const QDate& to)
 {
+  kDebug(5970) << "Entering function";
   QList<HistoryEvent> retval;
   QStringList processed;
   KCal::Event::List events;
@@ -1140,17 +1151,17 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
 
 bool KarmStorage::remoteResource( const QString& file ) const
 {
+  kDebug(5970) << "Entering function";
   QString f = file.toLower();
   bool rval = f.startsWith( "http://" ) || f.startsWith( "ftp://" );
 
-  kDebug(5970) <<"KarmStorage::remoteResource(" << file <<" ) returns" << rval;
+  kDebug(5970) << "KarmStorage::remoteResource(" << file <<" ) returns" << rval;
   return rval;
 }
 
 QString KarmStorage::saveCalendar()
 {
   kDebug(5970) << "Entering function";
-
   QString err=QString();
   KABC::Lock *lock = d->mCalendar->lock();
   if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
