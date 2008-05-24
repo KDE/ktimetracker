@@ -156,6 +156,7 @@ void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
       storage->startTimer(this);
       mCurrentPic=7;
       mLastStart = when;
+      kDebug(5970) << "task has been started for " << when;
       updateActiveIcon();
     }
   }

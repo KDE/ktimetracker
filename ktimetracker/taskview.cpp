@@ -379,7 +379,6 @@ Task* TaskView::itemAt(int i)
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug( 5970 ) << "Entering function(" << i << ")";
   if ( topLevelItemCount() == 0 ) return 0;
   
   QTreeWidgetItemIterator item( this );
@@ -659,6 +658,7 @@ void TaskView::startCurrentTimer()
 
 void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
+  kDebug(5970) << "Entering function";
   if (task != 0 && d->mActiveTasks.indexOf(task) == -1) 
   {
     if (!task->isComplete())
@@ -670,7 +670,6 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
       emit updateButtons();
       if ( d->mActiveTasks.count() == 1 )
           emit timersActive();
-  
       emit tasksChanged( d->mActiveTasks );
     }
   }
