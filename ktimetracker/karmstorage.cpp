@@ -760,10 +760,7 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
   QString err;
   if ( rc.reportType == ReportCriteria::CSVHistoryExport )
   {
-      if ( !rc.bExPortToClipBoard )
-        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
-      else
-        err=taskview->clipHistory();
+    err = exportcsvHistory( taskview, rc.from, rc.to, rc );
   }
   else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
   {
@@ -870,41 +867,46 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     kDebug() << "Retval is \n" << retval;
   }
   // itab->show(); // GREAT for debugging purposes :)
-  // store the file locally or remote
-  if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+  if (rc.bExPortToClipBoard)
+    taskview->setClipBoardText(retval);
+  else
   {
-    kDebug(5970) << "storing a local file";
-    QString filename=rc.url.path();
-    if (filename.isEmpty()) filename=rc.url.url();
-    QFile f( filename );
-    if( !f.open( QIODevice::WriteOnly ) ) 
+    // store the file locally or remote
+    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
     {
-      err = i18n( "Could not open \"%1\".", filename );
-      kDebug(5970) << "Could not open file";
-    }
-    kDebug() << "Err is " << err;
-    if (err.length()==0)
+      kDebug(5970) << "storing a local file";
+      QString filename=rc.url.path();
+      if (filename.isEmpty()) filename=rc.url.url();
+      QFile f( filename );
+      if( !f.open( QIODevice::WriteOnly ) ) 
+      {
+        err = i18n( "Could not open \"%1\".", filename );
+        kDebug(5970) << "Could not open file";
+      }
+      kDebug() << "Err is " << err;
+      if (err.length()==0)
+      {
+        QTextStream stream(&f);
+        kDebug(5970) << "Writing to file: " << retval;
+        // Export to file
+        stream << retval;
+        f.close();
+      }
+    } 
+    else // use remote file
     {
-      QTextStream stream(&f);
-      kDebug(5970) << "Writing to file: " << retval;
-      // Export to file
-      stream << retval;
-      f.close();
-    }
-  } 
-  else // use remote file
-  {
-    KTemporaryFile tmpFile;
-    if ( !tmpFile.open() )
-    {
-      err = QString::fromLatin1( "Unable to get temporary file" );
-    }
-    else
-    {
-      QTextStream stream ( &tmpFile );
-      stream << retval;
-      stream.flush();
-      if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+      KTemporaryFile tmpFile;
+      if ( !tmpFile.open() )
+      {
+        err = QString::fromLatin1( "Unable to get temporary file" );
+      }
+      else
+      {
+        QTextStream stream ( &tmpFile );
+        stream << retval;
+        stream.flush();
+        if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+      }
     }
   }
   return err;

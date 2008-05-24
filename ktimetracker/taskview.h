@@ -210,8 +210,8 @@ class TaskView : public QTreeWidget
     /** Copy totals for current and all sub tasks to clipboard. */
     QString clipTotals( const ReportCriteria &rc );
 
-    /** Copy history for current and all sub tasks to clipboard. */
-    QString clipHistory();
+    /** Set the text of the application's clipboard. */
+    QString setClipBoardText(const QString& s);
 
     /** Reconfigures taskView depending on current configuration. */
     void reconfigure();

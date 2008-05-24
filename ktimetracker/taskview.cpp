@@ -47,7 +47,6 @@
 #include "plannerparser.h"
 #include "preferences.h"
 #include "ktimetracker.h"
-#include "printdialog.h"
 #include "task.h"
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
@@ -1010,7 +1009,6 @@ void TaskView::markTaskAsIncomplete()
   reinstateTask(50); // if it has been reopened, assume half-done
 }
 
-
 QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
@@ -1022,16 +1020,10 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
   return err;
 }
 
-QString TaskView::clipHistory()
+QString TaskView::setClipBoardText(const QString& s)
 {
-  QString err=QString();
-  PrintDialog dialog;
-  if (dialog.exec()== QDialog::Accepted)
-  {
-    TimeKard t;
-    KApplication::clipboard()->
-      setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek(), dialog.totalsOnly() ) );
-  }
+  QString err; // maybe we find possible errors later
+  KApplication::clipboard()->setText(s);
   return err;
 }
 
