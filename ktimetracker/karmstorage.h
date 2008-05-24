@@ -339,17 +339,6 @@ class KarmStorage : public QObject
             const QDate& to,
             const ReportCriteria &rc
             );
-
-    long printTaskHistory (
-            const Task *task,
-            const QMap<QString,long>& taskdaytotals,
-            QMap<QString,long>& daytotals,
-            const QDate& from,
-            const QDate& to,
-            const int level,
-            QVector<QString> &matrix,
-            const ReportCriteria &rc
-            );
 };
 
 /**
