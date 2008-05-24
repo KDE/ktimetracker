@@ -29,6 +29,7 @@
 #include <KDebug>
 #include <kemailsettings.h>
 #include <KLocale>            // i18n
+#include <KMessageBox>
 #include <kpimprefs.h>        // for timezone
 #include <KProgressDialog>
 #include <KTemporaryFile>
@@ -764,15 +765,12 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
       else
         err=taskview->clipHistory();
   }
-  else if ( rc.reportType == ReportCriteria::CSVTotalsExport )
+  else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
   {
     if ( !rc.bExPortToClipBoard )
       err = exportcsvFile( taskview, rc );
     else
       err = taskview->clipTotals( rc );
-  }
-  else {
-      // hmmmm ... assert(0)?
   }
   return err;
 }
@@ -847,17 +845,18 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
         }
       } 
     }
+    // use the internal table itab to create the return value retval
     for ( int y=0; y<=(taskview->count()); y++ )
     {
       if (itab->item(y,0)) retval.append(itab->item(y,0)->text());  // task names
       for ( int x=1; x<=from.daysTo(to)+1; x++ )
       {
         retval.append(rc.delimiter);
-        kDebug(5970) << "itab->item(y,x)="<<itab->item(y,x)->text();
         if (y>0)
         {
           if (itab->item(y,x)) 
           {
+            kDebug(5970) << "itab->item(y,x)=" << itab->item(y,x)->text();
             retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
           }
         }
