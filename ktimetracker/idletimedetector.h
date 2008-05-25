@@ -23,6 +23,7 @@
 #ifndef KARM_IDLE_TIME_DETECTOR_H
 #define KARM_IDLE_TIME_DETECTOR_H
 
+#include "karmutility.h" // SecsPerMinute
 #include <QDateTime>
 #include <QObject>
 #include <config-karm.h> // HAVE_LIBXSS
@@ -35,9 +36,6 @@ class QTimer;
  #include <X11/extensions/scrnsaver.h>
  #include <fixx11h.h>
 #endif // HAVE_LIBXSS
-
-// Seconds per minutes - useful for speeding debugging up!
-const int secsPerMinute = 60;
 
 // Minutes between each idle overrun test.
 const int testInterval= secsPerMinute * 1000;
