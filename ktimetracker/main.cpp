@@ -35,7 +35,6 @@
 #include "mainadaptor.h"
 #include "karmstorage.h"
 #include "task.h"
-#include "taskview.h"
 #include <QDebug>
 
 namespace
