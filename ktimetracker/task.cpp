@@ -36,8 +36,6 @@
 #include "ktimetracker.h"
 #include "preferences.h"
 
-const int gSecondsPerMinute = 60;
-
 QVector<QPixmap*> *Task::icons = 0;
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
@@ -156,6 +154,7 @@ void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
       storage->startTimer(this);
       mCurrentPic=7;
       mLastStart = when;
+      kDebug(5970) << "task has been started for " << when;
       updateActiveIcon();
     }
   }
@@ -345,7 +344,7 @@ void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
   {
     mSessionTime += minutesSession;
     mTime += minutes;
-    if ( storage ) storage->changeTime(this, minutes * gSecondsPerMinute);
+    if ( storage ) storage->changeTime(this, minutes * secsPerMinute);
     changeTotalTimes( minutesSession, minutes );
   }
   kDebug(5970) << "Leaving function";

@@ -39,4 +39,5 @@ QString formatTime( double minutes, bool decimal = false );
  */
 QString getFocusWindow();
 
+const int secsPerMinute=60;
 #endif

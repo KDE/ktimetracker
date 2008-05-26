@@ -47,7 +47,6 @@
 #include "plannerparser.h"
 #include "preferences.h"
 #include "ktimetracker.h"
-#include "printdialog.h"
 #include "task.h"
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
@@ -380,7 +379,6 @@ Task* TaskView::itemAt(int i)
 Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
-  kDebug( 5970 ) << "Entering function(" << i << ")";
   if ( topLevelItemCount() == 0 ) return 0;
   
   QTreeWidgetItemIterator item( this );
@@ -660,6 +658,7 @@ void TaskView::startCurrentTimer()
 
 void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
+  kDebug(5970) << "Entering function";
   if (task != 0 && d->mActiveTasks.indexOf(task) == -1) 
   {
     if (!task->isComplete())
@@ -671,7 +670,6 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
       emit updateButtons();
       if ( d->mActiveTasks.count() == 1 )
           emit timersActive();
-  
       emit tasksChanged( d->mActiveTasks );
     }
   }
@@ -1010,7 +1008,6 @@ void TaskView::markTaskAsIncomplete()
   reinstateTask(50); // if it has been reopened, assume half-done
 }
 
-
 QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
@@ -1022,16 +1019,10 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
   return err;
 }
 
-QString TaskView::clipHistory()
+QString TaskView::setClipBoardText(const QString& s)
 {
-  QString err=QString();
-  PrintDialog dialog;
-  if (dialog.exec()== QDialog::Accepted)
-  {
-    TimeKard t;
-    KApplication::clipboard()->
-      setText( t.historyAsText(this, dialog.from(), dialog.to(), !dialog.allTasks(), dialog.perWeek(), dialog.totalsOnly() ) );
-  }
+  QString err; // maybe we find possible errors later
+  KApplication::clipboard()->setText(s);
   return err;
 }
 

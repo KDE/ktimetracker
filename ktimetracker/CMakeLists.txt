@@ -15,7 +15,7 @@ include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/rem
 set(karm_shared_SRCS 
 	desktoptracker.cpp 
 	edittaskdialog.cpp idletimedetector.cpp 
-	printdialog.cpp timekard.cpp karmutility.cpp ktimewidget.cpp
+	timekard.cpp karmutility.cpp ktimewidget.cpp
 	karmstorage.cpp mainwindow.cpp preferences.cpp 
 	task.cpp taskview.cpp tray.cpp  focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp 

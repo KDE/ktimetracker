@@ -1,3 +1,16 @@
+ktimetracker 4.1 (Jul 2008 -- KDE 4.1 Release)
+--------
+- Renamed KArm (KDE 3) to ktimetracker (KDE 4)
+- Added "Manage History" functionality (including comments on events)
+- Moved DCOP interface to DBUS
+- Added Drag&Drop
+- Added context-sensitive whatsthis help ("you have already created a task and can start timing")
+- If you quit karm, tasks can continue to get timing
+
+KArm 1.6 
+--------
+- Added checkbox to show completed tasks
+
 KArm 1.5 (Feb, 2005 -- KDE 3.4 Release)
 --------
 - Added import of Imedio Planner files
@@ -57,7 +70,6 @@ KArm 0.3
 --------
 - Fixes edit task bugs
 - Complies to new FSSTND
-
 
 KArm 0.2
 --------
