@@ -818,6 +818,7 @@ QString TaskView::addTask
   const DesktopList& desktops, Task* parent )
 {
   kDebug(5970) << "Entering function; taskname =" << taskname;
+  setSortingEnabled(false);
   Task *task;
   if ( parent ) task = new Task( taskname, total, session, desktops, parent );
   else          task = new Task( taskname, total, session, desktops, this );
@@ -836,6 +837,7 @@ QString TaskView::addTask
   {
     delete task;
   }
+  setSortingEnabled(true);
   return taskuid;
 }
 
