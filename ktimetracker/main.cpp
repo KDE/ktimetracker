@@ -28,7 +28,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KStandardDirs>
-#include <KUniqueApplication>
+#include <libkdepim/pimapplication.h>
 
 #include "version.h"
 #include "mainwindow.h"
@@ -119,14 +119,14 @@ int main( int argc, char *argv[] )
   */
   if ( argc-( args->count() ) <= 1)
   {  // no konsole mode
-    KUniqueApplication myApp;
+    KPIM::PimApplication myApp;
     MainWindow *mainWindow;
     mainWindow = new MainWindow( icsfile( args ) );
     if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
       mainWindow->restore( 1, false );
     else
       mainWindow->show();
-  
+
     signal( SIGQUIT, cleanup );
     signal( SIGINT, cleanup );
     int ret = myApp.exec();
@@ -135,7 +135,7 @@ int main( int argc, char *argv[] )
     return ret;
   }
   else // we are running in konsole mode
-  {  
+  {
     kDebug(5970) << "We are running in konsole mode";
     KCmdLineArgs::addCmdLineOptions( options );
     KApplication myApp(false);
@@ -214,4 +214,4 @@ int main( int argc, char *argv[] )
     }
   }
 }
-  
+

@@ -63,8 +63,8 @@ if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
 
-install(TARGETS karm  DESTINATION ${BIN_INSTALL_DIR} )
-install(TARGETS ktimetracker  DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS karm  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### next target ###############
