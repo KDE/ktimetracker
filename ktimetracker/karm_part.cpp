@@ -51,7 +51,7 @@ K_EXPORT_PLUGIN( karmPartFactory("karm","karm") )
 karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
-  KGlobal::locale()->insertCatalog("karm");
+  KGlobal::locale()->insertCatalog("ktimetracker");
 
   // we need an instance
   setComponentData( karmPartFactory::componentData() );
@@ -59,9 +59,9 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& 
   mMainWidget = new TimetrackerWidget( parentWidget );
   setWidget( mMainWidget );
   makeMenus();
-  mMainWidget->openFile( KStandardDirs::locateLocal( "appdata", 
-                        QString::fromLatin1( "karm.ics" ) ) );
-  emit setWindowCaption( KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "karm.ics" ) ) );
+  mMainWidget->openFile( KStandardDirs::locateLocal( "data", 
+                        QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );
+  emit setWindowCaption( KStandardDirs::locateLocal( "data", QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );
   // connections
   connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
            this, SLOT( updateTime( long, long ) ) );
