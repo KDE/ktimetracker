@@ -102,6 +102,17 @@ MainWindow::MainWindow( const QString &icsfile )
   updateStatusBar();
 }
 
+void MainWindow::readProperties( const KConfigGroup &cfg )
+{
+  if( cfg.readEntry( "WindowShown", true ))   
+    show();
+}
+
+void MainWindow::saveProperties( KConfigGroup &cfg )
+{
+  cfg.writeEntry( "WindowShown", isVisible());   
+}
+
 void MainWindow::slotSetCaption( const QString& qs )
 {
   setCaption( qs );
