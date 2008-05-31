@@ -72,7 +72,7 @@ int Task::depth()
 // Deliver the depth of a task, i.e. how many tasks are supertasks to it. 
 // A toplevel task has the depth 0.
 {
-  kDebug(5970) <<"Entering function";
+  kDebug(5970) << "Entering function";
   int res=0;
   Task* t=this;
   while ( ( t = t->parent() ) ) res++;
@@ -97,7 +97,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
     icons = new QVector<QPixmap*>(8);
     if (!konsolemode) 
     {
-      KIconLoader kil("karm"); // always load icons from the KArm application
+      KIconLoader kil("ktimetracker"); // always load icons from the KArm application
       for (int i=0; i<8; i++)
       {
         QPixmap *icon = new QPixmap();
