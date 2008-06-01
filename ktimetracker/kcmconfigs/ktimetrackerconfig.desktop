@@ -1,0 +1,15 @@
+[Desktop Entry]
+Icon=karm
+Type=Service
+X-KDE-ServiceTypes=KCModule
+X-DocPath=kaddressbook/index.html
+
+X-KDE-Library=kcm_ktimetrackerconfig
+X-KDE-ParentApp=ktimetracker
+X-KDE-ParentComponents=ktimetracker,kontact_karmplugin
+X-KDE-CfgDlgHierarchy=KTT
+X-KDE-Weight=100
+
+Name=KTimeTracker
+Comment=Configure ktimetracker
+X-KDE-Keywords=ktimetracker, configure, settings
