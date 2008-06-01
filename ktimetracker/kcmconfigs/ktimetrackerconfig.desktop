@@ -11,5 +11,11 @@ X-KDE-CfgDlgHierarchy=KTT
 X-KDE-Weight=100
 
 Name=KTimeTracker
+Name[de]=Persönliche Zeiterfassung
+Name[km]=កម្មវិធី​តាមដាន​របស់ KTime
+Name[ne]=केडीई समय ट्रयाकर
+Name[pl]=Osobisty czasomierz
+Name[sv]=Ktimetracker
+Name[x-test]=xxKTimeTrackerxx
 Comment=Configure ktimetracker
 X-KDE-Keywords=ktimetracker, configure, settings
