@@ -13,6 +13,7 @@ Name[sv]=Tidmätningskomponent
 Name[tr]=KTimeTracker Bileşeni
 Name[uk]=Компонент KTimeTracker
 Name[x-test]=xxKTimeTracker Componentxx
+Name[zh_CN]=KTimeTracker 组件
 Name[zh_TW]=KTimeTracker 組件
 MimeType=text/calendar;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
