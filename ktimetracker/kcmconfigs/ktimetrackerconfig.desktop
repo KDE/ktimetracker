@@ -1,0 +1,30 @@
+[Desktop Entry]
+Icon=ktimetracker
+Type=Service
+X-KDE-ServiceTypes=KCModule
+X-DocPath=kaddressbook/index.html
+
+X-KDE-Library=kcm_ktimetrackerconfig
+X-KDE-ParentApp=ktimetracker
+X-KDE-ParentComponents=ktimetracker,kontact_karmplugin
+X-KDE-CfgDlgHierarchy=KTT
+X-KDE-Weight=100
+
+Name=KTimeTracker
+Name[de]=Persönliche Zeiterfassung
+Name[km]=កម្មវិធី​តាមដាន​របស់ KTime
+Name[ne]=केडीई समय ट्रयाकर
+Name[pl]=Osobisty czasomierz
+Name[sv]=Ktimetracker
+Name[x-test]=xxKTimeTrackerxx
+Comment=Configure ktimetracker
+Comment[ga]=Cumraigh ktimetracker
+Comment[km]=កំណត់​រចនាសម្ព័ន្ធ ktimetracker
+Comment[nds]=Tietlogbook instellen
+Comment[pt]=Configurar o KTimeTracker
+Comment[pt_BR]=Configurar o ktimetracker
+Comment[tr]=Ktimetracker Uygulamasını Yapılandır
+Comment[uk]=Налаштування ktimetracker
+Comment[zh_CN]=配置 KTimeTracker
+Comment[zh_TW]=設定 KTimeTracker
+X-KDE-Keywords=ktimetracker, configure, settings

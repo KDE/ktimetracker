@@ -4,6 +4,7 @@ macro_bool_to_01(X11_Xscreensaver_LIB HAVE_LIBXSS)
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
 
+add_subdirectory( kcmconfigs ) 
 add_subdirectory( support ) 
 add_subdirectory( pics ) 
 add_subdirectory( test ) 
