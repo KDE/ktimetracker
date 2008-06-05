@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=KTimeTracker
-Name[de]=Persönliche Zeiterfassung
+Name[de]=Zeiterfassung
 Name[km]=កម្មវិធី​តាមដាន​របស់ KTime
 Name[ne]=केडीई समय ट्रयाकर
 Name[pl]=Osobisty czasomierz
@@ -14,7 +14,7 @@ GenericName[ca]=Seguiment horari personal
 GenericName[cs]=Osobní měřič času
 GenericName[cy]=Dilynnydd Amser Personol
 GenericName[da]=Personlig tidsoversigt
-GenericName[de]=Persönliche Zeiterfassung
+GenericName[de]=Zeiterfassung
 GenericName[el]=Προσωπικός καταγραφέας χρόνου
 GenericName[eo]=Tempomezurilo por viaj aktivecoj
 GenericName[es]=Gestor personal del tiempo
@@ -30,6 +30,7 @@ GenericName[hr]=Osobni mjerač vremena
 GenericName[hu]=Időfelhasználás-figyelő
 GenericName[is]=Fylgjast með í hvað tíminn fer
 GenericName[it]=Segnatempo personale
+GenericName[ja]=個人用タイムトラッカー
 GenericName[ka]=პერსონალური დროის აღმრიცხველი
 GenericName[kk]=Дербес уақыт қадағалағышы
 GenericName[km]=កម្មវិធី​តាមដាន​ពេលវេលា​ផ្ទាល់​ខ្លួន
