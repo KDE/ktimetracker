@@ -680,7 +680,7 @@ void TaskView::clearActiveTasks()
 
 void TaskView::stopAllTimers( const QDateTime &when )
 {
-  kDebug(5970) <<"Entering TaskView::stopAllTimers";
+  kDebug(5970) << "Entering function";
   foreach ( Task *task, d->mActiveTasks )
     task->setRunning( false, d->mStorage, when );
 

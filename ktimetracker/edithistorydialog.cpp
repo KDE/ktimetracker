@@ -122,7 +122,10 @@ void EditHistoryDialog::listAllEvents()
     item->setFlags( Qt::ItemIsEnabled );
     item->setWhatsThis( i18n( "You can change this task's comment, start time and end time." ) );
     mHistoryWidget->setItem( row, 0, item );
-    QDateTime start = QDateTime::fromString( (*i)->dtStart().toString(), Qt::ISODate );
+    // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
+    // dtEnd is stored like DTEND:20080327T231509Z
+    // we need to handle both differently
+    QDateTime start = QDateTime::fromTime_t( (*i)->dtStart().toTime_t() );
     QDateTime end = QDateTime::fromString( (*i)->dtEnd().toString(), Qt::ISODate );
     kDebug() << "start =" << start << "; end =" << end;
     mHistoryWidget->setItem( row, 1, new QTableWidgetItem( start.toString( "yyyy-MM-dd HH:mm:ss" ) ) );
@@ -144,8 +147,8 @@ void EditHistoryDialog::listAllEvents()
 
 void EditHistoryDialog::historyWidgetCellChanged( int row, int col )
 {
-  kDebug( 5970 ) <<"Entering function";
-  kDebug( 5970 ) <<"row =" << row <<" col =" << col;
+  kDebug( 5970 ) << "Entering function";
+  kDebug( 5970 ) << "row =" << row << " col =" << col;
   if ( mHistoryWidget->item( row, 4 ) ) 
   { // the user did the change, not the program
     if ( col == 1 ) 
