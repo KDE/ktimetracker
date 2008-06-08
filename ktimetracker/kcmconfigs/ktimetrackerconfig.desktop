@@ -2,7 +2,7 @@
 Icon=ktimetracker
 Type=Service
 X-KDE-ServiceTypes=KCModule
-X-DocPath=kaddressbook/index.html
+X-DocPath=ktimetracker/index.html
 
 X-KDE-Library=kcm_ktimetrackerconfig
 X-KDE-ParentApp=ktimetracker

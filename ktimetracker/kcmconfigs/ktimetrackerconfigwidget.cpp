@@ -21,18 +21,6 @@
     without including the source code for Qt in the source distribution.
 */
 
-#include <QCheckBox>
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QTabWidget>
-
-#include <QComboBox>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
-#include <QBoxLayout>
-
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kdialog.h>
@@ -45,8 +33,6 @@ KTimeTrackerConfigWidget::KTimeTrackerConfigWidget( QWidget *parent, const char 
   : QWidget( parent )
 {
 
-  QTabWidget *tabWidget = new QTabWidget( this );
-
 }
 
 void KTimeTrackerConfigWidget::restoreSettings()
@@ -54,12 +40,8 @@ void KTimeTrackerConfigWidget::restoreSettings()
   bool blocked = signalsBlocked();
   blockSignals( true );
 
-  mLocationMapURL->lineEdit()->setCursorPosition( 0 );
-
   KConfig _config("ktimetrackerrc", KConfig::NoGlobals);
   KConfigGroup config(&_config, "General" );
-  mTradeAsFamilyName->setChecked( config.readEntry( "TradeAsFamilyName", true ) );
-  mLimitContactDisplay->setChecked( config.readEntry( "LimitContactDisplay", true ) );
 
   blockSignals( blocked );
 
@@ -68,21 +50,14 @@ void KTimeTrackerConfigWidget::restoreSettings()
 
 void KTimeTrackerConfigWidget::saveSettings()
 {
-
   KConfig _config("ktimetrackerrc", KConfig::NoGlobals);
   KConfigGroup config(&_config, "General" );
-  config.writeEntry( "TradeAsFamilyName", mTradeAsFamilyName->isChecked() );
-  config.writeEntry( "LimitContactDisplay", mLimitContactDisplay->isChecked() );
 
   emit changed( false );
 }
 
 void KTimeTrackerConfigWidget::defaults()
 {
-  mNameParsing->setChecked( true );
-  mViewsSingleClickBox->setChecked( false );
-  mEditorCombo->setCurrentIndex( 0 );
-  mLimitContactDisplay->setChecked( true );
 
   emit changed( true );
 }
