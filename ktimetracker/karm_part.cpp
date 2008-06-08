@@ -58,6 +58,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& 
 
   mMainWidget = new TimetrackerWidget( parentWidget );
   setWidget( mMainWidget );
+  setXMLFile( "karmui.rc" );
   makeMenus();
   mMainWidget->openFile( KStandardDirs::locateLocal( "data", 
                         QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );
