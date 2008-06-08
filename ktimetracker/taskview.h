@@ -130,7 +130,9 @@ class TaskView : public QTreeWidget
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();
 
-    /** Display edit task dialog and create a new task with results.  */
+    /** Display edit task dialog and create a new task with results. 
+     *  @param caption Window title of the edit task dialog
+     */
     void newTask( const QString &caption, Task* parent );
 
     /** Used to refresh (e.g. after import) */
