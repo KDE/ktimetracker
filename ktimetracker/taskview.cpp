@@ -24,7 +24,7 @@
 #include <cassert>
 
 #include <QFile>
-#include <QItemDelegate>
+#include <QStyledItemDelegate>
 #include <QMenu>
 #include <QPainter>
 #include <QString>
@@ -59,15 +59,13 @@
 class DesktopTracker;
 
 //BEGIN TaskViewDelegate (custom painting of the progress column)
-class TaskViewDelegate : public QItemDelegate {
+class TaskViewDelegate : public QStyledItemDelegate {
 public:
-  TaskViewDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
+  TaskViewDelegate( QObject *parent = 0 ) : QStyledItemDelegate( parent ) {}
 
   void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const {
     if (index.column () == 6) {
-      if (option.state & QStyle::State_Selected) {
-        painter->fillRect( option.rect, option.palette.highlight() );
-      }
+      QApplication::style()->drawControl( QStyle::CE_ItemViewItem, &option, painter );
       int rX = option.rect.x() + 2;
       int rY = option.rect.y() + 2;
       int rWidth = option.rect.width() - 4;
@@ -122,7 +120,7 @@ public:
       painter->setPen( Qt::black );
       painter->drawText( option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %" );
     } else {
-      QItemDelegate::paint( painter, option, index );
+      QStyledItemDelegate::paint( painter, option, index );
     }
   }
 };
@@ -682,7 +680,7 @@ void TaskView::clearActiveTasks()
 
 void TaskView::stopAllTimers( const QDateTime &when )
 {
-  kDebug(5970) <<"Entering TaskView::stopAllTimers";
+  kDebug(5970) << "Entering function";
   foreach ( Task *task, d->mActiveTasks )
     task->setRunning( false, d->mStorage, when );
 

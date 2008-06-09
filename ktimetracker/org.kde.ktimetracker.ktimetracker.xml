@@ -10,6 +10,7 @@
       <arg name="taskName" type="s" direction="in"/>
       <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
     </method>
+    <method name="newTask" />
     <method name="addTask">
       <arg name="taskName" type="s" direction="in"/>
     </method>

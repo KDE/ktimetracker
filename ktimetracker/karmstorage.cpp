@@ -810,7 +810,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
 
 void KarmStorage::startTimer( const Task* task, const KDateTime &when )
 {
-  kDebug(5970) << "Entering function";
+  kDebug(5970) << "Entering function; when=" << when;
   KCal::Event* e;
   e = baseEvent(task);
   e->setDtStart(when);

@@ -46,7 +46,7 @@
 #include "timetrackerwidget.h"
 
 K_PLUGIN_FACTORY(karmPartFactory, registerPlugin<karmPart>();)
-K_EXPORT_PLUGIN( karmPartFactory("karm","karm") )
+K_EXPORT_PLUGIN( karmPartFactory("ktimetracker","ktimetracker") )
 
 karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
@@ -58,6 +58,7 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& 
 
   mMainWidget = new TimetrackerWidget( parentWidget );
   setWidget( mMainWidget );
+  setXMLFile( "karmui.rc" );
   makeMenus();
   mMainWidget->openFile( KStandardDirs::locateLocal( "data", 
                         QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );

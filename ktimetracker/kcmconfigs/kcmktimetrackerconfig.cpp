@@ -1,6 +1,7 @@
 /*
     This file is part of ktimetracker.
     Copyright (c) 2003 Tobias Koenig <tokoe@kde.org>
+    Copyright (c) 2008 Thorsten Staerk
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,6 +55,7 @@ KCMKTimeTrackerConfig::KCMKTimeTrackerConfig( QWidget *parent, const QVariantLis
                                       ki18n( "(c), 2003 - 2008 Tobias Koenig" ) );
 
   about->addAuthor( ki18n("Tobias Koenig"), KLocalizedString(), "tokoe@kde.org" );
+  about->addAuthor( ki18n("Thorsten Staerk"), KLocalizedString(), "kde@staerk.de" );
   setAboutData( about );
 }
 

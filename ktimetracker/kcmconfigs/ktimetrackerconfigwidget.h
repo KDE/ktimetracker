@@ -1,6 +1,7 @@
 /*
     This file is part of ktimetracker.
     Copyright (c) 2003 Tobias Koenig <tokoe@kde.org>
+    Copyright (c) 2008 Thorsten Staerk
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,17 +48,6 @@ class KTimeTrackerConfigWidget : public QWidget
 
   public slots:
     void modified();
-
-  private:
-    QCheckBox *mNameParsing;
-    QCheckBox *mViewsSingleClickBox;
-    QCheckBox *mTradeAsFamilyName;
-    QComboBox *mEditorCombo;
-    QLineEdit *mPhoneHook;
-    QLineEdit *mFaxHook;
-    QLineEdit *mSMSHook;
-    QCheckBox *mLimitContactDisplay;
-    QComboBox *mLocationMapURL;
 
 };
 
