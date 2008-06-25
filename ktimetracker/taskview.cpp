@@ -432,7 +432,7 @@ void TaskView::load( const QString &fileName )
   {
     restoreItemState();
     setCurrentItem(topLevelItem( 0 ));
-    if ( _desktopTracker->startTracking() != QString() )
+    if ( !_desktopTracker->startTracking().isEmpty() )
       KMessageBox::error( 0, i18n( "Your virtual desktop number is too high, desktop tracking will not work" ) );
     _isloading = false;
     refresh();
@@ -1013,7 +1013,7 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // rc tells how the user wants his report, e.g. all times or session times
 {
   kDebug(5970) << "Entering function";
-  QString err=QString();
+  QString err;
   TimeKard t;
   KApplication::clipboard()->setText(t.totalsAsText(this, rc));
   return err;

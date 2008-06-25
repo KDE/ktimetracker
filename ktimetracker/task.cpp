@@ -58,7 +58,7 @@ Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
   long minutes = 0;
   QString name;
   long sessionTime = 0;
-  QString sessionStartTiMe = QString();
+  QString sessionStartTiMe;
   int percent_complete = 0;
   int priority = 0;
   DesktopList desktops;
