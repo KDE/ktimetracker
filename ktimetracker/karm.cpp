@@ -42,7 +42,7 @@ using namespace std;
 
 int main (int argc, char *argv[])
 {
-  KAboutData aboutData( "KArmReminder", 0, ki18n("KArmReminder"),
+  KAboutData aboutData( "KArmReminder", "ktimetracker", ki18n("KArmReminder"),
       "1.0", ki18n("KArmReminder"), KAboutData::License_GPL,
       ki18n("(c) 2006") );
   KCmdLineArgs::init( argc, argv, &aboutData );
