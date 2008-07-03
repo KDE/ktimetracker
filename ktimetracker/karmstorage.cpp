@@ -353,7 +353,7 @@ QString KarmStorage::save(TaskView* taskview)
 QString KarmStorage::setTaskParent( Task* task, Task* parent )
 {
   kDebug(5970) << "Entering function";
-  QString err=QString();
+  QString err;
   KCal::Todo* toDo;
   toDo = d->mCalendar->todo(task->uid());
   if (parent==0) toDo->removeRelation(toDo->relatedTo());
@@ -409,7 +409,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   QString double_dquote = dquote + dquote;
   bool to_quote = true;
 
-  QString err=QString();
+  QString err;
   Task* task;
   int maxdepth=0;
 
@@ -1059,7 +1059,7 @@ bool KarmStorage::remoteResource( const QString& file ) const
 QString KarmStorage::saveCalendar()
 {
   kDebug(5970) << "Entering function";
-  QString err=QString();
+  QString err;
   KABC::Lock *lock = d->mCalendar->lock();
   if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
 

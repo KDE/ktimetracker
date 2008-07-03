@@ -594,7 +594,7 @@ bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
       if ( keyEvent->key() == Qt::Key_Enter ||
            keyEvent->key() == Qt::Key_Return ) 
       {
-        if ( d->mSearchWidget->displayText() != QString() ) slotAddTask( d->mSearchWidget->displayText() );
+        if ( !d->mSearchWidget->displayText().isEmpty() ) slotAddTask( d->mSearchWidget->displayText() );
         return true;
       }
     }
