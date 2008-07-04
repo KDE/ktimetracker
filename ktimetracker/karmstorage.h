@@ -33,13 +33,14 @@
 #include <kcal/journal.h>
 #include <kcal/calendarresources.h>
 #include <kcal/resourcecalendar.h>
-#include <kcal/todo.h>
 
+namespace KCal {
+  class Todo;
+}
 class QDateTime;
 class Task;
 class TaskView;
 class HistoryEvent;
-class KCal::Todo;
 
 /**
  * Class to store/retrieve KTimeTracker data to/from persistent storage.
