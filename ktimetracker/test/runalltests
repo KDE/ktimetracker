@@ -1,2 +1,17 @@
 #!/bin/bash
-for n in *.sh; do if bash $n; then echo success; else echo fail; break; fi; done
+export failed=0;
+for n in *.sh
+  do 
+    if bash $n
+    then 
+      echo success
+    else 
+      echo fail
+      export failed=23
+      break
+    fi 
+  done
+  if [ $failed = 23 ]
+    then echo "runalltests: there was an error"
+    else echo "runalltests: there was no error"
+  fi
