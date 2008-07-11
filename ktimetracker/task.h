@@ -88,6 +88,8 @@ class Task : public QObject, public QTreeWidgetItem
 
     int depth();
 
+    void delete_recursive();
+
     /**
      * Set unique id for the task.
      *
