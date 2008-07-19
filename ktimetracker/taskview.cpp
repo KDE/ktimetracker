@@ -927,6 +927,7 @@ void TaskView::deleteTaskBatch( Task* task )
     _idleTimeDetector->stopIdleDetection();
     emit timersInactive();
   }
+  task->delete_recursive();
   emit tasksChanged( d->mActiveTasks );
 }
 
@@ -965,7 +966,7 @@ void TaskView::deleteTask( Task* task )
     for (int n=delendum.size()-1; n>=0; --n) 
       deleteTaskBatch(itemAt(delendum[n]));
   }
-  d->mStorage->buildTaskView(this);
+  //d->mStorage->buildTaskView(this);
 }
 
 void TaskView::markTaskAsComplete()
