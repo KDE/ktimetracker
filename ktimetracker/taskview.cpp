@@ -134,6 +134,9 @@ class TaskView::Private {
       mStorage( new KarmStorage() ), 
       mFocusTrackingActive( false ) {}
 
+    ~Private() {
+      delete mStorage; 
+    }
     KarmStorage *mStorage;
     bool mFocusTrackingActive;
     Task* mLastTaskWithFocus;
