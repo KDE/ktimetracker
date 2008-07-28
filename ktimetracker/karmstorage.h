@@ -66,6 +66,7 @@ class KarmStorage : public QObject
 {
   public:
     KarmStorage();
+    ~KarmStorage();
 
     QString setTaskParent( Task* task, Task* parent);
 
