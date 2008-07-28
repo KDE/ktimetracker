@@ -62,7 +62,9 @@
 class KarmStorage::Private {
   public:
     Private() : mCalendar( 0 ) {}
-
+    ~Private() {
+      delete mCalendar;
+    }
     KCal::ResourceCalendar *mCalendar;
     QString mICalFile;
 };
