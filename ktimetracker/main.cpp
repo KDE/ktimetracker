@@ -64,6 +64,7 @@ QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar
     {
       result = KCmdLineArgs::cwd() + '/' + result;
     }
+    delete icsfileurl;
   }
   else // file is not given as parameter
   {
