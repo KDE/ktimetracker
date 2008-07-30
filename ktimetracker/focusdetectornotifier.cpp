@@ -31,7 +31,10 @@ class FocusDetectorNotifier::Private {
     {
       mDetector = new FocusDetector();
     }
-
+    ~Private()
+    {
+      delete mDetector;
+    }
     FocusDetector *mDetector;
     QList< TaskView * > mViews;
 };
