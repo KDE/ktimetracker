@@ -130,6 +130,7 @@ int main( int argc, char *argv[] )
 
     signal( SIGQUIT, cleanup );
     signal( SIGINT, cleanup );
+    args->clear();
     int ret = myApp.exec();
 
     delete mainWindow;
@@ -152,6 +153,7 @@ int main( int argc, char *argv[] )
         char* line = tasknameslist[i].toLatin1().data();
         std::cout << line << std::endl;
       }
+      delete sto;  
     }
     // addtask
     if ( !args->getOption("addtask").isEmpty() )
@@ -165,6 +167,7 @@ int main( int argc, char *argv[] )
       Task* task=new Task( s,(long int) 0,(long int) 0, dl, 0, true );
       sto->addTask( task );
       sto->save( 0 );
+      delete sto;
     }
     // deletetask
     if ( !args->getOption("deletetask").isEmpty() )
@@ -173,6 +176,7 @@ int main( int argc, char *argv[] )
       sto->load( 0, icsfile( args ) );
       const QString& taskid=args->getOption("deletetask");
       sto->removeTask( taskid );
+      delete sto;
     }
     // taskidsfromname
     if ( !args->getOption("taskidsfromname").isEmpty() )
@@ -186,6 +190,7 @@ int main( int argc, char *argv[] )
         char* line = taskids[i].toLatin1().data();
         std::cout << line << std::endl;
       }
+      delete sto;
     }
     // totalminutesfortaskid
     if ( !args->getOption("totalminutesfortaskid").isEmpty() )
@@ -198,6 +203,7 @@ int main( int argc, char *argv[] )
         kDebug(5970) << "taskname=" << task->name();
         std::cout << task->totalTime();
       }
+      delete sto;
     }
     // starttask
     if ( !args->getOption("starttask").isEmpty() )
@@ -205,6 +211,7 @@ int main( int argc, char *argv[] )
       KarmStorage* sto=new KarmStorage();
       sto->load( 0, icsfile( args ) );
       sto->startTimer(args->getOption("starttask"));
+      delete sto;
     }
     // stoptask
     if ( !args->getOption("stoptask").isEmpty() )
@@ -212,7 +219,10 @@ int main( int argc, char *argv[] )
       KarmStorage* sto=new KarmStorage();
       sto->load( 0, icsfile( args ) );
       sto->stopTimer(sto->task( args->getOption("stoptask"), 0 ));
+      delete sto;
     }
+    args->clear();
   }
+  return 1;
 }
 
