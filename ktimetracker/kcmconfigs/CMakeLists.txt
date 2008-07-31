@@ -27,6 +27,6 @@ install(TARGETS kcm_ktimetrackerconfig  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
 
-install( FILES ktimetrackerconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+#install( FILES ktimetrackerconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 
