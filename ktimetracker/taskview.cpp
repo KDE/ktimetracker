@@ -495,7 +495,7 @@ void TaskView::refresh()
 
   // remove root decoration if there is no more child.
   i = 0;
-  while ( itemAt( ++i ) && ( itemAt( i )->depth() == 0 ) );
+  while ( itemAt( ++i ) && ( itemAt( i )->depth() == 0 ) ){};
   //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
   // FIXME workaround? seems that the QItemDelegate for the procent column only
   // works properly if rootIsDecorated == true.
@@ -609,7 +609,7 @@ QString TaskView::exportcsvHistory()
 long TaskView::count()
 {
   long n = 0;
-  for (Task* t = itemAt(n); t; t=itemAt(++n));
+  for (Task* t = itemAt(n); t; t=itemAt(++n)){};
   return n;
 }
 
