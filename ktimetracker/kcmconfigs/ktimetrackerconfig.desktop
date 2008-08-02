@@ -8,7 +8,7 @@ X-KDE-Library=kcm_ktimetrackerconfig
 X-KDE-ParentApp=ktimetracker
 X-KDE-ParentComponents=ktimetracker,kontact_karmplugin
 X-KDE-CfgDlgHierarchy=KTT
-X-KDE-Weight=100
+X-KDE-Weight=700
 
 Name=KTimeTracker
 Name[de]=Zeiterfassung
