@@ -72,6 +72,11 @@ KarmStorage::KarmStorage() : d( new Private() )
 {
 }
 
+KarmStorage::~KarmStorage()
+{
+  delete d;
+}
+
 QString KarmStorage::load( TaskView* view, const QString &fileName )
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
