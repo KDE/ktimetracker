@@ -266,12 +266,12 @@ void Task::setPriority( int priority )
 
 void Task::setPixmapProgress()
 {
-  QPixmap* icon = new QPixmap();
+  QPixmap icon;
   if (mPercentComplete >= 100)
-    *icon = UserIcon("task-complete.xpm");
+    icon = UserIcon("task-complete.xpm");
   else
-    *icon = UserIcon("task-incomplete.xpm");
-  setIcon(0, *icon);
+    icon = UserIcon("task-incomplete.xpm");
+  setIcon(0, icon);
 }
 
 bool Task::isComplete() { return mPercentComplete == 100; }
