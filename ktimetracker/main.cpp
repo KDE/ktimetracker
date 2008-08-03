@@ -118,6 +118,7 @@ int main( int argc, char *argv[] )
      ktimetracker /tmp/test --listtasknames     3           1         yes
      ktimetracker --listtasknames               2           0         yes
   */
+  int err=0;  // error code
   if ( argc-( args->count() ) <= 1)
   {  // no konsole mode
     KPIM::PimApplication myApp;
@@ -153,7 +154,7 @@ int main( int argc, char *argv[] )
         char* line = tasknameslist[i].toLatin1().data();
         std::cout << line << std::endl;
       }
-      delete sto;  
+      delete sto;  // make valgrind happy 
     }
     // addtask
     if ( !args->getOption("addtask").isEmpty() )
@@ -223,6 +224,6 @@ int main( int argc, char *argv[] )
     }
     args->clear();
   }
-  return 1;
+  return err;
 }
 
