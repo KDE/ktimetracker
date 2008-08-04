@@ -141,7 +141,7 @@ class TimetrackerWidget : public QWidget {
 
     //BEGIN wrapper slots
     /*
-     * The following slots are wrapper slots which fires the corresponding 
+     * The following slots are wrapper slots which fires the corresponding
      * slot of the current taskview.
      */
     void startCurrentTimer();
@@ -175,16 +175,21 @@ class TimetrackerWidget : public QWidget {
     int totalMinutesForTaskId( const QString &taskId ) const;
     void startTimerFor( const QString &taskId );
     void stopTimerFor( const QString &taskId );
-    // FIXME rename, when the wrapper slot is removed
+
+    bool startTimerForTaskName( const QString &taskName );
+    bool stopTimerForTaskName( const QString &taskName );
+
+  // FIXME rename, when the wrapper slot is removed
     void stopAllTimersDBUS();
-    QString exportCSVFile( const QString &filename, const QString &from, 
-                        const QString &to, int type, bool decimalMinutes, 
-                        bool allTasks, const QString &delimiter, 
+    QString exportCSVFile( const QString &filename, const QString &from,
+                        const QString &to, int type, bool decimalMinutes,
+                        bool allTasks, const QString &delimiter,
                          const QString &quote );
     void importPlannerFile( const QString &filename );
     QStringList tasks() const;
     QStringList activeTasks() const;
     bool isActive( const QString &taskId ) const;
+    bool isTaskNameActive( const QString &taskId ) const;
     void saveAll();
     void quit();
     //END

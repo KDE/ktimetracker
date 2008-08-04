@@ -49,6 +49,14 @@
     <method name="stopTimerFor">
       <arg name="taskId" type="s" direction="in"/>
     </method>
+    <method name="startTimerForTaskName">
+      <arg name="taskId" type="s" direction="in"/>
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="stopTimerForTaskName">
+      <arg name="taskId" type="s" direction="in"/>
+      <arg type="b" direction="out"/>
+    </method>
     <method name="stopAllTimersDBUS" />
     <method name="tasks">
       <arg name="out" type="as" direction="out" />
@@ -69,6 +77,10 @@
       <arg name="filename" type="s" direction="in"/>
     </method>
     <method name="isActive">
+      <arg type="b" direction="out" />
+      <arg name="taskId" type="s" direction="in" />
+    </method>
+    <method name="isTaskNameActive">
       <arg type="b" direction="out" />
       <arg name="taskId" type="s" direction="in" />
     </method>
