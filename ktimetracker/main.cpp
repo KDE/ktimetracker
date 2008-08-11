@@ -111,15 +111,17 @@ int main( int argc, char *argv[] )
   KCmdLineArgs::addCmdLineOptions( options );
   KUniqueApplication::addCmdLineOptions();
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  /* when do we open a gui, when do we use konsole mode ?
-     call                                    argc args->count konsolemode
-     ktimetracker                               1           0          no
-     ktimetracker /tmp/test                     2           1          no
-     ktimetracker /tmp/test --listtasknames     3           1         yes
-     ktimetracker --listtasknames               2           0         yes
-  */
   int err=0;  // error code
-  if ( argc-( args->count() ) <= 1)
+  bool konsolemode=false;  // open a gui and wait for user input?
+  if ( args->isSet("listtasknames") ) konsolemode=true;
+  if ( !args->getOption("addtask").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("deletetask").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("taskidsfromname").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("totalminutesfortaskid").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("starttask").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("stoptask").isEmpty() ) konsolemode=true;
+
+  if ( !konsolemode )
   {  // no konsole mode
     KPIM::PimApplication myApp;
     MainWindow *mainWindow;
