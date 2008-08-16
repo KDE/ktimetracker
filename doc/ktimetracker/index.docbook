@@ -1043,9 +1043,9 @@ for Desktop COmmunication Protocol.</para></glossdef>
 multiple desktops.  You typically have four different desktops installed by
 default.  Each desktop can display its own set of programs and files.  When
 &kde; first starts up, the desktop you see is Desktop 1.  If you press
-<keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo>, you will see
+<keycombo action="simul">&Ctrl;<keycap>F2</keycap></keycombo>, you will see
 Desktop 2.  Pressing <keycombo
-action="simul">&Alt;<keycap>F1</keycap></keycombo> will bring back Desktop
+action="simul">&Ctrl;<keycap>F1</keycap></keycombo> will bring back Desktop
 1.  </para></glossdef> </glossentry>
 
 <glossentry id="gloss-history">
