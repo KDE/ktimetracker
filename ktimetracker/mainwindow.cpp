@@ -53,6 +53,7 @@ MainWindow::MainWindow( const QString &icsfile )
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
+  kDebug(5970) << "Entering function";
   setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
   mainWidget = new TimetrackerWidget( this );
@@ -71,8 +72,6 @@ MainWindow::MainWindow( const QString &icsfile )
            this, SLOT( reSetTimes() ) );
   connect( mainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
-  connect( mainWidget, SIGNAL( reSetTimes() ),
-           this, SLOT( reSetTimes() ) );
   connect( mainWidget, SIGNAL( setCaption( const QString& ) ),
                  this, SLOT( slotSetCaption( const QString& ) ) );
   loadGeometry();

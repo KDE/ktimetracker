@@ -89,6 +89,7 @@ class TimetrackerWidget::Private {
 TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   d( new TimetrackerWidget::Private() )
 {
+  kDebug(5970) << "Entering function";
   new MainAdaptor( this );
   QDBusConnection::sessionBus().registerObject( "/KTimeTracker", this );
 
@@ -120,10 +121,6 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
            this, SLOT( slotCurrentChanged() ) );
   connect( d->mTabWidget, SIGNAL( mouseDoubleClick() ),
            this, SLOT( newFile() ) );
-  connect( d->mLastView, SIGNAL( totalTimesChanged( long, long ) ),
-            this, SIGNAL( totalTimesChanged( long, long ) ) );
-  connect( d->mLastView, SIGNAL( reSetTimes() ),
-            this, SIGNAL( reSetTimes() ) );
 
   showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
   showTabBar( false );
