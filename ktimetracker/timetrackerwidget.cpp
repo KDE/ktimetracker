@@ -135,6 +135,18 @@ TimetrackerWidget::~TimetrackerWidget()
   delete d;
 }
 
+bool TimetrackerWidget::allEventsHaveEndTiMe()
+{
+  bool result=true;
+  TaskView *taskView;
+  for ( int i = 0; i < d->mTabWidget->count(); ++i )
+  {
+    taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+    if ( !taskView->allEventsHaveEndTiMe() ) result=false;
+  }
+  return result;
+}
+
 void TimetrackerWidget::saveProperties( KConfigGroup &cfg )
 {
   cfg.writeEntry( "WindowShown", isVisible());

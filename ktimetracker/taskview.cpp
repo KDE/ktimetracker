@@ -474,13 +474,18 @@ void TaskView::itemStateChanged( QTreeWidgetItem *item )
 
 void TaskView::closeStorage() { d->mStorage->closeStorage(); }
 
+bool TaskView::allEventsHaveEndTiMe()
+{
+  return d->mStorage->allEventsHaveEndTiMe();
+}
+
 void TaskView::iCalFileModified(ResourceCalendar *rc)
 {
-  kDebug(5970) <<"entering function";
+  kDebug(5970) << "entering function";
   kDebug(5970) << rc->infoText();
   rc->dump();
   d->mStorage->buildTaskView(rc,this);
-  kDebug(5970) <<"exiting iCalFileModified";
+  kDebug(5970) << "exiting iCalFileModified";
 }
 
 void TaskView::refresh()
@@ -725,13 +730,13 @@ That is why there is also a total session time. */
     task->startNewSession();
     ++item;
   }
-  kDebug(5970) <<"Leaving TaskView::startNewSession";
+  kDebug(5970) << "Leaving TaskView::startNewSession";
 }
 
 void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
-  kDebug(5970) <<"Entering TaskView::resetTimeForAllTasks";
+  kDebug(5970) << "Entering TaskView::resetTimeForAllTasks";
   QTreeWidgetItemIterator item( this );
   while ( *item ) 
   {
@@ -739,7 +744,7 @@ void TaskView::resetTimeForAllTasks()
     task->resetTimes();
     ++item;
   }
-  kDebug(5970) <<"Leaving TaskView::resetTimeForAllTasks";
+  kDebug(5970) << "Leaving TaskView::resetTimeForAllTasks";
 }
 
 void TaskView::stopTimerFor(Task* task)

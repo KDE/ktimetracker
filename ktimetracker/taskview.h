@@ -76,6 +76,9 @@ class TaskView : public QTreeWidget
     /** Reset session time to zero for all tasks.   */
     void startNewSession();
 
+    /** Deliver if all events from the storage have and end time  */
+    bool allEventsHaveEndTiMe();
+
     /** Reset session and total time to zero for all tasks.  */
     void resetTimeForAllTasks();
 

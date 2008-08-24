@@ -89,6 +89,10 @@ MainWindow::MainWindow( const QString &icsfile )
 
   connect( mainWidget, SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
   connect( mainWidget, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
+  // when we conect mainwidget's timersActive, mainwidget has already be constructed
+  // so, signal sent during mainwidget's construction will not arrive.
+  if ( !mainWidget->allEventsHaveEndTiMe() )
+    _tray->startClock();
   connect( mainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
   _totalSum=0;

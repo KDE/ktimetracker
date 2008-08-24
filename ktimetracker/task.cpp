@@ -184,7 +184,8 @@ void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
 
 void Task::resumeRunning()
 // setRunning is the back-end, the front-end is StartTimerFor().
-// resumeRunning is the same as setRunning, but with no storage access.
+// resumeRunning does the same as setRunning, but not add a new 
+// start date to the storage.
 {
   kDebug(5970) << "Entering function"; 
   if (!mTimer->isActive()) 

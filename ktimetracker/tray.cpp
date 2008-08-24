@@ -48,15 +48,17 @@ QVector<QPixmap*> *TrayIcon::icons = 0;
 TrayIcon::TrayIcon(MainWindow* parent)
   : KSystemTrayIcon(parent)
 {
-  setObjectName( "Karm Tray" );
+  setObjectName( "Ktimetracker Tray" );
   // the timer that updates the "running" icon in the tray
   _taskActiveTimer = new QTimer(this);
   connect( _taskActiveTimer, SIGNAL( timeout() ), this,
                              SLOT( advanceClock()) );
 
-  if (icons == 0) {
+  if (icons == 0) 
+  {
     icons = new QVector<QPixmap*>(8);
-    for (int i=0; i<8; i++) {
+    for (int i=0; i<8; i++)
+    {
       QPixmap *icon = new QPixmap();
       QString name;
       name.sprintf("active-icon-%d.xpm",i);
@@ -66,7 +68,8 @@ TrayIcon::TrayIcon(MainWindow* parent)
   }
 
   TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
-  if ( timetrackerWidget ) {
+  if ( timetrackerWidget ) 
+  {
     KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
     if ( action ) contextMenu()->addAction( action );
     action = timetrackerWidget->action( "stopAll" );
@@ -75,27 +78,12 @@ TrayIcon::TrayIcon(MainWindow* parent)
 
   resetClock();
   initToolTip();
-
-  // start of a kind of menu for the tray
-  // this are experiments/tests
-  /*
-  for (int i=0; i<30; i++)
-    _tray->insertTitle(i 18n("bla ").arg(i));
-  for (int i=0; i<30; i++)
-    _tray->insertTitle2(i 18n("bli ").arg(i));
-  */
-  // experimenting with menus for the tray
-  /*
-  trayPopupMenu = contextMenu();
-  trayPopupMenu2 = new QPopupMenu();
-  trayPopupMenu->insertItem(i18n("Submenu"), *trayPopupMenu2);
-  */
 }
 
 TrayIcon::TrayIcon(karmPart *)
   : KSystemTrayIcon( 0 )
 {
-  setObjectName( "Karm Tray" );
+  setObjectName( "Ktimetracker Tray" );
 // it is not convenient if every kpart gets an icon in the systray.
   _taskActiveTimer = 0;
 }
@@ -104,7 +92,7 @@ TrayIcon::TrayIcon()
   : KSystemTrayIcon( 0 )
 // will display nothing at all
 {
-  setObjectName( "Karm Tray" );
+  setObjectName( "Ktimetracker Tray" );
   _taskActiveTimer = 0;
 }
 
@@ -112,23 +100,16 @@ TrayIcon::~TrayIcon()
 {
 }
 
-
-// experiment
-/*
-void TrayIcon::insertTitle(QString title)
-{
-  trayPopupMenu->insertTitle(title);
-}
-*/
-
 void TrayIcon::startClock()
 {
+  kDebug(5970) << "Entering function";
   if ( _taskActiveTimer )
   {
     _taskActiveTimer->start(1000);
     setIcon( *(*icons)[_activeIcon] );
     show();
   }
+  kDebug(5970) << "Leaving function";
 }
 
 void TrayIcon::stopClock()
@@ -162,7 +143,8 @@ void TrayIcon::initToolTip()
 
 void TrayIcon::updateToolTip(QList<Task*> activeTasks)
 {
-  if ( activeTasks.isEmpty() ) {
+  if ( activeTasks.isEmpty() ) 
+  {
     this->setToolTip( i18n("No active tasks") );
     return;
   }

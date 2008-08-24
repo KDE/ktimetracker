@@ -33,7 +33,8 @@ class KUrl;
 class Task;
 class TaskView;
 
-class TimetrackerWidget : public QWidget {
+class TimetrackerWidget : public QWidget 
+{
   Q_OBJECT
 
   public:
@@ -41,6 +42,13 @@ class TimetrackerWidget : public QWidget {
     ~TimetrackerWidget();
     virtual void saveProperties( KConfigGroup& );
     virtual void readProperties( const KConfigGroup& );
+
+    /** 
+      Delivers if all task have an end time. 
+      This is useful e.g. at the start of the program to see if a timer needs to be resumed.
+      This function checks all (TaskView) mTabWidget->widget() to see if any task is open.
+     */
+    bool allEventsHaveEndTiMe();
 
   private:
     void addTaskView( const QString &fileName = "" );

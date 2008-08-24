@@ -326,6 +326,19 @@ bool KarmStorage::allEventsHaveEndTiMe(Task* task)
   return true;
 }
 
+bool KarmStorage::allEventsHaveEndTiMe()
+{
+  kDebug(5970) << "Entering function";
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    if ( !(*i)->hasEndDate() ) return false;
+  }
+  return true;
+}
+
 QString KarmStorage::save(TaskView* taskview)
 {
   kDebug(5970) << "Entering function";
