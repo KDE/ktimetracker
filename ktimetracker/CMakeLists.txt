@@ -59,7 +59,7 @@ if(X11_Xscreensaver_LIB)
 	target_link_libraries(karm ${X11_Xscreensaver_LIB})
 endif(X11_Xscreensaver_LIB)
 
-target_link_libraries(ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
