@@ -51,7 +51,7 @@
     <Action name="configure_ktimetracker" />
   </Menu>
 </MenuBar>
-<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="mainToolBar" >
+<ToolBar alreadyVisited="1" position="top" iconText="icononly" noMerge="1" name="mainToolBar" >
 	<text>Main Toolbar</text>
 	<Action name="new_task" />
 	<Action name="new_sub_task" />
@@ -60,7 +60,7 @@
 	<Action name="delete_task" />
         <Action name="edit_task" />
 </ToolBar>
-<ToolBar alreadyVisited="1" position="Top" iconText="IconOnly" noMerge="1" name="taskToolBar" >
+<ToolBar alreadyVisited="1" position="top" iconText="icononly" noMerge="1" name="taskToolBar" >
   <text>Tasks</text>
   <Action name="file_new" />
   <Action name="file_open" />
@@ -84,7 +84,7 @@
 </Menu>
 
 <State name="readonly">
-  <Disable>
+  <disable>
     <Action name="file_save" />
     <Action name="new_task" />
     <Action name="new_sub_task" />
@@ -93,6 +93,6 @@
     <Action name="mark_as_complete" />
     <Action name="start_new_session" />
     <Action name="reset_all_times" />
-  </Disable>
+  </disable>
 </State>
 </kpartgui>
