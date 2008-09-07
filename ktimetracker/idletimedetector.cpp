@@ -44,12 +44,8 @@ IdleTimeDetector::IdleTimeDetector(int maxIdle)
 
 #if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
   int event_base, error_base;
-  if(XScreenSaverQueryExtension(QX11Info::display(), &event_base, &error_base)) {
-    _idleDetectionPossible = true;
-  }
-  else {
-    _idleDetectionPossible = false;
-  }
+  if(XScreenSaverQueryExtension(QX11Info::display(), &event_base, &error_base)) _idleDetectionPossible = true;
+  else _idleDetectionPossible = false;
 
   _timer = new QTimer(this);
   connect(_timer, SIGNAL(timeout()), this, SLOT(check()));
@@ -66,12 +62,16 @@ bool IdleTimeDetector::isIdleDetectionPossible()
 
 void IdleTimeDetector::check()
 {
+  kDebug(5970) << "Entering function";
 #if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
+  kDebug(5970) << "kompiled for libxss and x11, idledetectionpossible is " << _idleDetectionPossible;
   if (_idleDetectionPossible)
   {
-    _mit_info = XScreenSaverAllocInfo ();
+    _mit_info = XScreenSaverAllocInfo();
     XScreenSaverQueryInfo(QX11Info::display(), QX11Info::appRootWindow(), _mit_info);
     idleminutes = (_mit_info->idle/1000)/secsPerMinute;
+    kDebug(5970) << "The desktop has been idle for " << idleminutes << " minutes.";
+    kDebug(5970) << "The idle time in miliseconds is " << _mit_info->idle;
     if (idleminutes >= _maxIdle)
       informOverrun();
   }
@@ -124,12 +124,6 @@ void IdleTimeDetector::informOverrun()
     dialog->setButtonWhatsThis(KDialog::Ok, explanation);
     dialog->setButtonWhatsThis(KDialog::Cancel, explanationrevert);
     dialog->show();
-/*
-  else {
-    // Continue
-    _timer->start(testInterval);
-  }
-*/
 }
 #endif // HAVE_LIBXSS
 

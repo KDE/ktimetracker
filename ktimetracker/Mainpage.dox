@@ -1,1 +1,11 @@
 // DOXYGEN_REFERENCES = kdecore kdeui kio kparts kdeprint
+
+\section ktimetracker architecture
+ktimetracker consists out of either a kpart (class karmPart) or of a mainwindow
+(class mainwindow). The kpart can be used e.g. for a kontact plugin, the mainwindow as
+stand-alone application. Both classes display a timetrackerwidget, that is a ktabwidget
+containing one or more taskviews. A taskview is associated with a karmstorage object that
+holds a calendar with todos and events. A taskview is a QTreeWidget that holds tasks. A task
+has a summary (name), a priority and times: the time, total time, session time and total
+session time. Over the QTreeWidget, a task can have subtasks. The total time is defined as
+the task's and all its subtasks' times.
