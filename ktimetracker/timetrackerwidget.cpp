@@ -122,7 +122,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   connect( d->mTabWidget, SIGNAL( mouseDoubleClick() ),
            this, SLOT( newFile() ) );
 
-  showSearchBar( KTimeTrackerSettings::self()->showSearchBar() );
+  showSearchBar( !KTimeTrackerSettings::configPDA() );
   showTabBar( false );
 }
 

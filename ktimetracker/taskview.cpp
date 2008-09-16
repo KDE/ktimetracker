@@ -178,7 +178,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   headerItem()->setWhatsThis(4,"The total time is the time of this task and all its subtasks.");
   setAllColumnsShowFocus( true );
   setSortingEnabled( true );
-  setAlternatingRowColors( KTimeTrackerSettings::alternatingRowColors() );
+  setAlternatingRowColors( true );
   setDragDropMode( QAbstractItemView::InternalMove );
   setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
@@ -1146,9 +1146,6 @@ void TaskView::reconfigure()
   else if ( _autoSaveTimer->isActive() ) {
     _autoSaveTimer->stop();
   }
-
-  /* display */
-  setAlternatingRowColors( KTimeTrackerSettings::alternatingRowColors() );
 
   refresh();
 }
