@@ -1123,6 +1123,7 @@ QList< Task* > TaskView::activeTasks() const
 
 void TaskView::reconfigure()
 {
+  kDebug(5970) << "Entering function";
   /* Adapt columns */
   setColumnHidden( 1, !KTimeTrackerSettings::displaySessionTime() );
   setColumnHidden( 2, !KTimeTrackerSettings::displayTime() );

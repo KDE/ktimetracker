@@ -503,6 +503,7 @@ void TimetrackerWidget::showTabBar( bool visible )
 
 void TimetrackerWidget::reconfigureFiles()
 {
+  kDebug(5970) << "Entering function";
   TaskView *taskView;
   for ( int i = 0; i < d->mTabWidget->count(); ++i )
   {
@@ -653,8 +654,9 @@ void TimetrackerWidget::slotUpdateButtons()
 
 void TimetrackerWidget::showSettingsDialog()
 {
+  kDebug(5970) << "Entering function";
   /* show main window b/c if this method was started from tray icon and the window
-     is not visible the applications quits after accepting the settings dialog.
+     is not visible the application quits after accepting the settings dialog.
   */
   window()->show();
 
@@ -680,6 +682,7 @@ void TimetrackerWidget::showSettingsDialog()
   dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
 
   dialog->exec();
+  showSearchBar( !KTimeTrackerSettings::configPDA() );
   reconfigureFiles();
 }
 
