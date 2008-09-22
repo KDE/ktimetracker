@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2007 by Mathias Soeken <msoeken@tzi.de>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -38,7 +37,9 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
     mStyle( style ),
     mExcludedColumns( excludedColumns )
 {
-  if (mWidget) {
+  kDebug(5970) << "Entering function";
+  if (mWidget)
+  {
     mWidget->header()->setContextMenuPolicy( Qt::CustomContextMenu );
     connect( mWidget->header(), SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotCustomContextMenuRequested(const QPoint&)) );
 
@@ -52,21 +53,27 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
 
 TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 
 {
+  kDebug(5970) << "Entering function";
   qDeleteAll( mActions );
 }
 
 void TreeViewHeaderContextMenu::slotCustomContextMenuRequested( const QPoint& pos ) 
 {
-  if (mWidget && mContextMenu) {
+  kDebug(5970) << "Entering function";
+  if (mWidget && mContextMenu)
+  {
     mContextMenu->exec( mWidget->mapToGlobal(pos) );
   }
 }
 
 void TreeViewHeaderContextMenu::updateActions() 
 {
-  if (mWidget) {
+  kDebug(5970) << "Entering function";
+  if (mWidget)
+  {
     QAction *action;
-    foreach (action, mActions) {
+    foreach (action, mActions)
+    {
       mContextMenu->removeAction( action );
     }
 
@@ -74,7 +81,8 @@ void TreeViewHeaderContextMenu::updateActions()
     qDeleteAll( mActions );
     mActions.clear();
 
-    for (int c = 0; c < mWidget->model()->columnCount(); ++c) {
+    for (int c = 0; c < mWidget->model()->columnCount(); ++c)
+    {
       if (mExcludedColumns.contains( c )) continue;
 
       QAction* action = new QAction( this );
@@ -89,7 +97,9 @@ void TreeViewHeaderContextMenu::updateActions()
 
 void TreeViewHeaderContextMenu::slotTriggered( QAction *action )
 {
-  if (mWidget && action) {
+  kDebug(5970) << "Entering function";
+  if (mWidget && action)
+  {
     int column = mActionColumnMapping[action];
     bool hidden = mWidget->isColumnHidden(column);
     mWidget->setColumnHidden( column, !hidden );
@@ -100,16 +110,20 @@ void TreeViewHeaderContextMenu::slotTriggered( QAction *action )
 
 void TreeViewHeaderContextMenu::slotAboutToShow()
 {
+  kDebug(5970) << "Entering function";
   QAction *action;
-  foreach (action, mActions) {
+  foreach (action, mActions)
+  {
     updateAction( action, mActionColumnMapping[action] );
   }
 }
 
 void TreeViewHeaderContextMenu::updateAction( QAction *action, int column )
 {
+  kDebug(5970) << "Entering function";
   QString text = mWidget->model()->headerData(column, Qt::Horizontal).toString(); 
-  switch (mStyle) {
+  switch (mStyle)
+  {
     case AlwaysCheckBox:
       action->setCheckable( true );
       action->setChecked( !mWidget->isColumnHidden(column) );

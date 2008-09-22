@@ -218,7 +218,8 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 
   // Context Menu
   d->mPopupPercentageMenu = new QMenu( this );
-  for ( int i = 0; i <= 100; i += 10 ) {
+  for ( int i = 0; i <= 100; i += 10 )
+  {
     QString label = i18n( "%1 %" , i );
     d->mPercentage[ d->mPopupPercentageMenu->addAction( label ) ] = i;
   }
@@ -328,22 +329,24 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
   }
 }
 
-void TaskView::mousePressEvent( QMouseEvent *event ) {
+void TaskView::mousePressEvent( QMouseEvent *event )
+{
   QModelIndex index = indexAt( event->pos() );
-  
+
+  // if the user toggles a task as complete/incomplete
   if (   index.isValid() 
       && index.column() == 0
       && visualRect( index ).x() <= event->pos().x()
-      && event->pos().x() < visualRect( index ).x() + 19) {
+      && event->pos().x() < visualRect( index ).x() + 19)
+  {
     QTreeWidgetItem *item = itemFromIndex( index );
-    if (item) {
+    if (item)
+    {
       Task *task = static_cast<Task*>(item);
       if (task) 
       {
-        if (task->isComplete()) 
-        {
-          task->setPercentComplete( 0, d->mStorage );
-        } else 
+        if (task->isComplete()) task->setPercentComplete( 0, d->mStorage );
+        else 
         {
           task->setPercentComplete( 100, d->mStorage );
         }
@@ -351,8 +354,14 @@ void TaskView::mousePressEvent( QMouseEvent *event ) {
         emit updateButtons();
       }
     }
-  } else 
+  }
+  else
   {
+    if ( KTimeTrackerSettings::configPDA() )
+    {
+      QPoint newPos = viewport()->mapToGlobal( event->pos() );
+      emit contextMenuRequested( newPos );
+    }
     QTreeWidget::mousePressEvent( event );
   }
 }
