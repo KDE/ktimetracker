@@ -358,6 +358,7 @@ void TaskView::mousePressEvent( QMouseEvent *event )
   else
   {
     if ( KTimeTrackerSettings::configPDA() )
+    // if you have a touchscreen, you cannot right-click. So, display context menu on any click.
     {
       QPoint newPos = viewport()->mapToGlobal( event->pos() );
       emit contextMenuRequested( newPos );
