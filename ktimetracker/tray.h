@@ -29,7 +29,7 @@
 #include <KSystemTrayIcon>
 
 #include "task.h"
-#include "karm_part.h"
+#include "ktimetrackerpart.h"
 
 class QTimer;
 class MainWindow;

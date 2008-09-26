@@ -20,7 +20,7 @@
  *
  */
 
-#include "karm_part.h"
+#include "ktimetrackerpart.h"
 
 #include <QMenu>
 
@@ -145,4 +145,4 @@ void karmPart::taskViewCustomContextMenuRequested( const QPoint& point )
       pop->popup( point );
 }
 
-#include "karm_part.moc"
+#include "ktimetrackerpart.moc"

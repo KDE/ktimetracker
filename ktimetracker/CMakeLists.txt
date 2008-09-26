@@ -18,7 +18,7 @@ set(karm_shared_SRCS
 	edittaskdialog.cpp idletimedetector.cpp 
 	timekard.cpp karmutility.cpp ktimewidget.cpp
 	karmstorage.cpp mainwindow.cpp preferences.cpp 
-	task.cpp taskview.cpp tray.cpp  focusdetector.cpp
+	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp 
 	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp 
   focusdetectornotifier.cpp
@@ -70,22 +70,22 @@ install(TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### next target ###############
 
-set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
+set(ktimetrackerpart_PART_SRCS ktimetrackerpart.cpp ${karm_shared_SRCS})
 
-kde4_add_plugin(karmpart ${karmpart_PART_SRCS})
+kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
 
-target_link_libraries(karmpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(ktimetrackerpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
-	target_link_libraries(karmpart  ${X11_Xscreensaver_LIB} )
+	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
 
 
-install(TARGETS karmpart  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
 
-install( FILES karm_part.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
 install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker)
 
