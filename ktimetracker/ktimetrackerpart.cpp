@@ -45,8 +45,8 @@
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
-K_PLUGIN_FACTORY(karmPartFactory, registerPlugin<ktimetrackerpart>();)
-K_EXPORT_PLUGIN( karmPartFactory("ktimetracker","ktimetracker") )
+K_PLUGIN_FACTORY(ktimetrackerPartFactory, registerPlugin<ktimetrackerpart>();)
+K_EXPORT_PLUGIN( ktimetrackerPartFactory("ktimetracker","ktimetracker") )
 
 ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
@@ -54,7 +54,7 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
   KGlobal::locale()->insertCatalog("ktimetracker");
 
   // we need an instance
-  setComponentData( karmPartFactory::componentData() );
+  setComponentData( ktimetrackerPartFactory::componentData() );
 
   mMainWidget = new TimetrackerWidget( parentWidget );
   setWidget( mMainWidget );
