@@ -1,6 +1,5 @@
 /*
- *     Copyright (C) 2005 by Thorsten Staerk <kde@staerk.de>
- *                   2007 the ktimetracker developers
+ *     Copyright (C) 2005-2008 by Thorsten Staerk <kde@staerk.de>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,8 +19,8 @@
  *
  */
 
-#ifndef _KARMPART_H_
-#define _KARMPART_H_
+#ifndef _KTIMETRACKERPART_H_
+#define _KTIMETRACKERPART_H_
 
 #include <kparts/part.h>
 #include "karmerrors.h"
@@ -40,7 +39,7 @@ class TimetrackerWidget;
  * @author Thorsten Staerk (kde at staerk dot de)
  * @version 0.1
  */
-class karmPart : public KParts::ReadWritePart
+class ktimetrackerpart : public KParts::ReadWritePart
 {
   Q_OBJECT
 
@@ -53,20 +52,20 @@ class karmPart : public KParts::ReadWritePart
     friend class TrayIcon;
 
 public:
-    karmPart(QWidget *parentWidget, QObject *parent, const QVariantList&);
+    ktimetrackerpart(QWidget *parentWidget, QObject *parent, const QVariantList&);
 
     void taskViewCustomContextMenuRequested( const QPoint& );
     TimetrackerWidget* MainWidget() { return mMainWidget; };
 
-    virtual ~karmPart();
+    virtual ~ktimetrackerpart();
     static KAboutData *createAboutData();
+
 protected:
     virtual bool saveFile();
     virtual bool openFile();
 
 public Q_SLOTS:
    void setStatusBar(const QString & qs);
-
 };
 
-#endif // _KARMPART_H_
+#endif // _KTIMETRACKERPART_H_

@@ -45,10 +45,10 @@
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
-K_PLUGIN_FACTORY(karmPartFactory, registerPlugin<karmPart>();)
+K_PLUGIN_FACTORY(karmPartFactory, registerPlugin<ktimetrackerpart>();)
 K_EXPORT_PLUGIN( karmPartFactory("ktimetracker","ktimetracker") )
 
-karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& )
+ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
   KGlobal::locale()->insertCatalog("ktimetracker");
@@ -87,11 +87,11 @@ karmPart::karmPart( QWidget *parentWidget, QObject *parent, const QVariantList& 
            mTray, SLOT( updateToolTip( QList<Task*> ) ));
 }
 
-karmPart::~karmPart()
+ktimetrackerpart::~ktimetrackerpart()
 {
 }
 
-KAboutData *karmPart::createAboutData()
+KAboutData *ktimetrackerpart::createAboutData()
 {
   const QByteArray& ba=QByteArray("test");
   const KLocalizedString name=ki18n("myName");
@@ -101,7 +101,7 @@ KAboutData *karmPart::createAboutData()
   #warning not implemented
 }
 
-void karmPart::makeMenus()
+void ktimetrackerpart::makeMenus()
 {
   mMainWidget->setupActions( actionCollection() );
   KAction *actionKeyBindings;
@@ -117,27 +117,27 @@ void karmPart::makeMenus()
                                         "bindings which are specific to ktimetracker") );
 }
 
-void karmPart::setStatusBar(const QString & qs)
+void ktimetrackerpart::setStatusBar(const QString & qs)
 {
   kDebug(5970) << "Entering function";
   emit setStatusBarText(qs);
 }
 
-bool karmPart::openFile()
+bool ktimetrackerpart::openFile()
 {
   mMainWidget->openFile();
 
   return true;
 }
 
-bool karmPart::saveFile()
+bool ktimetrackerpart::saveFile()
 {
   mMainWidget->saveFile();
 
   return true;
 }
 
-void karmPart::taskViewCustomContextMenuRequested( const QPoint& point )
+void ktimetrackerpart::taskViewCustomContextMenuRequested( const QPoint& point )
 {
     QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );

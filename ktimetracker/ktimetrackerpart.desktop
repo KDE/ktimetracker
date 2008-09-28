@@ -30,5 +30,5 @@ Name[zh_CN]=KTimeTracker 组件
 Name[zh_TW]=KTimeTracker 組件
 MimeType=text/calendar;
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart
-X-KDE-Library=karmpart
+X-KDE-Library=ktimetrackerpart
 Type=Service

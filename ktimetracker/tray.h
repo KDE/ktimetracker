@@ -40,7 +40,7 @@ class TrayIcon : public KSystemTrayIcon
 
   public:
     TrayIcon(MainWindow * parent);
-    TrayIcon(karmPart *);
+    TrayIcon(ktimetrackerpart *);
     TrayIcon();
     ~TrayIcon();
 

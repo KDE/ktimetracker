@@ -80,7 +80,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
   initToolTip();
 }
 
-TrayIcon::TrayIcon(karmPart *)
+TrayIcon::TrayIcon(ktimetrackerpart *)
   : KSystemTrayIcon( 0 )
 {
   setObjectName( "Ktimetracker Tray" );
