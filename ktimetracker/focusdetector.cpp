@@ -20,7 +20,7 @@
  */
 
 #include "focusdetector.h"
-#include "karmutility.h"
+#include "ktimetrackerutility.h"
 
 
 #include <KDebug>

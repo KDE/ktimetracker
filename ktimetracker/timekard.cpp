@@ -35,7 +35,7 @@
 #include <kcal/event.h>
 
 #include "karmstorage.h"
-#include "karmutility.h"        // formatTime()
+#include "ktimetrackerutility.h"        // formatTime()
 #include "task.h"
 #include "taskview.h"
 
