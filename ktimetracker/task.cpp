@@ -32,7 +32,7 @@
 
 #include <kcal/event.h>
 
-#include "karmutility.h"
+#include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "preferences.h"
 

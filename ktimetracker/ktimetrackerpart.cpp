@@ -37,7 +37,7 @@
 #include <kdemacros.h>
 #include <kparts/genericfactory.h>
 #include "mainwindow.h"
-#include "karmerrors.h"
+#include "ktimetrackerutility.h"
 #include "task.h"
 #include "preferences.h"
 #include "tray.h"

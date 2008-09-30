@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2007 by Thorsten Staerk <dev@staerk.de>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,8 +19,8 @@
  *
  */
 
-#ifndef KARMUTILITY_H
-#define KARMUTILITY_H
+#ifndef KTIMETRACKERUTILITY_H
+#define KTIMETRACKERUTILITY_H
 
 #include <KDebug>
 #include <QString>
@@ -40,4 +39,18 @@ QString formatTime( double minutes, bool decimal = false );
 QString getFocusWindow();
 
 const int secsPerMinute=60;
+
+enum KTIMETRACKER_Errors
+{
+  KTIMETRACKER_ERR_GENERIC_SAVE_FAILED = 1,
+  KTIMETRACKER_ERR_COULD_NOT_MODIFY_RESOURCE,
+  KTIMETRACKER_ERR_MEMORY_EXHAUSTED,
+  KTIMETRACKER_ERR_UID_NOT_FOUND,
+  KTIMETRACKER_ERR_INVALID_DATE,
+  KTIMETRACKER_ERR_INVALID_TIME,
+  KTIMETRACKER_ERR_INVALID_DURATION,
+
+  KTIMETRACKER_MAX_ERROR_NO = KTIMETRACKER_ERR_INVALID_DURATION
+};
+
 #endif

@@ -25,7 +25,7 @@
 #include <kcal/incidence.h>
 #include <KApplication>       // kapp
 #include "karmstorage.h"
-#include "karmutility.h"
+#include "ktimetrackerutility.h"
 #include <KDebug>
 #include <kemailsettings.h>
 #include <KLocale>            // i18n

@@ -39,7 +39,7 @@
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 
-#include "karmutility.h"
+#include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "task.h"
 #include "taskview.h"

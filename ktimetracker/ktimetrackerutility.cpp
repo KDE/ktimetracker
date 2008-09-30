@@ -19,7 +19,7 @@
  *
  */
 
-#include "karmutility.h"
+#include "ktimetrackerutility.h"
 
 #include <KGlobal>
 #include <KLocale>

@@ -23,7 +23,7 @@
 #ifndef KARM_IDLE_TIME_DETECTOR_H
 #define KARM_IDLE_TIME_DETECTOR_H
 
-#include "karmutility.h" // SecsPerMinute
+#include "ktimetrackerutility.h" // SecsPerMinute
 #include <QDateTime>
 #include <QObject>
 #include <config-karm.h> // HAVE_LIBXSS

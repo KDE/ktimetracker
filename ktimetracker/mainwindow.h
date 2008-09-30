@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2003 by Scott Monachello <smonach@cox.net>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,7 +24,6 @@
 
 #include <KParts/MainWindow>
 
-#include "karmerrors.h"
 #include "reportcriteria.h"
 
 class KAccel;

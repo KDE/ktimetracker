@@ -23,7 +23,6 @@
 #define _KTIMETRACKERPART_H_
 
 #include <kparts/part.h>
-#include "karmerrors.h"
 #include <kparts/factory.h>
 #include "reportcriteria.h"
 
