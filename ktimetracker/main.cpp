@@ -111,14 +111,17 @@ int main( int argc, char *argv[] )
   KCmdLineArgs::addCmdLineOptions( options );
   KUniqueApplication::addCmdLineOptions();
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  /* when do we open a gui, when do we use konsole mode ?
-     call                                    argc args->count konsolemode
-     ktimetracker                               1           0          no
-     ktimetracker /tmp/test                     2           1          no
-     ktimetracker /tmp/test --listtasknames     3           1         yes
-     ktimetracker --listtasknames               2           0         yes
-  */
-  if ( argc-( args->count() ) <= 1)
+  int err=0;  // error code
+  bool konsolemode=false;  // open a gui and wait for user input?
+  if ( args->isSet("listtasknames") ) konsolemode=true;
+  if ( !args->getOption("addtask").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("deletetask").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("taskidsfromname").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("totalminutesfortaskid").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("starttask").isEmpty() ) konsolemode=true;
+  if ( !args->getOption("stoptask").isEmpty() ) konsolemode=true;
+
+  if ( !konsolemode )
   {  // no konsole mode
     KPIM::PimApplication myApp;
     MainWindow *mainWindow;
@@ -153,7 +156,7 @@ int main( int argc, char *argv[] )
         char* line = tasknameslist[i].toLatin1().data();
         std::cout << line << std::endl;
       }
-      delete sto;  
+      delete sto;  // make valgrind happy 
     }
     // addtask
     if ( !args->getOption("addtask").isEmpty() )
@@ -223,6 +226,6 @@ int main( int argc, char *argv[] )
     }
     args->clear();
   }
-  return 1;
+  return err;
 }
 
