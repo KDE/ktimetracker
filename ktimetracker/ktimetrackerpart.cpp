@@ -58,7 +58,7 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
 
   mMainWidget = new TimetrackerWidget( parentWidget );
   setWidget( mMainWidget );
-  setXMLFile( "karmui.rc" );
+  setXMLFile( "ktimetrackerui.rc" );
   makeMenus();
   mMainWidget->openFile( KStandardDirs::locateLocal( "data", 
                         QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );
@@ -109,7 +109,7 @@ void ktimetrackerpart::makeMenus()
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
 
-  setXMLFile( QString::fromLatin1( "karmui.rc" ) );
+  setXMLFile( QString::fromLatin1( "ktimetrackerui.rc" ) );
 
   // Tool tops must be set after the createGUI.
   actionKeyBindings->setToolTip( i18n("Configure key bindings") );

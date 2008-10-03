@@ -21,7 +21,7 @@ set(ktimetracker_shared_SRCS
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp 
 	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp 
-  focusdetectornotifier.cpp
+        focusdetectornotifier.cpp
  )
 
 qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
@@ -30,17 +30,20 @@ qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
         TimetrackerWidget
         mainadaptor
         MainAdaptor )
+
 qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
         org.kde.ktimetracker.storage.xml
         taskview.h
         TaskView
         storageadaptor
         StorageAdaptor )
+
 kde4_add_ui_files( ktimetracker_shared_SRCS
         csvexportdialog_base.ui 
         cfgbehavior.ui 
         cfgdisplay.ui
         cfgstorage.ui )
+
 kde4_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
@@ -82,8 +85,8 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 ########### install files ###############
 
 install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
-install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
-install( FILES karmui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker)
+install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
+install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}   )
 install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${KDE4_DBUS_INTERFACES_DIR} )

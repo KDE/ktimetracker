@@ -207,7 +207,7 @@ void MainWindow::makeMenus()
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
 
-  setXMLFile( QString::fromLatin1( "karmui.rc" ) );
+  setXMLFile( QString::fromLatin1( "ktimetrackerui.rc" ) );
   createGUI( 0 );
 
   actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
