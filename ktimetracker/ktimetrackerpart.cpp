@@ -109,8 +109,6 @@ void ktimetrackerpart::makeMenus()
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
 
-  setXMLFile( QString::fromLatin1( "ktimetrackerui.rc" ) );
-
   // Tool tops must be set after the createGUI.
   actionKeyBindings->setToolTip( i18n("Configure key bindings") );
   actionKeyBindings->setWhatsThis( i18n("This will let you configure key"

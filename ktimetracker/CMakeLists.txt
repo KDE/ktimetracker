@@ -63,8 +63,8 @@ if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
 
-install(TARGETS karm  ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install(TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS karm  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### next target ###############
@@ -75,7 +75,7 @@ kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
 
 target_link_libraries(ktimetrackerpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
-	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB} )
+	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
 endif(X11_Xscreensaver_LIB)
 
 
@@ -84,9 +84,9 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
 
-install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
-install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart)
-install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker)
+install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart )
+install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker )
 
-kde4_install_icons( ${ICON_INSTALL_DIR}   )
+kde4_install_icons( ${ICON_INSTALL_DIR} )
 install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${KDE4_DBUS_INTERFACES_DIR} )
