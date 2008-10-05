@@ -85,7 +85,6 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 ########### install files ###############
 
 install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/karmpart )
 install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker )
 
 kde4_install_icons( ${ICON_INSTALL_DIR} )
