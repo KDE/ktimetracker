@@ -38,6 +38,7 @@
 #include <KFileDialog>
 #include <KLocale>            // i18n
 #include <KMessageBox>
+#include <KProgressDialog>
 #include <KUrlRequester>
 
 #include "csvexportdialog.h"
@@ -699,9 +700,17 @@ void TaskView::clearActiveTasks()
 void TaskView::stopAllTimers( const QDateTime &when )
 {
   kDebug(5970) << "Entering function";
-  foreach ( Task *task, d->mActiveTasks )
-    task->setRunning( false, d->mStorage, when );
 
+  KProgressDialog dialog( this, 0, QString("Progress") );
+  dialog.progressBar()->setMaximum( d->mActiveTasks.count() );
+  dialog.show();
+
+  foreach ( Task *task, d->mActiveTasks )
+  {
+    kapp->processEvents();
+    task->setRunning( false, d->mStorage, when );
+    dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
+  }
   _idleTimeDetector->stopIdleDetection();
   FocusDetectorNotifier::instance()->detach( this );
   d->mActiveTasks.clear();
