@@ -174,7 +174,7 @@ class TaskView : public QTreeWidget
      * Deletes the given or the current task (and children) from the view.
      * It does this in batch mode, no user dialog.
      * @param task Task to be deleted. If empty, the current task is deleted. 
-     *             if non-existant, an error message is displayed.
+     *             if non-existent, an error message is displayed.
      */
     void deleteTaskBatch( Task* task=0 );
 
@@ -182,7 +182,7 @@ class TaskView : public QTreeWidget
      * Deletes the given or the current task (and children) from the view.
      * Depending on configuration, there may be a user dialog.
      * @param task Task to be deleted. If empty, the current task is deleted. 
-     *             if non-existant, an error message is displayed.
+     *             if non-existent, an error message is displayed.
      */
     void deleteTask( Task* task=0 );
 

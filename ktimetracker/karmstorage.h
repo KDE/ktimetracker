@@ -143,7 +143,7 @@ class KarmStorage : public QObject
      *
      * All tasks must have an associated VTODO object already created in the
      * calendar file; that is, the task->uid() must refer to a valid VTODO in
-     * the calender.
+     * the calendar.
      * Delivers empty string if successful, else error msg.
      *
      * @param taskview    The list group used in the TaskView
@@ -186,7 +186,7 @@ class KarmStorage : public QObject
      * Book time to a task.
      *
      * Creates an iCalendar event and adds it to the calendar.  Does not write
-     * calender to disk, just adds event to calendar in memory.  However, the
+     * calendar to disk, just adds event to calendar in memory.  However, the
      * resource framework does try to get a lock on the file.  After a
      * successful lock, the calendar marks this incidence as modified and then
      * releases the lock.
