@@ -11,7 +11,6 @@ X-KDE-CfgDlgHierarchy=KTT
 X-KDE-Weight=700
 
 Name=KTimeTracker
-Name[de]=Zeiterfassung
 Name[km]=កម្មវិធី​តាមដាន​របស់ KTime
 Name[ne]=केडीई समय ट्रयाकर
 Name[nn]=KTidtakar
@@ -21,7 +20,6 @@ Name[x-test]=xxKTimeTrackerxx
 Comment=Configure ktimetracker
 Comment[ca]=Configura el ktimetracker
 Comment[da]=Indstil KTimeTracker
-Comment[de]=Zeiterfassung einrichten
 Comment[el]=Ρύθμιση του ktimetracker
 Comment[es]=Configurar ktimetracker
 Comment[et]=KTimeTrackeri seadistamine
