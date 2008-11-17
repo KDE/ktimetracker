@@ -156,7 +156,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
     kDebug(5970) << "KarmStorage::load"
       << "rawTodo count (includes completed todos) ="
       << todoList.count();
-    for( todo = todoList.begin(); todo != todoList.end(); ++todo )
+    for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
       Task* task = new Task(*todo, view);
       map.insert( (*todo)->uid(), task );
@@ -165,7 +165,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
     }
 
     // Load each task under it's parent task.
-    for( todo = todoList.begin(); todo != todoList.end(); ++todo )
+    for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
       Task* task = map.value( (*todo)->uid() );
 
@@ -200,12 +200,12 @@ Task* KarmStorage::task( const QString& uid, TaskView* view )
   KCal::Todo::List todoList;
   KCal::Todo::List::ConstIterator todo;
   todoList = d->mCalendar->rawTodos();
-  todo = todoList.begin();
+  todo = todoList.constBegin();
   Task* result=0;
   bool konsolemode=false;
   if ( view == 0 ) konsolemode=true;
-  while ( todo != todoList.end() && ( (*todo)->uid() != uid ) ) ++todo;
-  if ( todo != todoList.end() ) result = new Task((*todo), view, konsolemode);
+  while ( todo != todoList.constEnd() && ( (*todo)->uid() != uid ) ) ++todo;
+  if ( todo != todoList.constEnd() ) result = new Task((*todo), view, konsolemode);
   kDebug(5970) << "Leaving function, returning " << result;
   return result;
 }
@@ -241,7 +241,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
   view->clear();
   todoList = rc->rawTodos();
-  for( todo = todoList.begin(); todo != todoList.end(); ++todo )
+  for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
   {
     Task* task = new Task(*todo, view);
     task->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
@@ -252,7 +252,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   }
 
   // 1.1. Load each task under it's parent task.
-  for( todo = todoList.begin(); todo != todoList.end(); ++todo )
+  for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
   {
     Task* task = map.value( (*todo)->uid() );
     // No relatedTo incident just means this is a top-level task.
@@ -844,7 +844,7 @@ void KarmStorage::startTimer( QString taskID )
   KCal::Todo::List todoList;
   KCal::Todo::List::ConstIterator todo;
   todoList = d->mCalendar->rawTodos();
-  for( todo = todoList.begin(); todo != todoList.end(); ++todo )
+  for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
   {
     kDebug(5970) << (*todo)->uid();
     kDebug(5970) << taskID;
