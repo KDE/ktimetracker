@@ -40,7 +40,7 @@ class TimetrackerWidget;
  * Main window to tie the application together.
  */
 
-class MainWindow : public KParts::MainWindow
+class MainWindow : public KXmlGuiWindow
 {
   Q_OBJECT
 

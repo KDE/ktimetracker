@@ -49,7 +49,7 @@
 #include "timetrackerwidget.h"
 
 MainWindow::MainWindow( const QString &icsfile )
-  :  KParts::MainWindow( 0, Qt::WindowContextHelpButtonHint ),
+  :  KXmlGuiWindow( 0, Qt::WindowContextHelpButtonHint ),
     _totalSum  ( 0 ),
     _sessionSum( 0 )
 {
@@ -207,8 +207,7 @@ void MainWindow::makeMenus()
   actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
       actionCollection() );
 
-  setXMLFile( QString::fromLatin1( "ktimetrackerui.rc" ) );
-  createGUI( 0 );
+  setupGUI();
 
   actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
   actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
