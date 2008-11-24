@@ -52,7 +52,7 @@
     <Action name="configure_ktimetracker" />
   </Menu>
 </MenuBar>
-<ToolBar alreadyVisited="1" position="top" iconText="icononly" noMerge="1" name="mainToolBar" >
+<ToolBar position="top" iconText="icononly" noMerge="1" name="mainToolBar" >
 	<text>Main Toolbar</text>
 	<Action name="new_task" />
 	<Action name="new_sub_task" />
@@ -61,7 +61,7 @@
 	<Action name="delete_task" />
         <Action name="edit_task" />
 </ToolBar>
-<ToolBar alreadyVisited="1" position="top" iconText="icononly" noMerge="1" name="taskToolBar" >
+<ToolBar position="top" iconText="icononly" noMerge="1" name="taskToolBar" >
   <text>Tasks</text>
   <Action name="file_new" />
   <Action name="file_open" />
