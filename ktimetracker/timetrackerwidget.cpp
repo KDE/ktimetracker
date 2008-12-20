@@ -158,6 +158,13 @@ void TimetrackerWidget::readProperties( const KConfigGroup &cfg )
     show();
 }
 
+int TimetrackerWidget::focusSearchBar()
+{
+  kDebug(5970) << "Entering function";
+  d->mSearchWidget->setFocus();
+  return 0;
+};
+
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
   kDebug(5970) << "Entering function (fileName=" << fileName << ")";
@@ -306,6 +313,8 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "of other tasks.") },
     { "media-playback-stop", I18N_NOOP("S&top"), SLOT( stopCurrentTimer() ), "stop",
       I18N_NOOP("Stops timing of the selected task"), I18N_NOOP("Stops timing of the selected task") },
+    { QString(), I18N_NOOP("Focus on searchbar"), SLOT( focusSearchBar() ), "focusSearchBar",
+      I18N_NOOP("Sets the focus on the searchbar"), I18N_NOOP("Sets the focus on the searchbar") },
     { QString(), I18N_NOOP("Stop &All Timers"), SLOT( stopAllTimers() ), "stopAll",
       I18N_NOOP("Stops all of the active timers"), I18N_NOOP("Stops all of the active timers") },
     { QString(), I18N_NOOP("Track Active Applications"), SLOT( focusTracking() ),
@@ -364,6 +373,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
   // custom shortcuts
   d->mActions[ "stopAll" ]->setShortcut( QKeySequence( Qt::Key_Escape ) );
   d->mActions[ "new_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_T ) );
+  d->mActions[ "focusSearchBar" ]->setShortcut( QKeySequence( Qt::Key_S ) );
   d->mActions[ "new_sub_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::ALT + Qt::Key_N ) );
   d->mActions[ "delete_task" ]->setShortcut( QKeySequence( Qt::Key_Delete ) );
   d->mActions[ "edit_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_E ) );

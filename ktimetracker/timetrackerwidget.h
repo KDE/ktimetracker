@@ -128,6 +128,11 @@ class TimetrackerWidget : public QWidget
     void reconfigureFiles();
 
     /**
+      this method puts the input focus onto the search bar
+     */
+    int focusSearchBar();
+
+    /**
       shows/hides the search bar.
      */
     void showSearchBar( bool visible );
