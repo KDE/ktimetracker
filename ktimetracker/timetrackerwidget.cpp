@@ -163,7 +163,7 @@ int TimetrackerWidget::focusSearchBar()
   kDebug(5970) << "Entering function";
   d->mSearchWidget->setFocus();
   return 0;
-};
+}
 
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
