@@ -63,7 +63,7 @@
       <default>false</default>
     </entry>
     <entry name="configPDA" type="Bool">
-      <default>true</default>
+      <default>false</default>
     </entry>
     <entry name="trayIcon" type="Bool">
       <default>true</default>
