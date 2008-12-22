@@ -142,6 +142,16 @@ Task::~Task()
   delete mTimer;
 }
 
+void Task::delete_recursive()
+{
+  while ( this->child(0) )
+  {
+    Task* t=(Task*) this->child(0);
+    t->delete_recursive();
+  }
+  delete this;
+}
+
 void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
 // This is the back-end, the front-end is StartTimerFor()
 {

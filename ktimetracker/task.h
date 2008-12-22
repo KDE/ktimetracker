@@ -86,6 +86,8 @@ class Task : public QObject, public QTreeWidgetItem
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const;
 
+    void delete_recursive();
+
     int depth();
 
     /**
