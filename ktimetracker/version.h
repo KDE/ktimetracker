@@ -21,5 +21,5 @@
  */
 
 #ifndef KTIMETRACKER_VERSION
-#define KTIMETRACKER_VERSION "4.0.0"
+#define KTIMETRACKER_VERSION "4.1.4"
 #endif
