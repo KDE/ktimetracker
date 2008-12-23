@@ -33,6 +33,7 @@
 #include <KLocale>    // i18n
 
 #include <kdebug.h>
+#include <KWindowSystem>
 
 #ifdef Q_WS_X11
 #include <QX11Info>
@@ -123,6 +124,10 @@ void IdleTimeDetector::informOverrun()
     dialog->setButtonText(KDialog::Cancel, i18n("Revert timing"));
     dialog->setButtonWhatsThis(KDialog::Ok, explanation);
     dialog->setButtonWhatsThis(KDialog::Cancel, explanationrevert);
+    // The user might be looking at another virtual desktop as where ktimetracker is running
+    KWindowSystem::self()->setOnDesktop( dialog->winId(), KWindowSystem::self()->currentDesktop() );
+    KWindowSystem::self()->demandAttention( dialog->winId() );
+    kDebug(5970) << "Setting WinId " << dialog->winId() << " to deskTop " << KWindowSystem::self()->currentDesktop();
     dialog->show();
 }
 #endif // HAVE_LIBXSS
