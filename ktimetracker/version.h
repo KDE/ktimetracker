@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 1999 by Sirtaj Singh Kang <taj@kde.org>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -21,5 +20,5 @@
  */
 
 #ifndef KTIMETRACKER_VERSION
-#define KTIMETRACKER_VERSION "4.2.0"
+#define KTIMETRACKER_VERSION "4.3.0"
 #endif
