@@ -70,4 +70,4 @@ Type=Application
 Terminal=false
 X-KDE-StartupNotify=true
 X-DBUS-StartupType=Multi
-Categories=Qt;KDE;Utility;X-KDE-Utilities-PIM;
+Categories=Qt;KDE;Utility;Office;Monitor;X-KDE-Utilities-PIM;
