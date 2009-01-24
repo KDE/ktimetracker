@@ -6,7 +6,7 @@ X-DocPath=ktimetracker/index.html
 
 X-KDE-Library=kcm_ktimetrackerconfig
 X-KDE-ParentApp=ktimetracker
-X-KDE-ParentComponents=ktimetracker,kontact_karmplugin
+X-KDE-ParentComponents=ktimetracker,kontact_ktimetrackerplugin
 X-KDE-CfgDlgHierarchy=KTT
 X-KDE-Weight=700
 
