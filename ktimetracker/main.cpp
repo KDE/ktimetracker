@@ -90,7 +90,7 @@ int main( int argc, char *argv[] )
                        "kde@staerk.de" );
   aboutData.addAuthor( ki18n("Sirtaj Singh Kang"), ki18n( "Original Author" ),
                        "taj@kde.org" );
-  aboutData.addAuthor( ki18n("Allen Winter"),      KLocalizedString(), "winterz@verizon.net" );
+  aboutData.addAuthor( ki18n("Allen Winter"),      KLocalizedString(), "winter@kde.org" );
   aboutData.addAuthor( ki18n("David Faure"),       KLocalizedString(), "faure@kde.org" );
   aboutData.addAuthor( ki18n("Mathias Soeken"),    KLocalizedString(), "msoeken@tzi.de" );
   aboutData.addAuthor( ki18n("Jesper Pedersen"),   KLocalizedString(), "blackie@kde.org" );
