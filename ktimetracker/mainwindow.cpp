@@ -53,40 +53,40 @@ MainWindow::MainWindow( const QString &icsfile )
   :  KParts::MainWindow( )
 {
   kDebug(5970) << "Entering function";
-    // Setup our actions
-    setupActions();
+  // Setup our actions
+  setupActions();
 
-    // this routine will find and load our Part.
-    KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
-    if (factory)
+  // this routine will find and load our Part.
+  KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
+  if (factory)
+  {
+    // now that the Part is loaded, we cast it to a Part to get
+    // our hands on it
+    m_part = static_cast<KParts::ReadWritePart *>
+       (factory->create(this, "ktimetrackerpart" ));
+
+    if (m_part)
     {
-        // now that the Part is loaded, we cast it to a Part to get
-        // our hands on it
-        m_part = static_cast<KParts::ReadWritePart *>
-                 (factory->create(this, "ktimetrackerpart" ));
+      // tell the KParts::MainWindow that this is indeed
+      // the main widget
+      setCentralWidget(m_part->widget());
 
-        if (m_part)
-        {
-            // tell the KParts::MainWindow that this is indeed
-            // the main widget
-            setCentralWidget(m_part->widget());
+      setupGUI(ToolBar | Keys | StatusBar | Save);
 
-            setupGUI(ToolBar | Keys | StatusBar | Save);
-
-            // and integrate the part's GUI with the shell's
-            createGUI(m_part);
-        }
+      // and integrate the part's GUI with the shell's
+      createGUI(m_part);
     }
-    else
-    {
-        // if we couldn't find our Part, we exit since the Shell by
-        // itself can't do anything useful
-        KMessageBox::error(this, "Could not find our Part!");
-        qApp->quit();
-        // we return here, cause qApp->quit() only means "exit the
-        // next time we enter the event loop...
-        return;
-    }
+  }
+  else
+  {
+    // if we couldn't find our Part, we exit since the Shell by
+    // itself can't do anything useful
+    KMessageBox::error(this, "Could not find our Part!");
+    qApp->quit();
+    // we return here, cause qApp->quit() only means "exit the
+    // next time we enter the event loop...
+    return;
+  }
   setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
   slotSetCaption( icsfile );  // set the window title to our iCal file
@@ -104,14 +104,13 @@ MainWindow::MainWindow( const QString &icsfile )
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
-  if ( KTimeTrackerSettings::trayIcon() ) _tray = new TrayIcon( this );
-  else _tray = new TrayIcon( );
+  _tray = new TrayIcon( this );
 
   connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
 
-  connect( mainWidget, SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
-  connect( mainWidget, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
-  connect( mainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
+  connect( m_part->widget(), SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
+  connect( m_part->widget(), SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
+  connect( m_part->widget(), SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
 }
 
