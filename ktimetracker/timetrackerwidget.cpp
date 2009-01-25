@@ -535,6 +535,7 @@ bool TimetrackerWidget::closeAllFiles()
   {
     TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( 0 ) );
     d->mTabWidget->setCurrentWidget( taskView );
+    taskView->stopAllTimers();
     if ( !( closeFile() ) )
       return false;
   }

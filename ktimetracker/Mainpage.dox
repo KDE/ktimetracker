@@ -151,8 +151,6 @@ These are the signals:
     <li>KarmWindow::resetSessionTime();
     <li>KarmWindow::save()
     <li>KarmWindow::slotSelectionChanged()
-    <li>KarmWindow::updateStatusBar()
-    <li>KarmWindow::updateTime()
     <li>Preferences::autoSaveCheckBoxChanged()
     <li>Preferences::hideOnCloseCheckBoxChanged()
     <li>Preferences::idleDetectCheckBoxChanged()

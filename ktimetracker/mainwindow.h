@@ -40,23 +40,23 @@ class TimetrackerWidget;
  * Main window to tie the application together.
  */
 
-class MainWindow : public KXmlGuiWindow
+class MainWindow : public KParts::MainWindow
 {
   Q_OBJECT
 
   private:
     void             makeMenus();
+    void setupActions();
 
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
-    long             _totalSum;
-    long             _sessionSum;
     TrayIcon*        _tray;
     KAction*         actionKeyBindings;
 
     TimetrackerWidget *mainWidget;
 
     friend class TrayIcon;
+    KParts::ReadWritePart *m_part;
 
   public:
     MainWindow( const QString &icsfile = "" );
@@ -70,17 +70,9 @@ class MainWindow : public KXmlGuiWindow
   protected Q_SLOTS:
     void keyBindings();
     void startNewSession();
-    void updateTime( long, long );
-    /** Set total application time and total application session time to zero.
-      Typically, these times are shown as the lowest and rightest figures in
-      the widget.
-     */
-    void reSetTimes();
-    void updateStatusBar();
     void taskViewCustomContextMenuRequested( const QPoint& );
 
   protected:
-    void startStatusBar();
     /* reimp */ void readProperties( const KConfigGroup &config );
     /* reimp */ void saveProperties( KConfigGroup &config );
     void saveGeometry();

@@ -32,6 +32,7 @@
 #include <KGlobal>
 #include <KIcon>
 #include <KLocale>            // i18n
+#include <KMessageBox>
 #include <KPushButton>
 #include <KShortcutsDialog>
 #include <KStandardAction>
@@ -49,27 +50,48 @@
 #include "timetrackerwidget.h"
 
 MainWindow::MainWindow( const QString &icsfile )
-  :  KXmlGuiWindow( 0, Qt::WindowContextHelpButtonHint ),
-    _totalSum  ( 0 ),
-    _sessionSum( 0 )
+  :  KParts::MainWindow( )
 {
   kDebug(5970) << "Entering function";
+    // Setup our actions
+    setupActions();
+
+    // this routine will find and load our Part.
+    KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
+    if (factory)
+    {
+        // now that the Part is loaded, we cast it to a Part to get
+        // our hands on it
+        m_part = static_cast<KParts::ReadWritePart *>
+                 (factory->create(this, "ktimetrackerpart" ));
+
+        if (m_part)
+        {
+            // tell the KParts::MainWindow that this is indeed
+            // the main widget
+            setCentralWidget(m_part->widget());
+
+            setupGUI(ToolBar | Keys | StatusBar | Save);
+
+            // and integrate the part's GUI with the shell's
+            createGUI(m_part);
+        }
+    }
+    else
+    {
+        // if we couldn't find our Part, we exit since the Shell by
+        // itself can't do anything useful
+        KMessageBox::error(this, "Could not find our Part!");
+        qApp->quit();
+        // we return here, cause qApp->quit() only means "exit the
+        // next time we enter the event loop...
+        return;
+    }
   setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
-  mainWidget = new TimetrackerWidget( this );
-  setCentralWidget( mainWidget );
-  makeMenus();
-  mainWidget->openFile( icsfile );
-  slotSetCaption( icsfile );
-
-  // status bar
-  startStatusBar();
+  slotSetCaption( icsfile );  // set the window title to our iCal file
 
   // connections
-  connect( mainWidget, SIGNAL( totalTimesChanged( long, long ) ),
-           this, SLOT( updateTime( long, long ) ) );
-  connect( mainWidget, SIGNAL( reSetTimes() ),
-           this, SLOT( reSetTimes() ) );
   connect( mainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
   connect( mainWidget, SIGNAL( setCaption( const QString& ) ),
@@ -89,20 +111,16 @@ MainWindow::MainWindow( const QString &icsfile )
 
   connect( mainWidget, SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
   connect( mainWidget, SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
-  // when we conect mainwidget's timersActive, mainwidget has already be constructed
-  // so, signal sent during mainwidget's construction will not arrive.
-  if ( !mainWidget->allEventsHaveEndTiMe() )
-    _tray->startClock();
   connect( mainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
-  _totalSum=0;
-  _sessionSum=0;
-  for (int i=0; i<mainWidget->currentTaskView()->count(); ++i)
-  {
-    _totalSum+=mainWidget->currentTaskView()->itemAt(i)->time();
-    _sessionSum+=mainWidget->currentTaskView()->itemAt(i)->sessionTime();
-  }
-  updateStatusBar();
+}
+
+void MainWindow::setupActions()
+{
+    KStandardAction::open(this, SLOT(fileOpen()),
+        actionCollection());
+    KStandardAction::quit(qApp, SLOT(closeAllWindows()),
+        actionCollection());
 }
 
 void MainWindow::readProperties( const KConfigGroup &cfg )
@@ -140,54 +158,6 @@ MainWindow::~MainWindow()
 {
   kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
   saveGeometry();
-}
-
-/**
- * Calculate the sum of the session time and the total time for all
- * toplevel tasks and put it in the statusbar.
- */
-
-void MainWindow::updateTime( long sessionDiff, long totalDiff )
-{
-  kDebug(5970) << "Entering function(sessionDiff=" << sessionDiff << " totalDiff=" << totalDiff << ")";
-  _sessionSum += sessionDiff;
-  _totalSum   += totalDiff;
-
-  updateStatusBar();
-  kDebug(5970) << "Exiting MainWindow::updateTime";
-}
-
-/**
- * Set the total application time and total application session time to zero.
- */
-
-void MainWindow::reSetTimes()
-{
-  kDebug(5970) << "Entering function";
-  _sessionSum = 0;
-  _totalSum   = 0;
-
-  updateStatusBar();
-  kDebug(5970) << "Exiting MainWindow::reSetTimes";
-}
-
-void MainWindow::updateStatusBar( )
-{
-  kDebug(5970) << "Entering MainWindow::updateStatusBar( )";
-  QString time;
-
-  time = formatTime( _sessionSum );
-  statusBar()->changeItem( i18n("Session: %1", time), 0 );
-
-  time = formatTime( _totalSum );
-  statusBar()->changeItem( i18nc( "total time of all tasks", "Total: %1", time ), 1);
-  kDebug(5970) << "Exiting MainWindow::updateStatusBar( )";
-}
-
-void MainWindow::startStatusBar()
-{
-  statusBar()->insertPermanentItem( i18n("Session"), 0, 0 );
-  statusBar()->insertPermanentItem( i18nc( "total time of all tasks", "Total" ), 1, 0);
 }
 
 void MainWindow::keyBindings()
