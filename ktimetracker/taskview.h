@@ -278,6 +278,7 @@ class TaskView : public QTreeWidget
     void slotCustomContextMenuRequested( const QPoint & );
     void slotSetPercentage( QAction * );
     void slotSetPriority( QAction * );
+    void slotTaskMenu( QAction * );
 };
 
 #endif // KARM_TASK_VIEW

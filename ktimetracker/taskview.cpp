@@ -147,6 +147,8 @@ class TaskView::Private {
     QMap<QAction*, int> mPercentage;
     QMenu *mPopupPriorityMenu;
     QMap<QAction*, int> mPriority;
+    QMenu *mPopupTaskMenu;
+    QMap<QAction*, int> mTaskOperation;
 };
 //@endcond
 //END
@@ -228,9 +230,11 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT( slotSetPercentage( QAction * ) ) );
 
   d->mPopupPriorityMenu = new QMenu( this );
-  for ( int i = 0; i <= 9; ++i ) {
+  for ( int i = 0; i <= 9; ++i )
+  {
     QString label;
-    switch ( i ) {
+    switch ( i )
+    {
       case 0:
         label = i18n( "unspecified" );
         break;
@@ -251,6 +255,21 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   }
   connect( d->mPopupPriorityMenu, SIGNAL( triggered( QAction * ) ),
            this, SLOT( slotSetPriority( QAction * ) ) );
+
+  d->mPopupTaskMenu = new QMenu( this );
+  for ( int i = 1; i <= 1; ++i )
+  {
+    QString label;
+    switch ( i )
+    {
+      case 1:
+        label = i18n( "Start/Stop Timer" );
+        break;
+    }
+    d->mTaskOperation[ d->mPopupTaskMenu->addAction( label ) ] = i;
+  }
+  connect( d->mPopupTaskMenu, SIGNAL( triggered( QAction * ) ),
+           this, SLOT( slotTaskMenu( QAction * ) ) );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint & ) ),
@@ -332,6 +351,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
 
 void TaskView::mousePressEvent( QMouseEvent *event )
 {
+  kDebug(5970) << "Entering function, event->button()=" << event->button();
   QModelIndex index = indexAt( event->pos() );
 
   // if the user toggles a task as complete/incomplete
@@ -356,7 +376,7 @@ void TaskView::mousePressEvent( QMouseEvent *event )
       }
     }
   }
-  else
+  else // the user did not mark a task as complete/incomplete
   {
     if ( KTimeTrackerSettings::configPDA() )
     // if you have a touchscreen, you cannot right-click. So, display context menu on any click.
@@ -1110,7 +1130,7 @@ void TaskView::slotCustomContextMenuRequested( const QPoint &pos )
       break;
 
     default:
-      emit contextMenuRequested( newPos );
+      d->mPopupTaskMenu->popup( newPos );
       break;
   }
 }
@@ -1128,6 +1148,17 @@ void TaskView::slotSetPriority( QAction *action )
   if ( currentItem() ) {
     currentItem()->setPriority( d->mPriority[ action ] );
   }
+}
+
+void TaskView::slotTaskMenu( QAction *action )
+{
+  kDebug(5970) << "Entering function";
+  if ( d->mTaskOperation[ action ] == 1 ) // start/stop timer
+    if ( currentItem() )
+    {
+      if ( !(currentItem()->isRunning()) ) startTimerFor( currentItem() );
+      else stopTimerFor( currentItem() );
+    }
 }
 
 bool TaskView::isFocusTrackingActive() const
