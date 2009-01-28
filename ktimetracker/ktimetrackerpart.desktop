@@ -1,14 +1,16 @@
 [Desktop Entry]
 Name=KTimeTracker Component
 Name[ca]=Component del KTimeTracker
+Name[cs]=Komponenta KTimeTracker
 Name[da]=KTimeTracker-komponent
+Name[de]=Zeiterfassungs-Komponente
 Name[el]=Συστατικό KTimeTracker
 Name[es]=Componente de KTimeTracker
 Name[et]=KTimeTrackeri komponent
 Name[fr]=Composant KTimeTracker
 Name[ga]=Comhpháirt KTimeTracker
 Name[gl]=Compoñente KTimeTracker
-Name[it]=Componente barra orologio
+Name[it]=Componente KTimeTracker
 Name[ja]=KTimeTracker コンポーネント
 Name[km]=សមាសភាគ​កម្មវិធីតាមដាន​របស់ KTime
 Name[ko]=KTimeTracker 구성 요소
@@ -17,6 +19,7 @@ Name[nb]=KTimeTracker-komponent
 Name[nds]=Tietlogbook-Komponent
 Name[nl]=KTimeTrackercomponent
 Name[nn]=KTidtakar-komponent
+Name[pa]=KTimeTracker ਭਾਗ
 Name[pl]=Moduł Osobistego czasomierza
 Name[pt]=Componente do KTimeTracker
 Name[pt_BR]=Componente do KTimeTracker
