@@ -72,8 +72,10 @@ MainWindow::MainWindow( const QString &icsfile )
       setCentralWidget(m_part->widget());
 
       setupGUI(ToolBar | Keys | StatusBar | Save);
-
+      connect(configureAction, SIGNAL(triggered(bool)),
+        m_part->widget(), SLOT(showSettingsDialog()));
       // and integrate the part's GUI with the shell's
+      setXMLFile( QString::fromLatin1( "ktimetrackerui.rc" ) );
       createGUI(m_part);
     }
   }
@@ -120,6 +122,9 @@ void MainWindow::setupActions()
         actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()),
         actionCollection());
+    configureAction = new KAction(this);
+    configureAction->setText(i18n("Configure Ktimetracker"));
+    actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
 void MainWindow::readProperties( const KConfigGroup &cfg )

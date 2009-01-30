@@ -52,6 +52,7 @@ class MainWindow : public KParts::MainWindow
     KAccelMenuWatch* _watcher;
     TrayIcon*        _tray;
     KAction*         actionKeyBindings;
+    KAction* configureAction;
 
     TimetrackerWidget *mainWidget;
 
