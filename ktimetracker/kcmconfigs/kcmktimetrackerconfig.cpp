@@ -1,7 +1,7 @@
 /*
     This file is part of ktimetracker.
     Copyright (c) 2003 Tobias Koenig <tokoe@kde.org>
-    Copyright (c) 2008 Thorsten Staerk
+    Copyright (c) 2008 Thorsten Staerk <dev@staerk.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
