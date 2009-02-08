@@ -723,7 +723,7 @@ void TaskView::stopAllTimers( const QDateTime &when )
 
   KProgressDialog dialog( this, 0, QString("Progress") );
   dialog.progressBar()->setMaximum( d->mActiveTasks.count() );
-  dialog.show();
+  if ( d->mActiveTasks.count() > 1 ) dialog.show();
 
   foreach ( Task *task, d->mActiveTasks )
   {
