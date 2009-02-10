@@ -53,7 +53,6 @@ class ktimetrackerpart : public KParts::ReadWritePart
 public:
     ktimetrackerpart(QWidget *parentWidget, QObject *parent, const QVariantList&);
 
-    void taskViewCustomContextMenuRequested( const QPoint& );
     TimetrackerWidget* MainWidget() { return mMainWidget; };
 
     virtual ~ktimetrackerpart();
@@ -64,6 +63,7 @@ protected:
     virtual bool openFile();
 
 public Q_SLOTS:
+   void taskViewCustomContextMenuRequested( const QPoint& );
    void setStatusBar(const QString & qs);
 };
 
