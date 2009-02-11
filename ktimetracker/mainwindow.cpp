@@ -83,7 +83,7 @@ MainWindow::MainWindow( const QString &icsfile )
   {
     // if we couldn't find our Part, we exit since the Shell by
     // itself can't do anything useful
-    KMessageBox::error(this, "Could not find our Part!");
+    KMessageBox::error(this, i18n( "Could not find our Part!" ));
     qApp->quit();
     // we return here, cause qApp->quit() only means "exit the
     // next time we enter the event loop...
@@ -129,13 +129,13 @@ void MainWindow::setupActions()
 
 void MainWindow::readProperties( const KConfigGroup &cfg )
 {
-  if( cfg.readEntry( "WindowShown", true ))   
+  if( cfg.readEntry( "WindowShown", true ))
     show();
 }
 
 void MainWindow::saveProperties( KConfigGroup &cfg )
 {
-  cfg.writeEntry( "WindowShown", isVisible());   
+  cfg.writeEntry( "WindowShown", isVisible());
 }
 
 void MainWindow::slotSetCaption( const QString& qs )
@@ -151,7 +151,7 @@ void MainWindow::setStatusBar(const QString& qs)
 void MainWindow::quit()
 {
   kDebug() << "Entering function";
-  if ( mainWidget->closeAllFiles() ) 
+  if ( mainWidget->closeAllFiles() )
   {
     kapp->quit();
   }
