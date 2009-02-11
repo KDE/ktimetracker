@@ -25,9 +25,6 @@
 
 #include <KDebug>
 
-#ifdef Q_WS_X11
-#endif
-
 FocusDetector::FocusDetector()
 {
   KWindowSystem* kw=KWindowSystem::self();
