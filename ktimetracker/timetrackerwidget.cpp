@@ -161,7 +161,7 @@ void TimetrackerWidget::readProperties( const KConfigGroup &cfg )
 int TimetrackerWidget::focusSearchBar()
 {
   kDebug(5970) << "Entering function";
-  d->mSearchWidget->setFocus();
+  if ( d->mSearchWidget->isVisible() ) d->mSearchWidget->setFocus();
   return 0;
 }
 
