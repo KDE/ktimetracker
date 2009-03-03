@@ -147,8 +147,6 @@ class TaskView::Private {
     QMap<QAction*, int> mPercentage;
     QMenu *mPopupPriorityMenu;
     QMap<QAction*, int> mPriority;
-    QMenu *mPopupTaskMenu;
-    QMap<QAction*, int> mTaskOperation;
 };
 //@endcond
 //END
@@ -255,21 +253,6 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
   }
   connect( d->mPopupPriorityMenu, SIGNAL( triggered( QAction * ) ),
            this, SLOT( slotSetPriority( QAction * ) ) );
-
-  d->mPopupTaskMenu = new QMenu( this );
-  for ( int i = 1; i <= 1; ++i )
-  {
-    QString label;
-    switch ( i )
-    {
-      case 1:
-        label = i18n( "Start/Stop Timer" );
-        break;
-    }
-    d->mTaskOperation[ d->mPopupTaskMenu->addAction( label ) ] = i;
-  }
-  connect( d->mPopupTaskMenu, SIGNAL( triggered( QAction * ) ),
-           this, SLOT( slotTaskMenu( QAction * ) ) );
 
   setContextMenuPolicy( Qt::CustomContextMenu );
   connect( this, SIGNAL( customContextMenuRequested( const QPoint & ) ),
@@ -1130,7 +1113,7 @@ void TaskView::slotCustomContextMenuRequested( const QPoint &pos )
       break;
 
     default:
-      d->mPopupTaskMenu->popup( newPos );
+      emit contextMenuRequested( newPos );
       break;
   }
 }
@@ -1148,17 +1131,6 @@ void TaskView::slotSetPriority( QAction *action )
   if ( currentItem() ) {
     currentItem()->setPriority( d->mPriority[ action ] );
   }
-}
-
-void TaskView::slotTaskMenu( QAction *action )
-{
-  kDebug(5970) << "Entering function";
-  if ( d->mTaskOperation[ action ] == 1 ) // start/stop timer
-    if ( currentItem() )
-    {
-      if ( !(currentItem()->isRunning()) ) startTimerFor( currentItem() );
-      else stopTimerFor( currentItem() );
-    }
 }
 
 bool TaskView::isFocusTrackingActive() const
