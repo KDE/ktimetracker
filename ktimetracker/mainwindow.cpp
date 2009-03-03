@@ -94,14 +94,14 @@ MainWindow::MainWindow( const QString &icsfile )
   slotSetCaption( icsfile );  // set the window title to our iCal file
 
   // connections
-  connect( mainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
+  connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
-  connect( mainWidget, SIGNAL( setCaption( const QString& ) ),
+  connect( m_part->widget(), SIGNAL( setCaption( const QString& ) ),
                  this, SLOT( slotSetCaption( const QString& ) ) );
   loadGeometry();
 
   // Setup context menu request handling
-  connect( mainWidget,
+  connect( m_part->widget(),
            SIGNAL( contextMenuRequested( const QPoint& ) ),
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
