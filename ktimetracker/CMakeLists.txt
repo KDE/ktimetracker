@@ -1,8 +1,11 @@
 project(ktimetracker)
 
-macro_bool_to_01(X11_Xscreensaver_LIB HAVE_LIBXSS)
-configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
-
+#We check if X11_Xscreensaver was found
+if(X11_Xscreensaver_FOUND)
+  macro_log_feature(X11_Xscreensaver_FOUND "X11 screensaver extension" "X Window Screen Saver Development Library" "http://xorg.freedesktop.org" FALSE "" "Needed by Ktimetracker to measure the screen idle time")
+  macro_bool_to_01(X11_Xscreensaver_LIB HAVE_LIBXSS)
+  configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
+endif(X11_Xscreensaver_FOUND)
 
 add_subdirectory( kcmconfigs ) 
 add_subdirectory( support ) 
