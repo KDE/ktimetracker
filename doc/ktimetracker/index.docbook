@@ -99,12 +99,13 @@ as <quote>karma</quote>.</para>
 <sect1 id="starting">
 <title>Starting &karm;</title>
 
-<para>Type <command>karm</command> at a command prompt or select
-<guimenuitem>Personal Time Tracker</guimenuitem> from the
-<guisubmenu>Utilities</guisubmenu> group in the <guimenu>KDE start
+<para>Type <command>ktimetracker</command> at a command prompt or select
+<guimenuitem>Personal Time Tracker</guimenuitem> from the <menuchoice>
+<guimenu>Applications</guimenu><guisubmenu>Utilities</guisubmenu> 
+</menuchoice> group in the <guimenu>KDE start
 menu</guimenu>. The standard &Qt; and &kde; command options are
 available, and can be listed by entering
-<userinput><command>karm</command> <option>--help</option></userinput>
+<userinput><command>ktimetracker</command> <option>--help</option></userinput>
 at the command line.</para>
 
 <para>&karm; provides an additional command option that allows you to enter
@@ -921,7 +922,7 @@ the keyboard shortcuts</para>
 <term>
 <menuchoice>
 <guimenu>Settings</guimenu>
-<guimenuitem>Configure KArm</guimenuitem>
+<guimenuitem>Configure &karm;</guimenuitem>
 </menuchoice>
 </term>
 <listitem><para><action>Opens</action> a dialog to allow the user to
@@ -997,7 +998,7 @@ Bucciarelli<email>mark@hubcapconsulting.com</email></para></listitem>
 
 <para>Contributors (in alphabetical order)</para>
 <itemizedlist>
-<listitem><para>Allen Winter <email>winterz@verizon.net</email></para></listitem>
+<listitem><para>Allen Winter <email>winter@kde.org</email></para></listitem>
 <listitem><para>&David.Faure; &David.Faure.mail;</para></listitem>
 <listitem><para>&Espen.Sand; <email>espen@kde.org</email></para></listitem>
 <listitem><para>Gioele Barabucci <email>gioele@gioelebarabucci.com</email></para></listitem>
