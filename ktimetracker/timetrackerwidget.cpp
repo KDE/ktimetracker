@@ -20,6 +20,7 @@
  */
 
 #include "timetrackerwidget.h"
+#include "ktimetrackerconfigdialog.h"
 
 #include <QDBusConnection>
 #include <QFileInfo>
@@ -57,9 +58,6 @@
 #include "task.h"
 #include "taskview.h"
 #include "version.h"
-#include "ui_cfgbehavior.h"
-#include "ui_cfgdisplay.h"
-#include "ui_cfgstorage.h"
 
 //@cond PRIVATE
 class TimetrackerWidget::Private {
@@ -670,30 +668,10 @@ void TimetrackerWidget::showSettingsDialog()
      is not visible the application quits after accepting the settings dialog.
   */
   window()->show();
-
-  KConfigDialog *dialog = new KConfigDialog(
-    this, "settings", KTimeTrackerSettings::self() );
-
-  Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
-  QWidget *behaviorPage = new QWidget;
-  behaviorUi->setupUi( behaviorPage );
-  dialog->addPage( behaviorPage, i18n( "Behavior" ), "preferences-other" );
-
-  Ui::DisplayPage *displayUi = new Ui::DisplayPage;
-  QWidget *displayPage = new QWidget;
-  displayUi->setupUi( displayPage );
-  dialog->addPage( displayPage,
-                   i18nc( "settings page for customizing user interface",
-                          "Appearance" ),
-                          "preferences-desktop-theme" );
-
-  Ui::StoragePage *storageUi = new Ui::StoragePage;
-  QWidget *storagePage = new QWidget;
-  storageUi->setupUi( storagePage );
-  dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
-
+  KTimeTrackerConfigDialog *dialog = new KTimeTrackerConfigDialog( i18n( "Settings" ), this);
   dialog->exec();
   delete dialog;
+
   showSearchBar( !KTimeTrackerSettings::configPDA() );
   reconfigureFiles();
 }

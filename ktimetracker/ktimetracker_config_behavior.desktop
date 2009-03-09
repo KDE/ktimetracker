@@ -1,0 +1,16 @@
+[Desktop Entry]
+Icon=preferences-other
+Type=Service
+X-KDE-ServiceTypes=KCModule
+X-DocPath=ktimetracker/index.html
+
+X-KDE-Library=kcm_ktimetracker
+X-KDE-ParentApp=ktimetracker
+X-KDE-FactoryName=ktimetracker_config_behavior
+X-KDE-ParentComponents=ktimetracker,kontact_ktimetrackerplugin
+X-KDE-CfgDlgHierarchy=KTimeTracker
+X-KDE-Weight=700
+
+Name=Behavior
+Comment=Configure Behavior
+X-KDE-Keywords=ktimetracker, configure, settings

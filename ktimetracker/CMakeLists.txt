@@ -7,7 +7,6 @@ if(X11_Xscreensaver_FOUND)
 endif(X11_Xscreensaver_FOUND)
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
-add_subdirectory( kcmconfigs ) 
 add_subdirectory( support ) 
 add_subdirectory( pics ) 
 add_subdirectory( test ) 
@@ -16,7 +15,7 @@ include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/rem
 
 
 ########### next target ###############
-set(ktimetracker_shared_SRCS
+set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp 
 	edittaskdialog.cpp idletimedetector.cpp 
 	timekard.cpp ktimetrackerutility.cpp ktimewidget.cpp
@@ -70,13 +69,28 @@ install( TARGETS karm  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
+###########
+
+set(kcm_ktimetracker_PART_SRCS ktimetrackerconfigdialog.cpp )
+
+
+kde4_add_kcfg_files( kcm_ktimetracker_PART_SRCS ktimetracker.kcfgc )
+
+kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS} )
+
+target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KUTILS_LIBS})
+
+install(TARGETS kcm_ktimetracker DESTINATION ${PLUGIN_INSTALL_DIR})
+
+
+
 ########### next target ###############
 
 set(ktimetrackerpart_PART_SRCS ktimetrackerpart.cpp ${ktimetracker_shared_SRCS})
 
 kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
 
-target_link_libraries(ktimetrackerpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(ktimetrackerpart ${KDE4_KUTILS_LIBS}  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
 endif(X11_Xscreensaver_LIB)
@@ -86,6 +100,7 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
+install( FILES ktimetracker_config_behavior.desktop  ktimetracker_config_display.desktop  ktimetracker_config_storage.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker )
