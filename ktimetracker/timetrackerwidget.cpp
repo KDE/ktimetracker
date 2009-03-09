@@ -693,6 +693,7 @@ void TimetrackerWidget::showSettingsDialog()
   dialog->addPage( storagePage, i18n( "Storage" ), "system-file-manager" );
 
   dialog->exec();
+  delete dialog;
   showSearchBar( !KTimeTrackerSettings::configPDA() );
   reconfigureFiles();
 }
