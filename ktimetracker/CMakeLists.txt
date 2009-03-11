@@ -7,22 +7,22 @@ if(X11_Xscreensaver_FOUND)
 endif(X11_Xscreensaver_FOUND)
 configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
-add_subdirectory( support ) 
-add_subdirectory( pics ) 
-add_subdirectory( test ) 
+add_subdirectory( support )
+add_subdirectory( pics )
+add_subdirectory( test )
 
 include_directories( ${KDE4_INCLUDE_DIR}/kcal ${CMAKE_SOURCE_DIR}/kresources/remote  )
 
 
 ########### next target ###############
 set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
-	desktoptracker.cpp 
-	edittaskdialog.cpp idletimedetector.cpp 
+	desktoptracker.cpp
+	edittaskdialog.cpp idletimedetector.cpp
 	timekard.cpp ktimetrackerutility.cpp ktimewidget.cpp
-	karmstorage.cpp mainwindow.cpp preferences.cpp 
+	karmstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
-	csvexportdialog.cpp plannerparser.cpp 
-	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp 
+	csvexportdialog.cpp plannerparser.cpp
+	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp
         focusdetectornotifier.cpp
  )
 
@@ -41,15 +41,14 @@ qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
         StorageAdaptor )
 
 kde4_add_ui_files( ktimetracker_shared_SRCS
-        csvexportdialog_base.ui 
-        cfgbehavior.ui 
+        csvexportdialog_base.ui
+        cfgbehavior.ui
         cfgdisplay.ui
         cfgstorage.ui )
 
 kde4_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
-
 
 kde4_add_executable(karm karm.cpp)
 
@@ -71,14 +70,14 @@ install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ###########
 
-set(kcm_ktimetracker_PART_SRCS ktimetrackerconfigdialog.cpp )
+set(kcm_ktimetracker_PART_SRCS ${ktimetracker_shared_SRCS})
 
+kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS})
 
-kde4_add_kcfg_files( kcm_ktimetracker_PART_SRCS ktimetracker.kcfgc )
-
-kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS} )
-
-target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KUTILS_LIBS})
+target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KUTILS_LIBS} ${KDE4_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
+if(X11_Xscreensaver_LIB)
+    target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
+endif(X11_Xscreensaver_LIB)
 
 install(TARGETS kcm_ktimetracker DESTINATION ${PLUGIN_INSTALL_DIR})
 
