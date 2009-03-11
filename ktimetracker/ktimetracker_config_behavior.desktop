@@ -12,5 +12,15 @@ X-KDE-CfgDlgHierarchy=KTimeTracker
 X-KDE-Weight=700
 
 Name=Behavior
+Name[ga]=Oibriú
+Name[pt_BR]=Comportamento
+Name[sv]=Beteende
+Name[uk]=Поведінка
+Name[zh_TW]=行為
 Comment=Configure Behavior
+Comment[ga]=Cumraigh Oibriú
+Comment[pt_BR]=Configurar comportamento
+Comment[sv]=Anpassa beteende
+Comment[uk]=Налаштуйте поведінку
+Comment[zh_TW]=設定行為
 X-KDE-Keywords=ktimetracker, configure, settings
