@@ -13,12 +13,14 @@ X-KDE-Weight=700
 
 Name=Storage
 Name[ga]=Stóras
+Name[nds]=Sekern
 Name[pt_BR]=Armazenamento
 Name[sv]=Lagring
 Name[uk]=Зберігання
 Name[zh_TW]=儲存裝置
 Comment=Configure Storage
 Comment[ga]=Cumraigh Stóras
+Comment[nds]=Sekern instellen
 Comment[pt_BR]=Configurar armazenamento
 Comment[sv]=Anpassa lagring
 Comment[uk]=Налаштуйте зберігання

@@ -13,12 +13,15 @@ X-KDE-Weight=700
 
 Name=Behavior
 Name[ga]=Oibriú
+Name[nds]=Bedregen
+Name[pt]=Comportamento
 Name[pt_BR]=Comportamento
 Name[sv]=Beteende
 Name[uk]=Поведінка
 Name[zh_TW]=行為
 Comment=Configure Behavior
 Comment[ga]=Cumraigh Oibriú
+Comment[nds]=Bedregen instellen
 Comment[pt_BR]=Configurar comportamento
 Comment[sv]=Anpassa beteende
 Comment[uk]=Налаштуйте поведінку
