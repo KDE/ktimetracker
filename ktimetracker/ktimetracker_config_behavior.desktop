@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=KTimeTracker
 X-KDE-Weight=700
 
 Name=Behavior
+Name[en_GB]=Behaviour
 Name[ga]=Oibriú
 Name[nds]=Bedregen
 Name[pt]=Comportamento
@@ -20,6 +21,7 @@ Name[sv]=Beteende
 Name[uk]=Поведінка
 Name[zh_TW]=行為
 Comment=Configure Behavior
+Comment[en_GB]=Configure Behaviour
 Comment[ga]=Cumraigh Oibriú
 Comment[nds]=Bedregen instellen
 Comment[pt]=Configurar o Comportamento
