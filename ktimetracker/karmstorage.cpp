@@ -19,23 +19,31 @@
  *
  */
 
-#include <cassert>
-#include "edithistorydialog.h"
-#include <fcntl.h>
-#include <kcal/incidence.h>
-#include <KApplication>       // kapp
 #include "karmstorage.h"
+#include "edithistorydialog.h"
 #include "ktimetrackerutility.h"
-#include <KDebug>
+#include "ktimetracker.h"
+#include "storageadaptor.h"
+#include "task.h"
+#include "taskview.h"
+#include "timekard.h"
+
 #include <kemailsettings.h>
+#include <kpimprefs.h>        // for timezone
+#include <kio/netaccess.h>
+#include <kcal/resourcecalendar.h>
+#include <kcal/resourcelocal.h>
+#include <resourceremote.h>
+#include <kcal/incidence.h>
+
+#include <KApplication>       // kapp
+#include <KDebug>
 #include <KLocale>            // i18n
 #include <KMessageBox>
-#include <kpimprefs.h>        // for timezone
 #include <KProgressDialog>
 #include <KTemporaryFile>
-#include "ktimetracker.h"
 #include <KUrl>
-#include <kio/netaccess.h>
+
 #include <QByteArray>
 #include <QDateTime>
 #include <QFile>
@@ -46,16 +54,12 @@
 #include <QStringList>
 #include <QTableWidget>
 #include <QTextStream>
-#include <kcal/resourcecalendar.h>
-#include <kcal/resourcelocal.h>
-#include <resourceremote.h>
+
 #include <sys/stat.h>
-#include "storageadaptor.h"
-#include "task.h"
-#include "taskview.h"
-#include "timekard.h"
 #include <sys/types.h>
 #include <unistd.h>
+#include <cassert>
+#include <fcntl.h>
 
 
 //@cond PRIVATE
@@ -1070,7 +1074,7 @@ bool KarmStorage::remoteResource( const QString& file ) const
 {
   kDebug(5970) << "Entering function";
   QString f = file.toLower();
-  bool rval = f.startsWith( "http://" ) || f.startsWith( "ftp://" );
+  bool rval = f.startsWith( QLatin1String("http://") ) || f.startsWith( QLatin1String("ftp://") );
 
   kDebug(5970) << "KarmStorage::remoteResource(" << file <<" ) returns" << rval;
   return rval;

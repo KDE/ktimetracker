@@ -64,6 +64,8 @@ class HistoryEvent;
 
 class KarmStorage : public QObject
 {
+  Q_OBJECT
+
   public:
     KarmStorage();
     ~KarmStorage();

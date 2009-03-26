@@ -266,7 +266,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 void TaskView::newFocusWindowDetected( const QString &taskName )
 {
   QString newTaskName = taskName;
-  newTaskName.replace( "\n", "" );
+  newTaskName.remove( '\n' );
 
   if ( d->mFocusTrackingActive ) {
     bool found = false;  // has taskName been found in our tasks
@@ -544,8 +544,8 @@ QString TaskView::reFreshTimes()
       {
         KDateTime kdatetimestart = (*i)->dtStart();
         KDateTime kdatetimeend = (*i)->dtEnd();
-        KDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().replace("Z",""));
-        KDateTime eventend = KDateTime::fromString(kdatetimeend.toString().replace("Z",""));
+        KDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().remove("Z"));
+        KDateTime eventend = KDateTime::fromString(kdatetimeend.toString().remove("Z"));
         int duration=eventstart.secsTo( eventend )/60;
         itemAt(n)->addTime( duration );
         emit totalTimesChanged( 0, duration );
