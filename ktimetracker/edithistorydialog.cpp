@@ -97,7 +97,8 @@ EditHistoryDialog::EditHistoryDialog( TaskView *parent )
   mHistoryWidget->setColumnHidden( 4, true );  // hide the "UID" column
 
   listAllEvents();
-  mHistoryWidget->setSortingEnabled( true ); 
+  mHistoryWidget->setSortingEnabled( true );
+  mHistoryWidget->sortItems( 1, Qt::DescendingOrder );
   mHistoryWidget->resizeColumnsToContents();
   setMainWidget( mHistoryWidget );
 }
