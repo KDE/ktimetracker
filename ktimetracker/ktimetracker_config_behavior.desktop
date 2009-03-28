@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=KTimeTracker
 X-KDE-Weight=700
 
 Name=Behavior
+Name[de]=Verhalten
 Name[en_GB]=Behaviour
 Name[et]=Käitumine
 Name[ga]=Oibriú
