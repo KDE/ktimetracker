@@ -1,7 +1,4 @@
 <ui version="4.0" stdsetdef="1" >
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
   <class>CSVExportDialogBase</class>
   <widget class="KDialog" name="CSVExportDialogBase" >
     <property name="geometry" >
@@ -324,7 +321,6 @@
       </layout>
     </widget>
   </widget>
-  <layoutdefault spacing="6" margin="11" />
   <customwidgets>
     <customwidget>
       <class>KPIM::KDateEdit</class>

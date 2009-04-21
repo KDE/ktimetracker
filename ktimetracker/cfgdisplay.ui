@@ -105,7 +105,6 @@
    </item>
   </layout>
  </widget>
- <layoutfunction spacing="KDialog::spacingHint" margin="KDialog::marginHint" />
  <resources/>
  <connections/>
 </ui>
