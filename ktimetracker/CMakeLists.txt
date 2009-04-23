@@ -74,7 +74,7 @@ set(karmpart_PART_SRCS karm_part.cpp ${karm_shared_SRCS})
 
 kde4_add_plugin(karmpart ${karmpart_PART_SRCS})
 
-target_link_libraries(karmpart  ${KDE4_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(karmpart  ${KDE4_KCAL_LIBS} ${KDE4_KRESOURCES_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(karmpart  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
