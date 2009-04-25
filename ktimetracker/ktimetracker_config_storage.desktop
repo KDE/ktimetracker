@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=KTimeTracker
 X-KDE-Weight=700
 
 Name=Storage
+Name[el]=Αποθήκευση
 Name[et]=Salvesti
 Name[ga]=Stóras
 Name[gl]=Almacenamento
@@ -26,6 +27,7 @@ Name[uk]=Зберігання
 Name[x-test]=xxStoragexx
 Name[zh_TW]=儲存裝置
 Comment=Configure Storage
+Comment[el]=Ρύθμιση αποθήκευσης
 Comment[et]=Salvesti seadistamine
 Comment[ga]=Cumraigh Stóras
 Comment[gl]=Configurar o almacenamento
