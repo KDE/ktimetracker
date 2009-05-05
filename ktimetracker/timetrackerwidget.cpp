@@ -311,7 +311,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
       "of other tasks.") },
     { "media-playback-stop", I18N_NOOP("S&top"), SLOT( stopCurrentTimer() ), "stop",
       I18N_NOOP("Stops timing of the selected task"), I18N_NOOP("Stops timing of the selected task") },
-    { QString(), I18N_NOOP("Focus on searchbar"), SLOT( focusSearchBar() ), "focusSearchBar",
+    { QString(), I18N_NOOP("Focus on Searchbar"), SLOT( focusSearchBar() ), "focusSearchBar",
       I18N_NOOP("Sets the focus on the searchbar"), I18N_NOOP("Sets the focus on the searchbar") },
     { QString(), I18N_NOOP("Stop &All Timers"), SLOT( stopAllTimers() ), "stopAll",
       I18N_NOOP("Stops all of the active timers"), I18N_NOOP("Stops all of the active timers") },

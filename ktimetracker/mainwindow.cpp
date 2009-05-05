@@ -123,7 +123,7 @@ void MainWindow::setupActions()
     KStandardAction::quit(qApp, SLOT(closeAllWindows()),
         actionCollection());
     configureAction = new KAction(this);
-    configureAction->setText(i18n("Configure Ktimetracker"));
+    configureAction->setText(i18n("Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
