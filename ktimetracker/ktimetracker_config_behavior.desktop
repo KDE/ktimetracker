@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=KTimeTracker
 X-KDE-Weight=700
 
 Name=Behavior
+Name[da]=Opførsel
 Name[de]=Verhalten
 Name[el]=Συμπεριφορά
 Name[en_GB]=Behaviour
@@ -31,6 +32,7 @@ Name[uk]=Поведінка
 Name[x-test]=xxBehaviorxx
 Name[zh_TW]=行為
 Comment=Configure Behavior
+Comment[da]=Indstil opførsel
 Comment[el]=Ρύθμιση συμπεριφοράς
 Comment[en_GB]=Configure Behaviour
 Comment[et]=Käitumise seadistamine
