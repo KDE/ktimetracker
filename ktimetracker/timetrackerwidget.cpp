@@ -408,6 +408,7 @@ void TimetrackerWidget::newFile()
 
 void TimetrackerWidget::openFile( const QString &fileName )
 {
+  kDebug(5970) << "Entering function, fileName is " << fileName;
   QString newFileName = fileName;
   if ( newFileName.isEmpty() )
   {

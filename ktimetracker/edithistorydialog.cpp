@@ -108,8 +108,9 @@ QTableWidget* EditHistoryDialog::tableWidget()
   return mHistoryWidget;
 }
 
-void EditHistoryDialog::listAllEvents()
+QString EditHistoryDialog::listAllEvents()
 {
+  QString err=QString();
   connect( mHistoryWidget, SIGNAL( cellChanged( int, int ) ), 
            this, SLOT( historyWidgetCellChanged( int, int ) ) );
 
@@ -142,7 +143,10 @@ void EditHistoryDialog::listAllEvents()
       }
     }
     else
+    {
       kDebug(5970) << "There is no 'relatedTo' entry for " << (*i)->summary();
+      err="NoRelatedToForEvent";
+    }
   }
   mHistoryWidget->resizeColumnsToContents();
   mHistoryWidget->setColumnWidth( 1, 300 );
@@ -151,6 +155,7 @@ void EditHistoryDialog::listAllEvents()
                         + mHistoryWidget->columnWidth( 1 ) 
                         + mHistoryWidget->columnWidth( 2 ) 
                         + mHistoryWidget->columnWidth( 3 ), height() );
+  return err;
 }
 
 void EditHistoryDialog::historyWidgetCellChanged( int row, int col )

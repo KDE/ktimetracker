@@ -42,7 +42,7 @@ private:
    * This lists all events in the calendar.
    * This procedure is triggered on user request.
    */
-  void listAllEvents();
+  QString listAllEvents();
 
 private Q_SLOTS:
   /**

@@ -52,7 +52,7 @@
 MainWindow::MainWindow( const QString &icsfile )
   :  KParts::MainWindow( )
 {
-  kDebug(5970) << "Entering function";
+  kDebug(5970) << "Entering function, icsfile is " << icsfile;
   // Setup our actions
   setupActions();
 
@@ -70,7 +70,7 @@ MainWindow::MainWindow( const QString &icsfile )
       // tell the KParts::MainWindow that this is indeed
       // the main widget
       setCentralWidget(m_part->widget());
-
+      ((TimetrackerWidget) (m_part->widget())).openFile(icsfile);
       setupGUI(ToolBar | Keys | StatusBar | Save);
       connect(configureAction, SIGNAL(triggered(bool)),
         m_part->widget(), SLOT(showSettingsDialog()));
@@ -92,7 +92,6 @@ MainWindow::MainWindow( const QString &icsfile )
   setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
   slotSetCaption( icsfile );  // set the window title to our iCal file
-
   // connections
   connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
@@ -153,7 +152,6 @@ void MainWindow::quit()
   }
 }
 
-
 MainWindow::~MainWindow()
 {
   kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
@@ -209,7 +207,8 @@ void MainWindow::saveGeometry()
 
 bool MainWindow::queryClose()
 {
-  if ( !kapp->sessionSaving() ) {
+  if ( !kapp->sessionSaving() )
+  {
     hide();
     return false;
   }
