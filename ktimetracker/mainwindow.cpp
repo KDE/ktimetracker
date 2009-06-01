@@ -118,13 +118,10 @@ MainWindow::MainWindow( const QString &icsfile )
 
 void MainWindow::setupActions()
 {
-    KStandardAction::open(this, SLOT(fileOpen()),
-        actionCollection());
-    KStandardAction::quit(qApp, SLOT(closeAllWindows()),
-        actionCollection());
-    configureAction = new KAction(this);
-    configureAction->setText(i18n("Configure KTimeTracker..."));
-    actionCollection()->addAction("configure_ktimetracker", configureAction);
+  KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
+  configureAction = new KAction(this);
+  configureAction->setText(i18n("Configure KTimeTracker..."));
+  actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
 void MainWindow::readProperties( const KConfigGroup &cfg )
