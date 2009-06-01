@@ -119,23 +119,30 @@ void EditHistoryDialog::listAllEvents()
   {
     int row = mHistoryWidget->rowCount();
     mHistoryWidget->insertRow( row );
-    QTableWidgetItem* item = new QTableWidgetItem( (*i)->relatedTo()->summary() );
-    item->setFlags( Qt::ItemIsEnabled );
-    item->setWhatsThis( i18n( "You can change this task's comment, start time and end time." ) );
-    mHistoryWidget->setItem( row, 0, item );
-    // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
-    // dtEnd is stored like DTEND:20080327T231509Z
-    // we need to handle both differently
-    QDateTime start = QDateTime::fromTime_t( (*i)->dtStart().toTime_t() );
-    QDateTime end = QDateTime::fromString( (*i)->dtEnd().toString(), Qt::ISODate );
-    kDebug() << "start =" << start << "; end =" << end;
-    mHistoryWidget->setItem( row, 1, new QTableWidgetItem( start.toString( "yyyy-MM-dd HH:mm:ss" ) ) );
-    mHistoryWidget->setItem( row, 2, new QTableWidgetItem( end.toString( "yyyy-MM-dd HH:mm:ss" ) ) );
-    mHistoryWidget->setItem( row, 4, new QTableWidgetItem( (*i)->uid() ) );
-    kDebug() <<"(*i)->comments.count() ="  << (*i)->comments().count();
-    if ( (*i)->comments().count() > 0 ) {
-      mHistoryWidget->setItem( row, 3, new QTableWidgetItem( (*i)->comments().last() ) );
+    QTableWidgetItem* item=0;
+    if ( (*i)->relatedTo() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
+    {
+      item = new QTableWidgetItem( (*i)->relatedTo()->summary() );
+      item->setFlags( Qt::ItemIsEnabled );
+      item->setWhatsThis( i18n( "You can change this task's comment, start time and end time." ) );
+      mHistoryWidget->setItem( row, 0, item );
+      // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
+      // dtEnd is stored like DTEND:20080327T231509Z
+      // we need to handle both differently
+      QDateTime start = QDateTime::fromTime_t( (*i)->dtStart().toTime_t() );
+      QDateTime end = QDateTime::fromString( (*i)->dtEnd().toString(), Qt::ISODate );
+      kDebug() << "start =" << start << "; end =" << end;
+      mHistoryWidget->setItem( row, 1, new QTableWidgetItem( start.toString( "yyyy-MM-dd HH:mm:ss" ) ) );
+      mHistoryWidget->setItem( row, 2, new QTableWidgetItem( end.toString( "yyyy-MM-dd HH:mm:ss" ) ) );
+      mHistoryWidget->setItem( row, 4, new QTableWidgetItem( (*i)->uid() ) );
+      kDebug() <<"(*i)->comments.count() ="  << (*i)->comments().count();
+      if ( (*i)->comments().count() > 0 )
+      {
+        mHistoryWidget->setItem( row, 3, new QTableWidgetItem( (*i)->comments().last() ) );
+      }
     }
+    else
+      kDebug(5970) << "There is no 'relatedTo' entry for " << (*i)->summary();
   }
   mHistoryWidget->resizeColumnsToContents();
   mHistoryWidget->setColumnWidth( 1, 300 );
