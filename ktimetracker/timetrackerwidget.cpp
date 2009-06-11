@@ -392,8 +392,6 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
            this, SLOT( slotUpdateButtons() ) );
   connect( this, SIGNAL( updateButtons() ),
            this, SLOT( slotUpdateButtons() ) );
-
-  slotUpdateButtons();
 }
 
 KAction* TimetrackerWidget::action( const QString &name ) const
