@@ -71,12 +71,10 @@ MainWindow::MainWindow( const QString &icsfile )
       // the main widget
       setCentralWidget(m_part->widget());
       ((TimetrackerWidget) (m_part->widget())).openFile(icsfile);
-      setupGUI(ToolBar | Keys | StatusBar | Save);
       connect(configureAction, SIGNAL(triggered(bool)),
         m_part->widget(), SLOT(showSettingsDialog()));
-      // and integrate the part's GUI with the shell's
-      setXMLFile( QString::fromLatin1( "ktimetrackerui.rc" ) );
-      createGUI(m_part);
+      ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
+      setupGUI();
     }
   }
   else
