@@ -19,9 +19,18 @@ Mainpage.dox - will be published on http://api.kde.org/4.x-api/kdepim-apidocs/kt
 
 \section map Road Map to the Classes
 
+Here is how the most important classes display/contain/use each other:
+<pre>
+main -> mainwindow ---------------
+                                  \
+                                   -> timetrackerwidget -(contains n>=0)-> taskview -(uses)-> karmstorage
+                                  /
+ktimetracker_plugin -> karmpart --
+</pre>
+
 MainWindow is the outermost layer and initializes the menus and actions, sets
 up the status bar, and handles many of the signal-to-slot connections.  It
-holds a pointer to the TaskView and Preferences objects and implements the
+holds a pointer to the timetrackerwidget and Preferences objects and implements the
 %ktimetracker DBUS interface.
 
 TaskView does most of the work in the application. This QListWidget subclass
