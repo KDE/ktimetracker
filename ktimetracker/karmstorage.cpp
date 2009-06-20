@@ -113,7 +113,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
     }
   }
 
-  if ( d->mCalendar)
+  if ( d->mCalendar )
     closeStorage();
 
   // Create local file resource and add to resources
@@ -236,7 +236,8 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   while ( *it ) 
   {
     Task *task = static_cast< Task* >( *it );
-    if ( task->isRunning() ) {
+    if ( task->isRunning() )
+    {
       runningTasks.append( task->uid() );
       startTimes.append( task->startTime() );
     }
@@ -245,7 +246,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
   view->clear();
   todoList = rc->rawTodos();
-  for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
+  for ( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
   {
     Task* task = new Task(*todo, view);
     task->setWhatsThis(0,"The task name is how you call the task, it can be chosen freely.");
@@ -310,6 +311,12 @@ KCal::Event::List KarmStorage::rawevents()
 {
   kDebug(5970) << "Entering function";
   return d->mCalendar->rawEvents();
+}
+
+KCal::Todo::List KarmStorage::rawtodos()
+{
+  kDebug(5970) << "Entering function";
+  return d->mCalendar->rawTodos();
 }
 
 bool KarmStorage::allEventsHaveEndTiMe(Task* task)

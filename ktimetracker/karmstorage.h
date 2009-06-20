@@ -121,6 +121,9 @@ class KarmStorage : public QObject
     /** list of all events */
     KCal::Event::List rawevents();
 
+    /** list of all todos */
+    KCal::Todo::List rawtodos();
+
     /**
      * Deliver if all events of a task have an endtime
      *
