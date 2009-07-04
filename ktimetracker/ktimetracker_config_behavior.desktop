@@ -12,6 +12,7 @@ X-KDE-CfgDlgHierarchy=KTimeTracker
 X-KDE-Weight=700
 
 Name=Behavior
+Name[cs]=Chování
 Name[da]=Opførsel
 Name[de]=Verhalten
 Name[el]=Συμπεριφορά
@@ -36,6 +37,7 @@ Name[x-test]=xxBehaviorxx
 Name[zh_CN]=行为
 Name[zh_TW]=行為
 Comment=Configure Behavior
+Comment[cs]=Nastavit chování
 Comment[da]=Indstil opførsel
 Comment[de]=Verhalten einrichten
 Comment[el]=Ρύθμιση συμπεριφοράς
