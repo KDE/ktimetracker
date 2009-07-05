@@ -135,12 +135,4 @@ bool ktimetrackerpart::saveFile()
   return true;
 }
 
-void ktimetrackerpart::taskViewCustomContextMenuRequested( const QPoint& point )
-{
-    QMenu* pop = dynamic_cast<QMenu*>(
-                          factory()->container( i18n( "task_popup" ), this ) );
-    if ( pop )
-      pop->popup( point );
-}
-
 #include "ktimetrackerpart.moc"
