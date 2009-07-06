@@ -63,7 +63,6 @@ protected:
     virtual bool openFile();
 
 public Q_SLOTS:
-   void taskViewCustomContextMenuRequested( const QPoint& );
    void setStatusBar(const QString & qs);
 };
 
