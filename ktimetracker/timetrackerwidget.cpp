@@ -427,7 +427,7 @@ void TimetrackerWidget::openFile( const QString &fileName )
 
 void TimetrackerWidget::openFile( const KUrl &fileName )
 {
-  openFile( fileName.path() );
+  openFile( fileName.toLocalFile() );
 }
 
 bool TimetrackerWidget::closeFile()
