@@ -105,7 +105,7 @@ MainWindow::MainWindow( const QString &icsfile )
 
   _tray = new TrayIcon( this );
 
-  connect( _tray, SIGNAL( quitSelected() ), SLOT( quit() ) );
+  connect( _tray, SIGNAL( quitSelected() ), m_part->widget(), SLOT( quit() ) );
 
   connect( m_part->widget(), SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
   connect( m_part->widget(), SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
