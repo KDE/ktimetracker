@@ -478,14 +478,7 @@ script, for example) can use.</para>
 
 <example><title>Bash script that echo's &karm;'s version</title>
 <programlisting>
-	DCOPID=`dcop | grep karm`
-	if [ $DCOPID ]
-	then
-		VERS=`dcop $DCOPID KarmDCOPIface version`
-		echo "&karm; version is $VERS"
-	else
-		echo "&karm; not running"
-	fi
+qdbus org.kde.ktimetracker /KTimeTracker version || echo "ktimetracker not running"
 </programlisting>
 </example>
 
