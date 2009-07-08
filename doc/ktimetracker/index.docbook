@@ -478,7 +478,7 @@ script, for example) can use.</para>
 
 <example><title>Bash script that echo's &karm;'s version</title>
 <programlisting>
-qdbus org.kde.ktimetracker /KTimeTracker version || echo "ktimetracker not running"
+qdbus org.kde.ktimetracker /KTimeTracker version 2>/dev/null || echo "ktimetracker not running"
 </programlisting>
 </example>
 
@@ -491,13 +491,7 @@ qdbus org.kde.ktimetracker /KTimeTracker version || echo "ktimetracker not runni
 
 <example><title>List &karm;'s &DCOP; interface to console</title>
 <programlisting>
-	DCOPID=`dcop | grep karm`
-	if [ $DCOPID ]
-	then
-		dcop $DCOPID KarmDCOPIface
-	else
-		echo "&karm; not running"
-	fi
+qdbus org.kde.ktimetracker /KTimeTracker 2>/dev/null || echo "ktimetracker not running"
 </programlisting>
 </example>
 </sect2>
