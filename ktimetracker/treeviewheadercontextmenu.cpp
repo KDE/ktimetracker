@@ -49,6 +49,7 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
     connect( mContextMenu, SIGNAL(aboutToShow()), this, SLOT(slotAboutToShow()) );
     updateActions();
   }
+  kDebug(5970) << "Leaving function";
 }
 
 TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 

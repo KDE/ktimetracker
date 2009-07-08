@@ -267,12 +267,21 @@ void Task::setPriority( int priority )
 
 void Task::setPixmapProgress()
 {
+  kDebug(5970) << "Entering function";
   QPixmap icon;
+  KIconLoader* kil = new KIconLoader();
   if (mPercentComplete >= 100)
-    icon = UserIcon("task-complete.xpm");
+  {
+    const QString iconcomplete=QString("task-complete.xpm");
+    icon = kil->loadIcon( iconcomplete, KIconLoader::User );
+  }
   else
-    icon = UserIcon("task-incomplete.xpm");
+  {
+    const QString iconincomplete=QString("task-incomplete.xpm");
+    icon = kil->loadIcon( iconincomplete, KIconLoader::User );
+  }
   setIcon(0, icon);
+  kDebug(5970) << "Leaving function";
 }
 
 bool Task::isComplete() { return mPercentComplete == 100; }
