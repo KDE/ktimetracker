@@ -141,15 +141,6 @@ void MainWindow::setStatusBar(const QString& qs)
   statusBar()->showMessage(i18n(qs.toUtf8()));
 }
 
-void MainWindow::quit()
-{
-  kDebug() << "Entering function";
-  if ( mainWidget->closeAllFiles() )
-  {
-    kapp->quit();
-  }
-}
-
 MainWindow::~MainWindow()
 {
   kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
@@ -159,11 +150,6 @@ MainWindow::~MainWindow()
 void MainWindow::keyBindings()
 {
   KShortcutsDialog::configure( actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this );
-}
-
-void MainWindow::startNewSession()
-{
-  mainWidget->currentTaskView()->startNewSession();
 }
 
 void MainWindow::makeMenus()

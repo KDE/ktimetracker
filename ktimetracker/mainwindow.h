@@ -66,11 +66,9 @@ class MainWindow : public KParts::MainWindow
   public Q_SLOTS:
     void slotSetCaption( const QString& );
     void setStatusBar( const QString& );
-    /** Quit ktimetracker (what else...) */
-    void quit();
+    /* quit() has been offloaded to timetrackerwidget */
   protected Q_SLOTS:
     void keyBindings();
-    void startNewSession();
     void taskViewCustomContextMenuRequested( const QPoint& );
 
   protected:
