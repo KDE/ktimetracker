@@ -229,7 +229,7 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 
   // remember tasks that are running and their start times
   QTreeWidgetItemIterator it( view );
-  while ( *it ) 
+  while ( *it )
   {
     Task *task = static_cast< Task* >( *it );
     if ( task->isRunning() ) {
@@ -334,7 +334,7 @@ QString KarmStorage::save(TaskView* taskview)
   QStack<KCal::Todo*> parents;
   if ( taskview ) // we may also be in konsole mode
   {
-    for (int i = 0; i < taskview->topLevelItemCount(); ++i ) 
+    for (int i = 0; i < taskview->topLevelItemCount(); ++i )
     {
       Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
       kDebug( 5970 ) << "write task" << task->name();
@@ -385,7 +385,7 @@ QString KarmStorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
   if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() );
   parents.push( todo );
 
-  for ( int i = 0; i < task->childCount(); ++i ) 
+  for ( int i = 0; i < task->childCount(); ++i )
   {
     Task *nextTask = static_cast< Task* >( task->child( i ) );
     err = writeTaskAsTodo( nextTask, parents );
@@ -496,7 +496,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
   // save, either locally or remote
   if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
   {
-    QString filename=rc.url.path();
+    QString filename=rc.url.toLocalFile();
     if (filename.isEmpty()) filename=rc.url.url();
     QFile f( filename );
     if( !f.open( QIODevice::WriteOnly ) ) {
@@ -699,7 +699,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   else
   {
     itab->setItem(0,0,new QTableWidgetItem("Task name"));
-    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) ) 
+    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
     {
       kDebug(5970) << mdate.toString();
       itab->setItem(0,1+from.daysTo(mdate),new QTableWidgetItem(mdate.toString()));
@@ -717,7 +717,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
             kDebug(5970) << "found an event for task, event=" << (*i)->uid();
             // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
             // dtEnd is stored like DTEND:20080327T231509Z
-            // we need to subtract the offset from UTC.  
+            // we need to subtract the offset from UTC.
             KDateTime startTime=(*i)->dtStart().addSecs((*i)->dtStart().utcOffset());
             KDateTime endTime=(*i)->dtEnd().addSecs((*i)->dtEnd().utcOffset());
             KDateTime NextMidNight=startTime;
@@ -743,7 +743,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
             itab->setItem(n+1,from.daysTo(mdate)+1,new QTableWidgetItem(QString::number(secondsSum)));
           };
         }
-      } 
+      }
     }
     // use the internal table itab to create the return value retval
     for ( int y=0; y<=(taskview->count()); y++ )
@@ -754,7 +754,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
         retval.append(rc.delimiter);
         if (y>0)
         {
-          if (itab->item(y,x)) 
+          if (itab->item(y,x))
           {
             kDebug(5970) << "itab->item(y,x)=" << itab->item(y,x)->text();
             retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
@@ -778,10 +778,10 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
     {
       kDebug(5970) << "storing a local file";
-      QString filename=rc.url.path();
+      QString filename=rc.url.toLocalFile();
       if (filename.isEmpty()) filename=rc.url.url();
       QFile f( filename );
-      if( !f.open( QIODevice::WriteOnly ) ) 
+      if( !f.open( QIODevice::WriteOnly ) )
       {
         err = i18n( "Could not open \"%1\".", filename );
         kDebug(5970) << "Could not open file";
@@ -795,7 +795,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
         stream << retval;
         f.close();
       }
-    } 
+    }
     else // use remote file
     {
       KTemporaryFile tmpFile;
@@ -866,7 +866,7 @@ void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
 	kDebug() << "kwhen ==" <<  kwhen;
         (*i)->setDtEnd(kwhen);
       }
-      else 
+      else
       {
         kDebug(5970) << "this event has an enddate";
         kDebug(5970) << "end date is " << (*i)->dtEnd();
@@ -997,11 +997,11 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
 
   for( QDate date = from; date <= to; date = date.addDays( 1 ) ) {
     events = d->mCalendar->rawEventsForDate( date, KPIM::KPimPrefs::timeSpec() );
-    for (event = events.begin(); event != events.end(); ++event) 
+    for (event = events.begin(); event != events.end(); ++event)
     {
 
       // KArm events have the custom property X-KDE-Karm-duration
-      if (! processed.contains( (*event)->uid())) 
+      if (! processed.contains( (*event)->uid()))
       {
         // If an event spans multiple days, CalendarLocal::rawEventsForDate
         // will return the same event on both days.  To avoid double-counting
@@ -1017,7 +1017,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
           QByteArray( "duration" )) == QString::null && (*event)->customProperty( "karm",
           QByteArray( "duration" )) != QString::null )
 
-          (*event)->setCustomProperty(  
+          (*event)->setCustomProperty(
             KGlobal::mainComponent().componentName().toUtf8(),
             QByteArray( "duration" ), (*event)->customProperty( "karm",
             QByteArray( "duration" )));
@@ -1070,7 +1070,7 @@ QString KarmStorage::saveCalendar()
   KABC::Lock *lock = d->mCalendar->lock();
   if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
 
-  if ( d->mCalendar->save() ) 
+  if ( d->mCalendar->save() )
   {
     lock->unlock();
   }
