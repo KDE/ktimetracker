@@ -30,8 +30,8 @@
 #include <kemailsettings.h>
 #include <KLocale>            // i18n
 #include <KMessageBox>
-#include <kpimprefs.h>        // for timezone
 #include <KProgressDialog>
+#include <KSystemTimeZones>
 #include <KTemporaryFile>
 #include "ktimetracker.h"
 #include <KUrl>
@@ -129,7 +129,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
 
   QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar *)),
   	            view, SLOT(iCalFileModified(ResourceCalendar *)));
-  d->mCalendar->setTimeSpec( KPIM::KPimPrefs::timeSpec() );
+  d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
   d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
   d->mCalendar->open();
   d->mCalendar->load();
@@ -996,7 +996,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
   QString duration;
 
   for( QDate date = from; date <= to; date = date.addDays( 1 ) ) {
-    events = d->mCalendar->rawEventsForDate( date, KPIM::KPimPrefs::timeSpec() );
+    events = d->mCalendar->rawEventsForDate( date, KSystemTimeZones::local() );
     for (event = events.begin(); event != events.end(); ++event)
     {
 
