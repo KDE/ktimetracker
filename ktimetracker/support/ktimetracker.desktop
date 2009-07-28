@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KTimeTracker
+Name[ar]=مقتفي الوقت
 Name[de]=KDE-Zeitplaner
 Name[km]=កម្មវិធី​តាមដាន​របស់ KTime
 Name[ne]=केडीई समय ट्रयाकर
@@ -8,6 +9,7 @@ Name[sv]=Ktimetracker
 Name[x-test]=xxKTimeTrackerxx
 GenericName=Personal Time Tracker
 GenericName[af]=Persoonlike Tyd Volger
+GenericName[ar]=مقتفي الوقت الشخصي
 GenericName[bg]=Отчитане на времето
 GenericName[br]=Roudenner amzer personel
 GenericName[ca]=Seguiment horari personal
