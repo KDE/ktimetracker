@@ -470,9 +470,9 @@ and under budget.</para>
 
 </sect2>
 
-<sect2 id="dcop"><title>&DCOP;</title>
+<sect2 id="dcop"><title>&DBus;</title>
 
-<para>&DCOP; is the mechanism &kde; programs use to communicate with each
+<para>&DBus; is the mechanism &kde; programs use to communicate with each
 other.  A &kde; program provides a list of functions that other programs (a Bash
 script, for example) can use.</para>
 
@@ -482,14 +482,14 @@ qdbus org.kde.ktimetracker /KTimeTracker version 2>/dev/null || echo "ktimetrack
 </programlisting>
 </example>
 
-<para>&karm;'s current &DCOP; interface is currently used mainly for automated
+<para>&karm;'s current &DBus; interface is currently used mainly for automated
 	testing, so it is very limited.  For the full interface definition, see
-	<link linkend="dcopappendix">&DCOP; Interface Appendix</link>.</para>
+	<link linkend="dcopappendix">&DBus; Interface Appendix</link>.</para>
 
-<para>To see the full &DCOP; interface of the &karm; version installed on your
+<para>To see the full &DBus; interface of the &karm; version installed on your
 	system, run the following Bash script:</para>
 
-<example><title>List &karm;'s &DCOP; interface to console</title>
+<example><title>List &karm;'s &DBus; interface to console</title>
 <programlisting>
 qdbus org.kde.ktimetracker /KTimeTracker 2>/dev/null || echo "ktimetracker not running"
 </programlisting>
@@ -714,7 +714,7 @@ which is that it is based on the Xt toolkit.</para>
 </glossentry>
 
 <glossentry id="gloss-dcop">
-<glossterm>&DCOP;</glossterm>
+<glossterm>&DBus;</glossterm>
 <glossdef><para>The interprocess communication protocol used in &kde;.  Short
 for Desktop COmmunication Protocol.</para></glossdef>
 </glossentry>
@@ -787,7 +787,7 @@ times were reset.</para></glossdef> </glossentry>
 
 </appendix>
 
-<appendix id="dcopappendix"><title>&DCOP; Interface</title>
+<appendix id="dcopappendix"><title>&DBus; Interface</title>
 
 <refentry id="dcop-version">
 <refmeta>
@@ -804,7 +804,7 @@ QString version()
 </refsynopsisdiv>
 <refsect1>
 <title>Description</title>
-<para><function>version()</function> is a &DCOP; call that returns &karm;'s
+<para><function>version()</function> is a &DBus; call that returns &karm;'s
 version number; for example 1.5.0.  The version number is returned as a string
 in the typical &GNU; format of major.minor.bugfix.</para>
 </refsect1>
@@ -825,7 +825,7 @@ QString quit()
 </refsynopsisdiv>
 <refsect1>
 <title>Description</title>
-<para><function>quit()</function> is a &DCOP; call that provides a way that an
+<para><function>quit()</function> is a &DBus; call that provides a way that an
 external program can gracefully shutdown &karm;.
 </para>
 </refsect1>
@@ -857,7 +857,7 @@ QString hastodo(QString taskname)
 </refsynopsisdiv>
 <refsect1>
 <title>Description</title>
-<para><function>hastodo(QString taskname)</function> is a &DCOP; call that
+<para><function>hastodo(QString taskname)</function> is a &DBus; call that
 	looks for a of the given name.  If found, it returns the
 	iCalendar UID that identifies that to-do.  If not found, it returns an empty
 	string.
@@ -895,7 +895,7 @@ QString addtodo(QString todoname)
 
 <refsect1>
 <title>Description</title>
-<para><function>addtodo(QString todoname)</function> is a &DCOP; call that
+<para><function>addtodo(QString todoname)</function> is a &DBus; call that
 	adds a new top-level to-do to the current storage.  The UID of the new to-do
 	is returned.
 </para>
