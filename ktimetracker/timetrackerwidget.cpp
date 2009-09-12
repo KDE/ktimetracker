@@ -51,6 +51,7 @@
 #include <KIO/Job>
 
 #include "edithistorydialog.h"
+#include "historydialog.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "mainadaptor.h"
@@ -762,16 +763,20 @@ void TimetrackerWidget::importPlanner( const QString &fileName )
 
 void TimetrackerWidget::startNewSession()
 {
-  if ( d->mTabWidget->currentWidget() ) {
+  if ( d->mTabWidget->currentWidget() )
+  {
     qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->startNewSession();
   }
 }
 
 void TimetrackerWidget::editHistory()
 {
+  // historydialog is the new historydialog, but the EditHiStoryDiaLog exists as well.
+  // historydialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog can not.
+  // TODO: remove the EditHiStoryDiaLog from this project. 2009-09-12.
   if ( d->mTabWidget->currentWidget() )
   {
-    EditHistoryDialog *dlg = new EditHistoryDialog( qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) );
+    historydialog *dlg = new historydialog( qobject_cast< TaskView* >( d->mTabWidget->currentWidget() ) );
     if (currentTaskView()->storage()->rawevents().count()!=0) dlg->exec();
     else KMessageBox::information(0, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
   }
@@ -779,7 +784,8 @@ void TimetrackerWidget::editHistory()
 
 void TimetrackerWidget::resetAllTimes()
 {
-  if ( d->mTabWidget->currentWidget() ) {
+  if ( d->mTabWidget->currentWidget() )
+  {
     if ( KMessageBox::warningContinueCancel( this,
          i18n( "Do you really want to reset the time to zero for all tasks?" ),
          i18n( "Confirmation Required" ), KGuiItem( i18n( "Reset All Times" ) ) ) == KMessageBox::Continue )
@@ -789,7 +795,8 @@ void TimetrackerWidget::resetAllTimes()
 
 void TimetrackerWidget::focusTracking()
 {
-  if ( d->mTabWidget->currentWidget() ) {
+  if ( d->mTabWidget->currentWidget() )
+  {
     currentTaskView()->toggleFocusTracking();
     d->mActions[ "focustracking" ]->setChecked(
       currentTaskView()->isFocusTrackingActive() );
