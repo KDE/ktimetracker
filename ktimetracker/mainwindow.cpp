@@ -70,7 +70,8 @@ MainWindow::MainWindow( const QString &icsfile )
       // tell the KParts::MainWindow that this is indeed
       // the main widget
       setCentralWidget(m_part->widget());
-      ((TimetrackerWidget) (m_part->widget())).openFile(icsfile);
+      //((TimetrackerWidget *) (m_part->widget()))->openFile(icsfile);
+      slotSetCaption( icsfile );  // set the window title to our iCal file
       connect(configureAction, SIGNAL(triggered(bool)),
         m_part->widget(), SLOT(showSettingsDialog()));
       ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
@@ -89,7 +90,6 @@ MainWindow::MainWindow( const QString &icsfile )
   }
   setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
-  slotSetCaption( icsfile );  // set the window title to our iCal file
   // connections
   connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
