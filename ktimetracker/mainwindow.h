@@ -23,7 +23,7 @@
 #define KARM_MAIN_WINDOW_H
 
 #include <KParts/MainWindow>
-
+#include "ktimetrackerpart.h"
 #include "reportcriteria.h"
 
 class KAccel;
@@ -57,7 +57,7 @@ class MainWindow : public KParts::MainWindow
     TimetrackerWidget *mainWidget;
 
     friend class TrayIcon;
-    KParts::ReadWritePart *m_part;
+    ktimetrackerpart *m_part;
 
   public:
     MainWindow( const QString &icsfile = "" );
