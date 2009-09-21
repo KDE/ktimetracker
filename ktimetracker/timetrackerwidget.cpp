@@ -434,7 +434,7 @@ void TimetrackerWidget::openFile( const KUrl &fileName )
 bool TimetrackerWidget::closeFile()
 {
   kDebug(5970) << "Entering TimetrackerWidget::closeFile";
-  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+  TaskView *taskView = (TaskView*)( d->mTabWidget->currentWidget() );
 
   // is it an unsaved file?
   if ( d->mIsNewVector.contains( taskView ) )
@@ -531,7 +531,7 @@ bool TimetrackerWidget::closeAllFiles()
   kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
   while ( d->mTabWidget->count() > 0 )
   {
-    TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( 0 ) );
+    TaskView *taskView = (TaskView*)( d->mTabWidget->widget( 0 ) );
     d->mTabWidget->setCurrentWidget( taskView );
     taskView->stopAllTimers();
     if ( !( closeFile() ) )
@@ -589,8 +589,7 @@ void TimetrackerWidget::updateTabs()
   TaskView *taskView;
   for ( int i = 0; i < d->mTabWidget->count(); ++i )
   {
-    taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
-
+    taskView = (TaskView*)( d->mTabWidget->widget( i ) );
     if ( taskView->activeTasks().count() == 0 )
     {
       d->mTabWidget->setTabTextColor( i, palette().color( QPalette::Foreground ) );
@@ -624,7 +623,7 @@ bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
 
 void TimetrackerWidget::slotAddTask( const QString &taskName )
 {
-  TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->currentWidget() );
+  TaskView *taskView = (TaskView*)( d->mTabWidget->currentWidget() );
 
   taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
 
