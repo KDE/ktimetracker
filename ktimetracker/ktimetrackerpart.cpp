@@ -60,31 +60,6 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
   setWidget( mMainWidget );
   setXMLFile( "ktimetrackerui.rc" );
   makeMenus();
-  mMainWidget->openFile( KStandardDirs::locateLocal( "data", 
-                        QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );
-  emit setWindowCaption( KStandardDirs::locateLocal( "data", QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ) );
-  // connections
-  connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
-           this, SLOT( updateTime( long, long ) ) );
-  connect( mMainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
-                 this, SLOT( setStatusBar( QString ) ) );
-  connect( mMainWidget, SIGNAL( setCaption( const QString& ) ),
-                 this, SIGNAL( setWindowCaption( const QString& ) ) );
-  // Setup context menu request handling
-  connect( mMainWidget,
-           SIGNAL( contextMenuRequested( const QPoint& ) ),
-           this,
-           SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
-
-  if ( KTimeTrackerSettings::trayIcon() ) mTray = new TrayIcon( this );
-  else mTray = new TrayIcon( );
-
-  connect( mTray, SIGNAL( quitSelected() ), SLOT( quit() ) );
-
-  connect( mMainWidget, SIGNAL( timersActive() ), mTray, SLOT( startClock() ) );
-  connect( mMainWidget, SIGNAL( timersInactive() ), mTray, SLOT( stopClock() ) );
-  connect( mMainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
-           mTray, SLOT( updateToolTip( QList<Task*> ) ));
 }
 
 ktimetrackerpart::~ktimetrackerpart()
@@ -93,12 +68,12 @@ ktimetrackerpart::~ktimetrackerpart()
 
 KAboutData *ktimetrackerpart::createAboutData()
 {
-  const QByteArray& ba=QByteArray("test");
-  const KLocalizedString name=ki18n("myName");
-  KAboutData* aboutData=new KAboutData( ba, ba, name, ba, name);
+  const QByteArray& appname=QByteArray("ktimetracker");
+  const QByteArray& catalogname=QByteArray("ktimetracker");
+  const KLocalizedString localizedname=ki18n("ktimetracker");
+  const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
+  KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
   return aboutData;
-  //return KABCore::createAboutData();
-  #warning not implemented
 }
 
 void ktimetrackerpart::makeMenus()
@@ -121,11 +96,33 @@ void ktimetrackerpart::setStatusBar(const QString & qs)
   emit setStatusBarText(qs);
 }
 
-bool ktimetrackerpart::openFile()
+bool ktimetrackerpart::openFile(QString icsfile)
 {
-  mMainWidget->openFile();
+  mMainWidget->openFile(icsfile);
+  emit setWindowCaption(icsfile);
+
+  if ( KTimeTrackerSettings::trayIcon() ) mTray = new TrayIcon( this );
+  else mTray = new TrayIcon( );
+
+  // connections
+  connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
+           this, SLOT( updateTime( long, long ) ) );
+  connect( mMainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
+                 this, SLOT( setStatusBar( QString ) ) );
+  connect( mMainWidget, SIGNAL( setCaption( const QString& ) ),
+                 this, SIGNAL( setWindowCaption( const QString& ) ) );
+  connect( mTray, SIGNAL( quitSelected() ), SLOT( quit() ) );
+  connect( mMainWidget, SIGNAL( timersActive() ), mTray, SLOT( startClock() ) );
+  connect( mMainWidget, SIGNAL( timersInactive() ), mTray, SLOT( stopClock() ) );
+  connect( mMainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
+           mTray, SLOT( updateToolTip( QList<Task*> ) ));
 
   return true;
+}
+
+bool ktimetrackerpart::openFile()
+{
+  return openFile(KStandardDirs::locateLocal( "data", QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ));
 }
 
 bool ktimetrackerpart::saveFile()

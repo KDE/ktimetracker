@@ -57,10 +57,16 @@ public:
 
     virtual ~ktimetrackerpart();
     static KAboutData *createAboutData();
-
+    /**
+     * openFile() opens the icalendar file that contains the tasks and events.
+     * It has been inherited from KParts::ReadWritePart where it was protected
+     * openFile() just calls openFile(<standard ical file>).
+     */
+    virtual bool openFile();
+    virtual bool openFile(QString icsfile);
+    
 protected:
     virtual bool saveFile();
-    virtual bool openFile();
 
 public Q_SLOTS:
    void setStatusBar(const QString & qs);
