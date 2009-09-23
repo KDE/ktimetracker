@@ -191,7 +191,7 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
   // Whats this help.
   _name->setWhatsThis(
                    i18n( "Enter the name of the task here. "
-                         "This name is for your eyes only."));
+                         "You can choose it freely."));
   _absoluteRB->setWhatsThis(
                    i18n( "Use this option to set the time spent on this task "
                          "to an absolute value.\n\nFor example, if you have "
