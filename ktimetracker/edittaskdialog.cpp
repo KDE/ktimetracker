@@ -2,7 +2,6 @@
  *     Copyright (C) 1999 by Espen Sand <espensa@online.no>
  *                   2000 by Klarälvdalens Datakonsult AB <kalle@dalheimer.de>
  *                   2000 by Jesper Pedersen <blackie@kde.org>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -115,9 +114,11 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
   desktopCount = 1;
 #endif
 
-  if ( desktopList && (desktopList->size() > 0) ) {
+  if ( desktopList && (desktopList->size() > 0) )
+  {
     DesktopList::iterator rit = desktopList->begin();
-    while ( *rit < desktopCount && rit!=desktopList->end() ) {
+    while ( *rit < desktopCount && rit!=desktopList->end() )
+    {
       ++rit;
     }
     desktopList->erase( rit, desktopList->end() );
@@ -135,7 +136,8 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
   label = new QLabel( i18n( "In Desktop" ) );
   gridLayout->addWidget( label, 0, 0, 1, lines );
 
-  for ( int i = 0; i < desktopCount; ++i ) {
+  for ( int i = 0; i < desktopCount; ++i )
+  {
     QCheckBox *tmpBx = new QCheckBox( groupBox );
     tmpBx->setObjectName( QString::number( i ).toLatin1() );
     _deskBox.append( tmpBx );
@@ -152,9 +154,11 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
   // check specified Desktop Check Boxes
   bool enableDesktops = false;
 
-  if ( desktopList && ( desktopList->size() > 0 ) ) {
+  if ( desktopList && ( desktopList->size() > 0 ) )
+  {
     DesktopList::iterator it = desktopList->begin();
-    while ( it != desktopList->end() ) {
+    while ( it != desktopList->end() )
+    {
       _deskBox[*it]->setChecked( true );
       ++it;
     }
@@ -171,11 +175,13 @@ EditTaskDialog::EditTaskDialog( QWidget *parent, const QString &caption,
   mainLayout->addWidget( groupBox );
   page->setLayout( mainLayout );
 
-  if ( editDlg ) {
+  if ( editDlg )
+  {
     // This is an edit dialog.
     _operator->setFocus();
   }
-  else {
+  else
+  {
     // This is an initial dialog
     _name->setFocus();
   }
@@ -265,12 +271,15 @@ QString EditTaskDialog::taskName() const
 void EditTaskDialog::status(long *time, long *timeDiff, long *session,
                             long *sessionDiff, DesktopList *desktopList) const
 {
-  if ( _absoluteRB->isChecked() ) {
+  if ( _absoluteRB->isChecked() )
+  {
     *time = _timeTW->time();
     *session = _sessionTW->time();
-  } else {
+  } else
+  {
     int diff = _diffTW->time();
-    if ( _operator->currentIndex() == 1) {
+    if ( _operator->currentIndex() == 1)
+    {
       diff = -diff;
     }
     *time = origTime + diff;
@@ -280,7 +289,8 @@ void EditTaskDialog::status(long *time, long *timeDiff, long *session,
   *timeDiff = *time - origTime;
   *sessionDiff = *session - origSession;
 
-  for ( int i = 0; i < _deskBox.count(); i++ ) {
+  for ( int i = 0; i < _deskBox.count(); i++ )
+  {
     if ( _deskBox[i]->isChecked() )
       desktopList->append( i );
   }
