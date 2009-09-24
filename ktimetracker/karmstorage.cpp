@@ -609,6 +609,23 @@ QStringList KarmStorage::taskNames() const
   return result;
 }
 
+QString KarmStorage::removeEvent(QString uid)
+{
+  kDebug(5970) << "Entering function";
+  QString err=QString();
+  KCal::Event::List eventList = d->mCalendar->rawEvents();
+  for(KCal::Event::List::iterator i = eventList.begin();
+      i != eventList.end();
+      ++i)
+  {
+    if ( (*i)->uid() == uid )
+    {
+      d->mCalendar->deleteEvent(*i);
+    }
+  }
+  return err;
+}
+
 bool KarmStorage::removeTask(Task* task)
 {
   kDebug(5970) << "Entering function";
