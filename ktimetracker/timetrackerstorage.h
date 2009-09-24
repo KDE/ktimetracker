@@ -62,13 +62,13 @@ class HistoryEvent;
  * @author Mark Bucciarelli <mark@hubcapconsulting.com>
  */
 
-class KarmStorage : public QObject
+class timetrackerstorage : public QObject
 {
   Q_OBJECT
 
   public:
-    KarmStorage();
-    ~KarmStorage();
+    timetrackerstorage();
+    ~timetrackerstorage();
 
     QString setTaskParent( Task* task, Task* parent);
 
@@ -244,7 +244,7 @@ class KarmStorage : public QObject
      *
      * The task stores the last time a timer was started, so we log a new iCal
      * Event with the start and end times for this task.
-     * @see KarmStorage::changeTime
+     * @see timetrackerstorage::changeTime
      *
      * @param task   The task the timer was stopped for.
      * @param when   When the timer stopped.

@@ -29,7 +29,7 @@
 #include <kcal/resourcecalendar.h>
 
 #include "desktoplist.h"
-#include "karmstorage.h"
+#include "timetrackerstorage.h"
 #include "reportcriteria.h"
 
 class QMouseEvent;
@@ -41,7 +41,7 @@ class DesktopTracker;
 class IdleTimeDetector;
 class Preferences;
 class Task;
-class KarmStorage;
+class timetrackerstorage;
 class HistoryEvent;
 
 using namespace KCal;
@@ -168,7 +168,7 @@ class TaskView : public QTreeWidget
      *
      * Hopefully, this will be redesigned as part of the Qt4 migration.
      */
-    KarmStorage* storage();
+    timetrackerstorage* storage();
 
     /**
      * Deletes the given or the current task (and children) from the view.

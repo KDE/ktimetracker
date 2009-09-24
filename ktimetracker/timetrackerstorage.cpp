@@ -19,7 +19,7 @@
  *
  */
 
-#include "karmstorage.h"
+#include "timetrackerstorage.h"
 #include "edithistorydialog.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
@@ -64,7 +64,7 @@
 
 
 //@cond PRIVATE
-class KarmStorage::Private {
+class timetrackerstorage::Private {
   public:
     Private() : mCalendar( 0 ) {}
     ~Private() {
@@ -75,16 +75,16 @@ class KarmStorage::Private {
 };
 //@endcond
 
-KarmStorage::KarmStorage() : d( new Private() )
+timetrackerstorage::timetrackerstorage() : d( new Private() )
 {
 }
 
-KarmStorage::~KarmStorage()
+timetrackerstorage::~timetrackerstorage()
 {
   delete d;
 }
 
-QString KarmStorage::load( TaskView* view, const QString &fileName )
+QString timetrackerstorage::load( TaskView* view, const QString &fileName )
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
@@ -158,7 +158,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
     // Build dictionary to look up Task object from Todo uid.  Each task is a
     // QListViewItem, and is initially added with the view as the parent.
     todoList = d->mCalendar->rawTodos();
-    kDebug(5970) << "KarmStorage::load"
+    kDebug(5970) << "timetrackerstorage::load"
       << "rawTodo count (includes completed todos) ="
       << todoList.count();
     for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
@@ -189,7 +189,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
       }
     }
 
-    kDebug(5970) << "KarmStorage::load - loaded" << view->count()
+    kDebug(5970) << "timetrackerstorage::load - loaded" << view->count()
       << "tasks from" << d->mICalFile;
   }
 
@@ -197,7 +197,7 @@ QString KarmStorage::load( TaskView* view, const QString &fileName )
   return err;
 }
 
-Task* KarmStorage::task( const QString& uid, TaskView* view )
+Task* timetrackerstorage::task( const QString& uid, TaskView* view )
 // return the tasks with the uid uid out of view.
 // If !view, return the todo with the uid uid.
 {
@@ -215,13 +215,13 @@ Task* KarmStorage::task( const QString& uid, TaskView* view )
   return result;
 }
 
-QString KarmStorage::icalfile()
+QString timetrackerstorage::icalfile()
 {
   kDebug(5970) << "Entering function";
   return d->mICalFile;
 }
 
-QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
+QString timetrackerstorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
 // makes *view contain the tasks out of *rc.
 {
   kDebug(5970) << "Entering function";
@@ -290,13 +290,13 @@ QString KarmStorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
   return err;
 }
 
-QString KarmStorage::buildTaskView(TaskView *view)
+QString timetrackerstorage::buildTaskView(TaskView *view)
 // makes *view contain the tasks out of mCalendar
 {
   return buildTaskView(d->mCalendar, view);
 }
 
-void KarmStorage::closeStorage()
+void timetrackerstorage::closeStorage()
 {
   kDebug(5970) << "Entering function";
   if ( d->mCalendar )
@@ -308,19 +308,19 @@ void KarmStorage::closeStorage()
   kDebug(5970) << "Leaving function";
 }
 
-KCal::Event::List KarmStorage::rawevents()
+KCal::Event::List timetrackerstorage::rawevents()
 {
   kDebug(5970) << "Entering function";
   return d->mCalendar->rawEvents();
 }
 
-KCal::Todo::List KarmStorage::rawtodos()
+KCal::Todo::List timetrackerstorage::rawtodos()
 {
   kDebug(5970) << "Entering function";
   return d->mCalendar->rawTodos();
 }
 
-bool KarmStorage::allEventsHaveEndTiMe(Task* task)
+bool timetrackerstorage::allEventsHaveEndTiMe(Task* task)
 {
   kDebug(5970) << "Entering function";
   KCal::Event::List eventList = d->mCalendar->rawEvents();
@@ -338,7 +338,7 @@ bool KarmStorage::allEventsHaveEndTiMe(Task* task)
   return true;
 }
 
-bool KarmStorage::allEventsHaveEndTiMe()
+bool timetrackerstorage::allEventsHaveEndTiMe()
 {
   kDebug(5970) << "Entering function";
   KCal::Event::List eventList = d->mCalendar->rawEvents();
@@ -351,7 +351,7 @@ bool KarmStorage::allEventsHaveEndTiMe()
   return true;
 }
 
-QString KarmStorage::save(TaskView* taskview)
+QString timetrackerstorage::save(TaskView* taskview)
 {
   kDebug(5970) << "Entering function";
   QString err;
@@ -372,17 +372,17 @@ QString KarmStorage::save(TaskView* taskview)
   if ( err.isEmpty() )
   {
     kDebug(5970)
-      << "KarmStorage::save : wrote tasks to" << d->mICalFile;
+      << "timetrackerstorage::save : wrote tasks to" << d->mICalFile;
   }
   else
   {
-    kWarning(5970) << "KarmStorage::save :" << err;
+    kWarning(5970) << "timetrackerstorage::save :" << err;
   }
 
   return err;
 }
 
-QString KarmStorage::setTaskParent( Task* task, Task* parent )
+QString timetrackerstorage::setTaskParent( Task* task, Task* parent )
 {
   kDebug(5970) << "Entering function";
   QString err;
@@ -394,7 +394,7 @@ QString KarmStorage::setTaskParent( Task* task, Task* parent )
   return err;
 }
 
-QString KarmStorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
+QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
 {
   kDebug(5970) << "Entering function";
   QString err;
@@ -420,7 +420,7 @@ QString KarmStorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
   return err;
 }
 
-bool KarmStorage::isEmpty()
+bool timetrackerstorage::isEmpty()
 {
   kDebug(5970) << "Entering function";
   KCal::Todo::List todoList;
@@ -432,7 +432,7 @@ bool KarmStorage::isEmpty()
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
-QString KarmStorage::exportcsvFile( TaskView *taskview,
+QString timetrackerstorage::exportcsvFile( TaskView *taskview,
                                     const ReportCriteria &rc )
 {
   kDebug(5970) << "Entering function";
@@ -559,7 +559,7 @@ QString KarmStorage::exportcsvFile( TaskView *taskview,
 // public routines:
 //
 
-QString KarmStorage::addTask(const Task* task, const Task* parent)
+QString timetrackerstorage::addTask(const Task* task, const Task* parent)
 {
   kDebug(5970) << "Entering function";
   KCal::Todo* todo;
@@ -583,7 +583,7 @@ QString KarmStorage::addTask(const Task* task, const Task* parent)
   return uid;
 }
 
-QStringList KarmStorage::taskidsfromname(QString taskname)
+QStringList timetrackerstorage::taskidsfromname(QString taskname)
 {
   kDebug(5970) << "Entering function";
   QStringList result;
@@ -598,7 +598,7 @@ QStringList KarmStorage::taskidsfromname(QString taskname)
   return result;
 }
 
-QStringList KarmStorage::taskNames() const
+QStringList timetrackerstorage::taskNames() const
 {
   kDebug(5970) << "Entering function";
   QStringList result;
@@ -609,7 +609,7 @@ QStringList KarmStorage::taskNames() const
   return result;
 }
 
-QString KarmStorage::removeEvent(QString uid)
+QString timetrackerstorage::removeEvent(QString uid)
 {
   kDebug(5970) << "Entering function";
   QString err=QString();
@@ -626,7 +626,7 @@ QString KarmStorage::removeEvent(QString uid)
   return err;
 }
 
-bool KarmStorage::removeTask(Task* task)
+bool timetrackerstorage::removeTask(Task* task)
 {
   kDebug(5970) << "Entering function";
   // delete history
@@ -653,7 +653,7 @@ bool KarmStorage::removeTask(Task* task)
   return true;
 }
 
-bool KarmStorage::removeTask(QString taskid)
+bool timetrackerstorage::removeTask(QString taskid)
 {
   kDebug(5970) << "Entering function";
   // delete history
@@ -680,7 +680,7 @@ bool KarmStorage::removeTask(QString taskid)
   return true;
 }
 
-void KarmStorage::addComment(const Task* task, const QString& comment)
+void timetrackerstorage::addComment(const Task* task, const QString& comment)
 {
   kDebug(5970) << "Entering function";
   KCal::Todo* todo;
@@ -699,7 +699,7 @@ void KarmStorage::addComment(const Task* task, const QString& comment)
   saveCalendar();
 }
 
-QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
+QString timetrackerstorage::report( TaskView *taskview, const ReportCriteria &rc )
 {
   kDebug(5970) << "Entering function";
   QString err;
@@ -718,7 +718,7 @@ QString KarmStorage::report( TaskView *taskview, const ReportCriteria &rc )
 }
 
 // export history report as csv, all tasks X all dates in one block
-QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
+QString timetrackerstorage::exportcsvHistory ( TaskView      *taskview,
                                             const QDate   &from,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
@@ -857,7 +857,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
   return err;
 }
 
-void KarmStorage::startTimer( const Task* task, const KDateTime &when )
+void timetrackerstorage::startTimer( const Task* task, const KDateTime &when )
 {
   kDebug(5970) << "Entering function; when=" << when;
   KCal::Event* e;
@@ -867,7 +867,7 @@ void KarmStorage::startTimer( const Task* task, const KDateTime &when )
   task->taskView()->scheduleSave();
 }
 
-void KarmStorage::startTimer( QString taskID )
+void timetrackerstorage::startTimer( QString taskID )
 {
   kDebug(5970) << "Entering function";
   KCal::Todo::List todoList;
@@ -889,7 +889,7 @@ void KarmStorage::startTimer( QString taskID )
   saveCalendar();
 }
 
-void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
+void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
 {
   kDebug(5970) << "Entering function; when=" << when;
   KCal::Event::List eventList = d->mCalendar->rawEvents();
@@ -918,7 +918,7 @@ void KarmStorage::stopTimer( const Task* task, const QDateTime &when )
   saveCalendar();
 }
 
-bool KarmStorage::bookTime(const Task* task,
+bool timetrackerstorage::bookTime(const Task* task,
                            const QDateTime& startDateTime,
                            const long durationInSeconds)
 {
@@ -940,7 +940,7 @@ bool KarmStorage::bookTime(const Task* task,
   return d->mCalendar->addEvent(e);
 }
 
-void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
+void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)
 {
   kDebug(5970) << "Entering function; deltaSeconds=" << deltaSeconds;
   KCal::Event* e;
@@ -965,7 +965,7 @@ void KarmStorage::changeTime(const Task* task, const long deltaSeconds)
 }
 
 
-KCal::Event* KarmStorage::baseEvent(const Task * task)
+KCal::Event* timetrackerstorage::baseEvent(const Task * task)
 {
   kDebug(5970) << "Entering function";
   KCal::Event* e;
@@ -991,7 +991,7 @@ KCal::Event* KarmStorage::baseEvent(const Task * task)
   return e;
 }
 
-KCal::Event* KarmStorage::baseEvent(const Todo* todo)
+KCal::Event* timetrackerstorage::baseEvent(const Todo* todo)
 {
   kDebug(5970) << "Entering function";
   KCal::Event* e;
@@ -1027,7 +1027,7 @@ HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
 }
 
 
-QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
+QList<HistoryEvent> timetrackerstorage::getHistory(const QDate& from,
     const QDate& to)
 {
   kDebug(5970) << "Entering function";
@@ -1084,7 +1084,7 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
             // Something is screwy with the ics file, as this KArm history event
             // does not have a todo related to it.  Could have been deleted
             // manually?  We'll continue with report on with report ...
-            kDebug(5970) <<"KarmStorage::getHistory():"
+            kDebug(5970) <<"timetrackerstorage::getHistory():"
               << "The event" << (*event)->uid()
               << "is not related to a todo.  Dropped.";
         }
@@ -1095,17 +1095,17 @@ QList<HistoryEvent> KarmStorage::getHistory(const QDate& from,
   return retval;
 }
 
-bool KarmStorage::remoteResource( const QString& file ) const
+bool timetrackerstorage::remoteResource( const QString& file ) const
 {
   kDebug(5970) << "Entering function";
   QString f = file.toLower();
   bool rval = f.startsWith( QLatin1String("http://") ) || f.startsWith( QLatin1String("ftp://") );
 
-  kDebug(5970) << "KarmStorage::remoteResource(" << file <<" ) returns" << rval;
+  kDebug(5970) << "timetrackerstorage::remoteResource(" << file <<" ) returns" << rval;
   return rval;
 }
 
-QString KarmStorage::saveCalendar()
+QString timetrackerstorage::saveCalendar()
 {
   kDebug(5970) << "Entering function";
   QString err;

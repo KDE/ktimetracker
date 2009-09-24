@@ -132,13 +132,13 @@ public:
 class TaskView::Private {
   public:
     Private() : 
-      mStorage( new KarmStorage() ), 
+      mStorage( new timetrackerstorage() ),
       mFocusTrackingActive( false ) {}
 
     ~Private() {
       delete mStorage; 
     }
-    KarmStorage *mStorage;
+    timetrackerstorage *mStorage;
     bool mFocusTrackingActive;
     Task* mLastTaskWithFocus;
     QList<Task*> mActiveTasks;
@@ -371,7 +371,7 @@ void TaskView::mousePressEvent( QMouseEvent *event )
   }
 }
 
-KarmStorage* TaskView::storage()
+timetrackerstorage* TaskView::storage()
 {
   return d->mStorage;
 }

@@ -19,7 +19,7 @@ set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp
 	edittaskdialog.cpp idletimedetector.cpp
 	timekard.cpp ktimetrackerutility.cpp ktimewidget.cpp
-	karmstorage.cpp mainwindow.cpp preferences.cpp
+	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp historydialog.cpp
 	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp
