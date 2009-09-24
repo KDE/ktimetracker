@@ -2,8 +2,7 @@
 #include "ui_edittaskdialog.h"
 #include "historydialog.h"
 
-EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption,
-                                bool editDlg, DesktopList* desktopList)
+EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList)
   : QDialog( parent ),
     m_ui(new Ui::EditTaskDialog)
 {

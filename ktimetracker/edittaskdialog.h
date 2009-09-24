@@ -5,15 +5,16 @@
 #include "desktoplist.h"
 #include "taskview.h"
 
-namespace Ui {
+namespace Ui
+{
     class EditTaskDialog;
 }
 
-class EditTaskDialog : public QDialog {
+class EditTaskDialog : public QDialog
+{
     Q_OBJECT
 public:
-    EditTaskDialog( TaskView *parent, const QString &caption, bool editDlg,
-                    DesktopList* desktopList = 0 );
+    EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList = 0 );
     ~EditTaskDialog();
     QString taskName();
     void setTask( const QString &name, long time, long sessionTime );
