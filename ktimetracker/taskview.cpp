@@ -824,7 +824,7 @@ void TaskView::newTask( const QString &caption, Task *parent )
     if ( !dialog->taskName().isEmpty()) taskName = dialog->taskName();
 
     total = totalDiff = session = sessionDiff = 0;
-    dialog->status( &total, &totalDiff, &session, &sessionDiff, &desktopList );
+    dialog->status( &desktopList );
 
     // If all available desktops are checked, disable auto tracking,
     // since it makes no sense to track for every desktop.
@@ -907,9 +907,9 @@ void TaskView::editTask()
     long total, session, totalDiff, sessionDiff;
     total = totalDiff = session = sessionDiff = 0;
     DesktopList desktopList;
-    dialog->status( &total, &totalDiff, &session, &sessionDiff, &desktopList);
+    dialog->status(&desktopList);
 
-    if( totalDiff != 0 || sessionDiff != 0)
+    if ( totalDiff != 0 || sessionDiff != 0)
       task->changeTimes( sessionDiff, totalDiff, d->mStorage );
 
     // If all available desktops are checked, disable auto tracking,

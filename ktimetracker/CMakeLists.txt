@@ -43,6 +43,7 @@ qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
 kde4_add_ui_files( ktimetracker_shared_SRCS
         csvexportdialog_base.ui
         historydialog.ui
+        edittaskdialog.ui
         cfgbehavior.ui
         cfgdisplay.ui
         cfgstorage.ui )
