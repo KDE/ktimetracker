@@ -7,6 +7,7 @@ EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption,
   : QDialog( parent ),
     m_ui(new Ui::EditTaskDialog)
 {
+    setWindowTitle(caption);
     m_parent=parent;
     m_ui->setupUi(this);
 }
