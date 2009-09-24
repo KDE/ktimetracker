@@ -19,12 +19,13 @@ EditTaskDialog::~EditTaskDialog()
 void EditTaskDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
-    switch (e->type()) {
-    case QEvent::LanguageChange:
-        m_ui->retranslateUi(this);
-        break;
-    default:
-        break;
+    switch (e->type())
+    {
+        case QEvent::LanguageChange:
+            m_ui->retranslateUi(this);
+            break;
+        default:
+            break;
     }
 }
 
@@ -35,19 +36,20 @@ QString EditTaskDialog::taskName()
 
 void EditTaskDialog::setTask( const QString &name, long time, long session )
 {
-  m_ui->tasknamelineedit->setText( name );
+    m_ui->tasknamelineedit->setText( name );
 }
 
 void EditTaskDialog::status(DesktopList *desktopList) const
 {
-  for ( int i = 0; i < 0; i++ )
-  {
-    //if ( _deskBox[i]->isChecked() ) desktopList->append( i );
-  }
+    for ( int i = 0; i < 0; i++ )
+    {
+        //if ( _deskBox[i]->isChecked() ) desktopList->append( i );
+    }
 }
 
 void EditTaskDialog::on_edittimespushbutton_clicked()
 {
     historydialog* historydialog1=new historydialog(m_parent);
-    historydialog1->show();
+    lower();
+    historydialog1->exec();
 }
