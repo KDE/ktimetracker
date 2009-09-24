@@ -22,7 +22,7 @@ set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
 	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp historydialog.cpp
-	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp
+	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
         focusdetectornotifier.cpp
  )
 

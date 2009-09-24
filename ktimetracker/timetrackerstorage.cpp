@@ -20,7 +20,6 @@
  */
 
 #include "timetrackerstorage.h"
-#include "edithistorydialog.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "storageadaptor.h"
