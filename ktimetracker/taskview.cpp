@@ -132,13 +132,13 @@ public:
 class TaskView::Private {
   public:
     Private() : 
-      mStorage( new KarmStorage() ), 
+      mStorage( new timetrackerstorage() ),
       mFocusTrackingActive( false ) {}
 
     ~Private() {
       delete mStorage; 
     }
-    KarmStorage *mStorage;
+    timetrackerstorage *mStorage;
     bool mFocusTrackingActive;
     Task* mLastTaskWithFocus;
     QList<Task*> mActiveTasks;
@@ -371,7 +371,7 @@ void TaskView::mousePressEvent( QMouseEvent *event )
   }
 }
 
-KarmStorage* TaskView::storage()
+timetrackerstorage* TaskView::storage()
 {
   return d->mStorage;
 }
@@ -824,7 +824,7 @@ void TaskView::newTask( const QString &caption, Task *parent )
     if ( !dialog->taskName().isEmpty()) taskName = dialog->taskName();
 
     total = totalDiff = session = sessionDiff = 0;
-    dialog->status( &total, &totalDiff, &session, &sessionDiff, &desktopList );
+    dialog->status( &desktopList );
 
     // If all available desktops are checked, disable auto tracking,
     // since it makes no sense to track for every desktop.
@@ -888,7 +888,7 @@ void TaskView::editTask()
 
   DesktopList desktopList = task->desktops();
   DesktopList oldDeskTopList = desktopList;
-  EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), true, &desktopList );
+  EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), &desktopList );
   dialog->setTask( task->name(),
                    task->time(),
                    task->sessionTime() );
@@ -907,9 +907,9 @@ void TaskView::editTask()
     long total, session, totalDiff, sessionDiff;
     total = totalDiff = session = sessionDiff = 0;
     DesktopList desktopList;
-    dialog->status( &total, &totalDiff, &session, &sessionDiff, &desktopList);
+    dialog->status(&desktopList);
 
-    if( totalDiff != 0 || sessionDiff != 0)
+    if ( totalDiff != 0 || sessionDiff != 0)
       task->changeTimes( sessionDiff, totalDiff, d->mStorage );
 
     // If all available desktops are checked, disable auto tracking,

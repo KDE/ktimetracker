@@ -152,7 +152,7 @@ void Task::delete_recursive()
   delete this;
 }
 
-void Task::setRunning( bool on, KarmStorage* storage, const QDateTime &when )
+void Task::setRunning( bool on, timetrackerstorage* storage, const QDateTime &when )
 // This is the back-end, the front-end is StartTimerFor()
 {
   kDebug(5970) << "Entering function"; 
@@ -206,7 +206,7 @@ bool Task::isRunning() const
   return mTimer->isActive();
 }
 
-void Task::setName( const QString& name, KarmStorage* storage )
+void Task::setName( const QString& name, timetrackerstorage* storage )
 {
   kDebug(5970) << "Entering function, name=" << name;
 
@@ -219,7 +219,7 @@ void Task::setName( const QString& name, KarmStorage* storage )
   }
 }
 
-void Task::setPercentComplete(const int percent, KarmStorage *storage)
+void Task::setPercentComplete(const int percent, timetrackerstorage *storage)
 {
   kDebug(5970) << "Entering function(" << percent <<", storage):"
     << mUid;
@@ -291,7 +291,7 @@ void Task::setDesktopList ( DesktopList desktopList )
   mDesktops = desktopList;
 }
 
-void Task::changeTime( long minutes, KarmStorage* storage )
+void Task::changeTime( long minutes, timetrackerstorage* storage )
 {
   changeTimes( minutes, minutes, storage); 
 }
@@ -356,7 +356,7 @@ QString Task::setSessionTime( long minutes )
   return err;
 }
 
-void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
+void Task::changeTimes( long minutesSession, long minutes, timetrackerstorage* storage)
 {
   kDebug(5970) << "Entering function";
   kDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
@@ -403,7 +403,7 @@ void Task::changeParentTotalTimes( long minutesSession, long minutes )
     parent()->changeTotalTimes( minutesSession, minutes );
 }
 
-bool Task::remove( KarmStorage* storage)
+bool Task::remove( timetrackerstorage* storage)
 {
   kDebug(5970) <<"Task::remove:" << mName;
 
@@ -614,7 +614,7 @@ void Task::update()
   kDebug( 5970 ) << "Leaving function";
 }
 
-void Task::addComment( const QString &comment, KarmStorage* storage )
+void Task::addComment( const QString &comment, timetrackerstorage* storage )
 {
   mComment = mComment + QString::fromLatin1("\n") + comment;
   storage->addComment(this, comment);

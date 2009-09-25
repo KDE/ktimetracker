@@ -19,10 +19,10 @@ set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp
 	edittaskdialog.cpp idletimedetector.cpp
 	timekard.cpp ktimetrackerutility.cpp ktimewidget.cpp
-	karmstorage.cpp mainwindow.cpp preferences.cpp
+	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp historydialog.cpp
-	treeviewheadercontextmenu.cpp edithistorydialog.cpp timetrackerwidget.cpp
+	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
         focusdetectornotifier.cpp
  )
 
@@ -43,6 +43,7 @@ qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
 kde4_add_ui_files( ktimetracker_shared_SRCS
         csvexportdialog_base.ui
         historydialog.ui
+        edittaskdialog.ui
         cfgbehavior.ui
         cfgdisplay.ui
         cfgstorage.ui )

@@ -40,7 +40,7 @@ test cases:
 
 #include <QtXml/QtXml>
 
-#include "karmstorage.h"
+#include "timetrackerstorage.h"
 
 class Task;
 class TaskView;

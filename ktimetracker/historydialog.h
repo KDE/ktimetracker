@@ -25,11 +25,13 @@
 #include <QtGui/QDialog>
 #include "taskview.h"
 
-namespace Ui {
+namespace Ui
+{
     class historydialog;
 }
 
-class historydialog : public QDialog {
+class historydialog : public QDialog
+{
     Q_OBJECT
 public:
     historydialog(TaskView *parent);
@@ -49,6 +51,7 @@ private Q_SLOTS:
    * The user can change dates and comments in there.
    * A change triggers this procedure, it shall store the new values in the calendar.
    */
+  void on_deletepushbutton_clicked();
   void historyWidgetCellChanged( int row, int col );
 };
 
