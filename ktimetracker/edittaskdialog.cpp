@@ -4,7 +4,9 @@
 #include <KMessageBox>
 #include "ktimetrackerutility.h"
 
-EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList)
+QVector<QCheckBox*> desktopcheckboxes;
+
+EditTaskDialog::EditTaskDialog(TaskView *parent, const QString &caption, DesktopList* desktopList)
   : QDialog( parent ),
     m_ui(new Ui::EditTaskDialog)
 {
@@ -12,9 +14,9 @@ EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption, Deskto
     m_parent=parent;
     m_ui->setupUi(this);
 
-    // Set the desktop checkboxes
-        QVector<QCheckBox*> desktopcheckboxes;
+    { // Set the desktop checkboxes
         QCheckBox* desktopcheckbox;
+        desktopcheckboxes.clear();
         int lines=5;
         for (int i=0; i<desktopcount(); ++i)
         {
@@ -22,9 +24,22 @@ EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption, Deskto
             desktopcheckbox->setObjectName(QString::fromUtf8("desktop_").append(i));
             desktopcheckbox->setText(KWindowSystem::desktopName( i + 1 ));
             m_ui->gridLayout_2->addWidget(desktopcheckbox, i / lines + 1, i % lines);
+            desktopcheckboxes.push_back(desktopcheckbox);
         }
-
-    kDebug(5970) << desktopcount();
+        if ( desktopList && ( desktopList->size() > 0 ) )
+        {
+            DesktopList::iterator it = desktopList->begin();
+            while ( it != desktopList->end() )
+            {
+                desktopcheckboxes[*it]->setChecked( true );
+                ++it;
+            }
+            m_ui->desktoptrackingenabled->setChecked(true);
+        }
+        else
+            for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+                desktopcheckboxes[i]->setEnabled(false);
+    }
 }
 
 EditTaskDialog::~EditTaskDialog()
@@ -50,16 +65,16 @@ QString EditTaskDialog::taskName()
     return m_ui->tasknamelineedit->text();
 }
 
-void EditTaskDialog::setTask( const QString &name, long time, long session )
+void EditTaskDialog::setTask( const QString &name )
 {
     m_ui->tasknamelineedit->setText( name );
 }
 
 void EditTaskDialog::status(DesktopList *desktopList) const
 {
-    for ( int i = 0; i < 0; i++ )
+    for ( int i = 0; i < desktopcheckboxes.count(); i++ )
     {
-        //if ( _deskBox[i]->isChecked() ) desktopList->append( i );
+        if ( desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
     }
 }
 
@@ -68,4 +83,10 @@ void EditTaskDialog::on_edittimespushbutton_clicked()
     historydialog* historydialog1=new historydialog(m_parent);
     lower();
     historydialog1->exec();
+}
+
+void EditTaskDialog::on_desktoptrackingenabled_clicked()
+{
+    for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+        desktopcheckboxes[i]->setEnabled(m_ui->desktoptrackingenabled->checkState());
 }

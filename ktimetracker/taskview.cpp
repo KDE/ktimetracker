@@ -889,7 +889,7 @@ void TaskView::editTask()
   DesktopList desktopList = task->desktops();
   DesktopList oldDeskTopList = desktopList;
   EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), &desktopList );
-  dialog->setTask( task->name(), task->time(), task->sessionTime() );
+  dialog->setTask( task->name() );
   int result = dialog->exec();
   if (result == QDialog::Accepted) 
   {

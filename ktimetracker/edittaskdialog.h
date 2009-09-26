@@ -17,7 +17,7 @@ public:
     EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList = 0 );
     ~EditTaskDialog();
     QString taskName();
-    void setTask( const QString &name, long time, long sessionTime );
+    void setTask( const QString &name );
     void status( DesktopList *desktopList) const;
 
 protected:
@@ -28,6 +28,7 @@ private:
     TaskView *m_parent;
 
 private slots:
+    void on_desktoptrackingenabled_clicked();
     void on_edittimespushbutton_clicked();
 };
 

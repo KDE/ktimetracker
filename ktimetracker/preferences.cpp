@@ -33,30 +33,30 @@ Preferences::Preferences()
 
 Preferences *Preferences::instance()
 {
-  if ( !mInstance ) {
-    mInstance = new Preferences;
-  }
-
-  return mInstance;
+    if ( !mInstance )
+    {
+        mInstance = new Preferences;
+    }
+    return mInstance;
 }
 
 bool Preferences::readBoolEntry( const QString& key )
 {
-  return KGlobal::config()->group( QString() ).readEntry( key, true );
+    return KGlobal::config()->group( QString() ).readEntry( key, true );
 }
 
 void Preferences::writeEntry( const QString &key, bool value)
 {
-  KConfigGroup config = KGlobal::config()->group( QString() );
-  config.writeEntry( key, value );
-  config.sync();
+    KConfigGroup config = KGlobal::config()->group( QString() );
+    config.writeEntry( key, value );
+    config.sync();
 }
 
 void Preferences::deleteEntry( const QString &key )
 {
-  KConfigGroup config = KGlobal::config()->group( QString() );
-  config.deleteEntry( key );
-  config.sync();
+    KConfigGroup config = KGlobal::config()->group( QString() );
+    config.deleteEntry( key );
+    config.sync();
 }
 
 #include "preferences.moc"
