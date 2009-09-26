@@ -51,15 +51,14 @@ K_EXPORT_PLUGIN( ktimetrackerPartFactory("ktimetracker","ktimetracker") )
 ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
-  KGlobal::locale()->insertCatalog("ktimetracker");
+    KGlobal::locale()->insertCatalog("ktimetracker");
 
-  // we need an instance
-  setComponentData( ktimetrackerPartFactory::componentData() );
-
-  mMainWidget = new TimetrackerWidget( parentWidget );
-  setWidget( mMainWidget );
-  setXMLFile( "ktimetrackerui.rc" );
-  makeMenus();
+    // we need an instance
+    setComponentData( ktimetrackerPartFactory::componentData() );
+    mMainWidget = new TimetrackerWidget( parentWidget );
+    setWidget( mMainWidget );
+    setXMLFile( "ktimetrackerui.rc" );
+    makeMenus();
 }
 
 ktimetrackerpart::~ktimetrackerpart()
@@ -68,68 +67,63 @@ ktimetrackerpart::~ktimetrackerpart()
 
 KAboutData *ktimetrackerpart::createAboutData()
 {
-  const QByteArray& appname=QByteArray("ktimetracker");
-  const QByteArray& catalogname=QByteArray("ktimetracker");
-  const KLocalizedString localizedname=ki18n("ktimetracker");
-  const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
-  KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
-  return aboutData;
+    const QByteArray& appname=QByteArray("ktimetracker");
+    const QByteArray& catalogname=QByteArray("ktimetracker");
+    const KLocalizedString localizedname=ki18n("ktimetracker");
+    const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
+    KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
+    return aboutData;
 }
 
 void ktimetrackerpart::makeMenus()
 {
-  mMainWidget->setupActions( actionCollection() );
-  KAction *actionKeyBindings;
-
-  actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
-      actionCollection() );
-
-  // Tool tops must be set after the createGUI.
-  actionKeyBindings->setToolTip( i18n("Configure key bindings") );
-  actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
+    mMainWidget->setupActions( actionCollection() );
+    KAction *actionKeyBindings;
+    actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
+        actionCollection() );
+    // Tool tips must be set after the createGUI.
+    actionKeyBindings->setToolTip( i18n("Configure key bindings") );
+    actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
                                         "bindings which are specific to ktimetracker") );
 }
 
 void ktimetrackerpart::setStatusBar(const QString & qs)
 {
-  kDebug(5970) << "Entering function";
-  emit setStatusBarText(qs);
+    kDebug(5970) << "Entering function";
+    emit setStatusBarText(qs);
 }
 
 bool ktimetrackerpart::openFile(QString icsfile)
 {
-  mMainWidget->openFile(icsfile);
-  emit setWindowCaption(icsfile);
+    mMainWidget->openFile(icsfile);
+    emit setWindowCaption(icsfile);
+    if ( KTimeTrackerSettings::trayIcon() ) mTray = new TrayIcon( this );
+    else mTray = new TrayIcon( );
 
-  if ( KTimeTrackerSettings::trayIcon() ) mTray = new TrayIcon( this );
-  else mTray = new TrayIcon( );
-
-  // connections
-  connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
+    // connections
+    connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
            this, SLOT( updateTime( long, long ) ) );
-  connect( mMainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
-                 this, SLOT( setStatusBar( QString ) ) );
-  connect( mMainWidget, SIGNAL( setCaption( const QString& ) ),
-                 this, SIGNAL( setWindowCaption( const QString& ) ) );
-  connect( mTray, SIGNAL( quitSelected() ), SLOT( quit() ) );
-  connect( mMainWidget, SIGNAL( timersActive() ), mTray, SLOT( startClock() ) );
-  connect( mMainWidget, SIGNAL( timersInactive() ), mTray, SLOT( stopClock() ) );
-  connect( mMainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
+    connect( mMainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
+           this, SLOT( setStatusBar( QString ) ) );
+    connect( mMainWidget, SIGNAL( setCaption( const QString& ) ),
+           this, SIGNAL( setWindowCaption( const QString& ) ) );
+    connect( mTray, SIGNAL( quitSelected() ), SLOT( quit() ) );
+    connect( mMainWidget, SIGNAL( timersActive() ), mTray, SLOT( startClock() ) );
+    connect( mMainWidget, SIGNAL( timersInactive() ), mTray, SLOT( stopClock() ) );
+    connect( mMainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
            mTray, SLOT( updateToolTip( QList<Task*> ) ));
-
-  return true;
+    return true;
 }
 
 bool ktimetrackerpart::openFile()
 {
-  return openFile(KStandardDirs::locateLocal( "data", QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ));
+    return openFile(KStandardDirs::locateLocal( "data", QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ));
 }
 
 bool ktimetrackerpart::saveFile()
 {
-  mMainWidget->saveFile();
-
-  return true;
+    mMainWidget->saveFile();
+    return true;
 }
 
 #include "ktimetrackerpart.moc"
