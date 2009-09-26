@@ -25,15 +25,16 @@
 #include "taskview.h"
 
 //@cond PRIVATE
-class FocusDetectorNotifier::Private {
-  public:
-    Private() 
+class FocusDetectorNotifier::Private
+{
+public:
+    Private()
     {
-      mDetector = new FocusDetector();
+        mDetector = new FocusDetector();
     }
     ~Private()
     {
-      delete mDetector;
+        delete mDetector;
     }
     FocusDetector *mDetector;
     QList< TaskView * > mViews;
@@ -49,40 +50,39 @@ FocusDetectorNotifier::FocusDetectorNotifier( QObject *parent )
 
 FocusDetectorNotifier* FocusDetectorNotifier::instance()
 {
-  if ( !mInstance ) 
-  {
-    mInstance = new FocusDetectorNotifier;
-  }
-
-  return mInstance;
+    if ( !mInstance )
+    {
+        mInstance = new FocusDetectorNotifier;
+    }
+    return mInstance;
 }
 
 FocusDetectorNotifier::~FocusDetectorNotifier()
 {
-  delete d;
+    delete d;
 }
 
 void FocusDetectorNotifier::attach( TaskView *view )
 {
-  d->mViews.append( view );
-  if ( d->mViews.count() == 1 ) 
-  {
-    //d->mDetector->startFocusDetection();
-  }
+    d->mViews.append( view );
+    if ( d->mViews.count() == 1 )
+    {
+        //d->mDetector->startFocusDetection();
+    }
 }
 
 void FocusDetectorNotifier::detach( TaskView *view )
 {
-  d->mViews.removeAll( view );
-  if ( d->mViews.count() == 0) 
-  {
-    //d->mDetector->stopFocusDetection();
-  }
+    d->mViews.removeAll( view );
+    if ( d->mViews.count() == 0)
+    {
+        //d->mDetector->stopFocusDetection();
+    }
 }
 
 FocusDetector *FocusDetectorNotifier::focusDetector() const
 {
-  return d->mDetector;
+    return d->mDetector;
 }
 
 #include "focusdetectornotifier.moc"

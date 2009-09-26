@@ -93,6 +93,9 @@ historydialog::~historydialog()
 QString historydialog::listallevents()
 {
     QString err=QString();
+    // if sorting is enabled and we write to row x, we cannot be sure row x will be in row x some lines later
+    bool old_sortingenabled=m_ui->historytablewidget->isSortingEnabled();
+    m_ui->historytablewidget->setSortingEnabled( false );
     connect(  m_ui->historytablewidget, SIGNAL( cellChanged( int, int ) ),
               this, SLOT( historyWidgetCellChanged( int, int ) ) );
 
@@ -137,6 +140,7 @@ QString historydialog::listallevents()
                   +  m_ui->historytablewidget->columnWidth( 1 )
                   +  m_ui->historytablewidget->columnWidth( 2 )
                   +  m_ui->historytablewidget->columnWidth( 3 ), height() );
+    m_ui->historytablewidget->setSortingEnabled(old_sortingenabled);
     return err;
 }
 
@@ -229,9 +233,7 @@ QString historydialog::refresh()
     QString err;
     while (m_ui->historytablewidget->rowCount()>0)
         m_ui->historytablewidget->removeRow(0);
-    m_ui->historytablewidget->setSortingEnabled( false );
     listallevents();
-    m_ui->historytablewidget->setSortingEnabled( true );
     return err;
 }
 

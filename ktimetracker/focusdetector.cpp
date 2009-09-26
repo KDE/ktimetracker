@@ -27,14 +27,14 @@
 
 FocusDetector::FocusDetector()
 {
-  KWindowSystem* kw=KWindowSystem::self();
-  connect(kw, SIGNAL(activeWindowChanged(WId)), SLOT( slotfocuschanged() ) );
+    KWindowSystem* kw=KWindowSystem::self();
+    connect(kw, SIGNAL(activeWindowChanged(WId)), SLOT( slotfocuschanged() ) );
 }
 
 void FocusDetector::slotfocuschanged()
 {
-  QString sysanswer = getFocusWindow();
-  emit( newFocus( sysanswer ) );
+    QString sysanswer = getFocusWindow();
+    emit( newFocus( sysanswer ) );
 }
 
 #include "focusdetector.moc" 

@@ -1,6 +1,8 @@
 #include "edittaskdialog.h"
 #include "ui_edittaskdialog.h"
 #include "historydialog.h"
+#include <KMessageBox>
+#include "ktimetrackerutility.h"
 
 EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList)
   : QDialog( parent ),
@@ -9,6 +11,20 @@ EditTaskDialog::EditTaskDialog( TaskView *parent, const QString &caption, Deskto
     setWindowTitle(caption);
     m_parent=parent;
     m_ui->setupUi(this);
+
+    // Set the desktop checkboxes
+        QVector<QCheckBox*> desktopcheckboxes;
+        QCheckBox* desktopcheckbox;
+        int lines=5;
+        for (int i=0; i<desktopcount(); ++i)
+        {
+            desktopcheckbox = new QCheckBox(m_ui->autotrackinggroupbox);
+            desktopcheckbox->setObjectName(QString::fromUtf8("desktop_").append(i));
+            desktopcheckbox->setText(KWindowSystem::desktopName( i + 1 ));
+            m_ui->gridLayout_2->addWidget(desktopcheckbox, i / lines + 1, i % lines);
+        }
+
+    kDebug(5970) << desktopcount();
 }
 
 EditTaskDialog::~EditTaskDialog()

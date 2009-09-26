@@ -31,33 +31,41 @@
 
 QString getFocusWindow()
 {
-  Display *display = XOpenDisplay( 0 );
-  char *name;
-  Window window = 0;
-  int i = 0;
-  XGetInputFocus( display, &window, &i );
-  XFetchName( display, window, &name );
-  XCloseDisplay( display );
-
-  return QString( name );
+    Display *display = XOpenDisplay( 0 );
+    char *name;
+    Window window = 0;
+    int i = 0;
+    XGetInputFocus( display, &window, &i );
+    XFetchName( display, window, &name );
+    XCloseDisplay( display );
+    return QString( name );
 }
 
 QString formatTime( double minutes, bool decimal )
-/* 
-Delivers a formatted time. E.g. 30 seconds are 0.5 minutes. 
-The output of formatTiMe(0.5,true) is 0.008333, because 0.5 minutes are 0.008333 hours.
-The output of formatTiMe(0.5,false) is 0:01, because 0.5 minutes are 0:01 hours rounded.
-*/
 {
-  kDebug(5970) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
-  QString time;
-  if ( decimal ) 
-  {
-    time.sprintf( "%.2f", minutes / 60.0 );
-    time.replace( '.', KGlobal::locale()->decimalSymbol() );
-  }
-  else time.sprintf("%s%ld:%02ld",
-    (minutes < 0) ? KGlobal::locale()->negativeSign().toUtf8().data() : "",
-    labs(minutes / 60), labs(((int) round(minutes)) % 60));
-  return time;
+    kDebug(5970) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
+    QString time;
+    if ( decimal )
+    {
+        time.sprintf( "%.2f", minutes / 60.0 );
+        time.replace( '.', KGlobal::locale()->decimalSymbol() );
+    }
+    else time.sprintf("%s%ld:%02ld",
+        (minutes < 0) ? KGlobal::locale()->negativeSign().toUtf8().data() : "",
+        labs(minutes / 60), labs(((int) round(minutes)) % 60));
+    return time;
+}
+
+int desktopcount()
+{
+    int result;
+    #ifdef Q_WS_X11
+    result = KWindowSystem::numberOfDesktops();
+    #else
+    #ifdef __GNUC__
+    #warning non-X11 support missing
+    #endif
+    result = -1;
+    #endif
+    return result;
 }
