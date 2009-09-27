@@ -42,14 +42,14 @@ Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent, bool konsolemode )
   : QObject(), QTreeWidgetItem(parent)
 { 
-  init( taskName, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
+    init( taskName, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
 }
 
 Task::Task( const QString& taskName, long minutes, long sessionTime,
             DesktopList desktops, Task *parent)
   : QObject(), QTreeWidgetItem(parent) 
 {
-  init( taskName, minutes, sessionTime, 0, desktops, 0, 0 );
+    init( taskName, minutes, sessionTime, 0, desktops, 0, 0 );
 }
 
 Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
