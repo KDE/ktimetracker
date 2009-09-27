@@ -18,7 +18,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kresources/remote )
 set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp
 	edittaskdialog.cpp idletimedetector.cpp
-	timekard.cpp ktimetrackerutility.cpp ktimewidget.cpp
+	timekard.cpp ktimetrackerutility.cpp
 	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp historydialog.cpp
