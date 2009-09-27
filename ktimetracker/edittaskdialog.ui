@@ -38,20 +38,10 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>Auto Tracking</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0" colspan="2">
-       <widget class="QCheckBox" name="desktoptrackingenabled">
-        <property name="whatsThis">
-         <string>With desktop tracking, you can associate every task with a virtual desktop. As soon as you enter this desktop, timing for this task is started.
-
-Select the desktop(s) that will automatically start the timer of this task.</string>
-        </property>
-        <property name="text">
-         <string>Desktop tracking enabled</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2"/>
     </widget>
    </item>
    <item row="3" column="0" colspan="2">

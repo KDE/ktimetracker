@@ -28,7 +28,7 @@ private:
     TaskView *m_parent;
 
 private slots:
-    void on_desktoptrackingenabled_clicked();
+    void on_autotrackinggroupbox_clicked();
     void on_edittimespushbutton_clicked();
 };
 

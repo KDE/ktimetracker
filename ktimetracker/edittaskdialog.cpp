@@ -3,6 +3,7 @@
 #include "historydialog.h"
 #include <KMessageBox>
 #include "ktimetrackerutility.h"
+#include <QCheckBox>
 
 QVector<QCheckBox*> desktopcheckboxes;
 
@@ -23,7 +24,7 @@ EditTaskDialog::EditTaskDialog(TaskView *parent, const QString &caption, Desktop
             desktopcheckbox = new QCheckBox(m_ui->autotrackinggroupbox);
             desktopcheckbox->setObjectName(QString::fromUtf8("desktop_").append(i));
             desktopcheckbox->setText(KWindowSystem::desktopName( i + 1 ));
-            m_ui->gridLayout_2->addWidget(desktopcheckbox, i / lines + 1, i % lines);
+            m_ui->gridLayout_2->addWidget(desktopcheckbox, i % lines, i / lines + 1);
             desktopcheckboxes.push_back(desktopcheckbox);
         }
         if ( desktopList && ( desktopList->size() > 0 ) )
@@ -34,7 +35,7 @@ EditTaskDialog::EditTaskDialog(TaskView *parent, const QString &caption, Desktop
                 desktopcheckboxes[*it]->setChecked( true );
                 ++it;
             }
-            m_ui->desktoptrackingenabled->setChecked(true);
+            m_ui->autotrackinggroupbox->setChecked(true);
         }
         else
             for ( int i = 0; i < desktopcheckboxes.count(); i++ )
@@ -85,8 +86,8 @@ void EditTaskDialog::on_edittimespushbutton_clicked()
     historydialog1->exec();
 }
 
-void EditTaskDialog::on_desktoptrackingenabled_clicked()
+void EditTaskDialog::on_autotrackinggroupbox_clicked()
 {
-    for ( int i = 0; i < desktopcheckboxes.count(); i++ )
-        desktopcheckboxes[i]->setEnabled(m_ui->desktoptrackingenabled->checkState());
+     for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+        desktopcheckboxes[i]->setEnabled(m_ui->autotrackinggroupbox->isChecked());
 }
