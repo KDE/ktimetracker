@@ -92,7 +92,7 @@ url="http://userbase.kde.org/ktimetracker">http://userbase.kde.org/ktimetracker<
 </chapter>
 
 
-<chapter id="using-Karm">
+<chapter id="using-ktimetracker">
 <title>Using &ktimetracker;</title>
 
 <sect1 id="starting">
@@ -156,7 +156,7 @@ To create a subtask, pick the parent task and select
 <para>When &ktimetracker; exits, the task list is saved to the file specified in
 <menuchoice>
 <guimenu>Settings</guimenu>
-<guimenuitem>Configure KArm</guimenuitem>
+<guimenuitem>Configure KTimeTracker...</guimenuitem>
 </menuchoice>.
 When it next opens, it reloads the task list from the same file.</para>
 
@@ -385,7 +385,7 @@ include the sub-task times.</para>
 
 <important><para>You must turn on the <guilabel>Log History</guilabel> option in
 <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
-KArm</guimenuitem> </menuchoice>.  Otherwise, &ktimetracker; only keeps track of
+KTimeTracker...</guimenuitem> </menuchoice>.  Otherwise, &ktimetracker; only keeps track of
 totals and not the detailed task history.</para></important>
 
 <para>This report is generated for the currently selected task and all it's
