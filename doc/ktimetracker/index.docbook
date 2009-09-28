@@ -606,7 +606,7 @@ task/time window and status bar.</para>
 <screeninfo>&ktimetracker; Screen</screeninfo>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="karm.png" format="PNG"/>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
           </imageobject>
           <textobject>
             <phrase>&ktimetracker; Screen</phrase>
