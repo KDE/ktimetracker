@@ -36,7 +36,8 @@ class historydialog : public QDialog
 public:
     historydialog(TaskView *parent);
     ~historydialog();
-    QString listAllEvents();
+    QString listallevents();
+    QString refresh();
 
 protected:
     void changeEvent(QEvent *e);

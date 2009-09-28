@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2004 by Thorsten Staerk <dev@staerk.de>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -39,30 +38,30 @@ test cases:
 #include "task.h"
 #include "taskview.h"
 
-  PlannerParser::PlannerParser(TaskView * tv)
-  // if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
-  // import as well if there a no task in the taskview as if there are.
-  // if there are, put the top-level tasks of planner on the same level as currentItem.
-  // So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
-  {
+PlannerParser::PlannerParser(TaskView * tv)
+// if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
+// import as well if there a no task in the taskview as if there are.
+// if there are, put the top-level tasks of planner on the same level as currentItem.
+// So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
+{
     kDebug() <<"entering constructor to import planner tasks";
     _taskView=tv;
     level=0;
     if (_taskView->currentItem()) if (_taskView->currentItem()->parent()) 
     {
-      task = _taskView->currentItem()->parent(); 
-      level=1;
+        task = _taskView->currentItem()->parent();
+        level=1;
     }
-  }
+}
   
-  bool PlannerParser::startDocument()
-  {
+bool PlannerParser::startDocument()
+{
     withInTasks=false; // becomes true as soon as parsing occurres <tasks>
     return true;
-  }
+}
   
-  bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
-  {
+bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
+{
     kDebug() << "entering function";
     QString taskName;
     int     taskComplete=0;
@@ -71,43 +70,41 @@ test cases:
     if (qName == QString::fromLatin1("tasks")) withInTasks=true;
     if ((qName == QString::fromLatin1("task")) && (withInTasks))
     {
-	
-      // find out name and percent-complete
-      for (int i=0; i<att.length(); i++)
-      {
-        if (att.qName(i) == QString::fromLatin1("name")) taskName=att.value(i);
-        if (att.qName(i)==QString::fromLatin1("percent-complete")) taskComplete=att.value(i).toInt();
-      }
+        // find out name and percent-complete
+        for (int i=0; i<att.length(); i++)
+        {
+            if (att.qName(i) == QString::fromLatin1("name")) taskName=att.value(i);
+            if (att.qName(i)==QString::fromLatin1("percent-complete")) taskComplete=att.value(i).toInt();
+        }
     
-      // at the moment, task is still the old task or the old father task (if an endElement occurred) or not existing (if the
-      // new task is a top-level-task). Make task the parenttask, if existing.
-      DesktopList dl;
-      if (level++>0) 
-      {
-        parentTask=task;
-        task = new Task(taskName, 0, 0, dl, parentTask);
-        task->setUid(_taskView->storage()->addTask(task, parentTask));
-      }
-      else
-      {
-        task = new Task(taskName, 0, 0, dl, _taskView);
-        kDebug() <<"added" << taskName;
-        task->setUid(_taskView->storage()->addTask(task, 0));	  
-      }
-    
-      task->setPercentComplete(taskComplete, _taskView->storage());
+        // at the moment, task is still the old task or the old father task (if an endElement occurred) or not existing (if the
+        // new task is a top-level-task). Make task the parenttask, if existing.
+        DesktopList dl;
+        if (level++>0)
+        {
+            parentTask=task;
+            task = new Task(taskName, 0, 0, dl, parentTask);
+            task->setUid(_taskView->storage()->addTask(task, parentTask));
+        }
+        else
+        {
+            task = new Task(taskName, 0, 0, dl, _taskView);
+            kDebug() <<"added" << taskName;
+            task->setUid(_taskView->storage()->addTask(task, 0));
+        }
+        task->setPercentComplete(taskComplete, _taskView->storage());
     }
     return true;
- }
+}
     
-  bool PlannerParser::endElement( const QString&, const QString&, const QString& qName)
-  {
+bool PlannerParser::endElement( const QString&, const QString&, const QString& qName)
+{
     // only <task>s within <tasks> increased level, so only decrease for <task>s within <tasks>
     if (withInTasks)
     {
-      if (qName=="task")  if (level-->=0) task=task->parent();
-      if (qName=="tasks") withInTasks=false;
+        if (qName=="task")  if (level-->=0) task=task->parent();
+        if (qName=="tasks") withInTasks=false;
     }
     return true;
-  }
+}
 

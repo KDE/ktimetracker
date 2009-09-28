@@ -52,151 +52,147 @@
 MainWindow::MainWindow( const QString &icsfile )
   :  KParts::MainWindow( )
 {
-  kDebug(5970) << "Entering function, icsfile is " << icsfile;
-  // Setup our actions
-  setupActions();
+    kDebug(5970) << "Entering function, icsfile is " << icsfile;
+    // Setup our actions
+    setupActions();
 
-  // this routine will find and load our Part.
-  KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
-  if (factory)
-  {
-    // now that the Part is loaded, we cast it to a Part to get
-    // our hands on it
-    m_part = static_cast<ktimetrackerpart *>
-       (factory->create(this, "ktimetrackerpart" ));
-
-    if (m_part)
+    // this routine will find and load our Part.
+    KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
+    if (factory)
     {
-      // tell the KParts::MainWindow that this is indeed
-      // the main widget
-      setCentralWidget(m_part->widget());
-      m_part->openFile(icsfile);
-      slotSetCaption( icsfile );  // set the window title to our iCal file
-      connect(configureAction, SIGNAL(triggered(bool)),
-        m_part->widget(), SLOT(showSettingsDialog()));
-      ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
-      setupGUI();
+        // now that the Part is loaded, we cast it to a Part to get
+        // our hands on it
+        m_part = static_cast<ktimetrackerpart *>(factory->create(this, "ktimetrackerpart" ));
+
+        if (m_part)
+        {
+            // tell the KParts::MainWindow that this is indeed
+            // the main widget
+            setCentralWidget(m_part->widget());
+            m_part->openFile(icsfile);
+            slotSetCaption( icsfile );  // set the window title to our iCal file
+            connect(configureAction, SIGNAL(triggered(bool)),
+            m_part->widget(), SLOT(showSettingsDialog()));
+            ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
+            setupGUI();
+        }
     }
-  }
-  else
-  {
-    // if we couldn't find our Part, we exit since the Shell by
-    // itself can't do anything useful
-    KMessageBox::error(this, i18n( "Could not find the KTimeTracker part." ));
-    qApp->quit();
-    // we return here, cause qApp->quit() only means "exit the
-    // next time we enter the event loop...
-    return;
-  }
-  setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
+    else
+    {
+        // if we couldn't find our Part, we exit since the Shell by
+        // itself can't do anything useful
+        KMessageBox::error(this, i18n( "Could not find the KTimeTracker part." ));
+        qApp->quit();
+        // we return here, cause qApp->quit() only means "exit the
+        // next time we enter the event loop...
+        return;
+    }
+    setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
-  // connections
-  connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
+    // connections
+    connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
                  this, SLOT( setStatusBar( QString ) ) );
-  connect( m_part->widget(), SIGNAL( setCaption( const QString& ) ),
+    connect( m_part->widget(), SIGNAL( setCaption( const QString& ) ),
                  this, SLOT( slotSetCaption( const QString& ) ) );
-  loadGeometry();
+    loadGeometry();
 
-  // Setup context menu request handling
-  connect( m_part->widget(),
+    // Setup context menu request handling
+    connect( m_part->widget(),
            SIGNAL( contextMenuRequested( const QPoint& ) ),
            this,
            SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
 
-  _tray = new TrayIcon( this );
+    _tray = new TrayIcon( this );
 
-  connect( _tray, SIGNAL( quitSelected() ), m_part->widget(), SLOT( quit() ) );
+    connect( _tray, SIGNAL( quitSelected() ), m_part->widget(), SLOT( quit() ) );
 
-  connect( m_part->widget(), SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
-  connect( m_part->widget(), SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
-  connect( m_part->widget(), SIGNAL( tasksChanged( const QList<Task*>& ) ),
+    connect( m_part->widget(), SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
+    connect( m_part->widget(), SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
+    connect( m_part->widget(), SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
 }
 
 void MainWindow::setupActions()
 {
-  configureAction = new KAction(this);
-  configureAction->setText(i18n("Configure KTimeTracker..."));
-  actionCollection()->addAction("configure_ktimetracker", configureAction);
+    configureAction = new KAction(this);
+    configureAction->setText(i18n("Configure KTimeTracker..."));
+    actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
 void MainWindow::readProperties( const KConfigGroup &cfg )
 {
-  if( cfg.readEntry( "WindowShown", true ))
-    show();
+    if( cfg.readEntry( "WindowShown", true ))
+        show();
 }
 
 void MainWindow::saveProperties( KConfigGroup &cfg )
 {
-  cfg.writeEntry( "WindowShown", isVisible());
+    cfg.writeEntry( "WindowShown", isVisible());
 }
 
 void MainWindow::slotSetCaption( const QString& qs )
 {
-  setCaption( qs );
+    setCaption( qs );
 }
 
 void MainWindow::setStatusBar(const QString& qs)
 {
-  statusBar()->showMessage(i18n(qs.toUtf8()));
+    statusBar()->showMessage(i18n(qs.toUtf8()));
 }
 
 MainWindow::~MainWindow()
 {
-  kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
-  saveGeometry();
+    kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
+    saveGeometry();
 }
 
 void MainWindow::keyBindings()
 {
-  KShortcutsDialog::configure( actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this );
+    KShortcutsDialog::configure( actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this );
 }
 
 void MainWindow::makeMenus()
 {
-  mainWidget->setupActions( actionCollection() );
-
-  actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
-      actionCollection() );
-
-  setupGUI();
-
-  actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
-  actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
-                                         "bindings which are specific to ktimetracker" ) );
+    mainWidget->setupActions( actionCollection() );
+    actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
+        actionCollection() );
+    setupGUI();
+    actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
+    actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
+                                           "bindings which are specific to ktimetracker" ) );
 }
 
 void MainWindow::loadGeometry()
 {
-  if (initialGeometrySet()) setAutoSaveSettings();
-  else
-  {
-    KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
-    int w = config.readEntry( QString::fromLatin1("Width"), 100 );
-    int h = config.readEntry( QString::fromLatin1("Height"), 100 );
-    w = qMax( w, sizeHint().width() );
-    h = qMax( h, sizeHint().height() );
-    resize(w, h);
-  }
+    if (initialGeometrySet()) setAutoSaveSettings();
+    else
+    {
+        KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
+        int w = config.readEntry( QString::fromLatin1("Width"), 100 );
+        int h = config.readEntry( QString::fromLatin1("Height"), 100 );
+        w = qMax( w, sizeHint().width() );
+        h = qMax( h, sizeHint().height() );
+        resize(w, h);
+    }
 }
 
 
 void MainWindow::saveGeometry()
 {
-  KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
-  config.writeEntry( QString::fromLatin1("Width"), width());
-  config.writeEntry( QString::fromLatin1("Height"), height());
-  config.sync();
+    KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
+    config.writeEntry( QString::fromLatin1("Width"), width());
+    config.writeEntry( QString::fromLatin1("Height"), height());
+    config.sync();
 }
 
 bool MainWindow::queryClose()
 {
-  if ( !kapp->sessionSaving() )
-  {
-    hide();
-    return false;
-  }
-  return KMainWindow::queryClose();
+    if ( !kapp->sessionSaving() )
+    {
+        hide();
+        return false;
+    }
+    return KMainWindow::queryClose();
 }
 
 void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
@@ -204,7 +200,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
     QMenu* pop = dynamic_cast<QMenu*>(
                           factory()->container( i18n( "task_popup" ), this ) );
     if ( pop )
-      pop->popup( point );
+        pop->popup( point );
 }
 
 #include "mainwindow.moc"

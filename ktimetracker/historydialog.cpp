@@ -44,7 +44,6 @@ public:
     void setEditorData( QWidget *editor, const QModelIndex &index ) const
     {
         QDateTime dateTime = QDateTime::fromString( index.model()->data( index, Qt::DisplayRole ).toString(), "yyyy-MM-dd HH:mm:ss" );
-
         KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
         dateTimeWidget->setDateTime( dateTime );
     }
@@ -53,7 +52,6 @@ public:
     {
         KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
         QDateTime dateTime = dateTimeWidget->dateTime();
-
         model->setData( index, dateTime.toString( "yyyy-MM-dd HH:mm:ss" ), Qt::EditRole );
     }
 
@@ -81,7 +79,7 @@ historydialog::historydialog(TaskView *parent) :
                   << i18n( "Comment" ) << QString( "event UID" ) );
     m_ui->historytablewidget->horizontalHeader()->setStretchLastSection( true );
     m_ui->historytablewidget->setColumnHidden( 4, true );  // hide the "UID" column
-    listAllEvents();
+    listallevents();
     m_ui->historytablewidget->setSortingEnabled( true );
     m_ui->historytablewidget->sortItems( 1, Qt::DescendingOrder );
     m_ui->historytablewidget->resizeColumnsToContents();
@@ -92,9 +90,12 @@ historydialog::~historydialog()
     delete m_ui;
 }
 
-QString historydialog::listAllEvents()
+QString historydialog::listallevents()
 {
     QString err=QString();
+    // if sorting is enabled and we write to row x, we cannot be sure row x will be in row x some lines later
+    bool old_sortingenabled=m_ui->historytablewidget->isSortingEnabled();
+    m_ui->historytablewidget->setSortingEnabled( false );
     connect(  m_ui->historytablewidget, SIGNAL( cellChanged( int, int ) ),
               this, SLOT( historyWidgetCellChanged( int, int ) ) );
 
@@ -139,6 +140,7 @@ QString historydialog::listAllEvents()
                   +  m_ui->historytablewidget->columnWidth( 1 )
                   +  m_ui->historytablewidget->columnWidth( 2 )
                   +  m_ui->historytablewidget->columnWidth( 3 ), height() );
+    m_ui->historytablewidget->setSortingEnabled(old_sortingenabled);
     return err;
 }
 
@@ -226,6 +228,15 @@ void historydialog::historyWidgetCellChanged( int row, int col )
     }
 }
 
+QString historydialog::refresh()
+{
+    QString err;
+    while (m_ui->historytablewidget->rowCount()>0)
+        m_ui->historytablewidget->removeRow(0);
+    listallevents();
+    return err;
+}
+
 #include "historydialog.moc"
 
 void historydialog::on_deletepushbutton_clicked()
@@ -238,8 +249,8 @@ void historydialog::on_deletepushbutton_clicked()
         if ( (*i)->uid() == uid )
         {
             kDebug(5970) << "removing uid " << (*i)->uid();
-            KMessageBox::information(0,(*i)->uid());
             mparent->storage()->removeEvent((*i)->uid());
+            this->refresh();
         }
     }
 }

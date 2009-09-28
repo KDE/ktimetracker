@@ -33,84 +33,81 @@
 
 CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   QWidget *parent 
-                                  ) 
-  : CSVExportDialogBase( parent )
+                                  ) : CSVExportDialogBase( parent )
 {
-  connect( button( User1 ), SIGNAL( clicked() ),
+    connect( button( User1 ), SIGNAL( clicked() ),
            this, SLOT( exPortToClipBoard() ) );
-  connect( button( Ok ), SIGNAL( clicked() ),
+    connect( button( Ok ), SIGNAL( clicked() ),
            this, SLOT( exPortToCSVFile() ) );
-  connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
-  switch ( rt ) {
-    case ReportCriteria::CSVTotalsExport:
-      grpDateRange->setEnabled( false );
-      grpDateRange->hide();
-      rc.reportType = rt;
-      break;
-    case ReportCriteria::CSVHistoryExport:
-      grpDateRange->setEnabled( true );
-      rc.reportType = rt;
-      break;
-    default:
-      break;
+    connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
+    switch ( rt )
+    {
+        case ReportCriteria::CSVTotalsExport:
+            grpDateRange->setEnabled( false );
+            grpDateRange->hide();
+            rc.reportType = rt;
+        break;
+        case ReportCriteria::CSVHistoryExport:
+            grpDateRange->setEnabled( true );
+            rc.reportType = rt;
+        break;
+        default:
+        break;
+    }
 
-  }
-
-  // If decimal symbol is a comma, then default field separator to semi-colon.
-  // In France and Germany, one-and-a-half is written as 1,5 not 1.5
-  QString d = KGlobal::locale()->decimalSymbol();
-  if ( "," == d ) CSVExportDialogBase::radioSemicolon->setChecked(true);
-  else CSVExportDialogBase::radioComma->setChecked(true);
-
+    // If decimal symbol is a comma, then default field separator to semi-colon.
+    // In France and Germany, one-and-a-half is written as 1,5 not 1.5
+    QString d = KGlobal::locale()->decimalSymbol();
+    if ( "," == d ) CSVExportDialogBase::radioSemicolon->setChecked(true);
+    else CSVExportDialogBase::radioComma->setChecked(true);
 }
 
 void CSVExportDialog::enableExportButton()
 {
-  enableButton( Ok, !urlExportTo->lineEdit()->text().isEmpty() );
+    enableButton( Ok, !urlExportTo->lineEdit()->text().isEmpty() );
 }
 
 void CSVExportDialog::enableTasksToExportQuestion()
 {
-  return;
-  //grpTasksToExport->setEnabled( true );      
+    return;
+    //grpTasksToExport->setEnabled( true );
 }
 
 void CSVExportDialog::exPortToClipBoard()
 {
-  rc.bExPortToClipBoard=true;
-  accept();
+    rc.bExPortToClipBoard=true;
+    accept();
 }
 
 void CSVExportDialog::exPortToCSVFile()
 {
-  rc.bExPortToClipBoard=false;
-  accept();
+    rc.bExPortToClipBoard=false;
+    accept();
 }
 
 ReportCriteria CSVExportDialog::reportCriteria()
 {
-  rc.url = urlExportTo->url();
-  rc.from = dtFrom->date();
-  rc.to = dtTo->date();
-  rc.decimalMinutes = (  combodecimalminutes->currentText() == i18nc( "format to display times", "Decimal" ) );
-  kDebug(5970) <<"rc.decimalMinutes is" << rc.decimalMinutes;
+    rc.url = urlExportTo->url();
+    rc.from = dtFrom->date();
+    rc.to = dtTo->date();
+    rc.decimalMinutes = (  combodecimalminutes->currentText() == i18nc( "format to display times", "Decimal" ) );
+    kDebug(5970) <<"rc.decimalMinutes is" << rc.decimalMinutes;
 
-  if ( radioComma->isChecked() )          rc.delimiter = ",";
-  else if ( radioTab->isChecked() )       rc.delimiter = "\t";
-  else if ( radioSemicolon->isChecked() ) rc.delimiter = ";";
-  else if ( radioSpace->isChecked() )     rc.delimiter = " ";
-  else if ( radioOther->isChecked() )     rc.delimiter = txtOther->text();
-  else {
-    kDebug(5970) 
-        << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
-    rc.delimiter = "\t";
-  }
+    if ( radioComma->isChecked() )          rc.delimiter = ",";
+    else if ( radioTab->isChecked() )       rc.delimiter = "\t";
+    else if ( radioSemicolon->isChecked() ) rc.delimiter = ";";
+    else if ( radioSpace->isChecked() )     rc.delimiter = " ";
+    else if ( radioOther->isChecked() )     rc.delimiter = txtOther->text();
+    else
+    {
+        kDebug(5970) << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
+        rc.delimiter = "\t";
+    }
 
-  rc.quote = cboQuote->currentText();
-  rc.sessionTimes = (i18n("Session Times") == combosessiontimes->currentText());
-  rc.allTasks = (i18n("All Tasks") == comboalltasks->currentText());
-
-  return rc;
+    rc.quote = cboQuote->currentText();
+    rc.sessionTimes = (i18n("Session Times") == combosessiontimes->currentText());
+    rc.allTasks = (i18n("All Tasks") == comboalltasks->currentText());
+    return rc;
 }
 
 #include "csvexportdialog.moc"

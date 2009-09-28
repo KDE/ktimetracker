@@ -42,15 +42,15 @@ using namespace std;
 
 int main (int argc, char *argv[])
 {
-  KAboutData aboutData( "KArmReminder", "ktimetracker", ki18n("KArmReminder"),
-      "1.0", ki18n("KArmReminder"), KAboutData::License_GPL,
-      ki18n("(c) 2006") );
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KApplication khello;
-  // outputting a string is again something that became complicated
-  // Several languages need 8Bit, ascii() is not enough.
-  cout << i18n("Someone, probably you, has called karm.\n").toLocal8Bit().data();
-  cout << i18n("KArm has been renamed to KTimeTracker. This makes it easier to recognize.\nCompatibility advice: Do not give ktimetracker files to karm users. Using karm files with ktimetracker is possible.\n").toLocal8Bit().data();
-  cout << i18n("Please learn to call ktimetracker as this reminder may be removed in the future.\n").toLocal8Bit().data();
-  KMessageBox::information(0,i18n("Someone, probably you, has called karm. KArm has been renamed to KTimeTracker. This makes it easier to recognize. Compatibility advice: Do not give ktimetracker files to karm users. Using karm files with ktimetracker is possible. Please learn to call ktimetracker as this reminder may be removed in the future."),i18n("KArm is now ktimetracker"));
+    KAboutData aboutData( "KArmReminder", "ktimetracker", ki18n("KArmReminder"),
+        "1.0", ki18n("KArmReminder"), KAboutData::License_GPL,
+        ki18n("(c) 2006") );
+    KCmdLineArgs::init( argc, argv, &aboutData );
+    KApplication khello;
+    // outputting a string is again something that became complicated
+    // Several languages need 8Bit, ascii() is not enough.
+    cout << i18n("Someone, probably you, has called karm.\n").toLocal8Bit().data();
+    cout << i18n("KArm has been renamed to KTimeTracker. This makes it easier to recognize.\nCompatibility advice: Do not give ktimetracker files to karm users. Using karm files with ktimetracker is possible.\n").toLocal8Bit().data();
+    cout << i18n("Please learn to call ktimetracker as this reminder may be removed in the future.\n").toLocal8Bit().data();
+    KMessageBox::information(0,i18n("Someone, probably you, has called karm. KArm has been renamed to KTimeTracker. This makes it easier to recognize. Compatibility advice: Do not give ktimetracker files to karm users. Using karm files with ktimetracker is possible. Please learn to call ktimetracker as this reminder may be removed in the future."),i18n("KArm is now ktimetracker"));
 }

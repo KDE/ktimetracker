@@ -47,52 +47,50 @@ QVector<QPixmap*> *TrayIcon::icons = 0;
 TrayIcon::TrayIcon(MainWindow* parent)
   : KSystemTrayIcon(parent)
 {
-  setObjectName( "Ktimetracker Tray" );
-  // the timer that updates the "running" icon in the tray
-  _taskActiveTimer = new QTimer(this);
-  connect( _taskActiveTimer, SIGNAL( timeout() ), this,
-                             SLOT( advanceClock()) );
+    setObjectName( "Ktimetracker Tray" );
+    // the timer that updates the "running" icon in the tray
+    _taskActiveTimer = new QTimer(this);
+    connect( _taskActiveTimer, SIGNAL( timeout() ), this,
+                               SLOT( advanceClock()) );
 
-  if (icons == 0) 
-  {
-    icons = new QVector<QPixmap*>(8);
-    for (int i=0; i<8; i++)
+    if (icons == 0)
     {
-      QPixmap *icon = new QPixmap();
-      QString name;
-      name.sprintf("active-icon-%d.xpm",i);
-      *icon = UserIcon(name);
-      icons->insert(i,icon);
+        icons = new QVector<QPixmap*>(8);
+        for (int i=0; i<8; i++)
+        {
+            QPixmap *icon = new QPixmap();
+        QString name;
+        name.sprintf("active-icon-%d.xpm",i);
+        *icon = UserIcon(name);
+        icons->insert(i,icon);
+        }
     }
-  }
-
-  TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
-  if ( timetrackerWidget ) 
-  {
-    KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
-    if ( action ) contextMenu()->addAction( action );
-    action = timetrackerWidget->action( "stopAll" );
-    if ( action ) contextMenu()->addAction( action );
-  }
-
-  resetClock();
-  initToolTip();
+    TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
+    if ( timetrackerWidget )
+    {
+        KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
+        if ( action ) contextMenu()->addAction( action );
+        action = timetrackerWidget->action( "stopAll" );
+        if ( action ) contextMenu()->addAction( action );
+    }
+    resetClock();
+    initToolTip();
 }
 
 TrayIcon::TrayIcon(ktimetrackerpart *)
   : KSystemTrayIcon( 0 )
 {
-  setObjectName( "Ktimetracker Tray" );
-// it is not convenient if every kpart gets an icon in the systray.
-  _taskActiveTimer = 0;
+    setObjectName( "Ktimetracker Tray" );
+    // it is not convenient if every kpart gets an icon in the systray.
+    _taskActiveTimer = 0;
 }
 
 TrayIcon::TrayIcon()
   : KSystemTrayIcon( 0 )
 // will display nothing at all
 {
-  setObjectName( "Ktimetracker Tray" );
-  _taskActiveTimer = 0;
+    setObjectName( "Ktimetracker Tray" );
+    _taskActiveTimer = 0;
 }
 
 TrayIcon::~TrayIcon()
@@ -101,81 +99,82 @@ TrayIcon::~TrayIcon()
 
 void TrayIcon::startClock()
 {
-  kDebug(5970) << "Entering function";
-  if ( _taskActiveTimer )
-  {
-    _taskActiveTimer->start(1000);
-    setIcon( *(*icons)[_activeIcon] );
-    show();
-  }
-  kDebug(5970) << "Leaving function";
+    kDebug(5970) << "Entering function";
+    if ( _taskActiveTimer )
+    {
+        _taskActiveTimer->start(1000);
+        setIcon( *(*icons)[_activeIcon] );
+        show();
+    }
+    kDebug(5970) << "Leaving function";
 }
 
 void TrayIcon::stopClock()
 {
-  kDebug(5970) << "Entering function";
-  if ( _taskActiveTimer )
-  {
-    _taskActiveTimer->stop();
-    show();
-  }
-  kDebug(5970) << "Leaving function";
+    kDebug(5970) << "Entering function";
+    if ( _taskActiveTimer )
+    {
+        _taskActiveTimer->stop();
+        show();
+    }
+    kDebug(5970) << "Leaving function";
 }
 
 void TrayIcon::advanceClock()
 {
-  _activeIcon = (_activeIcon+1) % 8;
-  setIcon( *(*icons)[_activeIcon]);
+    _activeIcon = (_activeIcon+1) % 8;
+    setIcon( *(*icons)[_activeIcon]);
 }
 
 void TrayIcon::resetClock()
 {
-  _activeIcon = 0;
-  setIcon( *(*icons)[_activeIcon]);
-  show();
+    _activeIcon = 0;
+    setIcon( *(*icons)[_activeIcon]);
+    show();
 }
 
 void TrayIcon::initToolTip()
 {
-  updateToolTip(QList<Task*> ());
+    updateToolTip(QList<Task*> ());
 }
 
 void TrayIcon::updateToolTip(QList<Task*> activeTasks)
 {
-  if ( activeTasks.isEmpty() ) 
-  {
-    this->setToolTip( i18n("No active tasks") );
-    return;
-  }
-
-  QFontMetrics fm( QToolTip::font() );
-  const QString continued = i18n( ", ..." );
-  const int buffer = fm.boundingRect( continued ).width();
-  const int desktopWidth = KGlobalSettings::desktopGeometry(parentWidget()).width();
-  const int maxWidth = desktopWidth - buffer;
-
-  QString qTip;
-  QString s;
-
-  // Build the tool tip with all of the names of the active tasks.
-  // If at any time the width of the tool tip is larger than the desktop,
-  // stop building it.
-
-  for ( int i = 0; i < activeTasks.count(); ++i ) {
-    Task* task = activeTasks.at( i );
-    if ( i > 0 )
-      s += i18n( ", " ) + task->name();
-    else
-      s += task->name();
-    int width = fm.boundingRect( s ).width();
-    if ( width > maxWidth ) {
-      qTip += continued;
-      break;
+    if ( activeTasks.isEmpty() )
+    {
+        this->setToolTip( i18n("No active tasks") );
+        return;
     }
-    qTip = s;
-  }
 
-  this->setToolTip( qTip );
+    QFontMetrics fm( QToolTip::font() );
+    const QString continued = i18n( ", ..." );
+    const int buffer = fm.boundingRect( continued ).width();
+    const int desktopWidth = KGlobalSettings::desktopGeometry(parentWidget()).width();
+    const int maxWidth = desktopWidth - buffer;
+
+    QString qTip;
+    QString s;
+
+    // Build the tool tip with all of the names of the active tasks.
+    // If at any time the width of the tool tip is larger than the desktop,
+    // stop building it.
+
+    for ( int i = 0; i < activeTasks.count(); ++i )
+    {
+        Task* task = activeTasks.at( i );
+        if ( i > 0 )
+            s += i18n( ", " ) + task->name();
+        else
+            s += task->name();
+        int width = fm.boundingRect( s ).width();
+        if ( width > maxWidth )
+        {
+            qTip += continued;
+            break;
+        }
+        qTip = s;
+    }
+    this->setToolTip( qTip );
 }
 
 #include "tray.moc"

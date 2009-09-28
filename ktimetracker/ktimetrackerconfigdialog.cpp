@@ -27,54 +27,51 @@
 #include "ktimetracker.h"
 KTimeTrackerConfigDialog::KTimeTrackerConfigDialog( const QString &title,
                                                     QWidget *parent )
-  : KCMultiDialog( parent )
+    : KCMultiDialog( parent )
 {
-  setFaceType( KPageDialog::List );
-  setButtons( Default | Ok | Cancel );
-  setDefaultButton( Ok );
-
-  setCaption( title );
-  addModule( "ktimetracker_config_behavior" );
-  addModule( "ktimetracker_config_display" );
-  addModule( "ktimetracker_config_storage" );
+    setFaceType( KPageDialog::List );
+    setButtons( Default | Ok | Cancel );
+    setDefaultButton( Ok );
+    setCaption( title );
+    addModule( "ktimetracker_config_behavior" );
+    addModule( "ktimetracker_config_display" );
+    addModule( "ktimetracker_config_storage" );
 }
 
 KTimeTrackerConfigDialog::~KTimeTrackerConfigDialog()
 {
 }
 
-void KTimeTrackerConfigDialog::slotOk() {
-  KTimeTrackerSettings::self()->writeConfig();
-}
-
-
-
-
-extern "C"
+void KTimeTrackerConfigDialog::slotOk()
 {
-  KDE_EXPORT KCModule *create_ktimetracker_config_behavior( QWidget *parent )
-  {
-      KComponentData instance( "ktimetracker_config_behavior" );
-      return new KTimeTrackerBehaviorConfig( instance, parent );
-  }
+    KTimeTrackerSettings::self()->writeConfig();
 }
 
 extern "C"
 {
-  KDE_EXPORT KCModule *create_ktimetracker_config_storage( QWidget *parent )
-  {
-      KComponentData instance( "ktimetracker_config_storage" );
-      return new KTimeTrackerStorageConfig( instance, parent );
-  }
+    KDE_EXPORT KCModule *create_ktimetracker_config_behavior( QWidget *parent )
+    {
+        KComponentData instance( "ktimetracker_config_behavior" );
+        return new KTimeTrackerBehaviorConfig( instance, parent );
+    }
 }
 
 extern "C"
 {
-  KDE_EXPORT KCModule *create_ktimetracker_config_display( QWidget *parent )
-  {
-      KComponentData instance( "ktimetracker_config_display" );
-      return new KTimeTrackerDisplayConfig( instance, parent );
-  }
+    KDE_EXPORT KCModule *create_ktimetracker_config_storage( QWidget *parent )
+    {
+        KComponentData instance( "ktimetracker_config_storage" );
+        return new KTimeTrackerStorageConfig( instance, parent );
+    }
+}
+
+extern "C"
+{
+    KDE_EXPORT KCModule *create_ktimetracker_config_display( QWidget *parent )
+    {
+        KComponentData instance( "ktimetracker_config_display" );
+        return new KTimeTrackerDisplayConfig( instance, parent );
+    }
 }
 
 KTimeTrackerBehaviorConfig::KTimeTrackerBehaviorConfig( const KComponentData &inst, QWidget *parent )
@@ -121,14 +118,10 @@ void KTimeTrackerStorageConfig::save()
     KCModule::save();
 }
 
-
-
 KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig( const KComponentData &inst, QWidget *parent )
     :KCModule( inst, parent )
 {
     QHBoxLayout *lay = new QHBoxLayout( this );
-
-
     Ui::DisplayPage *displayUi = new Ui::DisplayPage;
     QWidget *displayPage = new QWidget;
     displayUi->setupUi( displayPage );
