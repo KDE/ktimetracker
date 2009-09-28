@@ -4,11 +4,13 @@ Type=Service
 X-KDE-ServiceTypes=KCModule
 X-DocPath=ktimetracker/index.html
 
+X-KDE-ModuleType=Library
 X-KDE-Library=kcm_ktimetracker
 X-KDE-ParentApp=ktimetracker
 X-KDE-FactoryName=ktimetracker_config_display
 X-KDE-ParentComponents=ktimetracker,kontact_ktimetrackerplugin
 X-KDE-CfgDlgHierarchy=KTimeTracker
+X-KDE-HasReadOnlyMode=false
 X-KDE-Weight=700
 
 Name=Appearance
