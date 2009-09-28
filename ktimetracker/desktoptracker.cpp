@@ -23,6 +23,7 @@
 #include "desktoptracker.h"
 #include <KDebug>
 #include "ktimetracker.h"
+#include "ktimetrackerutility.h"
 #include <KWindowSystem>
 #include <QTimer>
 
@@ -32,7 +33,7 @@ DesktopTracker::DesktopTracker ()
 #ifdef Q_WS_X11
     connect( KWindowSystem::self(), SIGNAL( currentDesktopChanged( int ) ),
            this, SLOT( handleDesktopChange( int ) ) );
-    mDesktopCount = KWindowSystem::self()->numberOfDesktops();
+    mDesktopCount = desktopCount();
     mPreviousDesktop = KWindowSystem::self()->currentDesktop()-1;
 #else
 #ifdef __GNUC__

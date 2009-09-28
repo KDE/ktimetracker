@@ -19,19 +19,14 @@
  *
  */
 
-#ifndef KARM_TASK_H
-#define KARM_TASK_H
+#ifndef KTIMETRACKER_TASK_H
+#define KTIMETRACKER_TASK_H
 
 #include <QDateTime>
 #include <QPixmap>
 #include <QVector>
-
-// Required b/c DesktopList is a typedef not a class.
-#include "desktoplist.h"
-
-// Required b/c of static cast below?  (How else can compiler know that a
-// TaskView is a subclass or QListView?)
-#include "taskview.h"
+#include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
+#include "taskview.h" // Required b/c of static cast below.
 
 class QObject;
 class QPixmap;
@@ -41,8 +36,8 @@ class timetrackerstorage;
 
 namespace KCal 
 {
-  class Incidence;
-  class Todo;
+    class Incidence;
+    class Todo;
 }
 
 /** \brief A class representing a task
@@ -60,28 +55,26 @@ namespace KCal
  */
 class Task : public QObject, public QTreeWidgetItem
 {
-  Q_OBJECT
+Q_OBJECT
 
-  public:
-    //@{ constructors
+public:
     Task( const QString& taskame, long minutes, long sessionTime,
           DesktopList desktops, TaskView* parent = 0, bool konsolemode=false );
     Task( const QString& taskame, long minutes, long sessionTime,
           DesktopList desktops, Task* parent = 0);
     Task( KCal::Todo* incident, TaskView* parent, bool konsolemode=false );
-    //@}
+
     /* destructor */
     ~Task();
 
     /** return parent Task or null in case of TaskView.
      *  same as QListViewItem::parent()
      */
-    Task* parent() const      { return (Task*)QTreeWidgetItem::parent(); }
+    Task* parent() const  { return (Task*)QTreeWidgetItem::parent(); }
 
     /** Return task view for this task */
-    TaskView* taskView() const {
-        return static_cast<TaskView *>( treeWidget() );
-    }
+    TaskView* taskView() const
+        { return static_cast<TaskView *>( treeWidget() ); }
 
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const;
@@ -312,6 +305,7 @@ class Task : public QObject, public QTreeWidgetItem
      * 100.  If less than zero, set to zero.
      */
     void setPercentComplete(const int percent, timetrackerstorage *storage);
+
     int percentComplete() const;
 
     /**
@@ -320,8 +314,8 @@ class Task : public QObject, public QTreeWidgetItem
      * Priority is allowed from 0 to 9. 0 unspecified, 1 highest and 9 lowest.
      */
     void setPriority( int priority );
-    int priority() const;
 
+    int priority() const;
 
     /** Sets an appropriate icon for this task based on its level of
      * completion */
@@ -389,4 +383,4 @@ class Task : public QObject, public QTreeWidgetItem
     int mPriority;
 };
 
-#endif // KARM_TASK_H
+#endif // KTIMETRACKER_TASK_H
