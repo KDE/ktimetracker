@@ -9,6 +9,8 @@ X-KDE-ParentApp=ktimetracker
 X-KDE-FactoryName=ktimetracker_config_behavior
 X-KDE-ParentComponents=ktimetracker,kontact_ktimetrackerplugin
 X-KDE-CfgDlgHierarchy=KTimeTracker
+X-KDE-ModuleType=Library
+X-KDE-HasReadOnlyMode=false
 X-KDE-Weight=700
 
 Name=Behavior

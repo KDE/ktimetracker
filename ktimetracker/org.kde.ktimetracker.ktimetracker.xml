@@ -39,6 +39,9 @@
       <arg type="s" direction="out"/>
       <arg name="errorCode" type="i" direction="in"/>
     </method>
+    <method name="isIdleDetectionPossible">
+       <arg type="b" direction="out" />
+    </method>
     <method name="totalMinutesForTaskId">
       <arg type="i" direction="out"/>
       <arg name="taskId" type="s" direction="in"/>

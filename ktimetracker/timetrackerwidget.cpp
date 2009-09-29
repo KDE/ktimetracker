@@ -51,6 +51,7 @@
 #include <KIO/Job>
 
 #include "historydialog.h"
+#include "idletimedetector.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "mainadaptor.h"
@@ -995,6 +996,15 @@ QString TimetrackerWidget::error( int errorCode ) const
         default:
             return i18n( "Invalid error number: %1", errorCode );
     }
+}
+
+bool TimetrackerWidget::isIdleDetectionPossible() const
+{
+    bool result;
+    IdleTimeDetector *idletimedetector1=new IdleTimeDetector(50);
+    result=idletimedetector1->isIdleDetectionPossible();
+    delete idletimedetector1;
+    return result;
 }
 
 int TimetrackerWidget::totalMinutesForTaskId( const QString &taskId ) const

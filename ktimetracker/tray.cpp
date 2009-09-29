@@ -37,7 +37,7 @@
 #include <KAction>
 #include <KGlobalSettings>
 #include <KLocale>
-
+#include <KMenu>
 #include "mainwindow.h"
 #include "task.h"
 #include "timetrackerwidget.h"
@@ -45,7 +45,7 @@
 QVector<QPixmap*> *TrayIcon::icons = 0;
 
 TrayIcon::TrayIcon(MainWindow* parent)
-  : KSystemTrayIcon(parent)
+  : KNotificationItem(parent)
 {
     setObjectName( "Ktimetracker Tray" );
     // the timer that updates the "running" icon in the tray
@@ -78,7 +78,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
 }
 
 TrayIcon::TrayIcon(ktimetrackerpart *)
-  : KSystemTrayIcon( 0 )
+  : KNotificationItem( 0 )
 {
     setObjectName( "Ktimetracker Tray" );
     // it is not convenient if every kpart gets an icon in the systray.
@@ -86,7 +86,7 @@ TrayIcon::TrayIcon(ktimetrackerpart *)
 }
 
 TrayIcon::TrayIcon()
-  : KSystemTrayIcon( 0 )
+  : KNotificationItem( 0 )
 // will display nothing at all
 {
     setObjectName( "Ktimetracker Tray" );
@@ -103,8 +103,7 @@ void TrayIcon::startClock()
     if ( _taskActiveTimer )
     {
         _taskActiveTimer->start(1000);
-        setIcon( *(*icons)[_activeIcon] );
-        show();
+        setIconByPixmap( *(*icons)[_activeIcon] );
     }
     kDebug(5970) << "Leaving function";
 }
@@ -115,7 +114,6 @@ void TrayIcon::stopClock()
     if ( _taskActiveTimer )
     {
         _taskActiveTimer->stop();
-        show();
     }
     kDebug(5970) << "Leaving function";
 }
@@ -123,14 +121,13 @@ void TrayIcon::stopClock()
 void TrayIcon::advanceClock()
 {
     _activeIcon = (_activeIcon+1) % 8;
-    setIcon( *(*icons)[_activeIcon]);
+    setIconByPixmap( *(*icons)[_activeIcon]);
 }
 
 void TrayIcon::resetClock()
 {
     _activeIcon = 0;
-    setIcon( *(*icons)[_activeIcon]);
-    show();
+    setIconByPixmap( *(*icons)[_activeIcon]);
 }
 
 void TrayIcon::initToolTip()
@@ -142,14 +139,14 @@ void TrayIcon::updateToolTip(QList<Task*> activeTasks)
 {
     if ( activeTasks.isEmpty() )
     {
-        this->setToolTip( i18n("No active tasks") );
+        this->setToolTip( "ktimetracker", "ktimetracker", i18n("No active tasks") );
         return;
     }
 
     QFontMetrics fm( QToolTip::font() );
     const QString continued = i18n( ", ..." );
     const int buffer = fm.boundingRect( continued ).width();
-    const int desktopWidth = KGlobalSettings::desktopGeometry(parentWidget()).width();
+    const int desktopWidth = KGlobalSettings::desktopGeometry(associatedWidget()).width();
     const int maxWidth = desktopWidth - buffer;
 
     QString qTip;
@@ -174,7 +171,7 @@ void TrayIcon::updateToolTip(QList<Task*> activeTasks)
         }
         qTip = s;
     }
-    this->setToolTip( qTip );
+    this->setToolTip( "ktimetracker", "ktimetracker", qTip );
 }
 
 #include "tray.moc"
