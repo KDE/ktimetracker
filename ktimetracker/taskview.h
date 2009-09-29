@@ -186,9 +186,9 @@ class TaskView : public QTreeWidget
      */
     void deleteTask( Task* task=0 );
 
-    /** Reinstates the current task as incomplete.
+    /** Sets % completed for the current task.
      * @param completion The percentage complete to mark the task as. */
-    void reinstateTask(int completion);
+    void setPerCentComplete(int completion);
     void markTaskAsComplete();
     void markTaskAsIncomplete();
 

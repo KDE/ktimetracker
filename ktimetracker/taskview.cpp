@@ -938,7 +938,7 @@ void TaskView::editTask()
     }
 }
 
-void TaskView::reinstateTask(int completion)
+void TaskView::setPerCentComplete(int completion)
 {
     Task* task = currentItem();
     if (task == 0)
@@ -1049,7 +1049,7 @@ QList<HistoryEvent> TaskView::getHistory(const QDate& from,
 
 void TaskView::markTaskAsIncomplete()
 {
-    reinstateTask(50); // if it has been reopened, assume half-done
+    setPerCentComplete(50); // if it has been reopened, assume half-done
 }
 
 QString TaskView::clipTotals( const ReportCriteria &rc )
