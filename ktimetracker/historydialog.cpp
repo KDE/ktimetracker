@@ -250,6 +250,7 @@ void historydialog::on_deletepushbutton_clicked()
         {
             kDebug(5970) << "removing uid " << (*i)->uid();
             mparent->storage()->removeEvent((*i)->uid());
+            mparent->reFreshTimes();
             this->refresh();
         }
     }
