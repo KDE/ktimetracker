@@ -58,6 +58,7 @@ class MainWindow : public KParts::MainWindow
 
     friend class TrayIcon;
     ktimetrackerpart *m_part;
+    void aboutKDE();
 
   public:
     MainWindow( const QString &icsfile = "" );

@@ -112,6 +112,8 @@ MainWindow::MainWindow( const QString &icsfile )
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
 }
 
+void MainWindow::aboutKDE(){};
+
 void MainWindow::setupActions()
 {
     configureAction = new KAction(this);
