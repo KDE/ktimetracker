@@ -241,16 +241,21 @@ QString historydialog::refresh()
 
 void historydialog::on_deletepushbutton_clicked()
 {
-    QString uid = m_ui->historytablewidget->item( m_ui->historytablewidget->currentRow(), 4 )->text();
-    kDebug() <<"uid =" << uid;
-    KCal::Event::List eventList = mparent->storage()->rawevents();
-    for ( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
-    {
-        if ( (*i)->uid() == uid )
+    if (m_ui->historytablewidget->item( m_ui->historytablewidget->currentRow(), 4))
+    { // if an item is current
+        QString uid = m_ui->historytablewidget->item( m_ui->historytablewidget->currentRow(), 4 )->text();
+        kDebug() <<"uid =" << uid;
+        KCal::Event::List eventList = mparent->storage()->rawevents();
+        for ( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
         {
-            kDebug(5970) << "removing uid " << (*i)->uid();
-            mparent->storage()->removeEvent((*i)->uid());
-            this->refresh();
+            if ( (*i)->uid() == uid )
+            {
+                kDebug(5970) << "removing uid " << (*i)->uid();
+                mparent->storage()->removeEvent((*i)->uid());
+                mparent->reFreshTimes();
+                this->refresh();
+            }
         }
     }
+    else KMessageBox::information(this, "Please select a task to delete.");
 }
