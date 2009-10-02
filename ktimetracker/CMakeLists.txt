@@ -59,9 +59,9 @@ kde4_add_app_icon(ktimetracker_SRCS "hi*-app-ktimetracker.png")
 kde4_add_executable(ktimetracker ${ktimetracker_SRCS})
 
 
-target_link_libraries(karm   ${KDE4_KIO_LIBS} ${KDEPIMLIBS_KCAL_LIBS} kdepim kcal_resourceremote)
+target_link_libraries(karm   ${KDE4_KIO_LIBS} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} kcal_resourceremote)
 
-target_link_libraries(ktimetracker   ${KDE4_KUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(ktimetracker   ${KDE4_KUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)

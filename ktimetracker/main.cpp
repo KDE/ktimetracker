@@ -28,7 +28,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KStandardDirs>
-#include <libkdepim/pimapplication.h>
+#include <kontactinterface/pimuniqueapplication.h>
 
 #include "version.h"
 #include "mainwindow.h"
@@ -123,7 +123,7 @@ int main( int argc, char *argv[] )
 
     if ( !konsolemode )
     {  // no konsole mode
-        KPIM::PimApplication myApp;
+        KontactInterface::PimUniqueApplication myApp;
         MainWindow *mainWindow;
         mainWindow = new MainWindow( icsfile( args ) );
         if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
