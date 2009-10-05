@@ -48,8 +48,6 @@
   <Menu name="settings" > 
     <text>&amp;Settings</text>
     <Action name="searchbar" />
-    <Separator />
-    <Action name="configure_ktimetracker" />
   </Menu>
 </MenuBar>
 <ToolBar position="top" iconText="icononly" noMerge="1" name="mainToolBar" >
