@@ -52,7 +52,7 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
     : KParts::ReadWritePart(parent)
 {
   KGlobal::locale()->insertCatalog("ktimetracker");
-
+  KGlobal::locale()->insertCatalog("libkdepim");
   // we need an instance
   setComponentData( ktimetrackerPartFactory::componentData() );
 
