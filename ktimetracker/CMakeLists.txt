@@ -9,7 +9,6 @@ configure_file(config-karm.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karm.h )
 
 add_subdirectory( support )
 add_subdirectory( pics )
-add_subdirectory( test )
 
 include_directories( ${CMAKE_SOURCE_DIR}/kresources/remote )
 

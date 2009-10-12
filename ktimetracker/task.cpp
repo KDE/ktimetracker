@@ -281,6 +281,7 @@ void Task::setPixmapProgress()
         icon = kil->loadIcon( iconincomplete, KIconLoader::User );
     }
     setIcon(0, icon);
+    delete kil;
     kDebug(5970) << "Leaving function";
 }
 
