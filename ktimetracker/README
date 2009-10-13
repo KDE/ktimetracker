@@ -1,9 +1,0 @@
-KTimeTracker tracks time spent on various tasks. It is useful for tracking hours to be billed to different clients or just to find out what percentage of your day is
-spent playing Doom or reading Slashdot.
-
-KTimeTracker was originaly written by Sirtaj Singh Kang and named KArm. The word "karm" means "work" in the author's native Punjabi.
-
-KTimeTracker was inspired by Harald Tveit Alvestrand's very useful utility called
-titrax; we added some eyecandy and functionality like subtasks.
-
-There is more info about KTimeTracker at http://wiki.kde.org/ktimetracker

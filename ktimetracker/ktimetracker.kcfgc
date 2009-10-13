@@ -1,4 +1,0 @@
-File=ktimetracker.kcfg
-ClassName=KTimeTrackerSettings
-Singleton=true
-Mutators=true
