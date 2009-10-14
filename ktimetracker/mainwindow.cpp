@@ -72,7 +72,7 @@ MainWindow::MainWindow( const QString &icsfile )
             m_part->openFile(icsfile);
             slotSetCaption( icsfile );  // set the window title to our iCal file
             connect(configureAction, SIGNAL(triggered(bool)),
-            m_part->widget(), SLOT(showSettingsDialog()));
+                m_part->widget(), SLOT(showSettingsDialog()));
             ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
             setupGUI();
         }
