@@ -73,6 +73,7 @@ MainWindow::MainWindow( const QString &icsfile )
       ((TimetrackerWidget) (m_part->widget())).openFile(icsfile);
       connect(configureAction, SIGNAL(triggered(bool)),
         m_part->widget(), SLOT(showSettingsDialog()));
+      ((TimetrackerWidget *) (m_part->widget()))->setupActions(actionCollection());
       m_part->openFile(icsfile);
       setupGUI();
     }
