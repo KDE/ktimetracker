@@ -56,8 +56,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2005-02-02</date>
-<releaseinfo>1.5.0</releaseinfo>
+<date>2009-10-19</date>
+<releaseinfo>4.3.1</releaseinfo>
 
 <abstract><para>&ktimetracker; tracks time spent on various tasks.</para></abstract>
 
@@ -131,15 +131,16 @@ double-clicking on task you are currently working on.</para>
 <para>&ktimetracker; provides great flexibility in tracking your time, allowing
 unlimited tasks and task depth.  Time may be logged to any task, and more than
 one task can be active at any given time.</para>
-
+<para>&ktimetracker; allows you to edit your task's history and to put a comment 
+for every event that you have stopped.</para>
 <para>
 To create a top-level task, select
 <menuchoice>
 <shortcut>
-<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+<keycombo action="simul">&Ctrl;<keycap>T</keycap></keycombo>
 </shortcut>
 <guimenu>Task</guimenu>
-<guimenuitem>New</guimenuitem>
+<guimenuitem>New Task...</guimenuitem>
 </menuchoice>
 
 To create a subtask, pick the parent task and select
@@ -149,18 +150,15 @@ To create a subtask, pick the parent task and select
 <keycombo action="simul">&Ctrl;&Alt;<keycap>N</keycap></keycombo>
 </shortcut>
 <guimenu>Task</guimenu>
-<guimenuitem>New Subtask</guimenuitem>
+<guimenuitem>New Subtask...</guimenuitem>
 </menuchoice>
 </para>
 
-<para>When &ktimetracker; exits, the task list is saved to the file specified in
-<menuchoice>
-<guimenu>Settings</guimenu>
-<guimenuitem>Configure KTimeTracker...</guimenuitem>
-</menuchoice>.
+<para>When &ktimetracker; exits, the task list is saved to a file on your disk. 
 When it next opens, it reloads the task list from the same file.</para>
 
-<para>&ktimetracker; can import and export tasks to minimize your work. See <link linkend="interfaces">Other Systems</link>.</para>
+<para>&ktimetracker; can import and export tasks to minimize your work. 
+See <link linkend="interfaces">Other Systems</link>.</para>
 
 </sect1>
 
@@ -240,10 +238,10 @@ the project 1 task.</para>
 <keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
 </shortcut>
 <guimenu>Task</guimenu>
-<guimenuitem>Edit</guimenuitem>
+<guimenuitem>Edit...</guimenuitem>
 </menuchoice>.
 
-Turn on <guilabel>Auto tracking</guilabel> and select the desktop or desktops
+Turn on <guilabel>Auto Tracking</guilabel> and select the desktop or desktops
 to associate with this task.  When any of the selected desktops becomes active,
 after a short delay &ktimetracker; will be automatically start logging time against
 that task.</para>
@@ -275,168 +273,20 @@ Monday, the timer is still running.</para>
 </screenshot>
 
 <variablelist>
-<varlistentry><term><guibutton>Revert &amp; Stop</guibutton></term>
+<varlistentry> <term><guibutton>Continue timing</guibutton></term>
+<listitem><para>Apply the idle time to all active timers and keep them
+running.</para><para>You were working on the task(s) while your computer
+was idle and still are.</para></listitem></varlistentry>
+
+<varlistentry><term><guibutton>Revert timing</guibutton></term>
 <listitem><para>Subtract the amount of idle time from all active timers and
 stop them.</para><para>You were not working on the task(s) while you
 computer was idle and you are still are
 not.</para></listitem></varlistentry> 
-
-<varlistentry> <term><guibutton>Revert &amp; Continue</guibutton></term>
-<listitem><para>Subtract the amount of idle time from all active timers but
-keep them running.</para><para>You were not working on the task(s) while
-your computer was idle but you are now.  </para></listitem></varlistentry> 
-
-<varlistentry> <term><guibutton>Continue Timing</guibutton></term>
-<listitem><para>Apply the idle time to all active timers and keep them
-running.</para><para>You were working on the task(s) while your computer
-was idle and still are.  </para></listitem></varlistentry> </variablelist>
+</variablelist>
 
 </sect2>
 
-</sect1>
-
-<sect1 id="reporting"><title>Reporting</title>
-
-<para>&ktimetracker; provides three ways to report on time you have logged.  You can
-send the session and time totals to the printer, copy the time totals to the
-clipboard, or copy the time history to the clipboard.</para>
-
-<sect2><title>Print Totals</title>
-<para>To generate the totals report for the printer, select
-<menuchoice>
-<shortcut>
-<keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Print</guimenuitem>
-</menuchoice>.
-This generates a three-column report for the complete list of tasks.  The
-first column is the task name, the second column is the <guilabel>Total
-Session Time</guilabel> and the third column is the <guilabel>Total
-Time</guilabel>.</para>
-</sect2>
-
-<sect2><title>Clip Totals</title>
-<para>To generate the totals report to the clipboard, select
-<menuchoice>
-<shortcut>
-<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Copy Totals to Clipboard</guimenuitem>
-</menuchoice>.
-</para>
-
-<para>This report is generated for the currently selected task and all its
-subtasks.  If the current task is a top-level task, &ktimetracker; asks you if you
-want to generate the report for the current task and its subtasks or for the
-entire task list.</para>
-
-<screenshot>
-<screeninfo>&ktimetracker; Copy This Task</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="copy-this-task.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase>&ktimetracker; Copy This Task Dialog</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
-
-<para>Once the report is generated, open &kedit; or some other text editor and
-paste the report data.</para>
-
-<literallayout>
-<computeroutput>
-Task Totals
-2004-07-10 02:26
-
-  Time    Task
-----------------------------------------------
-  9:14    kde
-   9:14    ktimetracker
-    1:08    bugs
-    0:00    checkin changes
-   0:00    promo
-   0:00    web stuff
-----------------------------------------------
-  9:14 Total
-</computeroutput>
-</literallayout>
-
-<para>The first column is the <guilabel>Total Time</guilabel> and is indented
-(like the task names) to indicate task/sub-task relationships.  The reported times
-include the sub-task times.</para> 
-
-</sect2>
-
-<sect2><title>Clip History</title>
-
-<para>To generate the totals report to the clipboard, select
-<menuchoice>
-<shortcut>
-<keycombo action="simul">&Ctrl;&Alt;<keycap>C</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Copy History to Clipboard</guimenuitem>
-</menuchoice>.
-</para>
-
-<important><para>You must turn on the <guilabel>Log History</guilabel> option in
-<menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
-KTimeTracker...</guimenuitem> </menuchoice>.  Otherwise, &ktimetracker; only keeps track of
-totals and not the detailed task history.</para></important>
-
-<para>This report is generated for the currently selected task and all it's
-subtasks. You also have the choice to generate it for all tasks.</para>
-
-<para>When you select the history report, &ktimetracker; first prompts you to enter the
-date range for the report:</para>
-
-<screenshot>
-<screeninfo>&ktimetracker; Enter Date Range</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="daterange.png" format="PNG"/>
-</imageobject>
-<textobject>
-<phrase>&ktimetracker; Enter Date Range</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
-
-<para>After entering a date range, open &kedit; or some other text editor and
-paste the report data.</para>
-
-<literallayout>
-<computeroutput>
-Task History
-From Thursday 01 July 2004 to Monday 12 July 2004
-Printed on: 2004-07-12 17:18
-
-                               Week of Monday 05 July 2004
-     5     6     7     8     9    10    11
--------------------------------------------------------------------------
-                                             0:00 kde
-                                             0:00  dc
-              !:22  1:46  3:14  1:44         8:06  ktimetracker
-                                             0:00   3.2 feature plan
-              1:08                           1:08   bugs
-                                             0:00   checkin changes
-                                             0:00  promo
-                                             0:00  web stuff
--------------------------------------------------------------------------
-              2:30  1:46  3:14  1:44         9:14 Total
-</computeroutput>
-</literallayout>
-
-<para>The task history is totaled for each day and task, grouped by week.  The
-first seven columns are Monday through Sunday.  The eighth column is the total
-for the week and the ninth column is the task name.  The task names are
-indented to indicate the task/sub-task relationships.</para>
-
-</sect2>
 </sect1>
 
 <sect1 id="interfaces">
@@ -460,8 +310,9 @@ only edit the file with one application or the other.</para></warning>
 <para>As a typical usecase, you might want to plan a project with the project 
 management tool Imendio Planner 
 (from <ulink url="http://planner.imendio.org">planner.imendio.org</ulink>) 
-and import its tasks to &ktimetracker;, to have them in the industry
-standard <ulink
+and import its tasks to &ktimetracker; with <guimenu>File</guimenu>
+<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>, 
+to have them in the industry standard <ulink
 url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink> 
 format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
 to them in &ktimetracker;. That's one way to help ensure your project stays on time
@@ -501,8 +352,8 @@ qdbus org.kde.ktimetracker /KTimeTracker 2>/dev/null || echo "ktimetracker not r
 format.  To export totals, select
 <menuchoice>
 <guimenu>File</guimenu>
-<guisubmenu>Import/Export</guisubmenu>
-<guimenuitem>Export to CSV file...</guimenuitem>
+<guisubmenu>Export</guisubmenu>
+<guimenuitem>Export Times...</guimenuitem>
 </menuchoice> and &ktimetracker; displays the following export dialog:</para>
 
 <screenshot>
@@ -518,11 +369,10 @@ format.  To export totals, select
 </screenshot>
 
 <para>Enter the file you would like to export the data to, and modify the
-other dialog defaults if necessary.  Note that the date range control is
-disabled since you are exporting time totals, not the history data.  Click
+other dialog defaults if necessary.  Click
 <guibutton>Export</guibutton> and &ktimetracker; exports the totals for all tasks to
 the file you selected.</para>
-
+<para>Use the <guibutton>Export to Clipboard</guibutton> button to export the times to the clipboard</para>
 <para>Here is an example of the output format:</para>
 
 <literallayout>
@@ -554,14 +404,15 @@ Time</guilabel> and the fourth is the <guilabel>Total Time</guilabel>.
 <para>To export task history, select
 <menuchoice>
 <guimenu>File</guimenu>
-<guisubmenu>Import/Export</guisubmenu>
-<guimenuitem>Export History to CSV file...</guimenuitem>
+<guisubmenu>Export</guisubmenu>
+<guimenuitem>Export History...</guimenuitem>
 </menuchoice> and &ktimetracker; displays the same export dialog as shown above.</para>
 
 <para>Enter the file you would like to export the data to, and select a date
 range that you want the task history.  Modify the other dialog defaults if
 necessary.  Click <guibutton>Export</guibutton> and &ktimetracker; exports the
 task history for all tasks to the file you selected.</para>
+<para>Use the <guibutton>Export to Clipboard</guibutton> button to export the history to the clipboard</para>
 
 <para>Here is an example of the output format:</para>
 
@@ -648,7 +499,7 @@ subtasks, as well as its own accumulated time.</para>
 <sect1 id="status-bar">
 <title>The Statusbar</title>
 
-<para>Reports the total elapsed time for the session.</para>
+<para>Reports the name of the file where the data was saved.</para>
 </sect1>
 
 </chapter>
@@ -715,7 +566,7 @@ which is that it is based on the Xt toolkit.</para>
 <glossentry id="gloss-dcop">
 <glossterm>&DBus;</glossterm>
 <glossdef><para>The interprocess communication protocol used in &kde;.  Short
-for Desktop COmmunication Protocol.</para></glossdef>
+for Desktop Bus.</para></glossdef>
 </glossentry>
 
 <glossentry id="gloss-desktop">
@@ -804,7 +655,7 @@ QString version()
 <refsect1>
 <title>Description</title>
 <para><function>version()</function> is a &DBus; call that returns &ktimetracker;'s
-version number; for example 1.5.0.  The version number is returned as a string
+version number; for example 4.3.1.  The version number is returned as a string
 in the typical &GNU; format of major.minor.bugfix.</para>
 </refsect1>
 </refentry>
@@ -829,7 +680,7 @@ external program can gracefully shutdown &ktimetracker;.
 </para>
 </refsect1>
 </refentry>
-
+<!--
 <refentry id="dcop-hastodo">
 <refmeta>
 <refentrytitle>hastodo</refentrytitle>
@@ -866,26 +717,26 @@ searched.  All to-do trees are searched, not just top-level to-do's.  If more
 than one to-do has a matching name, the first one found is returned.</para>
 </refsect1>
 </refentry>
-
+-->
 <refentry id="dcop-addtodo">
 <refmeta>
 <refentrytitle>addtodo</refentrytitle>
 </refmeta>
 <refnamediv>
-<refname>addtodo</refname>
-<refpurpose>Add new todo.</refpurpose>
+<refname>addTask</refname>
+<refpurpose>Add new task.</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 <synopsis>
-QString addtodo(QString todoname)
+QString addTask(QString taskname)
 </synopsis>
 <refsect2>
 <title>Parameters</title>
 <variablelist>
 <varlistentry>
-<term><parameter>todoname</parameter></term>
+<term><parameter>taskname</parameter></term>
 <listitem>
-	<para>The name of new to-do.</para>
+<para>The name of new task.</para>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -894,9 +745,9 @@ QString addtodo(QString todoname)
 
 <refsect1>
 <title>Description</title>
-<para><function>addtodo(QString todoname)</function> is a &DBus; call that
-	adds a new top-level to-do to the current storage.  The UID of the new to-do
-	is returned.
+<para><function>addTask(QString taskname)</function> is a &DBus; call that
+adds a new top-level to-do to the current storage.  The UID of the new task
+is returned.
 </para>
 </refsect1>
 </refentry>
