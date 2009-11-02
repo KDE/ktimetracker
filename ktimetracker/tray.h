@@ -26,7 +26,7 @@
 #include <QList>
 #include <QVector>
 
-#include <KNotificationItem>
+#include <KStatusNotifierItem>
 
 #include "task.h"
 #include "ktimetrackerpart.h"
@@ -34,7 +34,7 @@
 class QTimer;
 class MainWindow;
 
-class TrayIcon : public KNotificationItem
+class TrayIcon : public KStatusNotifierItem
 {
   Q_OBJECT
 

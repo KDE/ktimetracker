@@ -45,7 +45,7 @@
 QVector<QPixmap*> *TrayIcon::icons = 0;
 
 TrayIcon::TrayIcon(MainWindow* parent)
-  : KNotificationItem(parent)
+  : KStatusNotifierItem(parent)
 {
     setObjectName( "Ktimetracker Tray" );
     // the timer that updates the "running" icon in the tray
@@ -78,7 +78,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
 }
 
 TrayIcon::TrayIcon(ktimetrackerpart *)
-  : KNotificationItem( 0 )
+  : KStatusNotifierItem( 0 )
 {
     setObjectName( "Ktimetracker Tray" );
     // it is not convenient if every kpart gets an icon in the systray.
@@ -86,7 +86,7 @@ TrayIcon::TrayIcon(ktimetrackerpart *)
 }
 
 TrayIcon::TrayIcon()
-  : KNotificationItem( 0 )
+  : KStatusNotifierItem( 0 )
 // will display nothing at all
 {
     setObjectName( "Ktimetracker Tray" );
