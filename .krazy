@@ -1,5 +1,3 @@
-#mimelib is an old 3rd party lib
-IGNORESUBS mimelib
 #kdgantt is copied in from KDAB
 IGNORESUBS kdgantt,kdgantt1
 PRIORITY low
