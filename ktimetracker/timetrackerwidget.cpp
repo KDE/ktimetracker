@@ -713,6 +713,9 @@ void TimetrackerWidget::stopAllTimers( const QDateTime &when )
 
 void TimetrackerWidget::newTask()
 {
+    if ( d->mTabWidget->count() == 0 )
+        newFile() ;
+
     if ( d->mTabWidget->currentWidget() )
     {
         qobject_cast< TaskView* >( d->mTabWidget->currentWidget() )->newTask();
