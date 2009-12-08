@@ -476,8 +476,11 @@ bool TimetrackerWidget::closeFile()
             d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
         }
     }
-    taskView->save();
-    taskView->closeStorage();
+    if ( taskView )
+    {
+        taskView->save();
+        taskView->closeStorage();
+    }
 
     d->mTabWidget->removeTab( d->mTabWidget->currentIndex() );
     d->mSearchWidget->removeTreeWidget( taskView );
