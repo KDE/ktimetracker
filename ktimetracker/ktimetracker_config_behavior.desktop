@@ -15,6 +15,7 @@ X-KDE-Weight=700
 
 Name=Behavior
 Name[ar]=سلوك
+Name[ca]=Comportament
 Name[cs]=Chování
 Name[da]=Opførsel
 Name[de]=Verhalten
@@ -46,6 +47,7 @@ Name[zh_CN]=行为
 Name[zh_TW]=行為
 Comment=Configure Behavior
 Comment[ar]=اضبط السلوك
+Comment[ca]=Configura el comportament
 Comment[cs]=Nastavit chování
 Comment[da]=Indstil opførsel
 Comment[de]=Verhalten einrichten
