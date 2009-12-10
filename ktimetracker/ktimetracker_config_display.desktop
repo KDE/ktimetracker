@@ -15,6 +15,7 @@ X-KDE-Weight=700
 
 Name=Appearance
 Name[af]=Appearance
+Name[ar]=المظهر
 Name[be]=Вонкавы выгляд
 Name[bg]=Външен вид
 Name[br]=Neuziadur
@@ -76,6 +77,8 @@ Name[x-test]=xxAppearancexx
 Name[zh_CN]=外观
 Name[zh_TW]=外觀
 Comment=Configure Appearance
+Comment[ar]=اضبط المظهر
+Comment[ca]=Configura l'aparença
 Comment[cs]=Nastavit vzhled
 Comment[da]=Indstil udseende
 Comment[de]=Erscheinungsbild einrichten
