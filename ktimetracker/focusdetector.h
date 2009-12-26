@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef KARM_FOCUS_DETECTOR_H
-#define KARM_FOCUS_DETECTOR_H
+#ifndef KTIMETRACKER_FOCUS_DETECTOR_H
+#define KTIMETRACKER_FOCUS_DETECTOR_H
 
 #include <kwindowsystem.h>
 #include <QObject>
@@ -50,4 +50,4 @@ Q_SIGNALS:
   void newFocus( const QString & );
 };
 
-#endif // KARM_FOCUS_DETECTOR_H 
+#endif // KTIMETRACKER_FOCUS_DETECTOR_H
