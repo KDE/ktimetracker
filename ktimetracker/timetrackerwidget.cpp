@@ -331,6 +331,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
             "with the title of the window as its name and will be started. If there "
             "already exists such an task it will be started.")
         },
+        // in the following element,
+        // document-new is the icon name, e.g. for the toolbar, new_task is how the action is
+        // called in the ktimetrackerui.rc file, rest should be obvious
         { "document-new", I18N_NOOP("&New Task..."), SLOT( newTask() ), "new_task", I18N_NOOP("Creates "
             "new top level task"), I18N_NOOP("This will create a new top level task.")
         },
