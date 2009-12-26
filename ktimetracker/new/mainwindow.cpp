@@ -53,7 +53,17 @@ MainWindow::MainWindow( const QString &icsfile )
   :  QMainWindow( ),
     m_ui(new Ui::MainWindow)
 {
-    kDebug(5970) << "Entering function, icsfile is " << icsfile;
+    m_ui->setupUi(this);
+      delete m_ui->treeWidget;
+      m_ui->treeWidget=new TaskView(m_ui->centralwidget);
+      m_ui->gridLayout->addWidget(m_ui->treeWidget, 0, 0, 1, 1);
+      m_ui->treeWidget->hide();
+      m_ui->treeWidget->show();
+      m_ui->ktreewidgetsearchline->show();
+      m_ui->toolBar->addAction(KIcon("document-new"),"hi");
+
+/*
+      kDebug(5970) << "Entering function, icsfile is " << icsfile;
     // Setup our actions
     setupActions();
 
@@ -111,6 +121,7 @@ MainWindow::MainWindow( const QString &icsfile )
     connect( m_part->widget(), SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
     connect( m_part->widget(), SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
+                      */
 }
 
 void MainWindow::setupActions()
@@ -201,7 +212,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
     //QMenu* pop = dynamic_cast<QMenu*>(
       //                    factory()->container( i18n( "task_popup" ), this ) );
     //if ( pop )
-     //   pop->popup( point );
+      //  pop->popup( point );
 }
 
 #include "mainwindow.moc"
