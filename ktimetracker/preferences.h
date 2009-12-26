@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2000 by Jesper Pedersen <blackie@kde.org>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,8 +19,8 @@
  *
  */
 
-#ifndef KARM_PREFERENCES_H
-#define KARM_PREFERENCES_H
+#ifndef KTIMETRACKER_PREFERENCES_H
+#define KTIMETRACKER_PREFERENCES_H
 
 #include <KPageDialog>
 
@@ -45,5 +44,5 @@ class Preferences : public KPageDialog
     static Preferences *mInstance;
 };
 
-#endif // KARM_PREFERENCES_H
+#endif // KTIMETRACKER_PREFERENCES_H
 
