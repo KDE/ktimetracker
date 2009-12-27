@@ -26,7 +26,7 @@
 #include <kwindowsystem.h>
 #include <QObject>
 
-#include <config-karm.h> // HAVE_LIBXSS
+#include <config-ktimetracker.h> // HAVE_LIBXSS
 
 class QTimer;
 

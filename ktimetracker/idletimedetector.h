@@ -26,7 +26,7 @@
 #include "ktimetrackerutility.h" // SecsPerMinute
 #include <QDateTime>
 #include <QObject>
-#include <config-karm.h> // HAVE_LIBXSS
+#include <config-ktimetracker.h> // HAVE_LIBXSS
 
 class QTimer;
 
