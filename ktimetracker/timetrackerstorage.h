@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef KARM_STORAGE_H
-#define KARM_STORAGE_H
+#ifndef KTIMETRACKER_STORAGE_H
+#define KTIMETRACKER_STORAGE_H
 
 #include <QList>
 #include <QStack>
@@ -47,16 +47,10 @@ class HistoryEvent;
  *
  * The storage is an iCalendar file.
  *
- * All logic that deals with getting and saving data should go here. The
- * storage logic has changed at least twice already in KArm's history, and
- * chances are good it will change again.
+ * All logic that deals with getting and saving data should go here.
  *
- * Prior to KDE 3.2, KArm just stored totals for each task--a session total
- * and a task total.  The session total was reset to zero each time KArm
- * started up or after the user reset the session times to zero.  With the
- * release of KDE 3.2, KArm now stores these task totals as well as logging
- * the history of each start/stop event; that is, every time you start a timer
- * and then stop a timer on a task, KArm records this as an iCalendar event.
+ * This program uses iCalendar to store its data. There are tasks and
+ * events. Events have a start and a end date and an associated task.
  *
  * @short Logic that gets and stores KTimeTracker data to disk.
  * @author Mark Bucciarelli <mark@hubcapconsulting.com>
@@ -372,7 +366,7 @@ class HistoryEvent
     /** Needed to be used in a value list. */
     HistoryEvent() {}
     HistoryEvent( const QString &uid, const QString &name, long duration,
-                  const KDateTime &start, const KDateTime &stop, 
+                  const KDateTime &start, const KDateTime &stop,
                   const QString &todoUid );
     QString uid() {return _uid; }
     QString name() {return _name; }
@@ -392,4 +386,4 @@ class HistoryEvent
 
 };
 
-#endif // KARM_STORAGE_H
+#endif // KTIMETRACKER_STORAGE_H
