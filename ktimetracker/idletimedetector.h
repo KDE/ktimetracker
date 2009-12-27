@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef KARM_IDLE_TIME_DETECTOR_H
-#define KARM_IDLE_TIME_DETECTOR_H
+#ifndef KTIMETRACKER_IDLE_TIME_DETECTOR_H
+#define KTIMETRACKER_IDLE_TIME_DETECTOR_H
 
 #include "ktimetrackerutility.h" // SecsPerMinute
 #include <QDateTime>
@@ -124,4 +124,4 @@ private:
   int idleminutes;
 };
 
-#endif // KARM_IDLE_TIME_DETECTOR_H
+#endif // KTIMETRACKER_IDLE_TIME_DETECTOR_H

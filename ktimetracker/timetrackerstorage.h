@@ -356,8 +356,8 @@ class timetrackerstorage : public QObject
 /**
  * One start/stop event that has been logged.
  *
- * When a task is running and the user stops it, KArm logs this event and
- * saves it in the history.  This class represents such an event read from
+ * When a task is running and the user stops it, ktimetracker logs this event and
+ * saves it in the history. This class represents such an event read from
  * storage, and abstracts it from the specific storage used.
  */
 class HistoryEvent
