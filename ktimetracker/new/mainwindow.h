@@ -19,8 +19,8 @@
  *
  */
 
-#ifndef KARM_MAIN_WINDOW_H
-#define KARM_MAIN_WINDOW_H
+#ifndef KTIMETRACKER_MAIN_WINDOW_H
+#define KTIMETRACKER_MAIN_WINDOW_H
 
 #include <KParts/MainWindow>
 #include "ktimetrackerpart.h"
@@ -83,4 +83,4 @@ class MainWindow : public QMainWindow
     bool queryClose();
 };
 
-#endif // KARM_MAIN_WINDOW_H
+#endif // KTIMETRACKER_MAIN_WINDOW_H
