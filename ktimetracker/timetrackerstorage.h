@@ -312,9 +312,6 @@ class timetrackerstorage : public QObject
     /** Return a list of all task names */
     QStringList taskNames() const;
 
-    /** Return a list of start/stop events for the given date range. */
-    QList<HistoryEvent> getHistory(const QDate& from, const QDate& to);
-
   private:
     //@cond PRIVATE
     class Private;
