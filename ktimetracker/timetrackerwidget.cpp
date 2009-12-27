@@ -241,7 +241,7 @@ bool TimetrackerWidget::saveCurrentTaskView()
         taskView->load( fileName );
         KIO::file_delete( currentFilename, KIO::HideProgressInfo );
 
-        d->mTabWidget->setTabIcon( d->mTabWidget->currentIndex(), KIcon( "karm" ) );
+        d->mTabWidget->setTabIcon( d->mTabWidget->currentIndex(), KIcon( "ktimetracker" ) );
         d->mTabWidget->setTabText( d->mTabWidget->currentIndex(), QFileInfo( fileName ).fileName() );
         d->mTabWidget->setTabToolTip( d->mTabWidget->currentIndex(), fileName );
         return true;

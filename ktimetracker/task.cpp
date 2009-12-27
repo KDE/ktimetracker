@@ -97,7 +97,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
         icons = new QVector<QPixmap*>(8);
         if (!konsolemode)
         {
-            KIconLoader kil("ktimetracker"); // always load icons from the KArm application
+            KIconLoader kil("ktimetracker");
             for (int i=0; i<8; i++)
             {
                 QPixmap *icon = new QPixmap();
