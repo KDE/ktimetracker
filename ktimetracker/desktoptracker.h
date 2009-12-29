@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef KARM_DESKTOP_TRACKER_H
-#define KARM_DESKTOP_TRACKER_H
+#ifndef KTIMETRACKER_DESKTOP_TRACKER_H
+#define KTIMETRACKER_DESKTOP_TRACKER_H
 
 #include <QObject>
 #include <QVector>
@@ -77,4 +77,4 @@ class DesktopTracker : public QObject
     void changeTimers();
 };
 
-#endif // KARM_DESKTOP_TRACKER_H
+#endif // KTIMETRACKER_DESKTOP_TRACKER_H

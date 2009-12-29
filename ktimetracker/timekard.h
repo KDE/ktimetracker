@@ -1,6 +1,5 @@
 /*
  *     Copyright (C) 2003 by Mark Bucciarelli <mark@hubcapconsutling.com>
- *                   2007 the ktimetracker developers
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,8 +19,8 @@
  *
  */
 
-#ifndef KARM_TIMEKARD_H
-#define KARM_TIMEKARD_H
+#ifndef KTIMETRACKER_TIMEKARD_H
+#define KTIMETRACKER_TIMEKARD_H
 
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
@@ -124,4 +123,4 @@ private:
                                  bool justThisTask, bool totalsOnly);
 
   };
-#endif // KARM_TIMEKARD_H
+#endif // KTIMETRACKER_TIMEKARD_H

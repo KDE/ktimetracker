@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef KARM_TASK_VIEW_H
-#define KARM_TASK_VIEW_H
+#ifndef KTIMETRACKER_TASK_VIEW
+#define KTIMETRACKER_TASK_VIEW
 
 #include <QList>
 #include <QTreeWidget>
@@ -280,4 +280,4 @@ class TaskView : public QTreeWidget
     void slotSetPriority( QAction * );
 };
 
-#endif // KARM_TASK_VIEW
+#endif // KTIMETRACKER_TASK_VIEW

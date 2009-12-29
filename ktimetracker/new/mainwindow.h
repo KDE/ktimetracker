@@ -36,18 +36,21 @@ class QString;
 class Task;
 class TimetrackerWidget;
 
+namespace Ui {
+    class MainWindow;
+}
 /**
  * Main window to tie the application together.
  */
 
-class MainWindow : public KParts::MainWindow
+class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
   private:
     void             makeMenus();
     void setupActions();
-
+    Ui::MainWindow *m_ui;
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
     TrayIcon*        _tray;
@@ -60,7 +63,8 @@ class MainWindow : public KParts::MainWindow
     ktimetrackerpart *m_part;
 
   public:
-    MainWindow( const QString &icsfile = "" );
+     MainWindow(QWidget *parent = 0);
+   MainWindow( const QString &icsfile = "" );
     virtual ~MainWindow();
 
   public Q_SLOTS:

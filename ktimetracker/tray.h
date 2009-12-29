@@ -69,4 +69,4 @@ class TrayIcon : public KStatusNotifierItem
     */
 };
 
-#endif // KARM_TRAY_H
+#endif // TRAY_ICON_H

@@ -9,7 +9,7 @@ associated with it. The primary user interaction for %ktimetracker is to start a
 ktimetracker can be a kpart (class ktimetrackerpart) or a mainwindow (class mainwindow).
 The kpart can be used e.g. for a kontact plugin, the mainwindow as stand-alone application.
 Both classes display a timetrackerwidget, that is a ktabwidget containing one or more taskviews.
-A taskview is associated with a karmstorage object that holds a calendar with todos and events.
+A taskview is associated with a timetrackerstorage object that holds a calendar with todos and events.
 A taskview is a QTreeWidget that holds tasks. A task has a summary (name), a priority and times:
 the time, total time, session time and total session time. Over the QTreeWidget, a task can have
 subtasks. The total time is defined as the task's and all its subtasks' times.
@@ -21,11 +21,11 @@ Mainpage.dox - will be published on http://api.kde.org/4.x-api/kdepim-apidocs/kt
 
 Here is how the most important classes display/contain/use each other:
 <pre>
-main -> mainwindow ---------------
-                                  \
-                                   -> timetrackerwidget -(contains n>=0)-> taskview -(uses)-> karmstorage
-                                  /
-ktimetracker_plugin -> karmpart --
+main -> mainwindow -------------------------
+                                            \
+                                             -> timetrackerwidget -(contains n>=0)-> taskview -(uses)-> timetrackerstorage
+                                           /
+ktimetracker_plugin -> ktimetrackerpart --
 </pre>
 
 MainWindow is the outermost layer and initializes the menus and actions, sets
@@ -37,7 +37,7 @@ TaskView does most of the work in the application. This QListWidget subclass
 sets up the columns in the list, the idle detection timer, the auto save
 timer, and the desktop tracker. It starts and stops timers, handles importing
 and exporting and displays the edit task dialog in response to user action.
-TaskView holds a private pointer to Preferences and KarmStorage objects.
+TaskView holds a private pointer to Preferences and a timetrackerstorage object.
 
 A Task is a QListViewItem subclass stores state such as the timer totals, if a
 timer is currently running for the task. It also defines the list view sort
@@ -45,189 +45,11 @@ order and can return a pointer to a KCal::Todo object that holds the same
 information.
 
 Preferences is a singleton that stores configuration options. It raises
-signals when options change (for example, the location where the karm data is
+signals when options change (for example, the location where the ktimetracker data is
 stored) so the application can react and adjust.
 
-KarmStorage is a singleton that creates an interface for storing %ktimetracker data.
+timetrackerstorage is a singleton that creates an interface for storing %ktimetracker data.
 Currently, it uses KDE Resource framework and stores data in the iCalendar
 format.
-
-*/
-
-/** \page sig_slot_index Index of Signals and Slots
-
-To get an understanding of the flow program, it may be useful to see an overview of all of the signals, slots, and
-connections. See \see connections to get an index of what signal is connected to which slot.
-
-\section overview Summary of what each class provides
-
-<table>
-    <tr><td><b><center>Class</center></b></td> <td><b><center>Signal?</center></b></td> <td><b><center>Public Slot?</center></b></td>
-        <td><b><center>Protected Slot?</center></b></td> <td><b><center>Private Slot?</center></b></td></tr>
-
-
-    <tr><td>AddTaskDialog</td>    <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>Y     </td></tr>
-    <tr><td>IdleTimer</td>        <td>Y     </td> <td>Y     </td> <td>Y     </td> <td>&nbsp;</td></tr>
-    <tr><td>KAccelMenuWatch</td>  <td>&nbsp;</td> <td>Y     </td> <td>&nbsp;</td> <td>Y     </td></tr>
-    <tr><td>Karm</td>             <td>Y     </td> <td>Y     </td> <td>Y     </td> <td>&nbsp;</td></tr>
-    <tr><td>KarmTray</td>         <td>&nbsp;</td> <td>Y     </td> <td>Y     </td> <td>&nbsp;</td></tr>
-    <tr><td>KarmWindow</td>       <td>&nbsp;</td> <td>&nbsp;</td> <td>Y     </td> <td>&nbsp;</td></tr>
-    <tr><td>KTimeWidget</td>      <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td></tr>
-    <tr><td>ListViewIterator</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td></tr>
-    <tr><td>Loging</td>           <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td></tr>
-    <tr><td>MyPrinter</td>        <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td></tr>
-    <tr><td>Preferences</td>      <td>Y     </td> <td>Y     </td> <td>Y     </td> <td>&nbsp;</td></tr>
-    <tr><td>SubtreeIterator</td>  <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td></tr>
-    <tr><td>Task</td>             <td>&nbsp;</td> <td>&nbsp;</td> <td>Y     </td> <td>&nbsp;</td></tr>
-</table>
-
-\section signals Listing of all of the signals
-
-These are the signals:
-<ol>
-    <li>IdleTimer::extractTime(int)
-    <li>IdleTimer::stopTimer()
-    <li>Karm::sessionTimeChanged()
-    <li>Karm::timerActive()
-    <li>Karm::timerInactive()
-    <li>Karm::timerTick()
-    <li>Karm::updateButtons()
-    <li>Karm::tasksChanged(QPtrList<Task>)
-    <li>Preferences::autoSave(bool)
-    <li>Preferences::autoSavePeriod(int)
-    <li>Preferences::detectIdleness(bool)
-    <li>Preferences::idlenessTimeout(int)
-    <li>Preferences::saveFile(QString)
-    <li>Preferences::setupChanged()
-    <li>Preferences::timeLog(QString)
-    <li>Preferences::timeLoging(bool)
-    <li>Preferences::hideOnClose(bool)
-</ol>
-
-\section slots Listing of the slots
-
-\subsection public Public Slots
-
-<ol>
-    <li>IdleTimer::setMaxIdle(int maxIdle)
-    <li>IdleTimer::startIdleDetection()
-    <li>IdleTimer::stopIdleDetection()
-    <li>IdleTimer::toggleOverAllIdleDetection(bool)
-    <li>KAccelMenuWatch::updateMenus()
-    <li>Karm::changeTimer(QListViewItem*)
-    <li>Karm::deleteTask()
-    <li>Karm::editTask()
-    <li>Karm::extractTime(int)
-    <li>Karm::load()
-    <li>Karm::newSubTask()
-    <li>Karm::newTask()
-    <li>Karm::newTask(QString, QListViewItem*)
-    <li>Karm::parseLine(QString, long*, QString*, int*)
-    <li>Karm::resetSessionTimeForAllTasks()
-    <li>Karm::save()
-    <li>Karm::startTimer()
-    <li>Karm::stopAllTimers()
-    <li>Karm::stopCurrentTimer()
-    <li>Karm::stopTimer(Task*)
-    <li>KarmTray::initToolTip()
-    <li>KarmTray::resetClock()
-    <li>KarmTray::startClock()
-    <li>KarmTray::stopClock()
-    <li>KarmTray::updateToolTip(QPtrList<Task>)
-    <li>Karm::writeTaskToFile(QTextStream*, QListViewItem*, int)
-    <li>Preferences::load()
-    <li>Preferences::save()
-    <li>Preferences::showDialog()
-</ol>
-
-\subsection protected Protected Slots
-
-<ol>
-    <li>IdleTimer::check()
-    <li>Karm::addTimeToActiveTasks(int)
-    <li>Karm::autoSaveChanged(bool)
-    <li>Karm::autoSavePeriodChanged(int)
-    <li>Karm::minuteUpdate()
-    <li>Karm::stopChildCounters(Task*)
-    <li>KarmTray::advanceClock()
-    <li>KarmWindow::contextMenuRequest(QListViewItem*, const QPoint&, int)
-    <li>KarmWindow::disableStopAll()
-    <li>KarmWindow::enableStopAll()
-    <li>KarmWindow::hideOnClose(bool)
-    <li>KarmWindow::keyBindings()
-    <li>KarmWindow::print()
-    <li>KarmWindow::quit()
-    <li>KarmWindow::resetSessionTime();
-    <li>KarmWindow::save()
-    <li>KarmWindow::slotSelectionChanged()
-    <li>Preferences::autoSaveCheckBoxChanged()
-    <li>Preferences::hideOnCloseCheckBoxChanged()
-    <li>Preferences::idleDetectCheckBoxChanged()
-    <li>Preferences::slotCancel()
-    <li>Preferences::slotOk()
-    <li>Preferences::timeLogingCheckBoxChanged()
-    <li>Task::updateActiveIcon()
-</ol>
-
-\subsection private Private Slots
-
-<ol>
-    <li>AddTaskDialog::enterWhatsThis()
-    <li>AddTaskDialog::slotAbsolutePressed()
-    <li>AddTaskDialog::slotRelativePressed()
-    <li>KAccelMenuWatch::removeDeadMenu()
-</ol>
-
-*/
-
-/** \page connections Index of the signal/slot connections
-
-<table>
-    <tr><td><center><b>Class</b></center></td> <td><center><b>Sender</b></center></td> <td><center><b>Sending Type</b></center></td>
-<td><center><b>Signal</b></center></td> <td><center><b>Receiver</b></center></td> <td><center><b>Slot</b></center></td></tr>
-
-<tr><td>AddTaskDialog</td> <td>_absoluteRB</td> <td>QRadioButton</td> <td>clicked()</td> <td>this</td> <td>slotAbsolutePressed</td></tr>
-<tr><td>AddTaskDialog</td> <td>_relativeRB</td> <td>QRadioButton</td> <td>clicked()</td> <td>this</td> <td>slotRelativePressed</td></tr>
-<tr><td>AddTaskDialog</td> <td>whatsThisBU</td> <td>QPushButton</td> <td>clicked()</td> <td>this</td> <td>enterWhatsThis</td></tr>
-<tr><td>IdleTimer</td> <td>_timer</td> <td>QTimer</td> <td>timeout()</td> <td>this</td> <td>check</td></tr>
-<tr><td>KAccelMenuWatch</td> <td>menu</td> <td>QPopupMenu</td> <td>destroyed()</td> <td>this</td> <td>removeeDeadMenu</td></tr>
-<tr><td>Karm</td> <td>this</td> <td>Karm__QListView</td> <td>doubleClicked()</td> <td>this</td> <td>changeTimer</td></tr>
-<tr><td>Karm</td> <td>_minuteTimer</td> <td>QTimer</td> <td>timeout()</td> <td>this</td> <td>minuteUpdate</td></tr>
-<tr><td>Karm</td> <td>_idleTimer</td> <td>IdleTimer</td> <td>extractTime()</td> <td>this</td> <td>extractTime</td></tr>
-<tr><td>Karm</td> <td>_idleTimer</td> <td>IdleTimer</td> <td>stopTimer()</td> <td>this</td> <td>stopAllTimers</td></tr>
-<tr><td>Karm</td> <td>_preferences</td> <td>Preferences</td> <td>idlenessTimeout()</td> <td>_idleTimer</td> <td>setMaxIdle</td></tr>
-<tr><td>Karm</td> <td>_preferences</td> <td>Preferences</td> <td>detectIdleness()</td> <td>_idleTimer</td> <td>toggleOverAllIdleDetection</td></tr>
-<tr><td>Karm</td> <td>_preferences</td> <td>Preferences</td> <td>autoSave()</td> <td>this</td> <td>autoSaveChanged</td></tr>
-<tr><td>Karm</td> <td>_preferences</td> <td>Preferences</td> <td>autoSavePeriod()</td> <td>this</td> <td>autoSavePeriodChanged</td></tr>
-<tr><td>Karm</td> <td>_autoSaveTimer</td> <td>QTimer</td> <td>timeout()</td> <td>this</td> <td>save</td></tr>
-<tr><td>Karm</td> <td>_menu</td> <td>QPopupMenu</td> <td>__()</td> <td>this</td> <td>startTimer</td></tr>
-<tr><td>Karm</td> <td>_menu</td> <td>QPopupMenu</td> <td>__()</td> <td>this</td> <td>stopCurrentTimer</td></tr>
-<tr><td>Karm</td> <td>this</td> <td>Karm__QListView</td> <td>contextMenuRequested()</td> <td>this</td> <td>slotRMB</td></tr>
-<tr><td>Preferences</td> <td>_doAutoSaveW</td> <td>QCheckBox</td> <td>clicked()</td> <td>this</td> <td>autoSaveCheckboxChanged</td></tr>
-<tr><td>Preferences</td> <td>_doTimeLogingW</td> <td>QCheckBox</td> <td>clicked()</td> <td>this</td> <td>timeLogingCheckboxChanged</td></tr>
-<tr><td>Preferences</td> <td>_doIdleDetectionW</td> <td>QCheckBox</td> <td>clicked()</td> <td>this</td> <td>idleDetectCheckBoxChanged</td></tr>
-<tr><td>Preferences</td> <td>__</td> <td>Preferences__KDialogBase</td> <td>__()</td> <td>__</td> <td>slotOk</td></tr>
-<tr><td>Preferences</td> <td>__</td> <td>Preferences__KDialogBase</td> <td>__()</td> <td>__</td> <td>slotCancel</td></tr>
-<tr><td>KArmWindow</td> <td>_karm</td> <td>Karm</td> <td>sessionTimeChanged()</td> <td>this</td> <td>updateTime</td></tr>
-<tr><td>KarmWindow</td> <td>_karm</td> <td>Karm__QListView</td> <td>currentChanged()</td> <td>this</td> <td>slotSelectionChanged</td></tr>
-<tr><td>KarmWindow</td> <td>_karm</td> <td>Karm__QListView</td> <td>selectionChanged()</td> <td>this</td> <td>slotSelectionChanged</td></tr>
-<tr><td>KarmWindow</td> <td>_karm</td> <td>Karm</td> <td>timerTick()</td> <td>this</td> <td>updateTime</td></tr>
-<tr><td>KarmWindow</td> <td>_karm</td> <td>Karm</td> <td>timerActive()</td> <td>this</td> <td>setActiveIcon</td></tr>
-<tr><td>KarmWindow</td> <td>_karm</td> <td>Karm</td> <td>timerInactive()</td> <td>this</td> <td>setInactiveIcon</td></tr>
-<tr><td>KarmWindow</td> <td>KStdAction__quit</td> <td>KAction</td> <td>__()</td> <td>this</td> <td>quit</td></tr>
-<tr><td>KarmWindow</td> <td>KStdAction__print</td> <td>KAction</td> <td>__()</td> <td>this</td> <td>print</td></tr>
-<tr><td>KarmWindow</td> <td>KStdAction__keyBindings</td> <td>KAction</td> <td>__()</td> <td>this</td> <td>keyBindings</td></tr>
-<tr><td>KarmWindow</td> <td>KStdAction__preferences</td> <td>KAction</td> <td>__()</td> <td>_preferences</td> <td>showDialog</td></tr>
-<tr><td>KarmWindow</td> <td>KStdAction__save</td> <td>KAction</td> <td>__()</td> <td>_preferences</td> <td>save</td></tr>
-<tr><td>KarmWindow</td> <td>actionResetSession</td> <td>KAction</td> <td>__()</td> <td>this</td> <td>resetSessionTime</td></tr>
-<tr><td>KarmWindow</td> <td>actionStart</td> <td>KAction</td> <td>__()</td> <td>_karm</td> <td>startTimer</td></tr>
-<tr><td>KarmWindow</td> <td>actionStop</td> <td>KAction</td> <td>__()</td> <td>_karm</td> <td>stopCurrentTimer</td></tr>
-<tr><td>KarmWindow</td> <td>actionNew</td> <td>KAction</td> <td>__()</td> <td>_karm</td> <td>newTask</td></tr>
-<tr><td>KarmWindow</td> <td>actionNewSub</td> <td>KAction</td> <td>__()</td> <td>_karm</td> <td>newSubTask</td></tr>
-<tr><td>KarmWindow</td> <td>actionDelete</td> <td>KAction</td> <td>__()</td> <td>_karm</td> <td>deleteTask</td></tr>
-<tr><td>KarmWindow</td> <td>actionEdit</td> <td>KAction</td> <td>__()</td> <td>_karm</td> <td>editTask</td></tr>
-<tr><td>Task</td> <td>_timer</td> <td>QTimer</td> <td>timeout()</td> <td>this</td> <td>updateActiveIcon</td></tr>
-
-</table>
 
 */

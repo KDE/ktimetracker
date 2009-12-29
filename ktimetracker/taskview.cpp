@@ -1041,12 +1041,6 @@ void TaskView::deletingTask(Task* deletedTask)
     emit tasksChanged( d->mActiveTasks );
 }
 
-QList<HistoryEvent> TaskView::getHistory(const QDate& from,
-    const QDate& to) const
-{
-    return d->mStorage->getHistory(from, to);
-}
-
 void TaskView::markTaskAsIncomplete()
 {
     setPerCentComplete(50); // if it has been reopened, assume half-done

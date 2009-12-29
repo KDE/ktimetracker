@@ -59,11 +59,11 @@ class CSVExportDialog : public CSVExportDialogBase
     /**
      Enable the "Tasks to export" question in the dialog.
 
-     Since Karm does not have the concept of a single root task, when the user
+     Since ktimetracker does not have the concept of a single root task, when the user
      requests a report on a top-level task, it is impossible to know if they
      want all tasks or just the currently selected top-level task.
 
-     Stubbed for 3.3 release as CSV export of totals doesn't suppor this option.
+     Stubbed for 3.3 release as CSV export of totals doesn't support this option.
      */
     void enableTasksToExportQuestion();
 
