@@ -74,6 +74,7 @@ class MainWindow : public QMainWindow
   protected Q_SLOTS:
     void keyBindings();
     void taskViewCustomContextMenuRequested( const QPoint& );
+    void on_actionQuit_triggered();
 
   protected:
     /* reimp */ void readProperties( const KConfigGroup &config );

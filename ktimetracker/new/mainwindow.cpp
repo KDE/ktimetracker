@@ -215,4 +215,9 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
       //  pop->popup( point );
 }
 
+void MainWindow::on_actionQuit_triggered()
+{
+    close();
+}
+
 #include "mainwindow.moc"
