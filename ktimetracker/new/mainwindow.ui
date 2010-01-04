@@ -94,7 +94,7 @@
   </action>
   <action name="actionHelp">
    <property name="text">
-    <string>Help3</string>
+    <string>Help</string>
    </property>
   </action>
  </widget>
