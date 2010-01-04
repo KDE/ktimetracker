@@ -65,6 +65,7 @@ MainWindow::MainWindow( const QString &icsfile )
       delete m_ui->treeWidget;
       m_ui->treeWidget=new TaskView(m_ui->centralwidget);
       ((TaskView *) m_ui->treeWidget)->load(icsfile);
+      this->setWindowTitle(QString(icsfile));
       m_ui->gridLayout->addWidget(m_ui->treeWidget, 1, 0, 1, 1);
       m_ui->treeWidget->hide();
       m_ui->treeWidget->show();
@@ -83,11 +84,6 @@ MainWindow::MainWindow( const QString &icsfile )
 
         if (m_part)
         {
-            // tell the KParts::MainWindow that this is indeed
-            // the main widget
-            setCentralWidget(m_part->widget());
-            m_part->openFile(icsfile);
-            slotSetCaption( icsfile );  // set the window title to our iCal file
             connect(configureAction, SIGNAL(triggered(bool)),
                 m_part->widget(), SLOT(showSettingsDialog()));
         }
