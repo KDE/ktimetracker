@@ -120,11 +120,6 @@ void MainWindow::setupActions()
     //actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
-void MainWindow::slotSetCaption( const QString& qs )
-{
-    //setCaption( qs );
-}
-
 void MainWindow::setStatusBar(const QString& qs)
 {
     statusBar()->showMessage(i18n(qs.toUtf8()));

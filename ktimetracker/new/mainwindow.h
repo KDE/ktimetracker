@@ -68,7 +68,6 @@ class MainWindow : public QMainWindow
     virtual ~MainWindow();
 
   public Q_SLOTS:
-    void slotSetCaption( const QString& );
     void setStatusBar( const QString& );
     /* quit() has been offloaded to timetrackerwidget */
   protected Q_SLOTS:
