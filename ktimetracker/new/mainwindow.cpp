@@ -65,7 +65,7 @@ MainWindow::MainWindow( const QString &icsfile )
     m_ui->setupUi(this);
       delete m_ui->treeWidget;
       m_ui->treeWidget=new TaskView(m_ui->centralwidget);
-      m_ui->gridLayout->addWidget(m_ui->treeWidget, 0, 0, 1, 1);
+      m_ui->gridLayout->addWidget(m_ui->treeWidget, 1, 0, 1, 1);
       m_ui->treeWidget->hide();
       m_ui->treeWidget->show();
       m_ui->ktreewidgetsearchline->show();
@@ -124,17 +124,6 @@ void MainWindow::setupActions()
     //actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
-void MainWindow::readProperties( const KConfigGroup &cfg )
-{
-    if( cfg.readEntry( "WindowShown", true ))
-        show();
-}
-
-void MainWindow::saveProperties( KConfigGroup &cfg )
-{
-    cfg.writeEntry( "WindowShown", isVisible());
-}
-
 void MainWindow::slotSetCaption( const QString& qs )
 {
     //setCaption( qs );
@@ -188,16 +177,6 @@ void MainWindow::saveGeometry()
     config.writeEntry( QString::fromLatin1("Width"), width());
     config.writeEntry( QString::fromLatin1("Height"), height());
     config.sync();
-}
-
-bool MainWindow::queryClose()
-{
-    if ( !kapp->sessionSaving() )
-    {
-        hide();
-        return false;
-    }
-    //return KMainWindow::queryClose();
 }
 
 void MainWindow::on_actionQuit_triggered()

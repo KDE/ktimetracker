@@ -76,11 +76,8 @@ class MainWindow : public QMainWindow
     void on_actionQuit_triggered();
 
   protected:
-    /* reimp */ void readProperties( const KConfigGroup &config );
-    /* reimp */ void saveProperties( KConfigGroup &config );
     void saveGeometry();
     void loadGeometry();
-    bool queryClose();
 };
 
 #endif // KTIMETRACKER_MAIN_WINDOW_H
