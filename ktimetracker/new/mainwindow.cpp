@@ -53,7 +53,6 @@
 /*
 
   Missing:
-      - parameter icsfile
       - reaction on click on icons in the toolbar
       - context menu
 
@@ -62,9 +61,10 @@ MainWindow::MainWindow( const QString &icsfile )
   :  QMainWindow( ),
     m_ui(new Ui::MainWindow)
 {
-    m_ui->setupUi(this);
+      m_ui->setupUi(this);
       delete m_ui->treeWidget;
       m_ui->treeWidget=new TaskView(m_ui->centralwidget);
+      ((TaskView *) m_ui->treeWidget)->load(icsfile);
       m_ui->gridLayout->addWidget(m_ui->treeWidget, 1, 0, 1, 1);
       m_ui->treeWidget->hide();
       m_ui->treeWidget->show();
