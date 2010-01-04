@@ -73,7 +73,6 @@ class MainWindow : public QMainWindow
     /* quit() has been offloaded to timetrackerwidget */
   protected Q_SLOTS:
     void keyBindings();
-    void taskViewCustomContextMenuRequested( const QPoint& );
     void on_actionQuit_triggered();
 
   protected:
