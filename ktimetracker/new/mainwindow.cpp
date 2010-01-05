@@ -49,56 +49,45 @@
 
 #include "timetrackerwidget.h"
 
+
+/*
+
+  Missing:
+      - reaction on click on icons in the toolbar
+      - context menu
+
+  */
 MainWindow::MainWindow( const QString &icsfile )
   :  QMainWindow( ),
     m_ui(new Ui::MainWindow)
 {
-    m_ui->setupUi(this);
+      m_ui->setupUi(this);
       delete m_ui->treeWidget;
       m_ui->treeWidget=new TaskView(m_ui->centralwidget);
-      m_ui->gridLayout->addWidget(m_ui->treeWidget, 0, 0, 1, 1);
+      ((TaskView *) m_ui->treeWidget)->load(icsfile);
+      this->setWindowTitle(QString(icsfile));
+      m_ui->gridLayout->addWidget(m_ui->treeWidget, 1, 0, 1, 1);
       m_ui->treeWidget->hide();
       m_ui->treeWidget->show();
       m_ui->ktreewidgetsearchline->show();
-      m_ui->toolBar->addAction(KIcon("document-new"),"hi");
-
+      m_ui->toolBar->addAction(KIcon("document-new"),"New Task");
+      m_ui->toolBar->addAction(KIcon("subtask-new-ktimetracker"),"New Subtask");
+      m_ui->toolBar->addAction(KIcon("media-playback-start"),"Start");
+      m_ui->toolBar->addAction(KIcon("media-playback-stop"),"Stop");
+      m_ui->toolBar->addAction(KIcon("edit-delete"), "Delete");
+      m_ui->toolBar->addAction(KIcon("document-properties"),"Edit");
+      setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 /*
-      kDebug(5970) << "Entering function, icsfile is " << icsfile;
-    // Setup our actions
-    setupActions();
 
-    // this routine will find and load our Part.
-    KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
     if (factory)
     {
-        // now that the Part is loaded, we cast it to a Part to get
-        // our hands on it
-        m_part = static_cast<ktimetrackerpart *>(factory->create(this, "ktimetrackerpart" ));
 
         if (m_part)
         {
-            // tell the KParts::MainWindow that this is indeed
-            // the main widget
-            setCentralWidget(m_part->widget());
-            m_part->openFile(icsfile);
-            slotSetCaption( icsfile );  // set the window title to our iCal file
             connect(configureAction, SIGNAL(triggered(bool)),
                 m_part->widget(), SLOT(showSettingsDialog()));
-            //((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
-            //setupGUI();
         }
     }
-    else
-    {
-        // if we couldn't find our Part, we exit since the Shell by
-        // itself can't do anything useful
-        KMessageBox::error(this, i18n( "Could not find the KTimeTracker part." ));
-        qApp->quit();
-        // we return here, cause qApp->quit() only means "exit the
-        // next time we enter the event loop...
-        return;
-    }
-    setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
     // connections
     connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
@@ -129,22 +118,6 @@ void MainWindow::setupActions()
     configureAction = new KAction(this);
     configureAction->setText(i18n("Configure KTimeTracker..."));
     //actionCollection()->addAction("configure_ktimetracker", configureAction);
-}
-
-void MainWindow::readProperties( const KConfigGroup &cfg )
-{
-    if( cfg.readEntry( "WindowShown", true ))
-        show();
-}
-
-void MainWindow::saveProperties( KConfigGroup &cfg )
-{
-    cfg.writeEntry( "WindowShown", isVisible());
-}
-
-void MainWindow::slotSetCaption( const QString& qs )
-{
-    //setCaption( qs );
 }
 
 void MainWindow::setStatusBar(const QString& qs)
@@ -197,22 +170,9 @@ void MainWindow::saveGeometry()
     config.sync();
 }
 
-bool MainWindow::queryClose()
+void MainWindow::on_actionQuit_triggered()
 {
-    if ( !kapp->sessionSaving() )
-    {
-        hide();
-        return false;
-    }
-    //return KMainWindow::queryClose();
-}
-
-void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
-{
-    //QMenu* pop = dynamic_cast<QMenu*>(
-      //                    factory()->container( i18n( "task_popup" ), this ) );
-    //if ( pop )
-      //  pop->popup( point );
+    close();
 }
 
 #include "mainwindow.moc"

@@ -68,19 +68,15 @@ class MainWindow : public QMainWindow
     virtual ~MainWindow();
 
   public Q_SLOTS:
-    void slotSetCaption( const QString& );
     void setStatusBar( const QString& );
     /* quit() has been offloaded to timetrackerwidget */
   protected Q_SLOTS:
     void keyBindings();
-    void taskViewCustomContextMenuRequested( const QPoint& );
+    void on_actionQuit_triggered();
 
   protected:
-    /* reimp */ void readProperties( const KConfigGroup &config );
-    /* reimp */ void saveProperties( KConfigGroup &config );
     void saveGeometry();
     void loadGeometry();
-    bool queryClose();
 };
 
 #endif // KTIMETRACKER_MAIN_WINDOW_H
