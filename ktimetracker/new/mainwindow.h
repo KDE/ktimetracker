@@ -77,6 +77,7 @@ class MainWindow : public QMainWindow
     void keyBindings();
     void on_actionConfigure_ktimetracker_triggered();
     void on_actionQuit_triggered();
+    void newtask();
 
   protected:
     void saveGeometry();
