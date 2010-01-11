@@ -113,6 +113,20 @@ MainWindow::MainWindow( const QString &icsfile )
                       */
 }
 
+void MainWindow::showSettingsDialog()
+{
+    kDebug(5970) << "Entering function";
+    /* show main window b/c if this method was started from tray icon and the window
+        is not visible the application quits after accepting the settings dialog.
+    */
+    window()->show();
+    KTimeTrackerConfigDialog *dialog = new KTimeTrackerConfigDialog( i18n( "Settings" ), this);
+    dialog->exec();
+    delete dialog;
+    m_ui->ktreewidgetsearchline->setHidden(KTimeTrackerSettings::configPDA());
+    ((TaskView*) m_ui->treeWidget)->reconfigure();
+}
+
 void MainWindow::setupActions()
 {
     configureAction = new KAction(this);
@@ -168,6 +182,11 @@ void MainWindow::saveGeometry()
     config.writeEntry( QString::fromLatin1("Width"), width());
     config.writeEntry( QString::fromLatin1("Height"), height());
     config.sync();
+}
+
+void MainWindow::on_actionConfigure_ktimetracker_triggered()
+{
+    showSettingsDialog();
 }
 
 void MainWindow::on_actionQuit_triggered()
