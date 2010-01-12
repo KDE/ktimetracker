@@ -584,7 +584,7 @@ QString TaskView::reFreshTimes()
         }
     }
 
-    // TODO: refresh total times
+    for (int i=0; i<count(); i++) itemAt(i)->recalculatetotaltime();
 
     refresh();
     kDebug(5970) << "Leaving TaskView::reFreshTimes()";
