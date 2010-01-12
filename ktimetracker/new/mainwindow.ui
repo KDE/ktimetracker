@@ -59,8 +59,15 @@
     </property>
     <addaction name="actionHelp"/>
    </widget>
+   <widget class="QMenu" name="menuConfigure">
+    <property name="title">
+     <string>Configure</string>
+    </property>
+    <addaction name="actionConfigure_ktimetracker"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuConfigure"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -95,6 +102,11 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionConfigure_ktimetracker">
+   <property name="text">
+    <string>Configure ktimetracker</string>
    </property>
   </action>
  </widget>

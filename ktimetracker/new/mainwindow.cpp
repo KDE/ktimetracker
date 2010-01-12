@@ -70,7 +70,7 @@ MainWindow::MainWindow( const QString &icsfile )
       m_ui->treeWidget->hide();
       m_ui->treeWidget->show();
       m_ui->ktreewidgetsearchline->show();
-      m_ui->toolBar->addAction(KIcon("document-new"),"New Task");
+      m_ui->toolBar->addAction(KIcon("document-new"),"New Task",this,SLOT(newtask()));
       m_ui->toolBar->addAction(KIcon("subtask-new-ktimetracker"),"New Subtask");
       m_ui->toolBar->addAction(KIcon("media-playback-start"),"Start");
       m_ui->toolBar->addAction(KIcon("media-playback-stop"),"Stop");
@@ -78,16 +78,6 @@ MainWindow::MainWindow( const QString &icsfile )
       m_ui->toolBar->addAction(KIcon("document-properties"),"Edit");
       setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 /*
-
-    if (factory)
-    {
-
-        if (m_part)
-        {
-            connect(configureAction, SIGNAL(triggered(bool)),
-                m_part->widget(), SLOT(showSettingsDialog()));
-        }
-    }
 
     // connections
     connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
@@ -111,6 +101,25 @@ MainWindow::MainWindow( const QString &icsfile )
     connect( m_part->widget(), SIGNAL( tasksChanged( const QList<Task*>& ) ),
                       _tray, SLOT( updateToolTip( QList<Task*> ) ));
                       */
+}
+
+void MainWindow::newtask()
+{
+    ((TaskView*) m_ui->treeWidget)->newTask();
+}
+
+void MainWindow::showSettingsDialog()
+{
+    kDebug(5970) << "Entering function";
+    /* show main window b/c if this method was started from tray icon and the window
+        is not visible the application quits after accepting the settings dialog.
+    */
+    window()->show();
+    KTimeTrackerConfigDialog *dialog = new KTimeTrackerConfigDialog( i18n( "Settings" ), this);
+    dialog->exec();
+    m_ui->ktreewidgetsearchline->setHidden(KTimeTrackerSettings::configPDA());
+    ((TaskView*) m_ui->treeWidget)->reconfigure();
+    delete dialog;
 }
 
 void MainWindow::setupActions()
@@ -168,6 +177,11 @@ void MainWindow::saveGeometry()
     config.writeEntry( QString::fromLatin1("Width"), width());
     config.writeEntry( QString::fromLatin1("Height"), height());
     config.sync();
+}
+
+void MainWindow::on_actionConfigure_ktimetracker_triggered()
+{
+    showSettingsDialog();
 }
 
 void MainWindow::on_actionQuit_triggered()

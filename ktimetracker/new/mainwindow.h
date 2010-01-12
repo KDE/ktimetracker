@@ -25,6 +25,7 @@
 #include <KParts/MainWindow>
 #include "ktimetrackerpart.h"
 #include "reportcriteria.h"
+#include "ktimetrackerconfigdialog.h"
 
 class KAccel;
 class KAccelMenuWatch;
@@ -69,10 +70,14 @@ class MainWindow : public QMainWindow
 
   public Q_SLOTS:
     void setStatusBar( const QString& );
+    /* this is duplicated from timetrackerwidget */
+    void showSettingsDialog();
     /* quit() has been offloaded to timetrackerwidget */
   protected Q_SLOTS:
     void keyBindings();
+    void on_actionConfigure_ktimetracker_triggered();
     void on_actionQuit_triggered();
+    void newtask();
 
   protected:
     void saveGeometry();
