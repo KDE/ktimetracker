@@ -186,11 +186,10 @@ public:
        */
       void resetTimes();
 
-      /*@{ returns the times accumulated by the task
-       * @return total time in minutes
-       */
+      /** @return time in minutes */
       long time() const;
-      long totalTime() const;
+      /** @return total time in minutes */
+      long totalTime() const { return mTotalTime; };
       long sessionTime() const;
       long totalSessionTime() const;
       KDateTime sessionStartTiMe() const;

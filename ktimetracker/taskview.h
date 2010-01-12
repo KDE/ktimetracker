@@ -262,7 +262,7 @@ class TaskView : public QTreeWidget
 
   protected Q_SLOTS:
     void minuteUpdate();
-
+    void dropEvent ( QDropEvent * event );
     /** item state stores if a task is expanded so you can see the subtasks */
     void itemStateChanged( QTreeWidgetItem *item );
 

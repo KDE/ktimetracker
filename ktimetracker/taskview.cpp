@@ -583,6 +583,9 @@ QString TaskView::reFreshTimes()
             }
         }
     }
+
+    // TODO: refresh total times
+
     refresh();
     kDebug(5970) << "Leaving TaskView::reFreshTimes()";
     return err;
@@ -666,6 +669,12 @@ Task* TaskView::task( const QString& taskId )
         if ( itemAt( i ) )
             if ( itemAt( i )->uid() == taskId ) result=itemAt( i );
     return result;
+}
+
+void TaskView::dropEvent ( QDropEvent * event )
+{
+    QTreeWidget::dropEvent(event);
+    reFreshTimes();
 }
 
 void TaskView::scheduleSave()

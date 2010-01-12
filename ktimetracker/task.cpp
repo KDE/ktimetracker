@@ -652,11 +652,6 @@ long Task::time() const
     return mTime;
 }
 
-long Task::totalTime() const
-{
-    return mTotalTime;
-}
-
 long Task::sessionTime() const
 {
     return mSessionTime;
