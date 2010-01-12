@@ -312,6 +312,7 @@ QString Task::addTotalTime( long minutes )
     kDebug(5970) << "Entering function";
     QString err;
     mTotalTime+=minutes;
+    if ( parent() ) parent()->addTotalTime( minutes );
     kDebug(5970) << "Leaving function";
     return err;
 }
@@ -346,18 +347,14 @@ QString Task::setTime( long minutes )
     return err;
 }
 
-long Task::recalculatetotaltime()
+QString Task::recalculatetotaltime()
 {
-    long result=0;
+    QString result;
     setTotalTime(0);
-    addTotalTime(time());
     Task* child;
     for (int i=0; i<this->childCount(); ++i)
-    {
         child=(Task*)this->child(i);
-        this->addTotalTime(child->recalculatetotaltime());
-    }
-    result=totalTime();
+    addTotalTime(time());
     return result;
 }
 

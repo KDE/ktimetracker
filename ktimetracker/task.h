@@ -176,7 +176,7 @@ public:
       void setTotalTime( long minutes ) { mTotalTime=minutes; };
 
       /** A recursive function to calculate the total time of a task. */
-      long recalculatetotaltime();
+      QString recalculatetotaltime();
 
       /** Sets the session time.
        * Set the session time without changing totalTime nor sessionTime. 
