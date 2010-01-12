@@ -175,8 +175,16 @@ public:
         */
       void setTotalTime( long minutes ) { mTotalTime=minutes; };
 
+      /** Sets the total session time, does not change the parent's total session time.
+        This means the parent's total session time can run out of sync.
+        */
+      void setTotalSessionTime( long minutes ) { mTotalSessionTime=minutes; };
+
       /** A recursive function to calculate the total time of a task. */
       QString recalculatetotaltime();
+
+      /** A recursive function to calculate the total session time of a task. */
+      QString recalculatetotalsessiontime();
 
       /** Sets the session time.
        * Set the session time without changing totalTime nor sessionTime. 

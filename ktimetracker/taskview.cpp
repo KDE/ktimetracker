@@ -585,6 +585,7 @@ QString TaskView::reFreshTimes()
     }
 
     for (int i=0; i<count(); i++) itemAt(i)->recalculatetotaltime();
+    for (int i=0; i<count(); i++) itemAt(i)->recalculatetotalsessiontime();
 
     refresh();
     kDebug(5970) << "Leaving TaskView::reFreshTimes()";
@@ -1085,10 +1086,10 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
                 stopCurrentTimer();
             } else
                 if ( !task->isComplete() )
-                    {
-                        stopAllTimers();
-                        startCurrentTimer();
-                    }
+                {
+                    stopAllTimers();
+                    startCurrentTimer();
+                }
         }
     }
 }
