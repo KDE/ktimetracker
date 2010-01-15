@@ -347,6 +347,28 @@ QString Task::setTime( long minutes )
     return err;
 }
 
+QString Task::recalculatetotaltime()
+{
+    QString result;
+    setTotalTime(0);
+    Task* child;
+    for (int i=0; i<this->childCount(); ++i)
+        child=(Task*)this->child(i);
+    addTotalTime(time());
+    return result;
+}
+
+QString Task::recalculatetotalsessiontime()
+{
+    QString result;
+    setTotalSessionTime(0);
+    Task* child;
+    for (int i=0; i<this->childCount(); ++i)
+        child=(Task*)this->child(i);
+    addTotalSessionTime(time());
+    return result;
+}
+
 QString Task::setSessionTime( long minutes )
 {
     kDebug(5970) << "Entering function";
@@ -645,26 +667,6 @@ QString Task::name() const
 QDateTime Task::startTime() const
 {
     return mLastStart;
-}
-
-long Task::time() const
-{
-    return mTime;
-}
-
-long Task::totalTime() const
-{
-    return mTotalTime;
-}
-
-long Task::sessionTime() const
-{
-    return mSessionTime;
-}
-
-long Task::totalSessionTime() const
-{
-    return mTotalSessionTime;
 }
 
 KDateTime Task::sessionStartTiMe() const

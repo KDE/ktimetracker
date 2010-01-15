@@ -170,6 +170,22 @@ public:
        */
       QString setTime( long minutes );
 
+      /** Sets the total time, does not change the parent's total time.
+        This means the parent's total time can run out of sync.
+        */
+      void setTotalTime( long minutes ) { mTotalTime=minutes; };
+
+      /** Sets the total session time, does not change the parent's total session time.
+        This means the parent's total session time can run out of sync.
+        */
+      void setTotalSessionTime( long minutes ) { mTotalSessionTime=minutes; };
+
+      /** A recursive function to calculate the total time of a task. */
+      QString recalculatetotaltime();
+
+      /** A recursive function to calculate the total session time of a task. */
+      QString recalculatetotalsessiontime();
+
       /** Sets the session time.
        * Set the session time without changing totalTime nor sessionTime. 
        * Do not change the parent's totalTime.
@@ -186,13 +202,12 @@ public:
        */
       void resetTimes();
 
-      /*@{ returns the times accumulated by the task
-       * @return total time in minutes
-       */
-      long time() const;
-      long totalTime() const;
-      long sessionTime() const;
-      long totalSessionTime() const;
+      /** @return time in minutes */
+      long time() const { return mTime; };
+      /** @return total time in minutes */
+      long totalTime() const { return mTotalTime; };
+      long sessionTime() const { return mSessionTime; };
+      long totalSessionTime() const { return mTotalSessionTime; };
       KDateTime sessionStartTiMe() const;
 
       /**
