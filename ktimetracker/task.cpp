@@ -347,6 +347,17 @@ QString Task::setSessionTime( long minutes )
   return err;
 }
 
+QString Task::recalculatetotalsessiontime()
+              {
+                  QString result;
+                  setTotalSessionTime(0);
+                  Task* child;
+                  for (int i=0; i<this->childCount(); ++i)
+                      child=(Task*)this->child(i);
+                  addTotalSessionTime(time());
+                  return result;
+              }
+
 long Task::recalculatetotaltime()
 {
   long result=0;

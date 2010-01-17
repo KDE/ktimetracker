@@ -572,6 +572,7 @@ QString TaskView::reFreshTimes()
     }
   }
   for (int i=0; i<count(); i++) itemAt(i)->recalculatetotaltime();
+  for (int i=0; i<count(); i++) itemAt(i)->recalculatetotalsessiontime();
   refresh();
   kDebug(5970) << "Leaving TaskView::reFreshTimes()";
   return err;

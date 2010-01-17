@@ -177,6 +177,10 @@ class Task : public QObject, public QTreeWidgetItem
       long recalculatetotaltime();
 
       QString addTotalSessionTime( long minutes );
+      
+      void setTotalSessionTime( long minutes ) { mTotalSessionTime=minutes; };
+
+      QString recalculatetotalsessiontime();
 
       /** Sets the time (not session time). This does not add an event.
        *
