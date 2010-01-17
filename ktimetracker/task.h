@@ -168,6 +168,14 @@ class Task : public QObject, public QTreeWidgetItem
        *  @returns                A QString with the error message, in case of no error an empty QString.
        *
        */
+       /** Sets the total time, does not change the parent's total time.
+           This means the parent's total time can run out of sync.
+       */
+       
+       void setTotalTime( long minutes ) { mTotalTime=minutes; };
+       /** A recursive function to calculate the total time of a task. */
+      long recalculatetotaltime();
+
       QString addTotalSessionTime( long minutes );
 
       /** Sets the time (not session time). This does not add an event.
@@ -196,10 +204,10 @@ class Task : public QObject, public QTreeWidgetItem
       /*@{ returns the times accumulated by the task
        * @return total time in minutes
        */
-      long time() const;
-      long totalTime() const;
-      long sessionTime() const;
-      long totalSessionTime() const;
+      long time() const{ return mTime; };
+      long totalTime() const {return mTotalTime;};
+      long sessionTime() const{ return mSessionTime; };
+      long totalSessionTime() const{ return mTotalSessionTime; };
       KDateTime sessionStartTiMe() const;
 
       /**

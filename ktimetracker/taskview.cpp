@@ -571,6 +571,7 @@ QString TaskView::reFreshTimes()
       }
     }
   }
+  for (int i=0; i<count(); i++) itemAt(i)->recalculatetotaltime();
   refresh();
   kDebug(5970) << "Leaving TaskView::reFreshTimes()";
   return err;
@@ -669,6 +670,12 @@ QString TaskView::save()
     if (err==QString("Could not save. Could not lock file.")) emit setStatusBarText( i18n("Could not save. Disk full ?") );
     else emit setStatusBarText( i18n("Could not save.") );
   return err;
+}
+
+void TaskView::dropEvent ( QDropEvent * event )
+{
+  QTreeWidget::dropEvent(event);
+  reFreshTimes();
 }
 
 void TaskView::startCurrentTimer()

@@ -347,6 +347,18 @@ QString Task::setSessionTime( long minutes )
   return err;
 }
 
+long Task::recalculatetotaltime()
+{
+  long result=0;
+  setTotalTime(0);
+  Task* child;
+  for (int i=0; i<this->childCount(); ++i)
+    child=(Task*)this->child(i);
+  addTotalTime(time());
+  result=totalTime();
+  return result;
+}
+
 void Task::changeTimes( long minutesSession, long minutes, KarmStorage* storage)
 {
   kDebug(5970) << "Entering function";
@@ -646,26 +658,6 @@ QString Task::name() const
 QDateTime Task::startTime() const
 {
   return mLastStart;
-}
-
-long Task::time() const
-{
-  return mTime;
-}
-
-long Task::totalTime() const
-{
-  return mTotalTime;
-}
-
-long Task::sessionTime() const
-{
-  return mSessionTime;
-}
-
-long Task::totalSessionTime() const
-{
-  return mTotalSessionTime;
 }
 
 KDateTime Task::sessionStartTiMe() const
