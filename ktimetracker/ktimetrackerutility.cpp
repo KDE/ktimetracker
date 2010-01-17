@@ -28,18 +28,11 @@
 #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <fixx11h.h>
+#include <KWindowSystem>
 
 QString getFocusWindow()
 {
-  Display *display = XOpenDisplay( 0 );
-  char *name;
-  Window window = 0;
-  int i = 0;
-  XGetInputFocus( display, &window, &i );
-  XFetchName( display, window, &name );
-  XCloseDisplay( display );
-
-  return QString( name );
+  return KWindowSystem::windowInfo(KWindowSystem::activeWindow(),NET::WMName, 0).name();
 }
 
 QString formatTime( double minutes, bool decimal )
