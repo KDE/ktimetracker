@@ -79,6 +79,17 @@ RELATED-TO:libkcal-1156600660.458
 PERCENT-COMPLETE:0
 END:VTODO
 
+BEGIN:VTODO                                                                                                                            
+DTSTAMP:20100122T212756Z                                                                                                               
+X-KDE-ktimetracker-totalSessionTime:0                                                                                                  
+X-KDE-ktimetracker-totalTaskTime:0                                                                                                     
+CREATED:20100122T212628Z                                                                                                               
+UID:libkcal-873988223.1033                                                                                                             
+LAST-MODIFIED:20100122T212756Z                                                                                                         
+SUMMARY:sleeping\, eating                                                                                                              
+PERCENT-COMPLETE:0                                                                                                                     
+END:VTODO     
+
 BEGIN:VEVENT
 DTSTAMP:20061209T170950Z
 ORGANIZER:MAILTO:
