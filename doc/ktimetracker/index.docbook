@@ -310,7 +310,7 @@ only edit the file with one application or the other.</para></warning>
 
 <para>As a typical usecase, you might want to plan a project with the project 
 management tool Imendio Planner 
-(from <ulink url="http://planner.imendio.org">planner.imendio.org</ulink>) 
+(from <ulink url="http://live.gnome.org/Planner">live.gnome.org/Planner</ulink>) 
 and import its tasks to &ktimetracker; with <menuchoice><guimenu>File</guimenu>
 <guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>
 </menuchoice>, to have them in the industry standard <ulink
