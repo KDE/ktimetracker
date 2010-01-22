@@ -141,7 +141,7 @@ To create a top-level task, select
 </shortcut>
 <guimenu>Task</guimenu>
 <guimenuitem>New Task...</guimenuitem>
-</menuchoice>
+</menuchoice>. 
 
 To create a subtask, pick the parent task and select
 
@@ -151,7 +151,7 @@ To create a subtask, pick the parent task and select
 </shortcut>
 <guimenu>Task</guimenu>
 <guimenuitem>New Subtask...</guimenuitem>
-</menuchoice>
+</menuchoice>.
 </para>
 
 <para>When &ktimetracker; exits, the task list is saved to a file on your disk. 
@@ -192,12 +192,13 @@ two columns for each timer, resulting in a total of four columns for each task:<
 <listitem><para>The time spent on the task since the session
 began.</para></listitem> </varlistentry> 
 
-<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
-<listitem><para>The time spent on the task and all its subtasks since the
-session began.</para></listitem> </varlistentry> 
 <varlistentry> <term><guilabel>Time</guilabel></term> <listitem><para>The time
 spent on the task since all times were reset.</para></listitem>
 </varlistentry> 
+
+<varlistentry> <term><guilabel>Total Session Time</guilabel></term>
+<listitem><para>The time spent on the task and all its subtasks since the
+session began.</para></listitem> </varlistentry> 
 
 <varlistentry> <term><guilabel>Total Time</guilabel></term>
 <listitem><para>The time spent on the task and all its subtasks since all
@@ -310,9 +311,9 @@ only edit the file with one application or the other.</para></warning>
 <para>As a typical usecase, you might want to plan a project with the project 
 management tool Imendio Planner 
 (from <ulink url="http://planner.imendio.org">planner.imendio.org</ulink>) 
-and import its tasks to &ktimetracker; with <guimenu>File</guimenu>
-<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>, 
-to have them in the industry standard <ulink
+and import its tasks to &ktimetracker; with <menuchoice><guimenu>File</guimenu>
+<guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>
+</menuchoice>, to have them in the industry standard <ulink
 url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink> 
 format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
 to them in &ktimetracker;. That's one way to help ensure your project stays on time
@@ -479,8 +480,8 @@ subtasks, as well as its own accumulated time.</para>
 
 </sect1>
 
-<sect1 id="tool-bar">
-<title>The Toolbar</title>
+<sect1 id="tool-bar-status-bar">
+<title>The Toolbar and Statusbar</title>
 <para>The toolbar contains icons for the following commands:</para>
 
 <note><para>(All behave identically to the menu command.)</para></note>
@@ -494,12 +495,7 @@ subtasks, as well as its own accumulated time.</para>
 <listitem><para><guiicon>Edit</guiicon></para></listitem>
 </itemizedlist>
 
-</sect1>
-
-<sect1 id="status-bar">
-<title>The Statusbar</title>
-
-<para>Reports the name of the file where the data was saved.</para>
+<para>The statusbar reports the name of the file where the data was saved.</para>
 </sect1>
 
 </chapter>
