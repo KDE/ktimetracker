@@ -772,7 +772,7 @@ QString KarmStorage::exportcsvHistory ( TaskView      *taskview,
     // use the internal table itab to create the return value retval
     for ( int y=0; y<=(taskview->count()); y++ )
     {
-      if (itab->item(y,0)) retval.append(itab->item(y,0)->text());  // task names
+      if (itab->item(y,0)) retval.append("\"").append(itab->item(y,0)->text().replace("\"","\"\"")).append("\"");  // task names
       for ( int x=1; x<=from.daysTo(to)+1; x++ )
       {
         retval.append(rc.delimiter);
