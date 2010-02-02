@@ -138,7 +138,9 @@ class timetrackerstorage : public QObject
      *
      */
     bool allEventsHaveEndTiMe();
-   
+
+    QString deleteAllEvents();
+
     /**
      * Save all tasks and their totals to an iCalendar file.
      *

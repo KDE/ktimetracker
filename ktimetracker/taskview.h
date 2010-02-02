@@ -73,14 +73,17 @@ class TaskView : public QTreeWidget
     /** Close the storage and release lock. */
     void closeStorage();
 
-    /** Reset session time to zero for all tasks.   */
+    /** Reset session time to zero for all tasks.  */
     void startNewSession();
 
-    /** Deliver if all events from the storage have and end time  */
+    /** Deliver if all events from the storage have and end time.  */
     bool allEventsHaveEndTiMe();
 
     /** Reset session and total time to zero for all tasks.  */
     void resetTimeForAllTasks();
+
+    /** Reset session and total time for all tasks - do not touch the storage.  */
+    void resetDisplayTimeForAllTasks();
 
     /** Return the total number of items in the view.  */
     long count();

@@ -814,7 +814,7 @@ void TimetrackerWidget::resetAllTimes()
     if ( d->mTabWidget->currentWidget() )
     {
         if ( KMessageBox::warningContinueCancel( this,
-            i18n( "Do you really want to reset the time to zero for all tasks?" ),
+            i18n( "Do you really want to reset the time to zero for all tasks? This will delete the entire history." ),
             i18n( "Confirmation Required" ), KGuiItem( i18n( "Reset All Times" ) ) ) == KMessageBox::Continue )
         currentTaskView()->resetTimeForAllTasks();
     }

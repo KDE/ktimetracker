@@ -356,6 +356,15 @@ bool timetrackerstorage::allEventsHaveEndTiMe()
     return true;
 }
 
+QString timetrackerstorage::deleteAllEvents()
+{
+    kDebug(5970) << "Entering function";
+    QString err;
+    KCal::Event::List eventList = d->mCalendar->rawEvents();
+    d->mCalendar->deleteAllEvents();
+    return err;
+}
+
 QString timetrackerstorage::save(TaskView* taskview)
 {
     kDebug(5970) << "Entering function";

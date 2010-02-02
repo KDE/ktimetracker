@@ -546,7 +546,7 @@ QString TaskView::reFreshTimes()
     // re-calculate the time for every task based on events in the history
     KCal::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
     int n=-1;
-    resetTimeForAllTasks();
+    resetDisplayTimeForAllTasks();
     emit reSetTimes();
     while (itemAt(++n)) // loop over all tasks
     {
@@ -782,7 +782,7 @@ That is why there is also a total session time. */
 void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
-    kDebug(5970) << "Entering TaskView::resetTimeForAllTasks";
+    kDebug(5970) << "Entering function";
     QTreeWidgetItemIterator item( this );
     while ( *item )
     {
@@ -790,7 +790,22 @@ void TaskView::resetTimeForAllTasks()
         task->resetTimes();
         ++item;
     }
-    kDebug(5970) << "Leaving TaskView::resetTimeForAllTasks";
+    storage()->deleteAllEvents();
+    kDebug(5970) << "Leaving function";
+}
+
+void TaskView::resetDisplayTimeForAllTasks()
+/* This procedure resets all times (session and overall) for all tasks and subtasks. */
+{
+    kDebug(5970) << "Entering function";
+    QTreeWidgetItemIterator item( this );
+    while ( *item )
+    {
+        Task * task = (Task *) *item;
+        task->resetTimes();
+        ++item;
+    }
+    kDebug(5970) << "Leaving function";
 }
 
 void TaskView::stopTimerFor(Task* task)
