@@ -2,6 +2,7 @@
 Name=KTimeTracker
 Name[ar]=مقتفي الوقت
 Name[ca]=KTimeTracker
+Name[ca@valencia]=KTimeTracker
 Name[cs]=KTimeTracker
 Name[da]=KTimeTracker
 Name[de]=KDE-Zeitplaner
@@ -45,6 +46,7 @@ GenericName[ar]=مقتفي الوقت الشخصي
 GenericName[bg]=Отчитане на времето
 GenericName[br]=Roudenner amzer personel
 GenericName[ca]=Seguiment horari personal
+GenericName[ca@valencia]=Seguiment horari personal
 GenericName[cs]=Osobní měřič času
 GenericName[cy]=Dilynnydd Amser Personol
 GenericName[da]=Personlig tidsoversigt
