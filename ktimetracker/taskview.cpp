@@ -646,7 +646,12 @@ QString TaskView::exportcsvHistory()
 long TaskView::count()
 {
     long n = 0;
-    for (Task* t = itemAt(n); t; t=itemAt(++n)){};
+    QTreeWidgetItemIterator item( this );
+    while( *item )
+    {
+        ++item;
+        ++n;
+    }
     return n;
 }
 
@@ -727,7 +732,6 @@ void TaskView::clearActiveTasks()
 void TaskView::stopAllTimers( const QDateTime &when )
 {
     kDebug(5970) << "Entering function";
-
     KProgressDialog dialog( this, 0, QString("Progress") );
     dialog.progressBar()->setMaximum( d->mActiveTasks.count() );
     if ( d->mActiveTasks.count() > 1 ) dialog.show();
