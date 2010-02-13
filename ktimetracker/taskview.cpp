@@ -642,7 +642,12 @@ QString TaskView::exportcsvHistory()
 long TaskView::count()
 {
     long n = 0;
-    for (Task* t = itemAt(n); t; t=itemAt(++n)){};
+    QTreeWidgetItemIterator item( this );
+    while( *item )
+    {
+        ++item;
+        ++n;
+    }
     return n;
 }
 
