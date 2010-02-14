@@ -259,6 +259,7 @@ class TaskView : public QTreeWidget
   protected:
     void mouseMoveEvent( QMouseEvent* );
     void mousePressEvent( QMouseEvent* );
+    void dropEvent ( QDropEvent * event );
 
   protected Q_SLOTS:
     void minuteUpdate();

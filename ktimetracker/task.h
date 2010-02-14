@@ -154,6 +154,14 @@ public:
        *
        */
       QString addSessionTime( long minutes );
+      
+      /** Sets the total time, does not change the parent's total time.
+          This means the parent's total time can run out of sync.
+       */
+      void setTotalTime( long minutes ) { mTotalTime=minutes; };
+
+      /** A recursive function to calculate the total time of a task. */
+      long recalculatetotaltime();
 
       /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
        *
@@ -162,6 +170,10 @@ public:
        *
        */
       QString addTotalSessionTime( long minutes );
+
+      void setTotalSessionTime( long minutes ) { mTotalSessionTime=minutes; };
+
+      QString recalculatetotalsessiontime();
 
       /** Sets the time (not session time). This does not add an event.
        *

@@ -346,6 +346,29 @@ QString Task::setTime( long minutes )
     kDebug(5970) << "Leaving function";
     return err;
 }
+         long Task::recalculatetotaltime()
+              {
+                long result=0;
+                setTotalTime(0);
+                Task* child;
+                for (int i=0; i<this->childCount(); ++i)
+                  child=(Task*)this->child(i);
+                addTotalTime(time());
+                result=totalTime();
+                return result;
+              }
+
+QString Task::recalculatetotalsessiontime()
+              {
+                  QString result;
+                  setTotalSessionTime(0);
+                  Task* child;
+                  for (int i=0; i<this->childCount(); ++i)
+                      child=(Task*)this->child(i);
+                  addTotalSessionTime(time());
+                  return result;
+              }
+
 
 QString Task::setSessionTime( long minutes )
 {
