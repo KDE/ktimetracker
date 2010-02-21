@@ -989,40 +989,30 @@ void TaskView::deleteTaskBatch( Task* task )
 
 
 void TaskView::deleteTask( Task* task )
+/* Attention when popping up a window asking for confirmation.
+If you have "Track active applications" on, this window will create a new task and
+make this task running and selected. */
 {
     kDebug(5970) << "Entering function";
     if (task == 0) task = currentItem();
     if (currentItem() == 0)
     {
         KMessageBox::information(0,i18n("No task selected."));
-        return;
     }
-
-    int response = KMessageBox::Continue;
-    if (KTimeTrackerSettings::promptDelete())
+    else
     {
-        response = KMessageBox::warningContinueCancel( 0,
-            i18n( "Are you sure you want to delete the selected"
-            " task(s) and their entire history?\n"
-            "NOTE: all subtasks and their history will also "
-            "be deleted."),
-            i18n( "Deleting Task(s)"), KStandardGuiItem::del());
-    }
-
-    if (response == KMessageBox::Continue)
-    {
-        int i=0;
-        QList<int> delendum;
-        while ( itemAt(i) )
+        int response = KMessageBox::Continue;
+        if (KTimeTrackerSettings::promptDelete())
         {
-            if ( itemAt( i )->isSelected())
-                delendum << i;
-            i++;
+            response = KMessageBox::warningContinueCancel( 0,
+                i18n( "Are you sure you want to delete the selected"
+                " task and its entire history?\n"
+                "NOTE: All subtasks and their history will also "
+                "be deleted."),
+                i18n( "Deleting Task"), KStandardGuiItem::del());
         }
-        for (int n=delendum.size()-1; n>=0; --n)
-            deleteTaskBatch(itemAt(delendum[n]));
+        if (response == KMessageBox::Continue) deleteTaskBatch(task);
     }
-    //d->mStorage->buildTaskView(this);
 }
 
 void TaskView::markTaskAsComplete()
