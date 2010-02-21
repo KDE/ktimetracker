@@ -1022,10 +1022,10 @@ make this task running and selected. */
         {
             response = KMessageBox::warningContinueCancel( 0,
                 i18n( "Are you sure you want to delete the selected"
-                " task(s) and their entire history?\n"
+                " task and its entire history?\n"
                 "NOTE: all subtasks and their history will also "
                 "be deleted."),
-                i18n( "Deleting Task(s)"), KStandardGuiItem::del());
+                i18n( "Deleting Task"), KStandardGuiItem::del());
         }
         if (response == KMessageBox::Continue) deleteTaskBatch(task);
     }
