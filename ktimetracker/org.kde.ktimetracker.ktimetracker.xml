@@ -35,6 +35,11 @@
       <arg name="dateTime" type="s" direction="in"/>
       <arg name="minutes" type="i" direction="in"/>
     </method>
+    <method name="changeTime">
+      <arg type="i" direction="out"/>
+      <arg name="taskId" type="s" direction="in"/>
+      <arg name="minutes" type="i" direction="in"/>
+    </method>
     <method name="error">
       <arg type="s" direction="out"/>
       <arg name="errorCode" type="i" direction="in"/>

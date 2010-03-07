@@ -176,7 +176,8 @@ class TimetrackerWidget : public QWidget
     void slotSearchBar();
     //END
 
-    //BEGIN dbus slots
+    /** \defgroup dbus slots ‘‘dbus slots’’ */
+    /* @{ */
     QString version() const;
     QStringList taskIdsFromName( const QString &taskName ) const;
     void addTask( const QString &taskName );
@@ -184,6 +185,7 @@ class TimetrackerWidget : public QWidget
     void deleteTask( const QString &taskId );
     void setPercentComplete( const QString &taskId, int percent );
     int bookTime( const QString &taskId, const QString &dateTime, int minutes );
+    int changeTime( const QString &taskId, int minutes );
     QString error( int errorCode ) const;
     bool isIdleDetectionPossible() const;
     int totalMinutesForTaskId( const QString &taskId ) const;
@@ -206,7 +208,8 @@ class TimetrackerWidget : public QWidget
     bool isTaskNameActive( const QString &taskId ) const;
     void saveAll();
     void quit();
-    //END
+    // END of dbus slots group
+    /* @} */
 
   protected:
     bool event ( QEvent * event ); // inherited from QWidget

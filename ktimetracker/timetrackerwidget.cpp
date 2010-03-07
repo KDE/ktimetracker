@@ -839,7 +839,8 @@ void TimetrackerWidget::slotSearchBar()
 }
 //END
 
-//BEGIN dbus slots
+/** \defgroup dbus slots ‘‘dbus slots’’ */
+/* @{ */
 QString TimetrackerWidget::version() const
 {
     return KTIMETRACKER_VERSION;
@@ -982,6 +983,41 @@ int TimetrackerWidget::bookTime( const QString &taskId, const QString &dateTime,
         return KTIMETRACKER_ERR_GENERIC_SAVE_FAILED;
 
     return 0;
+}
+
+int TimetrackerWidget::changeTime( const QString &taskId, int minutes )
+{
+    int result=0;
+    QDate startDate;
+    QTime startTime;
+    QDateTime startDateTime;
+    Task *task = 0, *t = 0;
+
+    if ( minutes <= 0 ) return KTIMETRACKER_ERR_INVALID_DURATION;
+
+    // Find task
+    for ( int i = 0; i < d->mTabWidget->count(); ++i )
+    {
+        TaskView *taskView = qobject_cast< TaskView* >( d->mTabWidget->widget( i ) );
+        if ( !taskView ) continue;
+
+        QTreeWidgetItemIterator it( taskView );
+        while ( *it )
+        {
+            t = static_cast< Task* >( *it );
+            if ( t && t->uid() == taskId )
+            {
+                task = t;
+                break;
+            }
+            ++it;
+        }
+        if ( task ) break;
+    }
+
+    if ( !task ) result=KTIMETRACKER_ERR_UID_NOT_FOUND;
+    else task->changeTime(minutes, task->taskView()->storage());
+    return result;
 }
 
 QString TimetrackerWidget::error( int errorCode ) const
@@ -1191,7 +1227,6 @@ bool TimetrackerWidget::isActive( const QString &taskId ) const
   return false;
 }
 
-
 bool TimetrackerWidget::isTaskNameActive( const QString &taskName ) const
 {
     for ( int i = 0; i < d->mTabWidget->count(); ++i )
@@ -1211,7 +1246,6 @@ bool TimetrackerWidget::isTaskNameActive( const QString &taskName ) const
     }
   return false;
 }
-
 
 QStringList TimetrackerWidget::tasks() const
 {
@@ -1283,6 +1317,6 @@ void TimetrackerWidget::quit()
         kapp->quit();
     }
 }
-//END
-
+// END of dbus slots group
+/* @} */
 #include "timetrackerwidget.moc"

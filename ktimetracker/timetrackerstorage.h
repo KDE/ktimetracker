@@ -162,9 +162,9 @@ class timetrackerstorage : public QObject
      * Log the change in a task's time.
      *
      * This is also called when a timer is stopped.
-     * We create an iCalendar event to store each change.  The event start
-     * date is set to the current datetime.  If time is added to the task, the
-     * task end date is set to start time + delta.  If the time is negative,
+     * We create an iCalendar event to store each change. The event start
+     * date is set to the current datetime. If time is added to the task, the
+     * task end date is set to start time + delta. If the time is negative,
      * the end date is set to the start time.
      *
      * In both cases (postive or negative delta), we create a custom iCalendar
@@ -173,7 +173,7 @@ class timetrackerstorage : public QObject
      *
      * Note that the ktimetracker UI allows the user to change both the session and
      * the total task time, and this routine does not account for all posibile
-     * cases.  For example, it is possible for the user to do something crazy
+     * cases. For example, it is possible for the user to do something crazy
      * like add 10 minutes to the session time and subtract 50 minutes from
      * the total time. Although this change violates a basic law of physics,
      * it is allowed.
@@ -188,9 +188,9 @@ class timetrackerstorage : public QObject
     /**
      * Book time to a task.
      *
-     * Creates an iCalendar event and adds it to the calendar.  Does not write
-     * calendar to disk, just adds event to calendar in memory.  However, the
-     * resource framework does try to get a lock on the file.  After a
+     * Creates an iCalendar event and adds it to the calendar. Does not write
+     * calendar to disk, just adds event to calendar in memory. However, the
+     * resource framework does try to get a lock on the file. After a
      * successful lock, the calendar marks this incidence as modified and then
      * releases the lock.
      *
