@@ -292,11 +292,6 @@ void Task::setDesktopList ( DesktopList desktopList )
     mDesktops = desktopList;
 }
 
-void Task::changeTime( long minutes, timetrackerstorage* storage )
-{
-    changeTimes( minutes, minutes, storage);
-}
-
 QString Task::addTime( long minutes )
 {
     kDebug(5970) << "Entering function";
@@ -391,6 +386,11 @@ void Task::changeTimes( long minutesSession, long minutes, timetrackerstorage* s
         changeTotalTimes( minutesSession, minutes );
     }
     kDebug(5970) << "Leaving function";
+}
+
+void Task::changeTime( long minutes, timetrackerstorage* storage )
+{
+    changeTimes( minutes, minutes, storage);
 }
 
 void Task::changeTotalTimes( long minutesSession, long minutes )

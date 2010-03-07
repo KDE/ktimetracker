@@ -945,13 +945,10 @@ void TaskView::editTask()
         task->setName(taskName, d->mStorage);
 
         // update session time as well if the time was changed
-        long total, session, totalDiff, sessionDiff;
-        total = totalDiff = session = sessionDiff = 0;
-        DesktopList desktopList;
-        dialog->status(&desktopList);
-
-        if ( totalDiff != 0 || sessionDiff != 0)
-            task->changeTimes( sessionDiff, totalDiff, d->mStorage );
+        if (!dialog->timeChange().isEmpty())
+        {
+            task->changeTime(dialog->timeChange().toInt(),d->mStorage);
+        }
 
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
