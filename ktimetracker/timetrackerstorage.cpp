@@ -37,7 +37,6 @@
 #include "timekard.h"
 
 #include <kemailsettings.h>
-#include <kpimprefs.h>        // for timezone
 #include <kio/netaccess.h>
 #include <kcal/resourcecalendar.h>
 #include <kcal/resourcelocal.h>
