@@ -66,7 +66,7 @@ class TimetrackerWidget : public QWidget
     /**
       Returns the TaskView widget of the current opened tabpage.
      */
-    TaskView* currentTaskView();
+    TaskView* currentTaskView() const;
 
     /**
       Returns the current task of the current opened TaskView widget.
@@ -136,11 +136,6 @@ class TimetrackerWidget : public QWidget
       shows/hides the search bar.
      */
     void showSearchBar( bool visible );
-
-     /**
-      shows/hides the tabbar.
-     */
-    void showTabBar( bool visible );
 
     /**
       tries to close all files. This slot has to be called before quitting
@@ -216,7 +211,6 @@ class TimetrackerWidget : public QWidget
 
   private Q_SLOTS:
     void slotCurrentChanged();
-    void updateTabs();
     void slotAddTask( const QString &taskName );
     void slotUpdateButtons();
     void showSettingsDialog();

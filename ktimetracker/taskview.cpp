@@ -688,16 +688,22 @@ void TaskView::scheduleSave()
     _manualSaveTimer->start( 10 );
 }
 
-QString TaskView::save()
+void TaskView::save()
 {
     kDebug(5970) <<"Entering TaskView::save()";
     QString err=d->mStorage->save(this);
 
-    if (err.isNull()) emit setStatusBarText( i18n("Successfully saved file ").append( d->mStorage->icalfile() ));
-    else
-        if (err==QString("Could not save. Could not lock file.")) emit setStatusBarText( i18n("Could not save. Disk full ?") );
-        else emit setStatusBarText( i18n("Could not save.") );
-    return err;
+    if (!err.isNull())
+    {
+        QString errMsg = d->mStorage->icalfile() + ":\n";
+
+        if (err==QString("Could not save. Could not lock file."))
+            errMsg += i18n("Could not save. Disk full?");
+        else
+            errMsg += i18n("Could not save.");
+
+        KMessageBox::error(this, errMsg);
+    }
 }
 
 void TaskView::startCurrentTimer()

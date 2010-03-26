@@ -115,7 +115,7 @@ class TaskView : public QTreeWidget
 
   public Q_SLOTS:
     /** Save to persistent storage. */
-    QString save();
+    void save();
 
     /** Start the timer on the current item (task) in view.  */
     void startCurrentTimer();
