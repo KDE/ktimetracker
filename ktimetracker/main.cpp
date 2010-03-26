@@ -109,7 +109,6 @@ int main( int argc, char *argv[] )
     options.add("totalminutesfortaskid <taskid>", ki18n( "Deliver total minutes for task id" ));
     options.add("version", ki18n( "Outputs the version" ));
     KCmdLineArgs::addCmdLineOptions( options );
-    KUniqueApplication::addCmdLineOptions();
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
     int err=0;  // error code
     bool konsolemode=false;  // open a gui and wait for user input?
@@ -123,7 +122,7 @@ int main( int argc, char *argv[] )
 
     if ( !konsolemode )
     {  // no konsole mode
-        KontactInterface::PimUniqueApplication myApp;
+        KApplication myApp;
         MainWindow *mainWindow;
         mainWindow = new MainWindow( icsfile( args ) );
         if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
