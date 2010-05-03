@@ -255,7 +255,7 @@ QString timetrackerstorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *
     for ( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
         Task* task = new Task(*todo, view);
-        task->setWhatsThis(0,i18n("The task name is how you call the task, it can be chosen freely."));
+        task->setWhatsThis(0,i18n("The task name is what you call the task, it can be chosen freely."));
         task->setWhatsThis(1,i18n("The session time is the time since you last chose \"start new session.\""));
         map.insert( (*todo)->uid(), task );
         view->setRootIsDecorated(true);
