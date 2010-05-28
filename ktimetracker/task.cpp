@@ -83,14 +83,15 @@ int Task::depth()
 void Task::init( const QString& taskName, long minutes, long sessionTime, QString sessionStartTiMe,
                  DesktopList desktops, int percent_complete, int priority, bool konsolemode )
 {
+    const TaskView *taskView = qobject_cast<TaskView*>( treeWidget() );
     // If our parent is the taskview then connect our totalTimesChanged
     // signal to its receiver
     if ( ! parent() )
         connect( this, SIGNAL( totalTimesChanged ( long, long ) ),
-             treeWidget(), SLOT( taskTotalTimesChanged( long, long) ));
+                 taskView, SLOT( taskTotalTimesChanged( long, long) ));
 
     connect( this, SIGNAL( deletingTask( Task* ) ),
-           treeWidget(), SLOT( deletingTask( Task* ) ));
+             taskView, SLOT( deletingTask( Task* ) ));
 
     if (icons == 0)
     {
