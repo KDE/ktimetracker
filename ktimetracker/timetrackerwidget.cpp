@@ -114,7 +114,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
     layout->addWidget( d->mTaskView );
     setLayout( layout );
 
-    showSearchBar( !KTimeTrackerSettings::configPDA() );
+    showSearchBar( !KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar() );
 }
 
 TimetrackerWidget::~TimetrackerWidget()
