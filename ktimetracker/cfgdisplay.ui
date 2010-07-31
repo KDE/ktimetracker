@@ -29,7 +29,7 @@
       <item>
        <widget class="QCheckBox" name="kcfg_configPDA" >
         <property name="whatsThis" >
-         <string>Choose this if you have a touchscreen and your screen real estate is precious</string>
+         <string>Choose this if you have a touchscreen and your screen real estate is precious. It will disable the search bar and every click will pop up a context menu.</string>
         </property>
         <property name="text" >
          <string comment="Choose this if you have a touchscreen and your screen real estate is precious." >Configuration for PDA</string>
