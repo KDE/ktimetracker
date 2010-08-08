@@ -623,7 +623,7 @@ void TimetrackerWidget::showSettingsDialog()
     dialog->exec();
     delete dialog;
 
-    showSearchBar( !KTimeTrackerSettings::configPDA() );
+    showSearchBar( !KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar() );
     reconfigureFiles();
 }
 
