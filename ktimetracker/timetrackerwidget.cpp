@@ -114,7 +114,7 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
     layout->addWidget( d->mTaskView );
     setLayout( layout );
 
-    showSearchBar( !KTimeTrackerSettings::configPDA() );
+    showSearchBar( !KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar() );
 }
 
 TimetrackerWidget::~TimetrackerWidget()
@@ -376,6 +376,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     }
 
     // custom shortcuts
+    d->mActions[ "start" ]->setShortcut( QKeySequence( Qt::Key_G) );
     d->mActions[ "stopAll" ]->setShortcut( QKeySequence( Qt::Key_Escape ) );
     d->mActions[ "new_task" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_T ) );
     d->mActions[ "focusSearchBar" ]->setShortcut( QKeySequence( Qt::Key_S ) );
@@ -623,7 +624,7 @@ void TimetrackerWidget::showSettingsDialog()
     dialog->exec();
     delete dialog;
 
-    showSearchBar( !KTimeTrackerSettings::configPDA() );
+    showSearchBar( !KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar() );
     reconfigureFiles();
 }
 
@@ -765,9 +766,11 @@ QStringList TimetrackerWidget::taskIdsFromName( const QString &taskName ) const
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return result;
     QTreeWidgetItemIterator it( taskView );
-    while ( *it ) {
+    while ( *it )
+    {
         Task *task = static_cast< Task* >( *it );
-        if ( task && task->name() == taskName ) {
+        if ( task && task->name() == taskName )
+        {
             result << task->uid();
         }
         ++it;
@@ -780,8 +783,8 @@ void TimetrackerWidget::addTask( const QString &taskName )
 {
     TaskView *taskView = currentTaskView();
 
-    if ( taskView ) {
-    
+    if ( taskView )
+    {
         taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
     }
 }
