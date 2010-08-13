@@ -75,7 +75,7 @@ set(kcm_ktimetracker_PART_SRCS ${ktimetracker_shared_SRCS})
 
 kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS})
 
-target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDEPIMLIBS_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
     target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
