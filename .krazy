@@ -1,3 +1,9 @@
+#runtime is a virtual module called kdepim-runtime
+IGNORESUBS runtime
+
 #kdgantt is copied in from KDAB
-IGNORESUBS kdgantt,kdgantt1,ontologies
-PRIORITY low
+IGNORESUBS kdgantt,kdgantt1,kdgantt2
+
+#ontologies has no code
+IGNORESUBS ontologies
+
