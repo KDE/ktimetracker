@@ -257,5 +257,5 @@ void historydialog::on_deletepushbutton_clicked()
             }
         }
     }
-    else KMessageBox::information(this, "Please select a task to delete.");
+    else KMessageBox::information(this, i18n("Please select a task to delete."));
 }
