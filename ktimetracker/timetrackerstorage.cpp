@@ -1033,7 +1033,16 @@ QString timetrackerstorage::saveCalendar()
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KABC::Lock *lock = d->mCalendar->lock();
+    KABC::Lock *lock;
+    if ( d->mCalendar )
+    {
+        lock = d->mCalendar->lock();
+    }
+    else
+    {
+        kWarning(5970) << "timetrackerstorage::saveCalendar mCalendar not set";
+        return err;
+    }
     if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
     if ( d->mCalendar->save() )
     {
