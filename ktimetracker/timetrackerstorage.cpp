@@ -449,6 +449,11 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
     KCal::Todo* todo;
     QString uid;
 
+    if ( !d->mCalendar )
+    {
+        kDebug(5970) << "mCalendar is not set";
+        return uid;
+    }
     todo = new KCal::Todo();
     if ( d->mCalendar->addTodo( todo ) )
     {
