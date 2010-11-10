@@ -23,7 +23,7 @@
 #define _KTIMETRACKERPART_H_
 
 #include <kparts/part.h>
-#include <kparts/factory.h>
+#include <kaboutdata.h>
 #include "reportcriteria.h"
 
 class TrayIcon;
