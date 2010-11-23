@@ -15,7 +15,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kresources/remote )
 
 ########### next target ###############
 set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
-	desktoptracker.cpp
+	desktoptracker.cpp ktimetrackerpart.cpp
 	edittaskdialog.cpp idletimedetector.cpp
 	timekard.cpp ktimetrackerutility.cpp
 	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
@@ -86,7 +86,7 @@ install(TARGETS kcm_ktimetracker DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### next target ###############
 
-set(ktimetrackerpart_PART_SRCS ktimetrackerpart.cpp ${ktimetracker_shared_SRCS})
+set(ktimetrackerpart_PART_SRCS ${ktimetracker_shared_SRCS})
 
 kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
 

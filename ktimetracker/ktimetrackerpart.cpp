@@ -35,7 +35,7 @@
 #include <KActionCollection>
 
 #include <kdemacros.h>
-#include <kparts/genericfactory.h>
+#include <kpluginfactory.h>
 #include "mainwindow.h"
 #include "ktimetrackerutility.h"
 #include "task.h"
@@ -54,7 +54,6 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
     KGlobal::locale()->insertCatalog("ktimetracker");
     KGlobal::locale()->insertCatalog("libkdepim");
     // we need an instance
-    setComponentData( ktimetrackerPartFactory::componentData() );
     mMainWidget = new TimetrackerWidget( parentWidget );
     setWidget( mMainWidget );
     setXMLFile( "ktimetrackerui.rc" );

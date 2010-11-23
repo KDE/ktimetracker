@@ -57,12 +57,13 @@ MainWindow::MainWindow( const QString &icsfile )
     setupActions();
 
     // this routine will find and load our Part.
-    KLibFactory *factory = KLibLoader::self()->factory("ktimetrackerpart");
+    KPluginLoader loader( "ktimetrackerpart" );
+    KPluginFactory *factory = loader.factory();
     if (factory)
     {
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
-        m_part = static_cast<ktimetrackerpart *>(factory->create(this, "ktimetrackerpart" ));
+        m_part = factory->create<ktimetrackerpart>( this );
 
         if (m_part)
         {
