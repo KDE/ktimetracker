@@ -4,4 +4,16 @@
 *.kdev4
 .swp.*
 .*.swp
-
+Makefile
+*.moc
+*.moc.cpp
+autom4te.cache
+*.diff
+svn-commit.tmp
+svn-commit.*.tmp
+*.kdevelop.pcs
+*.kdev4
+svnmerge-commit-message.txt
+avail
+Doxyfile
+*.user
