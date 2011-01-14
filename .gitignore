@@ -5,6 +5,7 @@
 .swp.*
 .*.swp
 Makefile
+Makefile.in
 *.moc
 *.moc.cpp
 autom4te.cache
