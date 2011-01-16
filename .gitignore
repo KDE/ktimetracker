@@ -4,6 +4,7 @@
 *.kdev4
 .swp.*
 .*.swp
+/Makefile.am
 Makefile
 Makefile.in
 *.moc
@@ -18,3 +19,11 @@ svnmerge-commit-message.txt
 avail
 Doxyfile
 *.user
+acinclude.m4
+aclocal.m4
+config.h.in
+configure
+configure.files
+configure.in
+stamp-h.in
+subdirs
