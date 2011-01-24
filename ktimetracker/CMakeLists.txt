@@ -106,4 +106,4 @@ install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker )
 
 kde4_install_icons( ${ICON_INSTALL_DIR} )
-install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${KDE4_DBUS_INTERFACES_DIR} )
+install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
