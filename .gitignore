@@ -27,3 +27,4 @@ configure.files
 configure.in
 stamp-h.in
 subdirs
+*.pyc
