@@ -418,8 +418,7 @@ void TimetrackerWidget::openFile( const QString &fileName )
     QString newFileName = fileName;
     if ( newFileName.isEmpty() )
     {
-        newFileName = KFileDialog::getOpenFileName( QString(), QString(),
-                                                        this );
+        newFileName = KFileDialog::getOpenFileName( QString(), QString(), this );
         if ( newFileName.isEmpty() )
         {
             return;
