@@ -649,9 +649,12 @@ void TimetrackerWidget::stopAllTimers( const QDateTime &when )
 
 void TimetrackerWidget::newTask()
 {
-    if ( currentTaskView() ) {
+    if ( currentTaskView() ) 
+    {
         currentTaskView()->newTask();
-    } else {
+    } 
+    else 
+    {
         newFile() ;
     }
 }
