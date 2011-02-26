@@ -3,7 +3,7 @@
 \section intro Introduction
 
 %ktimetracker is a simple, easy to use time tracking program. It keeps a hierarchical list of tasks. Each task has a timer
-associated with it. The primary user interaction for %ktimetracker is to start and stop the appropriate timer.
+associated with it. The primary user interaction for %ktimetracker is to start and stop the appropriate timer. All information here is taken from http://community.kde.org/Ktimetracker.
 
 \section ktimetracker architecture
 ktimetracker can be a kpart (class ktimetrackerpart) or a mainwindow (class mainwindow).
