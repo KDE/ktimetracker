@@ -20,7 +20,7 @@
    <item row="1" column="1">
     <widget class="QPushButton" name="deletepushbutton">
      <property name="text">
-      <string>delete</string>
+      <string>Delete</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -30,7 +30,7 @@
    <item row="2" column="1">
     <widget class="QPushButton" name="okpushbutton">
      <property name="text">
-      <string>Ok</string>
+      <string>Close</string>
      </property>
     </widget>
    </item>
