@@ -78,10 +78,11 @@ void EditTaskDialog::setTask( const QString &name )
 
 void EditTaskDialog::status(DesktopList *desktopList) const
 {
-    for ( int i = 0; i < desktopcheckboxes.count(); i++ )
-    {
-        if ( desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
-    }
+    if ( desktopList )
+        for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+        {
+            if ( desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
+        }
 }
 
 void EditTaskDialog::on_edittimespushbutton_clicked()
