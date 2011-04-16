@@ -4,6 +4,7 @@
 *.kdev4
 .swp.*
 .*.swp
+*.kate-swp
 Makefile
 Makefile.in
 *.moc
