@@ -512,11 +512,7 @@ bool TimetrackerWidget::closeAllFiles()
     kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
 
     d->mTaskView->stopAllTimers();
-    if ( !( closeFile() ) ) {
-            return false;
-    }
-
-    return true;
+    return closeFile();
 }
 
 void TimetrackerWidget::slotCurrentChanged()

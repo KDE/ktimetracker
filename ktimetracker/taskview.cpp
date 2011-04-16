@@ -1095,12 +1095,12 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
             if ( task->isRunning() )
             {
                 stopCurrentTimer();
-            } else
-                if ( !task->isComplete() )
-                {
-                    stopAllTimers();
-                    startCurrentTimer();
-                }
+            }
+            else if ( !task->isComplete() )
+            {
+                stopAllTimers();
+                startCurrentTimer();
+            }
         }
     }
 }
