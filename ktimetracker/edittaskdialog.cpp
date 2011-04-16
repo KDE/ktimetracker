@@ -83,7 +83,7 @@ void EditTaskDialog::status(DesktopList *desktopList) const
         desktopList->clear();
         for ( int i = 0; i < desktopcheckboxes.count(); i++ )
         {
-            if ( desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
+            if ( desktopcheckboxes[i]->isEnabled() && desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
         }
     }
 }
