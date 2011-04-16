@@ -210,8 +210,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
 
 }
 
-
-
 bool TimetrackerWidget::saveCurrentTaskView()
 {
     QString fileName = KFileDialog::getSaveFileName( QString(), QString(), this );
@@ -477,6 +475,7 @@ bool TimetrackerWidget::closeFile()
     slotCurrentChanged();
 
     delete taskView; // removeTab does not delete its widget.
+    d->mTaskView=0;
     return true;
 }
 
@@ -510,9 +509,13 @@ void TimetrackerWidget::showSearchBar( bool visible )
 bool TimetrackerWidget::closeAllFiles()
 {
     kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
-
-    d->mTaskView->stopAllTimers();
-    return closeFile();
+    bool err;
+    if (d->mTaskView)
+    {
+        d->mTaskView->stopAllTimers();
+        err=closeFile();
+    }
+    return err;
 }
 
 void TimetrackerWidget::slotCurrentChanged()
