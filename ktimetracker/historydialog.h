@@ -54,6 +54,7 @@ private Q_SLOTS:
    */
   void on_deletepushbutton_clicked();
   void historyWidgetCellChanged( int row, int col );
+  void on_okpushbutton_clicked();
 };
 
 #endif // HISTORYDIALOG_H

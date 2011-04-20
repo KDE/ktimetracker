@@ -77,6 +77,12 @@ MainWindow::MainWindow( const QString &icsfile )
             ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
             setupGUI();
         }
+        else
+        {
+          KMessageBox::error(this, i18n( "Could not create the KTimeTracker part." ));
+          qApp->quit();
+          return;
+        }
     }
     else
     {

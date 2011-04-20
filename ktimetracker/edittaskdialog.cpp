@@ -78,9 +78,13 @@ void EditTaskDialog::setTask( const QString &name )
 
 void EditTaskDialog::status(DesktopList *desktopList) const
 {
-    for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+    if ( desktopList )
     {
-        if ( desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
+        desktopList->clear();
+        for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+        {
+            if ( desktopcheckboxes[i]->isEnabled() && desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
+        }
     }
 }
 

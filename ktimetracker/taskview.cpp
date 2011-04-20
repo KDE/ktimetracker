@@ -932,8 +932,7 @@ void TaskView::editTask()
 {
     kDebug(5970) <<"Entering editTask";
     Task *task = currentItem();
-    if (!task)
-        return;
+    if (!task) return;
 
     DesktopList desktopList = task->desktops();
     DesktopList oldDeskTopList = desktopList;
@@ -955,7 +954,7 @@ void TaskView::editTask()
         {
             task->changeTime(dialog->timeChange().toInt(),d->mStorage);
         }
-
+        dialog->status( &desktopList );
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
         if (desktopList.size() == _desktopTracker->desktopCount())
@@ -1096,12 +1095,12 @@ void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
             if ( task->isRunning() )
             {
                 stopCurrentTimer();
-            } else
-                if ( !task->isComplete() )
-                {
-                    stopAllTimers();
-                    startCurrentTimer();
-                }
+            }
+            else if ( !task->isComplete() )
+            {
+                stopAllTimers();
+                startCurrentTimer();
+            }
         }
     }
 }

@@ -51,10 +51,12 @@ K_EXPORT_PLUGIN( ktimetrackerPartFactory("ktimetracker","ktimetracker") )
 ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
+    kDebug(5970) << "Entering function";
     KGlobal::locale()->insertCatalog("ktimetracker");
     KGlobal::locale()->insertCatalog("libkdepim");
     // we need an instance
     mMainWidget = new TimetrackerWidget( parentWidget );
+    mMainWidget->openFile(QString(KStandardDirs::locate("data", "ktimetracker/ktimetracker.ics")));
     setWidget( mMainWidget );
     setXMLFile( "ktimetrackerui.rc" );
     makeMenus();
