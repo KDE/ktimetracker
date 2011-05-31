@@ -509,7 +509,7 @@ void TimetrackerWidget::showSearchBar( bool visible )
 bool TimetrackerWidget::closeAllFiles()
 {
     kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
-    bool err;
+    bool err = true;
     if (d->mTaskView)
     {
         d->mTaskView->stopAllTimers();
