@@ -862,7 +862,7 @@ void TaskView::newTask()
 
 void TaskView::newTask( const QString &caption, Task *parent )
 {
-    EditTaskDialog *dialog = new EditTaskDialog( this, caption, false );
+    EditTaskDialog *dialog = new EditTaskDialog( this, caption, 0 );
     long total, totalDiff, session, sessionDiff;
     DesktopList desktopList;
 
