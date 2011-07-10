@@ -341,12 +341,9 @@
     <tabstop>urlExportTo</tabstop>
     <tabstop>dtFrom</tabstop>
     <tabstop>dtTo</tabstop>
-    <tabstop>radioDecimal</tabstop>
     <tabstop>radioComma</tabstop>
     <tabstop>txtOther</tabstop>
     <tabstop>cboQuote</tabstop>
-    <tabstop>btnExport</tabstop>
-    <tabstop>btnCancel</tabstop>
   </tabstops>
   <images>
     <image name="image0" >
