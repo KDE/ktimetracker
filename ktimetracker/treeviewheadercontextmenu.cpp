@@ -41,7 +41,7 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
     if (mWidget)
     {
         mWidget->header()->setContextMenuPolicy( Qt::CustomContextMenu );
-        connect( mWidget->header(), SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(slotCustomContextMenuRequested(const QPoint&)) );
+        connect( mWidget->header(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotCustomContextMenuRequested(QPoint)) );
 
         mContextMenu = new KMenu( mWidget );
         mContextMenu->addTitle( i18n("Columns") );

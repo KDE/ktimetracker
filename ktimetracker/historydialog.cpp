@@ -96,8 +96,8 @@ QString historydialog::listallevents()
     // if sorting is enabled and we write to row x, we cannot be sure row x will be in row x some lines later
     bool old_sortingenabled=m_ui->historytablewidget->isSortingEnabled();
     m_ui->historytablewidget->setSortingEnabled( false );
-    connect(  m_ui->historytablewidget, SIGNAL( cellChanged( int, int ) ),
-              this, SLOT( historyWidgetCellChanged( int, int ) ) );
+    connect(  m_ui->historytablewidget, SIGNAL(cellChanged(int,int)),
+              this, SLOT(historyWidgetCellChanged(int,int)) );
 
     KCal::Event::List eventList = mparent->storage()->rawevents();
     for ( KCal::Event::List::iterator i = eventList.begin();
