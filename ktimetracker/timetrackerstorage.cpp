@@ -138,8 +138,8 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     }
     d->mCalendar = resource;
 
-    QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar *)),
-  	            view, SLOT(iCalFileModified(ResourceCalendar *)));
+    QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar*)),
+  	            view, SLOT(iCalFileModified(ResourceCalendar*)));
     d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
     d->mCalendar->open();
