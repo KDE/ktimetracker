@@ -31,8 +31,8 @@ DesktopTracker::DesktopTracker ()
 {
   // Setup desktop change handling
 #ifdef Q_WS_X11
-    connect( KWindowSystem::self(), SIGNAL( currentDesktopChanged( int ) ),
-           this, SLOT( handleDesktopChange( int ) ) );
+    connect( KWindowSystem::self(), SIGNAL(currentDesktopChanged(int)),
+           this, SLOT(handleDesktopChange(int)) );
     mDesktopCount = desktopCount();
     mPreviousDesktop = KWindowSystem::self()->currentDesktop()-1;
 #else
@@ -44,7 +44,7 @@ DesktopTracker::DesktopTracker ()
     if( mPreviousDesktop < 0 ) mPreviousDesktop = 0;
     mTimer = new QTimer( this );
     mTimer->setSingleShot( true );
-    connect( mTimer, SIGNAL( timeout() ), this, SLOT( changeTimers() ) );
+    connect( mTimer, SIGNAL(timeout()), this, SLOT(changeTimers()) );
 }
 
 void DesktopTracker::handleDesktopChange( int desktop )

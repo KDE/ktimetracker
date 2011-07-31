@@ -50,8 +50,8 @@ TrayIcon::TrayIcon(MainWindow* parent)
     setObjectName( "Ktimetracker Tray" );
     // the timer that updates the "running" icon in the tray
     _taskActiveTimer = new QTimer(this);
-    connect( _taskActiveTimer, SIGNAL( timeout() ), this,
-                               SLOT( advanceClock()) );
+    connect( _taskActiveTimer, SIGNAL(timeout()), this,
+                               SLOT(advanceClock()) );
 
     if (icons == 0)
     {

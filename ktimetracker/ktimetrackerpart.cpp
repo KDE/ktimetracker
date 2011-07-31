@@ -80,7 +80,7 @@ void ktimetrackerpart::makeMenus()
 {
     mMainWidget->setupActions( actionCollection() );
     KAction *actionKeyBindings;
-    actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
+    actionKeyBindings = KStandardAction::keyBindings( this, SLOT(keyBindings()),
         actionCollection() );
     // Tool tips must be set after the createGUI.
     actionKeyBindings->setToolTip( i18n("Configure key bindings") );
@@ -102,17 +102,17 @@ bool ktimetrackerpart::openFile(QString icsfile)
     else mTray = new TrayIcon( );
 
     // connections
-    connect( mMainWidget, SIGNAL( totalTimesChanged( long, long ) ),
-           this, SLOT( updateTime( long, long ) ) );
-    connect( mMainWidget, SIGNAL( statusBarTextChangeRequested( QString ) ),
-           this, SLOT( setStatusBar( QString ) ) );
-    connect( mMainWidget, SIGNAL( setCaption( const QString& ) ),
-           this, SIGNAL( setWindowCaption( const QString& ) ) );
-    connect( mTray, SIGNAL( quitSelected() ), SLOT( quit() ) );
-    connect( mMainWidget, SIGNAL( timersActive() ), mTray, SLOT( startClock() ) );
-    connect( mMainWidget, SIGNAL( timersInactive() ), mTray, SLOT( stopClock() ) );
-    connect( mMainWidget, SIGNAL( tasksChanged( const QList<Task*>& ) ),
-           mTray, SLOT( updateToolTip( QList<Task*> ) ));
+    connect( mMainWidget, SIGNAL(totalTimesChanged(long,long)),
+           this, SLOT(updateTime(long,long)) );
+    connect( mMainWidget, SIGNAL(statusBarTextChangeRequested(QString)),
+           this, SLOT(setStatusBar(QString)) );
+    connect( mMainWidget, SIGNAL(setCaption(QString)),
+           this, SIGNAL(setWindowCaption(QString)) );
+    connect( mTray, SIGNAL(quitSelected()), SLOT(quit()) );
+    connect( mMainWidget, SIGNAL(timersActive()), mTray, SLOT(startClock()) );
+    connect( mMainWidget, SIGNAL(timersInactive()), mTray, SLOT(stopClock()) );
+    connect( mMainWidget, SIGNAL(tasksChanged(QList<Task*>)),
+           mTray, SLOT(updateToolTip(QList<Task*>)));
     return true;
 }
 
