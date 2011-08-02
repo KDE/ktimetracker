@@ -35,10 +35,10 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   QWidget *parent 
                                   ) : CSVExportDialogBase( parent )
 {
-    connect( button( User1 ), SIGNAL( clicked() ),
-           this, SLOT( exPortToClipBoard() ) );
-    connect( button( Ok ), SIGNAL( clicked() ),
-           this, SLOT( exPortToCSVFile() ) );
+    connect( button( User1 ), SIGNAL(clicked()),
+           this, SLOT(exPortToClipBoard()) );
+    connect( button( Ok ), SIGNAL(clicked()),
+           this, SLOT(exPortToCSVFile()) );
     connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
     switch ( rt )
     {

@@ -28,7 +28,7 @@
 FocusDetector::FocusDetector()
 {
     KWindowSystem* kw=KWindowSystem::self();
-    connect(kw, SIGNAL(activeWindowChanged(WId)), SLOT( slotfocuschanged() ) );
+    connect(kw, SIGNAL(activeWindowChanged(WId)), SLOT(slotfocuschanged()) );
 }
 
 void FocusDetector::slotfocuschanged()

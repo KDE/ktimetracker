@@ -170,11 +170,11 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
     connect( this, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
-    connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),
-           this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*, int)) );
+    connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+           this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)) );
     connect( FocusDetectorNotifier::instance()->focusDetector(),
-           SIGNAL( newFocus( const QString & ) ), 
-           this, SLOT( newFocusWindowDetected ( const QString & ) ) ); 
+           SIGNAL(newFocus(QString)), 
+           this, SLOT(newFocusWindowDetected(QString)) ); 
 
     QStringList labels;
     setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
@@ -194,33 +194,33 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 
     // set up the minuteTimer
     _minuteTimer = new QTimer(this);
-    connect( _minuteTimer, SIGNAL( timeout() ), this, SLOT( minuteUpdate() ));
+    connect( _minuteTimer, SIGNAL(timeout()), this, SLOT(minuteUpdate()));
     _minuteTimer->start(1000 * secsPerMinute);
 
     // Set up the idle detection.
     _idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
-    connect( _idleTimeDetector, SIGNAL( extractTime(int) ),
-           this, SLOT( extractTime(int) ));
-    connect( _idleTimeDetector, SIGNAL( stopAllTimers(QDateTime) ),
-           this, SLOT( stopAllTimers(QDateTime) ));
+    connect( _idleTimeDetector, SIGNAL(extractTime(int)),
+           this, SLOT(extractTime(int)));
+    connect( _idleTimeDetector, SIGNAL(stopAllTimers(QDateTime)),
+           this, SLOT(stopAllTimers(QDateTime)));
     if (!_idleTimeDetector->isIdleDetectionPossible())
         KTimeTrackerSettings::setEnabled( false );
 
     // Setup auto save timer
     _autoSaveTimer = new QTimer(this);
-    connect( _autoSaveTimer, SIGNAL( timeout() ), this, SLOT( save() ));
+    connect( _autoSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
 
     // Setup manual save timer (to save changes a little while after they happen)
     _manualSaveTimer = new QTimer(this);
     _manualSaveTimer->setSingleShot( true );
-    connect( _manualSaveTimer, SIGNAL( timeout() ), this, SLOT( save() ));
+    connect( _manualSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
 
     // Connect desktop tracker events to task starting/stopping
     _desktopTracker = new DesktopTracker();
-    connect( _desktopTracker, SIGNAL( reachedActiveDesktop( Task* ) ),
-           this, SLOT( startTimerFor(Task*) ));
-    connect( _desktopTracker, SIGNAL( leftActiveDesktop( Task* ) ),
-           this, SLOT( stopTimerFor(Task*) ));
+    connect( _desktopTracker, SIGNAL(reachedActiveDesktop(Task*)),
+           this, SLOT(startTimerFor(Task*)));
+    connect( _desktopTracker, SIGNAL(leftActiveDesktop(Task*)),
+           this, SLOT(stopTimerFor(Task*)));
 
     // Header context menu
     TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
@@ -233,8 +233,8 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
         QString label = i18n( "%1 %" , i );
         d->mPercentage[ d->mPopupPercentageMenu->addAction( label ) ] = i;
     }
-    connect( d->mPopupPercentageMenu, SIGNAL( triggered( QAction * ) ),
-           this, SLOT( slotSetPercentage( QAction * ) ) );
+    connect( d->mPopupPercentageMenu, SIGNAL(triggered(QAction*)),
+           this, SLOT(slotSetPercentage(QAction*)) );
 
     d->mPopupPriorityMenu = new QMenu( this );
     for ( int i = 0; i <= 9; ++i )
@@ -260,12 +260,12 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
         }
         d->mPriority[ d->mPopupPriorityMenu->addAction( label ) ] = i;
     }
-    connect( d->mPopupPriorityMenu, SIGNAL( triggered( QAction * ) ),
-           this, SLOT( slotSetPriority( QAction * ) ) );
+    connect( d->mPopupPriorityMenu, SIGNAL(triggered(QAction*)),
+           this, SLOT(slotSetPriority(QAction*)) );
 
     setContextMenuPolicy( Qt::CustomContextMenu );
-    connect( this, SIGNAL( customContextMenuRequested( const QPoint & ) ),
-           this, SLOT( slotCustomContextMenuRequested( const QPoint & ) ) );
+    connect( this, SIGNAL(customContextMenuRequested(QPoint)),
+           this, SLOT(slotCustomContextMenuRequested(QPoint)) );
 
     reconfigure();
     sortByColumn( 0, Qt::AscendingOrder );
