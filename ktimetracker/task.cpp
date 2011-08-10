@@ -87,11 +87,11 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
     // If our parent is the taskview then connect our totalTimesChanged
     // signal to its receiver
     if ( ! parent() )
-        connect( this, SIGNAL( totalTimesChanged ( long, long ) ),
-                 taskView, SLOT( taskTotalTimesChanged( long, long) ));
+        connect( this, SIGNAL(totalTimesChanged(long,long)),
+                 taskView, SLOT(taskTotalTimesChanged(long,long)));
 
-    connect( this, SIGNAL( deletingTask( Task* ) ),
-             taskView, SLOT( deletingTask( Task* ) ));
+    connect( this, SIGNAL(deletingTask(Task*)),
+             taskView, SLOT(deletingTask(Task*)));
 
     if (icons == 0)
     {

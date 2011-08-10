@@ -97,26 +97,26 @@ MainWindow::MainWindow( const QString &icsfile )
     setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
 
     // connections
-    connect( m_part->widget(), SIGNAL( statusBarTextChangeRequested( QString ) ),
-                 this, SLOT( setStatusBar( QString ) ) );
-    connect( m_part->widget(), SIGNAL( setCaption( const QString& ) ),
-                 this, SLOT( slotSetCaption( const QString& ) ) );
+    connect( m_part->widget(), SIGNAL(statusBarTextChangeRequested(QString)),
+                 this, SLOT(setStatusBar(QString)) );
+    connect( m_part->widget(), SIGNAL(setCaption(QString)),
+                 this, SLOT(slotSetCaption(QString)) );
     loadGeometry();
 
     // Setup context menu request handling
     connect( m_part->widget(),
-           SIGNAL( contextMenuRequested( const QPoint& ) ),
+           SIGNAL(contextMenuRequested(QPoint)),
            this,
-           SLOT( taskViewCustomContextMenuRequested( const QPoint& ) ) );
+           SLOT(taskViewCustomContextMenuRequested(QPoint)) );
 
     _tray = new TrayIcon( this );
 
-    connect( _tray, SIGNAL( quitSelected() ), m_part->widget(), SLOT( quit() ) );
+    connect( _tray, SIGNAL(quitSelected()), m_part->widget(), SLOT(quit()) );
 
-    connect( m_part->widget(), SIGNAL( timersActive() ), _tray, SLOT( startClock() ) );
-    connect( m_part->widget(), SIGNAL( timersInactive() ), _tray, SLOT( stopClock() ) );
-    connect( m_part->widget(), SIGNAL( tasksChanged( const QList<Task*>& ) ),
-                      _tray, SLOT( updateToolTip( QList<Task*> ) ));
+    connect( m_part->widget(), SIGNAL(timersActive()), _tray, SLOT(startClock()) );
+    connect( m_part->widget(), SIGNAL(timersInactive()), _tray, SLOT(stopClock()) );
+    connect( m_part->widget(), SIGNAL(tasksChanged(QList<Task*>)),
+                      _tray, SLOT(updateToolTip(QList<Task*>)));
 }
 
 void MainWindow::setupActions()
@@ -161,7 +161,7 @@ void MainWindow::keyBindings()
 void MainWindow::makeMenus()
 {
     mainWidget->setupActions( actionCollection() );
-    actionKeyBindings = KStandardAction::keyBindings( this, SLOT( keyBindings() ),
+    actionKeyBindings = KStandardAction::keyBindings( this, SLOT(keyBindings()),
         actionCollection() );
     setupGUI();
     actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );

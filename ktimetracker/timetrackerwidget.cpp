@@ -179,10 +179,10 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
 
     TaskView *taskView = d->mTaskView;
 
-    connect( taskView, SIGNAL( contextMenuRequested( const QPoint& ) ),
-           this, SIGNAL( contextMenuRequested( const QPoint& ) ) );
-    connect( taskView, SIGNAL( tasksChanged( const QList< Task* >& ) ),
-           this, SLOT( updateTabs() ) );
+    connect( taskView, SIGNAL(contextMenuRequested(QPoint)),
+           this, SIGNAL(contextMenuRequested(QPoint)) );
+    connect( taskView, SIGNAL(tasksChanged(QList<Task*>)),
+           this, SLOT(updateTabs()) );
 
 /* FIXME: review mTabWidget usage
     d->mTabWidget->addTab( taskView,
@@ -209,8 +209,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
     }
 
 }
-
-
 
 bool TimetrackerWidget::saveCurrentTaskView()
 {
@@ -255,61 +253,61 @@ Task* TimetrackerWidget::currentTask()
 void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 {
     d->mActions.insert( "file_new",
-        KStandardAction::openNew( this, SLOT( newFile() ), actionCollection ) );
+        KStandardAction::openNew( this, SLOT(newFile()), actionCollection ) );
     d->mActions[ "file_new" ]->setIcon( KIcon( "tab-new" ) );
 
     d->mActions.insert ("file_open",
-        KStandardAction::open( this, SLOT( openFile() ), actionCollection ) );
+        KStandardAction::open( this, SLOT(openFile()), actionCollection ) );
 
     d->mRecentFilesAction = KStandardAction::openRecent(
-        this, SLOT( openFile( const KUrl & ) ), this );
+        this, SLOT(openFile(KUrl)), this );
     actionCollection->addAction( d->mRecentFilesAction->objectName(),
                                d->mRecentFilesAction );
     d->mRecentFilesAction->loadEntries( KGlobal::config()->group( "Recent Files" ) );
 
     d->mActions.insert ("file_save",
-        KStandardAction::save( this, SLOT( saveFile() ), actionCollection ) );
+        KStandardAction::save( this, SLOT(saveFile()), actionCollection ) );
     d->mActions.insert ("file_close",
-        KStandardAction::close( this, SLOT( closeFile() ), actionCollection ) );
+        KStandardAction::close( this, SLOT(closeFile()), actionCollection ) );
     d->mActions.insert ("file_quit",
-        KStandardAction::quit( this, SLOT( quit() ), actionCollection ) );
+        KStandardAction::quit( this, SLOT(quit()), actionCollection ) );
     d->mActions.insert ("configure_ktimetracker",
-        KStandardAction::preferences( this, SLOT( showSettingsDialog() ),
+        KStandardAction::preferences( this, SLOT(showSettingsDialog()),
                                   actionCollection ) );
 
     Private::ActionData actions[] =
     {
-        { QString(), I18N_NOOP("Start &New Session"), SLOT( startNewSession() ),
+        { QString(), I18N_NOOP("Start &New Session"), SLOT(startNewSession()),
             "start_new_session", I18N_NOOP("Starts a new session"), I18N_NOOP("This will reset the "
             "session time to 0 for all tasks, to start a new session, without "
             "affecting the totals.")
         },
-        { "view-history", I18N_NOOP("Edit History..."), SLOT( editHistory() ), "edit_history",
+        { "view-history", I18N_NOOP("Edit History..."), SLOT(editHistory()), "edit_history",
             I18N_NOOP("Edits history of all tasks of the current document"), I18N_NOOP("A window will "
             "be opened where you can change start and stop times of tasks or add a "
             "comment to them.")
         },
-        { QString(), I18N_NOOP("&Reset All Times"), SLOT( resetAllTimes() ),
+        { QString(), I18N_NOOP("&Reset All Times"), SLOT(resetAllTimes()),
             "reset_all_times", I18N_NOOP("Resets all times"), I18N_NOOP("This will reset the session "
             "and total time to 0 for all tasks, to restart from scratch.")
         },
-        { "media-playback-start", I18N_NOOP("&Start"), SLOT( startCurrentTimer() ), "start",
+        { "media-playback-start", I18N_NOOP("&Start"), SLOT(startCurrentTimer()), "start",
             I18N_NOOP("Starts timing for selected task"), I18N_NOOP("This will start timing for the "
             "selected task.\nIt is even possible to time several tasks "
             "simultanously.\n\nYou may also start timing of tasks by double clicking "
             "the left mouse button on a given task. This will, however, stop timing "
             "of other tasks.")
         },
-        { "media-playback-stop", I18N_NOOP("S&top"), SLOT( stopCurrentTimer() ), "stop",
+        { "media-playback-stop", I18N_NOOP("S&top"), SLOT(stopCurrentTimer()), "stop",
             I18N_NOOP("Stops timing of the selected task"), I18N_NOOP("Stops timing of the selected task")
         },
-        { QString(), I18N_NOOP("Focus on Searchbar"), SLOT( focusSearchBar() ), "focusSearchBar",
+        { QString(), I18N_NOOP("Focus on Searchbar"), SLOT(focusSearchBar()), "focusSearchBar",
             I18N_NOOP("Sets the focus on the searchbar"), I18N_NOOP("Sets the focus on the searchbar")
         },
-        { QString(), I18N_NOOP("Stop &All Timers"), SLOT( stopAllTimers() ), "stopAll",
+        { QString(), I18N_NOOP("Stop &All Timers"), SLOT(stopAllTimers()), "stopAll",
             I18N_NOOP("Stops all of the active timers"), I18N_NOOP("Stops all of the active timers")
         },
-        { QString(), I18N_NOOP("Track Active Applications"), SLOT( focusTracking() ),
+        { QString(), I18N_NOOP("Track Active Applications"), SLOT(focusTracking()),
             "focustracking", I18N_NOOP("Auto-creates and updates tasks when the focus of the "
             "current window has changed"), I18N_NOOP("If the focus of a window changes for the "
             "first time when this action is enabled, a new task will be created "
@@ -319,37 +317,37 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
         // in the following element,
         // document-new is the icon name, e.g. for the toolbar, new_task is how the action is
         // called in the ktimetrackerui.rc file, rest should be obvious
-        { "document-new", I18N_NOOP("&New Task..."), SLOT( newTask() ), "new_task", I18N_NOOP("Creates "
+        { "document-new", I18N_NOOP("&New Task..."), SLOT(newTask()), "new_task", I18N_NOOP("Creates "
             "new top level task"), I18N_NOOP("This will create a new top level task.")
         },
-        { "subtask-new-ktimetracker", I18N_NOOP("New &Subtask..."), SLOT( newSubTask() ),
+        { "subtask-new-ktimetracker", I18N_NOOP("New &Subtask..."), SLOT(newSubTask()),
             "new_sub_task", I18N_NOOP("Creates a new subtask to the current selected task"),
             I18N_NOOP("This will create a new subtask to the current selected task.")
         },
-        { "edit-delete", I18N_NOOP("&Delete"), SLOT( deleteTask() ), "delete_task", I18N_NOOP("Deletes "
+        { "edit-delete", I18N_NOOP("&Delete"), SLOT(deleteTask()), "delete_task", I18N_NOOP("Deletes "
             "selected task"), I18N_NOOP("This will delete the selected task(s) and all "
             "subtasks.")
         },
-        { "document-properties", I18N_NOOP("&Edit..."), SLOT( editTask() ), "edit_task",
+        { "document-properties", I18N_NOOP("&Edit..."), SLOT(editTask()), "edit_task",
             I18N_NOOP("Edits name or times for selected task"), I18N_NOOP("This will bring up a dialog "
             "box where you may edit the parameters for the selected task.")
         },
-        { QString(), I18N_NOOP("&Mark as Complete"), SLOT( markTaskAsComplete() ),
+        { QString(), I18N_NOOP("&Mark as Complete"), SLOT(markTaskAsComplete()),
             "mark_as_complete", "", ""
         },
-        { QString(), I18N_NOOP("&Mark as Incomplete"), SLOT( markTaskAsIncomplete() ),
+        { QString(), I18N_NOOP("&Mark as Incomplete"), SLOT(markTaskAsIncomplete()),
             "mark_as_incomplete", "", ""
         },
-        { QString(), I18N_NOOP("&Export Times..."), SLOT( exportcsvFile() ), "export_times",
+        { QString(), I18N_NOOP("&Export Times..."), SLOT(exportcsvFile()), "export_times",
             "", ""
         },
-        { QString(), I18N_NOOP("Export &History..."), SLOT( exportcsvHistory() ),
+        { QString(), I18N_NOOP("Export &History..."), SLOT(exportcsvHistory()),
             "export_history", "", ""
         },
-        { QString(), I18N_NOOP("Import Tasks From &Planner..."), SLOT( importPlanner() ),
+        { QString(), I18N_NOOP("Import Tasks From &Planner..."), SLOT(importPlanner()),
             "import_planner", "", ""
         },
-        { QString(), I18N_NOOP("Show Searchbar"), SLOT( slotSearchBar() ), "searchbar",
+        { QString(), I18N_NOOP("Show Searchbar"), SLOT(slotSearchBar()), "searchbar",
             "", ""
         }
     };
@@ -368,7 +366,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
         }
 
         actionCollection->addAction( actionData.name, action );
-        connect( action, SIGNAL( triggered( bool ) ), actionData.slot );
+        connect( action, SIGNAL(triggered(bool)), actionData.slot );
         action->setToolTip( i18n( actionData.toolTip ) );
         action->setWhatsThis( i18n( actionData.whatsThis ) );
 
@@ -394,12 +392,12 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 
     d->mActions[ "searchbar" ]->setChecked( KTimeTrackerSettings::self()->showSearchBar() );
 
-    connect( this, SIGNAL( currentTaskChanged() ),
-             this, SLOT( slotUpdateButtons() ) );
-    connect( this, SIGNAL( currentTaskViewChanged() ),
-             this, SLOT( slotUpdateButtons() ) );
-    connect( this, SIGNAL( updateButtons() ),
-             this, SLOT( slotUpdateButtons() ) );
+    connect( this, SIGNAL(currentTaskChanged()),
+             this, SLOT(slotUpdateButtons()) );
+    connect( this, SIGNAL(currentTaskViewChanged()),
+             this, SLOT(slotUpdateButtons()) );
+    connect( this, SIGNAL(updateButtons()),
+             this, SLOT(slotUpdateButtons()) );
 }
 
 KAction* TimetrackerWidget::action( const QString &name ) const
@@ -477,6 +475,7 @@ bool TimetrackerWidget::closeFile()
     slotCurrentChanged();
 
     delete taskView; // removeTab does not delete its widget.
+    d->mTaskView=0;
     return true;
 }
 
@@ -510,13 +509,13 @@ void TimetrackerWidget::showSearchBar( bool visible )
 bool TimetrackerWidget::closeAllFiles()
 {
     kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
-
-    d->mTaskView->stopAllTimers();
-    if ( !( closeFile() ) ) {
-            return false;
+    bool err = true;
+    if (d->mTaskView)
+    {
+        d->mTaskView->stopAllTimers();
+        err=closeFile();
     }
-
-    return true;
+    return err;
 }
 
 void TimetrackerWidget::slotCurrentChanged()
@@ -525,32 +524,32 @@ void TimetrackerWidget::slotCurrentChanged()
 
     if ( d->mTaskView )
     {
-        disconnect( d->mTaskView, SIGNAL( totalTimesChanged( long, long ) ) );
-        disconnect( d->mTaskView, SIGNAL( reSetTimes() ) );
-        disconnect( d->mTaskView, SIGNAL( itemSelectionChanged() ) );
-        disconnect( d->mTaskView, SIGNAL( updateButtons() ) );
-        disconnect( d->mTaskView, SIGNAL( setStatusBarText( QString ) ) );
-        disconnect( d->mTaskView, SIGNAL( timersActive() ) );
-        disconnect( d->mTaskView, SIGNAL( timersInactive() ) );
-        disconnect( d->mTaskView, SIGNAL( tasksChanged( const QList< Task* >& ) ),
-                this, SIGNAL( tasksChanged( const QList< Task* > & ) ) );
+        disconnect( d->mTaskView, SIGNAL(totalTimesChanged(long,long)) );
+        disconnect( d->mTaskView, SIGNAL(reSetTimes()) );
+        disconnect( d->mTaskView, SIGNAL(itemSelectionChanged()) );
+        disconnect( d->mTaskView, SIGNAL(updateButtons()) );
+        disconnect( d->mTaskView, SIGNAL(setStatusBarText(QString)) );
+        disconnect( d->mTaskView, SIGNAL(timersActive()) );
+        disconnect( d->mTaskView, SIGNAL(timersInactive()) );
+        disconnect( d->mTaskView, SIGNAL(tasksChanged(QList<Task*>)),
+                this, SIGNAL(tasksChanged(QList<Task*>)) );
         
-        connect( d->mTaskView, SIGNAL( totalTimesChanged( long, long ) ),
-            this, SIGNAL( totalTimesChanged( long, long ) ) );
-        connect( d->mTaskView, SIGNAL( reSetTimes() ),
-            this, SIGNAL( reSetTimes() ) );
-        connect( d->mTaskView, SIGNAL( itemSelectionChanged() ),
-            this, SIGNAL( currentTaskChanged() ) );
-        connect( d->mTaskView, SIGNAL( updateButtons() ),
-            this, SIGNAL( updateButtons() ) );
-        connect( d->mTaskView, SIGNAL( setStatusBarText( QString ) ), // FIXME signature
-            this, SIGNAL( statusBarTextChangeRequested( const QString & ) ) );
-        connect( d->mTaskView, SIGNAL( timersActive() ),
-            this, SIGNAL( timersActive() ) );
-        connect( d->mTaskView, SIGNAL( timersInactive() ),
-            this, SIGNAL( timersInactive() ) );
-        connect( d->mTaskView, SIGNAL( tasksChanged( QList< Task* > ) ), // FIXME signature
-            this, SIGNAL( tasksChanged( const QList< Task* > &) ) );
+        connect( d->mTaskView, SIGNAL(totalTimesChanged(long,long)),
+            this, SIGNAL(totalTimesChanged(long,long)) );
+        connect( d->mTaskView, SIGNAL(reSetTimes()),
+            this, SIGNAL(reSetTimes()) );
+        connect( d->mTaskView, SIGNAL(itemSelectionChanged()),
+            this, SIGNAL(currentTaskChanged()) );
+        connect( d->mTaskView, SIGNAL(updateButtons()),
+            this, SIGNAL(updateButtons()) );
+        connect( d->mTaskView, SIGNAL(setStatusBarText(QString)), // FIXME signature
+            this, SIGNAL(statusBarTextChangeRequested(QString)) );
+        connect( d->mTaskView, SIGNAL(timersActive()),
+            this, SIGNAL(timersActive()) );
+        connect( d->mTaskView, SIGNAL(timersInactive()),
+            this, SIGNAL(timersInactive()) );
+        connect( d->mTaskView, SIGNAL(tasksChanged(QList<Task*>)), // FIXME signature
+            this, SIGNAL(tasksChanged(QList<Task*>)) );
         emit setCaption( d->mTaskView->storage()->icalfile() );
     }
     d->mSearchWidget->setEnabled( d->mTaskView );
