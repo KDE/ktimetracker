@@ -56,7 +56,6 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
     KGlobal::locale()->insertCatalog("libkdepim");
     // we need an instance
     mMainWidget = new TimetrackerWidget( parentWidget );
-    mMainWidget->openFile(QString(KStandardDirs::locate("data", "ktimetracker/ktimetracker.ics")));
     setWidget( mMainWidget );
     setXMLFile( "ktimetrackerui.rc" );
     makeMenus();
