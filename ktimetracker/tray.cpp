@@ -59,10 +59,10 @@ TrayIcon::TrayIcon(MainWindow* parent)
         for (int i=0; i<8; i++)
         {
             QPixmap *icon = new QPixmap();
-        QString name;
-        name.sprintf("active-icon-%d.xpm",i);
-        *icon = UserIcon(name);
-        icons->insert(i,icon);
+            QString name;
+            name.sprintf("active-icon-%d.xpm",i);
+            *icon = UserIcon(name);
+            icons->insert(i,icon);
         }
     }
     TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
