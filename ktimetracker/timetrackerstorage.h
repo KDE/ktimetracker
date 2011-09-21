@@ -45,7 +45,9 @@ class HistoryEvent;
 /**
  * Class to store/retrieve KTimeTracker data to/from persistent storage.
  *
- * The storage is an iCalendar file.
+ * The storage is an iCalendar file. Its name is contained in this class
+ * in the variable _icalfile and can be read using the function icalfile().
+ * The name gets set by the load() operation.
  *
  * All logic that deals with getting and saving data should go here.
  *
@@ -367,13 +369,13 @@ class HistoryEvent
     HistoryEvent( const QString &uid, const QString &name, long duration,
                   const KDateTime &start, const KDateTime &stop,
                   const QString &todoUid );
-    QString uid() {return _uid; }
-    QString name() {return _name; }
+    QString uid() { return _uid; }
+    QString name() { return _name; }
     /** In seconds. */
-    long duration() {return _duration; }
-    KDateTime start() {return _start; }
+    long duration() { return _duration; }
+    KDateTime start() { return _start; }
     KDateTime stop() { return _stop; }
-    QString todoUid() {return _todoUid; }
+    QString todoUid() { return _todoUid; }
 
   private:
     QString _uid;
