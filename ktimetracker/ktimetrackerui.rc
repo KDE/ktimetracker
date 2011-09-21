@@ -60,8 +60,6 @@
   <Action name="file_new" />
   <Action name="file_open" />
   <Action name="file_save" />
-  <Separator />
-  <Action name="file_close" />
 </ToolBar>
 
 <Menu name="task_popup">
