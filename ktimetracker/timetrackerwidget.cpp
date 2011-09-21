@@ -193,14 +193,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
     taskView->load( lFileName );
     d->mSearchWidget->addTreeWidget( taskView );
 
-    if ( isNew )
-    {
-        d->mIsNewVector.append( taskView );
-    } else
-    {
-        // FIXME does not work for the startup page
-    }
-
     // When adding the first tab currentChanged is not emitted, so...
     if ( !d->mTaskView )
     {
