@@ -71,7 +71,6 @@ class TimetrackerWidget::Private
     QWidget *mSearchLine;
     KTreeWidgetSearchLine *mSearchWidget;
     TaskView *mTaskView;
-    QVector<TaskView*> mIsNewVector;
     QMap<QString, KAction*> mActions;
     KRecentFilesAction *mRecentFilesAction;
 
