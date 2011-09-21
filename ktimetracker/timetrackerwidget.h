@@ -115,12 +115,6 @@ class TimetrackerWidget : public QWidget
     void saveFile();
 
     /**
-      call this method when the preferences changed to adjust all
-      taskviews.
-     */
-    void reconfigureFiles();
-
-    /**
       this method puts the input focus onto the search bar
      */
     int focusSearchBar();
