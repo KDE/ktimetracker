@@ -137,17 +137,6 @@ bool TimetrackerWidget::allEventsHaveEndTiMe()
     return result;
 }
 
-void TimetrackerWidget::saveProperties( KConfigGroup &cfg )
-{
-    cfg.writeEntry( "WindowShown", isVisible());
-}
-
-void TimetrackerWidget::readProperties( const KConfigGroup &cfg )
-{
-    if( cfg.readEntry( "WindowShown", true ))
-        show();
-}
-
 int TimetrackerWidget::focusSearchBar()
 {
     kDebug(5970) << "Entering function";

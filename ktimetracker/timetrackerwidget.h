@@ -40,8 +40,6 @@ class TimetrackerWidget : public QWidget
   public:
     explicit TimetrackerWidget( QWidget *parent = 0 );
     ~TimetrackerWidget();
-    virtual void saveProperties( KConfigGroup& );
-    virtual void readProperties( const KConfigGroup& );
 
     /** 
       Delivers if all task have an end time. 
