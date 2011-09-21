@@ -53,13 +53,6 @@ class TimetrackerWidget : public QWidget
   private:
     void addTaskView( const QString &fileName = "" );
 
-    /**
-      Opens a file dialog to save the current taskView.
-
-      @returns true if save was successfully, false otherwise.
-     */
-    bool saveCurrentTaskView();
-
     bool eventFilter( QObject *obj, QEvent *event );
 
   public:

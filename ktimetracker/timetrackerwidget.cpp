@@ -184,11 +184,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
     connect( taskView, SIGNAL(tasksChanged(QList<Task*>)),
            this, SLOT(updateTabs()) );
 
-/* FIXME: review mTabWidget usage
-    d->mTabWidget->addTab( taskView,
-          isNew ? KIcon( "document-save" ) : KIcon( "ktimetracker" ),
-          isNew ? i18n( "Untitled" ) : QFileInfo( lFileName ).fileName() );
-*/
     emit setCaption( fileName );
     taskView->load( lFileName );
     d->mSearchWidget->addTreeWidget( taskView );
@@ -199,29 +194,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
         emit currentTaskViewChanged();
         slotCurrentChanged();
     }
-
-}
-
-bool TimetrackerWidget::saveCurrentTaskView()
-{
-    QString fileName = KFileDialog::getSaveFileName( QString(), QString(), this );
-    if ( !fileName.isEmpty() )
-    {
-        TaskView *taskView = currentTaskView();
-        taskView->stopAllTimers();
-        taskView->save();
-        taskView->closeStorage();
-
-        QString currentFilename = taskView->storage()->icalfile();
-        KIO::file_move( currentFilename, fileName, -1, KIO::Overwrite | KIO::HideProgressInfo );
-        d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
-
-        taskView->load( fileName );
-        KIO::file_delete( currentFilename, KIO::HideProgressInfo );
-
-        return true;
-    }
-  return false;
 }
 
 TaskView* TimetrackerWidget::currentTaskView() const
@@ -426,28 +398,6 @@ bool TimetrackerWidget::closeFile()
     kDebug(5970) << "Entering TimetrackerWidget::closeFile";
     TaskView *taskView = currentTaskView();
 
-    // is it an unsaved file?
-    if ( d->mIsNewVector.contains( taskView ) )
-    {
-        QString message = i18n( "This document has not been saved yet. Do you want to save it?" );
-        QString caption = i18n( "Untitled" );
-        int result = KMessageBox::questionYesNoCancel( this, message, caption );
-        if ( result == KMessageBox::Cancel )
-        {
-            return false;
-        }
-        if ( result == KMessageBox::Yes )
-        {
-            if ( !saveCurrentTaskView() )
-            {
-                return false;
-            }
-        }
-        else
-        { // result == No
-            d->mIsNewVector.remove( d->mIsNewVector.indexOf( taskView ) );
-        }
-    }
     if ( taskView )
     {
         taskView->save();
@@ -467,16 +417,7 @@ bool TimetrackerWidget::closeFile()
 
 void TimetrackerWidget::saveFile()
 {
-    TaskView *taskView = currentTaskView();
-
-    // is it an unsaved file?
-    if ( d->mIsNewVector.contains( taskView ) )
-    {
-        saveCurrentTaskView();
-    }
-    taskView->save();
-    // TODO get eventually error message from save and emit
-    // a error message signal.
+    currentTaskView()->save();
 }
 
 void TimetrackerWidget::reconfigureFiles()
@@ -1115,14 +1056,7 @@ QStringList TimetrackerWidget::activeTasks() const
 
 void TimetrackerWidget::saveAll()
 {
-    TaskView *taskView = currentTaskView();
-    if ( !taskView ) return;
-
-    // is it an unsaved file?
-    if ( d->mIsNewVector.contains( taskView ) ) {
-        saveCurrentTaskView();
-    }
-    taskView->save();
+    currentTaskView()->save();
 }
 
 bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
