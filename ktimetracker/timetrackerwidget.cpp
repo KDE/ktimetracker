@@ -252,10 +252,6 @@ Task* TimetrackerWidget::currentTask()
 
 void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 {
-    d->mActions.insert( "file_new",
-        KStandardAction::openNew( this, SLOT(newFile()), actionCollection ) );
-    d->mActions[ "file_new" ]->setIcon( KIcon( "tab-new" ) );
-
     d->mActions.insert ("file_open",
         KStandardAction::open( this, SLOT(openFile()), actionCollection ) );
 
@@ -267,8 +263,6 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 
     d->mActions.insert ("file_save",
         KStandardAction::save( this, SLOT(saveFile()), actionCollection ) );
-    d->mActions.insert ("file_close",
-        KStandardAction::close( this, SLOT(closeFile()), actionCollection ) );
     d->mActions.insert ("file_quit",
         KStandardAction::quit( this, SLOT(quit()), actionCollection ) );
     d->mActions.insert ("configure_ktimetracker",
@@ -607,7 +601,6 @@ void TimetrackerWidget::slotUpdateButtons()
     d->mActions[ "export_history" ]->setEnabled( currentTaskView() );
     d->mActions[ "import_planner" ]->setEnabled( currentTaskView() );
     d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
-    d->mActions[ "file_close" ]->setEnabled( currentTaskView() );
     kDebug(5970) << "Leaving function";
 }
 
