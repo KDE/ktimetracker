@@ -83,12 +83,6 @@ class TimetrackerWidget : public QWidget
 
   public Q_SLOTS:
     /**
-      opens a new untitled file which is stored firstly as temporary file
-      but with a flag, that it has to be saved in a proper place.
-     */
-    void newFile();
-
-    /**
       opens an existing ics file.
      */
     void openFile( const QString &fileName = QString() );

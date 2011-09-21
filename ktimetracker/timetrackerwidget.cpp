@@ -127,14 +127,7 @@ TimetrackerWidget::~TimetrackerWidget()
 
 bool TimetrackerWidget::allEventsHaveEndTiMe()
 {
-    bool result = true;
-    TaskView *taskView;
-    taskView = currentTaskView();
-    if ( !taskView->allEventsHaveEndTiMe() )
-    {
-        result = false;
-    }
-    return result;
+    return currentTaskView()->allEventsHaveEndTiMe();
 }
 
 int TimetrackerWidget::focusSearchBar()
@@ -351,11 +344,6 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 KAction* TimetrackerWidget::action( const QString &name ) const
 {
     return d->mActions.value( name );
-}
-
-void TimetrackerWidget::newFile()
-{
-    addTaskView();
 }
 
 void TimetrackerWidget::openFile( const QString &fileName )
