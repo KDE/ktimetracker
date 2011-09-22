@@ -66,13 +66,12 @@ class TimetrackerWidget::Private
 {
   public:
     Private() :
-      mTaskView( 0 ), mRecentFilesAction( 0 ) {}
+      mTaskView( 0 ) {}
 
     QWidget *mSearchLine;
     KTreeWidgetSearchLine *mSearchWidget;
     TaskView *mTaskView;
     QMap<QString, KAction*> mActions;
-    KRecentFilesAction *mRecentFilesAction;
 
     struct ActionData
     {
@@ -118,10 +117,6 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
 
 TimetrackerWidget::~TimetrackerWidget()
 {
-    if ( d->mRecentFilesAction )
-    {
-        d->mRecentFilesAction->saveEntries( KGlobal::config()->group( "Recent Files" ) );
-    }
     delete d;
 }
 
@@ -200,13 +195,6 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
 {
     d->mActions.insert ("file_open",
         KStandardAction::open( this, SLOT(openFile()), actionCollection ) );
-
-    d->mRecentFilesAction = KStandardAction::openRecent(
-        this, SLOT(openFile(KUrl)), this );
-    actionCollection->addAction( d->mRecentFilesAction->objectName(),
-                               d->mRecentFilesAction );
-    d->mRecentFilesAction->loadEntries( KGlobal::config()->group( "Recent Files" ) );
-
     d->mActions.insert ("file_save",
         KStandardAction::save( this, SLOT(saveFile()), actionCollection ) );
     d->mActions.insert ("file_quit",
@@ -357,11 +345,6 @@ void TimetrackerWidget::openFile( const QString &fileName )
         {
             return;
         }
-    }
-
-    if ( d->mRecentFilesAction )
-    {
-        d->mRecentFilesAction->addUrl( newFileName );
     }
     addTaskView( newFileName );
 }
