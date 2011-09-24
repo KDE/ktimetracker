@@ -500,6 +500,7 @@ void TimetrackerWidget::showSettingsDialog()
     KTimeTrackerConfigDialog *dialog=new KTimeTrackerConfigDialog(i18n( "Settings" ), this);
     dialog->exec();
     delete dialog;
+    KTimeTrackerSettings::self()->readConfig();
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
     currentTaskView()->reconfigure();
