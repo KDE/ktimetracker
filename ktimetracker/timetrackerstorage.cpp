@@ -906,10 +906,7 @@ void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
             if (!(*i)->hasEndDate())
             {
                 kDebug(5970) << "this event has no enddate";
-                QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
-                KDateTime kwhen=KDateTime::fromString(s);
-                kDebug() << "kwhen ==" <<  kwhen;
-                (*i)->setDtEnd(kwhen);
+                (*i)->setDtEnd(KDateTime(when, KDateTime::Spec::LocalZone()));
             }
             else
             {
@@ -919,27 +916,6 @@ void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
         };
     }
     saveCalendar();
-}
-
-bool timetrackerstorage::bookTime(const Task* task,
-                           const QDateTime& startDateTime,
-                           const long durationInSeconds)
-{
-    kDebug(5970) << "Entering function";
-    // Ignores preferences setting re: logging history.
-    KCal::Event* e;
-    QDateTime end;
-    KDateTime start( startDateTime, KDateTime::Spec::LocalZone() ); //??? is LocalZone correct ???
-
-    e = baseEvent( task );
-    e->setDtStart( start );
-    e->setDtEnd( start.addSecs( durationInSeconds ) );
-
-    // Use a custom property to keep a record of negative durations
-    e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray("duration"),
-        QString::number(durationInSeconds));
-    return d->mCalendar->addEvent(e);
 }
 
 void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)

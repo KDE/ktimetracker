@@ -694,60 +694,6 @@ void TimetrackerWidget::setPercentComplete( const QString &taskId, int percent )
     }
 }
 
-int TimetrackerWidget::bookTime( const QString &taskId, const QString &dateTime, int minutes )
-{
-    QDate startDate;
-    QTime startTime;
-    QDateTime startDateTime;
-    Task *task = 0, *t = 0;
-
-    if ( minutes <= 0 ) return KTIMETRACKER_ERR_INVALID_DURATION;
-
-
-    TaskView *taskView = currentTaskView();
-    if ( taskView )
-    {
-        QTreeWidgetItemIterator it( taskView );
-        while ( *it )
-        {
-            t = static_cast< Task* >( *it );
-            if ( t && t->uid() == taskId )
-            {
-                task = t;
-                break;
-            }
-            ++it;
-        }
-    }
-
-    if ( !task ) return KTIMETRACKER_ERR_UID_NOT_FOUND;
-
-    // Parse datetime
-    startDate = QDate::fromString( dateTime, Qt::ISODate );
-
-    if ( dateTime.length() > 10 )
-    { // "YYYY-MM-DD".length() = 10
-        startTime = QTime::fromString( dateTime, Qt::ISODate );
-    }
-    else startTime = QTime( 12, 0 );
-
-    if ( startDate.isValid() && startTime.isValid() )
-    {
-        startDateTime = QDateTime( startDate, startTime );
-    }
-    else return KTIMETRACKER_ERR_INVALID_DATE;
-
-    // Update task totals (session and total) and save to disk
-    task->changeTotalTimes( task->sessionTime() + minutes,
-                          task->totalTime() + minutes );
-    if ( !( task->taskView()->storage()->bookTime( task,
-                                                 startDateTime,
-                                                 minutes * 60 ) ) )
-        return KTIMETRACKER_ERR_GENERIC_SAVE_FAILED;
-
-    return 0;
-}
-
 int TimetrackerWidget::changeTime( const QString &taskId, int minutes )
 {
     int result=0;
