@@ -110,7 +110,7 @@ void IdleTimeDetector::informOverrun()
         QVBoxLayout *lay1 = new QVBoxLayout(wid);
         QHBoxLayout *lay2 = new QHBoxLayout();
         lay1->addLayout(lay2);
-        QString idlemsg=QString( "Desktop has been idle since %1. What do you want to do ?" ).arg(backThen);
+        QString idlemsg=QString( i18n("Desktop has been idle since %1. What do you want to do ?", backThen) );
         QLabel *label = new QLabel( idlemsg, wid );
         lay2->addWidget( label );
         connect( dialog , SIGNAL(cancelClicked()) , this , SLOT(revert()) );
