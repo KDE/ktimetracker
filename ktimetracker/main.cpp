@@ -166,7 +166,7 @@ int main( int argc, char *argv[] )
             const QString& s=args->getOption("addtask");
             QVector<int> vec;
             DesktopList dl=vec;
-            Task* task=new Task( s,(long int) 0,(long int) 0, dl, 0, true );
+            Task* task=new Task( s, QString(), (long int) 0,(long int) 0, dl, 0, true );
             sto->addTask( task );
             sto->save( 0 );
             delete sto;

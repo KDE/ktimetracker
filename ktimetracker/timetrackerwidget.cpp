@@ -457,7 +457,7 @@ bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
 void TimetrackerWidget::slotAddTask( const QString &taskName )
 {
     TaskView *taskView = currentTaskView();
-    taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
+    taskView->addTask( taskName, QString(), 0, 0, DesktopList(), 0 );
 
     d->mSearchWidget->clear();
 }
@@ -643,7 +643,7 @@ void TimetrackerWidget::addTask( const QString &taskName )
 
     if ( taskView )
     {
-        taskView->addTask( taskName, 0, 0, DesktopList(), 0 );
+        taskView->addTask( taskName, QString(), 0, 0, DesktopList(), 0 );
     }
 }
 
@@ -653,7 +653,7 @@ void TimetrackerWidget::addSubTask( const QString& taskName, const QString &task
 
     if ( taskView )
     {
-        taskView->addTask( taskName, 0, 0, DesktopList(), taskView->task( taskId) );
+        taskView->addTask( taskName, QString(), 0, 0, DesktopList(), taskView->task( taskId) );
         taskView->refresh();
     }
 }

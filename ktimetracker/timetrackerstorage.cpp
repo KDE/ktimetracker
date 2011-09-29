@@ -457,7 +457,7 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
     todo = new KCal::Todo();
     if ( d->mCalendar->addTodo( todo ) )
     {
-        task->asTodo( todo  );
+        task->asTodo( todo );
         if (parent)
             todo->setRelatedTo(d->mCalendar->todo(parent->uid()));
         uid = todo->uid();
