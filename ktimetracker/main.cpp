@@ -30,7 +30,7 @@
 #include <KStandardDirs>
 #include <kontactinterface/pimuniqueapplication.h>
 
-#include "version.h"
+#include "kdepim-version.h"
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "timetrackerstorage.h"
@@ -83,7 +83,7 @@ QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar
 int main( int argc, char *argv[] )
 {
     KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
-        KTIMETRACKER_VERSION, ki18n(description), KAboutData::License_GPL,
+        KDEPIM_VERSION, ki18n(description), KAboutData::License_GPL,
         ki18n("Copyright © 1997-2011 KDE PIM authors"), KLocalizedString(),
         QByteArray("http://userbase.kde.org/KTimeTracker") );
 

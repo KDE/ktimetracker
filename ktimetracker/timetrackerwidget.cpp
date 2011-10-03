@@ -58,7 +58,7 @@
 #include "reportcriteria.h"
 #include "task.h"
 #include "taskview.h"
-#include "version.h"
+#include "kdepim-version.h"
 
 
 //@cond PRIVATE
@@ -614,7 +614,7 @@ void TimetrackerWidget::slotSearchBar()
 /* @{ */
 QString TimetrackerWidget::version() const
 {
-    return KTIMETRACKER_VERSION;
+    return KDEPIM_VERSION;
 }
 
 QStringList TimetrackerWidget::taskIdsFromName( const QString &taskName ) const
