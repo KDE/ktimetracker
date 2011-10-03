@@ -589,7 +589,7 @@ QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
     QString err;
     if ( rc.reportType == ReportCriteria::CSVHistoryExport )
     {
-        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
+        err = exportcsvHistory2( taskview, rc.from, rc.to, rc );
     }
     else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
     {
@@ -728,11 +728,8 @@ QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriter
 int todaySeconds (const QDate &date, const KCal::Event &event)
 {
         kDebug(5970) << "found an event for task, event=" << event.uid();
-        // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
-        // dtEnd is stored like DTEND:20080327T231509Z
-        // we need to subtract the offset from UTC.
-        KDateTime startTime=event.dtStart().addSecs(event.dtStart().utcOffset());
-        KDateTime endTime=event.dtEnd().addSecs(event.dtEnd().utcOffset());
+        KDateTime startTime=event.dtStart();
+        KDateTime endTime=event.dtEnd();
         KDateTime NextMidNight=startTime;
         NextMidNight.setTime(QTime ( 0,0 ));
         NextMidNight=NextMidNight.addDays(1);
@@ -877,7 +874,7 @@ QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
         if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
         {
             kDebug(5970) << "storing a local file";
-            QString filename=rc.url.toLocalFile() + ".2"; // XXX: remove the .2 once the refactoring is tested.
+            QString filename=rc.url.toLocalFile();
             if (filename.isEmpty()) filename=rc.url.url();
             QFile f( filename );
             if( !f.open( QIODevice::WriteOnly ) )
