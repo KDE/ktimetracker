@@ -127,7 +127,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
 
-    KCal::ResourceCached *resource;
+    KCal::ResourceCached* resource;
     if ( remoteResource( d->mICalFile ) )
     {
         KUrl url( d->mICalFile );
@@ -140,7 +140,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     d->mCalendar = resource;
 
     QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar*)),
-  	            view, SLOT(iCalFileModified(ResourceCalendar*)));
+                    view, SLOT(iCalFileModified(ResourceCalendar*)));
     d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
     d->mCalendar->open();
@@ -168,7 +168,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
         kDebug(5970) << "timetrackerstorage::load"
             << "rawTodo count (includes completed todos) ="
             << todoList.count();
-        for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
+        for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
         {
             Task* task = new Task(*todo, view);
             map.insert( (*todo)->uid(), task );
@@ -177,7 +177,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
         }
 
         // Load each task under it's parent task.
-        for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
+        for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
         {
             Task* task = map.value( (*todo)->uid() );
             // No relatedTo incident just means this is a top-level task.
@@ -394,7 +394,7 @@ QString timetrackerstorage::save(TaskView* taskview)
     return err;
 }
 
-QString timetrackerstorage::setTaskParent( Task* task, Task* parent )
+QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
 {
     kDebug(5970) << "Entering function";
     QString err;
