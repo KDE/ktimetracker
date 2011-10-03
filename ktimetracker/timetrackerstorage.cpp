@@ -68,6 +68,7 @@
 #include <unistd.h>
 #include <cassert>
 #include <fcntl.h>
+#include <QMap>
 
 
 //@cond PRIVATE
@@ -720,6 +721,201 @@ QString timetrackerstorage::exportcsvFile( TaskView *taskview,
 
     return err;
 }
+
+
+
+
+
+int todaySeconds (const QDate &date, const KCal::Event &event)
+{
+        kDebug(5970) << "found an event for task, event=" << event.uid();
+        // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
+        // dtEnd is stored like DTEND:20080327T231509Z
+        // we need to subtract the offset from UTC.
+        KDateTime startTime=event.dtStart().addSecs(event.dtStart().utcOffset());
+        KDateTime endTime=event.dtEnd().addSecs(event.dtEnd().utcOffset());
+        KDateTime NextMidNight=startTime;
+        NextMidNight.setTime(QTime ( 0,0 ));
+        NextMidNight=NextMidNight.addDays(1);
+        // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
+        KDateTime LastMidNight=KDateTime::currentLocalDateTime();
+        LastMidNight.setDate(date);
+        LastMidNight.setTime(QTime(0,0));
+        int secsstartTillMidNight=startTime.secsTo(NextMidNight);
+        int secondsToAdd=0; // seconds that need to be added to the actual cell
+        if ( (startTime.date()==date) && (event.dtEnd().date()==date) ) // all the event occurred today
+            secondsToAdd=startTime.secsTo(endTime);
+        if ( (startTime.date()==date) && (endTime.date()>date) ) // the event started today, but ended later
+            secondsToAdd=secsstartTillMidNight;
+        if ( (startTime.date()<date) && (endTime.date()==date) ) // the event started before today and ended today
+            secondsToAdd=LastMidNight.secsTo(event.dtEnd());
+        if ( (startTime.date()<date) && (endTime.date()>date) ) // the event started before today and ended after
+            secondsToAdd=86400;
+
+        return secondsToAdd;
+}
+
+// export history report as csv, all tasks X all dates in one block
+// XXX: replace exportcsvHistory with this method once it's tested.
+QString timetrackerstorage::exportcsvHistory2 ( TaskView      *taskview,
+                                            const QDate   &from,
+                                            const QDate   &to,
+                                            const ReportCriteria &rc)
+{
+    kDebug(5970) << "Entering function";
+
+    QString delim = rc.delimiter;
+    const QString cr = QString::fromLatin1("\n");
+    QString err=QString::null;
+    QString retval;
+    Task* task;
+    const int intervalLength = from.daysTo(to)+1;
+    QMap< QString, QVector<int> > secsForUid;
+    QMap< QString, QString > uidForName;
+
+
+
+    // Step 1: Prepare two hashmaps:
+    // * "uid -> seconds each day": used while traversing events, as uid is their id
+    //                              "seconds each day" are stored in a vector
+    // * "name -> uid", ordered by name: used when creating the csv file at the end
+    kDebug(5970) << "Taskview Count: " << taskview->count();
+    for ( int n=0; n<taskview->count(); n++ )
+    {
+        task=taskview->itemAt(n);
+        kDebug(5970) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
+        // uid -> seconds each day
+        // * Init each element to zero
+        QVector<int> vector(intervalLength, 0);
+        secsForUid[task->uid()] = vector;
+
+        // name -> uid
+        // * Create task fullname concatenating each parent's name
+        QString fullName;
+        Task* parentTask;
+        parentTask = task;
+        fullName += parentTask->name();
+        parentTask = parentTask->parent();
+        while (parentTask) {
+            fullName = parentTask->name() + "->" + fullName;
+            kDebug(5970) << "Fullname(inside): " << fullName;
+            parentTask = parentTask->parent();
+            kDebug(5970) << "Parent task: " << parentTask;
+        }
+
+        uidForName[fullName] = task->uid();
+
+        kDebug(5970) << "Fullname(end): " << fullName;
+    }
+
+    kDebug(5970) << "secsForUid" << secsForUid;
+    kDebug(5970) << "uidForName" << uidForName;
+
+
+
+    // Step 2: For each date, get the events and calculate the seconds
+    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
+    // We rely on rawEventsForDate to get the events
+    kDebug(5970) << "Let's iterate for each date: ";
+    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
+    {
+        kDebug(5970) << mdate.toString();
+        KCal::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
+
+        for(KCal::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
+        {
+            kDebug(5970) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedToUid();
+            kDebug(5970) << "Today's seconds: " << todaySeconds(mdate, **i);
+            secsForUid[(*i)->relatedToUid()][from.daysTo(mdate)] += todaySeconds(mdate, **i);
+        }
+    }
+
+
+    //kDebug(5970) << secsForUid;
+
+
+    // Step 3: For each task, generate the matching row for the CSV file
+    // We use the two hashmaps to have direct access using the task name
+
+    // First CSV file line
+    // FIXME: localize strings and date formats
+    retval.append("\"Task name\"");
+    for (int i=0; i<intervalLength; i++)
+    {
+        retval.append(delim);
+        retval.append(from.addDays(i).toString());
+    }
+    retval.append(cr);
+
+
+    // Rest of the CSV file
+    QMapIterator<QString, QString> nameUid(uidForName);
+    double time;
+    while (nameUid.hasNext())
+    {
+        nameUid.next();
+        retval.append("\"" + nameUid.key() + "\"");
+        kDebug(5970) << nameUid.key() << ": " << nameUid.value() << endl;
+
+        for (int day=0; day<intervalLength; day++)
+        {
+            kDebug(5970) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
+            retval.append(delim);
+            time = secsForUid[nameUid.value()][day]/60.0;
+            retval.append(formatTime(time, rc.decimalMinutes));
+        }
+
+        retval.append(cr);
+    }
+
+    kDebug() << "Retval is \n" << retval;
+
+    if (rc.bExPortToClipBoard)
+        taskview->setClipBoardText(retval);
+    else
+    {
+        // store the file locally or remote
+        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+        {
+            kDebug(5970) << "storing a local file";
+            QString filename=rc.url.toLocalFile() + ".2"; // XXX: remove the .2 once the refactoring is tested.
+            if (filename.isEmpty()) filename=rc.url.url();
+            QFile f( filename );
+            if( !f.open( QIODevice::WriteOnly ) )
+            {
+                err = i18n( "Could not open \"%1\".", filename );
+                kDebug(5970) << "Could not open file";
+            }
+            kDebug() << "Err is " << err;
+            if (err.length()==0)
+            {
+                QTextStream stream(&f);
+                kDebug(5970) << "Writing to file: " << retval;
+                // Export to file
+                stream << retval;
+                f.close();
+            }
+        }
+        else // use remote file
+        {
+            KTemporaryFile tmpFile;
+            if ( !tmpFile.open() )
+            {
+                err = QString::fromLatin1( "Unable to get temporary file" );
+            }
+            else
+            {
+                QTextStream stream ( &tmpFile );
+                stream << retval;
+                stream.flush();
+                if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+            }
+        }
+    }
+    return err;
+}
+
+
 
 // export history report as csv, all tasks X all dates in one block
 QString timetrackerstorage::exportcsvHistory ( TaskView      *taskview,

@@ -325,6 +325,18 @@ class timetrackerstorage : public QObject
     QString exportcsvFile( TaskView *taskview, const ReportCriteria &rc );
 
     /**
+     * just to test a patch by Hector
+     *
+     */
+    QString exportcsvHistory2
+    (
+            TaskView* taskview,
+            const QDate& from,
+            const QDate& to,
+            const ReportCriteria &rc
+    );
+
+    /**
      *  Write task history to file as comma-delimited data.
      */
     QString exportcsvHistory (
