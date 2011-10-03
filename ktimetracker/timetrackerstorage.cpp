@@ -906,10 +906,7 @@ void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
             if (!(*i)->hasEndDate())
             {
                 kDebug(5970) << "this event has no enddate";
-                QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
-                KDateTime kwhen=KDateTime::fromString(s);
-                kDebug() << "kwhen ==" <<  kwhen;
-                (*i)->setDtEnd(kwhen);
+                (*i)->setDtEnd(KDateTime(when, KDateTime::Spec::LocalZone()));
             }
             else
             {
