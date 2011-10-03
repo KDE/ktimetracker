@@ -94,7 +94,7 @@ timetrackerstorage::~timetrackerstorage()
     delete d;
 }
 
-QString timetrackerstorage::load( TaskView* view, const QString &fileName )
+QString timetrackerstorage::load(TaskView* view, const QString &fileName)
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
@@ -203,7 +203,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     return err;
 }
 
-Task* timetrackerstorage::task( const QString& uid, TaskView* view )
+Task* timetrackerstorage::task(const QString& uid, TaskView* view)
 // return the tasks with the uid uid out of view.
 // If !view, return the todo with the uid uid.
 {
@@ -406,7 +406,7 @@ QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
     return err;
 }
 
-QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
+QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents)
 {
     kDebug(5970) << "Entering function";
     QString err;
@@ -583,7 +583,7 @@ void timetrackerstorage::addComment(const Task* task, const QString& comment)
     saveCalendar();
 }
 
-QString timetrackerstorage::report( TaskView *taskview, const ReportCriteria &rc )
+QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
 {
     kDebug(5970) << "Entering function";
     QString err;
@@ -605,8 +605,7 @@ QString timetrackerstorage::report( TaskView *taskview, const ReportCriteria &rc
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
-QString timetrackerstorage::exportcsvFile( TaskView *taskview,
-                                    const ReportCriteria &rc )
+QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
 {
     kDebug(5970) << "Entering function";
     QString delim = rc.delimiter;
@@ -757,7 +756,7 @@ int todaySeconds (const QDate &date, const KCal::Event &event)
 
 // export history report as csv, all tasks X all dates in one block
 // XXX: replace exportcsvHistory with this method once it's tested.
-QString timetrackerstorage::exportcsvHistory2 ( TaskView      *taskview,
+QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
                                             const QDate   &from,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
@@ -918,7 +917,7 @@ QString timetrackerstorage::exportcsvHistory2 ( TaskView      *taskview,
 
 
 // export history report as csv, all tasks X all dates in one block
-QString timetrackerstorage::exportcsvHistory ( TaskView      *taskview,
+QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
                                             const QDate   &from,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
@@ -1056,7 +1055,7 @@ QString timetrackerstorage::exportcsvHistory ( TaskView      *taskview,
     return err;
 }
 
-void timetrackerstorage::startTimer( const Task* task, const KDateTime &when )
+void timetrackerstorage::startTimer(const Task* task, const KDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
     KCal::Event* e;
@@ -1066,7 +1065,7 @@ void timetrackerstorage::startTimer( const Task* task, const KDateTime &when )
     task->taskView()->scheduleSave();
 }
 
-void timetrackerstorage::startTimer( QString taskID )
+void timetrackerstorage::startTimer(QString taskID)
 {
     kDebug(5970) << "Entering function";
     KCal::Todo::List todoList;
@@ -1088,7 +1087,7 @@ void timetrackerstorage::startTimer( QString taskID )
     saveCalendar();
 }
 
-void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
+void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
     KCal::Event::List eventList = d->mCalendar->rawEvents();
@@ -1185,9 +1184,9 @@ KCal::Event* timetrackerstorage::baseEvent(const Todo* todo)
     return e;
 }
 
-HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
+HistoryEvent::HistoryEvent(const QString &uid, const QString &name,
                             long duration, const KDateTime &start,
-                            const KDateTime &stop, const QString &todoUid )
+                            const KDateTime &stop, const QString &todoUid)
 {
     _uid = uid;
     _name = name;
@@ -1197,7 +1196,7 @@ HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
     _todoUid = todoUid;
 }
 
-bool timetrackerstorage::remoteResource( const QString& file ) const
+bool timetrackerstorage::remoteResource(const QString& file) const
 {
     kDebug(5970) << "Entering function";
     QString f = file.toLower();
