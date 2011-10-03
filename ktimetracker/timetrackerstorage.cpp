@@ -589,7 +589,7 @@ QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
     QString err;
     if ( rc.reportType == ReportCriteria::CSVHistoryExport )
     {
-        err = exportcsvHistory2( taskview, rc.from, rc.to, rc );
+        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
     }
     else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
     {
@@ -721,10 +721,6 @@ QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriter
     return err;
 }
 
-
-
-
-
 int todaySeconds (const QDate &date, const KCal::Event &event)
 {
         kDebug(5970) << "found an event for task, event=" << event.uid();
@@ -752,8 +748,7 @@ int todaySeconds (const QDate &date, const KCal::Event &event)
 }
 
 // export history report as csv, all tasks X all dates in one block
-// XXX: replace exportcsvHistory with this method once it's tested.
-QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
+QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
                                             const QDate   &from,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
@@ -768,7 +763,6 @@ QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
     const int intervalLength = from.daysTo(to)+1;
     QMap< QString, QVector<int> > secsForUid;
     QMap< QString, QString > uidForName;
-
 
 
     // Step 1: Prepare two hashmaps:
@@ -792,7 +786,8 @@ QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
         parentTask = task;
         fullName += parentTask->name();
         parentTask = parentTask->parent();
-        while (parentTask) {
+        while (parentTask)
+        {
             fullName = parentTask->name() + "->" + fullName;
             kDebug(5970) << "Fullname(inside): " << fullName;
             parentTask = parentTask->parent();
@@ -806,7 +801,6 @@ QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
 
     kDebug(5970) << "secsForUid" << secsForUid;
     kDebug(5970) << "uidForName" << uidForName;
-
 
 
     // Step 2: For each date, get the events and calculate the seconds
@@ -825,9 +819,6 @@ QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
             secsForUid[(*i)->relatedToUid()][from.daysTo(mdate)] += todaySeconds(mdate, **i);
         }
     }
-
-
-    //kDebug(5970) << secsForUid;
 
 
     // Step 3: For each task, generate the matching row for the CSV file
@@ -866,147 +857,6 @@ QString timetrackerstorage::exportcsvHistory2 (TaskView      *taskview,
 
     kDebug() << "Retval is \n" << retval;
 
-    if (rc.bExPortToClipBoard)
-        taskview->setClipBoardText(retval);
-    else
-    {
-        // store the file locally or remote
-        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-        {
-            kDebug(5970) << "storing a local file";
-            QString filename=rc.url.toLocalFile();
-            if (filename.isEmpty()) filename=rc.url.url();
-            QFile f( filename );
-            if( !f.open( QIODevice::WriteOnly ) )
-            {
-                err = i18n( "Could not open \"%1\".", filename );
-                kDebug(5970) << "Could not open file";
-            }
-            kDebug() << "Err is " << err;
-            if (err.length()==0)
-            {
-                QTextStream stream(&f);
-                kDebug(5970) << "Writing to file: " << retval;
-                // Export to file
-                stream << retval;
-                f.close();
-            }
-        }
-        else // use remote file
-        {
-            KTemporaryFile tmpFile;
-            if ( !tmpFile.open() )
-            {
-                err = QString::fromLatin1( "Unable to get temporary file" );
-            }
-            else
-            {
-                QTextStream stream ( &tmpFile );
-                stream << retval;
-                stream.flush();
-                if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
-            }
-        }
-    }
-    return err;
-}
-
-
-
-// export history report as csv, all tasks X all dates in one block
-QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
-                                            const QDate   &from,
-                                            const QDate   &to,
-                                            const ReportCriteria &rc)
-{
-    kDebug(5970) << "Entering function";
-    QString delim = rc.delimiter;
-    const QString cr = QString::fromLatin1("\n");
-    QString err=QString::null;
-    QString retval;
-    Task* task;
-
-    QTableWidget* itab=new QTableWidget(); // hello, ABAP
-    itab->setRowCount(taskview->count()+1);
-    itab->setColumnCount(from.daysTo(to)+2);
-    // parameter-plausi
-    if ( from > to )
-    {
-        err = QString("'to' has to be a date later than or equal to 'from'.");
-    }
-    else
-    {
-        itab->setItem(0,0,new QTableWidgetItem("Task name"));
-        for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
-        {
-            kDebug(5970) << mdate.toString();
-            itab->setItem(0,1+from.daysTo(mdate),new QTableWidgetItem(mdate.toString()));
-            for ( int n=0; n<taskview->count(); n++ )
-            {
-                task=taskview->itemAt(n);
-                itab->setItem(n+1,0,new QTableWidgetItem(taskview->itemAt(n)->name()));
-                KCal::Event::List eventList = d->mCalendar->rawEvents();
-                for(KCal::Event::List::iterator i = eventList.begin();
-                    i != eventList.end(); ++i)
-                {
-                    if ( (*i)->relatedToUid() == task->uid() )
-                    {
-                        kDebug(5970) << "found an event for task, event=" << (*i)->uid();
-                        // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
-                        // dtEnd is stored like DTEND:20080327T231509Z
-                        // we need to subtract the offset from UTC.
-                        KDateTime startTime=(*i)->dtStart().addSecs((*i)->dtStart().utcOffset());
-                        KDateTime endTime=(*i)->dtEnd().addSecs((*i)->dtEnd().utcOffset());
-                        KDateTime NextMidNight=startTime;
-                        NextMidNight.setTime(QTime ( 0,0 ));
-                        NextMidNight=NextMidNight.addDays(1);
-                        // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
-                        KDateTime LastMidNight=KDateTime::currentLocalDateTime();
-                        LastMidNight.setDate(mdate);
-                        LastMidNight.setTime(QTime(0,0));
-                        int secsstartTillMidNight=startTime.secsTo(NextMidNight);
-                        int secondsToAdd=0; // seconds that need to be added to the actual cell
-                        if ( (startTime.date()==mdate) && ((*i)->dtEnd().date()==mdate) ) // all the event occurred today
-                            secondsToAdd=startTime.secsTo(endTime);
-                        if ( (startTime.date()==mdate) && (endTime.date()>mdate) ) // the event started today, but ended later
-                            secondsToAdd=secsstartTillMidNight;
-                        if ( (startTime.date()<mdate) && (endTime.date()==mdate) ) // the event started before today and ended today
-                            secondsToAdd=LastMidNight.secsTo((*i)->dtEnd());
-                        if ( (startTime.date()<mdate) && (endTime.date()>mdate) ) // the event started before today and ended after
-                            secondsToAdd=86400;
-                        int secondsSum=secondsToAdd;
-                        if (itab->item(n+1,from.daysTo(mdate)+1))
-                            secondsSum=itab->item(n+1,from.daysTo(mdate)+1)->text().toInt()+secondsToAdd;
-                        itab->setItem(n+1,from.daysTo(mdate)+1,new QTableWidgetItem(QString::number(secondsSum)));
-                    };
-                }
-            }
-        }
-        // use the internal table itab to create the return value retval
-        for ( int y=0; y<=(taskview->count()); y++ )
-        {
-            if (itab->item(y,0)) retval.append("\"").append(itab->item(y,0)->text().replace("\"","\"\"")).append("\"");  // task names
-            for ( int x=1; x<=from.daysTo(to)+1; x++ )
-            {
-                retval.append(rc.delimiter);
-                if (y>0)
-                {
-                    if (itab->item(y,x))
-                    {
-                        kDebug(5970) << "itab->item(y,x)=" << itab->item(y,x)->text();
-                        retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
-                    }
-                }
-                else // heading
-                {
-                    retval.append(itab->item(y,x)->text());
-                }
-            };
-            retval.append("\n");
-        }
-        kDebug() << "Retval is \n" << retval;
-    }
-    // itab->show(); // GREAT for debugging purposes :)
     if (rc.bExPortToClipBoard)
         taskview->setClipBoardText(retval);
     else
