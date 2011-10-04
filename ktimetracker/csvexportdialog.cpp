@@ -22,17 +22,15 @@
 
 #include "csvexportdialog.h"
 
-
 #include <KDebug>
+#include <KDateComboBox>
 #include <KGlobal>
 #include <KLocale>
 #include <KPushButton>
 #include <KLineEdit>
 
-#include "kdateedit.h"
-
 CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
-                                  QWidget *parent 
+                                  QWidget *parent
                                   ) : CSVExportDialogBase( parent )
 {
     connect( button( User1 ), SIGNAL(clicked()),
