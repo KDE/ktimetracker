@@ -66,14 +66,24 @@ QString EditTaskDialog::taskName()
     return m_ui->tasknamelineedit->text();
 }
 
+QString EditTaskDialog::taskDescription()
+{
+    return m_ui->tasknametextedit->toPlainText();
+}
+
 QString EditTaskDialog::timeChange()
 {
     return m_ui->letimechange->text();
 }
 
-void EditTaskDialog::setTask( const QString &name )
+void EditTaskDialog::setTask(const QString &name)
 {
-    m_ui->tasknamelineedit->setText( name );
+    m_ui->tasknamelineedit->setText(name);
+}
+
+void EditTaskDialog::setDescription(const QString &description)
+{
+    m_ui->tasknametextedit->setText(description);
 }
 
 void EditTaskDialog::status(DesktopList *desktopList) const

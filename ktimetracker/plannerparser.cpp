@@ -83,12 +83,12 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
         if (level++>0)
         {
             parentTask=task;
-            task = new Task(taskName, 0, 0, dl, parentTask);
+            task = new Task(taskName, QString(), 0, 0, dl, parentTask);
             task->setUid(_taskView->storage()->addTask(task, parentTask));
         }
         else
         {
-            task = new Task(taskName, 0, 0, dl, _taskView);
+            task = new Task(taskName, QString(), 0, 0, dl, _taskView);
             kDebug() <<"added" << taskName;
             task->setUid(_taskView->storage()->addTask(task, 0));
         }

@@ -101,7 +101,7 @@ class TaskView : public QTreeWidget
     Task* task( const QString& uid );
 
     /** Add a task to view and storage. */
-    QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
+    QString addTask( const QString& taskame, const QString& taskdescription = QString(), long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
 
     /** Returns a list of the current active tasks. */

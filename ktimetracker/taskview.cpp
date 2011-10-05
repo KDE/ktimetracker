@@ -871,6 +871,7 @@ void TaskView::newTask( const QString &caption, Task *parent )
     {
         QString taskName = i18n( "Unnamed Task" );
         if ( !dialog->taskName().isEmpty()) taskName = dialog->taskName();
+        QString taskDescription = dialog->taskDescription();
 
         total = totalDiff = session = sessionDiff = 0;
         dialog->status( &desktopList );
@@ -880,7 +881,7 @@ void TaskView::newTask( const QString &caption, Task *parent )
         if ( desktopList.size() ==  _desktopTracker->desktopCount() )
             desktopList.clear();
 
-        QString uid = addTask( taskName, total, session, desktopList, parent );
+        QString uid = addTask( taskName, taskDescription, total, session, desktopList, parent );
         if ( uid.isNull() )
         {
             KMessageBox::error( 0, i18n(
@@ -891,14 +892,14 @@ void TaskView::newTask( const QString &caption, Task *parent )
 }
 
 QString TaskView::addTask
-( const QString& taskname, long total, long session, 
+( const QString& taskname, const QString& taskdescription, long total, long session,
   const DesktopList& desktops, Task* parent )
 {
     kDebug(5970) << "Entering function; taskname =" << taskname;
     setSortingEnabled(false);
     Task *task;
-    if ( parent ) task = new Task( taskname, total, session, desktops, parent );
-    else          task = new Task( taskname, total, session, desktops, this );
+    if ( parent ) task = new Task( taskname, taskdescription, total, session, desktops, parent );
+    else          task = new Task( taskname, taskdescription, total, session, desktops, this );
 
     task->setUid( d->mStorage->addTask( task, parent ) );
     QString taskuid=task->uid();
@@ -938,6 +939,7 @@ void TaskView::editTask()
     DesktopList oldDeskTopList = desktopList;
     EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), &desktopList );
     dialog->setTask( task->name() );
+    dialog->setDescription( task->description() );
     int result = dialog->exec();
     if (result == QDialog::Accepted)
     {
@@ -948,7 +950,7 @@ void TaskView::editTask()
         }
         // setName only does something if the new name is different
         task->setName(taskName, d->mStorage);
-
+        task->setDescription(dialog->taskDescription());
         // update session time as well if the time was changed
         if (!dialog->timeChange().isEmpty())
         {

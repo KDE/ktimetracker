@@ -119,7 +119,7 @@
                 </widget>
               </item>
               <item row="1" column="0" >
-                <widget class="KPIM::KDateEdit" name="dtFrom" >
+                <widget class="KDateComboBox" name="dtFrom" >
                   <property name="sizePolicy" >
                     <sizepolicy>
                       <hsizetype>1</hsizetype>
@@ -144,7 +144,7 @@
                 </widget>
               </item>
               <item row="1" column="1" >
-                <widget class="KPIM::KDateEdit" name="dtTo" >
+                <widget class="KDateComboBox" name="dtTo" >
                   <property name="sizePolicy" >
                     <sizepolicy>
                       <hsizetype>1</hsizetype>
@@ -323,8 +323,8 @@
   </widget>
   <customwidgets>
     <customwidget>
-      <class>KPIM::KDateEdit</class>
-      <header location="global" >kdateedit.h</header>
+      <class>KDateComboBox</class>
+      <header location="global" >kdatecombobox.h</header>
       <sizehint>
         <width>95</width>
         <height>21</height>
@@ -350,9 +350,6 @@
       <data format="XPM.GZ" length="5899" >789ced97596fe3460cc7dff3298cf02d28b81e599225147dc87d1f4e7693ec167d18cf8c723a8763e75af4bb572239dac891bcfbd4264542c0c90fc321f9a74805fe34d73adedb6ecd7d9ab91be9d1996999533d6ccdd9f160f0f4e75f7f7c9f994da356a05a4aa95630fbdbcc2c8e5ba6056dfa2918a0e484784338e4733c2b99cef1d0b3e2f3a1b011ff883829e35b611fefaa648eb7ccacdaa126ff1be13022c65de144cebd7fc2e7f0e439669e670eda11e985ac60d52e2a22de63564990129f30076187f9deb3dcbf14f6f9ae899332de0e7390848aeadd2a3828ee73fde7cc9d50ea47e6d0e890788139b27d4bfe1bccb1121e11a7ca70bf6193b96324fe3573d88ef9f93e0a87c29f99e3c844c4abc296f323f5aba3a2a8db216e13e7f93aa40786cc817fde0f05872ac83b4e7c2a6c848f88b5f2f3b42a6c84ef0a8e826e94b27e43ac95cc03ac316b6d1dc5eb151c0745c78907cc615b9edfb670c88cfbcc7942d20b6725533fe1cab3e57e7488b58f0f9ab9d30eb8df9c5f27b6cffd0a998d73541fb882d3b01bf1bca0664ebdbe3eb3f7c780d8f87ec28039b2a2e794d906e24ffa7418fafeae33c7e28f17c4a53fec0ac7c2cf05f7c344497dc7ccce6531f10ab18d15ebc53be654c93c0073dfc93cee31e7f1e93e2c166ca238927a52e624e27d80b1b095795d624eadcce701b356c27d6613cbbc2e30fb7ca8987dfd40fa8dcde3f17e717cebe3c1b97024f14f845dd2a7739a671b657196d139edb375da89ff6dc91cff80d9ca7cc2beb09379bd612ee33d096b66a07d76b10b444f22ecfb49fbeb9cf1f96e3da7867885d96ae9cf33735e20e7cf84fd7cae33fbfc48ef8f2c5f7fd9fffb92293e7e65764ee6dd316701f7bb37128e657ed684b5702c9c49be6fc45916f0fee1a5702cfddb12d6d28f2f25b39e45cf12df94ccf1bbc2999cdb9233ae1701f5bb34e88d7803f3bffb6fd4349a29966be07762ee69dfa84d57e0507f28f83714f4464d86d9878237a7e0044ff10ccff182e812077885d778534385dde27022dba4cf1d8e709c5bb3cf3d3ee4191ff1699a827cda9bec7942c13c2ee0222ee132d10aaee21aaee3460d59dcc42ddc9ec856f5d9c15ddc7b5551d5a787fb798507f8f917148c2b56af80ed0b1ed2ef233cce3fbf8a9e2a7dc3362a0c26b2557d3a18d65454f58930ce3fbb423f7b0693f53b4c6a15a4802fa303bca22e68c86f8099c856b901161c647002a7537c0c9ce59fe792a356014dbb37aeff07d728800bb894196d540003b822df6bb93596699fbc41130237cd3e700b433c84bb7c177e4d4156a93f83d1a40218c33d3cd43eef97f4721e9b27e4a8a2a7de87b33ec2944d9e50904d5300cf305fd65fee1c2cd490ef7d355bc5071669429660b9d987fc566015d6a62a786eb257cfa0ec2cac23bdf76003367fbc4d5f50bd828a0f6cc176be0b3bb0dbec43b9f6a0d758ffcf14ecbf87ff68ff0b054993c1c1878237a3a0f88ef65f57daa8000e9acd7f477be7df93fffe7de61f779ef4a1</data>
     </image>
   </images>
-  <includes>
-    <include location="local" >kdateedit.h</include>
-  </includes>
   <connections>
     <connection>
       <sender>radioOther</sender>

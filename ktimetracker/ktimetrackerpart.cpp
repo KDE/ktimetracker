@@ -41,7 +41,7 @@
 #include "task.h"
 #include "preferences.h"
 #include "tray.h"
-#include "version.h"
+#include "kdepim-version.h"
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
@@ -70,7 +70,7 @@ KAboutData *ktimetrackerpart::createAboutData()
     const QByteArray& appname=QByteArray("ktimetracker");
     const QByteArray& catalogname=QByteArray("ktimetracker");
     const KLocalizedString localizedname=ki18n("ktimetracker");
-    const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
+    const QByteArray version=QByteArray(KDEPIM_VERSION);
     KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
     return aboutData;
 }
