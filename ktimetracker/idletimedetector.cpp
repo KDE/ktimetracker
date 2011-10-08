@@ -88,7 +88,7 @@ void IdleTimeDetector::revert()
     kDebug(5970) << "Entering function";
     QDateTime end = QDateTime::currentDateTime();
     int diff = start.secsTo(end)/secsPerMinute;
-    emit(extractTime(idleminutes+diff)); // subtract the time that has been added on the display
+    emit(subtractTime(idleminutes+diff)); // subtract the time that has been added on the display
     emit(stopAllTimers(idlestart));
 }
 
@@ -96,17 +96,16 @@ void IdleTimeDetector::revert()
 void IdleTimeDetector::informOverrun()
 {
     if (!_overAllIdleDetect)
-        return; // In the preferences the user has indicated that he do not
-            // want idle detection.
+        return; // In the preferences the user has indicated that he does not want idle detection.
 
     _timer->stop();
     start = QDateTime::currentDateTime();
     idlestart = start.addSecs(-60 * _maxIdle);
     QString backThen = KGlobal::locale()->formatTime(idlestart.time());
     // Create dialog
-        KDialog *dialog=new KDialog( 0 );
+        KDialog *dialog=new KDialog(0);
         QWidget* wid=new QWidget(dialog);
-        dialog->setMainWidget( wid );
+        dialog->setMainWidget(wid);
         QVBoxLayout *lay1 = new QVBoxLayout(wid);
         QHBoxLayout *lay2 = new QHBoxLayout();
         lay1->addLayout(lay2);
