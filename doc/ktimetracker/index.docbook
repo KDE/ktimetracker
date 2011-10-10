@@ -299,7 +299,7 @@ not.</para></listitem></varlistentry>
 format for its data.  &ktimetracker; can read and write the to do lists created by
 these two applications.</para>
 <para>
-You can even work synchroneously on one file with &korganizer; and &ktimetracker;. 
+You can even work synchronously on one file with &korganizer; and &ktimetracker;. 
 If one program changes the file, the updates will be propagated to the other 
 application automatically.
 </para>
@@ -459,7 +459,7 @@ filter. Then, only tasks that match your input are shown. As soon as you
 type &Enter;, your input is used as name to create a new task.
 </para>
 
-<para>Choose <guilabel>Configuration for PDA</guilabel> in the settings doalog
+<para>Choose <guilabel>Configuration for PDA</guilabel> in the settings dialog
 if you have a touchscreen and your screen real estate is 
 precious. It will disable the search bar and every click will pop up a 
 context menu.</para>
