@@ -196,8 +196,8 @@ class TaskView : public QTreeWidget
     void markTaskAsIncomplete();
 
     /** Subtracts time from all active tasks, and does not log event. */
-    void extractTime( int minutes );
-    void taskTotalTimesChanged( long session, long total)
+    void subtractTime(int minutes);
+    void taskTotalTimesChanged(long session, long total)
                                 { emit totalTimesChanged( session, total); }
     /** receiving signal that a task is being deleted */
     void deletingTask(Task* deletedTask);

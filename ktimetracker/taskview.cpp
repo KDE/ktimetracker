@@ -199,8 +199,8 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 
     // Set up the idle detection.
     _idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
-    connect( _idleTimeDetector, SIGNAL(extractTime(int)),
-           this, SLOT(extractTime(int)));
+    connect( _idleTimeDetector, SIGNAL(subtractTime(int)),
+           this, SLOT(subtractTime(int)));
     connect( _idleTimeDetector, SIGNAL(stopAllTimers(QDateTime)),
            this, SLOT(stopAllTimers(QDateTime)));
     if (!_idleTimeDetector->isIdleDetectionPossible())
@@ -1048,7 +1048,7 @@ void TaskView::markTaskAsComplete()
     emit updateButtons();
 }
 
-void TaskView::extractTime(int minutes)
+void TaskView::subtractTime(int minutes)
 {
     addTimeToActiveTasks(-minutes,false); // subtract time in memory, but do not store it
 }
