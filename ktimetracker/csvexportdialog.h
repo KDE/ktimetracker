@@ -39,6 +39,7 @@ public:
     setButtonIcon( KDialog::User1, KIcon( "klipper" ) );
     enableButton( KDialog::Ok, false );
   }
+  virtual ~CSVExportDialogBase(){}
 };
 
 
