@@ -4,6 +4,7 @@
 *.diff
 *.kate-swp
 *.kdev4
+.kdev_include_paths
 *.kdevelop.pcs
 *.moc
 *.moc.cpp
