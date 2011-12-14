@@ -132,6 +132,7 @@ Comment[x-test]=xxConfigure Appearancexx
 Comment[zh_CN]=配置外观
 Comment[zh_TW]=設定外觀
 X-KDE-Keywords=ktimetracker, configure, settings
+X-KDE-Keywords[de]=KTimetracker,einstellen,konfigurieren,Konfiguration,Einrichtung,Einstellungen
 X-KDE-Keywords[es]=ktimetracker, configurar, preferencias
 X-KDE-Keywords[hu]=ktimetracker, beállítás, beállítások
 X-KDE-Keywords[ia]=ktimetracker, configura, preferentias
