@@ -575,7 +575,7 @@ void TimetrackerWidget::startNewSession()
 void TimetrackerWidget::editHistory()
 {
     // historydialog is the new historydialog, but the EditHiStoryDiaLog exists as well.
-    // historydialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog can not.
+    // historydialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if ( currentTaskView() )
     {
         historydialog *dlg = new historydialog( currentTaskView() );
