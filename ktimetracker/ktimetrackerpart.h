@@ -44,7 +44,6 @@ class ktimetrackerpart : public KParts::ReadWritePart
 
   private:
     void               makeMenus();
-    TrayIcon          *mTray;
     TimetrackerWidget *mMainWidget;
 
 

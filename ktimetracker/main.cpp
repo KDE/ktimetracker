@@ -30,7 +30,7 @@
 #include <KStandardDirs>
 #include <kontactinterface/pimuniqueapplication.h>
 
-#include "version.h"
+#include "kdepim-version.h"
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "timetrackerstorage.h"
@@ -83,8 +83,9 @@ QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar
 int main( int argc, char *argv[] )
 {
     KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
-        KTIMETRACKER_VERSION, ki18n(description), KAboutData::License_GPL,
-        ki18n("Copyright © 1997-2011 KDE PIM authors") );
+        KDEPIM_VERSION, ki18n(description), KAboutData::License_GPL,
+        ki18n("Copyright © 1997-2011 KDE PIM authors"), KLocalizedString(),
+        QByteArray("http://userbase.kde.org/KTimeTracker") );
 
     aboutData.addAuthor( ki18n("Thorsten Stärk"), ki18n( "Current Maintainer" ),
                        "kde@staerk.de" );
@@ -165,7 +166,7 @@ int main( int argc, char *argv[] )
             const QString& s=args->getOption("addtask");
             QVector<int> vec;
             DesktopList dl=vec;
-            Task* task=new Task( s,(long int) 0,(long int) 0, dl, 0, true );
+            Task* task=new Task( s, QString(), (long int) 0,(long int) 0, dl, 0, true );
             sto->addTask( task );
             sto->save( 0 );
             delete sto;

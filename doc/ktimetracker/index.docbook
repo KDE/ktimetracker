@@ -56,8 +56,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2009-10-19</date>
-<releaseinfo>4.3.1</releaseinfo>
+<date>2011-09-29</date>
+<releaseinfo>4.7</releaseinfo>
 
 <abstract><para>&ktimetracker; tracks time spent on various tasks.</para></abstract>
 
@@ -87,7 +87,7 @@
 
 <para>&ktimetracker; was originally written by &Sirtaj.Singh.Kang;.
 Its home page is <ulink
-url="http://userbase.kde.org/ktimetracker">http://userbase.kde.org/ktimetracker</ulink>.</para>
+url="http://userbase.kde.org/KTimeTracker">http://userbase.kde.org/KTimeTracker</ulink>.</para>
 
 </chapter>
 
@@ -295,14 +295,14 @@ not.</para></listitem></varlistentry>
 <sect2 id="korganizer"><title>&korganizer;</title>
 
 <para>&ktimetracker;, like &korganizer; and Apple's iCal, uses the industry standard
-<ulink
-url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink>
+<ulink url="http://www.faqs.org/rfcs/rfc2445.html">iCalendar</ulink>
 format for its data.  &ktimetracker; can read and write the to do lists created by
 these two applications.</para>
-
-<warning><para>If both &ktimetracker; and &korganizer; have the same file open, if you
-edit the file with &korganizer;, you risk losing data.  To be safe,
-only edit the file with one application or the other.</para></warning>
+<para>
+You can even work synchronously on one file with &korganizer; and &ktimetracker;. 
+If one program changes the file, the updates will be propagated to the other 
+application automatically.
+</para>
 
 </sect2>
 
@@ -314,7 +314,7 @@ management tool Imendio Planner
 and import its tasks to &ktimetracker; with <menuchoice><guimenu>File</guimenu>
 <guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>
 </menuchoice>, to have them in the industry standard <ulink
-url="http://developer.kde.org/documentation/standards/index.html">iCalendar</ulink> 
+url="http://www.faqs.org/rfcs/rfc2445.html">iCalendar</ulink> 
 format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
 to them in &ktimetracker;. That's one way to help ensure your project stays on time
 and under budget.</para>
@@ -451,8 +451,18 @@ in the first column after the total.</para>
 <chapter id="interface">
 <title>The &ktimetracker; interface</title>
 
-<para>The main &ktimetracker; window has the following components: menubar, toolbar,
-task/time window and status bar.</para>
+<para>The main &ktimetracker; window has the following components: menubar, toolbar, 
+searchbar, task/time window and status bar.</para>
+
+<para>The searchbar is a combined field. As long as you do not type &Enter;, it acts as a 
+filter. Then, only tasks that match your input are shown. As soon as you 
+type &Enter;, your input is used as name to create a new task.
+</para>
+
+<para>Choose <guilabel>Configuration for PDA</guilabel> in the settings dialog
+if you have a touchscreen and your screen real estate is 
+precious. It will disable the search bar and every click will pop up a 
+context menu.</para>
 
 <screenshot>
 <screeninfo>&ktimetracker; Screen</screeninfo>
@@ -487,12 +497,14 @@ subtasks, as well as its own accumulated time.</para>
 <note><para>(All behave identically to the menu command.)</para></note>
 
 <itemizedlist>
+<listitem><para><guiicon>New Task</guiicon></para></listitem>
+<listitem><para><guiicon>New Subtask</guiicon></para></listitem>
 <listitem><para><guiicon>Start</guiicon></para></listitem>
 <listitem><para><guiicon>Stop</guiicon></para></listitem>
-<listitem><para><guiicon>New</guiicon></para></listitem>
-<listitem><para><guiicon>New Subtask</guiicon></para></listitem>
 <listitem><para><guiicon>Delete</guiicon></para></listitem>
 <listitem><para><guiicon>Edit</guiicon></para></listitem>
+<listitem><para><guiicon>Open</guiicon></para></listitem>
+<listitem><para><guiicon>Save</guiicon></para></listitem>
 </itemizedlist>
 
 <para>The statusbar reports the name of the file where the data was saved.</para>
@@ -553,12 +565,18 @@ which is that it is based on the Xt toolkit.</para>
 </chapter>
 
 <glossary id="glossary">
+<title>Glossary</title>
 
+<glossdiv>
+<title>A</title> 
 <glossentry id="gloss-active-task">
 <glossterm>active task</glossterm>
 <glossdef><para>A task which has a timer running.</para></glossdef>
 </glossentry>
+</glossdiv>
 
+<glossdiv> 
+<title>D</title> 
 <glossentry id="gloss-dcop">
 <glossterm>&DBus;</glossterm>
 <glossdef><para>The interprocess communication protocol used in &kde;.  Short
@@ -575,14 +593,20 @@ default.  Each desktop can display its own set of programs and files.  When
 Desktop 2.  Pressing <keycombo
 action="simul">&Ctrl;<keycap>F1</keycap></keycombo> will bring back Desktop
 1.  </para></glossdef> </glossentry>
+</glossdiv>
 
+<glossdiv> 
+<title>H</title> 
 <glossentry id="gloss-history">
 <glossterm>history</glossterm>
 <glossdef><para>If &ktimetracker; is configured to log history, it will record ever
 start/stop timer event. This history is never cleared when times are reset
 cleared and remains on file until the task is deleted.</para></glossdef>
 </glossentry>
+</glossdiv>
 
+<glossdiv> 
+<title>S</title> 
 <glossentry id="gloss-session"> <glossterm>session</glossterm>
 <glossdef><para>A user-defined starting point for the session timers.  A new
 session begins when you select <menuchoice> <guimenu>File</guimenu>
@@ -601,7 +625,10 @@ the bottom of the screen.  In this system tray <inlinemediaobject>
 format="PNG"/></imageobject> </inlinemediaobject> the &ktimetracker; icon is on the far
 right.</para></glossdef>
 </glossentry>
+</glossdiv>
 
+<glossdiv> 
+<title>T</title> 
 <glossentry id="gloss-top-level-task">
 <glossterm>top level task</glossterm>
 <glossdef><para>A task with no parent tasks.</para></glossdef>
@@ -617,6 +644,7 @@ reset.</para></glossdef> </glossentry>
 <glossentry id="gloss-total-time"> <glossterm><guilabel>Total Time</guilabel></glossterm>
 <glossdef><para>The time spent on the task and all its subtasks since all
 times were reset.</para></glossdef> </glossentry> 
+</glossdiv>
 
 </glossary>
 
@@ -716,7 +744,7 @@ than one to-do has a matching name, the first one found is returned.</para>
 -->
 <refentry id="dcop-addtodo">
 <refmeta>
-<refentrytitle>addtodo</refentrytitle>
+<refentrytitle>addTask</refentrytitle>
 </refmeta>
 <refnamediv>
 <refname>addTask</refname>

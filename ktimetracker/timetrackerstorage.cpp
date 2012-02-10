@@ -68,6 +68,7 @@
 #include <unistd.h>
 #include <cassert>
 #include <fcntl.h>
+#include <QMap>
 
 
 //@cond PRIVATE
@@ -93,7 +94,7 @@ timetrackerstorage::~timetrackerstorage()
     delete d;
 }
 
-QString timetrackerstorage::load( TaskView* view, const QString &fileName )
+QString timetrackerstorage::load(TaskView* view, const QString &fileName)
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
@@ -126,7 +127,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
 
-    KCal::ResourceCached *resource;
+    KCal::ResourceCached* resource;
     if ( remoteResource( d->mICalFile ) )
     {
         KUrl url( d->mICalFile );
@@ -139,7 +140,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     d->mCalendar = resource;
 
     QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar*)),
-  	            view, SLOT(iCalFileModified(ResourceCalendar*)));
+                    view, SLOT(iCalFileModified(ResourceCalendar*)));
     d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
     d->mCalendar->open();
@@ -167,7 +168,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
         kDebug(5970) << "timetrackerstorage::load"
             << "rawTodo count (includes completed todos) ="
             << todoList.count();
-        for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
+        for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
         {
             Task* task = new Task(*todo, view);
             map.insert( (*todo)->uid(), task );
@@ -176,7 +177,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
         }
 
         // Load each task under it's parent task.
-        for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
+        for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
         {
             Task* task = map.value( (*todo)->uid() );
             // No relatedTo incident just means this is a top-level task.
@@ -202,7 +203,7 @@ QString timetrackerstorage::load( TaskView* view, const QString &fileName )
     return err;
 }
 
-Task* timetrackerstorage::task( const QString& uid, TaskView* view )
+Task* timetrackerstorage::task(const QString& uid, TaskView* view)
 // return the tasks with the uid uid out of view.
 // If !view, return the todo with the uid uid.
 {
@@ -393,7 +394,7 @@ QString timetrackerstorage::save(TaskView* taskview)
     return err;
 }
 
-QString timetrackerstorage::setTaskParent( Task* task, Task* parent )
+QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
 {
     kDebug(5970) << "Entering function";
     QString err;
@@ -405,7 +406,7 @@ QString timetrackerstorage::setTaskParent( Task* task, Task* parent )
     return err;
 }
 
-QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents )
+QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents)
 {
     kDebug(5970) << "Entering function";
     QString err;
@@ -457,7 +458,7 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
     todo = new KCal::Todo();
     if ( d->mCalendar->addTodo( todo ) )
     {
-        task->asTodo( todo  );
+        task->asTodo( todo );
         if (parent)
             todo->setRelatedTo(d->mCalendar->todo(parent->uid()));
         uid = todo->uid();
@@ -582,7 +583,7 @@ void timetrackerstorage::addComment(const Task* task, const QString& comment)
     saveCalendar();
 }
 
-QString timetrackerstorage::report( TaskView *taskview, const ReportCriteria &rc )
+QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
 {
     kDebug(5970) << "Entering function";
     QString err;
@@ -604,8 +605,7 @@ QString timetrackerstorage::report( TaskView *taskview, const ReportCriteria &rc
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
-QString timetrackerstorage::exportcsvFile( TaskView *taskview,
-                                    const ReportCriteria &rc )
+QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
 {
     kDebug(5970) << "Entering function";
     QString delim = rc.delimiter;
@@ -721,100 +721,142 @@ QString timetrackerstorage::exportcsvFile( TaskView *taskview,
     return err;
 }
 
+int todaySeconds (const QDate &date, const KCal::Event &event)
+{
+        kDebug(5970) << "found an event for task, event=" << event.uid();
+        KDateTime startTime=event.dtStart();
+        KDateTime endTime=event.dtEnd();
+        KDateTime NextMidNight=startTime;
+        NextMidNight.setTime(QTime ( 0,0 ));
+        NextMidNight=NextMidNight.addDays(1);
+        // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
+        KDateTime LastMidNight=KDateTime::currentLocalDateTime();
+        LastMidNight.setDate(date);
+        LastMidNight.setTime(QTime(0,0));
+        int secsstartTillMidNight=startTime.secsTo(NextMidNight);
+        int secondsToAdd=0; // seconds that need to be added to the actual cell
+        if ( (startTime.date()==date) && (event.dtEnd().date()==date) ) // all the event occurred today
+            secondsToAdd=startTime.secsTo(endTime);
+        if ( (startTime.date()==date) && (endTime.date()>date) ) // the event started today, but ended later
+            secondsToAdd=secsstartTillMidNight;
+        if ( (startTime.date()<date) && (endTime.date()==date) ) // the event started before today and ended today
+            secondsToAdd=LastMidNight.secsTo(event.dtEnd());
+        if ( (startTime.date()<date) && (endTime.date()>date) ) // the event started before today and ended after
+            secondsToAdd=86400;
+
+        return secondsToAdd;
+}
+
 // export history report as csv, all tasks X all dates in one block
-QString timetrackerstorage::exportcsvHistory ( TaskView      *taskview,
+QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
                                             const QDate   &from,
                                             const QDate   &to,
                                             const ReportCriteria &rc)
 {
     kDebug(5970) << "Entering function";
+
     QString delim = rc.delimiter;
     const QString cr = QString::fromLatin1("\n");
     QString err=QString::null;
     QString retval;
     Task* task;
+    const int intervalLength = from.daysTo(to)+1;
+    QMap< QString, QVector<int> > secsForUid;
+    QMap< QString, QString > uidForName;
 
-    QTableWidget* itab=new QTableWidget(); // hello, ABAP
-    itab->setRowCount(taskview->count()+1);
-    itab->setColumnCount(from.daysTo(to)+2);
-    // parameter-plausi
-    if ( from > to )
+
+    // Step 1: Prepare two hashmaps:
+    // * "uid -> seconds each day": used while traversing events, as uid is their id
+    //                              "seconds each day" are stored in a vector
+    // * "name -> uid", ordered by name: used when creating the csv file at the end
+    kDebug(5970) << "Taskview Count: " << taskview->count();
+    for ( int n=0; n<taskview->count(); n++ )
     {
-        err = QString("'to' has to be a date later than or equal to 'from'.");
+        task=taskview->itemAt(n);
+        kDebug(5970) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
+        // uid -> seconds each day
+        // * Init each element to zero
+        QVector<int> vector(intervalLength, 0);
+        secsForUid[task->uid()] = vector;
+
+        // name -> uid
+        // * Create task fullname concatenating each parent's name
+        QString fullName;
+        Task* parentTask;
+        parentTask = task;
+        fullName += parentTask->name();
+        parentTask = parentTask->parent();
+        while (parentTask)
+        {
+            fullName = parentTask->name() + "->" + fullName;
+            kDebug(5970) << "Fullname(inside): " << fullName;
+            parentTask = parentTask->parent();
+            kDebug(5970) << "Parent task: " << parentTask;
+        }
+
+        uidForName[fullName] = task->uid();
+
+        kDebug(5970) << "Fullname(end): " << fullName;
     }
-    else
+
+    kDebug(5970) << "secsForUid" << secsForUid;
+    kDebug(5970) << "uidForName" << uidForName;
+
+
+    // Step 2: For each date, get the events and calculate the seconds
+    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
+    // We rely on rawEventsForDate to get the events
+    kDebug(5970) << "Let's iterate for each date: ";
+    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
     {
-        itab->setItem(0,0,new QTableWidgetItem("Task name"));
-        for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
+        kDebug(5970) << mdate.toString();
+        KCal::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
+
+        for(KCal::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
         {
-            kDebug(5970) << mdate.toString();
-            itab->setItem(0,1+from.daysTo(mdate),new QTableWidgetItem(mdate.toString()));
-            for ( int n=0; n<taskview->count(); n++ )
-            {
-                task=taskview->itemAt(n);
-                itab->setItem(n+1,0,new QTableWidgetItem(taskview->itemAt(n)->name()));
-                KCal::Event::List eventList = d->mCalendar->rawEvents();
-                for(KCal::Event::List::iterator i = eventList.begin();
-                    i != eventList.end(); ++i)
-                {
-                    if ( (*i)->relatedToUid() == task->uid() )
-                    {
-                        kDebug(5970) << "found an event for task, event=" << (*i)->uid();
-                        // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
-                        // dtEnd is stored like DTEND:20080327T231509Z
-                        // we need to subtract the offset from UTC.
-                        KDateTime startTime=(*i)->dtStart().addSecs((*i)->dtStart().utcOffset());
-                        KDateTime endTime=(*i)->dtEnd().addSecs((*i)->dtEnd().utcOffset());
-                        KDateTime NextMidNight=startTime;
-                        NextMidNight.setTime(QTime ( 0,0 ));
-                        NextMidNight=NextMidNight.addDays(1);
-                        // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
-                        KDateTime LastMidNight=KDateTime::currentLocalDateTime();
-                        LastMidNight.setDate(mdate);
-                        LastMidNight.setTime(QTime(0,0));
-                        int secsstartTillMidNight=startTime.secsTo(NextMidNight);
-                        int secondsToAdd=0; // seconds that need to be added to the actual cell
-                        if ( (startTime.date()==mdate) && ((*i)->dtEnd().date()==mdate) ) // all the event occurred today
-                            secondsToAdd=startTime.secsTo(endTime);
-                        if ( (startTime.date()==mdate) && (endTime.date()>mdate) ) // the event started today, but ended later
-                            secondsToAdd=secsstartTillMidNight;
-                        if ( (startTime.date()<mdate) && (endTime.date()==mdate) ) // the event started before today and ended today
-                            secondsToAdd=LastMidNight.secsTo((*i)->dtEnd());
-                        if ( (startTime.date()<mdate) && (endTime.date()>mdate) ) // the event started before today and ended after
-                            secondsToAdd=86400;
-                        int secondsSum=secondsToAdd;
-                        if (itab->item(n+1,from.daysTo(mdate)+1))
-                            secondsSum=itab->item(n+1,from.daysTo(mdate)+1)->text().toInt()+secondsToAdd;
-                        itab->setItem(n+1,from.daysTo(mdate)+1,new QTableWidgetItem(QString::number(secondsSum)));
-                    };
-                }
-            }
+            kDebug(5970) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedToUid();
+            kDebug(5970) << "Today's seconds: " << todaySeconds(mdate, **i);
+            secsForUid[(*i)->relatedToUid()][from.daysTo(mdate)] += todaySeconds(mdate, **i);
         }
-        // use the internal table itab to create the return value retval
-        for ( int y=0; y<=(taskview->count()); y++ )
-        {
-            if (itab->item(y,0)) retval.append("\"").append(itab->item(y,0)->text().replace("\"","\"\"")).append("\"");  // task names
-            for ( int x=1; x<=from.daysTo(to)+1; x++ )
-            {
-                retval.append(rc.delimiter);
-                if (y>0)
-                {
-                    if (itab->item(y,x))
-                    {
-                        kDebug(5970) << "itab->item(y,x)=" << itab->item(y,x)->text();
-                        retval.append(formatTime( itab->item(y,x)->text().toInt()/60.0, rc.decimalMinutes ));
-                    }
-                }
-                else // heading
-                {
-                    retval.append(itab->item(y,x)->text());
-                }
-            };
-            retval.append("\n");
-        }
-        kDebug() << "Retval is \n" << retval;
     }
-    // itab->show(); // GREAT for debugging purposes :)
+
+
+    // Step 3: For each task, generate the matching row for the CSV file
+    // We use the two hashmaps to have direct access using the task name
+
+    // First CSV file line
+    // FIXME: localize strings and date formats
+    retval.append("\"Task name\"");
+    for (int i=0; i<intervalLength; i++)
+    {
+        retval.append(delim);
+        retval.append(from.addDays(i).toString());
+    }
+    retval.append(cr);
+
+
+    // Rest of the CSV file
+    QMapIterator<QString, QString> nameUid(uidForName);
+    double time;
+    while (nameUid.hasNext())
+    {
+        nameUid.next();
+        retval.append("\"" + nameUid.key() + "\"");
+        kDebug(5970) << nameUid.key() << ": " << nameUid.value() << endl;
+
+        for (int day=0; day<intervalLength; day++)
+        {
+            kDebug(5970) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
+            retval.append(delim);
+            time = secsForUid[nameUid.value()][day]/60.0;
+            retval.append(formatTime(time, rc.decimalMinutes));
+        }
+
+        retval.append(cr);
+    }
+
+    kDebug() << "Retval is \n" << retval;
+
     if (rc.bExPortToClipBoard)
         taskview->setClipBoardText(retval);
     else
@@ -860,7 +902,7 @@ QString timetrackerstorage::exportcsvHistory ( TaskView      *taskview,
     return err;
 }
 
-void timetrackerstorage::startTimer( const Task* task, const KDateTime &when )
+void timetrackerstorage::startTimer(const Task* task, const KDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
     KCal::Event* e;
@@ -870,7 +912,7 @@ void timetrackerstorage::startTimer( const Task* task, const KDateTime &when )
     task->taskView()->scheduleSave();
 }
 
-void timetrackerstorage::startTimer( QString taskID )
+void timetrackerstorage::startTimer(QString taskID)
 {
     kDebug(5970) << "Entering function";
     KCal::Todo::List todoList;
@@ -892,7 +934,7 @@ void timetrackerstorage::startTimer( QString taskID )
     saveCalendar();
 }
 
-void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
+void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
     KCal::Event::List eventList = d->mCalendar->rawEvents();
@@ -906,10 +948,7 @@ void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
             if (!(*i)->hasEndDate())
             {
                 kDebug(5970) << "this event has no enddate";
-                QString s=when.toString("yyyy-MM-ddThh:mm:ss.zzzZ"); // need the KDE standard from the ISO standard, not the QT one
-                KDateTime kwhen=KDateTime::fromString(s);
-                kDebug() << "kwhen ==" <<  kwhen;
-                (*i)->setDtEnd(kwhen);
+                (*i)->setDtEnd(KDateTime(when, KDateTime::Spec::LocalZone()));
             }
             else
             {
@@ -919,27 +958,6 @@ void timetrackerstorage::stopTimer( const Task* task, const QDateTime &when )
         };
     }
     saveCalendar();
-}
-
-bool timetrackerstorage::bookTime(const Task* task,
-                           const QDateTime& startDateTime,
-                           const long durationInSeconds)
-{
-    kDebug(5970) << "Entering function";
-    // Ignores preferences setting re: logging history.
-    KCal::Event* e;
-    QDateTime end;
-    KDateTime start( startDateTime, KDateTime::Spec::LocalZone() ); //??? is LocalZone correct ???
-
-    e = baseEvent( task );
-    e->setDtStart( start );
-    e->setDtEnd( start.addSecs( durationInSeconds ) );
-
-    // Use a custom property to keep a record of negative durations
-    e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray("duration"),
-        QString::number(durationInSeconds));
-    return d->mCalendar->addEvent(e);
 }
 
 void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)
@@ -1013,9 +1031,9 @@ KCal::Event* timetrackerstorage::baseEvent(const Todo* todo)
     return e;
 }
 
-HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
+HistoryEvent::HistoryEvent(const QString &uid, const QString &name,
                             long duration, const KDateTime &start,
-                            const KDateTime &stop, const QString &todoUid )
+                            const KDateTime &stop, const QString &todoUid)
 {
     _uid = uid;
     _name = name;
@@ -1025,7 +1043,7 @@ HistoryEvent::HistoryEvent( const QString &uid, const QString &name,
     _todoUid = todoUid;
 }
 
-bool timetrackerstorage::remoteResource( const QString& file ) const
+bool timetrackerstorage::remoteResource(const QString& file) const
 {
     kDebug(5970) << "Entering function";
     QString f = file.toLower();

@@ -40,8 +40,6 @@ class TimetrackerWidget : public QWidget
   public:
     explicit TimetrackerWidget( QWidget *parent = 0 );
     ~TimetrackerWidget();
-    virtual void saveProperties( KConfigGroup& );
-    virtual void readProperties( const KConfigGroup& );
 
     /** 
       Delivers if all task have an end time. 
@@ -52,13 +50,6 @@ class TimetrackerWidget : public QWidget
 
   private:
     void addTaskView( const QString &fileName = "" );
-
-    /**
-      Opens a file dialog to save the current taskView.
-
-      @returns true if save was successfully, false otherwise.
-     */
-    bool saveCurrentTaskView();
 
     bool eventFilter( QObject *obj, QEvent *event );
 
@@ -92,12 +83,6 @@ class TimetrackerWidget : public QWidget
 
   public Q_SLOTS:
     /**
-      opens a new untitled file which is stored firstly as temporary file
-      but with a flag, that it has to be saved in a proper place.
-     */
-    void newFile();
-
-    /**
       opens an existing ics file.
      */
     void openFile( const QString &fileName = QString() );
@@ -120,12 +105,6 @@ class TimetrackerWidget : public QWidget
       files to give them a non-temporary filename.
     */
     void saveFile();
-
-    /**
-      call this method when the preferences changed to adjust all
-      taskviews.
-     */
-    void reconfigureFiles();
 
     /**
       this method puts the input focus onto the search bar
@@ -179,7 +158,6 @@ class TimetrackerWidget : public QWidget
     void addSubTask( const QString& taskName, const QString &taskId );
     void deleteTask( const QString &taskId );
     void setPercentComplete( const QString &taskId, int percent );
-    int bookTime( const QString &taskId, const QString &dateTime, int minutes );
     int changeTime( const QString &taskId, int minutes );
     QString error( int errorCode ) const;
     bool isIdleDetectionPossible() const;

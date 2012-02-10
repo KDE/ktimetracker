@@ -101,7 +101,7 @@ class TaskView : public QTreeWidget
     Task* task( const QString& uid );
 
     /** Add a task to view and storage. */
-    QString addTask( const QString& taskame, long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
+    QString addTask( const QString& taskame, const QString& taskdescription = QString(), long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
                      Task* parent = 0 );
 
     /** Returns a list of the current active tasks. */
@@ -196,8 +196,8 @@ class TaskView : public QTreeWidget
     void markTaskAsIncomplete();
 
     /** Subtracts time from all active tasks, and does not log event. */
-    void extractTime( int minutes );
-    void taskTotalTimesChanged( long session, long total)
+    void subtractTime(int minutes);
+    void taskTotalTimesChanged(long session, long total)
                                 { emit totalTimesChanged( session, total); }
     /** receiving signal that a task is being deleted */
     void deletingTask(Task* deletedTask);

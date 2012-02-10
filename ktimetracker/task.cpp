@@ -38,18 +38,18 @@
 
 QVector<QPixmap*> *Task::icons = 0;
 
-Task::Task( const QString& taskName, long minutes, long sessionTime,
+Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent, bool konsolemode )
   : QObject(), QTreeWidgetItem(parent)
 { 
-    init( taskName, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
+    init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
 }
 
-Task::Task( const QString& taskName, long minutes, long sessionTime,
+Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
             DesktopList desktops, Task *parent)
   : QObject(), QTreeWidgetItem(parent) 
 {
-    init( taskName, minutes, sessionTime, 0, desktops, 0, 0 );
+    init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0 );
 }
 
 Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
@@ -57,15 +57,16 @@ Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
 {
     long minutes = 0;
     QString name;
+    QString description;
     long sessionTime = 0;
     QString sessionStartTiMe;
     int percent_complete = 0;
     int priority = 0;
     DesktopList desktops;
 
-    parseIncidence( todo, minutes, sessionTime, sessionStartTiMe, name, desktops, percent_complete,
+    parseIncidence( todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete,
                   priority );
-    init( name, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority, konsolemode );
+    init( name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority, konsolemode );
 }
 
 int Task::depth()
@@ -80,7 +81,7 @@ int Task::depth()
     return res;
 }
 
-void Task::init( const QString& taskName, long minutes, long sessionTime, QString sessionStartTiMe,
+void Task::init( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
                  DesktopList desktops, int percent_complete, int priority, bool konsolemode )
 {
     const TaskView *taskView = qobject_cast<TaskView*>( treeWidget() );
@@ -112,6 +113,7 @@ void Task::init( const QString& taskName, long minutes, long sessionTime, QStrin
 
     mRemoving = false;
     mName = taskName.trimmed();
+    mDescription = taskDescription.trimmed();
     mLastStart = QDateTime::currentDateTime();
     mTotalTime = mTime = minutes;
     mTotalSessionTime = mSessionTime = sessionTime;
@@ -216,6 +218,18 @@ void Task::setName( const QString& name, timetrackerstorage* storage )
     {
         mName = name;
         storage->setName(this, oldname);
+        update();
+    }
+}
+
+void Task::setDescription( const QString& description )
+{
+    kDebug(5970) << "Entering function, description=" << description;
+
+    QString olddescription = mDescription;
+    if ( olddescription != description )
+    {
+        mDescription = description;
         update();
     }
 }
@@ -468,6 +482,7 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
 
     kDebug(5970) <<"Task::asTodo: name() = '" << name() <<"'";
     todo->setSummary( name() );
+    todo->setDescription( description() );
 
     // Note: if the date start is empty, the KOrganizer GUI will have the
     // checkbox blank, but will prefill the todo's starting datetime to the
@@ -495,12 +510,13 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
 }
 
 bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
-    long& sessionMinutes, QString& sessionStartTiMe, QString& name, DesktopList& desktops,
+    long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
     int& percent_complete, int& priority )
 {
     kDebug(5970) << "Entering function";
     bool ok;
     name = incident->summary();
+    description = incident->description();
     mUid = incident->uid();
     mComment = incident->description();
     ok = false;
@@ -663,6 +679,11 @@ int Task::priority() const
 QString Task::name() const
 {
     return mName;
+}
+
+QString Task::description() const
+{
+    return mDescription;
 }
 
 QDateTime Task::startTime() const

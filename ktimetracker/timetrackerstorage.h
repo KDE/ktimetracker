@@ -45,7 +45,9 @@ class HistoryEvent;
 /**
  * Class to store/retrieve KTimeTracker data to/from persistent storage.
  *
- * The storage is an iCalendar file.
+ * The storage is an iCalendar file. Its name is contained in this class
+ * in the variable _icalfile and can be read using the function icalfile().
+ * The name gets set by the load() operation.
  *
  * All logic that deals with getting and saving data should go here.
  *
@@ -184,25 +186,6 @@ class timetrackerstorage : public QObject
      * @param delta  Change in task time, in seconds.  Can be negative.
      */
     void changeTime(const Task* task, const long deltaSeconds);
-
-    /**
-     * Book time to a task.
-     *
-     * Creates an iCalendar event and adds it to the calendar. Does not write
-     * calendar to disk, just adds event to calendar in memory. However, the
-     * resource framework does try to get a lock on the file. After a
-     * successful lock, the calendar marks this incidence as modified and then
-     * releases the lock.
-     *
-     * @param task Task
-     * @param startDateTime Date and time the booking starts.
-     * @param durationInSeconds Duration of time to book, in seconds.
-     *
-     * @return true if event was added, false if not (if, for example, the
-     * attempted file lock failed).
-     */
-    bool bookTime(const Task* task, const QDateTime& startDateTime,
-                  const long durationInSeconds);
 
     /**
      * Log a change to a task name.
@@ -344,12 +327,13 @@ class timetrackerstorage : public QObject
     /**
      *  Write task history to file as comma-delimited data.
      */
-    QString exportcsvHistory (
+    QString exportcsvHistory
+    (
             TaskView* taskview,
             const QDate& from,
             const QDate& to,
             const ReportCriteria &rc
-            );
+    );
 };
 
 /**
@@ -367,13 +351,13 @@ class HistoryEvent
     HistoryEvent( const QString &uid, const QString &name, long duration,
                   const KDateTime &start, const KDateTime &stop,
                   const QString &todoUid );
-    QString uid() {return _uid; }
-    QString name() {return _name; }
+    QString uid() { return _uid; }
+    QString name() { return _name; }
     /** In seconds. */
-    long duration() {return _duration; }
-    KDateTime start() {return _start; }
+    long duration() { return _duration; }
+    KDateTime start() { return _start; }
     KDateTime stop() { return _stop; }
-    QString todoUid() {return _todoUid; }
+    QString todoUid() { return _todoUid; }
 
   private:
     QString _uid;

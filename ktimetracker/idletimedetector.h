@@ -64,12 +64,12 @@ public:
 
 Q_SIGNALS:
   /**
-     Tells the listener to extract time from current timing.
-     The time to extract is due to the idle time since the dialog wass
+     Tells the listener to subtract time from current timing.
+     The time to subtract is due to the idle time since the dialog wass
      shown, and until the user answers the dialog.
-     @param minutes Minutes to extract.
+     @param minutes Minutes to subtract.
   **/
-  void extractTime(int minutes);
+  void subtractTime(int minutes);
 
   /**
       Tells the listener to stop timing

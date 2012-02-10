@@ -58,9 +58,9 @@ class Task : public QObject, public QTreeWidgetItem
 Q_OBJECT
 
 public:
-    Task( const QString& taskame, long minutes, long sessionTime,
+    Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
           DesktopList desktops, TaskView* parent = 0, bool konsolemode=false );
-    Task( const QString& taskame, long minutes, long sessionTime,
+    Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
           DesktopList desktops, Task* parent = 0);
     Task( KCal::Todo* incident, TaskView* parent, bool konsolemode=false );
 
@@ -235,10 +235,19 @@ public:
        */
       void setName( const QString& name, timetrackerstorage* storage );
 
+      /** sets the description of the task
+       */
+      void setDescription( const QString& description);
+
       /** returns the name of this task.
        *  @return a pointer to the name.
        */
       QString name() const;
+
+      /** returns the description of this task.
+        * @return a pointer to the description.
+        */
+      QString description() const;
 
       /**
        * Returns that task name, prefixed by parent tree up to root.
@@ -281,7 +290,7 @@ public:
      *  and use these data to initialize the task.
      */
     bool parseIncidence( KCal::Incidence*, long& minutes,
-        long& sessionMinutes, QString& sessionStartTiMe, QString& name, DesktopList& desktops,
+        long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
         int& percent_complete, int& priority );
 
     /**
@@ -357,7 +366,7 @@ public:
     void noNegativeTimes();
 
     /** initialize a task */
-    void init( const QString& taskame, long minutes, long sessionTime, QString sessionStartTiMe, 
+    void init( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
                DesktopList desktops, int percent_complete, int priority, bool konsolemode=false );
 
     static QVector<QPixmap*> *icons;
@@ -372,6 +381,9 @@ public:
 
     /** task name */
     QString mName;
+
+    /** task description */
+    QString mDescription;
 
     /** Last time this task was started. */
     QDateTime mLastStart;

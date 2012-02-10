@@ -30,8 +30,10 @@ public:
     EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList = 0 );
     ~EditTaskDialog();
     QString taskName();
+    QString taskDescription();
     QString timeChange();
     void setTask( const QString &name );
+    void setDescription( const QString &description );
     void status( DesktopList *desktopList) const;
 
 protected:

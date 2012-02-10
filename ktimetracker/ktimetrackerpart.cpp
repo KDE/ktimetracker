@@ -41,7 +41,7 @@
 #include "task.h"
 #include "preferences.h"
 #include "tray.h"
-#include "version.h"
+#include "kdepim-version.h"
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
@@ -56,7 +56,6 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
     KGlobal::locale()->insertCatalog("libkdepim");
     // we need an instance
     mMainWidget = new TimetrackerWidget( parentWidget );
-    mMainWidget->openFile(QString(KStandardDirs::locate("data", "ktimetracker/ktimetracker.ics")));
     setWidget( mMainWidget );
     setXMLFile( "ktimetrackerui.rc" );
     makeMenus();
@@ -71,7 +70,7 @@ KAboutData *ktimetrackerpart::createAboutData()
     const QByteArray& appname=QByteArray("ktimetracker");
     const QByteArray& catalogname=QByteArray("ktimetracker");
     const KLocalizedString localizedname=ki18n("ktimetracker");
-    const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
+    const QByteArray version=QByteArray(KDEPIM_VERSION);
     KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
     return aboutData;
 }
@@ -98,8 +97,6 @@ bool ktimetrackerpart::openFile(QString icsfile)
 {
     mMainWidget->openFile(icsfile);
     emit setWindowCaption(icsfile);
-    if ( KTimeTrackerSettings::trayIcon() ) mTray = new TrayIcon( this );
-    else mTray = new TrayIcon( );
 
     // connections
     connect( mMainWidget, SIGNAL(totalTimesChanged(long,long)),
@@ -108,11 +105,6 @@ bool ktimetrackerpart::openFile(QString icsfile)
            this, SLOT(setStatusBar(QString)) );
     connect( mMainWidget, SIGNAL(setCaption(QString)),
            this, SIGNAL(setWindowCaption(QString)) );
-    connect( mTray, SIGNAL(quitSelected()), SLOT(quit()) );
-    connect( mMainWidget, SIGNAL(timersActive()), mTray, SLOT(startClock()) );
-    connect( mMainWidget, SIGNAL(timersInactive()), mTray, SLOT(stopClock()) );
-    connect( mMainWidget, SIGNAL(tasksChanged(QList<Task*>)),
-           mTray, SLOT(updateToolTip(QList<Task*>)));
     return true;
 }
 
