@@ -30,7 +30,7 @@
 #include <KDebug>
 #include <KIconLoader>
 
-#include <kcal/event.h>
+#include <KCalCore/Event>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
@@ -41,18 +41,18 @@ QVector<QPixmap*> *Task::icons = 0;
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent, bool konsolemode )
   : QObject(), QTreeWidgetItem(parent)
-{ 
+{
     init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
 }
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
             DesktopList desktops, Task *parent)
-  : QObject(), QTreeWidgetItem(parent) 
+  : QObject(), QTreeWidgetItem(parent)
 {
     init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0 );
 }
 
-Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
+Task::Task( const KCalCore::Todo::Ptr &todo, TaskView* parent, bool konsolemode )
   : QObject(), QTreeWidgetItem( parent )
 {
     long minutes = 0;
@@ -70,7 +70,7 @@ Task::Task( KCal::Todo* todo, TaskView* parent, bool konsolemode )
 }
 
 int Task::depth()
-// Deliver the depth of a task, i.e. how many tasks are supertasks to it. 
+// Deliver the depth of a task, i.e. how many tasks are supertasks to it.
 // A toplevel task has the depth 0.
 {
     kDebug(5970) << "Entering function";
@@ -128,7 +128,7 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
 
     update();
     changeParentTotalTimes( mSessionTime, mTime);
-  
+
     // alignment of the number items
     for (int i = 1; i < columnCount(); ++i)
     {
@@ -139,7 +139,7 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
     setTextAlignment( 5, Qt::AlignCenter );
 }
 
-Task::~Task() 
+Task::~Task()
 {
     emit deletingTask(this);
     delete mTimer;
@@ -187,7 +187,7 @@ void Task::setRunning( bool on, timetrackerstorage* storage, const QDateTime &wh
 
 void Task::resumeRunning()
 // setRunning is the back-end, the front-end is StartTimerFor().
-// resumeRunning does the same as setRunning, but not add a new 
+// resumeRunning does the same as setRunning, but not add a new
 // start date to the storage.
 {
     kDebug(5970) << "Entering function";
@@ -199,7 +199,7 @@ void Task::resumeRunning()
     }
 }
 
-void Task::setUid( const QString &uid ) 
+void Task::setUid( const QString &uid )
 {
     mUid = uid;
 }
@@ -476,7 +476,7 @@ QString Task::fullName() const
         return parent()->fullName() + QString::fromLatin1("/") + name();
 }
 
-KCal::Todo* Task::asTodo(KCal::Todo* todo) const
+KCalCorez::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
 {
     Q_ASSERT( todo != NULL );
 
@@ -509,7 +509,7 @@ KCal::Todo* Task::asTodo(KCal::Todo* todo) const
     return todo;
 }
 
-bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
+bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minutes,
     long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
     int& percent_complete, int& priority )
 {
@@ -577,7 +577,7 @@ bool Task::parseIncidence( KCal::Incidence* incident, long& minutes,
             desktops.push_back( desktopInt );
         }
     }
-    percent_complete = static_cast<KCal::Todo*>(incident)->percentComplete();
+    percent_complete = incident.staticCast<KCalCore::Todo>()->percentComplete();
     priority = incident->priority();
     return true;
 }

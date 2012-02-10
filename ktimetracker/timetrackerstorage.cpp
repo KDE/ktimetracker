@@ -38,10 +38,8 @@
 
 #include <kemailsettings.h>
 #include <kio/netaccess.h>
-#include <kcal/resourcecalendar.h>
-#include <kcal/resourcelocal.h>
+#incluce <KCalCore/Person>
 #include <resourceremote.h>
-#include <kcal/incidence.h>
 
 #include <KApplication>       // kapp
 #include <KDebug>
@@ -147,19 +145,19 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     d->mCalendar->load();
 
     // Claim ownership of iCalendar file if no one else has.
-    KCal::Person owner = resource->owner();
-    if ( owner.isEmpty() )
+    KCalCore::Person::Ptr owner = resource->owner();
+    if ( owner && owner->isEmpty() )
     {
-        resource->setOwner( KCal::Person(
-          settings.getSetting( KEMailSettings::RealName ),
-          settings.getSetting( KEMailSettings::EmailAddress ) ) );
+        resource->setOwner( KCalCore::Person::Ptr(
+           new KCalCore::Person( settings.getSetting( KEMailSettings::RealName ),
+                                 settings.getSetting( KEMailSettings::EmailAddress ) ) ) );
     }
 
     // Build task view from iCal data
     if (!err.isEmpty())
     {
-        KCal::Todo::List todoList;
-        KCal::Todo::List::ConstIterator todo;
+        KCalCore::Todo::List todoList;
+        KCalCore::Todo::List::ConstIterator todo;
         QMultiHash< QString, Task* > map;
 
         // Build dictionary to look up Task object from Todo uid.  Each task is a
@@ -208,8 +206,8 @@ Task* timetrackerstorage::task(const QString& uid, TaskView* view)
 // If !view, return the todo with the uid uid.
 {
     kDebug(5970) << "Entering function";
-    KCal::Todo::List todoList;
-    KCal::Todo::List::ConstIterator todo;
+    KCalCore::Todo::List todoList;
+    KCalCore::Todo::List::ConstIterator todo;
     todoList = d->mCalendar->rawTodos();
     todo = todoList.constBegin();
     Task* result=0;
@@ -232,8 +230,8 @@ QString timetrackerstorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KCal::Todo::List todoList;
-    KCal::Todo::List::ConstIterator todo;
+    KCalCore::Todo::List todoList;
+    KCalCore::Todo::List::ConstIterator todo;
     QMultiHash< QString, Task* > map;
     QVector<QString> runningTasks;
     QVector<QDateTime> startTimes;
@@ -315,13 +313,13 @@ void timetrackerstorage::closeStorage()
     kDebug(5970) << "Leaving function";
 }
 
-KCal::Event::List timetrackerstorage::rawevents()
+KCalCore::Event::List timetrackerstorage::rawevents()
 {
     kDebug(5970) << "Entering function";
     return d->mCalendar->rawEvents();
 }
 
-KCal::Todo::List timetrackerstorage::rawtodos()
+KCalCore::Todo::List timetrackerstorage::rawtodos()
 {
     kDebug(5970) << "Entering function";
     return d->mCalendar->rawTodos();
@@ -330,8 +328,8 @@ KCal::Todo::List timetrackerstorage::rawtodos()
 bool timetrackerstorage::allEventsHaveEndTiMe(Task* task)
 {
     kDebug(5970) << "Entering function";
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
+    for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
         if ( (*i)->relatedToUid() == task->uid()
@@ -347,8 +345,8 @@ bool timetrackerstorage::allEventsHaveEndTiMe(Task* task)
 bool timetrackerstorage::allEventsHaveEndTiMe()
 {
     kDebug(5970) << "Entering function";
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
+    for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
         if ( !(*i)->hasEndDate() ) return false;
@@ -360,7 +358,7 @@ QString timetrackerstorage::deleteAllEvents()
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     d->mCalendar->deleteAllEvents();
     return err;
 }
@@ -370,7 +368,7 @@ QString timetrackerstorage::save(TaskView* taskview)
     kDebug(5970) << "Entering function";
     QString err;
 
-    QStack<KCal::Todo*> parents;
+    QStack<KCalCore::Todo::Ptr> parents;
     if ( taskview ) // we may also be in konsole mode
     {
         for (int i = 0; i < taskview->topLevelItemCount(); ++i )
@@ -398,7 +396,7 @@ QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KCal::Todo* toDo;
+    KCalCore::Todo::Ptr toDo;
     toDo = d->mCalendar->todo(task->uid());
     if (parent==0) toDo->removeRelation(toDo->relatedTo());
     else toDo->setRelatedTo(d->mCalendar->todo(parent->uid()));
@@ -406,13 +404,11 @@ QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
     return err;
 }
 
-QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& parents)
+QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::Ptr>& parents)
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KCal::Todo* todo;
-
-    todo = d->mCalendar->todo(task->uid());
+    KCalCore::Todo::Ptr todo = d->mCalendar->todo(task->uid());
     if ( !todo )
     {
         kDebug(5970) << "Could not get todo from calendar";
@@ -435,9 +431,7 @@ QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCal::Todo*>& par
 bool timetrackerstorage::isEmpty()
 {
     kDebug(5970) << "Entering function";
-    KCal::Todo::List todoList;
-    todoList = d->mCalendar->rawTodos();
-    return todoList.empty();
+    return d->mCalendar->rawTodos().isEmpty();
 }
 
 //----------------------------------------------------------------------------
@@ -447,7 +441,7 @@ bool timetrackerstorage::isEmpty()
 QString timetrackerstorage::addTask(const Task* task, const Task* parent)
 {
     kDebug(5970) << "Entering function";
-    KCal::Todo* todo;
+    KCalCore::Todo::Ptr todo;
     QString uid;
 
     if ( !d->mCalendar )
@@ -455,7 +449,7 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
         kDebug(5970) << "mCalendar is not set";
         return uid;
     }
-    todo = new KCal::Todo();
+    todo = KCalCore::Todo::Ptr( new KCalCore::Todo() );
     if ( d->mCalendar->addTodo( todo ) )
     {
         task->asTodo( todo );
@@ -467,7 +461,7 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
     {
         // Most likely a lock could not be pulled, although there are other
         // possiblities (like a really confused resource manager).
-        uid = "";
+        uid.clear();;
     }
     return uid;
 }
@@ -476,8 +470,8 @@ QStringList timetrackerstorage::taskidsfromname(QString taskname)
 {
     kDebug(5970) << "Entering function";
     QStringList result;
-    KCal::Todo::List todoList = d->mCalendar->rawTodos();
-    for(KCal::Todo::List::iterator i = todoList.begin();
+    KCalCore::Todo::List todoList = d->mCalendar->rawTodos();
+    for(KCalCore::Todo::List::iterator i = todoList.begin();
         i != todoList.end(); ++i)
     {
         kDebug(5970) << (*i)->uid();
@@ -490,8 +484,8 @@ QStringList timetrackerstorage::taskNames() const
 {
     kDebug(5970) << "Entering function";
     QStringList result;
-    KCal::Todo::List todoList = d->mCalendar->rawTodos();
-    for(KCal::Todo::List::iterator i = todoList.begin();
+    KCalCore::Todo::List todoList = d->mCalendar->rawTodos();
+    for(KCalCore::Todo::List::iterator i = todoList.begin();
         i != todoList.end(); ++i) result << (*i)->summary();
     return result;
 }
@@ -500,8 +494,8 @@ QString timetrackerstorage::removeEvent(QString uid)
 {
     kDebug(5970) << "Entering function";
     QString err=QString();
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
+    for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
         if ( (*i)->uid() == uid )
@@ -516,8 +510,8 @@ bool timetrackerstorage::removeTask(Task* task)
 {
     kDebug(5970) << "Entering function";
     // delete history
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
+    for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
         if ( (*i)->relatedToUid() == task->uid()
@@ -529,7 +523,7 @@ bool timetrackerstorage::removeTask(Task* task)
     }
 
     // delete todo
-    KCal::Todo *todo = d->mCalendar->todo(task->uid());
+    KCalCore::Todo::Ptr todo = d->mCalendar->todo(task->uid());
     d->mCalendar->deleteTodo(todo);
     // Save entire file
     saveCalendar();
@@ -541,8 +535,8 @@ bool timetrackerstorage::removeTask(QString taskid)
 {
     kDebug(5970) << "Entering function";
     // delete history
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
+    for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end();
         ++i)
     {
@@ -555,7 +549,7 @@ bool timetrackerstorage::removeTask(QString taskid)
     }
 
     // delete todo
-    KCal::Todo *todo = d->mCalendar->todo(taskid);
+    KCalCore::Todo::Ptr todo = d->mCalendar->todo(taskid);
     d->mCalendar->deleteTodo(todo);
 
     // Save entire file
@@ -567,15 +561,13 @@ bool timetrackerstorage::removeTask(QString taskid)
 void timetrackerstorage::addComment(const Task* task, const QString& comment)
 {
     kDebug(5970) << "Entering function";
-    KCal::Todo* todo;
-
-    todo = d->mCalendar->todo(task->uid());
+    KCalCore::Todo::Ptr todo = d->mCalendar->todo(task->uid());
 
     // Do this to avoid compiler warnings about comment not being used.  once we
     // transition to using the addComment method, we need this second param.
     QString s = comment;
 
-    // TODO: Use libkcal comments
+    // TODO: Use libkcalcore comments
     // todo->addComment(comment);
     // temporary
     todo->setDescription(task->comment());
@@ -721,7 +713,7 @@ QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriter
     return err;
 }
 
-int todaySeconds (const QDate &date, const KCal::Event &event)
+int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
 {
         kDebug(5970) << "found an event for task, event=" << event.uid();
         KDateTime startTime=event.dtStart();
@@ -810,9 +802,9 @@ QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
     for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
     {
         kDebug(5970) << mdate.toString();
-        KCal::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
+        KCalCore::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
 
-        for(KCal::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
+        for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
         {
             kDebug(5970) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedToUid();
             kDebug(5970) << "Today's seconds: " << todaySeconds(mdate, **i);
@@ -905,7 +897,7 @@ QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
 void timetrackerstorage::startTimer(const Task* task, const KDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
-    KCal::Event* e;
+    KCalCore::Event::Ptr e;
     e = baseEvent(task);
     e->setDtStart(when);
     d->mCalendar->addEvent(e);
@@ -915,8 +907,8 @@ void timetrackerstorage::startTimer(const Task* task, const KDateTime &when)
 void timetrackerstorage::startTimer(QString taskID)
 {
     kDebug(5970) << "Entering function";
-    KCal::Todo::List todoList;
-    KCal::Todo::List::ConstIterator todo;
+    KCalCore::Todo::List todoList;
+    KCalCore::Todo::List::ConstIterator todo;
     todoList = d->mCalendar->rawTodos();
     for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
@@ -925,7 +917,7 @@ void timetrackerstorage::startTimer(QString taskID)
         if ( (*todo)->uid() == taskID )
         {
             kDebug(5970) << "adding event";
-            KCal::Event* e;
+            KCalCore::Event::Ptr e;
             e = baseEvent((*todo));
             e->setDtStart(KDateTime::currentLocalDateTime());
             d->mCalendar->addEvent(e);
@@ -937,8 +929,8 @@ void timetrackerstorage::startTimer(QString taskID)
 void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
-    KCal::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
+    for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end();
         ++i)
     {
@@ -963,7 +955,7 @@ void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)
 {
     kDebug(5970) << "Entering function; deltaSeconds=" << deltaSeconds;
-    KCal::Event* e;
+    KCalCore::Event::Ptr e;
     QDateTime end;
     e = baseEvent(task);
 
@@ -983,12 +975,11 @@ void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)
 }
 
 
-KCal::Event* timetrackerstorage::baseEvent(const Task * task)
+KCalCore::Event::Ptr timetrackerstorage::baseEvent(const Task *task)
 {
     kDebug(5970) << "Entering function";
-    KCal::Event* e;
+    KCalCore::Event::Ptr e( new KCalCore::Event() );
     QStringList categories;
-    e = new KCal::Event;
     e->setSummary(task->name());
 
     // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
@@ -1008,13 +999,11 @@ KCal::Event* timetrackerstorage::baseEvent(const Task * task)
     return e;
 }
 
-KCal::Event* timetrackerstorage::baseEvent(const Todo* todo)
+KCalCore::Event::Ptr timetrackerstorage::baseEvent(const KCalCore::Todo::Ptr &todo)
 {
     kDebug(5970) << "Entering function";
-    KCal::Event* e;
+    KCalCore::Event::Ptr e( new KCalCore::Event() );
     QStringList categories;
-
-    e = new KCal::Event;
     e->setSummary(todo->summary());
 
     // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
