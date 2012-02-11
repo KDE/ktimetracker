@@ -23,16 +23,31 @@
 #define _KTIMETRACKER_CALENDAR_H_
 
 #include <KCalCore/MemoryCalendar>
-#include <QSharedPointer>
-
+#include <QWeakPointer>
+//TODO:sergio file watch
 namespace KTimeTracker {
   class KTTCalendar : public KCalCore::MemoryCalendar {
     Q_OBJECT
   public:
-    typedef Ptr QSharedPointer<KTimeTracker::KTTCalendar>;
-    explicit KTTCalendar( QObject *parent = 0 );
+    typedef QSharedPointer<KTimeTracker::KTTCalendar> Ptr;
     ~KTTCalendar();
+    /**reimp*/ bool reload();
+
+    /**
+     * Creates a new KTTCalendar and calls KTTCalendar::setWeakPointer(), so we can do
+     * KTTCalendar::Ptr ptr = qobject_cast<KTTCalendar*>( sender() )->weakPointer().toStrongRef()
+     * in slots.
+     *
+     * For this reason, the ctor is private.
+     */
+    static KTimeTracker::KTTCalendar::Ptr createInstance( const QString &filename );
+    QWeakPointer<KTimeTracker::KTTCalendar> weakPointer() const;
+    void setWeakPointer( const QWeakPointer<KTimeTracker::KTTCalendar> &);
+  Q_SIGNALS:
+    void calendarChanged();
   private:
+    KTTCalendar();
+    explicit KTTCalendar( const QString &filename );
     class Private;
     Private *const d;
   };

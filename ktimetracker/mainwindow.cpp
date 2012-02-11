@@ -39,6 +39,8 @@
 #include <KStatusBar>         // statusBar()
 #include <KXMLGUIFactory>
 #include <KActionCollection>
+#include <KPluginLoader>
+#include <KPluginFactory>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"

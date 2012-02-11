@@ -21,21 +21,48 @@
 
 #include "kttcalendar.h"
 
+#include <KDateTime>
+
 using namespace KTimeTracker;
 
 class KTTCalendar::Private {
 public:
-  Private()
+  Private( const QString &filename ) : m_filename( filename )
   {
   }
+  QString m_filename;
+  QWeakPointer<KTTCalendar> m_weakPtr;
 };
 
-KTTCalendar::KTTCalendar( QObject *parent ) : KCalCore::MemoryCalendar( parent )
-                                            , d( new Private() )
+KTTCalendar::KTTCalendar( const QString &filename ) : KCalCore::MemoryCalendar( KDateTime::LocalZone )
+                                                    , d( new Private( filename ) )
 {
 }
 
 KTTCalendar::~KTTCalendar()
 {
   delete d;
+}
+
+bool KTTCalendar::reload()
+{
+    return true;
+}
+
+QWeakPointer<KTTCalendar> KTTCalendar::weakPointer() const
+{
+  return d->m_weakPtr;
+}
+
+void KTTCalendar::setWeakPointer(const QWeakPointer<KTTCalendar> &ptr )
+{
+  d->m_weakPtr = ptr;
+}
+
+/** static */
+KTTCalendar::Ptr KTTCalendar::createInstance( const QString &filename )
+{
+  KTTCalendar::Ptr calendar( new KTTCalendar( filename ) );
+  calendar->setWeakPointer( calendar.toWeakRef() );
+  return calendar;
 }

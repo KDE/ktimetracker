@@ -38,6 +38,7 @@
 #include <KGlobalSettings>
 #include <KLocale>
 #include <KMenu>
+#include <KDebug>
 #include "mainwindow.h"
 #include "task.h"
 #include "timetrackerwidget.h"

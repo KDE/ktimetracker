@@ -38,6 +38,8 @@ test cases:
 #include "task.h"
 #include "taskview.h"
 
+#include <KDebug>
+
 PlannerParser::PlannerParser(TaskView * tv)
 // if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
 // import as well if there a no task in the taskview as if there are.
@@ -47,25 +49,25 @@ PlannerParser::PlannerParser(TaskView * tv)
     kDebug() <<"entering constructor to import planner tasks";
     _taskView=tv;
     level=0;
-    if (_taskView->currentItem()) if (_taskView->currentItem()->parent()) 
+    if (_taskView->currentItem()) if (_taskView->currentItem()->parent())
     {
         task = _taskView->currentItem()->parent();
         level=1;
     }
 }
-  
+
 bool PlannerParser::startDocument()
 {
     withInTasks=false; // becomes true as soon as parsing occurres <tasks>
     return true;
 }
-  
+
 bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
 {
     kDebug() << "entering function";
     QString taskName;
     int     taskComplete=0;
-    
+
     // only <task>s within <tasks> are processed
     if (qName == QString::fromLatin1("tasks")) withInTasks=true;
     if ((qName == QString::fromLatin1("task")) && (withInTasks))
@@ -76,7 +78,7 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
             if (att.qName(i) == QString::fromLatin1("name")) taskName=att.value(i);
             if (att.qName(i)==QString::fromLatin1("percent-complete")) taskComplete=att.value(i).toInt();
         }
-    
+
         // at the moment, task is still the old task or the old father task (if an endElement occurred) or not existing (if the
         // new task is a top-level-task). Make task the parenttask, if existing.
         DesktopList dl;
@@ -96,7 +98,7 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
     }
     return true;
 }
-    
+
 bool PlannerParser::endElement( const QString&, const QString&, const QString& qName)
 {
     // only <task>s within <tasks> increased level, so only decrease for <task>s within <tasks>

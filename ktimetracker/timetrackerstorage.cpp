@@ -72,12 +72,13 @@ using namespace KTimeTracker;
 class timetrackerstorage::Private
 {
 public:
-    Private() : mCalendar( 0 ) {}
+    Private()
+    {
+    }
     ~Private()
     {
-        delete mCalendar;
     }
-    KTTCalendar::Ptr mCalendar;
+    KTimeTracker::KTTCalendar::Ptr mCalendar;
     QString mICalFile;
 };
 //@endcond
@@ -105,11 +106,10 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     // If same file, don't reload
     if ( lFileName == d->mICalFile ) return err;
 
-
     // If file doesn't exist, create a blank one to avoid ResourceLocal load
     // error.  We make it user and group read/write, others read.  This is
     // masked by the users umask.  (See man creat)
-    if ( !( isRemoteResource( lFileName ) ) )
+    if ( !( isRemoteFile( lFileName ) ) )
     {
         int handle;
         handle = open ( QFile::encodeName( lFileName ), O_CREAT | O_EXCL | O_WRONLY,
@@ -123,31 +123,18 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
         closeStorage();
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
+    d->mCalendar = KTTCalendar::createInstance( d->mICalFile );
 
-    KCal::ResourceCached* resource;
-    if ( isRemoteResource( d->mICalFile ) )
-    {
-        KUrl url( d->mICalFile );
-        resource = new KCal::ResourceRemote( url, url ); // same url for upload and download
-    }
-    else
-    {
-        resource = new KCal::ResourceLocal( d->mICalFile );
-    }
-    d->mCalendar = resource;
-
-    QObject::connect (d->mCalendar, SIGNAL(resourceChanged(ResourceCalendar*)),
-                    view, SLOT(iCalFileModified(ResourceCalendar*)));
+    QObject::connect( d->mCalendar.data(), SIGNAL(calendarChanged()),
+                      view, SLOT(handleCalendarChanged()) );
     d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
-    d->mCalendar->setResourceName( QString::fromLatin1("KTimeTracker") );
-    d->mCalendar->open();
-    d->mCalendar->load();
+    d->mCalendar->reload();
 
     // Claim ownership of iCalendar file if no one else has.
-    KCalCore::Person::Ptr owner = resource->owner();
+    KCalCore::Person::Ptr owner = d->mCalendar->owner();
     if ( owner && owner->isEmpty() )
     {
-        resource->setOwner( KCalCore::Person::Ptr(
+        d->mCalendar->setOwner( KCalCore::Person::Ptr(
            new KCalCore::Person( settings.getSetting( KEMailSettings::RealName ),
                                  settings.getSetting( KEMailSettings::EmailAddress ) ) ) );
     }
@@ -178,17 +165,16 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
         {
             Task* task = map.value( (*todo)->uid() );
             // No relatedTo incident just means this is a top-level task.
-            if ( (*todo)->relatedTo() )
+            if ( !(*todo)->relatedTo().isEmpty() )
             {
-                Task* newParent = map.value( (*todo)->relatedToUid() );
+                Task *newParent = map.value( (*todo)->relatedTo() );
 
                 // Complete the loading but return a message
                 if ( !newParent )
                     err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
-                        task->name(),
-                (*todo)->relatedToUid());
+                        task->name(), (*todo)->relatedTo()  );
 
-            if (!err.isEmpty()) task->move( newParent );
+                if (!err.isEmpty()) task->move( newParent );
             }
         }
 
@@ -196,7 +182,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
             << "tasks from" << d->mICalFile;
     }
 
-    if ( view ) buildTaskView(d->mCalendar, view);
+    if ( view ) buildTaskView(d->mCalendar->weakPointer(), view);
     return err;
 }
 
@@ -266,14 +252,14 @@ QString timetrackerstorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr 
     {
         Task* task = map.value( (*todo)->uid() );
         // No relatedTo incident just means this is a top-level task.
-        if ( (*todo)->relatedTo() )
+        if ( !(*todo)->relatedTo().isEmpty() )
         {
-            Task* newParent = map.value( (*todo)->relatedToUid() );
+            Task* newParent = map.value( (*todo)->relatedTo() );
             // Complete the loading but return a message
             if ( !newParent )
                 err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
                     task->name(),
-                    (*todo)->relatedToUid());
+                    (*todo)->relatedTo());
             else task->move( newParent );
         }
     }
@@ -307,8 +293,7 @@ void timetrackerstorage::closeStorage()
     if ( d->mCalendar )
     {
         d->mCalendar->close();
-        delete d->mCalendar;
-        d->mCalendar = 0;
+        d->mCalendar = KTTCalendar::Ptr();
     }
     kDebug(5970) << "Leaving function";
 }
@@ -332,11 +317,8 @@ bool timetrackerstorage::allEventsHaveEndTiMe(Task* task)
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
-        if ( (*i)->relatedToUid() == task->uid()
-            || ( (*i)->relatedTo()
-            && (*i)->relatedTo()->uid() == task->uid() ) )
-        {
-            if ( !(*i)->hasEndDate() ) return false;
+        if ( (*i)->relatedTo() == task->uid() && !(*i)->hasEndDate() ) {
+          return false;
         }
     }
     return true;
@@ -396,10 +378,12 @@ QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KCalCore::Todo::Ptr toDo;
-    toDo = d->mCalendar->todo(task->uid());
-    if (parent==0) toDo->removeRelation(toDo->relatedTo());
-    else toDo->setRelatedTo(d->mCalendar->todo(parent->uid()));
+    KCalCore::Todo::Ptr todo = d->mCalendar->todo( task->uid() );
+    if ( !parent ) {
+      todo->setRelatedTo( QString() );
+    } else {
+      todo->setRelatedTo( parent->uid() );
+    }
     kDebug(5970) << "Leaving function";
     return err;
 }
@@ -415,7 +399,7 @@ QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
         return "Could not get todo from calendar";
     }
     task->asTodo(todo);
-    if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() );
+    if ( !parents.isEmpty() ) todo->setRelatedTo( parents.top() ? parents.top()->uid() : QString() );
     parents.push( todo );
 
     for ( int i = 0; i < task->childCount(); ++i )
@@ -454,7 +438,7 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
     {
         task->asTodo( todo );
         if (parent)
-            todo->setRelatedTo(d->mCalendar->todo(parent->uid()));
+            todo->setRelatedTo( parent->uid() );
         uid = todo->uid();
     }
     else
@@ -514,9 +498,7 @@ bool timetrackerstorage::removeTask(Task* task)
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
-        if ( (*i)->relatedToUid() == task->uid()
-            || ( (*i)->relatedTo()
-            && (*i)->relatedTo()->uid() == task->uid()))
+        if ( (*i)->relatedTo() == task->uid() )
         {
             d->mCalendar->deleteEvent(*i);
         }
@@ -540,9 +522,7 @@ bool timetrackerstorage::removeTask(QString taskid)
         i != eventList.end();
         ++i)
     {
-        if ( (*i)->relatedToUid() == taskid
-            || ( (*i)->relatedTo()
-            && (*i)->relatedTo()->uid() == taskid))
+        if ( (*i)->relatedTo() == taskid )
         {
             d->mCalendar->deleteEvent(*i);
         }
@@ -715,9 +695,12 @@ QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriter
 
 int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
 {
-        kDebug(5970) << "found an event for task, event=" << event.uid();
-        KDateTime startTime=event.dtStart();
-        KDateTime endTime=event.dtEnd();
+        if ( !event )
+          return 0;
+
+        kDebug(5970) << "found an event for task, event=" << event->uid();
+        KDateTime startTime=event->dtStart();
+        KDateTime endTime=event->dtEnd();
         KDateTime NextMidNight=startTime;
         NextMidNight.setTime(QTime ( 0,0 ));
         NextMidNight=NextMidNight.addDays(1);
@@ -727,12 +710,12 @@ int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
         LastMidNight.setTime(QTime(0,0));
         int secsstartTillMidNight=startTime.secsTo(NextMidNight);
         int secondsToAdd=0; // seconds that need to be added to the actual cell
-        if ( (startTime.date()==date) && (event.dtEnd().date()==date) ) // all the event occurred today
+        if ( (startTime.date()==date) && (event->dtEnd().date()==date) ) // all the event occurred today
             secondsToAdd=startTime.secsTo(endTime);
         if ( (startTime.date()==date) && (endTime.date()>date) ) // the event started today, but ended later
             secondsToAdd=secsstartTillMidNight;
         if ( (startTime.date()<date) && (endTime.date()==date) ) // the event started before today and ended today
-            secondsToAdd=LastMidNight.secsTo(event.dtEnd());
+            secondsToAdd=LastMidNight.secsTo(event->dtEnd());
         if ( (startTime.date()<date) && (endTime.date()>date) ) // the event started before today and ended after
             secondsToAdd=86400;
 
@@ -806,9 +789,9 @@ QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
 
         for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
         {
-            kDebug(5970) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedToUid();
-            kDebug(5970) << "Today's seconds: " << todaySeconds(mdate, **i);
-            secsForUid[(*i)->relatedToUid()][from.daysTo(mdate)] += todaySeconds(mdate, **i);
+            kDebug(5970) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedTo();
+            kDebug(5970) << "Today's seconds: " << todaySeconds(mdate, *i);
+            secsForUid[(*i)->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, *i);
         }
     }
 
@@ -934,7 +917,7 @@ void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
         i != eventList.end();
         ++i)
     {
-        if ( (*i)->relatedToUid() == task->uid() )
+        if ( (*i)->relatedTo() == task->uid() )
         {
             kDebug(5970) << "found an event for task, event=" << (*i)->uid();
             if (!(*i)->hasEndDate())
@@ -983,10 +966,10 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const Task *task)
     e->setSummary(task->name());
 
     // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
-    e->setRelatedTo(d->mCalendar->todo(task->uid()));
+    e->setRelatedTo( task->uid() );
 
     // Debugging: some events where not getting a related-to field written.
-    Q_ASSERT(e->relatedTo()->uid() == task->uid());
+    Q_ASSERT(e->relatedTo() == task->uid());
 
     // Have to turn this off to get datetimes in date fields.
     e->setAllDay(false);
@@ -1007,7 +990,7 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const KCalCore::Todo::Ptr &to
     e->setSummary(todo->summary());
 
     // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
-    e->setRelatedTo(d->mCalendar->todo(todo->uid()));
+    e->setRelatedTo( todo->uid() );
 
     // Have to turn this off to get datetimes in date fields.
     e->setAllDay(false);
@@ -1037,7 +1020,7 @@ bool timetrackerstorage::isRemoteFile( const QString &file ) const
     kDebug(5970) << "Entering function";
     QString f = file.toLower();
     bool rval = f.startsWith( QLatin1String("http://") ) || f.startsWith( QLatin1String("ftp://") );
-    kDebug(5970) << "timetrackerstorage::isRemoteResource(" << file <<" ) returns" << rval;
+    kDebug(5970) << "timetrackerstorage::isRemoteFile(" << file <<" ) returns" << rval;
     return rval;
 }
 
@@ -1045,22 +1028,27 @@ QString timetrackerstorage::saveCalendar()
 {
     kDebug(5970) << "Entering function";
     QString err;
-    KABC::Lock *lock;
+    //KABC::Lock *lock; //TODO:sergio lock
     if ( d->mCalendar )
     {
-        lock = d->mCalendar->lock();
+      //  lock = d->mCalendar->lock();
     }
     else
     {
         kDebug(5970) << "mCalendar not set";
         return err;
     }
-    if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
+   // if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
     if ( d->mCalendar->save() )
     {
-        lock->unlock();
+     //   lock->unlock();
     }
     else err=QString("Could not save. Could lock file.");
-    lock->unlock();
+    //lock->unlock();
     return err;
+}
+
+KTTCalendar::Ptr timetrackerstorage::calendar() const
+{
+  return _calendar;
 }

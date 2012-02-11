@@ -29,6 +29,7 @@
 
 #include <KDebug>
 #include <KIconLoader>
+#include <KComponentData>
 
 #include <KCalCore/Event>
 
@@ -476,7 +477,7 @@ QString Task::fullName() const
         return parent()->fullName() + QString::fromLatin1("/") + name();
 }
 
-KCalCorez::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
+KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
 {
     Q_ASSERT( todo != NULL );
 

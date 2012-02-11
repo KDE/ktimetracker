@@ -500,20 +500,26 @@ void TaskView::itemStateChanged( QTreeWidgetItem *item )
     if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
-void TaskView::closeStorage() { d->mStorage->closeStorage(); }
+void TaskView::closeStorage()
+{
+  d->mStorage->closeStorage();
+}
 
 bool TaskView::allEventsHaveEndTiMe()
 {
     return d->mStorage->allEventsHaveEndTiMe();
 }
 
-void TaskView::iCalFileModified( const KTimeTracker::KTTCalendar::Ptr &calendar )
+void TaskView::iCalFileModified()
 {
-    kDebug(5970) << "entering function";
-    //kDebug(5970) << calendar->infoText(); TODO:sergio
-    rc->dump();
-    d->mStorage->buildTaskView( calendar, this );
-    kDebug(5970) << "exiting iCalFileModified";
+    KTimeTracker::KTTCalendar *calendar = qobject_cast<KTimeTracker::KTTCalendar*>( sender() );
+    if ( !calendar || !calendar->weakPointer() ) {
+      kWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
+    } else {
+      kDebug(5970) << "entering function";
+      d->mStorage->buildTaskView( calendar->weakPointer().toStrongRef(), this );
+      kDebug(5970) << "exiting iCalFileModified";
+    }
 }
 
 void TaskView::refresh()
@@ -552,7 +558,7 @@ QString TaskView::reFreshTimes()
     {
         for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
         {
-            if ( (*i)->relatedToUid() == itemAt(n)->uid() ) // if event i belongs to task n
+            if ( (*i)->relatedTo() == itemAt(n)->uid() ) // if event i belongs to task n
             {
                 KDateTime kdatetimestart = (*i)->dtStart();
                 KDateTime kdatetimeend = (*i)->dtEnd();

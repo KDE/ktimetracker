@@ -27,8 +27,6 @@
 #include <QVector>
 
 #include "reportcriteria.h"
-#include "kttcalendar.h"
-
 #include "desktoplist.h"
 #include "kttcalendar.h"
 
@@ -100,7 +98,7 @@ class timetrackerstorage : public QObject
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(const KTimeTracker::KTTCalendar::Ptr &, TaskView *view);
+    QString buildTaskView( const KTimeTracker::KTTCalendar::Ptr &calendar, TaskView *view );
 
    /**
     * Build up the taskview.
@@ -119,6 +117,8 @@ class timetrackerstorage : public QObject
     KCalCore::Todo::List rawtodos();
 
     QString removeEvent(QString uid);
+
+    KTimeTracker::KTTCalendar::Ptr calendar() const;
 
     /**
      * Deliver if all events of a task have an endtime
@@ -311,7 +311,7 @@ class timetrackerstorage : public QObject
 
     KCalCore::Event::Ptr baseEvent(const Task*);
     KCalCore::Event::Ptr baseEvent(const KCalCore::Todo::Ptr &);
-    bool isRemoteResource( const QString &file ) const;
+    bool isRemoteFile( const QString &file ) const;
 
     /**
      *  Writes all tasks and their totals to a Comma-Separated Values file.

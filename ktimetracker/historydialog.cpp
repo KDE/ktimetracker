@@ -22,9 +22,12 @@
 #include "historydialog.h"
 #include "ui_historydialog.h"
 #include "taskview.h"
+#include "kttcalendar.h"
+
 #include <QItemDelegate>
 #include <KDateTimeWidget>
 #include <KMessageBox>
+#include <KDebug>
 
 class HistoryWidgetDelegate : public QItemDelegate
 {
@@ -100,15 +103,17 @@ QString historydialog::listallevents()
               this, SLOT(historyWidgetCellChanged(int,int)) );
 
     KCalCore::Event::List eventList = mparent->storage()->rawevents();
+    KTimeTracker::KTTCalendar::Ptr calendar = mparent->storage()->calendar();
     for ( KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i )
     {
         int row =  m_ui->historytablewidget->rowCount();
         m_ui->historytablewidget->insertRow( row );
         QTableWidgetItem* item=0;
-        if ( (*i)->relatedTo() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
+        if ( !(*i)->relatedTo().isEmpty() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
         {
-            item = new QTableWidgetItem( (*i)->relatedTo()->summary() );
+            KCalCore::Incidence::Ptr parent = calendar ? calendar->incidence( (*i)->relatedTo() ) : KCalCore::Incidence::Ptr();
+            item = new QTableWidgetItem( parent ? parent->summary() : QString() );
             item->setFlags( Qt::ItemIsEnabled );
             item->setWhatsThis( i18n( "You can change this task's comment, start time and end time." ) );
             m_ui->historytablewidget->setItem( row, 0, item );
