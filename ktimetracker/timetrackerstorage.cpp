@@ -40,7 +40,7 @@
 #include <kio/netaccess.h>
 #include <KCalCore/Person>
 #include <KDirWatch>
-
+#include <KLockFile>
 #include <KApplication>       // kapp
 #include <KDebug>
 #include <KLocale>            // i18n
@@ -75,12 +75,15 @@ class timetrackerstorage::Private
 public:
     Private()
     {
+      m_fileLock = new KLockFile( QLatin1String( "ktimetrackerics.lock" ) );
     }
     ~Private()
     {
+      delete m_fileLock;
     }
     KTimeTracker::KTTCalendar::Ptr mCalendar;
     QString mICalFile;
+    KLockFile *m_fileLock;
 };
 //@endcond
 
@@ -1048,20 +1051,17 @@ QString timetrackerstorage::saveCalendar()
     }
 
     QString errorMessage;
-    //KABC::Lock *lock; //TODO:sergio lock
     if ( d->mCalendar ) {
-      //  lock = d->mCalendar->lock();
+      d->m_fileLock->lock();
     } else {
-        kDebug() << "mCalendar not set";
-        return errorMessage;
+      kDebug() << "mCalendar not set";
+      return errorMessage;
     }
-    // if ( !lock || !lock->lock() ) errorMessage=QString("Could not save. Could not lock file.");
-    if ( d->mCalendar->save() ) {
-     //   lock->unlock();
-    } else {
+
+    if ( !d->mCalendar->save() ) {
       errorMessage = QString("Could not save. Could lock file.");
     }
-    //lock->unlock();
+    d->m_fileLock->unlock();
 
     if ( removedFromDirWatch ) {
       KDirWatch::self()->addFile( d->mICalFile );
