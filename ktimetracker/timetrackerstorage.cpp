@@ -63,7 +63,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <cassert>
 #include <fcntl.h>
 #include <QMap>
 
@@ -101,7 +100,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     KEMailSettings settings;
     QString lFileName = fileName;
 
-    assert( !( lFileName.isEmpty() ) );
+    Q_ASSERT( !( lFileName.isEmpty() ) );
 
     // If same file, don't reload
     if ( lFileName == d->mICalFile ) return err;
@@ -987,7 +986,7 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const Task *task)
     e->setRelatedTo(d->mCalendar->todo(task->uid()));
 
     // Debugging: some events where not getting a related-to field written.
-    assert(e->relatedTo()->uid() == task->uid());
+    Q_ASSERT(e->relatedTo()->uid() == task->uid());
 
     // Have to turn this off to get datetimes in date fields.
     e->setAllDay(false);
