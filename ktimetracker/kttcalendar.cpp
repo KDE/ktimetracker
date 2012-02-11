@@ -24,6 +24,7 @@
 #include <KCalCore/FileStorage>
 #include <KCalCore/MemoryCalendar>
 #include <KCalCore/ICalFormat>
+
 #include <KDateTime>
 #include <KDebug>
 
@@ -78,4 +79,21 @@ KTTCalendar::Ptr KTTCalendar::createInstance( const QString &filename )
   KTTCalendar::Ptr calendar( new KTTCalendar( filename ) );
   calendar->setWeakPointer( calendar.toWeakRef() );
   return calendar;
+}
+
+/** static */
+bool KTTCalendar::save()
+{
+  if ( !d->m_fileStorage ) {
+    kWarning() << "KTTCalendar::save() save called before load";
+    if ( !reload() ) {
+      kError() << "KTTCalendar::save: problem loading the calendar";
+      return false;
+    }
+  }
+
+  const bool result = d->m_fileStorage->save();
+  if ( !result )
+    kError() << "KTTCalendar::save: problem saving calendar";
+  return result;
 }

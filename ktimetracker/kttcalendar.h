@@ -32,6 +32,7 @@ namespace KTimeTracker {
     typedef QSharedPointer<KTimeTracker::KTTCalendar> Ptr;
     ~KTTCalendar();
     /**reimp*/ bool reload();
+    /**reimp*/ bool save();
 
     /**
      * Creates a new KTTCalendar and calls KTTCalendar::setWeakPointer(), so we can do
