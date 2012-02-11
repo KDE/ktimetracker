@@ -24,7 +24,7 @@
 
 #include <KCalCore/MemoryCalendar>
 #include <QWeakPointer>
-//TODO:sergio file watch
+
 namespace KTimeTracker {
   class KTTCalendar : public KCalCore::MemoryCalendar {
     Q_OBJECT
@@ -41,14 +41,15 @@ namespace KTimeTracker {
      *
      * For this reason, the ctor is private.
      */
-    static KTimeTracker::KTTCalendar::Ptr createInstance( const QString &filename );
+    static KTimeTracker::KTTCalendar::Ptr createInstance( const QString &filename,
+                                                          bool monitorFile );
     QWeakPointer<KTimeTracker::KTTCalendar> weakPointer() const;
     void setWeakPointer( const QWeakPointer<KTimeTracker::KTTCalendar> &);
   Q_SIGNALS:
     void calendarChanged();
   private:
     KTTCalendar();
-    explicit KTTCalendar( const QString &filename );
+    explicit KTTCalendar( const QString &filename, bool monitorFile );
     class Private;
     Private *const d;
   };

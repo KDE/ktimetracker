@@ -39,6 +39,7 @@
 #include <kemailsettings.h>
 #include <kio/netaccess.h>
 #include <KCalCore/Person>
+#include <KDirWatch>
 
 #include <KApplication>       // kapp
 #include <KDebug>
@@ -96,6 +97,12 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
 // loads data from filename into view. If no filename is given, filename from preferences is used.
 // filename might be of use if this program is run as embedded konqueror plugin.
 {
+    // loading might create the file
+    bool removedFromDirWatch = false;
+    if ( KDirWatch::self()->contains( d->mICalFile ) ) {
+      KDirWatch::self()->removeFile( d->mICalFile );
+      removedFromDirWatch = true;
+    }
     kDebug(5970) << "Entering function";
     QString err;
     KEMailSettings settings;
@@ -104,12 +111,17 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     Q_ASSERT( !( lFileName.isEmpty() ) );
 
     // If same file, don't reload
-    if ( lFileName == d->mICalFile ) return err;
-
+    if ( lFileName == d->mICalFile ) {
+        if ( removedFromDirWatch ) {
+          KDirWatch::self()->addFile( d->mICalFile );
+        }
+        return err;
+    }
     // If file doesn't exist, create a blank one to avoid ResourceLocal load
     // error.  We make it user and group read/write, others read.  This is
     // masked by the users umask.  (See man creat)
-    if ( !( isRemoteFile( lFileName ) ) )
+    const bool fileIsLocal = !isRemoteFile( lFileName );
+    if ( fileIsLocal )
     {
         int handle;
         handle = open ( QFile::encodeName( lFileName ), O_CREAT | O_EXCL | O_WRONLY,
@@ -123,10 +135,10 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
         closeStorage();
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
-    d->mCalendar = KTTCalendar::createInstance( d->mICalFile );
+    d->mCalendar = KTTCalendar::createInstance( d->mICalFile, /*monitorFile=*/ fileIsLocal );
 
     QObject::connect( d->mCalendar.data(), SIGNAL(calendarChanged()),
-                      view, SLOT(handleCalendarChanged()) );
+                      view, SLOT(iCalFileModified()) );
     d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->reload();
 
@@ -183,6 +195,10 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     }
 
     if ( view ) buildTaskView(d->mCalendar->weakPointer(), view);
+
+    if ( removedFromDirWatch ) {
+      KDirWatch::self()->addFile( d->mICalFile );
+    }
     return err;
 }
 
@@ -348,7 +364,7 @@ QString timetrackerstorage::deleteAllEvents()
 QString timetrackerstorage::save(TaskView* taskview)
 {
     kDebug(5970) << "Entering function";
-    QString err;
+    QString errorString;
 
     QStack<KCalCore::Todo::Ptr> parents;
     if ( taskview ) // we may also be in konsole mode
@@ -357,21 +373,19 @@ QString timetrackerstorage::save(TaskView* taskview)
         {
             Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
             kDebug( 5970 ) << "write task" << task->name();
-            err = writeTaskAsTodo( task, parents );
+            errorString = writeTaskAsTodo( task, parents );
         }
     }
 
-    err=saveCalendar();
+    errorString = saveCalendar();
 
-    if ( err.isEmpty() )
-    {
+    if ( errorString.isEmpty() ) {
         kDebug(5970) << "timetrackerstorage::save : wrote tasks to" << d->mICalFile;
+    } else {
+        kWarning(5970) << "timetrackerstorage::save :" << errorString;
     }
-    else
-    {
-        kWarning(5970) << "timetrackerstorage::save :" << err;
-    }
-    return err;
+
+    return errorString;
 }
 
 QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
@@ -1027,25 +1041,33 @@ bool timetrackerstorage::isRemoteFile( const QString &file ) const
 QString timetrackerstorage::saveCalendar()
 {
     kDebug(5970) << "Entering function";
-    QString err;
+    bool removedFromDirWatch = false;
+    if ( KDirWatch::self()->contains( d->mICalFile ) ) {
+      KDirWatch::self()->removeFile( d->mICalFile );
+      removedFromDirWatch = true;
+    }
+
+    QString errorMessage;
     //KABC::Lock *lock; //TODO:sergio lock
-    if ( d->mCalendar )
-    {
+    if ( d->mCalendar ) {
       //  lock = d->mCalendar->lock();
+    } else {
+        kDebug() << "mCalendar not set";
+        return errorMessage;
     }
-    else
-    {
-        kDebug(5970) << "mCalendar not set";
-        return err;
-    }
-   // if ( !lock || !lock->lock() ) err=QString("Could not save. Could not lock file.");
-    if ( d->mCalendar->save() )
-    {
+    // if ( !lock || !lock->lock() ) errorMessage=QString("Could not save. Could not lock file.");
+    if ( d->mCalendar->save() ) {
      //   lock->unlock();
+    } else {
+      errorMessage = QString("Could not save. Could lock file.");
     }
-    else err=QString("Could not save. Could lock file.");
     //lock->unlock();
-    return err;
+
+    if ( removedFromDirWatch ) {
+      KDirWatch::self()->addFile( d->mICalFile );
+    }
+
+    return errorMessage;
 }
 
 KTTCalendar::Ptr timetrackerstorage::calendar() const

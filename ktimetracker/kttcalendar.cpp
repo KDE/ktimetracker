@@ -26,6 +26,7 @@
 #include <KCalCore/ICalFormat>
 
 #include <KDateTime>
+#include <KDirWatch>
 #include <KDebug>
 
 using namespace KCalCore;
@@ -41,9 +42,16 @@ public:
   KCalCore::FileStorage::Ptr m_fileStorage;
 };
 
-KTTCalendar::KTTCalendar( const QString &filename ) : KCalCore::MemoryCalendar( KDateTime::LocalZone )
-                                                    , d( new Private( filename ) )
+KTTCalendar::KTTCalendar( const QString &filename,
+                          bool monitorFile ) : KCalCore::MemoryCalendar( KDateTime::LocalZone )
+                                             , d( new Private( filename ) )
 {
+  if ( monitorFile ) {
+    connect( KDirWatch::self(), SIGNAL(dirty(QString)), SIGNAL(calendarChanged()) );
+    if ( !KDirWatch::self()->contains( filename ) ) {
+      KDirWatch::self()->addFile( filename );
+    }
+  }
 }
 
 KTTCalendar::~KTTCalendar()
@@ -54,10 +62,10 @@ KTTCalendar::~KTTCalendar()
 bool KTTCalendar::reload()
 {
   KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
-  d->m_fileStorage = FileStorage::Ptr( new FileStorage( calendar,
-                                                        d->m_filename,
-                                                        new ICalFormat() ) );
-  const bool result = d->m_fileStorage->load();
+  KCalCore::FileStorage::Ptr fileStorage = FileStorage::Ptr( new FileStorage( calendar,
+                                                                              d->m_filename,
+                                                                              new ICalFormat() ) );
+  const bool result = fileStorage->load();
   if ( !result )
     kError() << "KTTCalendar::reload: problem loading calendar";
   return result;
@@ -74,9 +82,9 @@ void KTTCalendar::setWeakPointer(const QWeakPointer<KTTCalendar> &ptr )
 }
 
 /** static */
-KTTCalendar::Ptr KTTCalendar::createInstance( const QString &filename )
+KTTCalendar::Ptr KTTCalendar::createInstance( const QString &filename, bool monitorFile )
 {
-  KTTCalendar::Ptr calendar( new KTTCalendar( filename ) );
+  KTTCalendar::Ptr calendar( new KTTCalendar( filename, monitorFile ) );
   calendar->setWeakPointer( calendar.toWeakRef() );
   return calendar;
 }
@@ -84,15 +92,12 @@ KTTCalendar::Ptr KTTCalendar::createInstance( const QString &filename )
 /** static */
 bool KTTCalendar::save()
 {
-  if ( !d->m_fileStorage ) {
-    kWarning() << "KTTCalendar::save() save called before load";
-    if ( !reload() ) {
-      kError() << "KTTCalendar::save: problem loading the calendar";
-      return false;
-    }
-  }
+  KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
+  FileStorage::Ptr fileStorage = FileStorage::Ptr( new FileStorage( calendar,
+                                                                    d->m_filename,
+                                                                    new ICalFormat() ) );
 
-  const bool result = d->m_fileStorage->save();
+  const bool result = fileStorage->save();
   if ( !result )
     kError() << "KTTCalendar::save: problem saving calendar";
   return result;
