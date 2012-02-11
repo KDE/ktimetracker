@@ -27,8 +27,10 @@
 #include <QVector>
 
 #include "reportcriteria.h"
+#include "kttcalendar.h"
 
 #include "desktoplist.h"
+#include "kttcalendar.h"
 
 #include <KCalCore/Todo>
 #include <KCalCore/Event>
@@ -98,7 +100,7 @@ class timetrackerstorage : public QObject
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
+    QString buildTaskView(const KTimeTracker::KTTCalendar::Ptr &, TaskView *view);
 
    /**
     * Build up the taskview.
@@ -298,8 +300,8 @@ class timetrackerstorage : public QObject
     class Private;
     Private *const d;
     //@endcond
-    KCal::ResourceCalendar            *_calendar;
-    QString                           _icalfile;
+    KTimeTracker::KTTCalendar::Ptr _calendar;
+    QString _icalfile;
 
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,

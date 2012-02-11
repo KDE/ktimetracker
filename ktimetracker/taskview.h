@@ -23,6 +23,8 @@
 #ifndef KTIMETRACKER_TASK_VIEW
 #define KTIMETRACKER_TASK_VIEW
 
+#include "kttcalendar.h"
+
 #include <QList>
 #include <QTreeWidget>
 
@@ -41,8 +43,6 @@ class Preferences;
 class Task;
 class timetrackerstorage;
 class HistoryEvent;
-
-using namespace KCal;
 
 /**
  * Container and interface for the tasks.
@@ -269,7 +269,7 @@ class TaskView : public QTreeWidget
 
     /** React on another process having modified the iCal file we rely on.
        This is not iCalFileChanged. */
-    void iCalFileModified(ResourceCalendar *);
+    void iCalFileModified( const KTimeTracker::KTTCalendar::Ptr & );
     void slotItemDoubleClicked( QTreeWidgetItem *item, int );
 
     /** React on the focus having changed to Window QString **/

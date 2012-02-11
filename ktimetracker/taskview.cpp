@@ -507,12 +507,12 @@ bool TaskView::allEventsHaveEndTiMe()
     return d->mStorage->allEventsHaveEndTiMe();
 }
 
-void TaskView::iCalFileModified(ResourceCalendar *rc)
+void TaskView::iCalFileModified( const KTimeTracker::KTTCalendar::Ptr &calendar )
 {
     kDebug(5970) << "entering function";
-    kDebug(5970) << rc->infoText();
+    //kDebug(5970) << calendar->infoText(); TODO:sergio
     rc->dump();
-    d->mStorage->buildTaskView(rc,this);
+    d->mStorage->buildTaskView( calendar, this );
     kDebug(5970) << "exiting iCalFileModified";
 }
 

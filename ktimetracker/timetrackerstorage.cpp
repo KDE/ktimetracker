@@ -38,8 +38,7 @@
 
 #include <kemailsettings.h>
 #include <kio/netaccess.h>
-#incluce <KCalCore/Person>
-#include <resourceremote.h>
+#include <KCalCore/Person>
 
 #include <KApplication>       // kapp
 #include <KDebug>
@@ -68,6 +67,7 @@
 #include <fcntl.h>
 #include <QMap>
 
+using namespace KTimeTracker;
 
 //@cond PRIVATE
 class timetrackerstorage::Private
@@ -78,7 +78,7 @@ public:
     {
         delete mCalendar;
     }
-    KCal::ResourceCalendar *mCalendar;
+    KTTCalendar::Ptr mCalendar;
     QString mICalFile;
 };
 //@endcond
@@ -225,7 +225,8 @@ QString timetrackerstorage::icalfile()
     return d->mICalFile;
 }
 
-QString timetrackerstorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *view)
+QString timetrackerstorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr &calendar,
+                                           TaskView *view )
 // makes *view contain the tasks out of *rc.
 {
     kDebug(5970) << "Entering function";
@@ -250,7 +251,7 @@ QString timetrackerstorage::buildTaskView(KCal::ResourceCalendar *rc, TaskView *
     }
 
     view->clear();
-    todoList = rc->rawTodos();
+    todoList = calendar->rawTodos();
     for ( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
         Task* task = new Task(*todo, view);
