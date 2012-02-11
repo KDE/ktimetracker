@@ -21,8 +21,13 @@
 
 #include "kttcalendar.h"
 
+#include <KCalCore/FileStorage>
+#include <KCalCore/MemoryCalendar>
+#include <KCalCore/ICalFormat>
 #include <KDateTime>
+#include <KDebug>
 
+using namespace KCalCore;
 using namespace KTimeTracker;
 
 class KTTCalendar::Private {
@@ -32,6 +37,7 @@ public:
   }
   QString m_filename;
   QWeakPointer<KTTCalendar> m_weakPtr;
+  KCalCore::FileStorage::Ptr m_fileStorage;
 };
 
 KTTCalendar::KTTCalendar( const QString &filename ) : KCalCore::MemoryCalendar( KDateTime::LocalZone )
@@ -46,7 +52,14 @@ KTTCalendar::~KTTCalendar()
 
 bool KTTCalendar::reload()
 {
-    return true;
+  KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
+  d->m_fileStorage = FileStorage::Ptr( new FileStorage( calendar,
+                                                        d->m_filename,
+                                                        new ICalFormat() ) );
+  const bool result = d->m_fileStorage->load();
+  if ( !result )
+    kError() << "KTTCalendar::reload: problem loading calendar";
+  return result;
 }
 
 QWeakPointer<KTTCalendar> KTTCalendar::weakPointer() const
