@@ -61,6 +61,7 @@ KTTCalendar::~KTTCalendar()
 
 bool KTTCalendar::reload()
 {
+  deleteAllTodos();
   KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
   KCalCore::FileStorage::Ptr fileStorage = FileStorage::Ptr( new FileStorage( calendar,
                                                                               d->m_filename,

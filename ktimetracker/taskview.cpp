@@ -517,6 +517,7 @@ void TaskView::iCalFileModified()
       kWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
     } else {
       kDebug(5970) << "entering function";
+      calendar->reload();
       d->mStorage->buildTaskView( calendar->weakPointer().toStrongRef(), this );
       kDebug(5970) << "exiting iCalFileModified";
     }
