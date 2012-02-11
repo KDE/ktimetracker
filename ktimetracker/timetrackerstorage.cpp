@@ -110,7 +110,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     // If file doesn't exist, create a blank one to avoid ResourceLocal load
     // error.  We make it user and group read/write, others read.  This is
     // masked by the users umask.  (See man creat)
-    if ( !( remoteResource( lFileName ) ) )
+    if ( !( isRemoteResource( lFileName ) ) )
     {
         int handle;
         handle = open ( QFile::encodeName( lFileName ), O_CREAT | O_EXCL | O_WRONLY,
@@ -126,7 +126,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
     d->mICalFile = lFileName;
 
     KCal::ResourceCached* resource;
-    if ( remoteResource( d->mICalFile ) )
+    if ( isRemoteResource( d->mICalFile ) )
     {
         KUrl url( d->mICalFile );
         resource = new KCal::ResourceRemote( url, url ); // same url for upload and download
@@ -1033,12 +1033,12 @@ HistoryEvent::HistoryEvent(const QString &uid, const QString &name,
     _todoUid = todoUid;
 }
 
-bool timetrackerstorage::remoteResource(const QString& file) const
+bool timetrackerstorage::isRemoteFile( const QString &file ) const
 {
     kDebug(5970) << "Entering function";
     QString f = file.toLower();
     bool rval = f.startsWith( QLatin1String("http://") ) || f.startsWith( QLatin1String("ftp://") );
-    kDebug(5970) << "timetrackerstorage::remoteResource(" << file <<" ) returns" << rval;
+    kDebug(5970) << "timetrackerstorage::isRemoteResource(" << file <<" ) returns" << rval;
     return rval;
 }
 
