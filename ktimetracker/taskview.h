@@ -23,10 +23,9 @@
 #ifndef KTIMETRACKER_TASK_VIEW
 #define KTIMETRACKER_TASK_VIEW
 
+
 #include <QList>
 #include <QTreeWidget>
-
-#include <kcal/resourcecalendar.h>
 
 #include "desktoplist.h"
 #include "timetrackerstorage.h"
@@ -43,8 +42,6 @@ class Preferences;
 class Task;
 class timetrackerstorage;
 class HistoryEvent;
-
-using namespace KCal;
 
 /**
  * Container and interface for the tasks.
@@ -123,7 +120,7 @@ class TaskView : public QTreeWidget
     /** Stop the timer for the current item in the view.  */
     void stopCurrentTimer();
 
-    /** Stop all running timers.  
+    /** Stop all running timers.
      *  @param when When the timer stopped - this makes sense if the idletime-
      *              detector detects the user stopped working 5 minutes ago.
      */
@@ -136,7 +133,7 @@ class TaskView : public QTreeWidget
     /** Calls newTask dialog with caption "New Task".  */
     void newTask();
 
-    /** Display edit task dialog and create a new task with results. 
+    /** Display edit task dialog and create a new task with results.
      *  @param caption Window title of the edit task dialog
      */
     void newTask( const QString &caption, Task* parent );
@@ -176,7 +173,7 @@ class TaskView : public QTreeWidget
     /**
      * Deletes the given or the current task (and children) from the view.
      * It does this in batch mode, no user dialog.
-     * @param task Task to be deleted. If empty, the current task is deleted. 
+     * @param task Task to be deleted. If empty, the current task is deleted.
      *             if non-existent, an error message is displayed.
      */
     void deleteTaskBatch( Task* task=0 );
@@ -184,7 +181,7 @@ class TaskView : public QTreeWidget
     /**
      * Deletes the given or the current task (and children) from the view.
      * Depending on configuration, there may be a user dialog.
-     * @param task Task to be deleted. If empty, the current task is deleted. 
+     * @param task Task to be deleted. If empty, the current task is deleted.
      *             if non-existent, an error message is displayed.
      */
     void deleteTask( Task* task=0 );
@@ -206,7 +203,7 @@ class TaskView : public QTreeWidget
      * @param task      task to start timer of
      * @param startTime if taskview has been modified by another program, we
                             have to set the starting time to not-now. */
-    void startTimerFor( Task* task, 
+    void startTimerFor( Task* task,
                         const QDateTime &startTime = QDateTime::currentDateTime() );
     void stopTimerFor( Task* task );
 
@@ -269,9 +266,9 @@ class TaskView : public QTreeWidget
     /** item state stores if a task is expanded so you can see the subtasks */
     void itemStateChanged( QTreeWidgetItem *item );
 
-    /** React on another process having modified the iCal file we rely on. 
-       This is not iCalFileChanged. */
-    void iCalFileModified(ResourceCalendar *);
+    /** React on another process having modified the iCal file we rely on.
+        This is not iCalFileChanged. */
+    void iCalFileModified();
     void slotItemDoubleClicked( QTreeWidgetItem *item, int );
 
     /** React on the focus having changed to Window QString **/

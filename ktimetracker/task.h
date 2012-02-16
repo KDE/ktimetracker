@@ -22,11 +22,14 @@
 #ifndef KTIMETRACKER_TASK_H
 #define KTIMETRACKER_TASK_H
 
+#include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
+#include "taskview.h" // Required b/c of static cast below.
+
+#include <KCalCore/Todo>
+
 #include <QDateTime>
 #include <QPixmap>
 #include <QVector>
-#include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
-#include "taskview.h" // Required b/c of static cast below.
 
 class QObject;
 class QPixmap;
@@ -34,11 +37,6 @@ class QString;
 
 class timetrackerstorage;
 
-namespace KCal 
-{
-    class Incidence;
-    class Todo;
-}
 
 /** \brief A class representing a task
  *
@@ -62,7 +60,7 @@ public:
           DesktopList desktops, TaskView* parent = 0, bool konsolemode=false );
     Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
           DesktopList desktops, Task* parent = 0);
-    Task( KCal::Todo* incident, TaskView* parent, bool konsolemode=false );
+    Task( const KCalCore::Todo::Ptr &incident, TaskView* parent, bool konsolemode=false );
 
     /* destructor */
     ~Task();
@@ -187,7 +185,7 @@ public:
       QString recalculatetotalsessiontime();
 
       /** Sets the session time.
-       * Set the session time without changing totalTime nor sessionTime. 
+       * Set the session time without changing totalTime nor sessionTime.
        * Do not change the parent's totalTime.
        * Do not add an event.
        * See also: changeTimes(long, long) and resetTimes
@@ -266,7 +264,7 @@ public:
        *  @param on       true or false for starting or stopping a task
        *  @param storage a pointer to a timetrackerstorage object.
        *  @param when time when the task was started or stopped. Normally
-				    QDateTime::currentDateTime, but if calendar has 
+				    QDateTime::currentDateTime, but if calendar has
 				    been changed by another program and being reloaded
  				    the task is set to running with another start date
        */
@@ -289,14 +287,14 @@ public:
      *  You read the todo, extract its custom properties (like session time)
      *  and use these data to initialize the task.
      */
-    bool parseIncidence( KCal::Incidence*, long& minutes,
+    bool parseIncidence( const KCalCore::Incidence::Ptr &, long& minutes,
         long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
         int& percent_complete, int& priority );
 
     /**
      *  Load the todo passed in with this tasks info.
      */
-    KCal::Todo* asTodo(KCal::Todo* calendar) const;
+    KCalCore::Todo::Ptr asTodo(const KCalCore::Todo::Ptr &calendar) const;
 
     /**
      *  Set a task's description
@@ -304,9 +302,9 @@ public:
      */
     void setDescription( QString desc, timetrackerstorage* storage );
 
-    /** 
-     *  Add a comment to this task. 
-     *  A comment is called "description" in the context of KCal::ToDo
+    /**
+     *  Add a comment to this task.
+     *  A comment is called "description" in the context of KCalCore::ToDo
      */
     void addComment( const QString &comment, timetrackerstorage* storage );
 
@@ -314,7 +312,7 @@ public:
     QString comment() const;
 
     /** tells you whether this task is the root of the task tree */
-    bool isRoot() const                 { return parent() == 0; }
+    bool isRoot() const { return parent() == 0; }
 
     /** remove Task with all it's children
      * @param storage a pointer to a timetrackerstorage object.

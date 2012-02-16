@@ -41,7 +41,7 @@ TaskView holds a private pointer to Preferences and a timetrackerstorage object.
 
 A Task is a QListViewItem subclass stores state such as the timer totals, if a
 timer is currently running for the task. It also defines the list view sort
-order and can return a pointer to a KCal::Todo object that holds the same
+order and can return a pointer to a KCalCore::Todo object that holds the same
 information.
 
 Preferences is a singleton that stores configuration options. It raises
