@@ -113,7 +113,6 @@ MainWindow::MainWindow( const QString &icsfile )
     if (KTimeTrackerSettings::trayIcon())
     {
         _tray = new TrayIcon( this );
-        connect( _tray, SIGNAL(quitSelected()), m_part->widget(), SLOT(quit()) );
         connect( m_part->widget(), SIGNAL(timersActive()), _tray, SLOT(startClock()) );
         connect( m_part->widget(), SIGNAL(timersInactive()), _tray, SLOT(stopClock()) );
         connect( m_part->widget(), SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
