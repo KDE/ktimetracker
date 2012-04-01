@@ -19,6 +19,8 @@
  *
  */
 
+// TODO: what is the sense of tasksChanged()?
+
 #include "timetrackerwidget.h"
 #include "ktimetrackerconfigdialog.h"
 
@@ -158,8 +160,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
 
     connect( taskView, SIGNAL(contextMenuRequested(QPoint)),
            this, SIGNAL(contextMenuRequested(QPoint)) );
-    connect( taskView, SIGNAL(tasksChanged(QList<Task*>)),
-           this, SLOT(updateTabs()) );
 
     emit setCaption( fileName );
     taskView->load( lFileName );
