@@ -20,6 +20,8 @@
  *
  */
 
+// TODO: what does totalTimesChanged()?
+
 #include "ktimetrackerpart.h"
 
 #include <QMenu>
@@ -99,8 +101,6 @@ bool ktimetrackerpart::openFile(QString icsfile)
     emit setWindowCaption(icsfile);
 
     // connections
-    connect( mMainWidget, SIGNAL(totalTimesChanged(long,long)),
-           this, SLOT(updateTime(long,long)) );
     connect( mMainWidget, SIGNAL(statusBarTextChangeRequested(QString)),
            this, SLOT(setStatusBar(QString)) );
     connect( mMainWidget, SIGNAL(setCaption(QString)),
