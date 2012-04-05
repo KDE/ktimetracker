@@ -35,6 +35,7 @@
 #include <KStandardDirs>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
+#include <KShortcutsDialog>
 
 #include <kdemacros.h>
 #include <kpluginfactory.h>
@@ -87,6 +88,12 @@ void ktimetrackerpart::makeMenus()
     actionKeyBindings->setToolTip( i18n("Configure key bindings") );
     actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
                                         "bindings which are specific to ktimetracker") );
+}
+
+void ktimetrackerpart::keyBindings()
+{
+  KShortcutsDialog::configure( actionCollection(),
+                               KShortcutsEditor::LetterShortcutsAllowed );
 }
 
 void ktimetrackerpart::setStatusBar(const QString & qs)
