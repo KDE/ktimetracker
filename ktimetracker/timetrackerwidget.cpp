@@ -19,6 +19,8 @@
  *
  */
 
+// TODO: what is the sense of tasksChanged()?
+
 #include "timetrackerwidget.h"
 #include "ktimetrackerconfigdialog.h"
 
@@ -158,8 +160,6 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
 
     connect( taskView, SIGNAL(contextMenuRequested(QPoint)),
            this, SIGNAL(contextMenuRequested(QPoint)) );
-    connect( taskView, SIGNAL(tasksChanged(QList<Task*>)),
-           this, SLOT(updateTabs()) );
 
     emit setCaption( fileName );
     taskView->load( lFileName );
@@ -575,7 +575,7 @@ void TimetrackerWidget::startNewSession()
 void TimetrackerWidget::editHistory()
 {
     // historydialog is the new historydialog, but the EditHiStoryDiaLog exists as well.
-    // historydialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog can not.
+    // historydialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if ( currentTaskView() )
     {
         historydialog *dlg = new historydialog( currentTaskView() );

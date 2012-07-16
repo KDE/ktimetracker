@@ -20,6 +20,8 @@
  *
  */
 
+// TODO: what does totalTimesChanged()?
+
 #include "ktimetrackerpart.h"
 
 #include <QMenu>
@@ -33,6 +35,7 @@
 #include <KStandardDirs>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
+#include <KShortcutsDialog>
 
 #include <kdemacros.h>
 #include <kpluginfactory.h>
@@ -87,6 +90,12 @@ void ktimetrackerpart::makeMenus()
                                         "bindings which are specific to ktimetracker") );
 }
 
+void ktimetrackerpart::keyBindings()
+{
+  KShortcutsDialog::configure( actionCollection(),
+                               KShortcutsEditor::LetterShortcutsAllowed );
+}
+
 void ktimetrackerpart::setStatusBar(const QString & qs)
 {
     kDebug(5970) << "Entering function";
@@ -99,8 +108,6 @@ bool ktimetrackerpart::openFile(QString icsfile)
     emit setWindowCaption(icsfile);
 
     // connections
-    connect( mMainWidget, SIGNAL(totalTimesChanged(long,long)),
-           this, SLOT(updateTime(long,long)) );
     connect( mMainWidget, SIGNAL(statusBarTextChangeRequested(QString)),
            this, SLOT(setStatusBar(QString)) );
     connect( mMainWidget, SIGNAL(setCaption(QString)),

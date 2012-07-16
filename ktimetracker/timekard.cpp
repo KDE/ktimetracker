@@ -32,8 +32,6 @@
 #include <KGlobal>
 #include <KLocale>
 
-#include <kcal/event.h>
-
 #include "timetrackerstorage.h"
 #include "ktimetrackerutility.h"        // formatTime()
 #include "task.h"

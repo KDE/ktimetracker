@@ -69,6 +69,8 @@ protected:
 
 public Q_SLOTS:
    void setStatusBar(const QString & qs);
+   void keyBindings();
+
 };
 
 #endif // _KTIMETRACKERPART_H_

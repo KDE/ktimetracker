@@ -22,9 +22,12 @@
 #include "historydialog.h"
 #include "ui_historydialog.h"
 #include "taskview.h"
+#include "kttcalendar.h"
+
 #include <QItemDelegate>
 #include <KDateTimeWidget>
 #include <KMessageBox>
+#include <KDebug>
 
 class HistoryWidgetDelegate : public QItemDelegate
 {
@@ -99,16 +102,18 @@ QString historydialog::listallevents()
     connect(  m_ui->historytablewidget, SIGNAL(cellChanged(int,int)),
               this, SLOT(historyWidgetCellChanged(int,int)) );
 
-    KCal::Event::List eventList = mparent->storage()->rawevents();
-    for ( KCal::Event::List::iterator i = eventList.begin();
+    KCalCore::Event::List eventList = mparent->storage()->rawevents();
+    KTimeTracker::KTTCalendar::Ptr calendar = mparent->storage()->calendar();
+    for ( KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i )
     {
         int row =  m_ui->historytablewidget->rowCount();
         m_ui->historytablewidget->insertRow( row );
         QTableWidgetItem* item=0;
-        if ( (*i)->relatedTo() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
+        if ( !(*i)->relatedTo().isEmpty() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
         {
-            item = new QTableWidgetItem( (*i)->relatedTo()->summary() );
+            KCalCore::Incidence::Ptr parent = calendar ? calendar->incidence( (*i)->relatedTo() ) : KCalCore::Incidence::Ptr();
+            item = new QTableWidgetItem( parent ? parent->summary() : QString() );
             item->setFlags( Qt::ItemIsEnabled );
             item->setWhatsThis( i18n( "You can change this task's comment, start time and end time." ) );
             m_ui->historytablewidget->setItem( row, 0, item );
@@ -167,8 +172,8 @@ void historydialog::historyWidgetCellChanged( int row, int col )
         { // StartDate changed
             kDebug( 5970 ) << "user changed StartDate to" << m_ui->historytablewidget->item( row, col )->text();
             QString uid = m_ui->historytablewidget->item( row, 4 )->text();
-            KCal::Event::List eventList = mparent->storage()->rawevents();
-            for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
+            KCalCore::Event::List eventList = mparent->storage()->rawevents();
+            for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
             {
                 kDebug(5970) << "row=" << row <<" col=" << col;
                 if ( (*i)->uid() == uid )
@@ -190,8 +195,8 @@ void historydialog::historyWidgetCellChanged( int row, int col )
         { // EndDate changed
             kDebug( 5970 ) <<"user changed EndDate to" << m_ui->historytablewidget->item(row,col)->text();
             QString uid = m_ui->historytablewidget->item( row, 4 )->text();
-            KCal::Event::List eventList = mparent->storage()->rawevents();
-            for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
+            KCalCore::Event::List eventList = mparent->storage()->rawevents();
+            for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i)
             {
                 kDebug() <<"row=" << row <<" col=" << col;
                 if ( (*i)->uid() == uid )
@@ -214,8 +219,8 @@ void historydialog::historyWidgetCellChanged( int row, int col )
             kDebug( 5970 ) <<"user changed Comment to" << m_ui->historytablewidget->item(row,col)->text();
             QString uid = m_ui->historytablewidget->item( row, 4 )->text();
             kDebug() <<"uid =" << uid;
-            KCal::Event::List eventList = mparent->storage()->rawevents();
-            for ( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
+            KCalCore::Event::List eventList = mparent->storage()->rawevents();
+            for ( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
             {
                 kDebug() <<"row=" << row <<" col=" << col;
                 if ( (*i)->uid() == uid )
@@ -245,8 +250,8 @@ void historydialog::on_deletepushbutton_clicked()
     { // if an item is current
         QString uid = m_ui->historytablewidget->item( m_ui->historytablewidget->currentRow(), 4 )->text();
         kDebug() <<"uid =" << uid;
-        KCal::Event::List eventList = mparent->storage()->rawevents();
-        for ( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
+        KCalCore::Event::List eventList = mparent->storage()->rawevents();
+        for ( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i )
         {
             if ( (*i)->uid() == uid )
             {

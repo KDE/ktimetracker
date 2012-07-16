@@ -27,16 +27,12 @@
 #include <QVector>
 
 #include "reportcriteria.h"
-
 #include "desktoplist.h"
+#include "kttcalendar.h"
 
-#include <kcal/journal.h>
-#include <kcal/calendarresources.h>
-#include <kcal/resourcecalendar.h>
+#include <KCalCore/Todo>
+#include <KCalCore/Event>
 
-namespace KCal {
-  class Todo;
-}
 class QDateTime;
 class Task;
 class TaskView;
@@ -102,7 +98,7 @@ class timetrackerstorage : public QObject
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(KCal::ResourceCalendar *rc, TaskView *view);
+    QString buildTaskView( const KTimeTracker::KTTCalendar::Ptr &calendar, TaskView *view );
 
    /**
     * Build up the taskview.
@@ -115,12 +111,14 @@ class timetrackerstorage : public QObject
     void closeStorage();
 
     /** list of all events */
-    KCal::Event::List rawevents();
+    KCalCore::Event::List rawevents();
 
     /** list of all todos */
-    KCal::Todo::List rawtodos();
+    KCalCore::Todo::List rawtodos();
 
     QString removeEvent(QString uid);
+
+    KTimeTracker::KTTCalendar::Ptr calendar() const;
 
     /**
      * Deliver if all events of a task have an endtime
@@ -211,9 +209,9 @@ class timetrackerstorage : public QObject
      */
     void startTimer(const Task* task, const KDateTime &when=KDateTime::currentLocalDateTime());
 
-    /** 
+    /**
      * Start the timer for a given task ID
-     * 
+     *
      * @param taskID  The task ID of the task to be started
      */
     void startTimer( QString taskID );
@@ -265,7 +263,7 @@ class timetrackerstorage : public QObject
     /**
      * Add this task from iCalendar file.
      *
-     * Create a new KCal::Todo object and load with task information.  If
+     * Create a new KCalCore::Todo object and load with task information.  If
      * parent is not zero, then set the RELATED-TO attribute for this Todo.
      *
      * @param task   The task to be removed.
@@ -286,8 +284,8 @@ class timetrackerstorage : public QObject
     /** Return a list of all task ids for taskname */
     QStringList taskidsfromname(QString taskname);
 
-    /** 
-     * Find the task with the given uid 
+    /**
+     * Find the task with the given uid
      * @param  uid  The uid that identifies the task
      * @param  view The TaskView that contains the task
      * @return the task identified by uid, residing in the TaskView view
@@ -302,18 +300,18 @@ class timetrackerstorage : public QObject
     class Private;
     Private *const d;
     //@endcond
-    KCal::ResourceCalendar            *_calendar;
-    QString                           _icalfile;
+    KTimeTracker::KTTCalendar::Ptr _calendar;
+    QString _icalfile;
 
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,
         DesktopList* desktopList);
-    QString writeTaskAsTodo( Task* task, QStack<KCal::Todo*>& parents );
+    QString writeTaskAsTodo( Task* task, QStack<KCalCore::Todo::Ptr>& parents );
     QString saveCalendar();
 
-    KCal::Event* baseEvent(const Task*);
-    KCal::Event* baseEvent(const KCal::Todo*);
-    bool remoteResource( const QString& file ) const;
+    KCalCore::Event::Ptr baseEvent(const Task*);
+    KCalCore::Event::Ptr baseEvent(const KCalCore::Todo::Ptr &);
+    bool isRemoteFile( const QString &file ) const;
 
     /**
      *  Writes all tasks and their totals to a Comma-Separated Values file.

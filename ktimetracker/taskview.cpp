@@ -173,13 +173,13 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
     connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)) );
     connect( FocusDetectorNotifier::instance()->focusDetector(),
-           SIGNAL(newFocus(QString)), 
-           this, SLOT(newFocusWindowDetected(QString)) ); 
+           SIGNAL(newFocus(QString)),
+           this, SLOT(newFocusWindowDetected(QString)) );
 
     QStringList labels;
     setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
     labels << i18n( "Task Name" ) << i18n( "Session Time" ) << i18n( "Time" )
-         << i18n( "Total Session Time" ) << i18n( "Total Time" ) 
+         << i18n( "Total Session Time" ) << i18n( "Total Time" )
          << i18n( "Priority" ) << i18n( "Percent Complete" );
     setHeaderLabels( labels );
     headerItem()->setWhatsThis(0,i18n("The task name is what you call the task, it can be chosen freely."));
@@ -313,7 +313,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
     } // focustrackingactive
 }
 
-void TaskView::mouseMoveEvent( QMouseEvent *event ) 
+void TaskView::mouseMoveEvent( QMouseEvent *event )
 {
     QModelIndex index = indexAt( event->pos() );
 
@@ -408,10 +408,10 @@ Every item is a task. The items are counted linearily. The uppermost item
 has the number i=0. */
 {
     if ( topLevelItemCount() == 0 ) return 0;
-  
+
     QTreeWidgetItemIterator item( this );
     while( *item && i-- ) ++item;
-  
+
     kDebug( 5970 ) << "Leaving TaskView::itemAt" << "returning " << (*item==0);
     if ( !( *item ) )
         return 0;
@@ -477,7 +477,7 @@ Its state is whether it is expanded or not. If a task shall be expanded
 is stored in the _preferences object. */
 {
     kDebug(5970) << "Entering function";
-  
+
     if ( topLevelItemCount() > 0 )
     {
         QTreeWidgetItemIterator item( this );
@@ -500,20 +500,27 @@ void TaskView::itemStateChanged( QTreeWidgetItem *item )
     if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
-void TaskView::closeStorage() { d->mStorage->closeStorage(); }
+void TaskView::closeStorage()
+{
+  d->mStorage->closeStorage();
+}
 
 bool TaskView::allEventsHaveEndTiMe()
 {
     return d->mStorage->allEventsHaveEndTiMe();
 }
 
-void TaskView::iCalFileModified(ResourceCalendar *rc)
+void TaskView::iCalFileModified()
 {
-    kDebug(5970) << "entering function";
-    kDebug(5970) << rc->infoText();
-    rc->dump();
-    d->mStorage->buildTaskView(rc,this);
-    kDebug(5970) << "exiting iCalFileModified";
+    KTimeTracker::KTTCalendar *calendar = qobject_cast<KTimeTracker::KTTCalendar*>( sender() );
+    if ( !calendar || !calendar->weakPointer() ) {
+      kWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
+    } else {
+      kDebug(5970) << "entering function";
+      calendar->reload();
+      d->mStorage->buildTaskView( calendar->weakPointer().toStrongRef(), this );
+      kDebug(5970) << "exiting iCalFileModified";
+    }
 }
 
 void TaskView::refresh()
@@ -544,15 +551,15 @@ QString TaskView::reFreshTimes()
     kDebug(5970) << "Entering function";
     QString err;
     // re-calculate the time for every task based on events in the history
-    KCal::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
+    KCalCore::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
     int n=-1;
     resetDisplayTimeForAllTasks();
     emit reSetTimes();
     while (itemAt(++n)) // loop over all tasks
     {
-        for( KCal::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
+        for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
         {
-            if ( (*i)->relatedToUid() == itemAt(n)->uid() ) // if event i belongs to task n
+            if ( (*i)->relatedTo() == itemAt(n)->uid() ) // if event i belongs to task n
             {
                 KDateTime kdatetimestart = (*i)->dtStart();
                 KDateTime kdatetimeend = (*i)->dtEnd();
@@ -631,7 +638,7 @@ QString TaskView::exportcsvHistory()
 {
     kDebug(5970) << "TaskView::exportcsvHistory()";
     QString err;
-  
+
     CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
     if ( currentItem() && currentItem()->isRoot() )
         dialog.enableTasksToExportQuestion();
@@ -774,7 +781,7 @@ void TaskView::toggleFocusTracking()
 }
 
 void TaskView::startNewSession()
-/* This procedure starts a new session. We speak of session times, 
+/* This procedure starts a new session. We speak of session times,
 overalltimes (comprising all sessions) and total times (comprising all subtasks).
 That is why there is also a total session time. */
 {

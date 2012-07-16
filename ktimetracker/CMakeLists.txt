@@ -22,7 +22,7 @@ set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
 	csvexportdialog.cpp plannerparser.cpp historydialog.cpp
 	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
-        focusdetectornotifier.cpp
+  focusdetectornotifier.cpp kttcalendar.cpp
  )
 
 qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
@@ -58,9 +58,9 @@ kde4_add_app_icon(ktimetracker_SRCS "hi*-app-ktimetracker.png")
 kde4_add_executable(ktimetracker ${ktimetracker_SRCS})
 
 
-target_link_libraries(karm  ${KDE4_KIO_LIBS} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} kcal_resourceremote)
+target_link_libraries(karm  ${KDE4_KIO_LIBS} ${KDEPIMLIBS_KCALCORE_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} )
 
-target_link_libraries(ktimetracker   ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(ktimetracker   ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCALCORE_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
@@ -75,7 +75,7 @@ set(kcm_ktimetracker_PART_SRCS ${ktimetracker_shared_SRCS})
 
 kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS})
 
-target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCAL_LIBS} kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCALCORE_LIBS} ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
     target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
 endif(X11_Xscreensaver_LIB)
@@ -90,7 +90,7 @@ set(ktimetrackerpart_PART_SRCS ${ktimetracker_shared_SRCS})
 
 kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
 
-target_link_libraries(ktimetrackerpart ${KDE4_KCMUTILS_LIBS}  ${KDEPIMLIBS_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kcal_resourceremote ${X11_X11_LIB})
+target_link_libraries(ktimetrackerpart ${KDE4_KCMUTILS_LIBS}  ${KDEPIMLIBS_KCALCORE_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
 endif(X11_Xscreensaver_LIB)
