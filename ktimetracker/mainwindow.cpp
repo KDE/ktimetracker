@@ -65,7 +65,7 @@ MainWindow::MainWindow( const QString &icsfile )
     {
         // now that the Part is loaded, we cast it to a Part to get
         // our hands on it
-        m_part = factory->create<ktimetrackerpart>( this );
+        m_part = dynamic_cast<ktimetrackerpart*>( factory->create<KParts::ReadWritePart>( this ) );
 
         if (m_part)
         {
