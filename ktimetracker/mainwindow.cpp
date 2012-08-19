@@ -25,6 +25,7 @@
 
 #include <QMenu>
 #include <QString>
+#include <QTimer>
 
 #include <KAction>
 #include <KApplication>       // kapp
@@ -63,9 +64,14 @@ MainWindow::MainWindow( const QString &icsfile )
     KPluginFactory *factory = loader.factory();
     if (factory)
     {
-        // now that the Part is loaded, we cast it to a Part to get
-        // our hands on it
-        m_part = factory->create<ktimetrackerpart>( this );
+        // now that the Part is loaded, we cast it to a Part to get our hands on it
+
+        //NOTE: Use the dynamic_cast below. Without it, KPluginLoader will use a qobject_cast
+        // that fails, because ktimetrackerpart is defined twice, once in ktimetracker's binary
+        // and another one in the plugin. The build system should be fixed.
+        //m_part = factory->create<ktimetrackerpart>( this );
+
+        m_part = dynamic_cast<ktimetrackerpart*>( factory->create<KParts::ReadWritePart>( this ) );
 
         if (m_part)
         {
@@ -81,8 +87,9 @@ MainWindow::MainWindow( const QString &icsfile )
         }
         else
         {
+          kError() << "Could not find the KTimeTracker part: m_part is 0";
           KMessageBox::error(this, i18n( "Could not create the KTimeTracker part." ));
-          qApp->quit();
+          QTimer::singleShot(0, qApp, SLOT(quit()));
           return;
         }
     }
@@ -90,8 +97,9 @@ MainWindow::MainWindow( const QString &icsfile )
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
+        kError() << "Could not find the KTimeTracker part: factory is 0";
         KMessageBox::error(this, i18n( "Could not find the KTimeTracker part." ));
-        qApp->quit();
+        QTimer::singleShot(0, qApp, SLOT(quit()));
         // we return here, cause qApp->quit() only means "exit the
         // next time we enter the event loop...
         return;

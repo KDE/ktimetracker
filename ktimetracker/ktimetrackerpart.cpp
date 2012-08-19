@@ -39,7 +39,6 @@
 
 #include <kdemacros.h>
 #include <kpluginfactory.h>
-#include "mainwindow.h"
 #include "ktimetrackerutility.h"
 #include "task.h"
 #include "preferences.h"
