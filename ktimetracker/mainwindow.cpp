@@ -63,9 +63,14 @@ MainWindow::MainWindow( const QString &icsfile )
     KPluginFactory *factory = loader.factory();
     if (factory)
     {
-        // now that the Part is loaded, we cast it to a Part to get
-        // our hands on it
-        m_part = factory->create<ktimetrackerpart>( this );
+        // now that the Part is loaded, we cast it to a Part to get our hands on it
+
+        //NOTE: Use the dynamic_cast below. Without it, KPluginLoader will use a qobject_cast
+        // that fails, because ktimetrackerpart is defined twice, once in ktimetracker's binary
+        // and another one in the plugin. The build system should be fixed.
+        //m_part = factory->create<ktimetrackerpart>( this );
+
+        m_part = dynamic_cast<ktimetrackerpart*>( factory->create<KParts::ReadWritePart>( this ) );
 
         if (m_part)
         {
