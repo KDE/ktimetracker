@@ -22,7 +22,7 @@
 #ifndef HISTORYDIALOG_H
 #define HISTORYDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 #include "taskview.h"
 
 namespace Ui
