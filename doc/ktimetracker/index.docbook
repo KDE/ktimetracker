@@ -118,14 +118,14 @@ name; for example, http://www.mysite.com/mydata/mylabor.ics.</para>
 <title>Tasks</title>
 
 <informalexample>
-<para><emphasis>Problem:</emphasis> You are a free software consultant with
+<para><emphasis>Problem:</emphasis> You are a freelance software consultant with
 many clients.  Some clients have multiple projects.  During the course of a
 day, you switch back and forth between different projects.  You need to track
 your time to generate monthly invoices.</para>
 <para><emphasis>Solution:</emphasis> Create one top-level task for each client
 and a subtask for each client project.  For projects that require more
 detailed tracking, create a list of project subtasks.  Track time by
-double-clicking on task you are currently working on.</para>
+double-clicking on the task you are currently working on.</para>
 </informalexample>
 
 <para>&ktimetracker; provides great flexibility in tracking your time, allowing
@@ -143,7 +143,7 @@ To create a top-level task, select
 <guimenuitem>New Task...</guimenuitem>
 </menuchoice>. 
 
-To create a subtask, pick the parent task and select
+To create a subtask, highlight the parent task and select
 
 <menuchoice>
 <shortcut>
@@ -281,9 +281,8 @@ was idle and still are.</para></listitem></varlistentry>
 
 <varlistentry><term><guibutton>Revert timing</guibutton></term>
 <listitem><para>Subtract the amount of idle time from all active timers and
-stop them.</para><para>You were not working on the task(s) while you
-computer was idle and you are still are
-not.</para></listitem></varlistentry> 
+stop them.</para><para>You were not working on the task(s) while your
+computer was idle and you are still not.</para></listitem></varlistentry>
 </variablelist>
 
 </sect2>
@@ -296,7 +295,7 @@ not.</para></listitem></varlistentry>
 
 <para>&ktimetracker;, like &korganizer; and Apple's iCal, uses the industry standard
 <ulink url="http://www.faqs.org/rfcs/rfc2445.html">iCalendar</ulink>
-format for its data.  &ktimetracker; can read and write the to do lists created by
+format for its data.  &ktimetracker; can read and write the to-do lists created by
 these two applications.</para>
 <para>
 You can even work synchronously on one file with &korganizer; and &ktimetracker;. 
@@ -327,7 +326,7 @@ and under budget.</para>
 other.  A &kde; program provides a list of functions that other programs (a Bash
 script, for example) can use.</para>
 
-<example><title>Bash script that echo's &ktimetracker;'s version</title>
+<example><title>Bash script that echoes &ktimetracker;'s version</title>
 <programlisting>
 qdbus org.kde.ktimetracker /KTimeTracker version 2>/dev/null || echo "ktimetracker not running"
 </programlisting>
@@ -369,7 +368,7 @@ format.  To export totals, select
 </mediaobject>
 </screenshot>
 
-<para>Enter the file you would like to export the data to, and modify the
+<para>Enter the filename that you would like to export the data to, and modify the
 other dialog defaults if necessary.  Click
 <guibutton>Export</guibutton> and &ktimetracker; exports the totals for all tasks to
 the file you selected.</para>
@@ -409,11 +408,11 @@ Time</guilabel> and the fourth is the <guilabel>Total Time</guilabel>.
 <guimenuitem>Export History...</guimenuitem>
 </menuchoice> and &ktimetracker; displays the same export dialog as shown above.</para>
 
-<para>Enter the file you would like to export the data to, and select a date
-range that you want the task history.  Modify the other dialog defaults if
+<para>Enter the filename that you would like to export the data to, and select a date
+range that you want the task history to cover.  Modify the other dialog defaults if
 necessary.  Click <guibutton>Export</guibutton> and &ktimetracker; exports the
-task history for all tasks to the file you selected.</para>
-<para>Use the <guibutton>Export to Clipboard</guibutton> button to export the history to the clipboard</para>
+task history to the chosen file.</para>
+<para>Use the <guibutton>Export to Clipboard</guibutton> button to export the history to the clipboard.</para>
 
 <para>Here is an example of the output format:</para>
 
@@ -435,7 +434,7 @@ Printed on: 2004-07-13 18:10
 </computeroutput>
 </literallayout>
 
-<para>The three lines identify when the report was generated and for which
+<para>The first three lines identify when the report was generated and for which
 date range.  The fourth row is a comma-delimited list of the dates in the
 date range, in ISO 8601 format (YYYY-MM-DD).  All subsequent rows list the
 time logged against each task.   The last numeric column is the row total
@@ -454,9 +453,9 @@ in the first column after the total.</para>
 <para>The main &ktimetracker; window has the following components: menubar, toolbar, 
 searchbar, task/time window and status bar.</para>
 
-<para>The searchbar is a combined field. As long as you do not type &Enter;, it acts as a 
+<para>The searchbar is a combined field. As long as you do not press &Enter;, it acts as a
 filter. Then, only tasks that match your input are shown. As soon as you 
-type &Enter;, your input is used as name to create a new task.
+press &Enter;, your input is used as a name to create a new task.
 </para>
 
 <para>Choose <guilabel>Configuration for PDA</guilabel> in the settings dialog
@@ -494,7 +493,7 @@ subtasks, as well as its own accumulated time.</para>
 <title>The Toolbar and Statusbar</title>
 <para>The toolbar contains icons for the following commands:</para>
 
-<note><para>(All behave identically to the menu command.)</para></note>
+<note><para>All behave identically to the menu command.</para></note>
 
 <itemizedlist>
 <listitem><para><guiicon>New Task</guiicon></para></listitem>
@@ -586,7 +585,7 @@ for Desktop Bus.</para></glossdef>
 <glossentry id="gloss-desktop">
 <glossterm>desktop</glossterm>
 <glossdef><para>&GNU;/&Linux;, FreeBSD and other systems that run X-Windows have
-multiple desktops.  You typically have four different desktops installed by
+multiple desktops.  You can typically have four different desktops installed by
 default.  Each desktop can display its own set of programs and files.  When
 &kde; first starts up, the desktop you see is Desktop 1.  If you press
 <keycombo action="simul">&Ctrl;<keycap>F2</keycap></keycombo>, you will see
@@ -599,9 +598,9 @@ action="simul">&Ctrl;<keycap>F1</keycap></keycombo> will bring back Desktop
 <title>H</title> 
 <glossentry id="gloss-history">
 <glossterm>history</glossterm>
-<glossdef><para>If &ktimetracker; is configured to log history, it will record ever
-start/stop timer event. This history is never cleared when times are reset
-cleared and remains on file until the task is deleted.</para></glossdef>
+<glossdef><para>If &ktimetracker; is configured to log history, it will record every
+start/stop timer event. This history is not cleared when times are reset
+and remains on file until the task is deleted.</para></glossdef>
 </glossentry>
 </glossdiv>
 
