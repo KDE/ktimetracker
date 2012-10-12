@@ -6,9 +6,9 @@
   <!ENTITY % addindex "IGNORE">
 ]>
 
-<book lang="&language;">
+<book id="ktimetracker" lang="&language;">
 
-<bookinfo>
+<book id="ktimetracker"info>
 <title>The &ktimetracker; Handbook</title>
 
 <authorgroup>
