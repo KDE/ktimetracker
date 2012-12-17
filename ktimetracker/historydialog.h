@@ -34,7 +34,7 @@ class historydialog : public QDialog
 {
     Q_OBJECT
 public:
-    historydialog(TaskView *parent);
+    explicit historydialog(TaskView *parent);
     ~historydialog();
     QString listallevents();
     QString refresh();

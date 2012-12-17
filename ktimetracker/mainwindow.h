@@ -60,7 +60,7 @@ class MainWindow : public KParts::MainWindow
     ktimetrackerpart *m_part;
 
   public:
-    MainWindow( const QString &icsfile = "" );
+    explicit MainWindow( const QString &icsfile = "" );
     virtual ~MainWindow();
 
   public Q_SLOTS:

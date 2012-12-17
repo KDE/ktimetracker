@@ -29,7 +29,7 @@
 class CSVExportDialogBase : public KDialog, public Ui::CSVExportDialogBase
 {
 public:
-  CSVExportDialogBase( QWidget *parent ) : KDialog( parent ) {
+  explicit CSVExportDialogBase( QWidget *parent ) : KDialog( parent ) {
     setupUi( this );
 
     setMainWidget( page );
