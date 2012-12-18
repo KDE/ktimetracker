@@ -53,7 +53,7 @@ public:
      Initializes and idle test timer
      @param maxIdle minutes before the idle timer will go off.
   **/
-  IdleTimeDetector(int maxIdle);
+  explicit IdleTimeDetector(int maxIdle);
 
   /**
      Returns true if it is possible to do idle detection.

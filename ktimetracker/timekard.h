@@ -47,7 +47,7 @@ class Week
   public:
     /** Need an empty constructor to use in a QValueList. */
     Week();
-    Week( const QDate &from );
+    explicit Week( const QDate &from );
     QDate start() const;
     QDate end() const;
     QList<QDate> days() const;
