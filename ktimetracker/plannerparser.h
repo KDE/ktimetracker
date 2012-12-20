@@ -50,7 +50,7 @@ class PlannerParser : public QXmlDefaultHandler
 public:
 
     /**  Stores the active TaskView in this parser. Returns error code (not always, hopefully)  */
-    PlannerParser(TaskView * tv);
+    explicit PlannerParser(TaskView * tv);
 
     /** given by the framework from qxml. Called when parsing the xml-document starts.          */
     bool startDocument();

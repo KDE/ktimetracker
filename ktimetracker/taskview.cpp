@@ -630,7 +630,7 @@ void TaskView::exportcsvFile()
     if ( dialog.exec() )
     {
         QString err = d->mStorage->report( this, dialog.reportCriteria() );
-        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toAscii()) );
+        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toLatin1()) );
     }
 }
 

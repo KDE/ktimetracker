@@ -50,7 +50,7 @@ class FocusDetectorNotifier : public QObject
     FocusDetector *focusDetector() const;
 
   private:
-    FocusDetectorNotifier( QObject *parent = 0 );
+    explicit FocusDetectorNotifier( QObject *parent = 0 );
     static FocusDetectorNotifier *mInstance;
 
     //@cond PRIVATE

@@ -39,8 +39,8 @@ class TrayIcon : public KStatusNotifierItem
   Q_OBJECT
 
   public:
-    TrayIcon(MainWindow * parent);
-    TrayIcon(ktimetrackerpart *);
+    explicit TrayIcon(MainWindow * parent);
+    explicit TrayIcon(ktimetrackerpart *);
     TrayIcon();
     ~TrayIcon();
 
