@@ -108,6 +108,7 @@ Comment[x-test]=xxConfigure Storagexx
 Comment[zh_CN]=配置存储
 Comment[zh_TW]=設定儲存裝置
 X-KDE-Keywords=ktimetracker, configure, settings
+X-KDE-Keywords[bs]=ktimetracker, konfigurirati, postavke
 X-KDE-Keywords[ca]=ktimetracker, configura, arranjament
 X-KDE-Keywords[da]=ktimetracker, indstil, indstillinger
 X-KDE-Keywords[de]=KTimetracker,einstellen,konfigurieren,Konfiguration,Einrichtung,Einstellungen
