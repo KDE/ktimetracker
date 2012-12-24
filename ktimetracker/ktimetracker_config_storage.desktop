@@ -15,6 +15,7 @@ X-KDE-Weight=700
 
 Name=Storage
 Name[ar]=تخزين
+Name[bs]=Skladište
 Name[ca]=Emmagatzematge
 Name[ca@valencia]=Emmagatzematge
 Name[cs]=Úložiště
@@ -62,6 +63,7 @@ Name[zh_CN]=存储
 Name[zh_TW]=儲存裝置
 Comment=Configure Storage
 Comment[ar]=اضبط التخزين
+Comment[bs]=Konfiguriši spremnik
 Comment[ca]=Configura l'emmagatzematge
 Comment[ca@valencia]=Configura l'emmagatzematge
 Comment[cs]=Nastavit úložiště
