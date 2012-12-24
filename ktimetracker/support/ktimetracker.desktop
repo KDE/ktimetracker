@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KTimeTracker
 Name[ar]=مقتفي الوقت
+Name[bs]=KTimeTracker
 Name[ca]=KTimeTracker
 Name[ca@valencia]=KTimeTracker
 Name[cs]=KTimeTracker
@@ -52,6 +53,7 @@ GenericName[af]=Persoonlike Tyd Volger
 GenericName[ar]=مقتفي الوقت الشخصي
 GenericName[bg]=Отчитане на времето
 GenericName[br]=Roudenner amzer personel
+GenericName[bs]=Lični pratilac vremena
 GenericName[ca]=Seguiment horari personal
 GenericName[ca@valencia]=Seguiment horari personal
 GenericName[cs]=Osobní měřič času
