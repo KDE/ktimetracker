@@ -160,6 +160,12 @@ void TimetrackerWidget::addTaskView( const QString &fileName )
 
     connect( taskView, SIGNAL(contextMenuRequested(QPoint)),
            this, SIGNAL(contextMenuRequested(QPoint)) );
+    connect( taskView, SIGNAL(timersActive()),
+           this, SIGNAL(timersActive()) );
+    connect( taskView, SIGNAL(timersInactive()),
+           this, SIGNAL(timersInactive()) );
+    connect( taskView, SIGNAL(tasksChanged(QList<Task*>)),
+           this, SIGNAL(tasksChanged(QList<Task*>)));
 
     emit setCaption( fileName );
     taskView->load( lFileName );
