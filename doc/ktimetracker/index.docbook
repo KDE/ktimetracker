@@ -56,8 +56,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-09-29</date>
-<releaseinfo>4.7</releaseinfo>
+<date>2013-05-26</date>
+<releaseinfo>4.11 pre (&kde; 4.11)</releaseinfo>
 
 <abstract><para>&ktimetracker; tracks time spent on various tasks.</para></abstract>
 
@@ -254,7 +254,8 @@ that task.</para>
 <informalexample> <para><emphasis>Problem:</emphasis> You leave work early on
 Friday to run an errand and forget to stop the timer.  When you return on
 Monday, the timer is still running.</para>
-<para><emphasis>Solution:</emphasis> Turn on idle detection.</para>
+<para><emphasis>Solution:</emphasis> Turn on idle detection on the <guilabel>Behavior</guilabel> page 
+of the settings dialog.</para>
 </informalexample>
 
 <para>&ktimetracker; can be configured to detect when the mouse and keyboard become
@@ -458,8 +459,8 @@ filter. Then, only tasks that match your input are shown. As soon as you
 press &Enter;, your input is used as a name to create a new task.
 </para>
 
-<para>Choose <guilabel>Configuration for PDA</guilabel> in the settings dialog
-if you have a touchscreen and your screen real estate is 
+<para>Choose <guilabel>Configuration for PDA</guilabel> in the <guilabel>Appearance</guilabel> 
+page of the settings dialog if you have a touchscreen and your screen real estate is 
 precious. It will disable the search bar and every click will pop up a 
 context menu.</para>
 
