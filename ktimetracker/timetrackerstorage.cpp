@@ -175,7 +175,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
             task->setPixmapProgress();
         }
 
-        // Load each task under it's parent task.
+        // Load each task under its parent task.
         for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
         {
             Task* task = map.value( (*todo)->uid() );
@@ -266,7 +266,7 @@ QString timetrackerstorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr 
         task->setPixmapProgress();
     }
 
-    // 1.1. Load each task under it's parent task.
+    // 1.1. Load each task under its parent task.
     for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
         Task* task = map.value( (*todo)->uid() );
