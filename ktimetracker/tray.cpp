@@ -57,7 +57,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
     if (icons == 0)
     {
         icons = new QVector<QPixmap*>(8);
-        for (int i=0; i<8; i++)
+        for (int i=0; i<8; ++i)
         {
             QPixmap *icon = new QPixmap();
             QString name;
