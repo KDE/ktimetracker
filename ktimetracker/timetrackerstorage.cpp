@@ -285,7 +285,7 @@ QString timetrackerstorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr 
 
     view->clearActiveTasks();
     // restart tasks that have been running with their start times
-    for ( int i=0; i<view->count(); i++)
+    for ( int i=0; i<view->count(); ++i)
     {
         for ( int n = 0; n < runningTasks.count(); ++n )
         {
@@ -819,7 +819,7 @@ QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
     // First CSV file line
     // FIXME: localize strings and date formats
     retval.append("\"Task name\"");
-    for (int i=0; i<intervalLength; i++)
+    for (int i=0; i<intervalLength; ++i)
     {
         retval.append(delim);
         retval.append(from.addDays(i).toString());

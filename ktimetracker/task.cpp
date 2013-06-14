@@ -101,7 +101,7 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
         if (!konsolemode)
         {
             KIconLoader kil("ktimetracker");
-            for (int i=0; i<8; i++)
+            for (int i=0; i<8; ++i)
             {
                 QPixmap *icon = new QPixmap();
                 QString name;

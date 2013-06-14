@@ -269,7 +269,7 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 
     reconfigure();
     sortByColumn( 0, Qt::AscendingOrder );
-    for (int i=0; i<=columnCount(); i++) resizeColumnToContents(i);
+    for (int i=0; i<=columnCount(); ++i) resizeColumnToContents(i);
 }
 
 void TaskView::newFocusWindowDetected( const QString &taskName )
@@ -467,7 +467,7 @@ void TaskView::load( const QString &fileName )
         _isloading = false;
         refresh();
     }
-    for (int i=0; i<=columnCount(); i++) resizeColumnToContents(i);
+    for (int i=0; i<=columnCount(); ++i) resizeColumnToContents(i);
     kDebug(5970) << "Leaving function";
 }
 
@@ -591,8 +591,8 @@ QString TaskView::reFreshTimes()
         }
     }
 
-    for (int i=0; i<count(); i++) itemAt(i)->recalculatetotaltime();
-    for (int i=0; i<count(); i++) itemAt(i)->recalculatetotalsessiontime();
+    for (int i=0; i<count(); ++i) itemAt(i)->recalculatetotaltime();
+    for (int i=0; i<count(); ++i) itemAt(i)->recalculatetotalsessiontime();
 
     refresh();
     kDebug(5970) << "Leaving TaskView::reFreshTimes()";
