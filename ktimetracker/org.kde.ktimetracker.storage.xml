@@ -7,7 +7,7 @@
 	  </method>
 	  <method name="tasks">
 		  <arg name="out" type="as" direction="out" />
-		  <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
+		  <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QStringList" />
 	  </method>
   </interface>
 </node>

@@ -8,7 +8,7 @@
     <method name="taskIdsFromName">
       <arg name="out" type="as" direction="out" />
       <arg name="taskName" type="s" direction="in"/>
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QStringList" />
     </method>
     <method name="newTask" />
     <method name="addTask">
@@ -23,7 +23,7 @@
     </method>
     <method name="activeTasks">
       <arg name="out" type="as" direction="out" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QStringList" />
     </method>
     <method name="setPercentComplete">
       <arg name="taskId" type="s" direction="in"/>
@@ -62,7 +62,7 @@
     <method name="stopAllTimersDBUS" />
     <method name="tasks">
       <arg name="out" type="as" direction="out" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QStringList" />
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QStringList" />
     </method>
     <method name="exportCSVFile">
       <arg type="s" direction="out"/>
