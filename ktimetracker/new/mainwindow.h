@@ -64,8 +64,8 @@ class MainWindow : public QMainWindow
     ktimetrackerpart *m_part;
 
   public:
-     MainWindow(QWidget *parent = 0);
-   MainWindow( const QString &icsfile = "" );
+    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow( const QString &icsfile = "" );
     virtual ~MainWindow();
 
   public Q_SLOTS:

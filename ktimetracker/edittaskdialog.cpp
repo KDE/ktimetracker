@@ -38,7 +38,7 @@ EditTaskDialog::EditTaskDialog(TaskView *parent, const QString &caption, Desktop
             m_ui->autotrackinggroupbox->setChecked(true);
         }
         else
-            for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+            for ( int i = 0; i < desktopcheckboxes.count(); ++i )
                 desktopcheckboxes[i]->setEnabled(false);
     }
 }
@@ -91,7 +91,7 @@ void EditTaskDialog::status(DesktopList *desktopList) const
     if ( desktopList )
     {
         desktopList->clear();
-        for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+        for ( int i = 0; i < desktopcheckboxes.count(); ++i )
         {
             if ( desktopcheckboxes[i]->isEnabled() && desktopcheckboxes[i]->isChecked() ) desktopList->append( i );
         }
@@ -107,6 +107,6 @@ void EditTaskDialog::on_edittimespushbutton_clicked()
 
 void EditTaskDialog::on_autotrackinggroupbox_clicked()
 {
-     for ( int i = 0; i < desktopcheckboxes.count(); i++ )
+     for ( int i = 0; i < desktopcheckboxes.count(); ++i )
         desktopcheckboxes[i]->setEnabled(m_ui->autotrackinggroupbox->isChecked());
 }

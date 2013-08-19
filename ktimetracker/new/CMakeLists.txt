@@ -2,9 +2,14 @@ project(ktimetracker)
 
 #We check if X11_Xscreensaver was found
 if(X11_Xscreensaver_FOUND)
-  macro_log_feature(X11_Xscreensaver_FOUND "X11 screensaver extension" "X Window Screen Saver Development Library" "http://xorg.freedesktop.org" FALSE "" "Needed by Ktimetracker to measure the screen idle time")
+  message(STATUS "Found the X11 screensaver extension")
   macro_bool_to_01(X11_Xscreensaver_LIB HAVE_LIBXSS)
-endif(X11_Xscreensaver_FOUND)
+else()
+  message(STATUS "The X11 screensaver extension was NOT found.")
+endif()
+
+add_feature_info("KtimeTracker idle detection" X11_Xscreensaver_FOUND "Measure the screen idle time in KTimeTracker")
+
 configure_file(config-ktimetracker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ktimetracker.h )
 
 add_subdirectory( support )
@@ -64,7 +69,7 @@ target_link_libraries(karm  ${KDE4_KIO_LIBS} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIB
 target_link_libraries(ktimetracker   ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
-endif(X11_Xscreensaver_LIB)
+endif()
 
 install( TARGETS karm  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
@@ -79,7 +84,7 @@ kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS})
 target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDEPIMLIBS_KCAL_LIBS} kdepim  kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
     target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
-endif(X11_Xscreensaver_LIB)
+endif()
 
 install(TARGETS kcm_ktimetracker DESTINATION ${PLUGIN_INSTALL_DIR})
 
@@ -94,7 +99,7 @@ kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
 target_link_libraries(ktimetrackerpart ${KDE4_KCMUTILS_LIBS}  ${KDEPIMLIBS_KCAL_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} kdepim kcal_resourceremote ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
-endif(X11_Xscreensaver_LIB)
+endif()
 
 
 install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})

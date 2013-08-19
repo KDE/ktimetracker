@@ -73,7 +73,7 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
     if ((qName == QString::fromLatin1("task")) && (withInTasks))
     {
         // find out name and percent-complete
-        for (int i=0; i<att.length(); i++)
+        for (int i=0; i<att.length(); ++i)
         {
             if (att.qName(i) == QString::fromLatin1("name")) taskName=att.value(i);
             if (att.qName(i)==QString::fromLatin1("percent-complete")) taskComplete=att.value(i).toInt();
