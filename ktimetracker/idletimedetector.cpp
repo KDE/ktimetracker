@@ -149,4 +149,3 @@ void IdleTimeDetector::toggleOverAllIdleDetection(bool on)
     _overAllIdleDetect = on;
 }
 
-#include "idletimedetector.moc"

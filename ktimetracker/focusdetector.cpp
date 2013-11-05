@@ -37,4 +37,3 @@ void FocusDetector::slotfocuschanged()
     emit( newFocus( sysanswer ) );
 }
 
-#include "focusdetector.moc" 

@@ -108,4 +108,3 @@ ReportCriteria CSVExportDialog::reportCriteria()
     return rc;
 }
 
-#include "csvexportdialog.moc"
