@@ -141,4 +141,3 @@ void KTimeTrackerDisplayConfig::save()
     KCModule::save();
 }
 
-#include "ktimetrackerconfigdialog.moc"

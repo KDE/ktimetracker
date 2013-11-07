@@ -189,4 +189,3 @@ void MainWindow::on_actionQuit_triggered()
     close();
 }
 
-#include "mainwindow.moc"

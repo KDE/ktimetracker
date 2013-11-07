@@ -125,4 +125,3 @@ bool ktimetrackerpart::saveFile()
     return true;
 }
 
-#include "ktimetrackerpart.moc"

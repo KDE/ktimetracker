@@ -217,4 +217,3 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
         pop->popup( point );
 }
 
-#include "mainwindow.moc"

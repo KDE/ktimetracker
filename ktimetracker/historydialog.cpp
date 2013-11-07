@@ -242,7 +242,6 @@ QString historydialog::refresh()
     return err;
 }
 
-#include "historydialog.moc"
 
 void historydialog::on_deletepushbutton_clicked()
 {

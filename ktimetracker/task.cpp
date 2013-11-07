@@ -703,4 +703,3 @@ DesktopList Task::desktops() const
 }
 //END
 
-#include "task.moc"

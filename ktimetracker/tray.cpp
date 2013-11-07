@@ -175,4 +175,3 @@ void TrayIcon::updateToolTip(QList<Task*> activeTasks)
     this->setToolTip( "ktimetracker", "ktimetracker", qTip );
 }
 
-#include "tray.moc"

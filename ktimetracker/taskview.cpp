@@ -1218,4 +1218,3 @@ void TaskView::reconfigure()
     refresh();
 }
 
-#include "taskview.moc"

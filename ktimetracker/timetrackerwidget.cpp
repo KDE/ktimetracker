@@ -988,4 +988,3 @@ void TimetrackerWidget::quit()
 }
 // END of dbus slots group
 /* @} */
-#include "timetrackerwidget.moc"
