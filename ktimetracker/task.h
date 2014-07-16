@@ -264,9 +264,9 @@ public:
        *  @param on       true or false for starting or stopping a task
        *  @param storage a pointer to a timetrackerstorage object.
        *  @param when time when the task was started or stopped. Normally
-				    QDateTime::currentDateTime, but if calendar has
-				    been changed by another program and being reloaded
- 				    the task is set to running with another start date
+                                    QDateTime::currentDateTime, but if calendar has
+                                    been changed by another program and being reloaded
+                                    the task is set to running with another start date
        */
       void setRunning( bool on, timetrackerstorage* storage,
                        const QDateTime &when = QDateTime::currentDateTime() );

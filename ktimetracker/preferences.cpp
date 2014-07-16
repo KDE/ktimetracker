@@ -59,4 +59,3 @@ void Preferences::deleteEntry( const QString &key )
     config.sync();
 }
 
-#include "preferences.moc"

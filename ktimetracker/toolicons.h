@@ -126,9 +126,9 @@ const char * delete_xpm[] = {
 /* width height num_colors chars_per_pixel */
 "22 22 3 1",
 /* colors */
-" 	c white",
-".	c none",
-"X	c black",
+"      c white",
+".     c none",
+"X     c black",
 /* pixels */
 "......................",
 "......................",

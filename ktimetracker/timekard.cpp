@@ -39,7 +39,7 @@
 
 const int taskWidth = 40;
 const int timeWidth = 6;
-const int totalTimeWidth = 7;
+//const int totalTimeWidth = 7;
 const int reportWidth = taskWidth + timeWidth;
 
 const QString cr = QString::fromLatin1("\n");

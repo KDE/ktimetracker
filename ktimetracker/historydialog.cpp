@@ -113,7 +113,7 @@ QString historydialog::listallevents()
         if ( !(*i)->relatedTo().isEmpty() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
         {
             KCalCore::Incidence::Ptr parent = calendar ? calendar->incidence( (*i)->relatedTo() ) : KCalCore::Incidence::Ptr();
-            item = new QTableWidgetItem( parent ? parent->summary() : QString() );
+            item = new QTableWidgetItem( parent ? parent->summary() : (*i)->summary() );
             item->setFlags( Qt::ItemIsEnabled );
             item->setWhatsThis( i18n( "You can change this task's comment, start time and end time." ) );
             m_ui->historytablewidget->setItem( row, 0, item );
@@ -242,7 +242,6 @@ QString historydialog::refresh()
     return err;
 }
 
-#include "historydialog.moc"
 
 void historydialog::on_deletepushbutton_clicked()
 {

@@ -141,7 +141,7 @@ class TaskView::Private
 public:
 Private() :
     mStorage( new timetrackerstorage() ),
-    mFocusTrackingActive( false ) {}
+    mFocusTrackingActive( false ), mLastTaskWithFocus(0), mPopupPercentageMenu(0), mPopupPriorityMenu(0) {}
 
     ~Private()
     {
@@ -1218,4 +1218,3 @@ void TaskView::reconfigure()
     refresh();
 }
 
-#include "taskview.moc"

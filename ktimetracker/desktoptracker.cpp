@@ -153,4 +153,3 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
     kDebug(5970) << "Leaving function";
 }
 
-#include "desktoptracker.moc"
