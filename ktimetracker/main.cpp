@@ -29,6 +29,7 @@
 #include <KLocale>
 #include <KStandardDirs>
 #include <kontactinterface/pimuniqueapplication.h>
+#include <kuniqueapplication.h>
 
 #include "kdepim-version.h"
 #include "mainwindow.h"
@@ -123,7 +124,11 @@ int main( int argc, char *argv[] )
 
     if ( !konsolemode )
     {  // no konsole mode
-        KApplication myApp;
+        if (!KUniqueApplication::start()) {
+            kDebug(5970) << "Other instance is already running, exiting!";
+            return 0;
+        }
+        KUniqueApplication myApp;
         MainWindow *mainWindow;
         mainWindow = new MainWindow( icsfile( args ) );
         if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
