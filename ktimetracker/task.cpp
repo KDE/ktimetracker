@@ -656,6 +656,21 @@ void Task::startNewSession()
     mSessionStartTiMe=KDateTime::currentLocalDateTime();
 }
 
+/* Overriding the < operator in order to sort the names case insensitive and
+ * the progress percentage [coloumn 6] numerically.
+ */
+bool Task::operator<(const QTreeWidgetItem &other)const {
+        const int column = treeWidget()->sortColumn();
+        if (column == 6){ //progress percent
+            return text(column).toInt() < other.text(column).toInt();
+        } else if (column == 0) { //task name
+            return text(column).toLower() < other.text(column).toLower();
+        }
+        else {
+            return text(column) < other.text(column);
+        }
+}
+
 //BEGIN Properties
 QString Task::uid() const
 {

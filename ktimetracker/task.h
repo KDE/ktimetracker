@@ -367,6 +367,8 @@ public:
     void init( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
                DesktopList desktops, int percent_complete, int priority, bool konsolemode=false );
 
+    bool operator<(const QTreeWidgetItem &other)const;
+
     static QVector<QPixmap*> *icons;
 
     /** The iCal unique ID of the Todo for this task. */
