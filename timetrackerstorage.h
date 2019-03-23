@@ -207,7 +207,7 @@ class timetrackerstorage : public QObject
      *
      * @param task    The task the timer was started for.
      */
-    void startTimer(const Task* task, const KDateTime &when=KDateTime::currentLocalDateTime());
+    void startTimer(const Task* task, const QDateTime &when=QDateTime::currentDateTime());
 
     /**
      * Start the timer for a given task ID
@@ -347,14 +347,14 @@ class HistoryEvent
     /** Needed to be used in a value list. */
     HistoryEvent() {}
     HistoryEvent( const QString &uid, const QString &name, long duration,
-                  const KDateTime &start, const KDateTime &stop,
+                  const QDateTime &start, const QDateTime &stop,
                   const QString &todoUid );
     QString uid() { return _uid; }
     QString name() { return _name; }
     /** In seconds. */
     long duration() { return _duration; }
-    KDateTime start() { return _start; }
-    KDateTime stop() { return _stop; }
+    QDateTime start() { return _start; }
+    QDateTime stop() { return _stop; }
     QString todoUid() { return _todoUid; }
 
   private:
@@ -362,9 +362,8 @@ class HistoryEvent
     QString _todoUid;
     QString _name;
     long _duration;
-    KDateTime _start;
-    KDateTime _stop;
-
+    QDateTime _start;
+    QDateTime _stop;
 };
 
 #endif // KTIMETRACKER_STORAGE_H

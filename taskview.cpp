@@ -561,10 +561,10 @@ QString TaskView::reFreshTimes()
         {
             if ( (*i)->relatedTo() == itemAt(n)->uid() ) // if event i belongs to task n
             {
-                KDateTime kdatetimestart = (*i)->dtStart();
-                KDateTime kdatetimeend = (*i)->dtEnd();
-                KDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().remove("Z"));
-                KDateTime eventend = KDateTime::fromString(kdatetimeend.toString().remove("Z"));
+                QDateTime kdatetimestart = (*i)->dtStart();
+                QDateTime kdatetimeend = (*i)->dtEnd();
+                QDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().remove("Z"));
+                QDateTime eventend = KDateTime::fromString(kdatetimeend.toString().remove("Z"));
                 int duration=eventstart.secsTo( eventend )/60;
                 itemAt(n)->addTime( duration );
                 emit totalTimesChanged( 0, duration );

@@ -24,6 +24,7 @@
 #include <signal.h>
 #include <QFile>
 #include <KAboutData>
+#include <KLocalizedString>
 
 #include <kontactinterface/pimuniqueapplication.h>
 
@@ -37,8 +38,6 @@
 
 namespace
 {
-    const char* description = I18N_NOOP("KDE Time tracker tool");
-
     void cleanup( int )
     {
         kDebug(5970) << i18n("Just caught a software interrupt.");
@@ -83,7 +82,7 @@ int main( int argc, char *argv[] )
     QApplication app(argc, argv);
 
     KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
-        KDEPIM_VERSION, ki18n(description), KAboutLicense::GPL,
+        KDEPIM_VERSION, ki18n("KDE Time tracker tool"), KAboutLicense::GPL,
         ki18n("Copyright © 1997-2012 KDE PIM authors"), KLocalizedString(),
         QByteArray("http://userbase.kde.org/KTimeTracker") );
 

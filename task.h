@@ -206,7 +206,7 @@ public:
       long totalTime() const { return mTotalTime; };
       long sessionTime() const { return mSessionTime; };
       long totalSessionTime() const { return mTotalSessionTime; };
-      KDateTime sessionStartTiMe() const;
+      QDateTime sessionStartTiMe() const;
 
       /**
        * Return time the task was started.
@@ -397,7 +397,7 @@ public:
     long mSessionTime;
 
     /** time when the session was started */
-    KDateTime mSessionStartTiMe;
+    QDateTime mSessionStartTiMe;
 
     DesktopList mDesktops;
     QTimer *mTimer;

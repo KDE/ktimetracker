@@ -653,7 +653,7 @@ void Task::addComment( const QString &comment, timetrackerstorage* storage )
 void Task::startNewSession()
 {
     changeTimes( -mSessionTime, 0 );
-    mSessionStartTiMe=KDateTime::currentLocalDateTime();
+    mSessionStartTiMe=QDateTime::currentDateTime();
 }
 
 /* Overriding the < operator in order to sort the names case insensitive and
@@ -707,7 +707,7 @@ QDateTime Task::startTime() const
     return mLastStart;
 }
 
-KDateTime Task::sessionStartTiMe() const
+QDateTime Task::sessionStartTiMe() const
 {
     return mSessionStartTiMe;
 }

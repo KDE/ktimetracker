@@ -181,8 +181,7 @@ void historydialog::historyWidgetCellChanged( int row, int col )
                     if ( KDateTime::fromString( m_ui->historytablewidget->item( row, col )->text() ).isValid() )
                     {
                         QDateTime datetime = QDateTime::fromString( m_ui->historytablewidget->item( row, col )->text(), "yyyy-MM-dd HH:mm:ss" );
-                        KDateTime kdatetime = KDateTime::fromString( datetime.toString( Qt::ISODate ) );
-                        (*i)->setDtStart( kdatetime );
+                        (*i)->setDtStart( datetime );
                         mparent->reFreshTimes();
                         kDebug(5970) <<"Program SetDtStart to" << m_ui->historytablewidget->item( row, col )->text();
                     }

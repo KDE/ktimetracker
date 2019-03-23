@@ -716,13 +716,13 @@ int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
           return 0;
 
         kDebug(5970) << "found an event for task, event=" << event->uid();
-        KDateTime startTime=event->dtStart();
-        KDateTime endTime=event->dtEnd();
-        KDateTime NextMidNight=startTime;
+        QDateTime startTime=event->dtStart();
+        QDateTime endTime=event->dtEnd();
+        QDateTime NextMidNight=startTime;
         NextMidNight.setTime(QTime ( 0,0 ));
         NextMidNight=NextMidNight.addDays(1);
         // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
-        KDateTime LastMidNight=KDateTime::currentLocalDateTime();
+        QDateTime LastMidNight=QDateTime::currentDateTime();
         LastMidNight.setDate(date);
         LastMidNight.setTime(QTime(0,0));
         int secsstartTillMidNight=startTime.secsTo(NextMidNight);
@@ -894,7 +894,7 @@ QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
     return err;
 }
 
-void timetrackerstorage::startTimer(const Task* task, const KDateTime &when)
+void timetrackerstorage::startTimer(const Task* task, const QDateTime &when)
 {
     kDebug(5970) << "Entering function; when=" << when;
     KCalCore::Event::Ptr e;
@@ -919,7 +919,7 @@ void timetrackerstorage::startTimer(QString taskID)
             kDebug(5970) << "adding event";
             KCalCore::Event::Ptr e;
             e = baseEvent((*todo));
-            e->setDtStart(KDateTime::currentLocalDateTime());
+            e->setDtStart(QDateTime::currentDateTime());
             d->mCalendar->addEvent(e);
         }
     }
@@ -1021,8 +1021,8 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const KCalCore::Todo::Ptr &to
 }
 
 HistoryEvent::HistoryEvent(const QString &uid, const QString &name,
-                            long duration, const KDateTime &start,
-                            const KDateTime &stop, const QString &todoUid)
+                            long duration, const QDateTime &start,
+                            const QDateTime &stop, const QString &todoUid)
 {
     _uid = uid;
     _name = name;

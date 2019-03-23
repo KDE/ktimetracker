@@ -22,7 +22,7 @@
 #ifndef _KTIMETRACKERPART_H_
 #define _KTIMETRACKERPART_H_
 
-#include <kparts/part.h>
+#include <KParts/ReadWritePart>
 #include <kaboutdata.h>
 #include "reportcriteria.h"
 
