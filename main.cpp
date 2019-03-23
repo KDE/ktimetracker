@@ -24,7 +24,7 @@
 #include <signal.h>
 #include <QFile>
 #include <KAboutData>
-#include <KCmdLineArgs>
+
 #include <KDebug>
 #include <KLocale>
 #include <KStandardDirs>
@@ -37,6 +37,8 @@
 #include "timetrackerstorage.h"
 #include "task.h"
 #include <QDebug>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 
 namespace
 {
@@ -83,8 +85,10 @@ QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar
 
 int main( int argc, char *argv[] )
 {
+    QApplication app(argc, argv);
+
     KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
-        KDEPIM_VERSION, ki18n(description), KAboutData::License_GPL,
+        KDEPIM_VERSION, ki18n(description), KAboutLicense::GPL,
         ki18n("Copyright © 1997-2012 KDE PIM authors"), KLocalizedString(),
         QByteArray("http://userbase.kde.org/KTimeTracker") );
 
@@ -98,29 +102,34 @@ int main( int argc, char *argv[] )
     aboutData.addAuthor( ki18n("Jesper Pedersen"),   KLocalizedString(), "blackie@kde.org" );
     aboutData.addAuthor( ki18n("Kalle Dalheimer"),   KLocalizedString(), "kalle@kde.org" );
     aboutData.addAuthor( ki18n("Mark Bucciarelli"),  KLocalizedString(), "mark@hubcapconsulting.com" );
-    KCmdLineArgs::init( argc, argv, &aboutData );
+    KAboutData::setApplicationData(aboutData);
 
-    KCmdLineOptions options;
-    options.add("+file", ki18n( "The iCalendar file to open" ));
-    options.add("listtasknames", ki18n( "List all tasks as text output" ));
-    options.add("addtask <taskname>", ki18n( "Add task <taskname>" ));
-    options.add("deletetask <taskid>", ki18n( "Delete task <taskid>" ));
-    options.add("taskidsfromname <taskname>", ki18n( "Print the task ids for all tasks named <taskname>" ));
-    options.add("starttask <taskid>", ki18n( "Start timer for task <taskid>" ));
-    options.add("stoptask <taskid>", ki18n( "Stop timer for task <taskid>" ));
-    options.add("totalminutesfortaskid <taskid>", ki18n( "Deliver total minutes for task id" ));
-    options.add("version", ki18n( "Outputs the version" ));
-    KCmdLineArgs::addCmdLineOptions( options );
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    QCommandLineParser parser;
+    parser.addVersionOption();
+    parser.addHelpOption();
+    //PORTING SCRIPT: adapt aboutdata variable if necessary
+    aboutData.setupCommandLine(&parser);
+    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    aboutData.processCommandLine(&parser);
+
+    parser.addPositionalArgument(QLatin1String("file"), i18n( "The iCalendar file to open" ));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("listtasknames"), i18n( "List all tasks as text output" )));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("addtask"), i18n( "Add task <taskname>" ), QLatin1String("taskname")));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("deletetask"), i18n( "Delete task <taskid>" ), QLatin1String("taskid")));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("taskidsfromname"), i18n( "Print the task ids for all tasks named <taskname>" ), QLatin1String("taskname")));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("starttask"), i18n( "Start timer for task <taskid>" ), QLatin1String("taskid")));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("stoptask"), i18n( "Stop timer for task <taskid>" ), QLatin1String("taskid")));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("totalminutesfortaskid"), i18n( "Deliver total minutes for task id" ), QLatin1String("taskid")));
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("version"), i18n( "Outputs the version" )));
     int err=0;  // error code
     bool konsolemode=false;  // open a gui and wait for user input?
-    if ( args->isSet("listtasknames") ) konsolemode=true;
-    if ( !args->getOption("addtask").isEmpty() ) konsolemode=true;
-    if ( !args->getOption("deletetask").isEmpty() ) konsolemode=true;
-    if ( !args->getOption("taskidsfromname").isEmpty() ) konsolemode=true;
-    if ( !args->getOption("totalminutesfortaskid").isEmpty() ) konsolemode=true;
-    if ( !args->getOption("starttask").isEmpty() ) konsolemode=true;
-    if ( !args->getOption("stoptask").isEmpty() ) konsolemode=true;
+    if ( parser.isSet("listtasknames") ) konsolemode=true;
+    if ( !parser.value("addtask").isEmpty() ) konsolemode=true;
+    if ( !parser.value("deletetask").isEmpty() ) konsolemode=true;
+    if ( !parser.value("taskidsfromname").isEmpty() ) konsolemode=true;
+    if ( !parser.value("totalminutesfortaskid").isEmpty() ) konsolemode=true;
+    if ( !parser.value("starttask").isEmpty() ) konsolemode=true;
+    if ( !parser.value("stoptask").isEmpty() ) konsolemode=true;
 
     if ( !konsolemode )
     {  // no konsole mode
@@ -138,7 +147,7 @@ int main( int argc, char *argv[] )
 
         signal( SIGQUIT, cleanup );
         signal( SIGINT, cleanup );
-        args->clear();
+        
         int ret = myApp.exec();
 
         delete mainWindow;
@@ -147,11 +156,9 @@ int main( int argc, char *argv[] )
     else // we are running in konsole mode
     {
         kDebug(5970) << "We are running in konsole mode";
-        KCmdLineArgs::addCmdLineOptions( options );
         KApplication myApp(false);
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
         // listtasknames
-        if ( args->isSet("listtasknames") )
+        if ( parser.isSet("listtasknames") )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
@@ -164,11 +171,11 @@ int main( int argc, char *argv[] )
         delete sto;  // make valgrind happy
         }
         // addtask
-        if ( !args->getOption("addtask").isEmpty() )
+        if ( !parser.value("addtask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
-            const QString& s=args->getOption("addtask");
+            const QString& s=parser.value("addtask");
             QVector<int> vec;
             DesktopList dl=vec;
             Task* task=new Task( s, QString(), (long int) 0,(long int) 0, dl, 0, true );
@@ -177,20 +184,20 @@ int main( int argc, char *argv[] )
             delete sto;
         }
         // deletetask
-        if ( !args->getOption("deletetask").isEmpty() )
+        if ( !parser.value("deletetask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
-            const QString& taskid=args->getOption("deletetask");
+            const QString& taskid=parser.value("deletetask");
             sto->removeTask( taskid );
             delete sto;
         }
         // taskidsfromname
-        if ( !args->getOption("taskidsfromname").isEmpty() )
+        if ( !parser.value("taskidsfromname").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
-            const QString& taskname=args->getOption("taskidsfromname");
+            const QString& taskname=parser.value("taskidsfromname");
             QStringList taskids=sto->taskidsfromname( taskname );
             for ( int i=0; i<taskids.count(); ++i )
             {
@@ -200,11 +207,11 @@ int main( int argc, char *argv[] )
             delete sto;
         }
         // totalminutesfortaskid
-        if ( !args->getOption("totalminutesfortaskid").isEmpty() )
+        if ( !parser.value("totalminutesfortaskid").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
-            Task* task=sto->task( args->getOption("totalminutesfortaskid"), 0 );
+            Task* task=sto->task( parser.value("totalminutesfortaskid"), 0 );
             if (task!=0)
             {
                 kDebug(5970) << "taskname=" << task->name();
@@ -213,22 +220,22 @@ int main( int argc, char *argv[] )
             delete sto;
         }
         // starttask
-        if ( !args->getOption("starttask").isEmpty() )
+        if ( !parser.value("starttask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
-            sto->startTimer(args->getOption("starttask"));
+            sto->startTimer(parser.value("starttask"));
             delete sto;
         }
         // stoptask
-        if ( !args->getOption("stoptask").isEmpty() )
+        if ( !parser.value("stoptask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
             sto->load( 0, icsfile( args ) );
-            sto->stopTimer(sto->task( args->getOption("stoptask"), 0 ));
+            sto->stopTimer(sto->task( parser.value("stoptask"), 0 ));
             delete sto;
         }
-        args->clear();
+        
     }
     return err;
 }
