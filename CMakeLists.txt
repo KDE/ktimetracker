@@ -1,4 +1,13 @@
+cmake_minimum_required(VERSION 3.5)
 project(ktimetracker)
+
+set(KF5_MIN_VERSION "5.55.0")
+
+find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+include(ECMInstallIcons)
+include(KDEInstallDirs)
 
 #We check if X11_Xscreensaver was found
 if(X11_Xscreensaver_FOUND)
@@ -8,9 +17,10 @@ else()
   message(STATUS "The X11 screensaver extension was NOT found.")
 endif()
 
-add_feature_info("KtimeTracker idle detection" X11_Xscreensaver_FOUND "Measure the screen idle time in KTimeTracker")
+#add_feature_info("KtimeTracker idle detection" X11_Xscreensaver_FOUND "Measure the screen idle time in KTimeTracker")
 
-configure_file(config-ktimetracker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ktimetracker.h )
+# TODO: define HAVE_LIBXSS
+#configure_file(config-ktimetracker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ktimetracker.h )
 
 add_subdirectory( support )
 add_subdirectory( pics )

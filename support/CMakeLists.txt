@@ -1,3 +1,1 @@
-
-install( PROGRAMS ktimetracker.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
-
+install(PROGRAMS ktimetracker.desktop DESTINATION ${KDE_INSTALL_APPDIR})
