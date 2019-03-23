@@ -48,7 +48,7 @@
 #include <KProgressDialog>
 #include <KSystemTimeZones>
 #include <KTemporaryFile>
-#include <KUrl>
+#include <QUrl>
 
 #include <QByteArray>
 #include <QDateTime>

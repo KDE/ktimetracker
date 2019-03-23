@@ -49,7 +49,7 @@
 #include <KTabWidget>
 #include <KTemporaryFile>
 #include <KTreeWidgetSearchLine>
-#include <KUrl>
+#include <QUrl>
 #include <KIO/Job>
 
 #include "historydialog.h"
@@ -355,7 +355,7 @@ void TimetrackerWidget::openFile( const QString &fileName )
     addTaskView( newFileName );
 }
 
-void TimetrackerWidget::openFile( const KUrl &fileName )
+void TimetrackerWidget::openFile( const QUrl &fileName )
 {
     openFile( fileName.toLocalFile() );
 }

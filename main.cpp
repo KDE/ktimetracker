@@ -52,7 +52,7 @@ QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar
     if ( args->count() > 0 ) // file is given as parameter
     {
         result = args->arg( 0 );
-        KUrl* icsfileurl=new KUrl(args->arg( 0 ));
+        QUrl* icsfileurl=new QUrl(args->arg( 0 ));
         if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
         {
             // leave as is

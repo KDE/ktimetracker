@@ -28,7 +28,7 @@
 
 class KAction;
 class KActionCollection;
-class KUrl;
+class QUrl;
 
 class Task;
 class TaskView;
@@ -88,9 +88,9 @@ class TimetrackerWidget : public QWidget
     void openFile( const QString &fileName = QString() );
 
     /**
-      opens an existing ics file (wrapper for KUrl).
+      opens an existing ics file (wrapper for QUrl).
      */
-    void openFile( const KUrl &fileName );
+    void openFile( const QUrl &fileName );
 
     /**
       closes the current opened tab widget and saves the data
