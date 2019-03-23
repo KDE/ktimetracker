@@ -8,6 +8,21 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(ECMInstallIcons)
 include(KDEInstallDirs)
+include(ECMAddAppIcon)
+
+set(QT_REQUIRED_VERSION "5.10.0")
+#find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Network Test Widgets WebEngine WebEngineWidgets)
+find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus)
+
+# Find KF5 package
+find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5Config ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5KCMUtils ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5Parts ${KF5_MIN_VERSION} CONFIG REQUIRED)
+
+# Find KdepimLibs Package
+find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5KontactInterface ${KONTACTINTERFACE_LIB_VERSION} CONFIG REQUIRED)
 
 #We check if X11_Xscreensaver was found
 if(X11_Xscreensaver_FOUND)
@@ -40,21 +55,21 @@ set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
   focusdetectornotifier.cpp kttcalendar.cpp
  )
 
-qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
+qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
         org.kde.ktimetracker.ktimetracker.xml
         timetrackerwidget.h
         TimetrackerWidget
         mainadaptor
         MainAdaptor )
 
-qt4_add_dbus_adaptor( ktimetracker_shared_SRCS
+qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
         org.kde.ktimetracker.storage.xml
         taskview.h
         TaskView
         storageadaptor
         StorageAdaptor )
 
-kde4_add_ui_files( ktimetracker_shared_SRCS
+ki18n_wrap_ui( ktimetracker_shared_SRCS
         csvexportdialog_base.ui
         historydialog.ui
         edittaskdialog.ui
@@ -62,20 +77,21 @@ kde4_add_ui_files( ktimetracker_shared_SRCS
         cfgdisplay.ui
         cfgstorage.ui )
 
-kde4_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
+kconfig_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
 
-kde4_add_executable(karm karm.cpp)
+add_executable(karm karm.cpp)
 
-kde4_add_app_icon(ktimetracker_SRCS "hi*-app-ktimetracker.png")
+file(GLOB ICONS_SRCS "hi*-app-ktimetracker.png")
+ecm_add_app_icon(ktimetracker_SRCS ICONS ${ICONS_SRCS})
 
-kde4_add_executable(ktimetracker ${ktimetracker_SRCS})
+add_executable(ktimetracker ${ktimetracker_SRCS})
 
 
-target_link_libraries(karm  ${KDE4_KIO_LIBS} ${KDEPIMLIBS_KCALCORE_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} )
+target_link_libraries(karm  KF5::KIOCore KF5::CalendarCore KF5::KontactInterface )
 
-target_link_libraries(ktimetracker   ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCALCORE_LIBS} ${KDEPIMLIBS_KONTACTINTERFACE_LIBS} ${X11_X11_LIB})
+target_link_libraries(ktimetracker   KF5::KCMUtils KF5::Parts KF5::CalendarCore KF5::KontactInterface ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif()
@@ -88,9 +104,9 @@ install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 set(kcm_ktimetracker_PART_SRCS ${ktimetracker_shared_SRCS})
 
-kde4_add_plugin(kcm_ktimetracker ${kcm_ktimetracker_PART_SRCS})
+add_library(kcm_ktimetracker MODULE ${kcm_ktimetracker_PART_SRCS})
 
-target_link_libraries(kcm_ktimetracker   ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDE4_KPARTS_LIBRARY} ${KDEPIMLIBS_KCALCORE_LIBS} ${X11_X11_LIB})
+target_link_libraries(kcm_ktimetracker   KF5::KIOCore  KF5::KCMUtils KF5::Parts KF5::CalendarCore ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
     target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
 endif()
@@ -103,9 +119,9 @@ install(TARGETS kcm_ktimetracker DESTINATION ${PLUGIN_INSTALL_DIR})
 
 set(ktimetrackerpart_PART_SRCS ${ktimetracker_shared_SRCS})
 
-kde4_add_plugin(ktimetrackerpart ${ktimetrackerpart_PART_SRCS})
+add_library(ktimetrackerpart MODULE ${ktimetrackerpart_PART_SRCS})
 
-target_link_libraries(ktimetrackerpart ${KDE4_KCMUTILS_LIBS}  ${KDEPIMLIBS_KCALCORE_LIBS}  ${KDE4_KIO_LIBS} ${KDE4_KPARTS_LIBS} ${X11_X11_LIB})
+target_link_libraries(ktimetrackerpart KF5::KCMUtils  KF5::CalendarCore  KF5::KIOCore KF5::Parts ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
 endif()
@@ -120,5 +136,5 @@ install( FILES ktimetracker_config_behavior.desktop  ktimetracker_config_display
 install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker )
 
-kde4_install_icons( ${ICON_INSTALL_DIR} )
+#ecm_install_icons( ${ICON_INSTALL_DIR} )
 install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
