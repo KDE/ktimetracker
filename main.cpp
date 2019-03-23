@@ -25,13 +25,8 @@
 #include <QFile>
 #include <KAboutData>
 
-#include <KDebug>
-#include <KLocale>
-#include <KStandardDirs>
 #include <kontactinterface/pimuniqueapplication.h>
-#include <kuniqueapplication.h>
 
-#include "kdepim-version.h"
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "timetrackerstorage.h"
