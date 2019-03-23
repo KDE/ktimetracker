@@ -81,22 +81,17 @@ kconfig_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
 
-add_executable(karm karm.cpp)
-
 file(GLOB ICONS_SRCS "hi*-app-ktimetracker.png")
 ecm_add_app_icon(ktimetracker_SRCS ICONS ${ICONS_SRCS})
 
 add_executable(ktimetracker ${ktimetracker_SRCS})
 
 
-target_link_libraries(karm  KF5::KIOCore KF5::CalendarCore KF5::KontactInterface )
-
 target_link_libraries(ktimetracker   KF5::KCMUtils KF5::Parts KF5::CalendarCore KF5::KontactInterface ${X11_X11_LIB})
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif()
 
-install( TARGETS karm  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
