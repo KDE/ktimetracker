@@ -69,7 +69,8 @@ set(ktimetracker_shared_SRCS
 	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
   focusdetectornotifier.cpp kttcalendar.cpp
 	desktoptracker.h
- )
+	$<TARGET_OBJECTS:pics>
+)
 
 ecm_qt_declare_logging_category(ktimetracker_shared_SRCS
 	HEADER ktt_debug.h

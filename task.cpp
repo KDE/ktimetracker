@@ -105,10 +105,9 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
             KIconLoader kil("ktimetracker");
             for (int i=0; i<8; ++i)
             {
-                QPixmap *icon = new QPixmap();
                 QString name;
-                name.sprintf("watch-%d.xpm",i);
-                *icon = kil.loadIcon( name, KIconLoader::User );
+                name.sprintf(":/pics/watch-%d.xpm",i);
+                QPixmap *icon = new QPixmap(name);
                 icons->insert(i,icon);
             }
         }
