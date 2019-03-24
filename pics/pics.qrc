@@ -16,5 +16,8 @@
         <file>active-icon-5.xpm</file>
         <file>active-icon-6.xpm</file>
         <file>active-icon-7.xpm</file>
+        <file>task-complete.xpm</file>
+        <file>task-incomplete.xpm</file>
+        <file>empty-watch.xpm</file>
     </qresource>
 </RCC>

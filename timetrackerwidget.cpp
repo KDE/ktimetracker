@@ -324,8 +324,8 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     d->mActions[ "mark_as_complete" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_M ) );
     d->mActions[ "mark_as_incomplete" ]->setShortcut( QKeySequence( Qt::CTRL + Qt::Key_M ) );
 
-    d->mActions[ "mark_as_complete" ]->setIcon( UserIcon( "task-complete.xpm" ) );
-    d->mActions[ "mark_as_incomplete" ]->setIcon( UserIcon( "task-incomplete.xpm" ) );
+    d->mActions["mark_as_complete"]->setIcon(QPixmap(":/pics/task-complete.xpm"));
+    d->mActions["mark_as_incomplete"]->setIcon(QPixmap(":/pics/task-incomplete.xpm"));
 
     d->mActions[ "focustracking" ]->setCheckable( true );
     d->mActions[ "searchbar" ]->setCheckable( true );

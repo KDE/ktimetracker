@@ -122,7 +122,7 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
     mTimer = new QTimer(this);
     mDesktops = desktops;
     connect(mTimer, SIGNAL(timeout()), this, SLOT(updateActiveIcon()));
-    if ( !konsolemode ) setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+    if ( !konsolemode ) setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
     mCurrentPic = 0;
     mPercentComplete = percent_complete;
     mPriority = priority;
@@ -181,7 +181,7 @@ void Task::setRunning( bool on, timetrackerstorage* storage, const QDateTime &wh
             if ( ! mRemoving )
             {
                 storage->stopTimer(this, when);
-                setIcon(1, UserIcon(QString::fromLatin1("empty-watch.xpm")));
+                setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
             }
         }
     }
