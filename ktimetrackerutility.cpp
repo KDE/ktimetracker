@@ -21,8 +21,9 @@
 
 #include "ktimetrackerutility.h"
 
-#include <KGlobal>
-#include <KLocale>
+//#include <KGlobal>
+//#include <KLocale>
+#include <KWindowSystem>
 
 #include <math.h>
 #include <stdlib.h>
@@ -36,15 +37,15 @@ QString getFocusWindow()
 
 QString formatTime( double minutes, bool decimal )
 {
-    kDebug(5970) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
+    qCDebug(KTT_LOG) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
     QString time;
     if ( decimal )
     {
-        time.sprintf( "%.2f", minutes / 60.0 );
-        time.replace( '.', KGlobal::locale()->decimalSymbol() );
+        time.sprintf("%.2f", minutes / 60.0 );
+        time.replace('.', QLocale().decimalPoint());
     }
     else time.sprintf("%s%ld:%02ld",
-        (minutes < 0) ? KGlobal::locale()->negativeSign().toUtf8().data() : "",
+        (minutes < 0) ? QString(QLocale().negativeSign()).toUtf8().data() : "",
         labs(minutes / 60), labs(((int) round(minutes)) % 60));
     return time;
 }

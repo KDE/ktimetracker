@@ -28,7 +28,7 @@
 
 class KAccel;
 class KAccelMenuWatch;
-class KAction;
+class QAction;
 class TrayIcon;
 class QPoint;
 class QString;
@@ -51,8 +51,8 @@ class MainWindow : public KParts::MainWindow
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
     TrayIcon*        _tray;
-    KAction*         actionKeyBindings;
-    KAction* configureAction;
+    QAction *         actionKeyBindings;
+    QAction * configureAction;
 
     TimetrackerWidget *mainWidget;
 

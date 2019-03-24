@@ -25,7 +25,8 @@
 #include <QFile>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KLocale>
 #include <KStandardDirs>
 #include <kontactinterface/pimuniqueapplication.h>
@@ -43,7 +44,7 @@ namespace
 
     void cleanup( int )
     {
-        kDebug(5970) << i18n("Just caught a software interrupt.");
+        qCDebug(KTT_LOG) << i18n("Just caught a software interrupt.");
         kapp->exit();
     }
 }
@@ -141,7 +142,7 @@ int main( int argc, char *argv[] )
     }
     else // we are running in konsole mode
     {
-        kDebug(5970) << "We are running in konsole mode";
+        qCDebug(KTT_LOG) << "We are running in konsole mode";
         KCmdLineArgs::addCmdLineOptions( options );
         KApplication myApp(false);
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -203,7 +204,7 @@ int main( int argc, char *argv[] )
             Task* task=sto->task( args->getOption("totalminutesfortaskid"), 0 );
             if (task!=0)
             {
-                kDebug(5970) << "taskname=" << task->name();
+                qCDebug(KTT_LOG) << "taskname=" << task->name();
                 std::cout << task->totalTime();
             }
             delete sto;

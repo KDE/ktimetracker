@@ -55,7 +55,7 @@ public:
     TimetrackerWidget* MainWidget() { return mMainWidget; };
 
     virtual ~ktimetrackerpart();
-    static KAboutData *createAboutData();
+//    static KAboutData *createAboutData();
     /**
      * openFile() opens the icalendar file that contains the tasks and events.
      * It has been inherited from KParts::ReadWritePart where it was protected

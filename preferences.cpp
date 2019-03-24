@@ -23,7 +23,9 @@
 #include "preferences.h"
 
 #include <KConfig>
-#include <KGlobal>
+#include <KConfigGroup>
+//#include <KGlobal>
+#include <KSharedConfig>
 
 Preferences *Preferences::mInstance = 0;
 
@@ -42,19 +44,19 @@ Preferences *Preferences::instance()
 
 bool Preferences::readBoolEntry( const QString& key )
 {
-    return KGlobal::config()->group( QString() ).readEntry( key, true );
+    return KSharedConfig::openConfig()->group( QString() ).readEntry( key, true );
 }
 
 void Preferences::writeEntry( const QString &key, bool value)
 {
-    KConfigGroup config = KGlobal::config()->group( QString() );
+    KConfigGroup config = KSharedConfig::openConfig()->group( QString() );
     config.writeEntry( key, value );
     config.sync();
 }
 
 void Preferences::deleteEntry( const QString &key )
 {
-    KConfigGroup config = KGlobal::config()->group( QString() );
+    KConfigGroup config = KSharedConfig::openConfig()->group( QString() );
     config.deleteEntry( key );
     config.sync();
 }

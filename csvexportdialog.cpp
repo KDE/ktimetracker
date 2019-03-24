@@ -22,7 +22,8 @@
 
 #include "csvexportdialog.h"
 
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KDateComboBox>
 #include <KGlobal>
 #include <KLocale>
@@ -89,7 +90,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
     rc.from = dtFrom->date();
     rc.to = dtTo->date();
     rc.decimalMinutes = (  combodecimalminutes->currentText() == i18nc( "format to display times", "Decimal" ) );
-    kDebug(5970) <<"rc.decimalMinutes is" << rc.decimalMinutes;
+    qCDebug(KTT_LOG) <<"rc.decimalMinutes is" << rc.decimalMinutes;
 
     if ( radioComma->isChecked() )          rc.delimiter = ",";
     else if ( radioTab->isChecked() )       rc.delimiter = "\t";
@@ -98,7 +99,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
     else if ( radioOther->isChecked() )     rc.delimiter = txtOther->text();
     else
     {
-        kDebug(5970) << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
+        qCDebug(KTT_LOG) << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
         rc.delimiter = "\t";
     }
 

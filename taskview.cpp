@@ -32,16 +32,19 @@
 #include <QMouseEvent>
 #include <QList>
 #include <QClipboard>
+#include <QApplication>
 
-#include <KApplication>       // kapp
-#include <KDebug>
+//#include <KApplication>       // kapp
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KFileDialog>
-#include <KLocale>            // i18n
+//#include <KLocale>            // i18n
 #include <KMessageBox>
 #include <KProgressDialog>
 #include <KUrlRequester>
+#include <KLocalizedString>
 
-#include "csvexportdialog.h"
+//#include "csvexportdialog.h"
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
 #include "idletimedetector.h"
@@ -350,7 +353,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
 
 void TaskView::mousePressEvent( QMouseEvent *event )
 {
-    kDebug(5970) << "Entering function, event->button()=" << event->button();
+    qCDebug(KTT_LOG) << "Entering function, event->button()=" << event->button();
     QModelIndex index = indexAt( event->pos() );
 
     // if the user toggles a task as complete/incomplete
@@ -398,7 +401,7 @@ TaskView::~TaskView()
 
 Task* TaskView::currentItem() const
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     return static_cast< Task* >( QTreeWidget::currentItem() );
 }
 
@@ -412,7 +415,7 @@ has the number i=0. */
     QTreeWidgetItemIterator item( this );
     while( *item && i-- ) ++item;
 
-    kDebug( 5970 ) << "Leaving TaskView::itemAt" << "returning " << (*item==0);
+    qCDebug(KTT_LOG) << "Leaving TaskView::itemAt" << "returning " << (*item==0);
     if ( !( *item ) )
         return 0;
     else
@@ -425,7 +428,7 @@ void TaskView::load( const QString &fileName )
 
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     _isloading = true;
     QString err = d->mStorage->load(this, fileName);
 
@@ -433,7 +436,7 @@ void TaskView::load( const QString &fileName )
     {
         KMessageBox::error(this, err);
         _isloading = false;
-        kDebug(5970) << "Leaving TaskView::load";
+        qCDebug(KTT_LOG) << "Leaving TaskView::load";
         return;
     }
 
@@ -468,7 +471,7 @@ void TaskView::load( const QString &fileName )
         refresh();
     }
     for (int i=0; i<=columnCount(); ++i) resizeColumnToContents(i);
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TaskView::restoreItemState()
@@ -476,7 +479,7 @@ void TaskView::restoreItemState()
 Its state is whether it is expanded or not. If a task shall be expanded
 is stored in the _preferences object. */
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
 
     if ( topLevelItemCount() > 0 )
     {
@@ -488,15 +491,15 @@ is stored in the _preferences object. */
             ++item;
         }
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TaskView::itemStateChanged( QTreeWidgetItem *item )
 {
-    kDebug() << "Entering function";
+    qDebug() << "Entering function";
     if ( !item || _isloading ) return;
     Task *t = (Task *)item;
-    kDebug(5970) <<"TaskView::itemStateChanged()" <<" uid=" << t->uid() <<" state=" << t->isExpanded();
+    qCDebug(KTT_LOG) <<"TaskView::itemStateChanged()" <<" uid=" << t->uid() <<" state=" << t->isExpanded();
     if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
 }
 
@@ -514,18 +517,18 @@ void TaskView::iCalFileModified()
 {
     KTimeTracker::KTTCalendar *calendar = qobject_cast<KTimeTracker::KTTCalendar*>( sender() );
     if ( !calendar || !calendar->weakPointer() ) {
-      kWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
+      qWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
     } else {
-      kDebug(5970) << "entering function";
+      qCDebug(KTT_LOG) << "entering function";
       calendar->reload();
       d->mStorage->buildTaskView( calendar->weakPointer().toStrongRef(), this );
-      kDebug(5970) << "exiting iCalFileModified";
+      qCDebug(KTT_LOG) << "exiting iCalFileModified";
     }
 }
 
 void TaskView::refresh()
 {
-    kDebug(5970) << "entering function";
+    qCDebug(KTT_LOG) << "entering function";
     int i = 0;
     for ( Task* t = itemAt(i); t; t = itemAt(++i) )
     {
@@ -542,13 +545,13 @@ void TaskView::refresh()
     setRootIsDecorated( true );
 
     emit updateButtons();
-    kDebug(5970) << "exiting TaskView::refresh()";
+    qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
 }
 
 QString TaskView::reFreshTimes()
 /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     // re-calculate the time for every task based on events in the history
     KCalCore::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
@@ -563,12 +566,12 @@ QString TaskView::reFreshTimes()
             {
                 QDateTime kdatetimestart = (*i)->dtStart();
                 QDateTime kdatetimeend = (*i)->dtEnd();
-                QDateTime eventstart = KDateTime::fromString(kdatetimestart.toString().remove("Z"));
-                QDateTime eventend = KDateTime::fromString(kdatetimeend.toString().remove("Z"));
+                QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
+                QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
                 int duration=eventstart.secsTo( eventend )/60;
                 itemAt(n)->addTime( duration );
                 emit totalTimesChanged( 0, duration );
-                kDebug(5970) << "duration is " << duration;
+                qCDebug(KTT_LOG) << "duration is " << duration;
 
                 if ( itemAt(n)->sessionStartTiMe().isValid() )
                 {
@@ -595,13 +598,13 @@ QString TaskView::reFreshTimes()
     for (int i=0; i<count(); ++i) itemAt(i)->recalculatetotalsessiontime();
 
     refresh();
-    kDebug(5970) << "Leaving TaskView::reFreshTimes()";
+    qCDebug(KTT_LOG) << "Leaving TaskView::reFreshTimes()";
     return err;
 }
 
 void TaskView::importPlanner( const QString &fileName )
 {
-    kDebug( 5970 ) << "entering importPlanner";
+    qCDebug(KTT_LOG) << "entering importPlanner";
     PlannerParser *handler = new PlannerParser( this );
     QString lFileName = fileName;
     if ( lFileName.isEmpty() )
@@ -616,38 +619,38 @@ void TaskView::importPlanner( const QString &fileName )
 
 QString TaskView::report( const ReportCriteria& rc )
 {
-    return d->mStorage->report( this, rc );
+//    return d->mStorage->report( this, rc );
 }
 
 void TaskView::exportcsvFile()
 {
-    kDebug(5970) << "TaskView::exportcsvFile()";
-
-    CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
-    if ( currentItem() && currentItem()->isRoot() )
-        dialog.enableTasksToExportQuestion();
-    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
-    if ( dialog.exec() )
-    {
-        QString err = d->mStorage->report( this, dialog.reportCriteria() );
-        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toLatin1()) );
-    }
+//    qCDebug(KTT_LOG) << "TaskView::exportcsvFile()";
+//
+//    CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
+//    if ( currentItem() && currentItem()->isRoot() )
+//        dialog.enableTasksToExportQuestion();
+//    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
+//    if ( dialog.exec() )
+//    {
+//        QString err = d->mStorage->report( this, dialog.reportCriteria() );
+//        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toLatin1()) );
+//    }
 }
 
 QString TaskView::exportcsvHistory()
 {
-    kDebug(5970) << "TaskView::exportcsvHistory()";
-    QString err;
-
-    CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
-    if ( currentItem() && currentItem()->isRoot() )
-        dialog.enableTasksToExportQuestion();
-    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
-    if ( dialog.exec() )
-    {
-        err = d->mStorage->report( this, dialog.reportCriteria() );
-    }
-    return err;
+//    qCDebug(KTT_LOG) << "TaskView::exportcsvHistory()";
+//    QString err;
+//
+//    CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
+//    if ( currentItem() && currentItem()->isRoot() )
+//        dialog.enableTasksToExportQuestion();
+//    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
+//    if ( dialog.exec() )
+//    {
+//        err = d->mStorage->report( this, dialog.reportCriteria() );
+//    }
+//    return err;
 }
 
 long TaskView::count()
@@ -697,7 +700,7 @@ void TaskView::scheduleSave()
 
 void TaskView::save()
 {
-    kDebug(5970) <<"Entering TaskView::save()";
+    qCDebug(KTT_LOG) <<"Entering TaskView::save()";
     QString err=d->mStorage->save(this);
 
     if (!err.isNull())
@@ -720,7 +723,7 @@ void TaskView::startCurrentTimer()
 
 void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (task != 0 && d->mActiveTasks.indexOf(task) == -1)
     {
         if (!task->isComplete())
@@ -744,14 +747,14 @@ void TaskView::clearActiveTasks()
 
 void TaskView::stopAllTimers( const QDateTime &when )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KProgressDialog dialog( this, 0, QString("Progress") );
     dialog.progressBar()->setMaximum( d->mActiveTasks.count() );
     if ( d->mActiveTasks.count() > 1 ) dialog.show();
 
     foreach ( Task *task, d->mActiveTasks )
     {
-        kapp->processEvents();
+//        kapp->processEvents();
         task->setRunning( false, d->mStorage, when );
         dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
     }
@@ -785,7 +788,7 @@ void TaskView::startNewSession()
 overalltimes (comprising all sessions) and total times (comprising all subtasks).
 That is why there is also a total session time. */
 {
-    kDebug(5970) <<"Entering TaskView::startNewSession";
+    qCDebug(KTT_LOG) <<"Entering TaskView::startNewSession";
     QTreeWidgetItemIterator item( this );
     while ( *item )
     {
@@ -793,13 +796,13 @@ That is why there is also a total session time. */
         task->startNewSession();
         ++item;
     }
-    kDebug(5970) << "Leaving TaskView::startNewSession";
+    qCDebug(KTT_LOG) << "Leaving TaskView::startNewSession";
 }
 
 void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QTreeWidgetItemIterator item( this );
     while ( *item )
     {
@@ -808,13 +811,13 @@ void TaskView::resetTimeForAllTasks()
         ++item;
     }
     storage()->deleteAllEvents();
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TaskView::resetDisplayTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QTreeWidgetItemIterator item( this );
     while ( *item )
     {
@@ -822,12 +825,12 @@ void TaskView::resetDisplayTimeForAllTasks()
         task->resetTimes();
         ++item;
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TaskView::stopTimerFor(Task* task)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 )
     {
         d->mActiveTasks.removeAll(task);
@@ -902,7 +905,7 @@ QString TaskView::addTask
 ( const QString& taskname, const QString& taskdescription, long total, long session,
   const DesktopList& desktops, Task* parent )
 {
-    kDebug(5970) << "Entering function; taskname =" << taskname;
+    qCDebug(KTT_LOG) << "Entering function; taskname =" << taskname;
     setSortingEnabled(false);
     Task *task;
     if ( parent ) task = new Task( taskname, taskdescription, total, session, desktops, parent );
@@ -938,7 +941,7 @@ void TaskView::newSubTask()
 
 void TaskView::editTask()
 {
-    kDebug(5970) <<"Entering editTask";
+    qCDebug(KTT_LOG) <<"Entering editTask";
     Task *task = currentItem();
     if (!task) return;
 
@@ -1020,7 +1023,7 @@ void TaskView::deleteTask( Task* task )
 If you have "Track active applications" on, this window will create a new task and
 make this task running and selected. */
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (task == 0) task = currentItem();
     if (currentItem() == 0)
     {
@@ -1062,7 +1065,7 @@ void TaskView::subtractTime(int minutes)
 
 void TaskView::deletingTask(Task* deletedTask)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     DesktopList desktopList;
 
     _desktopTracker->registerForDesktops( deletedTask, desktopList );
@@ -1080,17 +1083,17 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
 {
-    kDebug(5970) << "Entering function";
+//    qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    TimeKard t;
-    KApplication::clipboard()->setText(t.totalsAsText(this, rc));
+//    TimeKard t;
+//    KApplication::clipboard()->setText(t.totalsAsText(this, rc));
     return err;
 }
 
 QString TaskView::setClipBoardText(const QString& s)
 {
     QString err; // maybe we find possible errors later
-    KApplication::clipboard()->setText(s);
+//    KApplication::clipboard()->setText(s);
     return err;
 }
 
@@ -1190,7 +1193,7 @@ QList< Task* > TaskView::activeTasks() const
 
 void TaskView::reconfigure()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     /* Adapt columns */
     setColumnHidden( 1, !KTimeTrackerSettings::displaySessionTime() );
     setColumnHidden( 2, !KTimeTrackerSettings::displayTime() );

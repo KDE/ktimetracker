@@ -4,6 +4,7 @@
 #include <KMessageBox>
 #include "ktimetrackerutility.h"
 #include <QCheckBox>
+#include <KWindowSystem>
 
 QVector<QCheckBox*> desktopcheckboxes;
 

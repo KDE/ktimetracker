@@ -23,7 +23,7 @@
 #ifndef KTIMETRACKER_FOCUS_DETECTOR_H
 #define KTIMETRACKER_FOCUS_DETECTOR_H
 
-#include <kwindowsystem.h>
+//#include <kwindowsystem.h>
 #include <QObject>
 
 #include <config-ktimetracker.h> // HAVE_LIBXSS

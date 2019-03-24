@@ -21,7 +21,8 @@
  */
 
 #include "desktoptracker.h"
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include "ktimetracker.h"
 #include "ktimetrackerutility.h"
 #include <KWindowSystem>
@@ -97,7 +98,7 @@ QString DesktopTracker::startTracking()
 
 void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     // if no desktop is marked, disable auto tracking for this task
     if ( desktopList.size() == 0 )
     {
@@ -114,7 +115,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
                 emit leftActiveDesktop( task );
 #endif
         }
-        kDebug(5970) << "Leaving function, desktopList.size=0";
+        qCDebug(KTT_LOG) << "Leaving function, desktopList.size=0";
         return;
     }
 
@@ -150,6 +151,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
         }
         startTracking();
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
+//#include "desktoptracker.moc"

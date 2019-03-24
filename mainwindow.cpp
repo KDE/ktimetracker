@@ -27,21 +27,25 @@
 #include <QString>
 #include <QTimer>
 
-#include <KAction>
-#include <KApplication>       // kapp
-#include <KDebug>
-#include <KGlobal>
-#include <KIcon>
-#include <KLocale>            // i18n
+#include <QAction>
+//#include <KApplication>       // kapp
+#include <QDebug>
+#include "ktt_debug.h"
+//#include <KGlobal>
+//#include <KIcon>
+//#include <KLocale>            // i18n
 #include <KMessageBox>
-#include <KPushButton>
+#include <KLocalizedString>
+//#include <KPushButton>
 #include <KShortcutsDialog>
+#include <QStatusBar>
 #include <KStandardAction>
-#include <KStatusBar>         // statusBar()
+//#include <KStatusBar>         // statusBar()
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KPluginLoader>
 #include <KPluginFactory>
+#include <KSharedConfig>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
@@ -55,7 +59,7 @@
 MainWindow::MainWindow( const QString &icsfile )
   :  KParts::MainWindow( )
 {
-    kDebug(5970) << "Entering function, icsfile is " << icsfile;
+    qCDebug(KTT_LOG) << "Entering function, icsfile is " << icsfile;
     // Setup our actions
     setupActions();
 
@@ -87,7 +91,7 @@ MainWindow::MainWindow( const QString &icsfile )
         }
         else
         {
-          kError() << "Could not find the KTimeTracker part: m_part is 0";
+          qCritical() << "Could not find the KTimeTracker part: m_part is 0";
           KMessageBox::error(this, i18n( "Could not create the KTimeTracker part." ));
           QTimer::singleShot(0, qApp, SLOT(quit()));
           return;
@@ -97,7 +101,7 @@ MainWindow::MainWindow( const QString &icsfile )
     {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        kError() << "Could not find the KTimeTracker part: factory is 0";
+        qCritical() << "Could not find the KTimeTracker part: factory is 0";
         KMessageBox::error(this, i18n( "Could not find the KTimeTracker part." ));
         QTimer::singleShot(0, qApp, SLOT(quit()));
         // we return here, cause qApp->quit() only means "exit the
@@ -129,7 +133,7 @@ MainWindow::MainWindow( const QString &icsfile )
 
 void MainWindow::setupActions()
 {
-    configureAction = new KAction(this);
+    configureAction = new QAction(this);
     configureAction->setText(i18n("Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
@@ -157,7 +161,7 @@ void MainWindow::setStatusBar(const QString& qs)
 
 MainWindow::~MainWindow()
 {
-    kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
+    qCDebug(KTT_LOG) << "MainWindow::~MainWindows: Quitting ktimetracker.";
     saveGeometry();
 }
 
@@ -182,7 +186,7 @@ void MainWindow::loadGeometry()
     if (initialGeometrySet()) setAutoSaveSettings();
     else
     {
-        KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
+        KConfigGroup config = KSharedConfig::openConfig()->group( QString::fromLatin1("Main Window Geometry") );
         int w = config.readEntry( QString::fromLatin1("Width"), 100 );
         int h = config.readEntry( QString::fromLatin1("Height"), 100 );
         w = qMax( w, sizeHint().width() );
@@ -194,7 +198,7 @@ void MainWindow::loadGeometry()
 
 void MainWindow::saveGeometry()
 {
-    KConfigGroup config = KGlobal::config()->group( QString::fromLatin1("Main Window Geometry") );
+    KConfigGroup config = KSharedConfig::openConfig()->group( QString::fromLatin1("Main Window Geometry") );
     config.writeEntry( QString::fromLatin1("Width"), width());
     config.writeEntry( QString::fromLatin1("Height"), height());
     config.sync();
@@ -202,11 +206,11 @@ void MainWindow::saveGeometry()
 
 bool MainWindow::queryClose()
 {
-    if ( !kapp->sessionSaving() )
-    {
-        hide();
-        return false;
-    }
+//    if ( !kapp->sessionSaving() )
+//    {
+//        hide();
+//        return false;
+//    }
     return KMainWindow::queryClose();
 }
 

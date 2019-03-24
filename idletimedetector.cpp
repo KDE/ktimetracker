@@ -28,11 +28,11 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-#include <KDialog>
-#include <KGlobal>
-#include <KLocale>    // i18n
+//#include <KDialog>
+//#include <KGlobal>
+//#include <KLocale>    // i18n
 
-#include <kdebug.h>
+//#include <kdebug.h>
 #include <KWindowSystem>
 
 #ifdef Q_WS_X11
@@ -61,16 +61,16 @@ bool IdleTimeDetector::isIdleDetectionPossible()
 
 void IdleTimeDetector::check()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
 #if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
-    kDebug(5970) << "kompiled for libxss and x11, idledetectionpossible is " << _idleDetectionPossible;
+    qCDebug(KTT_LOG) << "kompiled for libxss and x11, idledetectionpossible is " << _idleDetectionPossible;
     if (_idleDetectionPossible)
     {
         _mit_info = XScreenSaverAllocInfo();
         XScreenSaverQueryInfo(QX11Info::display(), QX11Info::appRootWindow(), _mit_info);
         idleminutes = (_mit_info->idle/1000)/secsPerMinute;
-        kDebug(5970) << "The desktop has been idle for " << idleminutes << " minutes.";
-        kDebug(5970) << "The idle time in miliseconds is " << _mit_info->idle;
+        qCDebug(KTT_LOG) << "The desktop has been idle for " << idleminutes << " minutes.";
+        qCDebug(KTT_LOG) << "The idle time in miliseconds is " << _mit_info->idle;
         if (idleminutes >= _maxIdle)
         informOverrun();
     }
@@ -85,7 +85,7 @@ void IdleTimeDetector::setMaxIdle(int maxIdle)
 void IdleTimeDetector::revert()
 {
     // revert and stop
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QDateTime end = QDateTime::currentDateTime();
     int diff = start.secsTo(end)/secsPerMinute;
     emit(subtractTime(idleminutes+diff)); // subtract the time that has been added on the display
@@ -123,7 +123,7 @@ void IdleTimeDetector::informOverrun()
         // The user might be looking at another virtual desktop as where ktimetracker is running
         KWindowSystem::self()->setOnDesktop( dialog->winId(), KWindowSystem::self()->currentDesktop() );
         KWindowSystem::self()->demandAttention( dialog->winId() );
-        kDebug(5970) << "Setting WinId " << dialog->winId() << " to deskTop " << KWindowSystem::self()->currentDesktop();
+        qCDebug(KTT_LOG) << "Setting WinId " << dialog->winId() << " to deskTop " << KWindowSystem::self()->currentDesktop();
         dialog->show();
 }
 #endif // HAVE_LIBXSS

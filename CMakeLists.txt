@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-project(ktimetracker)
+set(KDEPIM_VERSION_NUMBER "5.10.80")
+project(ktimetracker VERSION ${KDEPIM_VERSION_NUMBER})
 
 set(KF5_MIN_VERSION "5.55.0")
 
@@ -9,6 +10,9 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(ECMInstallIcons)
 include(KDEInstallDirs)
 include(ECMAddAppIcon)
+include(ECMQtDeclareLoggingCategory)
+
+include(KDECMakeSettings)
 
 set(QT_REQUIRED_VERSION "5.10.0")
 #find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Network Test Widgets WebEngine WebEngineWidgets)
@@ -19,6 +23,11 @@ find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Config ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5KCMUtils ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Parts ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5WindowSystem ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5Notifications ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5ItemViews ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5IconThemes ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5KDELibs4Support ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 # Find KdepimLibs Package
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
@@ -46,18 +55,28 @@ include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}
 )
 
-
 ########### next target ###############
-set(ktimetracker_shared_SRCS ktimetrackerconfigdialog.cpp
+set(ktimetracker_shared_SRCS
+#	ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp ktimetrackerpart.cpp
 	edittaskdialog.cpp idletimedetector.cpp
 	timekard.cpp ktimetrackerutility.cpp
 	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
-	csvexportdialog.cpp plannerparser.cpp historydialog.cpp
+#	csvexportdialog.cpp
+	plannerparser.cpp historydialog.cpp
 	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
   focusdetectornotifier.cpp kttcalendar.cpp
+	desktoptracker.h
  )
+
+ecm_qt_declare_logging_category(ktimetracker_shared_SRCS
+	HEADER ktt_debug.h
+	IDENTIFIER KTT_LOG
+	CATEGORY_NAME log_ktt
+)
+
+configure_file(ktimetracker-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/ktimetracker-version.h @ONLY)
 
 qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
         org.kde.ktimetracker.ktimetracker.xml
@@ -74,7 +93,7 @@ qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
         StorageAdaptor )
 
 ki18n_wrap_ui( ktimetracker_shared_SRCS
-        csvexportdialog_base.ui
+#        csvexportdialog_base.ui
         historydialog.ui
         edittaskdialog.ui
         cfgbehavior.ui
@@ -91,7 +110,18 @@ ecm_add_app_icon(ktimetracker_SRCS ICONS ${ICONS_SRCS})
 add_executable(ktimetracker ${ktimetracker_SRCS})
 
 
-target_link_libraries(ktimetracker   KF5::KCMUtils KF5::Parts KF5::CalendarCore KF5::KontactInterface ${X11_X11_LIB})
+target_link_libraries(ktimetracker
+	KF5::KCMUtils
+	KF5::Parts
+	KF5::WindowSystem
+	KF5::Notifications
+	KF5::ItemViews
+	KF5::IconThemes
+	KF5::KDELibs4Support
+	KF5::CalendarCore
+	KF5::KontactInterface
+	${X11_X11_LIB}
+)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
 endif()
@@ -105,7 +135,17 @@ set(kcm_ktimetracker_PART_SRCS ${ktimetracker_shared_SRCS})
 
 add_library(kcm_ktimetracker MODULE ${kcm_ktimetracker_PART_SRCS})
 
-target_link_libraries(kcm_ktimetracker   KF5::KIOCore  KF5::KCMUtils KF5::Parts KF5::CalendarCore ${X11_X11_LIB})
+target_link_libraries(kcm_ktimetracker
+	KF5::KIOCore
+	KF5::KCMUtils
+	KF5::Parts
+	KF5::Notifications
+	KF5::WindowSystem
+	KF5::IconThemes
+	KF5::KDELibs4Support
+	KF5::CalendarCore
+	${X11_X11_LIB}
+)
 if(X11_Xscreensaver_LIB)
     target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
 endif()
@@ -120,7 +160,17 @@ set(ktimetrackerpart_PART_SRCS ${ktimetracker_shared_SRCS})
 
 add_library(ktimetrackerpart MODULE ${ktimetrackerpart_PART_SRCS})
 
-target_link_libraries(ktimetrackerpart KF5::KCMUtils  KF5::CalendarCore  KF5::KIOCore KF5::Parts ${X11_X11_LIB})
+target_link_libraries(ktimetrackerpart
+	KF5::KCMUtils
+	KF5::CalendarCore
+	KF5::KIOCore
+	KF5::Parts
+	KF5::Notifications
+	KF5::WindowSystem
+	KF5::IconThemes
+	KF5::KDELibs4Support
+	${X11_X11_LIB}
+)
 if(X11_Xscreensaver_LIB)
 	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
 endif()

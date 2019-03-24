@@ -27,7 +27,8 @@
 
 #include <KDateTime>
 #include <KDirWatch>
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 
 using namespace KCalCore;
 using namespace KTimeTracker;
@@ -43,7 +44,7 @@ public:
 };
 
 KTTCalendar::KTTCalendar( const QString &filename,
-                          bool monitorFile ) : KCalCore::MemoryCalendar( KDateTime::LocalZone )
+                          bool monitorFile ) : KCalCore::MemoryCalendar(QTimeZone::systemTimeZone())
                                              , d( new Private( filename ) )
 {
   if ( monitorFile ) {
@@ -61,14 +62,15 @@ KTTCalendar::~KTTCalendar()
 
 bool KTTCalendar::reload()
 {
-  deleteAllTodos();
+//  deleteAllTodos();
   KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
   KCalCore::FileStorage::Ptr fileStorage = FileStorage::Ptr( new FileStorage( calendar,
                                                                               d->m_filename,
                                                                               new ICalFormat() ) );
   const bool result = fileStorage->load();
-  if ( !result )
-    kError() << "KTTCalendar::reload: problem loading calendar";
+  if ( !result ) {
+    qCritical() << "KTTCalendar::reload: problem loading calendar";
+  }
   return result;
 }
 
@@ -99,7 +101,10 @@ bool KTTCalendar::save()
                                                                     new ICalFormat() ) );
 
   const bool result = fileStorage->save();
-  if ( !result )
-    kError() << "KTTCalendar::save: problem saving calendar";
+  if ( !result ) {
+    qCritical() << "KTTCalendar::save: problem saving calendar";
+  }
   return result;
 }
+
+//#include "kttcalendar.moc"

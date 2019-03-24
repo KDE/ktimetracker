@@ -38,7 +38,8 @@ test cases:
 #include "task.h"
 #include "taskview.h"
 
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 
 PlannerParser::PlannerParser(TaskView * tv)
 // if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
@@ -46,7 +47,7 @@ PlannerParser::PlannerParser(TaskView * tv)
 // if there are, put the top-level tasks of planner on the same level as currentItem.
 // So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
 {
-    kDebug() <<"entering constructor to import planner tasks";
+    qDebug() <<"entering constructor to import planner tasks";
     _taskView=tv;
     level=0;
     if (_taskView->currentItem()) if (_taskView->currentItem()->parent())
@@ -64,7 +65,7 @@ bool PlannerParser::startDocument()
 
 bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
 {
-    kDebug() << "entering function";
+    qDebug() << "entering function";
     QString taskName;
     int     taskComplete=0;
 
@@ -91,7 +92,7 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
         else
         {
             task = new Task(taskName, QString(), 0, 0, dl, _taskView);
-            kDebug() <<"added" << taskName;
+            qDebug() <<"added" << taskName;
             task->setUid(_taskView->storage()->addTask(task, 0));
         }
         task->setPercentComplete(taskComplete, _taskView->storage());

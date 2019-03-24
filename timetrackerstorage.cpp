@@ -37,17 +37,20 @@
 #include "timekard.h"
 
 #include <kemailsettings.h>
-#include <kio/netaccess.h>
+//#include <kio/netaccess.h>
 #include <KCalCore/Person>
 #include <KDirWatch>
-#include <KLockFile>
-#include <KApplication>       // kapp
-#include <KDebug>
-#include <KLocale>            // i18n
+//#include <KLockFile>
+//#include <KApplication>       // kapp
+//#include <QDebug>
+#include "ktt_debug.h"
+//#include <KLocale>            // i18n
 #include <KMessageBox>
-#include <KProgressDialog>
-#include <KSystemTimeZones>
-#include <KTemporaryFile>
+#include <KLocalizedString>
+#include <QLockFile>
+//#include <KProgressDialog>
+//#include <KSystemTimeZones>
+//#include <KTemporaryFile>
 #include <QUrl>
 
 #include <QByteArray>
@@ -75,7 +78,7 @@ class timetrackerstorage::Private
 public:
     Private()
     {
-      m_fileLock = new KLockFile( QLatin1String( "ktimetrackerics.lock" ) );
+      m_fileLock = new QLockFile( QLatin1String( "ktimetrackerics.lock" ) );
     }
     ~Private()
     {
@@ -83,7 +86,7 @@ public:
     }
     KTimeTracker::KTTCalendar::Ptr mCalendar;
     QString mICalFile;
-    KLockFile *m_fileLock;
+    QLockFile *m_fileLock;
 };
 //@endcond
 
@@ -106,7 +109,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
       KDirWatch::self()->removeFile( d->mICalFile );
       removedFromDirWatch = true;
     }
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     KEMailSettings settings;
     QString lFileName = fileName;
@@ -142,7 +145,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
 
     QObject::connect( d->mCalendar.data(), SIGNAL(calendarChanged()),
                       view, SLOT(iCalFileModified()) );
-    d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
+//    d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->reload();
 
     // Claim ownership of iCalendar file if no one else has.
@@ -164,7 +167,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
         // Build dictionary to look up Task object from Todo uid.  Each task is a
         // QListViewItem, and is initially added with the view as the parent.
         todoList = d->mCalendar->rawTodos();
-        kDebug(5970) << "timetrackerstorage::load"
+        qCDebug(KTT_LOG) << "timetrackerstorage::load"
             << "rawTodo count (includes completed todos) ="
             << todoList.count();
         for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
@@ -193,7 +196,7 @@ QString timetrackerstorage::load(TaskView* view, const QString &fileName)
             }
         }
 
-        kDebug(5970) << "timetrackerstorage::load - loaded" << view->count()
+        qCDebug(KTT_LOG) << "timetrackerstorage::load - loaded" << view->count()
             << "tasks from" << d->mICalFile;
     }
 
@@ -209,7 +212,7 @@ Task* timetrackerstorage::task(const QString& uid, TaskView* view)
 // return the tasks with the uid uid out of view.
 // If !view, return the todo with the uid uid.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Todo::List todoList;
     KCalCore::Todo::List::ConstIterator todo;
     todoList = d->mCalendar->rawTodos();
@@ -219,13 +222,13 @@ Task* timetrackerstorage::task(const QString& uid, TaskView* view)
     if ( view == 0 ) konsolemode=true;
     while ( todo != todoList.constEnd() && ( (*todo)->uid() != uid ) ) ++todo;
     if ( todo != todoList.constEnd() ) result = new Task((*todo), view, konsolemode);
-    kDebug(5970) << "Leaving function, returning " << result;
+    qCDebug(KTT_LOG) << "Leaving function, returning " << result;
     return result;
 }
 
 QString timetrackerstorage::icalfile()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     return d->mICalFile;
 }
 
@@ -233,7 +236,7 @@ QString timetrackerstorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr 
                                            TaskView *view )
 // makes *view contain the tasks out of *rc.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     KCalCore::Todo::List todoList;
     KCalCore::Todo::List::ConstIterator todo;
@@ -308,30 +311,30 @@ QString timetrackerstorage::buildTaskView(TaskView *view)
 
 void timetrackerstorage::closeStorage()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if ( d->mCalendar )
     {
         d->mCalendar->close();
         d->mCalendar = KTTCalendar::Ptr();
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 KCalCore::Event::List timetrackerstorage::rawevents()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     return d->mCalendar->rawEvents();
 }
 
 KCalCore::Todo::List timetrackerstorage::rawtodos()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     return d->mCalendar->rawTodos();
 }
 
 bool timetrackerstorage::allEventsHaveEndTiMe(Task* task)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
@@ -345,7 +348,7 @@ bool timetrackerstorage::allEventsHaveEndTiMe(Task* task)
 
 bool timetrackerstorage::allEventsHaveEndTiMe()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
@@ -357,16 +360,16 @@ bool timetrackerstorage::allEventsHaveEndTiMe()
 
 QString timetrackerstorage::deleteAllEvents()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
-    d->mCalendar->deleteAllEvents();
+//    d->mCalendar->deleteAllEvents(); // FIXME
     return err;
 }
 
 QString timetrackerstorage::save(TaskView* taskview)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString errorString;
 
     QStack<KCalCore::Todo::Ptr> parents;
@@ -375,7 +378,7 @@ QString timetrackerstorage::save(TaskView* taskview)
         for (int i = 0; i < taskview->topLevelItemCount(); ++i )
         {
             Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
-            kDebug( 5970 ) << "write task" << task->name();
+            qCDebug(KTT_LOG) << "write task" << task->name();
             errorString = writeTaskAsTodo( task, parents );
         }
     }
@@ -383,9 +386,9 @@ QString timetrackerstorage::save(TaskView* taskview)
     errorString = saveCalendar();
 
     if ( errorString.isEmpty() ) {
-        kDebug(5970) << "timetrackerstorage::save : wrote tasks to" << d->mICalFile;
+        qCDebug(KTT_LOG) << "timetrackerstorage::save : wrote tasks to" << d->mICalFile;
     } else {
-        kWarning(5970) << "timetrackerstorage::save :" << errorString;
+        qCWarning(KTT_LOG) << "timetrackerstorage::save :" << errorString;
     }
 
     return errorString;
@@ -393,7 +396,7 @@ QString timetrackerstorage::save(TaskView* taskview)
 
 QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     KCalCore::Todo::Ptr todo = d->mCalendar->todo( task->uid() );
     if ( !parent ) {
@@ -401,18 +404,18 @@ QString timetrackerstorage::setTaskParent(Task* task, Task* parent)
     } else {
       todo->setRelatedTo( parent->uid() );
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
 QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::Ptr>& parents)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     KCalCore::Todo::Ptr todo = d->mCalendar->todo(task->uid());
     if ( !todo )
     {
-        kDebug(5970) << "Could not get todo from calendar";
+        qCDebug(KTT_LOG) << "Could not get todo from calendar";
         return "Could not get todo from calendar";
     }
     task->asTodo(todo);
@@ -431,7 +434,7 @@ QString timetrackerstorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
 
 bool timetrackerstorage::isEmpty()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     return d->mCalendar->rawTodos().isEmpty();
 }
 
@@ -441,13 +444,13 @@ bool timetrackerstorage::isEmpty()
 
 QString timetrackerstorage::addTask(const Task* task, const Task* parent)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Todo::Ptr todo;
     QString uid;
 
     if ( !d->mCalendar )
     {
-        kDebug(5970) << "mCalendar is not set";
+        qCDebug(KTT_LOG) << "mCalendar is not set";
         return uid;
     }
     todo = KCalCore::Todo::Ptr( new KCalCore::Todo() );
@@ -469,13 +472,13 @@ QString timetrackerstorage::addTask(const Task* task, const Task* parent)
 
 QStringList timetrackerstorage::taskidsfromname(QString taskname)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QStringList result;
     KCalCore::Todo::List todoList = d->mCalendar->rawTodos();
     for(KCalCore::Todo::List::iterator i = todoList.begin();
         i != todoList.end(); ++i)
     {
-        kDebug(5970) << (*i)->uid();
+        qCDebug(KTT_LOG) << (*i)->uid();
         if ( (*i)->summary() == taskname ) result << (*i)->uid();
     }
     return result;
@@ -483,7 +486,7 @@ QStringList timetrackerstorage::taskidsfromname(QString taskname)
 
 QStringList timetrackerstorage::taskNames() const
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QStringList result;
     KCalCore::Todo::List todoList = d->mCalendar->rawTodos();
     for(KCalCore::Todo::List::iterator i = todoList.begin();
@@ -493,7 +496,7 @@ QStringList timetrackerstorage::taskNames() const
 
 QString timetrackerstorage::removeEvent(QString uid)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err=QString();
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
@@ -509,7 +512,7 @@ QString timetrackerstorage::removeEvent(QString uid)
 
 bool timetrackerstorage::removeTask(Task* task)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     // delete history
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
@@ -532,7 +535,7 @@ bool timetrackerstorage::removeTask(Task* task)
 
 bool timetrackerstorage::removeTask(QString taskid)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     // delete history
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
@@ -557,7 +560,7 @@ bool timetrackerstorage::removeTask(QString taskid)
 
 void timetrackerstorage::addComment(const Task* task, const QString& comment)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Todo::Ptr todo = d->mCalendar->todo(task->uid());
 
     // Do this to avoid compiler warnings about comment not being used.  once we
@@ -572,150 +575,150 @@ void timetrackerstorage::addComment(const Task* task, const QString& comment)
     saveCalendar();
 }
 
-QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
-{
-    kDebug(5970) << "Entering function";
-    QString err;
-    if ( rc.reportType == ReportCriteria::CSVHistoryExport )
-    {
-        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
-    }
-    else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
-    {
-        if ( !rc.bExPortToClipBoard )
-            err = exportcsvFile( taskview, rc );
-        else
-            err = taskview->clipTotals( rc );
-    }
-    return err;
-}
+//QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
+//{
+//    qCDebug(KTT_LOG) << "Entering function";
+//    QString err;
+//    if ( rc.reportType == ReportCriteria::CSVHistoryExport )
+//    {
+//        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
+//    }
+//    else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
+//    {
+//        if ( !rc.bExPortToClipBoard )
+//            err = exportcsvFile( taskview, rc );
+//        else
+//            err = taskview->clipTotals( rc );
+//    }
+//    return err;
+//}
 
 
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
-QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
-{
-    kDebug(5970) << "Entering function";
-    QString delim = rc.delimiter;
-    QString dquote = rc.quote;
-    QString double_dquote = dquote + dquote;
-    bool to_quote = true;
-    QString err;
-    Task* task;
-    int maxdepth=0;
-    QString title = i18n("Export Progress");
-    KProgressDialog dialog( taskview, 0, title );
-    dialog.setAutoClose( true );
-    dialog.setAllowCancel( true );
-    dialog.progressBar()->setMaximum( 2 * taskview->count() );
-
-    // The default dialog was not displaying all the text in the title bar.
-    int width = taskview->fontMetrics().width(title) * 3;
-    QSize dialogsize;
-    dialogsize.setWidth(width);
-    dialog.setInitialSize( dialogsize );
-
-    if ( taskview->count() > 1 ) dialog.show();
-    QString retval;
-
-    // Find max task depth
-    int tasknr = 0;
-    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
-    {
-        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
-        if ( tasknr % 15 == 0 ) kapp->processEvents(); // repainting is slow
-        if ( taskview->itemAt(tasknr)->depth() > maxdepth )
-            maxdepth = taskview->itemAt(tasknr)->depth();
-        tasknr++;
-    }
-
-    // Export to file
-    tasknr = 0;
-    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
-    {
-        task = taskview->itemAt( tasknr );
-        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
-        if ( tasknr % 15 == 0 ) kapp->processEvents();
-
-        // indent the task in the csv-file:
-        for ( int i=0; i < task->depth(); ++i ) retval += delim;
-
-        /*
-        // CSV compliance
-        // Surround the field with quotes if the field contains
-        // a comma (delim) or a double quote
-        if (task->name().contains(delim) || task->name().contains(dquote))
-        to_quote = true;
-        else
-        to_quote = false;
-        */
-        to_quote = true;
-
-        if (to_quote)
-            retval += dquote;
-
-        // Double quotes replaced by a pair of consecutive double quotes
-        retval += task->name().replace( dquote, double_dquote );
-
-        if (to_quote)
-            retval += dquote;
-
-        // maybe other tasks are more indented, so to align the columns:
-        for ( int i = 0; i < maxdepth - task->depth(); ++i ) retval += delim;
-
-        retval += delim + formatTime( task->sessionTime(),
-                                   rc.decimalMinutes )
-                + delim + formatTime( task->time(),
-                                   rc.decimalMinutes )
-                + delim + formatTime( task->totalSessionTime(),
-                                   rc.decimalMinutes )
-                + delim + formatTime( task->totalTime(),
-                                   rc.decimalMinutes )
-                + '\n';
-        tasknr++;
-    }
-
-    // save, either locally or remote
-    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-    {
-        QString filename=rc.url.toLocalFile();
-        if (filename.isEmpty()) filename=rc.url.url();
-        QFile f( filename );
-        if( !f.open( QIODevice::WriteOnly ) )
-        {
-            err = i18n( "Could not open \"%1\".", filename );
-        }
-        if (err.length()==0)
-        {
-            QTextStream stream(&f);
-            // Export to file
-            stream << retval;
-            f.close();
-        }
-    }
-    else // use remote file
-    {
-        KTemporaryFile tmpFile;
-        if ( !tmpFile.open() ) err = QString::fromLatin1( "Unable to get temporary file" );
-        else
-        {
-            QTextStream stream ( &tmpFile );
-            stream << retval;
-            stream.flush();
-            if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
-        }
-    }
-
-    return err;
-}
+//QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
+//{
+//    qCDebug(KTT_LOG) << "Entering function";
+//    QString delim = rc.delimiter;
+//    QString dquote = rc.quote;
+//    QString double_dquote = dquote + dquote;
+//    bool to_quote = true;
+//    QString err;
+//    Task* task;
+//    int maxdepth=0;
+//    QString title = i18n("Export Progress");
+//    KProgressDialog dialog( taskview, 0, title );
+//    dialog.setAutoClose( true );
+//    dialog.setAllowCancel( true );
+//    dialog.progressBar()->setMaximum( 2 * taskview->count() );
+//
+//    // The default dialog was not displaying all the text in the title bar.
+//    int width = taskview->fontMetrics().width(title) * 3;
+//    QSize dialogsize;
+//    dialogsize.setWidth(width);
+//    dialog.setInitialSize( dialogsize );
+//
+//    if ( taskview->count() > 1 ) dialog.show();
+//    QString retval;
+//
+//    // Find max task depth
+//    int tasknr = 0;
+//    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
+//    {
+//        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
+//        if ( tasknr % 15 == 0 ) kapp->processEvents(); // repainting is slow
+//        if ( taskview->itemAt(tasknr)->depth() > maxdepth )
+//            maxdepth = taskview->itemAt(tasknr)->depth();
+//        tasknr++;
+//    }
+//
+//    // Export to file
+//    tasknr = 0;
+//    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
+//    {
+//        task = taskview->itemAt( tasknr );
+//        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
+//        if ( tasknr % 15 == 0 ) kapp->processEvents();
+//
+//        // indent the task in the csv-file:
+//        for ( int i=0; i < task->depth(); ++i ) retval += delim;
+//
+//        /*
+//        // CSV compliance
+//        // Surround the field with quotes if the field contains
+//        // a comma (delim) or a double quote
+//        if (task->name().contains(delim) || task->name().contains(dquote))
+//        to_quote = true;
+//        else
+//        to_quote = false;
+//        */
+//        to_quote = true;
+//
+//        if (to_quote)
+//            retval += dquote;
+//
+//        // Double quotes replaced by a pair of consecutive double quotes
+//        retval += task->name().replace( dquote, double_dquote );
+//
+//        if (to_quote)
+//            retval += dquote;
+//
+//        // maybe other tasks are more indented, so to align the columns:
+//        for ( int i = 0; i < maxdepth - task->depth(); ++i ) retval += delim;
+//
+//        retval += delim + formatTime( task->sessionTime(),
+//                                   rc.decimalMinutes )
+//                + delim + formatTime( task->time(),
+//                                   rc.decimalMinutes )
+//                + delim + formatTime( task->totalSessionTime(),
+//                                   rc.decimalMinutes )
+//                + delim + formatTime( task->totalTime(),
+//                                   rc.decimalMinutes )
+//                + '\n';
+//        tasknr++;
+//    }
+//
+//    // save, either locally or remote
+//    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+//    {
+//        QString filename=rc.url.toLocalFile();
+//        if (filename.isEmpty()) filename=rc.url.url();
+//        QFile f( filename );
+//        if( !f.open( QIODevice::WriteOnly ) )
+//        {
+//            err = i18n( "Could not open \"%1\".", filename );
+//        }
+//        if (err.length()==0)
+//        {
+//            QTextStream stream(&f);
+//            // Export to file
+//            stream << retval;
+//            f.close();
+//        }
+//    }
+//    else // use remote file
+//    {
+//        KTemporaryFile tmpFile;
+//        if ( !tmpFile.open() ) err = QString::fromLatin1( "Unable to get temporary file" );
+//        else
+//        {
+//            QTextStream stream ( &tmpFile );
+//            stream << retval;
+//            stream.flush();
+//            if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+//        }
+//    }
+//
+//    return err;
+//}
 
 int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
 {
         if ( !event )
           return 0;
 
-        kDebug(5970) << "found an event for task, event=" << event->uid();
+        qCDebug(KTT_LOG) << "found an event for task, event=" << event->uid();
         QDateTime startTime=event->dtStart();
         QDateTime endTime=event->dtEnd();
         QDateTime NextMidNight=startTime;
@@ -739,164 +742,164 @@ int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
         return secondsToAdd;
 }
 
-// export history report as csv, all tasks X all dates in one block
-QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
-                                            const QDate   &from,
-                                            const QDate   &to,
-                                            const ReportCriteria &rc)
-{
-    kDebug(5970) << "Entering function";
-
-    QString delim = rc.delimiter;
-    const QString cr = QString::fromLatin1("\n");
-    QString err=QString::null;
-    QString retval;
-    Task* task;
-    const int intervalLength = from.daysTo(to)+1;
-    QMap< QString, QVector<int> > secsForUid;
-    QMap< QString, QString > uidForName;
-
-
-    // Step 1: Prepare two hashmaps:
-    // * "uid -> seconds each day": used while traversing events, as uid is their id
-    //                              "seconds each day" are stored in a vector
-    // * "name -> uid", ordered by name: used when creating the csv file at the end
-    kDebug(5970) << "Taskview Count: " << taskview->count();
-    for ( int n=0; n<taskview->count(); n++ )
-    {
-        task=taskview->itemAt(n);
-        kDebug(5970) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
-        // uid -> seconds each day
-        // * Init each element to zero
-        QVector<int> vector(intervalLength, 0);
-        secsForUid[task->uid()] = vector;
-
-        // name -> uid
-        // * Create task fullname concatenating each parent's name
-        QString fullName;
-        Task* parentTask;
-        parentTask = task;
-        fullName += parentTask->name();
-        parentTask = parentTask->parent();
-        while (parentTask)
-        {
-            fullName = parentTask->name() + "->" + fullName;
-            kDebug(5970) << "Fullname(inside): " << fullName;
-            parentTask = parentTask->parent();
-            kDebug(5970) << "Parent task: " << parentTask;
-        }
-
-        uidForName[fullName] = task->uid();
-
-        kDebug(5970) << "Fullname(end): " << fullName;
-    }
-
-    kDebug(5970) << "secsForUid" << secsForUid;
-    kDebug(5970) << "uidForName" << uidForName;
-
-
-    // Step 2: For each date, get the events and calculate the seconds
-    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
-    // We rely on rawEventsForDate to get the events
-    kDebug(5970) << "Let's iterate for each date: ";
-    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
-    {
-        kDebug(5970) << mdate.toString();
-        KCalCore::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
-
-        for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
-        {
-            kDebug(5970) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedTo();
-            kDebug(5970) << "Today's seconds: " << todaySeconds(mdate, *i);
-            secsForUid[(*i)->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, *i);
-        }
-    }
-
-
-    // Step 3: For each task, generate the matching row for the CSV file
-    // We use the two hashmaps to have direct access using the task name
-
-    // First CSV file line
-    // FIXME: localize strings and date formats
-    retval.append("\"Task name\"");
-    for (int i=0; i<intervalLength; ++i)
-    {
-        retval.append(delim);
-        retval.append(from.addDays(i).toString());
-    }
-    retval.append(cr);
-
-
-    // Rest of the CSV file
-    QMapIterator<QString, QString> nameUid(uidForName);
-    double time;
-    while (nameUid.hasNext())
-    {
-        nameUid.next();
-        retval.append("\"" + nameUid.key() + "\"");
-        kDebug(5970) << nameUid.key() << ": " << nameUid.value() << endl;
-
-        for (int day=0; day<intervalLength; day++)
-        {
-            kDebug(5970) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
-            retval.append(delim);
-            time = secsForUid[nameUid.value()][day]/60.0;
-            retval.append(formatTime(time, rc.decimalMinutes));
-        }
-
-        retval.append(cr);
-    }
-
-    kDebug() << "Retval is \n" << retval;
-
-    if (rc.bExPortToClipBoard)
-        taskview->setClipBoardText(retval);
-    else
-    {
-        // store the file locally or remote
-        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-        {
-            kDebug(5970) << "storing a local file";
-            QString filename=rc.url.toLocalFile();
-            if (filename.isEmpty()) filename=rc.url.url();
-            QFile f( filename );
-            if( !f.open( QIODevice::WriteOnly ) )
-            {
-                err = i18n( "Could not open \"%1\".", filename );
-                kDebug(5970) << "Could not open file";
-            }
-            kDebug() << "Err is " << err;
-            if (err.length()==0)
-            {
-                QTextStream stream(&f);
-                kDebug(5970) << "Writing to file: " << retval;
-                // Export to file
-                stream << retval;
-                f.close();
-            }
-        }
-        else // use remote file
-        {
-            KTemporaryFile tmpFile;
-            if ( !tmpFile.open() )
-            {
-                err = QString::fromLatin1( "Unable to get temporary file" );
-            }
-            else
-            {
-                QTextStream stream ( &tmpFile );
-                stream << retval;
-                stream.flush();
-                if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
-            }
-        }
-    }
-    return err;
-}
+//// export history report as csv, all tasks X all dates in one block
+//QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
+//                                            const QDate   &from,
+//                                            const QDate   &to,
+//                                            const ReportCriteria &rc)
+//{
+//    qCDebug(KTT_LOG) << "Entering function";
+//
+//    QString delim = rc.delimiter;
+//    const QString cr = QString::fromLatin1("\n");
+//    QString err=QString::null;
+//    QString retval;
+//    Task* task;
+//    const int intervalLength = from.daysTo(to)+1;
+//    QMap< QString, QVector<int> > secsForUid;
+//    QMap< QString, QString > uidForName;
+//
+//
+//    // Step 1: Prepare two hashmaps:
+//    // * "uid -> seconds each day": used while traversing events, as uid is their id
+//    //                              "seconds each day" are stored in a vector
+//    // * "name -> uid", ordered by name: used when creating the csv file at the end
+//    qCDebug(KTT_LOG) << "Taskview Count: " << taskview->count();
+//    for ( int n=0; n<taskview->count(); n++ )
+//    {
+//        task=taskview->itemAt(n);
+//        qCDebug(KTT_LOG) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
+//        // uid -> seconds each day
+//        // * Init each element to zero
+//        QVector<int> vector(intervalLength, 0);
+//        secsForUid[task->uid()] = vector;
+//
+//        // name -> uid
+//        // * Create task fullname concatenating each parent's name
+//        QString fullName;
+//        Task* parentTask;
+//        parentTask = task;
+//        fullName += parentTask->name();
+//        parentTask = parentTask->parent();
+//        while (parentTask)
+//        {
+//            fullName = parentTask->name() + "->" + fullName;
+//            qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
+//            parentTask = parentTask->parent();
+//            qCDebug(KTT_LOG) << "Parent task: " << parentTask;
+//        }
+//
+//        uidForName[fullName] = task->uid();
+//
+//        qCDebug(KTT_LOG) << "Fullname(end): " << fullName;
+//    }
+//
+//    qCDebug(KTT_LOG) << "secsForUid" << secsForUid;
+//    qCDebug(KTT_LOG) << "uidForName" << uidForName;
+//
+//
+//    // Step 2: For each date, get the events and calculate the seconds
+//    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
+//    // We rely on rawEventsForDate to get the events
+//    qCDebug(KTT_LOG) << "Let's iterate for each date: ";
+//    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
+//    {
+//        qCDebug(KTT_LOG) << mdate.toString();
+//        KCalCore::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
+//
+//        for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
+//        {
+//            qCDebug(KTT_LOG) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedTo();
+//            qCDebug(KTT_LOG) << "Today's seconds: " << todaySeconds(mdate, *i);
+//            secsForUid[(*i)->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, *i);
+//        }
+//    }
+//
+//
+//    // Step 3: For each task, generate the matching row for the CSV file
+//    // We use the two hashmaps to have direct access using the task name
+//
+//    // First CSV file line
+//    // FIXME: localize strings and date formats
+//    retval.append("\"Task name\"");
+//    for (int i=0; i<intervalLength; ++i)
+//    {
+//        retval.append(delim);
+//        retval.append(from.addDays(i).toString());
+//    }
+//    retval.append(cr);
+//
+//
+//    // Rest of the CSV file
+//    QMapIterator<QString, QString> nameUid(uidForName);
+//    double time;
+//    while (nameUid.hasNext())
+//    {
+//        nameUid.next();
+//        retval.append("\"" + nameUid.key() + "\"");
+//        qCDebug(KTT_LOG) << nameUid.key() << ": " << nameUid.value() << endl;
+//
+//        for (int day=0; day<intervalLength; day++)
+//        {
+//            qCDebug(KTT_LOG) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
+//            retval.append(delim);
+//            time = secsForUid[nameUid.value()][day]/60.0;
+//            retval.append(formatTime(time, rc.decimalMinutes));
+//        }
+//
+//        retval.append(cr);
+//    }
+//
+//    kDebug() << "Retval is \n" << retval;
+//
+//    if (rc.bExPortToClipBoard)
+//        taskview->setClipBoardText(retval);
+//    else
+//    {
+//        // store the file locally or remote
+//        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+//        {
+//            qCDebug(KTT_LOG) << "storing a local file";
+//            QString filename=rc.url.toLocalFile();
+//            if (filename.isEmpty()) filename=rc.url.url();
+//            QFile f( filename );
+//            if( !f.open( QIODevice::WriteOnly ) )
+//            {
+//                err = i18n( "Could not open \"%1\".", filename );
+//                qCDebug(KTT_LOG) << "Could not open file";
+//            }
+//            kDebug() << "Err is " << err;
+//            if (err.length()==0)
+//            {
+//                QTextStream stream(&f);
+//                qCDebug(KTT_LOG) << "Writing to file: " << retval;
+//                // Export to file
+//                stream << retval;
+//                f.close();
+//            }
+//        }
+//        else // use remote file
+//        {
+//            KTemporaryFile tmpFile;
+//            if ( !tmpFile.open() )
+//            {
+//                err = QString::fromLatin1( "Unable to get temporary file" );
+//            }
+//            else
+//            {
+//                QTextStream stream ( &tmpFile );
+//                stream << retval;
+//                stream.flush();
+//                if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
+//            }
+//        }
+//    }
+//    return err;
+//}
 
 void timetrackerstorage::startTimer(const Task* task, const QDateTime &when)
 {
-    kDebug(5970) << "Entering function; when=" << when;
+    qCDebug(KTT_LOG) << "Entering function; when=" << when;
     KCalCore::Event::Ptr e;
     e = baseEvent(task);
     e->setDtStart(when);
@@ -906,17 +909,17 @@ void timetrackerstorage::startTimer(const Task* task, const QDateTime &when)
 
 void timetrackerstorage::startTimer(QString taskID)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Todo::List todoList;
     KCalCore::Todo::List::ConstIterator todo;
     todoList = d->mCalendar->rawTodos();
     for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
     {
-        kDebug(5970) << (*todo)->uid();
-        kDebug(5970) << taskID;
+        qCDebug(KTT_LOG) << (*todo)->uid();
+        qCDebug(KTT_LOG) << taskID;
         if ( (*todo)->uid() == taskID )
         {
-            kDebug(5970) << "adding event";
+            qCDebug(KTT_LOG) << "adding event";
             KCalCore::Event::Ptr e;
             e = baseEvent((*todo));
             e->setDtStart(QDateTime::currentDateTime());
@@ -928,7 +931,7 @@ void timetrackerstorage::startTimer(QString taskID)
 
 void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 {
-    kDebug(5970) << "Entering function; when=" << when;
+    qCDebug(KTT_LOG) << "Entering function; when=" << when;
     KCalCore::Event::List eventList = d->mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end();
@@ -936,16 +939,17 @@ void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
     {
         if ( (*i)->relatedTo() == task->uid() )
         {
-            kDebug(5970) << "found an event for task, event=" << (*i)->uid();
+            qCDebug(KTT_LOG) << "found an event for task, event=" << (*i)->uid();
             if (!(*i)->hasEndDate())
             {
-                kDebug(5970) << "this event has no enddate";
-                (*i)->setDtEnd(KDateTime(when, KDateTime::Spec::LocalZone()));
+                qCDebug(KTT_LOG) << "this event has no enddate";
+//                (*i)->setDtEnd(KDateTime(when, KDateTime::Spec::LocalZone()));
+                (*i)->setDtEnd(when);
             }
             else
             {
-                kDebug(5970) << "this event has an enddate";
-                kDebug(5970) << "end date is " << (*i)->dtEnd();
+                qCDebug(KTT_LOG) << "this event has an enddate";
+                qCDebug(KTT_LOG) << "end date is " << (*i)->dtEnd();
             }
         };
     }
@@ -954,30 +958,30 @@ void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 
 void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)
 {
-    kDebug(5970) << "Entering function; deltaSeconds=" << deltaSeconds;
-    KCalCore::Event::Ptr e;
-    QDateTime end;
-    e = baseEvent(task);
-
-    // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
-    // duration, even though it looks like it's used in event.cpp.
-    end = task->startTime();
-    if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
-    e->setDtEnd(KDateTime(end, KDateTime::Spec::LocalZone()));
-
-    // Use a custom property to keep a record of negative durations
-    e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray("duration"),
-        QString::number(deltaSeconds));
-
-    d->mCalendar->addEvent(e);
-    task->taskView()->scheduleSave();
+//    qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
+//    KCalCore::Event::Ptr e;
+//    QDateTime end;
+//    e = baseEvent(task);
+//
+//    // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
+//    // duration, even though it looks like it's used in event.cpp.
+//    end = task->startTime();
+//    if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
+//    e->setDtEnd(KDateTime(end, KDateTime::Spec::LocalZone()));
+//
+//    // Use a custom property to keep a record of negative durations
+//    e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
+//        QByteArray("duration"),
+//        QString::number(deltaSeconds));
+//
+//    d->mCalendar->addEvent(e);
+//    task->taskView()->scheduleSave();
 }
 
 
 KCalCore::Event::Ptr timetrackerstorage::baseEvent(const Task *task)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Event::Ptr e( new KCalCore::Event() );
     QStringList categories;
     e->setSummary(task->name());
@@ -990,7 +994,8 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const Task *task)
 
     // Have to turn this off to get datetimes in date fields.
     e->setAllDay(false);
-    e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
+//    e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
+    e->setDtStart(task->startTime());
 
     // So someone can filter this mess out of their calendar display
     categories.append(i18n("KTimeTracker"));
@@ -1001,7 +1006,7 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const Task *task)
 
 KCalCore::Event::Ptr timetrackerstorage::baseEvent(const KCalCore::Todo::Ptr &todo)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Event::Ptr e( new KCalCore::Event() );
     QStringList categories;
     e->setSummary(todo->summary());
@@ -1011,7 +1016,8 @@ KCalCore::Event::Ptr timetrackerstorage::baseEvent(const KCalCore::Todo::Ptr &to
 
     // Have to turn this off to get datetimes in date fields.
     e->setAllDay(false);
-    e->setDtStart(KDateTime(todo->dtStart()));
+//    e->setDtStart(KDateTime(todo->dtStart()));
+    e->setDtStart(todo->dtStart());
 
     // So someone can filter this mess out of their calendar display
     categories.append(i18n("KTimeTracker"));
@@ -1034,16 +1040,16 @@ HistoryEvent::HistoryEvent(const QString &uid, const QString &name,
 
 bool timetrackerstorage::isRemoteFile( const QString &file ) const
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString f = file.toLower();
     bool rval = f.startsWith( QLatin1String("http://") ) || f.startsWith( QLatin1String("ftp://") );
-    kDebug(5970) << "timetrackerstorage::isRemoteFile(" << file <<" ) returns" << rval;
+    qCDebug(KTT_LOG) << "timetrackerstorage::isRemoteFile(" << file <<" ) returns" << rval;
     return rval;
 }
 
 QString timetrackerstorage::saveCalendar()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     bool removedFromDirWatch = false;
     if ( KDirWatch::self()->contains( d->mICalFile ) ) {
       KDirWatch::self()->removeFile( d->mICalFile );
@@ -1054,7 +1060,7 @@ QString timetrackerstorage::saveCalendar()
     if ( d->mCalendar ) {
       d->m_fileLock->lock();
     } else {
-      kDebug() << "mCalendar not set";
+      qDebug() << "mCalendar not set";
       return errorMessage;
     }
 

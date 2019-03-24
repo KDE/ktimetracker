@@ -27,7 +27,8 @@
 
 #include <KMenu>
 
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KLocale>
 
 TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView *widget, int style, QVector<int> excludedColumns )
@@ -37,7 +38,7 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
     mStyle( style ),
     mExcludedColumns( excludedColumns )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (mWidget)
     {
         mWidget->header()->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -49,18 +50,18 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
         connect( mContextMenu, SIGNAL(aboutToShow()), this, SLOT(slotAboutToShow()) );
         updateActions();
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     qDeleteAll( mActions );
 }
 
 void TreeViewHeaderContextMenu::slotCustomContextMenuRequested( const QPoint& pos ) 
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (mWidget && mContextMenu)
     {
         mContextMenu->exec( mWidget->mapToGlobal(pos) );
@@ -69,7 +70,7 @@ void TreeViewHeaderContextMenu::slotCustomContextMenuRequested( const QPoint& po
 
 void TreeViewHeaderContextMenu::updateActions() 
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (mWidget)
     {
         QAction *action;
@@ -98,7 +99,7 @@ void TreeViewHeaderContextMenu::updateActions()
 
 void TreeViewHeaderContextMenu::slotTriggered( QAction *action )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (mWidget && action)
     {
         int column = mActionColumnMapping[action];
@@ -111,7 +112,7 @@ void TreeViewHeaderContextMenu::slotTriggered( QAction *action )
 
 void TreeViewHeaderContextMenu::slotAboutToShow()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QAction *action;
     foreach (action, mActions)
     {
@@ -121,7 +122,7 @@ void TreeViewHeaderContextMenu::slotAboutToShow()
 
 void TreeViewHeaderContextMenu::updateAction( QAction *action, int column )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString text = mWidget->model()->headerData(column, Qt::Horizontal).toString();
     switch (mStyle)
     {

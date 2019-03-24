@@ -35,41 +35,38 @@
 #include <QDebug>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QStandardPaths>
+#include "ktt_debug.h"
+#include "ktimetracker-version.h"
 
-namespace
+QString icsfile( const QCommandLineParser &parser) // deliver the name of the iCalendar file to be used
 {
-    void cleanup( int )
-    {
-        kDebug(5970) << i18n("Just caught a software interrupt.");
-        kapp->exit();
-    }
-}
+    const QString& file = parser.value("file");
 
-QString icsfile( const KCmdLineArgs* args ) // deliver the name of the iCalendar file to be used
-{
     QString result;
-    if ( args->count() > 0 ) // file is given as parameter
+    if (!file.isEmpty()) // file is given as parameter
     {
-        result = args->arg( 0 );
-        QUrl* icsfileurl=new QUrl(args->arg( 0 ));
-        if (( icsfileurl->protocol() == "http" ) || ( icsfileurl->protocol() == "ftp" ) || ( icsfileurl->isLocalFile() ))
+        result = file;
+        QUrl* icsfileurl=new QUrl(file);
+        if (( icsfileurl->scheme() == "http" ) || ( icsfileurl->scheme() == "ftp" ) || ( icsfileurl->isLocalFile() ))
         {
             // leave as is
             ;
         }
         else
         {
-            result = KCmdLineArgs::cwd() + '/' + result;
+            QFileInfo info(result);
+            result = info.absolutePath();
         }
         delete icsfileurl;
     }
     else // file is not given as parameter
     {
-        result=QString(KStandardDirs::locate( "data", "ktimetracker/ktimetracker.ics" ));
+        result=QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics" ));
         if ( !QFile::exists( result ) )
         {
-            QFile oldFile( KStandardDirs::locate( "data", "karm/karm.ics" ) );
-            result = KStandardDirs::locateLocal( "appdata", QString::fromLatin1( "ktimetracker.ics" ) );
+            QFile oldFile( QStandardPaths::locate(QStandardPaths::GenericDataLocation, "karm/karm.ics" ) );
+            result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QString::fromLatin1( "ktimetracker.ics" ) ;
             if ( oldFile.exists() )
                 oldFile.copy( result );
         }
@@ -81,21 +78,24 @@ int main( int argc, char *argv[] )
 {
     QApplication app(argc, argv);
 
-    KAboutData aboutData( "ktimetracker", 0, ki18n("KTimeTracker"),
-        KDEPIM_VERSION, ki18n("KDE Time tracker tool"), KAboutLicense::GPL,
-        ki18n("Copyright © 1997-2012 KDE PIM authors"), KLocalizedString(),
-        QByteArray("http://userbase.kde.org/KTimeTracker") );
+    KAboutData aboutData(
+        QStringLiteral("ktimetracker"),
+        i18n("KTimeTracker"),
+        QStringLiteral(KTIMETRACKER_VERSION),
+        i18n("KDE Time tracker tool"),
+        KAboutLicense::GPL,
+        i18n("Copyright © 1997-2012 KDE PIM authors"),
+        QString(),
+        QStringLiteral("http://userbase.kde.org/KTimeTracker"));
 
-    aboutData.addAuthor( ki18n("Thorsten Stärk"), ki18n( "Current Maintainer" ),
-                       "kde@staerk.de" );
-    aboutData.addAuthor( ki18n("Sirtaj Singh Kang"), ki18n( "Original Author" ),
-                       "taj@kde.org" );
-    aboutData.addAuthor( ki18n("Allen Winter"),      KLocalizedString(), "winter@kde.org" );
-    aboutData.addAuthor( ki18n("David Faure"),       KLocalizedString(), "faure@kde.org" );
-    aboutData.addAuthor( ki18n("Mathias Soeken"),    KLocalizedString(), "msoeken@tzi.de" );
-    aboutData.addAuthor( ki18n("Jesper Pedersen"),   KLocalizedString(), "blackie@kde.org" );
-    aboutData.addAuthor( ki18n("Kalle Dalheimer"),   KLocalizedString(), "kalle@kde.org" );
-    aboutData.addAuthor( ki18n("Mark Bucciarelli"),  KLocalizedString(), "mark@hubcapconsulting.com" );
+    aboutData.addAuthor(i18n("Thorsten Stärk"), i18n("Current Maintainer"), QStringLiteral("kde@staerk.de"));
+    aboutData.addAuthor(i18n("Sirtaj Singh Kang"), i18n("Original Author"), QStringLiteral("taj@kde.org"));
+    aboutData.addAuthor(i18n("Allen Winter"),      QString(), QStringLiteral("winter@kde.org"));
+    aboutData.addAuthor(i18n("David Faure"),       QString(), QStringLiteral("faure@kde.org"));
+    aboutData.addAuthor(i18n("Mathias Soeken"),    QString(), QStringLiteral("msoeken@tzi.de"));
+    aboutData.addAuthor(i18n("Jesper Pedersen"),   QString(), QStringLiteral("blackie@kde.org"));
+    aboutData.addAuthor(i18n("Kalle Dalheimer"),   QString(), QStringLiteral("kalle@kde.org"));
+    aboutData.addAuthor(i18n("Mark Bucciarelli"),  QString(), QStringLiteral("mark@hubcapconsulting.com"));
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
@@ -127,35 +127,32 @@ int main( int argc, char *argv[] )
 
     if ( !konsolemode )
     {  // no konsole mode
-        if (!KUniqueApplication::start()) {
-            kDebug(5970) << "Other instance is already running, exiting!";
-            return 0;
-        }
-        KUniqueApplication myApp;
+//        if (!KUniqueApplication::start()) {
+//            qCDebug(KTT_LOG) << "Other instance is already running, exiting!";
+//            return 0;
+//        }
+//        KUniqueApplication myApp;
         MainWindow *mainWindow;
-        mainWindow = new MainWindow( icsfile( args ) );
-        if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
-            mainWindow->restore( 1, false );
-        else
+        mainWindow = new MainWindow( icsfile( parser ) );
+//        if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
+//            mainWindow->restore( 1, false );
+//        else
         mainWindow->show();
 
-        signal( SIGQUIT, cleanup );
-        signal( SIGINT, cleanup );
-        
-        int ret = myApp.exec();
+        int ret = app.exec();
 
         delete mainWindow;
         return ret;
     }
     else // we are running in konsole mode
     {
-        kDebug(5970) << "We are running in konsole mode";
-        KApplication myApp(false);
+        qCDebug(KTT_LOG) << "We are running in konsole mode";
+//        KApplication myApp(false);
         // listtasknames
         if ( parser.isSet("listtasknames") )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             QStringList tasknameslist=sto->taskNames();
             for ( int i=0; i<tasknameslist.count(); ++i )
             {
@@ -168,7 +165,7 @@ int main( int argc, char *argv[] )
         if ( !parser.value("addtask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             const QString& s=parser.value("addtask");
             QVector<int> vec;
             DesktopList dl=vec;
@@ -181,7 +178,7 @@ int main( int argc, char *argv[] )
         if ( !parser.value("deletetask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             const QString& taskid=parser.value("deletetask");
             sto->removeTask( taskid );
             delete sto;
@@ -190,7 +187,7 @@ int main( int argc, char *argv[] )
         if ( !parser.value("taskidsfromname").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             const QString& taskname=parser.value("taskidsfromname");
             QStringList taskids=sto->taskidsfromname( taskname );
             for ( int i=0; i<taskids.count(); ++i )
@@ -204,11 +201,11 @@ int main( int argc, char *argv[] )
         if ( !parser.value("totalminutesfortaskid").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             Task* task=sto->task( parser.value("totalminutesfortaskid"), 0 );
             if (task!=0)
             {
-                kDebug(5970) << "taskname=" << task->name();
+                qCDebug(KTT_LOG) << "taskname=" << task->name();
                 std::cout << task->totalTime();
             }
             delete sto;
@@ -217,7 +214,7 @@ int main( int argc, char *argv[] )
         if ( !parser.value("starttask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             sto->startTimer(parser.value("starttask"));
             delete sto;
         }
@@ -225,7 +222,7 @@ int main( int argc, char *argv[] )
         if ( !parser.value("stoptask").isEmpty() )
         {
             timetrackerstorage* sto=new timetrackerstorage();
-            sto->load( 0, icsfile( args ) );
+            sto->load( 0, icsfile( parser ) );
             sto->stopTimer(sto->task( parser.value("stoptask"), 0 ));
             delete sto;
         }

@@ -22,8 +22,9 @@
 #ifndef KTIMETRACKERUTILITY_H
 #define KTIMETRACKERUTILITY_H
 
-#include <KDebug>
-#include <KWindowSystem>
+#include <QDebug>
+#include "ktt_debug.h"
+//#include <KWindowSystem>
 #include <QString>
 
 /**

@@ -22,7 +22,7 @@
 // TODO: what is the sense of tasksChanged()?
 
 #include "timetrackerwidget.h"
-#include "ktimetrackerconfigdialog.h"
+//#include "ktimetrackerconfigdialog.h"
 
 #include <QDBusConnection>
 #include <QFileInfo>
@@ -33,16 +33,21 @@
 #include <QVBoxLayout>
 #include <QVector>
 
-#include <KApplication>
-#include <KAction>
+//#include <KApplication>
+#include <KIconLoader>
+#include <KIcon>
+#include <QAction>
+#include <KLocalizedString>
+#include <KDialog>
 #include <KActionCollection>
 #include <KConfig>
 #include <KConfigDialog>
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KFileDialog>
-#include <KGlobal>
-#include <KIcon>
-#include <KLocale>
+//#include <KGlobal>
+//#include <KIcon>
+//#include <KLocale>
 #include <KMessageBox>
 #include <KRecentFilesAction>
 #include <KStandardAction>
@@ -60,7 +65,7 @@
 #include "reportcriteria.h"
 #include "task.h"
 #include "taskview.h"
-#include "kdepim-version.h"
+#include "ktimetracker-version.h"
 
 
 //@cond PRIVATE
@@ -73,7 +78,7 @@ class TimetrackerWidget::Private
     QWidget *mSearchLine;
     KTreeWidgetSearchLine *mSearchWidget;
     TaskView *mTaskView;
-    QMap<QString, KAction*> mActions;
+    QMap<QString, QAction *> mActions;
 
     struct ActionData
     {
@@ -90,7 +95,7 @@ class TimetrackerWidget::Private
 TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
   d( new TimetrackerWidget::Private() )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     new MainAdaptor( this );
     QDBusConnection::sessionBus().registerObject( "/KTimeTracker", this );
 
@@ -129,14 +134,14 @@ bool TimetrackerWidget::allEventsHaveEndTiMe()
 
 int TimetrackerWidget::focusSearchBar()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if ( d->mSearchWidget->isVisible() ) d->mSearchWidget->setFocus();
     return 0;
 }
 
 void TimetrackerWidget::addTaskView( const QString &fileName )
 {
-    kDebug(5970) << "Entering function (fileName=" << fileName << ")";
+    qCDebug(KTT_LOG) << "Entering function (fileName=" << fileName << ")";
     bool isNew = fileName.isEmpty();
     QString lFileName = fileName;
 
@@ -275,9 +280,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
         { QString(), I18N_NOOP("&Export Times..."), SLOT(exportcsvFile()), "export_times",
             "", ""
         },
-        { QString(), I18N_NOOP("Export &History..."), SLOT(exportcsvHistory()),
-            "export_history", "", ""
-        },
+//        { QString(), I18N_NOOP("Export &History..."), SLOT(exportcsvHistory()),
+//            "export_history", "", ""
+//        },
         { QString(), I18N_NOOP("Import Tasks From &Planner..."), SLOT(importPlanner()),
             "import_planner", "", ""
         },
@@ -289,14 +294,14 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
     for ( unsigned int i = 0; i < ( sizeof( actions ) / sizeof( Private::ActionData ) ); ++i )
     {
         Private::ActionData actionData = actions[i];
-        KAction *action;
+        QAction *action;
         if ( actionData.iconName.isEmpty() )
         {
-            action = new KAction( i18n( actionData.caption ), this );
+            action = new QAction( i18n( actionData.caption ), this );
         }
         else
         {
-            action = new KAction( KIcon( actionData.iconName ),
+            action = new QAction( KIcon( actionData.iconName ),
                             i18n( actionData.caption ), this );
         }
 
@@ -335,14 +340,14 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
              this, SLOT(slotUpdateButtons()) );
 }
 
-KAction* TimetrackerWidget::action( const QString &name ) const
+QAction * TimetrackerWidget::action( const QString &name ) const
 {
     return d->mActions.value( name );
 }
 
 void TimetrackerWidget::openFile( const QString &fileName )
 {
-    kDebug(5970) << "Entering function, fileName is " << fileName;
+    qCDebug(KTT_LOG) << "Entering function, fileName is " << fileName;
     QString newFileName = fileName;
     if ( newFileName.isEmpty() )
     {
@@ -362,7 +367,7 @@ void TimetrackerWidget::openFile( const QUrl &fileName )
 
 bool TimetrackerWidget::closeFile()
 {
-    kDebug(5970) << "Entering TimetrackerWidget::closeFile";
+    qCDebug(KTT_LOG) << "Entering TimetrackerWidget::closeFile";
     TaskView *taskView = currentTaskView();
 
     if ( taskView )
@@ -394,7 +399,7 @@ void TimetrackerWidget::showSearchBar( bool visible )
 
 bool TimetrackerWidget::closeAllFiles()
 {
-    kDebug(5970) << "Entering TimetrackerWidget::closeAllFiles";
+    qCDebug(KTT_LOG) << "Entering TimetrackerWidget::closeAllFiles";
     bool err = true;
     if (d->mTaskView)
     {
@@ -406,7 +411,7 @@ bool TimetrackerWidget::closeAllFiles()
 
 void TimetrackerWidget::slotCurrentChanged()
 {
-    kDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
+    qDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
 
     if ( d->mTaskView )
     {
@@ -470,7 +475,7 @@ void TimetrackerWidget::slotAddTask( const QString &taskName )
 
 void TimetrackerWidget::slotUpdateButtons()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     Task *item = currentTask();
 
     d->mActions[ "start" ]->setEnabled( item && !item->isRunning() &&
@@ -493,19 +498,19 @@ void TimetrackerWidget::slotUpdateButtons()
     d->mActions[ "export_history" ]->setEnabled( currentTaskView() );
     d->mActions[ "import_planner" ]->setEnabled( currentTaskView() );
     d->mActions[ "file_save" ]->setEnabled( currentTaskView() );
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TimetrackerWidget::showSettingsDialog()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     /* show main window b/c if this method was started from tray icon and the window
         is not visible the application quits after accepting the settings dialog.
     */
     window()->show();
-    KTimeTrackerConfigDialog *dialog=new KTimeTrackerConfigDialog(i18n( "Settings" ), this);
-    dialog->exec();
-    delete dialog;
+//    KTimeTrackerConfigDialog *dialog=new KTimeTrackerConfigDialog(i18n( "Settings" ), this);
+//    dialog->exec();
+//    delete dialog;
     KTimeTrackerSettings::self()->readConfig();
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
@@ -565,7 +570,7 @@ void TimetrackerWidget::exportcsvFile()
 
 void TimetrackerWidget::exportcsvHistory()
 {
-    currentTaskView()->exportcsvHistory();
+//    currentTaskView()->exportcsvHistory();
 }
 
 void TimetrackerWidget::importPlanner( const QString &fileName )
@@ -620,7 +625,7 @@ void TimetrackerWidget::slotSearchBar()
 /* @{ */
 QString TimetrackerWidget::version() const
 {
-    return KDEPIM_VERSION;
+    return KTIMETRACKER_VERSION;
 }
 
 QStringList TimetrackerWidget::taskIdsFromName( const QString &taskName ) const
@@ -782,7 +787,7 @@ int TimetrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
 
 void TimetrackerWidget::startTimerFor( const QString &taskId )
 {
-    kDebug();
+    qDebug();
         
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return;
@@ -980,11 +985,11 @@ bool TimetrackerWidget::event ( QEvent * event ) // inherited from QWidget
 
 void TimetrackerWidget::quit()
 {
-    kDebug(5970) << "Entering TimetrackerWidget::quit";
-    if ( closeAllFiles() )
-    {
-        kapp->quit();
-    }
+//    qCDebug(KTT_LOG) << "Entering TimetrackerWidget::quit";
+//    if ( closeAllFiles() )
+//    {
+//        kapp->quit();
+//    }
 }
 // END of dbus slots group
 /* @} */

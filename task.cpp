@@ -27,9 +27,11 @@
 #include <QTimer>
 #include <QPixmap>
 
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KIconLoader>
 #include <KComponentData>
+#include <KGlobal>
 
 #include <KCalCore/Event>
 
@@ -74,11 +76,11 @@ int Task::depth()
 // Deliver the depth of a task, i.e. how many tasks are supertasks to it.
 // A toplevel task has the depth 0.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     int res=0;
     Task* t=this;
     while ( ( t = t->parent() ) ) res++;
-    kDebug(5970) << "Leaving function. depth is:" << res;
+    qCDebug(KTT_LOG) << "Leaving function. depth is:" << res;
     return res;
 }
 
@@ -125,7 +127,7 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
     mCurrentPic = 0;
     mPercentComplete = percent_complete;
     mPriority = priority;
-    mSessionStartTiMe=KDateTime::fromString(sessionStartTiMe);
+    mSessionStartTiMe=QDateTime::fromString(sessionStartTiMe);
 
     update();
     changeParentTotalTimes( mSessionTime, mTime);
@@ -159,7 +161,7 @@ void Task::delete_recursive()
 void Task::setRunning( bool on, timetrackerstorage* storage, const QDateTime &when )
 // This is the back-end, the front-end is StartTimerFor()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if ( on )
     {
         if (!mTimer->isActive())
@@ -168,7 +170,7 @@ void Task::setRunning( bool on, timetrackerstorage* storage, const QDateTime &wh
             storage->startTimer(this);
             mCurrentPic=7;
             mLastStart = when;
-            kDebug(5970) << "task has been started for " << when;
+            qCDebug(KTT_LOG) << "task has been started for " << when;
             updateActiveIcon();
         }
     }
@@ -191,7 +193,7 @@ void Task::resumeRunning()
 // resumeRunning does the same as setRunning, but not add a new
 // start date to the storage.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if (!mTimer->isActive())
     {
         mTimer->start(1000);
@@ -212,7 +214,7 @@ bool Task::isRunning() const
 
 void Task::setName( const QString& name, timetrackerstorage* storage )
 {
-    kDebug(5970) << "Entering function, name=" << name;
+    qCDebug(KTT_LOG) << "Entering function, name=" << name;
 
     QString oldname = mName;
     if ( oldname != name )
@@ -225,7 +227,7 @@ void Task::setName( const QString& name, timetrackerstorage* storage )
 
 void Task::setDescription( const QString& description )
 {
-    kDebug(5970) << "Entering function, description=" << description;
+    qCDebug(KTT_LOG) << "Entering function, description=" << description;
 
     QString olddescription = mDescription;
     if ( olddescription != description )
@@ -237,7 +239,7 @@ void Task::setDescription( const QString& description )
 
 void Task::setPercentComplete(const int percent, timetrackerstorage *storage)
 {
-    kDebug(5970) << "Entering function(" << percent <<", storage):" << mUid;
+    qCDebug(KTT_LOG) << "Entering function(" << percent <<", storage):" << mUid;
 
     if (!percent)
         mPercentComplete = 0;
@@ -283,7 +285,7 @@ void Task::setPriority( int priority )
 
 void Task::setPixmapProgress()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QPixmap icon;
     KIconLoader* kil = new KIconLoader();
     if (mPercentComplete >= 100)
@@ -298,7 +300,7 @@ void Task::setPixmapProgress()
     }
     setIcon(0, icon);
     delete kil;
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 bool Task::isComplete() { return mPercentComplete == 100; }
@@ -310,51 +312,51 @@ void Task::setDesktopList ( DesktopList desktopList )
 
 QString Task::addTime( long minutes )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mTime+=minutes;
     this->addTotalTime( minutes );
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
 QString Task::addTotalTime( long minutes )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mTotalTime+=minutes;
     if ( parent() ) parent()->addTotalTime( minutes );
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
 QString Task::addSessionTime( long minutes )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mSessionTime+=minutes;
     this->addTotalSessionTime( minutes );
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
 QString Task::addTotalSessionTime( long minutes )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mTotalSessionTime+=minutes;
     if ( parent() ) parent()->addTotalSessionTime( minutes );
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
 QString Task::setTime( long minutes )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mTime=minutes;
     mTotalTime+=minutes;
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
@@ -382,18 +384,18 @@ QString Task::recalculatetotalsessiontime()
 
 QString Task::setSessionTime( long minutes )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mSessionTime=minutes;
     mTotalSessionTime+=minutes;
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
 void Task::changeTimes( long minutesSession, long minutes, timetrackerstorage* storage)
 {
-    kDebug(5970) << "Entering function";
-    kDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
+    qCDebug(KTT_LOG) << "Entering function";
+    qDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
     if( minutesSession != 0 || minutes != 0)
     {
         mSessionTime += minutesSession;
@@ -401,7 +403,7 @@ void Task::changeTimes( long minutesSession, long minutes, timetrackerstorage* s
         if ( storage ) storage->changeTime(this, minutes * secsPerMinute);
         changeTotalTimes( minutesSession, minutes );
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::changeTime( long minutes, timetrackerstorage* storage )
@@ -411,26 +413,26 @@ void Task::changeTime( long minutes, timetrackerstorage* storage )
 
 void Task::changeTotalTimes( long minutesSession, long minutes )
 {
-    kDebug(5970)
+    qCDebug(KTT_LOG)
         << "Task::changeTotalTimes(" << minutesSession << ","
         << minutes << ") for" << name();
     mTotalSessionTime += minutesSession;
     mTotalTime += minutes;
     update();
     changeParentTotalTimes( minutesSession, minutes );
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::resetTimes()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     mTotalSessionTime -= mSessionTime;
     mTotalTime -= mTime;
     changeParentTotalTimes( -mSessionTime, -mTime);
     mSessionTime = 0;
     mTime = 0;
     update();
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::changeParentTotalTimes( long minutesSession, long minutes )
@@ -443,7 +445,7 @@ void Task::changeParentTotalTimes( long minutesSession, long minutes )
 
 bool Task::remove( timetrackerstorage* storage)
 {
-    kDebug(5970) << "entering function" << mName;
+    qCDebug(KTT_LOG) << "entering function" << mName;
     bool ok = true;
 
     mRemoving = true;
@@ -481,7 +483,7 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
 {
     Q_ASSERT( todo != NULL );
 
-    kDebug(5970) <<"Task::asTodo: name() = '" << name() <<"'";
+    qCDebug(KTT_LOG) <<"Task::asTodo: name() = '" << name() <<"'";
     todo->setSummary( name() );
     todo->setDescription( description() );
 
@@ -496,7 +498,7 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
         QByteArray( "totalSessionTime" ), QString::number( mSessionTime) );
     todo->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
         QByteArray( "sessionStartTiMe" ), mSessionStartTiMe.toString() );
-    kDebug() << "mSessionStartTiMe=" << mSessionStartTiMe.toString() ;
+    qDebug() << "mSessionStartTiMe=" << mSessionStartTiMe.toString() ;
 
     if (getDesktopStr().isEmpty())
         todo->removeCustomProperty(KGlobal::mainComponent().componentName().toUtf8(), QByteArray("desktopList"));
@@ -514,7 +516,7 @@ bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minut
     long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
     int& percent_complete, int& priority )
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     bool ok;
     name = incident->summary();
     description = incident->description();
@@ -602,37 +604,37 @@ QString Task::getDesktopStr() const
 void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     changeParentTotalTimes( -mTotalSessionTime, -mTotalTime);
     if ( ! parent() )
         treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
     else
         parent()->takeChild(indexOfChild(this));
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::paste(Task* destination)
 // This is needed e.g. to move a task under its parent when loading.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     destination->QTreeWidgetItem::insertChild(0,this);
     changeParentTotalTimes( mTotalSessionTime, mTotalTime);
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::move(Task* destination)
 // This is used e.g. to move each task under its parent after loading.
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     cut();
     paste(destination);
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::update()
 // Update a row, containing one task
 {
-    kDebug( 5970 ) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     bool b = KTimeTrackerSettings::decimalFormat();
     setText( 0, mName );
     setText( 1, formatTime( mSessionTime, b ) );
@@ -641,7 +643,7 @@ void Task::update()
     setText( 4, formatTime( mTotalTime, b ) );
     setText( 5, mPriority > 0 ? QString::number( mPriority ) : "--" );
     setText( 6, QString::number( mPercentComplete ) );
-    kDebug( 5970 ) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::addComment( const QString &comment, timetrackerstorage* storage )

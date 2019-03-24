@@ -156,7 +156,7 @@ class timetrackerstorage : public QObject
     /**
      Output a report based on contents of ReportCriteria.
      */
-    QString report( TaskView *taskview, const ReportCriteria &rc );
+//    QString report( TaskView *taskview, const ReportCriteria &rc );
 
     /**
      * Log the change in a task's time.
@@ -320,18 +320,18 @@ class timetrackerstorage : public QObject
      *    taskName,subtaskName,..,sessionTime,time,totalSessionTime,totalTime
      * the number of subtasks is determined at runtime.
      */
-    QString exportcsvFile( TaskView *taskview, const ReportCriteria &rc );
+//    QString exportcsvFile( TaskView *taskview, const ReportCriteria &rc );
 
     /**
      *  Write task history to file as comma-delimited data.
      */
-    QString exportcsvHistory
-    (
-            TaskView* taskview,
-            const QDate& from,
-            const QDate& to,
-            const ReportCriteria &rc
-    );
+//    QString exportcsvHistory
+//    (
+//            TaskView* taskview,
+//            const QDate& from,
+//            const QDate& to,
+//            const ReportCriteria &rc
+//    );
 };
 
 /**

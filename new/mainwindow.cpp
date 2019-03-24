@@ -28,7 +28,8 @@
 
 #include <KAction>
 #include <KApplication>       // kapp
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include <KGlobal>
 #include <KIcon>
 #include <KLocale>            // i18n
@@ -110,7 +111,7 @@ void MainWindow::newtask()
 
 void MainWindow::showSettingsDialog()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     /* show main window b/c if this method was started from tray icon and the window
         is not visible the application quits after accepting the settings dialog.
     */
@@ -136,7 +137,7 @@ void MainWindow::setStatusBar(const QString& qs)
 
 MainWindow::~MainWindow()
 {
-    kDebug(5970) << "MainWindow::~MainWindows: Quitting ktimetracker.";
+    qCDebug(KTT_LOG) << "MainWindow::~MainWindows: Quitting ktimetracker.";
     saveGeometry();
 }
 

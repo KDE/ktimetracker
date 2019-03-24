@@ -27,23 +27,25 @@
 #include <QMenu>
 
 #include <KAboutData>
-#include <KAction>
-#include <KComponentData>
-#include <KGlobal>
-#include <KLocale>
+#include <QAction>
+#include <KLocalizedString>
+//#include <KComponentData>
+//#include <KGlobal>
+//#include <KLocale>
 #include <KStandardAction>
-#include <KStandardDirs>
+
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KShortcutsDialog>
 
-#include <kdemacros.h>
+//#include <kdemacros.h>
 #include <kpluginfactory.h>
+#include <QStandardPaths>
 #include "ktimetrackerutility.h"
 #include "task.h"
 #include "preferences.h"
 #include "tray.h"
-#include "kdepim-version.h"
+#include "ktimetracker-version.h"
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
@@ -53,9 +55,9 @@ K_EXPORT_PLUGIN( ktimetrackerPartFactory("ktimetracker","ktimetracker") )
 ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, const QVariantList& )
     : KParts::ReadWritePart(parent)
 {
-    kDebug(5970) << "Entering function";
-    KGlobal::locale()->insertCatalog("ktimetracker");
-    KGlobal::locale()->insertCatalog("libkdepim");
+    qCDebug(KTT_LOG) << "Entering function";
+//    KGlobal::locale()->insertCatalog("ktimetracker");
+//    KGlobal::locale()->insertCatalog("libkdepim");
     // we need an instance
     mMainWidget = new TimetrackerWidget( parentWidget );
     setWidget( mMainWidget );
@@ -67,20 +69,20 @@ ktimetrackerpart::~ktimetrackerpart()
 {
 }
 
-KAboutData *ktimetrackerpart::createAboutData()
-{
-    const QByteArray& appname=QByteArray("ktimetracker");
-    const QByteArray& catalogname=QByteArray("ktimetracker");
-    const KLocalizedString localizedname=ki18n("ktimetracker");
-    const QByteArray version=QByteArray(KDEPIM_VERSION);
-    KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
-    return aboutData;
-}
+//KAboutData *ktimetrackerpart::createAboutData()
+//{
+//    const QByteArray& appname=QByteArray("ktimetracker");
+//    const QByteArray& catalogname=QByteArray("ktimetracker");
+//    const KLocalizedString localizedname=ki18n("ktimetracker");
+//    const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
+//    KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
+//    return aboutData;
+//}
 
 void ktimetrackerpart::makeMenus()
 {
     mMainWidget->setupActions( actionCollection() );
-    KAction *actionKeyBindings;
+    QAction *actionKeyBindings;
     actionKeyBindings = KStandardAction::keyBindings( this, SLOT(keyBindings()),
         actionCollection() );
     // Tool tips must be set after the createGUI.
@@ -97,7 +99,7 @@ void ktimetrackerpart::keyBindings()
 
 void ktimetrackerpart::setStatusBar(const QString & qs)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     emit setStatusBarText(qs);
 }
 
@@ -116,7 +118,7 @@ bool ktimetrackerpart::openFile(QString icsfile)
 
 bool ktimetrackerpart::openFile()
 {
-    return openFile(KStandardDirs::locateLocal( "data", QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) ));
+    return openFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) );
 }
 
 bool ktimetrackerpart::saveFile()
@@ -125,3 +127,4 @@ bool ktimetrackerpart::saveFile()
     return true;
 }
 
+#include "ktimetrackerpart.moc"

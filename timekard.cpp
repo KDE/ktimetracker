@@ -28,9 +28,11 @@
 #include <QList>
 #include <QMap>
 
-#include <KDebug>
-#include <KGlobal>
-#include <KLocale>
+#include <QDebug>
+#include "ktt_debug.h"
+//#include <KGlobal>
+//#include <KLocale>
+#include <KLocalizedString>
 
 #include "timetrackerstorage.h"
 #include "ktimetrackerutility.h"        // formatTime()
@@ -46,7 +48,7 @@ const QString cr = QString::fromLatin1("\n");
 
 QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString retval;
     QString line;
     QString buf;
@@ -58,7 +60,8 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 
     // header
     retval += i18n("Task Totals") + cr;
-    retval += KGlobal::locale()->formatDateTime(QDateTime::currentDateTime());
+    retval += QLocale().toString(QDateTime::currentDateTime());
+//    retval += KGlobal::locale()->formatDateTime(QDateTime::currentDateTime());
     retval += cr + cr;
     retval += QString(QString::fromLatin1("%1    %2"))
         .arg(i18n("Time"), timeWidth)
@@ -103,7 +106,7 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
 // Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
 void TimeKard::printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     QString buf;
 
     s += buf.fill(' ', level);
@@ -156,7 +159,7 @@ QDate Week::end() const
 
 QString Week::name() const
 {
-    return i18n("Week of %1", KGlobal::locale()->formatDate(start()));
+    return i18n("Week of %1", QLocale().toString(start()));
 }
 
 QList<Week> Week::weeksFromDateRange(const QDate& from, const QDate& to)
@@ -174,7 +177,7 @@ QList<Week> Week::weeksFromDateRange(const QDate& from, const QDate& to)
     // Since report always shows a full week, we generate a full week of dates,
     // even if from and to are the same date.  The week starts on the day
     // that is set in the locale settings.
-    start = from.addDays( -((7 - KGlobal::locale()->weekStartDay() + from.dayOfWeek()) % 7));
+    start = from.addDays( -((7 - QLocale().firstDayOfWeek() + from.dayOfWeek()) % 7));
 
     for (QDate d = start; d <= to; d = d.addDays(7))
         weeks.append(Week(d));

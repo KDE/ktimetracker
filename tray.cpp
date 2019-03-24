@@ -34,11 +34,13 @@
 #include <QToolTip>
 #include <QMenu>
 
-#include <KAction>
+#include <QAction>
 #include <KGlobalSettings>
 #include <KLocale>
+#include <KIconLoader>
 #include <KMenu>
-#include <KDebug>
+#include <QDebug>
+#include "ktt_debug.h"
 #include "mainwindow.h"
 #include "task.h"
 #include "timetrackerwidget.h"
@@ -69,7 +71,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
     TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
     if ( timetrackerWidget )
     {
-        KAction *action = timetrackerWidget->action( "configure_ktimetracker" );
+        QAction *action = timetrackerWidget->action( "configure_ktimetracker" );
         if ( action ) contextMenu()->addAction( action );
         action = timetrackerWidget->action( "stopAll" );
         if ( action ) contextMenu()->addAction( action );
@@ -100,23 +102,23 @@ TrayIcon::~TrayIcon()
 
 void TrayIcon::startClock()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if ( _taskActiveTimer )
     {
         _taskActiveTimer->start(1000);
         setIconByPixmap( *(*icons)[_activeIcon] );
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TrayIcon::stopClock()
 {
-    kDebug(5970) << "Entering function";
+    qCDebug(KTT_LOG) << "Entering function";
     if ( _taskActiveTimer )
     {
         _taskActiveTimer->stop();
     }
-    kDebug(5970) << "Leaving function";
+    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TrayIcon::advanceClock()
