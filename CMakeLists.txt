@@ -106,10 +106,10 @@ kconfig_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
 
-file(GLOB ICONS_SRCS "hi*-app-ktimetracker.png")
-ecm_add_app_icon(ktimetracker_SRCS ICONS ${ICONS_SRCS})
-
-add_executable(ktimetracker ${ktimetracker_SRCS})
+add_executable(ktimetracker
+	${ktimetracker_SRCS}
+	$<TARGET_OBJECTS:ktimetracker_app_icon>
+)
 
 
 target_link_libraries(ktimetracker
