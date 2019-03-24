@@ -37,7 +37,6 @@
 #include <QAction>
 #include <KGlobalSettings>
 #include <KLocale>
-#include <KIconLoader>
 #include <KMenu>
 #include <QDebug>
 #include "ktt_debug.h"

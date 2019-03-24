@@ -33,9 +33,6 @@
 #include <QVBoxLayout>
 #include <QVector>
 
-//#include <KApplication>
-#include <KIconLoader>
-#include <KIcon>
 #include <QAction>
 #include <KLocalizedString>
 #include <KDialog>
@@ -45,9 +42,6 @@
 #include <QDebug>
 #include "ktt_debug.h"
 #include <KFileDialog>
-//#include <KGlobal>
-//#include <KIcon>
-//#include <KLocale>
 #include <KMessageBox>
 #include <KRecentFilesAction>
 #include <KStandardAction>
@@ -301,8 +295,7 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
         }
         else
         {
-            action = new QAction( KIcon( actionData.iconName ),
-                            i18n( actionData.caption ), this );
+            action = new QAction(QIcon::fromTheme(actionData.iconName), i18n(actionData.caption), this);
         }
 
         actionCollection->addAction( actionData.name, action );
