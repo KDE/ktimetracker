@@ -61,10 +61,9 @@ TrayIcon::TrayIcon(MainWindow* parent)
         icons = new QVector<QPixmap*>(8);
         for (int i=0; i<8; ++i)
         {
-            QPixmap *icon = new QPixmap();
             QString name;
-            name.sprintf("active-icon-%d.xpm",i);
-            *icon = UserIcon(name);
+            name.sprintf(":/pics/active-icon-%d.xpm",i);
+            QPixmap *icon = new QPixmap(name);
             icons->insert(i,icon);
         }
     }

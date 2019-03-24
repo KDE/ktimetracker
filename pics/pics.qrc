@@ -8,5 +8,13 @@
         <file>watch-5.xpm</file>
         <file>watch-6.xpm</file>
         <file>watch-7.xpm</file>
+        <file>active-icon-0.xpm</file>
+        <file>active-icon-1.xpm</file>
+        <file>active-icon-2.xpm</file>
+        <file>active-icon-3.xpm</file>
+        <file>active-icon-4.xpm</file>
+        <file>active-icon-5.xpm</file>
+        <file>active-icon-6.xpm</file>
+        <file>active-icon-7.xpm</file>
     </qresource>
 </RCC>
