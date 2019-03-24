@@ -11,7 +11,7 @@ include(ECMInstallIcons)
 include(KDEInstallDirs)
 include(ECMAddAppIcon)
 include(ECMQtDeclareLoggingCategory)
-
+include(FeatureSummary)
 include(KDECMakeSettings)
 
 set(QT_REQUIRED_VERSION "5.10.0")
@@ -188,3 +188,5 @@ install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
 install(FILES ktimetrackerui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/ktimetracker)
 
 install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
