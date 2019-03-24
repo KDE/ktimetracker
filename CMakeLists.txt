@@ -185,7 +185,6 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 install( FILES ktimetracker_config_behavior.desktop  ktimetracker_config_display.desktop  ktimetracker_config_storage.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
-install( FILES ktimetrackerui.rc  DESTINATION ${DATA_INSTALL_DIR}/ktimetracker )
+install(FILES ktimetrackerui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/ktimetracker)
 
-#ecm_install_icons( ${ICON_INSTALL_DIR} )
 install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
