@@ -46,8 +46,9 @@ endif()
 # TODO: define HAVE_LIBXSS
 #configure_file(config-ktimetracker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ktimetracker.h )
 
-add_subdirectory( support )
-add_subdirectory( pics )
+add_subdirectory(support)
+add_subdirectory(pics)
+add_subdirectory(icons)
 
 include_directories(
 	${CMAKE_SOURCE_DIR}/kresources/remote
