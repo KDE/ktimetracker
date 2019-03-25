@@ -19,10 +19,7 @@
  *
  */
 
-#include <iostream>
-
 #include <QFile>
-#include <QDebug>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QStandardPaths>
@@ -70,8 +67,12 @@ QString icsfile(const QCommandLineParser &parser) // deliver the name of the iCa
         result = QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics"));
         if (!QFile::exists(result))
         {
-            QFile oldFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "karm/karm.ics"));
             result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker.ics");
+
+            QFileInfo fileInfo(result);
+            QDir().mkpath(fileInfo.absolutePath());
+
+            QFile oldFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "karm/karm.ics"));
             if (oldFile.exists()) {
                 oldFile.copy(result);
             }
@@ -111,145 +112,29 @@ int main(int argc, char *argv[])
     aboutData.setupCommandLine(&parser);
 
     parser.addPositionalArgument(QStringLiteral("file"), i18n("The iCalendar file to open"));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("listtasknames"), i18n("List all tasks as text output")));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("addtask"), i18n("Add task <taskname>"),
-        QStringLiteral("taskname")));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("deletetask"), i18n("Delete task <taskid>"),
-        QStringLiteral("taskid")));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("taskidsfromname"), i18n("Print the task ids for all tasks named <taskname>"),
-        QStringLiteral("taskname")));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("starttask"), i18n("Start timer for task <taskid>"),
-        QStringLiteral("taskid")));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("stoptask"), i18n("Stop timer for task <taskid>"),
-        QStringLiteral("taskid")));
-    parser.addOption(QCommandLineOption(
-        QStringList() << QStringLiteral("totalminutesfortaskid"), i18n("Deliver total minutes for task id"),
-        QStringLiteral("taskid")));
 
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
-    int err=0;  // error code
-    bool konsolemode=false;  // open a gui and wait for user input?
-    if ( parser.isSet("listtasknames") ) konsolemode=true;
-    if ( !parser.value("addtask").isEmpty() ) konsolemode=true;
-    if ( !parser.value("deletetask").isEmpty() ) konsolemode=true;
-    if ( !parser.value("taskidsfromname").isEmpty() ) konsolemode=true;
-    if ( !parser.value("totalminutesfortaskid").isEmpty() ) konsolemode=true;
-    if ( !parser.value("starttask").isEmpty() ) konsolemode=true;
-    if ( !parser.value("stoptask").isEmpty() ) konsolemode=true;
+    const QString& path = icsfile(parser);
 
-    if ( !konsolemode )
-    {  // no konsole mode
 //        if (!KUniqueApplication::start()) {
 //            qCDebug(KTT_LOG) << "Other instance is already running, exiting!";
 //            return 0;
 //        }
 //        KUniqueApplication myApp;
-        MainWindow *mainWindow;
-        mainWindow = new MainWindow(icsfile(parser));
-        mainWindow->show();
+    MainWindow *mainWindow;
+    mainWindow = new MainWindow(path);
+    mainWindow->show();
 
-        if (app.isSessionRestored()) {
-            const QString className = KXmlGuiWindow::classNameOfToplevel(1);
-            if (className == QLatin1String("MainWindow")) {
-                mainWindow->restore(1);
-            } else {
-                qCWarning(KTT_LOG) << "Unknown class " << className << " in session saved data!";
-            }
+    if (app.isSessionRestored()) {
+        const QString className = KXmlGuiWindow::classNameOfToplevel(1);
+        if (className == QLatin1String("MainWindow")) {
+            mainWindow->restore(1);
+        } else {
+            qCWarning(KTT_LOG) << "Unknown class " << className << " in session saved data!";
         }
+    }
 
-        return app.exec();
-    }
-    else // we are running in konsole mode
-    {
-        qCDebug(KTT_LOG) << "We are running in konsole mode";
-//        KApplication myApp(false);
-        // listtasknames
-        if ( parser.isSet("listtasknames") )
-        {
-            auto* sto=new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            QStringList tasknameslist=sto->taskNames();
-            for ( int i=0; i<tasknameslist.count(); ++i )
-            {
-                char* line = tasknameslist[i].toLatin1().data();
-                std::cout << line << std::endl;
-            }
-        delete sto;  // make valgrind happy
-        }
-        // addtask
-        if ( !parser.value("addtask").isEmpty() )
-        {
-            auto* sto = new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            const QString& s=parser.value("addtask");
-            QVector<int> vec;
-            DesktopList dl=vec;
-            Task* task=new Task( s, QString(), (long int) 0,(long int) 0, dl, 0, true );
-            sto->addTask( task );
-            sto->save( 0 );
-            delete sto;
-        }
-        // deletetask
-        if ( !parser.value("deletetask").isEmpty() )
-        {
-            auto* sto = new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            const QString& taskid=parser.value("deletetask");
-            sto->removeTask( taskid );
-            delete sto;
-        }
-        // taskidsfromname
-        if ( !parser.value("taskidsfromname").isEmpty() )
-        {
-            auto* sto = new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            const QString& taskname=parser.value("taskidsfromname");
-            QStringList taskids=sto->taskidsfromname( taskname );
-            for ( int i=0; i<taskids.count(); ++i )
-            {
-                char* line = taskids[i].toLatin1().data();
-                std::cout << line << std::endl;
-            }
-            delete sto;
-        }
-        // totalminutesfortaskid
-        if ( !parser.value("totalminutesfortaskid").isEmpty() )
-        {
-            auto* sto = new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            Task* task=sto->task( parser.value("totalminutesfortaskid"), 0 );
-            if (task!=0)
-            {
-                qCDebug(KTT_LOG) << "taskname=" << task->name();
-                std::cout << task->totalTime();
-            }
-            delete sto;
-        }
-        // starttask
-        if ( !parser.value("starttask").isEmpty() )
-        {
-            auto* sto = new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            sto->startTimer(parser.value("starttask"));
-            delete sto;
-        }
-        // stoptask
-        if ( !parser.value("stoptask").isEmpty() )
-        {
-            auto* sto = new TimeTrackerStorage();
-            sto->load( 0, icsfile( parser ) );
-            sto->stopTimer(sto->task( parser.value("stoptask"), 0 ));
-            delete sto;
-        }
-        
-    }
-    return err;
+    return app.exec();
 }

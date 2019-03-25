@@ -57,10 +57,10 @@ Q_OBJECT
 
 public:
     Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-          DesktopList desktops, TaskView* parent = 0, bool konsolemode=false );
+          DesktopList desktops, TaskView* parent = 0);
     Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
           DesktopList desktops, Task* parent = 0);
-    Task( const KCalCore::Todo::Ptr &incident, TaskView* parent, bool konsolemode=false );
+    Task( const KCalCore::Todo::Ptr &incident, TaskView* parent);
 
     /* destructor */
     ~Task();
@@ -365,7 +365,7 @@ public:
 
     /** initialize a task */
     void init( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
-               DesktopList desktops, int percent_complete, int priority, bool konsolemode=false );
+               DesktopList desktops, int percent_complete, int priority);
 
     bool operator<(const QTreeWidgetItem &other)const;
 

@@ -41,10 +41,10 @@ const QByteArray eventAppName = QByteArray("ktimetracker");
 QVector<QPixmap*> *Task::icons = 0;
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-            DesktopList desktops, TaskView *parent, bool konsolemode )
+            DesktopList desktops, TaskView *parent)
   : QObject(), QTreeWidgetItem(parent)
 {
-    init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0, konsolemode );
+    init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0);
 }
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
@@ -54,7 +54,7 @@ Task::Task( const QString& taskName, const QString& taskDescription, long minute
     init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0 );
 }
 
-Task::Task( const KCalCore::Todo::Ptr &todo, TaskView* parent, bool konsolemode )
+Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* parent)
   : QObject(), QTreeWidgetItem( parent )
 {
     long minutes = 0;
@@ -68,7 +68,7 @@ Task::Task( const KCalCore::Todo::Ptr &todo, TaskView* parent, bool konsolemode 
 
     parseIncidence( todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete,
                   priority );
-    init( name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority, konsolemode );
+    init( name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
 }
 
 int Task::depth()
@@ -83,31 +83,29 @@ int Task::depth()
     return res;
 }
 
-void Task::init( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
-                 DesktopList desktops, int percent_complete, int priority, bool konsolemode )
+void Task::init(
+    const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
+    DesktopList desktops, int percent_complete, int priority)
 {
-    const TaskView *taskView = qobject_cast<TaskView*>( treeWidget() );
+    const TaskView *taskView = qobject_cast<TaskView*>(treeWidget());
     // If our parent is the taskview then connect our totalTimesChanged
     // signal to its receiver
-    if ( ! parent() )
-        connect( this, SIGNAL(totalTimesChanged(long,long)),
-                 taskView, SLOT(taskTotalTimesChanged(long,long)));
+    if (!parent()) {
+        connect(this, &Task::totalTimesChanged,
+                taskView, &TaskView::taskTotalTimesChanged);
+    }
 
-    connect( this, SIGNAL(deletingTask(Task*)),
-             taskView, SLOT(deletingTask(Task*)));
+    connect(this, &Task::deletingTask, taskView, &TaskView::deletingTask);
 
-    if (icons == 0)
+    if (!icons)
     {
         icons = new QVector<QPixmap*>(8);
-        if (!konsolemode)
+        for (int i=0; i<8; ++i)
         {
-            for (int i=0; i<8; ++i)
-            {
-                QString name;
-                name.sprintf(":/pics/watch-%d.xpm",i);
-                QPixmap *icon = new QPixmap(name);
-                icons->insert(i,icon);
-            }
+            QString name;
+            name.sprintf(":/pics/watch-%d.xpm",i);
+            QPixmap *icon = new QPixmap(name);
+            icons->insert(i,icon);
         }
     }
 
@@ -120,7 +118,7 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
     mTimer = new QTimer(this);
     mDesktops = desktops;
     connect(mTimer, SIGNAL(timeout()), this, SLOT(updateActiveIcon()));
-    if ( !konsolemode ) setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
+    setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
     mCurrentPic = 0;
     mPercentComplete = percent_complete;
     mPriority = priority;

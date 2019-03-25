@@ -276,9 +276,6 @@ public:
      */
     bool isEmpty();
 
-    /** Return a list of all task ids for taskname */
-    QStringList taskidsfromname(QString taskname);
-
     /**
      * Find the task with the given uid
      * @param  uid  The uid that identifies the task

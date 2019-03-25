@@ -144,7 +144,9 @@ QString TimeTrackerStorage::load(TaskView* view, const QString &fileName)
     d->mICalFile = lFileName;
     d->mCalendar = KTTCalendar::createInstance(d->mICalFile, /*monitorFile=*/ fileIsLocal);
 
-    QObject::connect(d->mCalendar.data(), SIGNAL(calendarChanged()), view, SLOT(iCalFileModified()));
+    if (view) {
+        connect(d->mCalendar.data(), &KTTCalendar::calendarChanged, view, &TaskView::iCalFileModified);
+    }
 //    d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->reload();
 
@@ -218,17 +220,12 @@ Task* TimeTrackerStorage::task(const QString& uid, TaskView* view)
     todo = todoList.constBegin();
     Task* result=0;
 
-    bool konsolemode = false;
-    if (view == 0) {
-        konsolemode=true;
-    }
-
     while (todo != todoList.constEnd() && ((*todo)->uid() != uid)) {
         ++todo;
     }
 
     if (todo != todoList.constEnd()) {
-        result = new Task((*todo), view, konsolemode);
+        result = new Task((*todo), view);
     }
 
     qCDebug(KTT_LOG) << "Leaving function, returning " << result;
@@ -375,14 +372,11 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     QString errorString;
 
     QStack<KCalCore::Todo::Ptr> parents;
-    if ( taskview ) // we may also be in konsole mode
+    for (int i = 0; i < taskview->topLevelItemCount(); ++i )
     {
-        for (int i = 0; i < taskview->topLevelItemCount(); ++i )
-        {
-            Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
-            qCDebug(KTT_LOG) << "write task" << task->name();
-            errorString = writeTaskAsTodo( task, parents );
-        }
+        Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
+        qCDebug(KTT_LOG) << "write task" << task->name();
+        errorString = writeTaskAsTodo( task, parents );
     }
 
     errorString = saveCalendar();
@@ -453,20 +447,6 @@ QString TimeTrackerStorage::addTask(const Task* task, const Task* parent)
         uid.clear();
     }
     return uid;
-}
-
-QStringList TimeTrackerStorage::taskidsfromname(QString taskname)
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    QStringList result;
-    KCalCore::Todo::List todoList = d->mCalendar->rawTodos();
-    for(KCalCore::Todo::List::iterator i = todoList.begin();
-        i != todoList.end(); ++i)
-    {
-        qCDebug(KTT_LOG) << (*i)->uid();
-        if ( (*i)->summary() == taskname ) result << (*i)->uid();
-    }
-    return result;
 }
 
 QStringList TimeTrackerStorage::taskNames() const

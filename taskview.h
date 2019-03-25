@@ -245,18 +245,18 @@ class TaskView : public QTreeWidget
     Private *const d;
     //@endcond
 
-  private:
+private:
     void updateParents( Task* task, long totalDiff, long sesssionDiff);
     void deleteChildTasks( Task *item );
     void addTimeToActiveTasks( int minutes, bool save_data = true );
     /** item state stores if a task is expanded so you can see the subtasks */
     void restoreItemState();
 
-  protected:
+protected:
     void mouseMoveEvent( QMouseEvent* );
     void mousePressEvent( QMouseEvent* );
 
-  protected Q_SLOTS:
+public Q_SLOTS:
     void minuteUpdate();
     void dropEvent ( QDropEvent * event );
     /** item state stores if a task is expanded so you can see the subtasks */
