@@ -29,16 +29,12 @@
 #include <KAboutData>
 #include <QAction>
 #include <KLocalizedString>
-//#include <KComponentData>
-//#include <KGlobal>
-//#include <KLocale>
 #include <KStandardAction>
 
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KShortcutsDialog>
 
-//#include <kdemacros.h>
 #include <kpluginfactory.h>
 #include <QStandardPaths>
 #include "ktimetrackerutility.h"
@@ -56,8 +52,6 @@ ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, cons
     : KParts::ReadWritePart(parent)
 {
     qCDebug(KTT_LOG) << "Entering function";
-//    KGlobal::locale()->insertCatalog("ktimetracker");
-//    KGlobal::locale()->insertCatalog("libkdepim");
     // we need an instance
     mMainWidget = new TimetrackerWidget( parentWidget );
     setWidget( mMainWidget );

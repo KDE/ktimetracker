@@ -30,8 +30,6 @@
 
 #include <QDebug>
 #include "ktt_debug.h"
-//#include <KGlobal>
-//#include <KLocale>
 #include <KLocalizedString>
 
 #include "timetrackerstorage.h"

@@ -29,15 +29,14 @@
 
 #include <QDebug>
 #include "ktt_debug.h"
-#include <KIconLoader>
-#include <KComponentData>
-#include <KGlobal>
 
 #include <KCalCore/Event>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "preferences.h"
+
+const QByteArray eventAppName = QByteArray("ktimetracker");
 
 QVector<QPixmap*> *Task::icons = 0;
 
@@ -102,7 +101,6 @@ void Task::init( const QString& taskName, const QString& taskDescription, long m
         icons = new QVector<QPixmap*>(8);
         if (!konsolemode)
         {
-            KIconLoader kil("ktimetracker");
             for (int i=0; i<8; ++i)
             {
                 QString name;
@@ -285,20 +283,13 @@ void Task::setPriority( int priority )
 void Task::setPixmapProgress()
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QPixmap icon;
-    KIconLoader* kil = new KIconLoader();
-    if (mPercentComplete >= 100)
-    {
-        const QString iconcomplete=QString("task-complete.xpm");
-        icon = kil->loadIcon( iconcomplete, KIconLoader::User );
+
+    if (mPercentComplete >= 100) {
+        setIcon(0, QPixmap(":/pics/task-complete.xpm"));
+    } else {
+        setIcon(0, QPixmap(":/pics/task-incomplete.xpm"));
     }
-    else
-    {
-        const QString iconincomplete=QString("task-incomplete.xpm");
-        icon = kil->loadIcon( iconincomplete, KIconLoader::User );
-    }
-    setIcon(0, icon);
-    delete kil;
+
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
@@ -491,19 +482,16 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
     // time the file is opened.
     // todo->setDtStart( current );
 
-    todo->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "totalTaskTime" ), QString::number( mTime ) );
-    todo->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "totalSessionTime" ), QString::number( mSessionTime) );
-    todo->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "sessionStartTiMe" ), mSessionStartTiMe.toString() );
+    todo->setCustomProperty(eventAppName, QByteArray( "totalTaskTime"), QString::number( mTime ) );
+    todo->setCustomProperty(eventAppName, QByteArray( "totalSessionTime"), QString::number( mSessionTime) );
+    todo->setCustomProperty(eventAppName, QByteArray( "sessionStartTiMe"), mSessionStartTiMe.toString() );
     qDebug() << "mSessionStartTiMe=" << mSessionStartTiMe.toString() ;
 
-    if (getDesktopStr().isEmpty())
-        todo->removeCustomProperty(KGlobal::mainComponent().componentName().toUtf8(), QByteArray("desktopList"));
-    else
-        todo->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-            QByteArray( "desktopList" ), getDesktopStr() );
+    if (getDesktopStr().isEmpty()) {
+        todo->removeCustomProperty(eventAppName, QByteArray("desktopList"));
+    } else {
+        todo->setCustomProperty(eventAppName, QByteArray("desktopList"), getDesktopStr());
+    }
 
     todo->setOrganizer( KTimeTrackerSettings::userRealName() );
     todo->setPercentComplete(mPercentComplete);
@@ -521,52 +509,48 @@ bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minut
     description = incident->description();
     mUid = incident->uid();
     mComment = incident->description();
-    ok = false;
 
     // if a KDE-karm-duration exists and not KDE-ktimetracker-duration, change this
-    if (
-        incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "totalTaskTime" )) == QString::null && incident->customProperty( "karm",
-        QByteArray( "totalTaskTime" )) != QString::null )
-            incident->setCustomProperty(
-                KGlobal::mainComponent().componentName().toUtf8(),
-                QByteArray( "totalTaskTime" ), incident->customProperty( "karm",
-                QByteArray( "totalTaskTime" )));
-                minutes = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
-                QByteArray( "totalTaskTime" )).toInt( &ok );
-    if ( !ok )
-    minutes = 0;
     ok = false;
+    if (
+        incident->customProperty(eventAppName, QByteArray("totalTaskTime")) == QString::null &&
+        incident->customProperty("karm", QByteArray("totalTaskTime")) != QString::null) {
+        incident->setCustomProperty(
+            eventAppName, QByteArray("totalTaskTime"),
+            incident->customProperty("karm", QByteArray("totalTaskTime")));
+    }
+
+    minutes = incident->customProperty(eventAppName, QByteArray("totalTaskTime")).toInt(&ok);
+    if (!ok) {
+        minutes = 0;
+    }
 
     // if a KDE-karm-totalSessionTime exists and not KDE-ktimetracker-totalSessionTime, change this
+    ok = false;
     if (
-        incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "totalSessionTime" )) == QString::null && incident->customProperty( "karm",
-        QByteArray( "totalSessionTime" )) != QString::null )
-            incident->setCustomProperty(
-                KGlobal::mainComponent().componentName().toUtf8(),
-                QByteArray( "totalSessionTime" ), incident->customProperty( "karm",
-                QByteArray( "totalSessionTime" )));
-    sessionMinutes = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "totalSessionTime" )).toInt( &ok );
-    if ( !ok )
+        incident->customProperty(eventAppName, QByteArray("totalSessionTime")) == QString::null &&
+        incident->customProperty("karm", QByteArray("totalSessionTime")) != QString::null) {
+        incident->setCustomProperty(
+            eventAppName, QByteArray("totalSessionTime"),
+            incident->customProperty("karm", QByteArray("totalSessionTime")));
+    }
+
+    sessionMinutes = incident->customProperty(eventAppName, QByteArray("totalSessionTime")).toInt(&ok);
+    if (!ok) {
         sessionMinutes = 0;
-    sessionStartTiMe=incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(), QByteArray( "sessionStartTiMe" ));
+    }
+    sessionStartTiMe = incident->customProperty(eventAppName, QByteArray("sessionStartTiMe"));
 
     // if a KDE-karm-deskTopList exists and no KDE-ktimetracker-DeskTopList, change this
-    if (
-        incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "desktopList" )) == QString::null && incident->customProperty( "karm",
-        QByteArray( "desktopList" )) != QString::null )
-            incident->setCustomProperty(
-                KGlobal::mainComponent().componentName().toUtf8(),
-                QByteArray( "desktopList" ), incident->customProperty( "karm",
-                QByteArray( "desktopList" )));
+    if (incident->customProperty(eventAppName, QByteArray( "desktopList" )) == QString::null &&
+        incident->customProperty("karm", QByteArray("desktopList")) != QString::null) {
+        incident->setCustomProperty(
+            eventAppName, QByteArray("desktopList"),
+            incident->customProperty("karm", QByteArray("desktopList")));
+    }
 
-    QString desktopList = incident->customProperty( KGlobal::mainComponent().componentName().toUtf8(),
-        QByteArray( "desktopList" ) );
-    QStringList desktopStrList = desktopList.split( QString::fromLatin1(","),
-        QString::SkipEmptyParts );
+    QString desktopList = incident->customProperty(eventAppName, QByteArray("desktopList"));
+    QStringList desktopStrList = desktopList.split(QStringLiteral(","), QString::SkipEmptyParts);
     desktops.clear();
 
     for ( QStringList::iterator iter = desktopStrList.begin();

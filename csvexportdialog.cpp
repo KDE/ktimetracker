@@ -25,8 +25,6 @@
 #include <QDebug>
 #include "ktt_debug.h"
 #include <KDateComboBox>
-#include <KGlobal>
-#include <KLocale>
 #include <KPushButton>
 #include <KLineEdit>
 
@@ -67,9 +65,12 @@ CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
 
     // If decimal symbol is a comma, then default field separator to semi-colon.
     // In France and Germany, one-and-a-half is written as 1,5 not 1.5
-    QString d = KGlobal::locale()->decimalSymbol();
-    if ( "," == d ) ui.radioSemicolon->setChecked(true);
-    else ui.radioComma->setChecked(true);
+    QChar d = QLocale().decimalPoint();
+    if (QChar(',') == d) {
+        ui.radioSemicolon->setChecked(true);
+    } else {
+        ui.radioComma->setChecked(true);
+    }
 }
 
 void CSVExportDialog::enableExportButton()

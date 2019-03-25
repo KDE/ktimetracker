@@ -21,8 +21,6 @@
 
 #include "ktimetrackerutility.h"
 
-//#include <KGlobal>
-//#include <KLocale>
 #include <KWindowSystem>
 
 #include <math.h>

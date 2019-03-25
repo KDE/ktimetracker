@@ -28,11 +28,6 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-//#include <KDialog>
-//#include <KGlobal>
-//#include <KLocale>    // i18n
-
-//#include <kdebug.h>
 #include <KWindowSystem>
 
 #ifdef Q_WS_X11
