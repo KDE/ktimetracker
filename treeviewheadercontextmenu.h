@@ -26,11 +26,10 @@
 #include <QPoint>
 #include <QHash>
 #include <QVector>
+#include <QMenu>
 
 class QAction;
 class QTreeView;
-
-class KMenu;
 
 /**
  * ContextMenu for QTreeView::header() to toggle the
@@ -44,45 +43,46 @@ class KMenu;
  *
  * @author Mathias Soeken <msoeken@tzi.de>
  */
-class TreeViewHeaderContextMenu : public QObject {
-  Q_OBJECT
-  Q_PROPERTY(int style READ style)
-  Q_PROPERTY(KMenu* menu READ menu)
+class TreeViewHeaderContextMenu : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(int style READ style)
+    Q_PROPERTY(QMenu* menu READ menu)
 
-  public:
+public:
     enum { AlwaysCheckBox, CheckBoxOnChecked, ShowHideText };
 
-  public:
-    explicit TreeViewHeaderContextMenu( QObject *parent, QTreeView *widget, int style = AlwaysCheckBox, QVector<int> excludedColumns = QVector<int>() );
-    ~TreeViewHeaderContextMenu();
+public:
+    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style = AlwaysCheckBox, QVector<int> excludedColumns = QVector<int>());
+    ~TreeViewHeaderContextMenu() override;
 
-  private:
-    void updateAction( QAction *action, int column );
+private:
+    void updateAction(QAction* action, int column);
 
-  private Q_SLOTS:
-    void slotCustomContextMenuRequested( const QPoint& );
+private Q_SLOTS:
+    void slotCustomContextMenuRequested(const QPoint&);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void updateActions();
-    void slotTriggered( QAction* );
+    void slotTriggered(QAction*);
     void slotAboutToShow();
 
-  protected:
+protected:
     QTreeView *mWidget;
     QVector<QAction*> mActions;
-    KMenu *mContextMenu;
+    QMenu *mContextMenu;
     int mStyle;
     QHash<QAction*, int> mActionColumnMapping;
     QVector<int> mExcludedColumns;
 
-  public:
+public:
     int style() const { return mStyle; }
-    void addExcludedColumn( int column ) { mExcludedColumns << column; updateActions(); }
-    void addExcludedColumns( QVector<int> columns ) { mExcludedColumns << columns; updateActions(); }
-    KMenu *menu() const { return mContextMenu; }
+    void addExcludedColumn(int column) { mExcludedColumns << column; updateActions(); }
+    void addExcludedColumns(QVector<int> columns) { mExcludedColumns << columns; updateActions(); }
+    QMenu *menu() const { return mContextMenu; }
 
-  Q_SIGNALS:
-    void columnToggled( int );
+Q_SIGNALS:
+    void columnToggled(int);
 };
 
 #endif

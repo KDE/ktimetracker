@@ -43,8 +43,6 @@ class KTimeTrackerPart : public KParts::ReadWritePart
 public:
     KTimeTrackerPart(QWidget *parentWidget, QObject *parent, const QVariantList&);
 
-    TimetrackerWidget* MainWidget() { return mMainWidget; };
-
     ~KTimeTrackerPart() override = default;
 
     /**
@@ -59,15 +57,13 @@ protected:
     bool saveFile() override;
 
 public Q_SLOTS:
-   void setStatusBar(const QString & qs);
+   void setStatusBar(const QString& qs);
    void keyBindings();
 
 private:
     void makeMenus();
 
-    TimetrackerWidget *mMainWidget;
-
-    friend class TrayIcon;
+    TimetrackerWidget *m_mainWidget;
 };
 
 #endif // _KTIMETRACKERPART_H_

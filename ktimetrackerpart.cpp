@@ -47,15 +47,15 @@ KTimeTrackerPart::KTimeTrackerPart(QWidget *parentWidget, QObject *parent, const
 {
     qCDebug(KTT_LOG) << "Entering function";
     // we need an instance
-    mMainWidget = new TimetrackerWidget(parentWidget);
-    setWidget(mMainWidget);
+    m_mainWidget = new TimetrackerWidget(parentWidget);
+    setWidget(m_mainWidget);
     setXMLFile("ktimetrackerui.rc");
     makeMenus();
 }
 
 void KTimeTrackerPart::makeMenus()
 {
-    mMainWidget->setupActions( actionCollection() );
+    m_mainWidget->setupActions( actionCollection() );
     QAction *actionKeyBindings;
     actionKeyBindings = KStandardAction::keyBindings( this, SLOT(keyBindings()),
         actionCollection() );
@@ -79,13 +79,13 @@ void KTimeTrackerPart::setStatusBar(const QString& qs)
 
 bool KTimeTrackerPart::openFile(QString icsfile)
 {
-    mMainWidget->openFile(icsfile);
+    m_mainWidget->openFile(icsfile);
     emit setWindowCaption(icsfile);
 
     // connections
-    connect( mMainWidget, SIGNAL(statusBarTextChangeRequested(QString)),
+    connect( m_mainWidget, SIGNAL(statusBarTextChangeRequested(QString)),
            this, SLOT(setStatusBar(QString)) );
-    connect( mMainWidget, SIGNAL(setCaption(QString)),
+    connect( m_mainWidget, SIGNAL(setCaption(QString)),
            this, SIGNAL(setWindowCaption(QString)) );
     return true;
 }
@@ -97,7 +97,7 @@ bool KTimeTrackerPart::openFile()
 
 bool KTimeTrackerPart::saveFile()
 {
-    mMainWidget->saveFile();
+    m_mainWidget->saveFile();
     return true;
 }
 

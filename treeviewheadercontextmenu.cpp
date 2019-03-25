@@ -24,19 +24,18 @@
 #include <QAction>
 #include <QTreeView>
 #include <QHeaderView>
-
-#include <KMenu>
-
 #include <QDebug>
-#include "ktt_debug.h"
-#include <KLocale>
 
-TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView *widget, int style, QVector<int> excludedColumns )
-  : QObject( parent ),
-    mWidget( widget ),
-    mContextMenu( 0 ),
-    mStyle( style ),
-    mExcludedColumns( excludedColumns )
+#include <KLocalizedString>
+
+#include "ktt_debug.h"
+
+TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style, QVector<int> excludedColumns)
+    : QObject(parent)
+    , mWidget(widget)
+    , mContextMenu(0)
+    , mStyle(style)
+    , mExcludedColumns(excludedColumns)
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (mWidget)
@@ -44,8 +43,8 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
         mWidget->header()->setContextMenuPolicy( Qt::CustomContextMenu );
         connect( mWidget->header(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotCustomContextMenuRequested(QPoint)) );
 
-        mContextMenu = new KMenu( mWidget );
-        mContextMenu->addTitle( i18n("Columns") );
+        mContextMenu = new QMenu(mWidget);
+        mContextMenu->addSection(i18n("Columns"));
         connect( mContextMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotTriggered(QAction*)) );
         connect( mContextMenu, SIGNAL(aboutToShow()), this, SLOT(slotAboutToShow()) );
         updateActions();
@@ -56,91 +55,84 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu( QObject *parent, QTreeView
 TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 
 {
     qCDebug(KTT_LOG) << "Entering function";
-    qDeleteAll( mActions );
+    qDeleteAll(mActions);
 }
 
-void TreeViewHeaderContextMenu::slotCustomContextMenuRequested( const QPoint& pos ) 
+void TreeViewHeaderContextMenu::slotCustomContextMenuRequested(const QPoint& pos)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (mWidget && mContextMenu)
-    {
-        mContextMenu->exec( mWidget->mapToGlobal(pos) );
+    if (mWidget && mContextMenu) {
+        mContextMenu->exec(mWidget->mapToGlobal(pos));
     }
 }
 
 void TreeViewHeaderContextMenu::updateActions() 
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (mWidget)
-    {
-        QAction *action;
-        foreach (action, mActions)
-        {
-            mContextMenu->removeAction( action );
+    if (mWidget) {
+        for (QAction *action : mActions) {
+            mContextMenu->removeAction(action);
         }
 
         mActionColumnMapping.clear();
-        qDeleteAll( mActions );
+        qDeleteAll(mActions);
         mActions.clear();
 
-        for (int c = 0; c < mWidget->model()->columnCount(); ++c)
-        {
-            if (mExcludedColumns.contains( c )) continue;
+        for (int c = 0; c < mWidget->model()->columnCount(); ++c) {
+            if (mExcludedColumns.contains(c)) {
+                continue;
+            }
 
-            QAction* action = new QAction( this );
-            updateAction( action, c );
-            mActions.append( action );
+            auto* action = new QAction(this);
+            updateAction(action, c);
+            mActions.append(action);
 
-            mContextMenu->addAction( action );
+            mContextMenu->addAction(action);
             mActionColumnMapping[action] = c;
         }
     }
 }
 
-void TreeViewHeaderContextMenu::slotTriggered( QAction *action )
+void TreeViewHeaderContextMenu::slotTriggered(QAction* action)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (mWidget && action)
-    {
+    if (mWidget && action) {
         int column = mActionColumnMapping[action];
         bool hidden = mWidget->isColumnHidden(column);
-        mWidget->setColumnHidden( column, !hidden );
-        updateAction( action, column );
-        emit columnToggled( column );
+        mWidget->setColumnHidden(column, !hidden);
+        updateAction(action, column);
+        emit columnToggled(column);
     }
 }
 
 void TreeViewHeaderContextMenu::slotAboutToShow()
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QAction *action;
-    foreach (action, mActions)
-    {
-        updateAction( action, mActionColumnMapping[action] );
+    for (QAction *action : mActions) {
+        updateAction(action, mActionColumnMapping[action]);
     }
 }
 
-void TreeViewHeaderContextMenu::updateAction( QAction *action, int column )
+void TreeViewHeaderContextMenu::updateAction(QAction *action, int column)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString text = mWidget->model()->headerData(column, Qt::Horizontal).toString();
     switch (mStyle)
     {
         case AlwaysCheckBox:
-            action->setCheckable( true );
-            action->setChecked( !mWidget->isColumnHidden(column) );
-            action->setText( text );
-        break;
+            action->setCheckable(true);
+            action->setChecked(!mWidget->isColumnHidden(column));
+            action->setText(text);
+            break;
         case CheckBoxOnChecked:
-            action->setCheckable( !mWidget->isColumnHidden(column) );
-            action->setChecked( !mWidget->isColumnHidden(column) );
-            action->setText( text );
-        break;
+            action->setCheckable(!mWidget->isColumnHidden(column));
+            action->setChecked(!mWidget->isColumnHidden(column));
+            action->setText(text);
+            break;
         case ShowHideText:
             action->setCheckable( false );
             action->setChecked( false );
-            action->setText( (mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + ' ' + text );
-        break;
+            action->setText((mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + ' ' + text);
+            break;
     }
 }
-
