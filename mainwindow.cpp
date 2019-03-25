@@ -50,7 +50,7 @@
 #include "ktt_debug.h"
 
 MainWindow::MainWindow(const QString &icsfile)
-  :  KParts::MainWindow( )
+    : KParts::MainWindow()
 {
     qCDebug(KTT_LOG) << "Entering function, icsfile is " << icsfile;
     // Setup our actions
@@ -109,7 +109,6 @@ MainWindow::MainWindow(const QString &icsfile)
     // connections
     connect(widget, &TimetrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
     connect(widget, &TimetrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
-    loadGeometry();
 
     // Setup context menu request handling
     connect(widget, &TimetrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
@@ -127,18 +126,6 @@ void MainWindow::setupActions()
     configureAction = new QAction(this);
     configureAction->setText(i18n("Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
-}
-
-void MainWindow::readProperties(const KConfigGroup &cfg)
-{
-    if (cfg.readEntry("WindowShown", true)) {
-        show();
-    }
-}
-
-void MainWindow::saveProperties(KConfigGroup &cfg)
-{
-    cfg.writeEntry("WindowShown", isVisible());
 }
 
 void MainWindow::slotSetCaption(const QString& qs)
@@ -171,28 +158,6 @@ void MainWindow::makeMenus()
     actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
     actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
                                            "bindings which are specific to ktimetracker" ) );
-}
-
-void MainWindow::loadGeometry()
-{
-    if (initialGeometrySet()) {
-        setAutoSaveSettings();
-    } else {
-        KConfigGroup config = KSharedConfig::openConfig()->group( QString::fromLatin1("Main Window Geometry") );
-        int w = config.readEntry( QString::fromLatin1("Width"), 100 );
-        int h = config.readEntry( QString::fromLatin1("Height"), 100 );
-        w = qMax( w, sizeHint().width() );
-        h = qMax( h, sizeHint().height() );
-        resize(w, h);
-    }
-}
-
-void MainWindow::saveGeometry()
-{
-    KConfigGroup config = KSharedConfig::openConfig()->group( QString::fromLatin1("Main Window Geometry") );
-    config.writeEntry( QString::fromLatin1("Width"), width());
-    config.writeEntry( QString::fromLatin1("Height"), height());
-    config.sync();
 }
 
 bool MainWindow::queryClose()

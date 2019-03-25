@@ -153,16 +153,19 @@ int main(int argc, char *argv[])
 //        }
 //        KUniqueApplication myApp;
         MainWindow *mainWindow;
-        mainWindow = new MainWindow( icsfile( parser ) );
-//        if (kapp->isSessionRestored() && KMainWindow::canBeRestored( 1 ))
-//            mainWindow->restore( 1, false );
-//        else
+        mainWindow = new MainWindow(icsfile(parser));
         mainWindow->show();
 
-        int ret = app.exec();
+        if (app.isSessionRestored()) {
+            const QString className = KXmlGuiWindow::classNameOfToplevel(1);
+            if (className == QLatin1String("DolphinMainWindow")) {
+                mainWindow->restore(1);
+            } else {
+                qCWarning(KTT_LOG) << "Unknown class " << className << " in session saved data!";
+            }
+        }
 
-        delete mainWindow;
-        return ret;
+        return app.exec();
     }
     else // we are running in konsole mode
     {
