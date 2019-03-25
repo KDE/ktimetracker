@@ -41,7 +41,12 @@
 
 QString icsfile( const QCommandLineParser &parser) // deliver the name of the iCalendar file to be used
 {
-    const QString& file = parser.value("file");
+    // Get first positional argument ("file")
+    const QStringList args = parser.positionalArguments();
+    QString file;
+    if (args.size() > 0) {
+        file = args[0];
+    }
 
     QString result;
     if (!file.isEmpty()) // file is given as parameter
@@ -56,7 +61,7 @@ QString icsfile( const QCommandLineParser &parser) // deliver the name of the iC
         else
         {
             QFileInfo info(result);
-            result = info.absolutePath();
+            result = info.absoluteFilePath();
         }
         delete icsfileurl;
     }
