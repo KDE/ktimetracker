@@ -26,21 +26,14 @@
 #include <QMenu>
 #include <QString>
 #include <QTimer>
-
 #include <QAction>
-//#include <KApplication>       // kapp
 #include <QDebug>
-#include "ktt_debug.h"
-//#include <KGlobal>
-//#include <KIcon>
-//#include <KLocale>            // i18n
+#include <QStatusBar>
+
 #include <KMessageBox>
 #include <KLocalizedString>
-//#include <KPushButton>
 #include <KShortcutsDialog>
-#include <QStatusBar>
 #include <KStandardAction>
-//#include <KStatusBar>         // statusBar()
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KPluginLoader>
@@ -53,10 +46,10 @@
 #include "taskview.h"
 #include "timekard.h"
 #include "tray.h"
-
 #include "timetrackerwidget.h"
+#include "ktt_debug.h"
 
-MainWindow::MainWindow( const QString &icsfile )
+MainWindow::MainWindow(const QString &icsfile)
   :  KParts::MainWindow( )
 {
     qCDebug(KTT_LOG) << "Entering function, icsfile is " << icsfile;
@@ -75,7 +68,7 @@ MainWindow::MainWindow( const QString &icsfile )
         // and another one in the plugin. The build system should be fixed.
         //m_part = factory->create<ktimetrackerpart>( this );
 
-        m_part = dynamic_cast<ktimetrackerpart*>( factory->create<KParts::ReadWritePart>( this ) );
+        m_part = dynamic_cast<KTimeTrackerPart*>(factory->create<KParts::ReadWritePart>(this));
 
         if (m_part)
         {

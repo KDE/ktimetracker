@@ -26,17 +26,11 @@
 
 #include <QMenu>
 
-#include <KAboutData>
-#include <QAction>
 #include <KLocalizedString>
-#include <KStandardAction>
-
-#include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KShortcutsDialog>
+#include <KPluginFactory>
 
-#include <kpluginfactory.h>
-#include <QStandardPaths>
 #include "ktimetrackerutility.h"
 #include "task.h"
 #include "preferences.h"
@@ -45,25 +39,21 @@
 #include "ktimetracker.h"
 #include "timetrackerwidget.h"
 
-K_PLUGIN_FACTORY(ktimetrackerPartFactory, registerPlugin<ktimetrackerpart>();)
+K_PLUGIN_FACTORY(ktimetrackerPartFactory, registerPlugin<KTimeTrackerPart>();)
 K_EXPORT_PLUGIN( ktimetrackerPartFactory("ktimetracker","ktimetracker") )
 
-ktimetrackerpart::ktimetrackerpart( QWidget *parentWidget, QObject *parent, const QVariantList& )
+KTimeTrackerPart::KTimeTrackerPart(QWidget *parentWidget, QObject *parent, const QVariantList&)
     : KParts::ReadWritePart(parent)
 {
     qCDebug(KTT_LOG) << "Entering function";
     // we need an instance
-    mMainWidget = new TimetrackerWidget( parentWidget );
-    setWidget( mMainWidget );
-    setXMLFile( "ktimetrackerui.rc" );
+    mMainWidget = new TimetrackerWidget(parentWidget);
+    setWidget(mMainWidget);
+    setXMLFile("ktimetrackerui.rc");
     makeMenus();
 }
 
-ktimetrackerpart::~ktimetrackerpart()
-{
-}
-
-void ktimetrackerpart::makeMenus()
+void KTimeTrackerPart::makeMenus()
 {
     mMainWidget->setupActions( actionCollection() );
     QAction *actionKeyBindings;
@@ -75,19 +65,19 @@ void ktimetrackerpart::makeMenus()
                                         "bindings which are specific to ktimetracker") );
 }
 
-void ktimetrackerpart::keyBindings()
+void KTimeTrackerPart::keyBindings()
 {
   KShortcutsDialog::configure( actionCollection(),
                                KShortcutsEditor::LetterShortcutsAllowed );
 }
 
-void ktimetrackerpart::setStatusBar(const QString & qs)
+void KTimeTrackerPart::setStatusBar(const QString& qs)
 {
     qCDebug(KTT_LOG) << "Entering function";
     emit setStatusBarText(qs);
 }
 
-bool ktimetrackerpart::openFile(QString icsfile)
+bool KTimeTrackerPart::openFile(QString icsfile)
 {
     mMainWidget->openFile(icsfile);
     emit setWindowCaption(icsfile);
@@ -100,12 +90,12 @@ bool ktimetrackerpart::openFile(QString icsfile)
     return true;
 }
 
-bool ktimetrackerpart::openFile()
+bool KTimeTrackerPart::openFile()
 {
-    return openFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + QString::fromLatin1( "ktimetracker/ktimetracker.ics" ) );
+    return openFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker/ktimetracker.ics"));
 }
 
-bool ktimetrackerpart::saveFile()
+bool KTimeTrackerPart::saveFile()
 {
     mMainWidget->saveFile();
     return true;

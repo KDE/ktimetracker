@@ -40,9 +40,9 @@ class TrayIcon : public KStatusNotifierItem
 
   public:
     explicit TrayIcon(MainWindow * parent);
-    explicit TrayIcon(ktimetrackerpart *);
+    explicit TrayIcon(KTimeTrackerPart *);
     TrayIcon();
-    ~TrayIcon();
+    ~TrayIcon() override = default;
 
   private:
     int _activeIcon;

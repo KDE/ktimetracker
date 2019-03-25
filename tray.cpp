@@ -78,7 +78,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
     initToolTip();
 }
 
-TrayIcon::TrayIcon(ktimetrackerpart *)
+TrayIcon::TrayIcon(KTimeTrackerPart *)
   : KStatusNotifierItem( 0 )
 {
     setObjectName( "Ktimetracker Tray" );
@@ -92,10 +92,6 @@ TrayIcon::TrayIcon()
 {
     setObjectName( "Ktimetracker Tray" );
     _taskActiveTimer = 0;
-}
-
-TrayIcon::~TrayIcon()
-{
 }
 
 void TrayIcon::startClock()

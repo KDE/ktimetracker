@@ -57,7 +57,7 @@ class MainWindow : public KParts::MainWindow
     TimetrackerWidget *mainWidget;
 
     friend class TrayIcon;
-    ktimetrackerpart *m_part;
+    KTimeTrackerPart *m_part;
 
   public:
     explicit MainWindow( const QString &icsfile = "" );

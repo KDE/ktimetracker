@@ -23,7 +23,7 @@
 #define _KTIMETRACKERPART_H_
 
 #include <KParts/ReadWritePart>
-#include <kaboutdata.h>
+
 #include "reportcriteria.h"
 
 class TrayIcon;
@@ -38,39 +38,36 @@ class TimetrackerWidget;
  * @author Thorsten Staerk (kde at staerk dot de)
  * @version 0.1
  */
-class ktimetrackerpart : public KParts::ReadWritePart
+class KTimeTrackerPart : public KParts::ReadWritePart
 {
-  Q_OBJECT
-
-  private:
-    void               makeMenus();
-    TimetrackerWidget *mMainWidget;
-
-
-    friend class TrayIcon;
-
 public:
-    ktimetrackerpart(QWidget *parentWidget, QObject *parent, const QVariantList&);
+    KTimeTrackerPart(QWidget *parentWidget, QObject *parent, const QVariantList&);
 
     TimetrackerWidget* MainWidget() { return mMainWidget; };
 
-    virtual ~ktimetrackerpart();
+    ~KTimeTrackerPart() override = default;
 
     /**
      * openFile() opens the icalendar file that contains the tasks and events.
      * It has been inherited from KParts::ReadWritePart where it was protected
      * openFile() just calls openFile(<standard ical file>).
      */
-    virtual bool openFile();
+    bool openFile() override;
     virtual bool openFile(QString icsfile);
     
 protected:
-    virtual bool saveFile();
+    bool saveFile() override;
 
 public Q_SLOTS:
    void setStatusBar(const QString & qs);
    void keyBindings();
 
+private:
+    void makeMenus();
+
+    TimetrackerWidget *mMainWidget;
+
+    friend class TrayIcon;
 };
 
 #endif // _KTIMETRACKERPART_H_
