@@ -95,13 +95,14 @@ qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
         storageadaptor
         StorageAdaptor )
 
-ki18n_wrap_ui( ktimetracker_shared_SRCS
-        csvexportdialog_base.ui
-        historydialog.ui
-        edittaskdialog.ui
-        cfgbehavior.ui
-        cfgdisplay.ui
-        cfgstorage.ui )
+ki18n_wrap_ui(ktimetracker_shared_SRCS
+	csvexportdialog.ui
+	historydialog.ui
+	edittaskdialog.ui
+	cfgbehavior.ui
+	cfgdisplay.ui
+	cfgstorage.ui
+)
 
 kconfig_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
 

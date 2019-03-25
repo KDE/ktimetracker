@@ -25,30 +25,19 @@
 
 #include <QDialogButtonBox>
 
-#include "ui_csvexportdialog_base.h"
+#include "ui_csvexportdialog.h"
 #include "reportcriteria.h"
 
-class CSVExportDialogBase : public QDialog, public Ui::CSVExportDialogBase
+class CSVExportDialog : public QDialog
 {
-public:
-  explicit CSVExportDialogBase(QWidget* parent);
+    Q_OBJECT
 
-protected:
-    QDialogButtonBox* m_buttonBox;
-};
-
-class CSVExportDialog : public CSVExportDialogBase
-{
-  Q_OBJECT
-
-  public Q_SLOTS:
+public Q_SLOTS:
     void exPortToClipBoard();
     void exPortToCSVFile();
 
-  public:
-    explicit CSVExportDialog( ReportCriteria::REPORTTYPE rt,
-                     QWidget *parent = 0 
-                     );
+public:
+    explicit CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent = 0);
 
     /**
      Enable the "Tasks to export" question in the dialog.
@@ -66,14 +55,15 @@ class CSVExportDialog : public CSVExportDialogBase
      */
     ReportCriteria reportCriteria();
 
-  private Q_SLOTS:
+private Q_SLOTS:
 
     /**
     Enable export button if export url entered.
     */
     void enableExportButton();
 
-  private:
+private:
+    Ui::CSVExportDialog ui;
     ReportCriteria rc;
 };
 

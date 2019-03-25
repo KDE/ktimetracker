@@ -1,6 +1,6 @@
 <ui version="4.0" stdsetdef="1" >
-  <class>CSVExportDialogBase</class>
-  <widget class="KDialog" name="CSVExportDialogBase" >
+  <class>CSVExportDialog</class>
+  <widget class="QDialog" name="CSVExportDialog" >
     <property name="geometry" >
       <rect>
         <x>0</x>
@@ -317,6 +317,13 @@
               </item>
             </layout>
           </widget>
+        </item>
+        <item rowspan="1" row="6" column="0" colspan="4" >
+         <widget class="QDialogButtonBox" name="buttonBox">
+          <property name="standardButtons">
+           <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::Save</set>
+          </property>
+         </widget>
         </item>
       </layout>
     </widget>

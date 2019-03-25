@@ -30,58 +30,51 @@
 #include <KPushButton>
 #include <KLineEdit>
 
-CSVExportDialogBase::CSVExportDialogBase(QWidget* parent)
-    : QDialog(parent) {
-    QVBoxLayout* const mainLayout = new QVBoxLayout(this);
-    setLayout(mainLayout);
+CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
+    : QDialog(parent)
+{
+    ui.setupUi(this);
 
-    m_buttonBox = new QDialogButtonBox(
-        QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Save, this);
-    m_buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
+    ui.urlExportTo->KUrlRequester::setMode(KFile::File);
 
-    QPushButton* const clipboardButton = m_buttonBox->button(QDialogButtonBox::Save);
+    ui.buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
+
+    // TODO: put this button on the left, aside from OK/Cancel
+    QPushButton* const clipboardButton = ui.buttonBox->button(QDialogButtonBox::Save);
     clipboardButton->setText(i18nc("@action:button", "E&xport to Clipboard"));
     clipboardButton->setIcon(QIcon::fromTheme("klipper"));
 
-    mainLayout->addWidget(page);
-    mainLayout->addWidget(m_buttonBox);
-}
-
-CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
-                                  QWidget *parent
-                                  ) : CSVExportDialogBase( parent )
-{
-    connect(m_buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked,
+    connect(ui.buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked,
             this, &CSVExportDialog::exPortToCSVFile);
-    connect(m_buttonBox, &QDialogButtonBox::accepted,
+    connect(ui.buttonBox, &QDialogButtonBox::accepted,
             this, &CSVExportDialog::exPortToCSVFile);
 
-    connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
-    switch ( rt )
-    {
-        case ReportCriteria::CSVTotalsExport:
-            grpDateRange->setEnabled( false );
-            grpDateRange->hide();
-            rc.reportType = rt;
+    connect(ui.urlExportTo, &KUrlRequester::textChanged, this, &CSVExportDialog::enableExportButton);
+
+    switch (rt) {
+    case ReportCriteria::CSVTotalsExport:
+        ui.grpDateRange->setEnabled(false);
+        ui.grpDateRange->hide();
+        rc.reportType = rt;
         break;
-        case ReportCriteria::CSVHistoryExport:
-            grpDateRange->setEnabled( true );
-            rc.reportType = rt;
+    case ReportCriteria::CSVHistoryExport:
+        ui.grpDateRange->setEnabled(true);
+        rc.reportType = rt;
         break;
-        default:
+    default:
         break;
     }
 
     // If decimal symbol is a comma, then default field separator to semi-colon.
     // In France and Germany, one-and-a-half is written as 1,5 not 1.5
     QString d = KGlobal::locale()->decimalSymbol();
-    if ( "," == d ) CSVExportDialogBase::radioSemicolon->setChecked(true);
-    else CSVExportDialogBase::radioComma->setChecked(true);
+    if ( "," == d ) ui.radioSemicolon->setChecked(true);
+    else ui.radioComma->setChecked(true);
 }
 
 void CSVExportDialog::enableExportButton()
 {
-    m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!urlExportTo->lineEdit()->text().isEmpty());
+    ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!ui.urlExportTo->lineEdit()->text().isEmpty());
 }
 
 void CSVExportDialog::enableTasksToExportQuestion()
@@ -104,25 +97,29 @@ void CSVExportDialog::exPortToCSVFile()
 
 ReportCriteria CSVExportDialog::reportCriteria()
 {
-    rc.url = urlExportTo->url();
-    rc.from = dtFrom->date();
-    rc.to = dtTo->date();
-    rc.decimalMinutes = (  combodecimalminutes->currentText() == i18nc( "format to display times", "Decimal" ) );
+    rc.url = ui.urlExportTo->url();
+    rc.from = ui.dtFrom->date();
+    rc.to = ui.dtTo->date();
+    rc.decimalMinutes = (ui.combodecimalminutes->currentText() == i18nc( "format to display times", "Decimal" ) );
     qCDebug(KTT_LOG) <<"rc.decimalMinutes is" << rc.decimalMinutes;
 
-    if ( radioComma->isChecked() )          rc.delimiter = ",";
-    else if ( radioTab->isChecked() )       rc.delimiter = "\t";
-    else if ( radioSemicolon->isChecked() ) rc.delimiter = ";";
-    else if ( radioSpace->isChecked() )     rc.delimiter = " ";
-    else if ( radioOther->isChecked() )     rc.delimiter = txtOther->text();
-    else
-    {
+    if (ui.radioComma->isChecked()) {
+        rc.delimiter = ",";
+    } else if (ui.radioTab->isChecked()) {
+        rc.delimiter = "\t";
+    } else if (ui.radioSemicolon->isChecked()) {
+        rc.delimiter = ";";
+    } else if (ui.radioSpace->isChecked()) {
+        rc.delimiter = " ";
+    } else if (ui.radioOther->isChecked()) {
+        rc.delimiter = ui.txtOther->text();
+    } else {
         qCDebug(KTT_LOG) << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
         rc.delimiter = "\t";
     }
 
-    rc.quote = cboQuote->currentText();
-    rc.sessionTimes = (i18n("Session Times") == combosessiontimes->currentText());
-    rc.allTasks = (i18n("All Tasks") == comboalltasks->currentText());
+    rc.quote = ui.cboQuote->currentText();
+    rc.sessionTimes = (i18n("Session Times") == ui.combosessiontimes->currentText());
+    rc.allTasks = (i18n("All Tasks") == ui.comboalltasks->currentText());
     return rc;
 }
