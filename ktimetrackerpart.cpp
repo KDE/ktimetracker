@@ -63,16 +63,6 @@ ktimetrackerpart::~ktimetrackerpart()
 {
 }
 
-//KAboutData *ktimetrackerpart::createAboutData()
-//{
-//    const QByteArray& appname=QByteArray("ktimetracker");
-//    const QByteArray& catalogname=QByteArray("ktimetracker");
-//    const KLocalizedString localizedname=ki18n("ktimetracker");
-//    const QByteArray version=QByteArray(KTIMETRACKER_VERSION);
-//    KAboutData* aboutData=new KAboutData( appname, catalogname, localizedname, version);
-//    return aboutData;
-//}
-
 void ktimetrackerpart::makeMenus()
 {
     mMainWidget->setupActions( actionCollection() );
