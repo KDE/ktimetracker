@@ -35,7 +35,7 @@ class QObject;
 class QPixmap;
 class QString;
 
-class timetrackerstorage;
+class TimeTrackerStorage;
 
 
 /** \brief A class representing a task
@@ -106,21 +106,21 @@ public:
        * Change task time.  Adds minutes to both total time and session time by adding an event.
        *
        *  @param minutes        minutes to add to - may be negative
-       *  @param storage        Pointer to timetrackerstorage instance.
+       *  @param storage        Pointer to TimeTrackerStorage instance.
        *                        If zero, don't save changes.
        */
-      void changeTime( long minutes, timetrackerstorage* storage );
+      void changeTime( long minutes, TimeTrackerStorage* storage );
 
       /**
        * Add minutes to time and session time by adding an event, and write to storage.
        *
        *  @param minutesSession   minutes to add to task session time
        *  @param minutes          minutes to add to task time
-       *  @param storage          Pointer to timetrackerstorage instance.
+       *  @param storage          Pointer to TimeTrackerStorage instance.
        *                          If zero, don't save changes.
        */
       void changeTimes
-        ( long minutesSession, long minutes, timetrackerstorage* storage=0 );
+        ( long minutesSession, long minutes, TimeTrackerStorage* storage=0 );
 
       /** adds minutes to total and session time by adding an event
        *
@@ -229,9 +229,9 @@ public:
 
       /** sets the name of the task
        *  @param name    a pointer to the name. A deep copy will be made.
-       *  @param storage a pointer to a timetrackerstorage object.
+       *  @param storage a pointer to a TimeTrackerStorage object.
        */
-      void setName( const QString& name, timetrackerstorage* storage );
+      void setName( const QString& name, TimeTrackerStorage* storage );
 
       /** sets the description of the task
        */
@@ -262,13 +262,13 @@ public:
 
       /** starts or stops a task
        *  @param on       true or false for starting or stopping a task
-       *  @param storage a pointer to a timetrackerstorage object.
+       *  @param storage a pointer to a TimeTrackerStorage object.
        *  @param when time when the task was started or stopped. Normally
                                     QDateTime::currentDateTime, but if calendar has
                                     been changed by another program and being reloaded
                                     the task is set to running with another start date
        */
-      void setRunning( bool on, timetrackerstorage* storage,
+      void setRunning( bool on, TimeTrackerStorage* storage,
                        const QDateTime &when = QDateTime::currentDateTime() );
 
       /** Resume the running state of a task.
@@ -300,13 +300,13 @@ public:
      *  Set a task's description
      *  A description is a comment.
      */
-    void setDescription( QString desc, timetrackerstorage* storage );
+    void setDescription( QString desc, TimeTrackerStorage* storage );
 
     /**
      *  Add a comment to this task.
      *  A comment is called "description" in the context of KCalCore::ToDo
      */
-    void addComment( const QString &comment, timetrackerstorage* storage );
+    void addComment( const QString &comment, TimeTrackerStorage* storage );
 
     /** Retrieve the entire comment for the task. */
     QString comment() const;
@@ -315,9 +315,9 @@ public:
     bool isRoot() const { return parent() == 0; }
 
     /** remove Task with all it's children
-     * @param storage a pointer to a timetrackerstorage object.
+     * @param storage a pointer to a TimeTrackerStorage object.
      */
-    bool remove( timetrackerstorage* storage );
+    bool remove( TimeTrackerStorage* storage );
 
     /**
      * Update percent complete for this task.
@@ -326,7 +326,7 @@ public:
      * taskview.  If percent NULL, set to zero.  If greater than 100, set to
      * 100.  If less than zero, set to zero.
      */
-    void setPercentComplete(const int percent, timetrackerstorage *storage);
+    void setPercentComplete(const int percent, TimeTrackerStorage *storage);
 
     int percentComplete() const;
 

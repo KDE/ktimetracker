@@ -155,7 +155,7 @@ void Task::delete_recursive()
     delete this;
 }
 
-void Task::setRunning( bool on, timetrackerstorage* storage, const QDateTime &when )
+void Task::setRunning( bool on, TimeTrackerStorage* storage, const QDateTime &when )
 // This is the back-end, the front-end is StartTimerFor()
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -209,7 +209,7 @@ bool Task::isRunning() const
     return mTimer->isActive();
 }
 
-void Task::setName( const QString& name, timetrackerstorage* storage )
+void Task::setName( const QString& name, TimeTrackerStorage* storage )
 {
     qCDebug(KTT_LOG) << "Entering function, name=" << name;
 
@@ -234,7 +234,7 @@ void Task::setDescription( const QString& description )
     }
 }
 
-void Task::setPercentComplete(const int percent, timetrackerstorage *storage)
+void Task::setPercentComplete(const int percent, TimeTrackerStorage* storage)
 {
     qCDebug(KTT_LOG) << "Entering function(" << percent <<", storage):" << mUid;
 
@@ -382,7 +382,7 @@ QString Task::setSessionTime( long minutes )
     return err;
 }
 
-void Task::changeTimes( long minutesSession, long minutes, timetrackerstorage* storage)
+void Task::changeTimes( long minutesSession, long minutes, TimeTrackerStorage* storage)
 {
     qCDebug(KTT_LOG) << "Entering function";
     qDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
@@ -396,7 +396,7 @@ void Task::changeTimes( long minutesSession, long minutes, timetrackerstorage* s
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::changeTime( long minutes, timetrackerstorage* storage )
+void Task::changeTime( long minutes, TimeTrackerStorage* storage )
 {
     changeTimes( minutes, minutes, storage);
 }
@@ -433,7 +433,7 @@ void Task::changeParentTotalTimes( long minutesSession, long minutes )
         parent()->changeTotalTimes( minutesSession, minutes );
 }
 
-bool Task::remove( timetrackerstorage* storage)
+bool Task::remove(TimeTrackerStorage* storage)
 {
     qCDebug(KTT_LOG) << "entering function" << mName;
     bool ok = true;
@@ -629,7 +629,7 @@ void Task::update()
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::addComment( const QString &comment, timetrackerstorage* storage )
+void Task::addComment(const QString &comment, TimeTrackerStorage* storage)
 {
     mComment = mComment + QString::fromLatin1("\n") + comment;
     storage->addComment(this, comment);

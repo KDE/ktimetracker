@@ -40,8 +40,7 @@ class DesktopTracker;
 class IdleTimeDetector;
 class Preferences;
 class Task;
-class timetrackerstorage;
-class HistoryEvent;
+class TimeTrackerStorage;
 
 /**
  * Container and interface for the tasks.
@@ -84,9 +83,6 @@ class TaskView : public QTreeWidget
 
     /** Return the total number of items in the view.  */
     long count();
-
-    /** Return list of start/stop events for given date range. */
-    QList<HistoryEvent> getHistory(const QDate& from, const QDate& to) const;
 
     /** Schedule that we should save very soon */
     void scheduleSave();
@@ -168,7 +164,7 @@ class TaskView : public QTreeWidget
      *
      * Hopefully, this will be redesigned as part of the Qt4 migration.
      */
-    timetrackerstorage* storage();
+    TimeTrackerStorage* storage();
 
     /**
      * Deletes the given or the current task (and children) from the view.
@@ -176,7 +172,7 @@ class TaskView : public QTreeWidget
      * @param task Task to be deleted. If empty, the current task is deleted.
      *             if non-existent, an error message is displayed.
      */
-    void deleteTaskBatch( Task* task=0 );
+    void deleteTaskBatch(Task* task = nullptr);
 
     /**
      * Deletes the given or the current task (and children) from the view.
@@ -184,7 +180,7 @@ class TaskView : public QTreeWidget
      * @param task Task to be deleted. If empty, the current task is deleted.
      *             if non-existent, an error message is displayed.
      */
-    void deleteTask( Task* task=0 );
+    void deleteTask(Task* task = nullptr);
 
     /** Sets % completed for the current task.
      * @param completion The percentage complete to mark the task as. */
@@ -205,7 +201,7 @@ class TaskView : public QTreeWidget
                             have to set the starting time to not-now. */
     void startTimerFor( Task* task,
                         const QDateTime &startTime = QDateTime::currentDateTime() );
-    void stopTimerFor( Task* task );
+    void stopTimerFor(Task* task);
 
     /** clears all active tasks. Needed e.g. if iCal file was modified by
        another program and taskview is cleared without stopping tasks

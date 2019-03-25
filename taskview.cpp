@@ -143,14 +143,14 @@ class TaskView::Private
 {
 public:
 Private() :
-    mStorage( new timetrackerstorage() ),
+    mStorage( new TimeTrackerStorage() ),
     mFocusTrackingActive( false ), mLastTaskWithFocus(0), mPopupPercentageMenu(0), mPopupPriorityMenu(0) {}
 
     ~Private()
     {
         delete mStorage;
     }
-    timetrackerstorage *mStorage;
+    TimeTrackerStorage *mStorage;
     bool mFocusTrackingActive;
     Task* mLastTaskWithFocus;
     QList<Task*> mActiveTasks;
@@ -387,7 +387,7 @@ void TaskView::mousePressEvent( QMouseEvent *event )
     }
 }
 
-timetrackerstorage* TaskView::storage()
+TimeTrackerStorage* TaskView::storage()
 {
     return d->mStorage;
 }

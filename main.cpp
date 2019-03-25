@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
         // listtasknames
         if ( parser.isSet("listtasknames") )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto=new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             QStringList tasknameslist=sto->taskNames();
             for ( int i=0; i<tasknameslist.count(); ++i )
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
         // addtask
         if ( !parser.value("addtask").isEmpty() )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto = new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             const QString& s=parser.value("addtask");
             QVector<int> vec;
@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
         // deletetask
         if ( !parser.value("deletetask").isEmpty() )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto = new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             const QString& taskid=parser.value("deletetask");
             sto->removeTask( taskid );
@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
         // taskidsfromname
         if ( !parser.value("taskidsfromname").isEmpty() )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto = new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             const QString& taskname=parser.value("taskidsfromname");
             QStringList taskids=sto->taskidsfromname( taskname );
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
         // totalminutesfortaskid
         if ( !parser.value("totalminutesfortaskid").isEmpty() )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto = new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             Task* task=sto->task( parser.value("totalminutesfortaskid"), 0 );
             if (task!=0)
@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
         // starttask
         if ( !parser.value("starttask").isEmpty() )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto = new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             sto->startTimer(parser.value("starttask"));
             delete sto;
@@ -241,7 +241,7 @@ int main(int argc, char *argv[])
         // stoptask
         if ( !parser.value("stoptask").isEmpty() )
         {
-            timetrackerstorage* sto=new timetrackerstorage();
+            auto* sto = new TimeTrackerStorage();
             sto->load( 0, icsfile( parser ) );
             sto->stopTimer(sto->task( parser.value("stoptask"), 0 ));
             delete sto;

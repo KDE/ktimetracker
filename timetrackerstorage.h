@@ -22,21 +22,18 @@
 #ifndef KTIMETRACKER_STORAGE_H
 #define KTIMETRACKER_STORAGE_H
 
-#include <QList>
 #include <QStack>
-#include <QVector>
+
+#include <KCalCore/Todo>
+#include <KCalCore/Event>
 
 #include "reportcriteria.h"
 #include "desktoplist.h"
 #include "kttcalendar.h"
 
-#include <KCalCore/Todo>
-#include <KCalCore/Event>
-
 class QDateTime;
 class Task;
 class TaskView;
-class HistoryEvent;
 
 /**
  * Class to store/retrieve KTimeTracker data to/from persistent storage.
@@ -54,15 +51,13 @@ class HistoryEvent;
  * @author Mark Bucciarelli <mark@hubcapconsulting.com>
  */
 
-class timetrackerstorage : public QObject
+class TimeTrackerStorage : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    timetrackerstorage();
-    ~timetrackerstorage();
-
-    QString setTaskParent( Task* task, Task* parent);
+public:
+    TimeTrackerStorage();
+    ~TimeTrackerStorage();
 
     /**
       Load the list view with tasks read from iCalendar file.
@@ -207,7 +202,7 @@ class timetrackerstorage : public QObject
      *
      * @param task    The task the timer was started for.
      */
-    void startTimer(const Task* task, const QDateTime &when=QDateTime::currentDateTime());
+    void startTimer(const Task* task, const QDateTime &when = QDateTime::currentDateTime());
 
     /**
      * Start the timer for a given task ID
@@ -221,12 +216,12 @@ class timetrackerstorage : public QObject
      *
      * The task stores the last time a timer was started, so we log a new iCal
      * Event with the start and end times for this task.
-     * @see timetrackerstorage::changeTime
+     * @see TimeTrackerStorage::changeTime
      *
      * @param task   The task the timer was stopped for.
      * @param when   When the timer stopped.
      */
-    void stopTimer( const Task* task, const QDateTime &when = QDateTime::currentDateTime() );
+    void stopTimer(const Task* task, const QDateTime &when = QDateTime::currentDateTime());
 
     /**
      * Log a new comment for this task.
@@ -272,7 +267,7 @@ class timetrackerstorage : public QObject
      * @return The unique ID for the new VTODO.  Return an null QString if
      * there was an error creating the new calendar object.
      */
-    QString addTask(const Task* task, const Task* parent=0);
+    QString addTask(const Task* task, const Task* parent = nullptr);
 
     /**
      *  Check if the iCalendar file currently loaded has any Todos in it.
@@ -301,7 +296,6 @@ class timetrackerstorage : public QObject
     Private *const d;
     //@endcond
     KTimeTracker::KTTCalendar::Ptr _calendar;
-    QString _icalfile;
 
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,
@@ -332,38 +326,6 @@ class timetrackerstorage : public QObject
             const QDate& to,
             const ReportCriteria &rc
     );
-};
-
-/**
- * One start/stop event that has been logged.
- *
- * When a task is running and the user stops it, ktimetracker logs this event and
- * saves it in the history. This class represents such an event read from
- * storage, and abstracts it from the specific storage used.
- */
-class HistoryEvent
-{
-  public:
-    /** Needed to be used in a value list. */
-    HistoryEvent() {}
-    HistoryEvent( const QString &uid, const QString &name, long duration,
-                  const QDateTime &start, const QDateTime &stop,
-                  const QString &todoUid );
-    QString uid() { return _uid; }
-    QString name() { return _name; }
-    /** In seconds. */
-    long duration() { return _duration; }
-    QDateTime start() { return _start; }
-    QDateTime stop() { return _stop; }
-    QString todoUid() { return _todoUid; }
-
-  private:
-    QString _uid;
-    QString _todoUid;
-    QString _name;
-    long _duration;
-    QDateTime _start;
-    QDateTime _stop;
 };
 
 #endif // KTIMETRACKER_STORAGE_H
