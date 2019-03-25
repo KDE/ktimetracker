@@ -274,9 +274,9 @@ void TimetrackerWidget::setupActions( KActionCollection *actionCollection )
         { QString(), I18N_NOOP("&Export Times..."), SLOT(exportcsvFile()), "export_times",
             "", ""
         },
-//        { QString(), I18N_NOOP("Export &History..."), SLOT(exportcsvHistory()),
-//            "export_history", "", ""
-//        },
+        { QString(), I18N_NOOP("Export &History..."), SLOT(exportcsvHistory()),
+            "export_history", "", ""
+        },
         { QString(), I18N_NOOP("Import Tasks From &Planner..."), SLOT(importPlanner()),
             "import_planner", "", ""
         },
