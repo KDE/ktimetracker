@@ -74,6 +74,8 @@
 #include <fcntl.h>
 #include <QMap>
 
+const QByteArray eventAppName = QByteArray("ktimetracker");
+
 using namespace KTimeTracker;
 
 //@cond PRIVATE
@@ -951,24 +953,22 @@ void timetrackerstorage::stopTimer(const Task* task, const QDateTime &when)
 
 void timetrackerstorage::changeTime(const Task* task, const long deltaSeconds)
 {
-//    qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
-//    KCalCore::Event::Ptr e;
-//    QDateTime end;
-//    e = baseEvent(task);
-//
-//    // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
-//    // duration, even though it looks like it's used in event.cpp.
-//    end = task->startTime();
-//    if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
-//    e->setDtEnd(KDateTime(end, KDateTime::Spec::LocalZone()));
-//
-//    // Use a custom property to keep a record of negative durations
-//    e->setCustomProperty( KGlobal::mainComponent().componentName().toUtf8(),
-//        QByteArray("duration"),
-//        QString::number(deltaSeconds));
-//
-//    d->mCalendar->addEvent(e);
-//    task->taskView()->scheduleSave();
+    qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
+    KCalCore::Event::Ptr e;
+    QDateTime end;
+    e = baseEvent(task);
+
+    // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
+    // duration, even though it looks like it's used in event.cpp.
+    end = task->startTime();
+    if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
+    e->setDtEnd(end);
+
+    // Use a custom property to keep a record of negative durations
+    e->setCustomProperty(eventAppName, QByteArray("duration"), QString::number(deltaSeconds));
+
+    d->mCalendar->addEvent(e);
+    task->taskView()->scheduleSave();
 }
 
 
