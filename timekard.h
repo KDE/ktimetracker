@@ -25,69 +25,18 @@
 #undef Color // X11 headers
 #undef GrayScale // X11 headers
 
-#include <QList>
-
 #include "reportcriteria.h"
-
-class QString;
-class QDate;
 
 class Task;
 class TaskView;
-
-/**
- *  Seven consecutive days.
- *
- *  The timecard report prints out one table for each week of data.  The first
- *  day of the week should be read from the KControlPanel.  Currently, it is
- *  hardcoded to Sunday.
- */
-class Week
-{
-  public:
-    /** Need an empty constructor to use in a QValueList. */
-    Week();
-    explicit Week( const QDate &from );
-    QDate start() const;
-    QDate end() const;
-    QList<QDate> days() const;
-
-    /**
-     * Returns a list of weeks for the given date range.
-     *
-     * The first day of the week is picked up from the settings in the
-     * KontrolPanel.
-     *
-     * The list is inclusive; for example, if you pass in a date range of two
-     * days, one being a Sunday and the other being a Monday, you will get two
-     * weeks back in the list.
-     */
-    static QList<Week> weeksFromDateRange(const QDate& from,
-        const QDate& to);
-
-    /**
-     *  Return the name of the week.
-     *
-     *  Uses whatever the user has set up for the long date format in
-     *  KControlPanel, prefixed by "Week of".
-     */
-    QString name() const;
-
-
-  private:
-    QDate _start;
-};
 
 /**
  *  Routines to output timecard data.
  */
 class TimeKard
 {
-  public:
-    /**
-      Empty constructor
-     */
-    TimeKard() {}
+public:
+    TimeKard() = default;
 
     /**
      * Generates ascii text of task totals, for current task on down.
@@ -100,27 +49,8 @@ class TimeKard
      */
     QString totalsAsText(TaskView* taskview, ReportCriteria rc);
 
-    /**
-     * Generates ascii text of weekly task history, for current task on down.
-     *
-     * Formatted for pasting into clipboard.
-     */
-    QString historyAsText(TaskView* taskview, const QDate& from,
-        const QDate& to, bool justThisTask, bool perWeek, bool totalsOnly);
-
 private:
-    void printTask(Task *t, QString &s, int level, const ReportCriteria &rc);
+    void printTask(Task* t, QString& s, int level, const ReportCriteria &rc);
+};
 
-    void printTaskHistory(const Task *t, const QMap<QString, long>& datamap,
-                          QMap<QString, long>& daytotals,
-                          const QDate& from, const QDate& to,
-                          const int level, QString& retval, bool totalsOnly);
-
-    QString sectionHistoryAsText(TaskView* taskview,
-                                 const QDate& sectionFrom, const QDate& sectionTo,
-                                 const QDate& from, const QDate& to,
-                                 const QString& name,
-                                 bool justThisTask, bool totalsOnly);
-
-  };
 #endif // KTIMETRACKER_TIMEKARD_H

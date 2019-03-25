@@ -22,20 +22,14 @@
 
 #include "timekard.h"
 
-#include <cassert>
-
 #include <QDateTime>
-#include <QList>
-#include <QMap>
 
-#include <QDebug>
-#include "ktt_debug.h"
 #include <KLocalizedString>
 
-#include "timetrackerstorage.h"
 #include "ktimetrackerutility.h"        // formatTime()
 #include "task.h"
 #include "taskview.h"
+#include "ktt_debug.h"
 
 const int taskWidth = 40;
 const int timeWidth = 6;
@@ -51,7 +45,7 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
     QString line;
     QString buf;
     long sum;
-    bool justThisTask=!rc.allTasks;
+    bool justThisTask = !rc.allTasks;
 
     line.fill('-', reportWidth);
     line += cr;
@@ -68,35 +62,38 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
     retval += line;
 
     // tasks
-    if (taskview->currentItem())
-    {
-        if (justThisTask)
-        {
-            if (!rc.sessionTimes) sum = taskview->currentItem()->totalTime();
-            else sum = taskview->currentItem()->totalSessionTime();
+    if (taskview->currentItem()) {
+        if (justThisTask) {
+            if (!rc.sessionTimes) {
+                sum = taskview->currentItem()->totalTime();
+            } else {
+                sum = taskview->currentItem()->totalSessionTime();
+            }
+
             printTask(taskview->currentItem(), retval, 0, rc);
-        }
-        else // print all tasks
-        {
+        } else { // print all tasks
             sum = 0;
-            for ( int i = 0; i < taskview->topLevelItemCount(); ++i )
-            {
-                Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
-                if (!rc.sessionTimes) sum += task->totalTime();
-                else sum += task->totalSessionTime();
-                if ( (task->totalTime() && (!rc.sessionTimes)) || (task->totalSessionTime() && rc.sessionTimes) )
-                printTask(task, retval, 0, rc);
+            for (int i = 0; i < taskview->topLevelItemCount(); ++i) {
+                Task *task = static_cast<Task*>(taskview->topLevelItem(i));
+                if (!rc.sessionTimes) {
+                    sum += task->totalTime();
+                } else {
+                    sum += task->totalSessionTime();
+                }
+                if ((task->totalTime() && !rc.sessionTimes) || (task->totalSessionTime() && rc.sessionTimes) ) {
+                    printTask(task, retval, 0, rc);
+                }
             }
         }
         // total
         buf.fill('-', reportWidth);
         retval += QString(QString::fromLatin1("%1")).arg(buf, timeWidth) + cr;
         retval += QString(QString::fromLatin1("%1 %2"))
-            .arg(formatTime(sum),timeWidth)
-        .arg(i18nc( "total time of all tasks", "Total" ));
-    }
-    else
+            .arg(formatTime(sum), timeWidth)
+            .arg(i18nc("total time of all tasks", "Total"));
+    } else {
         retval += i18n("No tasks.");
+    }
 
     return retval;
 }
@@ -108,78 +105,28 @@ void TimeKard::printTask(Task *task, QString &s, int level, const ReportCriteria
     QString buf;
 
     s += buf.fill(' ', level);
-    if (!rc.sessionTimes)
-    {
+    if (!rc.sessionTimes) {
         s += QString(QString::fromLatin1("%1    %2"))
             .arg(formatTime(task->totalTime()), timeWidth)
-        .arg(task->name());
-    }
-    else // print session times
-    {
+            .arg(task->name());
+    } else {
+        // print session times
         s += QString(QString::fromLatin1("%1    %2"))
             .arg(formatTime(task->totalSessionTime()), timeWidth)
-        .arg(task->name());
+            .arg(task->name());
     }
     s += cr;
 
-    for ( int i = 0; i < task->childCount(); ++i )
-    {
-        Task *subTask = static_cast< Task* >( task->child( i ) );
-        if ( !rc.sessionTimes )
-        {
-            if ( subTask->totalTime() ) // to avoid 00:00 entries
-            printTask(subTask, s, level+1, rc);
-        }
-        else
-        {
-            if ( subTask->totalSessionTime() ) // to avoid 00:00 entries
-            printTask(subTask, s, level+1, rc);
+    for (int i = 0; i < task->childCount(); ++i) {
+        Task *subTask = static_cast<Task*>(task->child(i));
+        if (!rc.sessionTimes) {
+            if (subTask->totalTime()) {// to avoid 00:00 entries
+                printTask(subTask, s, level + 1, rc);
+            }
+        } else {
+            if (subTask->totalSessionTime()) { // to avoid 00:00 entries
+                printTask(subTask, s, level + 1, rc);
+            }
         }
     }
 }
-
-Week::Week() {}
-
-Week::Week( const QDate &from )
-{
-    _start = from;
-}
-
-QDate Week::start() const
-{
-    return _start;
-}
-
-QDate Week::end() const
-{
-    return _start.addDays(6);
-}
-
-QString Week::name() const
-{
-    return i18n("Week of %1", QLocale().toString(start()));
-}
-
-QList<Week> Week::weeksFromDateRange(const QDate& from, const QDate& to)
-{
-    QDate start;
-    QList<Week> weeks;
-
-    // The QDate weekNumber() method always puts monday as the first day of the
-    // week.
-    //
-    // Not that it matters here, but week 1 always includes the first Thursday
-    // of the year.  For example, January 1, 2000 was a Saturday, so
-    // QDate(2000,1,1).weekNumber() returns 52.
-
-    // Since report always shows a full week, we generate a full week of dates,
-    // even if from and to are the same date.  The week starts on the day
-    // that is set in the locale settings.
-    start = from.addDays( -((7 - QLocale().firstDayOfWeek() + from.dayOfWeek()) % 7));
-
-    for (QDate d = start; d <= to; d = d.addDays(7))
-        weeks.append(Week(d));
-
-    return weeks;
-}
-
