@@ -106,5 +106,3 @@ bool KTTCalendar::save()
   }
   return result;
 }
-
-//#include "kttcalendar.moc"

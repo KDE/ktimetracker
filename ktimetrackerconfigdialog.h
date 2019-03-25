@@ -42,31 +42,30 @@ class KTimeTrackerBehaviorConfig : public KCModule
 {
     Q_OBJECT
 public:
-    KTimeTrackerBehaviorConfig( const KComponentData &inst, QWidget *parent );
-    /** Reimplemented from KCModule. */
-    virtual void load();
-    virtual void save();
+    explicit KTimeTrackerBehaviorConfig(QWidget *parent);
+
+    void load() override;
+    void save() override;
 };
 
 class KTimeTrackerDisplayConfig : public KCModule
 {
     Q_OBJECT
 public:
-    KTimeTrackerDisplayConfig( const KComponentData &inst, QWidget *parent );
-    /** Reimplemented from KCModule. */
-    virtual void load();
-    virtual void save();
+    explicit KTimeTrackerDisplayConfig(QWidget *parent);
+
+    void load() override;
+    void save() override;
 };
 
 class KTimeTrackerStorageConfig : public KCModule
 {
     Q_OBJECT
 public:
-    KTimeTrackerStorageConfig( const KComponentData &inst, QWidget *parent );
-    /** Reimplemented from KCModule. */
-    virtual void load();
-    virtual void save();
+    explicit KTimeTrackerStorageConfig(QWidget *parent);
+
+    void load() override;
+    void save() override;
 };
 
 #endif /* KTIMETRACKERCONFIGDIALOG_H */
-

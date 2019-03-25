@@ -44,7 +44,7 @@
 #include <KUrlRequester>
 #include <KLocalizedString>
 
-//#include "csvexportdialog.h"
+#include "csvexportdialog.h"
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
 #include "idletimedetector.h"
@@ -624,33 +624,33 @@ QString TaskView::report( const ReportCriteria& rc )
 
 void TaskView::exportcsvFile()
 {
-//    qCDebug(KTT_LOG) << "TaskView::exportcsvFile()";
-//
-//    CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
-//    if ( currentItem() && currentItem()->isRoot() )
-//        dialog.enableTasksToExportQuestion();
-//    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
-//    if ( dialog.exec() )
-//    {
-//        QString err = d->mStorage->report( this, dialog.reportCriteria() );
-//        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toLatin1()) );
-//    }
+    qCDebug(KTT_LOG) << "TaskView::exportcsvFile()";
+
+    CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
+    if ( currentItem() && currentItem()->isRoot() )
+        dialog.enableTasksToExportQuestion();
+    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
+    if ( dialog.exec() )
+    {
+        QString err = d->mStorage->report( this, dialog.reportCriteria() );
+        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toLatin1()) );
+    }
 }
 
 QString TaskView::exportcsvHistory()
 {
-//    qCDebug(KTT_LOG) << "TaskView::exportcsvHistory()";
-//    QString err;
-//
-//    CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
-//    if ( currentItem() && currentItem()->isRoot() )
-//        dialog.enableTasksToExportQuestion();
-//    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
-//    if ( dialog.exec() )
-//    {
-//        err = d->mStorage->report( this, dialog.reportCriteria() );
-//    }
-//    return err;
+    qCDebug(KTT_LOG) << "TaskView::exportcsvHistory()";
+    QString err;
+
+    CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
+    if ( currentItem() && currentItem()->isRoot() )
+        dialog.enableTasksToExportQuestion();
+    dialog.urlExportTo->KUrlRequester::setMode(KFile::File);
+    if ( dialog.exec() )
+    {
+        err = d->mStorage->report( this, dialog.reportCriteria() );
+    }
+    return err;
 }
 
 long TaskView::count()

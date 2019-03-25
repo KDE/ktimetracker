@@ -40,6 +40,8 @@
 //#include <kio/netaccess.h>
 #include <KCalCore/Person>
 #include <KDirWatch>
+#include <QApplication>
+#include <KJobUiDelegate>
 //#include <KLockFile>
 //#include <KApplication>       // kapp
 //#include <QDebug>
@@ -48,10 +50,11 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <QLockFile>
-//#include <KProgressDialog>
+#include <KProgressDialog>
 //#include <KSystemTimeZones>
-//#include <KTemporaryFile>
+#include <KTemporaryFile>
 #include <QUrl>
+#include <KJobWidgets>
 
 #include <QByteArray>
 #include <QDateTime>
@@ -64,6 +67,7 @@
 #include <QTableWidget>
 #include <QTextStream>
 
+#include <KIO/StoredTransferJob>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -575,143 +579,139 @@ void timetrackerstorage::addComment(const Task* task, const QString& comment)
     saveCalendar();
 }
 
-//QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
-//{
-//    qCDebug(KTT_LOG) << "Entering function";
-//    QString err;
-//    if ( rc.reportType == ReportCriteria::CSVHistoryExport )
-//    {
-//        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
-//    }
-//    else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
-//    {
-//        if ( !rc.bExPortToClipBoard )
-//            err = exportcsvFile( taskview, rc );
-//        else
-//            err = taskview->clipTotals( rc );
-//    }
-//    return err;
-//}
+QString timetrackerstorage::report(TaskView *taskview, const ReportCriteria &rc)
+{
+    qCDebug(KTT_LOG) << "Entering function";
+    QString err;
+    if ( rc.reportType == ReportCriteria::CSVHistoryExport )
+    {
+        err = exportcsvHistory( taskview, rc.from, rc.to, rc );
+    }
+    else // if ( rc.reportType == ReportCriteria::CSVTotalsExport )
+    {
+        if ( !rc.bExPortToClipBoard )
+            err = exportcsvFile( taskview, rc );
+        else
+            err = taskview->clipTotals( rc );
+    }
+    return err;
+}
 
 
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
-//QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
-//{
-//    qCDebug(KTT_LOG) << "Entering function";
-//    QString delim = rc.delimiter;
-//    QString dquote = rc.quote;
-//    QString double_dquote = dquote + dquote;
-//    bool to_quote = true;
-//    QString err;
-//    Task* task;
-//    int maxdepth=0;
-//    QString title = i18n("Export Progress");
-//    KProgressDialog dialog( taskview, 0, title );
-//    dialog.setAutoClose( true );
-//    dialog.setAllowCancel( true );
-//    dialog.progressBar()->setMaximum( 2 * taskview->count() );
-//
-//    // The default dialog was not displaying all the text in the title bar.
-//    int width = taskview->fontMetrics().width(title) * 3;
-//    QSize dialogsize;
-//    dialogsize.setWidth(width);
-//    dialog.setInitialSize( dialogsize );
-//
-//    if ( taskview->count() > 1 ) dialog.show();
-//    QString retval;
-//
-//    // Find max task depth
-//    int tasknr = 0;
-//    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
-//    {
-//        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
-//        if ( tasknr % 15 == 0 ) kapp->processEvents(); // repainting is slow
-//        if ( taskview->itemAt(tasknr)->depth() > maxdepth )
-//            maxdepth = taskview->itemAt(tasknr)->depth();
-//        tasknr++;
-//    }
-//
-//    // Export to file
-//    tasknr = 0;
-//    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
-//    {
-//        task = taskview->itemAt( tasknr );
-//        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
-//        if ( tasknr % 15 == 0 ) kapp->processEvents();
-//
-//        // indent the task in the csv-file:
-//        for ( int i=0; i < task->depth(); ++i ) retval += delim;
-//
-//        /*
-//        // CSV compliance
-//        // Surround the field with quotes if the field contains
-//        // a comma (delim) or a double quote
-//        if (task->name().contains(delim) || task->name().contains(dquote))
-//        to_quote = true;
-//        else
-//        to_quote = false;
-//        */
-//        to_quote = true;
-//
-//        if (to_quote)
-//            retval += dquote;
-//
-//        // Double quotes replaced by a pair of consecutive double quotes
-//        retval += task->name().replace( dquote, double_dquote );
-//
-//        if (to_quote)
-//            retval += dquote;
-//
-//        // maybe other tasks are more indented, so to align the columns:
-//        for ( int i = 0; i < maxdepth - task->depth(); ++i ) retval += delim;
-//
-//        retval += delim + formatTime( task->sessionTime(),
-//                                   rc.decimalMinutes )
-//                + delim + formatTime( task->time(),
-//                                   rc.decimalMinutes )
-//                + delim + formatTime( task->totalSessionTime(),
-//                                   rc.decimalMinutes )
-//                + delim + formatTime( task->totalTime(),
-//                                   rc.decimalMinutes )
-//                + '\n';
-//        tasknr++;
-//    }
-//
-//    // save, either locally or remote
-//    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-//    {
-//        QString filename=rc.url.toLocalFile();
-//        if (filename.isEmpty()) filename=rc.url.url();
-//        QFile f( filename );
-//        if( !f.open( QIODevice::WriteOnly ) )
-//        {
-//            err = i18n( "Could not open \"%1\".", filename );
-//        }
-//        if (err.length()==0)
-//        {
-//            QTextStream stream(&f);
-//            // Export to file
-//            stream << retval;
-//            f.close();
-//        }
-//    }
-//    else // use remote file
-//    {
-//        KTemporaryFile tmpFile;
-//        if ( !tmpFile.open() ) err = QString::fromLatin1( "Unable to get temporary file" );
-//        else
-//        {
-//            QTextStream stream ( &tmpFile );
-//            stream << retval;
-//            stream.flush();
-//            if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
-//        }
-//    }
-//
-//    return err;
-//}
+QString timetrackerstorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
+{
+    qCDebug(KTT_LOG) << "Entering function";
+    QString delim = rc.delimiter;
+    QString dquote = rc.quote;
+    QString double_dquote = dquote + dquote;
+    bool to_quote = true;
+    QString err;
+    Task* task;
+    int maxdepth=0;
+    QString title = i18n("Export Progress");
+    KProgressDialog dialog( taskview, 0, title );
+    dialog.setAutoClose( true );
+    dialog.setAllowCancel( true );
+    dialog.progressBar()->setMaximum( 2 * taskview->count() );
+
+    // The default dialog was not displaying all the text in the title bar.
+    int width = taskview->fontMetrics().width(title) * 3;
+    QSize dialogsize;
+    dialogsize.setWidth(width);
+    dialog.setInitialSize( dialogsize );
+
+    if ( taskview->count() > 1 ) dialog.show();
+    QString retval;
+
+    // Find max task depth
+    int tasknr = 0;
+    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
+    {
+        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
+        if ( tasknr % 15 == 0 ) QApplication::processEvents(); // repainting is slow
+        if ( taskview->itemAt(tasknr)->depth() > maxdepth )
+            maxdepth = taskview->itemAt(tasknr)->depth();
+        tasknr++;
+    }
+
+    // Export to file
+    tasknr = 0;
+    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
+    {
+        task = taskview->itemAt( tasknr );
+        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
+        if ( tasknr % 15 == 0 ) QApplication::processEvents();
+
+        // indent the task in the csv-file:
+        for ( int i=0; i < task->depth(); ++i ) retval += delim;
+
+        /*
+        // CSV compliance
+        // Surround the field with quotes if the field contains
+        // a comma (delim) or a double quote
+        if (task->name().contains(delim) || task->name().contains(dquote))
+        to_quote = true;
+        else
+        to_quote = false;
+        */
+        to_quote = true;
+
+        if (to_quote)
+            retval += dquote;
+
+        // Double quotes replaced by a pair of consecutive double quotes
+        retval += task->name().replace( dquote, double_dquote );
+
+        if (to_quote)
+            retval += dquote;
+
+        // maybe other tasks are more indented, so to align the columns:
+        for ( int i = 0; i < maxdepth - task->depth(); ++i ) retval += delim;
+
+        retval += delim + formatTime( task->sessionTime(),
+                                   rc.decimalMinutes )
+                + delim + formatTime( task->time(),
+                                   rc.decimalMinutes )
+                + delim + formatTime( task->totalSessionTime(),
+                                   rc.decimalMinutes )
+                + delim + formatTime( task->totalTime(),
+                                   rc.decimalMinutes )
+                + '\n';
+        tasknr++;
+    }
+
+    // save, either locally or remote
+    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+    {
+        QString filename=rc.url.toLocalFile();
+        if (filename.isEmpty()) filename=rc.url.url();
+        QFile f( filename );
+        if( !f.open( QIODevice::WriteOnly ) )
+        {
+            err = i18n( "Could not open \"%1\".", filename );
+        }
+        if (err.length()==0)
+        {
+            QTextStream stream(&f);
+            // Export to file
+            stream << retval;
+            f.close();
+        }
+    }
+    else // use remote file
+    {
+        auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
+        KJobWidgets::setWindow(job, &dialog);
+        if (!job->exec()) {
+            err=QString::fromLatin1("Could not upload");
+        }
+    }
+
+    return err;
+}
 
 int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
 {
@@ -742,160 +742,153 @@ int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
         return secondsToAdd;
 }
 
-//// export history report as csv, all tasks X all dates in one block
-//QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
-//                                            const QDate   &from,
-//                                            const QDate   &to,
-//                                            const ReportCriteria &rc)
-//{
-//    qCDebug(KTT_LOG) << "Entering function";
-//
-//    QString delim = rc.delimiter;
-//    const QString cr = QString::fromLatin1("\n");
-//    QString err=QString::null;
-//    QString retval;
-//    Task* task;
-//    const int intervalLength = from.daysTo(to)+1;
-//    QMap< QString, QVector<int> > secsForUid;
-//    QMap< QString, QString > uidForName;
-//
-//
-//    // Step 1: Prepare two hashmaps:
-//    // * "uid -> seconds each day": used while traversing events, as uid is their id
-//    //                              "seconds each day" are stored in a vector
-//    // * "name -> uid", ordered by name: used when creating the csv file at the end
-//    qCDebug(KTT_LOG) << "Taskview Count: " << taskview->count();
-//    for ( int n=0; n<taskview->count(); n++ )
-//    {
-//        task=taskview->itemAt(n);
-//        qCDebug(KTT_LOG) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
-//        // uid -> seconds each day
-//        // * Init each element to zero
-//        QVector<int> vector(intervalLength, 0);
-//        secsForUid[task->uid()] = vector;
-//
-//        // name -> uid
-//        // * Create task fullname concatenating each parent's name
-//        QString fullName;
-//        Task* parentTask;
-//        parentTask = task;
-//        fullName += parentTask->name();
-//        parentTask = parentTask->parent();
-//        while (parentTask)
-//        {
-//            fullName = parentTask->name() + "->" + fullName;
-//            qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
-//            parentTask = parentTask->parent();
-//            qCDebug(KTT_LOG) << "Parent task: " << parentTask;
-//        }
-//
-//        uidForName[fullName] = task->uid();
-//
-//        qCDebug(KTT_LOG) << "Fullname(end): " << fullName;
-//    }
-//
-//    qCDebug(KTT_LOG) << "secsForUid" << secsForUid;
-//    qCDebug(KTT_LOG) << "uidForName" << uidForName;
-//
-//
-//    // Step 2: For each date, get the events and calculate the seconds
-//    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
-//    // We rely on rawEventsForDate to get the events
-//    qCDebug(KTT_LOG) << "Let's iterate for each date: ";
-//    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
-//    {
-//        qCDebug(KTT_LOG) << mdate.toString();
-//        KCalCore::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
-//
-//        for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
-//        {
-//            qCDebug(KTT_LOG) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedTo();
-//            qCDebug(KTT_LOG) << "Today's seconds: " << todaySeconds(mdate, *i);
-//            secsForUid[(*i)->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, *i);
-//        }
-//    }
-//
-//
-//    // Step 3: For each task, generate the matching row for the CSV file
-//    // We use the two hashmaps to have direct access using the task name
-//
-//    // First CSV file line
-//    // FIXME: localize strings and date formats
-//    retval.append("\"Task name\"");
-//    for (int i=0; i<intervalLength; ++i)
-//    {
-//        retval.append(delim);
-//        retval.append(from.addDays(i).toString());
-//    }
-//    retval.append(cr);
-//
-//
-//    // Rest of the CSV file
-//    QMapIterator<QString, QString> nameUid(uidForName);
-//    double time;
-//    while (nameUid.hasNext())
-//    {
-//        nameUid.next();
-//        retval.append("\"" + nameUid.key() + "\"");
-//        qCDebug(KTT_LOG) << nameUid.key() << ": " << nameUid.value() << endl;
-//
-//        for (int day=0; day<intervalLength; day++)
-//        {
-//            qCDebug(KTT_LOG) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
-//            retval.append(delim);
-//            time = secsForUid[nameUid.value()][day]/60.0;
-//            retval.append(formatTime(time, rc.decimalMinutes));
-//        }
-//
-//        retval.append(cr);
-//    }
-//
-//    kDebug() << "Retval is \n" << retval;
-//
-//    if (rc.bExPortToClipBoard)
-//        taskview->setClipBoardText(retval);
-//    else
-//    {
-//        // store the file locally or remote
-//        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-//        {
-//            qCDebug(KTT_LOG) << "storing a local file";
-//            QString filename=rc.url.toLocalFile();
-//            if (filename.isEmpty()) filename=rc.url.url();
-//            QFile f( filename );
-//            if( !f.open( QIODevice::WriteOnly ) )
-//            {
-//                err = i18n( "Could not open \"%1\".", filename );
-//                qCDebug(KTT_LOG) << "Could not open file";
-//            }
-//            kDebug() << "Err is " << err;
-//            if (err.length()==0)
-//            {
-//                QTextStream stream(&f);
-//                qCDebug(KTT_LOG) << "Writing to file: " << retval;
-//                // Export to file
-//                stream << retval;
-//                f.close();
-//            }
-//        }
-//        else // use remote file
-//        {
-//            KTemporaryFile tmpFile;
-//            if ( !tmpFile.open() )
-//            {
-//                err = QString::fromLatin1( "Unable to get temporary file" );
-//            }
-//            else
-//            {
-//                QTextStream stream ( &tmpFile );
-//                stream << retval;
-//                stream.flush();
-//                if (!KIO::NetAccess::upload( tmpFile.fileName(), rc.url, 0 )) err=QString::fromLatin1("Could not upload");
-//            }
-//        }
-//    }
-//    return err;
-//}
+// export history report as csv, all tasks X all dates in one block
+QString timetrackerstorage::exportcsvHistory (TaskView      *taskview,
+                                            const QDate   &from,
+                                            const QDate   &to,
+                                            const ReportCriteria &rc)
+{
+    qCDebug(KTT_LOG) << "Entering function";
+
+    QString delim = rc.delimiter;
+    const QString cr = QString::fromLatin1("\n");
+    QString err=QString::null;
+    QString retval;
+    Task* task;
+    const int intervalLength = from.daysTo(to)+1;
+    QMap< QString, QVector<int> > secsForUid;
+    QMap< QString, QString > uidForName;
+
+
+    // Step 1: Prepare two hashmaps:
+    // * "uid -> seconds each day": used while traversing events, as uid is their id
+    //                              "seconds each day" are stored in a vector
+    // * "name -> uid", ordered by name: used when creating the csv file at the end
+    qCDebug(KTT_LOG) << "Taskview Count: " << taskview->count();
+    for ( int n=0; n<taskview->count(); n++ )
+    {
+        task=taskview->itemAt(n);
+        qCDebug(KTT_LOG) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
+        // uid -> seconds each day
+        // * Init each element to zero
+        QVector<int> vector(intervalLength, 0);
+        secsForUid[task->uid()] = vector;
+
+        // name -> uid
+        // * Create task fullname concatenating each parent's name
+        QString fullName;
+        Task* parentTask;
+        parentTask = task;
+        fullName += parentTask->name();
+        parentTask = parentTask->parent();
+        while (parentTask)
+        {
+            fullName = parentTask->name() + "->" + fullName;
+            qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
+            parentTask = parentTask->parent();
+            qCDebug(KTT_LOG) << "Parent task: " << parentTask;
+        }
+
+        uidForName[fullName] = task->uid();
+
+        qCDebug(KTT_LOG) << "Fullname(end): " << fullName;
+    }
+
+    qCDebug(KTT_LOG) << "secsForUid" << secsForUid;
+    qCDebug(KTT_LOG) << "uidForName" << uidForName;
+
+
+    // Step 2: For each date, get the events and calculate the seconds
+    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
+    // We rely on rawEventsForDate to get the events
+    qCDebug(KTT_LOG) << "Let's iterate for each date: ";
+    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
+    {
+        qCDebug(KTT_LOG) << mdate.toString();
+        KCalCore::Event::List dateEvents = d->mCalendar->rawEventsForDate(mdate);
+
+        for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
+        {
+            qCDebug(KTT_LOG) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedTo();
+            qCDebug(KTT_LOG) << "Today's seconds: " << todaySeconds(mdate, *i);
+            secsForUid[(*i)->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, *i);
+        }
+    }
+
+
+    // Step 3: For each task, generate the matching row for the CSV file
+    // We use the two hashmaps to have direct access using the task name
+
+    // First CSV file line
+    // FIXME: localize strings and date formats
+    retval.append("\"Task name\"");
+    for (int i=0; i<intervalLength; ++i)
+    {
+        retval.append(delim);
+        retval.append(from.addDays(i).toString());
+    }
+    retval.append(cr);
+
+
+    // Rest of the CSV file
+    QMapIterator<QString, QString> nameUid(uidForName);
+    double time;
+    while (nameUid.hasNext())
+    {
+        nameUid.next();
+        retval.append("\"" + nameUid.key() + "\"");
+        qCDebug(KTT_LOG) << nameUid.key() << ": " << nameUid.value() << endl;
+
+        for (int day=0; day<intervalLength; day++)
+        {
+            qCDebug(KTT_LOG) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
+            retval.append(delim);
+            time = secsForUid[nameUid.value()][day]/60.0;
+            retval.append(formatTime(time, rc.decimalMinutes));
+        }
+
+        retval.append(cr);
+    }
+
+    qDebug() << "Retval is \n" << retval;
+
+    if (rc.bExPortToClipBoard)
+        taskview->setClipBoardText(retval);
+    else
+    {
+        // store the file locally or remote
+        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
+        {
+            qCDebug(KTT_LOG) << "storing a local file";
+            QString filename=rc.url.toLocalFile();
+            if (filename.isEmpty()) filename=rc.url.url();
+            QFile f( filename );
+            if( !f.open( QIODevice::WriteOnly ) )
+            {
+                err = i18n( "Could not open \"%1\".", filename );
+                qCDebug(KTT_LOG) << "Could not open file";
+            }
+            qDebug() << "Err is " << err;
+            if (err.length()==0)
+            {
+                QTextStream stream(&f);
+                qCDebug(KTT_LOG) << "Writing to file: " << retval;
+                // Export to file
+                stream << retval;
+                f.close();
+            }
+        }
+        else // use remote file
+        {
+            auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
+            //KJobWidgets::setWindow(job, &dialog); // TODO: add progress dialog
+            if (!job->exec()) {
+                err=QString::fromLatin1("Could not upload");
+            }
+        }
+    }
+    return err;
+}
 
 void timetrackerstorage::startTimer(const Task* task, const QDateTime &when)
 {

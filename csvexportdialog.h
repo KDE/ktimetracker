@@ -23,22 +23,29 @@
 #ifndef CSVEXPORTDIALOG_H
 #define CSVEXPORTDIALOG_H
 
+#include <QDialogButtonBox>
+
 #include "ui_csvexportdialog_base.h"
 #include "reportcriteria.h"
 
-class CSVExportDialogBase : public KDialog, public Ui::CSVExportDialogBase
+class CSVExportDialogBase : public QDialog, public Ui::CSVExportDialogBase
 {
 public:
-  explicit CSVExportDialogBase( QWidget *parent ) : KDialog( parent ) {
-    setupUi( this );
+  explicit CSVExportDialogBase( QWidget *parent ) : QDialog( parent ) {
+      QVBoxLayout* const mainLayout = new QVBoxLayout(this);
+      setLayout(mainLayout);
 
-    setMainWidget( page );
-    setButtons( KDialog::User1 | KDialog::Ok | KDialog::Cancel );
-    setButtonText( KDialog::Ok, i18nc("@action:button", "&Export") );
-    setButtonText( KDialog::User1, i18nc("@action:button", "E&xport to Clipboard") );
-    setButtonIcon( KDialog::User1, KIcon( "klipper" ) );
-    enableButton( KDialog::Ok, false );
+      m_buttonBox = new QDialogButtonBox(
+          QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Save, this);
+      m_buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
+
+      QPushButton* const clipboardButton = m_buttonBox->button(QDialogButtonBox::Save);
+      clipboardButton->setText(i18nc("@action:button", "E&xport to Clipboard"));
+      clipboardButton->setIcon(QIcon::fromTheme("klipper"));
   }
+
+protected:
+    QDialogButtonBox* m_buttonBox;
 };
 
 

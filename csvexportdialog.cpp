@@ -34,10 +34,11 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   QWidget *parent
                                   ) : CSVExportDialogBase( parent )
 {
-    connect( button( User1 ), SIGNAL(clicked()),
-           this, SLOT(exPortToClipBoard()) );
-    connect( button( Ok ), SIGNAL(clicked()),
-           this, SLOT(exPortToCSVFile()) );
+    connect(m_buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked,
+            this, &CSVExportDialog::exPortToCSVFile);
+    connect(m_buttonBox, &QDialogButtonBox::accepted,
+            this, &CSVExportDialog::exPortToCSVFile);
+
     connect(urlExportTo,SIGNAL(textChanged(QString)), this, SLOT(enableExportButton()));
     switch ( rt )
     {
@@ -63,7 +64,7 @@ CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
 
 void CSVExportDialog::enableExportButton()
 {
-    enableButton( Ok, !urlExportTo->lineEdit()->text().isEmpty() );
+    m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!urlExportTo->lineEdit()->text().isEmpty());
 }
 
 void CSVExportDialog::enableTasksToExportQuestion()
@@ -108,4 +109,3 @@ ReportCriteria CSVExportDialog::reportCriteria()
     rc.allTasks = (i18n("All Tasks") == comboalltasks->currentText());
     return rc;
 }
-

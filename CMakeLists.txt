@@ -27,6 +27,7 @@ find_package(KF5WindowSystem ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Notifications ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5ItemViews ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5IconThemes ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5JobWidgets ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5KDELibs4Support ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 # Find KdepimLibs Package
@@ -58,13 +59,13 @@ include_directories(
 
 ########### next target ###############
 set(ktimetracker_shared_SRCS
-#	ktimetrackerconfigdialog.cpp
+	ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp ktimetrackerpart.cpp
 	edittaskdialog.cpp idletimedetector.cpp
 	timekard.cpp ktimetrackerutility.cpp
 	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
 	task.cpp taskview.cpp tray.cpp focusdetector.cpp
-#	csvexportdialog.cpp
+	csvexportdialog.cpp
 	plannerparser.cpp historydialog.cpp
 	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
   focusdetectornotifier.cpp kttcalendar.cpp
@@ -95,7 +96,7 @@ qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
         StorageAdaptor )
 
 ki18n_wrap_ui( ktimetracker_shared_SRCS
-#        csvexportdialog_base.ui
+        csvexportdialog_base.ui
         historydialog.ui
         edittaskdialog.ui
         cfgbehavior.ui
@@ -119,6 +120,7 @@ target_link_libraries(ktimetracker
 	KF5::Notifications
 	KF5::ItemViews
 	KF5::IconThemes
+	KF5::JobWidgets
 	KF5::KDELibs4Support
 	KF5::CalendarCore
 	KF5::KontactInterface
@@ -144,6 +146,7 @@ target_link_libraries(kcm_ktimetracker
 	KF5::Notifications
 	KF5::WindowSystem
 	KF5::IconThemes
+	KF5::JobWidgets
 	KF5::KDELibs4Support
 	KF5::CalendarCore
 	${X11_X11_LIB}
@@ -170,6 +173,7 @@ target_link_libraries(ktimetrackerpart
 	KF5::Notifications
 	KF5::WindowSystem
 	KF5::IconThemes
+	KF5::JobWidgets
 	KF5::KDELibs4Support
 	${X11_X11_LIB}
 )

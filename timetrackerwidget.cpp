@@ -22,7 +22,7 @@
 // TODO: what is the sense of tasksChanged()?
 
 #include "timetrackerwidget.h"
-//#include "ktimetrackerconfigdialog.h"
+#include "ktimetrackerconfigdialog.h"
 
 #include <QDBusConnection>
 #include <QFileInfo>
@@ -501,9 +501,9 @@ void TimetrackerWidget::showSettingsDialog()
         is not visible the application quits after accepting the settings dialog.
     */
     window()->show();
-//    KTimeTrackerConfigDialog *dialog=new KTimeTrackerConfigDialog(i18n( "Settings" ), this);
-//    dialog->exec();
-//    delete dialog;
+    KTimeTrackerConfigDialog *dialog=new KTimeTrackerConfigDialog(i18n( "Settings" ), this);
+    dialog->exec();
+    delete dialog;
     KTimeTrackerSettings::self()->readConfig();
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
