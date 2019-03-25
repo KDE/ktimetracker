@@ -56,8 +56,8 @@ private:
     KTimeTrackerPart *m_part;
 
 public:
-    explicit MainWindow( const QString &icsfile = "" );
-    virtual ~MainWindow();
+    explicit MainWindow(const QString& path = QString());
+    ~MainWindow() override;
 
 public Q_SLOTS:
     void slotSetCaption( const QString& );

@@ -37,20 +37,20 @@ class TaskView;
  */
 class FocusDetectorNotifier : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    virtual ~FocusDetectorNotifier();
+public:
+    ~FocusDetectorNotifier() override;
     static FocusDetectorNotifier *instance();
 
-  public:
-    void attach( TaskView *view );
-    void detach( TaskView *view );
+public:
+    void attach(TaskView *view);
+    void detach(TaskView *view);
 
     FocusDetector *focusDetector() const;
 
-  private:
-    explicit FocusDetectorNotifier( QObject *parent = 0 );
+private:
+    explicit FocusDetectorNotifier(QObject *parent = nullptr);
     static FocusDetectorNotifier *mInstance;
 
     //@cond PRIVATE

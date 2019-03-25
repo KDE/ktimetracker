@@ -51,8 +51,8 @@ public:
      * openFile() just calls openFile(<standard ical file>).
      */
     bool openFile() override;
-    virtual bool openFile(QString icsfile);
-    
+    virtual bool openFile(const QString& path);
+
 protected:
     bool saveFile() override;
 

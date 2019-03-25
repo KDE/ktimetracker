@@ -49,10 +49,10 @@
 #include "timetrackerwidget.h"
 #include "ktt_debug.h"
 
-MainWindow::MainWindow(const QString &icsfile)
+MainWindow::MainWindow(const QString& path)
     : KParts::MainWindow()
 {
-    qCDebug(KTT_LOG) << "Entering function, icsfile is " << icsfile;
+    qCDebug(KTT_LOG) << "Entering function, icsfile is " << path;
     // Setup our actions
     setupActions();
 
@@ -97,8 +97,8 @@ MainWindow::MainWindow(const QString &icsfile)
     // tell the KParts::MainWindow that this is indeed
     // the main widget
     setCentralWidget(widget);
-    m_part->openFile(icsfile);
-    slotSetCaption(icsfile);  // set the window title to our iCal file
+    m_part->openFile(path);
+    slotSetCaption(path);  // set the window title to our iCal file
     connect(configureAction, SIGNAL(triggered(bool)),
         widget, SLOT(showSettingsDialog()));
     widget->setupActions(actionCollection());
@@ -146,18 +146,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyBindings()
 {
-    KShortcutsDialog::configure( actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this );
+    KShortcutsDialog::configure(actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this);
 }
 
 void MainWindow::makeMenus()
 {
-    mainWidget->setupActions( actionCollection() );
-    actionKeyBindings = KStandardAction::keyBindings( this, SLOT(keyBindings()),
-        actionCollection() );
+    mainWidget->setupActions(actionCollection());
+    actionKeyBindings = KStandardAction::keyBindings(this, SLOT(keyBindings()), actionCollection());
     setupGUI();
-    actionKeyBindings->setToolTip( i18n( "Configure key bindings" ) );
-    actionKeyBindings->setWhatsThis( i18n( "This will let you configure key"
-                                           "bindings which are specific to ktimetracker" ) );
+    actionKeyBindings->setToolTip(i18n("Configure key bindings"));
+    actionKeyBindings->setWhatsThis(i18n("This will let you configure key bindings which are specific to ktimetracker."));
 }
 
 bool MainWindow::queryClose()
@@ -172,8 +170,8 @@ bool MainWindow::queryClose()
 
 void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 {
-    QMenu* pop = dynamic_cast<QMenu*>( factory()->container( i18n( "task_popup" ), this ) );
-    if ( pop )
-        pop->popup( point );
+    QMenu* pop = dynamic_cast<QMenu*>(factory()->container("task_popup", this));
+    if (pop) {
+        pop->popup(point);
+    }
 }
-

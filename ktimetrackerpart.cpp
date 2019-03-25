@@ -55,10 +55,9 @@ KTimeTrackerPart::KTimeTrackerPart(QWidget *parentWidget, QObject *parent, const
 
 void KTimeTrackerPart::makeMenus()
 {
-    m_mainWidget->setupActions( actionCollection() );
+    m_mainWidget->setupActions(actionCollection());
     QAction *actionKeyBindings;
-    actionKeyBindings = KStandardAction::keyBindings( this, SLOT(keyBindings()),
-        actionCollection() );
+    actionKeyBindings = KStandardAction::keyBindings(this, &KTimeTrackerPart::keyBindings, actionCollection());
     // Tool tips must be set after the createGUI.
     actionKeyBindings->setToolTip( i18n("Configure key bindings") );
     actionKeyBindings->setWhatsThis( i18n("This will let you configure key"
@@ -77,16 +76,14 @@ void KTimeTrackerPart::setStatusBar(const QString& qs)
     emit setStatusBarText(qs);
 }
 
-bool KTimeTrackerPart::openFile(QString icsfile)
+bool KTimeTrackerPart::openFile(const QString& path)
 {
-    m_mainWidget->openFile(icsfile);
-    emit setWindowCaption(icsfile);
+    m_mainWidget->openFile(path);
+    emit setWindowCaption(path);
 
     // connections
-    connect( m_mainWidget, SIGNAL(statusBarTextChangeRequested(QString)),
-           this, SLOT(setStatusBar(QString)) );
-    connect( m_mainWidget, SIGNAL(setCaption(QString)),
-           this, SIGNAL(setWindowCaption(QString)) );
+    connect(m_mainWidget, &TimetrackerWidget::statusBarTextChangeRequested, this, &KTimeTrackerPart::setStatusBar);
+    connect(m_mainWidget, &TimetrackerWidget::setCaption, this, &KTimeTrackerPart::setWindowCaption);
     return true;
 }
 
