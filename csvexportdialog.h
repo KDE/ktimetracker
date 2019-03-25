@@ -31,24 +31,11 @@
 class CSVExportDialogBase : public QDialog, public Ui::CSVExportDialogBase
 {
 public:
-  explicit CSVExportDialogBase( QWidget *parent ) : QDialog( parent ) {
-      QVBoxLayout* const mainLayout = new QVBoxLayout(this);
-      setLayout(mainLayout);
-
-      m_buttonBox = new QDialogButtonBox(
-          QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Save, this);
-      m_buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
-
-      QPushButton* const clipboardButton = m_buttonBox->button(QDialogButtonBox::Save);
-      clipboardButton->setText(i18nc("@action:button", "E&xport to Clipboard"));
-      clipboardButton->setIcon(QIcon::fromTheme("klipper"));
-  }
+  explicit CSVExportDialogBase(QWidget* parent);
 
 protected:
     QDialogButtonBox* m_buttonBox;
 };
-
-
 
 class CSVExportDialog : public CSVExportDialogBase
 {

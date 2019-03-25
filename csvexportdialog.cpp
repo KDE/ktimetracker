@@ -30,6 +30,23 @@
 #include <KPushButton>
 #include <KLineEdit>
 
+CSVExportDialogBase::CSVExportDialogBase(QWidget* parent)
+    : QDialog(parent) {
+    QVBoxLayout* const mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
+
+    m_buttonBox = new QDialogButtonBox(
+        QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Save, this);
+    m_buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
+
+    QPushButton* const clipboardButton = m_buttonBox->button(QDialogButtonBox::Save);
+    clipboardButton->setText(i18nc("@action:button", "E&xport to Clipboard"));
+    clipboardButton->setIcon(QIcon::fromTheme("klipper"));
+
+    mainLayout->addWidget(page);
+    mainLayout->addWidget(m_buttonBox);
+}
+
 CSVExportDialog::CSVExportDialog( ReportCriteria::REPORTTYPE rt,
                                   QWidget *parent
                                   ) : CSVExportDialogBase( parent )
