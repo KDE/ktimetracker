@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
 
         if (app.isSessionRestored()) {
             const QString className = KXmlGuiWindow::classNameOfToplevel(1);
-            if (className == QLatin1String("DolphinMainWindow")) {
+            if (className == QLatin1String("MainWindow")) {
                 mainWindow->restore(1);
             } else {
                 qCWarning(KTT_LOG) << "Unknown class " << className << " in session saved data!";
