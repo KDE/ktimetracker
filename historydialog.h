@@ -24,18 +24,20 @@
 
 #include <QDialog>
 #include "taskview.h"
+#include "ui_historydialog.h"
 
 namespace Ui
 {
     class historydialog;
 }
 
-class historydialog : public QDialog
+class HistoryDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit historydialog(TaskView *parent);
-    ~historydialog();
+    explicit HistoryDialog(TaskView *parent);
+    ~HistoryDialog() = default;
+
     QString listallevents();
     QString refresh();
 
@@ -43,7 +45,7 @@ protected:
     void changeEvent(QEvent *e);
 
 private:
-    Ui::historydialog *m_ui;
+    Ui::HistoryDialog m_ui;
     TaskView *mparent;
 
 private Q_SLOTS:

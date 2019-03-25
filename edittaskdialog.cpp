@@ -101,7 +101,7 @@ void EditTaskDialog::status(DesktopList *desktopList) const
 
 void EditTaskDialog::on_edittimespushbutton_clicked()
 {
-    historydialog* historydialog1=new historydialog(m_parent);
+    HistoryDialog* historydialog1=new HistoryDialog(m_parent);
     lower();
     historydialog1->exec();
 }

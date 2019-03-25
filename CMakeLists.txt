@@ -59,17 +59,27 @@ include_directories(
 
 ########### next target ###############
 set(ktimetracker_shared_SRCS
-	ktimetrackerconfigdialog.cpp
-	desktoptracker.cpp ktimetrackerpart.cpp
-	edittaskdialog.cpp idletimedetector.cpp
-	timekard.cpp ktimetrackerutility.cpp
-	timetrackerstorage.cpp mainwindow.cpp preferences.cpp
-	task.cpp taskview.cpp tray.cpp focusdetector.cpp
+    ktimetrackerconfigdialog.cpp
+	desktoptracker.cpp
+    ktimetrackerpart.cpp
+	edittaskdialog.cpp
+    idletimedetector.cpp
+	timekard.cpp
+    ktimetrackerutility.cpp
+	timetrackerstorage.cpp
+    mainwindow.cpp
+    preferences.cpp
+	task.cpp
+    taskview.cpp
+    tray.cpp
+    focusdetector.cpp
 	csvexportdialog.cpp
-	plannerparser.cpp historydialog.cpp
-	treeviewheadercontextmenu.cpp timetrackerwidget.cpp
-  focusdetectornotifier.cpp kttcalendar.cpp
-	desktoptracker.h
+	plannerparser.cpp
+    historydialog.cpp
+	treeviewheadercontextmenu.cpp
+    timetrackerwidget.cpp
+    focusdetectornotifier.cpp
+    kttcalendar.cpp
 	$<TARGET_OBJECTS:pics>
 )
 

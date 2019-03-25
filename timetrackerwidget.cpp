@@ -578,11 +578,11 @@ void TimetrackerWidget::startNewSession()
 
 void TimetrackerWidget::editHistory()
 {
-    // historydialog is the new historydialog, but the EditHiStoryDiaLog exists as well.
-    // historydialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
+    // HistoryDialog is the new HistoryDialog, but the EditHiStoryDiaLog exists as well.
+    // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if ( currentTaskView() )
     {
-        historydialog *dlg = new historydialog( currentTaskView() );
+        HistoryDialog *dlg = new HistoryDialog( currentTaskView() );
         if (currentTaskView()->storage()->rawevents().count()!=0) dlg->exec();
         else KMessageBox::information(0, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
     }
