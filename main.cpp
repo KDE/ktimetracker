@@ -19,27 +19,28 @@
  *
  */
 
-#include "desktoplist.h"
 #include <iostream>
-#include <signal.h>
+
 #include <QFile>
+#include <QDebug>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QStandardPaths>
+
 #include <KAboutData>
 #include <KLocalizedString>
 
 #include <kontactinterface/pimuniqueapplication.h>
 
+#include "desktoplist.h"
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "timetrackerstorage.h"
 #include "task.h"
-#include <QDebug>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
-#include <QStandardPaths>
 #include "ktt_debug.h"
 #include "ktimetracker-version.h"
 
-QString icsfile( const QCommandLineParser &parser) // deliver the name of the iCalendar file to be used
+QString icsfile(const QCommandLineParser &parser) // deliver the name of the iCalendar file to be used
 {
     // Get first positional argument ("file")
     const QStringList args = parser.positionalArguments();
@@ -52,8 +53,8 @@ QString icsfile( const QCommandLineParser &parser) // deliver the name of the iC
     if (!file.isEmpty()) // file is given as parameter
     {
         result = file;
-        QUrl* icsfileurl=new QUrl(file);
-        if (( icsfileurl->scheme() == "http" ) || ( icsfileurl->scheme() == "ftp" ) || ( icsfileurl->isLocalFile() ))
+        const QUrl& icsfileurl = QUrl(file);
+        if (icsfileurl.scheme() == "http" || icsfileurl.scheme() == "ftp" || icsfileurl.isLocalFile())
         {
             // leave as is
             ;
@@ -63,23 +64,23 @@ QString icsfile( const QCommandLineParser &parser) // deliver the name of the iC
             QFileInfo info(result);
             result = info.absoluteFilePath();
         }
-        delete icsfileurl;
     }
     else // file is not given as parameter
     {
-        result=QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics" ));
-        if ( !QFile::exists( result ) )
+        result = QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics"));
+        if (!QFile::exists(result))
         {
-            QFile oldFile( QStandardPaths::locate(QStandardPaths::GenericDataLocation, "karm/karm.ics" ) );
-            result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QString::fromLatin1( "ktimetracker.ics" ) ;
-            if ( oldFile.exists() )
-                oldFile.copy( result );
+            QFile oldFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "karm/karm.ics"));
+            result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker.ics");
+            if (oldFile.exists()) {
+                oldFile.copy(result);
+            }
         }
     }
     return result;
 }
 
-int main( int argc, char *argv[] )
+int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
@@ -108,18 +109,32 @@ int main( int argc, char *argv[] )
     parser.addHelpOption();
     //PORTING SCRIPT: adapt aboutdata variable if necessary
     aboutData.setupCommandLine(&parser);
-    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+
+    parser.addPositionalArgument(QStringLiteral("file"), i18n("The iCalendar file to open"));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("listtasknames"), i18n("List all tasks as text output")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("addtask"), i18n("Add task <taskname>"),
+        QStringLiteral("taskname")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("deletetask"), i18n("Delete task <taskid>"),
+        QStringLiteral("taskid")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("taskidsfromname"), i18n("Print the task ids for all tasks named <taskname>"),
+        QStringLiteral("taskname")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("starttask"), i18n("Start timer for task <taskid>"),
+        QStringLiteral("taskid")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("stoptask"), i18n("Stop timer for task <taskid>"),
+        QStringLiteral("taskid")));
+    parser.addOption(QCommandLineOption(
+        QStringList() << QStringLiteral("totalminutesfortaskid"), i18n("Deliver total minutes for task id"),
+        QStringLiteral("taskid")));
+
+    parser.process(app);
     aboutData.processCommandLine(&parser);
 
-    parser.addPositionalArgument(QLatin1String("file"), i18n( "The iCalendar file to open" ));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("listtasknames"), i18n( "List all tasks as text output" )));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("addtask"), i18n( "Add task <taskname>" ), QLatin1String("taskname")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("deletetask"), i18n( "Delete task <taskid>" ), QLatin1String("taskid")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("taskidsfromname"), i18n( "Print the task ids for all tasks named <taskname>" ), QLatin1String("taskname")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("starttask"), i18n( "Start timer for task <taskid>" ), QLatin1String("taskid")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("stoptask"), i18n( "Stop timer for task <taskid>" ), QLatin1String("taskid")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("totalminutesfortaskid"), i18n( "Deliver total minutes for task id" ), QLatin1String("taskid")));
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("version"), i18n( "Outputs the version" )));
     int err=0;  // error code
     bool konsolemode=false;  // open a gui and wait for user input?
     if ( parser.isSet("listtasknames") ) konsolemode=true;
