@@ -33,12 +33,13 @@
 #include <QTimer>
 #include <QToolTip>
 #include <QMenu>
-
-#include <QAction>
-#include <KGlobalSettings>
-#include <KLocale>
-#include <KMenu>
 #include <QDebug>
+#include <QAction>
+#include <QApplication>
+#include <QDesktopWidget>
+
+#include <KLocalizedString>
+
 #include "ktt_debug.h"
 #include "mainwindow.h"
 #include "task.h"
@@ -76,14 +77,6 @@ TrayIcon::TrayIcon(MainWindow* parent)
     }
     resetClock();
     initToolTip();
-}
-
-TrayIcon::TrayIcon(KTimeTrackerPart *)
-  : KStatusNotifierItem( 0 )
-{
-    setObjectName( "Ktimetracker Tray" );
-    // it is not convenient if every kpart gets an icon in the systray.
-    _taskActiveTimer = 0;
 }
 
 TrayIcon::TrayIcon()
@@ -142,8 +135,8 @@ void TrayIcon::updateToolTip(QList<Task*> activeTasks)
 
     QFontMetrics fm( QToolTip::font() );
     const QString continued = i18n( ", ..." );
-    const int buffer = fm.boundingRect( continued ).width();
-    const int desktopWidth = KGlobalSettings::desktopGeometry(associatedWidget()).width();
+    const int buffer = fm.boundingRect(continued).width();
+    const int desktopWidth = QApplication::desktop()->screenGeometry(associatedWidget()).width();
     const int maxWidth = desktopWidth - buffer;
 
     QString qTip;
@@ -170,4 +163,3 @@ void TrayIcon::updateToolTip(QList<Task*> activeTasks)
     }
     this->setToolTip( "ktimetracker", "ktimetracker", qTip );
 }
-

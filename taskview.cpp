@@ -33,12 +33,9 @@
 #include <QList>
 #include <QClipboard>
 #include <QApplication>
-
-//#include <KApplication>       // kapp
 #include <QDebug>
-#include "ktt_debug.h"
+
 #include <KFileDialog>
-//#include <KLocale>            // i18n
 #include <KMessageBox>
 #include <KProgressDialog>
 #include <KUrlRequester>
@@ -57,6 +54,7 @@
 #include "focusdetector.h"
 #include "focusdetectornotifier.h"
 #include "storageadaptor.h"
+#include "ktt_debug.h"
 
 #define T_LINESIZE 1023
 
@@ -1217,4 +1215,3 @@ void TaskView::reconfigure()
 
     refresh();
 }
-

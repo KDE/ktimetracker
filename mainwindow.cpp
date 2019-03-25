@@ -59,39 +59,7 @@ MainWindow::MainWindow(const QString &icsfile)
     // this routine will find and load our Part.
     KPluginLoader loader( "ktimetrackerpart" );
     KPluginFactory *factory = loader.factory();
-    if (factory)
-    {
-        // now that the Part is loaded, we cast it to a Part to get our hands on it
-
-        //NOTE: Use the dynamic_cast below. Without it, KPluginLoader will use a qobject_cast
-        // that fails, because ktimetrackerpart is defined twice, once in ktimetracker's binary
-        // and another one in the plugin. The build system should be fixed.
-        //m_part = factory->create<ktimetrackerpart>( this );
-
-        m_part = dynamic_cast<KTimeTrackerPart*>(factory->create<KParts::ReadWritePart>(this));
-
-        if (m_part)
-        {
-            // tell the KParts::MainWindow that this is indeed
-            // the main widget
-            setCentralWidget(m_part->widget());
-            m_part->openFile(icsfile);
-            slotSetCaption( icsfile );  // set the window title to our iCal file
-            connect(configureAction, SIGNAL(triggered(bool)),
-                m_part->widget(), SLOT(showSettingsDialog()));
-            ((TimetrackerWidget *) (m_part->widget()))->setupActions( actionCollection() );
-            setupGUI();
-        }
-        else
-        {
-          qCritical() << "Could not find the KTimeTracker part: m_part is 0";
-          KMessageBox::error(this, i18n( "Could not create the KTimeTracker part." ));
-          QTimer::singleShot(0, qApp, SLOT(quit()));
-          return;
-        }
-    }
-    else
-    {
+    if (!factory) {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
         qCritical() << "Could not find the KTimeTracker part: factory is 0";
@@ -101,26 +69,56 @@ MainWindow::MainWindow(const QString &icsfile)
         // next time we enter the event loop...
         return;
     }
-    setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
+
+    // now that the Part is loaded, we cast it to a Part to get our hands on it
+
+    //NOTE: Use the dynamic_cast below. Without it, KPluginLoader will use a qobject_cast
+    // that fails, because ktimetrackerpart is defined twice, once in ktimetracker's binary
+    // and another one in the plugin. The build system should be fixed.
+    //m_part = factory->create<ktimetrackerpart>( this );
+
+    m_part = dynamic_cast<KTimeTrackerPart*>(factory->create<KParts::ReadWritePart>(this));
+
+    if (!m_part) {
+        qCritical() << "Could not find the KTimeTracker part: m_part is 0";
+        KMessageBox::error(this, i18n( "Could not create the KTimeTracker part." ));
+        QTimer::singleShot(0, qApp, SLOT(quit()));
+        return;
+    }
+
+    auto* widget = dynamic_cast<TimetrackerWidget*>(m_part->widget());
+    if (!widget) {
+        qCritical() << "KPart widget has wrong type";
+        KMessageBox::error(this, i18n("Could not find the KTimeTracker widget."));
+        QTimer::singleShot(0, qApp, SLOT(quit()));
+        return;
+    }
+
+    // tell the KParts::MainWindow that this is indeed
+    // the main widget
+    setCentralWidget(widget);
+    m_part->openFile(icsfile);
+    slotSetCaption(icsfile);  // set the window title to our iCal file
+    connect(configureAction, SIGNAL(triggered(bool)),
+        widget, SLOT(showSettingsDialog()));
+    widget->setupActions(actionCollection());
+    setupGUI();
+
+    setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
 
     // connections
-    connect( m_part->widget(), SIGNAL(statusBarTextChangeRequested(QString)),
-                 this, SLOT(setStatusBar(QString)) );
-    connect( m_part->widget(), SIGNAL(setCaption(QString)),
-                 this, SLOT(slotSetCaption(QString)) );
+    connect(widget, &TimetrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
+    connect(widget, &TimetrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
     loadGeometry();
 
     // Setup context menu request handling
-    connect( m_part->widget(),
-           SIGNAL(contextMenuRequested(QPoint)),
-           this,
-           SLOT(taskViewCustomContextMenuRequested(QPoint)) );
-    if (KTimeTrackerSettings::trayIcon())
-    {
-        _tray = new TrayIcon( this );
-        connect( m_part->widget(), SIGNAL(timersActive()), _tray, SLOT(startClock()) );
-        connect( m_part->widget(), SIGNAL(timersInactive()), _tray, SLOT(stopClock()) );
-        connect( m_part->widget(), SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
+    connect(widget, &TimetrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
+
+    if (KTimeTrackerSettings::trayIcon()) {
+        _tray = new TrayIcon(this);
+        connect(widget, &TimetrackerWidget::timersActive, _tray, &TrayIcon::startClock);
+        connect(widget, &TimetrackerWidget::timersInactive, _tray, &TrayIcon::stopClock);
+        connect( widget, SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
     }
 }
 
@@ -131,20 +129,21 @@ void MainWindow::setupActions()
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 }
 
-void MainWindow::readProperties( const KConfigGroup &cfg )
+void MainWindow::readProperties(const KConfigGroup &cfg)
 {
-    if( cfg.readEntry( "WindowShown", true ))
+    if (cfg.readEntry("WindowShown", true)) {
         show();
+    }
 }
 
-void MainWindow::saveProperties( KConfigGroup &cfg )
+void MainWindow::saveProperties(KConfigGroup &cfg)
 {
-    cfg.writeEntry( "WindowShown", isVisible());
+    cfg.writeEntry("WindowShown", isVisible());
 }
 
-void MainWindow::slotSetCaption( const QString& qs )
+void MainWindow::slotSetCaption(const QString& qs)
 {
-    setCaption( qs );
+    setCaption(qs);
 }
 
 void MainWindow::setStatusBar(const QString& qs)
@@ -176,9 +175,9 @@ void MainWindow::makeMenus()
 
 void MainWindow::loadGeometry()
 {
-    if (initialGeometrySet()) setAutoSaveSettings();
-    else
-    {
+    if (initialGeometrySet()) {
+        setAutoSaveSettings();
+    } else {
         KConfigGroup config = KSharedConfig::openConfig()->group( QString::fromLatin1("Main Window Geometry") );
         int w = config.readEntry( QString::fromLatin1("Width"), 100 );
         int h = config.readEntry( QString::fromLatin1("Height"), 100 );
@@ -187,7 +186,6 @@ void MainWindow::loadGeometry()
         resize(w, h);
     }
 }
-
 
 void MainWindow::saveGeometry()
 {

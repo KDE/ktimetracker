@@ -36,37 +36,27 @@ class MainWindow;
 
 class TrayIcon : public KStatusNotifierItem
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     explicit TrayIcon(MainWindow * parent);
-    explicit TrayIcon(KTimeTrackerPart *);
     TrayIcon();
     ~TrayIcon() override = default;
 
-  private:
+private:
     int _activeIcon;
     static QVector<QPixmap*> *icons;
     QTimer *_taskActiveTimer;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void startClock();
     void stopClock();
     void resetClock();
-    void updateToolTip( QList<Task*> activeTasks);
+    void updateToolTip(QList<Task*> activeTasks);
     void initToolTip();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void advanceClock();
-
-  // experiment
-  /*
-    void insertTitle(QString title);
-
-  private:
-    KMenu *trayPopupMenu;
-    QPopupMenu *trayPopupMenu2;
-    */
 };
 
 #endif // TRAY_ICON_H
