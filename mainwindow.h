@@ -30,7 +30,7 @@ class QAction;
 
 class TrayIcon;
 class Task;
-class TimetrackerWidget;
+class TimeTrackerWidget;
 class KTimeTrackerPart;
 
 /**
@@ -50,7 +50,7 @@ private:
     QAction *         actionKeyBindings;
     QAction * configureAction;
 
-    TimetrackerWidget *mainWidget;
+    TimeTrackerWidget *mainWidget;
 
     friend class TrayIcon;
     KTimeTrackerPart *m_part;

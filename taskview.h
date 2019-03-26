@@ -23,7 +23,6 @@
 #ifndef KTIMETRACKER_TASK_VIEW
 #define KTIMETRACKER_TASK_VIEW
 
-
 #include <QList>
 #include <QTreeWidget>
 
@@ -253,27 +252,27 @@ private:
     void restoreItemState();
 
 protected:
-    void mouseMoveEvent( QMouseEvent* );
-    void mousePressEvent( QMouseEvent* );
+    void mouseMoveEvent(QMouseEvent*) override;
+    void mousePressEvent(QMouseEvent*) override;
 
 public Q_SLOTS:
     void minuteUpdate();
-    void dropEvent ( QDropEvent * event );
+    void dropEvent(QDropEvent* event) override;
     /** item state stores if a task is expanded so you can see the subtasks */
-    void itemStateChanged( QTreeWidgetItem *item );
+    void itemStateChanged(QTreeWidgetItem* item);
 
     /** React on another process having modified the iCal file we rely on.
         This is not iCalFileChanged. */
     void iCalFileModified();
-    void slotItemDoubleClicked( QTreeWidgetItem *item, int );
+    void slotItemDoubleClicked(QTreeWidgetItem *item, int);
 
     /** React on the focus having changed to Window QString **/
-    void newFocusWindowDetected( const QString & );
+    void newFocusWindowDetected(const QString&);
 
-    void slotColumnToggled( int );
-    void slotCustomContextMenuRequested( const QPoint & );
-    void slotSetPercentage( QAction * );
-    void slotSetPriority( QAction * );
+    void slotColumnToggled(int);
+    void slotCustomContextMenuRequested(const QPoint&);
+    void slotSetPercentage(QAction*);
+    void slotSetPriority(QAction*);
 };
 
 #endif // KTIMETRACKER_TASK_VIEW

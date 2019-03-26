@@ -1,5 +1,3 @@
-#include <kcmodule.h>
-#include <kcmultidialog.h>
 /*
  *     Copyright (C) 2009 by Laurent Montel <montel@kde.org>
  *
@@ -24,15 +22,16 @@
 #ifndef KTIMETRACKERCONFIGDIALOG_H
 #define KTIMETRACKERCONFIGDIALOG_H
 
+#include <KCMultiDialog>
+#include <KCModule>
 
-class KTimeTrackerConfigDialog
-  : public KCMultiDialog
+class KTimeTrackerConfigDialog : public KCMultiDialog
 {
-  Q_OBJECT
-  public:
-    KTimeTrackerConfigDialog( const QString &title,
-                    QWidget *parent );
-    ~KTimeTrackerConfigDialog();
+    Q_OBJECT
+
+public:
+    KTimeTrackerConfigDialog(const QString& title, QWidget* parent);
+    ~KTimeTrackerConfigDialog() override = default;
 
 public slots:
     void slotOk();
@@ -41,6 +40,7 @@ public slots:
 class KTimeTrackerBehaviorConfig : public KCModule
 {
     Q_OBJECT
+
 public:
     explicit KTimeTrackerBehaviorConfig(QWidget *parent);
 
@@ -51,6 +51,7 @@ public:
 class KTimeTrackerDisplayConfig : public KCModule
 {
     Q_OBJECT
+
 public:
     explicit KTimeTrackerDisplayConfig(QWidget *parent);
 
@@ -61,6 +62,7 @@ public:
 class KTimeTrackerStorageConfig : public KCModule
 {
     Q_OBJECT
+
 public:
     explicit KTimeTrackerStorageConfig(QWidget *parent);
 

@@ -22,7 +22,6 @@
 #ifndef TIMETRACKER_WIDGET_H
 #define TIMETRACKER_WIDGET_H
 
-#include <kconfiggroup.h>
 #include <QWidget>
 #include <QDateTime>
 
@@ -33,13 +32,13 @@ class QUrl;
 class Task;
 class TaskView;
 
-class TimetrackerWidget : public QWidget 
+class TimeTrackerWidget : public QWidget 
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit TimetrackerWidget( QWidget *parent = 0 );
-    ~TimetrackerWidget();
+public:
+    explicit TimeTrackerWidget(QWidget* parent = nullptr);
+    ~TimeTrackerWidget() override;
 
     /** 
       Delivers if all task have an end time. 
@@ -48,12 +47,12 @@ class TimetrackerWidget : public QWidget
      */
     bool allEventsHaveEndTiMe();
 
-  private:
-    void addTaskView( const QString &fileName = "" );
+private:
+    void addTaskView(const QString &fileName = "");
 
-    bool eventFilter( QObject *obj, QEvent *event );
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
-  public:
+public:
     /**
       Returns the TaskView widget of the current opened tabpage.
      */

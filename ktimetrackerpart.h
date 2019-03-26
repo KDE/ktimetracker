@@ -28,7 +28,7 @@
 
 class TrayIcon;
 class QWidget;
-class TimetrackerWidget;
+class TimeTrackerWidget;
 
 /**
  * This is a "Part".  It that does all the real work in a KPart
@@ -63,7 +63,7 @@ public Q_SLOTS:
 private:
     void makeMenus();
 
-    TimetrackerWidget *m_mainWidget;
+    TimeTrackerWidget* m_mainWidget;
 };
 
 #endif // _KTIMETRACKERPART_H_

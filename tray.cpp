@@ -67,13 +67,17 @@ TrayIcon::TrayIcon(MainWindow* parent)
             icons->insert(i,icon);
         }
     }
-    TimetrackerWidget *timetrackerWidget = static_cast< TimetrackerWidget * >( parent->centralWidget() );
-    if ( timetrackerWidget )
-    {
-        QAction *action = timetrackerWidget->action( "configure_ktimetracker" );
-        if ( action ) contextMenu()->addAction( action );
-        action = timetrackerWidget->action( "stopAll" );
-        if ( action ) contextMenu()->addAction( action );
+    TimeTrackerWidget *timetrackerWidget = static_cast<TimeTrackerWidget*>(parent->centralWidget());
+    if (timetrackerWidget) {
+        QAction *action = timetrackerWidget->action("configure_ktimetracker");
+        if (action) {
+            contextMenu()->addAction(action);
+        }
+
+        action = timetrackerWidget->action("stopAll");
+        if (action) {
+            contextMenu()->addAction(action);
+        }
     }
     resetClock();
     initToolTip();

@@ -40,10 +40,6 @@ KTimeTrackerConfigDialog::KTimeTrackerConfigDialog( const QString &title,
     addModule( "ktimetracker_config_storage" );
 }
 
-KTimeTrackerConfigDialog::~KTimeTrackerConfigDialog()
-{
-}
-
 void KTimeTrackerConfigDialog::slotOk()
 {
     KTimeTrackerSettings::self()->writeConfig();

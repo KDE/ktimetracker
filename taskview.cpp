@@ -444,22 +444,20 @@ void TaskView::load( const QString &fileName )
     // till here
     // Start all tasks that have an event without endtime
     i = 0;
-    for ( Task* t = itemAt(i); t; t = itemAt(++i) )
-    {
-        if ( !d->mStorage->allEventsHaveEndTiMe( t ) )
-        {
+    for (Task* t = itemAt(i); t; t = itemAt(++i)) {
+        if (!d->mStorage->allEventsHaveEndTiMe(t)) {
             t->resumeRunning();
             d->mActiveTasks.append(t);
             emit updateButtons();
-            if ( d->mActiveTasks.count() == 1 )
+            if (d->mActiveTasks.count() == 1) {
                 emit timersActive();
-            emit tasksChanged( d->mActiveTasks );
+            }
+            emit tasksChanged(d->mActiveTasks);
         }
     }
     // till here
 
-    if ( topLevelItemCount() > 0 )
-    {
+    if (topLevelItemCount() > 0) {
         restoreItemState();
         setCurrentItem(topLevelItem( 0 ));
         if ( !_desktopTracker->startTracking().isEmpty() )
@@ -467,7 +465,9 @@ void TaskView::load( const QString &fileName )
         _isloading = false;
         refresh();
     }
-    for (int i=0; i<=columnCount(); ++i) resizeColumnToContents(i);
+    for (int i = 0; i <= columnCount(); ++i) {
+        resizeColumnToContents(i);
+    }
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
@@ -478,31 +478,34 @@ is stored in the _preferences object. */
 {
     qCDebug(KTT_LOG) << "Entering function";
 
-    if ( topLevelItemCount() > 0 )
-    {
-        QTreeWidgetItemIterator item( this );
-        while( *item )
-        {
+    if (topLevelItemCount() > 0) {
+        QTreeWidgetItemIterator item(this);
+        while (*item) {
             Task *t = (Task *) *item;
-            t->setExpanded( _preferences->readBoolEntry( t->uid() ) );
+            t->setExpanded(_preferences->readBoolEntry(t->uid()));
             ++item;
         }
     }
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void TaskView::itemStateChanged( QTreeWidgetItem *item )
+void TaskView::itemStateChanged(QTreeWidgetItem* item)
 {
     qDebug() << "Entering function";
-    if ( !item || _isloading ) return;
+    if (!item || _isloading) {
+        return;
+    }
+
     Task *t = (Task *)item;
     qCDebug(KTT_LOG) <<"TaskView::itemStateChanged()" <<" uid=" << t->uid() <<" state=" << t->isExpanded();
-    if( _preferences ) _preferences->writeEntry( t->uid(), t->isExpanded() );
+    if(_preferences) {
+        _preferences->writeEntry(t->uid(), t->isExpanded());
+    }
 }
 
 void TaskView::closeStorage()
 {
-  d->mStorage->closeStorage();
+    d->mStorage->closeStorage();
 }
 
 bool TaskView::allEventsHaveEndTiMe()
@@ -512,14 +515,14 @@ bool TaskView::allEventsHaveEndTiMe()
 
 void TaskView::iCalFileModified()
 {
-    KTimeTracker::KTTCalendar *calendar = qobject_cast<KTimeTracker::KTTCalendar*>( sender() );
-    if ( !calendar || !calendar->weakPointer() ) {
-      qWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
+    KTimeTracker::KTTCalendar *calendar = qobject_cast<KTimeTracker::KTTCalendar*>(sender());
+    if (!calendar || !calendar->weakPointer()) {
+        qWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
     } else {
-      qCDebug(KTT_LOG) << "entering function";
-      calendar->reload();
-      d->mStorage->buildTaskView( calendar->weakPointer().toStrongRef(), this );
-      qCDebug(KTT_LOG) << "exiting iCalFileModified";
+        qCDebug(KTT_LOG) << "entering function";
+        calendar->reload();
+        d->mStorage->buildTaskView(calendar->weakPointer().toStrongRef(), this);
+        qCDebug(KTT_LOG) << "exiting iCalFileModified";
     }
 }
 
@@ -527,19 +530,18 @@ void TaskView::refresh()
 {
     qCDebug(KTT_LOG) << "entering function";
     int i = 0;
-    for ( Task* t = itemAt(i); t; t = itemAt(++i) )
-    {
+    for (Task* t = itemAt(i); t; t = itemAt(++i)) {
         t->setPixmapProgress();
         t->update();  // maybe there was a change in the times's format
     }
 
     // remove root decoration if there is no more child.
     i = 0;
-    while ( itemAt( ++i ) && ( itemAt( i )->depth() == 0 ) ){};
+    while (itemAt(++i) && itemAt(i)->depth() == 0){};
     //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
     // FIXME workaround? seems that the QItemDelegate for the procent column only
     // works properly if rootIsDecorated == true.
-    setRootIsDecorated( true );
+    setRootIsDecorated(true);
 
     emit updateButtons();
     qCDebug(KTT_LOG) << "exiting TaskView::refresh()";

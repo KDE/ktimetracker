@@ -90,19 +90,21 @@ ecm_qt_declare_logging_category(ktimetracker_shared_SRCS
 
 configure_file(ktimetracker-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/ktimetracker-version.h @ONLY)
 
-qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
-        org.kde.ktimetracker.ktimetracker.xml
-        timetrackerwidget.h
-        TimetrackerWidget
-        mainadaptor
-        MainAdaptor )
+qt5_add_dbus_adaptor(ktimetracker_shared_SRCS
+	org.kde.ktimetracker.ktimetracker.xml
+	timetrackerwidget.h
+	TimeTrackerWidget
+	mainadaptor
+	MainAdaptor
+)
 
-qt5_add_dbus_adaptor( ktimetracker_shared_SRCS
-        org.kde.ktimetracker.storage.xml
-        taskview.h
-        TaskView
-        storageadaptor
-        StorageAdaptor )
+qt5_add_dbus_adaptor(ktimetracker_shared_SRCS
+	org.kde.ktimetracker.storage.xml
+	taskview.h
+	TaskView
+	storageadaptor
+	StorageAdaptor
+)
 
 ki18n_wrap_ui(ktimetracker_shared_SRCS
 	csvexportdialog.ui

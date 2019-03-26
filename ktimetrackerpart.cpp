@@ -47,7 +47,7 @@ KTimeTrackerPart::KTimeTrackerPart(QWidget *parentWidget, QObject *parent, const
 {
     qCDebug(KTT_LOG) << "Entering function";
     // we need an instance
-    m_mainWidget = new TimetrackerWidget(parentWidget);
+    m_mainWidget = new TimeTrackerWidget(parentWidget);
     setWidget(m_mainWidget);
     setXMLFile("ktimetrackerui.rc");
     makeMenus();
@@ -82,8 +82,8 @@ bool KTimeTrackerPart::openFile(const QString& path)
     emit setWindowCaption(path);
 
     // connections
-    connect(m_mainWidget, &TimetrackerWidget::statusBarTextChangeRequested, this, &KTimeTrackerPart::setStatusBar);
-    connect(m_mainWidget, &TimetrackerWidget::setCaption, this, &KTimeTrackerPart::setWindowCaption);
+    connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &KTimeTrackerPart::setStatusBar);
+    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, &KTimeTrackerPart::setWindowCaption);
     return true;
 }
 

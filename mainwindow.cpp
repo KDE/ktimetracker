@@ -86,7 +86,7 @@ MainWindow::MainWindow(const QString& path)
         return;
     }
 
-    auto* widget = dynamic_cast<TimetrackerWidget*>(m_part->widget());
+    auto* widget = dynamic_cast<TimeTrackerWidget*>(m_part->widget());
     if (!widget) {
         qCritical() << "KPart widget has wrong type";
         KMessageBox::error(this, i18n("Could not find the KTimeTracker widget."));
@@ -109,16 +109,16 @@ MainWindow::MainWindow(const QString& path)
     setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
 
     // connections
-    connect(widget, &TimetrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
-    connect(widget, &TimetrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
+    connect(widget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
+    connect(widget, &TimeTrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
 
     // Setup context menu request handling
-    connect(widget, &TimetrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
+    connect(widget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
 
     if (KTimeTrackerSettings::trayIcon()) {
         _tray = new TrayIcon(this);
-        connect(widget, &TimetrackerWidget::timersActive, _tray, &TrayIcon::startClock);
-        connect(widget, &TimetrackerWidget::timersInactive, _tray, &TrayIcon::stopClock);
+        connect(widget, &TimeTrackerWidget::timersActive, _tray, &TrayIcon::startClock);
+        connect(widget, &TimeTrackerWidget::timersInactive, _tray, &TrayIcon::stopClock);
         connect( widget, SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
     }
 }
@@ -180,7 +180,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 
 void MainWindow::quit()
 {
-    auto* widget = dynamic_cast<TimetrackerWidget*>(m_part->widget());
+    auto* widget = dynamic_cast<TimeTrackerWidget*>(m_part->widget());
     if (widget && widget->closeAllFiles()) {
         close();
     }
