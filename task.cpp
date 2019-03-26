@@ -38,8 +38,6 @@
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 
-QVector<QPixmap*> *Task::icons = 0;
-
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
             DesktopList desktops, TaskView *parent)
   : QObject(), QTreeWidgetItem(parent)
@@ -97,16 +95,13 @@ void Task::init(
 
     connect(this, &Task::deletingTask, taskView, &TaskView::deletingTask);
 
-    if (!icons)
-    {
-        icons = new QVector<QPixmap*>(8);
-        for (int i=0; i<8; ++i)
-        {
-            QString name;
-            name.sprintf(":/pics/watch-%d.xpm",i);
-            QPixmap *icon = new QPixmap(name);
-            icons->insert(i,icon);
-        }
+    // Prepare animated icon
+    m_icons = QVector<QPixmap*>(8);
+    for (int i = 0; i < 8; ++i) {
+        QString name;
+        name.sprintf(":/pics/watch-%d.xpm", i);
+        QPixmap *icon = new QPixmap(name);
+        m_icons.insert(i, icon);
     }
 
     mRemoving = false;
@@ -153,7 +148,7 @@ void Task::delete_recursive()
     delete this;
 }
 
-void Task::setRunning( bool on, TimeTrackerStorage* storage, const QDateTime &when )
+void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime &when)
 // This is the back-end, the front-end is StartTimerFor()
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -455,8 +450,8 @@ bool Task::remove(TimeTrackerStorage* storage)
 
 void Task::updateActiveIcon()
 {
-    mCurrentPic = (mCurrentPic+1) % 8;
-    setIcon(1, *(*icons)[mCurrentPic]);
+    mCurrentPic = (mCurrentPic + 1) % 8;
+    setIcon(1, *m_icons[mCurrentPic]);
 }
 
 QString Task::fullName() const
@@ -700,4 +695,3 @@ DesktopList Task::desktops() const
     return mDesktops;
 }
 //END
-

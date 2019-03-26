@@ -104,6 +104,8 @@ MainWindow::MainWindow(const QString& path)
     widget->setupActions(actionCollection());
     setupGUI();
 
+    KStandardAction::quit(this, &MainWindow::quit, actionCollection());
+
     setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
 
     // connections
@@ -173,5 +175,13 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
     QMenu* pop = dynamic_cast<QMenu*>(factory()->container("task_popup", this));
     if (pop) {
         pop->popup(point);
+    }
+}
+
+void MainWindow::quit()
+{
+    auto* widget = dynamic_cast<TimetrackerWidget*>(m_part->widget());
+    if (widget && widget->closeAllFiles()) {
+        close();
     }
 }

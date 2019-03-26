@@ -71,7 +71,7 @@ class TimetrackerWidget : public QWidget
       @param actionCollection The KActionCollection instance of the host
       object.
      */
-    void setupActions( KActionCollection *actionCollection );
+    void setupActions(KActionCollection* actionCollection);
 
     /**
       returns a generated action by name. You have to call setupActions before.
@@ -79,18 +79,18 @@ class TimetrackerWidget : public QWidget
       @param name The name of the action
       @returns A pointer to a QAction instance
      */
-    QAction *action( const QString &name ) const;
+    QAction* action(const QString &name) const;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     /**
       opens an existing ics file.
      */
-    void openFile( const QString &fileName = QString() );
+    void openFile(const QString &fileName = QString());
 
     /**
       opens an existing ics file (wrapper for QUrl).
      */
-    void openFile( const QUrl &fileName );
+    void openFile(const QUrl &fileName);
 
     /**
       closes the current opened tab widget and saves the data
@@ -114,7 +114,7 @@ class TimetrackerWidget : public QWidget
     /**
       shows/hides the search bar.
      */
-    void showSearchBar( bool visible );
+    void showSearchBar(bool visible);
 
     /**
       tries to close all files. This slot has to be called before quitting
@@ -142,7 +142,7 @@ class TimetrackerWidget : public QWidget
     void markTaskAsIncomplete();
     void exportcsvFile();
     void exportcsvHistory();
-    void importPlanner( const QString &fileName = "" );
+    void importPlanner(const QString &fileName = "");
     void startNewSession();
     void editHistory();
     void resetAllTimes();

@@ -60,12 +60,13 @@ public:
     ~MainWindow() override;
 
 public Q_SLOTS:
-    void slotSetCaption( const QString& );
-    void setStatusBar( const QString& );
-    /* quit() has been offloaded to timetrackerwidget */
+    void slotSetCaption(const QString&);
+    void setStatusBar(const QString&);
+    void quit();
+
 protected Q_SLOTS:
     void keyBindings();
-    void taskViewCustomContextMenuRequested( const QPoint& );
+    void taskViewCustomContextMenuRequested(const QPoint&);
 
 protected:
     bool queryClose();

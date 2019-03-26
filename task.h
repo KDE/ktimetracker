@@ -369,7 +369,7 @@ public:
 
     bool operator<(const QTreeWidgetItem &other)const;
 
-    static QVector<QPixmap*> *icons;
+    QVector<QPixmap*> m_icons;
 
     /** The iCal unique ID of the Todo for this task. */
     QString mUid;
