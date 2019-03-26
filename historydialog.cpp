@@ -51,7 +51,7 @@ public:
         if (dateTimeWidget) {
             dateTimeWidget->setDateTime(dateTime);
         } else {
-            qCWarning(KTT_LOG, "Cast to QDateTimeEdit failed");
+            qCWarning(KTT_LOG) << "Cast to QDateTimeEdit failed";
         }
     }
 
@@ -62,7 +62,7 @@ public:
             QDateTime dateTime = dateTimeWidget->dateTime();
             model->setData(index, dateTime.toString( "yyyy-MM-dd HH:mm:ss" ), Qt::EditRole);
         } else {
-            qCWarning(KTT_LOG, "Cast to QDateTimeEdit failed");
+            qCWarning(KTT_LOG) << "Cast to QDateTimeEdit failed";
         }
     }
 

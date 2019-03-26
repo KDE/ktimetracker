@@ -32,22 +32,21 @@
 #include <QMap>
 #include <QVBoxLayout>
 #include <QVector>
-
+#include <QDebug>
+#include <QFileDialog>
 #include <QAction>
+#include <QUrl>
+
 #include <KLocalizedString>
-#include <KDialog>
 #include <KActionCollection>
 #include <KConfig>
 #include <KConfigDialog>
-#include <QDebug>
 #include "ktt_debug.h"
-#include <KFileDialog>
 #include <KMessageBox>
 #include <KRecentFilesAction>
 #include <KStandardAction>
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 #include <KTreeWidgetSearchLine>
-#include <QUrl>
 #include <KIO/Job>
 
 #include "historydialog.h"
@@ -97,22 +96,20 @@ TimetrackerWidget::TimetrackerWidget( QWidget *parent ) : QWidget( parent ),
     layout->setSpacing( 0 );
 
     QLayout *innerLayout = new QHBoxLayout;
-    d->mSearchLine = new QWidget( this );
-    innerLayout->setMargin( KDialog::marginHint() );
-    innerLayout->setSpacing( KDialog::spacingHint() );
-    d->mSearchWidget = new KTreeWidgetSearchLine( d->mSearchLine );
-    d->mSearchWidget->setClickMessage( i18n( "Search or add task" ) );
-    d->mSearchWidget->setWhatsThis( i18n( "This is a combined field. As long as you do not type ENTER, it acts as a filter. Then, only tasks that match your input are shown. As soon as you type ENTER, your input is used as name to create a new task." ) );
+    d->mSearchLine = new QWidget(this);
+    d->mSearchWidget = new KTreeWidgetSearchLine(d->mSearchLine);
+    d->mSearchWidget->setClickMessage(i18n("Search or add task"));
+    d->mSearchWidget->setWhatsThis(i18n("This is a combined field. As long as you do not type ENTER, it acts as a filter. Then, only tasks that match your input are shown. As soon as you type ENTER, your input is used as name to create a new task."));
     d->mSearchWidget->installEventFilter( this );
-    innerLayout->addWidget( d->mSearchWidget );
-    d->mSearchLine->setLayout( innerLayout );
+    innerLayout->addWidget(d->mSearchWidget);
+    d->mSearchLine->setLayout(innerLayout);
 
-    d->mTaskView = new TaskView( this );
-    layout->addWidget( d->mSearchLine );
-    layout->addWidget( d->mTaskView );
-    setLayout( layout );
+    d->mTaskView = new TaskView(this);
+    layout->addWidget(d->mSearchLine);
+    layout->addWidget(d->mTaskView);
+    setLayout(layout);
 
-    showSearchBar( !KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar() );
+    showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
 }
 
 TimetrackerWidget::~TimetrackerWidget()
@@ -132,24 +129,20 @@ int TimetrackerWidget::focusSearchBar()
     return 0;
 }
 
-void TimetrackerWidget::addTaskView( const QString &fileName )
+void TimetrackerWidget::addTaskView(const QString &fileName)
 {
     qCDebug(KTT_LOG) << "Entering function (fileName=" << fileName << ")";
     bool isNew = fileName.isEmpty();
     QString lFileName = fileName;
 
-    if ( isNew )
-    {
-        KTemporaryFile tempFile;
-        tempFile.setAutoRemove( false );
-        if ( tempFile.open() )
-        {
+    if (isNew) {
+        QTemporaryFile tempFile;
+        tempFile.setAutoRemove(false);
+        if (tempFile.open()) {
             lFileName = tempFile.fileName();
             tempFile.close();
-        }
-        else
-        {
-            KMessageBox::error( this, i18n( "Cannot create new file." ) );
+        } else {
+            KMessageBox::error(this, i18n("Cannot create new file."));
             return;
         }
     }
@@ -341,41 +334,38 @@ void TimetrackerWidget::openFile( const QString &fileName )
 {
     qCDebug(KTT_LOG) << "Entering function, fileName is " << fileName;
     QString newFileName = fileName;
-    if ( newFileName.isEmpty() )
-    {
-        newFileName = KFileDialog::getOpenFileName( QString(), QString(), this );
-        if ( newFileName.isEmpty() )
-        {
+    if (newFileName.isEmpty()) {
+        newFileName = QFileDialog::getOpenFileName(this);
+        if (newFileName.isEmpty()) {
             return;
         }
     }
-    addTaskView( newFileName );
+    addTaskView(newFileName);
 }
 
-void TimetrackerWidget::openFile( const QUrl &fileName )
+void TimetrackerWidget::openFile(const QUrl& fileName)
 {
-    openFile( fileName.toLocalFile() );
+    openFile(fileName.toLocalFile());
 }
 
 bool TimetrackerWidget::closeFile()
 {
     qCDebug(KTT_LOG) << "Entering TimetrackerWidget::closeFile";
-    TaskView *taskView = currentTaskView();
+    TaskView* taskView = currentTaskView();
 
-    if ( taskView )
-    {
+    if (taskView) {
         taskView->save();
         taskView->closeStorage();
     }
 
-    d->mSearchWidget->removeTreeWidget( taskView );
+    d->mSearchWidget->removeTreeWidget(taskView);
 
     emit currentTaskViewChanged();
-    emit setCaption( QString() );
+    emit setCaption(QString());
     slotCurrentChanged();
 
     delete taskView; // removeTab does not delete its widget.
-    d->mTaskView=0;
+    d->mTaskView = nullptr;
     return true;
 }
 
@@ -384,19 +374,18 @@ void TimetrackerWidget::saveFile()
     currentTaskView()->save();
 }
 
-void TimetrackerWidget::showSearchBar( bool visible )
+void TimetrackerWidget::showSearchBar(bool visible)
 {
-    d->mSearchLine->setVisible( visible );
+    d->mSearchLine->setVisible(visible);
 }
 
 bool TimetrackerWidget::closeAllFiles()
 {
     qCDebug(KTT_LOG) << "Entering TimetrackerWidget::closeAllFiles";
     bool err = true;
-    if (d->mTaskView)
-    {
+    if (d->mTaskView) {
         d->mTaskView->stopAllTimers();
-        err=closeFile();
+        err = closeFile();
     }
     return err;
 }
@@ -405,8 +394,7 @@ void TimetrackerWidget::slotCurrentChanged()
 {
     qDebug() << "entering KTimetrackerWidget::slotCurrentChanged";
 
-    if ( d->mTaskView )
-    {
+    if (d->mTaskView) {
         disconnect( d->mTaskView, SIGNAL(totalTimesChanged(long,long)) );
         disconnect( d->mTaskView, SIGNAL(reSetTimes()) );
         disconnect( d->mTaskView, SIGNAL(itemSelectionChanged()) );
@@ -438,14 +426,11 @@ void TimetrackerWidget::slotCurrentChanged()
     d->mSearchWidget->setEnabled( d->mTaskView );
 }
 
-
-bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
+bool TimetrackerWidget::eventFilter(QObject* obj, QEvent* event)
 {
-    if ( obj == d->mSearchWidget )
-    {
-        if ( event->type() == QEvent::KeyPress )
-        {
-            QKeyEvent *keyEvent = static_cast< QKeyEvent* >( event );
+    if (obj == d->mSearchWidget) {
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent *keyEvent = static_cast< QKeyEvent* >(event);
             if ( keyEvent->key() == Qt::Key_Enter ||
                 keyEvent->key() == Qt::Key_Return )
             {
@@ -454,13 +439,14 @@ bool TimetrackerWidget::eventFilter( QObject *obj, QEvent *event )
             }
         }
     }
-  return QObject::eventFilter( obj, event );
+
+    return QObject::eventFilter(obj, event);
 }
 
-void TimetrackerWidget::slotAddTask( const QString &taskName )
+void TimetrackerWidget::slotAddTask(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
-    taskView->addTask( taskName, QString(), 0, 0, DesktopList(), 0 );
+    taskView->addTask(taskName, QString(), 0, 0, DesktopList(), 0);
 
     d->mSearchWidget->clear();
 }

@@ -34,9 +34,9 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QDebug>
+#include <QProgressDialog>
 
 #include <KMessageBox>
-#include <KProgressDialog>
 #include <KUrlRequester>
 #include <KLocalizedString>
 
@@ -744,39 +744,37 @@ void TaskView::clearActiveTasks()
     d->mActiveTasks.clear();
 }
 
-void TaskView::stopAllTimers( const QDateTime &when )
+void TaskView::stopAllTimers(const QDateTime& when)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    KProgressDialog dialog( this, 0, QString("Progress") );
-    dialog.progressBar()->setMaximum( d->mActiveTasks.count() );
-    if ( d->mActiveTasks.count() > 1 ) dialog.show();
-
-    foreach ( Task *task, d->mActiveTasks )
-    {
-//        kapp->processEvents();
-        task->setRunning( false, d->mStorage, when );
-        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
+    QProgressDialog dialog(i18n("Stopping timers..."), i18n("Cancel"), 0, d->mActiveTasks.count(), this);
+    if (d->mActiveTasks.count() > 1) {
+        dialog.show();
     }
+
+    for (Task *task : d->mActiveTasks) {
+//        kapp->processEvents();
+        task->setRunning(false, d->mStorage, when);
+        dialog.setValue(dialog.value() + 1);
+    }
+
     _idleTimeDetector->stopIdleDetection();
-    FocusDetectorNotifier::instance()->detach( this );
+    FocusDetectorNotifier::instance()->detach(this);
     d->mActiveTasks.clear();
     emit updateButtons();
     emit timersInactive();
-    emit tasksChanged( d->mActiveTasks );
+    emit tasksChanged(d->mActiveTasks);
 }
 
 void TaskView::toggleFocusTracking()
 {
     d->mFocusTrackingActive = !d->mFocusTrackingActive;
 
-    if ( d->mFocusTrackingActive )
-    {
-        FocusDetectorNotifier::instance()->attach( this );
-    }
-    else
-    {
-        stopTimerFor( d->mLastTaskWithFocus );
-        FocusDetectorNotifier::instance()->detach( this );
+    if (d->mFocusTrackingActive) {
+        FocusDetectorNotifier::instance()->attach(this);
+    } else {
+        stopTimerFor(d->mLastTaskWithFocus);
+        FocusDetectorNotifier::instance()->detach(this);
     }
 
     emit updateButtons();

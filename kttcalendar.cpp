@@ -25,7 +25,6 @@
 #include <KCalCore/MemoryCalendar>
 #include <KCalCore/ICalFormat>
 
-#include <KDateTime>
 #include <KDirWatch>
 #include <QDebug>
 #include "ktt_debug.h"
