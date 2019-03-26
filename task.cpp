@@ -26,23 +26,22 @@
 #include <QString>
 #include <QTimer>
 #include <QPixmap>
-
 #include <QDebug>
-#include "ktt_debug.h"
-
-#include <KCalCore/Event>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "preferences.h"
+#include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-            DesktopList desktops, TaskView *parent)
-  : QObject(), QTreeWidgetItem(parent)
+Task::Task(
+    const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
+    DesktopList desktops, TaskView *parent)
+    : QObject()
+    , QTreeWidgetItem(parent)
 {
-    init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0);
+    init(taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0);
 }
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
@@ -227,29 +226,30 @@ void Task::setDescription( const QString& description )
     }
 }
 
-void Task::setPercentComplete(const int percent, TimeTrackerStorage* storage)
+void Task::setPercentComplete(int percent, TimeTrackerStorage* storage)
 {
     qCDebug(KTT_LOG) << "Entering function(" << percent <<", storage):" << mUid;
 
-    if (!percent)
+    if (!percent) {
         mPercentComplete = 0;
-    else if (percent > 100)
+    } else if (percent > 100) {
         mPercentComplete = 100;
-    else if (percent < 0)
+    } else if (percent < 0) {
         mPercentComplete = 0;
-    else
+    } else {
         mPercentComplete = percent;
+    }
 
-    if (isRunning() && mPercentComplete==100) taskView()->stopTimerFor(this);
+    if (isRunning() && mPercentComplete == 100) {
+        taskView()->stopTimerFor(this);
+    }
 
     setPixmapProgress();
 
     // When parent marked as complete, mark all children as complete as well.
     // This behavior is consistent with KOrganizer (as of 2003-09-24).
-    if (mPercentComplete == 100)
-    {
-        for ( int i = 0; i < childCount(); ++i )
-        {
+    if (mPercentComplete == 100) {
+        for (int i = 0; i < childCount(); ++i) {
             Task *task = static_cast< Task* >( child( i ) );
             task->setPercentComplete(mPercentComplete, storage);
         }
@@ -258,14 +258,11 @@ void Task::setPercentComplete(const int percent, TimeTrackerStorage* storage)
     update();
 }
 
-void Task::setPriority( int priority )
+void Task::setPriority(int priority)
 {
-    if ( priority < 0 )
-    {
+    if (priority < 0) {
         priority = 0;
-    }
-    else if ( priority > 9 )
-    {
+    } else if (priority > 9) {
         priority = 9;
     }
 
@@ -286,59 +283,66 @@ void Task::setPixmapProgress()
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-bool Task::isComplete() { return mPercentComplete == 100; }
+bool Task::isComplete()
+{
+    return mPercentComplete == 100;
+}
 
-void Task::setDesktopList ( DesktopList desktopList )
+void Task::setDesktopList(const DesktopList& desktopList)
 {
     mDesktops = desktopList;
 }
 
-QString Task::addTime( long minutes )
+QString Task::addTime(long minutes)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    mTime+=minutes;
-    this->addTotalTime( minutes );
+    mTime += minutes;
+    this->addTotalTime(minutes);
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
-QString Task::addTotalTime( long minutes )
+QString Task::addTotalTime(long minutes)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    mTotalTime+=minutes;
-    if ( parent() ) parent()->addTotalTime( minutes );
+    mTotalTime += minutes;
+    if (parent()) {
+        parent()->addTotalTime(minutes);
+    }
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
-QString Task::addSessionTime( long minutes )
+QString Task::addSessionTime(long minutes)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    mSessionTime+=minutes;
-    this->addTotalSessionTime( minutes );
+    mSessionTime += minutes;
+    this->addTotalSessionTime(minutes);
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
-QString Task::addTotalSessionTime( long minutes )
+QString Task::addTotalSessionTime(long minutes)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    mTotalSessionTime+=minutes;
-    if ( parent() ) parent()->addTotalSessionTime( minutes );
+    mTotalSessionTime += minutes;
+    if (parent()) {
+        parent()->addTotalSessionTime(minutes);
+    }
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
-QString Task::setTime( long minutes )
+QString Task::setTime(long minutes)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    mTime=minutes;
-    mTotalTime+=minutes;
+    mTime = minutes;
+    mTotalTime += minutes;
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
@@ -347,9 +351,11 @@ QString Task::recalculatetotaltime()
 {
     QString result;
     setTotalTime(0);
+    // FIXME: this code is obviously broken
     Task* child;
-    for (int i=0; i<this->childCount(); ++i)
-        child=(Task*)this->child(i);
+    for (int i = 0; i < this->childCount(); ++i) {
+        child = (Task*)this->child(i);
+    }
     addTotalTime(time());
     return result;
 }
@@ -358,43 +364,46 @@ QString Task::recalculatetotalsessiontime()
 {
     QString result;
     setTotalSessionTime(0);
+    // FIXME: this code is obviously broken
     Task* child;
-    for (int i=0; i<this->childCount(); ++i)
-        child=(Task*)this->child(i);
+    for (int i = 0; i < this->childCount(); ++i) {
+        child = (Task*)this->child(i);
+    }
     addTotalSessionTime(time());
     return result;
 }
 
-QString Task::setSessionTime( long minutes )
+QString Task::setSessionTime(long minutes)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    mSessionTime=minutes;
-    mTotalSessionTime+=minutes;
+    mSessionTime = minutes;
+    mTotalSessionTime += minutes;
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
 }
 
-void Task::changeTimes( long minutesSession, long minutes, TimeTrackerStorage* storage)
+void Task::changeTimes(long minutesSession, long minutes, TimeTrackerStorage* storage)
 {
     qCDebug(KTT_LOG) << "Entering function";
     qDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
-    if( minutesSession != 0 || minutes != 0)
-    {
+    if (minutesSession != 0 || minutes != 0) {
         mSessionTime += minutesSession;
         mTime += minutes;
-        if ( storage ) storage->changeTime(this, minutes * secsPerMinute);
-        changeTotalTimes( minutesSession, minutes );
+        if (storage) {
+            storage->changeTime(this, minutes * secsPerMinute);
+        }
+        changeTotalTimes(minutesSession, minutes);
     }
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::changeTime( long minutes, TimeTrackerStorage* storage )
+void Task::changeTime(long minutes, TimeTrackerStorage* storage)
 {
-    changeTimes( minutes, minutes, storage);
+    changeTimes(minutes, minutes, storage);
 }
 
-void Task::changeTotalTimes( long minutesSession, long minutes )
+void Task::changeTotalTimes(long minutesSession, long minutes)
 {
     qCDebug(KTT_LOG)
         << "Task::changeTotalTimes(" << minutesSession << ","
@@ -402,7 +411,7 @@ void Task::changeTotalTimes( long minutesSession, long minutes )
     mTotalSessionTime += minutesSession;
     mTotalTime += minutes;
     update();
-    changeParentTotalTimes( minutesSession, minutes );
+    changeParentTotalTimes(minutesSession, minutes);
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
@@ -411,19 +420,20 @@ void Task::resetTimes()
     qCDebug(KTT_LOG) << "Entering function";
     mTotalSessionTime -= mSessionTime;
     mTotalTime -= mTime;
-    changeParentTotalTimes( -mSessionTime, -mTime);
+    changeParentTotalTimes(-mSessionTime, -mTime);
     mSessionTime = 0;
     mTime = 0;
     update();
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::changeParentTotalTimes( long minutesSession, long minutes )
+void Task::changeParentTotalTimes(long minutesSession, long minutes)
 {
-    if ( isRoot() )
-        emit totalTimesChanged( minutesSession, minutes );
-    else
-        parent()->changeTotalTimes( minutesSession, minutes );
+    if (isRoot()) {
+        emit totalTimesChanged(minutesSession, minutes);
+    } else {
+        parent()->changeTotalTimes(minutesSession, minutes);
+    }
 }
 
 bool Task::remove(TimeTrackerStorage* storage)
@@ -486,7 +496,7 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
         todo->setCustomProperty(eventAppName, QByteArray("desktopList"), getDesktopStr());
     }
 
-    todo->setOrganizer( KTimeTrackerSettings::userRealName() );
+    todo->setOrganizer(KTimeTrackerSettings::userRealName());
     todo->setPercentComplete(mPercentComplete);
     todo->setPriority( mPriority );
     return todo;
@@ -630,14 +640,14 @@ void Task::addComment(const QString &comment, TimeTrackerStorage* storage)
 
 void Task::startNewSession()
 {
-    changeTimes( -mSessionTime, 0 );
-    mSessionStartTiMe=QDateTime::currentDateTime();
+    changeTimes(-mSessionTime, 0);
+    mSessionStartTiMe = QDateTime::currentDateTime();
 }
 
 /* Overriding the < operator in order to sort the names case insensitive and
  * the progress percentage [coloumn 6] numerically.
  */
-bool Task::operator<(const QTreeWidgetItem &other)const {
+bool Task::operator<(const QTreeWidgetItem &other) const {
         const int column = treeWidget()->sortColumn();
         if (column == 6){ //progress percent
             return text(column).toInt() < other.text(column).toInt();

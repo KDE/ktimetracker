@@ -219,7 +219,7 @@ public:
 
     //@{ desktop related functions
 
-      void setDesktopList ( DesktopList dl );
+      void setDesktopList(const DesktopList& desktopList);
       DesktopList desktops() const;
 
       QString getDesktopStr() const;
@@ -326,7 +326,7 @@ public:
      * taskview.  If percent NULL, set to zero.  If greater than 100, set to
      * 100.  If less than zero, set to zero.
      */
-    void setPercentComplete(const int percent, TimeTrackerStorage *storage);
+    void setPercentComplete(int percent, TimeTrackerStorage *storage);
 
     int percentComplete() const;
 
@@ -364,10 +364,11 @@ public:
     void noNegativeTimes();
 
     /** initialize a task */
-    void init( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
-               DesktopList desktops, int percent_complete, int priority);
+    void init(
+        const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
+        DesktopList desktops, int percent_complete, int priority);
 
-    bool operator<(const QTreeWidgetItem &other)const;
+    bool operator<(const QTreeWidgetItem &other) const;
 
     QVector<QPixmap*> m_icons;
 
