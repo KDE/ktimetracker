@@ -45,7 +45,6 @@
 #include <KMessageBox>
 #include <KRecentFilesAction>
 #include <KStandardAction>
-#include <KTabWidget>
 #include <KTemporaryFile>
 #include <KTreeWidgetSearchLine>
 #include <QUrl>

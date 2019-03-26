@@ -44,8 +44,7 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <QLockFile>
-#include <KProgressDialog>
-#include <KTemporaryFile>
+#include <QProgressDialog>
 #include <QUrl>
 #include <KJobWidgets>
 
@@ -564,42 +563,43 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
     QString err;
     Task* task;
     int maxdepth=0;
-    QString title = i18n("Export Progress");
-    KProgressDialog dialog( taskview, 0, title );
-    dialog.setAutoClose( true );
-    dialog.setAllowCancel( true );
-    dialog.progressBar()->setMaximum( 2 * taskview->count() );
+    QProgressDialog dialog(i18n("Exporting to CSV..."), i18n("Cancel"), 0, static_cast<int>(2 * taskview->count()), taskview, 0);
+    dialog.setAutoClose(true);
+    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
 
-    // The default dialog was not displaying all the text in the title bar.
-    int width = taskview->fontMetrics().width(title) * 3;
-    QSize dialogsize;
-    dialogsize.setWidth(width);
-    dialog.setInitialSize( dialogsize );
+    if (taskview->count() > 1) {
+        dialog.show();
+    }
 
-    if ( taskview->count() > 1 ) dialog.show();
     QString retval;
 
     // Find max task depth
     int tasknr = 0;
-    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
-    {
-        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
-        if ( tasknr % 15 == 0 ) QApplication::processEvents(); // repainting is slow
-        if ( taskview->itemAt(tasknr)->depth() > maxdepth )
+    while (tasknr < taskview->count() && !dialog.wasCanceled()) {
+        dialog.setValue(dialog.value() + 1);
+        if (tasknr % 15 == 0) {
+            QApplication::processEvents(); // repainting is slow
+        }
+        if (taskview->itemAt(tasknr)->depth() > maxdepth) {
             maxdepth = taskview->itemAt(tasknr)->depth();
+        }
         tasknr++;
     }
 
     // Export to file
     tasknr = 0;
-    while ( tasknr < taskview->count() && !dialog.wasCancelled() )
+    while (tasknr < taskview->count() && !dialog.wasCanceled())
     {
         task = taskview->itemAt( tasknr );
-        dialog.progressBar()->setValue( dialog.progressBar()->value() + 1 );
-        if ( tasknr % 15 == 0 ) QApplication::processEvents();
+        dialog.setValue(dialog.value() + 1);
+        if (tasknr % 15 == 0) {
+            QApplication::processEvents();
+        }
 
         // indent the task in the csv-file:
-        for ( int i=0; i < task->depth(); ++i ) retval += delim;
+        for (int i = 0; i < task->depth(); ++i) {
+            retval += delim;
+        }
 
         /*
         // CSV compliance
@@ -612,50 +612,48 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
         */
         to_quote = true;
 
-        if (to_quote)
+        if (to_quote) {
             retval += dquote;
+        }
 
         // Double quotes replaced by a pair of consecutive double quotes
-        retval += task->name().replace( dquote, double_dquote );
+        retval += task->name().replace(dquote, double_dquote);
 
-        if (to_quote)
+        if (to_quote) {
             retval += dquote;
+        }
 
         // maybe other tasks are more indented, so to align the columns:
-        for ( int i = 0; i < maxdepth - task->depth(); ++i ) retval += delim;
+        for (int i = 0; i < maxdepth - task->depth(); ++i) {
+            retval += delim;
+        }
 
-        retval += delim + formatTime( task->sessionTime(),
-                                   rc.decimalMinutes )
-                + delim + formatTime( task->time(),
-                                   rc.decimalMinutes )
-                + delim + formatTime( task->totalSessionTime(),
-                                   rc.decimalMinutes )
-                + delim + formatTime( task->totalTime(),
-                                   rc.decimalMinutes )
+        retval += delim + formatTime(task->sessionTime(), rc.decimalMinutes)
+                + delim + formatTime(task->time(), rc.decimalMinutes)
+                + delim + formatTime(task->totalSessionTime(), rc.decimalMinutes)
+                + delim + formatTime(task->totalTime(), rc.decimalMinutes)
                 + '\n';
         tasknr++;
     }
 
     // save, either locally or remote
-    if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-    {
-        QString filename=rc.url.toLocalFile();
-        if (filename.isEmpty()) filename=rc.url.url();
-        QFile f( filename );
-        if( !f.open( QIODevice::WriteOnly ) )
-        {
-            err = i18n( "Could not open \"%1\".", filename );
+    if (rc.url.isLocalFile() || !rc.url.url().contains("/")) {
+        QString filename = rc.url.toLocalFile();
+        if (filename.isEmpty()) {
+            filename = rc.url.url();
         }
-        if (err.length()==0)
-        {
+        QFile f(filename);
+        if (!f.open(QIODevice::WriteOnly)) {
+            err = i18n("Could not open \"%1\".", filename);
+        }
+        if (err.length() == 0) {
             QTextStream stream(&f);
             // Export to file
             stream << retval;
             f.close();
         }
-    }
-    else // use remote file
-    {
+    } else {
+        // use remote file
         auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
         KJobWidgets::setWindow(job, &dialog);
         if (!job->exec()) {
@@ -666,7 +664,7 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
     return err;
 }
 
-int todaySeconds (const QDate &date, const KCalCore::Event::Ptr &event)
+int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
 {
         if ( !event )
           return 0;

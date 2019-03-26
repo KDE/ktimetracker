@@ -25,7 +25,6 @@
 #include <QDebug>
 #include "ktt_debug.h"
 #include <KDateComboBox>
-#include <KPushButton>
 #include <KLineEdit>
 
 CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)

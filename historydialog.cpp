@@ -24,7 +24,7 @@
 #include "kttcalendar.h"
 
 #include <QItemDelegate>
-#include <KDateTimeWidget>
+#include <QDateTimeEdit>
 #include <KMessageBox>
 #include <QDebug>
 #include "ktt_debug.h"
@@ -32,34 +32,43 @@
 class HistoryWidgetDelegate : public QItemDelegate
 {
 public:
-    HistoryWidgetDelegate( QObject *parent = 0 ) : QItemDelegate( parent ) {}
+    explicit HistoryWidgetDelegate(QObject *parent = nullptr)
+        : QItemDelegate(parent) {}
 
-    QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &) const
+    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &) const override
     {
-        KDateTimeWidget *editor = new KDateTimeWidget( parent );
-        editor->setAutoFillBackground( true );
-        editor->setPalette( option.palette );
-        editor->setBackgroundRole( QPalette::Background );
+        auto* editor = new QDateTimeEdit(parent);
+        editor->setAutoFillBackground(true);
+        editor->setPalette(option.palette);
+        editor->setBackgroundRole(QPalette::Background);
         return editor;
     }
 
-    void setEditorData( QWidget *editor, const QModelIndex &index ) const
+    void setEditorData(QWidget *editor, const QModelIndex &index) const override
     {
         QDateTime dateTime = QDateTime::fromString( index.model()->data( index, Qt::DisplayRole ).toString(), "yyyy-MM-dd HH:mm:ss" );
-        KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
-        dateTimeWidget->setDateTime( dateTime );
+        auto* dateTimeWidget = dynamic_cast<QDateTimeEdit*>(editor);
+        if (dateTimeWidget) {
+            dateTimeWidget->setDateTime(dateTime);
+        } else {
+            qCWarning(KTT_LOG, "Cast to QDateTimeEdit failed");
+        }
     }
 
-    void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+    void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override
     {
-        KDateTimeWidget *dateTimeWidget = static_cast<KDateTimeWidget*>( editor );
-        QDateTime dateTime = dateTimeWidget->dateTime();
-        model->setData( index, dateTime.toString( "yyyy-MM-dd HH:mm:ss" ), Qt::EditRole );
+        auto* dateTimeWidget = dynamic_cast<QDateTimeEdit*>(editor);
+        if (dateTimeWidget) {
+            QDateTime dateTime = dateTimeWidget->dateTime();
+            model->setData(index, dateTime.toString( "yyyy-MM-dd HH:mm:ss" ), Qt::EditRole);
+        } else {
+            qCWarning(KTT_LOG, "Cast to QDateTimeEdit failed");
+        }
     }
 
-    void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const override
     {
-        editor->setGeometry( option.rect );
+        editor->setGeometry(option.rect);
     }
 };
 
@@ -70,20 +79,20 @@ HistoryDialog::HistoryDialog(TaskView *parent)
     mparent = parent;
     m_ui.setupUi(this);
     /* Item Delegate for displaying KDateTimeWidget instead of QLineEdit */
-    HistoryWidgetDelegate *historyWidgetDelegate = new HistoryWidgetDelegate( m_ui.historytablewidget );
-    m_ui.historytablewidget->setItemDelegateForColumn( 1, historyWidgetDelegate );
-    m_ui.historytablewidget->setItemDelegateForColumn( 2, historyWidgetDelegate );
+    auto* historyWidgetDelegate = new HistoryWidgetDelegate(m_ui.historytablewidget);
+    m_ui.historytablewidget->setItemDelegateForColumn(1, historyWidgetDelegate);
+    m_ui.historytablewidget->setItemDelegateForColumn(2, historyWidgetDelegate);
 
-    m_ui.historytablewidget->setEditTriggers( QAbstractItemView::AllEditTriggers );
+    m_ui.historytablewidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
     m_ui.historytablewidget->setColumnCount(5);
     m_ui.historytablewidget->setHorizontalHeaderLabels(
-    QStringList() << i18n( "Task" ) << i18n( "StartTime" ) << i18n( "EndTime" )
-                  << i18n( "Comment" ) << QString( "event UID" ) );
-    m_ui.historytablewidget->horizontalHeader()->setStretchLastSection( true );
-    m_ui.historytablewidget->setColumnHidden( 4, true );  // hide the "UID" column
+    QStringList() << i18n("Task") << i18n("StartTime") << i18n("EndTime")
+                  << i18n("Comment") << QString("event UID"));
+    m_ui.historytablewidget->horizontalHeader()->setStretchLastSection(true);
+    m_ui.historytablewidget->setColumnHidden(4, true);  // hide the "UID" column
     listallevents();
-    m_ui.historytablewidget->setSortingEnabled( true );
-    m_ui.historytablewidget->sortItems( 1, Qt::DescendingOrder );
+    m_ui.historytablewidget->setSortingEnabled(true);
+    m_ui.historytablewidget->sortItems(1, Qt::DescendingOrder);
     m_ui.historytablewidget->resizeColumnsToContents();
 }
 
@@ -91,7 +100,7 @@ QString HistoryDialog::listallevents()
 {
     QString err=QString();
     // if sorting is enabled and we write to row x, we cannot be sure row x will be in row x some lines later
-    bool old_sortingenabled=m_ui.historytablewidget->isSortingEnabled();
+    bool old_sortingenabled = m_ui.historytablewidget->isSortingEnabled();
     m_ui.historytablewidget->setSortingEnabled( false );
     connect(  m_ui.historytablewidget, SIGNAL(cellChanged(int,int)),
               this, SLOT(historyWidgetCellChanged(int,int)) );
@@ -101,11 +110,10 @@ QString HistoryDialog::listallevents()
     for ( KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i )
     {
-        int row =  m_ui.historytablewidget->rowCount();
-        m_ui.historytablewidget->insertRow( row );
-        QTableWidgetItem* item=0;
-        if ( !(*i)->relatedTo().isEmpty() ) // maybe the file is corrupt and (*i)->relatedTo is NULL
-        {
+        int row = m_ui.historytablewidget->rowCount();
+        m_ui.historytablewidget->insertRow(row);
+        QTableWidgetItem* item = nullptr;
+        if ( !(*i)->relatedTo().isEmpty() ) { // maybe the file is corrupt and (*i)->relatedTo is NULL
             KCalCore::Incidence::Ptr parent = calendar ? calendar->incidence( (*i)->relatedTo() ) : KCalCore::Incidence::Ptr();
             item = new QTableWidgetItem( parent ? parent->summary() : (*i)->summary() );
             item->setFlags( Qt::ItemIsEnabled );
@@ -125,20 +133,20 @@ QString HistoryDialog::listallevents()
             {
                 m_ui.historytablewidget->setItem( row, 3, new QTableWidgetItem( (*i)->comments().last() ) );
             }
-        }
-        else
-        {
+        } else {
             qCDebug(KTT_LOG) << "There is no 'relatedTo' entry for " << (*i)->summary();
             err="NoRelatedToForEvent";
         }
     }
+
     m_ui.historytablewidget->resizeColumnsToContents();
-    m_ui.historytablewidget->setColumnWidth( 1, 300 );
-    m_ui.historytablewidget->setColumnWidth( 2, 300 );
-    setMinimumSize(  m_ui.historytablewidget->columnWidth( 0 )
-                  +  m_ui.historytablewidget->columnWidth( 1 )
-                  +  m_ui.historytablewidget->columnWidth( 2 )
-                  +  m_ui.historytablewidget->columnWidth( 3 ), height() );
+    m_ui.historytablewidget->setColumnWidth(1, 300);
+    m_ui.historytablewidget->setColumnWidth(2, 300);
+    setMinimumSize(
+        m_ui.historytablewidget->columnWidth(0) +
+        m_ui.historytablewidget->columnWidth(1) +
+        m_ui.historytablewidget->columnWidth(2) +
+        m_ui.historytablewidget->columnWidth(3), height());
     m_ui.historytablewidget->setSortingEnabled(old_sortingenabled);
     return err;
 }

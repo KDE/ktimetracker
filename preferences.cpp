@@ -24,7 +24,6 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-//#include <KGlobal>
 #include <KSharedConfig>
 
 Preferences *Preferences::mInstance = 0;

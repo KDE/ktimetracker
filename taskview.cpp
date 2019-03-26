@@ -35,7 +35,6 @@
 #include <QApplication>
 #include <QDebug>
 
-#include <KFileDialog>
 #include <KMessageBox>
 #include <KProgressDialog>
 #include <KUrlRequester>
@@ -605,32 +604,33 @@ void TaskView::importPlanner( const QString &fileName )
     qCDebug(KTT_LOG) << "entering importPlanner";
     PlannerParser *handler = new PlannerParser( this );
     QString lFileName = fileName;
-    if ( lFileName.isEmpty() )
-        lFileName = KFileDialog::getOpenFileName( QString(), QString(), 0 );
-    QFile xmlFile( lFileName );
-    QXmlInputSource source( &xmlFile );
+    if (lFileName.isEmpty()) {
+        lFileName = QFileDialog::getOpenFileName();
+    }
+    QFile xmlFile(lFileName);
+    QXmlInputSource source(&xmlFile);
     QXmlSimpleReader reader;
-    reader.setContentHandler( handler );
-    reader.parse( source );
+    reader.setContentHandler(handler);
+    reader.parse(source);
     refresh();
 }
 
-QString TaskView::report( const ReportCriteria& rc )
+QString TaskView::report(const ReportCriteria& rc)
 {
-//    return d->mStorage->report( this, rc );
+    return d->mStorage->report( this, rc );
 }
 
 void TaskView::exportcsvFile()
 {
     qCDebug(KTT_LOG) << "TaskView::exportcsvFile()";
 
-    CSVExportDialog dialog( ReportCriteria::CSVTotalsExport, this );
-    if ( currentItem() && currentItem()->isRoot() )
+    CSVExportDialog dialog(ReportCriteria::CSVTotalsExport, this);
+    if (currentItem() && currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
-    if ( dialog.exec() )
-    {
-        QString err = d->mStorage->report( this, dialog.reportCriteria() );
-        if ( !err.isEmpty() ) KMessageBox::error( this, i18n(err.toLatin1()) );
+    }
+    if (dialog.exec()) {
+        QString err = d->mStorage->report(this, dialog.reportCriteria());
+        if ( !err.isEmpty() ) KMessageBox::error(this, i18n(err.toLatin1()));
     }
 }
 
@@ -652,9 +652,8 @@ QString TaskView::exportcsvHistory()
 long TaskView::count()
 {
     long n = 0;
-    QTreeWidgetItemIterator item( this );
-    while( *item )
-    {
+    QTreeWidgetItemIterator item(this);
+    while (*item) {
         ++item;
         ++n;
     }
@@ -664,26 +663,30 @@ long TaskView::count()
 QStringList TaskView::tasks()
 {
     QStringList result;
-    int i=0;
-    while ( itemAt(i) )
-    {
+    int i = 0;
+    while (itemAt(i)) {
         result << itemAt(i)->name();
         ++i;
     }
     return result;
 }
 
-Task* TaskView::task( const QString& taskId )
+Task* TaskView::task(const QString& taskId)
 {
-    Task* result=0;
-    int i=-1;
-    while ( itemAt(++i) )
-        if ( itemAt( i ) )
-            if ( itemAt( i )->uid() == taskId ) result=itemAt( i );
+    Task* result = nullptr;
+    int i = -1;
+    while (itemAt(++i)) {
+        if (itemAt(i)) {
+            if (itemAt(i)->uid() == taskId) {
+                result = itemAt(i);
+            }
+        }
+    }
+
     return result;
 }
 
-void TaskView::dropEvent ( QDropEvent * event )
+void TaskView::dropEvent (QDropEvent* event)
 {
     QTreeWidget::dropEvent(event);
     reFreshTimes();
@@ -691,7 +694,7 @@ void TaskView::dropEvent ( QDropEvent * event )
 
 void TaskView::scheduleSave()
 {
-    _manualSaveTimer->start( 10 );
+    _manualSaveTimer->start(10);
 }
 
 void TaskView::save()
