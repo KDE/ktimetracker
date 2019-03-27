@@ -685,17 +685,17 @@ int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, 
     QDate startDate;
     QTime startTime;
     QDateTime startDateTime;
-    Task *task = 0, *t = 0;
 
     if (minutes <= 0) {
         return KTIMETRACKER_ERR_INVALID_DURATION;
     }
 
+    Task *task = nullptr;
     TaskView *taskView = currentTaskView();
     if (taskView) {
         QTreeWidgetItemIterator it(taskView);
         while (*it) {
-            t = static_cast< Task* >(*it);
+            auto* t = static_cast< Task* >(*it);
             if (t && t->uid() == taskId) {
                 task = t;
                 break;
