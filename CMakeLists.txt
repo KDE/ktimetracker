@@ -28,6 +28,7 @@ find_package(KF5IconThemes ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5JobWidgets ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5XmlGui ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5DBusAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 # Find KdepimLibs Package
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
@@ -132,6 +133,7 @@ target_link_libraries(ktimetracker
 	KF5::JobWidgets
 	KF5::KIOCore
 	KF5::KIOWidgets
+	KF5::DBusAddons
 	KF5::CalendarCore
 	${X11_X11_LIB}
 )

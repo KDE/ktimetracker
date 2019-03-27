@@ -27,6 +27,7 @@
 
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KDBusService>
 
 #include "desktoplist.h"
 #include "mainwindow.h"
@@ -103,6 +104,8 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(i18n("Kalle Dalheimer"),   QString(), QStringLiteral("kalle@kde.org"));
     aboutData.addAuthor(i18n("Mark Bucciarelli"),  QString(), QStringLiteral("mark@hubcapconsulting.com"));
     KAboutData::setApplicationData(aboutData);
+
+    KDBusService dbusService(KDBusService::Unique);
 
     QCommandLineParser parser;
     parser.addVersionOption();
