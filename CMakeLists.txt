@@ -45,7 +45,6 @@ endif()
 # TODO: define HAVE_LIBXSS
 #configure_file(config-ktimetracker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ktimetracker.h )
 
-add_subdirectory(support)
 add_subdirectory(pics)
 add_subdirectory(icons)
 
@@ -144,5 +143,6 @@ install(TARGETS ktimetracker ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 install(FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
+install(PROGRAMS ktimetracker.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
