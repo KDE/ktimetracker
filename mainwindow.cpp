@@ -36,8 +36,6 @@
 #include <KStandardAction>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KPluginLoader>
-#include <KPluginFactory>
 #include <KSharedConfig>
 
 #include "ktimetrackerutility.h"
@@ -50,58 +48,24 @@
 #include "ktt_debug.h"
 
 MainWindow::MainWindow(const QString& path)
-    : KParts::MainWindow()
+        : KXmlGuiWindow(nullptr)
 {
     qCDebug(KTT_LOG) << "Entering function, icsfile is " << path;
+
+    // we need an instance
+    m_mainWidget = new TimeTrackerWidget(this);
+    setCentralWidget(m_mainWidget);
+
     // Setup our actions
-    setupActions();
+    configureAction = new QAction(this);
+    configureAction->setText(i18n("Configure KTimeTracker..."));
+    actionCollection()->addAction("configure_ktimetracker", configureAction);
 
-    // this routine will find and load our Part.
-    KPluginLoader loader( "ktimetrackerpart" );
-    KPluginFactory *factory = loader.factory();
-    if (!factory) {
-        // if we couldn't find our Part, we exit since the Shell by
-        // itself can't do anything useful
-        qCritical() << "Could not find the KTimeTracker part: factory is 0";
-        KMessageBox::error(this, i18n( "Could not find the KTimeTracker part." ));
-        QTimer::singleShot(0, qApp, SLOT(quit()));
-        // we return here, cause qApp->quit() only means "exit the
-        // next time we enter the event loop...
-        return;
-    }
-
-    // now that the Part is loaded, we cast it to a Part to get our hands on it
-
-    //NOTE: Use the dynamic_cast below. Without it, KPluginLoader will use a qobject_cast
-    // that fails, because ktimetrackerpart is defined twice, once in ktimetracker's binary
-    // and another one in the plugin. The build system should be fixed.
-    //m_part = factory->create<ktimetrackerpart>( this );
-
-    m_part = dynamic_cast<KTimeTrackerPart*>(factory->create<KParts::ReadWritePart>(this));
-
-    if (!m_part) {
-        qCritical() << "Could not find the KTimeTracker part: m_part is 0";
-        KMessageBox::error(this, i18n( "Could not create the KTimeTracker part." ));
-        QTimer::singleShot(0, qApp, SLOT(quit()));
-        return;
-    }
-
-    auto* widget = dynamic_cast<TimeTrackerWidget*>(m_part->widget());
-    if (!widget) {
-        qCritical() << "KPart widget has wrong type";
-        KMessageBox::error(this, i18n("Could not find the KTimeTracker widget."));
-        QTimer::singleShot(0, qApp, SLOT(quit()));
-        return;
-    }
-
-    // tell the KParts::MainWindow that this is indeed
-    // the main widget
-    setCentralWidget(widget);
-    m_part->openFile(path);
+    openFile(path);
     slotSetCaption(path);  // set the window title to our iCal file
     connect(configureAction, SIGNAL(triggered(bool)),
-        widget, SLOT(showSettingsDialog()));
-    widget->setupActions(actionCollection());
+            m_mainWidget, SLOT(showSettingsDialog()));
+    m_mainWidget->setupActions(actionCollection());
     setupGUI();
 
     KStandardAction::quit(this, &MainWindow::quit, actionCollection());
@@ -109,25 +73,39 @@ MainWindow::MainWindow(const QString& path)
     setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
 
     // connections
-    connect(widget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
-    connect(widget, &TimeTrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
+    connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
+    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
 
     // Setup context menu request handling
-    connect(widget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
+    connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
 
     if (KTimeTrackerSettings::trayIcon()) {
         _tray = new TrayIcon(this);
-        connect(widget, &TimeTrackerWidget::timersActive, _tray, &TrayIcon::startClock);
-        connect(widget, &TimeTrackerWidget::timersInactive, _tray, &TrayIcon::stopClock);
-        connect( widget, SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
+        connect(m_mainWidget, &TimeTrackerWidget::timersActive, _tray, &TrayIcon::startClock);
+        connect(m_mainWidget, &TimeTrackerWidget::timersInactive, _tray, &TrayIcon::stopClock);
+        connect(m_mainWidget, SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
     }
 }
 
-void MainWindow::setupActions()
+//bool KTimeTrackerPart::openFile()
+//{
+//    return openFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker/ktimetracker.ics"));
+//}
+
+//bool KTimeTrackerPart::saveFile()
+//{
+//    m_mainWidget->saveFile();
+//    return true;
+//}
+
+bool MainWindow::openFile(const QString& path)
 {
-    configureAction = new QAction(this);
-    configureAction->setText(i18n("Configure KTimeTracker..."));
-    actionCollection()->addAction("configure_ktimetracker", configureAction);
+    m_mainWidget->openFile(path);
+    setCaption(path);
+
+    connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
+    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, static_cast<void(MainWindow::*)(const QString&)>(&MainWindow::setCaption));
+    return true;
 }
 
 void MainWindow::slotSetCaption(const QString& qs)
@@ -146,20 +124,6 @@ MainWindow::~MainWindow()
     saveGeometry();
 }
 
-void MainWindow::keyBindings()
-{
-    KShortcutsDialog::configure(actionCollection(), KShortcutsEditor::LetterShortcutsAllowed, this);
-}
-
-void MainWindow::makeMenus()
-{
-    mainWidget->setupActions(actionCollection());
-    actionKeyBindings = KStandardAction::keyBindings(this, SLOT(keyBindings()), actionCollection());
-    setupGUI();
-    actionKeyBindings->setToolTip(i18n("Configure key bindings"));
-    actionKeyBindings->setWhatsThis(i18n("This will let you configure key bindings which are specific to ktimetracker."));
-}
-
 bool MainWindow::queryClose()
 {
 //    if ( !kapp->sessionSaving() )
@@ -172,7 +136,7 @@ bool MainWindow::queryClose()
 
 void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 {
-    QMenu* pop = dynamic_cast<QMenu*>(factory()->container("task_popup", this));
+    QMenu* pop = dynamic_cast<QMenu*>(guiFactory()->container("task_popup", this));
     if (pop) {
         pop->popup(point);
     }
@@ -180,8 +144,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 
 void MainWindow::quit()
 {
-    auto* widget = dynamic_cast<TimeTrackerWidget*>(m_part->widget());
-    if (widget && widget->closeAllFiles()) {
+    if (m_mainWidget->closeAllFiles()) {
         close();
     }
 }

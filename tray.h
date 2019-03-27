@@ -29,7 +29,6 @@
 #include <KStatusNotifierItem>
 
 #include "task.h"
-#include "ktimetrackerpart.h"
 
 class QTimer;
 class MainWindow;
@@ -39,7 +38,7 @@ class TrayIcon : public KStatusNotifierItem
     Q_OBJECT
 
 public:
-    explicit TrayIcon(MainWindow * parent);
+    explicit TrayIcon(MainWindow* parent);
     TrayIcon();
     ~TrayIcon() override = default;
 

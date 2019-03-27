@@ -22,7 +22,7 @@
 #ifndef KTIMETRACKER_MAIN_WINDOW_H
 #define KTIMETRACKER_MAIN_WINDOW_H
 
-#include <KParts/MainWindow>
+#include <KXmlGuiWindow>
 
 class KAccel;
 class KAccelMenuWatch;
@@ -31,18 +31,17 @@ class QAction;
 class TrayIcon;
 class Task;
 class TimeTrackerWidget;
-class KTimeTrackerPart;
 
 /**
  * Main window to tie the application together.
  */
-class MainWindow : public KParts::MainWindow
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
 private:
-    void             makeMenus();
     void setupActions();
+    bool openFile(const QString& path);
 
     KAccel*          _accel;
     KAccelMenuWatch* _watcher;
@@ -50,10 +49,8 @@ private:
     QAction *         actionKeyBindings;
     QAction * configureAction;
 
-    TimeTrackerWidget *mainWidget;
-
     friend class TrayIcon;
-    KTimeTrackerPart *m_part;
+    TimeTrackerWidget *m_mainWidget;
 
 public:
     explicit MainWindow(const QString& path = QString());
@@ -65,7 +62,6 @@ public Q_SLOTS:
     void quit();
 
 protected Q_SLOTS:
-    void keyBindings();
     void taskViewCustomContextMenuRequested(const QPoint&);
 
 protected:

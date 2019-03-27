@@ -21,12 +21,13 @@ find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus)
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Config ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5KCMUtils ${KF5_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5Parts ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5WindowSystem ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Notifications ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5ItemViews ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5IconThemes ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5JobWidgets ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5XmlGui ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 # Find KdepimLibs Package
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
@@ -54,32 +55,33 @@ include_directories(
 )
 
 ########### next target ###############
-set(ktimetracker_shared_SRCS
+set(ktimetracker_SRCS
 	settings/ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp
-    ktimetrackerpart.cpp
 	edittaskdialog.cpp
-    idletimedetector.cpp
+	idletimedetector.cpp
 	timekard.cpp
-    ktimetrackerutility.cpp
+	ktimetrackerutility.cpp
 	timetrackerstorage.cpp
-    mainwindow.cpp
-    preferences.cpp
+	mainwindow.cpp
+	preferences.cpp
 	task.cpp
-    taskview.cpp
-    tray.cpp
-    focusdetector.cpp
+	taskview.cpp
+	tray.cpp
+	focusdetector.cpp
 	csvexportdialog.cpp
 	plannerparser.cpp
-    historydialog.cpp
+	historydialog.cpp
 	treeviewheadercontextmenu.cpp
-    timetrackerwidget.cpp
-    focusdetectornotifier.cpp
-    kttcalendar.cpp
+	timetrackerwidget.cpp
+	focusdetectornotifier.cpp
+	kttcalendar.cpp
+	main.cpp
 	$<TARGET_OBJECTS:pics>
+	$<TARGET_OBJECTS:ktimetracker_app_icon>
 )
 
-ecm_qt_declare_logging_category(ktimetracker_shared_SRCS
+ecm_qt_declare_logging_category(ktimetracker_SRCS
 	HEADER ktt_debug.h
 	IDENTIFIER KTT_LOG
 	CATEGORY_NAME log_ktt
@@ -87,7 +89,7 @@ ecm_qt_declare_logging_category(ktimetracker_shared_SRCS
 
 configure_file(ktimetracker-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/ktimetracker-version.h @ONLY)
 
-qt5_add_dbus_adaptor(ktimetracker_shared_SRCS
+qt5_add_dbus_adaptor(ktimetracker_SRCS
 	org.kde.ktimetracker.ktimetracker.xml
 	timetrackerwidget.h
 	TimeTrackerWidget
@@ -95,7 +97,7 @@ qt5_add_dbus_adaptor(ktimetracker_shared_SRCS
 	MainAdaptor
 )
 
-qt5_add_dbus_adaptor(ktimetracker_shared_SRCS
+qt5_add_dbus_adaptor(ktimetracker_SRCS
 	org.kde.ktimetracker.storage.xml
 	taskview.h
 	TaskView
@@ -103,7 +105,7 @@ qt5_add_dbus_adaptor(ktimetracker_shared_SRCS
 	StorageAdaptor
 )
 
-ki18n_wrap_ui(ktimetracker_shared_SRCS
+ki18n_wrap_ui(ktimetracker_SRCS
 	csvexportdialog.ui
 	historydialog.ui
 	edittaskdialog.ui
@@ -112,25 +114,25 @@ ki18n_wrap_ui(ktimetracker_shared_SRCS
 	settings/cfgstorage.ui
 )
 
-kconfig_add_kcfg_files(ktimetracker_shared_SRCS settings/ktimetracker.kcfgc)
-
-set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
+kconfig_add_kcfg_files(ktimetracker_SRCS settings/ktimetracker.kcfgc)
 
 qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
 add_executable(ktimetracker
 	${ktimetracker_SRCS}
-	$<TARGET_OBJECTS:ktimetracker_app_icon>
 )
 
 target_link_libraries(ktimetracker
 	KF5::KCMUtils
-	KF5::Parts
 	KF5::WindowSystem
 	KF5::Notifications
 	KF5::ItemViews
 	KF5::IconThemes
+	KF5::I18n
+	KF5::XmlGui
 	KF5::JobWidgets
+	KF5::KIOCore
+	KF5::KIOWidgets
 	KF5::CalendarCore
 	${X11_X11_LIB}
 )
@@ -140,35 +142,7 @@ endif()
 
 install(TARGETS ktimetracker ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-########### next target ###############
-
-set(ktimetrackerpart_PART_SRCS ${ktimetracker_shared_SRCS})
-
-add_library(ktimetrackerpart MODULE ${ktimetrackerpart_PART_SRCS})
-
-target_link_libraries(ktimetrackerpart
-	KF5::KCMUtils
-	KF5::CalendarCore
-	KF5::KIOCore
-	KF5::Parts
-	KF5::Notifications
-	KF5::ItemViews
-	KF5::WindowSystem
-	KF5::IconThemes
-	KF5::JobWidgets
-	${X11_X11_LIB}
-)
-if(X11_Xscreensaver_LIB)
-	target_link_libraries(ktimetrackerpart  ${X11_Xscreensaver_LIB})
-endif()
-
-
-install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
-
-
 ########### install files ###############
-install(FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
-
 install(FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

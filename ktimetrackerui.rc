@@ -1,91 +1,90 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <gui name="ktimetracker" version="392">
-<MenuBar>
-  <Menu name="file" >
-    <text>&amp;File</text>
-    <Action name="file_open" />
-    <Action name="file_open_recent" />
-    <Action name="file_save" />
-    <Separator />
-    <Action name="start_new_session" />
-    <Action name="reset_all_times" />
-    <Separator />
-    <Menu name="import" icon="document-import" >
-      <text>&amp;Import</text>
-      <Action name="import_planner" />
+    <MenuBar>
+        <Menu name="file">
+            <Action name="file_open" />
+            <Action name="file_open_recent" />
+            <Action name="file_save" />
+            <Separator />
+            <Action name="start_new_session" />
+            <Action name="reset_all_times" />
+            <Separator />
+            <Menu name="import" icon="document-import" >
+                <text>&amp;Import</text>
+                <Action name="import_planner" />
+            </Menu>
+            <Menu name="export" icon="document-export">
+                <text>&amp;Export</text>
+                <Action name="export_times" />
+                <Action name="export_history" />
+            </Menu>
+            <Action name="edit_history" />
+            <Separator />
+            <Action name="file_quit" />
+        </Menu>
+        <Menu name="clock">
+            <text>&amp;Clock</text>
+            <Action name="start" />
+            <Action name="stop" />
+            <Action name="stopAll" />
+            <Action name="focustracking" />
+        </Menu>
+        <Menu name="task">
+            <text>&amp;Task</text>
+            <Action name="new_task" />
+            <Action name="new_sub_task" />
+            <Action name="delete_task" />
+            <Action name="edit_task" />
+            <!--    <Action name="add_comment_to_task" /> -->
+            <Separator />
+            <Action name="mark_as_complete" />
+            <Action name="mark_as_incomplete" />
+        </Menu>
+        <Menu name="settings" >
+        <text>&amp;Settings</text>
+        <Action name="searchbar" />
+        </Menu>
+    </MenuBar>
+    <ToolBar position="top" iconText="icononly" noMerge="1" name="mainToolBar" >
+        <text>Main Toolbar</text>
+        <Action name="new_task" />
+        <Action name="new_sub_task" />
+        <Action name="start" />
+        <Action name="stop" />
+        <Action name="delete_task" />
+            <Action name="edit_task" />
+    </ToolBar>
+    <ToolBar position="top" iconText="icononly" noMerge="1" name="taskToolBar" >
+      <text>Tasks</text>
+      <Action name="file_new" />
+      <Action name="file_open" />
+      <Action name="file_save" />
+    </ToolBar>
+
+    <Menu name="task_popup">
+      <Action name="start" />
+      <Action name="stop" />
+      <Action name="stopAll" />
+      <Separator />
+      <Action name="new_task" />
+      <Action name="new_sub_task" />
+      <Action name="delete_task" />
+      <Action name="edit_task" />
+      <Separator />
+      <Action name="mark_as_complete" />
+      <Action name="mark_as_incomplete" />
     </Menu>
-    <Menu name="export" icon="document-export">
-      <text>&amp;Export</text>
-      <Action name="export_times" />
-      <Action name="export_history" />
-    </Menu>
-    <Action name="edit_history" />
-    <Separator />
-    <Action name="file_quit" />
-  </Menu>
-  <Menu name="clock" >
-    <text>&amp;Clock</text>
-    <Action name="start" />
-    <Action name="stop" />
-    <Action name="stopAll" />
-    <Action name="focustracking" />
-  </Menu>
-  <Menu name="task" >
-    <text>&amp;Task</text>
-    <Action name="new_task" />
-    <Action name="new_sub_task" />
-    <Action name="delete_task" />
-    <Action name="edit_task" />
-<!--    <Action name="add_comment_to_task" /> -->
-    <Separator />
-    <Action name="mark_as_complete" />
-    <Action name="mark_as_incomplete" />
-  </Menu>
-  <Menu name="settings" > 
-    <text>&amp;Settings</text>
-    <Action name="searchbar" />
-  </Menu>
-</MenuBar>
-<ToolBar position="top" iconText="icononly" noMerge="1" name="mainToolBar" >
-	<text>Main Toolbar</text>
-	<Action name="new_task" />
-	<Action name="new_sub_task" />
-	<Action name="start" />
-	<Action name="stop" />
-	<Action name="delete_task" />
+
+    <State name="readonly">
+      <disable>
+        <Action name="file_save" />
+        <Action name="new_task" />
+        <Action name="new_sub_task" />
+        <Action name="delete_task" />
         <Action name="edit_task" />
-</ToolBar>
-<ToolBar position="top" iconText="icononly" noMerge="1" name="taskToolBar" >
-  <text>Tasks</text>
-  <Action name="file_new" />
-  <Action name="file_open" />
-  <Action name="file_save" />
-</ToolBar>
-
-<Menu name="task_popup">
-  <Action name="start" />
-  <Action name="stop" />
-  <Action name="stopAll" />
-  <Separator />
-  <Action name="new_task" />
-  <Action name="new_sub_task" />
-  <Action name="delete_task" />
-  <Action name="edit_task" />
-  <Separator />
-  <Action name="mark_as_complete" />
-  <Action name="mark_as_incomplete" />
-</Menu>
-
-<State name="readonly">
-  <disable>
-    <Action name="file_save" />
-    <Action name="new_task" />
-    <Action name="new_sub_task" />
-    <Action name="delete_task" />
-    <Action name="edit_task" />
-    <Action name="mark_as_complete" />
-    <Action name="start_new_session" />
-    <Action name="reset_all_times" />
-  </disable>
-</State>
+        <Action name="mark_as_complete" />
+        <Action name="start_new_session" />
+        <Action name="reset_all_times" />
+      </disable>
+    </State>
 </gui>
