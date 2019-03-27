@@ -1,3 +1,0 @@
-The idea of this directory is to prepare a new ktimetracker that meets the requirements outlined at http://community.kde.org/Ktimetracker#simplify_ktimetracker.
-
-To kompile the new ktimetracker, copy all files from ktimetracker/new to ktimetracker and rebuild.
