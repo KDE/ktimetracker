@@ -293,7 +293,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     QAction* markTaskAsIncomplete = actionCollection->addAction(QStringLiteral("mark_as_incomplete"));
     markTaskAsIncomplete->setText(i18n("&Mark as Incomplete"));
     markTaskAsIncomplete->setIcon(QPixmap(":/pics/task-incomplete.xpm"));
-    actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::Key_M));
+    actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
     connect(markTaskAsIncomplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
 
     QAction* exportcsvFile = actionCollection->addAction(QStringLiteral("export_times"));
