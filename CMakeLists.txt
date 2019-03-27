@@ -15,7 +15,6 @@ include(FeatureSummary)
 include(KDECMakeSettings)
 
 set(QT_REQUIRED_VERSION "5.10.0")
-#find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Network Test Widgets WebEngine WebEngineWidgets)
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus)
 
 # Find KF5 package
@@ -50,7 +49,6 @@ add_subdirectory(pics)
 add_subdirectory(icons)
 
 include_directories(
-	${CMAKE_SOURCE_DIR}/kresources/remote
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR}
 )
@@ -118,11 +116,12 @@ kconfig_add_kcfg_files(ktimetracker_shared_SRCS settings/ktimetracker.kcfgc)
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
 
+qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
+
 add_executable(ktimetracker
 	${ktimetracker_SRCS}
 	$<TARGET_OBJECTS:ktimetracker_app_icon>
 )
-
 
 target_link_libraries(ktimetracker
 	KF5::KCMUtils
@@ -136,10 +135,10 @@ target_link_libraries(ktimetracker
 	${X11_X11_LIB}
 )
 if(X11_Xscreensaver_LIB)
-	target_link_libraries(ktimetracker  ${X11_Xscreensaver_LIB} )
+	target_link_libraries(ktimetracker ${X11_Xscreensaver_LIB})
 endif()
 
-install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ktimetracker ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### next target ###############
 
@@ -168,9 +167,8 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
-install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
-install(FILES ktimetrackerui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/ktimetracker)
+install(FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 
-install( FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
+install(FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
