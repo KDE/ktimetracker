@@ -30,9 +30,6 @@ class KTimeTrackerBehaviorConfig : public KCModule
 
 public:
     explicit KTimeTrackerBehaviorConfig(QWidget *parent);
-
-    void load() override;
-    void save() override;
 };
 
 class KTimeTrackerDisplayConfig : public KCModule
@@ -41,9 +38,6 @@ class KTimeTrackerDisplayConfig : public KCModule
 
 public:
     explicit KTimeTrackerDisplayConfig(QWidget *parent);
-
-    void load() override;
-    void save() override;
 };
 
 class KTimeTrackerStorageConfig : public KCModule
@@ -52,9 +46,6 @@ class KTimeTrackerStorageConfig : public KCModule
 
 public:
     explicit KTimeTrackerStorageConfig(QWidget *parent);
-
-    void load() override;
-    void save() override;
 };
 
 #endif /* KTIMETRACKERCONFIGDIALOG_H */

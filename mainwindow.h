@@ -24,12 +24,7 @@
 
 #include <KXmlGuiWindow>
 
-class KAccel;
-class KAccelMenuWatch;
-class QAction;
-
 class TrayIcon;
-class Task;
 class TimeTrackerWidget;
 
 /**
@@ -39,21 +34,8 @@ class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
-private:
-    void setupActions();
-    bool openFile(const QString& path);
-
-    KAccel*          _accel;
-    KAccelMenuWatch* _watcher;
-    TrayIcon*        _tray;
-    QAction *         actionKeyBindings;
-    QAction * configureAction;
-
-    friend class TrayIcon;
-    TimeTrackerWidget *m_mainWidget;
-
 public:
-    explicit MainWindow(const QString& path = QString());
+    explicit MainWindow(const QString& path);
     ~MainWindow() override;
 
 public Q_SLOTS:
@@ -65,7 +47,14 @@ protected Q_SLOTS:
     void taskViewCustomContextMenuRequested(const QPoint&);
 
 protected:
-    bool queryClose();
+    bool queryClose() override;
+
+private:
+    bool openFile(const QString& path);
+
+    TrayIcon* m_tray;
+    TimeTrackerWidget* m_mainWidget;
+    bool m_quitRequested;
 };
 
 #endif // KTIMETRACKER_MAIN_WINDOW_H

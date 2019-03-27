@@ -21,34 +21,24 @@
 
 #include "mainwindow.h"
 
-#include <numeric>
-
 #include <QMenu>
-#include <QString>
-#include <QTimer>
-#include <QAction>
-#include <QDebug>
 #include <QStatusBar>
+#include <QGuiApplication>
 
-#include <KMessageBox>
 #include <KLocalizedString>
-#include <KShortcutsDialog>
-#include <KStandardAction>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KSharedConfig>
 
-#include "ktimetrackerutility.h"
 #include "ktimetracker.h"
-#include "task.h"
-#include "taskview.h"
-#include "timekard.h"
 #include "tray.h"
 #include "timetrackerwidget.h"
 #include "ktt_debug.h"
 
 MainWindow::MainWindow(const QString& path)
-        : KXmlGuiWindow(nullptr)
+    : KXmlGuiWindow(nullptr)
+    , m_tray(nullptr)
+    , m_mainWidget(nullptr)
+    , m_quitRequested(false)
 {
     qCDebug(KTT_LOG) << "Entering function, icsfile is " << path;
 
@@ -57,7 +47,7 @@ MainWindow::MainWindow(const QString& path)
     setCentralWidget(m_mainWidget);
 
     // Setup our actions
-    configureAction = new QAction(this);
+    auto* configureAction = new QAction(this);
     configureAction->setText(i18n("Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 
@@ -80,10 +70,10 @@ MainWindow::MainWindow(const QString& path)
     connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
 
     if (KTimeTrackerSettings::trayIcon()) {
-        _tray = new TrayIcon(this);
-        connect(m_mainWidget, &TimeTrackerWidget::timersActive, _tray, &TrayIcon::startClock);
-        connect(m_mainWidget, &TimeTrackerWidget::timersInactive, _tray, &TrayIcon::stopClock);
-        connect(m_mainWidget, SIGNAL(tasksChanged(QList<Task*>)), _tray, SLOT(updateToolTip(QList<Task*>)));
+        m_tray = new TrayIcon(this);
+        connect(m_mainWidget, &TimeTrackerWidget::timersActive, m_tray, &TrayIcon::startClock);
+        connect(m_mainWidget, &TimeTrackerWidget::timersInactive, m_tray, &TrayIcon::stopClock);
+        connect(m_mainWidget, SIGNAL(tasksChanged(QList<Task*>)), m_tray, SLOT(updateToolTip(QList<Task*>)));
     }
 }
 
@@ -126,11 +116,12 @@ MainWindow::~MainWindow()
 
 bool MainWindow::queryClose()
 {
-//    if ( !kapp->sessionSaving() )
-//    {
-//        hide();
-//        return false;
-//    }
+    auto* app = dynamic_cast<QGuiApplication*>(QGuiApplication::instance());
+    if (!m_quitRequested && app && !app->isSavingSession()) {
+        hide();
+        return false;
+    }
+
     return KMainWindow::queryClose();
 }
 
@@ -145,6 +136,7 @@ void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
 void MainWindow::quit()
 {
     if (m_mainWidget->closeAllFiles()) {
+        m_quitRequested = true;
         close();
     }
 }

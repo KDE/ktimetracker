@@ -39,16 +39,6 @@ KTimeTrackerBehaviorConfig::KTimeTrackerBehaviorConfig(QWidget *parent)
     load();
 }
 
-void KTimeTrackerBehaviorConfig::load()
-{
-    KCModule::load();
-}
-
-void KTimeTrackerBehaviorConfig::save()
-{
-    KCModule::save();
-}
-
 KTimeTrackerStorageConfig::KTimeTrackerStorageConfig(QWidget *parent)
     : KCModule(parent)
 {
@@ -59,16 +49,6 @@ KTimeTrackerStorageConfig::KTimeTrackerStorageConfig(QWidget *parent)
     lay->addWidget( storagePage );
     addConfig( KTimeTrackerSettings::self(), storagePage );
     load();
-}
-
-void KTimeTrackerStorageConfig::load()
-{
-    KCModule::load();
-}
-
-void KTimeTrackerStorageConfig::save()
-{
-    KCModule::save();
 }
 
 KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig( QWidget *parent )
@@ -82,14 +62,4 @@ KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig( QWidget *parent )
     lay->addWidget( displayPage );
     addConfig( KTimeTrackerSettings::self(), displayPage );
     load();
-}
-
-void KTimeTrackerDisplayConfig::load()
-{
-    KCModule::load();
-}
-
-void KTimeTrackerDisplayConfig::save()
-{
-    KCModule::save();
 }
