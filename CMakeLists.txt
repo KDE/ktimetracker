@@ -57,7 +57,7 @@ include_directories(
 
 ########### next target ###############
 set(ktimetracker_shared_SRCS
-    ktimetrackerconfigdialog.cpp
+	settings/ktimetrackerconfigdialog.cpp
 	desktoptracker.cpp
     ktimetrackerpart.cpp
 	edittaskdialog.cpp
@@ -109,12 +109,12 @@ ki18n_wrap_ui(ktimetracker_shared_SRCS
 	csvexportdialog.ui
 	historydialog.ui
 	edittaskdialog.ui
-	cfgbehavior.ui
-	cfgdisplay.ui
-	cfgstorage.ui
+	settings/cfgbehavior.ui
+	settings/cfgdisplay.ui
+	settings/cfgstorage.ui
 )
 
-kconfig_add_kcfg_files( ktimetracker_shared_SRCS ktimetracker.kcfgc )
+kconfig_add_kcfg_files(ktimetracker_shared_SRCS settings/ktimetracker.kcfgc)
 
 set(ktimetracker_SRCS main.cpp ${ktimetracker_shared_SRCS})
 

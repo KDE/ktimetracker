@@ -57,7 +57,7 @@
 #include "taskview.h"
 #include "ktimetracker-version.h"
 #include "mainwindow.h"
-#include "ktimetrackerconfigdialog.h"
+#include "settings/ktimetrackerconfigdialog.h"
 #include "ktt_debug.h"
 
 
