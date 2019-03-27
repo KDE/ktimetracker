@@ -52,7 +52,6 @@
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
 #include "focusdetectornotifier.h"
-#include "storageadaptor.h"
 #include "ktt_debug.h"
 
 #define T_LINESIZE 1023
@@ -163,8 +162,6 @@ Private() :
 TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 {
     _preferences = Preferences::instance();
-    new StorageAdaptor( this );
-    QDBusConnection::sessionBus().registerObject( "/ktimetrackerstorage", this );
 
     connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );

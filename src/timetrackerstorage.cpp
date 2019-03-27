@@ -62,7 +62,6 @@
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
-#include "storageadaptor.h"
 #include "task.h"
 #include "taskview.h"
 #include "timekard.h"
