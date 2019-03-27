@@ -471,14 +471,21 @@ void TimeTrackerWidget::slotUpdateButtons()
 
 void TimeTrackerWidget::showSettingsDialog()
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    /* show main window b/c if this method was started from tray icon and the window
-        is not visible the application quits after accepting the settings dialog.
-    */
-    window()->show();
-    KTimeTrackerConfigDialog *dialog=new KTimeTrackerConfigDialog(i18n( "Settings" ), this);
-    dialog->exec();
-    delete dialog;
+    if (KConfigDialog::showDialog("settings")) {
+        return;
+    }
+
+    KConfigDialog *dialog = new KConfigDialog(this, "settings", KTimeTrackerSettings::self());
+    dialog->setFaceType(KPageDialog::List);
+    dialog->addPage(new KTimeTrackerBehaviorConfig(dialog), i18nc("@title:tab", "Behavior"), QStringLiteral("preferences-other"));
+    dialog->addPage(new KTimeTrackerDisplayConfig(dialog), i18nc("@title:tab", "Appearance"), QStringLiteral("preferences-desktop-theme"));
+    dialog->addPage(new KTimeTrackerStorageConfig(dialog), i18nc("@title:tab", "Storage"), QStringLiteral("system-file-manager"));
+    connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
+    dialog->show();
+}
+
+void TimeTrackerWidget::loadSettings()
+{
     KTimeTrackerSettings::self()->readConfig();
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());

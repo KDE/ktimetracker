@@ -22,20 +22,7 @@
 #ifndef KTIMETRACKERCONFIGDIALOG_H
 #define KTIMETRACKERCONFIGDIALOG_H
 
-#include <KCMultiDialog>
 #include <KCModule>
-
-class KTimeTrackerConfigDialog : public KCMultiDialog
-{
-    Q_OBJECT
-
-public:
-    KTimeTrackerConfigDialog(const QString& title, QWidget* parent);
-    ~KTimeTrackerConfigDialog() override = default;
-
-public slots:
-    void slotOk();
-};
 
 class KTimeTrackerBehaviorConfig : public KCModule
 {

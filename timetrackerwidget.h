@@ -183,7 +183,10 @@ public Q_SLOTS:
     // END of dbus slots group
     /* @} */
 
-  protected:
+    // Triggered on changes in the Settings dialog
+    void loadSettings();
+
+protected:
     bool event ( QEvent * event ); // inherited from QWidget
 
   private Q_SLOTS:

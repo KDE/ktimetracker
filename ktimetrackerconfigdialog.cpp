@@ -27,46 +27,6 @@
 #include "ui_cfgstorage.h"
 #include "ktimetracker.h"
 
-KTimeTrackerConfigDialog::KTimeTrackerConfigDialog( const QString &title,
-                                                    QWidget *parent )
-    : KCMultiDialog( parent )
-{
-    setWindowTitle( title );
-    setStandardButtons( QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
-    button(QDialogButtonBox::Ok)->setDefault(true);
-    setFaceType( KPageDialog::List );
-    addModule( "ktimetracker_config_behavior" );
-    addModule( "ktimetracker_config_display" );
-    addModule( "ktimetracker_config_storage" );
-}
-
-void KTimeTrackerConfigDialog::slotOk()
-{
-    KTimeTrackerSettings::self()->writeConfig();
-}
-
-extern "C"
-{
-    Q_DECL_EXPORT KCModule *create_ktimetracker_config_behavior(QWidget *parent, const char *)
-    {
-        auto* page = new KTimeTrackerBehaviorConfig(parent);
-        page->setObjectName(QStringLiteral("ktimetracker_config_behavior"));
-        return page;
-    }
-    Q_DECL_EXPORT KCModule *create_ktimetracker_config_storage(QWidget *parent, const char *)
-    {
-        auto* page = new KTimeTrackerStorageConfig(parent);
-        page->setObjectName(QStringLiteral("ktimetracker_config_storage"));
-        return page;
-    }
-    Q_DECL_EXPORT KCModule *create_ktimetracker_config_display(QWidget *parent, const char *)
-    {
-        auto* page = new KTimeTrackerDisplayConfig(parent);
-        page->setObjectName(QStringLiteral("ktimetracker_config_display"));
-        return page;
-    }
-}
-
 KTimeTrackerBehaviorConfig::KTimeTrackerBehaviorConfig(QWidget *parent)
     : KCModule(parent)
 {
@@ -133,4 +93,3 @@ void KTimeTrackerDisplayConfig::save()
 {
     KCModule::save();
 }
-

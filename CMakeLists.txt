@@ -141,33 +141,6 @@ endif()
 
 install( TARGETS ktimetracker  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-
-###########
-
-set(kcm_ktimetracker_PART_SRCS ${ktimetracker_shared_SRCS})
-
-add_library(kcm_ktimetracker MODULE ${kcm_ktimetracker_PART_SRCS})
-
-target_link_libraries(kcm_ktimetracker
-	KF5::KIOCore
-	KF5::KCMUtils
-	KF5::Parts
-	KF5::Notifications
-	KF5::WindowSystem
-	KF5::ItemViews
-	KF5::IconThemes
-	KF5::JobWidgets
-	KF5::CalendarCore
-	${X11_X11_LIB}
-)
-if(X11_Xscreensaver_LIB)
-    target_link_libraries(kcm_ktimetracker  ${X11_Xscreensaver_LIB} )
-endif()
-
-install(TARGETS kcm_ktimetracker DESTINATION ${PLUGIN_INSTALL_DIR})
-
-
-
 ########### next target ###############
 
 set(ktimetrackerpart_PART_SRCS ${ktimetracker_shared_SRCS})
@@ -195,8 +168,6 @@ install(TARGETS ktimetrackerpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
-install( FILES ktimetracker_config_behavior.desktop  ktimetracker_config_display.desktop  ktimetracker_config_storage.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-
 install( FILES ktimetrackerpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
 install(FILES ktimetrackerui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/ktimetracker)
 
