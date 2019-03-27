@@ -23,11 +23,10 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QStandardPaths>
+#include <QApplication>
 
 #include <KAboutData>
 #include <KLocalizedString>
-
-#include <kontactinterface/pimuniqueapplication.h>
 
 #include "desktoplist.h"
 #include "mainwindow.h"
@@ -42,7 +41,7 @@ QString icsfile(const QCommandLineParser &parser) // deliver the name of the iCa
     // Get first positional argument ("file")
     const QStringList args = parser.positionalArguments();
     QString file;
-    if (args.size() > 0) {
+    if (!args.isEmpty()) {
         file = args[0];
     }
 

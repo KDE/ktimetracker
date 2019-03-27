@@ -29,25 +29,16 @@
   */
 
 #include "timetrackerstorage.h"
-#include "ktimetrackerutility.h"
-#include "ktimetracker.h"
-#include "storageadaptor.h"
-#include "task.h"
-#include "taskview.h"
-#include "timekard.h"
 
-#include <KCalCore/Person>
-#include <KDirWatch>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+
 #include <QApplication>
-#include <KJobUiDelegate>
-#include "ktt_debug.h"
-#include <KMessageBox>
-#include <KLocalizedString>
 #include <QLockFile>
 #include <QProgressDialog>
 #include <QUrl>
-#include <KJobWidgets>
-
 #include <QByteArray>
 #include <QDateTime>
 #include <QFile>
@@ -58,13 +49,24 @@
 #include <QStringList>
 #include <QTableWidget>
 #include <QTextStream>
-
-#include <KIO/StoredTransferJob>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include <QMap>
+
+#include <KCalCore/Person>
+#include <KDirWatch>
+#include <KJobUiDelegate>
+#include <KMessageBox>
+#include <KLocalizedString>
+#include <KJobWidgets>
+#include <KEMailSettings>
+#include <KIO/StoredTransferJob>
+
+#include "ktimetrackerutility.h"
+#include "ktimetracker.h"
+#include "storageadaptor.h"
+#include "task.h"
+#include "taskview.h"
+#include "timekard.h"
+#include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 

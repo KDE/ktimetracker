@@ -31,7 +31,6 @@ find_package(KF5JobWidgets ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 # Find KdepimLibs Package
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
-find_package(KF5KontactInterface ${KONTACTINTERFACE_LIB_VERSION} CONFIG REQUIRED)
 
 #We check if X11_Xscreensaver was found
 if(X11_Xscreensaver_FOUND)
@@ -134,7 +133,6 @@ target_link_libraries(ktimetracker
 	KF5::IconThemes
 	KF5::JobWidgets
 	KF5::CalendarCore
-	KF5::KontactInterface
 	${X11_X11_LIB}
 )
 if(X11_Xscreensaver_LIB)
