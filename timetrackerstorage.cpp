@@ -902,7 +902,7 @@ void TimeTrackerStorage::stopTimer(const Task* task, const QDateTime &when)
     saveCalendar();
 }
 
-void TimeTrackerStorage::changeTime(const Task* task, const long deltaSeconds)
+void TimeTrackerStorage::changeTime(const Task* task, long deltaSeconds)
 {
     qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
     KCalCore::Event::Ptr e;
@@ -922,6 +922,18 @@ void TimeTrackerStorage::changeTime(const Task* task, const long deltaSeconds)
     task->taskView()->scheduleSave();
 }
 
+bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
+{
+    qCDebug(KTT_LOG) << "Entering function";
+
+    auto e = baseEvent(task);
+    e->setDtStart(startDateTime);
+    e->setDtEnd(startDateTime.addSecs( durationInSeconds));
+
+    // Use a custom property to keep a record of negative durations
+    e->setCustomProperty(eventAppName, QByteArray("duration"), QString::number(durationInSeconds));
+    return d->mCalendar->addEvent(e);
+}
 
 KCalCore::Event::Ptr TimeTrackerStorage::baseEvent(const Task *task)
 {

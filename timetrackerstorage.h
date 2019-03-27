@@ -178,7 +178,25 @@ public:
      * @param task   The task the change is for.
      * @param delta  Change in task time, in seconds.  Can be negative.
      */
-    void changeTime(const Task* task, const long deltaSeconds);
+    void changeTime(const Task* task, long deltaSeconds);
+
+    /**
+     * Book time to a task.
+     *
+     * Creates an iCalendar event and adds it to the calendar. Does not write
+     * calendar to disk, just adds event to calendar in memory. However, the
+     * resource framework does try to get a lock on the file. After a
+     * successful lock, the calendar marks this incidence as modified and then
+     * releases the lock.
+     *
+     * @param task Task
+     * @param startDateTime Date and time the booking starts.
+     * @param durationInSeconds Duration of time to book, in seconds.
+     *
+     * @return true if event was added, false if not (if, for example, the
+     * attempted file lock failed).
+     */
+    bool bookTime(const Task* task, const QDateTime& startDateTime, const long durationInSeconds);
 
     /**
      * Log a change to a task name.

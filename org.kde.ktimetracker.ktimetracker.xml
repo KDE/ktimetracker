@@ -29,6 +29,12 @@
       <arg name="taskId" type="s" direction="in"/>
       <arg name="perCent" type="i" direction="in"/>
     </method>
+    <method name="bookTime">
+      <arg type="i" direction="out"/>
+      <arg name="taskId" type="s" direction="in"/>
+      <arg name="dateTime" type="s" direction="in"/>
+      <arg name="minutes" type="i" direction="in"/>
+    </method>
     <method name="changeTime">
       <arg type="i" direction="out"/>
       <arg name="taskId" type="s" direction="in"/>
