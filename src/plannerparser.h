@@ -23,6 +23,11 @@
 #ifndef PLANNERPARSER_H
 #define PLANNERPARSER_H
 
+#include <QtXml/QtXml>
+
+class Task;
+class TaskView;
+
 /**
 this class is here to import tasks from a planner project file to ktimetracker.
 the import shall not be limited to ktimetracker (kPlaTo sends greetings)
@@ -37,37 +42,27 @@ test cases:
 
 @author Thorsten Staerk
 */
-
-#include <QtXml/QtXml>
-
-#include "timetrackerstorage.h"
-
-class Task;
-class TaskView;
-
 class PlannerParser : public QXmlDefaultHandler
 {
 public:
 
-    /**  Stores the active TaskView in this parser. Returns error code (not always, hopefully)  */
-    explicit PlannerParser(TaskView * tv);
+    /** Stores the active TaskView in this parser. */
+    explicit PlannerParser(TaskView* tv);
 
-    /** given by the framework from qxml. Called when parsing the xml-document starts.          */
-    bool startDocument();
+    /** Called when parsing the xml-document starts. */
+    bool startDocument() override;
 
-    /** given by the framework from qxml. Called when the reader occurs an open tag (e.g. \<b\> ) */
-    bool startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att );
+    /** Called when the reader occurs an open tag (e.g. \<b\> ) */
+    bool startElement(const QString&, const QString&, const QString& qName, const QXmlAttributes& att) override;
 
-    /** given by the framework from qxml. Called when the reader occurs a closed tag (e.g. \</b\> )*/
-    bool endElement( const QString&, const QString&, const QString& qName);
+    /** Called when the reader occurs a closed tag (e.g. \</b\> )*/
+    bool endElement(const QString&, const QString&, const QString& qName) override;
 
 private:
-    bool withInTasks;     // within <tasks> ?
-    TaskView *_taskView;
-    Task *task;
-    Task *parentTask;
-    int level;            // level=1: task is top-level-task
+    bool m_withinTasks;     // within <tasks> ?
+    TaskView* m_taskView;
+    Task* m_task;
+    int m_level;            // m_level=1: task is top-level-task
 };
-
 
 #endif
