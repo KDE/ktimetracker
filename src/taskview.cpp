@@ -598,10 +598,10 @@ QString TaskView::reFreshTimes()
     return err;
 }
 
-void TaskView::importPlanner( const QString &fileName )
+void TaskView::importPlanner(const QString& fileName)
 {
     qCDebug(KTT_LOG) << "entering importPlanner";
-    PlannerParser *handler = new PlannerParser( this );
+    PlannerParser *handler = new PlannerParser(this);
     QString lFileName = fileName;
     if (lFileName.isEmpty()) {
         lFileName = QFileDialog::getOpenFileName();
@@ -616,7 +616,7 @@ void TaskView::importPlanner( const QString &fileName )
 
 QString TaskView::report(const ReportCriteria& rc)
 {
-    return d->mStorage->report( this, rc );
+    return d->mStorage->report(this, rc);
 }
 
 void TaskView::exportcsvFile()
@@ -629,7 +629,9 @@ void TaskView::exportcsvFile()
     }
     if (dialog.exec()) {
         QString err = d->mStorage->report(this, dialog.reportCriteria());
-        if ( !err.isEmpty() ) KMessageBox::error(this, i18n(err.toLatin1()));
+        if (!err.isEmpty()) {
+            KMessageBox::error(this, i18n(err.toLatin1()));
+        }
     }
 }
 

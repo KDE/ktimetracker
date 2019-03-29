@@ -44,26 +44,25 @@ class TimeTrackerStorage;
 /**
  * Container and interface for the tasks.
  */
-
 class TaskView : public QTreeWidget
 {
   Q_OBJECT
 
-  public:
-    explicit TaskView( QWidget *parent = 0 );
-    virtual ~TaskView();
+public:
+    explicit TaskView(QWidget* parent = nullptr);
+    ~TaskView() override;
 
     //BEGIN view specified
     /**  Return the current item in the view, cast to a Task pointer.  */
     Task* currentItem() const;
 
     /**  Return the i'th item (zero-based), cast to a Task pointer.  */
-    Task* itemAt( int i );
+    Task* itemAt(int i);
     //END
 
     //BEGIN model specified
     /** Load the view from storage.  */
-    void load( const QString &filename );
+    void load(const QString& filename);
 
     /** Close the storage and release lock. */
     void closeStorage();
@@ -90,11 +89,13 @@ class TaskView : public QTreeWidget
     QStringList tasks();
 
     /** return the task with the given UID */
-    Task* task( const QString& uid );
+    Task* task(const QString& uid);
 
     /** Add a task to view and storage. */
-    QString addTask( const QString& taskame, const QString& taskdescription = QString(), long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
-                     Task* parent = 0 );
+    QString addTask(
+        const QString& taskame, const QString& taskdescription = QString(),
+        long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
+        Task* parent = nullptr);
 
     /** Returns a list of the current active tasks. */
     QList< Task* > activeTasks() const;
@@ -105,7 +106,7 @@ class TaskView : public QTreeWidget
     bool isFocusTrackingActive() const;
     //END
 
-  public Q_SLOTS:
+public Q_SLOTS:
     /** Save to persistent storage. */
     void save();
 
@@ -119,7 +120,7 @@ class TaskView : public QTreeWidget
      *  @param when When the timer stopped - this makes sense if the idletime-
      *              detector detects the user stopped working 5 minutes ago.
      */
-    void stopAllTimers( const QDateTime &when = QDateTime::currentDateTime() );
+    void stopAllTimers(const QDateTime& when = QDateTime::currentDateTime());
 
     /** Toggles the automatic tracking of focused windows
      */
@@ -131,16 +132,16 @@ class TaskView : public QTreeWidget
     /** Display edit task dialog and create a new task with results.
      *  @param caption Window title of the edit task dialog
      */
-    void newTask( const QString &caption, Task* parent );
+    void newTask(const QString& caption, Task* parent);
 
     /** Used to refresh (e.g. after import) */
     void refresh();
 
     /** used to import tasks from imendio planner */
-    void importPlanner( const QString &fileName = "" );
+    void importPlanner(const QString& fileName = "");
 
     /** call export function for csv totals or history */
-    QString report( const ReportCriteria &rc );
+    QString report(const ReportCriteria& rc);
 
     /** Export comma separated values format for task time totals. */
     void exportcsvFile();
@@ -198,8 +199,7 @@ class TaskView : public QTreeWidget
      * @param task      task to start timer of
      * @param startTime if taskview has been modified by another program, we
                             have to set the starting time to not-now. */
-    void startTimerFor( Task* task,
-                        const QDateTime &startTime = QDateTime::currentDateTime() );
+    void startTimerFor(Task* task, const QDateTime& startTime = QDateTime::currentDateTime());
     void stopTimerFor(Task* task);
 
     /** clears all active tasks. Needed e.g. if iCal file was modified by
@@ -208,7 +208,7 @@ class TaskView : public QTreeWidget
     void clearActiveTasks();
 
     /** Copy totals for current and all sub tasks to clipboard. */
-    QString clipTotals( const ReportCriteria &rc );
+    QString clipTotals(const ReportCriteria& rc);
 
     /** Set the text of the application's clipboard. */
     QString setClipBoardText(const QString& s);
@@ -219,17 +219,17 @@ class TaskView : public QTreeWidget
     /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
     QString reFreshTimes();
 
-  Q_SIGNALS:
-    void totalTimesChanged( long session, long total );
+Q_SIGNALS:
+    void totalTimesChanged(long session, long total);
     void reSetTimes();
     void updateButtons();
     void timersActive();
     void timersInactive();
-    void tasksChanged( QList<Task*> activeTasks );
+    void tasksChanged(QList<Task*> activeTasks);
     void setStatusBarText(QString);
-    void contextMenuRequested( const QPoint & );
+    void contextMenuRequested(const QPoint&);
 
-  private: // member variables
+private: // member variables
     IdleTimeDetector* _idleTimeDetector;
     QTimer *_minuteTimer;
     QTimer *_autoSaveTimer;
@@ -245,9 +245,7 @@ class TaskView : public QTreeWidget
     //@endcond
 
 private:
-    void updateParents( Task* task, long totalDiff, long sesssionDiff);
-    void deleteChildTasks( Task *item );
-    void addTimeToActiveTasks( int minutes, bool save_data = true );
+    void addTimeToActiveTasks(int minutes, bool save_data = true);
     /** item state stores if a task is expanded so you can see the subtasks */
     void restoreItemState();
 
