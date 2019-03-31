@@ -84,7 +84,7 @@ int Task::depth()
 
 void Task::init(
     const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
-    DesktopList desktops, int percent_complete, int priority)
+    const DesktopList& desktops, int percent_complete, int priority)
 {
     const TaskView *taskView = qobject_cast<TaskView*>(treeWidget());
     // If our parent is the taskview then connect our totalTimesChanged
@@ -118,10 +118,10 @@ void Task::init(
     mCurrentPic = 0;
     mPercentComplete = percent_complete;
     mPriority = priority;
-    mSessionStartTiMe=QDateTime::fromString(sessionStartTiMe);
+    mSessionStartTiMe = QDateTime::fromString(sessionStartTiMe);
 
     update();
-    changeParentTotalTimes( mSessionTime, mTime);
+    changeParentTotalTimes(mSessionTime, mTime);
 
     // alignment of the number items
     for (int i = 1; i < columnCount(); ++i) {

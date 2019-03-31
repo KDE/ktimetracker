@@ -57,9 +57,9 @@ Q_OBJECT
 
 public:
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, TaskView* parent = 0);
+        DesktopList desktops, TaskView* parent);
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, Task* parent = 0);
+        DesktopList desktops, Task* parent);
     Task(const KCalCore::Todo::Ptr &incident, TaskView* parent);
 
     /* destructor */
@@ -295,16 +295,10 @@ public:
     KCalCore::Todo::Ptr asTodo(const KCalCore::Todo::Ptr &calendar) const;
 
     /**
-     *  Set a task's description
-     *  A description is a comment.
-     */
-    void setDescription( QString desc, TimeTrackerStorage* storage );
-
-    /**
      *  Add a comment to this task.
      *  A comment is called "description" in the context of KCalCore::ToDo
      */
-    void addComment( const QString &comment, TimeTrackerStorage* storage );
+    void addComment(const QString& comment, TimeTrackerStorage* storage);
 
     /** Retrieve the entire comment for the task. */
     QString comment() const;
@@ -315,7 +309,7 @@ public:
     /** remove Task with all it's children
      * @param storage a pointer to a TimeTrackerStorage object.
      */
-    bool remove( TimeTrackerStorage* storage );
+    bool remove(TimeTrackerStorage* storage);
 
     /**
      * Update percent complete for this task.
@@ -333,7 +327,7 @@ public:
      *
      * Priority is allowed from 0 to 9. 0 unspecified, 1 highest and 9 lowest.
      */
-    void setPriority( int priority );
+    void setPriority(int priority);
 
     int priority() const;
 
@@ -357,16 +351,12 @@ public:
     void updateActiveIcon();
 
   private:
-
-    /** if the time or session time is negative set them to zero */
-    void noNegativeTimes();
-
     /** initialize a task */
     void init(
         const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
-        DesktopList desktops, int percent_complete, int priority);
+        const DesktopList& desktops, int percent_complete, int priority);
 
-    bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const override;
 
     QVector<QPixmap*> m_icons;
 
