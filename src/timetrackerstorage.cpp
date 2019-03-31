@@ -729,12 +729,12 @@ QString TimeTrackerStorage::exportcsvHistory(
         Task* parentTask;
         parentTask = task;
         fullName += parentTask->name();
-        parentTask = parentTask->parent();
+        parentTask = parentTask->parentTask();
         while (parentTask)
         {
             fullName = parentTask->name() + "->" + fullName;
             qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
-            parentTask = parentTask->parent();
+            parentTask = parentTask->parentTask();
             qCDebug(KTT_LOG) << "Parent task: " << parentTask;
         }
 

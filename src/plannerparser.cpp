@@ -53,8 +53,8 @@ PlannerParser::PlannerParser(TaskView* tv)
     // So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
 
     qDebug() << "entering constructor to import planner tasks";
-    if (m_taskView->currentItem() && m_taskView->currentItem()->parent()) {
-        m_task = m_taskView->currentItem()->parent();
+    if (m_taskView->currentItem() && m_taskView->currentItem()->parentTask()) {
+        m_task = m_taskView->currentItem()->parentTask();
         m_level = 1;
     }
 }
@@ -111,7 +111,7 @@ bool PlannerParser::endElement(const QString&, const QString&, const QString& qN
     // only <task>s within <tasks> increased level, so only decrease for <task>s within <tasks>
     if (m_withinTasks) {
         if (qName == "task" && m_level-- >= 0) {
-            m_task = m_task->parent();
+            m_task = m_task->parentTask();
         }
 
         if (qName == "tasks") {

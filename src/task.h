@@ -56,19 +56,19 @@ class Task : public QObject, public QTreeWidgetItem
 Q_OBJECT
 
 public:
-    Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-          DesktopList desktops, TaskView* parent = 0);
-    Task( const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-          DesktopList desktops, Task* parent = 0);
-    Task( const KCalCore::Todo::Ptr &incident, TaskView* parent);
+    Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
+        DesktopList desktops, TaskView* parent = 0);
+    Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
+        DesktopList desktops, Task* parent = 0);
+    Task(const KCalCore::Todo::Ptr &incident, TaskView* parent);
 
     /* destructor */
-    ~Task();
+    ~Task() override;
 
     /** return parent Task or null in case of TaskView.
      *  same as QListViewItem::parent()
      */
-    Task* parent() const  { return (Task*)QTreeWidgetItem::parent(); }
+    Task* parentTask() const { return (Task*)QTreeWidgetItem::parent(); }
 
     /** Return task view for this task */
     TaskView* taskView() const
@@ -88,7 +88,7 @@ public:
      *
      * @param uid  The new unique id.
      */
-    void setUid( const QString &uid );
+    void setUid(const QString &uid);
 
     /** cut Task out of parent Task or the TaskView */
     void cut();
@@ -109,7 +109,7 @@ public:
        *  @param storage        Pointer to TimeTrackerStorage instance.
        *                        If zero, don't save changes.
        */
-      void changeTime( long minutes, TimeTrackerStorage* storage );
+      void changeTime(long minutes, TimeTrackerStorage* storage);
 
       /**
        * Add minutes to time and session time by adding an event, and write to storage.
@@ -119,15 +119,14 @@ public:
        *  @param storage          Pointer to TimeTrackerStorage instance.
        *                          If zero, don't save changes.
        */
-      void changeTimes
-        ( long minutesSession, long minutes, TimeTrackerStorage* storage=0 );
+      void changeTimes(long minutesSession, long minutes, TimeTrackerStorage* storage = nullptr);
 
       /** adds minutes to total and session time by adding an event
        *
        *  @param minutesSession   minutes to add to task total session time
        *  @param minutes          minutes to add to task total time
        */
-      void changeTotalTimes( long minutesSession, long minutes );
+      void changeTotalTimes(long minutesSession, long minutes);
 
       /** Adds minutes to the time of the task and the total time of its supertasks. This does not add an event.
        *
@@ -135,7 +134,7 @@ public:
        *  @returns                A QString with the error message, in case of no error an empty QString.
        *
        */
-      QString addTime( long minutes );
+      QString addTime(long minutes);
 
       /** Adds minutes to the total time of the task and its supertasks. This does not add an event.
        *
@@ -143,7 +142,7 @@ public:
        *  @returns                A QString with the error message, in case of no error an empty QString.
        *
        */
-      QString addTotalTime( long minutes );
+      QString addTotalTime(long minutes);
 
       /** Adds minutes to the task's session time and its supertasks' total session time. This does not add an event.
        *
@@ -151,7 +150,7 @@ public:
        *  @returns                A QString with the error message, in case of no error an empty QString.
        *
        */
-      QString addSessionTime( long minutes );
+      QString addSessionTime(long minutes);
 
       /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
        *
@@ -159,24 +158,24 @@ public:
        *  @returns                A QString with the error message, in case of no error an empty QString.
        *
        */
-      QString addTotalSessionTime( long minutes );
+      QString addTotalSessionTime(long minutes);
 
       /** Sets the time (not session time). This does not add an event.
        *
        *  @param minutes          minutes to set time to
        *
        */
-      QString setTime( long minutes );
+      QString setTime(long minutes);
 
       /** Sets the total time, does not change the parent's total time.
         This means the parent's total time can run out of sync.
         */
-      void setTotalTime( long minutes ) { mTotalTime=minutes; };
+      void setTotalTime(long minutes) { mTotalTime = minutes; }
 
       /** Sets the total session time, does not change the parent's total session time.
         This means the parent's total session time can run out of sync.
         */
-      void setTotalSessionTime( long minutes ) { mTotalSessionTime=minutes; };
+      void setTotalSessionTime(long minutes) { mTotalSessionTime = minutes; }
 
       /** A recursive function to calculate the total time of a task. */
       QString recalculatetotaltime();
@@ -193,7 +192,7 @@ public:
        *  @param minutes          minutes to set session time to
        *
        */
-      QString setSessionTime( long minutes );
+      QString setSessionTime(long minutes);
 
       /**
        * Reset all times to 0 and adjust parent task's totalTiMes.
@@ -201,11 +200,11 @@ public:
       void resetTimes();
 
       /** @return time in minutes */
-      long time() const { return mTime; };
+      long time() const { return mTime; }
       /** @return total time in minutes */
-      long totalTime() const { return mTotalTime; };
-      long sessionTime() const { return mSessionTime; };
-      long totalSessionTime() const { return mTotalSessionTime; };
+      long totalTime() const { return mTotalTime; }
+      long sessionTime() const { return mSessionTime; }
+      long totalSessionTime() const { return mTotalSessionTime; }
       QDateTime sessionStartTiMe() const;
 
       /**
@@ -231,28 +230,27 @@ public:
        *  @param name    a pointer to the name. A deep copy will be made.
        *  @param storage a pointer to a TimeTrackerStorage object.
        */
-      void setName( const QString& name, TimeTrackerStorage* storage );
+    void setName(const QString& name, TimeTrackerStorage* storage);
 
-      /** sets the description of the task
-       */
-      void setDescription( const QString& description);
+    /** sets the description of the task */
+    void setDescription(const QString& description);
 
-      /** returns the name of this task.
-       *  @return a pointer to the name.
-       */
-      QString name() const;
+    /** returns the name of this task.
+    *  @return a pointer to the name.
+    */
+    QString name() const;
 
-      /** returns the description of this task.
-        * @return a pointer to the description.
-        */
-      QString description() const;
+    /** returns the description of this task.
+    * @return a pointer to the description.
+    */
+    QString description() const;
 
-      /**
-       * Returns that task name, prefixed by parent tree up to root.
-       *
-       * Task names are separated by a forward slash:  /
-       */
-      QString fullName() const;
+    /**
+    * Returns that task name, prefixed by parent tree up to root.
+    *
+    * Task names are separated by a forward slash:  /
+    */
+    QString fullName() const;
     //@}
 
     /** Update the display of the task (all columns) in the UI. */
@@ -312,7 +310,7 @@ public:
     QString comment() const;
 
     /** tells you whether this task is the root of the task tree */
-    bool isRoot() const { return parent() == 0; }
+    bool isRoot() const { return QTreeWidgetItem::parent() == nullptr; }
 
     /** remove Task with all it's children
      * @param storage a pointer to a TimeTrackerStorage object.

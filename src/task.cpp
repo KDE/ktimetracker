@@ -73,9 +73,11 @@ int Task::depth()
 // A toplevel task has the depth 0.
 {
     qCDebug(KTT_LOG) << "Entering function";
-    int res=0;
-    Task* t=this;
-    while ( ( t = t->parent() ) ) res++;
+    int res = 0;
+    Task* t = this;
+    while (t = t->parentTask()) {
+        res++;
+    }
     qCDebug(KTT_LOG) << "Leaving function. depth is:" << res;
     return res;
 }
@@ -87,7 +89,7 @@ void Task::init(
     const TaskView *taskView = qobject_cast<TaskView*>(treeWidget());
     // If our parent is the taskview then connect our totalTimesChanged
     // signal to its receiver
-    if (!parent()) {
+    if (!parentTask()) {
         connect(this, &Task::totalTimesChanged,
                 taskView, &TaskView::taskTotalTimesChanged);
     }
@@ -122,13 +124,12 @@ void Task::init(
     changeParentTotalTimes( mSessionTime, mTime);
 
     // alignment of the number items
-    for (int i = 1; i < columnCount(); ++i)
-    {
-        setTextAlignment( i, Qt::AlignRight );
+    for (int i = 1; i < columnCount(); ++i) {
+        setTextAlignment(i, Qt::AlignRight);
     }
 
     // .. but not the priority column
-    setTextAlignment( 5, Qt::AlignCenter );
+    setTextAlignment(5, Qt::AlignCenter);
 }
 
 Task::~Task()
@@ -139,22 +140,19 @@ Task::~Task()
 
 void Task::delete_recursive()
 {
-    while ( this->child(0) )
-    {
-        Task* t=(Task*) this->child(0);
+    while (this->child(0)) {
+        Task* t = (Task*) this->child(0);
         t->delete_recursive();
     }
     delete this;
 }
 
-void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime &when)
+void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime& when)
 // This is the back-end, the front-end is StartTimerFor()
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if ( on )
-    {
-        if (!mTimer->isActive())
-        {
+    if (on) {
+        if (!mTimer->isActive()) {
             mTimer->start(1000);
             storage->startTimer(this);
             mCurrentPic=7;
@@ -162,14 +160,10 @@ void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime &whe
             qCDebug(KTT_LOG) << "task has been started for " << when;
             updateActiveIcon();
         }
-    }
-    else
-    {
-        if (mTimer->isActive())
-        {
+    } else {
+        if (mTimer->isActive()) {
             mTimer->stop();
-            if ( ! mRemoving )
-            {
+            if (!mRemoving) {
                 storage->stopTimer(this, when);
                 setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
             }
@@ -183,15 +177,14 @@ void Task::resumeRunning()
 // start date to the storage.
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (!mTimer->isActive())
-    {
+    if (!mTimer->isActive()) {
         mTimer->start(1000);
-        mCurrentPic=7;
+        mCurrentPic = 7;
         updateActiveIcon();
     }
 }
 
-void Task::setUid( const QString &uid )
+void Task::setUid(const QString& uid)
 {
     mUid = uid;
 }
@@ -201,26 +194,24 @@ bool Task::isRunning() const
     return mTimer->isActive();
 }
 
-void Task::setName( const QString& name, TimeTrackerStorage* storage )
+void Task::setName(const QString& name, TimeTrackerStorage* storage)
 {
     qCDebug(KTT_LOG) << "Entering function, name=" << name;
 
     QString oldname = mName;
-    if ( oldname != name )
-    {
+    if (oldname != name) {
         mName = name;
         storage->setName(this, oldname);
         update();
     }
 }
 
-void Task::setDescription( const QString& description )
+void Task::setDescription(const QString& description)
 {
     qCDebug(KTT_LOG) << "Entering function, description=" << description;
 
     QString olddescription = mDescription;
-    if ( olddescription != description )
-    {
+    if (olddescription != description) {
         mDescription = description;
         update();
     }
@@ -308,8 +299,8 @@ QString Task::addTotalTime(long minutes)
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mTotalTime += minutes;
-    if (parent()) {
-        parent()->addTotalTime(minutes);
+    if (parentTask()) {
+        parentTask()->addTotalTime(minutes);
     }
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
@@ -330,8 +321,8 @@ QString Task::addTotalSessionTime(long minutes)
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
     mTotalSessionTime += minutes;
-    if (parent()) {
-        parent()->addTotalSessionTime(minutes);
+    if (parentTask()) {
+        parentTask()->addTotalSessionTime(minutes);
     }
     qCDebug(KTT_LOG) << "Leaving function";
     return err;
@@ -432,7 +423,7 @@ void Task::changeParentTotalTimes(long minutesSession, long minutes)
     if (isRoot()) {
         emit totalTimesChanged(minutesSession, minutes);
     } else {
-        parent()->changeTotalTimes(minutesSession, minutes);
+        parentTask()->changeTotalTimes(minutesSession, minutes);
     }
 }
 
@@ -443,17 +434,19 @@ bool Task::remove(TimeTrackerStorage* storage)
 
     mRemoving = true;
     storage->removeTask(this);
-    if( isRunning() ) setRunning( false, storage );
-
-    for ( int i = 0; i < childCount(); ++i )
-    {
-        Task *task = static_cast< Task* >( child( i ) );
-        if ( task->isRunning() )
-            task->setRunning( false, storage );
-        task->remove( storage );
+    if (isRunning()) {
+        setRunning(false, storage);
     }
 
-    changeParentTotalTimes( -mSessionTime, -mTime);
+    for (int i = 0; i < childCount(); ++i) {
+        Task* task = static_cast<Task*>(child(i));
+        if (task->isRunning()) {
+            task->setRunning(false, storage);
+        }
+        task->remove(storage);
+    }
+
+    changeParentTotalTimes(-mSessionTime, -mTime);
     mRemoving = false;
     return ok;
 }
@@ -466,29 +459,30 @@ void Task::updateActiveIcon()
 
 QString Task::fullName() const
 {
-    if (isRoot())
+    if (isRoot()) {
         return name();
-    else
-        return parent()->fullName() + QString::fromLatin1("/") + name();
+    } else {
+        return parentTask()->fullName() + QString::fromLatin1("/") + name();
+    }
 }
 
-KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
+KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
 {
-    Q_ASSERT( todo != NULL );
+    Q_ASSERT(todo != NULL);
 
-    qCDebug(KTT_LOG) <<"Task::asTodo: name() = '" << name() <<"'";
-    todo->setSummary( name() );
-    todo->setDescription( description() );
+    qCDebug(KTT_LOG) <<"Task::asTodo: name() = '" << name() << "'";
+    todo->setSummary(name());
+    todo->setDescription(description());
 
     // Note: if the date start is empty, the KOrganizer GUI will have the
     // checkbox blank, but will prefill the todo's starting datetime to the
     // time the file is opened.
     // todo->setDtStart( current );
 
-    todo->setCustomProperty(eventAppName, QByteArray( "totalTaskTime"), QString::number( mTime ) );
-    todo->setCustomProperty(eventAppName, QByteArray( "totalSessionTime"), QString::number( mSessionTime) );
-    todo->setCustomProperty(eventAppName, QByteArray( "sessionStartTiMe"), mSessionStartTiMe.toString() );
-    qDebug() << "mSessionStartTiMe=" << mSessionStartTiMe.toString() ;
+    todo->setCustomProperty(eventAppName, QByteArray("totalTaskTime"), QString::number(mTime));
+    todo->setCustomProperty(eventAppName, QByteArray("totalSessionTime"), QString::number(mSessionTime));
+    todo->setCustomProperty(eventAppName, QByteArray("sessionStartTiMe"), mSessionStartTiMe.toString());
+    qDebug() << "mSessionStartTiMe=" << mSessionStartTiMe.toString();
 
     if (getDesktopStr().isEmpty()) {
         todo->removeCustomProperty(eventAppName, QByteArray("desktopList"));
@@ -556,14 +550,10 @@ bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minut
     QStringList desktopStrList = desktopList.split(QStringLiteral(","), QString::SkipEmptyParts);
     desktops.clear();
 
-    for ( QStringList::iterator iter = desktopStrList.begin();
-        iter != desktopStrList.end();
-        ++iter )
-    {
-        int desktopInt = (*iter).toInt( &ok );
-        if ( ok )
-        {
-            desktops.push_back( desktopInt );
+    for (QStringList::iterator iter = desktopStrList.begin(); iter != desktopStrList.end(); ++iter) {
+        int desktopInt = (*iter).toInt(&ok);
+        if (ok) {
+            desktops.push_back(desktopInt);
         }
     }
     percent_complete = incident.staticCast<KCalCore::Todo>()->percentComplete();
@@ -573,17 +563,15 @@ bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minut
 
 QString Task::getDesktopStr() const
 {
-    if ( mDesktops.empty() )
+    if (mDesktops.empty()) {
         return QString();
+    }
 
     QString desktopstr;
-    for ( DesktopList::const_iterator iter = mDesktops.begin();
-        iter != mDesktops.end();
-        ++iter )
-    {
-        desktopstr += QString::number( *iter ) + QString::fromLatin1( "," );
+    for (DesktopList::const_iterator iter = mDesktops.begin(); iter != mDesktops.end(); ++iter) {
+        desktopstr += QString::number(*iter) + QString::fromLatin1(",");
     }
-    desktopstr.remove( desktopstr.length() - 1, 1 );
+    desktopstr.remove(desktopstr.length() - 1, 1);
     return desktopstr;
 }
 
@@ -591,11 +579,14 @@ void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
 {
     qCDebug(KTT_LOG) << "Entering function";
-    changeParentTotalTimes( -mTotalSessionTime, -mTotalTime);
-    if ( ! parent() )
+
+    changeParentTotalTimes(-mTotalSessionTime, -mTotalTime);
+    if (!parentTask()) {
         treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
-    else
-        parent()->takeChild(indexOfChild(this));
+    } else {
+        parentTask()->takeChild(indexOfChild(this));
+    }
+
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
@@ -603,7 +594,7 @@ void Task::paste(Task* destination)
 // This is needed e.g. to move a task under its parent when loading.
 {
     qCDebug(KTT_LOG) << "Entering function";
-    destination->QTreeWidgetItem::insertChild(0,this);
+    destination->QTreeWidgetItem::insertChild(0, this);
     changeParentTotalTimes( mTotalSessionTime, mTotalTime);
     qCDebug(KTT_LOG) << "Leaving function";
 }
@@ -622,17 +613,17 @@ void Task::update()
 {
     qCDebug(KTT_LOG) << "Entering function";
     bool b = KTimeTrackerSettings::decimalFormat();
-    setText( 0, mName );
-    setText( 1, formatTime( mSessionTime, b ) );
-    setText( 2, formatTime( mTime, b ) );
-    setText( 3, formatTime( mTotalSessionTime, b ) );
-    setText( 4, formatTime( mTotalTime, b ) );
-    setText( 5, mPriority > 0 ? QString::number( mPriority ) : "--" );
-    setText( 6, QString::number( mPercentComplete ) );
+    setText(0, mName);
+    setText(1, formatTime(mSessionTime, b));
+    setText(2, formatTime(mTime, b));
+    setText(3, formatTime(mTotalSessionTime, b));
+    setText(4, formatTime(mTotalTime, b));
+    setText(5, mPriority > 0 ? QString::number(mPriority) : "--");
+    setText(6, QString::number(mPercentComplete));
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::addComment(const QString &comment, TimeTrackerStorage* storage)
+void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
 {
     mComment = mComment + QString::fromLatin1("\n") + comment;
     storage->addComment(this, comment);
@@ -648,15 +639,14 @@ void Task::startNewSession()
  * the progress percentage [coloumn 6] numerically.
  */
 bool Task::operator<(const QTreeWidgetItem &other) const {
-        const int column = treeWidget()->sortColumn();
-        if (column == 6){ //progress percent
-            return text(column).toInt() < other.text(column).toInt();
-        } else if (column == 0) { //task name
-            return text(column).toLower() < other.text(column).toLower();
-        }
-        else {
-            return text(column) < other.text(column);
-        }
+    const int column = treeWidget()->sortColumn();
+    if (column == 6) { //progress percent
+        return text(column).toInt() < other.text(column).toInt();
+    } else if (column == 0) { //task name
+        return text(column).toLower() < other.text(column).toLower();
+    } else {
+        return text(column) < other.text(column);
+    }
 }
 
 //BEGIN Properties

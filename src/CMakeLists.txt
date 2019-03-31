@@ -28,13 +28,13 @@ set(ktimetracker_SRCS
     main.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:ktimetracker_app_icon>
-    )
+)
 
 ecm_qt_declare_logging_category(ktimetracker_SRCS
     HEADER ktt_debug.h
     IDENTIFIER KTT_LOG
     CATEGORY_NAME log_ktt
-    )
+)
 
 configure_file(ktimetracker-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/ktimetracker-version.h @ONLY)
 
@@ -44,7 +44,7 @@ qt5_add_dbus_adaptor(ktimetracker_SRCS
     TimeTrackerWidget
     mainadaptor
     MainAdaptor
-    )
+)
 
 ki18n_wrap_ui(ktimetracker_SRCS
     csvexportdialog.ui
@@ -53,15 +53,13 @@ ki18n_wrap_ui(ktimetracker_SRCS
     settings/cfgbehavior.ui
     settings/cfgdisplay.ui
     settings/cfgstorage.ui
-    )
+)
 
 kconfig_add_kcfg_files(ktimetracker_SRCS settings/ktimetracker.kcfgc)
 
 qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
-add_executable(ktimetracker
-    ${ktimetracker_SRCS}
-    )
+add_executable(ktimetracker ${ktimetracker_SRCS})
 
 target_link_libraries(ktimetracker
     KF5::KCMUtils
