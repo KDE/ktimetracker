@@ -30,13 +30,13 @@
 
 #include <QPixmap>
 #include <QString>
-#include <QTimer>
 #include <QToolTip>
 #include <QMenu>
 #include <QDebug>
 #include <QAction>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QMovie>
 
 #include <KLocalizedString>
 
@@ -45,28 +45,14 @@
 #include "task.h"
 #include "timetrackerwidget.h"
 
-QVector<QPixmap*> *TrayIcon::icons = 0;
-
 TrayIcon::TrayIcon(MainWindow* parent)
-  : KStatusNotifierItem(parent)
+    : KStatusNotifierItem(parent)
 {
-    setObjectName( "Ktimetracker Tray" );
-    // the timer that updates the "running" icon in the tray
-    _taskActiveTimer = new QTimer(this);
-    connect( _taskActiveTimer, SIGNAL(timeout()), this,
-                               SLOT(advanceClock()) );
+    setObjectName("Ktimetracker Tray");
 
-    if (icons == 0)
-    {
-        icons = new QVector<QPixmap*>(8);
-        for (int i=0; i<8; ++i)
-        {
-            QString name;
-            name.sprintf(":/pics/active-icon-%d.xpm",i);
-            QPixmap *icon = new QPixmap(name);
-            icons->insert(i,icon);
-        }
-    }
+    m_animation = new QMovie(":/pics/active-icon.gif", QByteArray(), this);
+    connect(m_animation, &QMovie::frameChanged, this, &TrayIcon::setActiveIcon);
+
     TimeTrackerWidget *timetrackerWidget = static_cast<TimeTrackerWidget*>(parent->centralWidget());
     if (timetrackerWidget) {
         QAction *action = timetrackerWidget->action("configure_ktimetracker");
@@ -83,62 +69,40 @@ TrayIcon::TrayIcon(MainWindow* parent)
     initToolTip();
 }
 
-TrayIcon::TrayIcon()
-  : KStatusNotifierItem( 0 )
-// will display nothing at all
-{
-    setObjectName( "Ktimetracker Tray" );
-    _taskActiveTimer = 0;
-}
-
 void TrayIcon::startClock()
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    if ( _taskActiveTimer )
-    {
-        _taskActiveTimer->start(1000);
-        setIconByPixmap( *(*icons)[_activeIcon] );
-    }
-    qCDebug(KTT_LOG) << "Leaving function";
+    m_animation->start();
 }
 
 void TrayIcon::stopClock()
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    if ( _taskActiveTimer )
-    {
-        _taskActiveTimer->stop();
-    }
-    qCDebug(KTT_LOG) << "Leaving function";
+    m_animation->stop();
 }
 
-void TrayIcon::advanceClock()
+void TrayIcon::setActiveIcon(int frame)
 {
-    _activeIcon = (_activeIcon+1) % 8;
-    setIconByPixmap( *(*icons)[_activeIcon]);
+    setIconByPixmap(QIcon(m_animation->currentPixmap()));
 }
 
 void TrayIcon::resetClock()
 {
-    _activeIcon = 0;
-    setIconByPixmap( *(*icons)[_activeIcon]);
+    m_animation->jumpToFrame(0);
 }
 
 void TrayIcon::initToolTip()
 {
-    updateToolTip(QList<Task*> ());
+    updateToolTip(QList<Task*>());
 }
 
 void TrayIcon::updateToolTip(QList<Task*> activeTasks)
 {
-    if ( activeTasks.isEmpty() )
-    {
+    if (activeTasks.isEmpty()) {
         this->setToolTip( "ktimetracker", "ktimetracker", i18n("No active tasks") );
         return;
     }
 
-    QFontMetrics fm( QToolTip::font() );
-    const QString continued = i18n( ", ..." );
+    QFontMetrics fm(QToolTip::font());
+    const QString continued = i18n(", ...");
     const int buffer = fm.boundingRect(continued).width();
     const int desktopWidth = QApplication::desktop()->screenGeometry(associatedWidget()).width();
     const int maxWidth = desktopWidth - buffer;
@@ -150,20 +114,20 @@ void TrayIcon::updateToolTip(QList<Task*> activeTasks)
     // If at any time the width of the tool tip is larger than the desktop,
     // stop building it.
 
-    for ( int i = 0; i < activeTasks.count(); ++i )
-    {
-        Task* task = activeTasks.at( i );
-        if ( i > 0 )
-            s += i18n( ", " ) + task->name();
-        else
+    for (int i = 0; i < activeTasks.count(); ++i) {
+        Task* task = activeTasks.at(i);
+        if (i > 0) {
+            s += i18n(", ") + task->name();
+        } else {
             s += task->name();
-        int width = fm.boundingRect( s ).width();
-        if ( width > maxWidth )
-        {
+        }
+
+        int width = fm.boundingRect(s).width();
+        if (width > maxWidth) {
             qTip += continued;
             break;
         }
         qTip = s;
     }
-    this->setToolTip( "ktimetracker", "ktimetracker", qTip );
+    this->setToolTip("ktimetracker", "ktimetracker", qTip);
 }

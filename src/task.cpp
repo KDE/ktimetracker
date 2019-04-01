@@ -24,9 +24,9 @@
 
 #include <QDateTime>
 #include <QString>
-#include <QTimer>
 #include <QPixmap>
 #include <QDebug>
+#include <QMovie>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
@@ -97,13 +97,8 @@ void Task::init(
     connect(this, &Task::deletingTask, taskView, &TaskView::deletingTask);
 
     // Prepare animated icon
-    m_icons = QVector<QPixmap*>(8);
-    for (int i = 0; i < 8; ++i) {
-        QString name;
-        name.sprintf(":/pics/watch-%d.xpm", i);
-        QPixmap *icon = new QPixmap(name);
-        m_icons.insert(i, icon);
-    }
+    m_clockAnimation = new QMovie(":/pics/watch.gif", QByteArray(), this);
+    connect(m_clockAnimation, &QMovie::frameChanged, this, &Task::setActiveIcon);
 
     mRemoving = false;
     mName = taskName.trimmed();
@@ -111,11 +106,8 @@ void Task::init(
     mLastStart = QDateTime::currentDateTime();
     mTotalTime = mTime = minutes;
     mTotalSessionTime = mSessionTime = sessionTime;
-    mTimer = new QTimer(this);
     mDesktops = desktops;
-    connect(mTimer, SIGNAL(timeout()), this, SLOT(updateActiveIcon()));
     setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
-    mCurrentPic = 0;
     mPercentComplete = percent_complete;
     mPriority = priority;
     mSessionStartTiMe = QDateTime::fromString(sessionStartTiMe);
@@ -135,7 +127,6 @@ void Task::init(
 Task::~Task()
 {
     emit deletingTask(this);
-    delete mTimer;
 }
 
 void Task::delete_recursive()
@@ -147,40 +138,34 @@ void Task::delete_recursive()
     delete this;
 }
 
-void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime& when)
 // This is the back-end, the front-end is StartTimerFor()
+void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime& when)
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (on) {
-        if (!mTimer->isActive()) {
-            mTimer->start(1000);
-            storage->startTimer(this);
-            mCurrentPic=7;
+        if (!isRunning()) {
+            m_clockAnimation->start();
             mLastStart = when;
             qCDebug(KTT_LOG) << "task has been started for " << when;
-            updateActiveIcon();
         }
     } else {
-        if (mTimer->isActive()) {
-            mTimer->stop();
+        if (isRunning()) {
+            m_clockAnimation->stop();
             if (!mRemoving) {
-                storage->stopTimer(this, when);
                 setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
             }
         }
     }
 }
 
-void Task::resumeRunning()
 // setRunning is the back-end, the front-end is StartTimerFor().
 // resumeRunning does the same as setRunning, but not add a new
 // start date to the storage.
+void Task::resumeRunning()
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (!mTimer->isActive()) {
-        mTimer->start(1000);
-        mCurrentPic = 7;
-        updateActiveIcon();
+    if (!isRunning()) {
+        m_clockAnimation->start();
     }
 }
 
@@ -191,7 +176,7 @@ void Task::setUid(const QString& uid)
 
 bool Task::isRunning() const
 {
-    return mTimer->isActive();
+    return m_clockAnimation->state() == QMovie::Running;
 }
 
 void Task::setName(const QString& name, TimeTrackerStorage* storage)
@@ -451,10 +436,9 @@ bool Task::remove(TimeTrackerStorage* storage)
     return ok;
 }
 
-void Task::updateActiveIcon()
+void Task::setActiveIcon(int frame)
 {
-    mCurrentPic = (mCurrentPic + 1) % 8;
-    setIcon(1, *m_icons[mCurrentPic]);
+    setIcon(1, QIcon(m_clockAnimation->currentPixmap()));
 }
 
 QString Task::fullName() const

@@ -28,8 +28,6 @@
 
 //#include <config-ktimetracker.h> // HAVE_LIBXSS
 
-class QTimer;
-
 /**
   Keep track of what window has the focus.
  */

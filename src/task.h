@@ -34,6 +34,7 @@
 class QObject;
 class QPixmap;
 class QString;
+class QMovie;
 
 class TimeTrackerStorage;
 
@@ -318,7 +319,7 @@ public:
      * taskview.  If percent NULL, set to zero.  If greater than 100, set to
      * 100.  If less than zero, set to zero.
      */
-    void setPercentComplete(int percent, TimeTrackerStorage *storage);
+    void setPercentComplete(int percent, TimeTrackerStorage* storage);
 
     int percentComplete() const;
 
@@ -338,19 +339,19 @@ public:
     /** Return true if task is complete (percent complete equals 100).  */
     bool isComplete();
 
-  protected:
-    void changeParentTotalTimes( long minutesSession, long minutes );
+protected:
+    void changeParentTotalTimes(long minutesSession, long minutes);
 
-  Q_SIGNALS:
-    void totalTimesChanged( long minutesSession, long minutes);
+Q_SIGNALS:
+    void totalTimesChanged(long minutesSession, long minutes);
     /** signal that we're about to delete a task */
     void deletingTask(Task* thisTask);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     /** animate the active icon */
-    void updateActiveIcon();
+    void setActiveIcon(int frame);
 
-  private:
+private:
     /** initialize a task */
     void init(
         const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
@@ -358,7 +359,7 @@ public:
 
     bool operator<(const QTreeWidgetItem &other) const override;
 
-    QVector<QPixmap*> m_icons;
+    QMovie* m_clockAnimation;
 
     /** The iCal unique ID of the Todo for this task. */
     QString mUid;
@@ -389,8 +390,6 @@ public:
     QDateTime mSessionStartTiMe;
 
     DesktopList mDesktops;
-    QTimer *mTimer;
-    int mCurrentPic;
 
     /** Don't need to update storage when deleting task from list. */
     bool mRemoving;

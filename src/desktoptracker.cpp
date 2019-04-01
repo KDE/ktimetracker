@@ -42,13 +42,15 @@ DesktopTracker::DesktopTracker ()
 #endif
 #endif
     // currentDesktop will return 0 if no window manager is started
-    if( mPreviousDesktop < 0 ) mPreviousDesktop = 0;
-    mTimer = new QTimer( this );
-    mTimer->setSingleShot( true );
-    connect( mTimer, SIGNAL(timeout()), this, SLOT(changeTimers()) );
+    if (mPreviousDesktop < 0) {
+        mPreviousDesktop = 0;
+    }
+    mTimer = new QTimer(this);
+    mTimer->setSingleShot(true);
+    connect(mTimer, SIGNAL(timeout()), this, SLOT(changeTimers()));
 }
 
-void DesktopTracker::handleDesktopChange( int desktop )
+void DesktopTracker::handleDesktopChange(int desktop)
 {
     mDesktop = desktop;
 

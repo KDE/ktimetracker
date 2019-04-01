@@ -30,7 +30,7 @@
 
 #include "task.h"
 
-class QTimer;
+class QMovie;
 class MainWindow;
 
 class TrayIcon : public KStatusNotifierItem
@@ -39,13 +39,10 @@ class TrayIcon : public KStatusNotifierItem
 
 public:
     explicit TrayIcon(MainWindow* parent);
-    TrayIcon();
     ~TrayIcon() override = default;
 
 private:
-    int _activeIcon;
-    static QVector<QPixmap*> *icons;
-    QTimer *_taskActiveTimer;
+    QMovie* m_animation;
 
 public Q_SLOTS:
     void startClock();
@@ -55,7 +52,7 @@ public Q_SLOTS:
     void initToolTip();
 
 protected Q_SLOTS:
-    void advanceClock();
+    void setActiveIcon(int frame);
 };
 
 #endif // TRAY_ICON_H
