@@ -28,22 +28,18 @@
 
 #include "tray.h"
 
-#include <QPixmap>
-#include <QString>
 #include <QToolTip>
 #include <QMenu>
-#include <QDebug>
-#include <QAction>
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QMovie>
 
 #include <KLocalizedString>
 
-#include "ktt_debug.h"
 #include "mainwindow.h"
 #include "task.h"
 #include "timetrackerwidget.h"
+#include "ktt_debug.h"
 
 TrayIcon::TrayIcon(MainWindow* parent)
     : KStatusNotifierItem(parent)
@@ -53,20 +49,20 @@ TrayIcon::TrayIcon(MainWindow* parent)
     m_animation = new QMovie(":/pics/active-icon.gif", QByteArray(), this);
     connect(m_animation, &QMovie::frameChanged, this, &TrayIcon::setActiveIcon);
 
-    TimeTrackerWidget *timetrackerWidget = static_cast<TimeTrackerWidget*>(parent->centralWidget());
-    if (timetrackerWidget) {
-        QAction *action = timetrackerWidget->action("configure_ktimetracker");
+    auto* widget = dynamic_cast<TimeTrackerWidget*>(parent->centralWidget());
+    if (widget) {
+        QAction* action = widget->action("configure_ktimetracker");
         if (action) {
             contextMenu()->addAction(action);
         }
 
-        action = timetrackerWidget->action("stopAll");
+        action = widget->action("stopAll");
         if (action) {
             contextMenu()->addAction(action);
         }
     }
-    resetClock();
-    initToolTip();
+
+    updateToolTip(QList<Task*>());
 }
 
 void TrayIcon::startClock()
@@ -82,16 +78,6 @@ void TrayIcon::stopClock()
 void TrayIcon::setActiveIcon(int frame)
 {
     setIconByPixmap(QIcon(m_animation->currentPixmap()));
-}
-
-void TrayIcon::resetClock()
-{
-    m_animation->jumpToFrame(0);
-}
-
-void TrayIcon::initToolTip()
-{
-    updateToolTip(QList<Task*>());
 }
 
 void TrayIcon::updateToolTip(QList<Task*> activeTasks)

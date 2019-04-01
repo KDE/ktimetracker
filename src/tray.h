@@ -24,14 +24,13 @@
 #define TRAY_ICON_H
 
 #include <QList>
-#include <QVector>
 
 #include <KStatusNotifierItem>
 
-#include "task.h"
-
 class QMovie;
+
 class MainWindow;
+class Task;
 
 class TrayIcon : public KStatusNotifierItem
 {
@@ -47,9 +46,7 @@ private:
 public Q_SLOTS:
     void startClock();
     void stopClock();
-    void resetClock();
     void updateToolTip(QList<Task*> activeTasks);
-    void initToolTip();
 
 protected Q_SLOTS:
     void setActiveIcon(int frame);
