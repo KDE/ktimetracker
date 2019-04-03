@@ -12,6 +12,7 @@
 *.user
 .*.swp
 .swp.*
+.idea
 Doxyfile
 Makefile
 avail
