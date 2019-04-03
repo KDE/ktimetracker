@@ -545,7 +545,7 @@ void TimeTrackerWidget::exportcsvFile()
 
 void TimeTrackerWidget::exportcsvHistory()
 {
-//    currentTaskView()->exportcsvHistory();
+    currentTaskView()->exportcsvHistory();
 }
 
 void TimeTrackerWidget::importPlanner(const QString &fileName)
