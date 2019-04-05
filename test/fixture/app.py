@@ -10,7 +10,7 @@ class AppHelper(object):
     def __init__(self):
         os.system('killall -q ktimetracker')
 
-        path = "/tmp/ktimetrackertest.ics"
+    def run(self, path):
         try:
             os.remove(path)
         except FileNotFoundError:
@@ -20,7 +20,7 @@ class AppHelper(object):
         self.__pid = os.spawnl(os.P_NOWAIT, "/usr/bin/ktimetracker", "ktimetracker", path)
         self.app = self.__wait_dbus_object()
 
-    def close(self):
+    def stop(self):
         os.kill(self.__pid, signal.SIGTERM)
 
     def __getattr__(self, name):

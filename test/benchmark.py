@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
-import os
-
 from test.fixture.app import AppHelper
 
 # start ktimetracker and make sure its dbus interface is ready
 app = AppHelper()
+app.run('/tmp/ktimetrackertest.ics')
 
 for n in range(2):
     # add 300 tasks
@@ -21,8 +20,7 @@ for n in range(2):
     app.saveAll()
     app.stopAllTimersDBUS()
 
-
-app.close()
+app.stop()
 
 # Old comments from Bash-based benchmark:
 #   This is a bash script for a ktimetracker benchmark - how fast is ktimetracker on your system ?
