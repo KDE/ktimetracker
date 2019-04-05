@@ -3,7 +3,7 @@ This directory holds automated tests for ktimetracker.
 How to start:
 - install Net::DAV::Server with CPAN; see e.g. http://wiki.linuxquestions.org/wiki/CPAN for information how to do it.
 - execute the tests like this:
- ./runalltests
+ python3 -m pytest ./
 
 --
 Mark Bucciarelli <mark@hubcapconsulting.com>

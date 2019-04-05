@@ -1,5 +1,6 @@
 import time
 import os
+import signal
 
 from pydbus import SessionBus
 from gi.repository import GLib
@@ -9,14 +10,21 @@ class AppHelper(object):
     def __init__(self):
         os.system('killall -q ktimetracker')
 
+        path = "/tmp/ktimetrackertest.ics"
         try:
-            os.remove("/tmp/ktimetrackerbenchmark.ics")
+            os.remove(path)
         except FileNotFoundError:
             pass
 
         # start ktimetracker and make sure its dbus interface is ready
-        self.pid = os.spawnl(os.P_NOWAIT, "/usr/bin/ktimetracker", "ktimetracker", "/tmp/ktimetrackerbenchmark.ics")
+        self.__pid = os.spawnl(os.P_NOWAIT, "/usr/bin/ktimetracker", "ktimetracker", path)
         self.app = self.__wait_dbus_object()
+
+    def close(self):
+        os.kill(self.__pid, signal.SIGTERM)
+
+    def __getattr__(self, name):
+        return getattr(self.app, name)
 
     @staticmethod
     def __wait_dbus_object():

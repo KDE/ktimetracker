@@ -18,3 +18,4 @@ Makefile
 avail
 random_seed
 svnmerge-commit-message.txt
+__pycache__
