@@ -868,61 +868,67 @@ void TaskView::newTask()
     newTask(i18n("New Task"), 0);
 }
 
-void TaskView::newTask( const QString &caption, Task *parent )
+void TaskView::newTask(const QString& caption, Task* parent)
 {
-    EditTaskDialog *dialog = new EditTaskDialog( this, caption, 0 );
+    EditTaskDialog *dialog = new EditTaskDialog(this, caption, 0);
     long total, totalDiff, session, sessionDiff;
     DesktopList desktopList;
 
     int result = dialog->exec();
-    if ( result == QDialog::Accepted )
-    {
-        QString taskName = i18n( "Unnamed Task" );
-        if ( !dialog->taskName().isEmpty()) taskName = dialog->taskName();
+    if (result == QDialog::Accepted) {
+        QString taskName = i18n("Unnamed Task");
+        if (!dialog->taskName().isEmpty()) {
+            taskName = dialog->taskName();
+        }
         QString taskDescription = dialog->taskDescription();
 
         total = totalDiff = session = sessionDiff = 0;
-        dialog->status( &desktopList );
+        dialog->status(&desktopList);
 
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
-        if ( desktopList.size() ==  _desktopTracker->desktopCount() )
+        if (desktopList.size() == _desktopTracker->desktopCount()) {
             desktopList.clear();
+        }
 
-        QString uid = addTask( taskName, taskDescription, total, session, desktopList, parent );
-        if ( uid.isNull() )
-        {
-            KMessageBox::error( 0, i18n(
-                "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
+        QString uid = addTask(taskName, taskDescription, total, session, desktopList, parent);
+        if (uid.isNull()) {
+            KMessageBox::error(nullptr, i18n(
+                "Error storing new task. Your changes were not saved. "
+                "Make sure you can edit your iCalendar file. Also quit "
+                "all applications using this file and remove any lock "
+                "file related to its name from ~/.kde/share/apps/kabc/lock/"));
         }
     }
     emit updateButtons();
 }
 
-QString TaskView::addTask
-( const QString& taskname, const QString& taskdescription, long total, long session,
-  const DesktopList& desktops, Task* parent )
+QString TaskView::addTask(
+    const QString& taskname, const QString& taskdescription, long total, long session,
+    const DesktopList& desktops, Task* parent)
 {
     qCDebug(KTT_LOG) << "Entering function; taskname =" << taskname;
     setSortingEnabled(false);
-    Task *task;
-    if ( parent ) task = new Task( taskname, taskdescription, total, session, desktops, parent );
-    else          task = new Task( taskname, taskdescription, total, session, desktops, this );
 
-    task->setUid( d->mStorage->addTask( task, parent ) );
-    QString taskuid=task->uid();
-    if ( ! taskuid.isNull() )
-    {
-        _desktopTracker->registerForDesktops( task, desktops );
-        setCurrentItem( task );
-        task->setSelected( true );
+    Task* task;
+    if (parent) {
+        task = new Task(taskname, taskdescription, total, session, desktops, parent);
+    } else {
+        task = new Task(taskname, taskdescription, total, session, desktops, this);
+    }
+
+    task->setUid(d->mStorage->addTask(task, parent));
+    QString taskuid = task->uid();
+    if (!taskuid.isNull()) {
+        _desktopTracker->registerForDesktops(task, desktops);
+        setCurrentItem(task);
+        task->setSelected(true);
         task->setPixmapProgress();
         save();
-    }
-    else
-    {
+    } else {
         delete task;
     }
+
     setSortingEnabled(true);
     return taskuid;
 }
@@ -930,8 +936,10 @@ QString TaskView::addTask
 void TaskView::newSubTask()
 {
     Task* task = currentItem();
-    if(!task)
+    if (!task) {
         return;
+    }
+
     newTask(i18n("New Sub Task"), task);
     task->setExpanded(true);
     refresh();
@@ -940,40 +948,39 @@ void TaskView::newSubTask()
 void TaskView::editTask()
 {
     qCDebug(KTT_LOG) <<"Entering editTask";
-    Task *task = currentItem();
-    if (!task) return;
+    Task* task = currentItem();
+    if (!task) {
+        return;
+    }
 
     DesktopList desktopList = task->desktops();
     DesktopList oldDeskTopList = desktopList;
-    EditTaskDialog *dialog = new EditTaskDialog( this, i18n("Edit Task"), &desktopList );
-    dialog->setTask( task->name() );
-    dialog->setDescription( task->description() );
+    EditTaskDialog* dialog = new EditTaskDialog(this, i18n("Edit Task"), &desktopList);
+    dialog->setTask(task->name());
+    dialog->setDescription(task->description());
     int result = dialog->exec();
-    if (result == QDialog::Accepted)
-    {
+    if (result == QDialog::Accepted) {
         QString taskName = i18n("Unnamed Task");
-        if (!dialog->taskName().isEmpty())
-        {
+        if (!dialog->taskName().isEmpty()) {
             taskName = dialog->taskName();
         }
         // setName only does something if the new name is different
         task->setName(taskName, d->mStorage);
         task->setDescription(dialog->taskDescription());
         // update session time as well if the time was changed
-        if (!dialog->timeChange().isEmpty())
-        {
-            task->changeTime(dialog->timeChange().toInt(),d->mStorage);
+        if (!dialog->timeChange().isEmpty()) {
+            task->changeTime(dialog->timeChange().toInt(), d->mStorage);
         }
-        dialog->status( &desktopList );
+        dialog->status(&desktopList);
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
-        if (desktopList.size() == _desktopTracker->desktopCount())
+        if (desktopList.size() == _desktopTracker->desktopCount()) {
             desktopList.clear();
+        }
         // only do something for autotracking if the new setting is different
-        if ( oldDeskTopList != desktopList )
-        {
+        if (oldDeskTopList != desktopList) {
             task->setDesktopList(desktopList);
-            _desktopTracker->registerForDesktops( task, desktopList );
+            _desktopTracker->registerForDesktops(task, desktopList);
         }
         emit updateButtons();
     }
@@ -982,15 +989,15 @@ void TaskView::editTask()
 void TaskView::setPerCentComplete(int completion)
 {
     Task* task = currentItem();
-    if (task == 0)
-    {
-        KMessageBox::information(0,i18n("No task selected."));
+    if (task == 0) {
+        KMessageBox::information(0, i18n("No task selected."));
         return;
     }
 
-    if (completion<0) completion=0;
-    if (completion<100)
-    {
+    if (completion < 0) {
+        completion = 0;
+    }
+    if (completion < 100) {
         task->setPercentComplete(completion, d->mStorage);
         task->setPixmapProgress();
         save();
@@ -998,40 +1005,38 @@ void TaskView::setPerCentComplete(int completion)
     }
 }
 
-void TaskView::deleteTaskBatch( Task* task )
+void TaskView::deleteTaskBatch(Task* task)
 {
     QString uid=task->uid();
     task->remove(d->mStorage);
-    _preferences->deleteEntry( uid ); // forget if the item was expanded or collapsed
+    _preferences->deleteEntry(uid); // forget if the item was expanded or collapsed
     save();
 
     // Stop idle detection if no more counters are running
-    if (d->mActiveTasks.count() == 0)
-    {
+    if (d->mActiveTasks.count() == 0) {
         _idleTimeDetector->stopIdleDetection();
         emit timersInactive();
     }
+
     task->delete_recursive();
-    emit tasksChanged( d->mActiveTasks );
+    emit tasksChanged(d->mActiveTasks);
 }
 
-
-void TaskView::deleteTask( Task* task )
+void TaskView::deleteTask(Task* task)
 /* Attention when popping up a window asking for confirmation.
 If you have "Track active applications" on, this window will create a new task and
 make this task running and selected. */
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (task == 0) task = currentItem();
-    if (currentItem() == 0)
-    {
-        KMessageBox::information(0,i18n("No task selected."));
+    if (task == 0) {
+        task = currentItem();
     }
-    else
-    {
+
+    if (currentItem() == 0) {
+        KMessageBox::information(0, i18n("No task selected."));
+    } else {
         int response = KMessageBox::Continue;
-        if (KTimeTrackerSettings::promptDelete())
-        {
+        if (KTimeTrackerSettings::promptDelete()) {
             response = KMessageBox::warningContinueCancel( 0,
                 i18n( "Are you sure you want to delete the selected"
                 " task and its entire history?\n"
@@ -1039,17 +1044,20 @@ make this task running and selected. */
                 "be deleted."),
                 i18n( "Deleting Task"), KStandardGuiItem::del());
         }
-        if (response == KMessageBox::Continue) deleteTaskBatch(task);
+
+        if (response == KMessageBox::Continue) {
+            deleteTaskBatch(task);
+        }
     }
 }
 
 void TaskView::markTaskAsComplete()
 {
-    if (currentItem() == 0)
-    {
-        KMessageBox::information(0,i18n("No task selected."));
+    if (currentItem() == 0) {
+        KMessageBox::information(0, i18n("No task selected."));
         return;
     }
+
     currentItem()->setPercentComplete(100, d->mStorage);
     currentItem()->setPixmapProgress();
     save();
@@ -1058,7 +1066,7 @@ void TaskView::markTaskAsComplete()
 
 void TaskView::subtractTime(int minutes)
 {
-    addTimeToActiveTasks(-minutes,false); // subtract time in memory, but do not store it
+    addTimeToActiveTasks(-minutes, false); // subtract time in memory, but do not store it
 }
 
 void TaskView::deletingTask(Task* deletedTask)
@@ -1066,10 +1074,10 @@ void TaskView::deletingTask(Task* deletedTask)
     qCDebug(KTT_LOG) << "Entering function";
     DesktopList desktopList;
 
-    _desktopTracker->registerForDesktops( deletedTask, desktopList );
-    d->mActiveTasks.removeAll( deletedTask );
+    _desktopTracker->registerForDesktops(deletedTask, desktopList);
+    d->mActiveTasks.removeAll(deletedTask);
 
-    emit tasksChanged( d->mActiveTasks );
+    emit tasksChanged(d->mActiveTasks);
 }
 
 void TaskView::markTaskAsIncomplete()

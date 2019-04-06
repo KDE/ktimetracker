@@ -2,13 +2,11 @@
 #define EDITTASKDIALOG_H
 
 #include <QDialog>
-#include "desktoplist.h"
-#include "taskview.h"
 
-namespace Ui
-{
-    class EditTaskDialog;
-}
+#include "desktoplist.h"
+#include "ui_edittaskdialog.h"
+
+class TaskView;
 
 /**
  * Class to show a dialog in ktimetracker to enter data about a task.
@@ -22,26 +20,27 @@ namespace Ui
  * @short Class to show a dialog to enter data about a task
  * @author Thorsten Staerk
  */
-
 class EditTaskDialog : public QDialog
 {
     Q_OBJECT
+
 public:
-    EditTaskDialog( TaskView *parent, const QString &caption, DesktopList* desktopList = 0 );
-    ~EditTaskDialog();
+    EditTaskDialog(TaskView* parent, const QString& caption, DesktopList* desktopList = nullptr);
+    ~EditTaskDialog() override = default;
+
     QString taskName();
     QString taskDescription();
     QString timeChange();
-    void setTask( const QString &name );
-    void setDescription( const QString &description );
-    void status( DesktopList *desktopList) const;
+    void setTask(const QString& name);
+    void setDescription(const QString& description);
+    void status(DesktopList* desktopList) const;
 
 protected:
-    void changeEvent(QEvent *e);
+    void changeEvent(QEvent* e) override;
 
 private:
-    Ui::EditTaskDialog *m_ui;
-    TaskView *m_parent;
+    Ui::EditTaskDialog m_ui;
+    TaskView* m_parent;
 
 private slots:
     void on_autotrackinggroupbox_clicked();
