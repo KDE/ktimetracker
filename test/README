@@ -4,6 +4,7 @@ How to start:
 - install Net::DAV::Server with CPAN; see e.g. http://wiki.linuxquestions.org/wiki/CPAN for information how to do it.
 - execute the tests like this:
  python3 -m pytest ./
+ ./webdav.sh
 
 --
 Mark Bucciarelli <mark@hubcapconsulting.com>
