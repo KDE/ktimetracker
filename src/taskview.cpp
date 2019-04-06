@@ -700,17 +700,17 @@ void TaskView::scheduleSave()
 
 void TaskView::save()
 {
-    qCDebug(KTT_LOG) <<"Entering TaskView::save()";
-    QString err=d->mStorage->save(this);
+    qCDebug(KTT_LOG) << "Entering TaskView::save()";
+    QString err = d->mStorage->save(this);
 
-    if (!err.isNull())
-    {
+    if (!err.isNull()) {
         QString errMsg = d->mStorage->icalfile() + ":\n";
 
-        if (err==QString("Could not save. Could not lock file."))
+        if (err == QString("Could not save. Could not lock file."))
             errMsg += i18n("Could not save. Disk full?");
-        else
+        } else {
             errMsg += i18n("Could not save.");
+        }
 
         KMessageBox::error(this, errMsg);
     }

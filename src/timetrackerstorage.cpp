@@ -372,16 +372,15 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     QString errorString;
 
     QStack<KCalCore::Todo::Ptr> parents;
-    for (int i = 0; i < taskview->topLevelItemCount(); ++i )
-    {
+    for (int i = 0; i < taskview->topLevelItemCount(); ++i) {
         Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
         qCDebug(KTT_LOG) << "write task" << task->name();
-        errorString = writeTaskAsTodo( task, parents );
+        errorString = writeTaskAsTodo(task, parents);
     }
 
     errorString = saveCalendar();
 
-    if ( errorString.isEmpty() ) {
+    if (errorString.isEmpty()) {
         qCDebug(KTT_LOG) << "TimeTrackerStorage::save : wrote tasks to" << d->mICalFile;
     } else {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save :" << errorString;
