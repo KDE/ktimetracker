@@ -11,6 +11,8 @@ class AppHelper(object):
         os.system('killall -q ktimetracker')
 
     def run(self, path):
+        self.__path = path
+
         try:
             os.remove(path)
         except FileNotFoundError:
@@ -19,6 +21,9 @@ class AppHelper(object):
         # start ktimetracker and make sure its dbus interface is ready
         self.__pid = os.spawnlp(os.P_NOWAIT, "ktimetracker", "ktimetracker", path)
         self.app = self.__wait_dbus_object()
+
+    def path(self):
+        return self.__path
 
     def stop(self):
         os.kill(self.__pid, signal.SIGTERM)
