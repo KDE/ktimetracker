@@ -37,7 +37,6 @@ public:
   }
   QString m_filename;
   QWeakPointer<KTTCalendar> m_weakPtr;
-  KCalCore::FileStorage::Ptr m_fileStorage;
 };
 
 KTTCalendar::KTTCalendar(const QString &filename, bool monitorFile)
