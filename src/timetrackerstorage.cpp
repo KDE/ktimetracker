@@ -69,8 +69,6 @@
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 
-using namespace KTimeTracker;
-
 //@cond PRIVATE
 class TimeTrackerStorage::Private
 {
@@ -85,7 +83,7 @@ public:
       delete m_fileLock;
     }
 
-    KTimeTracker::KTTCalendar::Ptr mCalendar;
+    KTTCalendar::Ptr mCalendar;
     QString mICalFile;
     QLockFile *m_fileLock;
 };
@@ -238,8 +236,7 @@ QString TimeTrackerStorage::icalfile()
     return d->mICalFile;
 }
 
-QString TimeTrackerStorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr &calendar,
-                                           TaskView *view )
+QString TimeTrackerStorage::buildTaskView(const KTTCalendar::Ptr& calendar, TaskView* view)
 // makes *view contain the tasks out of *rc.
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -251,7 +248,7 @@ QString TimeTrackerStorage::buildTaskView( const KTimeTracker::KTTCalendar::Ptr 
     QVector<QDateTime> startTimes;
 
     // remember tasks that are running and their start times
-    QTreeWidgetItemIterator it( view );
+    QTreeWidgetItemIterator it(view);
     while (*it) {
         Task *task = static_cast<Task*>(*it);
         if (task->isRunning()) {

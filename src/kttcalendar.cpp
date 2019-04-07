@@ -30,7 +30,6 @@
 #include "ktt_debug.h"
 
 using namespace KCalCore;
-using namespace KTimeTracker;
 
 class KTTCalendar::Private {
 public:

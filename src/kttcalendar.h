@@ -25,11 +25,12 @@
 #include <KCalCore/MemoryCalendar>
 #include <QWeakPointer>
 
-namespace KTimeTracker {
-  class KTTCalendar : public KCalCore::MemoryCalendar {
+class KTTCalendar : public KCalCore::MemoryCalendar
+{
     Q_OBJECT
-  public:
-    typedef QSharedPointer<KTimeTracker::KTTCalendar> Ptr;
+
+public:
+    typedef QSharedPointer<KTTCalendar> Ptr;
     ~KTTCalendar();
     /**reimp*/ bool reload();
     /**reimp*/ bool save();
@@ -41,18 +42,18 @@ namespace KTimeTracker {
      *
      * For this reason, the ctor is private.
      */
-    static KTimeTracker::KTTCalendar::Ptr createInstance( const QString &filename,
-                                                          bool monitorFile );
-    QWeakPointer<KTimeTracker::KTTCalendar> weakPointer() const;
-    void setWeakPointer( const QWeakPointer<KTimeTracker::KTTCalendar> &);
-  Q_SIGNALS:
+    static KTTCalendar::Ptr createInstance(const QString &filename, bool monitorFile);
+    QWeakPointer<KTTCalendar> weakPointer() const;
+    void setWeakPointer(const QWeakPointer<KTTCalendar>&);
+
+Q_SIGNALS:
     void calendarChanged();
-  private:
+
+private:
     KTTCalendar();
-    explicit KTTCalendar( const QString &filename, bool monitorFile );
+    explicit KTTCalendar(const QString &filename, bool monitorFile);
     class Private;
     Private *const d;
-  };
-}
+};
 
 #endif

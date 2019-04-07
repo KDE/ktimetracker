@@ -106,7 +106,7 @@ QString HistoryDialog::listallevents()
               this, SLOT(historyWidgetCellChanged(int,int)) );
 
     KCalCore::Event::List eventList = mparent->storage()->rawevents();
-    KTimeTracker::KTTCalendar::Ptr calendar = mparent->storage()->calendar();
+    KTTCalendar::Ptr calendar = mparent->storage()->calendar();
     for ( KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i )
     {

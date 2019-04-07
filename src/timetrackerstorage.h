@@ -93,7 +93,7 @@ public:
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView( const KTimeTracker::KTTCalendar::Ptr &calendar, TaskView *view );
+    QString buildTaskView(const KTTCalendar::Ptr& calendar, TaskView* view);
 
    /**
     * Build up the taskview.
@@ -113,7 +113,7 @@ public:
 
     QString removeEvent(QString uid);
 
-    KTimeTracker::KTTCalendar::Ptr calendar() const;
+    KTTCalendar::Ptr calendar() const;
 
     /**
      * Deliver if all events of a task have an endtime
@@ -310,7 +310,7 @@ public:
     class Private;
     Private *const d;
     //@endcond
-    KTimeTracker::KTTCalendar::Ptr _calendar;
+    KTTCalendar::Ptr _calendar;
 
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,

@@ -512,7 +512,7 @@ bool TaskView::allEventsHaveEndTiMe()
 
 void TaskView::iCalFileModified()
 {
-    KTimeTracker::KTTCalendar *calendar = qobject_cast<KTimeTracker::KTTCalendar*>(sender());
+    KTTCalendar *calendar = qobject_cast<KTTCalendar*>(sender());
     if (!calendar || !calendar->weakPointer()) {
         qWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
     } else {
@@ -551,7 +551,7 @@ QString TaskView::reFreshTimes()
     QString err;
     // re-calculate the time for every task based on events in the history
     KCalCore::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
-    int n=-1;
+    int n = -1;
     resetDisplayTimeForAllTasks();
     emit reSetTimes();
     while (itemAt(++n)) // loop over all tasks
