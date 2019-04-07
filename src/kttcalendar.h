@@ -31,9 +31,12 @@ class KTTCalendar : public KCalCore::MemoryCalendar
 
 public:
     typedef QSharedPointer<KTTCalendar> Ptr;
-    ~KTTCalendar();
-    /**reimp*/ bool reload();
-    /**reimp*/ bool save();
+
+    KTTCalendar() = delete;
+    ~KTTCalendar() override;
+
+    bool reload() override;
+    bool save() override;
 
     /**
      * Creates a new KTTCalendar and calls KTTCalendar::setWeakPointer(), so we can do
@@ -42,16 +45,17 @@ public:
      *
      * For this reason, the ctor is private.
      */
-    static KTTCalendar::Ptr createInstance(const QString &filename, bool monitorFile);
+    static KTTCalendar::Ptr createInstance(const QString& filename, bool monitorFile);
     QWeakPointer<KTTCalendar> weakPointer() const;
-    void setWeakPointer(const QWeakPointer<KTTCalendar>&);
 
 Q_SIGNALS:
     void calendarChanged();
 
 private:
-    KTTCalendar();
-    explicit KTTCalendar(const QString &filename, bool monitorFile);
+    explicit KTTCalendar(const QString& filename, bool monitorFile);
+
+    void setWeakPointer(const QWeakPointer<KTTCalendar>&);
+
     class Private;
     Private *const d;
 };
