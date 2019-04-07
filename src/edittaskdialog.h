@@ -42,7 +42,7 @@ private:
     Ui::EditTaskDialog m_ui;
     TaskView* m_parent;
 
-private slots:
+private Q_SLOTS:
     void on_autotrackinggroupbox_clicked();
     void on_edittimespushbutton_clicked();
 };

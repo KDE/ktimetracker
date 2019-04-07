@@ -41,7 +41,7 @@ public:
    */
   FocusDetector();
 
-public slots:
+public Q_SLOTS:
   void slotfocuschanged();
 
 Q_SIGNALS:
