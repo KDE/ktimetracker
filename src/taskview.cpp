@@ -512,7 +512,7 @@ bool TaskView::allEventsHaveEndTiMe()
 
 void TaskView::iCalFileModified()
 {
-    KTTCalendar *calendar = qobject_cast<KTTCalendar*>(sender());
+    FileCalendar *calendar = qobject_cast<FileCalendar*>(sender());
     if (!calendar || !calendar->weakPointer()) {
         qWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
     } else {

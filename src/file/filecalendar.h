@@ -25,15 +25,15 @@
 #include <KCalCore/MemoryCalendar>
 #include <QWeakPointer>
 
-class KTTCalendar : public KCalCore::MemoryCalendar
+class FileCalendar : public KCalCore::MemoryCalendar
 {
     Q_OBJECT
 
 public:
-    typedef QSharedPointer<KTTCalendar> Ptr;
+    typedef QSharedPointer<FileCalendar> Ptr;
 
-    KTTCalendar() = delete;
-    ~KTTCalendar() override = default;
+    FileCalendar() = delete;
+    ~FileCalendar() override = default;
 
     bool reload() override;
     bool save() override;
@@ -45,17 +45,17 @@ public:
      *
      * For this reason, the ctor is private.
      */
-    static KTTCalendar::Ptr createInstance(const QString& filename, bool monitorFile);
-    QWeakPointer<KTTCalendar> weakPointer() const;
+    static FileCalendar::Ptr createInstance(const QString& filename, bool monitorFile);
+    QWeakPointer<FileCalendar> weakPointer() const;
 
 Q_SIGNALS:
     void calendarChanged();
 
 private:
-    explicit KTTCalendar(const QString& filename, bool monitorFile);
+    explicit FileCalendar(const QString& filename, bool monitorFile);
 
     QString m_filename;
-    QWeakPointer<KTTCalendar> m_weakPtr;
+    QWeakPointer<FileCalendar> m_weakPtr;
 };
 
 #endif

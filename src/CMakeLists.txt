@@ -24,7 +24,7 @@ set(ktimetracker_SRCS
     treeviewheadercontextmenu.cpp
     timetrackerwidget.cpp
     focusdetectornotifier.cpp
-    kttcalendar.cpp
+    file/filecalendar.cpp
     main.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:ktimetracker_app_icon>

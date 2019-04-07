@@ -29,7 +29,7 @@
 
 #include "reportcriteria.h"
 #include "desktoplist.h"
-#include "kttcalendar.h"
+#include "file/filecalendar.h"
 
 class QDateTime;
 class Task;
@@ -93,7 +93,7 @@ public:
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(const KTTCalendar::Ptr& calendar, TaskView* view);
+    QString buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view);
 
    /**
     * Build up the taskview.
@@ -113,7 +113,7 @@ public:
 
     QString removeEvent(QString uid);
 
-    KTTCalendar::Ptr calendar() const;
+    FileCalendar::Ptr calendar() const;
 
     /**
      * Deliver if all events of a task have an endtime
@@ -310,7 +310,7 @@ public:
     class Private;
     Private *const d;
     //@endcond
-    KTTCalendar::Ptr _calendar;
+    FileCalendar::Ptr _calendar;
 
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,

@@ -83,7 +83,7 @@ public:
       delete m_fileLock;
     }
 
-    KTTCalendar::Ptr mCalendar;
+    FileCalendar::Ptr mCalendar;
     QString mICalFile;
     QLockFile *m_fileLock;
 };
@@ -140,10 +140,10 @@ QString TimeTrackerStorage::load(TaskView* view, const QString &fileName)
     }
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
-    d->mCalendar = KTTCalendar::createInstance(d->mICalFile, /*monitorFile=*/ fileIsLocal);
+    d->mCalendar = FileCalendar::createInstance(d->mICalFile, /*monitorFile=*/ fileIsLocal);
 
     if (view) {
-        connect(d->mCalendar.data(), &KTTCalendar::calendarChanged, view, &TaskView::iCalFileModified);
+        connect(d->mCalendar.data(), &FileCalendar::calendarChanged, view, &TaskView::iCalFileModified);
     }
 //    d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->reload();
@@ -236,7 +236,7 @@ QString TimeTrackerStorage::icalfile()
     return d->mICalFile;
 }
 
-QString TimeTrackerStorage::buildTaskView(const KTTCalendar::Ptr& calendar, TaskView* view)
+QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view)
 // makes *view contain the tasks out of *rc.
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -311,7 +311,7 @@ void TimeTrackerStorage::closeStorage()
     qCDebug(KTT_LOG) << "Entering function";
     if (d->mCalendar) {
         d->mCalendar->close();
-        d->mCalendar = KTTCalendar::Ptr();
+        d->mCalendar = FileCalendar::Ptr();
     }
     qCDebug(KTT_LOG) << "Leaving function";
 }
@@ -1012,7 +1012,7 @@ QString TimeTrackerStorage::saveCalendar()
     return errorMessage;
 }
 
-KTTCalendar::Ptr TimeTrackerStorage::calendar() const
+FileCalendar::Ptr TimeTrackerStorage::calendar() const
 {
     return _calendar;
 }

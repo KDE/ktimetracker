@@ -21,7 +21,7 @@
 
 #include "historydialog.h"
 #include "taskview.h"
-#include "kttcalendar.h"
+#include "file/filecalendar.h"
 
 #include <QItemDelegate>
 #include <QDateTimeEdit>
@@ -106,7 +106,7 @@ QString HistoryDialog::listallevents()
               this, SLOT(historyWidgetCellChanged(int,int)) );
 
     KCalCore::Event::List eventList = mparent->storage()->rawevents();
-    KTTCalendar::Ptr calendar = mparent->storage()->calendar();
+    FileCalendar::Ptr calendar = mparent->storage()->calendar();
     for ( KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i )
     {
