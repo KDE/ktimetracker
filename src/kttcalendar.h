@@ -33,13 +33,13 @@ public:
     typedef QSharedPointer<KTTCalendar> Ptr;
 
     KTTCalendar() = delete;
-    ~KTTCalendar() override;
+    ~KTTCalendar() override = default;
 
     bool reload() override;
     bool save() override;
 
     /**
-     * Creates a new KTTCalendar and calls KTTCalendar::setWeakPointer(), so we can do
+     * Creates a new KTTCalendar and sets m_weakPointer, so we can do
      * KTTCalendar::Ptr ptr = qobject_cast<KTTCalendar*>( sender() )->weakPointer().toStrongRef()
      * in slots.
      *
@@ -54,10 +54,8 @@ Q_SIGNALS:
 private:
     explicit KTTCalendar(const QString& filename, bool monitorFile);
 
-    void setWeakPointer(const QWeakPointer<KTTCalendar>&);
-
-    class Private;
-    Private *const d;
+    QString m_filename;
+    QWeakPointer<KTTCalendar> m_weakPtr;
 };
 
 #endif

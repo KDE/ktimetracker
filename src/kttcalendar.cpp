@@ -30,18 +30,10 @@
 
 #include "ktt_debug.h"
 
-class KTTCalendar::Private {
-public:
-  Private( const QString &filename ) : m_filename( filename )
-  {
-  }
-  QString m_filename;
-  QWeakPointer<KTTCalendar> m_weakPtr;
-};
-
 KTTCalendar::KTTCalendar(const QString &filename, bool monitorFile)
     : KCalCore::MemoryCalendar(QTimeZone::systemTimeZone())
-    , d(new Private(filename))
+    , m_filename(filename)
+    , m_weakPtr()
 {
     if (monitorFile) {
         connect(KDirWatch::self(), &KDirWatch::dirty, this, &KTTCalendar::calendarChanged);
@@ -51,17 +43,12 @@ KTTCalendar::KTTCalendar(const QString &filename, bool monitorFile)
     }
 }
 
-KTTCalendar::~KTTCalendar()
-{
-    delete d;
-}
-
 bool KTTCalendar::reload()
 {
 //  deleteAllTodos();
     KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
     KCalCore::FileStorage::Ptr fileStorage = KCalCore::FileStorage::Ptr(
-        new KCalCore::FileStorage(calendar, d->m_filename, new KCalCore::ICalFormat()));
+        new KCalCore::FileStorage(calendar, m_filename, new KCalCore::ICalFormat()));
     const bool result = fileStorage->load();
     if (!result) {
         qCritical() << "KTTCalendar::reload: problem loading calendar";
@@ -71,19 +58,14 @@ bool KTTCalendar::reload()
 
 QWeakPointer<KTTCalendar> KTTCalendar::weakPointer() const
 {
-    return d->m_weakPtr;
-}
-
-void KTTCalendar::setWeakPointer(const QWeakPointer<KTTCalendar>& ptr)
-{
-    d->m_weakPtr = ptr;
+    return m_weakPtr;
 }
 
 /** static */
 KTTCalendar::Ptr KTTCalendar::createInstance(const QString& filename, bool monitorFile)
 {
     KTTCalendar::Ptr calendar(new KTTCalendar(filename, monitorFile));
-    calendar->setWeakPointer(calendar.toWeakRef());
+    calendar->m_weakPtr = calendar.toWeakRef();
     return calendar;
 }
 
@@ -92,7 +74,7 @@ bool KTTCalendar::save()
 {
     KTTCalendar::Ptr calendar = weakPointer().toStrongRef();
     KCalCore::FileStorage::Ptr fileStorage = KCalCore::FileStorage::Ptr(
-        new KCalCore::FileStorage(calendar, d->m_filename, new KCalCore::ICalFormat()));
+        new KCalCore::FileStorage(calendar, m_filename, new KCalCore::ICalFormat()));
 
     const bool result = fileStorage->save();
     if (!result) {
