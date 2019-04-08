@@ -533,8 +533,8 @@ bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minut
     QStringList desktopStrList = desktopList.split(QStringLiteral(","), QString::SkipEmptyParts);
     desktops.clear();
 
-    for (QStringList::iterator iter = desktopStrList.begin(); iter != desktopStrList.end(); ++iter) {
-        int desktopInt = (*iter).toInt(&ok);
+    for (const QString& desktopStr : desktopStrList) {
+        int desktopInt = desktopStr.toInt(&ok);
         if (ok) {
             desktops.push_back(desktopInt);
         }
@@ -550,12 +550,12 @@ QString Task::getDesktopStr() const
         return QString();
     }
 
-    QString desktopstr;
-    for (DesktopList::const_iterator iter = mDesktops.begin(); iter != mDesktops.end(); ++iter) {
-        desktopstr += QString::number(*iter) + QString::fromLatin1(",");
+    QString desktopsStr;
+    for (const int desktop : mDesktops) {
+        desktopsStr += QString::number(desktop) + QString::fromLatin1(",");
     }
-    desktopstr.remove(desktopstr.length() - 1, 1);
-    return desktopstr;
+    desktopsStr.remove(desktopsStr.length() - 1, 1);
+    return desktopsStr;
 }
 
 void Task::cut()
