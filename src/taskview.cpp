@@ -79,12 +79,12 @@ void deleteEntry(const QString& key)
 //BEGIN TaskViewDelegate (custom painting of the progress column)
 class TaskViewDelegate : public QStyledItemDelegate {
 public:
-    TaskViewDelegate( QObject *parent = 0 ) : QStyledItemDelegate( parent ) {}
+    explicit TaskViewDelegate(QObject *parent)
+        : QStyledItemDelegate(parent) {}
 
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
     {
-        if (index.column () == 6)
-        {
+        if (index.column () == 6) {
             QApplication::style()->drawControl( QStyle::CE_ItemViewItem, &option, painter );
             int rX = option.rect.x() + 2;
             int rY = option.rect.y() + 2;

@@ -32,7 +32,6 @@
 
 class QMouseEvent;
 class QString;
-class QTableWidget;
 class QTimer;
 
 class DesktopTracker;
@@ -235,7 +234,6 @@ private: // member variables
     QTimer *_manualSaveTimer;
     DesktopTracker* _desktopTracker;
     bool _isloading;
-    QTableWidget* historywidget;
 
     //@cond PRIVATE
     class Private;
