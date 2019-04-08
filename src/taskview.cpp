@@ -151,33 +151,14 @@ public:
 };
 //END
 
-//BEGIN Private Data
-//@cond PRIVATE
-class TaskView::Private
-{
-public:
-Private() :
-    mStorage( new TimeTrackerStorage() ),
-    mFocusTrackingActive( false ), mLastTaskWithFocus(0), mPopupPercentageMenu(0), mPopupPriorityMenu(0) {}
-
-    ~Private()
-    {
-        delete mStorage;
-    }
-    TimeTrackerStorage *mStorage;
-    bool mFocusTrackingActive;
-    Task* mLastTaskWithFocus;
-    QList<Task*> mActiveTasks;
-
-    QMenu *mPopupPercentageMenu;
-    QMap<QAction*, int> mPercentage;
-    QMenu *mPopupPriorityMenu;
-    QMap<QAction*, int> mPriority;
-};
-//@endcond
-//END
-
-TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
+TaskView::TaskView(QWidget* parent)
+    : QTreeWidget(parent)
+    , m_isLoading(false)
+    , m_storage(new TimeTrackerStorage())
+    , m_focusTrackingActive(false)
+    , m_lastTaskWithFocus(nullptr)
+    , m_popupPercentageMenu(nullptr)
+    , m_popupPriorityMenu(nullptr)
 {
     connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
@@ -206,33 +187,33 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
     setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
     // set up the minuteTimer
-    _minuteTimer = new QTimer(this);
-    connect( _minuteTimer, SIGNAL(timeout()), this, SLOT(minuteUpdate()));
-    _minuteTimer->start(1000 * secsPerMinute);
+    m_minuteTimer = new QTimer(this);
+    connect( m_minuteTimer, SIGNAL(timeout()), this, SLOT(minuteUpdate()));
+    m_minuteTimer->start(1000 * secsPerMinute);
 
     // Set up the idle detection.
-    _idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
-    connect( _idleTimeDetector, SIGNAL(subtractTime(int)),
+    m_idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
+    connect( m_idleTimeDetector, SIGNAL(subtractTime(int)),
            this, SLOT(subtractTime(int)));
-    connect( _idleTimeDetector, SIGNAL(stopAllTimers(QDateTime)),
+    connect( m_idleTimeDetector, SIGNAL(stopAllTimers(QDateTime)),
            this, SLOT(stopAllTimers(QDateTime)));
-    if (!_idleTimeDetector->isIdleDetectionPossible())
+    if (!m_idleTimeDetector->isIdleDetectionPossible())
         KTimeTrackerSettings::setEnabled( false );
 
     // Setup auto save timer
-    _autoSaveTimer = new QTimer(this);
-    connect( _autoSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
+    m_autoSaveTimer = new QTimer(this);
+    connect( m_autoSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
 
     // Setup manual save timer (to save changes a little while after they happen)
-    _manualSaveTimer = new QTimer(this);
-    _manualSaveTimer->setSingleShot( true );
-    connect( _manualSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
+    m_manualSaveTimer = new QTimer(this);
+    m_manualSaveTimer->setSingleShot( true );
+    connect( m_manualSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
 
     // Connect desktop tracker events to task starting/stopping
-    _desktopTracker = new DesktopTracker();
-    connect( _desktopTracker, SIGNAL(reachedActiveDesktop(Task*)),
+    m_desktopTracker = new DesktopTracker();
+    connect( m_desktopTracker, SIGNAL(reachedActiveDesktop(Task*)),
            this, SLOT(startTimerFor(Task*)));
-    connect( _desktopTracker, SIGNAL(leftActiveDesktop(Task*)),
+    connect( m_desktopTracker, SIGNAL(leftActiveDesktop(Task*)),
            this, SLOT(stopTimerFor(Task*)));
 
     // Header context menu
@@ -240,16 +221,16 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
     connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
 
     // Context Menu
-    d->mPopupPercentageMenu = new QMenu( this );
+    m_popupPercentageMenu = new QMenu( this );
     for ( int i = 0; i <= 100; i += 10 )
     {
         QString label = i18n( "%1 %" , i );
-        d->mPercentage[ d->mPopupPercentageMenu->addAction( label ) ] = i;
+        m_percentage[ m_popupPercentageMenu->addAction( label ) ] = i;
     }
-    connect( d->mPopupPercentageMenu, SIGNAL(triggered(QAction*)),
+    connect( m_popupPercentageMenu, SIGNAL(triggered(QAction*)),
            this, SLOT(slotSetPercentage(QAction*)) );
 
-    d->mPopupPriorityMenu = new QMenu( this );
+    m_popupPriorityMenu = new QMenu( this );
     for ( int i = 0; i <= 9; ++i )
     {
         QString label;
@@ -271,9 +252,9 @@ TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
                 label = QString( "%1" ).arg( i );
             break;
         }
-        d->mPriority[ d->mPopupPriorityMenu->addAction( label ) ] = i;
+        m_priority[ m_popupPriorityMenu->addAction( label ) ] = i;
     }
-    connect( d->mPopupPriorityMenu, SIGNAL(triggered(QAction*)),
+    connect( m_popupPriorityMenu, SIGNAL(triggered(QAction*)),
            this, SLOT(slotSetPriority(QAction*)) );
 
     setContextMenuPolicy( Qt::CustomContextMenu );
@@ -290,10 +271,10 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
     QString newTaskName = taskName;
     newTaskName.remove( '\n' );
 
-    if ( d->mFocusTrackingActive )
+    if ( m_focusTrackingActive )
     {
         bool found = false;  // has taskName been found in our tasks
-        stopTimerFor( d->mLastTaskWithFocus );
+        stopTimerFor( m_lastTaskWithFocus );
         int i = 0;
         for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) )
         {
@@ -301,7 +282,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
             {
                 found = true;
                 startTimerFor( task );
-                d->mLastTaskWithFocus = task;
+                m_lastTaskWithFocus = task;
             }
         }
         if ( !found )
@@ -318,7 +299,7 @@ void TaskView::newFocusWindowDetected( const QString &taskName )
                 if (task->name() == newTaskName)
                 {
                     startTimerFor( task );
-                    d->mLastTaskWithFocus = task;
+                    m_lastTaskWithFocus = task;
                 }
             }
         }
@@ -350,7 +331,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
             Task *task = static_cast<Task*>(item);
             if (task)
             {
-                task->setPercentComplete( newValue, d->mStorage );
+                task->setPercentComplete( newValue, m_storage );
                 emit updateButtons();
             }
         }
@@ -376,10 +357,10 @@ void TaskView::mousePressEvent( QMouseEvent *event )
             Task *task = static_cast<Task*>(item);
             if (task)
             {
-                if (task->isComplete()) task->setPercentComplete( 0, d->mStorage );
+                if (task->isComplete()) task->setPercentComplete( 0, m_storage );
                 else
                 {
-                    task->setPercentComplete( 100, d->mStorage );
+                    task->setPercentComplete( 100, m_storage );
                 }
                 emit updateButtons();
             }
@@ -399,13 +380,13 @@ void TaskView::mousePressEvent( QMouseEvent *event )
 
 TimeTrackerStorage* TaskView::storage()
 {
-    return d->mStorage;
+    return m_storage;
 }
 
 TaskView::~TaskView()
 {
     FocusDetectorNotifier::instance()->detach( this );
-    delete d;
+    delete m_storage;
     KTimeTrackerSettings::self()->writeConfig();
 }
 
@@ -439,13 +420,13 @@ void TaskView::load( const QString &fileName )
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
     qCDebug(KTT_LOG) << "Entering function";
-    _isloading = true;
-    QString err = d->mStorage->load(this, fileName);
+    m_isLoading = true;
+    QString err = m_storage->load(this, fileName);
 
     if (!err.isEmpty())
     {
         KMessageBox::error(this, err);
-        _isloading = false;
+        m_isLoading = false;
         qCDebug(KTT_LOG) << "Leaving TaskView::load";
         return;
     }
@@ -453,19 +434,19 @@ void TaskView::load( const QString &fileName )
     // Register tasks with desktop tracker
     int i = 0;
     for ( Task* t = itemAt(i); t; t = itemAt(++i) )
-        _desktopTracker->registerForDesktops( t, t->desktops() );
+        m_desktopTracker->registerForDesktops( t, t->desktops() );
     // till here
     // Start all tasks that have an event without endtime
     i = 0;
     for (Task* t = itemAt(i); t; t = itemAt(++i)) {
-        if (!d->mStorage->allEventsHaveEndTiMe(t)) {
+        if (!m_storage->allEventsHaveEndTiMe(t)) {
             t->resumeRunning();
-            d->mActiveTasks.append(t);
+            m_activeTasks.append(t);
             emit updateButtons();
-            if (d->mActiveTasks.count() == 1) {
+            if (m_activeTasks.count() == 1) {
                 emit timersActive();
             }
-            emit tasksChanged(d->mActiveTasks);
+            emit tasksChanged(m_activeTasks);
         }
     }
     // till here
@@ -473,9 +454,9 @@ void TaskView::load( const QString &fileName )
     if (topLevelItemCount() > 0) {
         restoreItemState();
         setCurrentItem(topLevelItem( 0 ));
-        if ( !_desktopTracker->startTracking().isEmpty() )
+        if ( !m_desktopTracker->startTracking().isEmpty() )
             KMessageBox::error( 0, i18n( "Your virtual desktop number is too high, desktop tracking will not work" ) );
-        _isloading = false;
+        m_isLoading = false;
         refresh();
     }
     for (int i = 0; i <= columnCount(); ++i) {
@@ -505,7 +486,7 @@ is stored in the _preferences object. */
 void TaskView::itemStateChanged(QTreeWidgetItem* item)
 {
     qDebug() << "Entering function";
-    if (!item || _isloading) {
+    if (!item || m_isLoading) {
         return;
     }
 
@@ -516,12 +497,12 @@ void TaskView::itemStateChanged(QTreeWidgetItem* item)
 
 void TaskView::closeStorage()
 {
-    d->mStorage->closeStorage();
+    m_storage->closeStorage();
 }
 
 bool TaskView::allEventsHaveEndTiMe()
 {
-    return d->mStorage->allEventsHaveEndTiMe();
+    return m_storage->allEventsHaveEndTiMe();
 }
 
 void TaskView::refresh()
@@ -617,7 +598,7 @@ void TaskView::importPlanner(const QString& fileName)
 
 QString TaskView::report(const ReportCriteria& rc)
 {
-    return d->mStorage->report(this, rc);
+    return m_storage->report(this, rc);
 }
 
 void TaskView::exportcsvFile()
@@ -629,7 +610,7 @@ void TaskView::exportcsvFile()
         dialog.enableTasksToExportQuestion();
     }
     if (dialog.exec()) {
-        QString err = d->mStorage->report(this, dialog.reportCriteria());
+        QString err = m_storage->report(this, dialog.reportCriteria());
         if (!err.isEmpty()) {
             KMessageBox::error(this, i18n(err.toLatin1()));
         }
@@ -646,7 +627,7 @@ QString TaskView::exportcsvHistory()
         dialog.enableTasksToExportQuestion();
     if ( dialog.exec() )
     {
-        err = d->mStorage->report( this, dialog.reportCriteria() );
+        err = m_storage->report( this, dialog.reportCriteria() );
     }
     return err;
 }
@@ -696,16 +677,16 @@ void TaskView::dropEvent (QDropEvent* event)
 
 void TaskView::scheduleSave()
 {
-    _manualSaveTimer->start(10);
+    m_manualSaveTimer->start(10);
 }
 
 void TaskView::save()
 {
     qCDebug(KTT_LOG) << "Entering TaskView::save()";
-    QString err = d->mStorage->save(this);
+    QString err = m_storage->save(this);
 
     if (!err.isNull()) {
-        QString errMsg = d->mStorage->icalfile() + ":\n";
+        QString errMsg = m_storage->icalfile() + ":\n";
 
         if (err == QString("Could not save. Could not lock file.")) {
             errMsg += i18n("Could not save. Disk full?");
@@ -725,57 +706,57 @@ void TaskView::startCurrentTimer()
 void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (task != 0 && d->mActiveTasks.indexOf(task) == -1)
+    if (task != 0 && m_activeTasks.indexOf(task) == -1)
     {
         if (!task->isComplete())
         {
             if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
-            _idleTimeDetector->startIdleDetection();
-            task->setRunning(true, d->mStorage, startTime);
-            d->mActiveTasks.append(task);
+            m_idleTimeDetector->startIdleDetection();
+            task->setRunning(true, m_storage, startTime);
+            m_activeTasks.append(task);
             emit updateButtons();
-            if ( d->mActiveTasks.count() == 1 )
+            if ( m_activeTasks.count() == 1 )
                 emit timersActive();
-            emit tasksChanged( d->mActiveTasks );
+            emit tasksChanged( m_activeTasks );
         }
     }
 }
 
 void TaskView::clearActiveTasks()
 {
-    d->mActiveTasks.clear();
+    m_activeTasks.clear();
 }
 
 void TaskView::stopAllTimers(const QDateTime& when)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QProgressDialog dialog(i18n("Stopping timers..."), i18n("Cancel"), 0, d->mActiveTasks.count(), this);
-    if (d->mActiveTasks.count() > 1) {
+    QProgressDialog dialog(i18n("Stopping timers..."), i18n("Cancel"), 0, m_activeTasks.count(), this);
+    if (m_activeTasks.count() > 1) {
         dialog.show();
     }
 
-    for (Task *task : d->mActiveTasks) {
+    for (Task *task : m_activeTasks) {
 //        kapp->processEvents();
-        task->setRunning(false, d->mStorage, when);
+        task->setRunning(false, m_storage, when);
         dialog.setValue(dialog.value() + 1);
     }
 
-    _idleTimeDetector->stopIdleDetection();
+    m_idleTimeDetector->stopIdleDetection();
     FocusDetectorNotifier::instance()->detach(this);
-    d->mActiveTasks.clear();
+    m_activeTasks.clear();
     emit updateButtons();
     emit timersInactive();
-    emit tasksChanged(d->mActiveTasks);
+    emit tasksChanged(m_activeTasks);
 }
 
 void TaskView::toggleFocusTracking()
 {
-    d->mFocusTrackingActive = !d->mFocusTrackingActive;
+    m_focusTrackingActive = !m_focusTrackingActive;
 
-    if (d->mFocusTrackingActive) {
+    if (m_focusTrackingActive) {
         FocusDetectorNotifier::instance()->attach(this);
     } else {
-        stopTimerFor(d->mLastTaskWithFocus);
+        stopTimerFor(m_lastTaskWithFocus);
         FocusDetectorNotifier::instance()->detach(this);
     }
 
@@ -830,24 +811,24 @@ void TaskView::resetDisplayTimeForAllTasks()
 void TaskView::stopTimerFor(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if ( task != 0 && d->mActiveTasks.indexOf(task) != -1 )
+    if ( task != 0 && m_activeTasks.indexOf(task) != -1 )
     {
-        d->mActiveTasks.removeAll(task);
-        task->setRunning(false, d->mStorage);
-        if ( d->mActiveTasks.count() == 0 )
+        m_activeTasks.removeAll(task);
+        task->setRunning(false, m_storage);
+        if ( m_activeTasks.count() == 0 )
         {
-            _idleTimeDetector->stopIdleDetection();
+            m_idleTimeDetector->stopIdleDetection();
             emit timersInactive();
         }
         emit updateButtons();
     }
-    emit tasksChanged( d->mActiveTasks );
+    emit tasksChanged( m_activeTasks );
 }
 
 void TaskView::stopCurrentTimer()
 {
     stopTimerFor( currentItem() );
-    if ( d->mFocusTrackingActive && d->mLastTaskWithFocus == currentItem() )
+    if ( m_focusTrackingActive && m_lastTaskWithFocus == currentItem() )
     {
         toggleFocusTracking();
     }
@@ -860,8 +841,8 @@ void TaskView::minuteUpdate()
 
 void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
 {
-    foreach ( Task *task, d->mActiveTasks )
-        task->changeTime( minutes, ( save_data ? d->mStorage : 0 ) );
+    foreach ( Task *task, m_activeTasks )
+        task->changeTime( minutes, ( save_data ? m_storage : 0 ) );
 }
 
 void TaskView::newTask()
@@ -888,7 +869,7 @@ void TaskView::newTask(const QString& caption, Task* parent)
 
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
-        if (desktopList.size() == _desktopTracker->desktopCount()) {
+        if (desktopList.size() == m_desktopTracker->desktopCount()) {
             desktopList.clear();
         }
 
@@ -918,10 +899,10 @@ QString TaskView::addTask(
         task = new Task(taskname, taskdescription, total, session, desktops, this);
     }
 
-    task->setUid(d->mStorage->addTask(task, parent));
+    task->setUid(m_storage->addTask(task, parent));
     QString taskuid = task->uid();
     if (!taskuid.isNull()) {
-        _desktopTracker->registerForDesktops(task, desktops);
+        m_desktopTracker->registerForDesktops(task, desktops);
         setCurrentItem(task);
         task->setSelected(true);
         task->setPixmapProgress();
@@ -966,22 +947,22 @@ void TaskView::editTask()
             taskName = dialog->taskName();
         }
         // setName only does something if the new name is different
-        task->setName(taskName, d->mStorage);
+        task->setName(taskName, m_storage);
         task->setDescription(dialog->taskDescription());
         // update session time as well if the time was changed
         if (!dialog->timeChange().isEmpty()) {
-            task->changeTime(dialog->timeChange().toInt(), d->mStorage);
+            task->changeTime(dialog->timeChange().toInt(), m_storage);
         }
         dialog->status(&desktopList);
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
-        if (desktopList.size() == _desktopTracker->desktopCount()) {
+        if (desktopList.size() == m_desktopTracker->desktopCount()) {
             desktopList.clear();
         }
         // only do something for autotracking if the new setting is different
         if (oldDeskTopList != desktopList) {
             task->setDesktopList(desktopList);
-            _desktopTracker->registerForDesktops(task, desktopList);
+            m_desktopTracker->registerForDesktops(task, desktopList);
         }
         emit updateButtons();
     }
@@ -999,7 +980,7 @@ void TaskView::setPerCentComplete(int completion)
         completion = 0;
     }
     if (completion < 100) {
-        task->setPercentComplete(completion, d->mStorage);
+        task->setPercentComplete(completion, m_storage);
         task->setPixmapProgress();
         save();
         emit updateButtons();
@@ -1009,18 +990,18 @@ void TaskView::setPerCentComplete(int completion)
 void TaskView::deleteTaskBatch(Task* task)
 {
     QString uid=task->uid();
-    task->remove(d->mStorage);
+    task->remove(m_storage);
     deleteEntry(uid); // forget if the item was expanded or collapsed
     save();
 
     // Stop idle detection if no more counters are running
-    if (d->mActiveTasks.count() == 0) {
-        _idleTimeDetector->stopIdleDetection();
+    if (m_activeTasks.count() == 0) {
+        m_idleTimeDetector->stopIdleDetection();
         emit timersInactive();
     }
 
     task->delete_recursive();
-    emit tasksChanged(d->mActiveTasks);
+    emit tasksChanged(m_activeTasks);
 }
 
 void TaskView::deleteTask(Task* task)
@@ -1054,12 +1035,12 @@ make this task running and selected. */
 
 void TaskView::markTaskAsComplete()
 {
-    if (currentItem() == 0) {
-        KMessageBox::information(0, i18n("No task selected."));
+    if (!currentItem()) {
+        KMessageBox::information(nullptr, i18n("No task selected."));
         return;
     }
 
-    currentItem()->setPercentComplete(100, d->mStorage);
+    currentItem()->setPercentComplete(100, m_storage);
     currentItem()->setPixmapProgress();
     save();
     emit updateButtons();
@@ -1075,10 +1056,10 @@ void TaskView::deletingTask(Task* deletedTask)
     qCDebug(KTT_LOG) << "Entering function";
     DesktopList desktopList;
 
-    _desktopTracker->registerForDesktops(deletedTask, desktopList);
-    d->mActiveTasks.removeAll(deletedTask);
+    m_desktopTracker->registerForDesktops(deletedTask, desktopList);
+    m_activeTasks.removeAll(deletedTask);
 
-    emit tasksChanged(d->mActiveTasks);
+    emit tasksChanged(m_activeTasks);
 }
 
 void TaskView::markTaskAsIncomplete()
@@ -1103,10 +1084,9 @@ QString TaskView::setClipBoardText(const QString& s)
     return err;
 }
 
-void TaskView::slotItemDoubleClicked( QTreeWidgetItem *item, int )
+void TaskView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 {
-    if (item)
-    {
+    if (item) {
         Task *task = static_cast<Task*>( item );
         if ( task )
         {
@@ -1149,52 +1129,49 @@ void TaskView::slotColumnToggled( int column )
     KTimeTrackerSettings::self()->writeConfig();
 }
 
-void TaskView::slotCustomContextMenuRequested( const QPoint &pos )
+void TaskView::slotCustomContextMenuRequested(const QPoint& pos)
 {
-    QPoint newPos = viewport()->mapToGlobal( pos );
-    int column = columnAt( pos.x() );
+    QPoint newPos = viewport()->mapToGlobal(pos);
+    int column = columnAt(pos.x());
 
-    switch (column)
-    {
-        case 6: /* percentage */
-            d->mPopupPercentageMenu->popup( newPos );
+    switch (column) {
+    case 6: /* percentage */
+        m_popupPercentageMenu->popup(newPos);
         break;
 
-        case 5: /* priority */
-            d->mPopupPriorityMenu->popup( newPos );
+    case 5: /* priority */
+        m_popupPriorityMenu->popup(newPos);
         break;
 
-        default:
-            emit contextMenuRequested( newPos );
+    default:
+        emit contextMenuRequested(newPos);
         break;
     }
 }
 
-void TaskView::slotSetPercentage( QAction *action )
+void TaskView::slotSetPercentage(QAction* action)
 {
-    if ( currentItem() )
-    {
-        currentItem()->setPercentComplete( d->mPercentage[ action ], storage() );
+    if (currentItem()) {
+        currentItem()->setPercentComplete(m_percentage[action], storage());
         emit updateButtons();
     }
 }
 
-void TaskView::slotSetPriority( QAction *action )
+void TaskView::slotSetPriority(QAction* action)
 {
-    if ( currentItem() )
-    {
-        currentItem()->setPriority( d->mPriority[ action ] );
+    if (currentItem()) {
+        currentItem()->setPriority(m_priority[action]);
     }
 }
 
 bool TaskView::isFocusTrackingActive() const
 {
-    return d->mFocusTrackingActive;
+    return m_focusTrackingActive;
 }
 
-QList< Task* > TaskView::activeTasks() const
+QList<Task*> TaskView::activeTasks() const
 {
-    return d->mActiveTasks;
+    return m_activeTasks;
 }
 
 void TaskView::reconfigure()
@@ -1209,19 +1186,19 @@ void TaskView::reconfigure()
     setColumnHidden( 6, !KTimeTrackerSettings::displayPercentComplete() );
 
     /* idleness */
-    _idleTimeDetector->setMaxIdle( KTimeTrackerSettings::period() );
-    _idleTimeDetector->toggleOverAllIdleDetection( KTimeTrackerSettings::enabled() );
+    m_idleTimeDetector->setMaxIdle( KTimeTrackerSettings::period() );
+    m_idleTimeDetector->toggleOverAllIdleDetection( KTimeTrackerSettings::enabled() );
 
     /* auto save */
     if ( KTimeTrackerSettings::autoSave() )
     {
-        _autoSaveTimer->start(
+        m_autoSaveTimer->start(
             KTimeTrackerSettings::autoSavePeriod() * 1000 * secsPerMinute
         );
     }
-    else if ( _autoSaveTimer->isActive() )
+    else if ( m_autoSaveTimer->isActive() )
     {
-        _autoSaveTimer->stop();
+        m_autoSaveTimer->stop();
     }
 
     refresh();

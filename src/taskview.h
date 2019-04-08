@@ -228,17 +228,22 @@ Q_SIGNALS:
     void contextMenuRequested(const QPoint&);
 
 private: // member variables
-    IdleTimeDetector* _idleTimeDetector;
-    QTimer *_minuteTimer;
-    QTimer *_autoSaveTimer;
-    QTimer *_manualSaveTimer;
-    DesktopTracker* _desktopTracker;
-    bool _isloading;
+    IdleTimeDetector* m_idleTimeDetector;
+    QTimer *m_minuteTimer;
+    QTimer *m_autoSaveTimer;
+    QTimer *m_manualSaveTimer;
+    DesktopTracker* m_desktopTracker;
+    bool m_isLoading;
 
-    //@cond PRIVATE
-    class Private;
-    Private *const d;
-    //@endcond
+    TimeTrackerStorage *m_storage;
+    bool m_focusTrackingActive;
+    Task* m_lastTaskWithFocus;
+    QList<Task*> m_activeTasks;
+
+    QMenu *m_popupPercentageMenu;
+    QMap<QAction*, int> m_percentage;
+    QMenu *m_popupPriorityMenu;
+    QMap<QAction*, int> m_priority;
 
 private:
     void addTimeToActiveTasks(int minutes, bool save_data = true);
