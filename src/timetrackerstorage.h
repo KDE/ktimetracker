@@ -305,12 +305,14 @@ public:
     /** Return a list of all task names */
     QStringList taskNames() const;
 
-  private:
+private Q_SLOTS:
+    void onFileModified();
+
+private:
     //@cond PRIVATE
     class Private;
     Private *const d;
     //@endcond
-    FileCalendar::Ptr _calendar;
 
     void adjustFromLegacyFileFormat(Task* task);
     bool parseLine(QString line, long *time, QString *name, int *level,

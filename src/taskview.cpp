@@ -510,19 +510,6 @@ bool TaskView::allEventsHaveEndTiMe()
     return d->mStorage->allEventsHaveEndTiMe();
 }
 
-void TaskView::iCalFileModified()
-{
-    FileCalendar *calendar = qobject_cast<FileCalendar*>(sender());
-    if (!calendar || !calendar->weakPointer()) {
-        qWarning() << "TaskView::iCalFileModified(): calendar or weakPointer is null: " << calendar;
-    } else {
-        qCDebug(KTT_LOG) << "entering function";
-        calendar->reload();
-        d->mStorage->buildTaskView(calendar->weakPointer().toStrongRef(), this);
-        qCDebug(KTT_LOG) << "exiting iCalFileModified";
-    }
-}
-
 void TaskView::refresh()
 {
     qCDebug(KTT_LOG) << "entering function";

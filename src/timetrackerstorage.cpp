@@ -86,6 +86,7 @@ public:
     FileCalendar::Ptr mCalendar;
     QString mICalFile;
     QLockFile *m_fileLock;
+    TaskView* m_taskView;
 };
 //@endcond
 
@@ -140,10 +141,12 @@ QString TimeTrackerStorage::load(TaskView* view, const QString &fileName)
     }
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
-    d->mCalendar = FileCalendar::createInstance(d->mICalFile, /*monitorFile=*/ fileIsLocal);
+    d->mCalendar = FileCalendar::Ptr(new FileCalendar(d->mICalFile, fileIsLocal));
+    d->mCalendar->setWeakPointer(d->mCalendar);
 
     if (view) {
-        connect(d->mCalendar.data(), &FileCalendar::calendarChanged, view, &TaskView::iCalFileModified);
+        d->m_taskView = view;
+        connect(d->mCalendar.data(), &FileCalendar::calendarChanged, this, &TimeTrackerStorage::onFileModified);
     }
 //    d->mCalendar->setTimeSpec( KSystemTimeZones::local() );
     d->mCalendar->reload();
@@ -198,7 +201,7 @@ QString TimeTrackerStorage::load(TaskView* view, const QString &fileName)
     }
 
     if (view) {
-        buildTaskView(d->mCalendar->weakPointer(), view);
+        buildTaskView(d->mCalendar, view);
     }
 
     if (removedFromDirWatch) {
@@ -1014,5 +1017,17 @@ QString TimeTrackerStorage::saveCalendar()
 
 FileCalendar::Ptr TimeTrackerStorage::calendar() const
 {
-    return _calendar;
+    return d->mCalendar;
+}
+
+void TimeTrackerStorage::onFileModified()
+{
+    if (d->mCalendar.isNull()) {
+        qCWarning(KTT_LOG) << "TaskView::onFileModified(): calendar is null";
+    } else {
+        qCDebug(KTT_LOG) << "entering function";
+        d->mCalendar->reload();
+        this->buildTaskView(d->mCalendar, d->m_taskView);
+        qCDebug(KTT_LOG) << "exiting onFileModified";
+    }
 }

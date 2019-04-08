@@ -23,7 +23,6 @@
 #define _KTIMETRACKER_CALENDAR_H_
 
 #include <KCalCore/MemoryCalendar>
-#include <QWeakPointer>
 
 class FileCalendar : public KCalCore::MemoryCalendar
 {
@@ -32,28 +31,20 @@ class FileCalendar : public KCalCore::MemoryCalendar
 public:
     typedef QSharedPointer<FileCalendar> Ptr;
 
+    FileCalendar(const QString& filename, bool monitorFile);
     FileCalendar() = delete;
     ~FileCalendar() override = default;
 
     bool reload() override;
     bool save() override;
 
-    /**
-     * Creates a new KTTCalendar and sets m_weakPointer, so we can do
-     * KTTCalendar::Ptr ptr = qobject_cast<KTTCalendar*>( sender() )->weakPointer().toStrongRef()
-     * in slots.
-     *
-     * For this reason, the ctor is private.
-     */
-    static FileCalendar::Ptr createInstance(const QString& filename, bool monitorFile);
-    QWeakPointer<FileCalendar> weakPointer() const;
+    // hack to work around KCalCore API
+    void setWeakPointer(const QWeakPointer<FileCalendar>& ptr);
 
 Q_SIGNALS:
     void calendarChanged();
 
 private:
-    explicit FileCalendar(const QString& filename, bool monitorFile);
-
     QString m_filename;
     QWeakPointer<FileCalendar> m_weakPtr;
 };

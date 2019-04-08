@@ -46,39 +46,25 @@ FileCalendar::FileCalendar(const QString &filename, bool monitorFile)
 bool FileCalendar::reload()
 {
 //  deleteAllTodos();
-    FileCalendar::Ptr calendar = weakPointer().toStrongRef();
-    KCalCore::FileStorage::Ptr fileStorage = KCalCore::FileStorage::Ptr(
-        new KCalCore::FileStorage(calendar, m_filename, new KCalCore::ICalFormat()));
-    const bool result = fileStorage->load();
+    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_filename, new KCalCore::ICalFormat());
+    const bool result = fileStorage.load();
     if (!result) {
         qCritical() << "FileCalendar::reload: problem loading calendar";
     }
     return result;
 }
 
-QWeakPointer<FileCalendar> FileCalendar::weakPointer() const
-{
-    return m_weakPtr;
-}
-
-/** static */
-FileCalendar::Ptr FileCalendar::createInstance(const QString& filename, bool monitorFile)
-{
-    FileCalendar::Ptr calendar(new FileCalendar(filename, monitorFile));
-    calendar->m_weakPtr = calendar.toWeakRef();
-    return calendar;
-}
-
-/** static */
 bool FileCalendar::save()
 {
-    FileCalendar::Ptr calendar = weakPointer().toStrongRef();
-    KCalCore::FileStorage::Ptr fileStorage = KCalCore::FileStorage::Ptr(
-        new KCalCore::FileStorage(calendar, m_filename, new KCalCore::ICalFormat()));
-
-    const bool result = fileStorage->save();
+    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_filename, new KCalCore::ICalFormat());
+    const bool result = fileStorage.save();
     if (!result) {
         qCritical() << "FileCalendar::save: problem saving calendar";
     }
     return result;
+}
+
+void FileCalendar::setWeakPointer(const QWeakPointer<FileCalendar>& ptr)
+{
+    m_weakPtr = ptr;
 }

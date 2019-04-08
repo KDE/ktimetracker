@@ -261,7 +261,6 @@ public Q_SLOTS:
 
     /** React on another process having modified the iCal file we rely on.
         This is not iCalFileChanged. */
-    void iCalFileModified();
     void slotItemDoubleClicked(QTreeWidgetItem *item, int);
 
     /** React on the focus having changed to Window QString **/
