@@ -37,7 +37,6 @@ class QTimer;
 
 class DesktopTracker;
 class IdleTimeDetector;
-class Preferences;
 class Task;
 class TimeTrackerStorage;
 
@@ -234,7 +233,6 @@ private: // member variables
     QTimer *_minuteTimer;
     QTimer *_autoSaveTimer;
     QTimer *_manualSaveTimer;
-    Preferences *_preferences;
     DesktopTracker* _desktopTracker;
     bool _isloading;
     QTableWidget* historywidget;

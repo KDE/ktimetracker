@@ -45,7 +45,6 @@
 #include "edittaskdialog.h"
 #include "idletimedetector.h"
 #include "plannerparser.h"
-#include "preferences.h"
 #include "ktimetracker.h"
 #include "task.h"
 #include "timekard.h"
@@ -57,6 +56,25 @@
 #define T_LINESIZE 1023
 
 class DesktopTracker;
+
+bool readBoolEntry(const QString& key)
+{
+    return KSharedConfig::openConfig()->group(QString()).readEntry(key, true);
+}
+
+void writeEntry(const QString& key, bool value)
+{
+    KConfigGroup config = KSharedConfig::openConfig()->group(QString());
+    config.writeEntry(key, value);
+    config.sync();
+}
+
+void deleteEntry(const QString& key)
+{
+    KConfigGroup config = KSharedConfig::openConfig()->group(QString());
+    config.deleteEntry(key);
+    config.sync();
+}
 
 //BEGIN TaskViewDelegate (custom painting of the progress column)
 class TaskViewDelegate : public QStyledItemDelegate {
@@ -161,8 +179,6 @@ Private() :
 
 TaskView::TaskView( QWidget *parent ) : QTreeWidget(parent), d( new Private() )
 {
-    _preferences = Preferences::instance();
-
     connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
     connect( this, SIGNAL(itemCollapsed(QTreeWidgetItem*)),
@@ -479,7 +495,7 @@ is stored in the _preferences object. */
         QTreeWidgetItemIterator item(this);
         while (*item) {
             Task *t = (Task *) *item;
-            t->setExpanded(_preferences->readBoolEntry(t->uid()));
+            t->setExpanded(readBoolEntry(t->uid()));
             ++item;
         }
     }
@@ -495,9 +511,7 @@ void TaskView::itemStateChanged(QTreeWidgetItem* item)
 
     Task *t = (Task *)item;
     qCDebug(KTT_LOG) <<"TaskView::itemStateChanged()" <<" uid=" << t->uid() <<" state=" << t->isExpanded();
-    if(_preferences) {
-        _preferences->writeEntry(t->uid(), t->isExpanded());
-    }
+    writeEntry(t->uid(), t->isExpanded());
 }
 
 void TaskView::closeStorage()
@@ -996,7 +1010,7 @@ void TaskView::deleteTaskBatch(Task* task)
 {
     QString uid=task->uid();
     task->remove(d->mStorage);
-    _preferences->deleteEntry(uid); // forget if the item was expanded or collapsed
+    deleteEntry(uid); // forget if the item was expanded or collapsed
     save();
 
     // Stop idle detection if no more counters are running

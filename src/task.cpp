@@ -30,7 +30,6 @@
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
-#include "preferences.h"
 #include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");

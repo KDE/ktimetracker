@@ -13,7 +13,6 @@ set(ktimetracker_SRCS
     ktimetrackerutility.cpp
     timetrackerstorage.cpp
     mainwindow.cpp
-    preferences.cpp
     task.cpp
     taskview.cpp
     tray.cpp
