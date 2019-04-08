@@ -46,8 +46,9 @@ TrayIcon::TrayIcon(MainWindow* parent)
 {
     setObjectName("Ktimetracker Tray");
 
-    m_animation = new QMovie(":/pics/active-icon.gif", QByteArray(), this);
+    m_animation = new QMovie(":/pics/active-icon.gif", QByteArray("GIF"), this);
     connect(m_animation, &QMovie::frameChanged, this, &TrayIcon::setActiveIcon);
+    m_animation->jumpToFrame(0);
 
     auto* widget = dynamic_cast<TimeTrackerWidget*>(parent->centralWidget());
     if (widget) {
