@@ -26,27 +26,27 @@
 #include <KDirWatch>
 #include <KCalCore/FileStorage>
 #include <KCalCore/MemoryCalendar>
-#include <KCalCore/ICalFormat>
 
+#include "icalformatkio.h"
 #include "ktt_debug.h"
 
-FileCalendar::FileCalendar(const QString &filename, bool monitorFile)
+FileCalendar::FileCalendar(const QUrl& url, bool monitorFile)
     : KCalCore::MemoryCalendar(QTimeZone::systemTimeZone())
-    , m_filename(filename)
+    , m_url(url)
     , m_weakPtr()
 {
     if (monitorFile) {
         connect(KDirWatch::self(), &KDirWatch::dirty, this, &FileCalendar::calendarChanged);
-        if (!KDirWatch::self()->contains(filename)) {
-            KDirWatch::self()->addFile(filename);
+        if (!KDirWatch::self()->contains(url.path())) {
+            KDirWatch::self()->addFile(url.path());
         }
     }
 }
 
 bool FileCalendar::reload()
 {
-//  deleteAllTodos();
-    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_filename, new KCalCore::ICalFormat());
+    close(); // delete all TODOs
+    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_url.url(), new ICalFormatKIO());
     const bool result = fileStorage.load();
     if (!result) {
         qCritical() << "FileCalendar::reload: problem loading calendar";
@@ -56,7 +56,7 @@ bool FileCalendar::reload()
 
 bool FileCalendar::save()
 {
-    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_filename, new KCalCore::ICalFormat());
+    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_url.url(), new ICalFormatKIO());
     const bool result = fileStorage.save();
     if (!result) {
         qCritical() << "FileCalendar::save: problem saving calendar";

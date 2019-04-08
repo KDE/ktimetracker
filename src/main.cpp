@@ -37,7 +37,8 @@
 #include "ktt_debug.h"
 #include "ktimetracker-version.h"
 
-QString icsfile(const QCommandLineParser &parser) // deliver the name of the iCalendar file to be used
+// Deliver the path/URL to the iCalendar file to be used
+QUrl getFileUrl(const QCommandLineParser &parser)
 {
     // Get first positional argument ("file")
     const QStringList args = parser.positionalArguments();
@@ -46,27 +47,20 @@ QString icsfile(const QCommandLineParser &parser) // deliver the name of the iCa
         file = args[0];
     }
 
-    QString result;
-    if (!file.isEmpty()) // file is given as parameter
-    {
-        result = file;
-        const QUrl& icsfileurl = QUrl(file);
-        if (icsfileurl.scheme() == "http" || icsfileurl.scheme() == "ftp" || icsfileurl.isLocalFile())
-        {
-            // leave as is
-            ;
+    if (!file.isEmpty()) {
+        // file is given as parameter
+        const QUrl& url = QUrl(file);
+        if (url.scheme().isEmpty()) {
+            // Relative path to local file will be converted to absolute path
+            QFileInfo info(file);
+            return QUrl::fromLocalFile(info.absoluteFilePath());
+        } else {
+            return url;
         }
-        else
-        {
-            QFileInfo info(result);
-            result = info.absoluteFilePath();
-        }
-    }
-    else // file is not given as parameter
-    {
-        result = QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics"));
-        if (!QFile::exists(result))
-        {
+    } else {
+        // file is not given as parameter
+        QString result = QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics"));
+        if (result.isEmpty()) {
             result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker.ics");
 
             QFileInfo fileInfo(result);
@@ -77,8 +71,9 @@ QString icsfile(const QCommandLineParser &parser) // deliver the name of the iCa
                 oldFile.copy(result);
             }
         }
+
+        return QUrl::fromLocalFile(result);
     }
-    return result;
 }
 
 int main(int argc, char *argv[])
@@ -118,7 +113,7 @@ int main(int argc, char *argv[])
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
-    const QString& path = icsfile(parser);
+    const QString& url = getFileUrl(parser).url();
 
 //        if (!KUniqueApplication::start()) {
 //            qCDebug(KTT_LOG) << "Other instance is already running, exiting!";
@@ -126,7 +121,7 @@ int main(int argc, char *argv[])
 //        }
 //        KUniqueApplication myApp;
     MainWindow *mainWindow;
-    mainWindow = new MainWindow(path);
+    mainWindow = new MainWindow(url);
     mainWindow->show();
 
     if (app.isSessionRestored()) {

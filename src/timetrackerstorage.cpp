@@ -124,24 +124,28 @@ QString TimeTrackerStorage::load(TaskView* view, const QString &fileName)
         }
         return err;
     }
+
+    const bool fileIsLocal = QUrl(lFileName).isLocalFile();
+
     // If file doesn't exist, create a blank one to avoid ResourceLocal load
     // error.  We make it user and group read/write, others read.  This is
     // masked by the users umask.  (See man creat)
-    const bool fileIsLocal = !isRemoteFile( lFileName );
     if (fileIsLocal) {
-        int handle;
-        handle = open(QFile::encodeName( lFileName ), O_CREAT | O_EXCL | O_WRONLY,
-               S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+        int handle = open(
+            QFile::encodeName(QUrl(lFileName).path()),
+            O_CREAT | O_EXCL | O_WRONLY,
+            S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
         if (handle != -1) {
             close(handle);
         }
     }
+
     if (d->mCalendar) {
         closeStorage();
     }
     // Create local file resource and add to resources
     d->mICalFile = lFileName;
-    d->mCalendar = FileCalendar::Ptr(new FileCalendar(d->mICalFile, fileIsLocal));
+    d->mCalendar = FileCalendar::Ptr(new FileCalendar(QUrl(d->mICalFile), fileIsLocal));
     d->mCalendar->setWeakPointer(d->mCalendar);
 
     if (view) {
@@ -975,15 +979,6 @@ KCalCore::Event::Ptr TimeTrackerStorage::baseEvent(const KCalCore::Todo::Ptr &to
     e->setCategories(categories);
 
     return e;
-}
-
-bool TimeTrackerStorage::isRemoteFile(const QString& file) const
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    QString f = file.toLower();
-    bool rval = f.startsWith(QStringLiteral("http://")) || f.startsWith(QStringLiteral("ftp://"));
-    qCDebug(KTT_LOG) << "TimeTrackerStorage::isRemoteFile(" << file << " ) returns" << rval;
-    return rval;
 }
 
 QString TimeTrackerStorage::saveCalendar()

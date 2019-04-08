@@ -3,8 +3,9 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-########### next target ###############
 set(ktimetracker_SRCS
+    file/filecalendar.cpp
+    file/icalformatkio.cpp
     settings/ktimetrackerconfigdialog.cpp
     desktoptracker.cpp
     edittaskdialog.cpp
@@ -23,7 +24,6 @@ set(ktimetracker_SRCS
     treeviewheadercontextmenu.cpp
     timetrackerwidget.cpp
     focusdetectornotifier.cpp
-    file/filecalendar.cpp
     main.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:ktimetracker_app_icon>
@@ -80,7 +80,5 @@ if(X11_Xscreensaver_LIB)
 endif()
 
 install(TARGETS ktimetracker ${INSTALL_TARGETS_DEFAULT_ARGS})
-
-########### install files ###############
 install(FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
 install(PROGRAMS ktimetracker.desktop DESTINATION ${KDE_INSTALL_APPDIR})

@@ -322,7 +322,6 @@ private:
 
     KCalCore::Event::Ptr baseEvent(const Task*);
     KCalCore::Event::Ptr baseEvent(const KCalCore::Todo::Ptr &);
-    bool isRemoteFile( const QString &file ) const;
 
     /**
      *  Writes all tasks and their totals to a Comma-Separated Values file.

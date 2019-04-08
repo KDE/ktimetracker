@@ -40,7 +40,7 @@ MainWindow::MainWindow(const QString& path)
     , m_mainWidget(nullptr)
     , m_quitRequested(false)
 {
-    qCDebug(KTT_LOG) << "Entering function, icsfile is " << path;
+    qCDebug(KTT_LOG) << "Entering function, path is " << path;
 
     // we need an instance
     m_mainWidget = new TimeTrackerWidget(this);
