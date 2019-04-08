@@ -1,14 +1,5 @@
-This directory holds automated tests for ktimetracker.
+This directory contains functional tests for KTimeTracker.
 
 How to start:
-- install Net::DAV::Server with CPAN; see e.g. http://wiki.linuxquestions.org/wiki/CPAN for information how to do it.
-- execute the tests like this:
+1. execute the tests like this:
  python3 -m pytest ./
- ./webdav.sh
-
---
-Mark Bucciarelli <mark@hubcapconsulting.com>
-December 6, 2004
-
-Thorsten Staerk
-February 29, 2008
