@@ -1,5 +1,7 @@
 This directory contains functional tests for KTimeTracker.
 
 How to start:
-1. execute the tests like this:
- python3 -m pytest ./
+1. Install dependencies:
+ ../venv/bin/python3 -m pip install -r requirements.txt
+2. Run tests:
+ ../venv/bin/python3 -m pytest ./
