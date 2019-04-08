@@ -1,21 +1,22 @@
-# Ignore the following files
 *~
-*.[oa]
-*.diff
+
+*.orig
+*.user
+Doxyfile
+svnmerge-commit-message.txt
+__pycache__
+
+# Vim
+.*.swp
+.swp.*
+
+# IDEs/editors by KDE
 *.kate-swp
 *.kdev4
 .kdev_include_paths
 *.kdevelop.pcs
-*.moc
-*.moc.cpp
-*.orig
-*.user
-.*.swp
-.swp.*
-.idea
-Doxyfile
-Makefile
-avail
-random_seed
-svnmerge-commit-message.txt
-__pycache__
+
+# JetBrains IDEs
+/.idea
+/cmake-build-debug
+/venv
