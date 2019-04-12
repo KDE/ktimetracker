@@ -23,29 +23,27 @@
 #ifndef KTIMETRACKER_FOCUS_DETECTOR_H
 #define KTIMETRACKER_FOCUS_DETECTOR_H
 
-//#include <kwindowsystem.h>
 #include <QObject>
-
-//#include <config-ktimetracker.h> // HAVE_LIBXSS
+#include <QWidgetSet>
 
 /**
   Keep track of what window has the focus.
  */
 class FocusDetector : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-    Initializes the time period
-   */
-  FocusDetector();
+    /**
+      Initializes the time period
+     */
+    FocusDetector();
 
 public Q_SLOTS:
-  void slotfocuschanged();
+    void onFocusChanged(WId id);
 
 Q_SIGNALS:
-  void newFocus( const QString & );
+    void newFocus(const QString &windowName);
 };
 
 #endif // KTIMETRACKER_FOCUS_DETECTOR_H

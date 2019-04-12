@@ -20,22 +20,17 @@
  */
 
 #include "focusdetector.h"
-#include "ktimetrackerutility.h"
 
-
-#include <QDebug>
-#include "ktt_debug.h"
 #include <KWindowSystem>
+
+#include "ktimetrackerutility.h"
 
 FocusDetector::FocusDetector()
 {
-    KWindowSystem* kw=KWindowSystem::self();
-    connect(kw, SIGNAL(activeWindowChanged(WId)), SLOT(slotfocuschanged()) );
+    connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &FocusDetector::onFocusChanged);
 }
 
-void FocusDetector::slotfocuschanged()
+void FocusDetector::onFocusChanged(WId)
 {
-    QString sysanswer = getFocusWindow();
-    emit( newFocus( sysanswer ) );
+    emit newFocus(getFocusWindow());
 }
-
