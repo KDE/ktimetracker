@@ -50,7 +50,6 @@
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
-#include "focusdetectornotifier.h"
 #include "ktt_debug.h"
 
 #define T_LINESIZE 1023
@@ -159,6 +158,7 @@ TaskView::TaskView(QWidget* parent)
     , m_lastTaskWithFocus(nullptr)
     , m_popupPercentageMenu(nullptr)
     , m_popupPriorityMenu(nullptr)
+    , m_focusDetector(new FocusDetector())
 {
     connect( this, SIGNAL(itemExpanded(QTreeWidgetItem*)),
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
@@ -166,9 +166,7 @@ TaskView::TaskView(QWidget* parent)
            this, SLOT(itemStateChanged(QTreeWidgetItem*)) );
     connect( this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)) );
-    connect( FocusDetectorNotifier::instance()->focusDetector(),
-           SIGNAL(newFocus(QString)),
-           this, SLOT(newFocusWindowDetected(QString)) );
+    connect(m_focusDetector, &FocusDetector::newFocus, this, &TaskView::newFocusWindowDetected);
 
     QStringList labels;
     setWindowFlags( windowFlags() | Qt::WindowContextHelpButtonHint );
@@ -385,7 +383,6 @@ TimeTrackerStorage* TaskView::storage()
 
 TaskView::~TaskView()
 {
-    FocusDetectorNotifier::instance()->detach( this );
     delete m_storage;
     KTimeTrackerSettings::self()->writeConfig();
 }
@@ -742,7 +739,6 @@ void TaskView::stopAllTimers(const QDateTime& when)
     }
 
     m_idleTimeDetector->stopIdleDetection();
-    FocusDetectorNotifier::instance()->detach(this);
     m_activeTasks.clear();
     emit updateButtons();
     emit timersInactive();
@@ -754,10 +750,9 @@ void TaskView::toggleFocusTracking()
     m_focusTrackingActive = !m_focusTrackingActive;
 
     if (m_focusTrackingActive) {
-        FocusDetectorNotifier::instance()->attach(this);
+        // FIXME: should get the currently active window and start tracking it?
     } else {
         stopTimerFor(m_lastTaskWithFocus);
-        FocusDetectorNotifier::instance()->detach(this);
     }
 
     emit updateButtons();

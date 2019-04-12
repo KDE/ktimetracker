@@ -23,7 +23,6 @@ set(ktimetracker_SRCS
     historydialog.cpp
     treeviewheadercontextmenu.cpp
     timetrackerwidget.cpp
-    focusdetectornotifier.cpp
     main.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:ktimetracker_app_icon>

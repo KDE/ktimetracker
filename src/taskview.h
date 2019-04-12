@@ -38,6 +38,7 @@ class DesktopTracker;
 class IdleTimeDetector;
 class Task;
 class TimeTrackerStorage;
+class FocusDetector;
 
 /**
  * Container and interface for the tasks.
@@ -244,6 +245,8 @@ private: // member variables
     QMap<QAction*, int> m_percentage;
     QMenu *m_popupPriorityMenu;
     QMap<QAction*, int> m_priority;
+
+    FocusDetector *m_focusDetector;
 
 private:
     void addTimeToActiveTasks(int minutes, bool save_data = true);
