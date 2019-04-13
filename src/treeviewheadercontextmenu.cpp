@@ -30,18 +30,16 @@
 
 #include "ktt_debug.h"
 
-TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style, QVector<int> excludedColumns)
+TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style, QVector<int> &&excludedColumns)
     : QObject(parent)
     , mWidget(widget)
-    , mContextMenu(0)
+    , mContextMenu(nullptr)
     , mStyle(style)
     , mExcludedColumns(excludedColumns)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    if (mWidget)
-    {
-        mWidget->header()->setContextMenuPolicy( Qt::CustomContextMenu );
-        connect( mWidget->header(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotCustomContextMenuRequested(QPoint)) );
+    if (mWidget) {
+        mWidget->header()->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(mWidget->header(), &QHeaderView::customContextMenuRequested, this, &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
 
         mContextMenu = new QMenu(mWidget);
         mContextMenu->addSection(i18n("Columns"));
@@ -49,12 +47,10 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView*
         connect( mContextMenu, SIGNAL(aboutToShow()), this, SLOT(slotAboutToShow()) );
         updateActions();
     }
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 
 {
-    qCDebug(KTT_LOG) << "Entering function";
     qDeleteAll(mActions);
 }
 

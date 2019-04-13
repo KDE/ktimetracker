@@ -190,13 +190,12 @@ TaskView::TaskView(QWidget* parent)
     m_minuteTimer->start(1000 * secsPerMinute);
 
     // Set up the idle detection.
-    m_idleTimeDetector = new IdleTimeDetector( KTimeTrackerSettings::period() );
-    connect( m_idleTimeDetector, SIGNAL(subtractTime(int)),
-           this, SLOT(subtractTime(int)));
-    connect( m_idleTimeDetector, SIGNAL(stopAllTimers(QDateTime)),
-           this, SLOT(stopAllTimers(QDateTime)));
-    if (!m_idleTimeDetector->isIdleDetectionPossible())
-        KTimeTrackerSettings::setEnabled( false );
+    m_idleTimeDetector = new IdleTimeDetector(KTimeTrackerSettings::period());
+    connect(m_idleTimeDetector, &IdleTimeDetector::subtractTime, this, &TaskView::subtractTime);
+    connect(m_idleTimeDetector, &IdleTimeDetector::stopAllTimers, this, &TaskView::stopAllTimers);
+    if (!m_idleTimeDetector->isIdleDetectionPossible()) {
+        KTimeTrackerSettings::setEnabled(false);
+    }
 
     // Setup auto save timer
     m_autoSaveTimer = new QTimer(this);
@@ -215,56 +214,52 @@ TaskView::TaskView(QWidget* parent)
            this, SLOT(stopTimerFor(Task*)));
 
     // Header context menu
-    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>() << 0 );
-    connect( headerContextMenu, SIGNAL(columnToggled(int)), this, SLOT(slotColumnToggled(int)) );
+    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>{0});
+    connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
 
     // Context Menu
-    m_popupPercentageMenu = new QMenu( this );
-    for ( int i = 0; i <= 100; i += 10 )
-    {
-        QString label = i18n( "%1 %" , i );
-        m_percentage[ m_popupPercentageMenu->addAction( label ) ] = i;
+    m_popupPercentageMenu = new QMenu(this);
+    for (int i = 0; i <= 100; i += 10) {
+        QString label = i18n("%1 %" , i);
+        m_percentage[m_popupPercentageMenu->addAction(label)] = i;
     }
-    connect( m_popupPercentageMenu, SIGNAL(triggered(QAction*)),
-           this, SLOT(slotSetPercentage(QAction*)) );
+    connect(m_popupPercentageMenu, &QMenu::triggered, this, &TaskView::slotSetPercentage);
 
-    m_popupPriorityMenu = new QMenu( this );
-    for ( int i = 0; i <= 9; ++i )
-    {
+    m_popupPriorityMenu = new QMenu(this);
+    for (int i = 0; i <= 9; ++i) {
         QString label;
-        switch ( i )
-        {
-            case 0:
-                label = i18n( "unspecified" );
+        switch (i) {
+        case 0:
+            label = i18n("unspecified");
             break;
-            case 1:
-                label = i18nc( "combox entry for highest priority", "1 (highest)" );
+        case 1:
+            label = i18nc("combox entry for highest priority", "1 (highest)");
             break;
-            case 5:
-                label = i18nc( "combox entry for medium priority", "5 (medium)" );
+        case 5:
+            label = i18nc("combox entry for medium priority", "5 (medium)");
             break;
-            case 9:
-                label = i18nc( "combox entry for lowest priority", "9 (lowest)" );
+        case 9:
+            label = i18nc("combox entry for lowest priority", "9 (lowest)");
             break;
-            default:
-                label = QString( "%1" ).arg( i );
+        default:
+            label = QString("%1").arg(i);
             break;
         }
-        m_priority[ m_popupPriorityMenu->addAction( label ) ] = i;
+        m_priority[m_popupPriorityMenu->addAction(label)] = i;
     }
-    connect( m_popupPriorityMenu, SIGNAL(triggered(QAction*)),
-           this, SLOT(slotSetPriority(QAction*)) );
+    connect(m_popupPriorityMenu, &QMenu::triggered, this, &TaskView::slotSetPriority);
 
-    setContextMenuPolicy( Qt::CustomContextMenu );
-    connect( this, SIGNAL(customContextMenuRequested(QPoint)),
-           this, SLOT(slotCustomContextMenuRequested(QPoint)) );
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, &TaskView::customContextMenuRequested, this, &TaskView::slotCustomContextMenuRequested);
 
     reconfigure();
-    sortByColumn( 0, Qt::AscendingOrder );
-    for (int i=0; i<=columnCount(); ++i) resizeColumnToContents(i);
+    sortByColumn(0, Qt::AscendingOrder);
+    for (int i = 0; i <= columnCount(); ++i) {
+        resizeColumnToContents(i);
+    }
 }
 
-void TaskView::newFocusWindowDetected( const QString &taskName )
+void TaskView::newFocusWindowDetected(const QString &taskName)
 {
     QString newTaskName = taskName;
     newTaskName.remove( '\n' );

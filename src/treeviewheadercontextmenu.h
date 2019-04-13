@@ -53,7 +53,7 @@ public:
     enum { AlwaysCheckBox, CheckBoxOnChecked, ShowHideText };
 
 public:
-    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style = AlwaysCheckBox, QVector<int> excludedColumns = QVector<int>());
+    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style = AlwaysCheckBox, QVector<int> &&excludedColumns = QVector<int>());
     ~TreeViewHeaderContextMenu() override;
 
 private:

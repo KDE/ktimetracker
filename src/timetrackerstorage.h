@@ -59,7 +59,7 @@ class TimeTrackerStorage : public QObject
 
 public:
     TimeTrackerStorage();
-    ~TimeTrackerStorage();
+    ~TimeTrackerStorage() override;
 
     /**
       Load the list view with tasks read from iCalendar file.
