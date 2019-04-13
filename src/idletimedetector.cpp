@@ -56,25 +56,7 @@ bool IdleTimeDetector::isIdleDetectionPossible()
 void IdleTimeDetector::timeoutReached(int id, int timeout)
 {
     qCDebug(KTT_LOG) << "The desktop has been idle for " << timeout << " msec.";
-    informOverrun(timeout / 1000 / secsPerMinute);
-}
 
-void IdleTimeDetector::setMaxIdle(int maxIdle)
-{
-    m_maxIdle = maxIdle;
-}
-
-void IdleTimeDetector::revert(const QDateTime &dialogStart, const QDateTime &idleStart, int idleMinutes)
-{
-    // revert and stop
-    QDateTime end = QDateTime::currentDateTime();
-    const int diff = dialogStart.secsTo(end) / secsPerMinute;
-    emit subtractTime(idleMinutes + diff); // subtract the time that has been added on the display
-    emit stopAllTimers(idleStart);
-}
-
-void IdleTimeDetector::informOverrun(int idleMinutes)
-{
     if (!m_overAllIdleDetect) {
         // In the preferences the user has indicated that he does not want idle detection.
         return;
@@ -108,9 +90,23 @@ void IdleTimeDetector::informOverrun(int idleMinutes)
             qCWarning(KTT_LOG) << "unexpected button clicked" << result;
             Q_FALLTHROUGH();
         case KMessageBox::No:
-            revert(dialogStart, idleStart, idleMinutes);
+            revert(dialogStart, idleStart, timeout / 1000 / secsPerMinute);
             break;
     }
+}
+
+void IdleTimeDetector::setMaxIdle(int maxIdle)
+{
+    m_maxIdle = maxIdle;
+}
+
+void IdleTimeDetector::revert(const QDateTime &dialogStart, const QDateTime &idleStart, int idleMinutes)
+{
+    // revert and stop
+    QDateTime end = QDateTime::currentDateTime();
+    const int diff = dialogStart.secsTo(end) / secsPerMinute;
+    emit subtractTime(idleMinutes + diff); // subtract the time that has been added on the display
+    emit stopAllTimers(idleStart);
 }
 
 void IdleTimeDetector::startIdleDetection()

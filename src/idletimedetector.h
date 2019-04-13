@@ -86,9 +86,6 @@ public Q_SLOTS:
     **/
     void toggleOverAllIdleDetection(bool on);
 
-protected:
-    void informOverrun(int idleMinutes);
-
 protected Q_SLOTS:
     void timeoutReached(int id, int timeout);
 
