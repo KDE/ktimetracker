@@ -421,16 +421,15 @@ void TaskView::load( const QString &fileName )
     }
 
     // Register tasks with desktop tracker
-    int i = 0;
-    for ( Task* t = itemAt(i); t; t = itemAt(++i) )
-        m_desktopTracker->registerForDesktops( t, t->desktops() );
+    for (Task *task : getAllTasks()) {
+        m_desktopTracker->registerForDesktops(task, task->desktops());
+    }
     // till here
     // Start all tasks that have an event without endtime
-    i = 0;
-    for (Task* t = itemAt(i); t; t = itemAt(++i)) {
-        if (!m_storage->allEventsHaveEndTiMe(t)) {
-            t->resumeRunning();
-            m_activeTasks.append(t);
+    for (Task *task : getAllTasks()) {
+        if (!m_storage->allEventsHaveEndTiMe(task)) {
+            task->resumeRunning();
+            m_activeTasks.append(task);
             emit updateButtons();
             if (m_activeTasks.count() == 1) {
                 emit timersActive();
@@ -495,9 +494,9 @@ void TaskView::refresh()
 {
     qCDebug(KTT_LOG) << "entering function";
     int i = 0;
-    for (Task* t = itemAt(i); t; t = itemAt(++i)) {
-        t->setPixmapProgress();
-        t->update();  // maybe there was a change in the times's format
+    for (Task *task : getAllTasks()) {
+        task->setPixmapProgress();
+        task->update();  // maybe there was a change in the times's format
     }
 
     // remove root decoration if there is no more child.
@@ -519,47 +518,47 @@ QString TaskView::reFreshTimes()
     QString err;
     // re-calculate the time for every task based on events in the history
     KCalCore::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
-    int n = -1;
     resetDisplayTimeForAllTasks();
     emit reSetTimes();
-    while (itemAt(++n)) // loop over all tasks
-    {
+    for (Task *task : getAllTasks()) {
         for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
         {
-            if ( (*i)->relatedTo() == itemAt(n)->uid() ) // if event i belongs to task n
+            if ( (*i)->relatedTo() == task->uid() ) // if event i belongs to task n
             {
                 QDateTime kdatetimestart = (*i)->dtStart();
                 QDateTime kdatetimeend = (*i)->dtEnd();
                 QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
                 QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
                 int duration=eventstart.secsTo( eventend )/60;
-                itemAt(n)->addTime( duration );
+                task->addTime( duration );
                 emit totalTimesChanged( 0, duration );
                 qCDebug(KTT_LOG) << "duration is " << duration;
 
-                if ( itemAt(n)->sessionStartTiMe().isValid() )
+                if ( task->sessionStartTiMe().isValid() )
                 {
                     // if there is a session
-                    if ((itemAt(n)->sessionStartTiMe().secsTo( eventstart )>0) &&
-                        (itemAt(n)->sessionStartTiMe().secsTo( eventend )>0))
+                    if ((task->sessionStartTiMe().secsTo( eventstart )>0) &&
+                        (task->sessionStartTiMe().secsTo( eventend )>0))
                     // if the event is after the session start
                     {
                         int sessionTime=eventstart.secsTo( eventend )/60;
-                        itemAt(n)->setSessionTime( itemAt(n)->sessionTime()+sessionTime );
+                        task->setSessionTime( task->sessionTime()+sessionTime );
                     }
                 }
                 else
                 // so there is no session at all
                 {
-                    itemAt(n)->addSessionTime( duration );
+                    task->addSessionTime( duration );
                     emit totalTimesChanged( duration, 0 );
                 };
             }
         }
     }
 
-    for (int i=0; i<count(); ++i) itemAt(i)->recalculatetotaltime();
-    for (int i=0; i<count(); ++i) itemAt(i)->recalculatetotalsessiontime();
+    for (Task *task : getAllTasks()) {
+        task->recalculatetotaltime();
+        task->recalculatetotalsessiontime();
+    }
 
     refresh();
     qCDebug(KTT_LOG) << "Leaving TaskView::reFreshTimes()";
@@ -631,23 +630,19 @@ long TaskView::count()
 QStringList TaskView::tasks()
 {
     QStringList result;
-    int i = 0;
-    while (itemAt(i)) {
-        result << itemAt(i)->name();
-        ++i;
+    for (Task *task : getAllTasks()) {
+        result << task->name();
     }
+
     return result;
 }
 
 Task* TaskView::task(const QString& taskId)
 {
     Task* result = nullptr;
-    int i = -1;
-    while (itemAt(++i)) {
-        if (itemAt(i)) {
-            if (itemAt(i)->uid() == taskId) {
-                result = itemAt(i);
-            }
+    for (Task *task : getAllTasks()) {
+        if (task->uid() == taskId) {
+            result = task;
         }
     }
 
