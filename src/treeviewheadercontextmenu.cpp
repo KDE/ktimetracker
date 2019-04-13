@@ -24,7 +24,6 @@
 #include <QAction>
 #include <QTreeView>
 #include <QHeaderView>
-#include <QDebug>
 
 #include <KLocalizedString>
 
@@ -43,8 +42,8 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView*
 
         mContextMenu = new QMenu(mWidget);
         mContextMenu->addSection(i18n("Columns"));
-        connect( mContextMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotTriggered(QAction*)) );
-        connect( mContextMenu, SIGNAL(aboutToShow()), this, SLOT(slotAboutToShow()) );
+        connect(mContextMenu, &QMenu::triggered, this, &TreeViewHeaderContextMenu::slotTriggered);
+        connect(mContextMenu, &QMenu::aboutToShow, this, &TreeViewHeaderContextMenu::slotAboutToShow);
         updateActions();
     }
 }
@@ -113,22 +112,21 @@ void TreeViewHeaderContextMenu::updateAction(QAction *action, int column)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString text = mWidget->model()->headerData(column, Qt::Horizontal).toString();
-    switch (mStyle)
-    {
-        case AlwaysCheckBox:
-            action->setCheckable(true);
-            action->setChecked(!mWidget->isColumnHidden(column));
-            action->setText(text);
-            break;
-        case CheckBoxOnChecked:
-            action->setCheckable(!mWidget->isColumnHidden(column));
-            action->setChecked(!mWidget->isColumnHidden(column));
-            action->setText(text);
-            break;
-        case ShowHideText:
-            action->setCheckable( false );
-            action->setChecked( false );
-            action->setText((mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + ' ' + text);
-            break;
+    switch (mStyle) {
+    case AlwaysCheckBox:
+        action->setCheckable(true);
+        action->setChecked(!mWidget->isColumnHidden(column));
+        action->setText(text);
+        break;
+    case CheckBoxOnChecked:
+        action->setCheckable(!mWidget->isColumnHidden(column));
+        action->setChecked(!mWidget->isColumnHidden(column));
+        action->setText(text);
+        break;
+    case ShowHideText:
+        action->setCheckable( false );
+        action->setChecked( false );
+        action->setText((mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + ' ' + text);
+        break;
     }
 }

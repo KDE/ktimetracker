@@ -36,8 +36,7 @@ class QTreeView;
  * visible state of the columns.
  *
  * It is possible to exclude columns from inserting in the
- * menu either by the @p excludedColumns parameter in the constructor,
- * by #addExcludedColumn or #addExcludedColumns.
+ * menu either by the @p excludedColumns parameter in the constructor.
  *
  * You can also change the display style of the items in the menu.
  *
@@ -55,6 +54,9 @@ public:
 public:
     TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style = AlwaysCheckBox, QVector<int> &&excludedColumns = QVector<int>());
     ~TreeViewHeaderContextMenu() override;
+
+    int style() const { return mStyle; }
+    QMenu *menu() const { return mContextMenu; }
 
 private:
     void updateAction(QAction* action, int column);
@@ -74,12 +76,6 @@ protected:
     int mStyle;
     QHash<QAction*, int> mActionColumnMapping;
     QVector<int> mExcludedColumns;
-
-public:
-    int style() const { return mStyle; }
-    void addExcludedColumn(int column) { mExcludedColumns << column; updateActions(); }
-    void addExcludedColumns(QVector<int> columns) { mExcludedColumns << columns; updateActions(); }
-    QMenu *menu() const { return mContextMenu; }
 
 Q_SIGNALS:
     void columnToggled(int);
