@@ -63,8 +63,6 @@ Q_SIGNALS:
     void stopAllTimers(QDateTime time);
 
 public Q_SLOTS:
-    void revert();
-
     /**
        Sets the maximum allowed idle.
        @param maxIdle Maximum allowed idle time in minutes
@@ -89,18 +87,17 @@ public Q_SLOTS:
     void toggleOverAllIdleDetection(bool on);
 
 protected:
-    void informOverrun();
+    void informOverrun(int idleMinutes);
 
 protected Q_SLOTS:
     void timeoutReached(int id, int timeout);
 
 private:
-    bool _overAllIdleDetect; // Based on preferences.
-    int _maxIdle;
+    void revert(const QDateTime &dialogStart, const QDateTime &idleStart, int idleMinutes);
+
+    bool m_overAllIdleDetect; // Based on preferences.
+    int m_maxIdle;
     int m_timeoutId;
-    QDateTime start; // when the idletimedetectordialog started
-    QDateTime idlestart; // when the idleness started
-    int idleminutes;
 };
 
 #endif // KTIMETRACKER_IDLE_TIME_DETECTOR_H

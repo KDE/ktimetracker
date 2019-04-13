@@ -32,7 +32,8 @@
 #include "ktt_debug.h"
 
 IdleTimeDetector::IdleTimeDetector(int maxIdle)
-    : _maxIdle(maxIdle)
+    : m_overAllIdleDetect(false)
+    , m_maxIdle(maxIdle)
     , m_timeoutId(0)
 {
     connect(
@@ -55,35 +56,38 @@ bool IdleTimeDetector::isIdleDetectionPossible()
 void IdleTimeDetector::timeoutReached(int id, int timeout)
 {
     qCDebug(KTT_LOG) << "The desktop has been idle for " << timeout << " msec.";
-    informOverrun();
+    informOverrun(timeout / 1000 / secsPerMinute);
 }
 
 void IdleTimeDetector::setMaxIdle(int maxIdle)
 {
-    _maxIdle = maxIdle;
+    m_maxIdle = maxIdle;
 }
 
-void IdleTimeDetector::revert()
+void IdleTimeDetector::revert(const QDateTime &dialogStart, const QDateTime &idleStart, int idleMinutes)
 {
     // revert and stop
-    qCDebug(KTT_LOG) << "Entering function";
     QDateTime end = QDateTime::currentDateTime();
-    const int diff = start.secsTo(end) / secsPerMinute;
-    emit subtractTime(idleminutes + diff); // subtract the time that has been added on the display
-    emit stopAllTimers(idlestart);
+    const int diff = dialogStart.secsTo(end) / secsPerMinute;
+    emit subtractTime(idleMinutes + diff); // subtract the time that has been added on the display
+    emit stopAllTimers(idleStart);
 }
 
-void IdleTimeDetector::informOverrun()
+void IdleTimeDetector::informOverrun(int idleMinutes)
 {
-    if (!_overAllIdleDetect) {
+    if (!m_overAllIdleDetect) {
         // In the preferences the user has indicated that he does not want idle detection.
         return;
     }
 
     stopIdleDetection();
-    start = QDateTime::currentDateTime();
-    idlestart = start.addSecs(-60 * _maxIdle);
-    QString backThen = idlestart.time().toString();
+
+    // when the idletimedetectordialog started
+    QDateTime dialogStart = QDateTime::currentDateTime();
+
+    // when the idleness started
+    QDateTime idleStart = dialogStart.addSecs(-secsPerMinute * m_maxIdle);
+    QString backThen = idleStart.time().toString();
 
     // Create dialog
     QString hintYes = i18n("Continue timing. Timing has started at %1", backThen);
@@ -104,7 +108,7 @@ void IdleTimeDetector::informOverrun()
             qCWarning(KTT_LOG) << "unexpected button clicked" << result;
             Q_FALLTHROUGH();
         case KMessageBox::No:
-            revert();
+            revert(dialogStart, idleStart, idleMinutes);
             break;
     }
 }
@@ -112,7 +116,7 @@ void IdleTimeDetector::informOverrun()
 void IdleTimeDetector::startIdleDetection()
 {
     if (!m_timeoutId) {
-        m_timeoutId = KIdleTime::instance()->addIdleTimeout(_maxIdle * secsPerMinute * 1000);
+        m_timeoutId = KIdleTime::instance()->addIdleTimeout(m_maxIdle * secsPerMinute * 1000);
     }
 }
 
@@ -126,5 +130,5 @@ void IdleTimeDetector::stopIdleDetection()
 
 void IdleTimeDetector::toggleOverAllIdleDetection(bool on)
 {
-    _overAllIdleDetect = on;
+    m_overAllIdleDetect = on;
 }
