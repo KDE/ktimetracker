@@ -424,7 +424,7 @@ void TaskView::load( const QString &fileName )
     for (Task *task : getAllTasks()) {
         m_desktopTracker->registerForDesktops(task, task->desktops());
     }
-    // till here
+
     // Start all tasks that have an event without endtime
     for (Task *task : getAllTasks()) {
         if (!m_storage->allEventsHaveEndTiMe(task)) {
@@ -437,7 +437,6 @@ void TaskView::load( const QString &fileName )
             emit tasksChanged(m_activeTasks);
         }
     }
-    // till here
 
     if (topLevelItemCount() > 0) {
         restoreItemState();
@@ -493,7 +492,6 @@ bool TaskView::allEventsHaveEndTiMe()
 void TaskView::refresh()
 {
     qCDebug(KTT_LOG) << "entering function";
-    int i = 0;
     for (Task *task : getAllTasks()) {
         task->setPixmapProgress();
         task->update();  // maybe there was a change in the times's format
@@ -520,6 +518,7 @@ QString TaskView::reFreshTimes()
     KCalCore::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
     resetDisplayTimeForAllTasks();
     emit reSetTimes();
+
     for (Task *task : getAllTasks()) {
         for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
         {
