@@ -498,7 +498,7 @@ void TaskView::refresh()
     }
 
     // remove root decoration if there is no more child.
-    i = 0;
+    int i = 0;
     while (itemAt(++i) && itemAt(i)->depth() == 0){};
     //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
     // FIXME workaround? seems that the QItemDelegate for the procent column only
