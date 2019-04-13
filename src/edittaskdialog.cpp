@@ -19,7 +19,7 @@ EditTaskDialog::EditTaskDialog(TaskView* parent, const QString& caption, Desktop
         QCheckBox* desktopcheckbox;
         desktopcheckboxes.clear();
         int lines = 5;
-        for (int i = 0; i < desktopcount(); ++i) {
+        for (int i = 0; i < KWindowSystem::numberOfDesktops(); ++i) {
             desktopcheckbox = new QCheckBox(m_ui.autotrackinggroupbox);
             desktopcheckbox->setObjectName(QString::fromUtf8("desktop_").append(i));
             desktopcheckbox->setText(KWindowSystem::desktopName( i + 1 ));

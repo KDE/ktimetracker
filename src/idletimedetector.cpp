@@ -33,6 +33,8 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include "ktt_debug.h"
+
 IdleTimeDetector::IdleTimeDetector(int maxIdle)
 {
     _maxIdle = maxIdle;

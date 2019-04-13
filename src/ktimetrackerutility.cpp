@@ -21,34 +21,23 @@
 
 #include "ktimetrackerutility.h"
 
-#include <KWindowSystem>
+#include <cmath>
 
-#include <math.h>
-#include <stdlib.h>
-#include <X11/Xlib.h>
-#include <fixx11h.h>
+#include "ktt_debug.h"
 
-QString getFocusWindow()
-{
-    return KWindowSystem::windowInfo(KWindowSystem::activeWindow(),NET::WMName, 0).name();
-}
-
-QString formatTime( double minutes, bool decimal )
+QString formatTime(double minutes, bool decimal)
 {
     qCDebug(KTT_LOG) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
     QString time;
-    if ( decimal )
-    {
+    if (decimal) {
         time.sprintf("%.2f", minutes / 60.0 );
         time.replace('.', QLocale().decimalPoint());
+    } else {
+        time.sprintf(
+            "%s%ld:%02ld",
+            (minutes < 0) ? QString(QLocale().negativeSign()).toUtf8().data() : "",
+            labs(minutes / 60), labs(((int) round(minutes)) % 60));
     }
-    else time.sprintf("%s%ld:%02ld",
-        (minutes < 0) ? QString(QLocale().negativeSign()).toUtf8().data() : "",
-        labs(minutes / 60), labs(((int) round(minutes)) % 60));
-    return time;
-}
 
-int desktopcount()
-{
-    return KWindowSystem::numberOfDesktops();
+    return time;
 }

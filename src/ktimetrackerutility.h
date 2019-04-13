@@ -22,9 +22,6 @@
 #ifndef KTIMETRACKERUTILITY_H
 #define KTIMETRACKERUTILITY_H
 
-#include <QDebug>
-#include "ktt_debug.h"
-//#include <KWindowSystem>
 #include <QString>
 
 /**
@@ -37,21 +34,9 @@
   The output of formatTiMe(0.5,true) is 0.008333, because 0.5 minutes are 0.008333 hours.
   The output of formatTiMe(0.5,false) is 0:01, because 0.5 minutes are 0:01 hours rounded.
  */
-QString formatTime( double minutes, bool decimal = false );
+QString formatTime(double minutes, bool decimal = false);
 
-/**
-  Get the name of the window that has the focus
- */
-QString getFocusWindow();
-
-/**
-  Get the number of virtual desktops
-  Delivers 4 for four virtual desktops, 1 for one virtual desktop, -1 if it could not be
-  determined. The absolute value of desktopcount is always the usable number of desktops
-  */
-int desktopcount();
-
-const int secsPerMinute=60;
+const int secsPerMinute = 60;
 
 enum KTIMETRACKER_Errors
 {

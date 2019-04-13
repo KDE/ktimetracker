@@ -32,5 +32,5 @@ FocusDetector::FocusDetector()
 
 void FocusDetector::onFocusChanged(WId)
 {
-    emit newFocus(getFocusWindow());
+    emit newFocus(KWindowSystem::windowInfo(KWindowSystem::activeWindow(), NET::WMName, 0).name());
 }
