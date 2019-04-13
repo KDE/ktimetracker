@@ -28,19 +28,14 @@
 #include <KWindowSystem>
 #include <QTimer>
 
-DesktopTracker::DesktopTracker ()
+DesktopTracker::DesktopTracker()
 {
-  // Setup desktop change handling
-#ifdef Q_WS_X11
+    // Setup desktop change handling
     connect( KWindowSystem::self(), SIGNAL(currentDesktopChanged(int)),
            this, SLOT(handleDesktopChange(int)) );
     mDesktopCount = desktopCount();
     mPreviousDesktop = KWindowSystem::self()->currentDesktop()-1;
-#else
-#ifdef __GNUC__
-#warning non-X11 support missing
-#endif
-#endif
+
     // currentDesktop will return 0 if no window manager is started
     if (mPreviousDesktop < 0) {
         mPreviousDesktop = 0;
@@ -83,11 +78,7 @@ void DesktopTracker::changeTimers()
 QString DesktopTracker::startTracking()
 {
     QString err;
-#ifdef Q_WS_X11
-    int currentDesktop = KWindowSystem::self()->currentDesktop() -1;
-#else
-    int currentDesktop = 0;
-#endif
+    int currentDesktop = KWindowSystem::self()->currentDesktop() - 1;
     if ( currentDesktop < 0 ) currentDesktop = 0;
     if ( currentDesktop >= maxDesktops ) err="desktop number too high, desktop tracking will not work";
     else
@@ -112,10 +103,8 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
             mDesktopTracker[i].erase( tit );
             // if the task was priviously tracking this desktop then
             // emit a signal that is not tracking it any more
-#ifdef Q_WS_X11
             if ( i == KWindowSystem::self()->currentDesktop() - 1 )
                 emit leftActiveDesktop( task );
-#endif
         }
         qCDebug(KTT_LOG) << "Leaving function, desktopList.size=0";
         return;
@@ -144,10 +133,8 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
                     v.erase( tit ); // so we delete it from desktopTracker
                     // if the task was priviously tracking this desktop then
                     // emit a signal that is not tracking it any more
-#ifdef Q_WS_X11
                     if( i == KWindowSystem::self()->currentDesktop() -1)
                         emit leftActiveDesktop( task );
-#endif
                 }
             }
         }

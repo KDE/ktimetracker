@@ -50,14 +50,5 @@ QString formatTime( double minutes, bool decimal )
 
 int desktopcount()
 {
-    int result;
-    #ifdef Q_WS_X11
-    result = KWindowSystem::numberOfDesktops();
-    #else
-    #ifdef __GNUC__
-    #warning non-X11 support missing
-    #endif
-    result = -1;
-    #endif
-    return result;
+    return KWindowSystem::numberOfDesktops();
 }

@@ -35,6 +35,7 @@ ecm_qt_declare_logging_category(ktimetracker_SRCS
 )
 
 configure_file(ktimetracker-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/ktimetracker-version.h @ONLY)
+configure_file(config-ktimetracker.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ktimetracker.h)
 
 qt5_add_dbus_adaptor(ktimetracker_SRCS
     org.kde.ktimetracker.ktimetracker.xml
@@ -60,6 +61,7 @@ qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 add_executable(ktimetracker ${ktimetracker_SRCS})
 
 target_link_libraries(ktimetracker
+    Qt5::X11Extras
     KF5::KCMUtils
     KF5::WindowSystem
     KF5::Notifications

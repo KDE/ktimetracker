@@ -23,105 +23,103 @@
 #ifndef KTIMETRACKER_IDLE_TIME_DETECTOR_H
 #define KTIMETRACKER_IDLE_TIME_DETECTOR_H
 
-#include "ktimetrackerutility.h" // SecsPerMinute
-#include <QDateTime>
 #include <QObject>
-//#include <config-ktimetracker.h> // HAVE_LIBXSS
+#include <QDateTime>
+
+#include "ktimetrackerutility.h" // SecsPerMinute
+#include "config-ktimetracker.h" // HAVE_XSCREENSAVER
 
 class QTimer;
 
-#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
+#if defined(HAVE_XSCREENSAVER)
  #include <X11/Xlib.h>
  #include <X11/Xutil.h>
  #include <X11/extensions/scrnsaver.h>
  #include <fixx11h.h>
-#endif // HAVE_LIBXSS
+#endif // HAVE_XSCREENSAVER
 
 // Minutes between each idle overrun test.
-const int testInterval= secsPerMinute * 1000;
+const int testInterval = secsPerMinute * 1000;
 
 /**
  * Keep track of how long the computer has been idle.
  */
 
-class IdleTimeDetector :public QObject
+class IdleTimeDetector : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-     Initializes and idle test timer
-     @param maxIdle minutes before the idle timer will go off.
-  **/
-  explicit IdleTimeDetector(int maxIdle);
+    /**
+       Initializes and idle test timer
+       @param maxIdle minutes before the idle timer will go off.
+    **/
+    explicit IdleTimeDetector(int maxIdle);
 
-  /**
-     Returns true if it is possible to do idle detection.
-     Idle detection relys on a feature in the X server, which might not
-     always be present.
-  **/
-  bool isIdleDetectionPossible();
+    /**
+       Returns true if it is possible to do idle detection.
+       Idle detection relys on a feature in the X server, which might not
+       always be present.
+    **/
+    bool isIdleDetectionPossible();
 
 Q_SIGNALS:
-  /**
-     Tells the listener to subtract time from current timing.
-     The time to subtract is due to the idle time since the dialog wass
-     shown, and until the user answers the dialog.
-     @param minutes Minutes to subtract.
-  **/
-  void subtractTime(int minutes);
+    /**
+       Tells the listener to subtract time from current timing.
+       The time to subtract is due to the idle time since the dialog wass
+       shown, and until the user answers the dialog.
+       @param minutes Minutes to subtract.
+    **/
+    void subtractTime(int minutes);
 
-  /**
-      Tells the listener to stop timing
-   **/
-  void stopAllTimers(QDateTime time);
+    /**
+        Tells the listener to stop timing
+     **/
+    void stopAllTimers(QDateTime time);
 
 public Q_SLOTS:
-  void revert();
+    void revert();
 
-  /**
-     Sets the maximum allowed idle.
-     @param maxIdle Maximum allowed idle time in minutes
-  **/
-  void setMaxIdle(int maxIdle);
+    /**
+       Sets the maximum allowed idle.
+       @param maxIdle Maximum allowed idle time in minutes
+    **/
+    void setMaxIdle(int maxIdle);
 
-  /**
-     Starts detecting idle time
-  **/
-  void startIdleDetection();
+    /**
+       Starts detecting idle time
+    **/
+    void startIdleDetection();
 
-  /**
-      Stops detecting idle time.
-  **/
-  void stopIdleDetection();
+    /**
+        Stops detecting idle time.
+    **/
+    void stopIdleDetection();
 
-  /**
-     Sets whether idle detection should be done at all
-     @param on If true idle detection is done based on
-     startIdleDetection and @ref stopIdleDetection
-  **/
-  void toggleOverAllIdleDetection(bool on);
-
+    /**
+       Sets whether idle detection should be done at all
+       @param on If true idle detection is done based on
+       startIdleDetection and @ref stopIdleDetection
+    **/
+    void toggleOverAllIdleDetection(bool on);
 
 protected:
-#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
-  void informOverrun();
-#endif // HAVE_LIBXSS
+    void informOverrun();
 
 protected Q_SLOTS:
-  void check();
+    void check();
 
 private:
-#if defined(HAVE_LIBXSS) && defined(Q_WS_X11)
-  XScreenSaverInfo *_mit_info;
-#endif
-  bool _idleDetectionPossible;
-  bool _overAllIdleDetect; // Based on preferences.
-  int _maxIdle;
-  QTimer *_timer;
-  QDateTime start; // when the idletimedetectordialog started
-  QDateTime idlestart; // when the idleness started
-  int idleminutes;
+#if defined(HAVE_XSCREENSAVER)
+    XScreenSaverInfo *_mit_info;
+#endif // HAVE_XSCREENSAVER
+    bool _idleDetectionPossible;
+    bool _overAllIdleDetect; // Based on preferences.
+    int _maxIdle;
+    QTimer *_timer;
+    QDateTime start; // when the idletimedetectordialog started
+    QDateTime idlestart; // when the idleness started
+    int idleminutes;
 };
 
 #endif // KTIMETRACKER_IDLE_TIME_DETECTOR_H
