@@ -275,10 +275,10 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
 
     view->clearActiveTasks();
     // restart tasks that have been running with their start times
-    for (int i = 0; i<view->count(); ++i) {
+    for (Task *task : view->getAllTasks()) {
         for (int n = 0; n < runningTasks.count(); ++n) {
-            if (runningTasks[n] == view->itemAt(i)->uid()) {
-                view->startTimerFor(view->itemAt(i), startTimes[n]);
+            if (runningTasks[n] == task->uid()) {
+                view->startTimerFor(task, startTimes[n]);
             }
         }
     }
@@ -502,10 +502,7 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
     QString delim = rc.delimiter;
     QString dquote = rc.quote;
     QString double_dquote = dquote + dquote;
-    bool to_quote = true;
     QString err;
-    Task* task;
-    int maxdepth=0;
     QProgressDialog dialog(i18n("Exporting to CSV..."), i18n("Cancel"), 0, static_cast<int>(2 * taskview->count()), taskview, 0);
     dialog.setAutoClose(true);
     dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
@@ -517,27 +514,36 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
     QString retval;
 
     // Find max task depth
-    int tasknr = 0;
-    while (tasknr < taskview->count() && !dialog.wasCanceled()) {
+    int maxdepth = 0;
+    for (Task *task : taskview->getAllTasks()) {
+        if (dialog.wasCanceled()) {
+            break;
+        }
+
         dialog.setValue(dialog.value() + 1);
-        if (tasknr % 15 == 0) {
-            QApplication::processEvents(); // repainting is slow
+
+//        if (tasknr % 15 == 0) {
+//            QApplication::processEvents(); // repainting is slow
+//        }
+        QApplication::processEvents();
+
+        if (task->depth() > maxdepth) {
+            maxdepth = task->depth();
         }
-        if (taskview->itemAt(tasknr)->depth() > maxdepth) {
-            maxdepth = taskview->itemAt(tasknr)->depth();
-        }
-        tasknr++;
     }
 
     // Export to file
-    tasknr = 0;
-    while (tasknr < taskview->count() && !dialog.wasCanceled())
-    {
-        task = taskview->itemAt( tasknr );
-        dialog.setValue(dialog.value() + 1);
-        if (tasknr % 15 == 0) {
-            QApplication::processEvents();
+    for (Task *task : taskview->getAllTasks()) {
+        if (dialog.wasCanceled()) {
+            break;
         }
+
+        dialog.setValue(dialog.value() + 1);
+
+//        if (tasknr % 15 == 0) {
+//            QApplication::processEvents(); // repainting is slow
+//        }
+        QApplication::processEvents();
 
         // indent the task in the csv-file:
         for (int i = 0; i < task->depth(); ++i) {
@@ -553,7 +559,7 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
         else
         to_quote = false;
         */
-        to_quote = true;
+        bool to_quote = true;
 
         if (to_quote) {
             retval += dquote;
@@ -576,7 +582,6 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
                 + delim + formatTime(task->totalSessionTime(), rc.decimalMinutes)
                 + delim + formatTime(task->totalTime(), rc.decimalMinutes)
                 + '\n';
-        tasknr++;
     }
 
     // save, either locally or remote
@@ -646,7 +651,6 @@ QString TimeTrackerStorage::exportcsvHistory(
     const QString cr = QStringLiteral("\n");
     QString err = QString::null;
     QString retval;
-    Task* task;
     const int intervalLength = from.daysTo(to) + 1;
     QMap<QString, QVector<int>> secsForUid;
     QMap<QString, QString > uidForName;
@@ -656,10 +660,8 @@ QString TimeTrackerStorage::exportcsvHistory(
     //                              "seconds each day" are stored in a vector
     // * "name -> uid", ordered by name: used when creating the csv file at the end
     qCDebug(KTT_LOG) << "Taskview Count: " << taskview->count();
-    for ( int n=0; n<taskview->count(); n++ )
-    {
-        task=taskview->itemAt(n);
-        qCDebug(KTT_LOG) << "n: " << n << ", Task Name: " << task->name() << ", UID: " << task->uid();
+    for (Task *task : taskview->getAllTasks()) {
+        qCDebug(KTT_LOG) << ", Task Name: " << task->name() << ", UID: " << task->uid();
         // uid -> seconds each day
         // * Init each element to zero
         QVector<int> vector(intervalLength, 0);
@@ -672,8 +674,7 @@ QString TimeTrackerStorage::exportcsvHistory(
         parentTask = task;
         fullName += parentTask->name();
         parentTask = parentTask->parentTask();
-        while (parentTask)
-        {
+        while (parentTask) {
             fullName = parentTask->name() + "->" + fullName;
             qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
             parentTask = parentTask->parentTask();
