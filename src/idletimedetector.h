@@ -26,21 +26,6 @@
 #include <QObject>
 #include <QDateTime>
 
-#include "ktimetrackerutility.h" // SecsPerMinute
-#include "config-ktimetracker.h" // HAVE_XSCREENSAVER
-
-class QTimer;
-
-#if defined(HAVE_XSCREENSAVER)
- #include <X11/Xlib.h>
- #include <X11/Xutil.h>
- #include <X11/extensions/scrnsaver.h>
- #include <fixx11h.h>
-#endif // HAVE_XSCREENSAVER
-
-// Minutes between each idle overrun test.
-const int testInterval = secsPerMinute * 1000;
-
 /**
  * Keep track of how long the computer has been idle.
  */
@@ -61,7 +46,7 @@ public:
        Idle detection relys on a feature in the X server, which might not
        always be present.
     **/
-    bool isIdleDetectionPossible();
+    static bool isIdleDetectionPossible();
 
 Q_SIGNALS:
     /**
@@ -107,16 +92,12 @@ protected:
     void informOverrun();
 
 protected Q_SLOTS:
-    void check();
+    void timeoutReached(int id, int timeout);
 
 private:
-#if defined(HAVE_XSCREENSAVER)
-    XScreenSaverInfo *_mit_info;
-#endif // HAVE_XSCREENSAVER
-    bool _idleDetectionPossible;
     bool _overAllIdleDetect; // Based on preferences.
     int _maxIdle;
-    QTimer *_timer;
+    int m_timeoutId;
     QDateTime start; // when the idletimedetectordialog started
     QDateTime idlestart; // when the idleness started
     int idleminutes;

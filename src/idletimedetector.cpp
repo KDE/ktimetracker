@@ -23,53 +23,39 @@
 #include "idletimedetector.h"
 
 #include <QDateTime>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QTimer>
-#include <QVBoxLayout>
-#include <QX11Info>
 
-#include <KWindowSystem>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KIdleTime>
 
+#include "ktimetrackerutility.h" // SecsPerMinute
 #include "ktt_debug.h"
 
 IdleTimeDetector::IdleTimeDetector(int maxIdle)
+    : _maxIdle(maxIdle)
+    , m_timeoutId(0)
 {
-    _maxIdle = maxIdle;
-
-#if defined(HAVE_XSCREENSAVER)
-    int event_base, error_base;
-    _idleDetectionPossible = XScreenSaverQueryExtension(QX11Info::display(), &event_base, &error_base) != 0;
-
-    _timer = new QTimer(this);
-    connect(_timer, &QTimer::timeout, this, &IdleTimeDetector::check);
-#else
-    _idleDetectionPossible = false;
-#endif // HAVE_XSCREENSAVER
+    connect(
+        KIdleTime::instance(), static_cast<void(KIdleTime::*)(int, int)>(&KIdleTime::timeoutReached),
+        this, &IdleTimeDetector::timeoutReached);
 }
 
+// static
 bool IdleTimeDetector::isIdleDetectionPossible()
 {
-    return _idleDetectionPossible;
+    int id = KIdleTime::instance()->addIdleTimeout(5000);
+    if (id) {
+        KIdleTime::instance()->removeIdleTimeout(id);
+        return true;
+    } else {
+        return false;
+    }
 }
 
-void IdleTimeDetector::check()
+void IdleTimeDetector::timeoutReached(int id, int timeout)
 {
-#if defined(HAVE_XSCREENSAVER)
-    qCDebug(KTT_LOG) << "kompiled for libxss and x11, idledetectionpossible is " << _idleDetectionPossible;
-    if (_idleDetectionPossible) {
-        _mit_info = XScreenSaverAllocInfo();
-        XScreenSaverQueryInfo(QX11Info::display(), QX11Info::appRootWindow(), _mit_info);
-        idleminutes = (_mit_info->idle / 1000) / secsPerMinute;
-        qCDebug(KTT_LOG) << "The desktop has been idle for " << idleminutes << " minutes.";
-        qCDebug(KTT_LOG) << "The idle time in miliseconds is " << _mit_info->idle;
-        if (idleminutes >= _maxIdle) {
-            informOverrun();
-        }
-    }
-#endif // HAVE_XSCREENSAVER
+    qCDebug(KTT_LOG) << "The desktop has been idle for " << timeout << " msec.";
+    informOverrun();
 }
 
 void IdleTimeDetector::setMaxIdle(int maxIdle)
@@ -94,7 +80,7 @@ void IdleTimeDetector::informOverrun()
         return;
     }
 
-    _timer->stop();
+    stopIdleDetection();
     start = QDateTime::currentDateTime();
     idlestart = start.addSecs(-60 * _maxIdle);
     QString backThen = idlestart.time().toString();
@@ -112,7 +98,7 @@ void IdleTimeDetector::informOverrun()
         QString(), buttonYes, buttonNo);
     switch (result) {
         case KMessageBox::Yes:
-            _timer->start();
+            startIdleDetection();
             break;
         default:
             qCWarning(KTT_LOG) << "unexpected button clicked" << result;
@@ -125,20 +111,17 @@ void IdleTimeDetector::informOverrun()
 
 void IdleTimeDetector::startIdleDetection()
 {
-#if defined(HAVE_XSCREENSAVER)
-    if (!_timer->isActive()) {
-        _timer->start(testInterval);
+    if (!m_timeoutId) {
+        m_timeoutId = KIdleTime::instance()->addIdleTimeout(_maxIdle * secsPerMinute * 1000);
     }
-#endif // HAVE_XSCREENSAVER
 }
 
 void IdleTimeDetector::stopIdleDetection()
 {
-#if defined(HAVE_XSCREENSAVER)
-    if (_timer->isActive()) {
-        _timer->stop();
+    if (m_timeoutId) {
+        KIdleTime::instance()->removeIdleTimeout(m_timeoutId);
+        m_timeoutId = 0;
     }
-#endif // HAVE_XSCREENSAVER
 }
 
 void IdleTimeDetector::toggleOverAllIdleDetection(bool on)

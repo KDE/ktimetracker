@@ -15,7 +15,7 @@ include(FeatureSummary)
 include(KDECMakeSettings)
 
 set(QT_REQUIRED_VERSION "5.10.0")
-find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus X11Extras)
+find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 	I18n
@@ -29,20 +29,11 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 	XmlGui
 	KIO
 	DBusAddons
+	IdleTime
 )
 
 # Find KdepimLibs Package
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
-
-# Find X11 screensaver library
-find_package(X11)
-if(X11_Xscreensaver_FOUND)
-    message(STATUS "Found the X11 screensaver extension")
-    set(HAVE_XSCREENSAVER ${X11_Xscreensaver_LIB})
-else()
-    message(STATUS "The X11 screensaver extension was NOT found.")
-endif()
-add_feature_info("KtimeTracker idle detection" X11_Xscreensaver_FOUND "Measure the screen idle time in KTimeTracker")
 
 add_subdirectory(pics)
 add_subdirectory(icons)

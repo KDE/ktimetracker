@@ -50,6 +50,7 @@
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
+#include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 
 #define T_LINESIZE 1023
