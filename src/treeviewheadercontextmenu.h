@@ -43,13 +43,10 @@ class QTreeView;
 class TreeViewHeaderContextMenu : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QMenu* menu READ menu)
 
 public:
-    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, QVector<int> &&excludedColumns = QVector<int>());
+    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, QVector<int> &&excludedColumns);
     ~TreeViewHeaderContextMenu() override;
-
-    QMenu *menu() const { return mContextMenu; }
 
 private:
     void updateAction(QAction* action, int column);
