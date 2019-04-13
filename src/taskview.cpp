@@ -269,13 +269,10 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
     {
         bool found = false;  // has taskName been found in our tasks
         stopTimerFor( m_lastTaskWithFocus );
-        int i = 0;
-        for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) )
-        {
-            if ( task->name() == newTaskName )
-            {
+        for (Task *task : getAllTasks()) {
+            if (task->name() == newTaskName) {
                 found = true;
-                startTimerFor( task );
+                startTimerFor(task);
                 m_lastTaskWithFocus = task;
             }
         }
@@ -287,12 +284,9 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
                 KMessageBox::error( 0, i18n(
                 "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
             }
-            i = 0;
-            for ( Task* task = itemAt( i ); task; task = itemAt( ++i ) )
-            {
-                if (task->name() == newTaskName)
-                {
-                    startTimerFor( task );
+            for (Task *task : getAllTasks()) {
+                if (task->name() == newTaskName) {
+                    startTimerFor(task);
                     m_lastTaskWithFocus = task;
                 }
             }
