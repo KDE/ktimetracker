@@ -26,8 +26,9 @@
 #include <QDateTime>
 
 class QAction;
-class KActionCollection;
 class QUrl;
+class KActionCollection;
+class KTreeWidgetSearchLine;
 
 class Task;
 class TaskView;
@@ -38,7 +39,7 @@ class TimeTrackerWidget : public QWidget
 
 public:
     explicit TimeTrackerWidget(QWidget* parent = nullptr);
-    ~TimeTrackerWidget() override;
+    ~TimeTrackerWidget() override = default;
 
     /** 
       Delivers if all task have an end time. 
@@ -190,13 +191,13 @@ public Q_SLOTS:
 protected:
     bool event ( QEvent * event ); // inherited from QWidget
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void slotCurrentChanged();
     void slotAddTask( const QString &taskName );
     void slotUpdateButtons();
     void showSettingsDialog();
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void setCaption( const QString& qs );
     void currentTaskChanged();
     void currentTaskViewChanged();
@@ -209,11 +210,11 @@ protected:
     void timersInactive();
     void tasksChanged( const QList< Task* >& );
 
-  private:
-    //@cond PRIVATE
-    class Private;
-    Private *const d;
-    //@endcond
+private:
+    QWidget *m_searchLine;
+    KTreeWidgetSearchLine *m_searchWidget;
+    TaskView *m_taskView;
+    KActionCollection *m_actionCollection;
 };
 
 #endif
