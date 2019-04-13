@@ -32,6 +32,8 @@
 #include "file/filecalendar.h"
 
 class QDateTime;
+class QLockFile;
+
 class Task;
 class TaskView;
 
@@ -259,10 +261,10 @@ private Q_SLOTS:
     void onFileModified();
 
 private:
-    //@cond PRIVATE
-    class Private;
-    Private *const d;
-    //@endcond
+    FileCalendar::Ptr mCalendar;
+    QString mICalFile;
+    QLockFile *m_fileLock;
+    TaskView* m_taskView;
 
     QString writeTaskAsTodo( Task* task, QStack<KCalCore::Todo::Ptr>& parents );
     QString saveCalendar();
