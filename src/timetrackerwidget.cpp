@@ -608,7 +608,9 @@ QStringList TimeTrackerWidget::taskIdsFromName( const QString &taskName ) const
     QStringList result;
 
     TaskView *taskView = currentTaskView();
-    if ( !taskView ) return result;
+    if (!taskView) {
+        return result;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->name() == taskName) {
@@ -644,7 +646,9 @@ void TimeTrackerWidget::deleteTask( const QString &taskId )
 {
     TaskView *taskView = currentTaskView();
 
-    if ( !taskView ) return;
+    if (!taskView) {
+        return;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->uid() == taskId) {
@@ -657,7 +661,9 @@ void TimeTrackerWidget::setPercentComplete( const QString &taskId, int percent )
 {
     TaskView *taskView = currentTaskView();
     
-    if ( !taskView ) return;
+    if (!taskView) {
+        return;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->uid() == taskId) {
@@ -738,8 +744,12 @@ int TimeTrackerWidget::changeTime( const QString &taskId, int minutes )
         }
     }
 
-    if ( !task ) result=KTIMETRACKER_ERR_UID_NOT_FOUND;
-    else task->changeTime(minutes, task->taskView()->storage());
+    if ( !task ) {
+        result=KTIMETRACKER_ERR_UID_NOT_FOUND;
+    } else {
+        task->changeTime(minutes, task->taskView()->storage());
+    }
+
     return result;
 }
 
@@ -778,7 +788,9 @@ bool TimeTrackerWidget::isIdleDetectionPossible() const
 int TimeTrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
 {
     TaskView *taskView = currentTaskView();
-    if ( !taskView ) return -1;
+    if (!taskView) {
+        return -1;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->uid() == taskId) {
@@ -789,12 +801,14 @@ int TimeTrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
     return -1;
 }
 
-void TimeTrackerWidget::startTimerFor( const QString &taskId )
+void TimeTrackerWidget::startTimerFor(const QString &taskId)
 {
     qDebug();
-        
+
     TaskView *taskView = currentTaskView();
-    if ( !taskView ) return;
+    if (!taskView) {
+        return;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->uid() == taskId) {
@@ -807,7 +821,9 @@ void TimeTrackerWidget::startTimerFor( const QString &taskId )
 bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
 {
     TaskView *taskView = currentTaskView();
-    if ( !taskView ) return false;
+    if (!taskView) {
+        return false;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->name() == taskName ) {
@@ -819,10 +835,12 @@ bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
     return false;
 }
 
-bool TimeTrackerWidget::stopTimerForTaskName( const QString &taskName )
+bool TimeTrackerWidget::stopTimerForTaskName(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
-    if ( !taskView ) return false;
+    if (!taskView) {
+        return false;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->name() == taskName) {
@@ -834,10 +852,12 @@ bool TimeTrackerWidget::stopTimerForTaskName( const QString &taskName )
     return false;
 }
 
-void TimeTrackerWidget::stopTimerFor( const QString &taskId )
+void TimeTrackerWidget::stopTimerFor(const QString &taskId)
 {
     TaskView *taskView = currentTaskView();
-    if ( !taskView ) return;
+    if (!taskView) {
+        return;
+    }
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->uid() == taskId) {
