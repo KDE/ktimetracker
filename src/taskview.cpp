@@ -1052,13 +1052,6 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
     return QString();
 }
 
-QString TaskView::setClipBoardText(const QString& s)
-{
-    QString err; // maybe we find possible errors later
-//    KApplication::clipboard()->setText(s);
-    return err;
-}
-
 void TaskView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 {
     if (item) {

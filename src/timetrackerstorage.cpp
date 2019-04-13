@@ -50,6 +50,7 @@
 #include <QTableWidget>
 #include <QTextStream>
 #include <QMap>
+#include <QClipboard>
 
 #include <KCalCore/Person>
 #include <KDirWatch>
@@ -742,10 +743,9 @@ QString TimeTrackerStorage::exportcsvHistory(
 
     qDebug() << "Retval is \n" << retval;
 
-    if (rc.bExPortToClipBoard)
-        taskview->setClipBoardText(retval);
-    else
-    {
+    if (rc.bExPortToClipBoard) {
+        QApplication::clipboard()->setText(retval);
+    } else {
         // store the file locally or remote
         if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
         {

@@ -209,9 +209,6 @@ public Q_SLOTS:
     /** Copy totals for current and all sub tasks to clipboard. */
     QString clipTotals(const ReportCriteria& rc);
 
-    /** Set the text of the application's clipboard. */
-    QString setClipBoardText(const QString& s);
-
     /** Reconfigures taskView depending on current configuration. */
     void reconfigure();
 
