@@ -38,24 +38,17 @@ class QTreeView;
  * It is possible to exclude columns from inserting in the
  * menu either by the @p excludedColumns parameter in the constructor.
  *
- * You can also change the display style of the items in the menu.
- *
  * @author Mathias Soeken <msoeken@tzi.de>
  */
 class TreeViewHeaderContextMenu : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int style READ style)
     Q_PROPERTY(QMenu* menu READ menu)
 
 public:
-    enum { AlwaysCheckBox, CheckBoxOnChecked, ShowHideText };
-
-public:
-    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style = AlwaysCheckBox, QVector<int> &&excludedColumns = QVector<int>());
+    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, QVector<int> &&excludedColumns = QVector<int>());
     ~TreeViewHeaderContextMenu() override;
 
-    int style() const { return mStyle; }
     QMenu *menu() const { return mContextMenu; }
 
 private:
@@ -73,7 +66,6 @@ protected:
     QTreeView *mWidget;
     QVector<QAction*> mActions;
     QMenu *mContextMenu;
-    int mStyle;
     QHash<QAction*, int> mActionColumnMapping;
     QVector<int> mExcludedColumns;
 

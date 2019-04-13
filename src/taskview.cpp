@@ -214,7 +214,7 @@ TaskView::TaskView(QWidget* parent)
            this, SLOT(stopTimerFor(Task*)));
 
     // Header context menu
-    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu( this, this, TreeViewHeaderContextMenu::AlwaysCheckBox, QVector<int>{0});
+    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, this, QVector<int>{0});
     connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
 
     // Context Menu

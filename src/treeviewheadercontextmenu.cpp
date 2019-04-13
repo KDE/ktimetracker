@@ -29,11 +29,10 @@
 
 #include "ktt_debug.h"
 
-TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, int style, QVector<int> &&excludedColumns)
+TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, QVector<int> &&excludedColumns)
     : QObject(parent)
     , mWidget(widget)
     , mContextMenu(nullptr)
-    , mStyle(style)
     , mExcludedColumns(excludedColumns)
 {
     if (mWidget) {
@@ -110,23 +109,7 @@ void TreeViewHeaderContextMenu::slotAboutToShow()
 
 void TreeViewHeaderContextMenu::updateAction(QAction *action, int column)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString text = mWidget->model()->headerData(column, Qt::Horizontal).toString();
-    switch (mStyle) {
-    case AlwaysCheckBox:
-        action->setCheckable(true);
-        action->setChecked(!mWidget->isColumnHidden(column));
-        action->setText(text);
-        break;
-    case CheckBoxOnChecked:
-        action->setCheckable(!mWidget->isColumnHidden(column));
-        action->setChecked(!mWidget->isColumnHidden(column));
-        action->setText(text);
-        break;
-    case ShowHideText:
-        action->setCheckable( false );
-        action->setChecked( false );
-        action->setText((mWidget->isColumnHidden(column) ? i18n("Show") : i18n("Hide")) + ' ' + text);
-        break;
-    }
+    action->setCheckable(true);
+    action->setChecked(!mWidget->isColumnHidden(column));
+    action->setText(mWidget->model()->headerData(column, Qt::Horizontal).toString());
 }
