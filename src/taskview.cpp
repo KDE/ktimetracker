@@ -276,13 +276,15 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
                 m_lastTaskWithFocus = task;
             }
         }
-        if ( !found )
-        {
-            QString taskuid = addTask( newTaskName );
-            if ( taskuid.isNull() )
-            {
-                KMessageBox::error( 0, i18n(
-                "Error storing new task. Your changes were not saved. Make sure you can edit your iCalendar file. Also quit all applications using this file and remove any lock file related to its name from ~/.kde/share/apps/kabc/lock/ " ) );
+        if (!found) {
+            QString taskuid = addTask(newTaskName);
+            if (taskuid.isNull()) {
+                KMessageBox::error(
+                    nullptr,
+                    i18n("Error storing new task. Your changes were not saved. "
+                         "Make sure you can edit your iCalendar file. "
+                         "Also quit all applications using this file and remove "
+                         "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
             }
             for (Task *task : getAllTasks()) {
                 if (task->name() == newTaskName) {
