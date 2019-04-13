@@ -470,11 +470,8 @@ is stored in the _preferences object. */
     qCDebug(KTT_LOG) << "Entering function";
 
     if (topLevelItemCount() > 0) {
-        QTreeWidgetItemIterator item(this);
-        while (*item) {
-            Task *t = (Task *) *item;
-            t->setExpanded(readBoolEntry(t->uid()));
-            ++item;
+        for (Task *task : getAllTasks()) {
+            task->setExpanded(readBoolEntry(task->uid()));
         }
     }
     qCDebug(KTT_LOG) << "Leaving function";
@@ -632,11 +629,10 @@ QString TaskView::exportcsvHistory()
 long TaskView::count()
 {
     long n = 0;
-    QTreeWidgetItemIterator item(this);
-    while (*item) {
-        ++item;
+    for (Task *task : getAllTasks()) {
         ++n;
     }
+
     return n;
 }
 
@@ -764,12 +760,8 @@ overalltimes (comprising all sessions) and total times (comprising all subtasks)
 That is why there is also a total session time. */
 {
     qCDebug(KTT_LOG) <<"Entering TaskView::startNewSession";
-    QTreeWidgetItemIterator item( this );
-    while ( *item )
-    {
-        Task * task = (Task *) *item;
+    for (Task *task : getAllTasks()) {
         task->startNewSession();
-        ++item;
     }
     qCDebug(KTT_LOG) << "Leaving TaskView::startNewSession";
 }
@@ -778,12 +770,8 @@ void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QTreeWidgetItemIterator item( this );
-    while ( *item )
-    {
-        Task * task = (Task *) *item;
+    for (Task *task : getAllTasks()) {
         task->resetTimes();
-        ++item;
     }
     storage()->deleteAllEvents();
     qCDebug(KTT_LOG) << "Leaving function";
@@ -793,12 +781,8 @@ void TaskView::resetDisplayTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QTreeWidgetItemIterator item( this );
-    while ( *item )
-    {
-        Task * task = (Task *) *item;
+    for (Task *task : getAllTasks()) {
         task->resetTimes();
-        ++item;
     }
     qCDebug(KTT_LOG) << "Leaving function";
 }
@@ -1197,4 +1181,15 @@ void TaskView::reconfigure()
     }
 
     refresh();
+}
+
+QList<Task*> TaskView::getAllTasks()
+{
+    QList<Task*> tasks;
+    for (QTreeWidgetItemIterator it(this); *it; ++it) {
+        Task *task = dynamic_cast<Task*>(*it);
+        tasks.append(task);
+    }
+
+    return tasks;
 }

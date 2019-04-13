@@ -609,15 +609,11 @@ QStringList TimeTrackerWidget::taskIdsFromName( const QString &taskName ) const
 
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return result;
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->name() == taskName )
-        {
+
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->name() == taskName) {
             result << task->uid();
         }
-        ++it;
     }
 
     return result;
@@ -650,15 +646,10 @@ void TimeTrackerWidget::deleteTask( const QString &taskId )
 
     if ( !taskView ) return;
 
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->uid() == taskId )
-        {
-            taskView->deleteTaskBatch( task );
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->uid() == taskId) {
+            taskView->deleteTaskBatch(task);
         }
-        ++it;
     }
 }
 
@@ -668,15 +659,10 @@ void TimeTrackerWidget::setPercentComplete( const QString &taskId, int percent )
     
     if ( !taskView ) return;
 
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->uid() == taskId )
-        {
-            task->setPercentComplete( percent, taskView->storage() );
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->uid() == taskId) {
+            task->setPercentComplete(percent, taskView->storage());
         }
-        ++it;
     }
 }
 
@@ -693,14 +679,11 @@ int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, 
     Task *task = nullptr;
     TaskView *taskView = currentTaskView();
     if (taskView) {
-        QTreeWidgetItemIterator it(taskView);
-        while (*it) {
-            auto* t = static_cast< Task* >(*it);
-            if (t && t->uid() == taskId) {
+        for (Task *t : taskView->getAllTasks()) {
+            if (t->uid() == taskId) {
                 task = t;
                 break;
             }
-            ++it;
         }
     }
 
@@ -748,14 +731,11 @@ int TimeTrackerWidget::changeTime( const QString &taskId, int minutes )
     taskView = currentTaskView();
     if ( taskView ) return KTIMETRACKER_ERR_UID_NOT_FOUND; //FIXME: it mimics the behaviour with the for loop, but I am not sure semantics were right. Maybe a new error code must be defined?
 
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it ) {
-        t = static_cast< Task* >( *it );
-        if ( t && t->uid() == taskId ) {
+    for (Task *t : taskView->getAllTasks()) {
+        if (t->uid() == taskId) {
             task = t;
             break;
         }
-        ++it;
     }
 
     if ( !task ) result=KTIMETRACKER_ERR_UID_NOT_FOUND;
@@ -799,16 +779,13 @@ int TimeTrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
 {
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return -1;
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->uid() == taskId )
-        {
+
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->uid() == taskId) {
             return task->totalTime();
         }
-        ++it;
     }
+
     return -1;
 }
 
@@ -818,16 +795,12 @@ void TimeTrackerWidget::startTimerFor( const QString &taskId )
         
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return;
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->uid() == taskId )
-        {
-            taskView->startTimerFor( task );
+
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->uid() == taskId) {
+            taskView->startTimerFor(task);
             return;
         }
-        ++it;
     }
 }
 
@@ -835,56 +808,42 @@ bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
 {
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return false;
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->name() == taskName )
-        {
-            taskView->startTimerFor( task );
+
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->name() == taskName ) {
+            taskView->startTimerFor(task);
             return true;
         }
-        ++it;
     }
+
     return false;
 }
-
 
 bool TimeTrackerWidget::stopTimerForTaskName( const QString &taskName )
 {
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return false;
 
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-
-        if ( task && task->name() == taskName )
-        {
-            taskView->stopTimerFor( task );
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->name() == taskName) {
+            taskView->stopTimerFor(task);
             return true;
         }
-        ++it;
     }
+
     return false;
 }
-
 
 void TimeTrackerWidget::stopTimerFor( const QString &taskId )
 {
     TaskView *taskView = currentTaskView();
     if ( !taskView ) return;
-    QTreeWidgetItemIterator it( taskView );
-    while ( *it )
-    {
-        Task *task = static_cast< Task* >( *it );
-        if ( task && task->uid() == taskId )
-        {
-            taskView->stopTimerFor( task );
+
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->uid() == taskId) {
+            taskView->stopTimerFor(task);
             return;
         }
-        ++it;
     }
 }
 
@@ -935,15 +894,12 @@ bool TimeTrackerWidget::isActive(const QString& taskId) const
         return false;
     }
 
-    QTreeWidgetItemIterator it(taskView);
-    while (*it) {
-        Task* task = static_cast<Task*>(*it);
-
-        if (task && task->uid() == taskId) {
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->uid() == taskId) {
             return task->isRunning();
         }
-        ++it;
     }
+
     return false;
 }
 
@@ -954,14 +910,12 @@ bool TimeTrackerWidget::isTaskNameActive( const QString &taskName ) const
         return false;
     }
 
-    QTreeWidgetItemIterator it(taskView);
-    while (*it) {
-        Task* task = static_cast<Task*>(*it);
-        if (task && task->name() == taskName) {
+    for (Task *task : taskView->getAllTasks()) {
+        if (task->name() == taskName) {
             return task->isRunning();
         }
-        ++it;
     }
+
     return false;
 }
 
@@ -974,11 +928,10 @@ QStringList TimeTrackerWidget::tasks() const
         return result;
     }
 
-    QTreeWidgetItemIterator it(taskView);
-    while (*it) {
-        result << static_cast<Task*>(*it)->name();
-        ++it;
+    for (Task *task : taskView->getAllTasks()) {
+        result << task->name();
     }
+
     return result;
 }
 

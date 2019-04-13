@@ -255,14 +255,11 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
     QVector<QDateTime> startTimes;
 
     // remember tasks that are running and their start times
-    QTreeWidgetItemIterator it(view);
-    while (*it) {
-        Task *task = static_cast<Task*>(*it);
+    for (Task *task : view->getAllTasks()) {
         if (task->isRunning()) {
             runningTasks.append(task->uid());
             startTimes.append(task->startTime());
         }
-        ++it;
     }
 
     view->clear();

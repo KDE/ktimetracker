@@ -218,6 +218,8 @@ public Q_SLOTS:
     /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
     QString reFreshTimes();
 
+    QList<Task*> getAllTasks();
+
 Q_SIGNALS:
     void totalTimesChanged(long session, long total);
     void reSetTimes();
