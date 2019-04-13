@@ -304,12 +304,6 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
     return err;
 }
 
-QString TimeTrackerStorage::buildTaskView(TaskView *view)
-// makes *view contain the tasks out of mCalendar
-{
-    return buildTaskView(d->mCalendar, view);
-}
-
 void TimeTrackerStorage::closeStorage()
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -449,18 +443,6 @@ QString TimeTrackerStorage::addTask(const Task* task, const Task* parent)
     return uid;
 }
 
-QStringList TimeTrackerStorage::taskNames() const
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    QStringList result;
-    KCalCore::Todo::List todoList = d->mCalendar->rawTodos();
-    for(KCalCore::Todo::List::iterator i = todoList.begin();
-        i != todoList.end(); ++i) {
-        result << (*i)->summary();
-    }
-    return result;
-}
-
 QString TimeTrackerStorage::removeEvent(QString uid)
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -490,29 +472,6 @@ bool TimeTrackerStorage::removeTask(Task* task)
     // delete todo
     KCalCore::Todo::Ptr todo = d->mCalendar->todo(task->uid());
     d->mCalendar->deleteTodo(todo);
-    // Save entire file
-    saveCalendar();
-
-    return true;
-}
-
-bool TimeTrackerStorage::removeTask(QString taskid)
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    // delete history
-    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCalCore::Event::List::iterator i = eventList.begin();
-        i != eventList.end();
-        ++i) {
-        if ((*i)->relatedTo() == taskid) {
-            d->mCalendar->deleteEvent(*i);
-        }
-    }
-
-    // delete todo
-    KCalCore::Todo::Ptr todo = d->mCalendar->todo(taskid);
-    d->mCalendar->deleteTodo(todo);
-
     // Save entire file
     saveCalendar();
 
@@ -837,65 +796,6 @@ QString TimeTrackerStorage::exportcsvHistory(
         }
     }
     return err;
-}
-
-void TimeTrackerStorage::startTimer(const Task* task, const QDateTime &when)
-{
-    qCDebug(KTT_LOG) << "Entering function; when=" << when;
-    KCalCore::Event::Ptr e;
-    e = baseEvent(task);
-    e->setDtStart(when);
-    d->mCalendar->addEvent(e);
-    task->taskView()->scheduleSave();
-}
-
-void TimeTrackerStorage::startTimer(QString taskID)
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    KCalCore::Todo::List todoList;
-    KCalCore::Todo::List::ConstIterator todo;
-    todoList = d->mCalendar->rawTodos();
-    for( todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo )
-    {
-        qCDebug(KTT_LOG) << (*todo)->uid();
-        qCDebug(KTT_LOG) << taskID;
-        if ( (*todo)->uid() == taskID )
-        {
-            qCDebug(KTT_LOG) << "adding event";
-            KCalCore::Event::Ptr e;
-            e = baseEvent((*todo));
-            e->setDtStart(QDateTime::currentDateTime());
-            d->mCalendar->addEvent(e);
-        }
-    }
-    saveCalendar();
-}
-
-void TimeTrackerStorage::stopTimer(const Task* task, const QDateTime &when)
-{
-    qCDebug(KTT_LOG) << "Entering function; when=" << when;
-    KCalCore::Event::List eventList = d->mCalendar->rawEvents();
-    for(KCalCore::Event::List::iterator i = eventList.begin();
-        i != eventList.end();
-        ++i)
-    {
-        if ( (*i)->relatedTo() == task->uid() )
-        {
-            qCDebug(KTT_LOG) << "found an event for task, event=" << (*i)->uid();
-            if (!(*i)->hasEndDate())
-            {
-                qCDebug(KTT_LOG) << "this event has no enddate";
-//                (*i)->setDtEnd(KDateTime(when, KDateTime::Spec::LocalZone()));
-                (*i)->setDtEnd(when);
-            }
-            else
-            {
-                qCDebug(KTT_LOG) << "this event has an enddate";
-                qCDebug(KTT_LOG) << "end date is " << (*i)->dtEnd();
-            }
-        };
-    }
-    saveCalendar();
 }
 
 void TimeTrackerStorage::changeTime(const Task* task, long deltaSeconds)

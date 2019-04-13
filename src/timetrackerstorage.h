@@ -95,13 +95,6 @@ public:
     */
     QString buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view);
 
-   /**
-    * Build up the taskview.
-    *
-    * This is needed if a subtask has been deleted.
-    */
-    QString buildTaskView(TaskView *view);
-
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
 
@@ -211,36 +204,6 @@ public:
      */
     void setName(const Task* task, const QString& oldname) { Q_UNUSED(task); Q_UNUSED(oldname); }
 
-
-    /**
-     * Log the event that a timer has started for a task.
-     *
-     * For the iCalendar storage, there is no need to log anything for this
-     * event.  We log an event when the timer is stopped.
-     *
-     * @param task    The task the timer was started for.
-     */
-    void startTimer(const Task* task, const QDateTime &when = QDateTime::currentDateTime());
-
-    /**
-     * Start the timer for a given task ID
-     *
-     * @param taskID  The task ID of the task to be started
-     */
-    void startTimer( QString taskID );
-
-    /**
-     * Log the event that the timer has stopped for this task.
-     *
-     * The task stores the last time a timer was started, so we log a new iCal
-     * Event with the start and end times for this task.
-     * @see TimeTrackerStorage::changeTime
-     *
-     * @param task   The task the timer was stopped for.
-     * @param when   When the timer stopped.
-     */
-    void stopTimer(const Task* task, const QDateTime &when = QDateTime::currentDateTime());
-
     /**
      * Log a new comment for this task.
      *
@@ -262,16 +225,6 @@ public:
      * @return true if change was saved, false otherwise
      */
     bool removeTask(Task* task);
-
-    /**
-     * Remove this task from iCalendar file.
-     *
-     * Removes task as well as all event history for this task.
-     *
-     * @param task   The task to be removed.
-     * @return true if change was saved, false otherwise
-     */
-    bool removeTask(QString taskid);
 
     /**
      * Add this task from iCalendar file.
@@ -302,9 +255,6 @@ public:
      */
     Task* task( const QString& uid, TaskView* view );
 
-    /** Return a list of all task names */
-    QStringList taskNames() const;
-
 private Q_SLOTS:
     void onFileModified();
 
@@ -314,9 +264,6 @@ private:
     Private *const d;
     //@endcond
 
-    void adjustFromLegacyFileFormat(Task* task);
-    bool parseLine(QString line, long *time, QString *name, int *level,
-        DesktopList* desktopList);
     QString writeTaskAsTodo( Task* task, QStack<KCalCore::Todo::Ptr>& parents );
     QString saveCalendar();
 
