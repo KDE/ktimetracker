@@ -700,22 +700,20 @@ int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, 
     return 0;
 }
 
-int TimeTrackerWidget::changeTime( const QString &taskId, int minutes )
+int TimeTrackerWidget::changeTime(const QString &taskId, int minutes)
 {
-    int result=0;
-    QDate startDate;
-    QTime startTime;
-    QDateTime startDateTime;
-    Task *task = 0, *t = 0;
-
-    TaskView *taskView;
-
-    if ( minutes <= 0 ) return KTIMETRACKER_ERR_INVALID_DURATION;
+    if (minutes <= 0) {
+        return KTIMETRACKER_ERR_INVALID_DURATION;
+    }
 
     // Find task
-    taskView = currentTaskView();
-    if ( taskView ) return KTIMETRACKER_ERR_UID_NOT_FOUND; //FIXME: it mimics the behaviour with the for loop, but I am not sure semantics were right. Maybe a new error code must be defined?
+    TaskView *taskView = currentTaskView();
+    if (!taskView) {
+        //FIXME: it mimics the behaviour with the for loop, but I am not sure semantics were right. Maybe a new error code must be defined?
+        return KTIMETRACKER_ERR_UID_NOT_FOUND;
+    }
 
+    Task *task = nullptr;
     for (Task *t : taskView->getAllTasks()) {
         if (t->uid() == taskId) {
             task = t;
@@ -723,13 +721,12 @@ int TimeTrackerWidget::changeTime( const QString &taskId, int minutes )
         }
     }
 
-    if ( !task ) {
-        result=KTIMETRACKER_ERR_UID_NOT_FOUND;
-    } else {
-        task->changeTime(minutes, task->taskView()->storage());
+    if (!task) {
+        return KTIMETRACKER_ERR_UID_NOT_FOUND;
     }
 
-    return result;
+    task->changeTime(minutes, task->taskView()->storage());
+    return 0;
 }
 
 QString TimeTrackerWidget::error( int errorCode ) const
