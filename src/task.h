@@ -22,14 +22,14 @@
 #ifndef KTIMETRACKER_TASK_H
 #define KTIMETRACKER_TASK_H
 
-#include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
-#include "taskview.h" // Required b/c of static cast below.
-
-#include <KCalCore/Todo>
-
 #include <QDateTime>
 #include <QPixmap>
 #include <QVector>
+
+#include <KCalCore/Todo>
+
+#include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
+#include "taskview.h" // Required b/c of static cast below.
 
 class QObject;
 class QPixmap;
@@ -37,7 +37,6 @@ class QString;
 class QMovie;
 
 class TimeTrackerStorage;
-
 
 /** \brief A class representing a task
  *
