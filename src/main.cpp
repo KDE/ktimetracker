@@ -33,7 +33,7 @@
 #include "mainwindow.h"
 #include "mainadaptor.h"
 #include "timetrackerstorage.h"
-#include "task.h"
+#include "model/task.h"
 #include "ktt_debug.h"
 #include "ktimetracker-version.h"
 

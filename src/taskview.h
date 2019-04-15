@@ -30,20 +30,24 @@
 #include "timetrackerstorage.h"
 #include "reportcriteria.h"
 
+QT_BEGIN_NAMESPACE
 class QMouseEvent;
 class QString;
 class QTimer;
+class QSortFilterProxyModel;
+QT_END_NAMESPACE
 
 class DesktopTracker;
 class IdleTimeDetector;
 class Task;
 class TimeTrackerStorage;
 class FocusDetector;
+class TasksModel;
 
 /**
  * Container and interface for the tasks.
  */
-class TaskView : public QTreeWidget
+class TaskView : public QTreeView
 {
   Q_OBJECT
 
@@ -51,13 +55,10 @@ public:
     explicit TaskView(QWidget* parent = nullptr);
     ~TaskView() override;
 
-    //BEGIN view specified
+    Task* taskAtViewIndex(QModelIndex viewIndex) const;
+
     /**  Return the current item in the view, cast to a Task pointer.  */
     Task* currentItem() const;
-
-    /**  Return the i'th item (zero-based), cast to a Task pointer.  */
-    Task* itemAt(int i);
-    //END
 
     //BEGIN model specified
     /** Load the view from storage.  */
@@ -104,6 +105,9 @@ public:
     /** Returns whether the focus tracking is currently active. */
     bool isFocusTrackingActive() const;
     //END
+
+    inline TasksModel *tasksModel() { return m_model; }
+    int sortColumn() const;
 
 public Q_SLOTS:
     /** Save to persistent storage. */
@@ -217,6 +221,8 @@ public Q_SLOTS:
 
     QList<Task*> getAllTasks();
 
+    void setFilterText(const QString &text);
+
 Q_SIGNALS:
     void totalTimesChanged(long session, long total);
     void reSetTimes();
@@ -228,6 +234,9 @@ Q_SIGNALS:
     void contextMenuRequested(const QPoint&);
 
 private: // member variables
+    TasksModel* m_model;
+    QSortFilterProxyModel* m_filterProxyModel;
+
     IdleTimeDetector* m_idleTimeDetector;
     QTimer *m_minuteTimer;
     QTimer *m_autoSaveTimer;
@@ -255,16 +264,14 @@ private:
 protected:
     void mouseMoveEvent(QMouseEvent*) override;
     void mousePressEvent(QMouseEvent*) override;
+    void mouseDoubleClickEvent(QMouseEvent*) override;
 
 public Q_SLOTS:
     void minuteUpdate();
     void dropEvent(QDropEvent* event) override;
-    /** item state stores if a task is expanded so you can see the subtasks */
-    void itemStateChanged(QTreeWidgetItem* item);
 
-    /** React on another process having modified the iCal file we rely on.
-        This is not iCalFileChanged. */
-    void slotItemDoubleClicked(QTreeWidgetItem *item, int);
+    /** item state stores if a task is expanded so you can see the subtasks */
+    void itemStateChanged(const QModelIndex &index);
 
     /** React on the focus having changed to Window QString **/
     void newFocusWindowDetected(const QString&);

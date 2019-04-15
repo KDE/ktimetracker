@@ -44,7 +44,6 @@
 #include <KMessageBox>
 #include <KRecentFilesAction>
 #include <KStandardAction>
-#include <KTreeWidgetSearchLine>
 #include <KIO/Job>
 
 #include "historydialog.h"
@@ -53,18 +52,18 @@
 #include "ktimetracker.h"
 #include "mainadaptor.h"
 #include "reportcriteria.h"
-#include "task.h"
+#include "model/task.h"
 #include "taskview.h"
 #include "ktimetracker-version.h"
 #include "mainwindow.h"
 #include "settings/ktimetrackerconfigdialog.h"
+#include "widgets/searchline.h"
 #include "ktt_debug.h"
 
 
 TimeTrackerWidget::TimeTrackerWidget(QWidget* parent)
     : QWidget(parent)
     , m_searchLine(nullptr)
-    , m_searchWidget(nullptr)
     , m_taskView(nullptr)
     , m_actionCollection(nullptr)
 {
@@ -76,16 +75,12 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget* parent)
     layout->setMargin(0);
     layout->setSpacing(0);
 
-    QLayout* innerLayout = new QHBoxLayout;
-    m_searchLine = new QWidget(this);
-    m_searchWidget = new KTreeWidgetSearchLine(m_searchLine);
-    m_searchWidget->setPlaceholderText(i18n("Search or add task"));
-    m_searchWidget->setWhatsThis(i18n("This is a combined field. As long as you do not type ENTER, it acts as a filter. Then, only tasks that match your input are shown. As soon as you type ENTER, your input is used as name to create a new task."));
-    m_searchWidget->installEventFilter(this);
-    innerLayout->addWidget(m_searchWidget);
-    m_searchLine->setLayout(innerLayout);
+    m_searchLine = new SearchLine(this);
+    connect(m_searchLine, &SearchLine::textSubmitted, this, &TimeTrackerWidget::slotAddTask);
 
     m_taskView = new TaskView(this);
+    connect(m_searchLine, &SearchLine::searchUpdated, m_taskView, &TaskView::setFilterText);
+
     layout->addWidget(m_searchLine);
     layout->addWidget(m_taskView);
     setLayout(layout);
@@ -101,8 +96,8 @@ bool TimeTrackerWidget::allEventsHaveEndTiMe()
 int TimeTrackerWidget::focusSearchBar()
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (m_searchWidget->isVisible()) {
-        m_searchWidget->setFocus();
+    if (m_searchLine->isEnabled()) {
+        m_searchLine->setFocus();
     }
     return 0;
 }
@@ -134,7 +129,6 @@ void TimeTrackerWidget::addTaskView(const QString &fileName)
 
     emit setCaption(fileName);
     taskView->load(lFileName);
-    m_searchWidget->addTreeWidget(taskView);
 
     // When adding the first tab currentChanged is not emitted, so...
     if (!m_taskView) {
@@ -331,8 +325,6 @@ bool TimeTrackerWidget::closeFile()
         taskView->closeStorage();
     }
 
-    m_searchWidget->removeTreeWidget(taskView);
-
     emit currentTaskViewChanged();
     emit setCaption(QString());
     slotCurrentChanged();
@@ -370,7 +362,6 @@ void TimeTrackerWidget::slotCurrentChanged()
     if (m_taskView) {
         disconnect(m_taskView, SLOT(totalTimesChanged(long, long)));
         disconnect(m_taskView, SLOT(reSetTimes()));
-        disconnect(m_taskView, SLOT(itemSelectionChanged()));
         disconnect(m_taskView, SLOT(updateButtons()));
         disconnect(m_taskView, SLOT(setStatusBarText(QString)));
         disconnect(m_taskView, SLOT(timersActive()));
@@ -381,8 +372,6 @@ void TimeTrackerWidget::slotCurrentChanged()
             this, SIGNAL(totalTimesChanged(long,long)) );
         connect( m_taskView, SIGNAL(reSetTimes()),
             this, SIGNAL(reSetTimes()) );
-        connect( m_taskView, SIGNAL(itemSelectionChanged()),
-            this, SIGNAL(currentTaskChanged()) );
         connect( m_taskView, SIGNAL(updateButtons()),
             this, SIGNAL(updateButtons()) );
         connect( m_taskView, SIGNAL(setStatusBarText(QString)), // FIXME signature
@@ -395,31 +384,13 @@ void TimeTrackerWidget::slotCurrentChanged()
             this, SIGNAL(tasksChanged(QList<Task*>)) );
         emit setCaption(m_taskView->storage()->icalfile());
     }
-    m_searchWidget->setEnabled(m_taskView);
-}
-
-bool TimeTrackerWidget::eventFilter(QObject* obj, QEvent* event)
-{
-    if (obj == m_searchWidget && event->type() == QEvent::KeyPress) {
-        auto* keyEvent = dynamic_cast<QKeyEvent*>(event);
-        if (keyEvent && (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)) {
-            if (!m_searchWidget->displayText().isEmpty()) {
-                slotAddTask( m_searchWidget->displayText());
-            }
-
-            return true;
-        }
-    }
-
-    return QObject::eventFilter(obj, event);
+    m_searchLine->setEnabled(m_taskView);
 }
 
 void TimeTrackerWidget::slotAddTask(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
     taskView->addTask(taskName, QString(), 0, 0, DesktopList(), 0);
-
-    m_searchWidget->clear();
 }
 
 void TimeTrackerWidget::slotUpdateButtons()

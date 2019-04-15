@@ -37,7 +37,7 @@ test cases:
 
 #include <QDebug>
 
-#include "task.h"
+#include "model/task.h"
 #include "taskview.h"
 #include "ktt_debug.h"
 
@@ -93,10 +93,10 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
         DesktopList dl;
         if (m_level++ > 0) {
             Task* parentTask = m_task;
-            m_task = new Task(taskName, QString(), 0, 0, dl, parentTask);
+            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, parentTask);
             m_task->setUid(m_taskView->storage()->addTask(m_task, parentTask));
         } else {
-            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView);
+            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, nullptr);
             qDebug() << "added" << taskName;
             m_task->setUid(m_taskView->storage()->addTask(m_task, nullptr));
         }

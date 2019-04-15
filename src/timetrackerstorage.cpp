@@ -63,7 +63,7 @@
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
-#include "task.h"
+#include "model/task.h"
 #include "taskview.h"
 #include "timekard.h"
 #include "ktt_debug.h"
@@ -162,7 +162,7 @@ QString TimeTrackerStorage::load(TaskView* view, const QString &fileName)
             Task* task = new Task(*todo, view);
             map.insert( (*todo)->uid(), task );
             view->setRootIsDecorated(true);
-            task->setPixmapProgress();
+            task->invalidateCompletedState();
         }
 
         // Load each task under its parent task.
@@ -245,15 +245,13 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
         }
     }
 
-    view->clear();
+    view->tasksModel()->clear();
     todoList = calendar->rawTodos();
     for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo) {
         Task* task = new Task(*todo, view);
-        task->setWhatsThis(0, i18n("The task name is what you call the task, it can be chosen freely."));
-        task->setWhatsThis(1, i18n("The session time is the time since you last chose \"start new session.\""));
         map.insert((*todo)->uid(), task);
         view->setRootIsDecorated(true);
-        task->setPixmapProgress();
+        task->invalidateCompletedState();
     }
 
     // 1.1. Load each task under its parent task.
@@ -350,8 +348,8 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     QString errorString;
 
     QStack<KCalCore::Todo::Ptr> parents;
-    for (int i = 0; i < taskview->topLevelItemCount(); ++i) {
-        Task *task = static_cast< Task* >( taskview->topLevelItem( i ) );
+    for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
+        Task *task = static_cast< Task* >( taskview->tasksModel()->topLevelItem( i ) );
         qCDebug(KTT_LOG) << "write task" << task->name();
         errorString = writeTaskAsTodo(task, parents);
     }

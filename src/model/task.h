@@ -29,14 +29,17 @@
 #include <KCalCore/Todo>
 
 #include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
-#include "taskview.h" // Required b/c of static cast below.
+#include "model/tasksmodel.h"
+#include "model/tasksmodelitem.h"
 
+QT_BEGIN_NAMESPACE
 class QObject;
 class QPixmap;
 class QString;
-class QMovie;
+QT_END_NAMESPACE
 
 class TimeTrackerStorage;
+class TaskView;
 
 /** \brief A class representing a task
  *
@@ -51,28 +54,22 @@ class TimeTrackerStorage;
  * It can also contain subtasks - these are managed using the
  * QListViewItem class.
  */
-class Task : public QObject, public QTreeWidgetItem
+class Task : public QObject, public TasksModelItem
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, TaskView* parent);
-    Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, Task* parent);
-    Task(const KCalCore::Todo::Ptr &incident, TaskView* parent);
+        DesktopList desktops, TaskView* taskView, Task* parentTask);
+    Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView);
 
     /* destructor */
     ~Task() override;
 
-    /** return parent Task or null in case of TaskView.
-     *  same as QListViewItem::parent()
-     */
-    Task* parentTask() const { return (Task*)QTreeWidgetItem::parent(); }
+    Task* parentTask() const { return dynamic_cast<Task *>(TasksModelItem::parent()); }
 
     /** Return task view for this task */
-    TaskView* taskView() const
-        { return static_cast<TaskView *>( treeWidget() ); }
+    TaskView* taskView() const { return m_taskView; }
 
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const;
@@ -95,10 +92,10 @@ public:
 
     /** cut Task out of parent Task or the TaskView and into the
      *  destination Task */
-    void move(Task* destination);
+    void move(TasksModelItem* destination);
 
     /** insert Task into the destination Task */
-    void paste(Task* destination);
+    void paste(TasksModelItem* destination);
 
     //@{ timing related functions
 
@@ -304,7 +301,7 @@ public:
     QString comment() const;
 
     /** tells you whether this task is the root of the task tree */
-    bool isRoot() const { return QTreeWidgetItem::parent() == nullptr; }
+    bool isRoot() const { return !parentTask(); }
 
     /** remove Task with all it's children
      * @param storage a pointer to a TimeTrackerStorage object.
@@ -331,12 +328,10 @@ public:
 
     int priority() const;
 
-    /** Sets an appropriate icon for this task based on its level of
-     * completion */
-    void setPixmapProgress();
-
     /** Return true if task is complete (percent complete equals 100).  */
     bool isComplete();
+
+    QVariant data(int column, int role) const override;
 
 protected:
     void changeParentTotalTimes(long minutesSession, long minutes);
@@ -346,19 +341,15 @@ Q_SIGNALS:
     /** signal that we're about to delete a task */
     void deletingTask(Task* thisTask);
 
-protected Q_SLOTS:
-    /** animate the active icon */
-    void setActiveIcon(int frame);
-
 private:
     /** initialize a task */
     void init(
         const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
         const DesktopList& desktops, int percent_complete, int priority);
 
-    bool operator<(const QTreeWidgetItem &other) const override;
+    bool operator<(const TasksModelItem &other) const override;
 
-    QMovie* m_clockAnimation;
+    bool m_isRunning;
 
     /** The iCal unique ID of the Todo for this task. */
     QString mUid;
@@ -395,6 +386,8 @@ private:
 
     /** Priority of the task. */
     int mPriority;
+
+    TaskView* m_taskView;
 };
 
 #endif // KTIMETRACKER_TASK_H

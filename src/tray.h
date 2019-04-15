@@ -27,7 +27,9 @@
 
 #include <KStatusNotifierItem>
 
+QT_BEGIN_NAMESPACE
 class QMovie;
+QT_END_NAMESPACE
 
 class MainWindow;
 class Task;

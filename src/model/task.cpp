@@ -26,33 +26,37 @@
 #include <QString>
 #include <QPixmap>
 #include <QDebug>
-#include <QMovie>
 
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
+#include "timetrackerstorage.h"
+#include "taskview.h"
 #include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Task::Task(
-    const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-    DesktopList desktops, TaskView *parent)
-    : QObject()
-    , QTreeWidgetItem(parent)
-{
-    init(taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0);
-}
-
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-            DesktopList desktops, Task *parent)
-  : QObject(), QTreeWidgetItem(parent)
+            DesktopList desktops, TaskView* taskView, Task *parentTask)
+    : QObject()
+    , TasksModelItem(taskView->tasksModel(), parentTask)
+    , m_taskView(taskView)
 {
+    if (parentTask) {
+        parentTask->addChild(this);
+    } else {
+        taskView->tasksModel()->addChild(this);
+    }
+
     init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0 );
 }
 
-Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* parent)
-  : QObject(), QTreeWidgetItem( parent )
+Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView)
+    : QObject()
+    , TasksModelItem(taskView->tasksModel(), nullptr)
+    , m_taskView(taskView)
 {
+    taskView->tasksModel()->addChild(this);
+
     long minutes = 0;
     QString name;
     QString description;
@@ -85,20 +89,16 @@ void Task::init(
     const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
     const DesktopList& desktops, int percent_complete, int priority)
 {
-    const TaskView *taskView = qobject_cast<TaskView*>(treeWidget());
     // If our parent is the taskview then connect our totalTimesChanged
     // signal to its receiver
     if (!parentTask()) {
         connect(this, &Task::totalTimesChanged,
-                taskView, &TaskView::taskTotalTimesChanged);
+                m_taskView, &TaskView::taskTotalTimesChanged);
     }
 
-    connect(this, &Task::deletingTask, taskView, &TaskView::deletingTask);
+    connect(this, &Task::deletingTask, m_taskView, &TaskView::deletingTask);
 
-    // Prepare animated icon
-    m_clockAnimation = new QMovie(":/pics/watch.gif", QByteArray(), this);
-    connect(m_clockAnimation, &QMovie::frameChanged, this, &Task::setActiveIcon);
-
+    m_isRunning = false;
     mRemoving = false;
     mName = taskName.trimmed();
     mDescription = taskDescription.trimmed();
@@ -106,21 +106,13 @@ void Task::init(
     mTotalTime = mTime = minutes;
     mTotalSessionTime = mSessionTime = sessionTime;
     mDesktops = desktops;
-    setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
+
     mPercentComplete = percent_complete;
     mPriority = priority;
     mSessionStartTiMe = QDateTime::fromString(sessionStartTiMe);
 
     update();
     changeParentTotalTimes(mSessionTime, mTime);
-
-    // alignment of the number items
-    for (int i = 1; i < columnCount(); ++i) {
-        setTextAlignment(i, Qt::AlignRight);
-    }
-
-    // .. but not the priority column
-    setTextAlignment(5, Qt::AlignCenter);
 }
 
 Task::~Task()
@@ -140,19 +132,13 @@ void Task::delete_recursive()
 // This is the back-end, the front-end is StartTimerFor()
 void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime& when)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    if (on) {
-        if (!isRunning()) {
-            m_clockAnimation->start();
+    if (on != m_isRunning) {
+        m_isRunning = on;
+        invalidateRunningState();
+
+        if (on) {
             mLastStart = when;
             qCDebug(KTT_LOG) << "task has been started for " << when;
-        }
-    } else {
-        if (isRunning()) {
-            m_clockAnimation->stop();
-            if (!mRemoving) {
-                setIcon(1, QPixmap(":/pics/empty-watch.xpm"));
-            }
         }
     }
 }
@@ -164,7 +150,8 @@ void Task::resumeRunning()
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (!isRunning()) {
-        m_clockAnimation->start();
+        m_isRunning = true;
+        invalidateRunningState();
     }
 }
 
@@ -175,7 +162,7 @@ void Task::setUid(const QString& uid)
 
 bool Task::isRunning() const
 {
-    return m_clockAnimation->state() == QMovie::Running;
+    return m_isRunning;
 }
 
 void Task::setName(const QString& name, TimeTrackerStorage* storage)
@@ -216,10 +203,10 @@ void Task::setPercentComplete(int percent, TimeTrackerStorage* storage)
     }
 
     if (isRunning() && mPercentComplete == 100) {
-        taskView()->stopTimerFor(this);
+        m_taskView->stopTimerFor(this);
     }
 
-    setPixmapProgress();
+    invalidateCompletedState();
 
     // When parent marked as complete, mark all children as complete as well.
     // This behavior is consistent with KOrganizer (as of 2003-09-24).
@@ -243,19 +230,6 @@ void Task::setPriority(int priority)
 
     mPriority = priority;
     update();
-}
-
-void Task::setPixmapProgress()
-{
-    qCDebug(KTT_LOG) << "Entering function";
-
-    if (mPercentComplete >= 100) {
-        setIcon(0, QPixmap(":/pics/task-complete.xpm"));
-    } else {
-        setIcon(0, QPixmap(":/pics/task-incomplete.xpm"));
-    }
-
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 bool Task::isComplete()
@@ -404,10 +378,10 @@ void Task::resetTimes()
 
 void Task::changeParentTotalTimes(long minutesSession, long minutes)
 {
-    if (isRoot()) {
-        emit totalTimesChanged(minutesSession, minutes);
-    } else {
+    if (parentTask()) {
         parentTask()->changeTotalTimes(minutesSession, minutes);
+    } else {
+        emit totalTimesChanged(minutesSession, minutes);
     }
 }
 
@@ -433,11 +407,6 @@ bool Task::remove(TimeTrackerStorage* storage)
     changeParentTotalTimes(-mSessionTime, -mTime);
     mRemoving = false;
     return ok;
-}
-
-void Task::setActiveIcon(int frame)
-{
-    setIcon(1, QIcon(m_clockAnimation->currentPixmap()));
 }
 
 QString Task::fullName() const
@@ -558,52 +527,64 @@ QString Task::getDesktopStr() const
     return desktopsStr;
 }
 
-void Task::cut()
 // This is needed e.g. to move a task under its parent when loading.
+void Task::cut()
 {
-    qCDebug(KTT_LOG) << "Entering function";
-
     changeParentTotalTimes(-mTotalSessionTime, -mTotalTime);
     if (!parentTask()) {
-        treeWidget()->takeTopLevelItem(treeWidget()->indexOfTopLevelItem(this));
+        m_taskView->tasksModel()->takeTopLevelItem(m_taskView->tasksModel()->indexOfTopLevelItem(this));
     } else {
-        parentTask()->takeChild(indexOfChild(this));
+        parentTask()->takeChild(parentTask()->indexOfChild(this));
     }
-
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::paste(Task* destination)
 // This is needed e.g. to move a task under its parent when loading.
+void Task::paste(TasksModelItem* destination)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    destination->QTreeWidgetItem::insertChild(0, this);
-    changeParentTotalTimes( mTotalSessionTime, mTotalTime);
-    qCDebug(KTT_LOG) << "Leaving function";
+    destination->insertChild(0, this);
+    changeParentTotalTimes(mTotalSessionTime, mTotalTime);
 }
 
-void Task::move(Task* destination)
 // This is used e.g. to move each task under its parent after loading.
+void Task::move(TasksModelItem* destination)
 {
-    qCDebug(KTT_LOG) << "Entering function";
     cut();
     paste(destination);
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
-void Task::update()
-// Update a row, containing one task
+QVariant Task::data(int column, int role) const
 {
-    qCDebug(KTT_LOG) << "Entering function";
+    if (role != Qt::DisplayRole) {
+        return {};
+    }
+
     bool b = KTimeTrackerSettings::decimalFormat();
-    setText(0, mName);
-    setText(1, formatTime(mSessionTime, b));
-    setText(2, formatTime(mTime, b));
-    setText(3, formatTime(mTotalSessionTime, b));
-    setText(4, formatTime(mTotalTime, b));
-    setText(5, mPriority > 0 ? QString::number(mPriority) : "--");
-    setText(6, QString::number(mPercentComplete));
-    qCDebug(KTT_LOG) << "Leaving function";
+    switch (column) {
+        case 0:
+            return mName;
+        case 1:
+            return formatTime(mSessionTime, b);
+        case 2:
+            return formatTime(mTime, b);
+        case 3:
+            return formatTime(mTotalSessionTime, b);
+        case 4:
+            return formatTime(mTotalTime, b);
+        case 5:
+            return mPriority > 0 ? QString::number(mPriority) : QStringLiteral("--");
+        case 6:
+            return QString::number(mPercentComplete);
+        default:
+            return {};
+    }
+}
+
+// Update a row, containing one task
+void Task::update()
+{
+    QModelIndex first = taskView()->tasksModel()->index(this, 0);
+    QModelIndex last = taskView()->tasksModel()->index(this, 6);
+    emit taskView()->tasksModel()->dataChanged(first, last, QVector<int>{Qt::DisplayRole});
 }
 
 void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
@@ -621,14 +602,16 @@ void Task::startNewSession()
 /* Overriding the < operator in order to sort the names case insensitive and
  * the progress percentage [coloumn 6] numerically.
  */
-bool Task::operator<(const QTreeWidgetItem &other) const {
-    const int column = treeWidget()->sortColumn();
-    if (column == 6) { //progress percent
-        return text(column).toInt() < other.text(column).toInt();
+bool Task::operator<(const TasksModelItem &other) const
+{
+    const auto& otherTask = dynamic_cast<const Task&>(other);
+    const int column = m_taskView->sortColumn();
+    if (column == 6) {
+        return mPercentComplete < otherTask.mPercentComplete;
     } else if (column == 0) { //task name
-        return text(column).toLower() < other.text(column).toLower();
+        return mName.toLower() < otherTask.mName.toLower();
     } else {
-        return text(column) < other.text(column);
+        return data(column, Qt::DisplayRole) < other.data(column, Qt::DisplayRole);
     }
 }
 

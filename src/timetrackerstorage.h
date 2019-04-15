@@ -31,8 +31,10 @@
 #include "desktoplist.h"
 #include "file/filecalendar.h"
 
+QT_BEGIN_NAMESPACE
 class QDateTime;
 class QLockFile;
+QT_END_NAMESPACE
 
 class Task;
 class TaskView;

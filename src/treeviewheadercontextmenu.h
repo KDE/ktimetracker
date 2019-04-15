@@ -28,8 +28,10 @@
 #include <QVector>
 #include <QMenu>
 
+QT_BEGIN_NAMESPACE
 class QAction;
 class QTreeView;
+QT_END_NAMESPACE
 
 /**
  * ContextMenu for QTreeView::header() to toggle the

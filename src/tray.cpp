@@ -37,7 +37,7 @@
 #include <KLocalizedString>
 
 #include "mainwindow.h"
-#include "task.h"
+#include "model/task.h"
 #include "timetrackerwidget.h"
 #include "ktt_debug.h"
 

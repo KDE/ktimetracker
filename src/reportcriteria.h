@@ -26,7 +26,9 @@
 #include <QDateTime>
 #include <QUrl>
 
+QT_BEGIN_NAMESPACE
 class QString;
+QT_END_NAMESPACE
 
 /**
  Stores entries from export dialog.

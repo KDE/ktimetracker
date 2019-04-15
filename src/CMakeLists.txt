@@ -6,6 +6,9 @@ include_directories(
 set(ktimetracker_SRCS
     file/filecalendar.cpp
     file/icalformatkio.cpp
+    model/tasksmodel.cpp
+    model/tasksmodelitem.cpp
+    model/task.cpp
     settings/ktimetrackerconfigdialog.cpp
     desktoptracker.cpp
     edittaskdialog.cpp
@@ -14,7 +17,6 @@ set(ktimetracker_SRCS
     ktimetrackerutility.cpp
     timetrackerstorage.cpp
     mainwindow.cpp
-    task.cpp
     taskview.cpp
     tray.cpp
     focusdetector.cpp
@@ -23,6 +25,7 @@ set(ktimetracker_SRCS
     historydialog.cpp
     treeviewheadercontextmenu.cpp
     timetrackerwidget.cpp
+    widgets/searchline.cpp
     main.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:ktimetracker_app_icon>
@@ -63,7 +66,6 @@ target_link_libraries(ktimetracker
     KF5::KCMUtils
     KF5::WindowSystem
     KF5::Notifications
-    KF5::ItemViews
     KF5::IconThemes
     KF5::I18n
     KF5::XmlGui

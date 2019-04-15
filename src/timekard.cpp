@@ -27,7 +27,7 @@
 #include <KLocalizedString>
 
 #include "ktimetrackerutility.h"        // formatTime()
-#include "task.h"
+#include "model/task.h"
 #include "taskview.h"
 #include "ktt_debug.h"
 
@@ -73,8 +73,8 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
             printTask(taskview->currentItem(), retval, 0, rc);
         } else { // print all tasks
             sum = 0;
-            for (int i = 0; i < taskview->topLevelItemCount(); ++i) {
-                Task *task = static_cast<Task*>(taskview->topLevelItem(i));
+            for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
+                Task *task = static_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
                 if (!rc.sessionTimes) {
                     sum += task->totalTime();
                 } else {

@@ -25,13 +25,16 @@
 #include <QWidget>
 #include <QDateTime>
 
+QT_BEGIN_NAMESPACE
 class QAction;
 class QUrl;
+QT_END_NAMESPACE
+
 class KActionCollection;
-class KTreeWidgetSearchLine;
 
 class Task;
 class TaskView;
+class SearchLine;
 
 class TimeTrackerWidget : public QWidget 
 {
@@ -50,8 +53,6 @@ public:
 
 private:
     void addTaskView(const QString &fileName = "");
-
-    bool eventFilter(QObject* obj, QEvent* event) override;
 
 public:
     /**
@@ -211,8 +212,7 @@ Q_SIGNALS:
     void tasksChanged( const QList< Task* >& );
 
 private:
-    QWidget *m_searchLine;
-    KTreeWidgetSearchLine *m_searchWidget;
+    SearchLine *m_searchLine;
     TaskView *m_taskView;
     KActionCollection *m_actionCollection;
 };
