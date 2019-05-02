@@ -23,45 +23,28 @@
 
 #include "timetrackerwidget.h"
 
-#include <QDBusConnection>
-#include <QFileInfo>
-#include <QHBoxLayout>
-#include <QKeyEvent>
-#include <QKeySequence>
-#include <QMap>
-#include <QVBoxLayout>
-#include <QVector>
-#include <QDebug>
 #include <QFileDialog>
-#include <QAction>
-#include <QUrl>
-#include <QTemporaryFile>
 
-#include <KLocalizedString>
 #include <KActionCollection>
-#include <KConfig>
 #include <KConfigDialog>
 #include <KMessageBox>
-#include <KRecentFilesAction>
 #include <KStandardAction>
-#include <KIO/Job>
 
+#include "model/task.h"
+#include "settings/ktimetrackerconfigdialog.h"
+#include "widgets/searchline.h"
 #include "historydialog.h"
 #include "idletimedetector.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "mainadaptor.h"
 #include "reportcriteria.h"
-#include "model/task.h"
 #include "taskview.h"
 #include "ktimetracker-version.h"
 #include "mainwindow.h"
-#include "settings/ktimetrackerconfigdialog.h"
-#include "widgets/searchline.h"
 #include "ktt_debug.h"
 
-
-TimeTrackerWidget::TimeTrackerWidget(QWidget* parent)
+TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     : QWidget(parent)
     , m_searchLine(nullptr)
     , m_taskView(nullptr)
@@ -95,7 +78,6 @@ bool TimeTrackerWidget::allEventsHaveEndTiMe()
 
 int TimeTrackerWidget::focusSearchBar()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     if (m_searchLine->isEnabled()) {
         m_searchLine->setFocus();
     }
@@ -292,12 +274,12 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     connect(this, &TimeTrackerWidget::updateButtons, this, &TimeTrackerWidget::slotUpdateButtons);
 }
 
-QAction * TimeTrackerWidget::action(const QString& name) const
+QAction *TimeTrackerWidget::action(const QString &name) const
 {
     return m_actionCollection->action(name);
 }
 
-void TimeTrackerWidget::openFile(const QString& fileName)
+void TimeTrackerWidget::openFile(const QString &fileName)
 {
     qCDebug(KTT_LOG) << "Entering function, fileName is " << fileName;
     QString newFileName = fileName;
@@ -395,7 +377,6 @@ void TimeTrackerWidget::slotAddTask(const QString &taskName)
 
 void TimeTrackerWidget::slotUpdateButtons()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     Task *item = currentTask();
 
     action(QStringLiteral("start"))->setEnabled(item && !item->isRunning() && !item->isComplete());
@@ -416,7 +397,6 @@ void TimeTrackerWidget::slotUpdateButtons()
     action(QStringLiteral("export_history"))->setEnabled(currentTaskView());
     action(QStringLiteral("import_planner"))->setEnabled(currentTaskView());
     action(QStringLiteral("file_save"))->setEnabled(currentTaskView());
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TimeTrackerWidget::showSettingsDialog()
@@ -512,22 +492,27 @@ void TimeTrackerWidget::editHistory()
 {
     // HistoryDialog is the new HistoryDialog, but the EditHiStoryDiaLog exists as well.
     // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
-    if ( currentTaskView() )
-    {
-        HistoryDialog *dlg = new HistoryDialog( currentTaskView() );
-        if (currentTaskView()->storage()->rawevents().count()!=0) dlg->exec();
-        else KMessageBox::information(0, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
+    if (currentTaskView()) {
+        auto *dialog = new HistoryDialog(currentTaskView(), currentTaskView()->storage());
+        connect(dialog, &HistoryDialog::timesChanged, currentTaskView(), &TaskView::reFreshTimes);
+        if (currentTaskView()->storage()->rawevents().count() != 0) {
+            dialog->exec();
+        } else {
+            KMessageBox::information(nullptr, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
+        }
     }
 }
 
 void TimeTrackerWidget::resetAllTimes()
 {
-    if ( currentTaskView() )
-    {
-        if ( KMessageBox::warningContinueCancel( this,
-            i18n( "Do you really want to reset the time to zero for all tasks? This will delete the entire history." ),
-            i18n( "Confirmation Required" ), KGuiItem( i18n( "Reset All Times" ) ) ) == KMessageBox::Continue )
-        currentTaskView()->resetTimeForAllTasks();
+    if (currentTaskView()) {
+        if (KMessageBox::warningContinueCancel(
+            this,
+            i18n("Do you really want to reset the time to zero for all tasks? This will delete the entire history."),
+            i18n("Confirmation Required"),
+            KGuiItem(i18n("Reset All Times"))) == KMessageBox::Continue) {
+            currentTaskView()->resetTimeForAllTasks();
+        }
     }
 }
 
@@ -581,18 +566,17 @@ void TimeTrackerWidget::addTask( const QString &taskName )
     }
 }
 
-void TimeTrackerWidget::addSubTask( const QString& taskName, const QString &taskId )
+void TimeTrackerWidget::addSubTask(const QString &taskName, const QString &taskId)
 {
     TaskView *taskView = currentTaskView();
 
-    if ( taskView )
-    {
-        taskView->addTask( taskName, QString(), 0, 0, DesktopList(), taskView->task( taskId) );
+    if (taskView) {
+        taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->task(taskId));
         taskView->refresh();
     }
 }
 
-void TimeTrackerWidget::deleteTask( const QString &taskId )
+void TimeTrackerWidget::deleteTask(const QString &taskId)
 {
     TaskView *taskView = currentTaskView();
 
@@ -607,7 +591,7 @@ void TimeTrackerWidget::deleteTask( const QString &taskId )
     }
 }
 
-void TimeTrackerWidget::setPercentComplete( const QString &taskId, int percent )
+void TimeTrackerWidget::setPercentComplete(const QString &taskId, int percent)
 {
     TaskView *taskView = currentTaskView();
     
@@ -726,8 +710,8 @@ QString TimeTrackerWidget::error( int errorCode ) const
 bool TimeTrackerWidget::isIdleDetectionPossible() const
 {
     bool result;
-    IdleTimeDetector *idletimedetector1=new IdleTimeDetector(50);
-    result=idletimedetector1->isIdleDetectionPossible();
+    auto *idletimedetector1=new IdleTimeDetector(50);
+    result = idletimedetector1->isIdleDetectionPossible();
     delete idletimedetector1;
     return result;
 }
@@ -841,10 +825,10 @@ QString TimeTrackerWidget::exportCSVFile(
     rc.delimiter = delimiter;
     rc.quote = quote;
 
-    return taskView->report( rc );
+    return taskView->report(rc);
 }
 
-void TimeTrackerWidget::importPlannerFile(const QString& filename)
+void TimeTrackerWidget::importPlannerFile(const QString &filename)
 {
     TaskView *taskView = currentTaskView();
     if (!taskView) {
@@ -854,7 +838,7 @@ void TimeTrackerWidget::importPlannerFile(const QString& filename)
     taskView->importPlanner(filename);
 }
 
-bool TimeTrackerWidget::isActive(const QString& taskId) const
+bool TimeTrackerWidget::isActive(const QString &taskId) const
 {
     TaskView *taskView = currentTaskView();
     if (!taskView) {
@@ -870,7 +854,7 @@ bool TimeTrackerWidget::isActive(const QString& taskId) const
     return false;
 }
 
-bool TimeTrackerWidget::isTaskNameActive( const QString &taskName ) const
+bool TimeTrackerWidget::isTaskNameActive(const QString &taskName) const
 {
     TaskView *taskView = currentTaskView();
     if (!taskView) {

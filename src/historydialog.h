@@ -23,30 +23,31 @@
 #define HISTORYDIALOG_H
 
 #include <QDialog>
-#include "taskview.h"
+
 #include "ui_historydialog.h"
 
-namespace Ui
-{
-    class historydialog;
-}
+class TimeTrackerStorage;
 
 class HistoryDialog : public QDialog
 {
     Q_OBJECT
-public:
-    explicit HistoryDialog(TaskView *parent);
-    ~HistoryDialog() = default;
 
-    QString listallevents();
-    QString refresh();
+public:
+    explicit HistoryDialog(QWidget *parent, TimeTrackerStorage *storage);
+    ~HistoryDialog() override = default;
 
 protected:
-    void changeEvent(QEvent *e);
+    void changeEvent(QEvent *e) override;
 
 private:
+    QString listAllEvents();
+    QString refresh();
+
+    TimeTrackerStorage *m_storage;
     Ui::HistoryDialog m_ui;
-    TaskView *mparent;
+
+Q_SIGNALS:
+    void timesChanged();
 
 private Q_SLOTS:
   /**
@@ -55,7 +56,7 @@ private Q_SLOTS:
    * A change triggers this procedure, it shall store the new values in the calendar.
    */
   void on_deletepushbutton_clicked();
-  void historyWidgetCellChanged( int row, int col );
+  void onCellChanged(int row, int col);
   void on_okpushbutton_clicked();
 };
 

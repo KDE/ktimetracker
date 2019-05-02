@@ -1,9 +1,13 @@
 #include "edittaskdialog.h"
-#include "historydialog.h"
-#include <KMessageBox>
-#include "ktimetrackerutility.h"
+
 #include <QCheckBox>
+
+#include <KMessageBox>
 #include <KWindowSystem>
+
+#include "historydialog.h"
+#include "ktimetrackerutility.h"
+#include "taskview.h"
 
 QVector<QCheckBox*> desktopcheckboxes;
 
@@ -94,7 +98,8 @@ void EditTaskDialog::status(DesktopList *desktopList) const
 
 void EditTaskDialog::on_edittimespushbutton_clicked()
 {
-    auto* dialog = new HistoryDialog(m_parent);
+    auto* dialog = new HistoryDialog(m_parent, m_parent->storage());
+    connect(dialog, &HistoryDialog::timesChanged, m_parent, &TaskView::reFreshTimes);
     lower();
     dialog->exec();
 }
