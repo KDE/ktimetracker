@@ -299,7 +299,11 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
 
     if (index.isValid() && index.column() == 6)
     {
-        int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 100);
+        int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 101);
+        if (newValue > 100) {
+            newValue = 100;
+        }
+
         if ( event->modifiers() & Qt::ShiftModifier )
         {
             int delta = newValue % 10;
