@@ -1,7 +1,5 @@
 #include "tasksmodelitem.h"
 
-#include <QStack>
-
 #include "tasksmodel.h"
 
 TasksModelItem *TasksModelItem::takeChild(int index)

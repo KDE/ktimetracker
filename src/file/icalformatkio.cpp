@@ -9,10 +9,12 @@
 #include "ktt_debug.h"
 
 ICalFormatKIO::ICalFormatKIO()
-    : KCalCore::ICalFormat() {
+    : KCalCore::ICalFormat()
+{
 }
 
-bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString &fileName) {
+bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString &fileName)
+{
     qCDebug(KTT_LOG) << fileName;
 
     clearException();
@@ -53,7 +55,8 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
     }
 }
 
-bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString &fileName) {
+bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString &fileName)
+{
     qCDebug(KTT_LOG) << fileName;
 
     clearException();

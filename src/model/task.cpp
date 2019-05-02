@@ -99,7 +99,6 @@ void Task::init(
     connect(this, &Task::deletingTask, m_taskView, &TaskView::deletingTask);
 
     m_isRunning = false;
-    mRemoving = false;
     mName = taskName.trimmed();
     mDescription = taskDescription.trimmed();
     mLastStart = QDateTime::currentDateTime();
@@ -212,7 +211,7 @@ void Task::setPercentComplete(int percent, TimeTrackerStorage* storage)
     // This behavior is consistent with KOrganizer (as of 2003-09-24).
     if (mPercentComplete == 100) {
         for (int i = 0; i < childCount(); ++i) {
-            Task *task = static_cast< Task* >( child( i ) );
+            Task *task = dynamic_cast<Task*>(child(i));
             task->setPercentComplete(mPercentComplete, storage);
         }
     }
@@ -244,56 +243,41 @@ void Task::setDesktopList(const DesktopList& desktopList)
 
 QString Task::addTime(long minutes)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
     mTime += minutes;
     this->addTotalTime(minutes);
-    qCDebug(KTT_LOG) << "Leaving function";
-    return err;
+    return QString();
 }
 
 QString Task::addTotalTime(long minutes)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
     mTotalTime += minutes;
     if (parentTask()) {
         parentTask()->addTotalTime(minutes);
     }
-    qCDebug(KTT_LOG) << "Leaving function";
-    return err;
+    return QString();
 }
 
 QString Task::addSessionTime(long minutes)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
     mSessionTime += minutes;
     this->addTotalSessionTime(minutes);
-    qCDebug(KTT_LOG) << "Leaving function";
-    return err;
+    return QString();
 }
 
 QString Task::addTotalSessionTime(long minutes)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
     mTotalSessionTime += minutes;
     if (parentTask()) {
         parentTask()->addTotalSessionTime(minutes);
     }
-    qCDebug(KTT_LOG) << "Leaving function";
-    return err;
+    return QString();
 }
 
 QString Task::setTime(long minutes)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
     mTime = minutes;
     mTotalTime += minutes;
-    qCDebug(KTT_LOG) << "Leaving function";
-    return err;
+    return QString();
 }
 
 QString Task::recalculatetotaltime()
@@ -324,17 +308,13 @@ QString Task::recalculatetotalsessiontime()
 
 QString Task::setSessionTime(long minutes)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
     mSessionTime = minutes;
     mTotalSessionTime += minutes;
-    qCDebug(KTT_LOG) << "Leaving function";
-    return err;
+    return QString();
 }
 
 void Task::changeTimes(long minutesSession, long minutes, TimeTrackerStorage* storage)
 {
-    qCDebug(KTT_LOG) << "Entering function";
     qDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
     if (minutesSession != 0 || minutes != 0) {
         mSessionTime += minutesSession;
@@ -344,7 +324,6 @@ void Task::changeTimes(long minutesSession, long minutes, TimeTrackerStorage* st
         }
         changeTotalTimes(minutesSession, minutes);
     }
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::changeTime(long minutes, TimeTrackerStorage* storage)
@@ -361,19 +340,16 @@ void Task::changeTotalTimes(long minutesSession, long minutes)
     mTotalTime += minutes;
     update();
     changeParentTotalTimes(minutesSession, minutes);
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::resetTimes()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     mTotalSessionTime -= mSessionTime;
     mTotalTime -= mTime;
     changeParentTotalTimes(-mSessionTime, -mTime);
     mSessionTime = 0;
     mTime = 0;
     update();
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void Task::changeParentTotalTimes(long minutesSession, long minutes)
@@ -390,7 +366,6 @@ bool Task::remove(TimeTrackerStorage* storage)
     qCDebug(KTT_LOG) << "entering function" << mName;
     bool ok = true;
 
-    mRemoving = true;
     storage->removeTask(this);
     if (isRunning()) {
         setRunning(false, storage);
@@ -405,7 +380,6 @@ bool Task::remove(TimeTrackerStorage* storage)
     }
 
     changeParentTotalTimes(-mSessionTime, -mTime);
-    mRemoving = false;
     return ok;
 }
 
@@ -420,7 +394,7 @@ QString Task::fullName() const
 
 KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
 {
-    Q_ASSERT(todo != NULL);
+    Q_ASSERT(todo != nullptr);
 
     qCDebug(KTT_LOG) <<"Task::asTodo: name() = '" << name() << "'";
     todo->setSummary(name());

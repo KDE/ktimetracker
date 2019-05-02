@@ -1,10 +1,8 @@
 #include "tasksmodel.h"
 
 #include <QStack>
-#include <QDebug>
 #include <QPixmap>
 #include <QMovie>
-#include <QMimeData>
 
 #include <KLocalizedString>
 

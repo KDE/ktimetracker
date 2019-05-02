@@ -30,36 +30,35 @@
 KTimeTrackerBehaviorConfig::KTimeTrackerBehaviorConfig(QWidget *parent)
     : KCModule(parent)
 {
-    QHBoxLayout *lay = new QHBoxLayout( this );
-    Ui::BehaviorPage *behaviorUi = new Ui::BehaviorPage;
+    auto *lay = new QHBoxLayout(this);
+    auto *behaviorUi = new Ui::BehaviorPage;
     QWidget *behaviorPage = new QWidget;
-    behaviorUi->setupUi( behaviorPage );
-    lay->addWidget( behaviorPage );
-    addConfig( KTimeTrackerSettings::self(), behaviorPage );
+    behaviorUi->setupUi(behaviorPage);
+    lay->addWidget(behaviorPage);
+    addConfig(KTimeTrackerSettings::self(), behaviorPage);
     load();
 }
 
 KTimeTrackerStorageConfig::KTimeTrackerStorageConfig(QWidget *parent)
     : KCModule(parent)
 {
-    QHBoxLayout *lay = new QHBoxLayout( this );
-    Ui::StoragePage *storageUi = new Ui::StoragePage;
+    auto *lay = new QHBoxLayout(this);
+    auto *storageUi = new Ui::StoragePage;
     QWidget *storagePage = new QWidget;
-    storageUi->setupUi( storagePage );
-    lay->addWidget( storagePage );
-    addConfig( KTimeTrackerSettings::self(), storagePage );
+    storageUi->setupUi(storagePage);
+    lay->addWidget(storagePage);
+    addConfig(KTimeTrackerSettings::self(), storagePage);
     load();
 }
 
-KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig( QWidget *parent )
-    :KCModule( parent )
+KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig(QWidget *parent)
+    : KCModule(parent)
 {
-    QHBoxLayout *lay = new QHBoxLayout( this );
-    Ui::DisplayPage *displayUi = new Ui::DisplayPage;
+    auto *lay = new QHBoxLayout(this);
+    auto *displayUi = new Ui::DisplayPage;
     QWidget *displayPage = new QWidget;
-    displayUi->setupUi( displayPage );
-
-    lay->addWidget( displayPage );
-    addConfig( KTimeTrackerSettings::self(), displayPage );
+    displayUi->setupUi(displayPage);
+    lay->addWidget(displayPage);
+    addConfig(KTimeTrackerSettings::self(), displayPage);
     load();
 }

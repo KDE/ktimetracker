@@ -381,9 +381,6 @@ private:
 
     DesktopList mDesktops;
 
-    /** Don't need to update storage when deleting task from list. */
-    bool mRemoving;
-
     /** Priority of the task. */
     int mPriority;
 

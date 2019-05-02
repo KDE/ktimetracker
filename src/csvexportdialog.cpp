@@ -22,10 +22,9 @@
 
 #include "csvexportdialog.h"
 
-#include <QDebug>
-#include "ktt_debug.h"
-#include <KDateComboBox>
 #include <KLineEdit>
+
+#include "ktt_debug.h"
 
 CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
     : QDialog(parent)

@@ -21,42 +21,27 @@
 
 #include "taskview.h"
 
-#include <cassert>
-
-#include <QFile>
 #include <QStyledItemDelegate>
-#include <QMenu>
 #include <QPainter>
-#include <QString>
-#include <QTimer>
-#include <QMouseEvent>
-#include <QList>
 #include <QClipboard>
-#include <QApplication>
-#include <QDebug>
 #include <QProgressDialog>
 #include <QHeaderView>
-#include <QSortFilterProxyModel>
 
 #include <KMessageBox>
-#include <KUrlRequester>
-#include <KLocalizedString>
 
+#include "model/task.h"
+#include "model/tasksmodel.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
 #include "idletimedetector.h"
 #include "plannerparser.h"
 #include "ktimetracker.h"
-#include "model/task.h"
 #include "timekard.h"
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
 #include "ktimetrackerutility.h"
-#include "model/tasksmodel.h"
 #include "ktt_debug.h"
-
-class DesktopTracker;
 
 bool readBoolEntry(const QString& key)
 {

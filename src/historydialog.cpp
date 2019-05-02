@@ -20,13 +20,14 @@
  */
 
 #include "historydialog.h"
-#include "taskview.h"
-#include "file/filecalendar.h"
 
 #include <QItemDelegate>
 #include <QDateTimeEdit>
+
 #include <KMessageBox>
-#include <QDebug>
+
+#include "taskview.h"
+#include "file/filecalendar.h"
 #include "ktt_debug.h"
 
 class HistoryWidgetDelegate : public QItemDelegate

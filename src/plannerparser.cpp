@@ -35,8 +35,6 @@ test cases:
 
 #include "plannerparser.h"
 
-#include <QDebug>
-
 #include "model/task.h"
 #include "taskview.h"
 #include "ktt_debug.h"

@@ -21,12 +21,14 @@
  */
 
 #include "desktoptracker.h"
-#include <QDebug>
+
+#include <QTimer>
+
+#include <KWindowSystem>
+
 #include "ktt_debug.h"
 #include "ktimetracker.h"
 #include "ktimetrackerutility.h"
-#include <KWindowSystem>
-#include <QTimer>
 
 DesktopTracker::DesktopTracker()
 {

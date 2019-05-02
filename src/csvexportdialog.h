@@ -37,7 +37,7 @@ public Q_SLOTS:
     void exPortToCSVFile();
 
 public:
-    explicit CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent = 0);
+    explicit CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent = nullptr);
 
     /**
      Enable the "Tasks to export" question in the dialog.
