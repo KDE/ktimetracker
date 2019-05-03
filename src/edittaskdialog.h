@@ -6,6 +6,10 @@
 #include "desktoplist.h"
 #include "ui_edittaskdialog.h"
 
+QT_BEGIN_NAMESPACE
+class QCheckBox;
+QT_END_NAMESPACE
+
 class TaskView;
 
 /**
@@ -25,22 +29,23 @@ class EditTaskDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditTaskDialog(TaskView* parent, const QString& caption, DesktopList* desktopList = nullptr);
+    EditTaskDialog(TaskView *parent, const QString &caption, DesktopList *desktopList = nullptr);
     ~EditTaskDialog() override = default;
 
     QString taskName();
     QString taskDescription();
     QString timeChange();
-    void setTask(const QString& name);
-    void setDescription(const QString& description);
-    void status(DesktopList* desktopList) const;
+    void setTask(const QString &name);
+    void setDescription(const QString &description);
+    void status(DesktopList *desktopList) const;
 
 protected:
-    void changeEvent(QEvent* e) override;
+    void changeEvent(QEvent *e) override;
 
 private:
+    TaskView *m_parent;
     Ui::EditTaskDialog m_ui;
-    TaskView* m_parent;
+    QVector<QCheckBox*> m_desktopCheckboxes;
 
 private Q_SLOTS:
     void on_autotrackinggroupbox_clicked();

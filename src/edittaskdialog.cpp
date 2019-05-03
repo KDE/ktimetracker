@@ -9,45 +9,39 @@
 #include "ktimetrackerutility.h"
 #include "taskview.h"
 
-QVector<QCheckBox*> desktopcheckboxes;
-
-EditTaskDialog::EditTaskDialog(TaskView* parent, const QString& caption, DesktopList* desktopList)
+EditTaskDialog::EditTaskDialog(TaskView *parent, const QString &caption, DesktopList *desktopList)
     : QDialog(parent)
     , m_ui()
+    , m_desktopCheckboxes()
 {
     setWindowTitle(caption);
     m_parent = parent;
     m_ui.setupUi(this);
 
-    { // Set the desktop checkboxes
-        QCheckBox* desktopcheckbox;
-        desktopcheckboxes.clear();
-        int lines = 5;
-        for (int i = 0; i < KWindowSystem::numberOfDesktops(); ++i) {
-            desktopcheckbox = new QCheckBox(m_ui.autotrackinggroupbox);
-            desktopcheckbox->setObjectName(QString::fromUtf8("desktop_").append(i));
-            desktopcheckbox->setText(KWindowSystem::desktopName( i + 1 ));
-            m_ui.gridLayout_2->addWidget(desktopcheckbox, i % lines, i / lines + 1);
-            desktopcheckboxes.push_back(desktopcheckbox);
+    // Set the desktop checkboxes
+    const int lines = 5;
+    for (int i = 0; i < KWindowSystem::numberOfDesktops(); ++i) {
+        auto *checkbox = new QCheckBox(m_ui.autotrackinggroupbox);
+        checkbox->setObjectName(QString::fromUtf8("desktop_").append(i));
+        checkbox->setText(KWindowSystem::desktopName(i + 1));
+        m_ui.gridLayout_2->addWidget(checkbox, i % lines, i / lines + 1);
+        m_desktopCheckboxes.push_back(checkbox);
+    }
+
+    if (desktopList && !desktopList->empty()) {
+        for (int desktop : *desktopList) {
+            m_desktopCheckboxes[desktop]->setChecked(true);
         }
 
-        if (desktopList && desktopList->size() > 0) {
-            DesktopList::iterator it = desktopList->begin();
-            while (it != desktopList->end()) {
-                desktopcheckboxes[*it]->setChecked(true);
-                ++it;
-            }
-
-            m_ui.autotrackinggroupbox->setChecked(true);
-        } else {
-            for (int i = 0; i < desktopcheckboxes.count(); ++i) {
-                desktopcheckboxes[i]->setEnabled(false);
-            }
+        m_ui.autotrackinggroupbox->setChecked(true);
+    } else {
+        for (QCheckBox *checkbox : m_desktopCheckboxes) {
+            checkbox->setEnabled(false);
         }
     }
 }
 
-void EditTaskDialog::changeEvent(QEvent* e)
+void EditTaskDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
     switch (e->type()) {
@@ -74,12 +68,12 @@ QString EditTaskDialog::timeChange()
     return m_ui.letimechange->text();
 }
 
-void EditTaskDialog::setTask(const QString& name)
+void EditTaskDialog::setTask(const QString &name)
 {
     m_ui.tasknamelineedit->setText(name);
 }
 
-void EditTaskDialog::setDescription(const QString& description)
+void EditTaskDialog::setDescription(const QString &description)
 {
     m_ui.tasknametextedit->setText(description);
 }
@@ -88,8 +82,8 @@ void EditTaskDialog::status(DesktopList *desktopList) const
 {
     if (desktopList) {
         desktopList->clear();
-        for (int i = 0; i < desktopcheckboxes.count(); ++i) {
-            if (desktopcheckboxes[i]->isEnabled() && desktopcheckboxes[i]->isChecked()) {
+        for (int i = 0; i < m_desktopCheckboxes.count(); ++i) {
+            if (m_desktopCheckboxes[i]->isEnabled() && m_desktopCheckboxes[i]->isChecked()) {
                 desktopList->append(i);
             }
         }
@@ -106,7 +100,7 @@ void EditTaskDialog::on_edittimespushbutton_clicked()
 
 void EditTaskDialog::on_autotrackinggroupbox_clicked()
 {
-     for (int i = 0; i < desktopcheckboxes.count(); ++i) {
-         desktopcheckboxes[i]->setEnabled(m_ui.autotrackinggroupbox->isChecked());
+    for (QCheckBox *checkbox : m_desktopCheckboxes) {
+        checkbox->setEnabled(m_ui.autotrackinggroupbox->isChecked());
      }
 }
