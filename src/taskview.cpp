@@ -810,7 +810,7 @@ void TaskView::newTask()
 
 void TaskView::newTask(const QString& caption, Task* parent)
 {
-    auto *dialog = new EditTaskDialog(this, caption, 0);
+    auto *dialog = new EditTaskDialog(this, caption, nullptr);
     long total, totalDiff, session, sessionDiff;
     DesktopList desktopList;
 
