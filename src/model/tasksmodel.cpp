@@ -354,6 +354,7 @@ bool TasksModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int 
     }
 
     task->move(newParent);
+    return true;
 }
 
 QMimeData *TasksModel::mimeData(const QModelIndexList &indexes) const
