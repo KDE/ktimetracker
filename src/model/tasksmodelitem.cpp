@@ -29,7 +29,7 @@ void TasksModelItem::insertChild(int index, TasksModelItem *child) {
 
     if (m_model) {
         if (m_model->m_rootItem == this) {
-            child->m_parent = 0;
+            child->m_parent = nullptr;
         } else {
             child->m_parent = this;
         }

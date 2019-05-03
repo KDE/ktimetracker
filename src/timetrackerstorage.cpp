@@ -287,23 +287,19 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
 
 void TimeTrackerStorage::closeStorage()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     if (mCalendar) {
         mCalendar->close();
         mCalendar = FileCalendar::Ptr();
     }
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 KCalCore::Event::List TimeTrackerStorage::rawevents()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     return mCalendar->rawEvents();
 }
 
 KCalCore::Todo::List TimeTrackerStorage::rawtodos()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     return mCalendar->rawTodos();
 }
 
@@ -349,7 +345,7 @@ QString TimeTrackerStorage::save(TaskView* taskview)
 
     QStack<KCalCore::Todo::Ptr> parents;
     for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
-        Task *task = static_cast< Task* >( taskview->tasksModel()->topLevelItem( i ) );
+        Task *task = dynamic_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
         qCDebug(KTT_LOG) << "write task" << task->name();
         errorString = writeTaskAsTodo(task, parents);
     }
@@ -367,7 +363,6 @@ QString TimeTrackerStorage::save(TaskView* taskview)
 
 QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::Ptr>& parents)
 {
-    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     KCalCore::Todo::Ptr todo = mCalendar->todo(task->uid());
     if (!todo) {
@@ -381,8 +376,8 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
     parents.push( todo );
 
     for (int i = 0; i < task->childCount(); ++i) {
-        Task *nextTask = static_cast<Task*>(task->child(i));
-        err = writeTaskAsTodo( nextTask, parents );
+        Task *nextTask = dynamic_cast<Task*>(task->child(i));
+        err = writeTaskAsTodo(nextTask, parents);
     }
 
     parents.pop();
@@ -391,7 +386,6 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
 
 bool TimeTrackerStorage::isEmpty()
 {
-    qCDebug(KTT_LOG) << "Entering function";
     return mCalendar->rawTodos().isEmpty();
 }
 
@@ -426,8 +420,6 @@ QString TimeTrackerStorage::addTask(const Task* task, const Task* parent)
 
 QString TimeTrackerStorage::removeEvent(QString uid)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err=QString();
     KCalCore::Event::List eventList = mCalendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i) {
@@ -435,7 +427,7 @@ QString TimeTrackerStorage::removeEvent(QString uid)
             mCalendar->deleteEvent(*i);
         }
     }
-    return err;
+    return QString();
 }
 
 bool TimeTrackerStorage::removeTask(Task* task)
@@ -461,7 +453,6 @@ bool TimeTrackerStorage::removeTask(Task* task)
 
 void TimeTrackerStorage::addComment(const Task* task, const QString& comment)
 {
-    qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Todo::Ptr todo = mCalendar->todo(task->uid());
 
     // Do this to avoid compiler warnings about comment not being used.  once we
@@ -478,15 +469,15 @@ void TimeTrackerStorage::addComment(const Task* task, const QString& comment)
 
 QString TimeTrackerStorage::report(TaskView *taskview, const ReportCriteria &rc)
 {
-    qCDebug(KTT_LOG) << "Entering function";
     QString err;
     if (rc.reportType == ReportCriteria::CSVHistoryExport) {
         err = exportcsvHistory(taskview, rc.from, rc.to, rc);
     } else { // rc.reportType == ReportCriteria::CSVTotalsExport
-        if ( !rc.bExPortToClipBoard )
-            err = exportcsvFile( taskview, rc );
-        else
-            err = taskview->clipTotals( rc );
+        if (!rc.bExPortToClipBoard) {
+            err = exportcsvFile(taskview, rc);
+        } else {
+            err = taskview->clipTotals(rc);
+        }
     }
     return err;
 }
@@ -496,12 +487,13 @@ QString TimeTrackerStorage::report(TaskView *taskview, const ReportCriteria &rc)
 //
 QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
 {
-    qCDebug(KTT_LOG) << "Entering function";
     QString delim = rc.delimiter;
     QString dquote = rc.quote;
     QString double_dquote = dquote + dquote;
     QString err;
-    QProgressDialog dialog(i18n("Exporting to CSV..."), i18n("Cancel"), 0, static_cast<int>(2 * taskview->count()), taskview, 0);
+    QProgressDialog dialog(
+        i18n("Exporting to CSV..."), i18n("Cancel"),
+        0, static_cast<int>(2 * taskview->count()), taskview, nullptr);
     dialog.setAutoClose(true);
     dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
 
