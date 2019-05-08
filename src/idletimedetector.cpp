@@ -37,7 +37,7 @@ IdleTimeDetector::IdleTimeDetector(int maxIdle)
     , m_timeoutId(0)
 {
     connect(
-        KIdleTime::instance(), static_cast<void(KIdleTime::*)(int, int)>(&KIdleTime::timeoutReached),
+        KIdleTime::instance(), QOverload<int, int>::of(&KIdleTime::timeoutReached),
         this, &IdleTimeDetector::timeoutReached);
 }
 

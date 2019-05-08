@@ -228,7 +228,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     deleteTask->setWhatsThis(i18n("This will delete the selected task(s) and all subtasks."));
     deleteTask->setIcon(QIcon::fromTheme("edit-delete"));
     actionCollection->setDefaultShortcut(deleteTask, QKeySequence(Qt::Key_Delete));
-    connect(deleteTask, &QAction::triggered, this, static_cast<void(TimeTrackerWidget::*)()>(&TimeTrackerWidget::deleteTask));
+    connect(deleteTask, &QAction::triggered, this, QOverload<>::of(&TimeTrackerWidget::deleteTask));
 
     QAction* editTask = actionCollection->addAction(QStringLiteral("edit_task"));
     editTask->setText(i18n("&Edit..."));

@@ -94,7 +94,7 @@ bool MainWindow::openFile(const QString& path)
     setCaption(path);
 
     connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
-    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, static_cast<void(MainWindow::*)(const QString&)>(&MainWindow::setCaption));
+    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, QOverload<const QString&>::of(&MainWindow::setCaption));
     return true;
 }
 
