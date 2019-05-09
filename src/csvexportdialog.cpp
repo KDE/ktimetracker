@@ -41,7 +41,7 @@ CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
     clipboardButton->setIcon(QIcon::fromTheme("klipper"));
 
     connect(ui.buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked,
-            this, &CSVExportDialog::exPortToCSVFile);
+            this, &CSVExportDialog::exPortToClipBoard);
     connect(ui.buttonBox, &QDialogButtonBox::accepted,
             this, &CSVExportDialog::exPortToCSVFile);
 
