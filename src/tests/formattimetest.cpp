@@ -1,5 +1,4 @@
 #include <QTest>
-#include <QObject>
 
 #include "ktimetrackerutility.h"
 
@@ -41,6 +40,9 @@ void UtilsTest::testFormatTimeRu()
 
     QCOMPARE(formatTime(7386, false), "123:06");
     QCOMPARE(formatTime(7386, true), "123,10");
+
+    QCOMPARE(formatTime(0.5, false), "0:01");
+    QCOMPARE(formatTime(0.5, true), "0,01");
 }
 
 QTEST_GUILESS_MAIN(UtilsTest)

@@ -23,20 +23,20 @@
 
 #include <cmath>
 
-#include "ktt_debug.h"
+#include <QLocale>
 
 QString formatTime(double minutes, bool decimal)
 {
-    qCDebug(KTT_LOG) << "Entering function(minutes=" << minutes << ",decimal=" << decimal << ");";
     QString time;
     if (decimal) {
-        time.sprintf("%.2f", minutes / 60.0 );
+        time.sprintf("%.2f", minutes / 60.0);
         time.replace('.', QLocale().decimalPoint());
     } else {
+        const long absMinutes = static_cast<long>(std::round(std::fabs(minutes)));
         time.sprintf(
             "%s%ld:%02ld",
-            (minutes < 0) ? QString(QLocale().negativeSign()).toUtf8().data() : "",
-            labs(minutes / 60), labs(((int) round(minutes)) % 60));
+            minutes < 0 ? QString(QLocale().negativeSign()).toUtf8().data() : "",
+            absMinutes / 60, absMinutes % 60);
     }
 
     return time;
