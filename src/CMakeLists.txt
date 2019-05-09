@@ -60,9 +60,8 @@ kconfig_add_kcfg_files(ktimetracker_SRCS settings/ktimetracker.kcfgc)
 
 qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
-add_executable(ktimetracker ${ktimetracker_SRCS})
-
-target_link_libraries(ktimetracker
+add_library(libktimetracker STATIC ${ktimetracker_SRCS})
+target_link_libraries(libktimetracker
     KF5::KCMUtils
     KF5::WindowSystem
     KF5::Notifications
@@ -78,9 +77,16 @@ target_link_libraries(ktimetracker
     ${X11_X11_LIB}
 )
 if(X11_Xscreensaver_LIB)
-    target_link_libraries(ktimetracker ${X11_Xscreensaver_LIB})
+    target_link_libraries(libktimetracker ${X11_Xscreensaver_LIB})
 endif()
+
+add_executable(ktimetracker main.cpp)
+target_link_libraries(ktimetracker libktimetracker)
 
 install(TARGETS ktimetracker ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
 install(PROGRAMS ktimetracker.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
