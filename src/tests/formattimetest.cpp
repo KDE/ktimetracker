@@ -9,10 +9,24 @@ class UtilsTest : public QObject
 
 private Q_SLOTS:
     void testFormatTime();
+    void testFormatTimeRu();
 };
 
 void UtilsTest::testFormatTime()
 {
+    QLocale::setDefault(QLocale(QLocale::C));
+
+    QCOMPARE(formatTime(-61, false), "-1:01");
+    QCOMPARE(formatTime(-61, true), "-1.02"); // -1.01666 -> -1.02
+
+    QCOMPARE(formatTime(7386, false), "123:06");
+    QCOMPARE(formatTime(7386, true), "123.10");
+}
+
+void UtilsTest::testFormatTimeRu()
+{
+    QLocale::setDefault(QLocale(QLocale::Russian, QLocale::Russia));
+
     QCOMPARE(formatTime(0, false), "0:00");
     QCOMPARE(formatTime(0, true), "0,00");
 
