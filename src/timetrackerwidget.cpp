@@ -132,6 +132,8 @@ Task* TimeTrackerWidget::currentTask()
 
 void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
 {
+    Q_INIT_RESOURCE(pics);
+
     m_actionCollection = actionCollection;
 
     KStandardAction::open(this, SLOT(openFile()), actionCollection);

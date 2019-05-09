@@ -79,6 +79,7 @@ QUrl getFileUrl(const QCommandLineParser &parser)
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    Q_INIT_RESOURCE(ktimetracker);
 
     KAboutData aboutData(
         QStringLiteral("ktimetracker"),

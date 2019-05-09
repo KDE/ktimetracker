@@ -18,9 +18,13 @@ TasksModel::TasksModel()
         i18n("Total Time"),
         i18n("Priority"),
         i18n("Percent Complete")}
-    , m_clockAnimation(new QMovie(":/pics/watch.gif", QByteArray(), this))
+    , m_clockAnimation(nullptr)
     , m_dragCutTask(nullptr)
 {
+    Q_INIT_RESOURCE(pics);
+
+    m_clockAnimation = new QMovie(":/pics/watch.gif", QByteArray(), this);
+
     // Prepare animated icon
     connect(m_clockAnimation, &QMovie::frameChanged, this, &TasksModel::setActiveIcon);
 

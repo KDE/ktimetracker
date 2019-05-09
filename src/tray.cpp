@@ -44,6 +44,8 @@
 TrayIcon::TrayIcon(MainWindow* parent)
     : KStatusNotifierItem(parent)
 {
+    Q_INIT_RESOURCE(pics);
+
     setObjectName("Ktimetracker Tray");
 
     m_animation = new QMovie(":/pics/active-icon.gif", QByteArray("GIF"), this);
