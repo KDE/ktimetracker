@@ -84,11 +84,11 @@ int TimeTrackerWidget::focusSearchBar()
     return 0;
 }
 
-void TimeTrackerWidget::addTaskView(const QString &fileName)
+void TimeTrackerWidget::addTaskView(const QUrl &url)
 {
-    qCDebug(KTT_LOG) << "Entering function (fileName=" << fileName << ")";
-    bool isNew = fileName.isEmpty();
-    QString lFileName = fileName;
+    qCDebug(KTT_LOG) << "Entering function (url=" << url << ")";
+    bool isNew = url.isEmpty();
+    QUrl lFileName = url;
 
     if (isNew) {
         QTemporaryFile tempFile;
@@ -109,7 +109,7 @@ void TimeTrackerWidget::addTaskView(const QString &fileName)
     connect(taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive);
     connect(taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
 
-    emit setCaption(fileName);
+    emit setCaption(url.toString());
     taskView->load(lFileName);
 
     // When adding the first tab currentChanged is not emitted, so...
@@ -281,22 +281,19 @@ QAction *TimeTrackerWidget::action(const QString &name) const
     return m_actionCollection->action(name);
 }
 
-void TimeTrackerWidget::openFile(const QString &fileName)
+void TimeTrackerWidget::openFile(const QUrl &url)
 {
-    qCDebug(KTT_LOG) << "Entering function, fileName is " << fileName;
-    QString newFileName = fileName;
-    if (newFileName.isEmpty()) {
-        newFileName = QFileDialog::getOpenFileName(this);
-        if (newFileName.isEmpty()) {
+    qCDebug(KTT_LOG) << "Entering function, url is " << url;
+    QUrl newUrl = url;
+    if (newUrl.isEmpty()) {
+        const QString &path = QFileDialog::getOpenFileName(this);
+        if (path.isEmpty()) {
             return;
+        } else {
+            newUrl = QUrl::fromLocalFile(path);
         }
     }
-    addTaskView(newFileName);
-}
-
-void TimeTrackerWidget::openFile(const QUrl& fileName)
-{
-    openFile(fileName.toLocalFile());
+    addTaskView(newUrl);
 }
 
 bool TimeTrackerWidget::closeFile()

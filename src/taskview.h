@@ -62,7 +62,7 @@ public:
 
     //BEGIN model specified
     /** Load the view from storage.  */
-    void load(const QString& filename);
+    void load(const QUrl& url);
 
     /** Close the storage and release lock. */
     void closeStorage();

@@ -392,15 +392,15 @@ Task* TaskView::currentItem() const
     return taskAtViewIndex(QTreeView::currentIndex());
 }
 
-void TaskView::load(const QString &fileName)
+void TaskView::load(const QUrl &url)
 {
-    assert( !( fileName.isEmpty() ) );
+    assert( !( url.isEmpty() ) );
 
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
     qCDebug(KTT_LOG) << "Entering function";
     m_isLoading = true;
-    QString err = m_storage->load(this, fileName);
+    QString err = m_storage->load(this, url);
 
     if (!err.isEmpty())
     {

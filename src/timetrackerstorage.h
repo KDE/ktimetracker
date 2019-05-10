@@ -81,11 +81,11 @@ public:
          @li a todo is related to another todo which does not exist
 
       @param taskview     The list group used in the TaskView
-      @param fileName     Override preferences' filename
+      @param url     Override preferences' filename
 
       @return empty string if success, error message if error.
      */
-    QString load( TaskView* taskview, const QString &fileName );
+    QString load(TaskView *taskview, const QUrl &url);
 
    /**
     * Return the name of the iCal file
@@ -264,7 +264,7 @@ private Q_SLOTS:
 
 private:
     FileCalendar::Ptr mCalendar;
-    QString mICalFile;
+    QUrl mICalFile;
     QLockFile *m_fileLock;
     TaskView* m_taskView;
 

@@ -24,10 +24,10 @@
 
 #include <QWidget>
 #include <QDateTime>
+#include <QUrl>
 
 QT_BEGIN_NAMESPACE
 class QAction;
-class QUrl;
 QT_END_NAMESPACE
 
 class KActionCollection;
@@ -52,7 +52,7 @@ public:
     bool allEventsHaveEndTiMe();
 
 private:
-    void addTaskView(const QString &fileName = "");
+    void addTaskView(const QUrl &url = QUrl());
 
 public:
     /**
@@ -86,12 +86,7 @@ public Q_SLOTS:
     /**
       opens an existing ics file.
      */
-    void openFile(const QString &fileName = QString());
-
-    /**
-      opens an existing ics file (wrapper for QUrl).
-     */
-    void openFile(const QUrl &fileName);
+    void openFile(const QUrl &url = QUrl());
 
     /**
       closes the current opened tab widget and saves the data
