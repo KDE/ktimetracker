@@ -31,6 +31,19 @@ static ReportCriteria createRC()
     return rc;
 }
 
+static TaskView *createTaskView()
+{
+    auto *taskView = new TaskView();
+    QTemporaryFile icsFile;
+    if (!icsFile.open()) {
+        delete taskView;
+        return nullptr;
+    }
+
+    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile.fileName()));
+    return taskView;
+}
+
 void ExportCSVTest::testTotalsEmpty()
 {
     QLocale::setDefault(QLocale(QLocale::C));
@@ -48,10 +61,7 @@ void ExportCSVTest::testTotalsSimpleTree()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
-    auto *taskView = new TaskView();
-    QTemporaryFile icsFile;
-    QVERIFY(icsFile.open());
-    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile.fileName()));
+    auto *taskView = createTaskView();
 
     Task* task1 = taskView->task(taskView->addTask("1"));
     QVERIFY(task1);
