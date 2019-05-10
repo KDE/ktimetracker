@@ -24,17 +24,18 @@
 
 #include "reportcriteria.h"
 
-class TaskView;
+class TasksModel;
+class Task;
 
 /**
  * Generates ascii text of task totals, for current task on down.
  *
  * Formatted for pasting into clipboard.
  *
- * @param taskview The view whose tasks need to be formatted.
- *
+ * @param model The model whose tasks need to be formatted.
+ * @param currentItem The task that needs to be formatted along with its subtasks.
  * @param rc Criteria which filters the task information.
  */
-QString totalsAsText(TaskView *taskview, ReportCriteria rc);
+QString totalsAsText(TasksModel *model, Task *currentItem, ReportCriteria rc);
 
 #endif // KTIMETRACKER_TOTALSASTEXT_H

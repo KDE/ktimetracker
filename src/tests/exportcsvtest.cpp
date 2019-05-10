@@ -41,7 +41,7 @@ void ExportCSVTest::testTotalsEmpty()
     const QString &expected = QStringLiteral(
         "Task Totals\n%1\n\n"
         "  Time    Task\n----------------------------------------------\nNo tasks.").arg(timeString);
-    QCOMPARE(totalsAsText(taskView, createRC()), expected);
+    QCOMPARE(totalsAsText(taskView->tasksModel(), taskView->currentItem(), createRC()), expected);
 }
 
 void ExportCSVTest::testTotalsSimpleTree()
@@ -76,7 +76,7 @@ void ExportCSVTest::testTotalsSimpleTree()
          "  0:07    3\n"
          "----------------------------------------------\n"
          "  0:15 Total").arg(timeString);
-    QCOMPARE(totalsAsText(taskView, createRC()), expected);
+    QCOMPARE(totalsAsText(taskView->tasksModel(), taskView->currentItem(), createRC()), expected);
 }
 
 QTEST_MAIN(ExportCSVTest)

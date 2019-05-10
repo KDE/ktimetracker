@@ -27,15 +27,14 @@
 #include <KLocalizedString>
 
 #include "ktimetrackerutility.h"        // formatTime()
+#include "model/tasksmodel.h"
 #include "model/task.h"
-#include "taskview.h"
 
-const int taskWidth = 40;
-const int timeWidth = 6;
-//const int totalTimeWidth = 7;
-const int reportWidth = taskWidth + timeWidth;
+static const int taskWidth = 40;
+static const int timeWidth = 6;
+static const int reportWidth = taskWidth + timeWidth;
 
-const QString cr = QString::fromLatin1("\n");
+static const auto cr = QStringLiteral("\n");
 
 // Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
 static void printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
@@ -69,7 +68,7 @@ static void printTask(Task *task, QString &s, int level, const ReportCriteria &r
     }
 }
 
-QString totalsAsText(TaskView *taskview, ReportCriteria rc)
+QString totalsAsText(TasksModel *model, Task *currentItem, ReportCriteria rc)
 {
     QString retval;
     QString line;
@@ -91,19 +90,19 @@ QString totalsAsText(TaskView *taskview, ReportCriteria rc)
     retval += line;
 
     // tasks
-    if (taskview->currentItem()) {
+    if (currentItem) {
         if (justThisTask) {
             if (!rc.sessionTimes) {
-                sum = taskview->currentItem()->totalTime();
+                sum = currentItem->totalTime();
             } else {
-                sum = taskview->currentItem()->totalSessionTime();
+                sum = currentItem->totalSessionTime();
             }
 
-            printTask(taskview->currentItem(), retval, 0, rc);
+            printTask(currentItem, retval, 0, rc);
         } else { // print all tasks
             sum = 0;
-            for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
-                Task *task = dynamic_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
+            for (int i = 0; i < model->topLevelItemCount(); ++i) {
+                Task *task = dynamic_cast<Task*>(model->topLevelItem(i));
                 if (!rc.sessionTimes) {
                     sum += task->totalTime();
                 } else {

@@ -1024,7 +1024,7 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
 {
-    QApplication::clipboard()->setText(totalsAsText(this, rc));
+    QApplication::clipboard()->setText(totalsAsText(tasksModel(), currentItem(), rc));
     return QString();
 }
 
