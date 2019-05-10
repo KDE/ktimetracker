@@ -3,7 +3,7 @@
 
 #include "taskview.h"
 #include "model/task.h"
-#include "timekard.h"
+#include "export/totalsastext.h"
 
 class ExportCSVTest : public QObject
 {
@@ -41,7 +41,7 @@ void ExportCSVTest::testTotalsEmpty()
     const QString &expected = QStringLiteral(
         "Task Totals\n%1\n\n"
         "  Time    Task\n----------------------------------------------\nNo tasks.").arg(timeString);
-    QCOMPARE(TimeKard().totalsAsText(taskView, createRC()), expected);
+    QCOMPARE(totalsAsText(taskView, createRC()), expected);
 }
 
 void ExportCSVTest::testTotalsSimpleTree()
@@ -76,7 +76,7 @@ void ExportCSVTest::testTotalsSimpleTree()
          "  0:07    3\n"
          "----------------------------------------------\n"
          "  0:15 Total").arg(timeString);
-    QCOMPARE(TimeKard().totalsAsText(taskView, createRC()), expected);
+    QCOMPARE(totalsAsText(taskView, createRC()), expected);
 }
 
 QTEST_MAIN(ExportCSVTest)

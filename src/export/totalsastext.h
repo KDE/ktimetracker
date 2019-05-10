@@ -19,38 +19,22 @@
  *
  */
 
-#ifndef KTIMETRACKER_TIMEKARD_H
-#define KTIMETRACKER_TIMEKARD_H
-
-#undef Color // X11 headers
-#undef GrayScale // X11 headers
+#ifndef KTIMETRACKER_TOTALSASTEXT_H
+#define KTIMETRACKER_TOTALSASTEXT_H
 
 #include "reportcriteria.h"
 
-class Task;
 class TaskView;
 
 /**
- *  Routines to output timecard data.
+ * Generates ascii text of task totals, for current task on down.
+ *
+ * Formatted for pasting into clipboard.
+ *
+ * @param taskview The view whose tasks need to be formatted.
+ *
+ * @param rc Criteria which filters the task information.
  */
-class TimeKard
-{
-public:
-    TimeKard() = default;
+QString totalsAsText(TaskView *taskview, ReportCriteria rc);
 
-    /**
-     * Generates ascii text of task totals, for current task on down.
-     *
-     * Formatted for pasting into clipboard.
-     *
-     * @param taskview The view whose tasks need to be formatted.
-     *
-     * @param rc Criteria which filters the task information.
-     */
-    QString totalsAsText(TaskView* taskview, ReportCriteria rc);
-
-private:
-    void printTask(Task* t, QString& s, int level, const ReportCriteria &rc);
-};
-
-#endif // KTIMETRACKER_TIMEKARD_H
+#endif // KTIMETRACKER_TOTALSASTEXT_H

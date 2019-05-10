@@ -37,7 +37,7 @@
 #include "idletimedetector.h"
 #include "plannerparser.h"
 #include "ktimetracker.h"
-#include "timekard.h"
+#include "export/totalsastext.h"
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
 #include "ktimetrackerutility.h"
@@ -1024,8 +1024,7 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
 {
-    TimeKard t;
-    QApplication::clipboard()->setText(t.totalsAsText(this, rc));
+    QApplication::clipboard()->setText(totalsAsText(this, rc));
     return QString();
 }
 

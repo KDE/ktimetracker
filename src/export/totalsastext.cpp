@@ -20,7 +20,7 @@
  *
  */
 
-#include "timekard.h"
+#include "totalsastext.h"
 
 #include <QDateTime>
 
@@ -29,7 +29,6 @@
 #include "ktimetrackerutility.h"        // formatTime()
 #include "model/task.h"
 #include "taskview.h"
-#include "ktt_debug.h"
 
 const int taskWidth = 40;
 const int timeWidth = 6;
@@ -38,9 +37,40 @@ const int reportWidth = taskWidth + timeWidth;
 
 const QString cr = QString::fromLatin1("\n");
 
-QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
+// Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
+static void printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
 {
-    qCDebug(KTT_LOG) << "Entering function";
+    QString buf;
+
+    s += buf.fill(' ', level);
+    if (!rc.sessionTimes) {
+        s += QString(QString::fromLatin1("%1    %2"))
+            .arg(formatTime(task->totalTime()), timeWidth)
+            .arg(task->name());
+    } else {
+        // print session times
+        s += QString(QString::fromLatin1("%1    %2"))
+            .arg(formatTime(task->totalSessionTime()), timeWidth)
+            .arg(task->name());
+    }
+    s += cr;
+
+    for (int i = 0; i < task->childCount(); ++i) {
+        Task *subTask = dynamic_cast<Task*>(task->child(i));
+        if (!rc.sessionTimes) {
+            if (subTask->totalTime()) {// to avoid 00:00 entries
+                printTask(subTask, s, level + 1, rc);
+            }
+        } else {
+            if (subTask->totalSessionTime()) { // to avoid 00:00 entries
+                printTask(subTask, s, level + 1, rc);
+            }
+        }
+    }
+}
+
+QString totalsAsText(TaskView *taskview, ReportCriteria rc)
+{
     QString retval;
     QString line;
     QString buf;
@@ -53,7 +83,6 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
     // header
     retval += i18n("Task Totals") + cr;
     retval += QLocale().toString(QDateTime::currentDateTime());
-//    retval += KGlobal::locale()->formatDateTime(QDateTime::currentDateTime());
     retval += cr + cr;
     retval += QString(QString::fromLatin1("%1    %2"))
         .arg(i18n("Time"), timeWidth)
@@ -74,7 +103,7 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
         } else { // print all tasks
             sum = 0;
             for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
-                Task *task = static_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
+                Task *task = dynamic_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
                 if (!rc.sessionTimes) {
                     sum += task->totalTime();
                 } else {
@@ -96,37 +125,4 @@ QString TimeKard::totalsAsText(TaskView* taskview, ReportCriteria rc)
     }
 
     return retval;
-}
-
-// Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
-void TimeKard::printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    QString buf;
-
-    s += buf.fill(' ', level);
-    if (!rc.sessionTimes) {
-        s += QString(QString::fromLatin1("%1    %2"))
-            .arg(formatTime(task->totalTime()), timeWidth)
-            .arg(task->name());
-    } else {
-        // print session times
-        s += QString(QString::fromLatin1("%1    %2"))
-            .arg(formatTime(task->totalSessionTime()), timeWidth)
-            .arg(task->name());
-    }
-    s += cr;
-
-    for (int i = 0; i < task->childCount(); ++i) {
-        Task *subTask = static_cast<Task*>(task->child(i));
-        if (!rc.sessionTimes) {
-            if (subTask->totalTime()) {// to avoid 00:00 entries
-                printTask(subTask, s, level + 1, rc);
-            }
-        } else {
-            if (subTask->totalSessionTime()) { // to avoid 00:00 entries
-                printTask(subTask, s, level + 1, rc);
-            }
-        }
-    }
 }

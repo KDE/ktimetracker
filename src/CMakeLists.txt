@@ -13,7 +13,7 @@ set(ktimetracker_SRCS
     desktoptracker.cpp
     edittaskdialog.cpp
     idletimedetector.cpp
-    timekard.cpp
+    export/totalsastext.cpp
     ktimetrackerutility.cpp
     timetrackerstorage.cpp
     mainwindow.cpp

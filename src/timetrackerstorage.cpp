@@ -65,7 +65,7 @@
 #include "ktimetracker.h"
 #include "model/task.h"
 #include "taskview.h"
-#include "timekard.h"
+#include "export/totalsastext.h"
 #include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
