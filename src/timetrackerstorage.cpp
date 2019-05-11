@@ -574,7 +574,7 @@ QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriter
     }
 
     // save, either locally or remote
-    if (rc.url.isLocalFile() || !rc.url.url().contains("/")) {
+    if (rc.url.isLocalFile()) {
         QString filename = rc.url.toLocalFile();
         if (filename.isEmpty()) {
             filename = rc.url.url();
@@ -737,8 +737,7 @@ QString TimeTrackerStorage::exportcsvHistory(
         QApplication::clipboard()->setText(retval);
     } else {
         // store the file locally or remote
-        if ((rc.url.isLocalFile()) || (!rc.url.url().contains("/")))
-        {
+        if (rc.url.isLocalFile()) {
             qCDebug(KTT_LOG) << "storing a local file";
             QString filename=rc.url.toLocalFile();
             if (filename.isEmpty()) filename=rc.url.url();
