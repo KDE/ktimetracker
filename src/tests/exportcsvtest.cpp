@@ -1,4 +1,5 @@
 #include <QTest>
+#include <QTemporaryFile>
 
 #include "taskview.h"
 #include "model/task.h"
@@ -12,19 +13,25 @@ class ExportCSVTest : public QObject
 private Q_SLOTS:
     void testTotalsEmpty();
     void testTotalsSimpleTree();
+    void testCSVFileSimpleTree();
 };
 
-static ReportCriteria createRC()
+static ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
 {
+    QTemporaryFile file;
+    if (!file.open()) {
+        throw std::runtime_error("1");
+    }
+
     ReportCriteria rc;
-    rc.reportType = ReportCriteria::CSVTotalsExport;
-    rc.url = QUrl();
+    rc.reportType = type;
+    rc.url = QUrl::fromLocalFile(file.fileName());
     rc.from = QDate();
     rc.to = QDate();
     rc.decimalMinutes = false;
     rc.sessionTimes = false;
     rc.allTasks = true;
-    rc.bExPortToClipBoard = true;
+    rc.bExPortToClipBoard = toClipboard;
     rc.delimiter = ";";
     rc.quote = "\"";
 
@@ -41,25 +48,16 @@ void ExportCSVTest::testTotalsEmpty()
     const QString &expected = QStringLiteral(
         "Task Totals\n%1\n\n"
         "  Time    Task\n----------------------------------------------\nNo tasks.").arg(timeString);
-    QCOMPARE(totalsAsText(taskView->tasksModel(), taskView->currentItem(), createRC()), expected);
+    QCOMPARE(
+        totalsAsText(taskView->tasksModel(), taskView->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
+        expected);
 }
 
 void ExportCSVTest::testTotalsSimpleTree()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
-    auto *taskView = createTaskView();
-
-    Task* task1 = taskView->task(taskView->addTask("1"));
-    QVERIFY(task1);
-    Task* task2 = taskView->task(taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1));
-    QVERIFY(task2);
-    Task* task3 = taskView->task(taskView->addTask("3"));
-    QVERIFY(task3);
-
-    task1->changeTime(5, nullptr); // add 5 minutes
-    task2->changeTime(3, nullptr); // add 3 minutes
-    task3->changeTime(7, nullptr); // add 7 minutes
+    auto *taskView = createTaskView(true);
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(
@@ -73,7 +71,28 @@ void ExportCSVTest::testTotalsSimpleTree()
          "  0:07    3\n"
          "----------------------------------------------\n"
          "  0:15 Total").arg(timeString);
-    QCOMPARE(totalsAsText(taskView->tasksModel(), taskView->currentItem(), createRC()), expected);
+    QCOMPARE(
+        totalsAsText(taskView->tasksModel(), taskView->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
+        expected);
+}
+
+void ExportCSVTest::testCSVFileSimpleTree()
+{
+    QLocale::setDefault(QLocale(QLocale::C));
+
+    auto *taskView = createTaskView(true);
+
+    const auto &rc = createRC(ReportCriteria::CSVTotalsExport, false);
+    QCOMPARE(taskView->report(rc), "");
+
+    const QString &expected = QStringLiteral(
+        "\"3\";;0:07;0:07;0:07;0:07\n"
+        "\"1\";;0:05;0:05;0:08;0:08\n"
+        ";\"2\";0:03;0:03;0:03;0:03\n");
+    QFile file(rc.url.path());
+    QVERIFY(file.open(QFile::ReadOnly | QFile::Text));
+    QTextStream in(&file);
+    QCOMPARE(in.readAll(), expected);
 }
 
 QTEST_MAIN(ExportCSVTest)

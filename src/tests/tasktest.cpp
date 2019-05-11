@@ -14,7 +14,7 @@ private Q_SLOTS:
 
 void TaskTest::testIsRoot()
 {
-    auto *taskView = createTaskView();
+    auto *taskView = createTaskView(false);
 
     auto *task1 = taskView->task(taskView->addTask("1"));
     QVERIFY(task1);

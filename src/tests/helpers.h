@@ -3,6 +3,6 @@
 
 class TaskView;
 
-TaskView *createTaskView();
+TaskView *createTaskView(bool simpleTree);
 
 #endif // KTIMETRACKER_HELPERS_H
