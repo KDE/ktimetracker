@@ -1,9 +1,9 @@
 #include <QTest>
-#include <QTemporaryFile>
 
 #include "taskview.h"
 #include "model/task.h"
 #include "export/totalsastext.h"
+#include "helpers.h"
 
 class ExportCSVTest : public QObject
 {
@@ -29,19 +29,6 @@ static ReportCriteria createRC()
     rc.quote = "\"";
 
     return rc;
-}
-
-static TaskView *createTaskView()
-{
-    auto *taskView = new TaskView();
-    QTemporaryFile icsFile;
-    if (!icsFile.open()) {
-        delete taskView;
-        return nullptr;
-    }
-
-    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile.fileName()));
-    return taskView;
 }
 
 void ExportCSVTest::testTotalsEmpty()

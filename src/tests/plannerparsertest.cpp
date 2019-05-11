@@ -1,8 +1,8 @@
 #include <QTest>
-#include <QTemporaryFile>
 
 #include "taskview.h"
 #include "model/task.h"
+#include "helpers.h"
 
 class PlannerParserTest : public QObject
 {
@@ -13,19 +13,6 @@ private Q_SLOTS:
     void testAtTopLevel();
     void testAtSubTask();
 };
-
-static TaskView *createTaskView()
-{
-    auto *taskView = new TaskView();
-    QTemporaryFile icsFile;
-    if (!icsFile.open()) {
-        delete taskView;
-        return nullptr;
-    }
-
-    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile.fileName()));
-    return taskView;
-}
 
 void PlannerParserTest::testEmpty()
 {
