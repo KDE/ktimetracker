@@ -63,7 +63,7 @@ bool PlannerParser::startDocument()
     return true;
 }
 
-bool PlannerParser::startElement( const QString&, const QString&, const QString& qName, const QXmlAttributes& att )
+bool PlannerParser::startElement(const QString&, const QString&, const QString &qName, const QXmlAttributes &att)
 {
     qDebug() << "entering function";
     QString taskName;
@@ -98,7 +98,7 @@ bool PlannerParser::startElement( const QString&, const QString&, const QString&
             qDebug() << "added" << taskName;
             m_task->setUid(m_taskView->storage()->addTask(m_task, nullptr));
         }
-        m_task->setPercentComplete(taskComplete, m_taskView->storage());
+        m_task->setPercentComplete(taskComplete);
     }
 
     return true;

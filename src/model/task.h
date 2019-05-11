@@ -315,7 +315,7 @@ public:
      * taskview.  If percent NULL, set to zero.  If greater than 100, set to
      * 100.  If less than zero, set to zero.
      */
-    void setPercentComplete(int percent, TimeTrackerStorage* storage);
+    void setPercentComplete(int percent);
 
     int percentComplete() const;
 

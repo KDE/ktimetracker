@@ -187,9 +187,9 @@ void Task::setDescription(const QString& description)
     }
 }
 
-void Task::setPercentComplete(int percent, TimeTrackerStorage* storage)
+void Task::setPercentComplete(int percent)
 {
-    qCDebug(KTT_LOG) << "Entering function(" << percent <<", storage):" << mUid;
+    qCDebug(KTT_LOG) << "Entering function(" << percent << "):" << mUid;
 
     if (!percent) {
         mPercentComplete = 0;
@@ -212,7 +212,7 @@ void Task::setPercentComplete(int percent, TimeTrackerStorage* storage)
     if (mPercentComplete == 100) {
         for (int i = 0; i < childCount(); ++i) {
             Task *task = dynamic_cast<Task*>(child(i));
-            task->setPercentComplete(mPercentComplete, storage);
+            task->setPercentComplete(mPercentComplete);
         }
     }
     // maybe there is a column "percent completed", so do a ...

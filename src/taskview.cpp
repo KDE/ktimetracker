@@ -304,7 +304,7 @@ void TaskView::mouseMoveEvent( QMouseEvent *event )
             Task *task = taskAtViewIndex(index);
             if (task)
             {
-                task->setPercentComplete( newValue, m_storage );
+                task->setPercentComplete(newValue);
                 emit updateButtons();
             }
         }
@@ -328,9 +328,9 @@ void TaskView::mousePressEvent( QMouseEvent *event )
         if (task)
         {
             if (task->isComplete()) {
-                task->setPercentComplete(0, m_storage);
+                task->setPercentComplete(0);
             } else {
-                task->setPercentComplete(100, m_storage);
+                task->setPercentComplete(100);
             }
             emit updateButtons();
         }
@@ -934,7 +934,7 @@ void TaskView::setPerCentComplete(int completion)
         completion = 0;
     }
     if (completion < 100) {
-        task->setPercentComplete(completion, m_storage);
+        task->setPercentComplete(completion);
         task->invalidateCompletedState();
         save();
         emit updateButtons();
@@ -993,7 +993,7 @@ void TaskView::markTaskAsComplete()
         return;
     }
 
-    currentItem()->setPercentComplete(100, m_storage);
+    currentItem()->setPercentComplete(100);
     currentItem()->invalidateCompletedState();
     save();
     emit updateButtons();
@@ -1076,7 +1076,7 @@ void TaskView::slotCustomContextMenuRequested(const QPoint& pos)
 void TaskView::slotSetPercentage(QAction* action)
 {
     if (currentItem()) {
-        currentItem()->setPercentComplete(m_percentage[action], storage());
+        currentItem()->setPercentComplete(m_percentage[action]);
         emit updateButtons();
     }
 }

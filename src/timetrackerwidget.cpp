@@ -600,7 +600,7 @@ void TimeTrackerWidget::setPercentComplete(const QString &taskId, int percent)
 
     for (Task *task : taskView->getAllTasks()) {
         if (task->uid() == taskId) {
-            task->setPercentComplete(percent, taskView->storage());
+            task->setPercentComplete(percent);
         }
     }
 }
