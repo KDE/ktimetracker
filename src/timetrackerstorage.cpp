@@ -548,8 +548,13 @@ QString TimeTrackerStorage::exportCSVHistory(
     // Store the seconds using secsForUid hashmap, so we don't need to translate uids
     // We rely on rawEventsForDate to get the events
     qCDebug(KTT_LOG) << "Let's iterate for each date: ";
+    int dayCount = 0;
     for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
     {
+        if (dayCount++ > 365 * 100) {
+            return QStringLiteral("too many days to process");
+        }
+
         qCDebug(KTT_LOG) << mdate.toString();
         KCalCore::Event::List dateEvents = m_calendar->rawEventsForDate(mdate);
 
