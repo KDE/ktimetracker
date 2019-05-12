@@ -90,7 +90,7 @@ public:
    /**
     * Return the name of the iCal file
     */
-    QString icalfile();
+    QUrl fileUrl();
 
    /**
     * Build up the taskview.

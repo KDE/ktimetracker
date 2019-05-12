@@ -363,7 +363,7 @@ void TimeTrackerWidget::slotCurrentChanged()
             this, SIGNAL(timersInactive()) );
         connect( m_taskView, SIGNAL(tasksChanged(QList<Task*>)), // FIXME signature
             this, SIGNAL(tasksChanged(QList<Task*>)) );
-        emit setCaption(m_taskView->storage()->icalfile());
+        emit setCaption(m_taskView->storage()->fileUrl().toString());
     }
     m_searchLine->setEnabled(m_taskView);
 }

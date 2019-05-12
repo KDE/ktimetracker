@@ -670,7 +670,7 @@ void TaskView::save()
     QString err = m_storage->save(this);
 
     if (!err.isNull()) {
-        QString errMsg = m_storage->icalfile() + ":\n";
+        QString errMsg = m_storage->fileUrl().toString() + ":\n";
 
         if (err == QString("Could not save. Could not lock file.")) {
             errMsg += i18n("Could not save. Disk full?");

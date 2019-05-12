@@ -220,9 +220,9 @@ Task* TimeTrackerStorage::task(const QString& uid, TaskView* view)
     return result;
 }
 
-QString TimeTrackerStorage::icalfile()
+QUrl TimeTrackerStorage::fileUrl()
 {
-    return m_iCalFile.toString();
+    return m_iCalFile;
 }
 
 QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view)
