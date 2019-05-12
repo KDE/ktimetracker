@@ -105,9 +105,6 @@ public:
     /** list of all events */
     KCalCore::Event::List rawevents();
 
-    /** list of all todos */
-    KCalCore::Todo::List rawtodos();
-
     QString removeEvent(QString uid);
 
     FileCalendar::Ptr calendar() const;

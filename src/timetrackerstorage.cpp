@@ -297,11 +297,6 @@ KCalCore::Event::List TimeTrackerStorage::rawevents()
     return m_calendar->rawEvents();
 }
 
-KCalCore::Todo::List TimeTrackerStorage::rawtodos()
-{
-    return m_calendar->rawTodos();
-}
-
 bool TimeTrackerStorage::allEventsHaveEndTiMe(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
