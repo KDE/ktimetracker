@@ -22,9 +22,9 @@ TaskView *createTaskView(bool simpleTree)
         Task* task2 = taskView->task(taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1));
         Task* task3 = taskView->task(taskView->addTask("3"));
 
-        task1->changeTime(5, nullptr); // add 5 minutes
-        task2->changeTime(3, nullptr); // add 3 minutes
-        task3->changeTime(7, nullptr); // add 7 minutes
+        task1->changeTime(5, taskView->storage()); // add 5 minutes
+        task2->changeTime(3, taskView->storage()); // add 3 minutes
+        task3->changeTime(7, taskView->storage()); // add 7 minutes
     }
 
     return taskView;

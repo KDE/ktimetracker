@@ -13,7 +13,8 @@ class ExportCSVTest : public QObject
 private Q_SLOTS:
     void testTotalsEmpty();
     void testTotalsSimpleTree();
-    void testCSVFileSimpleTree();
+    void testTimesSimpleTree();
+    void testHistorySimpleTree();
 };
 
 static ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
@@ -26,8 +27,8 @@ static ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard
     ReportCriteria rc;
     rc.reportType = type;
     rc.url = QUrl::fromLocalFile(file.fileName());
-    rc.from = QDate();
-    rc.to = QDate();
+    rc.from = QDate::currentDate();
+    rc.to = QDate::currentDate();
     rc.decimalMinutes = false;
     rc.sessionTimes = false;
     rc.allTasks = true;
@@ -76,7 +77,7 @@ void ExportCSVTest::testTotalsSimpleTree()
         expected);
 }
 
-void ExportCSVTest::testCSVFileSimpleTree()
+void ExportCSVTest::testTimesSimpleTree()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
@@ -89,6 +90,26 @@ void ExportCSVTest::testCSVFileSimpleTree()
         "\"3\";;0:07;0:07;0:07;0:07\n"
         "\"1\";;0:05;0:05;0:08;0:08\n"
         ";\"2\";0:03;0:03;0:03;0:03\n");
+    QFile file(rc.url.path());
+    QVERIFY(file.open(QFile::ReadOnly | QFile::Text));
+    QTextStream in(&file);
+    QCOMPARE(in.readAll(), expected);
+}
+
+void ExportCSVTest::testHistorySimpleTree()
+{
+    QLocale::setDefault(QLocale(QLocale::C));
+
+    auto *taskView = createTaskView(true);
+
+    const auto &rc = createRC(ReportCriteria::CSVHistoryExport, false);
+    QCOMPARE(taskView->report(rc), "");
+
+    const QString &expected = QStringLiteral(
+        "\"Task name\";%1\n"
+        "\"1\";0:05\n"
+        "\"1->2\";0:03\n"
+        "\"3\";0:07\n").arg(QDate::currentDate().toString());
     QFile file(rc.url.path());
     QVERIFY(file.open(QFile::ReadOnly | QFile::Text));
     QTextStream in(&file);
