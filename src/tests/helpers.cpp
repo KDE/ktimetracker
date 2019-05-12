@@ -35,7 +35,7 @@ QString readTextFile(const QString &path)
 {
     QFile file(path);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        qFatal("failed to open file");
+        qFatal(QStringLiteral("failed to open file: %1").arg(path).toStdString().c_str());
     }
 
     QTextStream in(&file);
