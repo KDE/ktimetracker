@@ -90,10 +90,7 @@ void ExportCSVTest::testTimesSimpleTree()
         "\"3\";;0:07;0:07;0:07;0:07\n"
         "\"1\";;0:05;0:05;0:08;0:08\n"
         ";\"2\";0:03;0:03;0:03;0:03\n");
-    QFile file(rc.url.path());
-    QVERIFY(file.open(QFile::ReadOnly | QFile::Text));
-    QTextStream in(&file);
-    QCOMPARE(in.readAll(), expected);
+    QCOMPARE(readTextFile(rc.url.path()), expected);
 }
 
 void ExportCSVTest::testHistorySimpleTree()
@@ -110,10 +107,7 @@ void ExportCSVTest::testHistorySimpleTree()
         "\"1\";0:05\n"
         "\"1->2\";0:03\n"
         "\"3\";0:07\n").arg(QDate::currentDate().toString());
-    QFile file(rc.url.path());
-    QVERIFY(file.open(QFile::ReadOnly | QFile::Text));
-    QTextStream in(&file);
-    QCOMPARE(in.readAll(), expected);
+    QCOMPARE(readTextFile(rc.url.path()), expected);
 }
 
 QTEST_MAIN(ExportCSVTest)

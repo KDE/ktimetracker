@@ -1,6 +1,7 @@
 #include "helpers.h"
 
 #include <QTemporaryFile>
+#include <QTextStream>
 
 #include "taskview.h"
 #include "model/task.h"
@@ -28,4 +29,15 @@ TaskView *createTaskView(bool simpleTree)
     }
 
     return taskView;
+}
+
+QString readTextFile(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qFatal("failed to open file");
+    }
+
+    QTextStream in(&file);
+    return in.readAll();
 }
