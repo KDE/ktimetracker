@@ -173,18 +173,18 @@ void HistoryDialog::onCellChanged(int row, int col)
         case 1: {
             // StartDate changed
             qCDebug(KTT_LOG) << "user changed StartDate to" << m_ui.historytablewidget->item(row, col)->text();
+            QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
+            if (!datetime.isValid()) {
+                KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
+                break;
+            }
+
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
             for (const auto &event : m_storage->rawevents()) {
-                qCDebug(KTT_LOG) << "row=" << row <<" col=" << col;
                 if (event->uid() == uid) {
-                    QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
-                    if (datetime.isValid()) {
-                        event->setDtStart(datetime);
-                        emit timesChanged();
-                        qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
-                    } else {
-                        KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
-                    }
+                    event->setDtStart(datetime);
+                    emit timesChanged();
+                    qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
                 }
             }
             break;
@@ -192,18 +192,18 @@ void HistoryDialog::onCellChanged(int row, int col)
         case 2: {
             // EndDate changed
             qCDebug(KTT_LOG) << "user changed EndDate to" << m_ui.historytablewidget->item(row,col)->text();
-            QString uid = m_ui.historytablewidget->item( row, 4 )->text();
+            QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
+            if (!datetime.isValid()) {
+                KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
+                break;
+            }
+
+            QString uid = m_ui.historytablewidget->item(row, 4)->text();
             for (const auto &event : m_storage->rawevents()) {
-                qDebug() <<"row=" << row <<" col=" << col;
                 if (event->uid() == uid) {
-                    QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
-                    if (datetime.isValid()) {
-                        event->setDtEnd(datetime);
-                        emit timesChanged();
-                        qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
-                    } else {
-                        KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
-                    }
+                    event->setDtEnd(datetime);
+                    emit timesChanged();
+                    qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
                 }
             }
             break;
@@ -211,13 +211,13 @@ void HistoryDialog::onCellChanged(int row, int col)
         case 3: {
             // Comment changed
             qCDebug(KTT_LOG) << "user changed Comment to" << m_ui.historytablewidget->item(row, col)->text();
+
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            qDebug() << "uid =" << uid;
+            qCDebug(KTT_LOG) << "uid =" << uid;
             for (const auto &event : m_storage->rawevents()) {
-                qDebug() << "row=" << row << " col=" << col;
                 if (event->uid() == uid) {
                     event->addComment(m_ui.historytablewidget->item(row, col)->text());
-                    qDebug() << "added" << m_ui.historytablewidget->item(row, col)->text();
+                    qCDebug(KTT_LOG) << "added" << m_ui.historytablewidget->item(row, col)->text();
                 }
             }
             break;
