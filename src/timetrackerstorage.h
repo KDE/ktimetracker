@@ -272,7 +272,6 @@ private:
     QString saveCalendar();
 
     KCalCore::Event::Ptr baseEvent(const Task*);
-    KCalCore::Event::Ptr baseEvent(const KCalCore::Todo::Ptr &);
 };
 
 #endif // KTIMETRACKER_STORAGE_H

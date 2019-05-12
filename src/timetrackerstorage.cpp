@@ -697,28 +697,6 @@ KCalCore::Event::Ptr TimeTrackerStorage::baseEvent(const Task *task)
     return e;
 }
 
-KCalCore::Event::Ptr TimeTrackerStorage::baseEvent(const KCalCore::Todo::Ptr &todo)
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    KCalCore::Event::Ptr e( new KCalCore::Event() );
-    QStringList categories;
-    e->setSummary(todo->summary());
-
-    // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
-    e->setRelatedTo( todo->uid() );
-
-    // Have to turn this off to get datetimes in date fields.
-    e->setAllDay(false);
-//    e->setDtStart(KDateTime(todo->dtStart()));
-    e->setDtStart(todo->dtStart());
-
-    // So someone can filter this mess out of their calendar display
-    categories.append(i18n("KTimeTracker"));
-    e->setCategories(categories);
-
-    return e;
-}
-
 QString TimeTrackerStorage::saveCalendar()
 {
     qCDebug(KTT_LOG) << "Entering function";
