@@ -267,7 +267,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
 
     QAction* showSearchBar = actionCollection->addAction(QStringLiteral("searchbar"));
     showSearchBar->setCheckable(true);
-    showSearchBar->setChecked(KTimeTrackerSettings::self()->showSearchBar());
+    showSearchBar->setChecked(KTimeTrackerSettings::showSearchBar());
     showSearchBar->setText(i18n("Show Searchbar"));
     connect(showSearchBar, &QAction::triggered, this, &TimeTrackerWidget::slotSearchBar);
 
@@ -415,7 +415,7 @@ void TimeTrackerWidget::showSettingsDialog()
 
 void TimeTrackerWidget::loadSettings()
 {
-    KTimeTrackerSettings::self()->readConfig();
+    KTimeTrackerSettings::self()->load();
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
     currentTaskView()->reconfigure();
@@ -523,8 +523,8 @@ void TimeTrackerWidget::focusTracking()
 
 void TimeTrackerWidget::slotSearchBar()
 {
-    bool currentVisible = KTimeTrackerSettings::self()->showSearchBar();
-    KTimeTrackerSettings::self()->setShowSearchBar(!currentVisible);
+    bool currentVisible = KTimeTrackerSettings::showSearchBar();
+    KTimeTrackerSettings::setShowSearchBar(!currentVisible);
     action(QStringLiteral("searchbar"))->setChecked(!currentVisible);
     showSearchBar(!currentVisible);
 }

@@ -380,7 +380,7 @@ TimeTrackerStorage* TaskView::storage()
 TaskView::~TaskView()
 {
     delete m_storage;
-    KTimeTrackerSettings::self()->writeConfig();
+    KTimeTrackerSettings::self()->save();
 }
 
 Task* TaskView::taskAtViewIndex(QModelIndex viewIndex) const
@@ -1063,7 +1063,7 @@ void TaskView::slotColumnToggled( int column )
         KTimeTrackerSettings::setDisplayPercentComplete( !isColumnHidden( 6 ) );
         break;
     }
-    KTimeTrackerSettings::self()->writeConfig();
+    KTimeTrackerSettings::self()->save();
 }
 
 void TaskView::slotCustomContextMenuRequested(const QPoint& pos)
