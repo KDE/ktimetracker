@@ -71,8 +71,8 @@
 const QByteArray eventAppName = QByteArray("ktimetracker");
 
 TimeTrackerStorage::TimeTrackerStorage()
-    : mCalendar()
-    , mICalFile()
+    : m_calendar()
+    , m_iCalFile()
     , m_fileLock(new QLockFile(QStringLiteral("ktimetrackerics.lock")))
     , m_taskView(nullptr)
 {
@@ -89,8 +89,8 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
 {
     // loading might create the file
     bool removedFromDirWatch = false;
-    if ( KDirWatch::self()->contains( mICalFile.path() ) ) {
-      KDirWatch::self()->removeFile( mICalFile.path() );
+    if ( KDirWatch::self()->contains( m_iCalFile.path() ) ) {
+      KDirWatch::self()->removeFile( m_iCalFile.path() );
       removedFromDirWatch = true;
     }
     qCDebug(KTT_LOG) << "Entering function";
@@ -101,9 +101,9 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     Q_ASSERT( !( lFileName.isEmpty() ) );
 
     // If same file, don't reload
-    if ( lFileName == mICalFile ) {
+    if ( lFileName == m_iCalFile ) {
         if ( removedFromDirWatch ) {
-          KDirWatch::self()->addFile( mICalFile.path() );
+          KDirWatch::self()->addFile( m_iCalFile.path() );
         }
         return err;
     }
@@ -123,25 +123,25 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
         }
     }
 
-    if (mCalendar) {
+    if (m_calendar) {
         closeStorage();
     }
     // Create local file resource and add to resources
-    mICalFile = lFileName;
-    mCalendar = FileCalendar::Ptr(new FileCalendar(mICalFile, fileIsLocal));
-    mCalendar->setWeakPointer(mCalendar);
+    m_iCalFile = lFileName;
+    m_calendar = FileCalendar::Ptr(new FileCalendar(m_iCalFile, fileIsLocal));
+    m_calendar->setWeakPointer(m_calendar);
 
     if (view) {
         m_taskView = view;
-        connect(mCalendar.data(), &FileCalendar::calendarChanged, this, &TimeTrackerStorage::onFileModified);
+        connect(m_calendar.data(), &FileCalendar::calendarChanged, this, &TimeTrackerStorage::onFileModified);
     }
-//    mCalendar->setTimeSpec( KSystemTimeZones::local() );
-    mCalendar->reload();
+//    m_calendar->setTimeSpec( KSystemTimeZones::local() );
+    m_calendar->reload();
 
     // Claim ownership of iCalendar file if no one else has.
-    KCalCore::Person::Ptr owner = mCalendar->owner();
+    KCalCore::Person::Ptr owner = m_calendar->owner();
     if (owner && owner->isEmpty()) {
-        mCalendar->setOwner( KCalCore::Person::Ptr(
+        m_calendar->setOwner( KCalCore::Person::Ptr(
            new KCalCore::Person( settings.getSetting( KEMailSettings::RealName ),
                                  settings.getSetting( KEMailSettings::EmailAddress ) ) ) );
     }
@@ -154,7 +154,7 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
 
         // Build dictionary to look up Task object from Todo uid.  Each task is a
         // QListViewItem, and is initially added with the view as the parent.
-        todoList = mCalendar->rawTodos();
+        todoList = m_calendar->rawTodos();
         qCDebug(KTT_LOG) << "TimeTrackerStorage::load"
             << "rawTodo count (includes completed todos) ="
             << todoList.count();
@@ -184,15 +184,15 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
         }
 
         qCDebug(KTT_LOG) << "TimeTrackerStorage::load - loaded" << view->count()
-            << "tasks from" << mICalFile;
+            << "tasks from" << m_iCalFile;
     }
 
     if (view) {
-        buildTaskView(mCalendar, view);
+        buildTaskView(m_calendar, view);
     }
 
     if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(mICalFile.path());
+        KDirWatch::self()->addFile(m_iCalFile.path());
     }
     return err;
 }
@@ -204,7 +204,7 @@ Task* TimeTrackerStorage::task(const QString& uid, TaskView* view)
     qCDebug(KTT_LOG) << "Entering function";
     KCalCore::Todo::List todoList;
     KCalCore::Todo::List::ConstIterator todo;
-    todoList = mCalendar->rawTodos();
+    todoList = m_calendar->rawTodos();
     todo = todoList.constBegin();
     Task* result=0;
 
@@ -222,7 +222,7 @@ Task* TimeTrackerStorage::task(const QString& uid, TaskView* view)
 
 QString TimeTrackerStorage::icalfile()
 {
-    return mICalFile.toString();
+    return m_iCalFile.toString();
 }
 
 QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view)
@@ -286,26 +286,26 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
 
 void TimeTrackerStorage::closeStorage()
 {
-    if (mCalendar) {
-        mCalendar->close();
-        mCalendar = FileCalendar::Ptr();
+    if (m_calendar) {
+        m_calendar->close();
+        m_calendar = FileCalendar::Ptr();
     }
 }
 
 KCalCore::Event::List TimeTrackerStorage::rawevents()
 {
-    return mCalendar->rawEvents();
+    return m_calendar->rawEvents();
 }
 
 KCalCore::Todo::List TimeTrackerStorage::rawtodos()
 {
-    return mCalendar->rawTodos();
+    return m_calendar->rawTodos();
 }
 
 bool TimeTrackerStorage::allEventsHaveEndTiMe(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    KCalCore::Event::List eventList = mCalendar->rawEvents();
+    KCalCore::Event::List eventList = m_calendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
@@ -319,7 +319,7 @@ bool TimeTrackerStorage::allEventsHaveEndTiMe(Task* task)
 bool TimeTrackerStorage::allEventsHaveEndTiMe()
 {
     qCDebug(KTT_LOG) << "Entering function";
-    KCalCore::Event::List eventList = mCalendar->rawEvents();
+    KCalCore::Event::List eventList = m_calendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i)
     {
@@ -332,8 +332,8 @@ QString TimeTrackerStorage::deleteAllEvents()
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    KCalCore::Event::List eventList = mCalendar->rawEvents();
-//    mCalendar->deleteAllEvents(); // FIXME
+    KCalCore::Event::List eventList = m_calendar->rawEvents();
+//    m_calendar->deleteAllEvents(); // FIXME
     return err;
 }
 
@@ -352,7 +352,7 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     errorString = saveCalendar();
 
     if (errorString.isEmpty()) {
-        qCDebug(KTT_LOG) << "TimeTrackerStorage::save : wrote tasks to" << mICalFile;
+        qCDebug(KTT_LOG) << "TimeTrackerStorage::save : wrote tasks to" << m_iCalFile;
     } else {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save :" << errorString;
     }
@@ -363,7 +363,7 @@ QString TimeTrackerStorage::save(TaskView* taskview)
 QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::Ptr>& parents)
 {
     QString err;
-    KCalCore::Todo::Ptr todo = mCalendar->todo(task->uid());
+    KCalCore::Todo::Ptr todo = m_calendar->todo(task->uid());
     if (!todo) {
         qCDebug(KTT_LOG) << "Could not get todo from calendar";
         return "Could not get todo from calendar";
@@ -385,7 +385,7 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
 
 bool TimeTrackerStorage::isEmpty()
 {
-    return mCalendar->rawTodos().isEmpty();
+    return m_calendar->rawTodos().isEmpty();
 }
 
 //----------------------------------------------------------------------------
@@ -398,12 +398,12 @@ QString TimeTrackerStorage::addTask(const Task* task, const Task* parent)
     KCalCore::Todo::Ptr todo;
     QString uid;
 
-    if (!mCalendar) {
-        qCDebug(KTT_LOG) << "mCalendar is not set";
+    if (!m_calendar) {
+        qCDebug(KTT_LOG) << "m_calendar is not set";
         return uid;
     }
     todo = KCalCore::Todo::Ptr(new KCalCore::Todo());
-    if (mCalendar->addTodo(todo)) {
+    if (m_calendar->addTodo(todo)) {
         task->asTodo(todo);
         if (parent) {
             todo->setRelatedTo( parent->uid() );
@@ -419,11 +419,11 @@ QString TimeTrackerStorage::addTask(const Task* task, const Task* parent)
 
 QString TimeTrackerStorage::removeEvent(QString uid)
 {
-    KCalCore::Event::List eventList = mCalendar->rawEvents();
+    KCalCore::Event::List eventList = m_calendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i) {
         if ((*i)->uid() == uid) {
-            mCalendar->deleteEvent(*i);
+            m_calendar->deleteEvent(*i);
         }
     }
     return QString();
@@ -433,17 +433,17 @@ bool TimeTrackerStorage::removeTask(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
     // delete history
-    KCalCore::Event::List eventList = mCalendar->rawEvents();
+    KCalCore::Event::List eventList = m_calendar->rawEvents();
     for(KCalCore::Event::List::iterator i = eventList.begin();
         i != eventList.end(); ++i) {
         if ((*i)->relatedTo() == task->uid()) {
-            mCalendar->deleteEvent(*i);
+            m_calendar->deleteEvent(*i);
         }
     }
 
     // delete todo
-    KCalCore::Todo::Ptr todo = mCalendar->todo(task->uid());
-    mCalendar->deleteTodo(todo);
+    KCalCore::Todo::Ptr todo = m_calendar->todo(task->uid());
+    m_calendar->deleteTodo(todo);
     // Save entire file
     saveCalendar();
 
@@ -452,7 +452,7 @@ bool TimeTrackerStorage::removeTask(Task* task)
 
 void TimeTrackerStorage::addComment(const Task* task, const QString& comment)
 {
-    KCalCore::Todo::Ptr todo = mCalendar->todo(task->uid());
+    KCalCore::Todo::Ptr todo = m_calendar->todo(task->uid());
 
     // Do this to avoid compiler warnings about comment not being used.  once we
     // transition to using the addComment method, we need this second param.
@@ -551,7 +551,7 @@ QString TimeTrackerStorage::exportCSVHistory(
     for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
     {
         qCDebug(KTT_LOG) << mdate.toString();
-        KCalCore::Event::List dateEvents = mCalendar->rawEventsForDate(mdate);
+        KCalCore::Event::List dateEvents = m_calendar->rawEventsForDate(mdate);
 
         for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
         {
@@ -650,7 +650,7 @@ void TimeTrackerStorage::changeTime(const Task* task, long deltaSeconds)
     // Use a custom property to keep a record of negative durations
     e->setCustomProperty(eventAppName, QByteArray("duration"), QString::number(deltaSeconds));
 
-    mCalendar->addEvent(e);
+    m_calendar->addEvent(e);
     task->taskView()->scheduleSave();
 }
 
@@ -664,7 +664,7 @@ bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTi
 
     // Use a custom property to keep a record of negative durations
     e->setCustomProperty(eventAppName, QByteArray("duration"), QString::number(durationInSeconds));
-    return mCalendar->addEvent(e);
+    return m_calendar->addEvent(e);
 }
 
 KCalCore::Event::Ptr TimeTrackerStorage::baseEvent(const Task *task)
@@ -718,26 +718,26 @@ QString TimeTrackerStorage::saveCalendar()
 {
     qCDebug(KTT_LOG) << "Entering function";
     bool removedFromDirWatch = false;
-    if (KDirWatch::self()->contains(mICalFile.path())) {
-        KDirWatch::self()->removeFile(mICalFile.path());
+    if (KDirWatch::self()->contains(m_iCalFile.path())) {
+        KDirWatch::self()->removeFile(m_iCalFile.path());
         removedFromDirWatch = true;
     }
 
     QString errorMessage;
-    if (mCalendar) {
+    if (m_calendar) {
         m_fileLock->lock();
     } else {
-        qDebug() << "mCalendar not set";
+        qDebug() << "m_calendar not set";
         return errorMessage;
     }
 
-    if (!mCalendar->save()) {
+    if (!m_calendar->save()) {
         errorMessage = QString("Could not save. Could lock file.");
     }
     m_fileLock->unlock();
 
     if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(mICalFile.path());
+        KDirWatch::self()->addFile(m_iCalFile.path());
     }
 
     return errorMessage;
@@ -745,17 +745,17 @@ QString TimeTrackerStorage::saveCalendar()
 
 FileCalendar::Ptr TimeTrackerStorage::calendar() const
 {
-    return mCalendar;
+    return m_calendar;
 }
 
 void TimeTrackerStorage::onFileModified()
 {
-    if (mCalendar.isNull()) {
+    if (m_calendar.isNull()) {
         qCWarning(KTT_LOG) << "TaskView::onFileModified(): calendar is null";
     } else {
         qCDebug(KTT_LOG) << "entering function";
-        mCalendar->reload();
-        this->buildTaskView(mCalendar, m_taskView);
+        m_calendar->reload();
+        this->buildTaskView(m_calendar, m_taskView);
         qCDebug(KTT_LOG) << "exiting onFileModified";
     }
 }

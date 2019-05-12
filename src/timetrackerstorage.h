@@ -263,8 +263,8 @@ private Q_SLOTS:
     void onFileModified();
 
 private:
-    FileCalendar::Ptr mCalendar;
-    QUrl mICalFile;
+    FileCalendar::Ptr m_calendar;
+    QUrl m_iCalFile;
     QLockFile *m_fileLock;
     TaskView* m_taskView;
 
