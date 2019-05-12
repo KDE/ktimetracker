@@ -28,6 +28,8 @@
 #include <QHeaderView>
 
 #include <KMessageBox>
+#include <KJobWidgets>
+#include <KIO/StoredTransferJob>
 
 #include "model/task.h"
 #include "model/tasksmodel.h"
@@ -574,37 +576,48 @@ void TaskView::importPlanner(const QString& fileName)
 
 QString TaskView::report(const ReportCriteria& rc)
 {
-    return m_storage->report(this, rc);
+    QString err;
+    if (rc.reportType == ReportCriteria::CSVHistoryExport) {
+        err = m_storage->exportCSVHistory(this, rc.from, rc.to, rc);
+    } else { // rc.reportType == ReportCriteria::CSVTotalsExport
+        if (!rc.bExPortToClipBoard) {
+            err = exportcsvFile(rc);
+        } else {
+            err = clipTotals(rc);
+        }
+    }
+    return err;
 }
 
-void TaskView::exportcsvFile()
+void TaskView::exportCSVFileDialog()
 {
-    qCDebug(KTT_LOG) << "TaskView::exportcsvFile()";
+    qCDebug(KTT_LOG) << "TaskView::exportCSVFileDialog()";
 
     CSVExportDialog dialog(ReportCriteria::CSVTotalsExport, this);
     if (currentItem() && currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }
     if (dialog.exec()) {
-        QString err = m_storage->report(this, dialog.reportCriteria());
+        QString err = report(dialog.reportCriteria());
         if (!err.isEmpty()) {
             KMessageBox::error(this, i18n(err.toLatin1()));
         }
     }
 }
 
-QString TaskView::exportcsvHistory()
+QString TaskView::exportCSVHistoryDialog()
 {
-    qCDebug(KTT_LOG) << "TaskView::exportcsvHistory()";
+    qCDebug(KTT_LOG) << "TaskView::exportCSVHistoryDialog()";
     QString err;
 
-    CSVExportDialog dialog( ReportCriteria::CSVHistoryExport, this );
-    if ( currentItem() && currentItem()->isRoot() )
+    CSVExportDialog dialog(ReportCriteria::CSVHistoryExport, this);
+    if (currentItem() && currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
-    if ( dialog.exec() )
-    {
-        err = m_storage->report( this, dialog.reportCriteria() );
     }
+    if (dialog.exec()) {
+        err = report(dialog.reportCriteria());
+    }
+
     return err;
 }
 
@@ -1145,4 +1158,124 @@ int TaskView::sortColumn() const
 void TaskView::setFilterText(const QString &text)
 {
     m_filterProxyModel->setFilterFixedString(text);
+}
+
+//----------------------------------------------------------------------------
+// Routines that handle Comma-Separated Values export file format.
+//
+QString TaskView::exportcsvFile(const ReportCriteria &rc)
+{
+    QString delim = rc.delimiter;
+    QString dquote = rc.quote;
+    QString double_dquote = dquote + dquote;
+    QString err;
+    QProgressDialog dialog(
+        i18n("Exporting to CSV..."), i18n("Cancel"),
+        0, static_cast<int>(2 * count()), this, nullptr);
+    dialog.setAutoClose(true);
+    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
+
+    if (count() > 1) {
+        dialog.show();
+    }
+
+    QString retval;
+
+    // Find max task depth
+    int maxdepth = 0;
+    for (Task *task : getAllTasks()) {
+        if (dialog.wasCanceled()) {
+            break;
+        }
+
+        dialog.setValue(dialog.value() + 1);
+
+//        if (tasknr % 15 == 0) {
+//            QApplication::processEvents(); // repainting is slow
+//        }
+        QApplication::processEvents();
+
+        if (task->depth() > maxdepth) {
+            maxdepth = task->depth();
+        }
+    }
+
+    // Export to file
+    for (Task *task : getAllTasks()) {
+        if (dialog.wasCanceled()) {
+            break;
+        }
+
+        dialog.setValue(dialog.value() + 1);
+
+//        if (tasknr % 15 == 0) {
+//            QApplication::processEvents(); // repainting is slow
+//        }
+        QApplication::processEvents();
+
+        // indent the task in the csv-file:
+        for (int i = 0; i < task->depth(); ++i) {
+            retval += delim;
+        }
+
+        /*
+        // CSV compliance
+        // Surround the field with quotes if the field contains
+        // a comma (delim) or a double quote
+        if (task->name().contains(delim) || task->name().contains(dquote))
+        to_quote = true;
+        else
+        to_quote = false;
+        */
+        bool to_quote = true;
+
+        if (to_quote) {
+            retval += dquote;
+        }
+
+        // Double quotes replaced by a pair of consecutive double quotes
+        retval += task->name().replace(dquote, double_dquote);
+
+        if (to_quote) {
+            retval += dquote;
+        }
+
+        // maybe other tasks are more indented, so to align the columns:
+        for (int i = 0; i < maxdepth - task->depth(); ++i) {
+            retval += delim;
+        }
+
+        retval += delim + formatTime(task->sessionTime(), rc.decimalMinutes)
+                  + delim + formatTime(task->time(), rc.decimalMinutes)
+                  + delim + formatTime(task->totalSessionTime(), rc.decimalMinutes)
+                  + delim + formatTime(task->totalTime(), rc.decimalMinutes)
+                  + '\n';
+    }
+
+    // save, either locally or remote
+    if (rc.url.isLocalFile()) {
+        QString filename = rc.url.toLocalFile();
+        if (filename.isEmpty()) {
+            filename = rc.url.url();
+        }
+        QFile f(filename);
+        if (!f.open(QIODevice::WriteOnly)) {
+            err = i18n("Could not open \"%1\".", filename);
+        }
+        if (err.length() == 0) {
+            QTextStream stream(&f);
+            // Export to file
+            stream << retval;
+            f.close();
+        }
+    } else {
+        // use remote file
+        auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
+        KJobWidgets::setWindow(job, &dialog);
+        if (!job->exec()) {
+            err=QString::fromLatin1("Could not upload");
+        }
+    }
+
+    return err;
 }

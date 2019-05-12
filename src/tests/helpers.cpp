@@ -8,6 +8,7 @@
 TaskView *createTaskView(bool simpleTree)
 {
     auto *taskView = new TaskView();
+    // TODO: remove all temporary files after running test
     QTemporaryFile icsFile;
     if (!icsFile.open()) {
         delete taskView;

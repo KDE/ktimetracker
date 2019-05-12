@@ -136,8 +136,8 @@ public Q_SLOTS:
     void deleteTask();
     void markTaskAsComplete();
     void markTaskAsIncomplete();
-    void exportcsvFile();
-    void exportcsvHistory();
+    void exportCSVFileDialog();
+    void exportCSVHistoryDialog();
     void importPlanner(const QString &fileName = "");
     void startNewSession();
     void editHistory();

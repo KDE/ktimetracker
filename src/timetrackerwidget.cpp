@@ -253,13 +253,13 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
     connect(markTaskAsIncomplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
 
-    QAction* exportcsvFile = actionCollection->addAction(QStringLiteral("export_times"));
-    exportcsvFile->setText(i18n("&Export Times..."));
-    connect(exportcsvFile, &QAction::triggered, this, &TimeTrackerWidget::exportcsvFile);
+    QAction* exportTimes = actionCollection->addAction(QStringLiteral("export_times"));
+    exportTimes->setText(i18n("&Export Times..."));
+    connect(exportTimes, &QAction::triggered, this, &TimeTrackerWidget::exportCSVFileDialog);
 
-    QAction* exportcsvHistory = actionCollection->addAction(QStringLiteral("export_history"));
-    exportcsvHistory->setText(i18n("Export &History..."));
-    connect(exportcsvHistory, &QAction::triggered, this, &TimeTrackerWidget::exportcsvHistory);
+    QAction* exportHistory = actionCollection->addAction(QStringLiteral("export_history"));
+    exportHistory->setText(i18n("Export &History..."));
+    connect(exportHistory, &QAction::triggered, this, &TimeTrackerWidget::exportCSVHistoryDialog);
 
     QAction* importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
     importPlanner->setText(i18n("Import Tasks From &Planner..."));
@@ -467,14 +467,14 @@ void TimeTrackerWidget::markTaskAsIncomplete()
     currentTaskView()->markTaskAsIncomplete();
 }
 
-void TimeTrackerWidget::exportcsvFile()
+void TimeTrackerWidget::exportCSVFileDialog()
 {
-    currentTaskView()->exportcsvFile();
+    currentTaskView()->exportCSVFileDialog();
 }
 
-void TimeTrackerWidget::exportcsvHistory()
+void TimeTrackerWidget::exportCSVHistoryDialog()
 {
-    currentTaskView()->exportcsvHistory();
+    currentTaskView()->exportCSVHistoryDialog();
 }
 
 void TimeTrackerWidget::importPlanner(const QString &fileName)

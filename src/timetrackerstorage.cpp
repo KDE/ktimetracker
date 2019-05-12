@@ -466,141 +466,6 @@ void TimeTrackerStorage::addComment(const Task* task, const QString& comment)
     saveCalendar();
 }
 
-QString TimeTrackerStorage::report(TaskView *taskview, const ReportCriteria &rc)
-{
-    QString err;
-    if (rc.reportType == ReportCriteria::CSVHistoryExport) {
-        err = exportcsvHistory(taskview, rc.from, rc.to, rc);
-    } else { // rc.reportType == ReportCriteria::CSVTotalsExport
-        if (!rc.bExPortToClipBoard) {
-            err = exportcsvFile(taskview, rc);
-        } else {
-            err = taskview->clipTotals(rc);
-        }
-    }
-    return err;
-}
-
-//----------------------------------------------------------------------------
-// Routines that handle Comma-Separated Values export file format.
-//
-QString TimeTrackerStorage::exportcsvFile(TaskView *taskview, const ReportCriteria &rc)
-{
-    QString delim = rc.delimiter;
-    QString dquote = rc.quote;
-    QString double_dquote = dquote + dquote;
-    QString err;
-    QProgressDialog dialog(
-        i18n("Exporting to CSV..."), i18n("Cancel"),
-        0, static_cast<int>(2 * taskview->count()), taskview, nullptr);
-    dialog.setAutoClose(true);
-    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
-
-    if (taskview->count() > 1) {
-        dialog.show();
-    }
-
-    QString retval;
-
-    // Find max task depth
-    int maxdepth = 0;
-    for (Task *task : taskview->getAllTasks()) {
-        if (dialog.wasCanceled()) {
-            break;
-        }
-
-        dialog.setValue(dialog.value() + 1);
-
-//        if (tasknr % 15 == 0) {
-//            QApplication::processEvents(); // repainting is slow
-//        }
-        QApplication::processEvents();
-
-        if (task->depth() > maxdepth) {
-            maxdepth = task->depth();
-        }
-    }
-
-    // Export to file
-    for (Task *task : taskview->getAllTasks()) {
-        if (dialog.wasCanceled()) {
-            break;
-        }
-
-        dialog.setValue(dialog.value() + 1);
-
-//        if (tasknr % 15 == 0) {
-//            QApplication::processEvents(); // repainting is slow
-//        }
-        QApplication::processEvents();
-
-        // indent the task in the csv-file:
-        for (int i = 0; i < task->depth(); ++i) {
-            retval += delim;
-        }
-
-        /*
-        // CSV compliance
-        // Surround the field with quotes if the field contains
-        // a comma (delim) or a double quote
-        if (task->name().contains(delim) || task->name().contains(dquote))
-        to_quote = true;
-        else
-        to_quote = false;
-        */
-        bool to_quote = true;
-
-        if (to_quote) {
-            retval += dquote;
-        }
-
-        // Double quotes replaced by a pair of consecutive double quotes
-        retval += task->name().replace(dquote, double_dquote);
-
-        if (to_quote) {
-            retval += dquote;
-        }
-
-        // maybe other tasks are more indented, so to align the columns:
-        for (int i = 0; i < maxdepth - task->depth(); ++i) {
-            retval += delim;
-        }
-
-        retval += delim + formatTime(task->sessionTime(), rc.decimalMinutes)
-                + delim + formatTime(task->time(), rc.decimalMinutes)
-                + delim + formatTime(task->totalSessionTime(), rc.decimalMinutes)
-                + delim + formatTime(task->totalTime(), rc.decimalMinutes)
-                + '\n';
-    }
-
-    // save, either locally or remote
-    if (rc.url.isLocalFile()) {
-        QString filename = rc.url.toLocalFile();
-        if (filename.isEmpty()) {
-            filename = rc.url.url();
-        }
-        QFile f(filename);
-        if (!f.open(QIODevice::WriteOnly)) {
-            err = i18n("Could not open \"%1\".", filename);
-        }
-        if (err.length() == 0) {
-            QTextStream stream(&f);
-            // Export to file
-            stream << retval;
-            f.close();
-        }
-    } else {
-        // use remote file
-        auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
-        KJobWidgets::setWindow(job, &dialog);
-        if (!job->exec()) {
-            err=QString::fromLatin1("Could not upload");
-        }
-    }
-
-    return err;
-}
-
 int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
 {
         if ( !event )
@@ -631,8 +496,8 @@ int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
 }
 
 // export history report as csv, all tasks X all dates in one block
-QString TimeTrackerStorage::exportcsvHistory(
-    TaskView* taskview, const QDate& from, const QDate& to, const ReportCriteria& rc)
+QString TimeTrackerStorage::exportCSVHistory(
+    TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc)
 {
     qCDebug(KTT_LOG) << "Entering function";
 

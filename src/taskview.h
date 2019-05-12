@@ -143,14 +143,26 @@ public Q_SLOTS:
     /** used to import tasks from imendio planner */
     void importPlanner(const QString& fileName = "");
 
-    /** call export function for csv totals or history */
+    /**
+     * Call export function for csv totals or history.
+     * Output a report based on contents of ReportCriteria.
+     */
     QString report(const ReportCriteria& rc);
 
+    /**
+     *  Writes all tasks and their totals to a Comma-Separated Values file.
+     *
+     * The format of this file is zero or more lines of:
+     *    taskName,subtaskName,..,sessionTime,time,totalSessionTime,totalTime
+     * the number of subtasks is determined at runtime.
+     */
+    QString exportcsvFile(const ReportCriteria &rc);
+
     /** Export comma separated values format for task time totals. */
-    void exportcsvFile();
+    void exportCSVFileDialog();
 
     /** Export comma-separated values format for task history. */
-    QString exportcsvHistory();
+    QString exportCSVHistoryDialog();
 
     /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();

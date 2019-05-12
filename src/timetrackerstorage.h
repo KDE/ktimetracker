@@ -146,11 +146,6 @@ public:
     QString save(TaskView* taskview);
 
     /**
-     Output a report based on contents of ReportCriteria.
-     */
-    QString report( TaskView *taskview, const ReportCriteria &rc );
-
-    /**
      * Log the change in a task's time.
      *
      * This is also called when a timer is stopped.
@@ -259,6 +254,11 @@ public:
      */
     Task* task( const QString& uid, TaskView* view );
 
+    /**
+     *  Write task history to file as comma-delimited data.
+     */
+    QString exportCSVHistory(TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc);
+
 private Q_SLOTS:
     void onFileModified();
 
@@ -273,26 +273,6 @@ private:
 
     KCalCore::Event::Ptr baseEvent(const Task*);
     KCalCore::Event::Ptr baseEvent(const KCalCore::Todo::Ptr &);
-
-    /**
-     *  Writes all tasks and their totals to a Comma-Separated Values file.
-     *
-     * The format of this file is zero or more lines of:
-     *    taskName,subtaskName,..,sessionTime,time,totalSessionTime,totalTime
-     * the number of subtasks is determined at runtime.
-     */
-    QString exportcsvFile( TaskView *taskview, const ReportCriteria &rc );
-
-    /**
-     *  Write task history to file as comma-delimited data.
-     */
-    QString exportcsvHistory
-    (
-            TaskView* taskview,
-            const QDate& from,
-            const QDate& to,
-            const ReportCriteria &rc
-    );
 };
 
 #endif // KTIMETRACKER_STORAGE_H
