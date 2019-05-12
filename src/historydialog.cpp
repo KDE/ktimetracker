@@ -120,12 +120,9 @@ QString HistoryDialog::listAllEvents()
             item->setFlags(Qt::ItemIsEnabled);
             item->setWhatsThis(i18n("You can change this task's comment, start time and end time."));
             m_ui.historytablewidget->setItem(row, 0, item);
-            // dtStart is stored like DTSTART;TZID=Europe/Berlin:20080327T231056
-            // dtEnd is stored like DTEND:20080327T231509Z
-            // we need to handle both differently
-            QDateTime start = QDateTime::fromTime_t(event->dtStart().toTime_t());
-            QDateTime end = QDateTime::fromString(event->dtEnd().toString(), Qt::ISODate);
-            qDebug() << "start =" << start << "; end =" << end;
+
+            QDateTime start = event->dtStart();
+            QDateTime end = event->dtEnd();
             m_ui.historytablewidget->setItem(row, 1, new QTableWidgetItem(start.toString(dateTimeFormat)));
             m_ui.historytablewidget->setItem(row, 2, new QTableWidgetItem(end.toString(dateTimeFormat)));
             m_ui.historytablewidget->setItem(row, 4, new QTableWidgetItem(event->uid()));
