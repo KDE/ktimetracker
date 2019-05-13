@@ -261,7 +261,7 @@ private Q_SLOTS:
 
 private:
     FileCalendar::Ptr m_calendar;
-    QUrl m_iCalFile;
+    QUrl m_url;
     QLockFile *m_fileLock;
     TaskView* m_taskView;
 

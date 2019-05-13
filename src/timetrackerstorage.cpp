@@ -70,7 +70,7 @@ const QByteArray eventAppName = QByteArray("ktimetracker");
 
 TimeTrackerStorage::TimeTrackerStorage()
     : m_calendar()
-    , m_iCalFile()
+    , m_url()
     , m_fileLock(new QLockFile(QStringLiteral("ktimetrackerics.lock")))
     , m_taskView(nullptr)
 {
@@ -85,34 +85,33 @@ TimeTrackerStorage::~TimeTrackerStorage()
 // filename might be of use if this program is run as embedded konqueror plugin.
 QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
 {
+    if (url.isEmpty()) {
+        return QStringLiteral("TimeTrackerStorage::load() callled with an empty URL");
+    }
+
     // loading might create the file
     bool removedFromDirWatch = false;
-    if ( KDirWatch::self()->contains( m_iCalFile.path() ) ) {
-      KDirWatch::self()->removeFile( m_iCalFile.path() );
-      removedFromDirWatch = true;
+    if (KDirWatch::self()->contains(m_url.path())) {
+        KDirWatch::self()->removeFile(m_url.path());
+        removedFromDirWatch = true;
     }
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
-    QUrl lFileName = url;
-
-    Q_ASSERT( !( lFileName.isEmpty() ) );
 
     // If same file, don't reload
-    if ( lFileName == m_iCalFile ) {
-        if ( removedFromDirWatch ) {
-          KDirWatch::self()->addFile( m_iCalFile.path() );
+    if (url == m_url) {
+        if (removedFromDirWatch) {
+            KDirWatch::self()->addFile(m_url.path());
         }
-        return err;
+        return QString();
     }
 
-    const bool fileIsLocal = lFileName.isLocalFile();
+    const bool fileIsLocal = url.isLocalFile();
 
     // If file doesn't exist, create a blank one to avoid ResourceLocal load
     // error.  We make it user and group read/write, others read.  This is
     // masked by the users umask.  (See man creat)
     if (fileIsLocal) {
         int handle = open(
-            QFile::encodeName(lFileName.path()),
+            QFile::encodeName(url.path()),
             O_CREAT | O_EXCL | O_WRONLY,
             S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
         if (handle != -1) {
@@ -124,8 +123,8 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
         closeStorage();
     }
     // Create local file resource and add to resources
-    m_iCalFile = lFileName;
-    m_calendar = FileCalendar::Ptr(new FileCalendar(m_iCalFile, fileIsLocal));
+    m_url = url;
+    m_calendar = FileCalendar::Ptr(new FileCalendar(m_url, fileIsLocal));
     m_calendar->setWeakPointer(m_calendar);
 
     if (view) {
@@ -136,6 +135,7 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     m_calendar->reload();
 
     // Build task view from iCal data
+    QString err;
     if (!err.isEmpty()) {
         KCalCore::Todo::List todoList;
         KCalCore::Todo::List::ConstIterator todo;
@@ -173,7 +173,7 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
         }
 
         qCDebug(KTT_LOG) << "TimeTrackerStorage::load - loaded" << view->count()
-            << "tasks from" << m_iCalFile;
+            << "tasks from" << m_url;
     }
 
     if (view) {
@@ -181,7 +181,7 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     }
 
     if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(m_iCalFile.path());
+        KDirWatch::self()->addFile(m_url.path());
     }
     return err;
 }
@@ -211,7 +211,7 @@ Task* TimeTrackerStorage::task(const QString& uid, TaskView* view)
 
 QUrl TimeTrackerStorage::fileUrl()
 {
-    return m_iCalFile;
+    return m_url;
 }
 
 QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view)
@@ -336,7 +336,7 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     errorString = saveCalendar();
 
     if (errorString.isEmpty()) {
-        qCDebug(KTT_LOG) << "TimeTrackerStorage::save : wrote tasks to" << m_iCalFile;
+        qCDebug(KTT_LOG) << "TimeTrackerStorage::save : wrote tasks to" << m_url;
     } else {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save :" << errorString;
     }
@@ -685,8 +685,8 @@ QString TimeTrackerStorage::saveCalendar()
 {
     qCDebug(KTT_LOG) << "Entering function";
     bool removedFromDirWatch = false;
-    if (KDirWatch::self()->contains(m_iCalFile.path())) {
-        KDirWatch::self()->removeFile(m_iCalFile.path());
+    if (KDirWatch::self()->contains(m_url.path())) {
+        KDirWatch::self()->removeFile(m_url.path());
         removedFromDirWatch = true;
     }
 
@@ -704,7 +704,7 @@ QString TimeTrackerStorage::saveCalendar()
     m_fileLock->unlock();
 
     if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(m_iCalFile.path());
+        KDirWatch::self()->addFile(m_url.path());
     }
 
     return errorMessage;
