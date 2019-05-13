@@ -52,13 +52,11 @@
 #include <QMap>
 #include <QClipboard>
 
-#include <KCalCore/Person>
 #include <KDirWatch>
 #include <KJobUiDelegate>
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KJobWidgets>
-#include <KEMailSettings>
 #include <KIO/StoredTransferJob>
 
 #include "ktimetrackerutility.h"
@@ -95,7 +93,6 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     }
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    KEMailSettings settings;
     QUrl lFileName = url;
 
     Q_ASSERT( !( lFileName.isEmpty() ) );
@@ -137,14 +134,6 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     }
 //    m_calendar->setTimeSpec( KSystemTimeZones::local() );
     m_calendar->reload();
-
-    // Claim ownership of iCalendar file if no one else has.
-    KCalCore::Person::Ptr owner = m_calendar->owner();
-    if (owner && owner->isEmpty()) {
-        m_calendar->setOwner( KCalCore::Person::Ptr(
-           new KCalCore::Person( settings.getSetting( KEMailSettings::RealName ),
-                                 settings.getSetting( KEMailSettings::EmailAddress ) ) ) );
-    }
 
     // Build task view from iCal data
     if (!err.isEmpty()) {
