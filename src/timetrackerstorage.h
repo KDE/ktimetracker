@@ -237,13 +237,6 @@ public:
     QString addTask(const Task* task, const Task* parent = nullptr);
 
     /**
-     *  Check if the iCalendar file currently loaded has any Todos in it.
-     *
-     *  @return true if iCalendar file has any todos
-     */
-    bool isEmpty();
-
-    /**
      *  Write task history to file as comma-delimited data.
      */
     QString exportCSVHistory(TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc);

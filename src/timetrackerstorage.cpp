@@ -304,11 +304,6 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
     return err;
 }
 
-bool TimeTrackerStorage::isEmpty()
-{
-    return m_calendar->rawTodos().isEmpty();
-}
-
 //----------------------------------------------------------------------------
 // Routines that handle logging ktimetracker history
 
