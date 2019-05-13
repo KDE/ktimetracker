@@ -136,45 +136,6 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
 
     // Build task view from iCal data
     QString err;
-    if (!err.isEmpty()) {
-        KCalCore::Todo::List todoList;
-        KCalCore::Todo::List::ConstIterator todo;
-        QMultiHash< QString, Task* > map;
-
-        // Build dictionary to look up Task object from Todo uid.  Each task is a
-        // QListViewItem, and is initially added with the view as the parent.
-        todoList = m_calendar->rawTodos();
-        qCDebug(KTT_LOG) << "TimeTrackerStorage::load"
-            << "rawTodo count (includes completed todos) ="
-            << todoList.count();
-        for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo) {
-            Task* task = new Task(*todo, view);
-            map.insert( (*todo)->uid(), task );
-            view->setRootIsDecorated(true);
-            task->invalidateCompletedState();
-        }
-
-        // Load each task under its parent task.
-        for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo)
-        {
-            Task* task = map.value( (*todo)->uid() );
-            // No relatedTo incident just means this is a top-level task.
-            if ( !(*todo)->relatedTo().isEmpty() )
-            {
-                Task *newParent = map.value( (*todo)->relatedTo() );
-
-                // Complete the loading but return a message
-                if ( !newParent )
-                    err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
-                        task->name(), (*todo)->relatedTo()  );
-
-                if (!err.isEmpty()) task->move( newParent );
-            }
-        }
-
-        qCDebug(KTT_LOG) << "TimeTrackerStorage::load - loaded" << view->count()
-            << "tasks from" << m_url;
-    }
 
     if (view) {
         buildTaskView(m_calendar, view);
