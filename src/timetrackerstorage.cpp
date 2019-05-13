@@ -136,9 +136,8 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
 
     // Build task view from iCal data
     QString err;
-
     if (view) {
-        buildTaskView(m_calendar, view);
+        err = buildTaskView(m_calendar, view);
     }
 
     if (removedFromDirWatch) {
