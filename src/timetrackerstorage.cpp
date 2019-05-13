@@ -146,29 +146,6 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     return err;
 }
 
-Task* TimeTrackerStorage::task(const QString& uid, TaskView* view)
-// return the tasks with the uid uid out of view.
-// If !view, return the todo with the uid uid.
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    KCalCore::Todo::List todoList;
-    KCalCore::Todo::List::ConstIterator todo;
-    todoList = m_calendar->rawTodos();
-    todo = todoList.constBegin();
-    Task* result=0;
-
-    while (todo != todoList.constEnd() && ((*todo)->uid() != uid)) {
-        ++todo;
-    }
-
-    if (todo != todoList.constEnd()) {
-        result = new Task((*todo), view);
-    }
-
-    qCDebug(KTT_LOG) << "Leaving function, returning " << result;
-    return result;
-}
-
 QUrl TimeTrackerStorage::fileUrl()
 {
     return m_url;

@@ -244,14 +244,6 @@ public:
     bool isEmpty();
 
     /**
-     * Find the task with the given uid
-     * @param  uid  The uid that identifies the task
-     * @param  view The TaskView that contains the task
-     * @return the task identified by uid, residing in the TaskView view
-     */
-    Task* task( const QString& uid, TaskView* view );
-
-    /**
      *  Write task history to file as comma-delimited data.
      */
     QString exportCSVHistory(TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc);
