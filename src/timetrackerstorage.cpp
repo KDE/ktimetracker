@@ -622,14 +622,16 @@ QString TimeTrackerStorage::saveCalendar()
         removedFromDirWatch = true;
     }
 
-    QString errorMessage;
-    if (m_calendar) {
-        m_fileLock->lock();
-    } else {
+    if (!m_calendar) {
         qDebug() << "m_calendar not set";
-        return errorMessage;
+        return QString("m_calendar not set");
     }
 
+    if (!m_fileLock->lock()) {
+        return QString("Could not save. Could not lock file.");
+    }
+
+    QString errorMessage;
     if (!m_calendar->save()) {
         errorMessage = QString("Could not save. Could lock file.");
     }
