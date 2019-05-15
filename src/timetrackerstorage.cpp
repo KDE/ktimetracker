@@ -263,11 +263,10 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     qCDebug(KTT_LOG) << "Entering function";
     QString errorString;
 
-    QStack<KCalCore::Todo::Ptr> parents;
     for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
         Task *task = dynamic_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
         qCDebug(KTT_LOG) << "write task" << task->name();
-        errorString = writeTaskAsTodo(task, parents);
+        errorString = writeTaskAsTodo(task, KCalCore::Todo::Ptr());
     }
 
     errorString = saveCalendar();
@@ -281,7 +280,7 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     return errorString;
 }
 
-QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::Ptr>& parents)
+QString TimeTrackerStorage::writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent)
 {
     QString err;
     KCalCore::Todo::Ptr todo = m_calendar->todo(task->uid());
@@ -290,17 +289,15 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task* task, QStack<KCalCore::Todo::P
         return "Could not get todo from calendar";
     }
     task->asTodo(todo);
-    if (!parents.isEmpty()) {
-        todo->setRelatedTo(parents.top() ? parents.top()->uid() : QString());
+    if (parent) {
+        todo->setRelatedTo(parent->uid());
     }
-    parents.push( todo );
 
     for (int i = 0; i < task->childCount(); ++i) {
         Task *nextTask = dynamic_cast<Task*>(task->child(i));
-        err = writeTaskAsTodo(nextTask, parents);
+        err = writeTaskAsTodo(nextTask, todo);
     }
 
-    parents.pop();
     return err;
 }
 

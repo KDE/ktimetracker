@@ -22,8 +22,6 @@
 #ifndef KTIMETRACKER_STORAGE_H
 #define KTIMETRACKER_STORAGE_H
 
-#include <QStack>
-
 #include <KCalCore/Todo>
 #include <KCalCore/Event>
 
@@ -250,7 +248,7 @@ private:
     QLockFile *m_fileLock;
     TaskView* m_taskView;
 
-    QString writeTaskAsTodo( Task* task, QStack<KCalCore::Todo::Ptr>& parents );
+    QString writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent);
     QString saveCalendar();
 
     KCalCore::Event::Ptr baseEvent(const Task*);
