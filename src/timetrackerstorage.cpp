@@ -381,31 +381,44 @@ void TimeTrackerStorage::addComment(const Task* task, const QString& comment)
 
 int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
 {
-        if ( !event )
-          return 0;
+    if (!event) {
+        return 0;
+    }
 
-        qCDebug(KTT_LOG) << "found an event for task, event=" << event->uid();
-        QDateTime startTime=event->dtStart();
-        QDateTime endTime=event->dtEnd();
-        QDateTime NextMidNight=startTime;
-        NextMidNight.setTime(QTime ( 0,0 ));
-        NextMidNight=NextMidNight.addDays(1);
-        // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
-        QDateTime LastMidNight=QDateTime::currentDateTime();
-        LastMidNight.setDate(date);
-        LastMidNight.setTime(QTime(0,0));
-        int secsstartTillMidNight=startTime.secsTo(NextMidNight);
-        int secondsToAdd=0; // seconds that need to be added to the actual cell
-        if ( (startTime.date()==date) && (event->dtEnd().date()==date) ) // all the event occurred today
-            secondsToAdd=startTime.secsTo(endTime);
-        if ( (startTime.date()==date) && (endTime.date()>date) ) // the event started today, but ended later
-            secondsToAdd=secsstartTillMidNight;
-        if ( (startTime.date()<date) && (endTime.date()==date) ) // the event started before today and ended today
-            secondsToAdd=LastMidNight.secsTo(event->dtEnd());
-        if ( (startTime.date()<date) && (endTime.date()>date) ) // the event started before today and ended after
-            secondsToAdd=86400;
+    qCDebug(KTT_LOG) << "found an event for task, event=" << event->uid();
+    QDateTime startTime = event->dtStart();
+    QDateTime endTime = event->dtEnd();
+    QDateTime NextMidNight = startTime;
+    NextMidNight.setTime(QTime(0, 0));
+    NextMidNight = NextMidNight.addDays(1);
+    // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
+    QDateTime LastMidNight = QDateTime::currentDateTime();
+    LastMidNight.setDate(date);
+    LastMidNight.setTime(QTime(0, 0));
+    int secsstartTillMidNight = startTime.secsTo(NextMidNight);
+    int secondsToAdd = 0; // seconds that need to be added to the actual cell
 
-        return secondsToAdd;
+    if (startTime.date() == date && event->dtEnd().date() == date) {
+        // all the event occurred today
+        secondsToAdd = startTime.secsTo(endTime);
+    }
+
+    if (startTime.date() == date && endTime.date()>date) {
+        // the event started today, but ended later
+        secondsToAdd = secsstartTillMidNight;
+    }
+
+    if (startTime.date() < date && endTime.date() == date) {
+        // the event started before today and ended today
+        secondsToAdd = LastMidNight.secsTo(event->dtEnd());
+    }
+
+    if (startTime.date() < date && endTime.date() > date) {
+        // the event started before today and ended after
+        secondsToAdd = 86400;
+    }
+
+    return secondsToAdd;
 }
 
 // export history report as csv, all tasks X all dates in one block
