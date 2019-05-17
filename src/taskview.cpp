@@ -527,28 +527,24 @@ QString TaskView::reFreshTimes()
             QDateTime kdatetimeend = event->dtEnd();
             QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
             QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
-            int duration=eventstart.secsTo( eventend )/60;
-            task->addTime( duration );
-            emit totalTimesChanged( 0, duration );
-            qCDebug(KTT_LOG) << "duration is " << duration;
+            int duration = eventstart.secsTo(eventend) / 60;
+            task->addTime(duration);
+            emit totalTimesChanged(0, duration);
+            qCDebug(KTT_LOG) << "duration is" << duration;
 
-            if ( task->sessionStartTiMe().isValid() )
-            {
+            if (task->sessionStartTiMe().isValid()) {
                 // if there is a session
-                if ((task->sessionStartTiMe().secsTo( eventstart )>0) &&
-                    (task->sessionStartTiMe().secsTo( eventend )>0))
-                // if the event is after the session start
-                {
-                    int sessionTime=eventstart.secsTo( eventend )/60;
-                    task->setSessionTime( task->sessionTime()+sessionTime );
+                if (task->sessionStartTiMe().secsTo(eventstart) > 0 &&
+                    task->sessionStartTiMe().secsTo(eventend) > 0) {
+                    // if the event is after the session start
+                    int sessionTime = eventstart.secsTo(eventend) / 60;
+                    task->setSessionTime(task->sessionTime() + sessionTime);
                 }
+            } else {
+                // so there is no session at all
+                task->addSessionTime(duration);
+                emit totalTimesChanged(duration, 0);
             }
-            else
-            // so there is no session at all
-            {
-                task->addSessionTime( duration );
-                emit totalTimesChanged( duration, 0 );
-            };
         }
     }
 
