@@ -514,37 +514,41 @@ QString TaskView::reFreshTimes()
     emit reSetTimes();
 
     for (Task *task : getAllTasks()) {
-        for( KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i ) // loop over all events
-        {
-            if ( (*i)->relatedTo() == task->uid() ) // if event i belongs to task n
-            {
-                QDateTime kdatetimestart = (*i)->dtStart();
-                QDateTime kdatetimeend = (*i)->dtEnd();
-                QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
-                QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
-                int duration=eventstart.secsTo( eventend )/60;
-                task->addTime( duration );
-                emit totalTimesChanged( 0, duration );
-                qCDebug(KTT_LOG) << "duration is " << duration;
-
-                if ( task->sessionStartTiMe().isValid() )
-                {
-                    // if there is a session
-                    if ((task->sessionStartTiMe().secsTo( eventstart )>0) &&
-                        (task->sessionStartTiMe().secsTo( eventend )>0))
-                    // if the event is after the session start
-                    {
-                        int sessionTime=eventstart.secsTo( eventend )/60;
-                        task->setSessionTime( task->sessionTime()+sessionTime );
-                    }
-                }
-                else
-                // so there is no session at all
-                {
-                    task->addSessionTime( duration );
-                    emit totalTimesChanged( duration, 0 );
-                };
+        KCalCore::Event::List eventsForTask;
+        for (KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i) {
+            if ((*i)->relatedTo() == task->uid()) {
+                // if event i belongs to task
+                eventsForTask.append(*i);
             }
+        }
+
+        for (auto event : eventsForTask) {
+            QDateTime kdatetimestart = event->dtStart();
+            QDateTime kdatetimeend = event->dtEnd();
+            QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
+            QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
+            int duration=eventstart.secsTo( eventend )/60;
+            task->addTime( duration );
+            emit totalTimesChanged( 0, duration );
+            qCDebug(KTT_LOG) << "duration is " << duration;
+
+            if ( task->sessionStartTiMe().isValid() )
+            {
+                // if there is a session
+                if ((task->sessionStartTiMe().secsTo( eventstart )>0) &&
+                    (task->sessionStartTiMe().secsTo( eventend )>0))
+                // if the event is after the session start
+                {
+                    int sessionTime=eventstart.secsTo( eventend )/60;
+                    task->setSessionTime( task->sessionTime()+sessionTime );
+                }
+            }
+            else
+            // so there is no session at all
+            {
+                task->addSessionTime( duration );
+                emit totalTimesChanged( duration, 0 );
+            };
         }
     }
 
