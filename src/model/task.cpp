@@ -416,7 +416,6 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
         todo->setCustomProperty(eventAppName, QByteArray("desktopList"), getDesktopStr());
     }
 
-    todo->setOrganizer(KTimeTrackerSettings::userRealName());
     todo->setPercentComplete(mPercentComplete);
     todo->setPriority( mPriority );
     return todo;

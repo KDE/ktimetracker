@@ -8,14 +8,6 @@
     <entry name="showSearchBar" type="Bool">
       <default>true</default>
     </entry>
-    <entry name="userRealName" type="String">
-    <code>
-      QString _userRealName;
-      KEMailSettings settings;
-      _userRealName = settings.getSetting( KEMailSettings::RealName );
-    </code>
-    <default code="true">_userRealName</default>
-    </entry>
   </group>
   <group name="Idle detection">
     <entry name="enabled" type="Bool">
