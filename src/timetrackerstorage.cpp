@@ -122,14 +122,21 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     if (m_calendar) {
         closeStorage();
     }
+
+    if (fileIsLocal) {
+        connect(KDirWatch::self(), &KDirWatch::dirty, this, &TimeTrackerStorage::onFileModified);
+        if (!KDirWatch::self()->contains(url.path())) {
+            KDirWatch::self()->addFile(url.path());
+        }
+    }
+
     // Create local file resource and add to resources
     m_url = url;
-    m_calendar = FileCalendar::Ptr(new FileCalendar(m_url, fileIsLocal));
+    m_calendar = FileCalendar::Ptr(new FileCalendar(m_url));
     m_calendar->setWeakPointer(m_calendar);
 
     if (view) {
         m_taskView = view;
-        connect(m_calendar.data(), &FileCalendar::calendarChanged, this, &TimeTrackerStorage::onFileModified);
     }
 //    m_calendar->setTimeSpec( KSystemTimeZones::local() );
     m_calendar->reload();

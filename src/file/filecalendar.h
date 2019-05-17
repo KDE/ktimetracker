@@ -31,7 +31,7 @@ class FileCalendar : public KCalCore::MemoryCalendar
 public:
     typedef QSharedPointer<FileCalendar> Ptr;
 
-    FileCalendar(const QUrl& url, bool monitorFile);
+    FileCalendar(const QUrl &url);
     FileCalendar() = delete;
     ~FileCalendar() override = default;
 
@@ -40,9 +40,6 @@ public:
 
     // hack to work around KCalCore API
     void setWeakPointer(const QWeakPointer<FileCalendar>& ptr);
-
-Q_SIGNALS:
-    void calendarChanged();
 
 private:
     QUrl m_url;

@@ -23,24 +23,17 @@
 
 #include <QDebug>
 
-#include <KDirWatch>
 #include <KCalCore/FileStorage>
 #include <KCalCore/MemoryCalendar>
 
 #include "icalformatkio.h"
 #include "ktt_debug.h"
 
-FileCalendar::FileCalendar(const QUrl& url, bool monitorFile)
+FileCalendar::FileCalendar(const QUrl &url)
     : KCalCore::MemoryCalendar(QTimeZone::systemTimeZone())
     , m_url(url)
     , m_weakPtr()
 {
-    if (monitorFile) {
-        connect(KDirWatch::self(), &KDirWatch::dirty, this, &FileCalendar::calendarChanged);
-        if (!KDirWatch::self()->contains(url.path())) {
-            KDirWatch::self()->addFile(url.path());
-        }
-    }
 }
 
 bool FileCalendar::reload()
