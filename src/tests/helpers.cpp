@@ -6,17 +6,17 @@
 #include "taskview.h"
 #include "model/task.h"
 
-TaskView *createTaskView(bool simpleTree)
+TaskView *createTaskView(QObject *parent, bool simpleTree)
 {
     auto *taskView = new TaskView();
-    // TODO: remove all temporary files after running test
-    QTemporaryFile icsFile;
-    if (!icsFile.open()) {
+    QTemporaryFile *icsFile = new QTemporaryFile(parent);
+    if (!icsFile->open()) {
         delete taskView;
+        delete icsFile;
         return nullptr;
     }
 
-    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile.fileName()));
+    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile->fileName()));
 
     if (simpleTree) {
         Task* task1 = taskView->task(taskView->addTask("1"));

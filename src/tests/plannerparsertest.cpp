@@ -33,7 +33,7 @@ void PlannerParserTest::testEmpty()
 
 void PlannerParserTest::testAtTopLevel()
 {
-    auto *taskView = createTaskView(false);
+    auto *taskView = createTaskView(this, false);
     Task* task1 = taskView->task(taskView->addTask("1"));
     QVERIFY(task1);
     taskView->setCurrentIndex(taskView->tasksModel()->index(task1, 0));
@@ -55,7 +55,7 @@ void PlannerParserTest::testAtTopLevel()
 
 void PlannerParserTest::testAtSubTask()
 {
-    auto *taskView = createTaskView(false);
+    auto *taskView = createTaskView(this, false);
     Task* task1 = taskView->task(taskView->addTask("1"));
     QVERIFY(task1);
     Task* task2 = taskView->task(taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1));

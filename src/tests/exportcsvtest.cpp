@@ -10,6 +10,9 @@ class ExportCSVTest : public QObject
 {
     Q_OBJECT
 
+private:
+   ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard);
+
 private Q_SLOTS:
     void testTotalsEmpty();
     void testTotalsSimpleTree();
@@ -17,16 +20,17 @@ private Q_SLOTS:
     void testHistorySimpleTree();
 };
 
-static ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
+ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
 {
-    QTemporaryFile file;
-    if (!file.open()) {
+    QTemporaryFile *file = new QTemporaryFile(this);
+    if (!file->open()) {
+        delete file;
         throw std::runtime_error("1");
     }
 
     ReportCriteria rc;
     rc.reportType = type;
-    rc.url = QUrl::fromLocalFile(file.fileName());
+    rc.url = QUrl::fromLocalFile(file->fileName());
     rc.from = QDate::currentDate();
     rc.to = QDate::currentDate();
     rc.decimalMinutes = false;
@@ -58,7 +62,7 @@ void ExportCSVTest::testTotalsSimpleTree()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
-    auto *taskView = createTaskView(true);
+    auto *taskView = createTaskView(this, true);
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(
@@ -81,7 +85,7 @@ void ExportCSVTest::testTimesSimpleTree()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
-    auto *taskView = createTaskView(true);
+    auto *taskView = createTaskView(this, true);
 
     const auto &rc = createRC(ReportCriteria::CSVTotalsExport, false);
     QCOMPARE(taskView->report(rc), "");
@@ -97,7 +101,7 @@ void ExportCSVTest::testHistorySimpleTree()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
-    auto *taskView = createTaskView(true);
+    auto *taskView = createTaskView(this, true);
 
     const auto &rc = createRC(ReportCriteria::CSVHistoryExport, false);
     QCOMPARE(taskView->report(rc), "");

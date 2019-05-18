@@ -19,7 +19,7 @@ private Q_SLOTS:
 
 void StorageTest::testSaveEmpty()
 {
-    auto *taskView = createTaskView(false);
+    auto *taskView = createTaskView(this, false);
 
     QCOMPARE(taskView->storage()->save(taskView), "");
     QCOMPARE(readTextFile(taskView->storage()->fileUrl().path()), readTextFile(QFINDTESTDATA("data/empty.ics")));
@@ -27,7 +27,7 @@ void StorageTest::testSaveEmpty()
 
 void StorageTest::testSaveSimpleTree()
 {
-    auto *taskView = createTaskView(true);
+    auto *taskView = createTaskView(this, true);
 
     Task* negativeTask = taskView->task(taskView->addTask("negative duration"));
     negativeTask->changeTime(-5, taskView->storage()); // substract 5 minutes
