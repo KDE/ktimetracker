@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY kappname "&ktimetracker;">
-  <!ENTITY package "kdepim">
+  <!ENTITY Planner "<application>Planner</application>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE">
 ]>
@@ -64,7 +64,6 @@
 <keywordset>
 <keyword>KDE</keyword>
 <keyword>ktimetracker</keyword>
-<keyword>kdeutils</keyword>
 <keyword>time</keyword>
 <keyword>tracker</keyword>
 <keyword>project</keyword>
@@ -87,7 +86,7 @@
 
 <para>&ktimetracker; was originally written by &Sirtaj.Singh.Kang;.
 Its home page is <ulink
-url="http://userbase.kde.org/KTimeTracker">http://userbase.kde.org/KTimeTracker</ulink>.</para>
+url="https://userbase.kde.org/KTimeTracker">https://userbase.kde.org/KTimeTracker</ulink>.</para>
 
 </chapter>
 
@@ -109,8 +108,8 @@ at the command line.</para>
 
 <para>&ktimetracker; provides an additional command option that allows you to enter
 the name of the iCalendar file that is used to store your labor history.
-You enter a remote iCalendar file by using http or ftp as part of the file
-name; for example, http://www.mysite.com/mydata/mylabor.ics.</para>
+You enter a remote iCalendar file by using &HTTP; or &FTP; as part of the file
+name; for example, https://www.mysite.com/mydata/mylabor.ics.</para>
 
 </sect1>
 
@@ -158,7 +157,7 @@ To create a subtask, highlight the parent task and select
 When it next opens, it reloads the task list from the same file.</para>
 
 <para>&ktimetracker; can import and export tasks to minimize your work. 
-See <link linkend="interfaces">Other Systems</link>.</para>
+See <xref linkend="interfaces"/>.</para>
 
 </sect1>
 
@@ -295,7 +294,7 @@ computer was idle and you are still not.</para></listitem></varlistentry>
 <sect2 id="korganizer"><title>&korganizer;</title>
 
 <para>&ktimetracker;, like &korganizer; and Apple's iCal, uses the industry standard
-<ulink url="http://www.faqs.org/rfcs/rfc2445.html">iCalendar</ulink>
+<ulink url="https://tools.ietf.org/html/rfc2445">iCalendar</ulink>
 format for its data.  &ktimetracker; can read and write the to-do lists created by
 these two applications.</para>
 <para>
@@ -309,19 +308,18 @@ application automatically.
 <sect2 id="planner"><title>Planner</title>
 
 <para>As a typical usecase, you might want to plan a project with the project 
-management tool Imendio Planner 
-(from <ulink url="http://live.gnome.org/Planner">live.gnome.org/Planner</ulink>) 
+management tool <ulink url="&Planner.web;">&Planner;</ulink>
 and import its tasks to &ktimetracker; with <menuchoice><guimenu>File</guimenu>
 <guisubmenu>Import</guisubmenu><guimenuitem>Import Tasks From Planner...</guimenuitem>
 </menuchoice>, to have them in the industry standard <ulink
-url="http://www.faqs.org/rfcs/rfc2445.html">iCalendar</ulink> 
+url="https://tools.ietf.org/html/rfc2445">iCalendar</ulink>
 format. Having done so, you are able to schedule the tasks in &korganizer;, and account your time 
 to them in &ktimetracker;. That's one way to help ensure your project stays on time
 and under budget.</para>
 
 </sect2>
 
-<sect2 id="dcop"><title>&DBus;</title>
+<sect2 id="dbus"><title>&DBus;</title>
 
 <para>&DBus; is the mechanism &kde; programs use to communicate with each
 other.  A &kde; program provides a list of functions that other programs (a Bash
@@ -335,7 +333,7 @@ qdbus org.kde.ktimetracker /KTimeTracker version 2>/dev/null || echo "ktimetrack
 
 <para>&ktimetracker;'s current &DBus; interface is currently used mainly for automated
 	testing, so it is very limited.  For the full interface definition, see
-	<link linkend="dcopappendix">&DBus; Interface Appendix</link>.</para>
+	the <xref linkend="dbusappendix"/>.</para>
 
 <para>To see the full &DBus; interface of the &ktimetracker; version installed on your
 	system, run the following Bash script:</para>
@@ -520,7 +518,7 @@ subtasks, as well as its own accumulated time.</para>
 &ktimetracker;
 </para>
 
-<para> Program copyright: </para>
+<para>Program copyright:</para>
 
 <itemizedlist>
 
@@ -577,7 +575,7 @@ which is that it is based on the Xt toolkit.</para>
 
 <glossdiv> 
 <title>D</title> 
-<glossentry id="gloss-dcop">
+<glossentry id="gloss-dbus">
 <glossterm>&DBus;</glossterm>
 <glossdef><para>The interprocess communication protocol used in &kde;.  Short
 for Desktop Bus.</para></glossdef>
@@ -648,22 +646,9 @@ times were reset.</para></glossdef> </glossentry>
 
 </glossary>
 
-<appendix id="installation">
-<title>Installation</title>
+<appendix id="dbusappendix"><title>&DBus; Interface</title>
 
-<sect1 id="getting-ktimetracker">
-<title>How to obtain &ktimetracker;</title>
-
-&install.intro.documentation;
-&install.compile.documentation;
-
-</sect1>
-
-</appendix>
-
-<appendix id="dcopappendix"><title>&DBus; Interface</title>
-
-<refentry id="dcop-version">
+<refentry id="dbus-version">
 <refmeta>
 <refentrytitle>version</refentrytitle>
 </refmeta>
@@ -684,13 +669,13 @@ in the typical &GNU; format of major.minor.bugfix.</para>
 </refsect1>
 </refentry>
 
-<refentry id="dcop-quit">
+<refentry id="dbus-quit">
 <refmeta>
 <refentrytitle>quit</refentrytitle>
 </refmeta>
 <refnamediv>
 <refname>quit</refname>
-<refpurpose>Return &ktimetracker;'s quit.</refpurpose>
+<refpurpose>Quit &ktimetracker;'.</refpurpose>
 </refnamediv>
 <refsynopsisdiv>
 <synopsis>
@@ -705,7 +690,7 @@ external program can gracefully shutdown &ktimetracker;.
 </refsect1>
 </refentry>
 <!--
-<refentry id="dcop-hastodo">
+<refentry id="dbus-hastodo">
 <refmeta>
 <refentrytitle>hastodo</refentrytitle>
 </refmeta>
@@ -742,7 +727,7 @@ than one to-do has a matching name, the first one found is returned.</para>
 </refsect1>
 </refentry>
 -->
-<refentry id="dcop-addtodo">
+<refentry id="dbus-addtodo">
 <refmeta>
 <refentrytitle>addTask</refentrytitle>
 </refmeta>
