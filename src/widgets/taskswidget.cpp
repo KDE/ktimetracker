@@ -24,6 +24,7 @@
 #include <QApplication>
 #include <QPainter>
 #include <QMenu>
+#include <QMouseEvent>
 #include <QSortFilterProxyModel>
 
 #include <KSharedConfig>

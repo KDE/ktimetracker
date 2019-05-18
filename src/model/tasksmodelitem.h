@@ -22,6 +22,7 @@
 #define KTIMETRACKER_TASKSMODELITEM_H
 
 #include <QList>
+#include <QVariant>
 
 class TasksModel;
 

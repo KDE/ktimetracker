@@ -22,6 +22,7 @@
 
 #include "taskview.h"
 
+#include <QMouseEvent>
 #include <QProgressDialog>
 
 #include <KMessageBox>

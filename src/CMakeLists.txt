@@ -71,10 +71,9 @@ qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
 add_library(libktimetracker STATIC ${ktimetracker_SRCS})
 target_link_libraries(libktimetracker
-    KF5::KCMUtils
+    KF5::ConfigWidgets
     KF5::WindowSystem
     KF5::Notifications
-    KF5::IconThemes
     KF5::I18n
     KF5::XmlGui
     KF5::JobWidgets
@@ -82,11 +81,7 @@ target_link_libraries(libktimetracker
     KF5::IdleTime
     KF5::DBusAddons
     KF5::CalendarCore
-    ${X11_X11_LIB}
 )
-if(X11_Xscreensaver_LIB)
-    target_link_libraries(libktimetracker ${X11_Xscreensaver_LIB})
-endif()
 
 add_executable(ktimetracker main.cpp)
 target_link_libraries(ktimetracker libktimetracker)
