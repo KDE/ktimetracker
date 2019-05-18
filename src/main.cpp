@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
     KAboutData aboutData(
         QStringLiteral("ktimetracker"),
         i18n("KTimeTracker"),
-        QStringLiteral(KTIMETRACKER_VERSION),
+        QStringLiteral(KTIMETRACKER_VERSION_STRING),
         i18n("KDE Time tracker tool"),
         KAboutLicense::GPL,
         i18n("Copyright © 1997-2012 KDE PIM authors"),

@@ -534,7 +534,7 @@ void TimeTrackerWidget::slotSearchBar()
 /* @{ */
 QString TimeTrackerWidget::version() const
 {
-    return KTIMETRACKER_VERSION;
+    return KTIMETRACKER_VERSION_STRING;
 }
 
 QStringList TimeTrackerWidget::taskIdsFromName( const QString &taskName ) const
