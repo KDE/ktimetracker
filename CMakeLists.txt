@@ -13,6 +13,12 @@ include(ECMAddAppIcon)
 include(ECMQtDeclareLoggingCategory)
 include(FeatureSummary)
 include(KDECMakeSettings)
+include(ECMSetupVersion)
+
+ecm_setup_version(${KDEPIM_VERSION_NUMBER}
+    VARIABLE_PREFIX KTIMETRACKER
+    VERSION_HEADER src/ktimetracker-version.h
+)
 
 set(QT_REQUIRED_VERSION "5.10.0")
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus)

@@ -37,8 +37,6 @@ ecm_qt_declare_logging_category(ktimetracker_SRCS
     CATEGORY_NAME log_ktt
 )
 
-configure_file(ktimetracker-version.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/ktimetracker-version.h @ONLY)
-
 qt5_add_dbus_adaptor(ktimetracker_SRCS
     org.kde.ktimetracker.ktimetracker.xml
     timetrackerwidget.h
