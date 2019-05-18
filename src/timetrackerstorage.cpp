@@ -161,15 +161,9 @@ QUrl TimeTrackerStorage::fileUrl()
 QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view)
 // makes *view contain the tasks out of *rc.
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString err;
-    KCalCore::Todo::List todoList;
-    KCalCore::Todo::List::ConstIterator todo;
-    QMultiHash< QString, Task* > map;
+    // remember tasks that are running and their start times
     QVector<QString> runningTasks;
     QVector<QDateTime> startTimes;
-
-    // remember tasks that are running and their start times
     for (Task *task : view->getAllTasks()) {
         if (task->isRunning()) {
             runningTasks.append(task->uid());
@@ -178,25 +172,28 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
     }
 
     view->tasksModel()->clear();
-    todoList = calendar->rawTodos();
-    for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo) {
-        Task* task = new Task(*todo, view);
-        map.insert((*todo)->uid(), task);
+
+    QMultiHash<QString, Task*> map;
+    auto todoList = calendar->rawTodos();
+    for (auto todo : todoList) {
+        Task* task = new Task(todo, view);
+        map.insert(todo->uid(), task);
         view->setRootIsDecorated(true);
         task->invalidateCompletedState();
     }
 
     // 1.1. Load each task under its parent task.
-    for (todo = todoList.constBegin(); todo != todoList.constEnd(); ++todo) {
-        Task* task = map.value((*todo)->uid());
+    QString err;
+    for (auto todo : todoList) {
+        Task* task = map.value(todo->uid());
         // No relatedTo incident just means this is a top-level task.
-        if (!(*todo)->relatedTo().isEmpty()) {
-            Task* newParent = map.value((*todo)->relatedTo());
+        if (!todo->relatedTo().isEmpty()) {
+            Task* newParent = map.value(todo->relatedTo());
             // Complete the loading but return a message
             if (!newParent) {
                 err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
                            task->name(),
-                           (*todo)->relatedTo());
+                           todo->relatedTo());
             } else {
                 task->move(newParent);
             }
