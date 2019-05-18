@@ -114,25 +114,26 @@ QString HistoryDialog::listAllEvents()
         m_ui.historytablewidget->insertRow(row);
 
         // maybe the file is corrupt and (*i)->relatedTo is NULL
-        if (!event->relatedTo().isEmpty()) {
-            KCalCore::Incidence::Ptr parent = calendar ? calendar->incidence(event->relatedTo()) : KCalCore::Incidence::Ptr();
-            auto *item = new QTableWidgetItem(parent ? parent->summary() : event->summary());
-            item->setFlags(Qt::ItemIsEnabled);
-            item->setWhatsThis(i18n("You can change this task's comment, start time and end time."));
-            m_ui.historytablewidget->setItem(row, 0, item);
-
-            QDateTime start = event->dtStart();
-            QDateTime end = event->dtEnd();
-            m_ui.historytablewidget->setItem(row, 1, new QTableWidgetItem(start.toString(dateTimeFormat)));
-            m_ui.historytablewidget->setItem(row, 2, new QTableWidgetItem(end.toString(dateTimeFormat)));
-            m_ui.historytablewidget->setItem(row, 4, new QTableWidgetItem(event->uid()));
-            qDebug() << "event->comments.count() =" << event->comments().count();
-            if (event->comments().count() > 0) {
-                m_ui.historytablewidget->setItem(row, 3, new QTableWidgetItem(event->comments().last()));
-            }
-        } else {
+        if (event->relatedTo().isEmpty()) {
             qCDebug(KTT_LOG) << "There is no 'relatedTo' entry for " << event->summary();
             err = "NoRelatedToForEvent";
+            continue;
+        }
+
+        KCalCore::Incidence::Ptr parent = calendar ? calendar->incidence(event->relatedTo()) : KCalCore::Incidence::Ptr();
+        auto *item = new QTableWidgetItem(parent ? parent->summary() : event->summary());
+        item->setFlags(Qt::ItemIsEnabled);
+        item->setWhatsThis(i18n("You can change this task's comment, start time and end time."));
+        m_ui.historytablewidget->setItem(row, 0, item);
+
+        QDateTime start = event->dtStart();
+        QDateTime end = event->dtEnd();
+        m_ui.historytablewidget->setItem(row, 1, new QTableWidgetItem(start.toString(dateTimeFormat)));
+        m_ui.historytablewidget->setItem(row, 2, new QTableWidgetItem(end.toString(dateTimeFormat)));
+        m_ui.historytablewidget->setItem(row, 4, new QTableWidgetItem(event->uid()));
+        qDebug() << "event->comments.count() =" << event->comments().count();
+        if (event->comments().count() > 0) {
+            m_ui.historytablewidget->setItem(row, 3, new QTableWidgetItem(event->comments().last()));
         }
     }
 
