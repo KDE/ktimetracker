@@ -29,6 +29,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 	KIO
 	DBusAddons
 	IdleTime
+	DocTools
 )
 
 # Find KdepimLibs Package
@@ -36,6 +37,7 @@ find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
 
 add_subdirectory(pics)
 add_subdirectory(icons)
+add_subdirectory(doc)
 add_subdirectory(src)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
