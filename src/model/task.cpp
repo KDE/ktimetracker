@@ -432,46 +432,21 @@ bool Task::parseIncidence( const KCalCore::Incidence::Ptr &incident, long& minut
     mUid = incident->uid();
     mComment = incident->description();
 
-    // if a KDE-karm-duration exists and not KDE-ktimetracker-duration, change this
     ok = false;
-    if (
-        incident->customProperty(eventAppName, QByteArray("totalTaskTime")) == QString::null &&
-        incident->customProperty("karm", QByteArray("totalTaskTime")) != QString::null) {
-        incident->setCustomProperty(
-            eventAppName, QByteArray("totalTaskTime"),
-            incident->customProperty("karm", QByteArray("totalTaskTime")));
-    }
-
-    minutes = incident->customProperty(eventAppName, QByteArray("totalTaskTime")).toInt(&ok);
+    minutes = getCustomProperty(incident, QStringLiteral("totalTaskTime")).toInt(&ok);
     if (!ok) {
         minutes = 0;
     }
 
-    // if a KDE-karm-totalSessionTime exists and not KDE-ktimetracker-totalSessionTime, change this
     ok = false;
-    if (
-        incident->customProperty(eventAppName, QByteArray("totalSessionTime")) == QString::null &&
-        incident->customProperty("karm", QByteArray("totalSessionTime")) != QString::null) {
-        incident->setCustomProperty(
-            eventAppName, QByteArray("totalSessionTime"),
-            incident->customProperty("karm", QByteArray("totalSessionTime")));
-    }
-
-    sessionMinutes = incident->customProperty(eventAppName, QByteArray("totalSessionTime")).toInt(&ok);
+    sessionMinutes = getCustomProperty(incident, QStringLiteral("totalSessionTime")).toInt(&ok);
     if (!ok) {
         sessionMinutes = 0;
     }
-    sessionStartTiMe = incident->customProperty(eventAppName, QByteArray("sessionStartTiMe"));
 
-    // if a KDE-karm-deskTopList exists and no KDE-ktimetracker-DeskTopList, change this
-    if (incident->customProperty(eventAppName, QByteArray( "desktopList" )) == QString::null &&
-        incident->customProperty("karm", QByteArray("desktopList")) != QString::null) {
-        incident->setCustomProperty(
-            eventAppName, QByteArray("desktopList"),
-            incident->customProperty("karm", QByteArray("desktopList")));
-    }
+    sessionStartTiMe = getCustomProperty(incident, QStringLiteral("sessionStartTiMe"));
 
-    QString desktopList = incident->customProperty(eventAppName, QByteArray("desktopList"));
+    QString desktopList = getCustomProperty(incident, QStringLiteral("desktopList"));
     QStringList desktopStrList = desktopList.split(QStringLiteral(","), QString::SkipEmptyParts);
     desktops.clear();
 

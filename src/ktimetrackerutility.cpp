@@ -41,3 +41,21 @@ QString formatTime(double minutes, bool decimal)
 
     return time;
 }
+
+QString getCustomProperty(const KCalCore::Incidence::Ptr &incident, const QString &name)
+{
+    static const QByteArray eventAppName = QByteArray("ktimetracker");
+    static const QByteArray eventAppNameOld = QByteArray("karm");
+    const QByteArray nameArray = name.toLatin1();
+
+    // If a KDE-karm-* exists and not KDE-ktimetracker-*, change this.
+    if (
+        incident->customProperty(eventAppName, nameArray) == QString::null &&
+        incident->customProperty(eventAppNameOld, nameArray) != QString::null) {
+        incident->setCustomProperty(
+            eventAppName, nameArray,
+            incident->customProperty(eventAppNameOld, nameArray));
+    }
+
+    return incident->customProperty(eventAppName, nameArray);
+}

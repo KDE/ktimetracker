@@ -24,6 +24,8 @@
 
 #include <QString>
 
+#include <KCalCore/Incidence>
+
 /**
   Format time for output.  All times output on screen or report output go
   through this function.
@@ -50,5 +52,7 @@ enum KTIMETRACKER_Errors
 
   KTIMETRACKER_MAX_ERROR_NO = KTIMETRACKER_ERR_INVALID_DURATION
 };
+
+QString getCustomProperty(const KCalCore::Incidence::Ptr &incident, const QString &name);
 
 #endif
