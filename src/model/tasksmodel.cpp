@@ -36,12 +36,15 @@ void TasksModel::clear()
 {
     beginResetModel();
 
-    for (int i = 0; i < m_rootItem->childCount(); ++i) {
-        TasksModelItem *item = m_rootItem->m_children.at(i);
+    // Empty "m_children", move it to "children".
+    QList<TasksModelItem*> children;
+    children.swap(m_rootItem->m_children);
+
+    for (int i = 0; i < children.count(); ++i) {
+        TasksModelItem *item = children.at(i);
         item->m_parent = nullptr;
         delete item;
     }
-    m_rootItem->m_children.clear();
 
     endResetModel();
 }
