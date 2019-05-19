@@ -78,8 +78,8 @@ public:
          @li an iCalendar todo has no related to attribute
          @li a todo is related to another todo which does not exist
 
-      @param taskview     The list group used in the TaskView
-      @param url     Override preferences' filename
+      @param taskview The list group used in the TaskView. Must not be nullptr.
+      @param url      Override preferences' filename
 
       @return empty string if success, error message if error.
      */

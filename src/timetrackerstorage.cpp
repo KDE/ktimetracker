@@ -81,9 +81,8 @@ TimeTrackerStorage::~TimeTrackerStorage()
     delete m_fileLock;
 }
 
-// loads data from filename into view. If no filename is given, filename from preferences is used.
-// filename might be of use if this program is run as embedded konqueror plugin.
-QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
+// Loads data from filename into view.
+QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
 {
     if (url.isEmpty()) {
         return QStringLiteral("TimeTrackerStorage::load() callled with an empty URL");
@@ -135,17 +134,13 @@ QString TimeTrackerStorage::load(TaskView* view, const QUrl &url)
     m_calendar = FileCalendar::Ptr(new FileCalendar(m_url));
     m_calendar->setWeakPointer(m_calendar);
 
-    if (view) {
-        m_taskView = view;
-    }
+    m_taskView = view;
 //    m_calendar->setTimeSpec( KSystemTimeZones::local() );
     m_calendar->reload();
 
     // Build task view from iCal data
     QString err;
-    if (view) {
-        err = buildTaskView(m_calendar, view);
-    }
+    err = buildTaskView(m_calendar, view);
 
     if (removedFromDirWatch) {
         KDirWatch::self()->addFile(m_url.path());
