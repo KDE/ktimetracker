@@ -24,18 +24,18 @@ set(QT_REQUIRED_VERSION "5.10.0")
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-	I18n
-	Config
-	KCMUtils
-	WindowSystem
-	Notifications
-	IconThemes
-	JobWidgets
-	XmlGui
-	KIO
-	DBusAddons
-	IdleTime
-	DocTools
+    Config
+    DBusAddons
+    DocTools
+    I18n
+    IconThemes
+    IdleTime
+    JobWidgets
+    KIO
+    KCMUtils
+    Notifications
+    WindowSystem
+    XmlGui
 )
 
 # Find KdepimLibs Package

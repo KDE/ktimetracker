@@ -4,29 +4,33 @@ include_directories(
 )
 
 set(ktimetracker_SRCS
+    export/totalsastext.cpp
+
     file/filecalendar.cpp
     file/icalformatkio.cpp
+
+    model/task.cpp
     model/tasksmodel.cpp
     model/tasksmodelitem.cpp
-    model/task.cpp
+
     settings/ktimetrackerconfigdialog.cpp
+
+    widgets/searchline.cpp
+
+    csvexportdialog.cpp
     desktoptracker.cpp
     edittaskdialog.cpp
-    idletimedetector.cpp
-    export/totalsastext.cpp
-    ktimetrackerutility.cpp
-    timetrackerstorage.cpp
-    mainwindow.cpp
-    taskview.cpp
-    tray.cpp
     focusdetector.cpp
-    csvexportdialog.cpp
-    plannerparser.cpp
     historydialog.cpp
-    treeviewheadercontextmenu.cpp
+    idletimedetector.cpp
+    ktimetrackerutility.cpp
+    mainwindow.cpp
+    plannerparser.cpp
+    taskview.cpp
+    timetrackerstorage.cpp
     timetrackerwidget.cpp
-    widgets/searchline.cpp
-    main.cpp
+    tray.cpp
+    treeviewheadercontextmenu.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:ktimetracker_app_icon>
 )
