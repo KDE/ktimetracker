@@ -56,9 +56,10 @@ MainWindow::MainWindow(const QString& path)
     connect(configureAction, SIGNAL(triggered(bool)),
             m_mainWidget, SLOT(showSettingsDialog()));
     m_mainWidget->setupActions(actionCollection());
-    setupGUI();
 
     KStandardAction::quit(this, &MainWindow::quit, actionCollection());
+
+    setupGUI();
 
     setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
 
