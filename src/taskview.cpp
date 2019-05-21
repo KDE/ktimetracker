@@ -151,7 +151,7 @@ TaskView::TaskView(QWidget* parent)
     , m_popupPriorityMenu(nullptr)
     , m_focusDetector(new FocusDetector())
 {
-    m_filterProxyModel->setSourceModel(m_model);
+    m_filterProxyModel->setSourceModel(tasksModel());
     m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_filterProxyModel->setRecursiveFilteringEnabled(true);
     setModel(m_filterProxyModel);
@@ -238,7 +238,7 @@ TaskView::TaskView(QWidget* parent)
 
     reconfigure();
     sortByColumn(0, Qt::AscendingOrder);
-    for (int i = 0; i <= m_model->columnCount(QModelIndex()); ++i) {
+    for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
         resizeColumnToContents(i);
     }
 }
@@ -383,13 +383,13 @@ TaskView::~TaskView()
     KTimeTrackerSettings::self()->save();
 }
 
-Task* TaskView::taskAtViewIndex(QModelIndex viewIndex) const
+Task* TaskView::taskAtViewIndex(QModelIndex viewIndex)
 {
     QModelIndex index = m_filterProxyModel->mapToSource(viewIndex);
-    return dynamic_cast<Task*>(m_model->item(index));
+    return dynamic_cast<Task*>(tasksModel()->item(index));
 }
 
-Task* TaskView::currentItem() const
+Task* TaskView::currentItem()
 {
     return taskAtViewIndex(QTreeView::currentIndex());
 }
@@ -433,7 +433,8 @@ void TaskView::load(const QUrl &url)
     if (tasksModel()->topLevelItemCount() > 0) {
         restoreItemState();
 
-        setCurrentIndex(m_filterProxyModel->mapFromSource(m_model->index(m_model->topLevelItem(0), 0)));
+        setCurrentIndex(m_filterProxyModel->mapFromSource(
+            tasksModel()->index(tasksModel()->topLevelItem(0), 0)));
 
         if (!m_desktopTracker->startTracking().isEmpty()) {
             KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work"));
@@ -441,7 +442,7 @@ void TaskView::load(const QUrl &url)
         m_isLoading = false;
         refresh();
     }
-    for (int i = 0; i <= m_model->columnCount(QModelIndex()); ++i) {
+    for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
         resizeColumnToContents(i);
     }
     qCDebug(KTT_LOG) << "Leaving function";
@@ -456,7 +457,8 @@ is stored in the _preferences object. */
 
     if (tasksModel()->topLevelItemCount() > 0) {
         for (Task *task : getAllTasks()) {
-            setExpanded(m_filterProxyModel->mapFromSource(m_model->index(task, 0)), readBoolEntry(task->uid()));
+            setExpanded(m_filterProxyModel->mapFromSource(
+                tasksModel()->index(task, 0)), readBoolEntry(task->uid()));
         }
     }
     qCDebug(KTT_LOG) << "Leaving function";
@@ -869,7 +871,7 @@ QString TaskView::addTask(
     QString taskuid = task->uid();
     if (!taskuid.isNull()) {
         m_desktopTracker->registerForDesktops(task, desktops);
-        setCurrentIndex(m_filterProxyModel->mapFromSource(m_model->index(task, 0)));
+        setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)));
         task->invalidateCompletedState();
         save();
     } else {
@@ -889,7 +891,7 @@ void TaskView::newSubTask()
 
     newTask(i18n("New Sub Task"), task);
 
-    setExpanded(m_filterProxyModel->mapFromSource(m_model->index(task, 0)), true);
+    setExpanded(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)), true);
 
     refresh();
 }
@@ -1138,7 +1140,7 @@ void TaskView::reconfigure()
 QList<Task*> TaskView::getAllTasks()
 {
     QList<Task*> tasks;
-    for (TasksModelItem *item : m_model->getAllItems()) {
+    for (TasksModelItem *item : tasksModel()->getAllItems()) {
         Task *task = dynamic_cast<Task*>(item);
         if (task) {
             tasks.append(task);

@@ -55,10 +55,10 @@ public:
     explicit TaskView(QWidget* parent = nullptr);
     ~TaskView() override;
 
-    Task* taskAtViewIndex(QModelIndex viewIndex) const;
+    Task* taskAtViewIndex(QModelIndex viewIndex);
 
     /**  Return the current item in the view, cast to a Task pointer.  */
-    Task* currentItem() const;
+    Task* currentItem();
 
     //BEGIN model specified
     /** Load the view from storage.  */
