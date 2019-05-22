@@ -238,8 +238,8 @@ Q_SIGNALS:
     void updateButtons();
     void timersActive();
     void timersInactive();
-    void tasksChanged(QList<Task*> activeTasks);
-    void setStatusBarText(QString);
+    void tasksChanged(const QList<Task*> &activeTasks);
+    void setStatusBarText(const QString &text);
     void contextMenuRequested(const QPoint&);
 
 private: // member variables

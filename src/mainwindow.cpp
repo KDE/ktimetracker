@@ -31,6 +31,7 @@
 
 #include "ktimetracker.h"
 #include "tray.h"
+#include "model/task.h"
 #include "timetrackerwidget.h"
 #include "ktt_debug.h"
 
@@ -74,7 +75,7 @@ MainWindow::MainWindow(const QString& path)
         m_tray = new TrayIcon(this);
         connect(m_mainWidget, &TimeTrackerWidget::timersActive, m_tray, &TrayIcon::startClock);
         connect(m_mainWidget, &TimeTrackerWidget::timersInactive, m_tray, &TrayIcon::stopClock);
-        connect(m_mainWidget, SIGNAL(tasksChanged(QList<Task*>)), m_tray, SLOT(updateToolTip(QList<Task*>)));
+        connect(m_mainWidget, &TimeTrackerWidget::tasksChanged, m_tray, &TrayIcon::updateToolTip);
     }
 }
 

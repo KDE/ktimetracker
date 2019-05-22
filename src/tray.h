@@ -43,12 +43,12 @@ public:
     ~TrayIcon() override = default;
 
 private:
-    QMovie* m_animation;
+    QMovie *m_animation;
 
 public Q_SLOTS:
     void startClock();
     void stopClock();
-    void updateToolTip(QList<Task*> activeTasks);
+    void updateToolTip(const QList<Task*> &activeTasks);
 
 protected Q_SLOTS:
     void setActiveIcon(int frame);

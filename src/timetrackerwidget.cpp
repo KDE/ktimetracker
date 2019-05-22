@@ -342,25 +342,13 @@ void TimeTrackerWidget::slotCurrentChanged()
     qDebug() << "entering KTimeTrackerWidget::slotCurrentChanged";
 
     if (m_taskView) {
-        disconnect(m_taskView, SLOT(reSetTimes()));
-        disconnect(m_taskView, SLOT(updateButtons()));
-        disconnect(m_taskView, SLOT(setStatusBarText(QString)));
-        disconnect(m_taskView, SLOT(timersActive()));
-        disconnect(m_taskView, SLOT(timersInactive()));
-        disconnect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
+        connect(m_taskView, &TaskView::reSetTimes, this, &TimeTrackerWidget::reSetTimes, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::updateButtons, this, &TimeTrackerWidget::updateButtons, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::setStatusBarText, this, &TimeTrackerWidget::statusBarTextChangeRequested, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged, Qt::UniqueConnection);
 
-        connect( m_taskView, SIGNAL(reSetTimes()),
-            this, SIGNAL(reSetTimes()) );
-        connect( m_taskView, SIGNAL(updateButtons()),
-            this, SIGNAL(updateButtons()) );
-        connect( m_taskView, SIGNAL(setStatusBarText(QString)), // FIXME signature
-            this, SIGNAL(statusBarTextChangeRequested(QString)) );
-        connect( m_taskView, SIGNAL(timersActive()),
-            this, SIGNAL(timersActive()) );
-        connect( m_taskView, SIGNAL(timersInactive()),
-            this, SIGNAL(timersInactive()) );
-        connect( m_taskView, SIGNAL(tasksChanged(QList<Task*>)), // FIXME signature
-            this, SIGNAL(tasksChanged(QList<Task*>)) );
         emit setCaption(m_taskView->storage()->fileUrl().toString());
     }
     m_searchLine->setEnabled(m_taskView);

@@ -83,7 +83,7 @@ void TrayIcon::setActiveIcon(int frame)
     setIconByPixmap(QIcon(m_animation->currentPixmap()));
 }
 
-void TrayIcon::updateToolTip(QList<Task*> activeTasks)
+void TrayIcon::updateToolTip(const QList<Task*> &activeTasks)
 {
     if (activeTasks.isEmpty()) {
         this->setToolTip( "ktimetracker", "ktimetracker", i18n("No active tasks") );
