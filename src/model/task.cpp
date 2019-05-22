@@ -27,19 +27,23 @@
 #include <QPixmap>
 #include <QDebug>
 
+#include <KCalCore/CalFormat>
+
+#include "model/eventsmodel.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "timetrackerstorage.h"
 #include "taskview.h"
 #include "ktt_debug.h"
 
-const QByteArray eventAppName = QByteArray("ktimetracker");
+static const QByteArray eventAppName = QByteArray("ktimetracker");
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-            DesktopList desktops, TaskView* taskView, Task *parentTask)
+            DesktopList desktops, TaskView* taskView, EventsModel *eventsModel, Task *parentTask)
     : QObject()
     , TasksModelItem(taskView->tasksModel(), parentTask)
     , m_taskView(taskView)
+    , m_eventsModel(eventsModel)
 {
     if (parentTask) {
         parentTask->addChild(this);
@@ -48,12 +52,15 @@ Task::Task( const QString& taskName, const QString& taskDescription, long minute
     }
 
     init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0 );
+
+    mUid = KCalCore::CalFormat::createUniqueId();
 }
 
-Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView)
+Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView, EventsModel *eventsModel)
     : QObject()
     , TasksModelItem(taskView->tasksModel(), nullptr)
     , m_taskView(taskView)
+    , m_eventsModel(eventsModel)
 {
     taskView->tasksModel()->addChild(this);
 
@@ -152,11 +159,6 @@ void Task::resumeRunning()
         m_isRunning = true;
         invalidateRunningState();
     }
-}
-
-void Task::setUid(const QString& uid)
-{
-    mUid = uid;
 }
 
 bool Task::isRunning() const
@@ -366,20 +368,21 @@ bool Task::remove(TimeTrackerStorage* storage)
     qCDebug(KTT_LOG) << "entering function" << mName;
     bool ok = true;
 
-    storage->removeTask(this);
+    for (int i = 0; i < childCount(); ++i) {
+        Task* task = static_cast<Task*>(child(i));
+        task->remove(storage);
+    }
+
     if (isRunning()) {
         setRunning(false, storage);
     }
 
-    for (int i = 0; i < childCount(); ++i) {
-        Task* task = static_cast<Task*>(child(i));
-        if (task->isRunning()) {
-            task->setRunning(false, storage);
-        }
-        task->remove(storage);
-    }
+    m_eventsModel->removeAllForTask(this);
 
     changeParentTotalTimes(-mSessionTime, -mTime);
+
+    storage->save(m_taskView);
+
     return ok;
 }
 
@@ -397,6 +400,7 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
     Q_ASSERT(todo != nullptr);
 
     qCDebug(KTT_LOG) <<"Task::asTodo: name() = '" << name() << "'";
+    todo->setUid(uid());
     todo->setSummary(name());
     todo->setDescription(description());
 
@@ -418,6 +422,11 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
 
     todo->setPercentComplete(mPercentComplete);
     todo->setPriority( mPriority );
+
+    if (parentTask()) {
+        todo->setRelatedTo(parentTask()->uid());
+    }
+
     return todo;
 }
 
@@ -538,7 +547,11 @@ void Task::update()
 void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
 {
     mComment = mComment + QString::fromLatin1("\n") + comment;
-    storage->addComment(this, comment);
+
+    // TODO: Use libkcalcore comments
+    // todo->addComment(comment);
+
+    storage->save(m_taskView);
 }
 
 void Task::startNewSession()

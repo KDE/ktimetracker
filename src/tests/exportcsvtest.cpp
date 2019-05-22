@@ -47,7 +47,7 @@ void ExportCSVTest::testTotalsEmpty()
 {
     QLocale::setDefault(QLocale(QLocale::C));
 
-    auto *taskView = new TaskView();
+    auto *taskView = createTaskView(this, false);
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(

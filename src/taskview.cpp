@@ -33,6 +33,7 @@
 
 #include "model/task.h"
 #include "model/tasksmodel.h"
+#include "model/eventsmodel.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
@@ -141,7 +142,6 @@ public:
 
 TaskView::TaskView(QWidget* parent)
     : QTreeView(parent)
-    , m_model(new TasksModel())
     , m_filterProxyModel(new QSortFilterProxyModel(this))
     , m_isLoading(false)
     , m_storage(new TimeTrackerStorage())
@@ -151,7 +151,6 @@ TaskView::TaskView(QWidget* parent)
     , m_popupPriorityMenu(nullptr)
     , m_focusDetector(new FocusDetector())
 {
-    m_filterProxyModel->setSourceModel(tasksModel());
     m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_filterProxyModel->setRecursiveFilteringEnabled(true);
     setModel(m_filterProxyModel);
@@ -238,9 +237,6 @@ TaskView::TaskView(QWidget* parent)
 
     reconfigure();
     sortByColumn(0, Qt::AscendingOrder);
-    for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
-        resizeColumnToContents(i);
-    }
 }
 
 void TaskView::newFocusWindowDetected(const QString &taskName)
@@ -385,6 +381,10 @@ TaskView::~TaskView()
 
 Task* TaskView::taskAtViewIndex(QModelIndex viewIndex)
 {
+    if (!m_storage->isLoaded()) {
+        return nullptr;
+    }
+
     QModelIndex index = m_filterProxyModel->mapToSource(viewIndex);
     return dynamic_cast<Task*>(tasksModel()->item(index));
 }
@@ -403,6 +403,11 @@ void TaskView::load(const QUrl &url)
     qCDebug(KTT_LOG) << "Entering function";
     m_isLoading = true;
     QString err = m_storage->load(this, url);
+    // Connect to the new model created by TimeTrackerStorage::load()
+    m_filterProxyModel->setSourceModel(tasksModel());
+    for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
+        resizeColumnToContents(i);
+    }
 
     if (!err.isEmpty())
     {
@@ -511,20 +516,12 @@ QString TaskView::reFreshTimes()
     qCDebug(KTT_LOG) << "Entering function";
     QString err;
     // re-calculate the time for every task based on events in the history
-    KCalCore::Event::List eventList = storage()->rawevents(); // get all events (!= tasks)
     resetDisplayTimeForAllTasks();
     emit reSetTimes();
 
     for (Task *task : getAllTasks()) {
-        KCalCore::Event::List eventsForTask;
-        for (KCalCore::Event::List::iterator i = eventList.begin(); i != eventList.end(); ++i) {
-            if ((*i)->relatedTo() == task->uid()) {
-                // if event i belongs to task
-                eventsForTask.append(*i);
-            }
-        }
-
-        for (auto event : eventsForTask) {
+        // get all events for task
+        for (const auto *event : storage()->eventsModel()->eventsForTask(task)) {
             QDateTime kdatetimestart = event->dtStart();
             QDateTime kdatetimeend = event->dtEnd();
             QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
@@ -563,7 +560,7 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     qCDebug(KTT_LOG) << "entering importPlanner";
-    PlannerParser *handler = new PlannerParser(this);
+    PlannerParser *handler = new PlannerParser(this, storage()->eventsModel());
     QString lFileName = fileName;
     if (lFileName.isEmpty()) {
         lFileName = QFileDialog::getOpenFileName();
@@ -865,21 +862,19 @@ QString TaskView::addTask(
     qCDebug(KTT_LOG) << "Entering function; taskname =" << taskname;
     setSortingEnabled(false);
 
-    Task* task = new Task(taskname, taskdescription, total, session, desktops, this, parent);
-
-    task->setUid(m_storage->addTask(task, parent));
-    QString taskuid = task->uid();
-    if (!taskuid.isNull()) {
-        m_desktopTracker->registerForDesktops(task, desktops);
-        setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)));
-        task->invalidateCompletedState();
-        save();
-    } else {
-        delete task;
+    Task *task = new Task(
+        taskname, taskdescription, total, session, desktops, this, storage()->eventsModel(), parent);
+    if (task->uid().isNull()) {
+        qFatal("failed to generate UID");
     }
 
+    m_desktopTracker->registerForDesktops(task, desktops);
+    setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)));
+    task->invalidateCompletedState();
+    save();
+
     setSortingEnabled(true);
-    return taskuid;
+    return task->uid();
 }
 
 void TaskView::newSubTask()
@@ -1140,12 +1135,14 @@ void TaskView::reconfigure()
 QList<Task*> TaskView::getAllTasks()
 {
     QList<Task*> tasks;
-    for (TasksModelItem *item : tasksModel()->getAllItems()) {
-        Task *task = dynamic_cast<Task*>(item);
-        if (task) {
-            tasks.append(task);
-        } else {
-            qFatal("dynamic_cast to Task failed");
+    if (m_storage->isLoaded()) {
+        for (TasksModelItem *item : tasksModel()->getAllItems()) {
+            Task *task = dynamic_cast<Task*>(item);
+            if (task) {
+                tasks.append(task);
+            } else {
+                qFatal("dynamic_cast to Task failed");
+            }
         }
     }
 
@@ -1280,4 +1277,9 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
     }
 
     return err;
+}
+
+inline TasksModel *TaskView::tasksModel()
+{
+    return m_storage->tasksModel();
 }

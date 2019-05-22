@@ -16,7 +16,7 @@ TaskView *createTaskView(QObject *parent, bool simpleTree)
         return nullptr;
     }
 
-    taskView->storage()->load(taskView, QUrl::fromLocalFile(icsFile->fileName()));
+    taskView->load(QUrl::fromLocalFile(icsFile->fileName()));
 
     if (simpleTree) {
         Task* task1 = taskView->task(taskView->addTask("1"));

@@ -40,6 +40,7 @@ QT_END_NAMESPACE
 
 class TimeTrackerStorage;
 class TaskView;
+class EventsModel;
 
 /** \brief A class representing a task
  *
@@ -60,8 +61,8 @@ class Task : public QObject, public TasksModelItem
 
 public:
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, TaskView* taskView, Task* parentTask);
-    Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView);
+        DesktopList desktops, TaskView* taskView, EventsModel *eventsModel, Task* parentTask);
+    Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView, EventsModel *eventsModel);
 
     /* destructor */
     ~Task() override;
@@ -77,15 +78,6 @@ public:
     int depth();
 
     void delete_recursive();
-
-    /**
-     * Set unique id for the task.
-     *
-     * The uid is the key used to update the storage.
-     *
-     * @param uid  The new unique id.
-     */
-    void setUid(const QString &uid);
 
     /** cut Task out of parent Task or the TaskView */
     void cut();
@@ -294,6 +286,12 @@ public:
     /**
      *  Add a comment to this task.
      *  A comment is called "description" in the context of KCalCore::ToDo
+     *
+     * iCal allows multiple comment tags.  So we just add a new comment to the
+     * todo for this task and write the calendar.
+     *
+     * @param task     The task that gets the comment
+     * @param comment  The comment
      */
     void addComment(const QString& comment, TimeTrackerStorage* storage);
 
@@ -304,6 +302,8 @@ public:
     bool isRoot() const { return !parentTask(); }
 
     /** remove Task with all it's children
+     * Removes task as well as all event history for this task.
+     *
      * @param storage a pointer to a TimeTrackerStorage object.
      */
     bool remove(TimeTrackerStorage* storage);
@@ -385,6 +385,7 @@ private:
     int mPriority;
 
     TaskView* m_taskView;
+    EventsModel *m_eventsModel;
 };
 
 #endif // KTIMETRACKER_TASK_H

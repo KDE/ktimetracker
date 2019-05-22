@@ -34,8 +34,12 @@ class QDateTime;
 class QLockFile;
 QT_END_NAMESPACE
 
+class ProjectModel;
+class Event;
 class Task;
 class TaskView;
+class TasksModel;
+class EventsModel;
 
 /**
  * Class to store/retrieve KTimeTracker data to/from persistent storage.
@@ -100,12 +104,14 @@ public:
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
 
+    bool isLoaded() const { return m_model; }
+
     /** list of all events */
-    KCalCore::Event::List rawevents();
+    EventsModel *eventsModel();
+
+    TasksModel *tasksModel();
 
     QString removeEvent(QString uid);
-
-    FileCalendar::Ptr calendar() const;
 
     /**
      * Deliver if all events of a task have an endtime
@@ -199,28 +205,6 @@ public:
     void setName(const Task* task, const QString& oldname) { Q_UNUSED(task); Q_UNUSED(oldname); }
 
     /**
-     * Log a new comment for this task.
-     *
-     * iCal allows multiple comment tags.  So we just add a new comment to the
-     * todo for this task and write the calendar.
-     *
-     * @param task     The task that gets the comment
-     * @param comment  The comment
-     */
-    void addComment(const Task* task, const QString& comment);
-
-
-    /**
-     * Remove this task from iCalendar file.
-     *
-     * Removes task as well as all event history for this task.
-     *
-     * @param task   The task to be removed.
-     * @return true if change was saved, false otherwise
-     */
-    bool removeTask(Task* task);
-
-    /**
      * Add this task from iCalendar file.
      *
      * Create a new KCalCore::Todo object and load with task information.  If
@@ -243,7 +227,7 @@ private Q_SLOTS:
     void onFileModified();
 
 private:
-    FileCalendar::Ptr m_calendar;
+    ProjectModel *m_model;
     QUrl m_url;
     QLockFile *m_fileLock;
     TaskView* m_taskView;

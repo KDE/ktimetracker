@@ -52,6 +52,8 @@ public:
 
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+    TasksModelItem *taskByUID(const QString &uid);
+
 public Q_SLOTS:
     void setActiveIcon(int frameNumber);
 

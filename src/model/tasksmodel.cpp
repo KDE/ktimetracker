@@ -369,3 +369,14 @@ QMimeData *TasksModel::mimeData(const QModelIndexList &indexes) const
     m_dragCutTask = item(indexes[0]);
     return QAbstractItemModel::mimeData(indexes);
 }
+
+TasksModelItem *TasksModel::taskByUID(const QString &uid)
+{
+    for (auto *item : getAllItems()) {
+        if (dynamic_cast<Task*>(item)->uid() == uid) {
+            return item;
+        }
+    }
+
+    return nullptr;
+}

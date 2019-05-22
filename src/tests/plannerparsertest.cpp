@@ -16,7 +16,7 @@ private Q_SLOTS:
 
 void PlannerParserTest::testEmpty()
 {
-    auto *taskView = new TaskView();
+    auto *taskView = createTaskView(this, false);
     taskView->importPlanner(QFINDTESTDATA("data/kitchen.planner"));
 
     auto *model = taskView->tasksModel();

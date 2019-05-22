@@ -106,7 +106,7 @@ public:
     bool isFocusTrackingActive() const;
     //END
 
-    inline TasksModel *tasksModel() { return m_model; }
+    TasksModel *tasksModel();
     int sortColumn() const;
 
 public Q_SLOTS:
@@ -246,7 +246,6 @@ Q_SIGNALS:
     void contextMenuRequested(const QPoint&);
 
 private: // member variables
-    TasksModel* m_model;
     QSortFilterProxyModel* m_filterProxyModel;
 
     IdleTimeDetector* m_idleTimeDetector;

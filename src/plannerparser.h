@@ -27,6 +27,7 @@
 
 class Task;
 class TaskView;
+class EventsModel;
 
 /**
 this class is here to import tasks from a planner project file to ktimetracker.
@@ -47,7 +48,7 @@ class PlannerParser : public QXmlDefaultHandler
 public:
 
     /** Stores the active TaskView in this parser. */
-    explicit PlannerParser(TaskView* tv);
+    explicit PlannerParser(TaskView* tv, EventsModel *eventsModel);
 
     /** Called when parsing the xml-document starts. */
     bool startDocument() override;
@@ -61,6 +62,7 @@ public:
 private:
     bool m_withinTasks;     // within <tasks> ?
     TaskView* m_taskView;
+    EventsModel *m_eventsModel;
     Task* m_task;
     int m_level;            // m_level=1: task is top-level-task
 };

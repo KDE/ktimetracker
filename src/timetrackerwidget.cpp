@@ -31,6 +31,7 @@
 #include <KStandardAction>
 
 #include "model/task.h"
+#include "model/eventsmodel.h"
 #include "settings/ktimetrackerconfigdialog.h"
 #include "widgets/searchline.h"
 #include "historydialog.h"
@@ -494,7 +495,7 @@ void TimeTrackerWidget::editHistory()
     if (currentTaskView()) {
         auto *dialog = new HistoryDialog(currentTaskView(), currentTaskView()->storage());
         connect(dialog, &HistoryDialog::timesChanged, currentTaskView(), &TaskView::reFreshTimes);
-        if (currentTaskView()->storage()->rawevents().count() != 0) {
+        if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();
         } else {
             KMessageBox::information(nullptr, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));

@@ -9,6 +9,9 @@ set(ktimetracker_SRCS
     file/filecalendar.cpp
     file/icalformatkio.cpp
 
+    model/event.cpp
+    model/eventsmodel.cpp
+    model/projectmodel.cpp
     model/task.cpp
     model/tasksmodel.cpp
     model/tasksmodelitem.cpp
