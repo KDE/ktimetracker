@@ -337,7 +337,6 @@ protected:
     void changeParentTotalTimes(long minutesSession, long minutes);
 
 Q_SIGNALS:
-    void totalTimesChanged(long minutesSession, long minutes);
     /** signal that we're about to delete a task */
     void deletingTask(Task* thisTask);
 

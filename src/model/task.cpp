@@ -97,13 +97,6 @@ void Task::init(
     const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
     const DesktopList& desktops, int percent_complete, int priority)
 {
-    // If our parent is the taskview then connect our totalTimesChanged
-    // signal to its receiver
-    if (!parentTask()) {
-        connect(this, &Task::totalTimesChanged,
-                m_taskView, &TaskView::taskTotalTimesChanged);
-    }
-
     connect(this, &Task::deletingTask, m_taskView, &TaskView::deletingTask);
 
     m_isRunning = false;
@@ -359,8 +352,6 @@ void Task::changeParentTotalTimes(long minutesSession, long minutes)
 {
     if (parentTask()) {
         parentTask()->changeTotalTimes(minutesSession, minutes);
-    } else {
-        emit totalTimesChanged(minutesSession, minutes);
     }
 }
 

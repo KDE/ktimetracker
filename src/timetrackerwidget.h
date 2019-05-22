@@ -198,7 +198,6 @@ Q_SIGNALS:
     void currentTaskChanged();
     void currentTaskViewChanged();
     void updateButtons();
-    void totalTimesChanged( long session, long total );
     void reSetTimes();
     void statusBarTextChangeRequested(const QString& text);
     void contextMenuRequested( const QPoint &pos );

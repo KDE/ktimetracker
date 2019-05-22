@@ -342,7 +342,6 @@ void TimeTrackerWidget::slotCurrentChanged()
     qDebug() << "entering KTimeTrackerWidget::slotCurrentChanged";
 
     if (m_taskView) {
-        disconnect(m_taskView, SLOT(totalTimesChanged(long, long)));
         disconnect(m_taskView, SLOT(reSetTimes()));
         disconnect(m_taskView, SLOT(updateButtons()));
         disconnect(m_taskView, SLOT(setStatusBarText(QString)));
@@ -350,8 +349,6 @@ void TimeTrackerWidget::slotCurrentChanged()
         disconnect(m_taskView, SLOT(timersInactive()));
         disconnect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
 
-        connect( m_taskView, SIGNAL(totalTimesChanged(long,long)),
-            this, SIGNAL(totalTimesChanged(long,long)) );
         connect( m_taskView, SIGNAL(reSetTimes()),
             this, SIGNAL(reSetTimes()) );
         connect( m_taskView, SIGNAL(updateButtons()),

@@ -205,8 +205,6 @@ public Q_SLOTS:
 
     /** Subtracts time from all active tasks, and does not log event. */
     void subtractTime(int minutes);
-    void taskTotalTimesChanged(long session, long total)
-                                { emit totalTimesChanged( session, total); }
     /** receiving signal that a task is being deleted */
     void deletingTask(Task* deletedTask);
 
@@ -236,7 +234,6 @@ public Q_SLOTS:
     void setFilterText(const QString &text);
 
 Q_SIGNALS:
-    void totalTimesChanged(long session, long total);
     void reSetTimes();
     void updateButtons();
     void timersActive();

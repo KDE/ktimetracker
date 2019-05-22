@@ -528,7 +528,6 @@ QString TaskView::reFreshTimes()
             QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
             int duration = eventstart.secsTo(eventend) / 60;
             task->addTime(duration);
-            emit totalTimesChanged(0, duration);
             qCDebug(KTT_LOG) << "duration is" << duration;
 
             if (task->sessionStartTiMe().isValid()) {
@@ -542,7 +541,6 @@ QString TaskView::reFreshTimes()
             } else {
                 // so there is no session at all
                 task->addSessionTime(duration);
-                emit totalTimesChanged(duration, 0);
             }
         }
     }
