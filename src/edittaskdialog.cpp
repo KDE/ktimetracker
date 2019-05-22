@@ -92,7 +92,7 @@ void EditTaskDialog::status(DesktopList *desktopList) const
 
 void EditTaskDialog::on_edittimespushbutton_clicked()
 {
-    auto* dialog = new HistoryDialog(m_parent, m_parent->storage());
+    auto* dialog = new HistoryDialog(m_parent, m_parent->storage()->projectModel());
     connect(dialog, &HistoryDialog::timesChanged, m_parent, &TaskView::reFreshTimes);
     lower();
     dialog->exec();

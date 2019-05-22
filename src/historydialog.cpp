@@ -29,9 +29,9 @@
 #include "file/filecalendar.h"
 #include "model/event.h"
 #include "model/eventsmodel.h"
+#include "model/projectmodel.h"
 #include "model/tasksmodel.h"
 #include "model/task.h"
-#include "taskview.h"
 #include "ktt_debug.h"
 
 static const QString dateTimeFormat = QStringLiteral("yyyy-MM-dd HH:mm:ss");
@@ -81,9 +81,9 @@ public:
     }
 };
 
-HistoryDialog::HistoryDialog(QWidget *parent, TimeTrackerStorage *storage)
+HistoryDialog::HistoryDialog(QWidget *parent, ProjectModel *projectModel)
     : QDialog(parent)
-    , m_storage(storage)
+    , m_projectModel(projectModel)
     , m_ui()
 {
     m_ui.setupUi(this);
@@ -112,7 +112,7 @@ QString HistoryDialog::listAllEvents()
     m_ui.historytablewidget->setSortingEnabled(false);
     connect(m_ui.historytablewidget, &QTableWidget::cellChanged, this, &HistoryDialog::onCellChanged);
 
-    for (const auto *event : m_storage->eventsModel()->events()) {
+    for (const auto *event : m_projectModel->eventsModel()->events()) {
         int row = m_ui.historytablewidget->rowCount();
         m_ui.historytablewidget->insertRow(row);
 
@@ -123,7 +123,7 @@ QString HistoryDialog::listAllEvents()
             continue;
         }
 
-        const Task *parent = dynamic_cast<Task*>(m_storage->tasksModel()->taskByUID(event->relatedTo()));
+        const Task *parent = dynamic_cast<Task*>(m_projectModel->tasksModel()->taskByUID(event->relatedTo()));
         if (!parent) {
             qFatal("orphan event");
         }
@@ -188,7 +188,7 @@ void HistoryDialog::onCellChanged(int row, int col)
             }
 
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            Event *event = m_storage->eventsModel()->eventByUID(uid);
+            Event *event = m_projectModel->eventsModel()->eventByUID(uid);
             event->setDtStart(datetime);
             emit timesChanged();
             qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
@@ -204,7 +204,7 @@ void HistoryDialog::onCellChanged(int row, int col)
             }
 
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            Event *event = m_storage->eventsModel()->eventByUID(uid);
+            Event *event = m_projectModel->eventsModel()->eventByUID(uid);
             event->setDtEnd(datetime);
             emit timesChanged();
             qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
@@ -215,7 +215,7 @@ void HistoryDialog::onCellChanged(int row, int col)
             qCDebug(KTT_LOG) << "user changed Comment to" << m_ui.historytablewidget->item(row, col)->text();
 
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            Event *event = m_storage->eventsModel()->eventByUID(uid);
+            Event *event = m_projectModel->eventsModel()->eventByUID(uid);
             qCDebug(KTT_LOG) << "uid =" << uid;
             event->addComment(m_ui.historytablewidget->item(row, col)->text());
             qCDebug(KTT_LOG) << "added" << m_ui.historytablewidget->item(row, col)->text();
@@ -241,10 +241,10 @@ void HistoryDialog::on_deletepushbutton_clicked()
         // if an item is current
         QString uid = m_ui.historytablewidget->item(m_ui.historytablewidget->currentRow(), 4)->text();
         qDebug() << "uid =" << uid;
-        const Event *event = m_storage->eventsModel()->eventByUID(uid);
+        const Event *event = m_projectModel->eventsModel()->eventByUID(uid);
         if (event) {
             qCDebug(KTT_LOG) << "removing uid " << event->uid();
-            m_storage->eventsModel()->removeByUID(event->uid());
+            m_projectModel->eventsModel()->removeByUID(event->uid());
             emit timesChanged();
             this->refresh();
         }

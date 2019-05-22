@@ -26,14 +26,14 @@
 
 #include "ui_historydialog.h"
 
-class TimeTrackerStorage;
+class ProjectModel;
 
 class HistoryDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit HistoryDialog(QWidget *parent, TimeTrackerStorage *storage);
+    explicit HistoryDialog(QWidget *parent, ProjectModel *projectModel);
     ~HistoryDialog() override = default;
 
 protected:
@@ -43,7 +43,7 @@ private:
     QString listAllEvents();
     QString refresh();
 
-    TimeTrackerStorage *m_storage;
+    ProjectModel *m_projectModel;
     Ui::HistoryDialog m_ui;
 
 Q_SIGNALS:

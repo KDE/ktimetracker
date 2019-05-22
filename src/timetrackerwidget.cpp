@@ -490,7 +490,7 @@ void TimeTrackerWidget::editHistory()
     // HistoryDialog is the new HistoryDialog, but the EditHiStoryDiaLog exists as well.
     // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if (currentTaskView()) {
-        auto *dialog = new HistoryDialog(currentTaskView(), currentTaskView()->storage());
+        auto *dialog = new HistoryDialog(currentTaskView(), currentTaskView()->storage()->projectModel());
         connect(dialog, &HistoryDialog::timesChanged, currentTaskView(), &TaskView::reFreshTimes);
         if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();
