@@ -99,7 +99,7 @@ public:
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view);
+    QString buildTaskView(const KCalCore::Todo::List& todos, TaskView* view);
 
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();

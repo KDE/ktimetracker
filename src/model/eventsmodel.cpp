@@ -7,11 +7,11 @@ EventsModel::EventsModel()
 {
 }
 
-void EventsModel::load(const KCalCore::Calendar &calendar)
+void EventsModel::load(const KCalCore::Event::List &events)
 {
     clear();
 
-    for (const auto& event : calendar.rawEvents()) {
+    for (const auto& event : events) {
         m_events.append(new Event(event, this));
     }
 }

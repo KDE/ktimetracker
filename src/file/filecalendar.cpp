@@ -24,22 +24,20 @@
 #include <QDebug>
 
 #include <KCalCore/FileStorage>
-#include <KCalCore/MemoryCalendar>
 
 #include "icalformatkio.h"
 #include "ktt_debug.h"
 
-FileCalendar::FileCalendar(const QUrl &url)
-    : KCalCore::MemoryCalendar(QTimeZone::systemTimeZone())
-    , m_url(url)
-    , m_weakPtr()
+FileCalendar::FileCalendar(QUrl url)
+    : m_url(std::move(url))
+    , m_calendar(new KCalCore::MemoryCalendar(QTimeZone::systemTimeZone()))
 {
 }
 
 bool FileCalendar::reload()
 {
-    close(); // delete all TODOs
-    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_url.url(), new ICalFormatKIO());
+    m_calendar->close(); // delete all TODOs
+    KCalCore::FileStorage fileStorage(m_calendar, m_url.url(), new ICalFormatKIO());
     const bool result = fileStorage.load();
     if (!result) {
         qCritical() << "FileCalendar::reload: problem loading calendar";
@@ -49,7 +47,7 @@ bool FileCalendar::reload()
 
 bool FileCalendar::save()
 {
-    KCalCore::FileStorage fileStorage(m_weakPtr.toStrongRef(), m_url.url(), new ICalFormatKIO());
+    KCalCore::FileStorage fileStorage(m_calendar, m_url.url(), new ICalFormatKIO());
     const bool result = fileStorage.save();
     if (!result) {
         qCritical() << "FileCalendar::save: problem saving calendar";
@@ -57,7 +55,26 @@ bool FileCalendar::save()
     return result;
 }
 
-void FileCalendar::setWeakPointer(const QWeakPointer<FileCalendar>& ptr)
+KCalCore::Event::List FileCalendar::rawEvents() const
 {
-    m_weakPtr = ptr;
+    return m_calendar->rawEvents();
+}
+
+KCalCore::Event::List FileCalendar::rawEventsForDate(const QDate &date) const
+{
+    return m_calendar->rawEventsForDate(date);
+}
+
+void FileCalendar::addTodo(const KCalCore::Todo::Ptr &todo)
+{
+    m_calendar->addTodo(todo);
+}
+
+void FileCalendar::addEvent(const KCalCore::Event::Ptr &event)
+{
+    m_calendar->addEvent(event);
+}
+
+KCalCore::Todo::List FileCalendar::rawTodos() const {
+    return m_calendar->rawTodos();
 }

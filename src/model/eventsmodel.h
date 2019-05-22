@@ -13,7 +13,7 @@ public:
     EventsModel();
     virtual ~EventsModel();
 
-    void load(const KCalCore::Calendar &calendar);
+    void load(const KCalCore::Event::List &events);
     QList<Event*> events() const;
     QList<Event*> eventsForTask(Task *task) const;
     Event *eventByUID(const QString &uid) const;

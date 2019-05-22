@@ -24,26 +24,26 @@
 
 #include <KCalCore/MemoryCalendar>
 
-class FileCalendar : public KCalCore::MemoryCalendar
+class FileCalendar
 {
-    Q_OBJECT
-
 public:
-    typedef QSharedPointer<FileCalendar> Ptr;
-
-    FileCalendar(const QUrl &url);
+    explicit FileCalendar(QUrl url);
     FileCalendar() = delete;
-    ~FileCalendar() override = default;
+    ~FileCalendar() = default;
 
-    bool reload() override;
-    bool save() override;
+    bool reload();
+    bool save();
 
-    // hack to work around KCalCore API
-    void setWeakPointer(const QWeakPointer<FileCalendar>& ptr);
+    void addTodo(const KCalCore::Todo::Ptr &todo);
+    KCalCore::Todo::List rawTodos() const;
+
+    void addEvent(const KCalCore::Event::Ptr &event);
+    KCalCore::Event::List rawEvents() const;
+    KCalCore::Event::List rawEventsForDate(const QDate &date) const;
 
 private:
     QUrl m_url;
-    QWeakPointer<FileCalendar> m_weakPtr;
+    KCalCore::MemoryCalendar::Ptr m_calendar;
 };
 
 #endif

@@ -21,9 +21,9 @@ EventsModel *ProjectModel::eventsModel()
     return m_eventsModel;
 }
 
-FileCalendar::Ptr ProjectModel::asCalendar(const QUrl &url) const
+std::unique_ptr<FileCalendar> ProjectModel::asCalendar(const QUrl &url) const
 {
-    auto calendar = FileCalendar::Ptr(new FileCalendar(url));
+    std::unique_ptr<FileCalendar> calendar(new FileCalendar(url));
     for (auto *item : m_tasksModel->getAllItems()) {
         Task *task = dynamic_cast<Task*>(item);
 

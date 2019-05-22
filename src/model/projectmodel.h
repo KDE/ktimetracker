@@ -1,6 +1,8 @@
 #ifndef KTIMETRACKER_PROJECTMODEL_H
 #define KTIMETRACKER_PROJECTMODEL_H
 
+#include <memory>
+
 #include "file/filecalendar.h"
 
 class TasksModel;
@@ -14,7 +16,7 @@ public:
     TasksModel *tasksModel();
     EventsModel *eventsModel();
 
-    FileCalendar::Ptr asCalendar(const QUrl &url) const;
+    std::unique_ptr<FileCalendar> asCalendar(const QUrl &url) const;
 
 private:
     TasksModel *m_tasksModel;

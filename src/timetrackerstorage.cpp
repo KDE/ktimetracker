@@ -135,17 +135,16 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
 
     // Create local file resource and add to resources
     m_url = url;
-    auto m_calendar = FileCalendar::Ptr(new FileCalendar(m_url));
-    m_calendar->setWeakPointer(m_calendar);
+    FileCalendar m_calendar(m_url);
 
     m_taskView = view;
 //    m_calendar->setTimeSpec( KSystemTimeZones::local() );
-    m_calendar->reload();
+    m_calendar.reload();
 
     // Build task view from iCal data
     QString err;
-    eventsModel()->load(*m_calendar);
-    err = buildTaskView(m_calendar, view);
+    eventsModel()->load(m_calendar.rawEvents());
+    err = buildTaskView(m_calendar.rawTodos(), view);
 
     if (removedFromDirWatch) {
         KDirWatch::self()->addFile(m_url.path());
@@ -158,7 +157,7 @@ QUrl TimeTrackerStorage::fileUrl()
     return m_url;
 }
 
-QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, TaskView* view)
+QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, TaskView* view)
 // makes *view contain the tasks out of *rc.
 {
     // remember tasks that are running and their start times
@@ -174,8 +173,7 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
     view->tasksModel()->clear();
 
     QMultiHash<QString, Task*> map;
-    auto todoList = calendar->rawTodos();
-    for (auto todo : todoList) {
+    for (auto todo : todos) {
         Task* task = new Task(todo, view, eventsModel());
         map.insert(todo->uid(), task);
         view->setRootIsDecorated(true);
@@ -184,7 +182,7 @@ QString TimeTrackerStorage::buildTaskView(const FileCalendar::Ptr& calendar, Tas
 
     // 1.1. Load each task under its parent task.
     QString err;
-    for (auto todo : todoList) {
+    for (auto todo : todos) {
         Task* task = map.value(todo->uid());
         // No relatedTo incident just means this is a top-level task.
         if (!todo->relatedTo().isEmpty()) {
@@ -406,7 +404,7 @@ QString TimeTrackerStorage::exportCSVHistory(
     qCDebug(KTT_LOG) << "secsForUid" << secsForUid;
     qCDebug(KTT_LOG) << "uidForName" << uidForName;
 
-    auto calendar = m_model->asCalendar(QUrl());
+    std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(QUrl());
 
     // Step 2: For each date, get the events and calculate the seconds
     // Store the seconds using secsForUid hashmap, so we don't need to translate uids
@@ -584,8 +582,7 @@ QString TimeTrackerStorage::saveCalendar()
     }
 
     QString errorMessage;
-    auto calendar = m_model->asCalendar(m_url);
-    calendar->setWeakPointer(calendar);
+    std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
     if (!calendar->save()) {
         errorMessage = QString("Could not save. Could lock file.");
     }
@@ -607,11 +604,10 @@ void TimeTrackerStorage::onFileModified()
 
     qCDebug(KTT_LOG) << "entering function";
 
-    auto m_calendar = FileCalendar::Ptr(new FileCalendar(m_url));
-    m_calendar->setWeakPointer(m_calendar);
+    FileCalendar m_calendar(m_url);
 //    m_calendar->setTimeSpec( KSystemTimeZones::local() );
-    m_calendar->reload();
-    buildTaskView(m_calendar, m_taskView);
+    m_calendar.reload();
+    buildTaskView(m_calendar.rawTodos(), m_taskView);
 
     qCDebug(KTT_LOG) << "exiting onFileModified";
 }
