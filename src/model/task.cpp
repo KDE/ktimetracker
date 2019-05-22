@@ -49,21 +49,21 @@ Task::Task( const QString& taskName, const QString& taskDescription, long minute
     if (parentTask) {
         parentTask->addChild(this);
     } else {
-        taskView->tasksModel()->addChild(this);
+        m_projectModel->tasksModel()->addChild(this);
     }
 
-    init( taskName, taskDescription, minutes, sessionTime, 0, desktops, 0, 0 );
+    init(taskName, taskDescription, minutes, sessionTime, nullptr, desktops, 0, 0);
 
     mUid = KCalCore::CalFormat::createUniqueId();
 }
 
 Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView, ProjectModel *projectModel)
     : QObject()
-    , TasksModelItem(taskView->tasksModel(), nullptr)
+    , TasksModelItem(projectModel->tasksModel(), nullptr)
     , m_taskView(taskView)
     , m_projectModel(projectModel)
 {
-    taskView->tasksModel()->addChild(this);
+    projectModel->tasksModel()->addChild(this);
 
     long minutes = 0;
     QString name;
@@ -490,7 +490,7 @@ void Task::cut()
 {
     changeParentTotalTimes(-mTotalSessionTime, -mTotalTime);
     if (!parentTask()) {
-        m_taskView->tasksModel()->takeTopLevelItem(m_taskView->tasksModel()->indexOfTopLevelItem(this));
+        m_projectModel->tasksModel()->takeTopLevelItem(m_projectModel->tasksModel()->indexOfTopLevelItem(this));
     } else {
         parentTask()->takeChild(parentTask()->indexOfChild(this));
     }
@@ -540,9 +540,9 @@ QVariant Task::data(int column, int role) const
 // Update a row, containing one task
 void Task::update()
 {
-    QModelIndex first = taskView()->tasksModel()->index(this, 0);
-    QModelIndex last = taskView()->tasksModel()->index(this, 6);
-    emit taskView()->tasksModel()->dataChanged(first, last, QVector<int>{Qt::DisplayRole});
+    QModelIndex first = m_projectModel->tasksModel()->index(this, 0);
+    QModelIndex last = m_projectModel->tasksModel()->index(this, 6);
+    emit m_projectModel->tasksModel()->dataChanged(first, last, QVector<int>{Qt::DisplayRole});
 }
 
 void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
