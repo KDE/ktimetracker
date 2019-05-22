@@ -113,8 +113,6 @@ public:
 
     ProjectModel *projectModel();
 
-    QString removeEvent(QString uid);
-
     /**
      * Deliver if all events of a task have an endtime
      *

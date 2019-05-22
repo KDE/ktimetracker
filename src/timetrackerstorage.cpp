@@ -315,13 +315,6 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr pare
 }
 
 //----------------------------------------------------------------------------
-// Routines that handle logging ktimetracker history
-
-QString TimeTrackerStorage::removeEvent(QString uid)
-{
-    m_model->eventsModel()->removeByUID(uid);
-    return QString();
-}
 
 int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
 {

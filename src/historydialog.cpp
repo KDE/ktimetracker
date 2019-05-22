@@ -244,7 +244,7 @@ void HistoryDialog::on_deletepushbutton_clicked()
         const Event *event = m_storage->eventsModel()->eventByUID(uid);
         if (event) {
             qCDebug(KTT_LOG) << "removing uid " << event->uid();
-            m_storage->removeEvent(event->uid());
+            m_storage->eventsModel()->removeByUID(event->uid());
             emit timesChanged();
             this->refresh();
         }
