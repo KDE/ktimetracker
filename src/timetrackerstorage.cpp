@@ -173,7 +173,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
     view->tasksModel()->clear();
 
     QMultiHash<QString, Task*> map;
-    for (auto todo : todos) {
+    for (const auto &todo : todos) {
         Task* task = new Task(todo, view, m_model);
         map.insert(todo->uid(), task);
         view->setRootIsDecorated(true);
@@ -182,7 +182,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
 
     // 1.1. Load each task under its parent task.
     QString err;
-    for (auto todo : todos) {
+    for (const auto &todo : todos) {
         Task* task = map.value(todo->uid());
         // No relatedTo incident just means this is a top-level task.
         if (!todo->relatedTo().isEmpty()) {
