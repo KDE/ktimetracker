@@ -40,7 +40,7 @@ QT_END_NAMESPACE
 
 class TimeTrackerStorage;
 class TaskView;
-class EventsModel;
+class ProjectModel;
 
 /** \brief A class representing a task
  *
@@ -61,8 +61,8 @@ class Task : public QObject, public TasksModelItem
 
 public:
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, TaskView* taskView, EventsModel *eventsModel, Task* parentTask);
-    Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView, EventsModel *eventsModel);
+        DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task* parentTask);
+    Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView, ProjectModel *projectModel);
 
     /* destructor */
     ~Task() override;
@@ -385,7 +385,7 @@ private:
     int mPriority;
 
     TaskView* m_taskView;
-    EventsModel *m_eventsModel;
+    ProjectModel *m_projectModel;
 };
 
 #endif // KTIMETRACKER_TASK_H

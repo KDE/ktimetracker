@@ -29,6 +29,7 @@
 
 #include <KCalCore/CalFormat>
 
+#include "model/projectmodel.h"
 #include "model/eventsmodel.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
@@ -39,11 +40,11 @@
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-            DesktopList desktops, TaskView* taskView, EventsModel *eventsModel, Task *parentTask)
+            DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task *parentTask)
     : QObject()
-    , TasksModelItem(taskView->tasksModel(), parentTask)
+    , TasksModelItem(projectModel->tasksModel(), parentTask)
     , m_taskView(taskView)
-    , m_eventsModel(eventsModel)
+    , m_projectModel(projectModel)
 {
     if (parentTask) {
         parentTask->addChild(this);
@@ -56,11 +57,11 @@ Task::Task( const QString& taskName, const QString& taskDescription, long minute
     mUid = KCalCore::CalFormat::createUniqueId();
 }
 
-Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView, EventsModel *eventsModel)
+Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView, ProjectModel *projectModel)
     : QObject()
     , TasksModelItem(taskView->tasksModel(), nullptr)
     , m_taskView(taskView)
-    , m_eventsModel(eventsModel)
+    , m_projectModel(projectModel)
 {
     taskView->tasksModel()->addChild(this);
 
@@ -377,7 +378,7 @@ bool Task::remove(TimeTrackerStorage* storage)
         setRunning(false, storage);
     }
 
-    m_eventsModel->removeAllForTask(this);
+    m_projectModel->eventsModel()->removeAllForTask(this);
 
     changeParentTotalTimes(-mSessionTime, -mTime);
 

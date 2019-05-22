@@ -111,6 +111,8 @@ public:
 
     TasksModel *tasksModel();
 
+    ProjectModel *projectModel();
+
     QString removeEvent(QString uid);
 
     /**

@@ -174,7 +174,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
 
     QMultiHash<QString, Task*> map;
     for (auto todo : todos) {
-        Task* task = new Task(todo, view, eventsModel());
+        Task* task = new Task(todo, view, m_model);
         map.insert(todo->uid(), task);
         view->setRootIsDecorated(true);
         task->invalidateCompletedState();
@@ -236,6 +236,15 @@ TasksModel *TimeTrackerStorage::tasksModel()
     }
 
     return m_model->tasksModel();
+}
+
+ProjectModel *TimeTrackerStorage::projectModel()
+{
+    if (!m_model) {
+        qFatal("TimeTrackerStorage::projectModel is nullptr");
+    }
+
+    return m_model;
 }
 
 bool TimeTrackerStorage::allEventsHaveEndTiMe(Task *task)

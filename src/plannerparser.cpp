@@ -39,12 +39,12 @@ test cases:
 #include "taskview.h"
 #include "ktt_debug.h"
 
-PlannerParser::PlannerParser(TaskView* tv, EventsModel *eventsModel)
+PlannerParser::PlannerParser(TaskView* tv, ProjectModel *projectModel)
     : m_withinTasks(false)
     , m_taskView(tv)
     , m_task(nullptr)
     , m_level(0)
-    , m_eventsModel(eventsModel)
+    , m_projectModel(projectModel)
 {
     // if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
     // import as well if there a no task in the taskview as if there are.
@@ -92,9 +92,9 @@ bool PlannerParser::startElement(const QString&, const QString&, const QString &
         DesktopList dl;
         if (m_level++ > 0) {
             Task* parentTask = m_task;
-            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, m_eventsModel, parentTask);
+            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, m_projectModel, parentTask);
         } else {
-            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, m_eventsModel, nullptr);
+            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, m_projectModel, nullptr);
             qDebug() << "added" << taskName;
         }
         m_task->setPercentComplete(taskComplete);
