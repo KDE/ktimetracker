@@ -170,7 +170,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
         }
     }
 
-    view->tasksModel()->clear();
+    tasksModel()->clear();
 
     QMultiHash<QString, Task*> map;
     for (const auto &todo : todos) {
@@ -280,8 +280,8 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     qCDebug(KTT_LOG) << "Entering function";
     QString errorString;
 
-    for (int i = 0; i < taskview->tasksModel()->topLevelItemCount(); ++i) {
-        Task *task = dynamic_cast<Task*>(taskview->tasksModel()->topLevelItem(i));
+    for (int i = 0; i < tasksModel()->topLevelItemCount(); ++i) {
+        Task *task = dynamic_cast<Task*>(tasksModel()->topLevelItem(i));
         qCDebug(KTT_LOG) << "write task" << task->name();
         errorString = writeTaskAsTodo(task, KCalCore::Todo::Ptr());
     }
