@@ -68,7 +68,7 @@ static void printTask(Task *task, QString &s, int level, const ReportCriteria &r
     }
 }
 
-QString totalsAsText(TasksModel *model, Task *currentItem, ReportCriteria rc)
+QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria &rc)
 {
     QString retval;
     QString line;
