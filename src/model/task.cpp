@@ -373,7 +373,7 @@ bool Task::remove(TimeTrackerStorage* storage)
 
     changeParentTotalTimes(-mSessionTime, -mTime);
 
-    storage->save(m_taskView);
+    storage->save();
 
     return ok;
 }
@@ -543,7 +543,7 @@ void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
     // TODO: Use libkcalcore comments
     // todo->addComment(comment);
 
-    storage->save(m_taskView);
+    storage->save();
 }
 
 void Task::startNewSession()

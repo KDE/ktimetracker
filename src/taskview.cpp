@@ -402,7 +402,7 @@ void TaskView::scheduleSave()
 void TaskView::save()
 {
     qCDebug(KTT_LOG) << "Entering TaskView::save()";
-    QString err = m_storage->save(this);
+    QString err = m_storage->save();
 
     if (!err.isNull()) {
         QString errMsg = m_storage->fileUrl().toString() + ":\n";

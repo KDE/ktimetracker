@@ -141,10 +141,8 @@ public:
      * calendar file; that is, the task->uid() must refer to a valid VTODO in
      * the calendar.
      * Delivers empty string if successful, else error msg.
-     *
-     * @param taskview    The list group used in the TaskView
      */
-    QString save(TaskView* taskview);
+    QString save();
 
     /**
      * Log the change in a task's time.

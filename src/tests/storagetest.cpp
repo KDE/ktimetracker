@@ -21,7 +21,7 @@ void StorageTest::testSaveEmpty()
 {
     auto *taskView = createTaskView(this, false);
 
-    QCOMPARE(taskView->storage()->save(taskView), "");
+    QCOMPARE(taskView->storage()->save(), "");
     QCOMPARE(readTextFile(taskView->storage()->fileUrl().path()), readTextFile(QFINDTESTDATA("data/empty.ics")));
 }
 
@@ -32,7 +32,7 @@ void StorageTest::testSaveSimpleTree()
     Task* negativeTask = taskView->task(taskView->addTask("negative duration"));
     negativeTask->changeTime(-5, taskView->storage()); // substract 5 minutes
 
-    QCOMPARE(taskView->storage()->save(taskView), "");
+    QCOMPARE(taskView->storage()->save(), "");
 
     KCalCore::MemoryCalendar::Ptr calendar(new KCalCore::MemoryCalendar(QTimeZone::systemTimeZone()));
     KCalCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().path(), new KCalCore::ICalFormat());

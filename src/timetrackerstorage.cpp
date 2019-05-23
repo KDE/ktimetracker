@@ -275,7 +275,7 @@ QString TimeTrackerStorage::deleteAllEvents()
     return QString();
 }
 
-QString TimeTrackerStorage::save(TaskView* taskview)
+QString TimeTrackerStorage::save()
 {
     qCDebug(KTT_LOG) << "Entering function";
     QString errorString;
