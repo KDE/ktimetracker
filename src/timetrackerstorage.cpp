@@ -74,14 +74,12 @@ const QByteArray eventAppName = QByteArray("ktimetracker");
 TimeTrackerStorage::TimeTrackerStorage()
     : m_model(nullptr)
     , m_url()
-    , m_fileLock(new QLockFile(QStringLiteral("ktimetrackerics.lock")))
     , m_taskView(nullptr)
 {
 }
 
 TimeTrackerStorage::~TimeTrackerStorage()
 {
-    delete m_fileLock;
 }
 
 // Loads data from filename into view.
@@ -288,7 +286,8 @@ QString TimeTrackerStorage::save()
         return QString("m_model not set");
     }
 
-    if (!m_fileLock->lock()) {
+    QLockFile fileLock(QStringLiteral("ktimetrackerics.lock"));
+    if (!fileLock.lock()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_fileLock->lock() failed";
         return QString("Could not save. Could not lock file.");
     }
@@ -299,7 +298,7 @@ QString TimeTrackerStorage::save()
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
         errorMessage = QString("Could not save. Could lock file.");
     }
-    m_fileLock->unlock();
+    fileLock.unlock();
 
     if (removedFromDirWatch) {
         KDirWatch::self()->addFile(m_url.path());

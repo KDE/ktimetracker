@@ -227,7 +227,6 @@ private Q_SLOTS:
 private:
     ProjectModel *m_model;
     QUrl m_url;
-    QLockFile *m_fileLock;
     TaskView* m_taskView;
 
     QString writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent);
