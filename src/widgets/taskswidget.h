@@ -39,6 +39,7 @@ public Q_SLOTS:
     void slotCustomContextMenuRequested(const QPoint&);
     void slotSetPercentage(QAction*);
     void slotSetPriority(QAction*);
+    void setFilterText(const QString &text);
 
 Q_SIGNALS:
     void updateButtons();

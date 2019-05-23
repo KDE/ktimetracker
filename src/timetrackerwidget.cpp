@@ -62,7 +62,7 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     connect(m_searchLine, &SearchLine::textSubmitted, this, &TimeTrackerWidget::slotAddTask);
 
     m_taskView = new TaskView(this);
-    connect(m_searchLine, &SearchLine::searchUpdated, m_taskView, &TaskView::setFilterText);
+    connect(m_searchLine, &SearchLine::searchUpdated, m_taskView->tasksWidget(), &TasksWidget::setFilterText);
 
     layout->addWidget(m_searchLine);
     layout->addWidget(m_taskView->tasksWidget());

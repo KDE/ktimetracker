@@ -227,8 +227,6 @@ public Q_SLOTS:
 
     QList<Task*> getAllTasks();
 
-    void setFilterText(const QString &text);
-
     void onTaskDoubleClicked(Task *task);
 
 Q_SIGNALS:

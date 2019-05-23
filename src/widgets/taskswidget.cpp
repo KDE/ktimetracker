@@ -336,3 +336,8 @@ Task* TasksWidget::currentItem()
 {
     return taskAtViewIndex(QTreeView::currentIndex());
 }
+
+void TasksWidget::setFilterText(const QString &text)
+{
+    m_filterProxyModel->setFilterFixedString(text);
+}

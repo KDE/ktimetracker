@@ -846,11 +846,6 @@ int TaskView::sortColumn() const
     return m_tasksWidget->header()->sortIndicatorSection();
 }
 
-void TaskView::setFilterText(const QString &text)
-{
-    m_filterProxyModel->setFilterFixedString(text);
-}
-
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
