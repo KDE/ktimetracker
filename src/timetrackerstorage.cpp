@@ -66,6 +66,7 @@
 #include "model/projectmodel.h"
 #include "taskview.h"
 #include "export/totalsastext.h"
+#include "widgets/taskswidget.h"
 #include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
@@ -176,7 +177,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
     for (const auto &todo : todos) {
         Task* task = new Task(todo, view, m_model);
         map.insert(todo->uid(), task);
-        view->setRootIsDecorated(true);
+        view->tasksWidget()->setRootIsDecorated(true);
         task->invalidateCompletedState();
     }
 

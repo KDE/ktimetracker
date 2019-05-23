@@ -39,6 +39,7 @@
 #include "mainadaptor.h"
 #include "reportcriteria.h"
 #include "taskview.h"
+#include "widgets/taskswidget.h"
 #include "ktimetracker-version.h"
 #include "mainwindow.h"
 #include "ktt_debug.h"
@@ -64,7 +65,7 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     connect(m_searchLine, &SearchLine::searchUpdated, m_taskView, &TaskView::setFilterText);
 
     layout->addWidget(m_searchLine);
-    layout->addWidget(m_taskView);
+    layout->addWidget(m_taskView->tasksWidget());
     setLayout(layout);
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
@@ -126,7 +127,7 @@ TaskView* TimeTrackerWidget::currentTaskView() const
 Task* TimeTrackerWidget::currentTask()
 {
     TaskView* taskView = currentTaskView();
-    return taskView ? taskView->currentItem() : nullptr;
+    return taskView ? taskView->tasksWidget()->currentItem() : nullptr;
 }
 
 void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
@@ -475,7 +476,7 @@ void TimeTrackerWidget::editHistory()
     // HistoryDialog is the new HistoryDialog, but the EditHiStoryDiaLog exists as well.
     // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if (currentTaskView()) {
-        auto *dialog = new HistoryDialog(currentTaskView(), currentTaskView()->storage()->projectModel());
+        auto *dialog = new HistoryDialog(currentTaskView()->tasksWidget(), currentTaskView()->storage()->projectModel());
         connect(dialog, &HistoryDialog::timesChanged, currentTaskView(), &TaskView::reFreshTimes);
         if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();

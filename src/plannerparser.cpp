@@ -39,7 +39,7 @@ test cases:
 #include "taskview.h"
 #include "ktt_debug.h"
 
-PlannerParser::PlannerParser(TaskView* tv, ProjectModel *projectModel)
+PlannerParser::PlannerParser(TaskView* tv, ProjectModel *projectModel, Task *currentTask)
     : m_withinTasks(false)
     , m_taskView(tv)
     , m_task(nullptr)
@@ -52,8 +52,8 @@ PlannerParser::PlannerParser(TaskView* tv, ProjectModel *projectModel)
     // So you have the chance as well to have the planner tasks at top-level as at a whatever-so-deep sublevel.
 
     qDebug() << "entering constructor to import planner tasks";
-    if (m_taskView->currentItem() && m_taskView->currentItem()->parentTask()) {
-        m_task = m_taskView->currentItem()->parentTask();
+    if (currentTask && currentTask->parentTask()) {
+        m_task = currentTask->parentTask();
         m_level = 1;
     }
 }

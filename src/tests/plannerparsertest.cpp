@@ -2,6 +2,7 @@
 
 #include "taskview.h"
 #include "model/task.h"
+#include "widgets/taskswidget.h"
 #include "helpers.h"
 
 class PlannerParserTest : public QObject
@@ -36,7 +37,7 @@ void PlannerParserTest::testAtTopLevel()
     auto *taskView = createTaskView(this, false);
     Task* task1 = taskView->task(taskView->addTask("1"));
     QVERIFY(task1);
-    taskView->setCurrentIndex(taskView->tasksModel()->index(task1, 0));
+    taskView->tasksWidget()->setCurrentIndex(taskView->tasksModel()->index(task1, 0));
 
     taskView->importPlanner(QFINDTESTDATA("data/kitchen.planner"));
 
@@ -60,7 +61,7 @@ void PlannerParserTest::testAtSubTask()
     QVERIFY(task1);
     Task* task2 = taskView->task(taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1));
     QVERIFY(task2);
-    taskView->setCurrentIndex(taskView->tasksModel()->index(task2, 0));
+    taskView->tasksWidget()->setCurrentIndex(taskView->tasksModel()->index(task2, 0));
 
     taskView->importPlanner(QFINDTESTDATA("data/kitchen.planner"));
 

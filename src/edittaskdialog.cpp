@@ -8,9 +8,10 @@
 #include "historydialog.h"
 #include "ktimetrackerutility.h"
 #include "taskview.h"
+#include "widgets/taskswidget.h"
 
 EditTaskDialog::EditTaskDialog(TaskView *parent, const QString &caption, DesktopList *desktopList)
-    : QDialog(parent)
+    : QDialog(parent->tasksWidget())
     , m_ui()
     , m_desktopCheckboxes()
 {
@@ -92,7 +93,7 @@ void EditTaskDialog::status(DesktopList *desktopList) const
 
 void EditTaskDialog::on_edittimespushbutton_clicked()
 {
-    auto* dialog = new HistoryDialog(m_parent, m_parent->storage()->projectModel());
+    auto* dialog = new HistoryDialog(m_parent->tasksWidget(), m_parent->storage()->projectModel());
     connect(dialog, &HistoryDialog::timesChanged, m_parent, &TaskView::reFreshTimes);
     lower();
     dialog->exec();

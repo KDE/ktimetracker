@@ -19,6 +19,7 @@ set(ktimetracker_SRCS
     settings/ktimetrackerconfigdialog.cpp
 
     widgets/searchline.cpp
+    widgets/taskswidget.cpp
 
     csvexportdialog.cpp
     desktoptracker.cpp

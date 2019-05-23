@@ -24,17 +24,15 @@
 #define KTIMETRACKER_TASK_VIEW
 
 #include <QList>
-#include <QTreeWidget>
 
 #include "desktoplist.h"
 #include "timetrackerstorage.h"
 #include "reportcriteria.h"
 
 QT_BEGIN_NAMESPACE
-class QMouseEvent;
-class QString;
 class QTimer;
 class QSortFilterProxyModel;
+class QMenu;
 QT_END_NAMESPACE
 
 class DesktopTracker;
@@ -43,22 +41,18 @@ class Task;
 class TimeTrackerStorage;
 class FocusDetector;
 class TasksModel;
+class TasksWidget;
 
 /**
  * Container and interface for the tasks.
  */
-class TaskView : public QTreeView
+class TaskView : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-    explicit TaskView(QWidget* parent = nullptr);
+    explicit TaskView(QWidget *parent = nullptr);
     ~TaskView() override;
-
-    Task* taskAtViewIndex(QModelIndex viewIndex);
-
-    /**  Return the current item in the view, cast to a Task pointer.  */
-    Task* currentItem();
 
     //BEGIN model specified
     /** Load the view from storage.  */
@@ -108,6 +102,8 @@ public:
 
     TasksModel *tasksModel();
     int sortColumn() const;
+
+    TasksWidget *tasksWidget() { return m_tasksWidget; }
 
 public Q_SLOTS:
     /** Save to persistent storage. */
@@ -233,6 +229,8 @@ public Q_SLOTS:
 
     void setFilterText(const QString &text);
 
+    void onTaskDoubleClicked(Task *task);
+
 Q_SIGNALS:
     void updateButtons();
     void timersActive();
@@ -252,44 +250,28 @@ private: // member variables
     QTimer *m_autoSaveTimer;
     QTimer *m_manualSaveTimer;
     DesktopTracker* m_desktopTracker;
-    bool m_isLoading;
+//    bool m_isLoading;
 
     TimeTrackerStorage *m_storage;
     bool m_focusTrackingActive;
     Task* m_lastTaskWithFocus;
     QList<Task*> m_activeTasks;
 
-    QMenu *m_popupPercentageMenu;
-    QMap<QAction*, int> m_percentage;
-    QMenu *m_popupPriorityMenu;
-    QMap<QAction*, int> m_priority;
-
     FocusDetector *m_focusDetector;
+
+    TasksWidget *m_tasksWidget;
 
 private:
     void addTimeToActiveTasks(int minutes, bool save_data = true);
     /** item state stores if a task is expanded so you can see the subtasks */
-    void restoreItemState();
-
-protected:
-    void mouseMoveEvent(QMouseEvent*) override;
-    void mousePressEvent(QMouseEvent*) override;
-    void mouseDoubleClickEvent(QMouseEvent*) override;
 
 public Q_SLOTS:
     void minuteUpdate();
-    void dropEvent(QDropEvent* event) override;
-
-    /** item state stores if a task is expanded so you can see the subtasks */
-    void itemStateChanged(const QModelIndex &index);
 
     /** React on the focus having changed to Window QString **/
     void newFocusWindowDetected(const QString&);
 
     void slotColumnToggled(int);
-    void slotCustomContextMenuRequested(const QPoint&);
-    void slotSetPercentage(QAction*);
-    void slotSetPriority(QAction*);
 };
 
 #endif // KTIMETRACKER_TASK_VIEW

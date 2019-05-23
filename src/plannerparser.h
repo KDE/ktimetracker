@@ -48,7 +48,7 @@ class PlannerParser : public QXmlDefaultHandler
 public:
 
     /** Stores the active TaskView in this parser. */
-    explicit PlannerParser(TaskView* tv, ProjectModel *projectModel);
+    explicit PlannerParser(TaskView* tv, ProjectModel *projectModel, Task *currentTask);
 
     /** Called when parsing the xml-document starts. */
     bool startDocument() override;

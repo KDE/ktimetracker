@@ -21,8 +21,6 @@
 
 #include "taskview.h"
 
-#include <QStyledItemDelegate>
-#include <QPainter>
 #include <QClipboard>
 #include <QProgressDialog>
 #include <QHeaderView>
@@ -34,6 +32,7 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "model/eventsmodel.h"
+#include "widgets/taskswidget.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
@@ -46,18 +45,6 @@
 #include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 
-bool readBoolEntry(const QString& key)
-{
-    return KSharedConfig::openConfig()->group(QString()).readEntry(key, true);
-}
-
-void writeEntry(const QString& key, bool value)
-{
-    KConfigGroup config = KSharedConfig::openConfig()->group(QString());
-    config.writeEntry(key, value);
-    config.sync();
-}
-
 void deleteEntry(const QString& key)
 {
     KConfigGroup config = KSharedConfig::openConfig()->group(QString());
@@ -65,107 +52,27 @@ void deleteEntry(const QString& key)
     config.sync();
 }
 
-//BEGIN TaskViewDelegate (custom painting of the progress column)
-class TaskViewDelegate : public QStyledItemDelegate {
-public:
-    explicit TaskViewDelegate(QObject *parent)
-        : QStyledItemDelegate(parent) {}
-
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-    {
-        if (index.column () == 6) {
-            QApplication::style()->drawControl( QStyle::CE_ItemViewItem, &option, painter );
-            int rX = option.rect.x() + 2;
-            int rY = option.rect.y() + 2;
-            int rWidth = option.rect.width() - 4;
-            int rHeight = option.rect.height() - 4;
-            int value = index.model()->data( index ).toInt();
-            int newWidth = (int)(rWidth * (value / 100.));
-
-            if(QApplication::isLeftToRight())
-            {
-                int mid = rY + rHeight / 2;
-                int width = rWidth / 2;
-                QLinearGradient gradient1( rX, mid, rX + width, mid);
-                gradient1.setColorAt( 0, Qt::red );
-                gradient1.setColorAt( 1, Qt::yellow );
-                painter->fillRect( rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
-
-                if (newWidth > width)
-                {
-                    QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
-                    gradient2.setColorAt( 0, Qt::yellow );
-                    gradient2.setColorAt( 1, Qt::green );
-                    painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
-                }
-
-                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
-                for (int x = rHeight; x < newWidth; x += rHeight)
-                {
-                    painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
-                }
-            }
-            else
-            {
-                int mid = option.rect.height() - rHeight / 2;
-                int width = rWidth / 2;
-                QLinearGradient gradient1( rX, mid, rX + width, mid);
-                gradient1.setColorAt( 0, Qt::red );
-                gradient1.setColorAt( 1, Qt::yellow );
-                painter->fillRect( option.rect.height(), rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
-
-                if (newWidth > width)
-                {
-                    QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
-                    gradient2.setColorAt( 0, Qt::yellow );
-                    gradient2.setColorAt( 1, Qt::green );
-                    painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
-                }
-
-                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
-                for (int x = rWidth- rHeight; x > newWidth; x -= rHeight)
-                {
-                    painter->drawLine( rWidth - x, rY, rWidth - x, rY + rHeight - 1 );
-                }
-
-            }
-            painter->setPen( Qt::black );
-            painter->drawText( option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %" );
-        }
-        else
-        {
-            QStyledItemDelegate::paint( painter, option, index );
-        }
-    }
-};
-//END
-
-TaskView::TaskView(QWidget* parent)
-    : QTreeView(parent)
+TaskView::TaskView(QWidget *parent)
+    : QObject(parent)
     , m_filterProxyModel(new QSortFilterProxyModel(this))
-    , m_isLoading(false)
+//    , m_isLoading(false)
     , m_storage(new TimeTrackerStorage())
     , m_focusTrackingActive(false)
     , m_lastTaskWithFocus(nullptr)
-    , m_popupPercentageMenu(nullptr)
-    , m_popupPriorityMenu(nullptr)
     , m_focusDetector(new FocusDetector())
+    , m_tasksWidget(nullptr)
 {
     m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_filterProxyModel->setRecursiveFilteringEnabled(true);
-    setModel(m_filterProxyModel);
 
-    connect(this, &QTreeView::expanded, this, &TaskView::itemStateChanged);
-    connect(this, &QTreeView::collapsed, this, &TaskView::itemStateChanged);
+    // TODO: only create TasksWidget after a file is loaded, i.e. somewhere in load()
+    m_tasksWidget = new TasksWidget(parent, m_filterProxyModel, nullptr);
+    connect(m_tasksWidget, &TasksWidget::updateButtons, this, &TaskView::updateButtons);
+    connect(m_tasksWidget, &TasksWidget::contextMenuRequested, this, &TaskView::contextMenuRequested);
+    connect(m_tasksWidget, &TasksWidget::taskDropped, this, &TaskView::reFreshTimes);
+    connect(m_tasksWidget, &TasksWidget::taskDoubleClicked, this, &TaskView::onTaskDoubleClicked);
+
     connect(m_focusDetector, &FocusDetector::newFocus, this, &TaskView::newFocusWindowDetected);
-
-    setWindowFlags(windowFlags() | Qt::WindowContextHelpButtonHint);
-
-    setAllColumnsShowFocus( true );
-    setSortingEnabled( true );
-    setAlternatingRowColors( true );
-    setDragDropMode( QAbstractItemView::InternalMove );
-    setItemDelegateForColumn( 6, new TaskViewDelegate(this) );
 
     // set up the minuteTimer
     m_minuteTimer = new QTimer(this);
@@ -197,46 +104,10 @@ TaskView::TaskView(QWidget* parent)
            this, SLOT(stopTimerFor(Task*)));
 
     // Header context menu
-    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, this, QVector<int>{0});
+    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
     connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
 
-    // Context Menu
-    m_popupPercentageMenu = new QMenu(this);
-    for (int i = 0; i <= 100; i += 10) {
-        QString label = i18n("%1 %" , i);
-        m_percentage[m_popupPercentageMenu->addAction(label)] = i;
-    }
-    connect(m_popupPercentageMenu, &QMenu::triggered, this, &TaskView::slotSetPercentage);
-
-    m_popupPriorityMenu = new QMenu(this);
-    for (int i = 0; i <= 9; ++i) {
-        QString label;
-        switch (i) {
-        case 0:
-            label = i18n("unspecified");
-            break;
-        case 1:
-            label = i18nc("combox entry for highest priority", "1 (highest)");
-            break;
-        case 5:
-            label = i18nc("combox entry for medium priority", "5 (medium)");
-            break;
-        case 9:
-            label = i18nc("combox entry for lowest priority", "9 (lowest)");
-            break;
-        default:
-            label = QString("%1").arg(i);
-            break;
-        }
-        m_priority[m_popupPriorityMenu->addAction(label)] = i;
-    }
-    connect(m_popupPriorityMenu, &QMenu::triggered, this, &TaskView::slotSetPriority);
-
-    setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, &TaskView::customContextMenuRequested, this, &TaskView::slotCustomContextMenuRequested);
-
     reconfigure();
-    sortByColumn(0, Qt::AscendingOrder);
 }
 
 void TaskView::newFocusWindowDetected(const QString &taskName)
@@ -276,98 +147,6 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
     } // focustrackingactive
 }
 
-void TaskView::mouseMoveEvent( QMouseEvent *event )
-{
-    QModelIndex index = indexAt( event->pos() );
-
-    if (index.isValid() && index.column() == 6)
-    {
-        int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 101);
-        if (newValue > 100) {
-            newValue = 100;
-        }
-
-        if ( event->modifiers() & Qt::ShiftModifier )
-        {
-            int delta = newValue % 10;
-            if ( delta >= 5 )
-            {
-                newValue += (10 - delta);
-            } else
-            {
-                newValue -= delta;
-            }
-        }
-        if (selectionModel()->isSelected(index)) {
-            Task *task = taskAtViewIndex(index);
-            if (task)
-            {
-                task->setPercentComplete(newValue);
-                emit updateButtons();
-            }
-        }
-    }
-    else
-    {
-        QTreeView::mouseMoveEvent(event);
-    }
-}
-
-void TaskView::mousePressEvent( QMouseEvent *event )
-{
-    qCDebug(KTT_LOG) << "Entering function, event->button()=" << event->button();
-    QModelIndex index = indexAt( event->pos() );
-
-    // if the user toggles a task as complete/incomplete
-    if ( index.isValid() && index.column() == 0 && visualRect( index ).x() <= event->pos().x()
-      && event->pos().x() < visualRect( index ).x() + 19)
-    {
-        Task *task = taskAtViewIndex(index);
-        if (task)
-        {
-            if (task->isComplete()) {
-                task->setPercentComplete(0);
-            } else {
-                task->setPercentComplete(100);
-            }
-            emit updateButtons();
-        }
-    }
-    else // the user did not mark a task as complete/incomplete
-    {
-        if ( KTimeTrackerSettings::configPDA() )
-        // if you have a touchscreen, you cannot right-click. So, display context menu on any click.
-        {
-            QPoint newPos = viewport()->mapToGlobal( event->pos() );
-            emit contextMenuRequested( newPos );
-        }
-        QTreeView::mousePressEvent(event);
-    }
-}
-
-void TaskView::mouseDoubleClickEvent(QMouseEvent *event)
-{
-    qCDebug(KTT_LOG) << "Entering function, event->button()=" << event->button();
-    QModelIndex index = indexAt(event->pos());
-
-    // if the user toggles a task as complete/incomplete
-    if (index.isValid()) {
-        Task *task = taskAtViewIndex(index);
-        if (task) {
-            if (task->isRunning()) {
-                // if task is running, stop it
-                stopCurrentTimer();
-            } else if (!task->isComplete()) {
-                // if task is not running, start it
-                stopAllTimers();
-                startCurrentTimer();
-            }
-        }
-    } else {
-        QTreeView::mousePressEvent(event);
-    }
-}
-
 TimeTrackerStorage* TaskView::storage()
 {
     return m_storage;
@@ -379,21 +158,6 @@ TaskView::~TaskView()
     KTimeTrackerSettings::self()->save();
 }
 
-Task* TaskView::taskAtViewIndex(QModelIndex viewIndex)
-{
-    if (!m_storage->isLoaded()) {
-        return nullptr;
-    }
-
-    QModelIndex index = m_filterProxyModel->mapToSource(viewIndex);
-    return dynamic_cast<Task*>(tasksModel()->item(index));
-}
-
-Task* TaskView::currentItem()
-{
-    return taskAtViewIndex(QTreeView::currentIndex());
-}
-
 void TaskView::load(const QUrl &url)
 {
     assert( !( url.isEmpty() ) );
@@ -401,18 +165,18 @@ void TaskView::load(const QUrl &url)
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
     qCDebug(KTT_LOG) << "Entering function";
-    m_isLoading = true;
+//    m_isLoading = true;
     QString err = m_storage->load(this, url);
     // Connect to the new model created by TimeTrackerStorage::load()
     m_filterProxyModel->setSourceModel(tasksModel());
+    m_tasksWidget->setSourceModel(tasksModel());
     for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
-        resizeColumnToContents(i);
+        m_tasksWidget->resizeColumnToContents(i);
     }
 
-    if (!err.isEmpty())
-    {
-        KMessageBox::error(this, err);
-        m_isLoading = false;
+    if (!err.isEmpty()) {
+        KMessageBox::error(m_tasksWidget, err);
+//        m_isLoading = false;
         qCDebug(KTT_LOG) << "Leaving TaskView::load";
         return;
     }
@@ -436,48 +200,20 @@ void TaskView::load(const QUrl &url)
     }
 
     if (tasksModel()->topLevelItemCount() > 0) {
-        restoreItemState();
-
-        setCurrentIndex(m_filterProxyModel->mapFromSource(
+        m_tasksWidget->restoreItemState();
+        m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(
             tasksModel()->index(tasksModel()->topLevelItem(0), 0)));
 
         if (!m_desktopTracker->startTracking().isEmpty()) {
             KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work"));
         }
-        m_isLoading = false;
+//        m_isLoading = false;
         refresh();
     }
     for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
-        resizeColumnToContents(i);
+        m_tasksWidget->resizeColumnToContents(i);
     }
     qCDebug(KTT_LOG) << "Leaving function";
-}
-
-void TaskView::restoreItemState()
-/* Restores the item state of every item. An item is a task in the list.
-Its state is whether it is expanded or not. If a task shall be expanded
-is stored in the _preferences object. */
-{
-    qCDebug(KTT_LOG) << "Entering function";
-
-    if (tasksModel()->topLevelItemCount() > 0) {
-        for (Task *task : getAllTasks()) {
-            setExpanded(m_filterProxyModel->mapFromSource(
-                tasksModel()->index(task, 0)), readBoolEntry(task->uid()));
-        }
-    }
-    qCDebug(KTT_LOG) << "Leaving function";
-}
-
-void TaskView::itemStateChanged(const QModelIndex &index)
-{
-    Task *task = taskAtViewIndex(index);
-    if (!task || m_isLoading) {
-        return;
-    }
-
-    qCDebug(KTT_LOG) <<"TaskView::itemStateChanged()" <<" uid=" << task->uid() <<" state=" << isExpanded(index);
-    writeEntry(task->uid(), isExpanded(index));
 }
 
 void TaskView::closeStorage()
@@ -504,7 +240,7 @@ void TaskView::refresh()
     //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
     // FIXME workaround? seems that the QItemDelegate for the procent column only
     // works properly if rootIsDecorated == true.
-    setRootIsDecorated(true);
+    m_tasksWidget->setRootIsDecorated(true);
 
     emit updateButtons();
     qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
@@ -557,7 +293,7 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     qCDebug(KTT_LOG) << "entering importPlanner";
-    PlannerParser *handler = new PlannerParser(this, storage()->projectModel());
+    PlannerParser *handler = new PlannerParser(this, storage()->projectModel(), m_tasksWidget->currentItem());
     QString lFileName = fileName;
     if (lFileName.isEmpty()) {
         lFileName = QFileDialog::getOpenFileName();
@@ -589,14 +325,14 @@ void TaskView::exportCSVFileDialog()
 {
     qCDebug(KTT_LOG) << "TaskView::exportCSVFileDialog()";
 
-    CSVExportDialog dialog(ReportCriteria::CSVTotalsExport, this);
-    if (currentItem() && currentItem()->isRoot()) {
+    CSVExportDialog dialog(ReportCriteria::CSVTotalsExport, m_tasksWidget);
+    if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }
     if (dialog.exec()) {
         QString err = report(dialog.reportCriteria());
         if (!err.isEmpty()) {
-            KMessageBox::error(this, i18n(err.toLatin1()));
+            KMessageBox::error(m_tasksWidget, i18n(err.toLatin1()));
         }
     }
 }
@@ -606,8 +342,8 @@ QString TaskView::exportCSVHistoryDialog()
     qCDebug(KTT_LOG) << "TaskView::exportCSVHistoryDialog()";
     QString err;
 
-    CSVExportDialog dialog(ReportCriteria::CSVHistoryExport, this);
-    if (currentItem() && currentItem()->isRoot()) {
+    CSVExportDialog dialog(ReportCriteria::CSVHistoryExport, m_tasksWidget);
+    if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }
     if (dialog.exec()) {
@@ -649,12 +385,6 @@ Task* TaskView::task(const QString& taskId)
     return result;
 }
 
-void TaskView::dropEvent (QDropEvent* event)
-{
-    QTreeView::dropEvent(event);
-    reFreshTimes();
-}
-
 void TaskView::scheduleSave()
 {
     m_manualSaveTimer->start(10);
@@ -674,29 +404,30 @@ void TaskView::save()
             errMsg += i18n("Could not save.");
         }
 
-        KMessageBox::error(this, errMsg);
+        KMessageBox::error(m_tasksWidget, errMsg);
     }
 }
 
 void TaskView::startCurrentTimer()
 {
-    startTimerFor( currentItem() );
+    startTimerFor(m_tasksWidget->currentItem());
 }
 
-void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
+void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (task != 0 && m_activeTasks.indexOf(task) == -1)
-    {
-        if (!task->isComplete())
-        {
-            if ( KTimeTrackerSettings::uniTasking() ) stopAllTimers();
+    if (task != nullptr && m_activeTasks.indexOf(task) == -1) {
+        if (!task->isComplete()) {
+            if (KTimeTrackerSettings::uniTasking()) {
+                stopAllTimers();
+            }
             m_idleTimeDetector->startIdleDetection();
             task->setRunning(true, m_storage, startTime);
             m_activeTasks.append(task);
             emit updateButtons();
-            if ( m_activeTasks.count() == 1 )
+            if (m_activeTasks.count() == 1) {
                 emit timersActive();
+            }
             emit tasksChanged(m_activeTasks);
         }
     }
@@ -710,7 +441,7 @@ void TaskView::clearActiveTasks()
 void TaskView::stopAllTimers(const QDateTime& when)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QProgressDialog dialog(i18n("Stopping timers..."), i18n("Cancel"), 0, m_activeTasks.count(), this);
+    QProgressDialog dialog(i18n("Stopping timers..."), i18n("Cancel"), 0, m_activeTasks.count(), m_tasksWidget);
     if (m_activeTasks.count() > 1) {
         dialog.show();
     }
@@ -793,9 +524,8 @@ void TaskView::stopTimerFor(Task* task)
 
 void TaskView::stopCurrentTimer()
 {
-    stopTimerFor( currentItem() );
-    if ( m_focusTrackingActive && m_lastTaskWithFocus == currentItem() )
-    {
+    stopTimerFor(m_tasksWidget->currentItem());
+    if (m_focusTrackingActive && m_lastTaskWithFocus == m_tasksWidget->currentItem()) {
         toggleFocusTracking();
     }
 }
@@ -808,7 +538,7 @@ void TaskView::minuteUpdate()
 void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
 {
     for (Task *task : m_activeTasks) {
-        task->changeTime(minutes, save_data ? m_storage : 0);
+        task->changeTime(minutes, save_data ? m_storage : nullptr);
     }
 }
 
@@ -857,7 +587,7 @@ QString TaskView::addTask(
     const DesktopList& desktops, Task* parent)
 {
     qCDebug(KTT_LOG) << "Entering function; taskname =" << taskname;
-    setSortingEnabled(false);
+    m_tasksWidget->setSortingEnabled(false);
 
     Task *task = new Task(
         taskname, taskdescription, total, session, desktops, this, storage()->projectModel(), parent);
@@ -866,24 +596,24 @@ QString TaskView::addTask(
     }
 
     m_desktopTracker->registerForDesktops(task, desktops);
-    setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)));
+    m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)));
     task->invalidateCompletedState();
     save();
 
-    setSortingEnabled(true);
+    m_tasksWidget->setSortingEnabled(true);
     return task->uid();
 }
 
 void TaskView::newSubTask()
 {
-    Task* task = currentItem();
+    Task* task = m_tasksWidget->currentItem();
     if (!task) {
         return;
     }
 
     newTask(i18n("New Sub Task"), task);
 
-    setExpanded(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)), true);
+    m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)), true);
 
     refresh();
 }
@@ -891,7 +621,7 @@ void TaskView::newSubTask()
 void TaskView::editTask()
 {
     qCDebug(KTT_LOG) <<"Entering editTask";
-    Task* task = currentItem();
+    Task* task = m_tasksWidget->currentItem();
     if (!task) {
         return;
     }
@@ -931,7 +661,7 @@ void TaskView::editTask()
 
 void TaskView::setPerCentComplete(int completion)
 {
-    Task* task = currentItem();
+    Task* task = m_tasksWidget->currentItem();
     if (!task) {
         KMessageBox::information(nullptr, i18n("No task selected."));
         return;
@@ -971,10 +701,10 @@ If you have "Track active applications" on, this window will create a new task a
 make this task running and selected. */
 {
     if (!task) {
-        task = currentItem();
+        task = m_tasksWidget->currentItem();
     }
 
-    if (!currentItem()) {
+    if (!m_tasksWidget->currentItem()) {
         KMessageBox::information(nullptr, i18n("No task selected."));
     } else {
         int response = KMessageBox::Continue;
@@ -995,13 +725,13 @@ make this task running and selected. */
 
 void TaskView::markTaskAsComplete()
 {
-    if (!currentItem()) {
+    if (!m_tasksWidget->currentItem()) {
         KMessageBox::information(nullptr, i18n("No task selected."));
         return;
     }
 
-    currentItem()->setPercentComplete(100);
-    currentItem()->invalidateCompletedState();
+    m_tasksWidget->currentItem()->setPercentComplete(100);
+    m_tasksWidget->currentItem()->invalidateCompletedState();
     save();
     emit updateButtons();
 }
@@ -1031,68 +761,33 @@ QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
 {
-    QApplication::clipboard()->setText(totalsAsText(tasksModel(), currentItem(), rc));
+    QApplication::clipboard()->setText(totalsAsText(tasksModel(), m_tasksWidget->currentItem(), rc));
     return QString();
 }
 
-void TaskView::slotColumnToggled( int column )
+void TaskView::slotColumnToggled(int column)
 {
     switch (column) {
     case 1:
-        KTimeTrackerSettings::setDisplaySessionTime( !isColumnHidden( 1 ) );
+        KTimeTrackerSettings::setDisplaySessionTime(!m_tasksWidget->isColumnHidden(1));
         break;
     case 2:
-        KTimeTrackerSettings::setDisplayTime( !isColumnHidden( 2 ) );
+        KTimeTrackerSettings::setDisplayTime(!m_tasksWidget->isColumnHidden(2));
         break;
     case 3:
-        KTimeTrackerSettings::setDisplayTotalSessionTime( !isColumnHidden( 3 ) );
+        KTimeTrackerSettings::setDisplayTotalSessionTime(!m_tasksWidget->isColumnHidden(3));
         break;
     case 4:
-        KTimeTrackerSettings::setDisplayTotalTime( !isColumnHidden( 4 ) );
+        KTimeTrackerSettings::setDisplayTotalTime(!m_tasksWidget->isColumnHidden(4));
         break;
     case 5:
-        KTimeTrackerSettings::setDisplayPriority( !isColumnHidden( 5 ) );
+        KTimeTrackerSettings::setDisplayPriority(!m_tasksWidget->isColumnHidden(5));
         break;
     case 6:
-        KTimeTrackerSettings::setDisplayPercentComplete( !isColumnHidden( 6 ) );
+        KTimeTrackerSettings::setDisplayPercentComplete(!m_tasksWidget->isColumnHidden(6));
         break;
     }
     KTimeTrackerSettings::self()->save();
-}
-
-void TaskView::slotCustomContextMenuRequested(const QPoint& pos)
-{
-    QPoint newPos = viewport()->mapToGlobal(pos);
-    int column = columnAt(pos.x());
-
-    switch (column) {
-    case 6: /* percentage */
-        m_popupPercentageMenu->popup(newPos);
-        break;
-
-    case 5: /* priority */
-        m_popupPriorityMenu->popup(newPos);
-        break;
-
-    default:
-        emit contextMenuRequested(newPos);
-        break;
-    }
-}
-
-void TaskView::slotSetPercentage(QAction* action)
-{
-    if (currentItem()) {
-        currentItem()->setPercentComplete(m_percentage[action]);
-        emit updateButtons();
-    }
-}
-
-void TaskView::slotSetPriority(QAction* action)
-{
-    if (currentItem()) {
-        currentItem()->setPriority(m_priority[action]);
-    }
 }
 
 bool TaskView::isFocusTrackingActive() const
@@ -1108,12 +803,12 @@ QList<Task*> TaskView::activeTasks() const
 void TaskView::reconfigure()
 {
     /* Adapt columns */
-    setColumnHidden(1, !KTimeTrackerSettings::displaySessionTime());
-    setColumnHidden(2, !KTimeTrackerSettings::displayTime());
-    setColumnHidden(3, !KTimeTrackerSettings::displayTotalSessionTime());
-    setColumnHidden(4, !KTimeTrackerSettings::displayTotalTime());
-    setColumnHidden(5, !KTimeTrackerSettings::displayPriority());
-    setColumnHidden(6, !KTimeTrackerSettings::displayPercentComplete());
+    m_tasksWidget->setColumnHidden(1, !KTimeTrackerSettings::displaySessionTime());
+    m_tasksWidget->setColumnHidden(2, !KTimeTrackerSettings::displayTime());
+    m_tasksWidget->setColumnHidden(3, !KTimeTrackerSettings::displayTotalSessionTime());
+    m_tasksWidget->setColumnHidden(4, !KTimeTrackerSettings::displayTotalTime());
+    m_tasksWidget->setColumnHidden(5, !KTimeTrackerSettings::displayPriority());
+    m_tasksWidget->setColumnHidden(6, !KTimeTrackerSettings::displayPercentComplete());
 
     /* idleness */
     m_idleTimeDetector->setMaxIdle(KTimeTrackerSettings::period());
@@ -1148,7 +843,7 @@ QList<Task*> TaskView::getAllTasks()
 
 int TaskView::sortColumn() const
 {
-    return header()->sortIndicatorSection();
+    return m_tasksWidget->header()->sortIndicatorSection();
 }
 
 void TaskView::setFilterText(const QString &text)
@@ -1167,7 +862,7 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
     QString err;
     QProgressDialog dialog(
         i18n("Exporting to CSV..."), i18n("Cancel"),
-        0, static_cast<int>(2 * count()), this, nullptr);
+        0, static_cast<int>(2 * count()), m_tasksWidget, nullptr);
     dialog.setAutoClose(true);
     dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
 
@@ -1269,7 +964,7 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
         auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
         KJobWidgets::setWindow(job, &dialog);
         if (!job->exec()) {
-            err=QString::fromLatin1("Could not upload");
+            err = QString::fromLatin1("Could not upload");
         }
     }
 
@@ -1279,4 +974,16 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
 inline TasksModel *TaskView::tasksModel()
 {
     return m_storage->tasksModel();
+}
+
+void TaskView::onTaskDoubleClicked(Task *task)
+{
+    if (task->isRunning()) {
+        // if task is running, stop it
+        stopCurrentTimer();
+    } else if (!task->isComplete()) {
+        // if task is not running, start it
+        stopAllTimers();
+        startCurrentTimer();
+    }
 }
