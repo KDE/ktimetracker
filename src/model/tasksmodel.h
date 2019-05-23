@@ -8,9 +8,12 @@ class QMovie;
 QT_END_NAMESPACE
 
 class TasksModelItem;
+class Task;
 
 class TasksModel : public QAbstractItemModel
 {
+    Q_OBJECT
+
     friend class TasksModelItem;
 
 public:
@@ -57,6 +60,9 @@ public:
 public Q_SLOTS:
     void setActiveIcon(int frameNumber);
 
+Q_SIGNALS:
+    void taskCompleted(Task *task);
+
 private:
     void sortItems(QList<TasksModelItem*> *items, int column, Qt::SortOrder order);
 
@@ -68,7 +74,7 @@ private:
 
     TasksModelItem *m_rootItem;
     QStringList m_headerLabels;
-    QMovie* m_clockAnimation;
+    QMovie *m_clockAnimation;
     mutable TasksModelItem *m_dragCutTask;
 };
 

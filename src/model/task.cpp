@@ -23,14 +23,12 @@
 #include "task.h"
 
 #include <QDateTime>
-#include <QString>
-#include <QPixmap>
-#include <QDebug>
 
 #include <KCalCore/CalFormat>
 
 #include "model/projectmodel.h"
 #include "model/eventsmodel.h"
+#include "model/tasksmodel.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "timetrackerstorage.h"
@@ -198,7 +196,7 @@ void Task::setPercentComplete(int percent)
     }
 
     if (isRunning() && mPercentComplete == 100) {
-        m_taskView->stopTimerFor(this);
+        emit m_projectModel->tasksModel()->taskCompleted(this);
     }
 
     invalidateCompletedState();
@@ -553,7 +551,7 @@ void Task::startNewSession()
 }
 
 /* Overriding the < operator in order to sort the names case insensitive and
- * the progress percentage [coloumn 6] numerically.
+ * the progress percentage [column 6] numerically.
  */
 bool Task::operator<(const TasksModelItem &other) const
 {

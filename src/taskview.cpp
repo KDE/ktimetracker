@@ -160,7 +160,6 @@ void TaskView::load(const QUrl &url)
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
     qCDebug(KTT_LOG) << "Entering function";
-//    m_isLoading = true;
     QString err = m_storage->load(this, url);
 
     m_tasksWidget = new TasksWidget(dynamic_cast<QWidget*>(parent()), m_filterProxyModel, nullptr);
@@ -179,9 +178,10 @@ void TaskView::load(const QUrl &url)
         m_tasksWidget->resizeColumnToContents(i);
     }
 
+    connect(tasksModel(), &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
+
     if (!err.isEmpty()) {
         KMessageBox::error(m_tasksWidget, err);
-//        m_isLoading = false;
         qCDebug(KTT_LOG) << "Leaving TaskView::load";
         return;
     }
@@ -212,7 +212,6 @@ void TaskView::load(const QUrl &url)
         if (!m_desktopTracker->startTracking().isEmpty()) {
             KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work"));
         }
-//        m_isLoading = false;
         refresh();
     }
     for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {

@@ -23,20 +23,12 @@
 #define KTIMETRACKER_TASK_H
 
 #include <QDateTime>
-#include <QPixmap>
 #include <QVector>
 
 #include <KCalCore/Todo>
 
 #include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
-#include "model/tasksmodel.h"
 #include "model/tasksmodelitem.h"
-
-QT_BEGIN_NAMESPACE
-class QObject;
-class QPixmap;
-class QString;
-QT_END_NAMESPACE
 
 class TimeTrackerStorage;
 class TaskView;

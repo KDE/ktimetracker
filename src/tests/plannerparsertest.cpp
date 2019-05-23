@@ -2,6 +2,7 @@
 
 #include "taskview.h"
 #include "model/task.h"
+#include "model/tasksmodel.h"
 #include "widgets/taskswidget.h"
 #include "helpers.h"
 

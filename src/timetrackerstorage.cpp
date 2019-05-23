@@ -37,15 +37,11 @@
 
 #include <QApplication>
 #include <QLockFile>
-#include <QProgressDialog>
 #include <QUrl>
 #include <QByteArray>
 #include <QDateTime>
 #include <QFile>
-#include <QList>
 #include <QMultiHash>
-#include <QSize>
-#include <QString>
 #include <QStringList>
 #include <QTableWidget>
 #include <QTextStream>
@@ -53,10 +49,7 @@
 #include <QClipboard>
 
 #include <KDirWatch>
-#include <KJobUiDelegate>
-#include <KMessageBox>
 #include <KLocalizedString>
-#include <KJobWidgets>
 #include <KIO/StoredTransferJob>
 
 #include "ktimetrackerutility.h"
@@ -64,8 +57,8 @@
 #include "model/task.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
+#include "model/tasksmodel.h"
 #include "taskview.h"
-#include "export/totalsastext.h"
 #include "widgets/taskswidget.h"
 #include "ktt_debug.h"
 
