@@ -234,7 +234,6 @@ public Q_SLOTS:
     void setFilterText(const QString &text);
 
 Q_SIGNALS:
-    void reSetTimes();
     void updateButtons();
     void timersActive();
     void timersInactive();

@@ -517,7 +517,6 @@ QString TaskView::reFreshTimes()
     QString err;
     // re-calculate the time for every task based on events in the history
     resetDisplayTimeForAllTasks();
-    emit reSetTimes();
 
     for (Task *task : getAllTasks()) {
         // get all events for task

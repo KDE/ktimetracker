@@ -342,7 +342,6 @@ void TimeTrackerWidget::slotCurrentChanged()
     qDebug() << "entering KTimeTrackerWidget::slotCurrentChanged";
 
     if (m_taskView) {
-        connect(m_taskView, &TaskView::reSetTimes, this, &TimeTrackerWidget::reSetTimes, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::updateButtons, this, &TimeTrackerWidget::updateButtons, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::setStatusBarText, this, &TimeTrackerWidget::statusBarTextChangeRequested, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive, Qt::UniqueConnection);
