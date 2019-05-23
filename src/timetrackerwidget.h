@@ -35,6 +35,7 @@ class KActionCollection;
 class Task;
 class TaskView;
 class SearchLine;
+class TasksWidget;
 
 class TimeTrackerWidget : public QWidget 
 {
@@ -207,6 +208,8 @@ Q_SIGNALS:
     void tasksChanged(const QList<Task*> &activeTasks);
 
 private:
+    void fillLayout(TasksWidget *tasksWidget);
+
     SearchLine *m_searchLine;
     TaskView *m_taskView;
     KActionCollection *m_actionCollection;

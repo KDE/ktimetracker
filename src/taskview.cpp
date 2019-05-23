@@ -55,7 +55,6 @@ void deleteEntry(const QString& key)
 TaskView::TaskView(QWidget *parent)
     : QObject(parent)
     , m_filterProxyModel(new QSortFilterProxyModel(this))
-//    , m_isLoading(false)
     , m_storage(new TimeTrackerStorage())
     , m_focusTrackingActive(false)
     , m_lastTaskWithFocus(nullptr)
@@ -64,13 +63,6 @@ TaskView::TaskView(QWidget *parent)
 {
     m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_filterProxyModel->setRecursiveFilteringEnabled(true);
-
-    // TODO: only create TasksWidget after a file is loaded, i.e. somewhere in load()
-    m_tasksWidget = new TasksWidget(parent, m_filterProxyModel, nullptr);
-    connect(m_tasksWidget, &TasksWidget::updateButtons, this, &TaskView::updateButtons);
-    connect(m_tasksWidget, &TasksWidget::contextMenuRequested, this, &TaskView::contextMenuRequested);
-    connect(m_tasksWidget, &TasksWidget::taskDropped, this, &TaskView::reFreshTimes);
-    connect(m_tasksWidget, &TasksWidget::taskDoubleClicked, this, &TaskView::onTaskDoubleClicked);
 
     connect(m_focusDetector, &FocusDetector::newFocus, this, &TaskView::newFocusWindowDetected);
 
@@ -106,8 +98,6 @@ TaskView::TaskView(QWidget *parent)
     // Header context menu
     TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
     connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
-
-    reconfigure();
 }
 
 void TaskView::newFocusWindowDetected(const QString &taskName)
@@ -162,11 +152,26 @@ void TaskView::load(const QUrl &url)
 {
     assert( !( url.isEmpty() ) );
 
+    if (m_tasksWidget) {
+        delete m_tasksWidget;
+        m_tasksWidget = nullptr;
+    }
+
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
     qCDebug(KTT_LOG) << "Entering function";
 //    m_isLoading = true;
     QString err = m_storage->load(this, url);
+
+    m_tasksWidget = new TasksWidget(dynamic_cast<QWidget*>(parent()), m_filterProxyModel, nullptr);
+    connect(m_tasksWidget, &TasksWidget::updateButtons, this, &TaskView::updateButtons);
+    connect(m_tasksWidget, &TasksWidget::contextMenuRequested, this, &TaskView::contextMenuRequested);
+    connect(m_tasksWidget, &TasksWidget::taskDropped, this, &TaskView::reFreshTimes);
+    connect(m_tasksWidget, &TasksWidget::taskDoubleClicked, this, &TaskView::onTaskDoubleClicked);
+    m_tasksWidget->setRootIsDecorated(true);
+
+    reconfigure();
+
     // Connect to the new model created by TimeTrackerStorage::load()
     m_filterProxyModel->setSourceModel(tasksModel());
     m_tasksWidget->setSourceModel(tasksModel());
@@ -228,6 +233,10 @@ bool TaskView::allEventsHaveEndTiMe()
 
 void TaskView::refresh()
 {
+    if (!m_tasksWidget) {
+        return;
+    }
+
     qCDebug(KTT_LOG) << "entering function";
     for (Task *task : getAllTasks()) {
         task->invalidateCompletedState();

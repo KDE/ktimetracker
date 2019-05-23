@@ -177,7 +177,6 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
     for (const auto &todo : todos) {
         Task* task = new Task(todo, view, m_model);
         map.insert(todo->uid(), task);
-        view->tasksWidget()->setRootIsDecorated(true);
         task->invalidateCompletedState();
     }
 

@@ -166,7 +166,7 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
 void TasksWidget::itemStateChanged(const QModelIndex &index)
 {
     Task *task = taskAtViewIndex(index);
-    if (!task /* || m_isLoading*/) {
+    if (!task) {
         return;
     }
 

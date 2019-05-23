@@ -248,7 +248,6 @@ private: // member variables
     QTimer *m_autoSaveTimer;
     QTimer *m_manualSaveTimer;
     DesktopTracker* m_desktopTracker;
-//    bool m_isLoading;
 
     TimeTrackerStorage *m_storage;
     bool m_focusTrackingActive;

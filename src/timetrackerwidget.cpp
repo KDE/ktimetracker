@@ -47,7 +47,7 @@
 TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     : QWidget(parent)
     , m_searchLine(nullptr)
-    , m_taskView(nullptr)
+    , m_taskView(new TaskView(this))
     , m_actionCollection(nullptr)
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -57,18 +57,35 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     QLayout* layout = new QVBoxLayout;
     layout->setMargin(0);
     layout->setSpacing(0);
-
-    m_searchLine = new SearchLine(this);
-    connect(m_searchLine, &SearchLine::textSubmitted, this, &TimeTrackerWidget::slotAddTask);
-
-    m_taskView = new TaskView(this);
-    connect(m_searchLine, &SearchLine::searchUpdated, m_taskView->tasksWidget(), &TasksWidget::setFilterText);
-
-    layout->addWidget(m_searchLine);
-    layout->addWidget(m_taskView->tasksWidget());
     setLayout(layout);
 
-    showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
+    fillLayout(nullptr);
+}
+
+void TimeTrackerWidget::fillLayout(TasksWidget *tasksWidget)
+{
+    // Remove all items from layout
+    QLayoutItem *child;
+    while ((child = layout()->takeAt(0)) != nullptr) {
+        delete child->widget();
+        delete child;
+    }
+
+    if (tasksWidget) {
+        m_searchLine = new SearchLine(this);
+        connect(m_searchLine, &SearchLine::textSubmitted, this, &TimeTrackerWidget::slotAddTask);
+        connect(m_searchLine, &SearchLine::searchUpdated, tasksWidget, &TasksWidget::setFilterText);
+        layout()->addWidget(m_searchLine);
+
+        layout()->addWidget(tasksWidget);
+
+        showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
+    } else {
+        auto *placeholderWidget = new QWidget(this);
+        placeholderWidget->setBackgroundRole(QPalette::Dark);
+        placeholderWidget->setAutoFillBackground(true);
+        layout()->addWidget(placeholderWidget);
+    }
 }
 
 bool TimeTrackerWidget::allEventsHaveEndTiMe()
@@ -111,6 +128,8 @@ void TimeTrackerWidget::addTaskView(const QUrl &url)
 
     emit setCaption(url.toString());
     taskView->load(lFileName);
+
+    fillLayout(m_taskView->tasksWidget());
 
     // When adding the first tab currentChanged is not emitted, so...
     if (!m_taskView) {
