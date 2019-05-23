@@ -277,18 +277,36 @@ QString TimeTrackerStorage::deleteAllEvents()
 
 QString TimeTrackerStorage::save()
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    QString errorString;
-
-    errorString = saveCalendar();
-
-    if (errorString.isEmpty()) {
-        qCDebug(KTT_LOG) << "TimeTrackerStorage::save : wrote tasks to" << m_url;
-    } else {
-        qCWarning(KTT_LOG) << "TimeTrackerStorage::save :" << errorString;
+    bool removedFromDirWatch = false;
+    if (KDirWatch::self()->contains(m_url.path())) {
+        KDirWatch::self()->removeFile(m_url.path());
+        removedFromDirWatch = true;
     }
 
-    return errorString;
+    if (!m_model) {
+        qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_model is nullptr";
+        return QString("m_model not set");
+    }
+
+    if (!m_fileLock->lock()) {
+        qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_fileLock->lock() failed";
+        return QString("Could not save. Could not lock file.");
+    }
+
+    QString errorMessage;
+    std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
+    if (!calendar->save()) {
+        qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
+        errorMessage = QString("Could not save. Could lock file.");
+    }
+    m_fileLock->unlock();
+
+    if (removedFromDirWatch) {
+        KDirWatch::self()->addFile(m_url.path());
+    }
+
+    qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
+    return errorMessage;
 }
 
 QString TimeTrackerStorage::writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent)
@@ -557,38 +575,6 @@ KCalCore::Event::Ptr TimeTrackerStorage::baseEvent(const Task *task)
     e->setCategories(categories);
 
     return e;
-}
-
-QString TimeTrackerStorage::saveCalendar()
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    bool removedFromDirWatch = false;
-    if (KDirWatch::self()->contains(m_url.path())) {
-        KDirWatch::self()->removeFile(m_url.path());
-        removedFromDirWatch = true;
-    }
-
-    if (!m_model) {
-        qDebug() << "m_model not set";
-        return QString("m_model not set");
-    }
-
-    if (!m_fileLock->lock()) {
-        return QString("Could not save. Could not lock file.");
-    }
-
-    QString errorMessage;
-    std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
-    if (!calendar->save()) {
-        errorMessage = QString("Could not save. Could lock file.");
-    }
-    m_fileLock->unlock();
-
-    if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(m_url.path());
-    }
-
-    return errorMessage;
 }
 
 void TimeTrackerStorage::onFileModified()
