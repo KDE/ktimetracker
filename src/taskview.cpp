@@ -804,11 +804,6 @@ bool TaskView::isFocusTrackingActive() const
     return m_focusTrackingActive;
 }
 
-QList<Task*> TaskView::activeTasks() const
-{
-    return m_activeTasks;
-}
-
 void TaskView::reconfigure()
 {
     /* Adapt columns */

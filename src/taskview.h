@@ -90,9 +90,6 @@ public:
         const QString& taskame, const QString& taskdescription = QString(),
         long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
         Task* parent = nullptr);
-
-    /** Returns a list of the current active tasks. */
-    QList< Task* > activeTasks() const;
     //END
 
     //BEGIN behavior
