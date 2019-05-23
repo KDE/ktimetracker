@@ -19,8 +19,6 @@
  *
  */
 
-// TODO: what is the sense of tasksChanged()?
-
 #include "timetrackerwidget.h"
 
 #include <QFileDialog>

@@ -237,7 +237,10 @@ Q_SIGNALS:
     void updateButtons();
     void timersActive();
     void timersInactive();
+
+    /** Used to update text in tray icon */
     void tasksChanged(const QList<Task*> &activeTasks);
+
     void setStatusBarText(const QString &text);
     void contextMenuRequested(const QPoint&);
 

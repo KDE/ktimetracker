@@ -697,7 +697,7 @@ void TaskView::startTimerFor( Task* task, const QDateTime &startTime )
             emit updateButtons();
             if ( m_activeTasks.count() == 1 )
                 emit timersActive();
-            emit tasksChanged( m_activeTasks );
+            emit tasksChanged(m_activeTasks);
         }
     }
 }
@@ -788,7 +788,7 @@ void TaskView::stopTimerFor(Task* task)
         }
         emit updateButtons();
     }
-    emit tasksChanged( m_activeTasks );
+    emit tasksChanged(m_activeTasks);
 }
 
 void TaskView::stopCurrentTimer()

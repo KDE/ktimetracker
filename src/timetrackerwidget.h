@@ -202,7 +202,9 @@ Q_SIGNALS:
     void contextMenuRequested( const QPoint &pos );
     void timersActive();
     void timersInactive();
-    void tasksChanged( const QList< Task* >& );
+
+    /** Used to update text in tray icon */
+    void tasksChanged(const QList<Task*> &activeTasks);
 
 private:
     SearchLine *m_searchLine;
