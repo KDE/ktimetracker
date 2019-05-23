@@ -280,12 +280,6 @@ QString TimeTrackerStorage::save(TaskView* taskview)
     qCDebug(KTT_LOG) << "Entering function";
     QString errorString;
 
-    for (int i = 0; i < tasksModel()->topLevelItemCount(); ++i) {
-        Task *task = dynamic_cast<Task*>(tasksModel()->topLevelItem(i));
-        qCDebug(KTT_LOG) << "write task" << task->name();
-        errorString = writeTaskAsTodo(task, KCalCore::Todo::Ptr());
-    }
-
     errorString = saveCalendar();
 
     if (errorString.isEmpty()) {
