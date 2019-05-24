@@ -155,12 +155,13 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
         case Qt::TextAlignmentRole:
+            // Align task name: left
+            // Align priority: center
+            // Align HH:MM: right
             if (index.column() == 5) {
-                // Align priority left
                 return Qt::AlignCenter;
             } else if (index.column() >= 1) {
-                // Align HH:MM right
-                return Qt::AlignRight;
+                return {Qt::AlignRight | Qt::AlignVCenter};
             }
             break;
         case Qt::WhatsThisRole:
