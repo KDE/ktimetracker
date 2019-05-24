@@ -37,7 +37,7 @@
 #include "desktoptracker.h"
 #include "edittaskdialog.h"
 #include "idletimedetector.h"
-#include "plannerparser.h"
+#include "import/plannerparser.h"
 #include "ktimetracker.h"
 #include "export/totalsastext.h"
 #include "treeviewheadercontextmenu.h"

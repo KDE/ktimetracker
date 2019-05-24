@@ -29,7 +29,7 @@ set(ktimetracker_SRCS
     idletimedetector.cpp
     ktimetrackerutility.cpp
     mainwindow.cpp
-    plannerparser.cpp
+    import/plannerparser.cpp
     taskview.cpp
     timetrackerstorage.cpp
     timetrackerwidget.cpp
