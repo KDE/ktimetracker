@@ -9,7 +9,7 @@
 TaskView *createTaskView(QObject *parent, bool simpleTree)
 {
     auto *taskView = new TaskView();
-    QTemporaryFile *icsFile = new QTemporaryFile(parent);
+    auto *icsFile = new QTemporaryFile(parent);
     if (!icsFile->open()) {
         delete taskView;
         delete icsFile;
@@ -23,9 +23,9 @@ TaskView *createTaskView(QObject *parent, bool simpleTree)
         Task* task2 = taskView->task(taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1));
         Task* task3 = taskView->task(taskView->addTask("3"));
 
-        task1->changeTime(5, taskView->storage()); // add 5 minutes
-        task2->changeTime(3, taskView->storage()); // add 3 minutes
-        task3->changeTime(7, taskView->storage()); // add 7 minutes
+        task1->changeTime(5, taskView->storage()->eventsModel()); // add 5 minutes
+        task2->changeTime(3, taskView->storage()->eventsModel()); // add 3 minutes
+        task3->changeTime(7, taskView->storage()->eventsModel()); // add 7 minutes
     }
 
     return taskView;

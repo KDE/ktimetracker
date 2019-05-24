@@ -298,23 +298,23 @@ QString Task::setSessionTime(long minutes)
     return QString();
 }
 
-void Task::changeTimes(long minutesSession, long minutes, TimeTrackerStorage* storage)
+void Task::changeTimes(long minutesSession, long minutes, EventsModel *eventsModel)
 {
     qDebug() << "Task's sessionStartTiMe is " << mSessionStartTiMe;
     if (minutesSession != 0 || minutes != 0) {
         mSessionTime += minutesSession;
         mTime += minutes;
-        if (storage) {
-            storage->eventsModel()->changeTime(this, minutes * secsPerMinute);
+        if (eventsModel) {
+            eventsModel->changeTime(this, minutes * secsPerMinute);
             taskView()->scheduleSave();
         }
         changeTotalTimes(minutesSession, minutes);
     }
 }
 
-void Task::changeTime(long minutes, TimeTrackerStorage* storage)
+void Task::changeTime(long minutes, EventsModel *eventsModel)
 {
-    changeTimes(minutes, minutes, storage);
+    changeTimes(minutes, minutes, eventsModel);
 }
 
 void Task::changeTotalTimes(long minutesSession, long minutes)
@@ -538,7 +538,7 @@ void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
 
 void Task::startNewSession()
 {
-    changeTimes(-mSessionTime, 0);
+    changeTimes(-mSessionTime, 0, nullptr);
     mSessionStartTiMe = QDateTime::currentDateTime();
 }
 

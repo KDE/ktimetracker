@@ -682,7 +682,7 @@ int TimeTrackerWidget::changeTime(const QString &taskId, int minutes)
         return KTIMETRACKER_ERR_UID_NOT_FOUND;
     }
 
-    task->changeTime(minutes, task->taskView()->storage());
+    task->changeTime(minutes, taskView->storage()->eventsModel());
     return 0;
 }
 

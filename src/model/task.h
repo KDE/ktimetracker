@@ -33,6 +33,7 @@
 class TimeTrackerStorage;
 class TaskView;
 class ProjectModel;
+class EventsModel;
 
 /** \brief A class representing a task
  *
@@ -88,7 +89,7 @@ public:
        *  @param storage        Pointer to TimeTrackerStorage instance.
        *                        If zero, don't save changes.
        */
-      void changeTime(long minutes, TimeTrackerStorage* storage);
+      void changeTime(long minutes, EventsModel *eventsModel);
 
       /**
        * Add minutes to time and session time by adding an event, and write to storage.
@@ -98,7 +99,7 @@ public:
        *  @param storage          Pointer to TimeTrackerStorage instance.
        *                          If zero, don't save changes.
        */
-      void changeTimes(long minutesSession, long minutes, TimeTrackerStorage* storage = nullptr);
+      void changeTimes(long minutesSession, long minutes, EventsModel *eventsModel);
 
       /** adds minutes to total and session time by adding an event
        *
