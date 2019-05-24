@@ -650,7 +650,7 @@ int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, 
 
     // Update task totals (session and total) and save to disk
     task->changeTotalTimes(task->sessionTime() + minutes, task->totalTime() + minutes);
-    if (!task->taskView()->storage()->bookTime(task, startDateTime, minutes * 60)) {
+    if (!taskView->storage()->bookTime(task, startDateTime, minutes * 60)) {
         return KTIMETRACKER_ERR_GENERIC_SAVE_FAILED;
     }
 
@@ -683,6 +683,7 @@ int TimeTrackerWidget::changeTime(const QString &taskId, int minutes)
     }
 
     task->changeTime(minutes, taskView->storage()->eventsModel());
+    taskView->scheduleSave();
     return 0;
 }
 

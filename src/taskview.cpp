@@ -549,6 +549,7 @@ void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
     for (Task *task : m_activeTasks) {
         task->changeTime(minutes, save_data ? m_storage->eventsModel() : nullptr);
     }
+    scheduleSave();
 }
 
 void TaskView::newTask()
@@ -652,6 +653,7 @@ void TaskView::editTask()
         // update session time as well if the time was changed
         if (!dialog->timeChange().isEmpty()) {
             task->changeTime(dialog->timeChange().toInt(), m_storage->eventsModel());
+            scheduleSave();
         }
         dialog->status(&desktopList);
         // If all available desktops are checked, disable auto tracking,

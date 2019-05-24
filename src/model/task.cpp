@@ -306,7 +306,6 @@ void Task::changeTimes(long minutesSession, long minutes, EventsModel *eventsMod
         mTime += minutes;
         if (eventsModel) {
             eventsModel->changeTime(this, minutes * secsPerMinute);
-            taskView()->scheduleSave();
         }
         changeTotalTimes(minutesSession, minutes);
     }
