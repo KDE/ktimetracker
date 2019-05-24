@@ -39,9 +39,8 @@ test cases:
 #include "taskview.h"
 #include "ktt_debug.h"
 
-PlannerParser::PlannerParser(TaskView* tv, ProjectModel *projectModel, Task *currentTask)
+PlannerParser::PlannerParser(ProjectModel *projectModel, Task *currentTask)
     : m_withinTasks(false)
-    , m_taskView(tv)
     , m_task(nullptr)
     , m_level(0)
     , m_projectModel(projectModel)
@@ -92,9 +91,9 @@ bool PlannerParser::startElement(const QString&, const QString&, const QString &
         DesktopList dl;
         if (m_level++ > 0) {
             Task* parentTask = m_task;
-            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, m_projectModel, parentTask);
+            m_task = new Task(taskName, QString(), 0, 0, dl, m_projectModel, parentTask);
         } else {
-            m_task = new Task(taskName, QString(), 0, 0, dl, m_taskView, m_projectModel, nullptr);
+            m_task = new Task(taskName, QString(), 0, 0, dl, m_projectModel, nullptr);
             qDebug() << "added" << taskName;
         }
         m_task->setPercentComplete(taskComplete);

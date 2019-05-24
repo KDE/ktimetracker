@@ -37,10 +37,9 @@
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-            DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task *parentTask)
+Task::Task(const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
+           DesktopList desktops, ProjectModel *projectModel, Task *parentTask)
     : TasksModelItem(projectModel->tasksModel(), parentTask)
-    , m_taskView(taskView)
     , m_projectModel(projectModel)
 {
     if (parentTask) {
@@ -54,9 +53,8 @@ Task::Task( const QString& taskName, const QString& taskDescription, long minute
     mUid = KCalCore::CalFormat::createUniqueId();
 }
 
-Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView, ProjectModel *projectModel)
+Task::Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel)
     : TasksModelItem(projectModel->tasksModel(), nullptr)
-    , m_taskView(taskView)
     , m_projectModel(projectModel)
 {
     projectModel->tasksModel()->addChild(this);

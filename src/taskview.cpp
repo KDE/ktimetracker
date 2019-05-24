@@ -303,7 +303,7 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     qCDebug(KTT_LOG) << "entering importPlanner";
-    PlannerParser *handler = new PlannerParser(this, storage()->projectModel(), m_tasksWidget->currentItem());
+    PlannerParser *handler = new PlannerParser(storage()->projectModel(), m_tasksWidget->currentItem());
     QString lFileName = fileName;
     if (lFileName.isEmpty()) {
         lFileName = QFileDialog::getOpenFileName();
@@ -601,7 +601,7 @@ QString TaskView::addTask(
     m_tasksWidget->setSortingEnabled(false);
 
     Task *task = new Task(
-        taskname, taskdescription, total, session, desktops, this, storage()->projectModel(), parent);
+        taskname, taskdescription, total, session, desktops, storage()->projectModel(), parent);
     if (task->uid().isNull()) {
         qFatal("failed to generate UID");
     }

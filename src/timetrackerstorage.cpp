@@ -166,7 +166,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
 
     QMultiHash<QString, Task*> map;
     for (const auto &todo : todos) {
-        Task* task = new Task(todo, view, m_model);
+        Task* task = new Task(todo, m_model);
         map.insert(todo->uid(), task);
         task->invalidateCompletedState();
     }

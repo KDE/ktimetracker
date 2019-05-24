@@ -56,16 +56,13 @@ public:
     };
 
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task* parentTask);
-    Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView, ProjectModel *projectModel);
+        DesktopList desktops, ProjectModel *projectModel, Task* parentTask);
+    Task(const KCalCore::Todo::Ptr &incident, ProjectModel *projectModel);
 
     /* destructor */
     ~Task() override = default;
 
     Task* parentTask() const { return dynamic_cast<Task *>(TasksModelItem::parent()); }
-
-    /** Return task view for this task */
-    TaskView* taskView() const { return m_taskView; }
 
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const;
@@ -372,7 +369,6 @@ private:
     /** Priority of the task. */
     int mPriority;
 
-    TaskView* m_taskView;
     ProjectModel *m_projectModel;
 };
 
