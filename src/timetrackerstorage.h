@@ -143,7 +143,6 @@ public:
      */
     QString save();
 
-    void changeTime(const Task* task, long deltaSeconds);
     bool bookTime(const Task *task, const QDateTime &startDateTime, long durationInSeconds);
 
     /**

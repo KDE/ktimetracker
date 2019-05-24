@@ -305,7 +305,8 @@ void Task::changeTimes(long minutesSession, long minutes, TimeTrackerStorage* st
         mSessionTime += minutesSession;
         mTime += minutes;
         if (storage) {
-            storage->changeTime(this, minutes * secsPerMinute);
+            storage->eventsModel()->changeTime(this, minutes * secsPerMinute);
+            taskView()->scheduleSave();
         }
         changeTotalTimes(minutesSession, minutes);
     }

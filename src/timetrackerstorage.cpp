@@ -507,12 +507,6 @@ QString TimeTrackerStorage::exportCSVHistory(
     return err;
 }
 
-void TimeTrackerStorage::changeTime(const Task* task, long deltaSeconds)
-{
-    eventsModel()->changeTime(task, deltaSeconds);
-    task->taskView()->scheduleSave();
-}
-
 bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
 {
     return eventsModel()->bookTime(task, startDateTime, durationInSeconds);
