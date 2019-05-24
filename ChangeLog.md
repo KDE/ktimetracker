@@ -1,4 +1,17 @@
-ktimetracker 4.1 (Jul 2008 -- KDE 4.1 Release)
+KTimeTracker 5.0 (release date: ?)
+--------
+- Ported to KDE Frameworks 5
+- Nearly all the code touched by refactoring
+- Removed KParts support
+- Removed web interface in PHP
+- Removed CLI commands for tasks manupulation
+- Simplified configuration dialog internals, previously implemented as KCM shared libraries
+- Added unit tests (using Qt Test)
+- Rewrote D-Bus functional tests and benchmark in Python3 (py.test), previously written as Bash scripts
+- Ported to KF5::IdleTime for idle detection, thus removing dependency on X11
+- Do not create empty .ics file if it does not exist
+
+KTimeTracker 4.1 (Jul 2008 -- KDE 4.1 Release)
 --------
 - Renamed KArm (KDE 3) to ktimetracker (KDE 4)
 - Added "Manage History" functionality (including comments on events)
