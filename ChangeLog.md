@@ -10,6 +10,7 @@ KTimeTracker 5.0 (release date: ?)
 - Rewrote D-Bus functional tests and benchmark in Python3 (py.test), previously written as Bash scripts
 - Ported to KF5::IdleTime for idle detection, thus removing dependency on X11
 - Do not create empty .ics file if it does not exist
+- Fixed "Bug 325683 - Both "mark as complete" and "mark as incomplete" are mapped to ctrl+m"
 
 KTimeTracker 4.1 (Jul 2008 -- KDE 4.1 Release)
 --------
