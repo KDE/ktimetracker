@@ -492,26 +492,50 @@ void Task::move(TasksModelItem* destination)
 
 QVariant Task::data(int column, int role) const
 {
-    if (role != Qt::DisplayRole) {
-        return {};
-    }
-
-    bool b = KTimeTrackerSettings::decimalFormat();
-    switch (column) {
-        case 0:
-            return mName;
-        case 1:
-            return formatTime(mSessionTime, b);
-        case 2:
-            return formatTime(mTime, b);
-        case 3:
-            return formatTime(mTotalSessionTime, b);
-        case 4:
-            return formatTime(mTotalTime, b);
-        case 5:
-            return mPriority > 0 ? QString::number(mPriority) : QStringLiteral("--");
-        case 6:
-            return QString::number(mPercentComplete);
+    switch (role) {
+        case Qt::DisplayRole: {
+            bool b = KTimeTrackerSettings::decimalFormat();
+            switch (column) {
+                case 0:
+                    return mName;
+                case 1:
+                    return formatTime(mSessionTime, b);
+                case 2:
+                    return formatTime(mTime, b);
+                case 3:
+                    return formatTime(mTotalSessionTime, b);
+                case 4:
+                    return formatTime(mTotalTime, b);
+                case 5:
+                    return mPriority > 0 ? QString::number(mPriority) : QStringLiteral("--");
+                case 6:
+                    return QString::number(mPercentComplete);
+                default:
+                    return {};
+            }
+        }
+        case SortRole: {
+            // QSortFilterProxyModel::lessThan() supports comparison of a few data types,
+            // here we use some of those: QString, qlonglong, int.
+            switch (column) {
+                case 0:
+                    return mName;
+                case 1:
+                    return QVariant::fromValue<qlonglong>(mSessionTime);
+                case 2:
+                    return QVariant::fromValue<qlonglong>(mTime);
+                case 3:
+                    return QVariant::fromValue<qlonglong>(mTotalSessionTime);
+                case 4:
+                    return QVariant::fromValue<qlonglong>(mTotalTime);
+                case 5:
+                    return QVariant::fromValue<int>(mPriority);
+                case 6:
+                    return QVariant::fromValue<int>(mPercentComplete);
+                default:
+                    return {};
+            }
+        }
         default:
             return {};
     }

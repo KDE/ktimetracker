@@ -63,6 +63,7 @@ TaskView::TaskView(QWidget *parent)
 {
     m_filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_filterProxyModel->setRecursiveFilteringEnabled(true);
+    m_filterProxyModel->setSortRole(Task::SortRole);
 
     connect(m_focusDetector, &FocusDetector::newFocus, this, &TaskView::newFocusWindowDetected);
 

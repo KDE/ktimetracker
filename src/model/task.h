@@ -51,6 +51,10 @@ class EventsModel;
 class Task : public TasksModelItem
 {
 public:
+    enum {
+        SortRole = Qt::UserRole,
+    };
+
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
         DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task* parentTask);
     Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView, ProjectModel *projectModel);
