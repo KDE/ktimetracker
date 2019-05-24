@@ -35,7 +35,6 @@ class QLockFile;
 QT_END_NAMESPACE
 
 class ProjectModel;
-class Event;
 class Task;
 class TaskView;
 class TasksModel;
@@ -203,21 +202,7 @@ public:
     void setName(const Task* task, const QString& oldname) { Q_UNUSED(task); Q_UNUSED(oldname); }
 
     /**
-     * Add this task from iCalendar file.
-     *
-     * Create a new KCalCore::Todo object and load with task information.  If
-     * parent is not zero, then set the RELATED-TO attribute for this Todo.
-     *
-     * @param task   The task to be removed.
-     * @param parent The parent of this task.  Must have a uid() that is in
-     * the existing calendar.  If zero, this task is considered a root task.
-     * @return The unique ID for the new VTODO.  Return an null QString if
-     * there was an error creating the new calendar object.
-     */
-    QString addTask(const Task* task, const Task* parent = nullptr);
-
-    /**
-     *  Write task history to file as comma-delimited data.
+     * Write task history to file as comma-delimited data.
      */
     QString exportCSVHistory(TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc);
 
@@ -225,12 +210,11 @@ private Q_SLOTS:
     void onFileModified();
 
 private:
+    QString writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent);
+
     ProjectModel *m_model;
     QUrl m_url;
     TaskView* m_taskView;
-
-    QString writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent);
-    QString saveCalendar();
 
     KCalCore::Event::Ptr baseEvent(const Task*);
 };
