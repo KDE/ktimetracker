@@ -25,9 +25,8 @@
 
 #include <QtXml/QtXml>
 
-class Task;
-class TaskView;
 class ProjectModel;
+class Task;
 
 /**
 this class is here to import tasks from a planner project file to ktimetracker.

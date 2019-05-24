@@ -22,8 +22,6 @@
 
 #include "task.h"
 
-#include <QDateTime>
-
 #include <KCalCore/CalFormat>
 
 #include "model/projectmodel.h"
@@ -32,7 +30,6 @@
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "timetrackerstorage.h"
-#include "taskview.h"
 #include "ktt_debug.h"
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");

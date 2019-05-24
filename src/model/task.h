@@ -23,7 +23,6 @@
 #define KTIMETRACKER_TASK_H
 
 #include <QDateTime>
-#include <QVector>
 
 #include <KCalCore/Todo>
 
@@ -31,7 +30,6 @@
 #include "model/tasksmodelitem.h"
 
 class TimeTrackerStorage;
-class TaskView;
 class ProjectModel;
 class EventsModel;
 

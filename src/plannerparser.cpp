@@ -36,7 +36,6 @@ test cases:
 #include "plannerparser.h"
 
 #include "model/task.h"
-#include "taskview.h"
 #include "ktt_debug.h"
 
 PlannerParser::PlannerParser(ProjectModel *projectModel, Task *currentTask)
