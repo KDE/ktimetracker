@@ -337,8 +337,6 @@ private:
         const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
         const DesktopList& desktops, int percent_complete, int priority);
 
-    bool operator<(const TasksModelItem &other) const override;
-
     bool m_isRunning;
 
     /** The iCal unique ID of the Todo for this task. */

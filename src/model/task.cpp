@@ -565,22 +565,6 @@ void Task::startNewSession()
     mSessionStartTiMe = QDateTime::currentDateTime();
 }
 
-/* Overriding the < operator in order to sort the names case insensitive and
- * the progress percentage [column 6] numerically.
- */
-bool Task::operator<(const TasksModelItem &other) const
-{
-    const auto& otherTask = dynamic_cast<const Task&>(other);
-    const int column = m_taskView->sortColumn();
-    if (column == 6) {
-        return mPercentComplete < otherTask.mPercentComplete;
-    } else if (column == 0) { //task name
-        return mName.toLower() < otherTask.mName.toLower();
-    } else {
-        return data(column, Qt::DisplayRole) < other.data(column, Qt::DisplayRole);
-    }
-}
-
 //BEGIN Properties
 QString Task::uid() const
 {

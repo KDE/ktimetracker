@@ -13,8 +13,6 @@ public:
     explicit TasksModelItem(TasksModel *model, TasksModelItem *parent);
     virtual ~TasksModelItem();
 
-    virtual bool operator<(const TasksModelItem &other) const;
-
     TasksModelItem *parent() const;
     TasksModelItem *child(int index) const;
     int childCount() const;

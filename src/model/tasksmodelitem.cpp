@@ -66,11 +66,6 @@ int TasksModelItem::childCount() const
     return m_children.count();
 }
 
-bool TasksModelItem::operator<(const TasksModelItem &other) const
-{
-    return true;
-}
-
 TasksModelItem::TasksModelItem(TasksModel *model, TasksModelItem *parent)
     : m_model(model)
     , m_parent(parent)
