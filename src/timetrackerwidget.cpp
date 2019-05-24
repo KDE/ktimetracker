@@ -30,6 +30,7 @@
 
 #include "model/task.h"
 #include "model/eventsmodel.h"
+#include "model/projectmodel.h"
 #include "settings/ktimetrackerconfigdialog.h"
 #include "widgets/searchline.h"
 #include "historydialog.h"
@@ -496,7 +497,6 @@ void TimeTrackerWidget::editHistory()
     // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if (currentTaskView()) {
         auto *dialog = new HistoryDialog(currentTaskView()->tasksWidget(), currentTaskView()->storage()->projectModel());
-        connect(dialog, &HistoryDialog::timesChanged, currentTaskView(), &TaskView::reFreshTimes);
         if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();
         } else {

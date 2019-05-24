@@ -32,6 +32,7 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "model/eventsmodel.h"
+#include "model/projectmodel.h"
 #include "widgets/taskswidget.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
@@ -181,6 +182,7 @@ void TaskView::load(const QUrl &url)
 
     connect(tasksModel(), &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
     connect(tasksModel(), &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
+    connect(storage()->eventsModel(), &EventsModel::timesChanged, this, &TaskView::reFreshTimes);
 
     if (!err.isEmpty()) {
         KMessageBox::error(m_tasksWidget, err);
@@ -560,7 +562,7 @@ void TaskView::newTask()
 
 void TaskView::newTask(const QString& caption, Task* parent)
 {
-    auto *dialog = new EditTaskDialog(this, caption, nullptr);
+    auto *dialog = new EditTaskDialog(m_tasksWidget->parentWidget(), storage()->projectModel(), caption, nullptr);
     long total, totalDiff, session, sessionDiff;
     DesktopList desktopList;
 
@@ -639,7 +641,7 @@ void TaskView::editTask()
 
     DesktopList desktopList = task->desktops();
     DesktopList oldDeskTopList = desktopList;
-    EditTaskDialog* dialog = new EditTaskDialog(this, i18n("Edit Task"), &desktopList);
+    auto *dialog = new EditTaskDialog(m_tasksWidget->parentWidget(), storage()->projectModel(), i18n("Edit Task"), &desktopList);
     dialog->setTask(task->name());
     dialog->setDescription(task->description());
     int result = dialog->exec();

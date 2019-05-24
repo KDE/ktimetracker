@@ -190,7 +190,7 @@ void HistoryDialog::onCellChanged(int row, int col)
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
             Event *event = m_projectModel->eventsModel()->eventByUID(uid);
             event->setDtStart(datetime);
-            emit timesChanged();
+            emit m_projectModel->eventsModel()->timesChanged();
             qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
             break;
         }
@@ -206,7 +206,7 @@ void HistoryDialog::onCellChanged(int row, int col)
             QString uid = m_ui.historytablewidget->item(row, 4)->text();
             Event *event = m_projectModel->eventsModel()->eventByUID(uid);
             event->setDtEnd(datetime);
-            emit timesChanged();
+            emit m_projectModel->eventsModel()->timesChanged();
             qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
             break;
         }
@@ -245,7 +245,7 @@ void HistoryDialog::on_deletepushbutton_clicked()
         if (event) {
             qCDebug(KTT_LOG) << "removing uid " << event->uid();
             m_projectModel->eventsModel()->removeByUID(event->uid());
-            emit timesChanged();
+            emit m_projectModel->eventsModel()->timesChanged();
             this->refresh();
         }
     } else {

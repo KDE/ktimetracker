@@ -7,11 +7,13 @@
 
 class Task;
 
-class EventsModel
+class EventsModel : public QObject
 {
+    Q_OBJECT
+
 public:
     EventsModel();
-    virtual ~EventsModel();
+    ~EventsModel() override;
 
     void load(const KCalCore::Event::List &events);
     QList<Event*> events() const;
@@ -70,6 +72,9 @@ public:
      * attempted file lock failed).
      */
     bool bookTime(const Task *task, const QDateTime &startDateTime, long durationInSeconds);
+
+Q_SIGNALS:
+    void timesChanged();
 
 private:
     QList<Event*> m_events;

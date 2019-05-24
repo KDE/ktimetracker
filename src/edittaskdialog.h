@@ -10,7 +10,7 @@ QT_BEGIN_NAMESPACE
 class QCheckBox;
 QT_END_NAMESPACE
 
-class TaskView;
+class ProjectModel;
 
 /**
  * Class to show a dialog in ktimetracker to enter data about a task.
@@ -29,7 +29,7 @@ class EditTaskDialog : public QDialog
     Q_OBJECT
 
 public:
-    EditTaskDialog(TaskView *parent, const QString &caption, DesktopList *desktopList = nullptr);
+    EditTaskDialog(QWidget *parent, ProjectModel *projectModel, const QString &caption, DesktopList *desktopList = nullptr);
     ~EditTaskDialog() override = default;
 
     QString taskName();
@@ -42,14 +42,14 @@ public:
 protected:
     void changeEvent(QEvent *e) override;
 
-private:
-    TaskView *m_parent;
-    Ui::EditTaskDialog m_ui;
-    QVector<QCheckBox*> m_desktopCheckboxes;
-
 private Q_SLOTS:
     void on_autotrackinggroupbox_clicked();
     void on_edittimespushbutton_clicked();
+
+private:
+    ProjectModel *m_projectModel;
+    Ui::EditTaskDialog m_ui;
+    QVector<QCheckBox*> m_desktopCheckboxes;
 };
 
 #endif // EDITTASKDIALOG_H

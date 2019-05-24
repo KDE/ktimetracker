@@ -39,25 +39,22 @@ public:
 protected:
     void changeEvent(QEvent *e) override;
 
+private Q_SLOTS:
+    /**
+     * The historywidget contains all events and can be shown with File | Edit History.
+     * The user can change dates and comments in there.
+     * A change triggers this procedure, it shall store the new values in the calendar.
+     */
+    void on_deletepushbutton_clicked();
+    void onCellChanged(int row, int col);
+    void on_okpushbutton_clicked();
+
 private:
     QString listAllEvents();
     QString refresh();
 
     ProjectModel *m_projectModel;
     Ui::HistoryDialog m_ui;
-
-Q_SIGNALS:
-    void timesChanged();
-
-private Q_SLOTS:
-  /**
-   * The historywidget contains all events and can be shown with File | Edit History.
-   * The user can change dates and comments in there.
-   * A change triggers this procedure, it shall store the new values in the calendar.
-   */
-  void on_deletepushbutton_clicked();
-  void onCellChanged(int row, int col);
-  void on_okpushbutton_clicked();
 };
 
 #endif // HISTORYDIALOG_H

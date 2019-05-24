@@ -28,6 +28,7 @@
 
 CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
     : QDialog(parent)
+    , ui()
 {
     ui.setupUi(this);
 
@@ -84,13 +85,13 @@ void CSVExportDialog::enableTasksToExportQuestion()
 
 void CSVExportDialog::exPortToClipBoard()
 {
-    rc.bExPortToClipBoard=true;
+    rc.bExPortToClipBoard = true;
     accept();
 }
 
 void CSVExportDialog::exPortToCSVFile()
 {
-    rc.bExPortToClipBoard=false;
+    rc.bExPortToClipBoard = false;
     accept();
 }
 
@@ -99,7 +100,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
     rc.url = ui.urlExportTo->url();
     rc.from = ui.dtFrom->date();
     rc.to = ui.dtTo->date();
-    rc.decimalMinutes = (ui.combodecimalminutes->currentText() == i18nc( "format to display times", "Decimal" ) );
+    rc.decimalMinutes = (ui.combodecimalminutes->currentText() == i18nc("format to display times", "Decimal"));
     qCDebug(KTT_LOG) <<"rc.decimalMinutes is" << rc.decimalMinutes;
 
     if (ui.radioComma->isChecked()) {
