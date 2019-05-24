@@ -1,6 +1,9 @@
 #include "eventsmodel.h"
 
+#include <KLocalizedString>
+
 #include "task.h"
+#include "ktt_debug.h"
 
 EventsModel::EventsModel()
     : m_events()
@@ -85,4 +88,65 @@ void EventsModel::removeByUID(const QString &uid)
 void EventsModel::addEvent(Event *event)
 {
     m_events.append(event);
+}
+
+static KCalCore::Event::Ptr baseEvent(const Task *task)
+{
+    qCDebug(KTT_LOG) << "Entering function";
+    KCalCore::Event::Ptr e( new KCalCore::Event() );
+    QStringList categories;
+    e->setSummary(task->name());
+
+    // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
+    e->setRelatedTo( task->uid() );
+
+    // Debugging: some events where not getting a related-to field written.
+    Q_ASSERT(e->relatedTo() == task->uid());
+
+    // Have to turn this off to get datetimes in date fields.
+    e->setAllDay(false);
+//    e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
+    e->setDtStart(task->startTime());
+
+    // So someone can filter this mess out of their calendar display
+    categories.append(i18n("KTimeTracker"));
+    e->setCategories(categories);
+
+    return e;
+}
+
+void EventsModel::changeTime(const Task* task, long deltaSeconds)
+{
+    qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
+    QDateTime end;
+    auto kcalEvent = baseEvent(task);
+    auto *e = new Event(kcalEvent, this);
+
+    // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
+    // duration, even though it looks like it's used in event.cpp.
+    end = task->startTime();
+    if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
+    e->setDtEnd(end);
+
+    // Use a custom property to keep a record of negative durations
+    e->setDuration(deltaSeconds);
+
+    addEvent(e);
+}
+
+bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
+{
+    qCDebug(KTT_LOG) << "Entering function";
+
+    auto kcalEvent = baseEvent(task);
+    auto *e = new Event(kcalEvent, this);
+
+    e->setDtStart(startDateTime);
+    e->setDtEnd(startDateTime.addSecs( durationInSeconds));
+
+    // Use a custom property to keep a record of negative durations
+    e->setDuration(durationInSeconds);
+
+    addEvent(e);
+    return true;
 }
