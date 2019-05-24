@@ -42,8 +42,6 @@ public:
 
     TasksModelItem *item(const QModelIndex &index) const;
 
-    void sort(int column, Qt::SortOrder order) override;
-
     QList<TasksModelItem *> getAllItems();
 
     void addChild(TasksModelItem *item);
@@ -64,14 +62,6 @@ Q_SIGNALS:
     void taskCompleted(Task *task);
 
 private:
-    void sortItems(QList<TasksModelItem*> *items, int column, Qt::SortOrder order);
-
-    static bool itemLessThan(const QPair<TasksModelItem*,int> &left,
-                             const QPair<TasksModelItem*,int> &right);
-    static bool itemGreaterThan(const QPair<TasksModelItem*,int> &left,
-                                const QPair<TasksModelItem*,int> &right);
-
-
     TasksModelItem *m_rootItem;
     QStringList m_headerLabels;
     QMovie *m_clockAnimation;

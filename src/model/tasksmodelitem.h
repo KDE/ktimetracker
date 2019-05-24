@@ -30,9 +30,6 @@ public:
     void invalidateCompletedState();
 
 private:
-    void sortChildren(int column, Qt::SortOrder order, bool climb);
-    void sortChildrenImpl(int column, Qt::SortOrder order, bool climb);
-
     TasksModel *m_model;
     TasksModelItem *m_parent; // =nullptr for top-level items
     QList<TasksModelItem *> m_children;

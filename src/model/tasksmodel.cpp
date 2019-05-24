@@ -248,66 +248,6 @@ void TasksModel::setActiveIcon(int frameNumber)
     }
 }
 
-void TasksModel::sort(int column, Qt::SortOrder order)
-{
-    if (column < 0 || column >= columnCount(QModelIndex())) {
-        return;
-    }
-
-    m_rootItem->sortChildren(column, order, true);
-}
-
-// static
-bool TasksModel::itemLessThan(const QPair<TasksModelItem*,int> &left,
-                              const QPair<TasksModelItem*,int> &right)
-{
-    return *(left.first) < *(right.first);
-}
-
-// static
-bool TasksModel::itemGreaterThan(const QPair<TasksModelItem*,int> &left,
-                                 const QPair<TasksModelItem*,int> &right)
-{
-    return *(right.first) < *(left.first);
-}
-
-void TasksModel::sortItems(QList<TasksModelItem*> *items, int column, Qt::SortOrder order)
-{
-    Q_UNUSED(column);
-
-    // store the original order of indexes
-    QVector<QPair<TasksModelItem*,int>> sorting(items->count());
-    for (int i = 0; i < sorting.count(); ++i) {
-        sorting[i].first = items->at(i);
-        sorting[i].second = i;
-    }
-
-    // do the sorting
-    typedef bool(*LessThan)(const QPair<TasksModelItem*,int>&,const QPair<TasksModelItem*,int>&);
-    LessThan compare = (order == Qt::AscendingOrder ? &itemLessThan : &itemGreaterThan);
-    std::stable_sort(sorting.begin(), sorting.end(), compare);
-
-    QModelIndexList fromList;
-    QModelIndexList toList;
-    int colCount = columnCount(QModelIndex());
-    for (int r = 0; r < sorting.count(); ++r) {
-        int oldRow = sorting.at(r).second;
-        if (oldRow == r) {
-            continue;
-        }
-
-        TasksModelItem *item = sorting.at(r).first;
-        items->replace(r, item);
-        for (int c = 0; c < colCount; ++c) {
-            QModelIndex from = createIndex(oldRow, c, item);
-            QModelIndex to = createIndex(r, c, item);
-            fromList << from;
-            toList << to;
-        }
-    }
-    changePersistentIndexList(fromList, toList);
-}
-
 void TasksModel::addChild(TasksModelItem *item)
 {
     m_rootItem->addChild(item);

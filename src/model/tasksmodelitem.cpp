@@ -115,20 +115,3 @@ void TasksModelItem::invalidateCompletedState() {
     QModelIndex index = m_model->index(this, 0);
     emit m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
 }
-
-void TasksModelItem::sortChildrenImpl(int column, Qt::SortOrder order, bool climb)
-{
-    m_model->sortItems(&m_children, column, order);
-    if (climb) {
-        for (TasksModelItem *item : m_children) {
-            item->sortChildren(column, order, climb);
-        }
-    }
-}
-
-void TasksModelItem::sortChildren(int column, Qt::SortOrder order, bool climb)
-{
-    emit m_model->layoutAboutToBeChanged();
-    sortChildrenImpl(column, order, climb);
-    emit m_model->layoutChanged();
-}
