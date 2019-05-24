@@ -1,6 +1,6 @@
 /*
- *     Copyright (C) 2003 by Tomas Pospisek <tpo@sourcepole.ch>
- *                   2007 the ktimetracker developers
+ * Copyright (C) 2003 by Tomas Pospisek <tpo@sourcepole.ch>
+ * Copyright (C) 2019  Alexander Potashev <aspotashev@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

@@ -1,5 +1,6 @@
 /*
- *     Copyright (C) 2003, 2004 by Mark Bucciarelli <mark@hubcapconsutling.com>
+ * Copyright (C) 2003, 2004 by Mark Bucciarelli <mark@hubcapconsutling.com>
+ * Copyright (C) 2019  Alexander Potashev <aspotashev@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
