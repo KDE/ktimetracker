@@ -179,6 +179,7 @@ void TaskView::load(const QUrl &url)
     }
 
     connect(tasksModel(), &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
+    connect(tasksModel(), &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
 
     if (!err.isEmpty()) {
         KMessageBox::error(m_tasksWidget, err);
@@ -749,17 +750,6 @@ void TaskView::subtractTime(int minutes)
     addTimeToActiveTasks(-minutes, false); // subtract time in memory, but do not store it
 }
 
-void TaskView::deletingTask(Task* deletedTask)
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    DesktopList desktopList;
-
-    m_desktopTracker->registerForDesktops(deletedTask, desktopList);
-    m_activeTasks.removeAll(deletedTask);
-
-    emit tasksChanged(m_activeTasks);
-}
-
 void TaskView::markTaskAsIncomplete()
 {
     setPerCentComplete(50); // if it has been reopened, assume half-done
@@ -984,4 +974,41 @@ void TaskView::onTaskDoubleClicked(Task *task)
         stopAllTimers();
         startCurrentTimer();
     }
+}
+
+void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int last)
+{
+    if (first != last) {
+        qFatal("taskAboutToBeRemoved: unexpected removal of multiple items at once");
+    }
+
+    TasksModelItem *item = nullptr;
+    if (parent.isValid()) {
+        // Nested task
+        auto *parentItem = tasksModel()->item(parent);
+        if (!parentItem) {
+            qFatal("taskAboutToBeRemoved: parentItem is nullptr");
+        }
+
+        item = parentItem->child(first);
+    } else {
+        // Top-level task
+        item = tasksModel()->topLevelItem(first);
+    }
+
+    if (!item) {
+        qFatal("taskAboutToBeRemoved: item is nullptr");
+    }
+
+    // We use static_cast here instead of dynamic_cast because this
+    // taskAboutToBeRemoved() slot is called from TasksModelItem's destructor
+    // when the Task object is already destructed, thus dynamic_cast would
+    // return nullptr.
+    auto *deletedTask = static_cast<Task*>(item);
+
+    // Handle task deletion
+    DesktopList desktopList;
+    m_desktopTracker->registerForDesktops(deletedTask, desktopList);
+    m_activeTasks.removeAll(deletedTask);
+    emit tasksChanged(m_activeTasks);
 }

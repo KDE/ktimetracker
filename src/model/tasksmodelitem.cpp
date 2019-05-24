@@ -23,7 +23,7 @@ int TasksModelItem::indexOfChild(TasksModelItem *child) const
 }
 
 void TasksModelItem::insertChild(int index, TasksModelItem *child) {
-    if (index < 0 || index > m_children.count() || child == 0) {
+    if (index < 0 || index > m_children.count() || child == nullptr) {
         return;
     }
 

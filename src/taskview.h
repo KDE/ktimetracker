@@ -199,7 +199,7 @@ public Q_SLOTS:
     /** Subtracts time from all active tasks, and does not log event. */
     void subtractTime(int minutes);
     /** receiving signal that a task is being deleted */
-    void deletingTask(Task* deletedTask);
+    void taskAboutToBeRemoved(const QModelIndex &parent, int first, int last);
 
     /** starts timer for task.
      * @param task      task to start timer of

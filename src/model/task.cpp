@@ -39,8 +39,7 @@ static const QByteArray eventAppName = QByteArray("ktimetracker");
 
 Task::Task( const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
             DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task *parentTask)
-    : QObject()
-    , TasksModelItem(projectModel->tasksModel(), parentTask)
+    : TasksModelItem(projectModel->tasksModel(), parentTask)
     , m_taskView(taskView)
     , m_projectModel(projectModel)
 {
@@ -56,8 +55,7 @@ Task::Task( const QString& taskName, const QString& taskDescription, long minute
 }
 
 Task::Task(const KCalCore::Todo::Ptr &todo, TaskView* taskView, ProjectModel *projectModel)
-    : QObject()
-    , TasksModelItem(projectModel->tasksModel(), nullptr)
+    : TasksModelItem(projectModel->tasksModel(), nullptr)
     , m_taskView(taskView)
     , m_projectModel(projectModel)
 {
@@ -95,8 +93,6 @@ void Task::init(
     const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
     const DesktopList& desktops, int percent_complete, int priority)
 {
-    connect(this, &Task::deletingTask, m_taskView, &TaskView::deletingTask);
-
     m_isRunning = false;
     mName = taskName.trimmed();
     mDescription = taskDescription.trimmed();
@@ -111,11 +107,6 @@ void Task::init(
 
     update();
     changeParentTotalTimes(mSessionTime, mTime);
-}
-
-Task::~Task()
-{
-    emit deletingTask(this);
 }
 
 void Task::delete_recursive()

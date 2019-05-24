@@ -47,17 +47,15 @@ class ProjectModel;
  * It can also contain subtasks - these are managed using the
  * QListViewItem class.
  */
-class Task : public QObject, public TasksModelItem
+class Task : public TasksModelItem
 {
-    Q_OBJECT
-
 public:
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
         DesktopList desktops, TaskView* taskView, ProjectModel *projectModel, Task* parentTask);
     Task(const KCalCore::Todo::Ptr &incident, TaskView* taskView, ProjectModel *projectModel);
 
     /* destructor */
-    ~Task() override;
+    ~Task() override = default;
 
     Task* parentTask() const { return dynamic_cast<Task *>(TasksModelItem::parent()); }
 
@@ -327,10 +325,6 @@ public:
 
 protected:
     void changeParentTotalTimes(long minutesSession, long minutes);
-
-Q_SIGNALS:
-    /** signal that we're about to delete a task */
-    void deletingTask(Task* thisTask);
 
 private:
     /** initialize a task */
