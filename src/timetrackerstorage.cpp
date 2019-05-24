@@ -97,28 +97,13 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
         return QString();
     }
 
-    const bool fileIsLocal = url.isLocalFile();
-
-    // If file doesn't exist, create a blank one to avoid ResourceLocal load
-    // error.  We make it user and group read/write, others read.  This is
-    // masked by the users umask.  (See man creat)
-    if (fileIsLocal) {
-        int handle = open(
-            QFile::encodeName(url.path()),
-            O_CREAT | O_EXCL | O_WRONLY,
-            S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-        if (handle != -1) {
-            close(handle);
-        }
-    }
-
     if (m_model) {
         closeStorage();
     }
 
     m_model = new ProjectModel();
 
-    if (fileIsLocal) {
+    if (url.isLocalFile()) {
         connect(KDirWatch::self(), &KDirWatch::dirty, this, &TimeTrackerStorage::onFileModified);
         if (!KDirWatch::self()->contains(url.path())) {
             KDirWatch::self()->addFile(url.path());

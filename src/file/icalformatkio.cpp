@@ -22,6 +22,12 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
     QUrl url(fileName);
     if (url.isLocalFile()) {
         QFile file(url.path());
+        if (!file.exists()) {
+            // Local file does not exist
+            return true;
+        }
+
+        // Local file exists
         if (!file.open(QIODevice::ReadOnly)) {
             qCWarning(KTT_LOG) << "load file open error: " << file.errorString() << ";filename=" << fileName;
             setException(new KCalCore::Exception(KCalCore::Exception::LoadError));
