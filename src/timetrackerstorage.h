@@ -159,11 +159,6 @@ public:
      */
     void setName(const Task* task, const QString& oldname) { Q_UNUSED(task); Q_UNUSED(oldname); }
 
-    /**
-     * Write task history to file as comma-delimited data.
-     */
-    QString exportCSVHistory(const ReportCriteria &rc);
-
 private Q_SLOTS:
     void onFileModified();
 

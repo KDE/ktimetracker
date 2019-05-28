@@ -125,16 +125,7 @@ public Q_SLOTS:
      * Call export function for csv totals or history.
      * Output a report based on contents of ReportCriteria.
      */
-    QString report(const ReportCriteria& rc);
-
-    /**
-     *  Writes all tasks and their totals to a Comma-Separated Values file.
-     *
-     * The format of this file is zero or more lines of:
-     *    taskName,subtaskName,..,sessionTime,time,totalSessionTime,totalTime
-     * the number of subtasks is determined at runtime.
-     */
-    QString exportcsvFile(const ReportCriteria &rc);
+    QString report(const ReportCriteria &rc);
 
     /** Export comma separated values format for task time totals. */
     void exportCSVFileDialog();
@@ -197,9 +188,6 @@ public Q_SLOTS:
        another program and taskview is cleared without stopping tasks
         IF YOU DO NOT KNOW WHAT YOU ARE DOING, CALL stopAllTimers INSTEAD */
     void clearActiveTasks();
-
-    /** Copy totals for current and all sub tasks to clipboard. */
-    QString clipTotals(const ReportCriteria& rc);
 
     /** Reconfigures taskView depending on current configuration. */
     void reconfigure();

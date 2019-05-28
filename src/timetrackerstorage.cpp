@@ -307,13 +307,6 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr pare
 
 //----------------------------------------------------------------------------
 
-// export history report as csv, all tasks X all dates in one block
-QString TimeTrackerStorage::exportCSVHistory(const ReportCriteria &rc)
-{
-    QString retval = exportToString(m_model, nullptr, rc);
-    return writeExport(rc, retval);
-}
-
 bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
 {
     return eventsModel()->bookTime(task, startDateTime, durationInSeconds);

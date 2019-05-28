@@ -322,19 +322,20 @@ void TaskView::importPlanner(const QString& fileName)
     refresh();
 }
 
-QString TaskView::report(const ReportCriteria& rc)
+QString TaskView::report(const ReportCriteria &rc)
 {
-    QString err;
-    if (rc.reportType == ReportCriteria::CSVHistoryExport) {
-        err = m_storage->exportCSVHistory(rc);
-    } else { // rc.reportType == ReportCriteria::CSVTotalsExport
-        if (!rc.bExPortToClipBoard) {
-            err = exportcsvFile(rc);
-        } else {
-            err = clipTotals(rc);
-        }
-    }
-    return err;
+    //     QProgressDialog dialog(
+    //        i18n("Exporting to CSV..."), i18n("Cancel"),
+    //        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
+    //    dialog.setAutoClose(true);
+    //    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
+    //
+    //    if (storage()->tasksModel()->getAllTasks().size() > 1) {
+    //        dialog.show();
+    //    }
+
+    QString retval = exportToString(m_storage->projectModel(), m_tasksWidget->currentItem(), rc);
+    return writeExport(rc, retval);
 }
 
 void TaskView::exportCSVFileDialog()
@@ -720,14 +721,6 @@ void TaskView::markTaskAsIncomplete()
     setPerCentComplete(50); // if it has been reopened, assume half-done
 }
 
-// This function stores the user's tasks into the clipboard.
-// rc tells how the user wants his report, e.g. all times or session times
-QString TaskView::clipTotals(const ReportCriteria &rc)
-{
-    QApplication::clipboard()->setText(totalsAsText(storage()->tasksModel(), m_tasksWidget->currentItem(), rc));
-    return QString();
-}
-
 void TaskView::slotColumnToggled(int column)
 {
     switch (column) {
@@ -783,23 +776,6 @@ void TaskView::reconfigure()
 }
 
 //----------------------------------------------------------------------------
-// Routines that handle Comma-Separated Values export file format.
-//
-QString TaskView::exportcsvFile(const ReportCriteria &rc)
-{
-    QProgressDialog dialog(
-        i18n("Exporting to CSV..."), i18n("Cancel"),
-        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
-    dialog.setAutoClose(true);
-    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
-
-    if (storage()->tasksModel()->getAllTasks().size() > 1) {
-        dialog.show();
-    }
-
-    QString retval = exportToString(storage()->projectModel(), nullptr, rc);
-    return writeExport(rc, retval);
-}
 
 void TaskView::onTaskDoubleClicked(Task *task)
 {

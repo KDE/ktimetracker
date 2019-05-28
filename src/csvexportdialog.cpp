@@ -85,6 +85,10 @@ void CSVExportDialog::enableTasksToExportQuestion()
 
 void CSVExportDialog::exPortToClipBoard()
 {
+    if (rc.reportType == ReportCriteria::CSVTotalsExport) {
+        rc.reportType = ReportCriteria::TextTotalsExport;
+    }
+
     rc.bExPortToClipBoard = true;
     accept();
 }

@@ -9,6 +9,7 @@
 #include "model/projectmodel.h"
 #include "csvtotals.h"
 #include "csvhistory.h"
+#include "totalsastext.h"
 #include "ktt_debug.h"
 
 QString exportToString(ProjectModel *model, Task *currentTask, const ReportCriteria &rc)
@@ -18,6 +19,8 @@ QString exportToString(ProjectModel *model, Task *currentTask, const ReportCrite
             return exportCSVToString(model->tasksModel(), rc);
         case ReportCriteria::CSVHistoryExport:
             return exportCSVHistoryToString(model, rc);
+        case ReportCriteria::TextTotalsExport:
+            return totalsAsText(model->tasksModel(), currentTask, rc);
         default:
             return QString();
     }

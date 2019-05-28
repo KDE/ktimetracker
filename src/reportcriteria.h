@@ -45,8 +45,25 @@ public:
      * These numeric constants are part of D-Bus API, don't change them.
      */
     enum REPORTTYPE {
+        /**
+         * Writes all tasks and their totals to a Comma-Separated Values file.
+         *
+         * The format of this file is zero or more lines of:
+         *    taskName,subtaskName,..,sessionTime,time,totalSessionTime,totalTime
+         * the number of subtasks is determined at runtime.
+         */
         CSVTotalsExport = 0,
+        /**
+         * Export history report as csv, all tasks X all dates in one block.
+         * Write task history as comma-delimited data.
+         */
         CSVHistoryExport = 1,
+        /**
+         * Totals for current and all sub tasks.
+         * This function stores the user's tasks.
+         * rc tells how the user wants his report, e.g. all times or session times.
+         */
+        TextTotalsExport = 2,
     };
 
     /**
