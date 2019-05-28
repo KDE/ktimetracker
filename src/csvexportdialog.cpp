@@ -22,17 +22,20 @@
 
 #include "csvexportdialog.h"
 
-#include <KLineEdit>
+#include <QPushButton>
 
+#include <KMessageBox>
+#include <QtWidgets/QFileDialog>
+
+#include "taskview.h"
 #include "ktt_debug.h"
 
-CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
+CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView, ReportCriteria::REPORTTYPE rt)
     : QDialog(parent)
     , ui()
+    , m_taskView(taskView)
 {
     ui.setupUi(this);
-
-    ui.urlExportTo->KUrlRequester::setMode(KFile::File);
 
     ui.buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
 
@@ -43,12 +46,13 @@ CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
 
     connect(ui.buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked,
             this, &CSVExportDialog::exPortToClipBoard);
-    connect(ui.buttonBox, &QDialogButtonBox::accepted,
+    connect(ui.buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked,
             this, &CSVExportDialog::exPortToCSVFile);
 
-    connect(ui.urlExportTo, &KUrlRequester::textChanged, this, &CSVExportDialog::enableExportButton);
+    ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 
     switch (rt) {
+    case ReportCriteria::TextTotalsExport:
     case ReportCriteria::CSVTotalsExport:
         ui.grpDateRange->setEnabled(false);
         ui.grpDateRange->hide();
@@ -72,11 +76,6 @@ CSVExportDialog::CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent)
     }
 }
 
-void CSVExportDialog::enableExportButton()
-{
-    ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!ui.urlExportTo->lineEdit()->text().isEmpty());
-}
-
 void CSVExportDialog::enableTasksToExportQuestion()
 {
     return;
@@ -90,18 +89,29 @@ void CSVExportDialog::exPortToClipBoard()
     }
 
     rc.bExPortToClipBoard = true;
-    accept();
+
+    QString err = m_taskView->report(reportCriteria(), QUrl());
+    if (!err.isEmpty()) {
+        KMessageBox::error(parentWidget(), i18n(err.toLatin1()));
+    }
 }
 
 void CSVExportDialog::exPortToCSVFile()
 {
     rc.bExPortToClipBoard = false;
+
+    const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export as CSV"));
+    QString err = m_taskView->report(reportCriteria(), url);
+    if (!err.isEmpty()) {
+        KMessageBox::error(parentWidget(), i18n(err.toLatin1()));
+    }
+
+    // Close export dialog after saving
     accept();
 }
 
 ReportCriteria CSVExportDialog::reportCriteria()
 {
-    rc.url = ui.urlExportTo->url();
     rc.from = ui.dtFrom->date();
     rc.to = ui.dtTo->date();
     rc.decimalMinutes = (ui.combodecimalminutes->currentText() == i18nc("format to display times", "Decimal"));

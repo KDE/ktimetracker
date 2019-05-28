@@ -72,11 +72,6 @@ public:
     REPORTTYPE reportType;
 
     /**
-     For reports that write to a file, the filename to write to.
-     */
-    QUrl url;
-
-    /**
      For history reports, the lower bound of the date range to report on.
      */
     QDate   from;

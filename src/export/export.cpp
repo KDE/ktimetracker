@@ -46,7 +46,7 @@ QString exportToString(ProjectModel *model, Task *currentTask, const ReportCrite
     }
 }
 
-QString writeExport(const ReportCriteria &rc, const QString &data)
+QString writeExport(const ReportCriteria &rc, const QString &data, const QUrl &url)
 {
     QString err = QString::null;
 
@@ -54,11 +54,11 @@ QString writeExport(const ReportCriteria &rc, const QString &data)
         QApplication::clipboard()->setText(data);
     } else {
         // store the file locally or remote
-        if (rc.url.isLocalFile()) {
+        if (url.isLocalFile()) {
             qCDebug(KTT_LOG) << "storing a local file";
-            QString filename = rc.url.toLocalFile();
+            QString filename = url.toLocalFile();
             if (filename.isEmpty()) {
-                filename = rc.url.url();
+                filename = url.url();
             }
 
             QFile f(filename);
@@ -76,7 +76,7 @@ QString writeExport(const ReportCriteria &rc, const QString &data)
             }
         } else {
             // use remote file
-            auto* const job = KIO::storedPut(data.toUtf8(), rc.url, -1);
+            auto* const job = KIO::storedPut(data.toUtf8(), url, -1);
             //KJobWidgets::setWindow(job, &dialog); // TODO: add progress dialog
             if (!job->exec()) {
                 err = QString::fromLatin1("Could not upload");

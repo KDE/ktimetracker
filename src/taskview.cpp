@@ -322,7 +322,7 @@ void TaskView::importPlanner(const QString& fileName)
     refresh();
 }
 
-QString TaskView::report(const ReportCriteria &rc)
+QString TaskView::report(const ReportCriteria &rc, const QUrl &url)
 {
     //     QProgressDialog dialog(
     //        i18n("Exporting to CSV..."), i18n("Cancel"),
@@ -335,39 +335,28 @@ QString TaskView::report(const ReportCriteria &rc)
     //    }
 
     QString retval = exportToString(m_storage->projectModel(), m_tasksWidget->currentItem(), rc);
-    return writeExport(rc, retval);
+    return writeExport(rc, retval, url);
 }
 
 void TaskView::exportCSVFileDialog()
 {
     qCDebug(KTT_LOG) << "TaskView::exportCSVFileDialog()";
 
-    CSVExportDialog dialog(ReportCriteria::CSVTotalsExport, m_tasksWidget);
+    CSVExportDialog dialog(m_tasksWidget, this, ReportCriteria::CSVTotalsExport);
     if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }
-    if (dialog.exec()) {
-        QString err = report(dialog.reportCriteria());
-        if (!err.isEmpty()) {
-            KMessageBox::error(m_tasksWidget, i18n(err.toLatin1()));
-        }
-    }
+    dialog.exec();
 }
 
-QString TaskView::exportCSVHistoryDialog()
+void TaskView::exportCSVHistoryDialog()
 {
     qCDebug(KTT_LOG) << "TaskView::exportCSVHistoryDialog()";
-    QString err;
-
-    CSVExportDialog dialog(ReportCriteria::CSVHistoryExport, m_tasksWidget);
+    CSVExportDialog dialog(m_tasksWidget, this, ReportCriteria::CSVHistoryExport);
     if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }
-    if (dialog.exec()) {
-        err = report(dialog.reportCriteria());
-    }
-
-    return err;
+    dialog.exec();
 }
 
 void TaskView::scheduleSave()

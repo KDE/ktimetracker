@@ -810,7 +810,6 @@ QString TimeTrackerWidget::exportCSVFile(
 
     if ( !taskView ) return "";
     ReportCriteria rc;
-    rc.url = filename;
     rc.from = QDate::fromString( from );
     if ( rc.from.isNull() )
         rc.from = QDate::fromString( from, Qt::ISODate );
@@ -823,7 +822,7 @@ QString TimeTrackerWidget::exportCSVFile(
     rc.delimiter = delimiter;
     rc.quote = quote;
 
-    return taskView->report(rc);
+    return taskView->report(rc, filename);
 }
 
 void TimeTrackerWidget::importPlannerFile(const QString &filename)

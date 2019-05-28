@@ -32,7 +32,8 @@ class ExportCSVTest : public QObject
     Q_OBJECT
 
 private:
-   ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard);
+    QUrl createTempFile();
+    ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard);
 
 private Q_SLOTS:
     void testTotalsEmpty();
@@ -41,7 +42,7 @@ private Q_SLOTS:
     void testHistorySimpleTree();
 };
 
-ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
+QUrl ExportCSVTest::createTempFile()
 {
     auto *file = new QTemporaryFile(this);
     if (!file->open()) {
@@ -49,9 +50,13 @@ ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toC
         throw std::runtime_error("1");
     }
 
+    return QUrl::fromLocalFile(file->fileName());
+}
+
+ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
+{
     ReportCriteria rc;
     rc.reportType = type;
-    rc.url = QUrl::fromLocalFile(file->fileName());
     rc.from = QDate::currentDate();
     rc.to = QDate::currentDate();
     rc.decimalMinutes = false;
@@ -109,13 +114,14 @@ void ExportCSVTest::testTimesSimpleTree()
     auto *taskView = createTaskView(this, true);
 
     const auto &rc = createRC(ReportCriteria::CSVTotalsExport, false);
-    QCOMPARE(taskView->report(rc), "");
+    const QUrl &url = createTempFile();
+    QCOMPARE(taskView->report(rc, url), "");
 
     const QString &expected = QStringLiteral(
         "\"3\";;0:07;0:07;0:07;0:07\n"
         "\"1\";;0:05;0:05;0:08;0:08\n"
         ";\"2\";0:03;0:03;0:03;0:03\n");
-    QCOMPARE(readTextFile(rc.url.path()), expected);
+    QCOMPARE(readTextFile(url.path()), expected);
 }
 
 void ExportCSVTest::testHistorySimpleTree()
@@ -125,14 +131,15 @@ void ExportCSVTest::testHistorySimpleTree()
     auto *taskView = createTaskView(this, true);
 
     const auto &rc = createRC(ReportCriteria::CSVHistoryExport, false);
-    QCOMPARE(taskView->report(rc), "");
+    const QUrl &url = createTempFile();
+    QCOMPARE(taskView->report(rc, url), "");
 
     const QString &expected = QStringLiteral(
         "\"Task name\";%1\n"
         "\"1\";0:05\n"
         "\"1->2\";0:03\n"
         "\"3\";0:07\n").arg(QDate::currentDate().toString());
-    QCOMPARE(readTextFile(rc.url.path()), expected);
+    QCOMPARE(readTextFile(url.path()), expected);
 }
 
 QTEST_MAIN(ExportCSVTest)

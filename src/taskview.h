@@ -125,13 +125,13 @@ public Q_SLOTS:
      * Call export function for csv totals or history.
      * Output a report based on contents of ReportCriteria.
      */
-    QString report(const ReportCriteria &rc);
+    QString report(const ReportCriteria &rc, const QUrl &url);
 
     /** Export comma separated values format for task time totals. */
     void exportCSVFileDialog();
 
     /** Export comma-separated values format for task history. */
-    QString exportCSVHistoryDialog();
+    void exportCSVHistoryDialog();
 
     /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();

@@ -28,6 +28,8 @@
 #include "ui_csvexportdialog.h"
 #include "reportcriteria.h"
 
+class TaskView;
+
 class CSVExportDialog : public QDialog
 {
     Q_OBJECT
@@ -37,7 +39,7 @@ public Q_SLOTS:
     void exPortToCSVFile();
 
 public:
-    explicit CSVExportDialog(ReportCriteria::REPORTTYPE rt, QWidget *parent = nullptr);
+    explicit CSVExportDialog(QWidget *parent, TaskView *taskView, ReportCriteria::REPORTTYPE rt);
 
     /**
      Enable the "Tasks to export" question in the dialog.
@@ -55,15 +57,9 @@ public:
      */
     ReportCriteria reportCriteria();
 
-private Q_SLOTS:
-
-    /**
-    Enable export button if export url entered.
-    */
-    void enableExportButton();
-
 private:
     Ui::CSVExportDialog ui;
+    TaskView *m_taskView;
     ReportCriteria rc;
 };
 
