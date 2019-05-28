@@ -375,18 +375,6 @@ QStringList TaskView::tasks()
     return result;
 }
 
-Task *TaskView::task(const QString &taskId)
-{
-    Task *result = nullptr;
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        if (task->uid() == taskId) {
-            result = task;
-        }
-    }
-
-    return result;
-}
-
 void TaskView::scheduleSave()
 {
     m_manualSaveTimer->start(10);

@@ -79,9 +79,6 @@ public:
     /** return all task names, e.g. for batch processing */
     QStringList tasks();
 
-    /** return the task with the given UID */
-    Task* task(const QString& uid);
-
     /** Add a task to view and storage. */
     Task *addTask(
         const QString& taskame, const QString& taskdescription = QString(),

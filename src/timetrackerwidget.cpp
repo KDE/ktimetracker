@@ -574,7 +574,7 @@ void TimeTrackerWidget::addSubTask(const QString &taskName, const QString &taskI
     TaskView *taskView = currentTaskView();
 
     if (taskView) {
-        taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->task(taskId));
+        taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->storage()->tasksModel()->taskByUID(taskId));
         taskView->refresh();
     }
 }

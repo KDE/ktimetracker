@@ -346,11 +346,12 @@ QMimeData *TasksModel::mimeData(const QModelIndexList &indexes) const
     return QAbstractItemModel::mimeData(indexes);
 }
 
-TasksModelItem *TasksModel::taskByUID(const QString &uid)
+Task *TasksModel::taskByUID(const QString &uid)
 {
     for (auto *item : getAllItems()) {
-        if (dynamic_cast<Task*>(item)->uid() == uid) {
-            return item;
+        auto *task = dynamic_cast<Task*>(item);
+        if (task->uid() == uid) {
+            return task;
         }
     }
 
