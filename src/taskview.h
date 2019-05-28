@@ -119,7 +119,7 @@ public Q_SLOTS:
     void refresh();
 
     /** used to import tasks from imendio planner */
-    void importPlanner(const QString& fileName = "");
+    void importPlanner(const QString &fileName);
 
     /**
      * Call export function for csv totals or history.

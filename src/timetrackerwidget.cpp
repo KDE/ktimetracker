@@ -286,7 +286,8 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     QAction* importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
     importPlanner->setText(i18n("Import Tasks From &Planner..."));
     connect(importPlanner, &QAction::triggered, [=]() {
-        importPlannerFile(QStringLiteral(""));
+        const QString &fileName = QFileDialog::getOpenFileName();
+        importPlannerFile(fileName);
     });
 
     QAction* showSearchBar = actionCollection->addAction(QStringLiteral("searchbar"));

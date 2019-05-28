@@ -312,11 +312,7 @@ void TaskView::importPlanner(const QString& fileName)
 {
     qCDebug(KTT_LOG) << "entering importPlanner";
     auto *handler = new PlannerParser(storage()->projectModel(), m_tasksWidget->currentItem());
-    QString lFileName = fileName;
-    if (lFileName.isEmpty()) {
-        lFileName = QFileDialog::getOpenFileName();
-    }
-    QFile xmlFile(lFileName);
+    QFile xmlFile(fileName);
     QXmlInputSource source(&xmlFile);
     QXmlSimpleReader reader;
     reader.setContentHandler(handler);
