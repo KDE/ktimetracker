@@ -401,20 +401,16 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
     // We rely on rawEventsForDate to get the events
     qCDebug(KTT_LOG) << "Let's iterate for each date: ";
     int dayCount = 0;
-    for ( QDate mdate=from; mdate.daysTo(to)>=0; mdate=mdate.addDays(1) )
-    {
+    for (QDate mdate = from; mdate.daysTo(to) >= 0; mdate = mdate.addDays(1)) {
         if (dayCount++ > 365 * 100) {
             return QStringLiteral("too many days to process");
         }
 
         qCDebug(KTT_LOG) << mdate.toString();
-        KCalCore::Event::List dateEvents = calendar->rawEventsForDate(mdate);
-
-        for(KCalCore::Event::List::iterator i = dateEvents.begin();i != dateEvents.end(); ++i)
-        {
-            qCDebug(KTT_LOG) << "Summary: " << (*i)->summary() << ", Related to uid: " << (*i)->relatedTo();
-            qCDebug(KTT_LOG) << "Today's seconds: " << todaySeconds(mdate, *i);
-            secsForUid[(*i)->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, *i);
+        for (const auto &event : calendar->rawEventsForDate(mdate)) {
+            qCDebug(KTT_LOG) << "Summary: " << event->summary() << ", Related to uid: " << event->relatedTo();
+            qCDebug(KTT_LOG) << "Today's seconds: " << todaySeconds(mdate, event);
+            secsForUid[event->relatedTo()][from.daysTo(mdate)] += todaySeconds(mdate, event);
         }
     }
 
@@ -425,8 +421,7 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
     // First CSV file line
     // FIXME: localize strings and date formats
     retval.append("\"Task name\"");
-    for (int i=0; i<intervalLength; ++i)
-    {
+    for (int i = 0; i < intervalLength; ++i) {
         retval.append(delim);
         retval.append(from.addDays(i).toString());
     }
@@ -436,17 +431,15 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
     // Rest of the CSV file
     QMapIterator<QString, QString> nameUid(uidForName);
     double time;
-    while (nameUid.hasNext())
-    {
+    while (nameUid.hasNext()) {
         nameUid.next();
         retval.append("\"" + nameUid.key() + "\"");
         qCDebug(KTT_LOG) << nameUid.key() << ": " << nameUid.value() << endl;
 
-        for (int day=0; day<intervalLength; day++)
-        {
+        for (int day = 0; day < intervalLength; day++) {
             qCDebug(KTT_LOG) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
             retval.append(delim);
-            time = secsForUid[nameUid.value()][day]/60.0;
+            time = secsForUid[nameUid.value()][day] / 60.0;
             retval.append(formatTime(time, rc.decimalMinutes));
         }
 
@@ -461,26 +454,26 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
         // store the file locally or remote
         if (rc.url.isLocalFile()) {
             qCDebug(KTT_LOG) << "storing a local file";
-            QString filename=rc.url.toLocalFile();
-            if (filename.isEmpty()) filename=rc.url.url();
-            QFile f( filename );
-            if( !f.open( QIODevice::WriteOnly ) )
-            {
-                err = i18n( "Could not open \"%1\".", filename );
+            QString filename = rc.url.toLocalFile();
+            if (filename.isEmpty()) {
+                filename = rc.url.url();
+            }
+
+            QFile f(filename);
+            if (!f.open( QIODevice::WriteOnly)) {
+                err = i18n("Could not open \"%1\".", filename);
                 qCDebug(KTT_LOG) << "Could not open file";
             }
             qDebug() << "Err is " << err;
-            if (err.length()==0)
-            {
+            if (err.length() == 0) {
                 QTextStream stream(&f);
                 qCDebug(KTT_LOG) << "Writing to file: " << retval;
                 // Export to file
                 stream << retval;
                 f.close();
             }
-        }
-        else // use remote file
-        {
+        } else {
+            // use remote file
             auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
             //KJobWidgets::setWindow(job, &dialog); // TODO: add progress dialog
             if (!job->exec()) {
