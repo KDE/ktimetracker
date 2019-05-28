@@ -106,41 +106,42 @@ TaskView::TaskView(QWidget *parent)
 void TaskView::newFocusWindowDetected(const QString &taskName)
 {
     QString newTaskName = taskName;
-    newTaskName.remove( '\n' );
+    newTaskName.remove('\n');
 
-    if ( m_focusTrackingActive )
-    {
-        bool found = false;  // has taskName been found in our tasks
-        stopTimerFor( m_lastTaskWithFocus );
+    if (!m_focusTrackingActive) {
+        return;
+    }
+
+    bool found = false;  // has taskName been found in our tasks
+    stopTimerFor(m_lastTaskWithFocus);
+    for (Task *task : getAllTasks()) {
+        if (task->name() == newTaskName) {
+            found = true;
+            startTimerFor(task);
+            m_lastTaskWithFocus = task;
+        }
+    }
+    if (!found) {
+        QString taskuid = addTask(newTaskName);
+        if (taskuid.isNull()) {
+            KMessageBox::error(
+                nullptr,
+                i18n("Error storing new task. Your changes were not saved. "
+                     "Make sure you can edit your iCalendar file. "
+                     "Also quit all applications using this file and remove "
+                     "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
+        }
         for (Task *task : getAllTasks()) {
             if (task->name() == newTaskName) {
-                found = true;
                 startTimerFor(task);
                 m_lastTaskWithFocus = task;
             }
         }
-        if (!found) {
-            QString taskuid = addTask(newTaskName);
-            if (taskuid.isNull()) {
-                KMessageBox::error(
-                    nullptr,
-                    i18n("Error storing new task. Your changes were not saved. "
-                         "Make sure you can edit your iCalendar file. "
-                         "Also quit all applications using this file and remove "
-                         "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
-            }
-            for (Task *task : getAllTasks()) {
-                if (task->name() == newTaskName) {
-                    startTimerFor(task);
-                    m_lastTaskWithFocus = task;
-                }
-            }
-        }
-        emit updateButtons();
-    } // focustrackingactive
+    }
+    emit updateButtons();
 }
 
-TimeTrackerStorage* TaskView::storage()
+TimeTrackerStorage *TaskView::storage()
 {
     return m_storage;
 }
@@ -162,7 +163,6 @@ void TaskView::load(const QUrl &url)
 
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
-    qCDebug(KTT_LOG) << "Entering function";
     QString err = m_storage->load(this, url);
 
     m_tasksWidget = new TasksWidget(dynamic_cast<QWidget*>(parent()), m_filterProxyModel, nullptr);
@@ -223,7 +223,6 @@ void TaskView::load(const QUrl &url)
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
     }
-    qCDebug(KTT_LOG) << "Leaving function";
 }
 
 void TaskView::closeStorage()
@@ -382,9 +381,9 @@ QStringList TaskView::tasks()
     return result;
 }
 
-Task* TaskView::task(const QString& taskId)
+Task *TaskView::task(const QString &taskId)
 {
-    Task* result = nullptr;
+    Task *result = nullptr;
     for (Task *task : getAllTasks()) {
         if (task->uid() == taskId) {
             result = task;
