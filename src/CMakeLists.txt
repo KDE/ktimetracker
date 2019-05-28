@@ -7,6 +7,7 @@ set(ktimetracker_SRCS
     export/totalsastext.cpp
     export/csvhistory.cpp
     export/csvtotals.cpp
+    export/export.cpp
 
     file/filecalendar.cpp
     file/icalformatkio.cpp

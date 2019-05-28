@@ -40,9 +40,14 @@ class ReportCriteria
 {
 public:
     /**
-    The different report types.
-    */
-    enum REPORTTYPE { CSVTotalsExport = 0, CSVHistoryExport = 1 };
+     * The different report types.
+     *
+     * These numeric constants are part of D-Bus API, don't change them.
+     */
+    enum REPORTTYPE {
+        CSVTotalsExport = 0,
+        CSVHistoryExport = 1,
+    };
 
     /**
     The type of report we are running.

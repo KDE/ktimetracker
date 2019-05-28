@@ -51,8 +51,8 @@
 
 #include <KDirWatch>
 #include <KLocalizedString>
-#include <KIO/StoredTransferJob>
 
+#include "export/export.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
 #include "model/task.h"
@@ -310,44 +310,8 @@ QString TimeTrackerStorage::writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr pare
 // export history report as csv, all tasks X all dates in one block
 QString TimeTrackerStorage::exportCSVHistory(const ReportCriteria &rc)
 {
-    QString err = QString::null;
-
-    QString retval = exportCSVHistoryToString(m_model, rc);
-
-    if (rc.bExPortToClipBoard) {
-        QApplication::clipboard()->setText(retval);
-    } else {
-        // store the file locally or remote
-        if (rc.url.isLocalFile()) {
-            qCDebug(KTT_LOG) << "storing a local file";
-            QString filename = rc.url.toLocalFile();
-            if (filename.isEmpty()) {
-                filename = rc.url.url();
-            }
-
-            QFile f(filename);
-            if (!f.open(QIODevice::WriteOnly)) {
-                err = i18n("Could not open \"%1\".", filename);
-                qCDebug(KTT_LOG) << "Could not open file";
-            }
-            qDebug() << "Err is " << err;
-            if (err.length() == 0) {
-                QTextStream stream(&f);
-                qCDebug(KTT_LOG) << "Writing to file: " << retval;
-                // Export to file
-                stream << retval;
-                f.close();
-            }
-        } else {
-            // use remote file
-            auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
-            //KJobWidgets::setWindow(job, &dialog); // TODO: add progress dialog
-            if (!job->exec()) {
-                err=QString::fromLatin1("Could not upload");
-            }
-        }
-    }
-    return err;
+    QString retval = exportToString(m_model, nullptr, rc);
+    return writeExport(rc, retval);
 }
 
 bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)

@@ -43,6 +43,7 @@
 #include "ktimetracker.h"
 #include "export/totalsastext.h"
 #include "export/csvtotals.h"
+#include "export/export.h"
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
 #include "ktimetrackerutility.h"
@@ -786,7 +787,6 @@ void TaskView::reconfigure()
 //
 QString TaskView::exportcsvFile(const ReportCriteria &rc)
 {
-    QString err;
     QProgressDialog dialog(
         i18n("Exporting to CSV..."), i18n("Cancel"),
         0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
@@ -797,34 +797,8 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
         dialog.show();
     }
 
-    QString retval = exportCSVToString(storage()->tasksModel(), rc);
-
-    // save, either locally or remote
-    if (rc.url.isLocalFile()) {
-        QString filename = rc.url.toLocalFile();
-        if (filename.isEmpty()) {
-            filename = rc.url.url();
-        }
-        QFile f(filename);
-        if (!f.open(QIODevice::WriteOnly)) {
-            err = i18n("Could not open \"%1\".", filename);
-        }
-        if (err.length() == 0) {
-            QTextStream stream(&f);
-            // Export to file
-            stream << retval;
-            f.close();
-        }
-    } else {
-        // use remote file
-        auto* const job = KIO::storedPut(retval.toUtf8(), rc.url, -1);
-        KJobWidgets::setWindow(job, &dialog);
-        if (!job->exec()) {
-            err = QString::fromLatin1("Could not upload");
-        }
-    }
-
-    return err;
+    QString retval = exportToString(storage()->projectModel(), nullptr, rc);
+    return writeExport(rc, retval);
 }
 
 void TaskView::onTaskDoubleClicked(Task *task)
