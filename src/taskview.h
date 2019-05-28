@@ -70,9 +70,6 @@ public:
     /** Reset session and total time to zero for all tasks.  */
     void resetTimeForAllTasks();
 
-    /** Reset session and total time for all tasks - do not touch the storage.  */
-    void resetDisplayTimeForAllTasks();
-
     /** Schedule that we should save very soon */
     void scheduleSave();
 

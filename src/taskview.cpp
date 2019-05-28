@@ -258,13 +258,19 @@ void TaskView::refresh()
     qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
 }
 
+/**
+ * Refresh the times of the tasks, e.g. when the history has been changed by the user.
+ * Re-calculate the time for every task based on events in the history.
+ */
 QString TaskView::reFreshTimes()
-/** Refresh the times of the tasks, e.g. when the history has been changed by the user */
 {
-    qCDebug(KTT_LOG) << "Entering function";
     QString err;
-    // re-calculate the time for every task based on events in the history
-    resetDisplayTimeForAllTasks();
+
+    // This procedure resets all times (session and overall) for all tasks and subtasks.
+    // Reset session and total time for all tasks - do not touch the storage.
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
+        task->resetTimes();
+    }
 
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
         // get all events for task
@@ -472,16 +478,6 @@ void TaskView::resetTimeForAllTasks()
         task->resetTimes();
     }
     storage()->deleteAllEvents();
-    qCDebug(KTT_LOG) << "Leaving function";
-}
-
-void TaskView::resetDisplayTimeForAllTasks()
-/* This procedure resets all times (session and overall) for all tasks and subtasks. */
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        task->resetTimes();
-    }
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
