@@ -43,7 +43,7 @@ private Q_SLOTS:
 
 ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
 {
-    QTemporaryFile *file = new QTemporaryFile(this);
+    auto *file = new QTemporaryFile(this);
     if (!file->open()) {
         delete file;
         throw std::runtime_error("1");

@@ -26,10 +26,6 @@
 #include <QDateTime>
 #include <QUrl>
 
-QT_BEGIN_NAMESPACE
-class QString;
-QT_END_NAMESPACE
-
 /**
  Stores entries from export dialog.
 
@@ -42,8 +38,7 @@ QT_END_NAMESPACE
 
 class ReportCriteria
 {
-  public:
-
+public:
     /**
     The different report types.
     */

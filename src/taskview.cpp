@@ -780,35 +780,22 @@ void TaskView::reconfigure()
     refresh();
 }
 
-//----------------------------------------------------------------------------
-// Routines that handle Comma-Separated Values export file format.
-//
-QString TaskView::exportcsvFile(const ReportCriteria &rc)
+QString exportCSVToString(TasksModel *tasksModel, const ReportCriteria &rc)
 {
     QString delim = rc.delimiter;
     QString dquote = rc.quote;
     QString double_dquote = dquote + dquote;
-    QString err;
-    QProgressDialog dialog(
-        i18n("Exporting to CSV..."), i18n("Cancel"),
-        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
-    dialog.setAutoClose(true);
-    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
-
-    if (storage()->tasksModel()->getAllTasks().size() > 1) {
-        dialog.show();
-    }
 
     QString retval;
 
     // Find max task depth
     int maxdepth = 0;
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        if (dialog.wasCanceled()) {
-            break;
-        }
-
-        dialog.setValue(dialog.value() + 1);
+    for (Task *task : tasksModel->getAllTasks()) {
+//        if (dialog.wasCanceled()) {
+//            break;
+//        }
+//
+//        dialog.setValue(dialog.value() + 1);
 
 //        if (tasknr % 15 == 0) {
 //            QApplication::processEvents(); // repainting is slow
@@ -821,12 +808,12 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
     }
 
     // Export to file
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        if (dialog.wasCanceled()) {
-            break;
-        }
-
-        dialog.setValue(dialog.value() + 1);
+    for (Task *task : tasksModel->getAllTasks()) {
+//        if (dialog.wasCanceled()) {
+//            break;
+//        }
+//
+//        dialog.setValue(dialog.value() + 1);
 
 //        if (tasknr % 15 == 0) {
 //            QApplication::processEvents(); // repainting is slow
@@ -871,6 +858,27 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
                   + delim + formatTime(task->totalTime(), rc.decimalMinutes)
                   + '\n';
     }
+
+    return retval;
+}
+
+//----------------------------------------------------------------------------
+// Routines that handle Comma-Separated Values export file format.
+//
+QString TaskView::exportcsvFile(const ReportCriteria &rc)
+{
+    QString err;
+    QProgressDialog dialog(
+        i18n("Exporting to CSV..."), i18n("Cancel"),
+        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
+    dialog.setAutoClose(true);
+    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
+
+    if (storage()->tasksModel()->getAllTasks().size() > 1) {
+        dialog.show();
+    }
+
+    QString retval = exportCSVToString(storage()->tasksModel(), rc);
 
     // save, either locally or remote
     if (rc.url.isLocalFile()) {
