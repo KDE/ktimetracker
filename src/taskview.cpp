@@ -324,7 +324,7 @@ QString TaskView::report(const ReportCriteria& rc)
 {
     QString err;
     if (rc.reportType == ReportCriteria::CSVHistoryExport) {
-        err = m_storage->exportCSVHistory(rc.from, rc.to, rc);
+        err = m_storage->exportCSVHistory(rc);
     } else { // rc.reportType == ReportCriteria::CSVTotalsExport
         if (!rc.bExPortToClipBoard) {
             err = exportcsvFile(rc);

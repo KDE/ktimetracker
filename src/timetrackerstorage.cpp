@@ -348,8 +348,10 @@ int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
     return secondsToAdd;
 }
 
-QString exportCSVHistoryToString(ProjectModel *projectModel, const QDate &from, const QDate &to, const ReportCriteria &rc)
+QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteria &rc)
 {
+    const QDate &from = rc.from;
+    const QDate &to = rc.to;
     QString delim = rc.delimiter;
     const QString cr = QStringLiteral("\n");
     const int intervalLength = from.daysTo(to) + 1;
@@ -450,11 +452,11 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const QDate &from, 
 }
 
 // export history report as csv, all tasks X all dates in one block
-QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to, const ReportCriteria &rc)
+QString TimeTrackerStorage::exportCSVHistory(const ReportCriteria &rc)
 {
     QString err = QString::null;
 
-    QString retval = exportCSVHistoryToString(m_model, from, to, rc);
+    QString retval = exportCSVHistoryToString(m_model, rc);
 
     if (rc.bExPortToClipBoard) {
         QApplication::clipboard()->setText(retval);
