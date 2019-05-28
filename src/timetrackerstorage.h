@@ -162,7 +162,7 @@ public:
     /**
      * Write task history to file as comma-delimited data.
      */
-    QString exportCSVHistory(TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc);
+    QString exportCSVHistory(const QDate &from, const QDate &to, const ReportCriteria &rc);
 
 private Q_SLOTS:
     void onFileModified();

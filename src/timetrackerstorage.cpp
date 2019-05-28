@@ -349,25 +349,22 @@ int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
 }
 
 // export history report as csv, all tasks X all dates in one block
-QString TimeTrackerStorage::exportCSVHistory(
-    TaskView *taskview, const QDate &from, const QDate &to, const ReportCriteria &rc)
+QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to, const ReportCriteria &rc)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-
     QString delim = rc.delimiter;
     const QString cr = QStringLiteral("\n");
     QString err = QString::null;
     QString retval;
     const int intervalLength = from.daysTo(to) + 1;
     QMap<QString, QVector<int>> secsForUid;
-    QMap<QString, QString > uidForName;
+    QMap<QString, QString> uidForName;
 
     // Step 1: Prepare two hashmaps:
     // * "uid -> seconds each day": used while traversing events, as uid is their id
     //                              "seconds each day" are stored in a vector
     // * "name -> uid", ordered by name: used when creating the csv file at the end
     auto tasks = tasksModel()->getAllTasks();
-    qCDebug(KTT_LOG) << "Taskview Count: " << tasks.size();
+    qCDebug(KTT_LOG) << "Tasks count: " << tasks.size();
     for (Task *task : tasks) {
         qCDebug(KTT_LOG) << ", Task Name: " << task->name() << ", UID: " << task->uid();
         // uid -> seconds each day
