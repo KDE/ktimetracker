@@ -78,7 +78,7 @@ TaskView::TaskView(QWidget *parent)
     m_idleTimeDetector = new IdleTimeDetector(KTimeTrackerSettings::period());
     connect(m_idleTimeDetector, &IdleTimeDetector::subtractTime, this, &TaskView::subtractTime);
     connect(m_idleTimeDetector, &IdleTimeDetector::stopAllTimers, this, &TaskView::stopAllTimers);
-    if (!m_idleTimeDetector->isIdleDetectionPossible()) {
+    if (!IdleTimeDetector::isIdleDetectionPossible()) {
         KTimeTrackerSettings::setEnabled(false);
     }
 
@@ -175,14 +175,15 @@ void TaskView::load(const QUrl &url)
     reconfigure();
 
     // Connect to the new model created by TimeTrackerStorage::load()
-    m_filterProxyModel->setSourceModel(tasksModel());
-    m_tasksWidget->setSourceModel(tasksModel());
-    for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
+    auto *tasksModel = m_storage->tasksModel();
+    m_filterProxyModel->setSourceModel(tasksModel);
+    m_tasksWidget->setSourceModel(tasksModel);
+    for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
     }
 
-    connect(tasksModel(), &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
-    connect(tasksModel(), &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
+    connect(tasksModel, &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
+    connect(tasksModel, &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
     connect(storage()->eventsModel(), &EventsModel::timesChanged, this, &TaskView::reFreshTimes);
 
     if (!err.isEmpty()) {
@@ -209,17 +210,17 @@ void TaskView::load(const QUrl &url)
         }
     }
 
-    if (tasksModel()->topLevelItemCount() > 0) {
+    if (tasksModel->topLevelItemCount() > 0) {
         m_tasksWidget->restoreItemState();
         m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(
-            tasksModel()->index(tasksModel()->topLevelItem(0), 0)));
+            tasksModel->index(tasksModel->topLevelItem(0), 0)));
 
         if (!m_desktopTracker->startTracking().isEmpty()) {
             KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work"));
         }
         refresh();
     }
-    for (int i = 0; i <= tasksModel()->columnCount(QModelIndex()); ++i) {
+    for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
     }
     qCDebug(KTT_LOG) << "Leaving function";
@@ -306,7 +307,7 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     qCDebug(KTT_LOG) << "entering importPlanner";
-    PlannerParser *handler = new PlannerParser(storage()->projectModel(), m_tasksWidget->currentItem());
+    auto *handler = new PlannerParser(storage()->projectModel(), m_tasksWidget->currentItem());
     QString lFileName = fileName;
     if (lFileName.isEmpty()) {
         lFileName = QFileDialog::getOpenFileName();
@@ -368,12 +369,7 @@ QString TaskView::exportCSVHistoryDialog()
 
 long TaskView::count()
 {
-    long n = 0;
-    for (Task *task : getAllTasks()) {
-        ++n;
-    }
-
-    return n;
+    return getAllTasks().size();
 }
 
 QStringList TaskView::tasks()
@@ -521,12 +517,10 @@ void TaskView::resetDisplayTimeForAllTasks()
 void TaskView::stopTimerFor(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if ( task != 0 && m_activeTasks.indexOf(task) != -1 )
-    {
+    if (task != nullptr && m_activeTasks.indexOf(task) != -1) {
         m_activeTasks.removeAll(task);
         task->setRunning(false, m_storage);
-        if ( m_activeTasks.count() == 0 )
-        {
+        if (m_activeTasks.count() == 0) {
             m_idleTimeDetector->stopIdleDetection();
             emit timersInactive();
         }
@@ -610,7 +604,7 @@ QString TaskView::addTask(
     }
 
     m_desktopTracker->registerForDesktops(task, desktops);
-    m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)));
+    m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)));
     task->invalidateCompletedState();
     save();
 
@@ -627,7 +621,7 @@ void TaskView::newSubTask()
 
     newTask(i18n("New Sub Task"), task);
 
-    m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(tasksModel()->index(task, 0)), true);
+    m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)), true);
 
     refresh();
 }
@@ -724,7 +718,7 @@ make this task running and selected. */
     } else {
         int response = KMessageBox::Continue;
         if (KTimeTrackerSettings::promptDelete()) {
-            response = KMessageBox::warningContinueCancel( 0,
+            response = KMessageBox::warningContinueCancel(nullptr,
                 i18n( "Are you sure you want to delete the selected"
                 " task and its entire history?\n"
                 "NOTE: all subtasks and their history will also "
@@ -761,11 +755,11 @@ void TaskView::markTaskAsIncomplete()
     setPerCentComplete(50); // if it has been reopened, assume half-done
 }
 
-QString TaskView::clipTotals( const ReportCriteria &rc )
 // This function stores the user's tasks into the clipboard.
 // rc tells how the user wants his report, e.g. all times or session times
+QString TaskView::clipTotals(const ReportCriteria &rc)
 {
-    QApplication::clipboard()->setText(totalsAsText(tasksModel(), m_tasksWidget->currentItem(), rc));
+    QApplication::clipboard()->setText(totalsAsText(storage()->tasksModel(), m_tasksWidget->currentItem(), rc));
     return QString();
 }
 
@@ -827,7 +821,7 @@ QList<Task*> TaskView::getAllTasks()
 {
     QList<Task*> tasks;
     if (m_storage->isLoaded()) {
-        for (TasksModelItem *item : tasksModel()->getAllItems()) {
+        for (TasksModelItem *item : storage()->tasksModel()->getAllItems()) {
             Task *task = dynamic_cast<Task*>(item);
             if (task) {
                 tasks.append(task);
@@ -838,11 +832,6 @@ QList<Task*> TaskView::getAllTasks()
     }
 
     return tasks;
-}
-
-int TaskView::sortColumn() const
-{
-    return m_tasksWidget->header()->sortIndicatorSection();
 }
 
 //----------------------------------------------------------------------------
@@ -965,11 +954,6 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
     return err;
 }
 
-inline TasksModel *TaskView::tasksModel()
-{
-    return m_storage->tasksModel();
-}
-
 void TaskView::onTaskDoubleClicked(Task *task)
 {
     if (task->isRunning()) {
@@ -991,7 +975,7 @@ void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int la
     TasksModelItem *item = nullptr;
     if (parent.isValid()) {
         // Nested task
-        auto *parentItem = tasksModel()->item(parent);
+        auto *parentItem = storage()->tasksModel()->item(parent);
         if (!parentItem) {
             qFatal("taskAboutToBeRemoved: parentItem is nullptr");
         }
@@ -999,7 +983,7 @@ void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int la
         item = parentItem->child(first);
     } else {
         // Top-level task
-        item = tasksModel()->topLevelItem(first);
+        item = storage()->tasksModel()->topLevelItem(first);
     }
 
     if (!item) {

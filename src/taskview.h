@@ -97,9 +97,6 @@ public:
     bool isFocusTrackingActive() const;
     //END
 
-    TasksModel *tasksModel();
-    int sortColumn() const;
-
     TasksWidget *tasksWidget() { return m_tasksWidget; }
 
 public Q_SLOTS:

@@ -75,7 +75,7 @@ void ExportCSVTest::testTotalsEmpty()
         "Task Totals\n%1\n\n"
         "  Time    Task\n----------------------------------------------\nNo tasks.").arg(timeString);
     QCOMPARE(
-        totalsAsText(taskView->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
+        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
         expected);
 }
 
@@ -98,7 +98,7 @@ void ExportCSVTest::testTotalsSimpleTree()
          "----------------------------------------------\n"
          "  0:15 Total").arg(timeString);
     QCOMPARE(
-        totalsAsText(taskView->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
+        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
         expected);
 }
 
