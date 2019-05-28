@@ -348,22 +348,21 @@ int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
     return secondsToAdd;
 }
 
-// export history report as csv, all tasks X all dates in one block
-QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to, const ReportCriteria &rc)
+QString exportCSVHistoryToString(ProjectModel *projectModel, const QDate &from, const QDate &to, const ReportCriteria &rc)
 {
     QString delim = rc.delimiter;
     const QString cr = QStringLiteral("\n");
-    QString err = QString::null;
-    QString retval;
     const int intervalLength = from.daysTo(to) + 1;
     QMap<QString, QVector<int>> secsForUid;
     QMap<QString, QString> uidForName;
+
+    QString retval;
 
     // Step 1: Prepare two hashmaps:
     // * "uid -> seconds each day": used while traversing events, as uid is their id
     //                              "seconds each day" are stored in a vector
     // * "name -> uid", ordered by name: used when creating the csv file at the end
-    auto tasks = tasksModel()->getAllTasks();
+    auto tasks = projectModel->tasksModel()->getAllTasks();
     qCDebug(KTT_LOG) << "Tasks count: " << tasks.size();
     for (Task *task : tasks) {
         qCDebug(KTT_LOG) << ", Task Name: " << task->name() << ", UID: " << task->uid();
@@ -394,7 +393,7 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
     qCDebug(KTT_LOG) << "secsForUid" << secsForUid;
     qCDebug(KTT_LOG) << "uidForName" << uidForName;
 
-    std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(QUrl());
+    std::unique_ptr<FileCalendar> calendar = projectModel->asCalendar(QUrl());
 
     // Step 2: For each date, get the events and calculate the seconds
     // Store the seconds using secsForUid hashmap, so we don't need to translate uids
@@ -447,6 +446,15 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
     }
 
     qDebug() << "Retval is \n" << retval;
+    return retval;
+}
+
+// export history report as csv, all tasks X all dates in one block
+QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to, const ReportCriteria &rc)
+{
+    QString err = QString::null;
+
+    QString retval = exportCSVHistoryToString(m_model, from, to, rc);
 
     if (rc.bExPortToClipBoard) {
         QApplication::clipboard()->setText(retval);
@@ -460,7 +468,7 @@ QString TimeTrackerStorage::exportCSVHistory(const QDate &from, const QDate &to,
             }
 
             QFile f(filename);
-            if (!f.open( QIODevice::WriteOnly)) {
+            if (!f.open(QIODevice::WriteOnly)) {
                 err = i18n("Could not open \"%1\".", filename);
                 qCDebug(KTT_LOG) << "Could not open file";
             }
