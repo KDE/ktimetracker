@@ -22,18 +22,13 @@
 
 #include "taskview.h"
 
-#include <QClipboard>
 #include <QProgressDialog>
-#include <QHeaderView>
 
 #include <KMessageBox>
-#include <KJobWidgets>
-#include <KIO/StoredTransferJob>
 
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "model/eventsmodel.h"
-#include "model/projectmodel.h"
 #include "widgets/taskswidget.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
@@ -41,8 +36,6 @@
 #include "idletimedetector.h"
 #include "import/plannerparser.h"
 #include "ktimetracker.h"
-#include "export/totalsastext.h"
-#include "export/csvtotals.h"
 #include "export/export.h"
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
