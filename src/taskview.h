@@ -113,7 +113,7 @@ public Q_SLOTS:
      *  @param when When the timer stopped - this makes sense if the idletime-
      *              detector detects the user stopped working 5 minutes ago.
      */
-    void stopAllTimers(const QDateTime& when = QDateTime::currentDateTime());
+    void stopAllTimers(const QDateTime &when = QDateTime::currentDateTime());
 
     /** Toggles the automatic tracking of focused windows
      */
@@ -125,7 +125,7 @@ public Q_SLOTS:
     /** Display edit task dialog and create a new task with results.
      *  @param caption Window title of the edit task dialog
      */
-    void newTask(const QString& caption, Task* parent);
+    void newTask(const QString &caption, Task *parent);
 
     /** Used to refresh (e.g. after import) */
     void refresh();

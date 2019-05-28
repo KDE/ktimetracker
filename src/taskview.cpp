@@ -555,10 +555,9 @@ void TaskView::newTask()
     newTask(i18n("New Task"), nullptr);
 }
 
-void TaskView::newTask(const QString& caption, Task* parent)
+void TaskView::newTask(const QString &caption, Task *parent)
 {
     auto *dialog = new EditTaskDialog(m_tasksWidget->parentWidget(), storage()->projectModel(), caption, nullptr);
-    long total, totalDiff, session, sessionDiff;
     DesktopList desktopList;
 
     int result = dialog->exec();
@@ -569,7 +568,6 @@ void TaskView::newTask(const QString& caption, Task* parent)
         }
         QString taskDescription = dialog->taskDescription();
 
-        total = totalDiff = session = sessionDiff = 0;
         dialog->status(&desktopList);
 
         // If all available desktops are checked, disable auto tracking,
@@ -578,6 +576,8 @@ void TaskView::newTask(const QString& caption, Task* parent)
             desktopList.clear();
         }
 
+        long total = 0;
+        long session = 0;
         QString uid = addTask(taskName, taskDescription, total, session, desktopList, parent);
         if (uid.isNull()) {
             KMessageBox::error(nullptr, i18n(
