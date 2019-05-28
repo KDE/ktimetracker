@@ -150,12 +150,12 @@ public:
       /** Sets the total time, does not change the parent's total time.
         This means the parent's total time can run out of sync.
         */
-      void setTotalTime(long minutes) { mTotalTime = minutes; }
+      void setTotalTime(long minutes) { m_totalTime = minutes; }
 
       /** Sets the total session time, does not change the parent's total session time.
         This means the parent's total session time can run out of sync.
         */
-      void setTotalSessionTime(long minutes) { mTotalSessionTime = minutes; }
+      void setTotalSessionTime(long minutes) { m_totalSessionTime = minutes; }
 
       /** A recursive function to calculate the total time of a task. */
       QString recalculatetotaltime();
@@ -180,11 +180,11 @@ public:
       void resetTimes();
 
       /** @return time in minutes */
-      long time() const { return mTime; }
+      long time() const { return m_time; }
       /** @return total time in minutes */
-      long totalTime() const { return mTotalTime; }
-      long sessionTime() const { return mSessionTime; }
-      long totalSessionTime() const { return mTotalSessionTime; }
+      long totalTime() const { return m_totalTime; }
+      long sessionTime() const { return m_sessionTime; }
+      long totalSessionTime() const { return m_totalSessionTime; }
       QDateTime sessionStartTiMe() const;
 
       /**
@@ -336,37 +336,37 @@ private:
     bool m_isRunning;
 
     /** The iCal unique ID of the Todo for this task. */
-    QString mUid;
+    QString m_uid;
 
     /** The comment associated with this Task. */
-    QString mComment;
+    QString m_comment;
 
-    int mPercentComplete;
+    int m_percentComplete;
 
     /** task name */
-    QString mName;
+    QString m_name;
 
     /** task description */
-    QString mDescription;
+    QString m_description;
 
     /** Last time this task was started. */
-    QDateTime mLastStart;
+    QDateTime m_lastStart;
 
     /** totals of the whole subtree including self */
-    long mTotalTime;
-    long mTotalSessionTime;
+    long m_totalTime;
+    long m_totalSessionTime;
 
     /** times spend on the task itself */
-    long mTime;
-    long mSessionTime;
+    long m_time;
+    long m_sessionTime;
 
     /** time when the session was started */
-    QDateTime mSessionStartTiMe;
+    QDateTime m_sessionStartTime;
 
-    DesktopList mDesktops;
+    DesktopList m_desktops;
 
     /** Priority of the task. */
-    int mPriority;
+    int m_priority;
 
     ProjectModel *m_projectModel;
 };

@@ -31,37 +31,18 @@
 
 #include "timetrackerstorage.h"
 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-#include <QApplication>
 #include <QLockFile>
-#include <QUrl>
-#include <QByteArray>
 #include <QDateTime>
-#include <QFile>
 #include <QMultiHash>
-#include <QStringList>
-#include <QTableWidget>
-#include <QTextStream>
-#include <QMap>
-#include <QClipboard>
 
 #include <KDirWatch>
 #include <KLocalizedString>
 
-#include "export/export.h"
-#include "ktimetrackerutility.h"
-#include "ktimetracker.h"
 #include "model/task.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
 #include "model/tasksmodel.h"
-#include "export/csvhistory.h"
 #include "taskview.h"
-#include "widgets/taskswidget.h"
 #include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");

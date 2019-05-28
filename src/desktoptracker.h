@@ -44,9 +44,9 @@ const int maxDesktops = 20;
 
 class DesktopTracker : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     DesktopTracker();
     /**
       * Start time tracking of tasks by virtual desktop.
@@ -56,28 +56,27 @@ class DesktopTracker : public QObject
       */
     QString startTracking();
     void registerForDesktops( Task* task, DesktopList dl );
-    int desktopCount() const { return mDesktopCount; }
+    int desktopCount() const { return m_desktopCount; }
 
-  private: // member variables
+public Q_SLOTS:
+    void handleDesktopChange(int desktop);
 
+private Q_SLOTS:
+    void changeTimers();
+
+Q_SIGNALS:
+    void reachedActiveDesktop(Task *task);
+    void leftActiveDesktop(Task *task);
+
+private:
     // define vectors for at most 16 virtual desktops
     // E.g.: desktopTrackerStop[3] contains a vector with
     // all tasks to be notified, when switching to/from desk 3.
-    TaskVector mDesktopTracker[maxDesktops];
-    int mPreviousDesktop;
-    int mDesktopCount;
-    int mDesktop;
-    QTimer *mTimer;
-
-  Q_SIGNALS:
-    void reachedActiveDesktop( Task* task );
-    void leftActiveDesktop( Task* task );
-
-  public Q_SLOTS:
-    void handleDesktopChange( int desktop );
-
-  private Q_SLOTS:
-    void changeTimers();
+    TaskVector m_desktopTracker[maxDesktops];
+    int m_previousDesktop;
+    int m_desktopCount;
+    int m_desktop;
+    QTimer *m_timer;
 };
 
 #endif // KTIMETRACKER_DESKTOP_TRACKER_H

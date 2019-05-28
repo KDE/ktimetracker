@@ -48,11 +48,8 @@ class TreeViewHeaderContextMenu : public QObject
     Q_OBJECT
 
 public:
-    TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, QVector<int> &&excludedColumns);
+    TreeViewHeaderContextMenu(QObject *parent, QTreeView *widget, QVector<int> &&excludedColumns);
     ~TreeViewHeaderContextMenu() override;
-
-private:
-    void updateAction(QAction* action, int column);
 
 private Q_SLOTS:
     void slotCustomContextMenuRequested(const QPoint&);
@@ -62,15 +59,17 @@ protected Q_SLOTS:
     void slotTriggered(QAction*);
     void slotAboutToShow();
 
-protected:
-    QTreeView *mWidget;
-    QVector<QAction*> mActions;
-    QMenu *mContextMenu;
-    QHash<QAction*, int> mActionColumnMapping;
-    QVector<int> mExcludedColumns;
-
 Q_SIGNALS:
     void columnToggled(int);
+
+private:
+    void updateAction(QAction* action, int column);
+
+    QTreeView *m_widget;
+    QVector<QAction*> m_actions;
+    QMenu *m_contextMenu;
+    QHash<QAction*, int> m_actionColumnMapping;
+    QVector<int> m_excludedColumns;
 };
 
 #endif
