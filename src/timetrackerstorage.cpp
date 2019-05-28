@@ -141,7 +141,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
     // remember tasks that are running and their start times
     QVector<QString> runningTasks;
     QVector<QDateTime> startTimes;
-    for (Task *task : view->getAllTasks()) {
+    for (Task *task : tasksModel()->getAllTasks()) {
         if (task->isRunning()) {
             runningTasks.append(task->uid());
             startTimes.append(task->startTime());
@@ -177,7 +177,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, Tas
 
     view->clearActiveTasks();
     // restart tasks that have been running with their start times
-    for (Task *task : view->getAllTasks()) {
+    for (Task *task : tasksModel()->getAllTasks()) {
         for (int n = 0; n < runningTasks.count(); ++n) {
             if (runningTasks[n] == task->uid()) {
                 view->startTimerFor(task, startTimes[n]);
@@ -366,8 +366,9 @@ QString TimeTrackerStorage::exportCSVHistory(
     // * "uid -> seconds each day": used while traversing events, as uid is their id
     //                              "seconds each day" are stored in a vector
     // * "name -> uid", ordered by name: used when creating the csv file at the end
-    qCDebug(KTT_LOG) << "Taskview Count: " << taskview->count();
-    for (Task *task : taskview->getAllTasks()) {
+    auto tasks = tasksModel()->getAllTasks();
+    qCDebug(KTT_LOG) << "Taskview Count: " << tasks.size();
+    for (Task *task : tasks) {
         qCDebug(KTT_LOG) << ", Task Name: " << task->name() << ", UID: " << task->uid();
         // uid -> seconds each day
         // * Init each element to zero

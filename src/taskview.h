@@ -73,9 +73,6 @@ public:
     /** Reset session and total time for all tasks - do not touch the storage.  */
     void resetDisplayTimeForAllTasks();
 
-    /** Return the total number of items in the view.  */
-    long count();
-
     /** Schedule that we should save very soon */
     void scheduleSave();
 
@@ -218,8 +215,6 @@ public Q_SLOTS:
 
     /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
     QString reFreshTimes();
-
-    QList<Task*> getAllTasks();
 
     void onTaskDoubleClicked(Task *task);
 

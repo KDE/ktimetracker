@@ -232,6 +232,21 @@ QList<TasksModelItem *> TasksModel::getAllItems()
     return res;
 }
 
+QList<Task*> TasksModel::getAllTasks()
+{
+    QList<Task*> tasks;
+    for (TasksModelItem *item : getAllItems()) {
+        Task *task = dynamic_cast<Task*>(item);
+        if (task) {
+            tasks.append(task);
+        } else {
+            qFatal("dynamic_cast to Task failed");
+        }
+    }
+
+    return tasks;
+}
+
 QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (section < 0 || orientation != Qt::Horizontal || section >= m_headerLabels.size()) {

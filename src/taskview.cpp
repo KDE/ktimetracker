@@ -114,7 +114,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
 
     bool found = false;  // has taskName been found in our tasks
     stopTimerFor(m_lastTaskWithFocus);
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (task->name() == newTaskName) {
             found = true;
             startTimerFor(task);
@@ -131,7 +131,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
                      "Also quit all applications using this file and remove "
                      "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
         }
-        for (Task *task : getAllTasks()) {
+        for (Task *task : storage()->tasksModel()->getAllTasks()) {
             if (task->name() == newTaskName) {
                 startTimerFor(task);
                 m_lastTaskWithFocus = task;
@@ -193,12 +193,12 @@ void TaskView::load(const QUrl &url)
     }
 
     // Register tasks with desktop tracker
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         m_desktopTracker->registerForDesktops(task, task->desktops());
     }
 
     // Start all tasks that have an event without endtime
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (!m_storage->allEventsHaveEndTiMe(task)) {
             task->resumeRunning();
             m_activeTasks.append(task);
@@ -242,7 +242,7 @@ void TaskView::refresh()
     }
 
     qCDebug(KTT_LOG) << "entering function";
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         task->invalidateCompletedState();
         task->update();  // maybe there was a change in the times's format
     }
@@ -267,7 +267,7 @@ QString TaskView::reFreshTimes()
     // re-calculate the time for every task based on events in the history
     resetDisplayTimeForAllTasks();
 
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         // get all events for task
         for (const auto *event : storage()->eventsModel()->eventsForTask(task)) {
             QDateTime kdatetimestart = event->dtStart();
@@ -293,7 +293,7 @@ QString TaskView::reFreshTimes()
         }
     }
 
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         task->recalculatetotaltime();
         task->recalculatetotalsessiontime();
     }
@@ -366,15 +366,10 @@ QString TaskView::exportCSVHistoryDialog()
     return err;
 }
 
-long TaskView::count()
-{
-    return getAllTasks().size();
-}
-
 QStringList TaskView::tasks()
 {
     QStringList result;
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         result << task->name();
     }
 
@@ -384,7 +379,7 @@ QStringList TaskView::tasks()
 Task *TaskView::task(const QString &taskId)
 {
     Task *result = nullptr;
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             result = task;
         }
@@ -486,7 +481,7 @@ overalltimes (comprising all sessions) and total times (comprising all subtasks)
 That is why there is also a total session time. */
 {
     qCDebug(KTT_LOG) <<"Entering TaskView::startNewSession";
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         task->startNewSession();
     }
     qCDebug(KTT_LOG) << "Leaving TaskView::startNewSession";
@@ -496,7 +491,7 @@ void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
     qCDebug(KTT_LOG) << "Entering function";
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         task->resetTimes();
     }
     storage()->deleteAllEvents();
@@ -507,7 +502,7 @@ void TaskView::resetDisplayTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {
     qCDebug(KTT_LOG) << "Entering function";
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         task->resetTimes();
     }
     qCDebug(KTT_LOG) << "Leaving function";
@@ -816,23 +811,6 @@ void TaskView::reconfigure()
     refresh();
 }
 
-QList<Task*> TaskView::getAllTasks()
-{
-    QList<Task*> tasks;
-    if (m_storage->isLoaded()) {
-        for (TasksModelItem *item : storage()->tasksModel()->getAllItems()) {
-            Task *task = dynamic_cast<Task*>(item);
-            if (task) {
-                tasks.append(task);
-            } else {
-                qFatal("dynamic_cast to Task failed");
-            }
-        }
-    }
-
-    return tasks;
-}
-
 //----------------------------------------------------------------------------
 // Routines that handle Comma-Separated Values export file format.
 //
@@ -844,11 +822,11 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
     QString err;
     QProgressDialog dialog(
         i18n("Exporting to CSV..."), i18n("Cancel"),
-        0, static_cast<int>(2 * count()), m_tasksWidget, nullptr);
+        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
     dialog.setAutoClose(true);
     dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
 
-    if (count() > 1) {
+    if (storage()->tasksModel()->getAllTasks().size() > 1) {
         dialog.show();
     }
 
@@ -856,7 +834,7 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
 
     // Find max task depth
     int maxdepth = 0;
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (dialog.wasCanceled()) {
             break;
         }
@@ -874,7 +852,7 @@ QString TaskView::exportcsvFile(const ReportCriteria &rc)
     }
 
     // Export to file
-    for (Task *task : getAllTasks()) {
+    for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (dialog.wasCanceled()) {
             break;
         }

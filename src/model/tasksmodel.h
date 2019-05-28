@@ -63,6 +63,7 @@ public:
     TasksModelItem *item(const QModelIndex &index) const;
 
     QList<TasksModelItem *> getAllItems();
+    QList<Task *> getAllTasks();
 
     void addChild(TasksModelItem *item);
 

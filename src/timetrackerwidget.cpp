@@ -31,6 +31,7 @@
 
 #include "model/task.h"
 #include "model/eventsmodel.h"
+#include "model/tasksmodel.h"
 #include "model/projectmodel.h"
 #include "settings/ktimetrackerconfigdialog.h"
 #include "widgets/searchline.h"
@@ -391,7 +392,7 @@ void TimeTrackerWidget::slotUpdateButtons()
     action(QStringLiteral("mark_as_incomplete"))->setEnabled(item && item->isComplete());
 
     action(QStringLiteral("new_task"))->setEnabled(currentTaskView());
-    action(QStringLiteral("new_sub_task"))->setEnabled(currentTaskView() && currentTaskView()->count());
+    action(QStringLiteral("new_sub_task"))->setEnabled(currentTaskView() && currentTaskView()->storage()->isLoaded() && currentTaskView()->storage()->tasksModel()->getAllTasks().size());
     action(QStringLiteral("focustracking"))->setEnabled(currentTaskView());
     action(QStringLiteral("focustracking"))->setChecked(currentTaskView() && currentTaskView()->isFocusTrackingActive());
     action(QStringLiteral("start_new_session"))->setEnabled(currentTaskView());
@@ -550,7 +551,7 @@ QStringList TimeTrackerWidget::taskIdsFromName( const QString &taskName ) const
         return result;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->name() == taskName) {
             result << task->uid();
         }
@@ -587,7 +588,7 @@ void TimeTrackerWidget::deleteTask(const QString &taskId)
         return;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             taskView->deleteTaskBatch(task);
         }
@@ -602,7 +603,7 @@ void TimeTrackerWidget::setPercentComplete(const QString &taskId, int percent)
         return;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             task->setPercentComplete(percent);
         }
@@ -622,7 +623,7 @@ int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, 
     Task *task = nullptr;
     TaskView *taskView = currentTaskView();
     if (taskView) {
-        for (Task *t : taskView->getAllTasks()) {
+        for (Task *t : taskView->storage()->tasksModel()->getAllTasks()) {
             if (t->uid() == taskId) {
                 task = t;
                 break;
@@ -672,7 +673,7 @@ int TimeTrackerWidget::changeTime(const QString &taskId, int minutes)
     }
 
     Task *task = nullptr;
-    for (Task *t : taskView->getAllTasks()) {
+    for (Task *t : taskView->storage()->tasksModel()->getAllTasks()) {
         if (t->uid() == taskId) {
             task = t;
             break;
@@ -720,14 +721,14 @@ bool TimeTrackerWidget::isIdleDetectionPossible() const
     return result;
 }
 
-int TimeTrackerWidget::totalMinutesForTaskId( const QString &taskId ) const
+int TimeTrackerWidget::totalMinutesForTaskId(const QString &taskId) const
 {
     TaskView *taskView = currentTaskView();
     if (!taskView) {
         return -1;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             return task->totalTime();
         }
@@ -745,7 +746,7 @@ void TimeTrackerWidget::startTimerFor(const QString &taskId)
         return;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             taskView->startTimerFor(task);
             return;
@@ -760,7 +761,7 @@ bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
         return false;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->name() == taskName ) {
             taskView->startTimerFor(task);
             return true;
@@ -777,7 +778,7 @@ bool TimeTrackerWidget::stopTimerForTaskName(const QString &taskName)
         return false;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->name() == taskName) {
             taskView->stopTimerFor(task);
             return true;
@@ -794,7 +795,7 @@ void TimeTrackerWidget::stopTimerFor(const QString &taskId)
         return;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             taskView->stopTimerFor(task);
             return;
@@ -849,7 +850,7 @@ bool TimeTrackerWidget::isActive(const QString &taskId) const
         return false;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             return task->isRunning();
         }
@@ -865,7 +866,7 @@ bool TimeTrackerWidget::isTaskNameActive(const QString &taskName) const
         return false;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->name() == taskName) {
             return task->isRunning();
         }
@@ -883,7 +884,7 @@ QStringList TimeTrackerWidget::tasks() const
         return result;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         result << task->name();
     }
 
@@ -898,7 +899,7 @@ QStringList TimeTrackerWidget::activeTasks() const
         return result;
     }
 
-    for (Task *task : taskView->getAllTasks()) {
+    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->isRunning()) {
             result << task->name();
         }
@@ -925,7 +926,7 @@ void TimeTrackerWidget::quit()
 bool TimeTrackerWidget::event(QEvent* event) // inherited from QWidget
 {
     if (event->type() == QEvent::QueryWhatsThis) {
-        if ( m_taskView->count() == 0 ) {
+        if (m_taskView->storage()->tasksModel()->getAllTasks().size() == 0) {
             setWhatsThis(i18n("This is ktimetracker, KDE's program to help you track your time. Best, start with creating your first task - enter it into the field where you see \"search or add task\"."));
         } else {
             setWhatsThis(i18n("You have already created a task. You can now start and stop timing"));
