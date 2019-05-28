@@ -36,11 +36,11 @@ void TaskTest::testIsRoot()
 {
     auto *taskView = createTaskView(this, false);
 
-    auto *task1 = taskView->task(taskView->addTask("1"));
+    auto *task1 = taskView->addTask("1");
     QVERIFY(task1);
     QVERIFY(task1->isRoot());
 
-    auto *task2 = taskView->task(taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1));
+    auto *task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
     QVERIFY(task2);
     QVERIFY(!task2->isRoot());
 }

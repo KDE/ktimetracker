@@ -49,7 +49,7 @@ void StorageTest::testSaveSimpleTree()
 {
     auto *taskView = createTaskView(this, true);
 
-    Task* negativeTask = taskView->task(taskView->addTask("negative duration"));
+    Task* negativeTask = taskView->addTask("negative duration");
     negativeTask->changeTime(-5, taskView->storage()->eventsModel()); // substract 5 minutes
 
     QCOMPARE(taskView->storage()->save(), "");

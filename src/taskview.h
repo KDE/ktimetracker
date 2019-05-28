@@ -83,7 +83,7 @@ public:
     Task* task(const QString& uid);
 
     /** Add a task to view and storage. */
-    QString addTask(
+    Task *addTask(
         const QString& taskame, const QString& taskdescription = QString(),
         long total = 0, long session = 0, const DesktopList& desktops = QVector<int>(0,0),
         Task* parent = nullptr);

@@ -122,8 +122,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
         }
     }
     if (!found) {
-        QString taskuid = addTask(newTaskName);
-        if (taskuid.isNull()) {
+        if (!addTask(newTaskName)) {
             KMessageBox::error(
                 nullptr,
                 i18n("Error storing new task. Your changes were not saved. "
@@ -572,8 +571,8 @@ void TaskView::newTask(const QString &caption, Task *parent)
 
         long total = 0;
         long session = 0;
-        QString uid = addTask(taskName, taskDescription, total, session, desktopList, parent);
-        if (uid.isNull()) {
+        auto *task = addTask(taskName, taskDescription, total, session, desktopList, parent);
+        if (!task) {
             KMessageBox::error(nullptr, i18n(
                 "Error storing new task. Your changes were not saved. "
                 "Make sure you can edit your iCalendar file. Also quit "
@@ -584,7 +583,7 @@ void TaskView::newTask(const QString &caption, Task *parent)
     emit updateButtons();
 }
 
-QString TaskView::addTask(
+Task *TaskView::addTask(
     const QString& taskname, const QString& taskdescription, long total, long session,
     const DesktopList& desktops, Task* parent)
 {
@@ -603,7 +602,7 @@ QString TaskView::addTask(
     save();
 
     m_tasksWidget->setSortingEnabled(true);
-    return task->uid();
+    return task;
 }
 
 void TaskView::newSubTask()
