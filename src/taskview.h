@@ -76,9 +76,6 @@ public:
     /** Schedule that we should save very soon */
     void scheduleSave();
 
-    /** return all task names, e.g. for batch processing */
-    QStringList tasks();
-
     /** Add a task to view and storage. */
     Task *addTask(
         const QString& taskame, const QString& taskdescription = QString(),

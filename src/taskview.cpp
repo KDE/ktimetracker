@@ -365,16 +365,6 @@ QString TaskView::exportCSVHistoryDialog()
     return err;
 }
 
-QStringList TaskView::tasks()
-{
-    QStringList result;
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        result << task->name();
-    }
-
-    return result;
-}
-
 void TaskView::scheduleSave()
 {
     m_manualSaveTimer->start(10);

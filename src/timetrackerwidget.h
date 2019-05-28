@@ -174,7 +174,10 @@ public Q_SLOTS:
                         bool allTasks, const QString &delimiter,
                          const QString &quote );
     void importPlannerFile( const QString &filename );
+
+    /** return all task names, e.g. for batch processing */
     QStringList tasks() const;
+
     QStringList activeTasks() const;
     bool isActive( const QString &taskId ) const;
     bool isTaskNameActive( const QString &taskId ) const;
