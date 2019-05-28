@@ -708,11 +708,7 @@ QString TimeTrackerWidget::error( int errorCode ) const
 
 bool TimeTrackerWidget::isIdleDetectionPossible() const
 {
-    bool result;
-    auto *idletimedetector1=new IdleTimeDetector(50);
-    result = idletimedetector1->isIdleDetectionPossible();
-    delete idletimedetector1;
-    return result;
+    return IdleTimeDetector::isIdleDetectionPossible();
 }
 
 int TimeTrackerWidget::totalMinutesForTaskId(const QString &taskId) const
