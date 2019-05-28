@@ -483,11 +483,6 @@ void TimeTrackerWidget::exportCSVHistoryDialog()
     currentTaskView()->exportCSVHistoryDialog();
 }
 
-void TimeTrackerWidget::importPlanner(const QString &fileName)
-{
-    currentTaskView()->importPlanner(fileName);
-}
-
 void TimeTrackerWidget::startNewSession()
 {
     currentTaskView()->startNewSession();
