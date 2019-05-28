@@ -335,7 +335,7 @@ void TaskView::exportCSVFileDialog()
 {
     qCDebug(KTT_LOG) << "TaskView::exportCSVFileDialog()";
 
-    CSVExportDialog dialog(m_tasksWidget, this, ReportCriteria::CSVTotalsExport);
+    CSVExportDialog dialog(m_tasksWidget, this);
     if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }
@@ -345,7 +345,7 @@ void TaskView::exportCSVFileDialog()
 void TaskView::exportCSVHistoryDialog()
 {
     qCDebug(KTT_LOG) << "TaskView::exportCSVHistoryDialog()";
-    CSVExportDialog dialog(m_tasksWidget, this, ReportCriteria::CSVHistoryExport);
+    CSVExportDialog dialog(m_tasksWidget, this);
     if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }

@@ -30,7 +30,7 @@
 #include "taskview.h"
 #include "ktt_debug.h"
 
-CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView, ReportCriteria::REPORTTYPE rt)
+CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
     : QDialog(parent)
     , ui()
     , m_taskView(taskView)
@@ -51,20 +51,10 @@ CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView, ReportCrit
 
     ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 
-    switch (rt) {
-    case ReportCriteria::TextTotalsExport:
-    case ReportCriteria::CSVTotalsExport:
-        ui.grpDateRange->setEnabled(false);
-        ui.grpDateRange->hide();
-        rc.reportType = rt;
-        break;
-    case ReportCriteria::CSVHistoryExport:
-        ui.grpDateRange->setEnabled(true);
-        rc.reportType = rt;
-        break;
-    default:
-        break;
-    }
+    connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioTimesText, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    updateUI();
 
     // If decimal symbol is a comma, then default field separator to semi-colon.
     // In France and Germany, one-and-a-half is written as 1,5 not 1.5
@@ -84,10 +74,6 @@ void CSVExportDialog::enableTasksToExportQuestion()
 
 void CSVExportDialog::exPortToClipBoard()
 {
-    if (rc.reportType == ReportCriteria::CSVTotalsExport) {
-        rc.reportType = ReportCriteria::TextTotalsExport;
-    }
-
     rc.bExPortToClipBoard = true;
 
     QString err = m_taskView->report(reportCriteria(), QUrl());
@@ -136,4 +122,33 @@ ReportCriteria CSVExportDialog::reportCriteria()
     rc.sessionTimes = (i18n("Session Times") == ui.combosessiontimes->currentText());
     rc.allTasks = (i18n("All Tasks") == ui.comboalltasks->currentText());
     return rc;
+}
+
+void CSVExportDialog::updateUI()
+{
+    ReportCriteria::REPORTTYPE rt;
+    if (ui.radioTimesCsv->isChecked()) {
+        rt = ReportCriteria::CSVTotalsExport;
+    } else if (ui.radioHistoryCsv->isChecked()) {
+        rt = ReportCriteria::CSVHistoryExport;
+    } else if (ui.radioTimesText->isChecked()) {
+        rt = ReportCriteria::TextTotalsExport;
+    } else {
+        qCWarning(KTT_LOG) << "*** CSVExportDialog::updateUI: Unexpected delimiter choice";
+        rt = ReportCriteria::TextTotalsExport;
+    }
+    rc.reportType = rt;
+
+    switch (rt) {
+    case ReportCriteria::CSVHistoryExport:
+        ui.grpDateRange->setEnabled(true);
+        ui.grpDateRange->show();
+        break;
+    case ReportCriteria::TextTotalsExport:
+    case ReportCriteria::CSVTotalsExport:
+    default:
+        ui.grpDateRange->setEnabled(false);
+        ui.grpDateRange->hide();
+        break;
+    }
 }

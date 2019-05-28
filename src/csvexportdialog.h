@@ -38,8 +38,10 @@ public Q_SLOTS:
     void exPortToClipBoard();
     void exPortToCSVFile();
 
+    void updateUI();
+
 public:
-    explicit CSVExportDialog(QWidget *parent, TaskView *taskView, ReportCriteria::REPORTTYPE rt);
+    explicit CSVExportDialog(QWidget *parent, TaskView *taskView);
 
     /**
      Enable the "Tasks to export" question in the dialog.
