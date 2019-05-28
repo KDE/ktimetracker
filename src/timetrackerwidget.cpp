@@ -918,7 +918,7 @@ void TimeTrackerWidget::quit()
 bool TimeTrackerWidget::event(QEvent* event) // inherited from QWidget
 {
     if (event->type() == QEvent::QueryWhatsThis) {
-        if (m_taskView->storage()->tasksModel()->getAllTasks().size() == 0) {
+        if (m_taskView->storage()->tasksModel()->getAllTasks().empty()) {
             setWhatsThis(i18n("This is ktimetracker, KDE's program to help you track your time. Best, start with creating your first task - enter it into the field where you see \"search or add task\"."));
         } else {
             setWhatsThis(i18n("You have already created a task. You can now start and stop timing"));

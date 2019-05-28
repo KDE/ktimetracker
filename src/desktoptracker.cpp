@@ -31,18 +31,17 @@
 #include "ktimetrackerutility.h"
 
 DesktopTracker::DesktopTracker()
+    : m_desktopTracker()
+    // currentDesktop will return 0 if no window manager is started
+    , m_previousDesktop(std::max(KWindowSystem::currentDesktop() - 1, 0))
+    , m_desktopCount(KWindowSystem::numberOfDesktops())
+    // currentDesktop will return 0 if no window manager is started
+    , m_desktop(std::max(KWindowSystem::currentDesktop() - 1, 0))
+    , m_timer(new QTimer(this))
 {
     // Setup desktop change handling
-    connect( KWindowSystem::self(), SIGNAL(currentDesktopChanged(int)),
-           this, SLOT(handleDesktopChange(int)) );
-    m_desktopCount = desktopCount();
-    m_previousDesktop = KWindowSystem::self()->currentDesktop()-1;
+    connect(KWindowSystem::self(), &KWindowSystem::currentDesktopChanged, this, &DesktopTracker::handleDesktopChange);
 
-    // currentDesktop will return 0 if no window manager is started
-    if (m_previousDesktop < 0) {
-        m_previousDesktop = 0;
-    }
-    m_timer = new QTimer(this);
     m_timer->setSingleShot(true);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(changeTimers()));
 }
@@ -55,7 +54,7 @@ void DesktopTracker::handleDesktopChange(int desktop)
     // the data file can get huge fast if logging is turned on. Then saving
     // gets slower, etc. There's no benefit in saving a lot of start/stop
     // events that are very small. Wait a bit to make sure the user is settled.
-    m_timer->start( KTimeTrackerSettings::minActiveTime() * 1000 );
+    m_timer->start(KTimeTrackerSettings::minActiveTime() * 1000);
 }
 
 void DesktopTracker::changeTimers()
@@ -64,49 +63,52 @@ void DesktopTracker::changeTimers()
     // notify start all tasks setup for running on desktop
 
     // stop trackers for m_previousDesktop
-    foreach ( Task *task, m_desktopTracker[m_previousDesktop] )
-    {
-        emit leftActiveDesktop( task );
+    for (Task *task : m_desktopTracker[m_previousDesktop]) {
+        emit leftActiveDesktop(task);
     }
 
     // start trackers for desktop
-    foreach ( Task *task, m_desktopTracker[m_desktop] )
-    {
-        emit reachedActiveDesktop( task );
+    for (Task *task : m_desktopTracker[m_desktop]) {
+        emit reachedActiveDesktop(task);
     }
+
     m_previousDesktop = m_desktop;
 }
 
 QString DesktopTracker::startTracking()
 {
-    QString err;
-    int currentDesktop = KWindowSystem::self()->currentDesktop() - 1;
-    if ( currentDesktop < 0 ) currentDesktop = 0;
-    if ( currentDesktop >= maxDesktops ) err="desktop number too high, desktop tracking will not work";
-    else
-        foreach ( Task *task, m_desktopTracker[ currentDesktop ] )
-        {
-            emit reachedActiveDesktop( task );
-        }
-    return err;
+    int currentDesktop = KWindowSystem::currentDesktop() - 1;
+    if (currentDesktop < 0) {
+        currentDesktop = 0;
+    }
+
+    if (currentDesktop >= maxDesktops) {
+        return QStringLiteral("desktop number too high, desktop tracking will not work");
+    }
+
+    for (Task *task : m_desktopTracker[currentDesktop]) {
+        emit reachedActiveDesktop(task);
+    }
+
+    return QString();
 }
 
 void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
 {
     qCDebug(KTT_LOG) << "Entering function";
     // if no desktop is marked, disable auto tracking for this task
-    if ( desktopList.size() == 0 )
-    {
-        for ( int i = 0; i < maxDesktops; ++i )
-        {
-            TaskVector *v = &( m_desktopTracker[i] );
-            TaskVector::iterator tit = qFind( v->begin(), v->end(), task );
-            if ( tit != v->end() )
-            m_desktopTracker[i].erase( tit );
+    if (desktopList.empty()) {
+        for (int i = 0; i < maxDesktops; ++i) {
+            TaskVector *v = &(m_desktopTracker[i]);
+            TaskVector::iterator tit = qFind(v->begin(), v->end(), task);
+            if (tit != v->end()) {
+                m_desktopTracker[i].erase( tit );
+            }
             // if the task was priviously tracking this desktop then
             // emit a signal that is not tracking it any more
-            if ( i == KWindowSystem::self()->currentDesktop() - 1 )
-                emit leftActiveDesktop( task );
+            if (i == KWindowSystem::currentDesktop() - 1) {
+                emit leftActiveDesktop(task);
+            }
         }
         qCDebug(KTT_LOG) << "Leaving function, desktopList.size=0";
         return;
@@ -115,28 +117,27 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
     // If desktop contains entries then configure desktopTracker
     // If a desktop was disabled, it will not be stopped automatically.
     // If enabled: Start it now.
-    if ( desktopList.size() > 0 )
-    {
-        for ( int i = 0; i < maxDesktops; ++i )
-        {
+    if (!desktopList.empty()) {
+        for (int i = 0; i < maxDesktops; ++i) {
             TaskVector& v = m_desktopTracker[i];
-            TaskVector::iterator tit = qFind( v.begin(), v.end(), task );
+            TaskVector::iterator tit = qFind(v.begin(), v.end(), task);
             // Is desktop i in the desktop list?
-            if ( qFind( desktopList.begin(), desktopList.end(), i )
-                != desktopList.end() )
-            {
-                if ( tit == v.end() )  // not yet in start vector
-                v.push_back( task ); // track in desk i
-            }
-            else
-            { // delete it
-                if ( tit != v.end() ) // not in start vector any more
-                {
-                    v.erase( tit ); // so we delete it from desktopTracker
+            if (qFind( desktopList.begin(), desktopList.end(), i) != desktopList.end()) {
+
+                if (tit == v.end()) {
+                    // not yet in start vector
+                    v.push_back(task); // track in desk i
+                }
+            } else {
+                // delete it
+                if (tit != v.end()) {
+                    // not in start vector any more
+                    v.erase(tit); // so we delete it from desktopTracker
                     // if the task was priviously tracking this desktop then
                     // emit a signal that is not tracking it any more
-                    if( i == KWindowSystem::self()->currentDesktop() -1)
-                        emit leftActiveDesktop( task );
+                    if (i == KWindowSystem::currentDesktop() - 1) {
+                        emit leftActiveDesktop(task);
+                    }
                 }
             }
         }
