@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
         KAboutLicense::GPL,
         i18n("Copyright © 1997-2012 KDE PIM authors"),
         QString(),
-        QStringLiteral("http://userbase.kde.org/KTimeTracker"));
+        QStringLiteral("https://userbase.kde.org/KTimeTracker"));
 
     aboutData.addAuthor(i18n("Thorsten Stärk"), i18n("Current Maintainer"), QStringLiteral("kde@staerk.de"));
     aboutData.addAuthor(i18n("Sirtaj Singh Kang"), i18n("Original Author"), QStringLiteral("taj@kde.org"));
