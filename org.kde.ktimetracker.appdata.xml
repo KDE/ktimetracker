@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.ktimetracker.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <name>KTimeTracker</name>
+  <summary>Personal Time Tracker</summary>
+  <description>
+    <p>KTimeTracker helps you track your personal time spent on various tasks and projects.</p>
+    <p>It is useful for tracking billable hours and can report the hours logged by task and day.</p>
+    <p>With KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.</p>
+  </description>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=ktimetracker</url>
+  <screenshots>
+    <screenshot type="default">
+      <caption>KTimeTracker</caption>
+      <image>https://userbase.kde.org/images.userbase/1/15/Ktimetracker.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>ktimetracker</binary>
+  </provides>
+  <releases>
+    <release version="4.14.7" date="2015-04-15"/>
+    <release version="4.14.8" date="2015-05-12"/>
+    <release version="4.14.9" date="2015-06-02"/>
+    <release version="4.14.10" date="2015-07-01"/>
+  </releases>
+</component>

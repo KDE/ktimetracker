@@ -46,4 +46,6 @@ add_subdirectory(icons)
 add_subdirectory(doc)
 add_subdirectory(src)
 
+install(FILES org.kde.ktimetracker.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
