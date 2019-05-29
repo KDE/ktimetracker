@@ -23,11 +23,14 @@
 #include "csvexportdialog.h"
 
 #include <QPushButton>
+#include <QFileDialog>
+#include <QFontDatabase>
 
 #include <KMessageBox>
-#include <QtWidgets/QFileDialog>
 
 #include "taskview.h"
+#include "widgets/taskswidget.h"
+#include "export/export.h"
 #include "ktt_debug.h"
 
 CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
@@ -37,24 +40,7 @@ CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
 {
     ui.setupUi(this);
 
-    ui.buttonBox->button(QDialogButtonBox::Ok)->setText(i18nc("@action:button", "&Export"));
-
-    // TODO: put this button on the left, aside from OK/Cancel
-    QPushButton* const clipboardButton = ui.buttonBox->button(QDialogButtonBox::Save);
-    clipboardButton->setText(i18nc("@action:button", "E&xport to Clipboard"));
-    clipboardButton->setIcon(QIcon::fromTheme("klipper"));
-
-    connect(ui.buttonBox->button(QDialogButtonBox::Save), &QPushButton::clicked,
-            this, &CSVExportDialog::exPortToClipBoard);
-    connect(ui.buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked,
-            this, &CSVExportDialog::exPortToCSVFile);
-
-    ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
-
-    connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioTimesText, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    updateUI();
+    ui.previewText->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
     // If decimal symbol is a comma, then default field separator to semi-colon.
     // In France and Germany, one-and-a-half is written as 1,5 not 1.5
@@ -64,6 +50,29 @@ CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
     } else {
         ui.radioComma->setChecked(true);
     }
+
+    connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
+    connect(ui.btnToClipboard, &QPushButton::clicked, this, &CSVExportDialog::exPortToClipBoard);
+    connect(ui.btnSaveAs, &QPushButton::clicked, this, &CSVExportDialog::exPortToCSVFile);
+
+    connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioTimesText, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioComma, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioSemicolon, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioOther, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioTab, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.radioSpace, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
+    connect(ui.txtOther, &QLineEdit::textChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.combodecimalminutes, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.comboalltasks, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.combosessiontimes, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.cboQuote, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.dtFrom, &KDateComboBox::dateChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.dtTo, &KDateComboBox::dateChanged, this, &CSVExportDialog::updateUI);
+
+    updateUI();
 }
 
 void CSVExportDialog::enableTasksToExportQuestion()
@@ -151,4 +160,7 @@ void CSVExportDialog::updateUI()
         ui.grpDateRange->hide();
         break;
     }
+
+    ui.previewText->setText(exportToString(
+        m_taskView->storage()->projectModel(), m_taskView->tasksWidget()->currentItem(), reportCriteria()));
 }
