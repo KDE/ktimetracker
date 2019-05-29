@@ -278,10 +278,12 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
 
     QAction* exportAction = actionCollection->addAction(QStringLiteral("export_dialog"));
     exportAction->setText(i18n("&Export..."));
+    exportAction->setIcon(QIcon::fromTheme("document-export"));
     connect(exportAction, &QAction::triggered, this, &TimeTrackerWidget::exportDialog);
 
     QAction* importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
     importPlanner->setText(i18n("Import Tasks From &Planner..."));
+    importPlanner->setIcon(QIcon::fromTheme("document-import"));
     connect(importPlanner, &QAction::triggered, [=]() {
         const QString &fileName = QFileDialog::getOpenFileName();
         importPlannerFile(fileName);

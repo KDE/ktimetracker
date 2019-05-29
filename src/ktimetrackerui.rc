@@ -9,11 +9,8 @@
             <Action name="start_new_session" />
             <Action name="reset_all_times" />
             <Separator />
-            <Menu name="import" icon="document-import" >
-                <text>&amp;Import</text>
-                <Action name="import_planner" />
-            </Menu>
-            <Action name="export_dialog" icon="document-export" />
+            <Action name="import_planner" />
+            <Action name="export_dialog" />
             <Action name="edit_history" />
             <Separator />
             <Action name="file_quit" />
