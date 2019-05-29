@@ -46,6 +46,7 @@
 #include "ktimetracker-version.h"
 #include "mainwindow.h"
 #include "ktt_debug.h"
+#include "csvexportdialog.h"
 
 TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     : QWidget(parent)
@@ -275,13 +276,9 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
     connect(markTaskAsIncomplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
 
-    QAction* exportTimes = actionCollection->addAction(QStringLiteral("export_times"));
-    exportTimes->setText(i18n("&Export Times..."));
-    connect(exportTimes, &QAction::triggered, this, &TimeTrackerWidget::exportCSVFileDialog);
-
-    QAction* exportHistory = actionCollection->addAction(QStringLiteral("export_history"));
-    exportHistory->setText(i18n("Export &History..."));
-    connect(exportHistory, &QAction::triggered, this, &TimeTrackerWidget::exportCSVHistoryDialog);
+    QAction* exportAction = actionCollection->addAction(QStringLiteral("export_dialog"));
+    exportAction->setText(i18n("&Export..."));
+    connect(exportAction, &QAction::triggered, this, &TimeTrackerWidget::exportDialog);
 
     QAction* importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
     importPlanner->setText(i18n("Import Tasks From &Planner..."));
@@ -401,8 +398,7 @@ void TimeTrackerWidget::slotUpdateButtons()
     action(QStringLiteral("start_new_session"))->setEnabled(currentTaskView());
     action(QStringLiteral("edit_history"))->setEnabled(currentTaskView());
     action(QStringLiteral("reset_all_times"))->setEnabled(currentTaskView());
-    action(QStringLiteral("export_times"))->setEnabled(currentTaskView());
-    action(QStringLiteral("export_history"))->setEnabled(currentTaskView());
+    action(QStringLiteral("export_dialog"))->setEnabled(currentTaskView());
     action(QStringLiteral("import_planner"))->setEnabled(currentTaskView());
     action(QStringLiteral("file_save"))->setEnabled(currentTaskView());
 }
@@ -476,14 +472,16 @@ void TimeTrackerWidget::markTaskAsIncomplete()
     currentTaskView()->markTaskAsIncomplete();
 }
 
-void TimeTrackerWidget::exportCSVFileDialog()
+void TimeTrackerWidget::exportDialog()
 {
-    currentTaskView()->exportCSVFileDialog();
-}
+    qCDebug(KTT_LOG) << "TimeTrackerWidget::exportDialog()";
 
-void TimeTrackerWidget::exportCSVHistoryDialog()
-{
-    currentTaskView()->exportCSVHistoryDialog();
+    auto *taskView = currentTaskView();
+    CSVExportDialog dialog(taskView->tasksWidget(), taskView);
+    if (taskView->tasksWidget()->currentItem() && taskView->tasksWidget()->currentItem()->isRoot()) {
+        dialog.enableTasksToExportQuestion();
+    }
+    dialog.exec();
 }
 
 void TimeTrackerWidget::startNewSession()

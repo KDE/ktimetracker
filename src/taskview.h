@@ -127,12 +127,6 @@ public Q_SLOTS:
      */
     QString report(const ReportCriteria &rc, const QUrl &url);
 
-    /** Export comma separated values format for task time totals. */
-    void exportCSVFileDialog();
-
-    /** Export comma-separated values format for task history. */
-    void exportCSVHistoryDialog();
-
     /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();
 

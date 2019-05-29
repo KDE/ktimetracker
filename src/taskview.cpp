@@ -331,27 +331,6 @@ QString TaskView::report(const ReportCriteria &rc, const QUrl &url)
     return writeExport(rc, retval, url);
 }
 
-void TaskView::exportCSVFileDialog()
-{
-    qCDebug(KTT_LOG) << "TaskView::exportCSVFileDialog()";
-
-    CSVExportDialog dialog(m_tasksWidget, this);
-    if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
-        dialog.enableTasksToExportQuestion();
-    }
-    dialog.exec();
-}
-
-void TaskView::exportCSVHistoryDialog()
-{
-    qCDebug(KTT_LOG) << "TaskView::exportCSVHistoryDialog()";
-    CSVExportDialog dialog(m_tasksWidget, this);
-    if (m_tasksWidget->currentItem() && m_tasksWidget->currentItem()->isRoot()) {
-        dialog.enableTasksToExportQuestion();
-    }
-    dialog.exec();
-}
-
 void TaskView::scheduleSave()
 {
     m_manualSaveTimer->start(10);

@@ -13,11 +13,7 @@
                 <text>&amp;Import</text>
                 <Action name="import_planner" />
             </Menu>
-            <Menu name="export" icon="document-export">
-                <text>&amp;Export</text>
-                <Action name="export_times" />
-                <Action name="export_history" />
-            </Menu>
+            <Action name="export_dialog" icon="document-export" />
             <Action name="edit_history" />
             <Separator />
             <Action name="file_quit" />

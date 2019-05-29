@@ -123,6 +123,8 @@ public Q_SLOTS:
      */
     bool closeAllFiles();
 
+    /** Open export dialog. */
+    void exportDialog();
 
     //BEGIN wrapper slots
     /*
@@ -138,8 +140,6 @@ public Q_SLOTS:
     void deleteTask();
     void markTaskAsComplete();
     void markTaskAsIncomplete();
-    void exportCSVFileDialog();
-    void exportCSVHistoryDialog();
     void startNewSession();
     void editHistory();
     void resetAllTimes();
