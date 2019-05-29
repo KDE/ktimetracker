@@ -11,6 +11,8 @@ KTimeTracker 5.0 (release date: ?)
 - Ported to KF5::IdleTime for idle detection, thus removing dependency on X11
 - Do not create empty .ics file if it does not exist
 - Fixed "Bug 325683 - Both "mark as complete" and "mark as incomplete" are mapped to ctrl+m"
+- Reworked the export dialog, added preview of exportable text
+- Added appstream XML metadata
 
 KTimeTracker 4.1 (Jul 2008 -- KDE 4.1 Release)
 --------
