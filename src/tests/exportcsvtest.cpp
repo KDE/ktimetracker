@@ -24,6 +24,7 @@
 #include "taskview.h"
 #include "model/task.h"
 #include "export/totalsastext.h"
+#include "export/export.h"
 #include "widgets/taskswidget.h"
 #include "helpers.h"
 
@@ -33,7 +34,7 @@ class ExportCSVTest : public QObject
 
 private:
     QUrl createTempFile();
-    ReportCriteria createRC(ReportCriteria::REPORTTYPE type, bool toClipboard);
+    ReportCriteria createRC(ReportCriteria::REPORTTYPE type);
 
 private Q_SLOTS:
     void testTotalsEmpty();
@@ -53,7 +54,7 @@ QUrl ExportCSVTest::createTempFile()
     return QUrl::fromLocalFile(file->fileName());
 }
 
-ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toClipboard)
+ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type)
 {
     ReportCriteria rc;
     rc.reportType = type;
@@ -62,7 +63,6 @@ ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type, bool toC
     rc.decimalMinutes = false;
     rc.sessionTimes = false;
     rc.allTasks = true;
-    rc.bExPortToClipBoard = toClipboard;
     rc.delimiter = ";";
     rc.quote = "\"";
 
@@ -80,7 +80,7 @@ void ExportCSVTest::testTotalsEmpty()
         "Task Totals\n%1\n\n"
         "  Time    Task\n----------------------------------------------\nNo tasks.").arg(timeString);
     QCOMPARE(
-        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
+        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport)),
         expected);
 }
 
@@ -103,7 +103,7 @@ void ExportCSVTest::testTotalsSimpleTree()
          "----------------------------------------------\n"
          "  0:15 Total").arg(timeString);
     QCOMPARE(
-        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport, true)),
+        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport)),
         expected);
 }
 
@@ -113,9 +113,11 @@ void ExportCSVTest::testTimesSimpleTree()
 
     auto *taskView = createTaskView(this, true);
 
-    const auto &rc = createRC(ReportCriteria::CSVTotalsExport, false);
+    const auto &rc = createRC(ReportCriteria::CSVTotalsExport);
     const QUrl &url = createTempFile();
-    QCOMPARE(taskView->report(rc, url), "");
+    QString output = exportToString(taskView->storage()->projectModel(),
+                                    taskView->tasksWidget()->currentItem(), rc);
+    QCOMPARE(writeExport(output, url), "");
 
     const QString &expected = QStringLiteral(
         "\"3\";;0:07;0:07;0:07;0:07\n"
@@ -130,9 +132,11 @@ void ExportCSVTest::testHistorySimpleTree()
 
     auto *taskView = createTaskView(this, true);
 
-    const auto &rc = createRC(ReportCriteria::CSVHistoryExport, false);
+    const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
     const QUrl &url = createTempFile();
-    QCOMPARE(taskView->report(rc, url), "");
+    QString output = exportToString(taskView->storage()->projectModel(),
+                                    taskView->tasksWidget()->currentItem(), rc);
+    QCOMPARE(writeExport(output, url), "");
 
     const QString &expected = QStringLiteral(
         "\"Task name\";%1\n"

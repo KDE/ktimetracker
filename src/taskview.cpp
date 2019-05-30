@@ -315,22 +315,6 @@ void TaskView::importPlanner(const QString& fileName)
     refresh();
 }
 
-QString TaskView::report(const ReportCriteria &rc, const QUrl &url)
-{
-    //     QProgressDialog dialog(
-    //        i18n("Exporting to CSV..."), i18n("Cancel"),
-    //        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
-    //    dialog.setAutoClose(true);
-    //    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
-    //
-    //    if (storage()->tasksModel()->getAllTasks().size() > 1) {
-    //        dialog.show();
-    //    }
-
-    QString retval = exportToString(m_storage->projectModel(), m_tasksWidget->currentItem(), rc);
-    return writeExport(rc, retval, url);
-}
-
 void TaskView::scheduleSave()
 {
     m_manualSaveTimer->start(10);

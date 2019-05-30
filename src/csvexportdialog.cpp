@@ -25,6 +25,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QFontDatabase>
+#include <QClipboard>
 
 #include <KMessageBox>
 
@@ -53,8 +54,8 @@ CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
 
     connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    connect(ui.btnToClipboard, &QPushButton::clicked, this, &CSVExportDialog::exPortToClipBoard);
-    connect(ui.btnSaveAs, &QPushButton::clicked, this, &CSVExportDialog::exPortToCSVFile);
+    connect(ui.btnToClipboard, &QPushButton::clicked, this, &CSVExportDialog::exportToClipboard);
+    connect(ui.btnSaveAs, &QPushButton::clicked, this, &CSVExportDialog::exportToFile);
 
     connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
     connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
@@ -81,22 +82,31 @@ void CSVExportDialog::enableTasksToExportQuestion()
     //grpTasksToExport->setEnabled( true );
 }
 
-void CSVExportDialog::exPortToClipBoard()
+void CSVExportDialog::exportToClipboard()
 {
-    rc.bExPortToClipBoard = true;
-
-    QString err = m_taskView->report(reportCriteria(), QUrl());
-    if (!err.isEmpty()) {
-        KMessageBox::error(parentWidget(), i18n(err.toLatin1()));
-    }
+    QString output = exportToString(m_taskView->storage()->projectModel(),
+                                    m_taskView->tasksWidget()->currentItem(), reportCriteria());
+    QApplication::clipboard()->setText(output);
 }
 
-void CSVExportDialog::exPortToCSVFile()
+void CSVExportDialog::exportToFile()
 {
-    rc.bExPortToClipBoard = false;
+    //     QProgressDialog dialog(
+    //        i18n("Exporting to CSV..."), i18n("Cancel"),
+    //        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
+    //    dialog.setAutoClose(true);
+    //    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
+    //
+    //    if (storage()->tasksModel()->getAllTasks().size() > 1) {
+    //        dialog.show();
+    //    }
 
     const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export as CSV"));
-    QString err = m_taskView->report(reportCriteria(), url);
+
+    QString output = exportToString(m_taskView->storage()->projectModel(),
+                                    m_taskView->tasksWidget()->currentItem(), reportCriteria());
+    QString err = writeExport(output, url);
+
     if (!err.isEmpty()) {
         KMessageBox::error(parentWidget(), i18n(err.toLatin1()));
     }

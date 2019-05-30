@@ -29,6 +29,7 @@
 #include <KMessageBox>
 #include <KStandardAction>
 
+#include "export/export.h"
 #include "model/task.h"
 #include "model/eventsmodel.h"
 #include "model/tasksmodel.h"
@@ -822,7 +823,9 @@ QString TimeTrackerWidget::exportCSVFile(
     rc.delimiter = delimiter;
     rc.quote = quote;
 
-    return taskView->report(rc, filename);
+    QString output = exportToString(taskView->storage()->projectModel(),
+                                    taskView->tasksWidget()->currentItem(), rc);
+    return writeExport(output, QUrl(filename));
 }
 
 void TimeTrackerWidget::importPlannerFile(const QString &filename)

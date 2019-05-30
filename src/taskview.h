@@ -121,12 +121,6 @@ public Q_SLOTS:
     /** used to import tasks from imendio planner */
     void importPlanner(const QString &fileName);
 
-    /**
-     * Call export function for csv totals or history.
-     * Output a report based on contents of ReportCriteria.
-     */
-    QString report(const ReportCriteria &rc, const QUrl &url);
-
     /** Calls newTask dialog with caption "New Sub Task". */
     void newSubTask();
 

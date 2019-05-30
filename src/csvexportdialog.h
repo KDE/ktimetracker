@@ -35,8 +35,8 @@ class CSVExportDialog : public QDialog
     Q_OBJECT
 
 public Q_SLOTS:
-    void exPortToClipBoard();
-    void exPortToCSVFile();
+    void exportToClipboard();
+    void exportToFile();
 
     void updateUI();
 

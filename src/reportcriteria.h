@@ -98,11 +98,6 @@ public:
     bool    allTasks;
 
     /**
-     True if a clipboard export is wished, not an export to a file
-     */
-    bool    bExPortToClipBoard;
-
-    /**
      The delimiter to use when outputting comma-separated value reports.
      */
     QString delimiter;
