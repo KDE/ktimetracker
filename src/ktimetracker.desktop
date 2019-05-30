@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=KTimeTracker
+Name[ca]=KTimeTracker
+Name[de]=KTimeTracker
+Name[nl]=KTimeTracker
+Name[pt]=KTimeTracker
+Name[sv]=KTimeTracker
+Name[uk]=KTimeTracker
+Name[x-test]=xxKTimeTrackerxx
 GenericName=Personal Time Tracker
+GenericName[ca]=Seguidor personal de temps
+GenericName[de]=Persönliche Zeiterfassung
+GenericName[nl]=Persoonlijk gebruik van tijd
+GenericName[pt]=Gestor do Tempo Pessoal
+GenericName[sv]=Personlig tidmätning
+GenericName[uk]=Програма для керування особистим часом
+GenericName[x-test]=xxPersonal Time Trackerxx
 Exec=ktimetracker
 Icon=ktimetracker
 X-DocPath=ktimetracker/index.html
