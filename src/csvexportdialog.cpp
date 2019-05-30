@@ -102,17 +102,19 @@ void CSVExportDialog::exportToFile()
     //    }
 
     const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export as CSV"));
+    if (url.isEmpty()) {
+        return;
+    }
 
     QString output = exportToString(m_taskView->storage()->projectModel(),
                                     m_taskView->tasksWidget()->currentItem(), reportCriteria());
     QString err = writeExport(output, url);
-
-    if (!err.isEmpty()) {
+    if (err.isEmpty()) {
+        // Close export dialog after saving
+        accept();
+    } else {
         KMessageBox::error(parentWidget(), i18n(err.toLatin1()));
     }
-
-    // Close export dialog after saving
-    accept();
 }
 
 ReportCriteria CSVExportDialog::reportCriteria()
