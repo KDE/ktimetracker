@@ -7,13 +7,14 @@ set(KF5_MIN_VERSION "5.54.0")
 find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-include(ECMInstallIcons)
-include(KDEInstallDirs)
 include(ECMAddAppIcon)
+include(ECMInstallIcons)
 include(ECMQtDeclareLoggingCategory)
-include(FeatureSummary)
-include(KDECMakeSettings)
 include(ECMSetupVersion)
+include(FeatureSummary)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
 ecm_setup_version(${KDEPIM_VERSION_NUMBER}
     VARIABLE_PREFIX KTIMETRACKER
