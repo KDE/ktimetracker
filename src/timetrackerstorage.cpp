@@ -260,6 +260,8 @@ QString TimeTrackerStorage::save()
     if (!calendar->save()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
         errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as %1.", m_url.toString());
+    } else {
+        qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
     }
     fileLock.unlock();
 
@@ -267,7 +269,6 @@ QString TimeTrackerStorage::save()
         KDirWatch::self()->addFile(m_url.toLocalFile());
     }
 
-    qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
     return errorMessage;
 }
 
