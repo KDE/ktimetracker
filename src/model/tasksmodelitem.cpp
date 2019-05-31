@@ -63,7 +63,7 @@ void TasksModelItem::insertChild(int index, TasksModelItem *child) {
     }
 }
 
-QVariant TasksModelItem::data(int column, int role) const
+QVariant TasksModelItem::data(int, int) const
 {
     return {};
 }

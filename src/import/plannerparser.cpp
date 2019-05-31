@@ -41,9 +41,9 @@ test cases:
 
 PlannerParser::PlannerParser(ProjectModel *projectModel, Task *currentTask)
     : m_withinTasks(false)
+    , m_projectModel(projectModel)
     , m_task(nullptr)
     , m_level(0)
-    , m_projectModel(projectModel)
 {
     // if there is a task one level above currentItem, make it the father of all imported tasks. Set level accordingly.
     // import as well if there a no task in the taskview as if there are.

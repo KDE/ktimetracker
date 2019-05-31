@@ -277,8 +277,9 @@ QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int ro
     return QAbstractItemModel::headerData(section, orientation, role);
 }
 
-void TasksModel::setActiveIcon(int frameNumber)
+void TasksModel::setActiveIcon(int)
 {
+    // TODO: only touch those tasks that are currently running
     for (auto *task : getAllItems()) {
         task->invalidateRunningState();
     }
