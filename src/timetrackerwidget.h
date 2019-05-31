@@ -189,7 +189,7 @@ public Q_SLOTS:
     void loadSettings();
 
 protected:
-    bool event ( QEvent * event ); // inherited from QWidget
+    bool event(QEvent *event) override; // inherited from QWidget
 
 private Q_SLOTS:
     void slotCurrentChanged();

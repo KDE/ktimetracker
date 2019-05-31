@@ -162,7 +162,7 @@ int TasksModel::rowCount(const QModelIndex &parent) const
     return 0;
 }
 
-int TasksModel::columnCount(const QModelIndex &parent) const
+int TasksModel::columnCount(const QModelIndex&) const
 {
     return m_headerLabels.size();
 }

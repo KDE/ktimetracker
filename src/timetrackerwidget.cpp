@@ -918,7 +918,7 @@ void TimeTrackerWidget::quit()
     }
 }
 
-bool TimeTrackerWidget::event(QEvent* event) // inherited from QWidget
+bool TimeTrackerWidget::event(QEvent *event) // inherited from QWidget
 {
     if (event->type() == QEvent::QueryWhatsThis) {
         if (m_taskView->storage()->tasksModel()->getAllTasks().empty()) {

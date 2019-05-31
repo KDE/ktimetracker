@@ -53,7 +53,7 @@ bool IdleTimeDetector::isIdleDetectionPossible()
     }
 }
 
-void IdleTimeDetector::timeoutReached(int id, int timeout)
+void IdleTimeDetector::timeoutReached(int, int timeout)
 {
     qCDebug(KTT_LOG) << "The desktop has been idle for " << timeout << " msec.";
 
