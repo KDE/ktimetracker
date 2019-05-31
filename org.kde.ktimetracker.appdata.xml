@@ -4,16 +4,49 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>KTimeTracker</name>
+  <name xml:lang="ca">KTimeTracker</name>
+  <name xml:lang="nl">KTimeTracker</name>
+  <name xml:lang="pt">KTimeTracker</name>
+  <name xml:lang="ru">KTimeTracker</name>
+  <name xml:lang="uk">KTimeTracker</name>
+  <name xml:lang="x-test">xxKTimeTrackerxx</name>
   <summary>Personal Time Tracker</summary>
+  <summary xml:lang="ca">Seguidor personal del temps</summary>
+  <summary xml:lang="nl">Persoonlijk tijdgebruik</summary>
+  <summary xml:lang="pt">Gestor do Tempo Pessoal</summary>
+  <summary xml:lang="ru">Учёт времени</summary>
+  <summary xml:lang="uk">Програма для керування особистим часом</summary>
+  <summary xml:lang="x-test">xxPersonal Time Trackerxx</summary>
   <description>
     <p>KTimeTracker helps you track your personal time spent on various tasks and projects.</p>
+    <p xml:lang="ca">El KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
+    <p xml:lang="nl">KTimeTracker helpt u uw persoonlijk gebruikte tijd aan verschillende taken and projecten te volgen.</p>
+    <p xml:lang="pt">O KTimeTracker ajuda-nos a acompanhar o seu tempo pessoal gasto em várias tarefas e projectos.</p>
+    <p xml:lang="uk">KTimeTracker допоможе вам стежити за вашим особистим часом, який ви витрачаєте на виконання різноманітних завдань та проектів.</p>
+    <p xml:lang="x-test">xxKTimeTracker helps you track your personal time spent on various tasks and projects.xx</p>
     <p>It is useful for tracking billable hours and can report the hours logged by task and day.</p>
+    <p xml:lang="ca">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
+    <p xml:lang="nl">Het is nuttig voor het volgen van in rekening te brengen uren en kan de vastgelegde uren rapporteren per taak en dag.</p>
+    <p xml:lang="pt">É útil para gerir as horas para facturação e poderá relatar as horas registadas por tarefa e por dia.</p>
+    <p xml:lang="uk">Ця програма корисна для стеження за обліком годин, вона може створювати звіти за даними, записаними для задачі або протягом дня.</p>
+    <p xml:lang="x-test">xxIt is useful for tracking billable hours and can report the hours logged by task and day.xx</p>
     <p>With KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.</p>
+    <p xml:lang="ca">Amb el KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina sigui molt còmoda i intuïtiva.</p>
+    <p xml:lang="nl">Met KTimeTracker kunt u een in subtaken opgebroken project organiseren met onbeperkte nesting. De standaard sneltoetsen voor toetsenbord en muis zijn eenvoudig en maken het hulpmiddel echt comfortabel en intuïtief te gebruiken.</p>
+    <p xml:lang="pt">Com o KTimeTracker, poderá organizar um projecto decomposto em sub-tarefas com níveis ilimitados. Os atalhos-padrão do teclado e rato são simples e tornam a ferramenta realmente confortável e intuitiva para usar.</p>
+    <p xml:lang="uk">За допомогою KTimeTracker ви можете упорядкувати поділ проекту на підзавдання (рівень вкладеності не обмежено). Стандартні клавіатурні скорочення та дії за допомогою миші є простими — вони забезпечують зручність та інтуїтивну зрозумілість принципів керування програмою.</p>
+    <p xml:lang="x-test">xxWith KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.xx</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=ktimetracker</url>
   <screenshots>
     <screenshot type="default">
       <caption>KTimeTracker</caption>
+      <caption xml:lang="ca">KTimeTracker</caption>
+      <caption xml:lang="nl">KTimeTracker</caption>
+      <caption xml:lang="pt">KTimeTracker</caption>
+      <caption xml:lang="ru">KTimeTracker</caption>
+      <caption xml:lang="uk">KTimeTracker</caption>
+      <caption xml:lang="x-test">xxKTimeTrackerxx</caption>
       <image>https://userbase.kde.org/images.userbase/1/15/Ktimetracker.png</image>
     </screenshot>
   </screenshots>
