@@ -82,6 +82,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void taskCompleted(Task *task);
+    void taskDropped();
 
 private:
     TasksModelItem *m_rootItem;

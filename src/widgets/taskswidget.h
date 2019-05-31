@@ -64,14 +64,12 @@ public Q_SLOTS:
 Q_SIGNALS:
     void updateButtons();
     void contextMenuRequested(const QPoint&);
-    void taskDropped();
     void taskDoubleClicked(Task*);
 
 private:
     void mouseMoveEvent(QMouseEvent*) override;
     void mousePressEvent(QMouseEvent*) override;
     void mouseDoubleClickEvent(QMouseEvent*) override;
-    void dropEvent(QDropEvent*) override;
 
     QSortFilterProxyModel* m_filterProxyModel;
     TasksModel *m_tasksModel;

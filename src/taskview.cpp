@@ -165,7 +165,6 @@ void TaskView::load(const QUrl &url)
     m_tasksWidget = new TasksWidget(dynamic_cast<QWidget*>(parent()), m_filterProxyModel, nullptr);
     connect(m_tasksWidget, &TasksWidget::updateButtons, this, &TaskView::updateButtons);
     connect(m_tasksWidget, &TasksWidget::contextMenuRequested, this, &TaskView::contextMenuRequested);
-    connect(m_tasksWidget, &TasksWidget::taskDropped, this, &TaskView::reFreshTimes);
     connect(m_tasksWidget, &TasksWidget::taskDoubleClicked, this, &TaskView::onTaskDoubleClicked);
     m_tasksWidget->setRootIsDecorated(true);
 
@@ -180,6 +179,7 @@ void TaskView::load(const QUrl &url)
     }
 
     connect(tasksModel, &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
+    connect(tasksModel, &TasksModel::taskDropped, this, &TaskView::reFreshTimes);
     connect(tasksModel, &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
     connect(storage()->eventsModel(), &EventsModel::timesChanged, this, &TaskView::reFreshTimes);
 

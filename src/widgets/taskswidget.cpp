@@ -314,12 +314,6 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
-void TasksWidget::dropEvent(QDropEvent *event)
-{
-    QTreeView::dropEvent(event);
-    emit taskDropped();
-}
-
 void TasksWidget::restoreItemState()
 {
     qCDebug(KTT_LOG) << "Entering function";
