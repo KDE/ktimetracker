@@ -105,7 +105,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
     if (url.isLocalFile()) {
         QSaveFile file(url.toLocalFile());
         if (!file.open(QIODevice::WriteOnly)) {
-            qCWarning(KTT_LOG) << "save file open error: " << file.errorString() << ";filename=" << fileName;
+            qCWarning(KTT_LOG) << "save file open error: " << file.errorString() << ";local path" << file.fileName();
             setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorOpenFile, QStringList(fileName)));
             return false;
         }
@@ -113,7 +113,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
         file.write(textUtf8.data(), textUtf8.size());
 
         if (!file.commit()) {
-            qCWarning(KTT_LOG) << "file finalize error:" << file.errorString();
+            qCWarning(KTT_LOG) << "file finalize error:" << file.errorString() << ";local path" << file.fileName();
             setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(fileName)));
             return false;
         }
