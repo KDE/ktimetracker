@@ -163,8 +163,6 @@ private Q_SLOTS:
     void onFileModified();
 
 private:
-    QString writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent);
-
     ProjectModel *m_model;
     QUrl m_url;
     TaskView* m_taskView;

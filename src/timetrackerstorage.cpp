@@ -269,23 +269,6 @@ QString TimeTrackerStorage::save()
     return errorMessage;
 }
 
-QString TimeTrackerStorage::writeTaskAsTodo(Task *task, KCalCore::Todo::Ptr parent)
-{
-    QString err;
-    KCalCore::Todo::Ptr todo(new KCalCore::Todo());
-    task->asTodo(todo);
-    if (parent) {
-        todo->setRelatedTo(parent->uid());
-    }
-
-    for (int i = 0; i < task->childCount(); ++i) {
-        Task *nextTask = dynamic_cast<Task*>(task->child(i));
-        err = writeTaskAsTodo(nextTask, todo);
-    }
-
-    return err;
-}
-
 //----------------------------------------------------------------------------
 
 bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
