@@ -22,13 +22,12 @@
 
 #include <KLocalizedString>
 
-#include "eventsmodel.h"
 #include "ktt_debug.h"
 #include "ktimetrackerutility.h"
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Event::Event(const KCalCore::Event::Ptr &event, EventsModel *model)
+Event::Event(const KCalCore::Event::Ptr &event)
     : m_summary(event->summary())
     , m_dtStart(event->dtStart())
     , m_dtEnd(event->hasEndDate() ? event->dtEnd() : QDateTime())
@@ -36,7 +35,6 @@ Event::Event(const KCalCore::Event::Ptr &event, EventsModel *model)
     , m_relatedTo(event->relatedTo())
     , m_comments(event->comments())
     , m_duration(0)
-    , m_model(model)
 {
     if (!m_dtStart.isValid()) {
         qFatal("1");
@@ -57,7 +55,6 @@ QString Event::summary() const
 void Event::setDtStart(const QDateTime &dtStart)
 {
     m_dtStart = dtStart;
-//    m_model->updateInStorage(this);
 }
 
 QDateTime Event::dtStart() const
@@ -68,7 +65,6 @@ QDateTime Event::dtStart() const
 void Event::setDtEnd(const QDateTime &dtEnd)
 {
     m_dtEnd = dtEnd;
-//    m_model->updateInStorage(this);
 }
 
 bool Event::hasEndDate() const
@@ -119,7 +115,7 @@ KCalCore::Event::Ptr Event::asCalendarEvent(const KCalCore::Event::Ptr &event) c
     }
     event->setUid(uid());
     event->setRelatedTo(relatedTo());
-    for (auto comment : comments()) {
+    for (const auto &comment : comments()) {
         event->addComment(comment);
     }
 

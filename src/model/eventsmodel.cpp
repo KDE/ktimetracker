@@ -35,7 +35,7 @@ void EventsModel::load(const KCalCore::Event::List &events)
     clear();
 
     for (const auto& event : events) {
-        m_events.append(new Event(event, this));
+        m_events.append(new Event(event));
     }
 }
 
@@ -140,7 +140,7 @@ void EventsModel::changeTime(const Task* task, long deltaSeconds)
     qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
     QDateTime end;
     auto kcalEvent = baseEvent(task);
-    auto *e = new Event(kcalEvent, this);
+    auto *e = new Event(kcalEvent);
 
     // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
     // duration, even though it looks like it's used in event.cpp.
@@ -159,7 +159,7 @@ bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, lon
     qCDebug(KTT_LOG) << "Entering function";
 
     auto kcalEvent = baseEvent(task);
-    auto *e = new Event(kcalEvent, this);
+    auto *e = new Event(kcalEvent);
 
     e->setDtStart(startDateTime);
     e->setDtEnd(startDateTime.addSecs( durationInSeconds));

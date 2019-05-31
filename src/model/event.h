@@ -23,12 +23,10 @@
 
 #include <KCalCore/Event>
 
-class EventsModel;
-
 class Event
 {
 public:
-    explicit Event(const KCalCore::Event::Ptr &event, EventsModel *model);
+    explicit Event(const KCalCore::Event::Ptr &event);
 
     QString summary() const;
 
@@ -61,8 +59,6 @@ private:
     QString m_relatedTo;
     QStringList m_comments;
     long m_duration;
-
-    EventsModel *m_model;
 };
 
 #endif // KTIMETRACKER_EVENT_H
