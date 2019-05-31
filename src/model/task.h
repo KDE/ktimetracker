@@ -115,34 +115,26 @@ public:
       /** Adds minutes to the time of the task and the total time of its supertasks. This does not add an event.
        *
        *  @param minutes          minutes to add to the time
-       *  @returns                A QString with the error message, in case of no error an empty QString.
-       *
        */
-      QString addTime(long minutes);
+      void addTime(long minutes);
 
       /** Adds minutes to the total time of the task and its supertasks. This does not add an event.
        *
        *  @param minutes          minutes to add to the time
-       *  @returns                A QString with the error message, in case of no error an empty QString.
-       *
        */
-      QString addTotalTime(long minutes);
+      void addTotalTime(long minutes);
 
       /** Adds minutes to the task's session time and its supertasks' total session time. This does not add an event.
        *
        *  @param minutes          minutes to add to the session time
-       *  @returns                A QString with the error message, in case of no error an empty QString.
-       *
        */
-      QString addSessionTime(long minutes);
+      void addSessionTime(long minutes);
 
       /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
        *
        *  @param minutes          minutes to add to the session time
-       *  @returns                A QString with the error message, in case of no error an empty QString.
-       *
        */
-      QString addTotalSessionTime(long minutes);
+      void addTotalSessionTime(long minutes);
 
       /** Sets the time (not session time). This does not add an event.
        *
@@ -161,11 +153,8 @@ public:
         */
       void setTotalSessionTime(long minutes) { m_totalSessionTime = minutes; }
 
-      /** A recursive function to calculate the total time of a task. */
-      QString recalculatetotaltime();
-
-      /** A recursive function to calculate the total session time of a task. */
-      QString recalculatetotalsessiontime();
+      /** A recursive function to calculate the total time/session time of a task. */
+      void recalculateTotalTimesSubtree();
 
       /** Sets the session time.
        * Set the session time without changing totalTime nor sessionTime.

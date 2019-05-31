@@ -218,36 +218,32 @@ void Task::setDesktopList(const DesktopList& desktopList)
     m_desktops = desktopList;
 }
 
-QString Task::addTime(long minutes)
+void Task::addTime(long minutes)
 {
     m_time += minutes;
     this->addTotalTime(minutes);
-    return QString();
 }
 
-QString Task::addTotalTime(long minutes)
+void Task::addTotalTime(long minutes)
 {
     m_totalTime += minutes;
     if (parentTask()) {
         parentTask()->addTotalTime(minutes);
     }
-    return QString();
 }
 
-QString Task::addSessionTime(long minutes)
+void Task::addSessionTime(long minutes)
 {
     m_sessionTime += minutes;
     this->addTotalSessionTime(minutes);
-    return QString();
 }
 
-QString Task::addTotalSessionTime(long minutes)
+void Task::addTotalSessionTime(long minutes)
 {
     m_totalSessionTime += minutes;
     if (parentTask()) {
         parentTask()->addTotalSessionTime(minutes);
     }
-    return QString();
 }
 
 QString Task::setTime(long minutes)
@@ -257,30 +253,20 @@ QString Task::setTime(long minutes)
     return QString();
 }
 
-QString Task::recalculatetotaltime()
+void Task::recalculateTotalTimesSubtree()
 {
-    QString result;
-    setTotalTime(0);
-    // FIXME: this code is obviously broken
-    Task* child;
+    long totalMinutes = time();
+    long totalSessionMinutes = sessionTime();
     for (int i = 0; i < this->childCount(); ++i) {
-        child = (Task*)this->child(i);
-    }
-    addTotalTime(time());
-    return result;
-}
+        Task *subTask = dynamic_cast<Task*>(child(i));
+        subTask->recalculateTotalTimesSubtree();
 
-QString Task::recalculatetotalsessiontime()
-{
-    QString result;
-    setTotalSessionTime(0);
-    // FIXME: this code is obviously broken
-    Task* child;
-    for (int i = 0; i < this->childCount(); ++i) {
-        child = (Task*)this->child(i);
+        totalMinutes += subTask->totalTime();
+        totalSessionMinutes += subTask->totalSessionTime();
     }
-    addTotalSessionTime(time());
-    return result;
+
+    setTotalTime(totalMinutes);
+    setTotalSessionTime(totalSessionMinutes);
 }
 
 QString Task::setSessionTime(long minutes)

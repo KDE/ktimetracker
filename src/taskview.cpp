@@ -290,9 +290,12 @@ QString TaskView::reFreshTimes()
         }
     }
 
+    // Recalculate total times after changing hierarchy by drag&drop
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        task->recalculatetotaltime();
-        task->recalculatetotalsessiontime();
+        // Start recursive method recalculateTotalTimesSubtree() for each top-level task.
+        if (task->isRoot()) {
+            task->recalculateTotalTimesSubtree();
+        }
     }
 
     refresh();
