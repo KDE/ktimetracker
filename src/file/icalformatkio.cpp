@@ -35,7 +35,7 @@ ICalFormatKIO::ICalFormatKIO()
 
 bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString &fileName)
 {
-    qCDebug(KTT_LOG) << fileName;
+    qCDebug(KTT_LOG) << "ICalFormatKIO::load:" << fileName;
 
     clearException();
 
@@ -83,7 +83,7 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
 
 bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString &fileName)
 {
-    qCDebug(KTT_LOG) << fileName;
+    qCDebug(KTT_LOG) << "ICalFormatKIO::save:" << fileName;
 
     clearException();
 

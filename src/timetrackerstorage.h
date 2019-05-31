@@ -141,6 +141,8 @@ public:
      * calendar file; that is, the task->uid() must refer to a valid VTODO in
      * the calendar.
      * Delivers empty string if successful, else error msg.
+     *
+     * @return Null string on success. On failure, returns human-readable error message to display in a KMessageBox.
      */
     QString save();
 

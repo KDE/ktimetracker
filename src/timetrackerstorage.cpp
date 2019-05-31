@@ -244,20 +244,22 @@ QString TimeTrackerStorage::save()
 
     if (!m_model) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_model is nullptr";
-        return QString("m_model not set");
+        // No i18n() here because it's too technical and unlikely to happen
+        return QStringLiteral("m_model is nullptr");
     }
 
-    QLockFile fileLock(QStringLiteral("ktimetrackerics.lock"));
+    const QString fileLockPath("ktimetrackerics.lock");
+    QLockFile fileLock(fileLockPath);
     if (!fileLock.lock()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_fileLock->lock() failed";
-        return QString("Could not save. Could not lock file.");
+        return i18nc("%1=lock file path", "Could not write lock file %1. Disk full?", fileLockPath);
     }
 
     QString errorMessage;
     std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
     if (!calendar->save()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
-        errorMessage = QString("Could not save. Could lock file.");
+        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as %1.", m_url.toString());
     }
     fileLock.unlock();
 

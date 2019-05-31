@@ -326,15 +326,7 @@ void TaskView::save()
     QString err = m_storage->save();
 
     if (!err.isNull()) {
-        QString errMsg = m_storage->fileUrl().toString() + ":\n";
-
-        if (err == QString("Could not save. Could not lock file.")) {
-            errMsg += i18n("Could not save. Disk full?");
-        } else {
-            errMsg += i18n("Could not save.");
-        }
-
-        KMessageBox::error(m_tasksWidget, errMsg);
+        KMessageBox::error(m_tasksWidget, err);
     }
 }
 
