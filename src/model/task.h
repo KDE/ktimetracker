@@ -66,6 +66,10 @@ public:
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const;
 
+    /**
+     * Deliver the depth of a task, i.e. how many tasks are supertasks to it.
+     * A toplevel task has the depth 0.
+     */
     int depth();
 
     void delete_recursive();

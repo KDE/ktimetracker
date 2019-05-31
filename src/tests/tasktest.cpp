@@ -29,20 +29,22 @@ class TaskTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void testIsRoot();
+    void testProperties();
 };
 
-void TaskTest::testIsRoot()
+void TaskTest::testProperties()
 {
     auto *taskView = createTaskView(this, false);
 
     auto *task1 = taskView->addTask("1");
     QVERIFY(task1);
     QVERIFY(task1->isRoot());
+    QCOMPARE(task1->depth(), 0);
 
     auto *task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
     QVERIFY(task2);
     QVERIFY(!task2->isRoot());
+    QCOMPARE(task2->depth(), 1);
 }
 
 QTEST_MAIN(TaskTest)

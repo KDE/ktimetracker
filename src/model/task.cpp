@@ -71,15 +71,12 @@ Task::Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel)
 }
 
 int Task::depth()
-// Deliver the depth of a task, i.e. how many tasks are supertasks to it.
-// A toplevel task has the depth 0.
 {
-    qCDebug(KTT_LOG) << "Entering function";
     int res = 0;
-    Task* t = this;
-    while (t = t->parentTask()) {
+    for (Task* t = parentTask(); t; t = t->parentTask()) {
         res++;
     }
+
     qCDebug(KTT_LOG) << "Leaving function. depth is:" << res;
     return res;
 }
