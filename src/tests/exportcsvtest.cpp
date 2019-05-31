@@ -48,7 +48,7 @@ QUrl ExportCSVTest::createTempFile()
     auto *file = new QTemporaryFile(this);
     if (!file->open()) {
         delete file;
-        throw std::runtime_error("1");
+        return QUrl();
     }
 
     return QUrl::fromLocalFile(file->fileName());
@@ -115,6 +115,7 @@ void ExportCSVTest::testTimesSimpleTree()
 
     const auto &rc = createRC(ReportCriteria::CSVTotalsExport);
     const QUrl &url = createTempFile();
+    QVERIFY(!url.isEmpty());
     QString output = exportToString(taskView->storage()->projectModel(),
                                     taskView->tasksWidget()->currentItem(), rc);
     QCOMPARE(writeExport(output, url), "");
