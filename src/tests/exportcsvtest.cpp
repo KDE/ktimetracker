@@ -124,7 +124,7 @@ void ExportCSVTest::testTimesSimpleTree()
         "\"3\";;0:07;0:07;0:07;0:07\n"
         "\"1\";;0:05;0:05;0:08;0:08\n"
         ";\"2\";0:03;0:03;0:03;0:03\n");
-    QCOMPARE(readTextFile(url.path()), expected);
+    QCOMPARE(readTextFile(url.toLocalFile()), expected);
 }
 
 void ExportCSVTest::testHistorySimpleTree()
@@ -144,7 +144,7 @@ void ExportCSVTest::testHistorySimpleTree()
         "\"1\";0:05\n"
         "\"1->2\";0:03\n"
         "\"3\";0:07\n").arg(QDate::currentDate().toString());
-    QCOMPARE(readTextFile(url.path()), expected);
+    QCOMPARE(readTextFile(url.toLocalFile()), expected);
 }
 
 QTEST_MAIN(ExportCSVTest)

@@ -67,15 +67,15 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
 
     // loading might create the file
     bool removedFromDirWatch = false;
-    if (KDirWatch::self()->contains(m_url.path())) {
-        KDirWatch::self()->removeFile(m_url.path());
+    if (KDirWatch::self()->contains(m_url.toLocalFile())) {
+        KDirWatch::self()->removeFile(m_url.toLocalFile());
         removedFromDirWatch = true;
     }
 
     // If same file, don't reload
     if (url == m_url) {
         if (removedFromDirWatch) {
-            KDirWatch::self()->addFile(m_url.path());
+            KDirWatch::self()->addFile(m_url.toLocalFile());
         }
         return QString();
     }
@@ -88,8 +88,8 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
 
     if (url.isLocalFile()) {
         connect(KDirWatch::self(), &KDirWatch::dirty, this, &TimeTrackerStorage::onFileModified);
-        if (!KDirWatch::self()->contains(url.path())) {
-            KDirWatch::self()->addFile(url.path());
+        if (!KDirWatch::self()->contains(url.toLocalFile())) {
+            KDirWatch::self()->addFile(url.toLocalFile());
         }
     }
 
@@ -107,7 +107,7 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
     err = buildTaskView(m_calendar.rawTodos(), view);
 
     if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(m_url.path());
+        KDirWatch::self()->addFile(m_url.toLocalFile());
     }
     return err;
 }
@@ -237,8 +237,8 @@ QString TimeTrackerStorage::deleteAllEvents()
 QString TimeTrackerStorage::save()
 {
     bool removedFromDirWatch = false;
-    if (KDirWatch::self()->contains(m_url.path())) {
-        KDirWatch::self()->removeFile(m_url.path());
+    if (KDirWatch::self()->contains(m_url.toLocalFile())) {
+        KDirWatch::self()->removeFile(m_url.toLocalFile());
         removedFromDirWatch = true;
     }
 
@@ -262,7 +262,7 @@ QString TimeTrackerStorage::save()
     fileLock.unlock();
 
     if (removedFromDirWatch) {
-        KDirWatch::self()->addFile(m_url.path());
+        KDirWatch::self()->addFile(m_url.toLocalFile());
     }
 
     qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;

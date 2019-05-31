@@ -41,7 +41,7 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
 
     QUrl url(fileName);
     if (url.isLocalFile()) {
-        QFile file(url.path());
+        QFile file(url.toLocalFile());
         if (!file.exists()) {
             // Local file does not exist
             return true;
@@ -103,7 +103,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
     // save, either locally or remote
     QUrl url(fileName);
     if (url.isLocalFile()) {
-        QSaveFile file(url.path());
+        QSaveFile file(url.toLocalFile());
         if (!file.open(QIODevice::WriteOnly)) {
             qCWarning(KTT_LOG) << "save file open error: " << file.errorString() << ";filename=" << fileName;
             setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorOpenFile, QStringList(fileName)));

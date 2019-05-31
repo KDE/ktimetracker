@@ -42,7 +42,7 @@ void StorageTest::testSaveEmpty()
     auto *taskView = createTaskView(this, false);
 
     QCOMPARE(taskView->storage()->save(), "");
-    QCOMPARE(readTextFile(taskView->storage()->fileUrl().path()), readTextFile(QFINDTESTDATA("data/empty.ics")));
+    QCOMPARE(readTextFile(taskView->storage()->fileUrl().toLocalFile()), readTextFile(QFINDTESTDATA("data/empty.ics")));
 }
 
 void StorageTest::testSaveSimpleTree()
@@ -55,7 +55,7 @@ void StorageTest::testSaveSimpleTree()
     QCOMPARE(taskView->storage()->save(), "");
 
     KCalCore::MemoryCalendar::Ptr calendar(new KCalCore::MemoryCalendar(QTimeZone::systemTimeZone()));
-    KCalCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().path(), new KCalCore::ICalFormat());
+    KCalCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().toLocalFile(), new KCalCore::ICalFormat());
     QVERIFY(fileStorage.load());
 
     auto todos = calendar->rawTodos(KCalCore::TodoSortSummary);
