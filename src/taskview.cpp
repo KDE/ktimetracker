@@ -148,8 +148,6 @@ TaskView::~TaskView()
 
 void TaskView::load(const QUrl &url)
 {
-    assert( !( url.isEmpty() ) );
-
     if (m_tasksWidget) {
         delete m_tasksWidget;
         m_tasksWidget = nullptr;
@@ -158,6 +156,11 @@ void TaskView::load(const QUrl &url)
     // if the program is used as an embedded plugin for konqueror, there may be a need
     // to load from a file without touching the preferences.
     QString err = m_storage->load(this, url);
+    if (!err.isEmpty()) {
+        KMessageBox::error(m_tasksWidget, err);
+        qCDebug(KTT_LOG) << "Leaving TaskView::load";
+        return;
+    }
 
     m_tasksWidget = new TasksWidget(dynamic_cast<QWidget*>(parent()), m_filterProxyModel, nullptr);
     connect(m_tasksWidget, &TasksWidget::updateButtons, this, &TaskView::updateButtons);
@@ -179,12 +182,6 @@ void TaskView::load(const QUrl &url)
     connect(tasksModel, &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
     connect(tasksModel, &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
     connect(storage()->eventsModel(), &EventsModel::timesChanged, this, &TaskView::reFreshTimes);
-
-    if (!err.isEmpty()) {
-        KMessageBox::error(m_tasksWidget, err);
-        qCDebug(KTT_LOG) << "Leaving TaskView::load";
-        return;
-    }
 
     // Register tasks with desktop tracker
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
