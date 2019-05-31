@@ -242,26 +242,25 @@ public:
 
     //@{ the state of a Task - stopped, running
 
-      /** starts or stops a task
-       *  @param on       true or false for starting or stopping a task
-       *  @param storage a pointer to a TimeTrackerStorage object.
-       *  @param when time when the task was started or stopped. Normally
-                                    QDateTime::currentDateTime, but if calendar has
-                                    been changed by another program and being reloaded
-                                    the task is set to running with another start date
-       */
-      void setRunning( bool on, TimeTrackerStorage* storage,
-                       const QDateTime &when = QDateTime::currentDateTime() );
+    /** starts or stops a task
+     * @param on   True or false for starting or stopping a task
+     * @param when Time when the task was started or stopped. Normally
+     *             QDateTime::currentDateTime, but if calendar has
+     *             been changed by another program and being reloaded
+     *             the task is set to running with another start date
+     */
+    void setRunning(bool on, const QDateTime &when = QDateTime::currentDateTime());
 
-      /** Resume the running state of a task.
-        * This is the same as setrunning, but the storage is not modified.
-        */
-      void resumeRunning();
+    /**
+     * Resume the running state of a task.
+     * This is the same as setrunning, but the storage is not modified.
+     */
+    void resumeRunning();
 
-      /** return the state of a task - if it's running or not
-       *  @return         true or false depending on whether the task is running
-       */
-      bool isRunning() const;
+    /** return the state of a task - if it's running or not
+     *  @return         true or false depending on whether the task is running
+     */
+    bool isRunning() const;
     //@}
 
     /**

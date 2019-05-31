@@ -111,7 +111,7 @@ void Task::delete_recursive()
 }
 
 // This is the back-end, the front-end is StartTimerFor()
-void Task::setRunning(bool on, TimeTrackerStorage* storage, const QDateTime& when)
+void Task::setRunning(bool on, const QDateTime& when)
 {
     if (on != m_isRunning) {
         m_isRunning = on;
@@ -347,7 +347,7 @@ bool Task::remove(TimeTrackerStorage* storage)
     }
 
     if (isRunning()) {
-        setRunning(false, storage);
+        setRunning(false);
     }
 
     m_projectModel->eventsModel()->removeAllForTask(this);
