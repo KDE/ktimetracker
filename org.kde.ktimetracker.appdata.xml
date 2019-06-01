@@ -8,6 +8,7 @@
   <name xml:lang="nl">KTimeTracker</name>
   <name xml:lang="pt">KTimeTracker</name>
   <name xml:lang="ru">KTimeTracker</name>
+  <name xml:lang="sk">KTimeTracker</name>
   <name xml:lang="uk">KTimeTracker</name>
   <name xml:lang="x-test">xxKTimeTrackerxx</name>
   <summary>Personal Time Tracker</summary>
@@ -15,6 +16,7 @@
   <summary xml:lang="nl">Persoonlijk tijdgebruik</summary>
   <summary xml:lang="pt">Gestor do Tempo Pessoal</summary>
   <summary xml:lang="ru">Учёт времени</summary>
+  <summary xml:lang="sk">Osobný sledovač času</summary>
   <summary xml:lang="uk">Програма для керування особистим часом</summary>
   <summary xml:lang="x-test">xxPersonal Time Trackerxx</summary>
   <description>
@@ -45,6 +47,7 @@
       <caption xml:lang="nl">KTimeTracker</caption>
       <caption xml:lang="pt">KTimeTracker</caption>
       <caption xml:lang="ru">KTimeTracker</caption>
+      <caption xml:lang="sk">KTimeTracker</caption>
       <caption xml:lang="uk">KTimeTracker</caption>
       <caption xml:lang="x-test">xxKTimeTrackerxx</caption>
       <image>https://userbase.kde.org/images.userbase/1/15/Ktimetracker.png</image>
