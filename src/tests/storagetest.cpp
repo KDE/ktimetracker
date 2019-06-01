@@ -19,7 +19,6 @@
  */
 
 #include <QTest>
-#include <QTemporaryFile>
 
 #include <KCalCore/FileStorage>
 #include <KCalCore/ICalFormat>

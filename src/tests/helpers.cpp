@@ -35,8 +35,10 @@ TaskView *createTaskView(QObject *parent, bool simpleTree)
         delete icsFile;
         return nullptr;
     }
+    const QString& file = icsFile->fileName();
+    icsFile->close();
 
-    taskView->load(QUrl::fromLocalFile(icsFile->fileName()));
+    taskView->load(QUrl::fromLocalFile(file));
 
     if (simpleTree) {
         Task* task1 = taskView->addTask("1");
