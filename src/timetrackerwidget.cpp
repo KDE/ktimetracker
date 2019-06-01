@@ -823,7 +823,7 @@ QString TimeTrackerWidget::exportCSVFile(
 
     QString output = exportToString(taskView->storage()->projectModel(),
                                     taskView->tasksWidget()->currentItem(), rc);
-    return writeExport(output, QUrl(filename));
+    return writeExport(output, QUrl::fromLocalFile(filename));
 }
 
 void TimeTrackerWidget::importPlannerFile(const QString &filename)
