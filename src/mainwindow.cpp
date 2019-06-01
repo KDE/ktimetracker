@@ -53,8 +53,10 @@ MainWindow::MainWindow(const QUrl &url)
     configureAction->setText(i18n("Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 
-    openFile(url);
+    // Load the specified .ics file in the tasks widget
+    m_mainWidget->openFile(url);
     setCaption(url.url());  // set the window title to our iCal file
+
     connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);
     m_mainWidget->setupActions(actionCollection());
 
@@ -89,14 +91,6 @@ MainWindow::MainWindow(const QUrl &url)
 //    m_mainWidget->saveFile();
 //    return true;
 //}
-
-bool MainWindow::openFile(const QUrl &url)
-{
-    m_mainWidget->openFile(url);
-    setCaption(url.url());
-
-    return true;
-}
 
 void MainWindow::setStatusBar(const QString& qs)
 {

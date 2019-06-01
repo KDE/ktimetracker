@@ -50,12 +50,6 @@ protected:
     bool queryClose() override;
 
 private:
-    /**
-     * Load the specified .ics file in the tasks widget.
-     * @param url Must not be empty.
-     */
-    bool openFile(const QUrl &url);
-
     TrayIcon* m_tray;
     TimeTrackerWidget* m_mainWidget;
     bool m_quitRequested;
