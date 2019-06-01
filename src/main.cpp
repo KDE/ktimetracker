@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
-    const QString& url = getFileUrl(parser).url();
+    const QUrl &url = getFileUrl(parser);
 
 //        if (!KUniqueApplication::start()) {
 //            qCDebug(KTT_LOG) << "Other instance is already running, exiting!";

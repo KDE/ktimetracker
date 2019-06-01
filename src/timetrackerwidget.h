@@ -90,7 +90,8 @@ public:
 
 public Q_SLOTS:
     /**
-      opens an existing ics file.
+     * Load the specified .ics file in the tasks widget.
+     * @param url Must not be empty.
      */
     void openFile(const QUrl &url);
 

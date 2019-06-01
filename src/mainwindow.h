@@ -36,7 +36,7 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(const QString& path);
+    explicit MainWindow(const QUrl &url);
     ~MainWindow() override;
 
 public Q_SLOTS:
@@ -51,7 +51,11 @@ protected:
     bool queryClose() override;
 
 private:
-    bool openFile(const QString& path);
+    /**
+     * Load the specified .ics file in the tasks widget.
+     * @param url Must not be empty.
+     */
+    bool openFile(const QUrl &url);
 
     TrayIcon* m_tray;
     TimeTrackerWidget* m_mainWidget;

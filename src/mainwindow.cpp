@@ -36,13 +36,13 @@
 #include "timetrackerwidget.h"
 #include "ktt_debug.h"
 
-MainWindow::MainWindow(const QString& path)
+MainWindow::MainWindow(const QUrl &url)
     : KXmlGuiWindow(nullptr)
     , m_tray(nullptr)
     , m_mainWidget(nullptr)
     , m_quitRequested(false)
 {
-    qCDebug(KTT_LOG) << "Entering function, path is " << path;
+    qCDebug(KTT_LOG) << "Entering function, url is " << url;
 
     // we need an instance
     m_mainWidget = new TimeTrackerWidget(this);
@@ -53,8 +53,8 @@ MainWindow::MainWindow(const QString& path)
     configureAction->setText(i18n("Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 
-    openFile(path);
-    slotSetCaption(path);  // set the window title to our iCal file
+    openFile(url);
+    slotSetCaption(url.url());  // set the window title to our iCal file
     connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);
     m_mainWidget->setupActions(actionCollection());
 
@@ -90,10 +90,10 @@ MainWindow::MainWindow(const QString& path)
 //    return true;
 //}
 
-bool MainWindow::openFile(const QString& path)
+bool MainWindow::openFile(const QUrl &url)
 {
-    m_mainWidget->openFile(path);
-    setCaption(path);
+    m_mainWidget->openFile(url);
+    setCaption(url.url());
 
     connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
     connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, QOverload<const QString&>::of(&MainWindow::setCaption));
