@@ -201,12 +201,11 @@ public:
 
       /** sets the name of the task
        *  @param name    a pointer to the name. A deep copy will be made.
-       *  @param storage a pointer to a TimeTrackerStorage object.
        */
-    void setName(const QString& name, TimeTrackerStorage* storage);
+    void setName(const QString &name);
 
     /** sets the description of the task */
-    void setDescription(const QString& description);
+    void setDescription(const QString &description);
 
     /** returns the name of this task.
     *  @return a pointer to the name.

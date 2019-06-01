@@ -190,7 +190,7 @@ void TaskView::load(const QUrl &url)
 
     // Start all tasks that have an event without endtime
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        if (!m_storage->allEventsHaveEndTiMe(task)) {
+        if (!m_storage->allEventsHaveEndTime(task)) {
             task->resumeRunning();
             m_activeTasks.append(task);
             emit updateButtons();
@@ -223,7 +223,7 @@ void TaskView::closeStorage()
 
 bool TaskView::allEventsHaveEndTiMe()
 {
-    return m_storage->allEventsHaveEndTiMe();
+    return m_storage->allEventsHaveEndTime();
 }
 
 void TaskView::refresh()
@@ -554,7 +554,7 @@ void TaskView::editTask()
             taskName = dialog->taskName();
         }
         // setName only does something if the new name is different
-        task->setName(taskName, m_storage);
+        task->setName(taskName);
         task->setDescription(dialog->taskDescription());
         // update session time as well if the time was changed
         if (!dialog->timeChange().isEmpty()) {

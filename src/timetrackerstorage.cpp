@@ -54,10 +54,6 @@ TimeTrackerStorage::TimeTrackerStorage()
 {
 }
 
-TimeTrackerStorage::~TimeTrackerStorage()
-{
-}
-
 // Loads data from filename into view.
 QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
 {
@@ -117,7 +113,7 @@ QUrl TimeTrackerStorage::fileUrl()
     return m_url;
 }
 
-QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List& todos, TaskView* view)
+QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, TaskView *view)
 // makes *view contain the tasks out of *rc.
 {
     // remember tasks that are running and their start times
@@ -206,7 +202,7 @@ ProjectModel *TimeTrackerStorage::projectModel()
     return m_model;
 }
 
-bool TimeTrackerStorage::allEventsHaveEndTiMe(Task *task)
+bool TimeTrackerStorage::allEventsHaveEndTime(Task *task)
 {
     for (const auto *event : m_model->eventsModel()->eventsForTask(task)) {
         if (!event->hasEndDate()) {
@@ -217,7 +213,7 @@ bool TimeTrackerStorage::allEventsHaveEndTiMe(Task *task)
     return true;
 }
 
-bool TimeTrackerStorage::allEventsHaveEndTiMe()
+bool TimeTrackerStorage::allEventsHaveEndTime()
 {
     for (const auto *event : m_model->eventsModel()->events()) {
         if (!event->hasEndDate()) {

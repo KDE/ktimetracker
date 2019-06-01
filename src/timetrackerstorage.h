@@ -63,7 +63,7 @@ class TimeTrackerStorage : public QObject
 
 public:
     TimeTrackerStorage();
-    ~TimeTrackerStorage() override;
+    ~TimeTrackerStorage() override = default;
 
     /**
       Load the list view with tasks read from iCalendar file.
@@ -99,7 +99,7 @@ public:
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(const KCalCore::Todo::List& todos, TaskView* view);
+    QString buildTaskView(const KCalCore::Todo::List &todos, TaskView *view);
 
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
@@ -121,7 +121,7 @@ public:
      *
      * @param task        The task to be examined
      */
-    bool allEventsHaveEndTiMe(Task* task);
+    bool allEventsHaveEndTime(Task *task);
 
     /**
      * Deliver if all events of the actual calendar have an endtime
@@ -130,7 +130,7 @@ public:
      * This function delivers if an enddate of an event has not yet been stored.
      *
      */
-    bool allEventsHaveEndTiMe();
+    bool allEventsHaveEndTime();
 
     QString deleteAllEvents();
 
@@ -147,19 +147,6 @@ public:
     QString save();
 
     bool bookTime(const Task *task, const QDateTime &startDateTime, long durationInSeconds);
-
-    /**
-     * Log a change to a task name.
-     *
-     * For iCalendar storage, there is no need to log an Event for this event,
-     * since unique id's are used to link Events to Todos.  No matter how many
-     * times you change a task's name, the uid stays the same.
-     *
-     * @param task     The task
-     * @param oldname  The old name of the task.  The new name is in the task
-     *   object already.
-     */
-    void setName(const Task* task, const QString& oldname) { Q_UNUSED(task); Q_UNUSED(oldname); }
 
 private Q_SLOTS:
     void onFileModified();

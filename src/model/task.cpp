@@ -141,14 +141,13 @@ bool Task::isRunning() const
     return m_isRunning;
 }
 
-void Task::setName(const QString& name, TimeTrackerStorage* storage)
+void Task::setName(const QString& name)
 {
     qCDebug(KTT_LOG) << "Entering function, name=" << name;
 
     QString oldname = m_name;
     if (oldname != name) {
         m_name = name;
-        storage->setName(this, oldname);
         update();
     }
 }
