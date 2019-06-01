@@ -26,17 +26,42 @@
 #include "taskview.h"
 #include "model/task.h"
 
+class TemporaryFileDeleter : public QObject
+{
+public:
+    explicit TemporaryFileDeleter(QObject *parent, QString fileName)
+        : QObject(parent)
+        , m_fileName(std::move(fileName))
+    {
+    }
+
+    ~TemporaryFileDeleter() override
+    {
+        QFile::remove(m_fileName);
+    }
+
+private:
+    QString m_fileName;
+};
+
 QUrl createTempFile(QObject *parent)
 {
-    auto *icsFile = new QTemporaryFile(parent);
-    if (!icsFile->open()) {
-        delete icsFile;
+    auto *file = new QTemporaryFile();
+    if (!file->open()) {
+        delete file;
         return {};
     }
-    const QString& file = icsFile->fileName();
-    icsFile->close();
+    const QString& fileName = file->fileName();
+    // We have to destroy the QTemporaryFile here because
+    // otherwise on Windows it will block the file, so that
+    // the code being tested (e.g. TimeTrackerStorage::save())
+    // will not be able to access it.
+    delete file;
 
-    return QUrl::fromLocalFile(file);
+    // Schedule removal of the file after the current unit test ends.
+    new TemporaryFileDeleter(parent, fileName);
+
+    return QUrl::fromLocalFile(fileName);
 }
 
 TaskView *createTaskView(QObject *parent, bool simpleTree)
