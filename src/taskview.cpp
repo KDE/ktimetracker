@@ -589,7 +589,6 @@ void TaskView::setPerCentComplete(int completion)
     if (completion < 100) {
         task->setPercentComplete(completion);
         task->invalidateCompletedState();
-        save();
         emit updateButtons();
     }
 }
@@ -634,7 +633,6 @@ make this task running and selected. */
 
         if (response == KMessageBox::Continue) {
             deleteTaskBatch(task);
-            save();
         }
     }
 }
@@ -648,7 +646,6 @@ void TaskView::markTaskAsComplete()
 
     m_tasksWidget->currentItem()->setPercentComplete(100);
     m_tasksWidget->currentItem()->invalidateCompletedState();
-    save();
     emit updateButtons();
 }
 

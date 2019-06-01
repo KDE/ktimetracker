@@ -463,16 +463,19 @@ void TimeTrackerWidget::editTask()
 void TimeTrackerWidget::deleteTask()
 {
     currentTaskView()->deleteTask();
+    currentTaskView()->save();
 }
 
 void TimeTrackerWidget::markTaskAsComplete()
 {
     currentTaskView()->markTaskAsComplete();
+    currentTaskView()->save();
 }
 
 void TimeTrackerWidget::markTaskAsIncomplete()
 {
     currentTaskView()->markTaskAsIncomplete();
+    currentTaskView()->save();
 }
 
 void TimeTrackerWidget::exportDialog()
