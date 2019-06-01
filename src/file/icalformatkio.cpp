@@ -33,13 +33,13 @@ ICalFormatKIO::ICalFormatKIO()
 {
 }
 
-bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString &fileName)
+bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString &urlString)
 {
-    qCDebug(KTT_LOG) << "ICalFormatKIO::load:" << fileName;
+    qCDebug(KTT_LOG) << "ICalFormatKIO::load:" << urlString;
 
     clearException();
 
-    QUrl url(fileName);
+    QUrl url(urlString);
     if (url.isLocalFile()) {
         QFile file(url.toLocalFile());
         if (!file.exists()) {
@@ -49,7 +49,7 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
 
         // Local file exists
         if (!file.open(QIODevice::ReadOnly)) {
-            qCWarning(KTT_LOG) << "load file open error: " << file.errorString() << ";filename=" << fileName;
+            qCWarning(KTT_LOG) << "load file open error: " << file.errorString() << ";filename=" << urlString;
             setException(new KCalCore::Exception(KCalCore::Exception::LoadError));
             return false;
         }
@@ -60,7 +60,7 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
             // empty files are valid
             return true;
         } else {
-            return fromRawString(calendar, text, false, fileName);
+            return fromRawString(calendar, text, false, urlString);
         }
     } else {
         // use remote file
@@ -76,14 +76,14 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
             // empty files are valid
             return true;
         } else {
-            return fromRawString(calendar, text, false, fileName);
+            return fromRawString(calendar, text, false, urlString);
         }
     }
 }
 
-bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString &fileName)
+bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString &urlString)
 {
-    qCDebug(KTT_LOG) << "ICalFormatKIO::save:" << fileName;
+    qCDebug(KTT_LOG) << "ICalFormatKIO::save:" << urlString;
 
     clearException();
 
@@ -96,17 +96,17 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
     QByteArray textUtf8 = text.toUtf8();
 
     // TODO: Write backup file (i.e. backup the existing file somewhere, e.g. to ~/.local/share/apps/ktimetracker/backups/)
-//    const QString backupFile = fileName + QLatin1Char('~');
+//    const QString backupFile = urlString + QLatin1Char('~');
 //    QFile::remove(backupFile);
-//    QFile::copy(fileName, backupFile);
+//    QFile::copy(urlString, backupFile);
 
     // save, either locally or remote
-    QUrl url(fileName);
+    QUrl url(urlString);
     if (url.isLocalFile()) {
         QSaveFile file(url.toLocalFile());
         if (!file.open(QIODevice::WriteOnly)) {
             qCWarning(KTT_LOG) << "save file open error: " << file.errorString() << ";local path" << file.fileName();
-            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorOpenFile, QStringList(fileName)));
+            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorOpenFile, QStringList(urlString)));
             return false;
         }
 
@@ -114,7 +114,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
 
         if (!file.commit()) {
             qCWarning(KTT_LOG) << "file finalize error:" << file.errorString() << ";local path" << file.fileName();
-            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(fileName)));
+            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(urlString)));
             return false;
         }
     } else {

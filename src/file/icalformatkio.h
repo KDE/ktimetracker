@@ -29,8 +29,23 @@ public:
     ICalFormatKIO();
     ~ICalFormatKIO() override = default;
 
-    bool load(const KCalCore::Calendar::Ptr &calendar, const QString &fileName) override;
-    bool save(const KCalCore::Calendar::Ptr &calendar, const QString &fileName) override;
+    /**
+     * Read calendar from local or remote file.
+     *
+     * @param calendar
+     * @param urlString Must start with a schema, for example "file:///" or "https://"
+     * @return
+     */
+    bool load(const KCalCore::Calendar::Ptr &calendar, const QString &urlString) override;
+
+    /**
+     * Write calendar to local or remote file.
+     *
+     * @param calendar
+     * @param urlString Must start with a schema, for example "file:///" or "https://"
+     * @return
+     */
+    bool save(const KCalCore::Calendar::Ptr &calendar, const QString &urlString) override;
 };
 
 #endif // KTIMETRACKER_ICALFORMATKIO_H
