@@ -144,7 +144,7 @@ public Q_SLOTS:
      * @param task Task to be deleted. If empty, the current task is deleted.
      *             if non-existent, an error message is displayed.
      */
-    void deleteTaskBatch(Task* task = nullptr);
+    void deleteTaskBatch(Task *task);
 
     /**
      * Deletes the given or the current task (and children) from the view.

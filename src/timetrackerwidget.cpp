@@ -599,6 +599,7 @@ void TimeTrackerWidget::deleteTask(const QString &taskId)
     for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             taskView->deleteTaskBatch(task);
+            taskView->save();
         }
     }
 }
