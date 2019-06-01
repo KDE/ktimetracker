@@ -54,7 +54,7 @@ MainWindow::MainWindow(const QUrl &url)
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 
     openFile(url);
-    slotSetCaption(url.url());  // set the window title to our iCal file
+    setCaption(url.url());  // set the window title to our iCal file
     connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);
     m_mainWidget->setupActions(actionCollection());
 
@@ -66,7 +66,7 @@ MainWindow::MainWindow(const QUrl &url)
 
     // connections
     connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
-    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, &MainWindow::slotSetCaption);
+    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, QOverload<const QString&>::of(&KMainWindow::setCaption));
 
     // Setup context menu request handling
     connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
@@ -95,14 +95,7 @@ bool MainWindow::openFile(const QUrl &url)
     m_mainWidget->openFile(url);
     setCaption(url.url());
 
-    connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
-    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, QOverload<const QString&>::of(&MainWindow::setCaption));
     return true;
-}
-
-void MainWindow::slotSetCaption(const QString& qs)
-{
-    setCaption(qs);
 }
 
 void MainWindow::setStatusBar(const QString& qs)

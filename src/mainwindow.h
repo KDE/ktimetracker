@@ -40,7 +40,6 @@ public:
     ~MainWindow() override;
 
 public Q_SLOTS:
-    void slotSetCaption(const QString&);
     void setStatusBar(const QString&);
     void quit();
 
