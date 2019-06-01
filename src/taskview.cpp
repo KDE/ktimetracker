@@ -66,7 +66,7 @@ TaskView::TaskView(QWidget *parent)
 
     // set up the minuteTimer
     m_minuteTimer = new QTimer(this);
-    connect( m_minuteTimer, SIGNAL(timeout()), this, SLOT(minuteUpdate()));
+    connect(m_minuteTimer, &QTimer::timeout, this, &TaskView::minuteUpdate);
     m_minuteTimer->start(1000 * secsPerMinute);
 
     // Set up the idle detection.
@@ -79,19 +79,17 @@ TaskView::TaskView(QWidget *parent)
 
     // Setup auto save timer
     m_autoSaveTimer = new QTimer(this);
-    connect( m_autoSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
+    connect(m_autoSaveTimer, &QTimer::timeout, this, &TaskView::save);
 
     // Setup manual save timer (to save changes a little while after they happen)
     m_manualSaveTimer = new QTimer(this);
     m_manualSaveTimer->setSingleShot( true );
-    connect( m_manualSaveTimer, SIGNAL(timeout()), this, SLOT(save()));
+    connect(m_manualSaveTimer, &QTimer::timeout, this, &TaskView::save);
 
     // Connect desktop tracker events to task starting/stopping
     m_desktopTracker = new DesktopTracker();
-    connect( m_desktopTracker, SIGNAL(reachedActiveDesktop(Task*)),
-           this, SLOT(startTimerFor(Task*)));
-    connect( m_desktopTracker, SIGNAL(leftActiveDesktop(Task*)),
-           this, SLOT(stopTimerFor(Task*)));
+    connect(m_desktopTracker, &DesktopTracker::reachedActiveDesktop, this, &TaskView::startTimerForNow);
+    connect(m_desktopTracker, &DesktopTracker::leftActiveDesktop, this, &TaskView::stopTimerFor);
 
     // Header context menu
     TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
@@ -112,7 +110,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (task->name() == newTaskName) {
             found = true;
-            startTimerFor(task);
+            startTimerForNow(task);
             m_lastTaskWithFocus = task;
         }
     }
@@ -127,7 +125,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
         }
         for (Task *task : storage()->tasksModel()->getAllTasks()) {
             if (task->name() == newTaskName) {
-                startTimerFor(task);
+                startTimerForNow(task);
                 m_lastTaskWithFocus = task;
             }
         }
@@ -332,7 +330,7 @@ void TaskView::save()
 
 void TaskView::startCurrentTimer()
 {
-    startTimerFor(m_tasksWidget->currentItem());
+    startTimerForNow(m_tasksWidget->currentItem());
 }
 
 void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
@@ -353,6 +351,11 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
             emit tasksChanged(m_activeTasks);
         }
     }
+}
+
+void TaskView::startTimerForNow(Task *task)
+{
+    startTimerFor(task, QDateTime::currentDateTime());
 }
 
 void TaskView::clearActiveTasks()

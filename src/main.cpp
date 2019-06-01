@@ -25,6 +25,8 @@
 #include <QCommandLineOption>
 #include <QStandardPaths>
 #include <QApplication>
+#include <QFileInfo>
+#include <QDir>
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -32,7 +34,6 @@
 
 #include "desktoplist.h"
 #include "mainwindow.h"
-#include "mainadaptor.h"
 #include "timetrackerstorage.h"
 #include "model/task.h"
 #include "ktt_debug.h"

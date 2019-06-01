@@ -23,6 +23,7 @@
 #include "timetrackerwidget.h"
 
 #include <QFileDialog>
+#include <QTemporaryFile>
 
 #include <KActionCollection>
 #include <KConfigDialog>
@@ -40,7 +41,6 @@
 #include "idletimedetector.h"
 #include "ktimetrackerutility.h"
 #include "ktimetracker.h"
-#include "mainadaptor.h"
 #include "reportcriteria.h"
 #include "taskview.h"
 #include "widgets/taskswidget.h"
@@ -55,9 +55,7 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     , m_taskView(new TaskView(this))
     , m_actionCollection(nullptr)
 {
-    qCDebug(KTT_LOG) << "Entering function";
-    new MainAdaptor(this);
-    QDBusConnection::sessionBus().registerObject("/KTimeTracker", this);
+    registerDBus();
 
     QLayout* layout = new QVBoxLayout;
     layout->setMargin(0);
@@ -160,7 +158,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
 
     m_actionCollection = actionCollection;
 
-    KStandardAction::open(this, SLOT(openFile()), actionCollection);
+    KStandardAction::open(this, &TimeTrackerWidget::openFileDialog, actionCollection);
     KStandardAction::save(this, &TimeTrackerWidget::saveFile, actionCollection);
     KStandardAction::preferences(this, &TimeTrackerWidget::showSettingsDialog, actionCollection);
 
@@ -219,7 +217,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     stopAllTimers->setToolTip(i18n("Stops all of the active timers"));
     stopAllTimers->setWhatsThis(i18n("Stops all of the active timers"));
     actionCollection->setDefaultShortcut(stopAllTimers, QKeySequence(Qt::Key_Escape));
-    connect(stopAllTimers, SIGNAL(triggered()), this, SLOT(stopAllTimers()));
+    connect(stopAllTimers, &QAction::triggered, this, &TimeTrackerWidget::stopAllTimers);
 
     QAction* focusTracking = actionCollection->addAction(QStringLiteral("focustracking"));
     focusTracking->setCheckable(true);
@@ -309,16 +307,17 @@ QAction *TimeTrackerWidget::action(const QString &name) const
 void TimeTrackerWidget::openFile(const QUrl &url)
 {
     qCDebug(KTT_LOG) << "Entering function, url is " << url;
-    QUrl newUrl = url;
-    if (newUrl.isEmpty()) {
-        const QString &path = QFileDialog::getOpenFileName(this);
-        if (path.isEmpty()) {
-            return;
-        } else {
-            newUrl = QUrl::fromLocalFile(path);
-        }
+    addTaskView(url);
+}
+
+void TimeTrackerWidget::openFileDialog()
+{
+    const QString &path = QFileDialog::getOpenFileName(this);
+    if (path.isEmpty()) {
+        return;
     }
-    addTaskView(newUrl);
+
+    openFile(QUrl::fromLocalFile(path));
 }
 
 bool TimeTrackerWidget::closeFile()
@@ -417,7 +416,7 @@ void TimeTrackerWidget::showSettingsDialog()
     dialog->addPage(new KTimeTrackerBehaviorConfig(dialog), i18nc("@title:tab", "Behavior"), QStringLiteral("preferences-other"));
     dialog->addPage(new KTimeTrackerDisplayConfig(dialog), i18nc("@title:tab", "Appearance"), QStringLiteral("preferences-desktop-theme"));
     dialog->addPage(new KTimeTrackerStorageConfig(dialog), i18nc("@title:tab", "Storage"), QStringLiteral("system-file-manager"));
-    connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
+    connect(dialog, &KConfigDialog::settingsChanged, this, &TimeTrackerWidget::loadSettings);
     dialog->show();
 }
 
@@ -440,9 +439,9 @@ void TimeTrackerWidget::stopCurrentTimer()
     currentTaskView()->stopCurrentTimer();
 }
 
-void TimeTrackerWidget::stopAllTimers(const QDateTime& when)
+void TimeTrackerWidget::stopAllTimers()
 {
-    currentTaskView()->stopAllTimers(when);
+    currentTaskView()->stopAllTimers(QDateTime::currentDateTime());
 }
 
 void TimeTrackerWidget::newTask()
@@ -536,6 +535,14 @@ void TimeTrackerWidget::slotSearchBar()
 
 /** \defgroup dbus slots ‘‘dbus slots’’ */
 /* @{ */
+#include "mainadaptor.h"
+
+void TimeTrackerWidget::registerDBus()
+{
+    new MainAdaptor(this);
+    QDBusConnection::sessionBus().registerObject("/KTimeTracker", this);
+}
+
 QString TimeTrackerWidget::version() const
 {
     return KTIMETRACKER_VERSION_STRING;
@@ -742,7 +749,7 @@ void TimeTrackerWidget::startTimerFor(const QString &taskId)
 
     for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
-            taskView->startTimerFor(task);
+            taskView->startTimerForNow(task);
             return;
         }
     }
@@ -757,7 +764,7 @@ bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
 
     for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->name() == taskName ) {
-            taskView->startTimerFor(task);
+            taskView->startTimerForNow(task);
             return true;
         }
     }

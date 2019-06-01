@@ -43,7 +43,7 @@ DesktopTracker::DesktopTracker()
     connect(KWindowSystem::self(), &KWindowSystem::currentDesktopChanged, this, &DesktopTracker::handleDesktopChange);
 
     m_timer->setSingleShot(true);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(changeTimers()));
+    connect(m_timer, &QTimer::timeout, this, &DesktopTracker::changeTimers);
 }
 
 void DesktopTracker::handleDesktopChange(int desktop)

@@ -88,7 +88,9 @@ public Q_SLOTS:
     /**
       opens an existing ics file.
      */
-    void openFile(const QUrl &url = QUrl());
+    void openFile(const QUrl &url);
+
+    void openFileDialog();
 
     /**
       closes the current opened tab widget and saves the data
@@ -133,7 +135,7 @@ public Q_SLOTS:
      */
     void startCurrentTimer();
     void stopCurrentTimer();
-    void stopAllTimers( const QDateTime &when = QDateTime::currentDateTime() );
+    void stopAllTimers();
     void newTask();
     void newSubTask();
     void editTask();
@@ -191,11 +193,13 @@ public Q_SLOTS:
 protected:
     bool event(QEvent *event) override; // inherited from QWidget
 
+public Q_SLOTS:
+    void showSettingsDialog();
+
 private Q_SLOTS:
     void slotCurrentChanged();
     void slotAddTask( const QString &taskName );
     void slotUpdateButtons();
-    void showSettingsDialog();
 
 Q_SIGNALS:
     void setCaption( const QString& qs );
@@ -212,6 +216,7 @@ Q_SIGNALS:
 
 private:
     void fillLayout(TasksWidget *tasksWidget);
+    void registerDBus();
 
     SearchLine *m_searchLine;
     TaskView *m_taskView;

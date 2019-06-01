@@ -55,8 +55,7 @@ MainWindow::MainWindow(const QString& path)
 
     openFile(path);
     slotSetCaption(path);  // set the window title to our iCal file
-    connect(configureAction, SIGNAL(triggered(bool)),
-            m_mainWidget, SLOT(showSettingsDialog()));
+    connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);
     m_mainWidget->setupActions(actionCollection());
 
     KStandardAction::quit(this, &MainWindow::quit, actionCollection());

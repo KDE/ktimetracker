@@ -169,8 +169,9 @@ public Q_SLOTS:
      * @param task      task to start timer of
      * @param startTime if taskview has been modified by another program, we
                             have to set the starting time to not-now. */
-    void startTimerFor(Task* task, const QDateTime& startTime = QDateTime::currentDateTime());
-    void stopTimerFor(Task* task);
+    void startTimerFor(Task *task, const QDateTime& startTime);
+    void startTimerForNow(Task *task);
+    void stopTimerFor(Task *task);
 
     /** clears all active tasks. Needed e.g. if iCal file was modified by
        another program and taskview is cleared without stopping tasks
