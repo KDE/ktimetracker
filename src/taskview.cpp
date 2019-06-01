@@ -123,6 +123,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
                      "Also quit all applications using this file and remove "
                      "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
         }
+        save();
         for (Task *task : storage()->tasksModel()->getAllTasks()) {
             if (task->name() == newTaskName) {
                 startTimerForNow(task);
@@ -485,6 +486,7 @@ void TaskView::newTask(const QString &caption, Task *parent)
         long total = 0;
         long session = 0;
         auto *task = addTask(taskName, taskDescription, total, session, desktopList, parent);
+        save();
         if (!task) {
             KMessageBox::error(nullptr, i18n(
                 "Error storing new task. Your changes were not saved. "
@@ -512,7 +514,6 @@ Task *TaskView::addTask(
     m_desktopTracker->registerForDesktops(task, desktops);
     m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)));
     task->invalidateCompletedState();
-    save();
 
     m_tasksWidget->setSortingEnabled(true);
     return task;

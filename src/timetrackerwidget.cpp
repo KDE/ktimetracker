@@ -380,6 +380,7 @@ void TimeTrackerWidget::slotAddTask(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
     taskView->addTask(taskName, QString(), 0, 0, DesktopList(), nullptr);
+    taskView->save();
 }
 
 void TimeTrackerWidget::slotUpdateButtons()
@@ -572,6 +573,7 @@ void TimeTrackerWidget::addTask( const QString &taskName )
 
     if (taskView) {
         taskView->addTask(taskName, QString(), 0, 0, DesktopList(), nullptr);
+        taskView->save();
     }
 }
 
@@ -582,6 +584,7 @@ void TimeTrackerWidget::addSubTask(const QString &taskName, const QString &taskI
     if (taskView) {
         taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->storage()->tasksModel()->taskByUID(taskId));
         taskView->refresh();
+        taskView->save();
     }
 }
 
