@@ -252,14 +252,14 @@ QString TimeTrackerStorage::save()
     QLockFile fileLock(fileLockPath);
     if (!fileLock.lock()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_fileLock->lock() failed";
-        return i18nc("%1=lock file path", "Could not write lock file %1. Disk full?", fileLockPath);
+        return i18nc("%1=lock file path", "Could not write lock file \"%1\". Disk full?", fileLockPath);
     }
 
     QString errorMessage;
     std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
     if (!calendar->save()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
-        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as %1.", m_url.toString());
+        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".", m_url.toString());
     } else {
         qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
     }
