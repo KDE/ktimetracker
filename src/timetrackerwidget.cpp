@@ -107,20 +107,6 @@ int TimeTrackerWidget::focusSearchBar()
 void TimeTrackerWidget::addTaskView(const QUrl &url)
 {
     qCDebug(KTT_LOG) << "Entering function (url=" << url << ")";
-    bool isNew = url.isEmpty();
-    QUrl lFileName = url;
-
-    if (isNew) {
-        QTemporaryFile tempFile;
-        tempFile.setAutoRemove(false);
-        if (tempFile.open()) {
-            lFileName = tempFile.fileName();
-            tempFile.close();
-        } else {
-            KMessageBox::error(this, i18n("Cannot create new file."));
-            return;
-        }
-    }
 
     TaskView *taskView = m_taskView;
 
@@ -130,7 +116,7 @@ void TimeTrackerWidget::addTaskView(const QUrl &url)
     connect(taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
 
     emit setCaption(url.toString());
-    taskView->load(lFileName);
+    taskView->load(url);
 
     fillLayout(m_taskView->tasksWidget());
 
@@ -313,11 +299,9 @@ void TimeTrackerWidget::openFile(const QUrl &url)
 void TimeTrackerWidget::openFileDialog()
 {
     const QString &path = QFileDialog::getOpenFileName(this);
-    if (path.isEmpty()) {
-        return;
+    if (!path.isEmpty()) {
+        openFile(QUrl::fromLocalFile(path));
     }
-
-    openFile(QUrl::fromLocalFile(path));
 }
 
 bool TimeTrackerWidget::closeFile()

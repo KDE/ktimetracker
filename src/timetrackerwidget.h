@@ -54,7 +54,11 @@ public:
     bool allEventsHaveEndTiMe();
 
 private:
-    void addTaskView(const QUrl &url = QUrl());
+    /**
+     * Load the specified file in the tasks widget.
+     * @param url Must not be empty.
+     */
+    void addTaskView(const QUrl &url);
 
 public:
     /**
