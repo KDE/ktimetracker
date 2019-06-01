@@ -39,6 +39,8 @@ private Q_SLOTS:
 void PlannerParserTest::testEmpty()
 {
     auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
+
     taskView->importPlanner(QFINDTESTDATA("data/kitchen.planner"));
 
     auto *model = taskView->storage()->tasksModel();
@@ -56,6 +58,8 @@ void PlannerParserTest::testEmpty()
 void PlannerParserTest::testAtTopLevel()
 {
     auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
+
     Task* task1 = taskView->addTask("1");
     QVERIFY(task1);
     taskView->tasksWidget()->setCurrentIndex(taskView->storage()->tasksModel()->index(task1, 0));
@@ -78,6 +82,8 @@ void PlannerParserTest::testAtTopLevel()
 void PlannerParserTest::testAtSubTask()
 {
     auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
+
     Task* task1 = taskView->addTask("1");
     QVERIFY(task1);
     Task* task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);

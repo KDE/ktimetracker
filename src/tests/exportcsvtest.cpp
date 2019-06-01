@@ -61,6 +61,7 @@ void ExportCSVTest::testTotalsEmpty()
     QLocale::setDefault(QLocale(QLocale::C));
 
     auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(
@@ -76,6 +77,7 @@ void ExportCSVTest::testTotalsSimpleTree()
     QLocale::setDefault(QLocale(QLocale::C));
 
     auto *taskView = createTaskView(this, true);
+    QVERIFY(taskView);
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(
@@ -99,6 +101,7 @@ void ExportCSVTest::testTimesSimpleTree()
     QLocale::setDefault(QLocale(QLocale::C));
 
     auto *taskView = createTaskView(this, true);
+    QVERIFY(taskView);
 
     const auto &rc = createRC(ReportCriteria::CSVTotalsExport);
     const QUrl &url = createTempFile(this);
@@ -119,6 +122,7 @@ void ExportCSVTest::testHistorySimpleTree()
     QLocale::setDefault(QLocale(QLocale::C));
 
     auto *taskView = createTaskView(this, true);
+    QVERIFY(taskView);
 
     const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
     const QUrl &url = createTempFile(this);

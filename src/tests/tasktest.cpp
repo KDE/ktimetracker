@@ -35,6 +35,7 @@ private Q_SLOTS:
 void TaskTest::testProperties()
 {
     auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
 
     auto *task1 = taskView->addTask("1");
     QVERIFY(task1);
