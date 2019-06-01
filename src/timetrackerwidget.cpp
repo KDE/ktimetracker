@@ -23,7 +23,6 @@
 #include "timetrackerwidget.h"
 
 #include <QFileDialog>
-#include <QTemporaryFile>
 
 #include <KActionCollection>
 #include <KConfigDialog>

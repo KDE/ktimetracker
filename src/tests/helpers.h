@@ -26,6 +26,7 @@
 
 class TaskView;
 
+QUrl createTempFile(QObject *parent);
 TaskView *createTaskView(QObject *parent, bool simpleTree);
 QString readTextFile(const QString &path);
 

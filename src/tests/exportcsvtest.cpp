@@ -19,7 +19,6 @@
  */
 
 #include <QTest>
-#include <QTemporaryFile>
 
 #include "taskview.h"
 #include "model/task.h"
@@ -33,7 +32,6 @@ class ExportCSVTest : public QObject
     Q_OBJECT
 
 private:
-    QUrl createTempFile();
     ReportCriteria createRC(ReportCriteria::REPORTTYPE type);
 
 private Q_SLOTS:
@@ -42,17 +40,6 @@ private Q_SLOTS:
     void testTimesSimpleTree();
     void testHistorySimpleTree();
 };
-
-QUrl ExportCSVTest::createTempFile()
-{
-    auto *file = new QTemporaryFile(this);
-    if (!file->open()) {
-        delete file;
-        return QUrl();
-    }
-
-    return QUrl::fromLocalFile(file->fileName());
-}
 
 ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type)
 {
@@ -114,7 +101,7 @@ void ExportCSVTest::testTimesSimpleTree()
     auto *taskView = createTaskView(this, true);
 
     const auto &rc = createRC(ReportCriteria::CSVTotalsExport);
-    const QUrl &url = createTempFile();
+    const QUrl &url = createTempFile(this);
     QVERIFY(!url.isEmpty());
     QString output = exportToString(taskView->storage()->projectModel(),
                                     taskView->tasksWidget()->currentItem(), rc);
@@ -134,7 +121,7 @@ void ExportCSVTest::testHistorySimpleTree()
     auto *taskView = createTaskView(this, true);
 
     const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
-    const QUrl &url = createTempFile();
+    const QUrl &url = createTempFile(this);
     QString output = exportToString(taskView->storage()->projectModel(),
                                     taskView->tasksWidget()->currentItem(), rc);
     QCOMPARE(writeExport(output, url), "");

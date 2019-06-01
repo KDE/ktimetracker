@@ -26,19 +26,30 @@
 #include "taskview.h"
 #include "model/task.h"
 
-TaskView *createTaskView(QObject *parent, bool simpleTree)
+QUrl createTempFile(QObject *parent)
 {
-    auto *taskView = new TaskView();
     auto *icsFile = new QTemporaryFile(parent);
     if (!icsFile->open()) {
-        delete taskView;
         delete icsFile;
-        return nullptr;
+        return {};
     }
     const QString& file = icsFile->fileName();
     icsFile->close();
 
-    taskView->load(QUrl::fromLocalFile(file));
+    return QUrl::fromLocalFile(file);
+}
+
+TaskView *createTaskView(QObject *parent, bool simpleTree)
+{
+    auto *taskView = new TaskView();
+
+    QUrl icsFile = createTempFile(parent);
+    if (icsFile.isEmpty()) {
+        delete taskView;
+        return nullptr;
+    }
+
+    taskView->load(icsFile);
 
     if (simpleTree) {
         Task* task1 = taskView->addTask("1");
