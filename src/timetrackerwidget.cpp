@@ -176,7 +176,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     startCurrentTimer->setToolTip(i18n("Starts timing for selected task"));
     startCurrentTimer->setWhatsThis(i18n("This will start timing for the "
                                          "selected task.\nIt is even possible to time several tasks "
-                                         "simultanously.\n\nYou may also start timing of tasks by double clicking "
+                                         "simultaneously.\n\nYou may also start timing of tasks by double clicking "
                                          "the left mouse button on a given task. This will, however, stop timing "
                                          "of other tasks."));
     startCurrentTimer->setIcon(QIcon::fromTheme("media-playback-start"));
