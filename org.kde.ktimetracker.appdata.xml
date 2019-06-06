@@ -7,6 +7,7 @@
   <name xml:lang="ca">KTimeTracker</name>
   <name xml:lang="ca-valencia">KTimeTracker</name>
   <name xml:lang="it">KTimeTracker</name>
+  <name xml:lang="ko">KTimetracker</name>
   <name xml:lang="nl">KTimeTracker</name>
   <name xml:lang="pt">KTimeTracker</name>
   <name xml:lang="ru">KTimeTracker</name>
@@ -18,6 +19,7 @@
   <summary xml:lang="ca">Seguidor personal del temps</summary>
   <summary xml:lang="ca-valencia">Seguidor personal del temps</summary>
   <summary xml:lang="it">Segnatempo personale</summary>
+  <summary xml:lang="ko">개인 시간 추적기</summary>
   <summary xml:lang="nl">Persoonlijk tijdgebruik</summary>
   <summary xml:lang="pt">Gestor do Tempo Pessoal</summary>
   <summary xml:lang="ru">Учёт времени</summary>
@@ -30,6 +32,7 @@
     <p xml:lang="ca">El KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
     <p xml:lang="ca-valencia">El KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
     <p xml:lang="it">KTimeTracker ti aiuta a tenere traccia del tempo personale speso in varie attività e progetti.</p>
+    <p xml:lang="ko">KTimeTracker는 다양한 작업과 프로젝트에 투자한 개인 시간을 추적합니다.</p>
     <p xml:lang="nl">KTimeTracker helpt u uw persoonlijk gebruikte tijd aan verschillende taken and projecten te volgen.</p>
     <p xml:lang="pt">O KTimeTracker ajuda-nos a acompanhar o seu tempo pessoal gasto em várias tarefas e projectos.</p>
     <p xml:lang="uk">KTimeTracker допоможе вам стежити за вашим особистим часом, який ви витрачаєте на виконання різноманітних завдань та проєктів.</p>
@@ -38,6 +41,7 @@
     <p xml:lang="ca">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
     <p xml:lang="ca-valencia">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
     <p xml:lang="it">È utile per tracciare ore fatturabili e fornire resoconti delle ore registrate per attività e giorno.</p>
+    <p xml:lang="ko">작업별과 업무일별로 시간을 보고하고 공임 계산에 사용할 수 있습니다.</p>
     <p xml:lang="nl">Het is nuttig voor het volgen van in rekening te brengen uren en kan de vastgelegde uren rapporteren per taak en dag.</p>
     <p xml:lang="pt">É útil para gerir as horas para facturação e poderá relatar as horas registadas por tarefa e por dia.</p>
     <p xml:lang="uk">Ця програма корисна для стеження за обліком годин, вона може створювати звіти за даними, записаними для задачі або протягом дня.</p>
@@ -46,6 +50,7 @@
     <p xml:lang="ca">Amb el KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina sigui molt còmoda i intuïtiva.</p>
     <p xml:lang="ca-valencia">Amb el KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina siga molt còmoda i intuïtiva.</p>
     <p xml:lang="it">Con KTimeTracker, puoi organizzare un progetto frammentato come sotto-attività con nidificazione illimitata. Le scorciatoie standard per tastiera e mouse sono semplici e rendono lo strumento davvero comodo e intuitivo da utilizzare.</p>
+    <p xml:lang="ko">KTimeTracker를 사용하여 프로젝트를 다단계의 하위 작업으로 구성할 수 있습니다. 키보드 단축키와 마우스 동작을 사용하여 사용 편의성을 극대화합니다.</p>
     <p xml:lang="nl">Met KTimeTracker kunt u een in subtaken opgebroken project organiseren met onbeperkte nesting. De standaard sneltoetsen voor toetsenbord en muis zijn eenvoudig en maken het hulpmiddel echt comfortabel en intuïtief te gebruiken.</p>
     <p xml:lang="pt">Com o KTimeTracker, poderá organizar um projecto decomposto em sub-tarefas com níveis ilimitados. Os atalhos-padrão do teclado e rato são simples e tornam a ferramenta realmente confortável e intuitiva para usar.</p>
     <p xml:lang="uk">За допомогою KTimeTracker ви можете упорядкувати поділ проєкту на підзавдання (рівень вкладеності не обмежено). Стандартні клавіатурні скорочення та дії за допомогою миші є простими — вони забезпечують зручність та інтуїтивну зрозумілість принципів керування програмою.</p>
@@ -58,6 +63,7 @@
       <caption xml:lang="ca">KTimeTracker</caption>
       <caption xml:lang="ca-valencia">KTimeTracker</caption>
       <caption xml:lang="it">KTimeTracker</caption>
+      <caption xml:lang="ko">KTimetracker</caption>
       <caption xml:lang="nl">KTimeTracker</caption>
       <caption xml:lang="pt">KTimeTracker</caption>
       <caption xml:lang="ru">KTimeTracker</caption>
