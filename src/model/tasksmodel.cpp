@@ -193,6 +193,9 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
             break;
         case Qt::DecorationRole: {
             auto *task = dynamic_cast<Task *>(item(index));
+            if (!task) {
+                return {};
+            }
 
             if (index.column() == 0) {
                 return QPixmap(task->isComplete() ? ":/pics/task-complete.xpm" : ":/pics/task-incomplete.xpm");
