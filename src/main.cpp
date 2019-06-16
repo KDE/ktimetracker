@@ -44,19 +44,22 @@ QUrl getFileUrl(const QCommandLineParser &parser)
 {
     // Get first positional argument ("file")
     const QStringList args = parser.positionalArguments();
-    QString localFile;
+    QString customFile;
     if (!args.isEmpty()) {
-        localFile = args[0];
+        customFile = args[0];
     }
 
-    if (!localFile.isEmpty()) {
-        // localFile is given as parameter
+    if (!customFile.isEmpty()) {
+        // customFile is given as parameter
 
-        // Relative path to local file will be converted to absolute path
-        QFileInfo info(localFile);
-        return QUrl::fromLocalFile(info.absoluteFilePath());
+        const QUrl url = QUrl::fromUserInput(customFile, QDir::currentPath(), QUrl::AssumeLocalFile);
+        if (!url.isValid()) {
+            qCWarning(KTT_LOG) << "Invalid URL: " << customFile;
+        }
+
+        return url;
     } else {
-        // localFile is not given as parameter
+        // customFile is not given as parameter
         QString result = QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics"));
         if (result.isEmpty()) {
             result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker.ics");
@@ -126,7 +129,7 @@ int main(int argc, char *argv[])
     //PORTING SCRIPT: adapt aboutdata variable if necessary
     aboutData.setupCommandLine(&parser);
 
-    parser.addPositionalArgument(QStringLiteral("file"), i18n("Path to local iCalendar file to open"));
+    parser.addPositionalArgument(QStringLiteral("url"), i18nc("@info:shell", "Path or URL to iCalendar file to open."));
 
     parser.process(app);
     aboutData.processCommandLine(&parser);
