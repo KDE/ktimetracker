@@ -36,16 +36,14 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView*
     , m_contextMenu(nullptr)
     , m_excludedColumns(excludedColumns)
 {
-    if (m_widget) {
-        m_widget->header()->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(m_widget->header(), &QHeaderView::customContextMenuRequested, this, &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
+    m_widget->header()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(m_widget->header(), &QHeaderView::customContextMenuRequested, this, &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
 
-        m_contextMenu = new QMenu(m_widget);
-        m_contextMenu->addSection(i18n("Columns"));
-        connect(m_contextMenu, &QMenu::triggered, this, &TreeViewHeaderContextMenu::slotTriggered);
-        connect(m_contextMenu, &QMenu::aboutToShow, this, &TreeViewHeaderContextMenu::slotAboutToShow);
-        updateActions();
-    }
+    m_contextMenu = new QMenu(m_widget);
+    m_contextMenu->addSection(i18n("Columns"));
+    connect(m_contextMenu, &QMenu::triggered, this, &TreeViewHeaderContextMenu::slotTriggered);
+    connect(m_contextMenu, &QMenu::aboutToShow, this, &TreeViewHeaderContextMenu::slotAboutToShow);
+    updateActions();
 }
 
 TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 

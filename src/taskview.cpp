@@ -91,10 +91,6 @@ TaskView::TaskView(QWidget *parent)
     m_desktopTracker = new DesktopTracker();
     connect(m_desktopTracker, &DesktopTracker::reachedActiveDesktop, this, &TaskView::startTimerForNow);
     connect(m_desktopTracker, &DesktopTracker::leftActiveDesktop, this, &TaskView::stopTimerFor);
-
-    // Header context menu
-    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
-    connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
 }
 
 void TaskView::newFocusWindowDetected(const QString &taskName)
@@ -177,6 +173,10 @@ void TaskView::load(const QUrl &url)
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
     }
+
+    // Table header context menu
+    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
+    connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
 
     connect(tasksModel, &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
     connect(tasksModel, &TasksModel::taskDropped, this, &TaskView::reFreshTimes);
