@@ -58,11 +58,11 @@
       <arg name="taskId" type="s" direction="in"/>
     </method>
     <method name="startTimerForTaskName">
-      <arg name="taskId" type="s" direction="in"/>
+      <arg name="taskName" type="s" direction="in"/>
       <arg type="b" direction="out"/>
     </method>
     <method name="stopTimerForTaskName">
-      <arg name="taskId" type="s" direction="in"/>
+      <arg name="taskName" type="s" direction="in"/>
       <arg type="b" direction="out"/>
     </method>
     <method name="stopAllTimersDBUS" />
@@ -90,7 +90,7 @@
     </method>
     <method name="isTaskNameActive">
       <arg type="b" direction="out" />
-      <arg name="taskId" type="s" direction="in" />
+      <arg name="taskName" type="s" direction="in" />
     </method>
     <method name="saveAll" />
     <method name="quit" />
