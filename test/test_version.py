@@ -16,5 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 def test_delete_parent(app_testfile):
     assert len(app_testfile.version()) > 0

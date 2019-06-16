@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 def test_bad_date(app_testfile):
     app_testfile.addTask('Task1')
     task_id = app_testfile.taskIdsFromName('Task1')[0]
@@ -48,8 +49,6 @@ def test_valid(app_testfile):
     task_id = app_testfile.taskIdsFromName('Task1')[0]
 
     duration = 12
-    retval = app_testfile.bookTime(task_id, '2005-06-19', duration)
-    assert retval == 0
+    assert app_testfile.bookTime(task_id, '2005-06-19', duration) == 0
 
-    retval = app_testfile.totalMinutesForTaskId(task_id)
-    assert retval == duration
+    assert app_testfile.totalMinutesForTaskId(task_id) == duration

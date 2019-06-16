@@ -17,22 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-def test_delete(app_testfile):
+def test_same_name_tasks(app_testfile):
     app_testfile.addTask('Task1')
-    task_id = app_testfile.taskIdsFromName('Task1')[0]
-    app_testfile.deleteTask(task_id)
-    assert app_testfile.tasks() == []
-    assert len(app_testfile.version()) > 0
-
-
-def test_delete_parent(app_testfile):
     app_testfile.addTask('Task1')
-    task_id = app_testfile.taskIdsFromName('Task1')[0]
-
-    app_testfile.addSubTask('blah', task_id)
-    app_testfile.deleteTask(task_id)
-
-    # Should delete both tasks: parent and child
-    assert app_testfile.tasks() == []
-
-    assert len(app_testfile.version()) > 0
+    task_ids = app_testfile.taskIdsFromName('Task1')
+    assert len(task_ids) == 2
+    assert len(task_ids[0]) == 36
+    assert len(task_ids[1]) == 36
+    assert task_ids[0] != task_ids[1]

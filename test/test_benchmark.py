@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 # Old comments from Bash-based benchmark:
 #   This is a bash script for a ktimetracker benchmark - how fast is ktimetracker on your system ?
 #   example: my 2.4GHz Quad-core X64 computer with 4GB RAM needs 50 seconds
