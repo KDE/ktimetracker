@@ -22,6 +22,7 @@
 
 #include "taskview.h"
 #include "model/task.h"
+#include "model/tasksmodel.h"
 #include "helpers.h"
 
 class TaskTest : public QObject
@@ -30,6 +31,7 @@ class TaskTest : public QObject
 
 private Q_SLOTS:
     void testProperties();
+    void testRefreshTimes();
 };
 
 void TaskTest::testProperties()
@@ -46,6 +48,31 @@ void TaskTest::testProperties()
     QVERIFY(task2);
     QVERIFY(!task2->isRoot());
     QCOMPARE(task2->depth(), 1);
+}
+
+void TaskTest::testRefreshTimes()
+{
+    auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
+
+    auto *task1 = taskView->addTask("1");
+    auto *task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
+    task2->changeTime(5, taskView->storage()->eventsModel());
+
+    QCOMPARE(5, task2->time());
+    QCOMPARE(5, task2->sessionTime());
+
+    taskView->save();
+
+    // Open saved file again
+    auto *taskView2 = new TaskView();
+    taskView2->load(taskView->storage()->fileUrl());
+
+    taskView2->reFreshTimes();
+
+    auto *task2Mirror = taskView2->storage()->tasksModel()->taskByUID(task2->uid());
+    QCOMPARE(5, task2Mirror->time());
+    QCOMPARE(5, task2Mirror->sessionTime());
 }
 
 QTEST_MAIN(TaskTest)

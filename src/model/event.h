@@ -45,6 +45,7 @@ public:
     QStringList comments() const;
 
     void setDuration(long duration);
+    long duration() const;
 
     /**
      *  Load the event passed in with this event's info.

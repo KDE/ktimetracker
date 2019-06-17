@@ -102,6 +102,11 @@ void Event::setDuration(long duration)
     m_duration = duration;
 }
 
+long Event::duration() const
+{
+    return m_duration;
+}
+
 KCalCore::Event::Ptr Event::asCalendarEvent(const KCalCore::Event::Ptr &event) const
 {
     Q_ASSERT(event != nullptr);

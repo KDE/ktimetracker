@@ -267,21 +267,19 @@ QString TaskView::reFreshTimes()
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
         // get all events for task
         for (const auto *event : storage()->eventsModel()->eventsForTask(task)) {
-            QDateTime kdatetimestart = event->dtStart();
-            QDateTime kdatetimeend = event->dtEnd();
-            QDateTime eventstart = QDateTime::fromString(kdatetimestart.toString().remove("Z"));
-            QDateTime eventend = QDateTime::fromString(kdatetimeend.toString().remove("Z"));
-            int duration = eventstart.secsTo(eventend) / 60;
+            QDateTime eventStart = event->dtStart();
+            QDateTime eventEnd = event->dtEnd();
+
+            const int duration = event->duration() / 60;
             task->addTime(duration);
             qCDebug(KTT_LOG) << "duration is" << duration;
 
             if (task->sessionStartTiMe().isValid()) {
                 // if there is a session
-                if (task->sessionStartTiMe().secsTo(eventstart) > 0 &&
-                    task->sessionStartTiMe().secsTo(eventend) > 0) {
+                if (task->sessionStartTiMe().secsTo(eventStart) > 0 &&
+                    task->sessionStartTiMe().secsTo(eventEnd) > 0) {
                     // if the event is after the session start
-                    int sessionTime = eventstart.secsTo(eventend) / 60;
-                    task->setSessionTime(task->sessionTime() + sessionTime);
+                    task->addSessionTime(duration);
                 }
             } else {
                 // so there is no session at all
