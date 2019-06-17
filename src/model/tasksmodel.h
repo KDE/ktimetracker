@@ -88,7 +88,7 @@ private:
     TasksModelItem *m_rootItem;
     QStringList m_headerLabels;
     QMovie *m_clockAnimation;
-    mutable TasksModelItem *m_dragCutTask;
+    mutable QString m_dragCutTaskId;
 };
 
 #endif // KTIMETRACKER_TASKSMODEL_H

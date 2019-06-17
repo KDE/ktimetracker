@@ -39,7 +39,7 @@ TasksModel::TasksModel()
         i18n("Priority"),
         i18n("Percent Complete")}
     , m_clockAnimation(nullptr)
-    , m_dragCutTask(nullptr)
+    , m_dragCutTaskId()
 {
     Q_INIT_RESOURCE(pics);
 
@@ -311,7 +311,7 @@ Qt::DropActions TasksModel::supportedDropActions() const
 bool TasksModel::canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column,
                                  const QModelIndex &parent) const
 {
-    if (!m_dragCutTask) {
+    if (m_dragCutTaskId.isEmpty()) {
         return false;
     }
 
@@ -328,7 +328,7 @@ bool TasksModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int 
         return true;
     }
 
-    Task *task = dynamic_cast<Task *>(m_dragCutTask);
+    auto *task = taskByUID(m_dragCutTaskId);
     if (!task) {
         return false;
     }
@@ -347,7 +347,12 @@ bool TasksModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int 
 
 QMimeData *TasksModel::mimeData(const QModelIndexList &indexes) const
 {
-    m_dragCutTask = item(indexes[0]);
+    auto *task = dynamic_cast<Task*>(item(indexes[0]));
+    if (!task) {
+        return nullptr;
+    }
+
+    m_dragCutTaskId = task->uid();
     return QAbstractItemModel::mimeData(indexes);
 }
 
