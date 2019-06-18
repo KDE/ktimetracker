@@ -23,6 +23,20 @@
 
 #include <KCalCore/Event>
 
+/**
+ * We have three types of events:
+ *  1. Finished events of positive duration:
+ *     - dtStart and dtEnd are defined
+ *     - dtEnd >= dtStart
+ *     - duration >= 0
+ *  2. Unfinished events:
+ *     - dtStart is defined
+ *     - dtEnd is not defined, thus hasEndDate() returns false
+ *  3. Events of negative duration:
+ *     - dtStart and dtEnd are defined
+ *     - dtEnd <= dtStart (TODO make dtEnd undefined in the case of negative duration?)
+ *     - duration < 0
+ */
 class Event
 {
 public:
@@ -44,7 +58,7 @@ public:
     void addComment(const QString &comment);
     QStringList comments() const;
 
-    void setDuration(long duration);
+    void setDuration(long seconds);
     long duration() const;
 
     /**
@@ -53,6 +67,8 @@ public:
     KCalCore::Event::Ptr asCalendarEvent(const KCalCore::Event::Ptr &event) const;
 
 private:
+    void updateDuration(QDateTime &changedDt, const QDateTime &otherDt);
+
     QString m_summary;
     QDateTime m_dtStart;
     QDateTime m_dtEnd;

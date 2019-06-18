@@ -52,9 +52,33 @@ QString Event::summary() const
     return m_summary;
 }
 
+void Event::updateDuration(QDateTime &changedDt, const QDateTime &otherDt)
+{
+    if (m_duration < 0) {
+        // Was a negative duration task
+        if (m_dtEnd > m_dtStart) {
+            // If range is not trivial or inversed, we assume that
+            // event duration now becomes positive, thus we should update it here.
+            m_duration = m_dtStart.secsTo(m_dtEnd);
+        }
+    } else {
+        // Was a regular task, and will stay regular. Calculate duration if possible.
+        if (hasEndDate()) {
+            m_duration = m_dtStart.secsTo(m_dtEnd);
+            if (m_duration < 0) {
+                // We cannot make duration negative.
+                // May be the user tried to make duration zero, let us help him.
+                m_duration = 0;
+                changedDt = otherDt;
+            }
+        }
+    }
+}
+
 void Event::setDtStart(const QDateTime &dtStart)
 {
     m_dtStart = dtStart;
+    updateDuration(m_dtStart, m_dtEnd);
 }
 
 QDateTime Event::dtStart() const
@@ -65,6 +89,7 @@ QDateTime Event::dtStart() const
 void Event::setDtEnd(const QDateTime &dtEnd)
 {
     m_dtEnd = dtEnd;
+    updateDuration(m_dtEnd, m_dtStart);
 }
 
 bool Event::hasEndDate() const
@@ -97,9 +122,9 @@ QStringList Event::comments() const
     return m_comments;
 }
 
-void Event::setDuration(long duration)
+void Event::setDuration(long seconds)
 {
-    m_duration = duration;
+    m_duration = seconds;
 }
 
 long Event::duration() const
