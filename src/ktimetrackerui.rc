@@ -62,6 +62,7 @@
       <Action name="new_task" />
       <Action name="new_sub_task" />
       <Action name="delete_task" />
+      <Action name="edit_task_time" />
       <Action name="edit_task" />
       <Separator />
       <Action name="mark_as_complete" />
@@ -74,6 +75,7 @@
         <Action name="new_task" />
         <Action name="new_sub_task" />
         <Action name="delete_task" />
+        <Action name="edit_task_time" />
         <Action name="edit_task" />
         <Action name="mark_as_complete" />
         <Action name="start_new_session" />

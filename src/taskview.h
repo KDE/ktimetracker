@@ -127,6 +127,9 @@ public Q_SLOTS:
     /** Calls editTask dialog for the current task. */
     void editTask();
 
+    /** Calls editTaskTime dialog for the current task. */
+    void editTaskTime();
+
     /**
      * Returns a pointer to storage object.
      *
@@ -186,6 +189,8 @@ public Q_SLOTS:
 
     void onTaskDoubleClicked(Task *task);
 
+    void editTaskTime(const QString& taskUid, int minutes);
+
 Q_SIGNALS:
     void updateButtons();
     void timersActive();
@@ -214,6 +219,7 @@ private: // member variables
     FocusDetector *m_focusDetector;
 
     TasksWidget *m_tasksWidget;
+    QObject *m_editTimeDialog;
 
 private:
     void addTimeToActiveTasks(int minutes, bool save_data = true);

@@ -144,6 +144,7 @@ public Q_SLOTS:
     void newTask();
     void newSubTask();
     void editTask();
+    void editTaskTime();
     void deleteTask();
     void markTaskAsComplete();
     void markTaskAsIncomplete();

@@ -71,6 +71,7 @@ qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
 add_library(libktimetracker STATIC ${ktimetracker_SRCS})
 target_link_libraries(libktimetracker
+    Qt5::Quick
     KF5::ConfigWidgets
     KF5::WindowSystem
     KF5::Notifications

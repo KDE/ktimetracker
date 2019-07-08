@@ -248,6 +248,15 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(editTask, QKeySequence(Qt::CTRL + Qt::Key_E));
     connect(editTask, &QAction::triggered, this, &TimeTrackerWidget::editTask);
 
+    QAction* editTaskTime = actionCollection->addAction(QStringLiteral("edit_task_time"));
+    editTaskTime->setText(i18n("Edit &Time..."));
+    editTaskTime->setToolTip(i18n("Edit time for selected task"));
+    editTaskTime->setWhatsThis(i18n("This will bring up a dialog "
+                                "box where you may edit the times for the selected task."));
+    editTaskTime->setIcon(QIcon::fromTheme("document-properties"));
+    actionCollection->setDefaultShortcut(editTaskTime, QKeySequence(Qt::Key_E));
+    connect(editTaskTime, &QAction::triggered, this, &TimeTrackerWidget::editTaskTime);
+
     QAction* markTaskAsComplete = actionCollection->addAction(QStringLiteral("mark_as_complete"));
     markTaskAsComplete->setText(i18n("&Mark as Complete"));
     markTaskAsComplete->setIcon(QPixmap(":/pics/task-complete.xpm"));
@@ -441,6 +450,11 @@ void TimeTrackerWidget::newSubTask()
 void TimeTrackerWidget::editTask()
 {
     currentTaskView()->editTask();
+}
+
+void TimeTrackerWidget::editTaskTime()
+{
+    currentTaskView()->editTaskTime();
 }
 
 void TimeTrackerWidget::deleteTask()

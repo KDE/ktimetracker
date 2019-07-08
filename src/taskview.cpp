@@ -24,6 +24,7 @@
 
 #include <QMouseEvent>
 #include <QProgressDialog>
+#include <QQmlApplicationEngine>
 
 #include <KMessageBox>
 
@@ -91,6 +92,18 @@ TaskView::TaskView(QWidget *parent)
     m_desktopTracker = new DesktopTracker();
     connect(m_desktopTracker, &DesktopTracker::reachedActiveDesktop, this, &TaskView::startTimerForNow);
     connect(m_desktopTracker, &DesktopTracker::leftActiveDesktop, this, &TaskView::stopTimerFor);
+
+    auto* engine = new QQmlApplicationEngine();
+    engine->load("qrc:/qml/EditTimeDialog.qml");
+
+    if (!engine->rootObjects().empty()) {
+        m_editTimeDialog = engine->rootObjects().first();
+        connect(
+            m_editTimeDialog, SIGNAL(changeTime(const QString&, int)),
+            this, SLOT(editTaskTime(const QString&, int)));
+    } else {
+        m_editTimeDialog = nullptr;
+    }
 }
 
 void TaskView::newFocusWindowDetected(const QString &taskName)
@@ -554,11 +567,6 @@ void TaskView::editTask()
         // setName only does something if the new name is different
         task->setName(taskName);
         task->setDescription(dialog->taskDescription());
-        // update session time as well if the time was changed
-        if (!dialog->timeChange().isEmpty()) {
-            task->changeTime(dialog->timeChange().toInt(), m_storage->eventsModel());
-            scheduleSave();
-        }
         dialog->status(&desktopList);
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
@@ -572,6 +580,26 @@ void TaskView::editTask()
         }
         emit updateButtons();
     }
+}
+
+void TaskView::editTaskTime()
+{
+    qCDebug(KTT_LOG) <<"Entering editTask";
+    Task* task = m_tasksWidget->currentItem();
+    if (!task) {
+        return;
+    }
+
+    if (!m_editTimeDialog) {
+        qWarning() << "m_editTimeDialog is null";
+        return;
+    }
+
+    m_editTimeDialog->setProperty("taskUid", task->uid());
+    m_editTimeDialog->setProperty("taskName", task->name());
+    m_editTimeDialog->setProperty("taskDescription", task->description());
+    m_editTimeDialog->setProperty("minutes", static_cast<int>(task->time()));
+    m_editTimeDialog->setProperty("visible", true);
 }
 
 void TaskView::setPerCentComplete(int completion)
@@ -723,6 +751,16 @@ void TaskView::onTaskDoubleClicked(Task *task)
         // if task is not running, start it
         stopAllTimers();
         startCurrentTimer();
+    }
+}
+
+void TaskView::editTaskTime(const QString& taskUid, int minutes)
+{
+    // update session time if the time was changed
+    auto* task = m_storage->tasksModel()->taskByUID(taskUid);
+    if (task) {
+        task->changeTime(minutes, m_storage->eventsModel());
+        scheduleSave();
     }
 }
 

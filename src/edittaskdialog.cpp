@@ -65,11 +65,6 @@ QString EditTaskDialog::taskDescription()
     return m_ui.tasknametextedit->toPlainText();
 }
 
-QString EditTaskDialog::timeChange()
-{
-    return m_ui.letimechange->text();
-}
-
 void EditTaskDialog::setTask(const QString &name)
 {
     m_ui.tasknamelineedit->setText(name);
