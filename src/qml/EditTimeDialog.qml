@@ -33,6 +33,7 @@ Window {
     property string taskDescription
     property int changeMinutes: 0
     signal changeTime(string taskUid, int minutes)
+    signal editHistory()
 
     visible: false
     modality: Qt.ApplicationModal
@@ -125,30 +126,54 @@ Window {
                 Layout.fillHeight: true
             }
 
-            DialogButtonBox {
-                id: buttonBox
-                Layout.alignment: Qt.AlignRight
-
+            RowLayout {
                 Button {
-                    id: buttonBoxOk
-                    text: i18n("OK")
-                    icon.name: "dialog-ok"
-                    DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-                    enabled: dialog.changeMinutes != 0
+                    id: buttonBoxHistory
+                    text: i18n("Edit History...")
+                    icon.name: "document-edit"
+
+                    hoverEnabled: true
+                    ToolTip {
+                        text: i18n("To change this task's time, you have to edit its event history")
+                        visible: parent.hovered
+                        delay: 500
+                    }
+
+                    onClicked: {
+                        dialog.hide();
+                        dialog.editHistory();
+                    }
                 }
 
-                Button {
-                    id: buttonBoxCancel
-                    text: i18n("Cancel")
-                    icon.name: "dialog-cancel"
-                    DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
+                Item {
+                    Layout.fillWidth: true
                 }
 
-                onAccepted: {
-                    dialog.changeTime(dialog.taskUid, dialog.changeMinutes);
-                    dialog.hide();
+                DialogButtonBox {
+                    id: buttonBox
+                    Layout.alignment: Qt.AlignRight
+
+                    Button {
+                        id: buttonBoxOk
+                        text: i18n("OK")
+                        icon.name: "dialog-ok"
+                        DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+                        enabled: dialog.changeMinutes != 0
+                    }
+
+                    Button {
+                        id: buttonBoxCancel
+                        text: i18n("Cancel")
+                        icon.name: "dialog-cancel"
+                        DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
+                    }
+
+                    onAccepted: {
+                        dialog.changeTime(dialog.taskUid, dialog.changeMinutes);
+                        dialog.hide();
+                    }
+                    onRejected: dialog.hide()
                 }
-                onRejected: dialog.hide()
             }
 
             Keys.onEscapePressed: buttonBoxCancel.clicked()

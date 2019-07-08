@@ -5,7 +5,6 @@
 #include <KMessageBox>
 #include <KWindowSystem>
 
-#include "historydialog.h"
 #include "ktimetrackerutility.h"
 #include "model/projectmodel.h"
 #include "model/eventsmodel.h"
@@ -85,13 +84,6 @@ void EditTaskDialog::status(DesktopList *desktopList) const
             }
         }
     }
-}
-
-void EditTaskDialog::on_edittimespushbutton_clicked()
-{
-    auto *dialog = new HistoryDialog(parentWidget(), m_projectModel);
-    lower();
-    dialog->exec();
 }
 
 void EditTaskDialog::on_autotrackinggroupbox_clicked()

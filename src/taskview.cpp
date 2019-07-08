@@ -42,6 +42,7 @@
 #include "treeviewheadercontextmenu.h"
 #include "focusdetector.h"
 #include "ktimetrackerutility.h"
+#include "historydialog.h"
 #include "ktt_debug.h"
 
 void deleteEntry(const QString& key)
@@ -101,6 +102,9 @@ TaskView::TaskView(QWidget *parent)
         connect(
             m_editTimeDialog, SIGNAL(changeTime(const QString&, int)),
             this, SLOT(editTaskTime(const QString&, int)));
+        connect(
+            m_editTimeDialog, SIGNAL(editHistory()),
+            this, SLOT(editHistory()));
     } else {
         m_editTimeDialog = nullptr;
     }
@@ -600,6 +604,12 @@ void TaskView::editTaskTime()
     m_editTimeDialog->setProperty("taskDescription", task->description());
     m_editTimeDialog->setProperty("minutes", static_cast<int>(task->time()));
     m_editTimeDialog->setProperty("visible", true);
+}
+
+void TaskView::editHistory()
+{
+    auto *dialog = new HistoryDialog(m_tasksWidget->parentWidget(), storage()->projectModel());
+    dialog->exec();
 }
 
 void TaskView::setPerCentComplete(int completion)

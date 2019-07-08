@@ -43,7 +43,6 @@ protected:
 
 private Q_SLOTS:
     void on_autotrackinggroupbox_clicked();
-    void on_edittimespushbutton_clicked();
 
 private:
     ProjectModel *m_projectModel;

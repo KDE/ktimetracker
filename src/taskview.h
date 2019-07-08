@@ -130,6 +130,8 @@ public Q_SLOTS:
     /** Calls editTaskTime dialog for the current task. */
     void editTaskTime();
 
+    void editHistory();
+
     /**
      * Returns a pointer to storage object.
      *
