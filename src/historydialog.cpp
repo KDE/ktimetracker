@@ -24,8 +24,10 @@
 
 #include <QItemDelegate>
 #include <QDateTimeEdit>
+#include <QPushButton>
 
 #include <KMessageBox>
+#include <KStandardGuiItem>
 
 #include "file/filecalendar.h"
 #include "model/event.h"
@@ -103,6 +105,9 @@ HistoryDialog::HistoryDialog(QWidget *parent, ProjectModel *projectModel)
     m_ui.historytablewidget->setSortingEnabled(true);
     m_ui.historytablewidget->sortItems(1, Qt::DescendingOrder);
     m_ui.historytablewidget->resizeColumnsToContents();
+    auto *deleteButton = m_ui.buttonbox->addButton(QString(), QDialogButtonBox::ActionRole);
+    KStandardGuiItem::assign(deleteButton, KStandardGuiItem::Delete);
+    connect(deleteButton, &QPushButton::clicked, this, &HistoryDialog::on_deletepushbutton_clicked);
 }
 
 QString HistoryDialog::listAllEvents()
@@ -262,7 +267,7 @@ void HistoryDialog::on_deletepushbutton_clicked()
     }
 }
 
-void HistoryDialog::on_okpushbutton_clicked()
+void HistoryDialog::on_buttonbox_accepted()
 {
     m_ui.historytablewidget->setCurrentCell(0, 0); // you need to change the cell to store the value
     close();
