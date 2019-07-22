@@ -6,6 +6,7 @@
   <name>KTimeTracker</name>
   <name xml:lang="ca">KTimeTracker</name>
   <name xml:lang="ca-valencia">KTimeTracker</name>
+  <name xml:lang="es">KTimeTracker</name>
   <name xml:lang="gl">KTimeTracker</name>
   <name xml:lang="it">KTimeTracker</name>
   <name xml:lang="ko">KTimetracker</name>
@@ -67,6 +68,7 @@
       <caption>KTimeTracker</caption>
       <caption xml:lang="ca">KTimeTracker</caption>
       <caption xml:lang="ca-valencia">KTimeTracker</caption>
+      <caption xml:lang="es">KTimeTracker</caption>
       <caption xml:lang="gl">KTimeTracker</caption>
       <caption xml:lang="it">KTimeTracker</caption>
       <caption xml:lang="ko">KTimetracker</caption>
