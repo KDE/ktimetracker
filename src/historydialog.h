@@ -48,7 +48,7 @@ private Q_SLOTS:
      */
     void on_deletepushbutton_clicked();
     void onCellChanged(int row, int col);
-    void on_buttonbox_accepted();
+    void on_buttonbox_rejected();
 
 private:
     QString listAllEvents();

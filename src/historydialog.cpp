@@ -267,7 +267,7 @@ void HistoryDialog::on_deletepushbutton_clicked()
     }
 }
 
-void HistoryDialog::on_buttonbox_accepted()
+void HistoryDialog::on_buttonbox_rejected()
 {
     m_ui.historytablewidget->setCurrentCell(0, 0); // you need to change the cell to store the value
     close();
