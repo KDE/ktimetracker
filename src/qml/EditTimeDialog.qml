@@ -62,11 +62,14 @@ Window {
         ColumnLayout {
             anchors.fill: parent
 
-            Kirigami.FormLayout {
-                Layout.alignment: Qt.AlignHCenter
+            GridLayout {
+                columns: 2
 
                 Text {
-                    Kirigami.FormData.label: i18n("Task Name:")
+                    text: i18n("Task Name:")
+                }
+
+                Text {
                     text: taskName
 
                     font.bold: true
@@ -74,21 +77,38 @@ Window {
                 }
 
                 Text {
-                    Kirigami.FormData.label: i18n("Task Description:")
+                    text: i18n("Task Description:")
+                }
+
+                Text {
                     text: taskDescription
 
+                    Layout.fillWidth: true
                     wrapMode: Text.Wrap
                     elide: Text.ElideRight
                     maximumLineCount: 5
                 }
 
-                Kirigami.Separator {
-                    Kirigami.FormData.isSection: true
+                Rectangle {
+                    height: 1
+                    color: Qt.tint(Kirigami.Theme.textColor, Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.7))
+
+                    Layout.columnSpan: 2
+                    Layout.fillWidth: true
+                    Layout.topMargin: 10
+                    Layout.bottomMargin: 10
                 }
 
                 Text {
-                    Kirigami.FormData.label: i18n("Current Time:")
+                    text: i18n("Current Time:")
+                }
+
+                Text {
                     text: formatTime(minutes)
+                }
+
+                Text {
+                    text: i18n("Change Time By:")
                 }
 
                 RowLayout {
@@ -112,12 +132,13 @@ Window {
                     Text {
                         text: i18nc("label after text field for minutes", "min")
                     }
-
-                    Kirigami.FormData.label: i18n("Change Time By:")
                 }
 
                 Text {
-                    Kirigami.FormData.label: i18n("Time After Change:")
+                    text: i18n("Time After Change:")
+                }
+
+                Text {
                     text: formatTime(minutes + changeMinutes)
                 }
             }
