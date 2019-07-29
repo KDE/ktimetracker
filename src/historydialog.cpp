@@ -107,7 +107,7 @@ HistoryDialog::HistoryDialog(QWidget *parent, ProjectModel *projectModel)
     m_ui.historytablewidget->resizeColumnsToContents();
     auto *deleteButton = m_ui.buttonbox->addButton(QString(), QDialogButtonBox::ActionRole);
     KStandardGuiItem::assign(deleteButton, KStandardGuiItem::Delete);
-    connect(deleteButton, &QPushButton::clicked, this, &HistoryDialog::on_deletepushbutton_clicked);
+    connect(deleteButton, &QPushButton::clicked, this, &HistoryDialog::onDeleteClicked);
 }
 
 QString HistoryDialog::listAllEvents()
@@ -249,7 +249,7 @@ QString HistoryDialog::refresh()
     return QString();
 }
 
-void HistoryDialog::on_deletepushbutton_clicked()
+void HistoryDialog::onDeleteClicked()
 {
     if (m_ui.historytablewidget->item(m_ui.historytablewidget->currentRow(), 4)) {
         // if an item is current

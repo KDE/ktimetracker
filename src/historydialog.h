@@ -46,8 +46,9 @@ private Q_SLOTS:
      * The user can change dates and comments in there.
      * A change triggers this procedure, it shall store the new values in the calendar.
      */
-    void on_deletepushbutton_clicked();
     void onCellChanged(int row, int col);
+
+    void onDeleteClicked();
     void on_buttonbox_rejected();
 
 private:
