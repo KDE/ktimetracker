@@ -82,7 +82,7 @@ public:
                     painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
                 }
 
-                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
+                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.window().color() );
                 for (int x = rHeight; x < newWidth; x += rHeight)
                 {
                     painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
@@ -105,7 +105,7 @@ public:
                     painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
                 }
 
-                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.background().color() );
+                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.window().color() );
                 for (int x = rWidth- rHeight; x > newWidth; x -= rHeight)
                 {
                     painter->drawLine( rWidth - x, rY, rWidth - x, rY + rHeight - 1 );

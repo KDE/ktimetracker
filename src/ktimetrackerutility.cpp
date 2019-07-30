@@ -51,8 +51,8 @@ QString getCustomProperty(const KCalCore::Incidence::Ptr &incident, const QStrin
 
     // If a KDE-karm-* exists and not KDE-ktimetracker-*, change this.
     if (
-        incident->customProperty(eventAppName, nameArray) == QString::null &&
-        incident->customProperty(eventAppNameOld, nameArray) != QString::null) {
+        incident->customProperty(eventAppName, nameArray).isNull() &&
+        !incident->customProperty(eventAppNameOld, nameArray).isNull()) {
         incident->setCustomProperty(
             eventAppName, nameArray,
             incident->customProperty(eventAppNameOld, nameArray));

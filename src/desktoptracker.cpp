@@ -100,7 +100,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
     if (desktopList.empty()) {
         for (int i = 0; i < maxDesktops; ++i) {
             TaskVector *v = &(m_desktopTracker[i]);
-            TaskVector::iterator tit = qFind(v->begin(), v->end(), task);
+            TaskVector::iterator tit = std::find(v->begin(), v->end(), task);
             if (tit != v->end()) {
                 m_desktopTracker[i].erase( tit );
             }
@@ -120,9 +120,9 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
     if (!desktopList.empty()) {
         for (int i = 0; i < maxDesktops; ++i) {
             TaskVector& v = m_desktopTracker[i];
-            TaskVector::iterator tit = qFind(v.begin(), v.end(), task);
+            TaskVector::iterator tit = std::find(v.begin(), v.end(), task);
             // Is desktop i in the desktop list?
-            if (qFind( desktopList.begin(), desktopList.end(), i) != desktopList.end()) {
+            if (std::find( desktopList.begin(), desktopList.end(), i) != desktopList.end()) {
 
                 if (tit == v.end()) {
                     // not yet in start vector

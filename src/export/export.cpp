@@ -45,7 +45,7 @@ QString exportToString(ProjectModel *model, Task *currentTask, const ReportCrite
 
 QString writeExport(const QString &data, const QUrl &url)
 {
-    QString err = QString::null;
+    QString err = QString();
 
     // store the file locally or remote
     if (url.isLocalFile()) {
