@@ -2,6 +2,7 @@
 Name=KTimeTracker
 Name[ca]=KTimeTracker
 Name[ca@valencia]=KTimeTracker
+Name[cs]=KTimeTracker
 Name[de]=KTimeTracker
 Name[es]=KTimeTracker
 Name[gl]=KTimeTracker
@@ -19,6 +20,7 @@ Name[zh_TW]=KTimeTracker
 GenericName=Personal Time Tracker
 GenericName[ca]=Seguidor personal del temps
 GenericName[ca@valencia]=Seguidor personal del temps
+GenericName[cs]=Osobní sledovač času
 GenericName[de]=Persönliche Zeiterfassung
 GenericName[gl]=Seguimento do tempo persoal
 GenericName[it]=Segnatempo personale
