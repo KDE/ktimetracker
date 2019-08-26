@@ -9,6 +9,7 @@
   <name xml:lang="cs">KTimeTracker</name>
   <name xml:lang="de">KTimeTracker</name>
   <name xml:lang="es">KTimeTracker</name>
+  <name xml:lang="fr">KTimeTracker</name>
   <name xml:lang="gl">KTimeTracker</name>
   <name xml:lang="id">KTimeTracker</name>
   <name xml:lang="it">KTimeTracker</name>
@@ -26,6 +27,7 @@
   <summary xml:lang="ca">Seguidor personal del temps</summary>
   <summary xml:lang="ca-valencia">Seguidor personal del temps</summary>
   <summary xml:lang="de">Persönliche Zeiterfassung</summary>
+  <summary xml:lang="fr">Outil de gestion du temps personnel</summary>
   <summary xml:lang="gl">Seguimento do tempo persoal</summary>
   <summary xml:lang="id">Pelacak Waktu Personal</summary>
   <summary xml:lang="it">Segnatempo personale</summary>
@@ -44,6 +46,7 @@
     <p xml:lang="ca">El KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
     <p xml:lang="ca-valencia">El KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
     <p xml:lang="de">KTimeTracker misst die Zeit, die Sie für verschiedene Aufgaben und Projekte benötigen</p>
+    <p xml:lang="fr">KTimeTracker vous aide à suivre le temps que vous passez sur différentes tâches et projets.</p>
     <p xml:lang="gl">KTimeTracker axuda a facer un seguimento do tempo persoal que se dedica a distintas tarefas e proxectos.</p>
     <p xml:lang="id">KTimeTracker membantu kamu melacak waktu personal yang dihabiskan pada berbagai tugas dan projekmu.</p>
     <p xml:lang="it">KTimeTracker ti aiuta a tenere traccia del tempo personale speso in varie attività e progetti.</p>
@@ -58,6 +61,7 @@
     <p xml:lang="ca">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
     <p xml:lang="ca-valencia">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
     <p xml:lang="de">Das Programm ist nützlich, wenn z. B. die für verschiedene Kunden aufgewendeten Stunden verrechnet werden müssen.</p>
+    <p xml:lang="fr">Il vous permet de calculer vos heures facturables et de créer des rapports par tâche et par jour.</p>
     <p xml:lang="gl">Resulta útil para facer un seguimento de horas de traballo e pode informar das horas rexistradas por tarefa e día.</p>
     <p xml:lang="id">Ini berguna untuk melacak jam terbang dan bisa melaporkan jam yang dicatat berdasarkan tugas dan harian.</p>
     <p xml:lang="it">È utile per tracciare ore fatturabili e fornire resoconti delle ore registrate per attività e giorno.</p>
@@ -72,6 +76,7 @@
     <p xml:lang="ca">Amb el KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina sigui molt còmoda i intuïtiva.</p>
     <p xml:lang="ca-valencia">Amb el KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina siga molt còmoda i intuïtiva.</p>
     <p xml:lang="de">Mit KTimeTracker können Sie ein Projekt als Teilaufgaben mit unbegrenzter Verschachtelung organisieren. Die standardmäßigen Tastenkombinationen für Tastatur und Maus sind einfach und komfortabel und ermöglichen eine komfortable und intuitive Bedienung.</p>
+    <p xml:lang="fr">Grâce à KTimeTracker, vous pouvez organiser un projet en sous-tâches avec un nombre illimité de niveaux. Les raccourcis clavier et souris sont simples, de manière à ce que l'outil soit intuitif et confortable à utiliser.</p>
     <p xml:lang="gl">Con KTimeTracker pode  organizar un proxecto en tarefas aniñadas en niveis ilimitados. Os atallos de teclado e rato estándar son simples e fornecer unha experiencia cómoda e intuitiva.</p>
     <p xml:lang="id">Dengan KTimeTracker,kamu bisa mengatur projek yang kacau sebagai subtugas dengan bersarang tanpa batas. Pintasan keyboard dan mouse standar yang sederhana dan membuat alat ini benar-benar nyaman dan intuitif untuk digunakan.</p>
     <p xml:lang="it">Con KTimeTracker, puoi organizzare un progetto frammentato come sotto-attività con nidificazione illimitata. Le scorciatoie standard per tastiera e mouse sono semplici e rendono lo strumento davvero comodo e intuitivo da utilizzare.</p>
@@ -92,6 +97,7 @@
       <caption xml:lang="cs">KTimeTracker</caption>
       <caption xml:lang="de">KTimeTracker</caption>
       <caption xml:lang="es">KTimeTracker</caption>
+      <caption xml:lang="fr">KTimeTracker</caption>
       <caption xml:lang="gl">KTimeTracker</caption>
       <caption xml:lang="id">KTimeTracker</caption>
       <caption xml:lang="it">KTimeTracker</caption>
