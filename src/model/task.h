@@ -25,7 +25,7 @@
 
 #include <QDateTime>
 
-#include <KCalCore/Todo>
+#include <KCalendarCore/Todo>
 
 #include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
 #include "model/tasksmodelitem.h"
@@ -56,7 +56,7 @@ public:
 
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
         DesktopList desktops, ProjectModel *projectModel, Task* parentTask);
-    Task(const KCalCore::Todo::Ptr &incident, ProjectModel *projectModel);
+    Task(const KCalendarCore::Todo::Ptr &incident, ProjectModel *projectModel);
 
     /* destructor */
     ~Task() override = default;
@@ -256,14 +256,14 @@ public:
      *  You read the todo, extract its custom properties (like session time)
      *  and use these data to initialize the task.
      */
-    bool parseIncidence( const KCalCore::Incidence::Ptr &, long& minutes,
+    bool parseIncidence(const KCalendarCore::Incidence::Ptr &, long& minutes,
         long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
-        int& percent_complete, int& priority );
+        int& percent_complete, int& priority);
 
     /**
      *  Load the todo passed in with this tasks info.
      */
-    KCalCore::Todo::Ptr asTodo(const KCalCore::Todo::Ptr &calendar) const;
+    KCalendarCore::Todo::Ptr asTodo(const KCalendarCore::Todo::Ptr &calendar) const;
 
     /**
      *  Add a comment to this task.

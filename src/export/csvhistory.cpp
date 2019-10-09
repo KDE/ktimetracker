@@ -28,7 +28,7 @@
 #include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 
-static int todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
+static int todaySeconds(const QDate &date, const KCalendarCore::Event::Ptr &event)
 {
     if (!event) {
         return 0;

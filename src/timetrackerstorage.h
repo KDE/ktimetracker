@@ -23,8 +23,8 @@
 #ifndef KTIMETRACKER_STORAGE_H
 #define KTIMETRACKER_STORAGE_H
 
-#include <KCalCore/Todo>
-#include <KCalCore/Event>
+#include <KCalendarCore/Todo>
+#include <KCalendarCore/Event>
 
 #include "reportcriteria.h"
 #include "desktoplist.h"
@@ -99,7 +99,7 @@ public:
     *
     * This is needed if the iCal file has been modified.
     */
-    QString buildTaskView(const KCalCore::Todo::List &todos, TaskView *view);
+    QString buildTaskView(const KCalendarCore::Todo::List &todos, TaskView *view);
 
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();

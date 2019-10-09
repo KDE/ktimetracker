@@ -37,9 +37,9 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     XmlGui
 )
-
-# Find KdepimLibs Package
-find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5 5.63.0 REQUIRED COMPONENTS
+    CalendarCore
+)
 
 add_subdirectory(pics)
 add_subdirectory(icons)

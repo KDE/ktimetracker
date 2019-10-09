@@ -30,7 +30,7 @@ EventsModel::EventsModel()
 {
 }
 
-void EventsModel::load(const KCalCore::Event::List &events)
+void EventsModel::load(const KCalendarCore::Event::List &events)
 {
     clear();
 
@@ -110,10 +110,10 @@ void EventsModel::addEvent(Event *event)
     m_events.append(event);
 }
 
-static KCalCore::Event::Ptr baseEvent(const Task *task)
+static KCalendarCore::Event::Ptr baseEvent(const Task *task)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    KCalCore::Event::Ptr e( new KCalCore::Event() );
+    KCalendarCore::Event::Ptr e(new KCalendarCore::Event());
     QStringList categories;
     e->setSummary(task->name());
 

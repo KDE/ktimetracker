@@ -21,7 +21,7 @@
 #ifndef KTIMETRACKER_EVENTSMODEL_H
 #define KTIMETRACKER_EVENTSMODEL_H
 
-#include <KCalCore/Calendar>
+#include <KCalendarCore/Calendar>
 
 #include "event.h"
 
@@ -35,7 +35,7 @@ public:
     EventsModel();
     ~EventsModel() override;
 
-    void load(const KCalCore::Event::List &events);
+    void load(const KCalendarCore::Event::List &events);
     QList<Event*> events() const;
     QList<Event*> eventsForTask(Task *task) const;
     Event *eventByUID(const QString &uid) const;

@@ -23,7 +23,7 @@
 #ifndef _KTIMETRACKER_CALENDAR_H_
 #define _KTIMETRACKER_CALENDAR_H_
 
-#include <KCalCore/MemoryCalendar>
+#include <KCalendarCore/MemoryCalendar>
 
 class FileCalendar
 {
@@ -35,16 +35,16 @@ public:
     bool reload();
     bool save();
 
-    void addTodo(const KCalCore::Todo::Ptr &todo);
-    KCalCore::Todo::List rawTodos() const;
+    void addTodo(const KCalendarCore::Todo::Ptr &todo);
+    KCalendarCore::Todo::List rawTodos() const;
 
-    void addEvent(const KCalCore::Event::Ptr &event);
-    KCalCore::Event::List rawEvents() const;
-    KCalCore::Event::List rawEventsForDate(const QDate &date) const;
+    void addEvent(const KCalendarCore::Event::Ptr &event);
+    KCalendarCore::Event::List rawEvents() const;
+    KCalendarCore::Event::List rawEventsForDate(const QDate &date) const;
 
 private:
     QUrl m_url;
-    KCalCore::MemoryCalendar::Ptr m_calendar;
+    KCalendarCore::MemoryCalendar::Ptr m_calendar;
 };
 
 #endif

@@ -20,8 +20,8 @@
 
 #include <QTest>
 
-#include <KCalCore/FileStorage>
-#include <KCalCore/ICalFormat>
+#include <KCalendarCore/FileStorage>
+#include <KCalendarCore/ICalFormat>
 
 #include "taskview.h"
 #include "model/task.h"
@@ -55,11 +55,11 @@ void StorageTest::testSaveSimpleTree()
 
     QCOMPARE(taskView->storage()->save(), "");
 
-    KCalCore::MemoryCalendar::Ptr calendar(new KCalCore::MemoryCalendar(QTimeZone::systemTimeZone()));
-    KCalCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().toLocalFile(), new KCalCore::ICalFormat());
+    KCalendarCore::MemoryCalendar::Ptr calendar(new KCalendarCore::MemoryCalendar(QTimeZone::systemTimeZone()));
+    KCalendarCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().toLocalFile(), new KCalendarCore::ICalFormat());
     QVERIFY(fileStorage.load());
 
-    auto todos = calendar->rawTodos(KCalCore::TodoSortSummary);
+    auto todos = calendar->rawTodos(KCalendarCore::TodoSortSummary);
     QCOMPARE(todos.size(), 4);
 
     QCOMPARE(todos[0]->summary(), "1");
@@ -73,7 +73,7 @@ void StorageTest::testSaveSimpleTree()
     QCOMPARE(todos[3]->customProperty("ktimetracker", "totalSessionTime"), "-5");
     QCOMPARE(todos[3]->customProperty("ktimetracker", "totalTaskTime"), "-5");
 
-    auto events = calendar->rawEvents(KCalCore::EventSortSummary);
+    auto events = calendar->rawEvents(KCalendarCore::EventSortSummary);
     QCOMPARE(events.size(), 4);
 
     QCOMPARE(events[0]->summary(), "1");
