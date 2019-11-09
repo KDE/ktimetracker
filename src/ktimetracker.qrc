@@ -2,7 +2,4 @@
     <qresource prefix="/kxmlgui5/ktimetracker">
         <file>ktimetrackerui.rc</file>
     </qresource>
-    <qresource>
-        <file>qml/EditTimeDialog.qml</file>
-    </qresource>
 </RCC>

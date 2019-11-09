@@ -4,6 +4,8 @@ include_directories(
 )
 
 set(ktimetracker_SRCS
+    dialogs/edittimedialog.cpp
+
     export/totalsastext.cpp
     export/csvhistory.cpp
     export/csvtotals.cpp
@@ -71,7 +73,6 @@ qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
 add_library(libktimetracker STATIC ${ktimetracker_SRCS})
 target_link_libraries(libktimetracker
-    Qt5::Quick
     KF5::ConfigWidgets
     KF5::WindowSystem
     KF5::Notifications
@@ -82,6 +83,7 @@ target_link_libraries(libktimetracker
     KF5::IdleTime
     KF5::DBusAddons
     KF5::CalendarCore
+    KF5::TextWidgets
 )
 
 add_executable(ktimetracker main.cpp)

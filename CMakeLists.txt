@@ -22,7 +22,7 @@ ecm_setup_version(${KDEPIM_VERSION_NUMBER}
 )
 
 set(QT_REQUIRED_VERSION "5.10.0")
-find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Gui Widgets Xml Quick)
+find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Gui Widgets Xml)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Config
@@ -36,6 +36,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Notifications
     WindowSystem
     XmlGui
+    TextWidgets
 )
 find_package(KF5 5.63.0 REQUIRED COMPONENTS
     CalendarCore

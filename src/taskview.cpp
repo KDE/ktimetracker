@@ -24,10 +24,11 @@
 
 #include <QMouseEvent>
 #include <QProgressDialog>
-#include <QQmlApplicationEngine>
+#include <QPointer>
 
 #include <KMessageBox>
 
+#include "dialogs/edittimedialog.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "model/eventsmodel.h"
@@ -93,21 +94,6 @@ TaskView::TaskView(QWidget *parent)
     m_desktopTracker = new DesktopTracker();
     connect(m_desktopTracker, &DesktopTracker::reachedActiveDesktop, this, &TaskView::startTimerForNow);
     connect(m_desktopTracker, &DesktopTracker::leftActiveDesktop, this, &TaskView::stopTimerFor);
-
-    auto* engine = new QQmlApplicationEngine();
-    engine->load("qrc:/qml/EditTimeDialog.qml");
-
-    if (!engine->rootObjects().empty()) {
-        m_editTimeDialog = engine->rootObjects().first();
-        connect(
-            m_editTimeDialog, SIGNAL(changeTime(const QString&, int)),
-            this, SLOT(editTaskTime(const QString&, int)));
-        connect(
-            m_editTimeDialog, SIGNAL(editHistory()),
-            this, SLOT(editHistory()));
-    } else {
-        m_editTimeDialog = nullptr;
-    }
 }
 
 void TaskView::newFocusWindowDetected(const QString &taskName)
@@ -594,21 +580,25 @@ void TaskView::editTaskTime()
         return;
     }
 
-    if (!m_editTimeDialog) {
-        qWarning() << "m_editTimeDialog is null";
-        return;
+    QPointer<EditTimeDialog> editTimeDialog = new EditTimeDialog(
+        m_tasksWidget->parentWidget(),
+        task->name(), task->description(),
+        static_cast<int>(task->time()));
+
+    if (editTimeDialog->exec() == QDialog::Accepted) {
+        if (editTimeDialog->editHistoryRequested()) {
+            editHistory();
+        } else {
+            editTaskTime(task->uid(), editTimeDialog->changeMinutes());
+        }
     }
 
-    m_editTimeDialog->setProperty("taskUid", task->uid());
-    m_editTimeDialog->setProperty("taskName", task->name());
-    m_editTimeDialog->setProperty("taskDescription", task->description());
-    m_editTimeDialog->setProperty("minutes", static_cast<int>(task->time()));
-    m_editTimeDialog->setProperty("visible", true);
+    delete editTimeDialog;
 }
 
 void TaskView::editHistory()
 {
-    auto *dialog = new HistoryDialog(m_tasksWidget->parentWidget(), storage()->projectModel());
+    QPointer<HistoryDialog> dialog = new HistoryDialog(m_tasksWidget->parentWidget(), storage()->projectModel());
     dialog->exec();
 }
 
