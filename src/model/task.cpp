@@ -120,6 +120,11 @@ void Task::setRunning(bool on, const QDateTime& when)
         if (on) {
             m_lastStart = when;
             qCDebug(KTT_LOG) << "task has been started for " << when;
+
+//            m_projectModel->eventsModel()->startTask(this, when);
+            m_projectModel->eventsModel()->startTask(this);
+        } else {
+            m_projectModel->eventsModel()->stopTask(this, when);
         }
     }
 }

@@ -345,7 +345,10 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
                 stopAllTimers();
             }
             m_idleTimeDetector->startIdleDetection();
+
             task->setRunning(true, startTime);
+            save();
+
             m_activeTasks.append(task);
             emit updateButtons();
             if (m_activeTasks.count() == 1) {
@@ -376,7 +379,10 @@ void TaskView::stopAllTimers(const QDateTime& when)
 
     for (Task *task : m_activeTasks) {
         QApplication::processEvents();
+
         task->setRunning(false, when);
+        save();
+
         dialog.setValue(dialog.value() + 1);
     }
 
@@ -428,7 +434,10 @@ void TaskView::stopTimerFor(Task* task)
     qCDebug(KTT_LOG) << "Entering function";
     if (task != nullptr && m_activeTasks.indexOf(task) != -1) {
         m_activeTasks.removeAll(task);
+
         task->setRunning(false);
+        save();
+
         if (m_activeTasks.count() == 0) {
             m_idleTimeDetector->stopIdleDetection();
             emit timersInactive();

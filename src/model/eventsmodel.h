@@ -93,6 +93,9 @@ public:
      */
     bool bookTime(const Task *task, const QDateTime &startDateTime, long durationInSeconds);
 
+    void startTask(const Task *task);
+    void stopTask(const Task *task, const QDateTime &when);
+
 Q_SIGNALS:
     void timesChanged();
 

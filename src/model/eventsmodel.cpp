@@ -170,3 +170,34 @@ bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, lon
     addEvent(e);
     return true;
 }
+
+void EventsModel::startTask(const Task *task)
+{
+    auto *e = new Event(baseEvent(task));
+
+    // TODO support passing of a different start time from TimeTrackerStorage::buildTaskView?
+    e->setDtStart(QDateTime::currentDateTime());
+    addEvent(e);
+}
+
+void EventsModel::stopTask(const Task *task, const QDateTime &when)
+{
+    QList<Event*> openEvents;
+    for (auto *event : eventsForTask(task)) {
+        if (!event->hasEndDate()) {
+            openEvents.append(event);
+        }
+    }
+
+    if (openEvents.isEmpty()) {
+        qCWarning(KTT_LOG) << "Task to stop has no open events, uid=" << task->uid() << ", name=" << task->name();
+    } else if (openEvents.size() > 1) {
+        qCWarning(KTT_LOG) << "Task to stop has multiple open events (" << openEvents.size() <<
+            "), uid=" << task->uid() << ", name=" << task->name();
+    }
+
+    for (auto *event : openEvents) {
+        qCDebug(KTT_LOG) << "found an event for task, event=" << event->uid();
+        event->setDtEnd(when);
+    }
+}
