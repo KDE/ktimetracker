@@ -240,8 +240,8 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     connect(deleteTask, &QAction::triggered, this, QOverload<>::of(&TimeTrackerWidget::deleteTask));
 
     QAction* editTask = actionCollection->addAction(QStringLiteral("edit_task"));
-    editTask->setText(i18n("&Edit..."));
-    editTask->setToolTip(i18n("Edits name or times for selected task"));
+    editTask->setText(i18n("&Properties"));
+    editTask->setToolTip(i18n("Edit name or description for selected task"));
     editTask->setWhatsThis(i18n("This will bring up a dialog "
                                 "box where you may edit the parameters for the selected task."));
     editTask->setIcon(QIcon::fromTheme("document-properties"));
@@ -253,7 +253,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     editTaskTime->setToolTip(i18n("Edit time for selected task"));
     editTaskTime->setWhatsThis(i18n("This will bring up a dialog "
                                 "box where you may edit the times for the selected task."));
-    editTaskTime->setIcon(QIcon::fromTheme("document-properties"));
+    editTaskTime->setIcon(QIcon::fromTheme("document-edit"));
     actionCollection->setDefaultShortcut(editTaskTime, QKeySequence(Qt::Key_E));
     connect(editTaskTime, &QAction::triggered, this, &TimeTrackerWidget::editTaskTime);
 
