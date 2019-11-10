@@ -83,7 +83,7 @@ TaskPropertiesDialog::TaskPropertiesDialog(
     const int numDesktops = KWindowSystem::numberOfDesktops();
 
     auto *desktopsWidget = new QWidget(m_trackingGroup);
-    auto *desktopsLayout = new QGridLayout(m_trackingGroup);
+    auto *desktopsLayout = new QGridLayout(scrollArea);
     desktopsLayout->addItem(new QSpacerItem(50, 0), 0, 2, numDesktops, 1);
     desktopsWidget->setLayout(desktopsLayout);
 
