@@ -13,6 +13,7 @@ KTimeTracker 5.0 (release date: ?)
 - Fixed "Bug 325683 - Both "mark as complete" and "mark as incomplete" are mapped to ctrl+m"
 - Reworked the export dialog, added preview of exportable text
 - Added appstream XML metadata
+- Added dedicated dialog "Edit Task Time" to increment/decrement time spent on a task
 
 KTimeTracker 4.1 (Jul 2008 -- KDE 4.1 Release)
 --------
