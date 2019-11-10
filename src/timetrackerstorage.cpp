@@ -282,6 +282,8 @@ void TimeTrackerStorage::onFileModified()
         return;
     }
 
+    // TODO resolve conflicts if KTimeTracker has unsaved changes in its data structures
+
     qCDebug(KTT_LOG) << "entering function";
 
     FileCalendar m_calendar(m_url);
