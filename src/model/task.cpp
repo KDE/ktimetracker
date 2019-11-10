@@ -331,9 +331,7 @@ bool Task::remove(TimeTrackerStorage* storage)
         task->remove(storage);
     }
 
-    if (isRunning()) {
-        setRunning(false);
-    }
+    setRunning(false);
 
     m_projectModel->eventsModel()->removeAllForTask(this);
 
