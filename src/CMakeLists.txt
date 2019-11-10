@@ -5,6 +5,7 @@ include_directories(
 
 set(ktimetracker_SRCS
     dialogs/edittimedialog.cpp
+    dialogs/taskpropertiesdialog.cpp
 
     export/totalsastext.cpp
     export/csvhistory.cpp
@@ -28,7 +29,6 @@ set(ktimetracker_SRCS
 
     csvexportdialog.cpp
     desktoptracker.cpp
-    edittaskdialog.cpp
     focusdetector.cpp
     historydialog.cpp
     idletimedetector.cpp
@@ -61,7 +61,6 @@ qt5_add_dbus_adaptor(ktimetracker_SRCS
 ki18n_wrap_ui(ktimetracker_SRCS
     csvexportdialog.ui
     historydialog.ui
-    edittaskdialog.ui
     settings/cfgbehavior.ui
     settings/cfgdisplay.ui
     settings/cfgstorage.ui

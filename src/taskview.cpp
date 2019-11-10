@@ -29,13 +29,13 @@
 #include <KMessageBox>
 
 #include "dialogs/edittimedialog.h"
+#include "dialogs/taskpropertiesdialog.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "model/eventsmodel.h"
 #include "widgets/taskswidget.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
-#include "edittaskdialog.h"
 #include "idletimedetector.h"
 #include "import/plannerparser.h"
 #include "ktimetracker.h"
@@ -461,23 +461,22 @@ void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
 
 void TaskView::newTask()
 {
-    newTask(i18n("New Task"), nullptr);
+    newTask(i18nc("@title:window", "New Task"), nullptr);
 }
 
 void TaskView::newTask(const QString &caption, Task *parent)
 {
-    auto *dialog = new EditTaskDialog(m_tasksWidget->parentWidget(), storage()->projectModel(), caption, nullptr);
-    DesktopList desktopList;
+    QPointer<TaskPropertiesDialog> dialog = new TaskPropertiesDialog(
+        m_tasksWidget->parentWidget(), caption, QString(), QString(), DesktopList());
 
-    int result = dialog->exec();
-    if (result == QDialog::Accepted) {
+    if (dialog->exec() == QDialog::Accepted) {
         QString taskName = i18n("Unnamed Task");
-        if (!dialog->taskName().isEmpty()) {
-            taskName = dialog->taskName();
+        if (!dialog->name().isEmpty()) {
+            taskName = dialog->name();
         }
-        QString taskDescription = dialog->taskDescription();
+        QString taskDescription = dialog->description();
 
-        dialog->status(&desktopList);
+        auto desktopList = dialog->desktops();
 
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
@@ -497,6 +496,8 @@ void TaskView::newTask(const QString &caption, Task *parent)
                 "file related to its name from ~/.kde/share/apps/kabc/lock/"));
         }
     }
+    delete dialog;
+
     emit updateButtons();
 }
 
@@ -528,7 +529,7 @@ void TaskView::newSubTask()
         return;
     }
 
-    newTask(i18n("New Sub Task"), task);
+    newTask(i18nc("@title:window", "New Sub Task"), task);
 
     m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)), true);
 
@@ -543,21 +544,20 @@ void TaskView::editTask()
         return;
     }
 
-    DesktopList desktopList = task->desktops();
-    DesktopList oldDeskTopList = desktopList;
-    auto *dialog = new EditTaskDialog(m_tasksWidget->parentWidget(), storage()->projectModel(), i18n("Edit Task"), &desktopList);
-    dialog->setTask(task->name());
-    dialog->setDescription(task->description());
-    int result = dialog->exec();
-    if (result == QDialog::Accepted) {
-        QString taskName = i18n("Unnamed Task");
-        if (!dialog->taskName().isEmpty()) {
-            taskName = dialog->taskName();
+    auto oldDeskTopList = task->desktops();
+    QPointer<TaskPropertiesDialog> dialog = new TaskPropertiesDialog(
+        m_tasksWidget->parentWidget(), i18nc("@title:window", "Edit Task"),
+        task->name(), task->description(), oldDeskTopList);
+    if (dialog->exec() == QDialog::Accepted) {
+        QString name = i18n("Unnamed Task");
+        if (!dialog->name().isEmpty()) {
+            name = dialog->name();
         }
+
         // setName only does something if the new name is different
-        task->setName(taskName);
-        task->setDescription(dialog->taskDescription());
-        dialog->status(&desktopList);
+        task->setName(name);
+        task->setDescription(dialog->description());
+        auto desktopList = dialog->desktops();
         // If all available desktops are checked, disable auto tracking,
         // since it makes no sense to track for every desktop.
         if (desktopList.size() == m_desktopTracker->desktopCount()) {
@@ -570,6 +570,8 @@ void TaskView::editTask()
         }
         emit updateButtons();
     }
+
+    delete dialog;
 }
 
 void TaskView::editTaskTime()
