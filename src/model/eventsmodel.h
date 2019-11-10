@@ -37,7 +37,7 @@ public:
 
     void load(const KCalendarCore::Event::List &events);
     QList<Event*> events() const;
-    QList<Event*> eventsForTask(Task *task) const;
+    QList<Event*> eventsForTask(const Task *task) const;
     Event *eventByUID(const QString &uid) const;
 
     // Delete all events

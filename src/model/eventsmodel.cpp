@@ -49,7 +49,7 @@ QList<Event*> EventsModel::events() const
     return m_events;
 }
 
-QList<Event*> EventsModel::eventsForTask(Task *task) const
+QList<Event*> EventsModel::eventsForTask(const Task *task) const
 {
     QList<Event*> res;
     for (auto *event : events()) {
