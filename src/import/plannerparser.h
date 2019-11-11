@@ -23,7 +23,7 @@
 #ifndef PLANNERPARSER_H
 #define PLANNERPARSER_H
 
-#include <QtXml/QtXml>
+#include <QtXml>
 
 class ProjectModel;
 class Task;

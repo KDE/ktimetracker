@@ -27,12 +27,12 @@
 #include <QPlainTextEdit>
 #include <QLineEdit>
 #include <QDialogButtonBox>
+#include <QScrollArea>
+#include <QCheckBox>
 
 #include <KLocalizedString>
 #include <KPluralHandlingSpinBox>
-#include <QtWidgets/QScrollArea>
-#include <QtWidgets/QCheckBox>
-#include <KWindowSystem/KWindowSystem>
+#include <KWindowSystem>
 
 #include "ktimetrackerutility.h"
 

@@ -23,6 +23,7 @@
 #include "timetrackerwidget.h"
 
 #include <QFileDialog>
+#include <QPointer>
 
 #include <KActionCollection>
 #include <KConfigDialog>
@@ -497,7 +498,8 @@ void TimeTrackerWidget::editHistory()
     // HistoryDialog is the new HistoryDialog, but the EditHiStoryDiaLog exists as well.
     // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if (currentTaskView()) {
-        auto *dialog = new HistoryDialog(currentTaskView()->tasksWidget(), currentTaskView()->storage()->projectModel());
+        QPointer<HistoryDialog> dialog = new HistoryDialog(
+            currentTaskView()->tasksWidget(), currentTaskView()->storage()->projectModel());
         if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();
         } else {

@@ -112,7 +112,7 @@ HistoryDialog::HistoryDialog(QWidget *parent, ProjectModel *projectModel)
 
 QString HistoryDialog::listAllEvents()
 {
-    QString err = QString();
+    QString err;
     // if sorting is enabled and we write to row x, we cannot be sure row x will be in row x some lines later
     bool old_sortingenabled = m_ui.historytablewidget->isSortingEnabled();
     m_ui.historytablewidget->setSortingEnabled(false);

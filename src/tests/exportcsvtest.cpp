@@ -50,8 +50,8 @@ ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type)
     rc.decimalMinutes = false;
     rc.sessionTimes = false;
     rc.allTasks = true;
-    rc.delimiter = ";";
-    rc.quote = "\"";
+    rc.delimiter = ';';
+    rc.quote = '"';
 
     return rc;
 }

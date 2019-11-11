@@ -20,8 +20,8 @@
  *
  */
 
-#ifndef _KTIMETRACKER_CALENDAR_H_
-#define _KTIMETRACKER_CALENDAR_H_
+#ifndef KTIMETRACKER_FILECALENDAR_H
+#define KTIMETRACKER_FILECALENDAR_H
 
 #include <KCalendarCore/MemoryCalendar>
 
@@ -47,4 +47,4 @@ private:
     KCalendarCore::MemoryCalendar::Ptr m_calendar;
 };
 
-#endif
+#endif // KTIMETRACKER_FILECALENDAR_H
