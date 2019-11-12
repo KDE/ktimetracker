@@ -72,15 +72,16 @@ void IdleTimeDetector::timeoutReached(int, int timeout)
     QString backThen = idleStart.time().toString();
 
     // Create dialog
-    QString hintYes = i18n("Continue timing. Timing has started at %1", backThen);
-    KGuiItem buttonYes(i18n("Continue timing."), QString(), hintYes, hintYes);
+    QString hintYes = i18nc(
+        "@info:tooltip", "Apply the idle time since %1 to all active\ntimers and keep them running.", backThen);
+    KGuiItem buttonYes(i18nc("@action:button", "Continue Timing"), QString(), hintYes, hintYes);
 
-    QString hintNo = i18n("Stop timing and revert back to the time at %1.", backThen);
-    KGuiItem buttonNo(i18n("Revert timing"), QString(), hintNo, hintNo);
+    QString hintNo = i18nc("@info:tooltip", "Stop timing and revert back to the time at %1", backThen);
+    KGuiItem buttonNo(i18nc("@action:button", "Revert Timing"), QString(), hintNo, hintNo);
 
     const auto result = KMessageBox::questionYesNo(
         nullptr,
-        i18n("Desktop has been idle since %1. What do you want to do ?", backThen),
+        i18n("Desktop has been idle since %1. What do you want to do?", backThen),
         QString(), buttonYes, buttonNo);
     switch (result) {
         case KMessageBox::Yes:
