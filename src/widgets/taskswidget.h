@@ -67,6 +67,8 @@ Q_SIGNALS:
     void taskDoubleClicked(Task*);
 
 private:
+    bool mousePositionInsideCheckbox(QMouseEvent *event) const;
+
     void mouseMoveEvent(QMouseEvent*) override;
     void mousePressEvent(QMouseEvent*) override;
     void mouseDoubleClickEvent(QMouseEvent*) override;

@@ -267,18 +267,22 @@ void TasksWidget::mouseMoveEvent( QMouseEvent *event )
     }
 }
 
-void TasksWidget::mousePressEvent( QMouseEvent *event )
+bool TasksWidget::mousePositionInsideCheckbox(QMouseEvent *event) const
+{
+    QModelIndex index = indexAt(event->pos());
+    return index.isValid() && index.column() == 0 && visualRect(index).x() <= event->pos().x()
+         && event->pos().x() < visualRect(index).x() + 19;
+}
+
+void TasksWidget::mousePressEvent(QMouseEvent *event)
 {
     qCDebug(KTT_LOG) << "Entering function, event->button()=" << event->button();
-    QModelIndex index = indexAt( event->pos() );
 
-    // if the user toggles a task as complete/incomplete
-    if ( index.isValid() && index.column() == 0 && visualRect( index ).x() <= event->pos().x()
-         && event->pos().x() < visualRect( index ).x() + 19)
-    {
+    if (mousePositionInsideCheckbox(event)) {
+        // if the user toggles a task as complete/incomplete
+        QModelIndex index = indexAt(event->pos());
         Task *task = taskAtViewIndex(index);
-        if (task)
-        {
+        if (task) {
             if (task->isComplete()) {
                 task->setPercentComplete(0);
             } else {
@@ -286,15 +290,14 @@ void TasksWidget::mousePressEvent( QMouseEvent *event )
             }
             emit updateButtons();
         }
-    }
-    else // the user did not mark a task as complete/incomplete
-    {
-        if ( KTimeTrackerSettings::configPDA() )
+    } else {
+        // the user did not mark a task as complete/incomplete
+        if (KTimeTrackerSettings::configPDA()) {
             // if you have a touchscreen, you cannot right-click. So, display context menu on any click.
-        {
-            QPoint newPos = viewport()->mapToGlobal( event->pos() );
-            emit contextMenuRequested( newPos );
+            QPoint newPos = viewport()->mapToGlobal(event->pos());
+            emit contextMenuRequested(newPos);
         }
+
         QTreeView::mousePressEvent(event);
     }
 }
@@ -305,13 +308,13 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
     QModelIndex index = indexAt(event->pos());
 
     // if the user toggles a task as complete/incomplete
-    if (index.isValid()) {
+    if (index.isValid() && !mousePositionInsideCheckbox(event)) {
         Task *task = taskAtViewIndex(index);
         if (task) {
             emit taskDoubleClicked(task);
         }
     } else {
-        QTreeView::mousePressEvent(event);
+        QTreeView::mouseDoubleClickEvent(event);
     }
 }
 
