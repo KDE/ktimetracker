@@ -125,18 +125,18 @@ ReportCriteria CSVExportDialog::reportCriteria()
     qCDebug(KTT_LOG) <<"rc.decimalMinutes is" << rc.decimalMinutes;
 
     if (ui.radioComma->isChecked()) {
-        rc.delimiter = ",";
+        rc.delimiter = ',';
     } else if (ui.radioTab->isChecked()) {
-        rc.delimiter = "\t";
+        rc.delimiter = '\t';
     } else if (ui.radioSemicolon->isChecked()) {
-        rc.delimiter = ";";
+        rc.delimiter = ';';
     } else if (ui.radioSpace->isChecked()) {
-        rc.delimiter = " ";
+        rc.delimiter = ' ';
     } else if (ui.radioOther->isChecked()) {
         rc.delimiter = ui.txtOther->text();
     } else {
         qCDebug(KTT_LOG) << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
-        rc.delimiter = "\t";
+        rc.delimiter = '\t';
     }
 
     rc.quote = ui.cboQuote->currentText();

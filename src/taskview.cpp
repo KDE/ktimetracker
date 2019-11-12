@@ -25,6 +25,8 @@
 #include <QMouseEvent>
 #include <QProgressDialog>
 #include <QPointer>
+#include <QSortFilterProxyModel>
+#include <QTimer>
 
 #include <KMessageBox>
 
