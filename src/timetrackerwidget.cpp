@@ -229,7 +229,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     newSubTask->setToolTip(i18n("Creates a new subtask to the current selected task"));
     newSubTask->setWhatsThis(i18n("This will create a new subtask to the current selected task."));
     newSubTask->setIcon(QIcon::fromTheme("subtask-new-ktimetracker"));
-    actionCollection->setDefaultShortcut(newSubTask, QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_N));
+    actionCollection->setDefaultShortcut(newSubTask, QKeySequence(Qt::CTRL + Qt::Key_B));
     connect(newSubTask, &QAction::triggered, this, &TimeTrackerWidget::newSubTask);
 
     QAction* deleteTask = actionCollection->addAction(QStringLiteral("delete_task"));
