@@ -114,7 +114,9 @@ QString Event::relatedTo() const
 
 void Event::addComment(const QString &comment)
 {
-    m_comments.append(comment);
+    if (m_comments.isEmpty() || comment != m_comments.last()) {
+        m_comments.append(comment);
+    }
 }
 
 QStringList Event::comments() const
