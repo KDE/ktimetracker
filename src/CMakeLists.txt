@@ -85,7 +85,7 @@ target_link_libraries(ktimetracker libktimetracker)
 
 install(TARGETS ktimetracker ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.ktimetracker.ktimetracker.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
-install(PROGRAMS ktimetracker.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(PROGRAMS org.kde.ktimetracker.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
