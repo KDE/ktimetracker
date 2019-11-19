@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
                         i18nc("@info:credit", "Developer"),
                         QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
-
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("ktimetracker")));
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
