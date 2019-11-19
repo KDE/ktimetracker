@@ -121,7 +121,6 @@ int main(int argc, char *argv[])
                         QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
 
-    KDBusService dbusService(KDBusService::Unique);
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
@@ -130,6 +129,8 @@ int main(int argc, char *argv[])
 
     parser.process(app);
     aboutData.processCommandLine(&parser);
+
+    KDBusService dbusService(KDBusService::Unique);
 
     const QUrl &url = getFileUrl(parser);
 
