@@ -100,11 +100,9 @@ url="https://userbase.kde.org/KTimeTracker">https://userbase.kde.org/KTimeTracke
 <para>Type <command>ktimetracker</command> at a command prompt or select
 <guimenuitem>Personal Time Tracker</guimenuitem> from the <menuchoice>
 <guimenu>Applications</guimenu><guisubmenu>Utilities</guisubmenu> 
-</menuchoice> group in the <guimenu>KDE start
-menu</guimenu>. The standard &Qt; and &kde; command options are
-available, and can be listed by entering
-<userinput><command>ktimetracker</command> <option>--help</option></userinput>
-at the command line.</para>
+</menuchoice> group in the <guimenu>Plasma Application Launcher</guimenu>.
+The generic &Qt; and &kf5-full; command options are available, see man pages qt5options and kf5options.
+</para>
 
 <para>&ktimetracker; provides an additional command option that allows you to enter
 the name of the iCalendar file that is used to store your labor history.
@@ -146,7 +144,7 @@ To create a subtask, highlight the parent task and select
 
 <menuchoice>
 <shortcut>
-<keycombo action="simul">&Ctrl;&Alt;<keycap>N</keycap></keycombo>
+<keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>
 </shortcut>
 <guimenu>Task</guimenu>
 <guimenuitem>New Subtask...</guimenuitem>
@@ -175,7 +173,7 @@ week.</para> </informalexample>
 task, double-click on the task.  To stop logging time, double-click
 the task again.  Active tasks display a small clock in the <guilabel>Session
 Time</guilabel> column.</para>
-	
+
 <para>Another visual clue of logging activity is the &ktimetracker; system tray icon.
 When a task is active, the second hand in the icon moves.  If you rest the
 mouse pointer over this icon, the name of the active task will display in a
@@ -232,13 +230,13 @@ Desktop 1 active, &ktimetracker; automatically stops the project 2 task and star
 the project 1 task.</para>
 </informalexample>
 
-<para>To associate a task with a one or more desktops, select
+<para>To associate a task with one or more desktops, select
 <menuchoice>
 <shortcut>
 <keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
 </shortcut>
 <guimenu>Task</guimenu>
-<guimenuitem>Edit...</guimenuitem>
+<guimenuitem>Properties</guimenuitem>
 </menuchoice>.
 
 Turn on <guilabel>Auto Tracking</guilabel> and select the desktop or desktops
@@ -274,12 +272,12 @@ of the settings dialog.</para>
 </screenshot>
 
 <variablelist>
-<varlistentry> <term><guibutton>Continue timing</guibutton></term>
+<varlistentry> <term><guibutton>Continue Timing</guibutton></term>
 <listitem><para>Apply the idle time to all active timers and keep them
 running.</para><para>You were working on the task(s) while your computer
 was idle and still are.</para></listitem></varlistentry>
 
-<varlistentry><term><guibutton>Revert timing</guibutton></term>
+<varlistentry><term><guibutton>Revert Timing</guibutton></term>
 <listitem><para>Subtract the amount of idle time from all active timers and
 stop them.</para><para>You were not working on the task(s) while your
 computer was idle and you are still not.</para></listitem></varlistentry>
@@ -321,9 +319,13 @@ and under budget.</para>
 
 <sect2 id="dbus"><title>&DBus;</title>
 
-<para>&DBus; is the mechanism &kde; programs use to communicate with each
-other.  A &kde; program provides a list of functions that other programs (a Bash
-script, for example) can use.</para>
+<para>&ktimetracker; does support numerous methods that can be used with &DBus;.
+</para>
+<para>There are two ways to use the &DBus; interface: &Qt;'s &GUI;
+<application>qdbusviewer</application>
+and the command line
+<application>qdbus</application>.
+</para>
 
 <example><title>Bash script that echoes &ktimetracker;'s version</title>
 <programlisting>
@@ -351,28 +353,35 @@ qdbus org.kde.ktimetracker /KTimeTracker 2>/dev/null || echo "ktimetracker not r
 format.  To export totals, select
 <menuchoice>
 <guimenu>File</guimenu>
-<guisubmenu>Export</guisubmenu>
-<guimenuitem>Export Times...</guimenuitem>
-</menuchoice> and &ktimetracker; displays the following export dialog:</para>
+<guimenuitem>Export...</guimenuitem>
+</menuchoice> and &ktimetracker; displays the export dialog.
+</para>
+
+<para>
+Select option <guibutton>Times as CSV</guibutton> in group <guilabel>Report Type</guilabel>.
+The dialog is going to look as follows:
+</para>
 
 <screenshot>
-<screeninfo>&ktimetracker; CSV Export Dialog</screeninfo>
+<screeninfo>Export Times as CSV</screeninfo>
 <mediaobject>
 <imageobject>
-<imagedata fileref="csvexport.png" format="PNG"/>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
 </imageobject>
 <textobject>
-<phrase>&ktimetracker; CSV Export Dialog</phrase>
+<phrase>Export Times as CSV</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para>Enter the filename that you would like to export the data to, and modify the
-other dialog defaults if necessary.  Click
-<guibutton>Export</guibutton> and &ktimetracker; exports the totals for all tasks to
-the file you selected.</para>
-<para>Use the <guibutton>Export to Clipboard</guibutton> button to export the times to the clipboard</para>
-<para>Here is an example of the output format:</para>
+<para>Modify the dialog defaults if necessary. You can preview
+the CSV output on the right side of the dialog.
+Click <guibutton>Save As...</guibutton> and &ktimetracker; exports the totals for all tasks to
+the file you enter in a file dialog.</para>
+
+<para>Use the <guibutton>Copy to Clipboard</guibutton> button to export the times to the clipboard.</para>
+
+<para>Here is another example of the output format:</para>
 
 <literallayout>
 <computeroutput>
@@ -404,14 +413,19 @@ Time</guilabel> and the fourth is the <guilabel>Total Time</guilabel>.
 <menuchoice>
 <guimenu>File</guimenu>
 <guisubmenu>Export</guisubmenu>
-<guimenuitem>Export History...</guimenuitem>
-</menuchoice> and &ktimetracker; displays the same export dialog as shown above.</para>
+<guimenuitem>Export...</guimenuitem>
+</menuchoice> and &ktimetracker; displays the same export dialog as shown above.
+Select option <guibutton>History as CSV</guibutton> in group <guilabel>Report Type</guilabel>.
+</para>
 
-<para>Enter the filename that you would like to export the data to, and select a date
-range that you want the task history to cover.  Modify the other dialog defaults if
-necessary.  Click <guibutton>Export</guibutton> and &ktimetracker; exports the
-task history to the chosen file.</para>
-<para>Use the <guibutton>Export to Clipboard</guibutton> button to export the history to the clipboard.</para>
+<para>
+Select a date range that you want the task history to cover.
+Modify the dialog defaults if necessary.
+You can preview the CSV output on the right side of the dialog.
+Click <guibutton>Save As...</guibutton> and &ktimetracker; exports the totals for all tasks to
+the file you enter in a file dialog.</para>
+
+<para>Use the <guibutton>Copy to Clipboard</guibutton> button to export the times to the clipboard.</para>
 
 <para>Here is an example of the output format:</para>
 
@@ -522,19 +536,31 @@ subtasks, as well as its own accumulated time.</para>
 
 <itemizedlist>
 
-<listitem><para>1997-2000 &Sirtaj.Singh.Kang;
-&Sirtaj.Singh.Kang.mail;.</para>  </listitem> 
+<listitem><para>
+1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;
+</para></listitem>
 
-<listitem><para>2001-2002 Tomas Pospisek
-<email>tpo_deb@sourcepole.ch</email></para></listitem>
+<listitem><para>
+2001-2002 Tomas Pospisek <email>tpo_deb@sourcepole.ch</email>
+</para></listitem>
 
-<listitem><para>2003-2004 Mark
-Bucciarelli <email>mark@hubcapconsulting.com</email></para></listitem>
+<listitem><para>
+2003-2004 Mark Bucciarelli <email>mark@hubcapconsulting.com</email>
+</para></listitem>
+
+<listitem><para>
+2004-2011 Thorsten St&auml;rk <email>dev@staerk.de</email>
+</para></listitem>
+
+<listitem><para>
+2019 Alexander Potashev <email>aspotashev@gmail.com</email>
+</para></listitem>
 
 </itemizedlist>
 
 <para>Contributors (in alphabetical order)</para>
 <itemizedlist>
+<listitem><para>Alexander Potashev <email>aspotashev@gmail.com</email></para></listitem>
 <listitem><para>Allen Winter <email>winter@kde.org</email></para></listitem>
 <listitem><para>&David.Faure; &David.Faure.mail;</para></listitem>
 <listitem><para>&Espen.Sand; <email>espen@kde.org</email></para></listitem>
@@ -577,16 +603,15 @@ which is that it is based on the Xt toolkit.</para>
 <title>D</title> 
 <glossentry id="gloss-dbus">
 <glossterm>&DBus;</glossterm>
-<glossdef><para>The interprocess communication protocol used in &kde;.  Short
-for Desktop Bus.</para></glossdef>
+<glossdef><para>An interprocess communication protocol. Short for Desktop Bus.</para></glossdef>
 </glossentry>
 
 <glossentry id="gloss-desktop">
 <glossterm>desktop</glossterm>
-<glossdef><para>&GNU;/&Linux;, FreeBSD and other systems that run X-Windows have
+<glossdef><para>&GNU;/&Linux;, FreeBSD and other systems that run X.Org Server have
 multiple desktops.  You can typically have four different desktops installed by
 default.  Each desktop can display its own set of programs and files.  When
-&kde; first starts up, the desktop you see is Desktop 1.  If you press
+&kde; &plasma; first starts up, the desktop you see is Desktop 1.  If you press
 <keycombo action="simul">&Ctrl;<keycap>F2</keycap></keycombo>, you will see
 Desktop 2.  Pressing <keycombo
 action="simul">&Ctrl;<keycap>F1</keycap></keycombo> will bring back Desktop
@@ -617,7 +642,7 @@ Time</guilabel></glossterm> <glossdef><para>The time spent on the task
 since the session began.</para></glossdef> </glossentry> 
 
 <glossentry id="gloss-system-tray"> <glossterm>system tray</glossterm>
-<glossdef><para>The system tray is in the bar that (by default) appears at
+<glossdef><para>The system tray is in the bar that (by default in &kde; &plasma;) appears at
 the bottom of the screen.  In this system tray <inlinemediaobject>
 <imageobject> <imagedata fileref="systray.png"
 format="PNG"/></imageobject> </inlinemediaobject> the &ktimetracker; icon is on the far
