@@ -124,9 +124,6 @@ int main(int argc, char *argv[])
     KDBusService dbusService(KDBusService::Unique);
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
-    //PORTING SCRIPT: adapt aboutdata variable if necessary
     aboutData.setupCommandLine(&parser);
 
     parser.addPositionalArgument(QStringLiteral("url"), i18nc("@info:shell", "Path or URL to iCalendar file to open."));
