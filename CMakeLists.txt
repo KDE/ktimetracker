@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-set(KDEPIM_VERSION_NUMBER "5.10.80")
-project(ktimetracker VERSION ${KDEPIM_VERSION_NUMBER})
+set(APP_VERSION_NUMBER "4.99.70")
+project(ktimetracker VERSION ${APP_VERSION_NUMBER})
 
 set(KF5_MIN_VERSION "5.54.0")
 
@@ -16,7 +16,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
-ecm_setup_version(${KDEPIM_VERSION_NUMBER}
+ecm_setup_version(${APP_VERSION_NUMBER}
     VARIABLE_PREFIX KTIMETRACKER
     VERSION_HEADER src/ktimetracker-version.h
 )
