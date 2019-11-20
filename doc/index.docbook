@@ -9,66 +9,62 @@
 <book id="ktimetracker" lang="&language;">
 
 <bookinfo id="ktimetrackerinfo">
-<title>The &ktimetracker; Handbook</title>
+  <title>The &ktimetracker; Handbook</title>
 
-<authorgroup>
-<author>
-<firstname>Jonathan</firstname>
-<surname>Singer</surname>
-<affiliation>
-<address>&Jonathan.Singer.mail;</address>
-</affiliation>
-</author>
+  <authorgroup>
+    <author>
+      <firstname>Jonathan</firstname>
+      <surname>Singer</surname>
+      <affiliation><address>&Jonathan.Singer.mail;</address></affiliation>
+    </author>
 
-<author>
-<firstname>Mark</firstname>
-<surname>Bucciarelli</surname>
-<affiliation>
-<address><email>mark@hubcapconsulting.com</email></address>
-</affiliation>
-</author>
+    <author>
+      <firstname>Mark</firstname>
+      <surname>Bucciarelli</surname>
+      <affiliation><address><email>mark@hubcapconsulting.com</email></address></affiliation>
+    </author>
 
-<author>
-<firstname>Sirtaj</firstname>
-<othername>Singh</othername>
-<surname>Kang</surname>
-<affiliation><address>&Sirtaj.Singh.Kang.mail;</address></affiliation>
-</author>
+    <author>
+      <firstname>Sirtaj</firstname>
+      <othername>Singh</othername>
+      <surname>Kang</surname>
+      <affiliation><address>&Sirtaj.Singh.Kang.mail;</address></affiliation>
+    </author>
 
-<othercredit role="reviewer">
-<firstname>Lauri</firstname>
-<surname>Watts</surname>
-<contrib>Reviewer</contrib>
-<affiliation><address>&Lauri.Watts.mail;</address></affiliation>
-</othercredit>
-<!-- TRANS:ROLES_OF_TRANSLATORS -->
-</authorgroup>
+    <othercredit role="reviewer">
+      <firstname>Lauri</firstname>
+      <surname>Watts</surname>
+      <contrib>Reviewer</contrib>
+      <affiliation><address>&Lauri.Watts.mail;</address></affiliation>
+    </othercredit>
 
-<copyright>
-<year>2000-2004</year>
-<holder>&Jonathan.Singer;</holder>
-</copyright>
+    <!-- TRANS:ROLES_OF_TRANSLATORS -->
+  </authorgroup>
 
-<copyright>
-<year>2004-2005</year>
-<holder>Mark Bucciarelli</holder>
-</copyright>
+  <copyright>
+    <year>2000-2004</year>
+    <holder>&Jonathan.Singer;</holder>
+  </copyright>
 
-<legalnotice>&FDLNotice;</legalnotice>
+  <copyright>
+    <year>2004-2005</year>
+    <holder>Mark Bucciarelli</holder>
+  </copyright>
 
-<date>2013-05-26</date>
-<releaseinfo>4.11 pre (&kde; 4.11)</releaseinfo>
+  <legalnotice>&FDLNotice;</legalnotice>
 
-<abstract><para>&ktimetracker; tracks time spent on various tasks.</para></abstract>
+  <date>2019-11-19</date>
+  <releaseinfo>5.0</releaseinfo>
 
-<keywordset>
-<keyword>KDE</keyword>
-<keyword>ktimetracker</keyword>
-<keyword>time</keyword>
-<keyword>tracker</keyword>
-<keyword>project</keyword>
-</keywordset>
+  <abstract><para>&ktimetracker; tracks time spent on various tasks.</para></abstract>
 
+  <keywordset>
+    <keyword>KDE</keyword>
+    <keyword>ktimetracker</keyword>
+    <keyword>time</keyword>
+    <keyword>tracker</keyword>
+    <keyword>project</keyword>
+  </keywordset>
 </bookinfo>
 
 <chapter id="introduction">
@@ -801,4 +797,5 @@ sgml-indent-data:nil
 End:
 
 // vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
 -->
