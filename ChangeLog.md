@@ -40,32 +40,34 @@ KArm 1.5 (Feb, 2005 -- KDE 3.4 Release)
 
 Karm 1.4 (Aug 19, 2004 -- KDE 3.3 Release)
 --------
-- add confirm messagebox on "reset all times" action
-- improve messagebox text for "copy totals to clipboard" action
-- add preference setting to allow user to turn off logging
-- add CSV export
-- don't crash if timer running when you change storage file
-- if storage read-only, disable actions that change data
-- honor user's timezone
-- save tree state (open/closed) between sessions)
-- edit task dialog: show full desktop name, not just desktop number
-- sort data in time columns numerically, not alphabetically
-- allow negative task times
+- Add confirm messagebox on "reset all times" action
+- Improve messagebox text for "copy totals to clipboard" action
+- Add preference setting to allow user to turn off logging
+- Add CSV export
+- Don't crash if timer running when you change storage file
+- If storage read-only, disable actions that change data
+- Honor user's timezone
+- Save tree state (open/closed) between sessions
+- Edit task dialog: show full desktop name, not just desktop number
+- Sort data in time columns numerically, not alphabetically
+- Allow negative task times
 - Modify desktop tracking so timers delay before switching when desktop
-switches.  So if user switches rapidly, time log won't fill up with lots of
+  switches. So if user switches rapidly, time log won't fill up with lots of
 useless entries.
+- Advanced locking (bug #71292)
 
 KArm 1.3 (Feb 3, 2004 -- KDE 3.2 Release)
 --------
-- desktop tracking added
-- active task indication in the system tray
-- uses iCalendar format for data storage
-- stores start/stop history
-- settings dialog converted to icon format
-- "Reset Session Times" re-reversed and renamed to
-  "Start New Session" for clarity
-- new timecard report
-- ability to mark tasks as complete
+- Desktop tracking added
+- Active task indication in the system tray
+- Uses iCalendar format for data storage
+- Stores start/stop history
+- Settings dialog converted to icon format
+- "Reset Session Times" re-reversed and renamed to "Start New Session" for
+  clarity.
+- New timecard report
+- Ability to mark tasks as complete
+- Basic locking
 
 KArm 1.2
 --------
