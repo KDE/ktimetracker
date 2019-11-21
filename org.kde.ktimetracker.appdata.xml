@@ -18,6 +18,7 @@
   <name xml:lang="nl">KTimeTracker</name>
   <name xml:lang="pl">KTimeTracker</name>
   <name xml:lang="pt">KTimeTracker</name>
+  <name xml:lang="pt-BR">KTimeTracker</name>
   <name xml:lang="ru">KTimeTracker</name>
   <name xml:lang="sk">KTimeTracker</name>
   <name xml:lang="sv">Ktimerracker</name>
@@ -111,6 +112,7 @@
       <caption xml:lang="nl">KTimeTracker</caption>
       <caption xml:lang="pl">KTimeTracker</caption>
       <caption xml:lang="pt">KTimeTracker</caption>
+      <caption xml:lang="pt-BR">KTimeTracker</caption>
       <caption xml:lang="ru">KTimeTracker</caption>
       <caption xml:lang="sk">KTimeTracker</caption>
       <caption xml:lang="sv">Ktimerracker</caption>
