@@ -247,7 +247,7 @@ void TaskView::refresh()
 //    int i = 0;
 //    while (itemAt(++i) && itemAt(i)->depth() == 0){};
     //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
-    // FIXME workaround? seems that the QItemDelegate for the procent column only
+    // FIXME workaround? seems that the QItemDelegate for the percent column only
     // works properly if rootIsDecorated == true.
     m_tasksWidget->setRootIsDecorated(true);
 

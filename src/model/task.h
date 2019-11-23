@@ -39,7 +39,7 @@ class EventsModel;
  * A "Task" object stores information about a task such as it's name,
  * total and session times.
  *
- * It can log when the task is started, stoped or deleted.
+ * It can log when the task is started, stopped or deleted.
  *
  * If a task is associated with some desktop's activity it can remember that
  * too.

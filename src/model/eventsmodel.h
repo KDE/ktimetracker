@@ -57,12 +57,12 @@ public:
      * task end date is set to start time + delta. If the time is negative,
      * the end date is set to the start time.
      *
-     * In both cases (postive or negative delta), we create a custom iCalendar
+     * In both cases (positive or negative delta), we create a custom iCalendar
      * property that stores the delta (in seconds). This property is called
      * X-KDE-ktimetracker-duration.
      *
      * Note that the ktimetracker UI allows the user to change both the session and
-     * the total task time, and this routine does not account for all posibile
+     * the total task time, and this routine does not account for all possible
      * cases. For example, it is possible for the user to do something crazy
      * like add 10 minutes to the session time and subtract 50 minutes from
      * the total time. Although this change violates a basic law of physics,

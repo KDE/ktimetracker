@@ -116,7 +116,7 @@ public:
     /**
      * Deliver if all events of a task have an endtime
      *
-     * If ktimetracker has been quitted with one task running, it needs to resumeRunning().
+     * If ktimetracker has been quit with one task running, it needs to resumeRunning().
      * This function delivers if an enddate of an event has not yet been stored.
      *
      * @param task        The task to be examined

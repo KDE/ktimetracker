@@ -104,7 +104,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
             if (tit != v->end()) {
                 m_desktopTracker[i].erase( tit );
             }
-            // if the task was priviously tracking this desktop then
+            // if the task was previously tracking this desktop then
             // emit a signal that is not tracking it any more
             if (i == KWindowSystem::currentDesktop() - 1) {
                 emit leftActiveDesktop(task);
@@ -133,7 +133,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
                 if (tit != v.end()) {
                     // not in start vector any more
                     v.erase(tit); // so we delete it from desktopTracker
-                    // if the task was priviously tracking this desktop then
+                    // if the task was previously tracking this desktop then
                     // emit a signal that is not tracking it any more
                     if (i == KWindowSystem::currentDesktop() - 1) {
                         emit leftActiveDesktop(task);

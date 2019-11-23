@@ -59,7 +59,7 @@ PlannerParser::PlannerParser(ProjectModel *projectModel, Task *currentTask)
 
 bool PlannerParser::startDocument()
 {
-    m_withinTasks = false; // becomes true as soon as parsing occurres <tasks>
+    m_withinTasks = false; // becomes true as soon as parsing occurs <tasks>
     return true;
 }
 
