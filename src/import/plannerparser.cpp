@@ -63,7 +63,9 @@ bool PlannerParser::startDocument()
     return true;
 }
 
-bool PlannerParser::startElement(const QString&, const QString&, const QString &qName, const QXmlAttributes &att)
+bool PlannerParser::startElement(
+    const QString& /*namespaceURI*/, const QString& /*localName*/,
+    const QString &qName, const QXmlAttributes &att)
 {
     qDebug() << "entering function";
     QString taskName;
@@ -102,7 +104,7 @@ bool PlannerParser::startElement(const QString&, const QString&, const QString &
     return true;
 }
 
-bool PlannerParser::endElement(const QString&, const QString&, const QString& qName)
+bool PlannerParser::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
 {
     // only <task>s within <tasks> increased level, so only decrease for <task>s within <tasks>
     if (m_withinTasks) {

@@ -47,7 +47,7 @@ public:
     {
     }
 
-    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &) const override
+    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex & /*index*/) const override
     {
         auto* editor = new QDateTimeEdit(parent);
         editor->setAutoFillBackground(true);
@@ -78,7 +78,7 @@ public:
         }
     }
 
-    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const override
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &/*index*/) const override
     {
         editor->setGeometry(option.rect);
     }

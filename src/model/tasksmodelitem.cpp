@@ -63,7 +63,7 @@ void TasksModelItem::insertChild(int index, TasksModelItem *child) {
     }
 }
 
-QVariant TasksModelItem::data(int, int) const
+QVariant TasksModelItem::data(int /*unused*/, int /*unused*/) const
 {
     return {};
 }

@@ -162,7 +162,7 @@ int TasksModel::rowCount(const QModelIndex &parent) const
     return 0;
 }
 
-int TasksModel::columnCount(const QModelIndex&) const
+int TasksModel::columnCount(const QModelIndex& /*parent*/) const
 {
     return m_headerLabels.size();
 }
@@ -280,7 +280,7 @@ QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int ro
     return QAbstractItemModel::headerData(section, orientation, role);
 }
 
-void TasksModel::setActiveIcon(int)
+void TasksModel::setActiveIcon(int /*unused*/)
 {
     // TODO: only touch those tasks that are currently running
     for (auto *task : getAllItems()) {

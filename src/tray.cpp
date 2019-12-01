@@ -79,7 +79,7 @@ void TrayIcon::stopClock()
     m_animation->stop();
 }
 
-void TrayIcon::setActiveIcon(int)
+void TrayIcon::setActiveIcon(int /*unused*/)
 {
     setIconByPixmap(QIcon(m_animation->currentPixmap()));
 }
