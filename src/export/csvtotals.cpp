@@ -100,10 +100,10 @@ QString exportCSVToString(TasksModel *tasksModel, const ReportCriteria &rc)
             retval += delim;
         }
 
-        retval += delim + formatTime(task->sessionTime(), rc.decimalMinutes)
-                  + delim + formatTime(task->time(), rc.decimalMinutes)
-                  + delim + formatTime(task->totalSessionTime(), rc.decimalMinutes)
-                  + delim + formatTime(task->totalTime(), rc.decimalMinutes)
+        retval += delim + formatTime(static_cast<double>(task->sessionTime()), rc.decimalMinutes)
+                  + delim + formatTime(static_cast<double>(task->time()), rc.decimalMinutes)
+                  + delim + formatTime(static_cast<double>(task->totalSessionTime()), rc.decimalMinutes)
+                  + delim + formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes)
                   + '\n';
     }
 

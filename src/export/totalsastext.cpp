@@ -44,12 +44,12 @@ static void printTask(Task *task, QString &s, int level, const ReportCriteria &r
     s += buf.fill(' ', level);
     if (!rc.sessionTimes) {
         s += QString(QString::fromLatin1("%1    %2"))
-            .arg(formatTime(task->totalTime(), rc.decimalMinutes), timeWidth)
+            .arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth)
             .arg(task->name());
     } else {
         // print session times
         s += QString(QString::fromLatin1("%1    %2"))
-            .arg(formatTime(task->totalSessionTime(), rc.decimalMinutes), timeWidth)
+            .arg(formatTime(static_cast<double>(task->totalSessionTime()), rc.decimalMinutes), timeWidth)
             .arg(task->name());
     }
     s += cr;
