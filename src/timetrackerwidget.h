@@ -187,7 +187,7 @@ public Q_SLOTS:
 
     QStringList activeTasks() const;
     bool isActive( const QString &taskId ) const;
-    bool isTaskNameActive( const QString &taskId ) const;
+    bool isTaskNameActive(const QString &taskName) const;
     void saveAll();
     void quit();
     // END of dbus slots group

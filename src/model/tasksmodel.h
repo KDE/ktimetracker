@@ -51,7 +51,7 @@ public:
 
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     QModelIndex index(TasksModelItem *item, int column) const;
-    QModelIndex parent(const QModelIndex &index) const override;
+    QModelIndex parent(const QModelIndex &child) const override;
 
     int rowCount(const QModelIndex &parent) const override;
     int columnCount(const QModelIndex &parent) const override;

@@ -57,7 +57,7 @@ public:
     Task(
         const QString& taskname, const QString& taskdescription, int64_t minutes, int64_t sessionTime,
         const DesktopList& desktops, ProjectModel *projectModel, Task* parentTask);
-    Task(const KCalendarCore::Todo::Ptr &incident, ProjectModel *projectModel);
+    Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel);
 
     /* destructor */
     ~Task() override = default;
@@ -265,7 +265,7 @@ public:
     /**
      *  Load the todo passed in with this tasks info.
      */
-    KCalendarCore::Todo::Ptr asTodo(const KCalendarCore::Todo::Ptr &calendar) const;
+    KCalendarCore::Todo::Ptr asTodo(const KCalendarCore::Todo::Ptr& todo) const;
 
     /**
      *  Add a comment to this task.
