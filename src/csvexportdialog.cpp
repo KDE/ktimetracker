@@ -91,7 +91,7 @@ void CSVExportDialog::exportToClipboard()
 
 void CSVExportDialog::exportToFile()
 {
-    const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export as CSV"));
+    const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export to File"));
     if (url.isEmpty()) {
         return;
     }

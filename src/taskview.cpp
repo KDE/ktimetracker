@@ -212,7 +212,7 @@ void TaskView::load(const QUrl &url)
             tasksModel->index(tasksModel->topLevelItem(0), 0)));
 
         if (!m_desktopTracker->startTracking().isEmpty()) {
-            KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work"));
+            KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work."));
         }
         refresh();
     }
