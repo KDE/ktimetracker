@@ -42,7 +42,7 @@ static const QString dateTimeFormat = QStringLiteral("yyyy-MM-dd HH:mm:ss");
 class HistoryWidgetDelegate : public QItemDelegate
 {
 public:
-    explicit HistoryWidgetDelegate(QObject *parent = nullptr)
+    explicit HistoryWidgetDelegate(QObject *parent)
         : QItemDelegate(parent)
     {
     }
