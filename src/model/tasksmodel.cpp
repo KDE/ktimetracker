@@ -228,8 +228,9 @@ QList<TasksModelItem *> TasksModel::getAllItems()
             res.append(item);
         }
 
-        for (int c = 0; c < item->m_children.count(); ++c)
+        for (int c = 0; c < item->m_children.count(); ++c) {
             stack.push(item->m_children.at(c));
+        }
     }
 
     return res;

@@ -140,7 +140,9 @@ void EventsModel::changeTime(const Task* task, int64_t deltaSeconds)
     // Don't use duration, as ICalFormatImpl::writeIncidence never writes a
     // duration, even though it looks like it's used in event.cpp.
     end = task->startTime();
-    if ( deltaSeconds > 0 ) end = task->startTime().addSecs(deltaSeconds);
+    if (deltaSeconds > 0) {
+        end = task->startTime().addSecs(deltaSeconds);
+    }
     e->setDtEnd(end);
 
     // Use a custom property to keep a record of negative durations

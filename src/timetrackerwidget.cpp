@@ -829,7 +829,9 @@ void TimeTrackerWidget::stopTimerFor(const QString &taskId)
 void TimeTrackerWidget::stopAllTimersDBUS()
 {
     TaskView *taskView = currentTaskView();
-    if (taskView) taskView->stopAllTimers();
+    if (taskView) {
+        taskView->stopAllTimers();
+    }
 }
 
 QString TimeTrackerWidget::exportCSVFile(
@@ -838,14 +840,22 @@ QString TimeTrackerWidget::exportCSVFile(
 {
     TaskView *taskView = currentTaskView();
 
-    if ( !taskView ) return "";
+    if (!taskView) {
+        return "";
+    }
+
     ReportCriteria rc;
-    rc.from = QDate::fromString( from );
-    if ( rc.from.isNull() )
-        rc.from = QDate::fromString( from, Qt::ISODate );
-    rc.to = QDate::fromString( to );
-    if ( rc.to.isNull() )
-        rc.to = QDate::fromString( to, Qt::ISODate );
+
+    rc.from = QDate::fromString(from);
+    if (rc.from.isNull()) {
+        rc.from = QDate::fromString(from, Qt::ISODate);
+    }
+
+    rc.to = QDate::fromString(to);
+    if (rc.to.isNull()) {
+        rc.to = QDate::fromString(to, Qt::ISODate);
+    }
+
     rc.reportType = ( ReportCriteria::REPORTTYPE )type;
     rc.decimalMinutes = decimalMinutes;
     rc.allTasks = allTasks;
