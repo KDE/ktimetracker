@@ -374,7 +374,8 @@ void TaskView::clearActiveTasks()
 void TaskView::stopAllTimers(const QDateTime& when)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QProgressDialog dialog(i18n("Stopping timers..."), i18n("Cancel"), 0, m_activeTasks.count(), m_tasksWidget);
+    QProgressDialog dialog(
+        i18nc("@info:progress", "Stopping timers..."), i18n("Cancel"), 0, m_activeTasks.count(), m_tasksWidget);
     if (m_activeTasks.count() > 1) {
         dialog.show();
     }
@@ -664,11 +665,9 @@ make this task running and selected. */
         int response = KMessageBox::Continue;
         if (KTimeTrackerSettings::promptDelete()) {
             response = KMessageBox::warningContinueCancel(nullptr,
-                i18n( "Are you sure you want to delete the selected"
-                " task and its entire history?\n"
-                "NOTE: all subtasks and their history will also "
-                "be deleted."),
-                i18n( "Deleting Task"), KStandardGuiItem::del());
+                i18n("Are you sure you want to delete the selected task and its entire history?\n"
+                     "Note: All subtasks and their history will also be deleted."),
+                i18nc("@title:window", "Deleting Task"), KStandardGuiItem::del());
         }
 
         if (response == KMessageBox::Continue) {

@@ -148,7 +148,7 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
     // Context menu for task progress percentage
     m_popupPercentageMenu = new QMenu(this);
     for (int i = 0; i <= 100; i += 10) {
-        QString label = i18n("%1 %" , i);
+        QString label = i18nc("@item:inmenu Task progress", "%1 %", i);
         m_percentage[m_popupPercentageMenu->addAction(label)] = i;
     }
     connect(m_popupPercentageMenu, &QMenu::triggered, this, &TasksWidget::slotSetPercentage);
@@ -159,16 +159,16 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
         QString label;
         switch (i) {
             case 0:
-                label = i18n("unspecified");
+                label = i18nc("@item:inmenu Task priority", "unspecified");
                 break;
             case 1:
-                label = i18nc("combox entry for highest priority", "1 (highest)");
+                label = i18nc("@item:inmenu Task priority", "1 (highest)");
                 break;
             case 5:
-                label = i18nc("combox entry for medium priority", "5 (medium)");
+                label = i18nc("@item:inmenu Task priority", "5 (medium)");
                 break;
             case 9:
-                label = i18nc("combox entry for lowest priority", "9 (lowest)");
+                label = i18nc("@item:inmenu Task priority", "9 (lowest)");
                 break;
             default:
                 label = QString("%1").arg(i);

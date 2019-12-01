@@ -31,13 +31,13 @@
 TasksModel::TasksModel()
     : m_rootItem(new TasksModelItem(this, nullptr))
     , m_headerLabels{
-        i18n("Task Name"),
-        i18n("Session Time"),
-        i18n("Time"),
-        i18n("Total Session Time"),
-        i18n("Total Time"),
-        i18n("Priority"),
-        i18n("Percent Complete")}
+        i18nc("@title:column", "Task Name"),
+        i18nc("@title:column", "Session Time"),
+        i18nc("@title:column", "Time"),
+        i18nc("@title:column", "Total Session Time"),
+        i18nc("@title:column", "Total Time"),
+        i18nc("@title:column", "Priority"),
+        i18nc("@title:column", "Percent Complete")}
     , m_clockAnimation(nullptr)
     , m_dragCutTaskId()
 {
@@ -186,9 +186,9 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
             break;
         case Qt::WhatsThisRole:
             if (index.column() == 0) {
-                return i18n("The task name is what you call the task, it can be chosen freely.");
+                return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
             } else if (index.column() == 1) {
-                return i18n("The session time is the time since you last chose \"start new session.\"");
+                return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
             }
             break;
         case Qt::DecorationRole: {
@@ -262,13 +262,13 @@ QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int ro
         case Qt::WhatsThisRole:
             switch (section) {
                 case 0:
-                    return i18n("The task name is what you call the task, it can be chosen freely.");
+                    return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
                 case 1:
-                    return i18n("The session time is the time since you last chose \"start new session.\"");
+                    return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
                 case 3:
-                    return i18n("The total session time is the session time of this task and all its subtasks.");
+                    return i18nc("@info:whatsthis", "The total session time is the session time of this task and all its subtasks.");
                 case 4:
-                    return i18n("The total time is the time of this task and all its subtasks.");
+                    return i18nc("@info:whatsthis", "The total time is the time of this task and all its subtasks.");
                 default:
                     break;
             }

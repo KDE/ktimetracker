@@ -81,7 +81,7 @@ EditTimeDialog::EditTimeDialog(
     editLayout->addWidget(new QLabel(i18n("Current Time:")), 0, 1);
 
     m_timeEditor = new KPluralHandlingSpinBox(editGroup);
-    m_timeEditor->setSuffix(ki18ncp("@item:valuesuffix", " minute", " minutes"));
+    m_timeEditor->setSuffix(ki18ncp("@item:valuesuffix Change Time By: ... minute(s)", " minute", " minutes"));
     m_timeEditor->setRange(-24 * 3600, 24 * 3600);
     m_timeEditor->setMinimumWidth(200);
     m_timeEditor->setFocus();
@@ -96,7 +96,8 @@ EditTimeDialog::EditTimeDialog(
     m_buttonBox = new QDialogButtonBox(this);
     m_buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
-    auto *historyButton = new QPushButton(QIcon::fromTheme("document-edit"), i18n("Edit History..."), m_buttonBox);
+    auto *historyButton = new QPushButton(
+        QIcon::fromTheme("document-edit"), i18nc("@action:button", "Edit History..."), m_buttonBox);
     historyButton->setToolTip(i18n("To change this task's time, you have to edit its event history"));
     m_buttonBox->addButton(historyButton, QDialogButtonBox::HelpRole);
 

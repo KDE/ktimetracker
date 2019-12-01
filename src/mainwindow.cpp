@@ -50,7 +50,7 @@ MainWindow::MainWindow(const QUrl &url)
 
     // Setup our actions
     auto* configureAction = new QAction(this);
-    configureAction->setText(i18n("Configure KTimeTracker..."));
+    configureAction->setText(i18nc("@action:inmenu", "Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
 
     connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);

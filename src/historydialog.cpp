@@ -136,7 +136,7 @@ QString HistoryDialog::listAllEvents()
 
         auto *item = new QTableWidgetItem(parent->name());
         item->setFlags(Qt::ItemIsEnabled);
-        item->setWhatsThis(i18n("You can change this task's comment, start time and end time."));
+        item->setWhatsThis(i18nc("@info:whatsthis", "You can change this task's comment, start time and end time."));
         m_ui.historytablewidget->setItem(row, 0, item);
 
         QDateTime start = event->dtStart();

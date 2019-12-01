@@ -34,8 +34,12 @@ SearchLine::SearchLine(QWidget *parent)
     , m_queuedSearches(0)
     , m_queuedSearchText()
 {
-    m_lineEdit->setPlaceholderText(i18n("Search or add task"));
-    m_lineEdit->setWhatsThis(i18n("This is a combined field. As long as you do not type ENTER, it acts as a filter. Then, only tasks that match your input are shown. As soon as you type ENTER, your input is used as name to create a new task."));
+    m_lineEdit->setPlaceholderText(i18nc("@info:placeholder", "Search or add task"));
+    m_lineEdit->setWhatsThis(i18nc(
+        "@info:whatsthis",
+        "This is a combined field. As long as you do not press Enter, it acts as a filter. "
+        "Then, only tasks that match your input are shown. "
+        "As soon as you press Enter, your input is used as name to create a new task."));
     m_lineEdit->installEventFilter(this);
     connect(m_lineEdit, &QLineEdit::textChanged, this, &SearchLine::queueSearch);
 

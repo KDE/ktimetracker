@@ -40,7 +40,7 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView*
     connect(m_widget->header(), &QHeaderView::customContextMenuRequested, this, &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
 
     m_contextMenu = new QMenu(m_widget);
-    m_contextMenu->addSection(i18n("Columns"));
+    m_contextMenu->addSection(i18nc("@title:menu", "Columns"));
     connect(m_contextMenu, &QMenu::triggered, this, &TreeViewHeaderContextMenu::slotTriggered);
     connect(m_contextMenu, &QMenu::aboutToShow, this, &TreeViewHeaderContextMenu::slotAboutToShow);
     updateActions();

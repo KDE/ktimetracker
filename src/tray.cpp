@@ -92,7 +92,7 @@ void TrayIcon::updateToolTip(const QList<Task*> &activeTasks)
     }
 
     QFontMetrics fm(QToolTip::font());
-    const QString continued = i18n(", ...");
+    const QString continued = i18nc("ellipsis to truncate long list of tasks", ", ...");
     const int buffer = fm.boundingRect(continued).width();
     const int desktopWidth = QApplication::desktop()->screenGeometry(associatedWidget()).width();
     const int maxWidth = desktopWidth - buffer;
@@ -107,7 +107,7 @@ void TrayIcon::updateToolTip(const QList<Task*> &activeTasks)
     for (int i = 0; i < activeTasks.count(); ++i) {
         Task* task = activeTasks.at(i);
         if (i > 0) {
-            s += i18n(", ") + task->name();
+            s += i18nc("separator between task names", ", ") + task->name();
         } else {
             s += task->name();
         }
