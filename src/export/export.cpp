@@ -20,14 +20,14 @@
 
 #include "export.h"
 
-#include <KLocalizedString>
 #include <KIO/StoredTransferJob>
+#include <KLocalizedString>
 
-#include "model/projectmodel.h"
-#include "csvtotals.h"
 #include "csvhistory.h"
-#include "totalsastext.h"
+#include "csvtotals.h"
 #include "ktt_debug.h"
+#include "model/projectmodel.h"
+#include "totalsastext.h"
 
 QString exportToString(ProjectModel *model, Task *currentTask, const ReportCriteria &rc)
 {

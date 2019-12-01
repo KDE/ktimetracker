@@ -27,8 +27,8 @@
 #include <KLocalizedString>
 
 #include "ktimetrackerutility.h"        // formatTime()
-#include "model/tasksmodel.h"
 #include "model/task.h"
+#include "model/tasksmodel.h"
 
 static const int taskWidth = 40;
 static const int timeWidth = 6;

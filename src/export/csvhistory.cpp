@@ -22,11 +22,11 @@
 
 #include "csvhistory.h"
 
-#include "model/projectmodel.h"
-#include "model/tasksmodel.h"
-#include "model/task.h"
 #include "ktimetrackerutility.h"
 #include "ktt_debug.h"
+#include "model/projectmodel.h"
+#include "model/task.h"
+#include "model/tasksmodel.h"
 
 static int todaySeconds(const QDate &date, const KCalendarCore::Event::Ptr &event)
 {

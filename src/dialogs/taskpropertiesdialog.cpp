@@ -20,15 +20,15 @@
 
 #include "taskpropertiesdialog.h"
 
+#include <QCheckBox>
+#include <QDialogButtonBox>
 #include <QGridLayout>
 #include <QGroupBox>
-#include <QPushButton>
 #include <QLabel>
-#include <QPlainTextEdit>
 #include <QLineEdit>
-#include <QDialogButtonBox>
+#include <QPlainTextEdit>
+#include <QPushButton>
 #include <QScrollArea>
-#include <QCheckBox>
 
 #include <KLocalizedString>
 #include <KPluralHandlingSpinBox>

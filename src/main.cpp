@@ -20,24 +20,24 @@
  *
  */
 
-#include <QFile>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
-#include <QStandardPaths>
 #include <QApplication>
-#include <QFileInfo>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
 #include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QStandardPaths>
 
 #include <KAboutData>
-#include <KLocalizedString>
 #include <KDBusService>
+#include <KLocalizedString>
 
 #include "desktoplist.h"
-#include "mainwindow.h"
-#include "timetrackerstorage.h"
-#include "model/task.h"
-#include "ktt_debug.h"
 #include "ktimetracker-version.h"
+#include "ktt_debug.h"
+#include "mainwindow.h"
+#include "model/task.h"
+#include "timetrackerstorage.h"
 
 // Deliver the path/URL to the iCalendar file to be used
 QUrl getFileUrl(const QCommandLineParser &parser)

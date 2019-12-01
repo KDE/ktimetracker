@@ -23,30 +23,30 @@
 #include "taskview.h"
 
 #include <QMouseEvent>
-#include <QProgressDialog>
 #include <QPointer>
+#include <QProgressDialog>
 #include <QSortFilterProxyModel>
 #include <QTimer>
 
 #include <KMessageBox>
 
-#include "dialogs/edittimedialog.h"
-#include "dialogs/taskpropertiesdialog.h"
-#include "model/task.h"
-#include "model/tasksmodel.h"
-#include "model/eventsmodel.h"
-#include "widgets/taskswidget.h"
 #include "csvexportdialog.h"
 #include "desktoptracker.h"
+#include "dialogs/edittimedialog.h"
+#include "dialogs/taskpropertiesdialog.h"
+#include "export/export.h"
+#include "focusdetector.h"
+#include "historydialog.h"
 #include "idletimedetector.h"
 #include "import/plannerparser.h"
 #include "ktimetracker.h"
-#include "export/export.h"
-#include "treeviewheadercontextmenu.h"
-#include "focusdetector.h"
 #include "ktimetrackerutility.h"
-#include "historydialog.h"
 #include "ktt_debug.h"
+#include "model/eventsmodel.h"
+#include "model/task.h"
+#include "model/tasksmodel.h"
+#include "treeviewheadercontextmenu.h"
+#include "widgets/taskswidget.h"
 
 void deleteEntry(const QString& key)
 {

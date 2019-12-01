@@ -22,17 +22,17 @@
 
 #include "csvexportdialog.h"
 
-#include <QPushButton>
+#include <QClipboard>
 #include <QFileDialog>
 #include <QFontDatabase>
-#include <QClipboard>
+#include <QPushButton>
 
 #include <KMessageBox>
 
-#include "taskview.h"
-#include "widgets/taskswidget.h"
 #include "export/export.h"
 #include "ktt_debug.h"
+#include "taskview.h"
+#include "widgets/taskswidget.h"
 
 CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
     : QDialog(parent)

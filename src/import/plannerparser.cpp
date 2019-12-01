@@ -36,8 +36,8 @@ test cases:
 
 #include "plannerparser.h"
 
-#include "model/task.h"
 #include "ktt_debug.h"
+#include "model/task.h"
 
 PlannerParser::PlannerParser(ProjectModel *projectModel, Task *currentTask)
     : m_withinTasks(false)

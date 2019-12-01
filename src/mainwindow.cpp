@@ -22,19 +22,19 @@
 
 #include "mainwindow.h"
 
+#include <QGuiApplication>
 #include <QMenu>
 #include <QStatusBar>
-#include <QGuiApplication>
 
+#include <KActionCollection>
 #include <KLocalizedString>
 #include <KXMLGUIFactory>
-#include <KActionCollection>
 
 #include "ktimetracker.h"
-#include "tray.h"
+#include "ktt_debug.h"
 #include "model/task.h"
 #include "timetrackerwidget.h"
-#include "ktt_debug.h"
+#include "tray.h"
 
 MainWindow::MainWindow(const QUrl &url)
     : KXmlGuiWindow(nullptr)

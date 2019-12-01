@@ -20,9 +20,9 @@
 
 #include "tasksmodel.h"
 
-#include <QStack>
-#include <QPixmap>
 #include <QMovie>
+#include <QPixmap>
+#include <QStack>
 
 #include <KLocalizedString>
 

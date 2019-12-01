@@ -31,19 +31,19 @@
 
 #include "timetrackerstorage.h"
 
-#include <QLockFile>
 #include <QDateTime>
+#include <QLockFile>
 #include <QMultiHash>
 
 #include <KDirWatch>
 #include <KLocalizedString>
 
-#include "model/task.h"
+#include "ktt_debug.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
+#include "model/task.h"
 #include "model/tasksmodel.h"
 #include "taskview.h"
-#include "ktt_debug.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 

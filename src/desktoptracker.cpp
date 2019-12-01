@@ -26,9 +26,9 @@
 
 #include <KWindowSystem>
 
-#include "ktt_debug.h"
 #include "ktimetracker.h"
 #include "ktimetrackerutility.h"
+#include "ktt_debug.h"
 
 DesktopTracker::DesktopTracker()
     : m_desktopTracker()

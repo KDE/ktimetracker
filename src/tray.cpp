@@ -29,18 +29,18 @@
 
 #include "tray.h"
 
-#include <QToolTip>
-#include <QMenu>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QMenu>
 #include <QMovie>
+#include <QToolTip>
 
 #include <KLocalizedString>
 
+#include "ktt_debug.h"
 #include "mainwindow.h"
 #include "model/task.h"
 #include "timetrackerwidget.h"
-#include "ktt_debug.h"
 
 TrayIcon::TrayIcon(MainWindow* parent)
     : KStatusNotifierItem(parent)

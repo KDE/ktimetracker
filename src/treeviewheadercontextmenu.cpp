@@ -23,8 +23,8 @@
 #include "treeviewheadercontextmenu.h"
 
 #include <QAction>
-#include <QTreeView>
 #include <QHeaderView>
+#include <QTreeView>
 
 #include <KLocalizedString>
 

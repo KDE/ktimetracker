@@ -22,8 +22,8 @@
 
 #include <KLocalizedString>
 
-#include "task.h"
 #include "ktt_debug.h"
+#include "task.h"
 
 EventsModel::EventsModel()
     : m_events()

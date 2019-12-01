@@ -24,9 +24,9 @@
 
 #include <QApplication>
 
-#include "model/tasksmodel.h"
-#include "model/task.h"
 #include "ktimetrackerutility.h"
+#include "model/task.h"
+#include "model/tasksmodel.h"
 
 QString exportCSVToString(TasksModel *tasksModel, const ReportCriteria &rc)
 {

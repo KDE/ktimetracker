@@ -22,8 +22,8 @@
 
 #include <KLocalizedString>
 
-#include "ktt_debug.h"
 #include "ktimetrackerutility.h"
+#include "ktt_debug.h"
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 

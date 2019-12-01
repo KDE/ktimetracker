@@ -24,9 +24,9 @@
 
 #include <QDateTime>
 
+#include <KIdleTime>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KIdleTime>
 
 #include "ktimetrackerutility.h" // SecsPerMinute
 #include "ktt_debug.h"

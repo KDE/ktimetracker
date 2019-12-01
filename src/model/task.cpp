@@ -24,13 +24,13 @@
 
 #include <KCalendarCore/CalFormat>
 
-#include "model/projectmodel.h"
-#include "model/eventsmodel.h"
-#include "model/tasksmodel.h"
-#include "ktimetrackerutility.h"
 #include "ktimetracker.h"
-#include "timetrackerstorage.h"
+#include "ktimetrackerutility.h"
 #include "ktt_debug.h"
+#include "model/eventsmodel.h"
+#include "model/projectmodel.h"
+#include "model/tasksmodel.h"
+#include "timetrackerstorage.h"
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 

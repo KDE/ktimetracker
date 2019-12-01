@@ -22,20 +22,20 @@
 
 #include "historydialog.h"
 
-#include <QItemDelegate>
 #include <QDateTimeEdit>
+#include <QItemDelegate>
 #include <QPushButton>
 
 #include <KMessageBox>
 #include <KStandardGuiItem>
 
 #include "file/filecalendar.h"
+#include "ktt_debug.h"
 #include "model/event.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
-#include "model/tasksmodel.h"
 #include "model/task.h"
-#include "ktt_debug.h"
+#include "model/tasksmodel.h"
 
 static const QString dateTimeFormat = QStringLiteral("yyyy-MM-dd HH:mm:ss");
 

@@ -20,13 +20,13 @@
 
 #include "edittimedialog.h"
 
+#include <QDialogButtonBox>
 #include <QGridLayout>
 #include <QGroupBox>
-#include <QPushButton>
 #include <QLabel>
-#include <QPlainTextEdit>
 #include <QLineEdit>
-#include <QDialogButtonBox>
+#include <QPlainTextEdit>
+#include <QPushButton>
 
 #include <KLocalizedString>
 #include <KPluralHandlingSpinBox>

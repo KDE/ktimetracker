@@ -20,21 +20,21 @@
 
 #include "taskswidget.h"
 
-#include <QStyledItemDelegate>
 #include <QApplication>
-#include <QPainter>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QPainter>
 #include <QSortFilterProxyModel>
+#include <QStyledItemDelegate>
 
-#include <KSharedConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KSharedConfig>
 
 #include "ktimetracker.h"
+#include "ktt_debug.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
-#include "ktt_debug.h"
 
 bool readBoolEntry(const QString& key)
 {

@@ -21,12 +21,14 @@
  */
 
 #include "ktimetrackerconfigdialog.h"
+
 #include <QHBoxLayout>
 #include <QPushButton>
+
+#include "ktimetracker.h"
 #include "ui_cfgbehavior.h"
 #include "ui_cfgdisplay.h"
 #include "ui_cfgstorage.h"
-#include "ktimetracker.h"
 
 KTimeTrackerBehaviorConfig::KTimeTrackerBehaviorConfig(QWidget *parent)
     : KCModule(parent)

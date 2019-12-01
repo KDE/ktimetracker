@@ -20,10 +20,10 @@
 
 #include "projectmodel.h"
 
-#include "tasksmodel.h"
-#include "task.h"
-#include "eventsmodel.h"
 #include "event.h"
+#include "eventsmodel.h"
+#include "task.h"
+#include "tasksmodel.h"
 
 ProjectModel::ProjectModel()
     : m_tasksModel(new TasksModel())

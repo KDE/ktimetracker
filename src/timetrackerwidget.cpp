@@ -30,24 +30,24 @@
 #include <KMessageBox>
 #include <KStandardAction>
 
+#include "csvexportdialog.h"
 #include "export/export.h"
-#include "model/task.h"
-#include "model/eventsmodel.h"
-#include "model/tasksmodel.h"
-#include "model/projectmodel.h"
-#include "settings/ktimetrackerconfigdialog.h"
-#include "widgets/searchline.h"
 #include "historydialog.h"
 #include "idletimedetector.h"
-#include "ktimetrackerutility.h"
-#include "ktimetracker.h"
-#include "reportcriteria.h"
-#include "taskview.h"
-#include "widgets/taskswidget.h"
 #include "ktimetracker-version.h"
-#include "mainwindow.h"
+#include "ktimetracker.h"
+#include "ktimetrackerutility.h"
 #include "ktt_debug.h"
-#include "csvexportdialog.h"
+#include "mainwindow.h"
+#include "model/eventsmodel.h"
+#include "model/projectmodel.h"
+#include "model/task.h"
+#include "model/tasksmodel.h"
+#include "reportcriteria.h"
+#include "settings/ktimetrackerconfigdialog.h"
+#include "taskview.h"
+#include "widgets/searchline.h"
+#include "widgets/taskswidget.h"
 
 TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     : QWidget(parent)

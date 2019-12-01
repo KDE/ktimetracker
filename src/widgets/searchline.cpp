@@ -20,10 +20,10 @@
 
 #include "searchline.h"
 
-#include <QHBoxLayout>
-#include <QLineEdit>
 #include <QEvent>
+#include <QHBoxLayout>
 #include <QKeyEvent>
+#include <QLineEdit>
 #include <QTimer>
 
 #include <KLocalizedString>
