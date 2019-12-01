@@ -25,11 +25,6 @@
 #include "ktt_debug.h"
 #include "task.h"
 
-EventsModel::EventsModel()
-    : m_events()
-{
-}
-
 void EventsModel::load(const KCalendarCore::Event::List &events)
 {
     clear();

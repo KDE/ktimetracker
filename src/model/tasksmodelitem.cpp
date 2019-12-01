@@ -89,7 +89,6 @@ int TasksModelItem::childCount() const
 TasksModelItem::TasksModelItem(TasksModel *model, TasksModelItem *parent)
     : m_model(model)
     , m_parent(parent)
-    , m_children()
 {
 }
 

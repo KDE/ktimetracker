@@ -26,7 +26,7 @@
 class ICalFormatKIO : public KCalendarCore::ICalFormat
 {
 public:
-    ICalFormatKIO();
+    ICalFormatKIO() = default;
     ~ICalFormatKIO() override = default;
 
     /**

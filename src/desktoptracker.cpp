@@ -31,9 +31,8 @@
 #include "ktt_debug.h"
 
 DesktopTracker::DesktopTracker()
-    : m_desktopTracker()
     // currentDesktop will return 0 if no window manager is started
-    , m_previousDesktop(std::max(KWindowSystem::currentDesktop() - 1, 0))
+    : m_previousDesktop(std::max(KWindowSystem::currentDesktop() - 1, 0))
     , m_desktopCount(KWindowSystem::numberOfDesktops())
     // currentDesktop will return 0 if no window manager is started
     , m_desktop(std::max(KWindowSystem::currentDesktop() - 1, 0))

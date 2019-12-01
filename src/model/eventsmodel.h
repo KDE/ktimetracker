@@ -32,7 +32,7 @@ class EventsModel : public QObject
     Q_OBJECT
 
 public:
-    EventsModel();
+    EventsModel() = default;
     ~EventsModel() override;
 
     void load(const KCalendarCore::Event::List &events);

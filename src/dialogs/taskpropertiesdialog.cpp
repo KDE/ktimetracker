@@ -42,8 +42,7 @@ TaskPropertiesDialog::TaskPropertiesDialog(
     const DesktopList &desktops)
     : QDialog(parent),
       m_nameText(nullptr),
-      m_descText(nullptr),
-      m_trackingDesktops()
+      m_descText(nullptr)
 {
     setWindowTitle(caption);
     setModal(true);

@@ -28,11 +28,6 @@
 
 #include "ktt_debug.h"
 
-ICalFormatKIO::ICalFormatKIO()
-    : KCalendarCore::ICalFormat()
-{
-}
-
 bool ICalFormatKIO::load(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString)
 {
     qCDebug(KTT_LOG) << "ICalFormatKIO::load:" << urlString;

@@ -49,7 +49,6 @@ const QByteArray eventAppName = QByteArray("ktimetracker");
 
 TimeTrackerStorage::TimeTrackerStorage()
     : m_model(nullptr)
-    , m_url()
     , m_taskView(nullptr)
 {
 }

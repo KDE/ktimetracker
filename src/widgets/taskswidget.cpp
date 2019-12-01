@@ -128,9 +128,7 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
     , m_filterProxyModel(filterProxyModel)
     , m_tasksModel(tasksModel)
     , m_popupPercentageMenu(nullptr)
-    , m_percentage()
     , m_popupPriorityMenu(nullptr)
-    , m_priority()
 {
     setModel(filterProxyModel);
 
