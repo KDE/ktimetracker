@@ -55,7 +55,7 @@ public:
     };
 
     Task(const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
-        DesktopList desktops, ProjectModel *projectModel, Task* parentTask);
+        const DesktopList& desktops, ProjectModel *projectModel, Task* parentTask);
     Task(const KCalendarCore::Todo::Ptr &incident, ProjectModel *projectModel);
 
     /* destructor */
@@ -321,7 +321,8 @@ protected:
 private:
     /** initialize a task */
     void init(
-        const QString& taskname, const QString& taskdescription, long minutes, long sessionTime, QString sessionStartTiMe,
+        const QString& taskname, const QString& taskdescription, long minutes, long sessionTime,
+        const QString& sessionStartTiMe,
         const DesktopList& desktops, int percent_complete, int priority);
 
     bool m_isRunning;

@@ -35,7 +35,7 @@
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
 Task::Task(const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
-           DesktopList desktops, ProjectModel *projectModel, Task *parentTask)
+           const DesktopList& desktops, ProjectModel *projectModel, Task *parentTask)
     : TasksModelItem(projectModel->tasksModel(), parentTask)
     , m_projectModel(projectModel)
 {
@@ -82,7 +82,8 @@ int Task::depth()
 }
 
 void Task::init(
-    const QString& taskName, const QString& taskDescription, long minutes, long sessionTime, QString sessionStartTiMe,
+    const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
+    const QString& sessionStartTiMe,
     const DesktopList& desktops, int percent_complete, int priority)
 {
     m_isRunning = false;
