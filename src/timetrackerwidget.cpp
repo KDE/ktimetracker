@@ -856,7 +856,7 @@ QString TimeTrackerWidget::exportCSVFile(
         rc.to = QDate::fromString(to, Qt::ISODate);
     }
 
-    rc.reportType = ( ReportCriteria::REPORTTYPE )type;
+    rc.reportType = static_cast<ReportCriteria::REPORTTYPE>(type);
     rc.decimalMinutes = decimalMinutes;
     rc.allTasks = allTasks;
     rc.delimiter = delimiter;
