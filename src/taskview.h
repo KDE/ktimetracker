@@ -221,7 +221,6 @@ private: // member variables
     FocusDetector *m_focusDetector;
 
     TasksWidget *m_tasksWidget;
-    QObject *m_editTimeDialog;
 
 private:
     void addTimeToActiveTasks(int minutes, bool save_data = true);
