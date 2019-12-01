@@ -180,7 +180,7 @@ void TaskView::load(const QUrl &url)
     }
 
     // Table header context menu
-    TreeViewHeaderContextMenu *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
+    auto *headerContextMenu = new TreeViewHeaderContextMenu(this, m_tasksWidget, QVector<int>{0});
     connect(headerContextMenu, &TreeViewHeaderContextMenu::columnToggled, this, &TaskView::slotColumnToggled);
 
     connect(tasksModel, &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);

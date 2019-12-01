@@ -420,7 +420,7 @@ void TimeTrackerWidget::showSettingsDialog()
         return;
     }
 
-    KConfigDialog *dialog = new KConfigDialog(this, "settings", KTimeTrackerSettings::self());
+    auto *dialog = new KConfigDialog(this, "settings", KTimeTrackerSettings::self());
     dialog->setFaceType(KPageDialog::List);
     dialog->addPage(new KTimeTrackerBehaviorConfig(dialog), i18nc("@title:tab", "Behavior"), QStringLiteral("preferences-other"));
     dialog->addPage(new KTimeTrackerDisplayConfig(dialog), i18nc("@title:tab", "Appearance"), QStringLiteral("preferences-desktop-theme"));

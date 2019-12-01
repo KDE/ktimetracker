@@ -35,7 +35,7 @@ KTimeTrackerBehaviorConfig::KTimeTrackerBehaviorConfig(QWidget *parent)
 {
     auto *lay = new QHBoxLayout(this);
     auto *behaviorUi = new Ui::BehaviorPage;
-    QWidget *behaviorPage = new QWidget;
+    auto *behaviorPage = new QWidget;
     behaviorUi->setupUi(behaviorPage);
     lay->addWidget(behaviorPage);
     addConfig(KTimeTrackerSettings::self(), behaviorPage);
@@ -47,7 +47,7 @@ KTimeTrackerStorageConfig::KTimeTrackerStorageConfig(QWidget *parent)
 {
     auto *lay = new QHBoxLayout(this);
     auto *storageUi = new Ui::StoragePage;
-    QWidget *storagePage = new QWidget;
+    auto *storagePage = new QWidget;
     storageUi->setupUi(storagePage);
     lay->addWidget(storagePage);
     addConfig(KTimeTrackerSettings::self(), storagePage);
@@ -59,7 +59,7 @@ KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig(QWidget *parent)
 {
     auto *lay = new QHBoxLayout(this);
     auto *displayUi = new Ui::DisplayPage;
-    QWidget *displayPage = new QWidget;
+    auto *displayPage = new QWidget;
     displayUi->setupUi(displayPage);
     lay->addWidget(displayPage);
     addConfig(KTimeTrackerSettings::self(), displayPage);
