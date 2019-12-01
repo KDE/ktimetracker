@@ -54,7 +54,8 @@ public:
         SortRole = Qt::UserRole,
     };
 
-    Task(const QString& taskname, const QString& taskdescription, int64_t minutes, int64_t sessionTime,
+    Task(
+        const QString& taskname, const QString& taskdescription, int64_t minutes, int64_t sessionTime,
         const DesktopList& desktops, ProjectModel *projectModel, Task* parentTask);
     Task(const KCalendarCore::Todo::Ptr &incident, ProjectModel *projectModel);
 
@@ -86,91 +87,91 @@ public:
 
     //@{ timing related functions
 
-      /**
-       * Change task time.  Adds minutes to both total time and session time by adding an event.
-       *
-       *  @param minutes        minutes to add to - may be negative
-       *  @param storage        Pointer to TimeTrackerStorage instance.
-       *                        If zero, don't save changes.
-       */
-      void changeTime(int64_t minutes, EventsModel *eventsModel);
+    /**
+     * Change task time.  Adds minutes to both total time and session time by adding an event.
+     *
+     *  @param minutes        minutes to add to - may be negative
+     *  @param storage        Pointer to TimeTrackerStorage instance.
+     *                        If zero, don't save changes.
+     */
+    void changeTime(int64_t minutes, EventsModel *eventsModel);
 
-      /**
-       * Add minutes to time and session time by adding an event, and write to storage.
-       *
-       *  @param minutesSession   minutes to add to task session time
-       *  @param minutes          minutes to add to task time
-       *  @param storage          Pointer to TimeTrackerStorage instance.
-       *                          If zero, don't save changes.
-       */
-      void changeTimes(int64_t minutesSession, int64_t minutes, EventsModel *eventsModel);
+    /**
+     * Add minutes to time and session time by adding an event, and write to storage.
+     *
+     *  @param minutesSession   minutes to add to task session time
+     *  @param minutes          minutes to add to task time
+     *  @param storage          Pointer to TimeTrackerStorage instance.
+     *                          If zero, don't save changes.
+     */
+    void changeTimes(int64_t minutesSession, int64_t minutes, EventsModel *eventsModel);
 
-      /** adds minutes to total and session time by adding an event
-       *
-       *  @param minutesSession   minutes to add to task total session time
-       *  @param minutes          minutes to add to task total time
-       */
-      void changeTotalTimes(int64_t minutesSession, int64_t minutes);
+    /** adds minutes to total and session time by adding an event
+     *
+     *  @param minutesSession   minutes to add to task total session time
+     *  @param minutes          minutes to add to task total time
+     */
+    void changeTotalTimes(int64_t minutesSession, int64_t minutes);
 
-      /** Adds minutes to the time of the task and the total time of its supertasks. This does not add an event.
-       *
-       *  @param minutes          minutes to add to the time
-       */
-      void addTime(int64_t minutes);
+    /** Adds minutes to the time of the task and the total time of its supertasks. This does not add an event.
+     *
+     *  @param minutes          minutes to add to the time
+     */
+    void addTime(int64_t minutes);
 
-      /** Adds minutes to the total time of the task and its supertasks. This does not add an event.
-       *
-       *  @param minutes          minutes to add to the time
-       */
-      void addTotalTime(int64_t minutes);
+    /** Adds minutes to the total time of the task and its supertasks. This does not add an event.
+     *
+     *  @param minutes          minutes to add to the time
+     */
+    void addTotalTime(int64_t minutes);
 
-      /** Adds minutes to the task's session time and its supertasks' total session time. This does not add an event.
-       *
-       *  @param minutes          minutes to add to the session time
-       */
-      void addSessionTime(int64_t minutes);
+    /** Adds minutes to the task's session time and its supertasks' total session time. This does not add an event.
+     *
+     *  @param minutes          minutes to add to the session time
+     */
+    void addSessionTime(int64_t minutes);
 
-      /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
-       *
-       *  @param minutes          minutes to add to the session time
-       */
-      void addTotalSessionTime(int64_t minutes);
+    /** Adds minutes to the task's and its supertasks' total session time. This does not add an event.
+     *
+     *  @param minutes          minutes to add to the session time
+     */
+    void addTotalSessionTime(int64_t minutes);
 
-      /** Sets the time (not session time). This does not add an event.
-       *
-       *  @param minutes          minutes to set time to
-       *
-       */
-      QString setTime(int64_t minutes);
+    /** Sets the time (not session time). This does not add an event.
+     *
+     *  @param minutes          minutes to set time to
+     *
+     */
+    QString setTime(int64_t minutes);
 
-      /** Sets the total time, does not change the parent's total time.
-        This means the parent's total time can run out of sync.
-        */
-      void setTotalTime(int64_t minutes) { m_totalTime = minutes; }
+    /** Sets the total time, does not change the parent's total time.
+      This means the parent's total time can run out of sync.
+      */
+    void setTotalTime(int64_t minutes) { m_totalTime = minutes; }
 
-      /** Sets the total session time, does not change the parent's total session time.
-        This means the parent's total session time can run out of sync.
-        */
-      void setTotalSessionTime(int64_t minutes) { m_totalSessionTime = minutes; }
+    /** Sets the total session time, does not change the parent's total session time.
+      This means the parent's total session time can run out of sync.
+      */
+    void setTotalSessionTime(int64_t minutes) { m_totalSessionTime = minutes; }
 
-      /** A recursive function to calculate the total time/session time of a task. */
-      void recalculateTotalTimesSubtree();
+    /** A recursive function to calculate the total time/session time of a task. */
+    void recalculateTotalTimesSubtree();
 
-      /** Sets the session time.
-       * Set the session time without changing totalTime nor sessionTime.
-       * Do not change the parent's totalTime.
-       * Do not add an event.
-       * See also: changeTimes(long, long) and resetTimes
-       *
-       *  @param minutes          minutes to set session time to
-       *
-       */
-      QString setSessionTime(int64_t minutes);
+    /** Sets the session time.
+     * Set the session time without changing totalTime nor sessionTime.
+     * Do not change the parent's totalTime.
+     * Do not add an event.
+     * See also: changeTimes(long, long) and resetTimes
+     *
+     *  @param minutes          minutes to set session time to
+     *
+     */
+    QString setSessionTime(int64_t minutes);
 
-      /**
-       * Reset all times to 0 and adjust parent task's totalTiMes.
-       */
-      void resetTimes();
+    /**
+     * Reset all times to 0 and adjust parent task's totalTiMes.
+     */
+    void resetTimes();
 
     /** @return time in minutes */
     int64_t time() const { return m_time; }
@@ -180,28 +181,28 @@ public:
     int64_t totalSessionTime() const { return m_totalSessionTime; }
     QDateTime sessionStartTiMe() const;
 
-      /**
-       * Return time the task was started.
-       */
-      QDateTime startTime() const;
+    /**
+     * Return time the task was started.
+     */
+    QDateTime startTime() const;
 
-      /** sets session time to zero. */
-      void startNewSession();
+    /** sets session time to zero. */
+    void startNewSession();
     //@}
 
     //@{ desktop related functions
 
-      void setDesktopList(const DesktopList& desktopList);
-      DesktopList desktops() const;
+    void setDesktopList(const DesktopList& desktopList);
+    DesktopList desktops() const;
 
-      QString getDesktopStr() const;
+    QString getDesktopStr() const;
     //@}
 
     //@{ name related functions
 
-      /** sets the name of the task
-       *  @param name    a pointer to the name. A deep copy will be made.
-       */
+    /** sets the name of the task
+     *  @param name    a pointer to the name. A deep copy will be made.
+     */
     void setName(const QString &name);
 
     /** sets the description of the task */
@@ -256,7 +257,8 @@ public:
      *  You read the todo, extract its custom properties (like session time)
      *  and use these data to initialize the task.
      */
-    bool parseIncidence(const KCalendarCore::Incidence::Ptr &, int64_t& minutes,
+    bool parseIncidence(
+        const KCalendarCore::Incidence::Ptr &, int64_t& minutes,
         int64_t& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
         int& percent_complete, int& priority);
 
