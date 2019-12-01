@@ -37,9 +37,10 @@ EditTimeDialog::EditTimeDialog(
     QWidget *parent,
     const QString &name, const QString &description,
     const int minutes)
-    : QDialog(parent),
-      m_initialMinutes(minutes),
-      m_editHistoryRequested(false)
+    : QDialog(parent)
+    , m_initialMinutes(minutes)
+    , m_changeMinutes(0)
+    , m_editHistoryRequested(false)
 {
     setWindowTitle(i18nc("@title:window", "Edit Task Time"));
     setModal(true);
