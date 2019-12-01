@@ -688,7 +688,7 @@ void TaskView::markTaskAsComplete()
     emit updateButtons();
 }
 
-void TaskView::subtractTime(int minutes)
+void TaskView::subtractTime(int64_t minutes)
 {
     addTimeToActiveTasks(-minutes, false); // subtract time in memory, but do not store it
 }

@@ -166,7 +166,7 @@ public Q_SLOTS:
     void markTaskAsIncomplete();
 
     /** Subtracts time from all active tasks, and does not log event. */
-    void subtractTime(int minutes);
+    void subtractTime(int64_t minutes);
     /** receiving signal that a task is being deleted */
     void taskAboutToBeRemoved(const QModelIndex &parent, int first, int last);
 

@@ -55,7 +55,7 @@ Q_SIGNALS:
        shown, and until the user answers the dialog.
        @param minutes Minutes to subtract.
     **/
-    void subtractTime(int minutes);
+    void subtractTime(int64_t minutes);
 
     /**
         Tells the listener to stop timing
