@@ -275,7 +275,7 @@ QString TaskView::reFreshTimes()
             QDateTime eventStart = event->dtStart();
             QDateTime eventEnd = event->dtEnd();
 
-            const int duration = event->duration() / 60;
+            const int64_t duration = event->duration() / 60;
             task->addTime(duration);
             qCDebug(KTT_LOG) << "duration is" << duration;
 
@@ -496,8 +496,8 @@ void TaskView::newTask(const QString &caption, Task *parent)
             desktopList.clear();
         }
 
-        long total = 0;
-        long session = 0;
+        int64_t total = 0;
+        int64_t session = 0;
         auto *task = addTask(taskName, taskDescription, total, session, desktopList, parent);
         save();
         if (!task) {
@@ -514,7 +514,7 @@ void TaskView::newTask(const QString &caption, Task *parent)
 }
 
 Task *TaskView::addTask(
-    const QString& taskname, const QString& taskdescription, long total, long session,
+    const QString& taskname, const QString& taskdescription, int64_t total, int64_t session,
     const DesktopList& desktops, Task* parent)
 {
     qCDebug(KTT_LOG) << "Entering function; taskname =" << taskname;

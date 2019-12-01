@@ -73,7 +73,7 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
     QString retval;
     QString line;
     QString buf;
-    long sum;
+    int64_t sum;
     bool justThisTask = !rc.allTasks;
 
     line.fill('-', reportWidth);

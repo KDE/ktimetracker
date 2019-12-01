@@ -73,7 +73,7 @@ public:
      * @param task   The task the change is for.
      * @param delta  Change in task time, in seconds.  Can be negative.
      */
-    void changeTime(const Task* task, long deltaSeconds);
+    void changeTime(const Task* task, int64_t deltaSeconds);
 
     /**
      * Book time to a task.
@@ -91,7 +91,7 @@ public:
      * @return true if event was added, false if not (if, for example, the
      * attempted file lock failed).
      */
-    bool bookTime(const Task *task, const QDateTime &startDateTime, long durationInSeconds);
+    bool bookTime(const Task *task, const QDateTime &startDateTime, int64_t durationInSeconds);
 
     void startTask(const Task *task);
     void stopTask(const Task *task, const QDateTime &when);

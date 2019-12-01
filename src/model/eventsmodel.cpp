@@ -135,7 +135,7 @@ static KCalendarCore::Event::Ptr baseEvent(const Task *task)
     return e;
 }
 
-void EventsModel::changeTime(const Task* task, long deltaSeconds)
+void EventsModel::changeTime(const Task* task, int64_t deltaSeconds)
 {
     qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
     QDateTime end;
@@ -154,7 +154,7 @@ void EventsModel::changeTime(const Task* task, long deltaSeconds)
     addEvent(e);
 }
 
-bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
+bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, int64_t durationInSeconds)
 {
     qCDebug(KTT_LOG) << "Entering function";
 

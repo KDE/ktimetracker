@@ -270,7 +270,7 @@ QString TimeTrackerStorage::save()
 
 //----------------------------------------------------------------------------
 
-bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, long durationInSeconds)
+bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, int64_t durationInSeconds)
 {
     return eventsModel()->bookTime(task, startDateTime, durationInSeconds);
 }

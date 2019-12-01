@@ -146,7 +146,7 @@ public:
      */
     QString save();
 
-    bool bookTime(const Task *task, const QDateTime &startDateTime, long durationInSeconds);
+    bool bookTime(const Task *task, const QDateTime &startDateTime, int64_t durationInSeconds);
 
 private Q_SLOTS:
     void onFileModified();

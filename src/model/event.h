@@ -58,8 +58,8 @@ public:
     void addComment(const QString &comment);
     QStringList comments() const;
 
-    void setDuration(long seconds);
-    long duration() const;
+    void setDuration(int64_t seconds);
+    int64_t duration() const;
 
     /**
      *  Load the event passed in with this event's info.
@@ -75,7 +75,7 @@ private:
     QString m_uid;
     QString m_relatedTo;
     QStringList m_comments;
-    long m_duration;
+    int64_t m_duration;
 };
 
 #endif // KTIMETRACKER_EVENT_H

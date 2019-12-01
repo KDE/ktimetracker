@@ -34,7 +34,7 @@
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Task::Task(const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
+Task::Task(const QString& taskName, const QString& taskDescription, int64_t minutes, int64_t sessionTime,
            const DesktopList& desktops, ProjectModel *projectModel, Task *parentTask)
     : TasksModelItem(projectModel->tasksModel(), parentTask)
     , m_projectModel(projectModel)
@@ -56,10 +56,10 @@ Task::Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel)
 {
     projectModel->tasksModel()->addChild(this);
 
-    long minutes = 0;
+    int64_t minutes = 0;
     QString name;
     QString description;
-    long sessionTime = 0;
+    int64_t sessionTime = 0;
     QString sessionStartTiMe;
     int percent_complete = 0;
     int priority = 0;
@@ -82,7 +82,7 @@ int Task::depth()
 }
 
 void Task::init(
-    const QString& taskName, const QString& taskDescription, long minutes, long sessionTime,
+    const QString& taskName, const QString& taskDescription, int64_t minutes, int64_t sessionTime,
     const QString& sessionStartTiMe,
     const DesktopList& desktops, int percent_complete, int priority)
 {
@@ -223,13 +223,13 @@ void Task::setDesktopList(const DesktopList& desktopList)
     m_desktops = desktopList;
 }
 
-void Task::addTime(long minutes)
+void Task::addTime(int64_t minutes)
 {
     m_time += minutes;
     this->addTotalTime(minutes);
 }
 
-void Task::addTotalTime(long minutes)
+void Task::addTotalTime(int64_t minutes)
 {
     m_totalTime += minutes;
     if (parentTask()) {
@@ -237,13 +237,13 @@ void Task::addTotalTime(long minutes)
     }
 }
 
-void Task::addSessionTime(long minutes)
+void Task::addSessionTime(int64_t minutes)
 {
     m_sessionTime += minutes;
     this->addTotalSessionTime(minutes);
 }
 
-void Task::addTotalSessionTime(long minutes)
+void Task::addTotalSessionTime(int64_t minutes)
 {
     m_totalSessionTime += minutes;
     if (parentTask()) {
@@ -251,7 +251,7 @@ void Task::addTotalSessionTime(long minutes)
     }
 }
 
-QString Task::setTime(long minutes)
+QString Task::setTime(int64_t minutes)
 {
     m_time = minutes;
     m_totalTime += minutes;
@@ -260,8 +260,8 @@ QString Task::setTime(long minutes)
 
 void Task::recalculateTotalTimesSubtree()
 {
-    long totalMinutes = time();
-    long totalSessionMinutes = sessionTime();
+    int64_t totalMinutes = time();
+    int64_t totalSessionMinutes = sessionTime();
     for (int i = 0; i < this->childCount(); ++i) {
         Task *subTask = dynamic_cast<Task*>(child(i));
         subTask->recalculateTotalTimesSubtree();
@@ -274,14 +274,14 @@ void Task::recalculateTotalTimesSubtree()
     setTotalSessionTime(totalSessionMinutes);
 }
 
-QString Task::setSessionTime(long minutes)
+QString Task::setSessionTime(int64_t minutes)
 {
     m_sessionTime = minutes;
     m_totalSessionTime += minutes;
     return QString();
 }
 
-void Task::changeTimes(long minutesSession, long minutes, EventsModel *eventsModel)
+void Task::changeTimes(int64_t minutesSession, int64_t minutes, EventsModel *eventsModel)
 {
     qDebug() << "Task's sessionStartTiMe is " << m_sessionStartTime;
     if (minutesSession != 0 || minutes != 0) {
@@ -294,12 +294,12 @@ void Task::changeTimes(long minutesSession, long minutes, EventsModel *eventsMod
     }
 }
 
-void Task::changeTime(long minutes, EventsModel *eventsModel)
+void Task::changeTime(int64_t minutes, EventsModel *eventsModel)
 {
     changeTimes(minutes, minutes, eventsModel);
 }
 
-void Task::changeTotalTimes(long minutesSession, long minutes)
+void Task::changeTotalTimes(int64_t minutesSession, int64_t minutes)
 {
     qCDebug(KTT_LOG)
         << "Task::changeTotalTimes(" << minutesSession << ","
@@ -320,7 +320,7 @@ void Task::resetTimes()
     update();
 }
 
-void Task::changeParentTotalTimes(long minutesSession, long minutes)
+void Task::changeParentTotalTimes(int64_t minutesSession, int64_t minutes)
 {
     if (parentTask()) {
         parentTask()->changeTotalTimes(minutesSession, minutes);
@@ -393,8 +393,9 @@ KCalendarCore::Todo::Ptr Task::asTodo(const KCalendarCore::Todo::Ptr& todo) cons
     return todo;
 }
 
-bool Task::parseIncidence(const KCalendarCore::Incidence::Ptr &incident, long& minutes,
-    long& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
+bool Task::parseIncidence(
+    const KCalendarCore::Incidence::Ptr &incident, int64_t& minutes,
+    int64_t& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
     int& percent_complete, int& priority)
 {
     qCDebug(KTT_LOG) << "Entering function";
@@ -503,13 +504,13 @@ QVariant Task::data(int column, int role) const
                 case 0:
                     return m_name;
                 case 1:
-                    return QVariant::fromValue<qlonglong>(m_sessionTime);
+                    return QVariant::fromValue<int64_t>(m_sessionTime);
                 case 2:
-                    return QVariant::fromValue<qlonglong>(m_time);
+                    return QVariant::fromValue<int64_t>(m_time);
                 case 3:
-                    return QVariant::fromValue<qlonglong>(m_totalSessionTime);
+                    return QVariant::fromValue<int64_t>(m_totalSessionTime);
                 case 4:
-                    return QVariant::fromValue<qlonglong>(m_totalTime);
+                    return QVariant::fromValue<int64_t>(m_totalTime);
                 case 5:
                     return QVariant::fromValue<int>(m_priority);
                 case 6:

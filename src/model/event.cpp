@@ -124,12 +124,12 @@ QStringList Event::comments() const
     return m_comments;
 }
 
-void Event::setDuration(long seconds)
+void Event::setDuration(int64_t seconds)
 {
     m_duration = seconds;
 }
 
-long Event::duration() const
+int64_t Event::duration() const
 {
     return m_duration;
 }

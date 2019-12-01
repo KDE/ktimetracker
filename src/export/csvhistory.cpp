@@ -76,7 +76,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
     const QDate &to = rc.to;
     QString delim = rc.delimiter;
     const QString cr = QStringLiteral("\n");
-    const int intervalLength = from.daysTo(to) + 1;
+    const int64_t intervalLength = from.daysTo(to) + 1;
     QMap<QString, QVector<int>> secsForUid;
     QMap<QString, QString> uidForName;
 
