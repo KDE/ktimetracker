@@ -91,16 +91,6 @@ void CSVExportDialog::exportToClipboard()
 
 void CSVExportDialog::exportToFile()
 {
-    //     QProgressDialog dialog(
-    //        i18n("Exporting to CSV..."), i18n("Cancel"),
-    //        0, static_cast<int>(2 * storage()->tasksModel()->getAllTasks().size()), m_tasksWidget, nullptr);
-    //    dialog.setAutoClose(true);
-    //    dialog.setWindowTitle(i18nc("@title:window", "Export Progress"));
-    //
-    //    if (storage()->tasksModel()->getAllTasks().size() > 1) {
-    //        dialog.show();
-    //    }
-
     const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export as CSV"));
     if (url.isEmpty()) {
         return;
