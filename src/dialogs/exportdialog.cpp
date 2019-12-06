@@ -20,7 +20,7 @@
  *
  */
 
-#include "csvexportdialog.h"
+#include "exportdialog.h"
 
 #include <QClipboard>
 #include <QFileDialog>
@@ -34,7 +34,7 @@
 #include "taskview.h"
 #include "widgets/taskswidget.h"
 
-CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
+ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
     : QDialog(parent)
     , ui()
     , m_taskView(taskView)
@@ -54,42 +54,42 @@ CSVExportDialog::CSVExportDialog(QWidget *parent, TaskView *taskView)
 
     connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    connect(ui.btnToClipboard, &QPushButton::clicked, this, &CSVExportDialog::exportToClipboard);
-    connect(ui.btnSaveAs, &QPushButton::clicked, this, &CSVExportDialog::exportToFile);
+    connect(ui.btnToClipboard, &QPushButton::clicked, this, &ExportDialog::exportToClipboard);
+    connect(ui.btnSaveAs, &QPushButton::clicked, this, &ExportDialog::exportToFile);
 
-    connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioTimesText, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioComma, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioSemicolon, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioOther, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioTab, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.radioSpace, &QRadioButton::toggled, this, &CSVExportDialog::updateUI);
-    connect(ui.txtOther, &QLineEdit::textChanged, this, &CSVExportDialog::updateUI);
-    connect(ui.combodecimalminutes, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
-    connect(ui.comboalltasks, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
-    connect(ui.combosessiontimes, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
-    connect(ui.cboQuote, &QComboBox::currentTextChanged, this, &CSVExportDialog::updateUI);
-    connect(ui.dtFrom, &KDateComboBox::dateChanged, this, &CSVExportDialog::updateUI);
-    connect(ui.dtTo, &KDateComboBox::dateChanged, this, &CSVExportDialog::updateUI);
+    connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioTimesText, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioComma, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioSemicolon, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioOther, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioTab, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioSpace, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.txtOther, &QLineEdit::textChanged, this, &ExportDialog::updateUI);
+    connect(ui.combodecimalminutes, &QComboBox::currentTextChanged, this, &ExportDialog::updateUI);
+    connect(ui.comboalltasks, &QComboBox::currentTextChanged, this, &ExportDialog::updateUI);
+    connect(ui.combosessiontimes, &QComboBox::currentTextChanged, this, &ExportDialog::updateUI);
+    connect(ui.cboQuote, &QComboBox::currentTextChanged, this, &ExportDialog::updateUI);
+    connect(ui.dtFrom, &KDateComboBox::dateChanged, this, &ExportDialog::updateUI);
+    connect(ui.dtTo, &KDateComboBox::dateChanged, this, &ExportDialog::updateUI);
 
     updateUI();
 }
 
-void CSVExportDialog::enableTasksToExportQuestion()
+void ExportDialog::enableTasksToExportQuestion()
 {
     return;
     //grpTasksToExport->setEnabled( true );
 }
 
-void CSVExportDialog::exportToClipboard()
+void ExportDialog::exportToClipboard()
 {
     QString output = exportToString(m_taskView->storage()->projectModel(),
                                     m_taskView->tasksWidget()->currentItem(), reportCriteria());
     QApplication::clipboard()->setText(output);
 }
 
-void CSVExportDialog::exportToFile()
+void ExportDialog::exportToFile()
 {
     const QUrl &url = QFileDialog::getSaveFileUrl(this, i18nc("@title:window", "Export to File"));
     if (url.isEmpty()) {
@@ -107,7 +107,7 @@ void CSVExportDialog::exportToFile()
     }
 }
 
-ReportCriteria CSVExportDialog::reportCriteria()
+ReportCriteria ExportDialog::reportCriteria()
 {
     rc.from = ui.dtFrom->date();
     rc.to = ui.dtTo->date();
@@ -125,7 +125,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
     } else if (ui.radioOther->isChecked()) {
         rc.delimiter = ui.txtOther->text();
     } else {
-        qCDebug(KTT_LOG) << "*** CSVExportDialog::reportCriteria: Unexpected delimiter choice '";
+        qCDebug(KTT_LOG) << "*** ExportDialog::reportCriteria: Unexpected delimiter choice '";
         rc.delimiter = '\t';
     }
 
@@ -135,7 +135,7 @@ ReportCriteria CSVExportDialog::reportCriteria()
     return rc;
 }
 
-void CSVExportDialog::updateUI()
+void ExportDialog::updateUI()
 {
     ReportCriteria::REPORTTYPE rt;
     if (ui.radioTimesCsv->isChecked()) {
@@ -145,7 +145,7 @@ void CSVExportDialog::updateUI()
     } else if (ui.radioTimesText->isChecked()) {
         rt = ReportCriteria::TextTotalsExport;
     } else {
-        qCWarning(KTT_LOG) << "*** CSVExportDialog::updateUI: Unexpected delimiter choice";
+        qCWarning(KTT_LOG) << "*** ExportDialog::updateUI: Unexpected delimiter choice";
         rt = ReportCriteria::TextTotalsExport;
     }
     rc.reportType = rt;

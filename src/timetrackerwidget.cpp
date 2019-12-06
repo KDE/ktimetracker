@@ -30,7 +30,7 @@
 #include <KMessageBox>
 #include <KStandardAction>
 
-#include "dialogs/csvexportdialog.h"
+#include "dialogs/exportdialog.h"
 #include "export/export.h"
 #include "dialogs/historydialog.h"
 #include "idletimedetector.h"
@@ -496,7 +496,7 @@ void TimeTrackerWidget::exportDialog()
     qCDebug(KTT_LOG) << "TimeTrackerWidget::exportDialog()";
 
     auto *taskView = currentTaskView();
-    CSVExportDialog dialog(taskView->tasksWidget(), taskView);
+    ExportDialog dialog(taskView->tasksWidget(), taskView);
     if (taskView->tasksWidget()->currentItem() && taskView->tasksWidget()->currentItem()->isRoot()) {
         dialog.enableTasksToExportQuestion();
     }

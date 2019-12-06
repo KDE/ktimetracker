@@ -30,7 +30,7 @@
 
 #include <KMessageBox>
 
-#include "dialogs/csvexportdialog.h"
+#include "dialogs/exportdialog.h"
 #include "desktoptracker.h"
 #include "dialogs/edittimedialog.h"
 #include "dialogs/taskpropertiesdialog.h"

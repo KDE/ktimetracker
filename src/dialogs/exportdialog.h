@@ -20,17 +20,17 @@
  *
  */
 
-#ifndef CSVEXPORTDIALOG_H
-#define CSVEXPORTDIALOG_H
+#ifndef EXPORTDIALOG_H
+#define EXPORTDIALOG_H
 
 #include <QDialogButtonBox>
 
-#include "ui_csvexportdialog.h"
+#include "ui_exportdialog.h"
 #include "reportcriteria.h"
 
 class TaskView;
 
-class CSVExportDialog : public QDialog
+class ExportDialog : public QDialog
 {
     Q_OBJECT
 
@@ -41,7 +41,7 @@ public Q_SLOTS:
     void updateUI();
 
 public:
-    explicit CSVExportDialog(QWidget *parent, TaskView *taskView);
+    explicit ExportDialog(QWidget *parent, TaskView *taskView);
 
     /**
      Enable the "Tasks to export" question in the dialog.
@@ -60,7 +60,7 @@ public:
     ReportCriteria reportCriteria();
 
 private:
-    Ui::CSVExportDialog ui;
+    Ui::ExportDialog ui;
     TaskView *m_taskView;
     ReportCriteria rc;
 };
