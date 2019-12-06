@@ -405,6 +405,7 @@ void TimeTrackerWidget::slotUpdateButtons()
     action(QStringLiteral("start"))->setEnabled(item && !item->isRunning() && !item->isComplete());
     action(QStringLiteral("stop"))->setEnabled(item && item->isRunning());
     action(QStringLiteral("delete_task"))->setEnabled(item);
+    action(QStringLiteral("edit_task_time"))->setEnabled(item);
     action(QStringLiteral("edit_task"))->setEnabled(item);
     action(QStringLiteral("mark_as_complete"))->setEnabled(item && !item->isComplete());
     action(QStringLiteral("mark_as_incomplete"))->setEnabled(item && item->isComplete());
