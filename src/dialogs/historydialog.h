@@ -37,6 +37,8 @@ public:
     explicit HistoryDialog(QWidget *parent, ProjectModel *projectModel);
     ~HistoryDialog() override = default;
 
+    static const QString dateTimeFormat;
+
 protected:
     void changeEvent(QEvent *e) override;
 

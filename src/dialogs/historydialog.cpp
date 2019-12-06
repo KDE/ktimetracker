@@ -37,7 +37,7 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 
-static const QString dateTimeFormat = QStringLiteral("yyyy-MM-dd HH:mm:ss");
+const QString HistoryDialog::dateTimeFormat = QStringLiteral("yyyy-MM-dd HH:mm:ss");
 
 class HistoryWidgetDelegate : public QItemDelegate
 {
@@ -58,7 +58,7 @@ public:
 
     void setEditorData(QWidget *editor, const QModelIndex &index) const override
     {
-        QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(), dateTimeFormat);
+        QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(), HistoryDialog::dateTimeFormat);
         auto *dateTimeWidget = dynamic_cast<QDateTimeEdit*>(editor);
         if (dateTimeWidget) {
             dateTimeWidget->setDateTime(dateTime);
@@ -72,7 +72,7 @@ public:
         auto *dateTimeWidget = dynamic_cast<QDateTimeEdit*>(editor);
         if (dateTimeWidget) {
             QDateTime dateTime = dateTimeWidget->dateTime();
-            model->setData(index, dateTime.toString(dateTimeFormat), Qt::EditRole);
+            model->setData(index, dateTime.toString(HistoryDialog::dateTimeFormat), Qt::EditRole);
         } else {
             qCWarning(KTT_LOG) << "Cast to QDateTimeEdit failed";
         }
