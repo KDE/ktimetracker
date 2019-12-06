@@ -20,9 +20,12 @@
 
 #include <QTest>
 
-#include "taskview.h"
+#include "dialogs/historydialog.h"
+#include "model/eventsmodel.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
+#include "taskview.h"
+
 #include "helpers.h"
 
 class TaskTest : public QObject
@@ -32,6 +35,7 @@ class TaskTest : public QObject
 private Q_SLOTS:
     void testProperties();
     void testRefreshTimes();
+    void testDurationFromEvent();
 };
 
 void TaskTest::testProperties()
@@ -73,6 +77,26 @@ void TaskTest::testRefreshTimes()
     auto *task2Mirror = taskView2->storage()->tasksModel()->taskByUID(task2->uid());
     QCOMPARE(5, task2Mirror->time());
     QCOMPARE(5, task2Mirror->sessionTime());
+}
+
+void TaskTest::testDurationFromEvent()
+{
+    auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
+
+    auto *task = taskView->addTask("1");
+    task->changeTime(1, taskView->storage()->eventsModel());
+    QCOMPARE(task->time(), 1);
+
+    // Simulate increment of the hour number of event in "Edit History" dialog.
+    // Such editing operation loses sub-second precision.
+    auto *event = taskView->storage()->eventsModel()->eventsForTask(task)[0];
+    QString endDateString = event->dtEnd().addSecs(3600).toString(HistoryDialog::dateTimeFormat);
+    event->setDtEnd(QDateTime::fromString(endDateString, HistoryDialog::dateTimeFormat));
+
+    // Duration must become 61 minutes
+    taskView->reFreshTimes();
+    QCOMPARE(task->time(), 61);
 }
 
 QTEST_MAIN(TaskTest)

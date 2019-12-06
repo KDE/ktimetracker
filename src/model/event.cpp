@@ -52,6 +52,16 @@ QString Event::summary() const
     return m_summary;
 }
 
+static int64_t durationInSeconds(const QDateTime &start, const QDateTime &end)
+{
+    // Ignore milliseconds when calculating duration.
+    // This will look like correct calculation for users who do not
+    // see milliseconds in the UI.
+    QDateTime roundedStart = QDateTime::fromSecsSinceEpoch(start.toSecsSinceEpoch());
+    QDateTime roundedEnd = QDateTime::fromSecsSinceEpoch(end.toSecsSinceEpoch());
+    return roundedStart.secsTo(roundedEnd);
+}
+
 void Event::updateDuration(QDateTime &changedDt, const QDateTime &otherDt)
 {
     if (m_duration < 0) {
@@ -59,12 +69,12 @@ void Event::updateDuration(QDateTime &changedDt, const QDateTime &otherDt)
         if (m_dtEnd > m_dtStart) {
             // If range is not trivial or inversed, we assume that
             // event duration now becomes positive, thus we should update it here.
-            m_duration = m_dtStart.secsTo(m_dtEnd);
+            m_duration = durationInSeconds(m_dtStart, m_dtEnd);
         }
     } else {
         // Was a regular task, and will stay regular. Calculate duration if possible.
         if (hasEndDate()) {
-            m_duration = m_dtStart.secsTo(m_dtEnd);
+            m_duration = durationInSeconds(m_dtStart, m_dtEnd);
             if (m_duration < 0) {
                 // We cannot make duration negative.
                 // May be the user tried to make duration zero, let us help him.
