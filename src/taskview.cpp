@@ -30,13 +30,13 @@
 
 #include <KMessageBox>
 
-#include "csvexportdialog.h"
+#include "dialogs/csvexportdialog.h"
 #include "desktoptracker.h"
 #include "dialogs/edittimedialog.h"
 #include "dialogs/taskpropertiesdialog.h"
 #include "export/export.h"
 #include "focusdetector.h"
-#include "historydialog.h"
+#include "dialogs/historydialog.h"
 #include "idletimedetector.h"
 #include "import/plannerparser.h"
 #include "ktimetracker.h"

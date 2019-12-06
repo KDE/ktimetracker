@@ -30,9 +30,9 @@
 #include <KMessageBox>
 #include <KStandardAction>
 
-#include "csvexportdialog.h"
+#include "dialogs/csvexportdialog.h"
 #include "export/export.h"
-#include "historydialog.h"
+#include "dialogs/historydialog.h"
 #include "idletimedetector.h"
 #include "ktimetracker-version.h"
 #include "ktimetracker.h"

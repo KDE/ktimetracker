@@ -22,10 +22,10 @@ set(ktimetracker_SRCS
     widgets/searchline.cpp
     widgets/taskswidget.cpp
 
-    csvexportdialog.cpp
+    dialogs/csvexportdialog.cpp
     desktoptracker.cpp
     focusdetector.cpp
-    historydialog.cpp
+    dialogs/historydialog.cpp
     idletimedetector.cpp
     ktimetrackerutility.cpp
     mainwindow.cpp
@@ -54,8 +54,8 @@ qt5_add_dbus_adaptor(ktimetracker_SRCS
 )
 
 ki18n_wrap_ui(ktimetracker_SRCS
-    csvexportdialog.ui
-    historydialog.ui
+    dialogs/csvexportdialog.ui
+    dialogs/historydialog.ui
     settings/cfgbehavior.ui
     settings/cfgdisplay.ui
     settings/cfgstorage.ui
