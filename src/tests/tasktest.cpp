@@ -36,6 +36,7 @@ private Q_SLOTS:
     void testProperties();
     void testRefreshTimes();
     void testDurationFromEvent();
+    void testDeleteRunning();
 };
 
 void TaskTest::testProperties()
@@ -97,6 +98,17 @@ void TaskTest::testDurationFromEvent()
     // Duration must become 61 minutes
     taskView->reFreshTimes();
     QCOMPARE(task->time(), 61);
+}
+
+void TaskTest::testDeleteRunning()
+{
+    auto *taskView = createTaskView(this, false);
+    QVERIFY(taskView);
+
+    auto *task = taskView->addTask("1");
+    taskView->startTimerForNow(task);
+
+    taskView->deleteTaskBatch(task);
 }
 
 QTEST_MAIN(TaskTest)
