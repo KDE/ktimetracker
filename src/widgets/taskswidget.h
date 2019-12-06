@@ -72,6 +72,7 @@ private:
     void mouseMoveEvent(QMouseEvent*) override;
     void mousePressEvent(QMouseEvent*) override;
     void mouseDoubleClickEvent(QMouseEvent*) override;
+    void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
 
     QSortFilterProxyModel* m_filterProxyModel;
     TasksModel *m_tasksModel;

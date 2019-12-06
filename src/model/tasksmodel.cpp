@@ -240,11 +240,11 @@ QList<Task*> TasksModel::getAllTasks()
 {
     QList<Task*> tasks;
     for (TasksModelItem *item : getAllItems()) {
+        // If "item" is not a Task, then we are probably in the middle
+        // of class Task or TasksModelItem destructor.
         Task *task = dynamic_cast<Task*>(item);
         if (task) {
             tasks.append(task);
-        } else {
-            qFatal("dynamic_cast to Task failed");
         }
     }
 

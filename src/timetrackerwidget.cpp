@@ -52,7 +52,7 @@
 TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     : QWidget(parent)
     , m_searchLine(nullptr)
-    , m_taskView(new TaskView(this))
+    , m_taskView(nullptr)
     , m_actionCollection(nullptr)
 {
     registerDBus();
@@ -108,23 +108,21 @@ void TimeTrackerWidget::addTaskView(const QUrl &url)
 {
     qCDebug(KTT_LOG) << "Entering function (url=" << url << ")";
 
-    TaskView *taskView = m_taskView;
+    closeFile();
 
-    connect(taskView, &TaskView::contextMenuRequested, this, &TimeTrackerWidget::contextMenuRequested);
-    connect(taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive);
-    connect(taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive);
-    connect(taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
+    m_taskView = new TaskView(this);
+    connect(m_taskView, &TaskView::contextMenuRequested, this, &TimeTrackerWidget::contextMenuRequested);
+    connect(m_taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive);
+    connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive);
+    connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
 
     emit setCaption(url.toString());
-    taskView->load(url);
+    m_taskView->load(url);
 
     fillLayout(m_taskView->tasksWidget());
 
-    // When adding the first tab currentChanged is not emitted, so...
-    if (!m_taskView) {
-        emit currentTaskViewChanged();
-        slotCurrentChanged();
-    }
+    emit currentTaskViewChanged();
+    slotCurrentChanged();
 }
 
 TaskView* TimeTrackerWidget::currentTaskView() const
@@ -134,8 +132,17 @@ TaskView* TimeTrackerWidget::currentTaskView() const
 
 Task* TimeTrackerWidget::currentTask()
 {
-    TaskView* taskView = currentTaskView();
-    return taskView ? taskView->tasksWidget()->currentItem() : nullptr;
+    auto *taskView = currentTaskView();
+    if (taskView == nullptr) {
+        return nullptr;
+    }
+
+    auto *tasksWidget = taskView->tasksWidget();
+    if (tasksWidget == nullptr) {
+        return nullptr;
+    }
+
+    return tasksWidget->currentItem();
 }
 
 void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
@@ -307,6 +314,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     connect(this, &TimeTrackerWidget::currentTaskChanged, this, &TimeTrackerWidget::slotUpdateButtons);
     connect(this, &TimeTrackerWidget::currentTaskViewChanged, this, &TimeTrackerWidget::slotUpdateButtons);
     connect(this, &TimeTrackerWidget::updateButtons, this, &TimeTrackerWidget::slotUpdateButtons);
+    slotUpdateButtons();
 }
 
 QAction *TimeTrackerWidget::action(const QString &name) const
@@ -381,7 +389,6 @@ void TimeTrackerWidget::slotCurrentChanged()
 
         emit setCaption(m_taskView->storage()->fileUrl().toString());
     }
-    m_searchLine->setEnabled(m_taskView);
 }
 
 void TimeTrackerWidget::slotAddTask(const QString &taskName)

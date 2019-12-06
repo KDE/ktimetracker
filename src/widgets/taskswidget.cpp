@@ -316,6 +316,11 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
+void TasksWidget::currentChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    emit updateButtons();
+}
+
 void TasksWidget::restoreItemState()
 {
     qCDebug(KTT_LOG) << "Entering function";
