@@ -272,10 +272,8 @@ public:
 
     /** remove Task with all it's children
      * Removes task as well as all event history for this task.
-     *
-     * @param storage a pointer to a TimeTrackerStorage object.
      */
-    bool remove(TimeTrackerStorage* storage);
+    bool remove();
 
     /**
      * Update percent complete for this task.

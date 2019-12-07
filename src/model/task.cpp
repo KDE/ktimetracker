@@ -332,7 +332,7 @@ void Task::changeParentTotalTimes(int64_t minutesSession, int64_t minutes)
     }
 }
 
-bool Task::remove(TimeTrackerStorage* storage)
+bool Task::remove()
 {
     qCDebug(KTT_LOG) << "entering function" << m_name;
     bool ok = true;
@@ -343,7 +343,7 @@ bool Task::remove(TimeTrackerStorage* storage)
             qFatal("Task::remove: task is nullptr");
         }
 
-        task->remove(storage);
+        task->remove();
     }
 
     setRunning(false);
@@ -351,9 +351,6 @@ bool Task::remove(TimeTrackerStorage* storage)
     m_projectModel->eventsModel()->removeAllForTask(this);
 
     changeParentTotalTimes(-m_sessionTime, -m_time);
-
-    // TODO check return value
-    storage->save();
 
     return ok;
 }

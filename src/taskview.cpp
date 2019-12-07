@@ -589,7 +589,7 @@ void TaskView::setPerCentComplete(int completion)
 void TaskView::deleteTaskBatch(Task* task)
 {
     QString uid = task->uid();
-    task->remove(m_storage);
+    task->remove();
     deleteEntry(uid); // forget if the item was expanded or collapsed
 
     // Stop idle detection if no more counters are running
