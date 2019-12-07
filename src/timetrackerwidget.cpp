@@ -30,9 +30,10 @@
 #include <KMessageBox>
 #include <KStandardAction>
 
+#include "dialogs/edittimedialog.h"
 #include "dialogs/exportdialog.h"
-#include "export/export.h"
 #include "dialogs/historydialog.h"
+#include "export/export.h"
 #include "idletimedetector.h"
 #include "ktimetracker-version.h"
 #include "ktimetracker.h"
@@ -473,7 +474,24 @@ void TimeTrackerWidget::editTask()
 
 void TimeTrackerWidget::editTaskTime()
 {
-    currentTaskView()->editTaskTime();
+    qCDebug(KTT_LOG) <<"Entering editTask";
+    Task* task = currentTask();
+    if (!task) {
+        return;
+    }
+
+    QPointer<EditTimeDialog> editTimeDialog = new EditTimeDialog(
+        this, task->name(), task->description(), static_cast<int>(task->time()));
+
+    if (editTimeDialog->exec() == QDialog::Accepted) {
+        if (editTimeDialog->editHistoryRequested()) {
+            editHistory();
+        } else {
+            currentTaskView()->editTaskTime(task->uid(), editTimeDialog->changeMinutes());
+        }
+    }
+
+    delete editTimeDialog;
 }
 
 void TimeTrackerWidget::deleteTask()

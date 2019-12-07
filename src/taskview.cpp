@@ -538,30 +538,6 @@ void TaskView::editTask()
     delete dialog;
 }
 
-void TaskView::editTaskTime()
-{
-    qCDebug(KTT_LOG) <<"Entering editTask";
-    Task* task = m_tasksWidget->currentItem();
-    if (!task) {
-        return;
-    }
-
-    QPointer<EditTimeDialog> editTimeDialog = new EditTimeDialog(
-        m_tasksWidget->parentWidget(),
-        task->name(), task->description(),
-        static_cast<int>(task->time()));
-
-    if (editTimeDialog->exec() == QDialog::Accepted) {
-        if (editTimeDialog->editHistoryRequested()) {
-            editHistory();
-        } else {
-            editTaskTime(task->uid(), editTimeDialog->changeMinutes());
-        }
-    }
-
-    delete editTimeDialog;
-}
-
 void TaskView::editHistory()
 {
     QPointer<HistoryDialog> dialog = new HistoryDialog(m_tasksWidget->parentWidget(), storage()->projectModel());

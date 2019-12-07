@@ -116,9 +116,6 @@ public Q_SLOTS:
     /** Calls editTask dialog for the current task. */
     void editTask();
 
-    /** Calls editTaskTime dialog for the current task. */
-    void editTaskTime();
-
     void editHistory();
 
     /**
