@@ -316,7 +316,7 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
-void TasksWidget::currentChanged(const QModelIndex &current, const QModelIndex &previous)
+void TasksWidget::currentChanged(const QModelIndex& /*current*/, const QModelIndex& /*previous*/)
 {
     emit updateButtons();
 }
