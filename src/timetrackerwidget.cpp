@@ -459,7 +459,7 @@ void TimeTrackerWidget::stopAllTimers()
 
 void TimeTrackerWidget::newTask()
 {
-    currentTaskView()->newTask();
+    currentTaskView()->newTask(i18nc("@title:window", "New Task"), nullptr);
 }
 
 void TimeTrackerWidget::newSubTask()

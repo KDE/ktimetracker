@@ -134,6 +134,7 @@ public Q_SLOTS:
     void startCurrentTimer();
     void stopCurrentTimer();
     void stopAllTimers();
+    /** Calls newTask dialog with caption "New Task".  */
     void newTask();
     void newSubTask();
     void editTask();

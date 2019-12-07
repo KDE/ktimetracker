@@ -423,11 +423,6 @@ void TaskView::addTimeToActiveTasks(int64_t minutes)
     }
 }
 
-void TaskView::newTask()
-{
-    newTask(i18nc("@title:window", "New Task"), nullptr);
-}
-
 void TaskView::newTask(const QString &caption, Task *parent)
 {
     QPointer<TaskPropertiesDialog> dialog = new TaskPropertiesDialog(
