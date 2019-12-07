@@ -169,7 +169,8 @@ void TaskView::load(const QUrl &url)
     connect(m_tasksWidget, &TasksWidget::taskDoubleClicked, this, &TaskView::onTaskDoubleClicked);
     m_tasksWidget->setRootIsDecorated(true);
 
-    reconfigure();
+    reconfigureModel();
+    reconfigureView();
 
     // Connect to the new model created by TimeTrackerStorage::load()
     auto *tasksModel = m_storage->tasksModel();
@@ -729,16 +730,8 @@ bool TaskView::isFocusTrackingActive() const
     return m_focusTrackingActive;
 }
 
-void TaskView::reconfigure()
+void TaskView::reconfigureModel()
 {
-    /* Adapt columns */
-    m_tasksWidget->setColumnHidden(1, !KTimeTrackerSettings::displaySessionTime());
-    m_tasksWidget->setColumnHidden(2, !KTimeTrackerSettings::displayTime());
-    m_tasksWidget->setColumnHidden(3, !KTimeTrackerSettings::displayTotalSessionTime());
-    m_tasksWidget->setColumnHidden(4, !KTimeTrackerSettings::displayTotalTime());
-    m_tasksWidget->setColumnHidden(5, !KTimeTrackerSettings::displayPriority());
-    m_tasksWidget->setColumnHidden(6, !KTimeTrackerSettings::displayPercentComplete());
-
     /* idleness */
     m_idleTimeDetector->setMaxIdle(KTimeTrackerSettings::period());
     m_idleTimeDetector->toggleOverAllIdleDetection(KTimeTrackerSettings::enabled());
@@ -751,6 +744,18 @@ void TaskView::reconfigure()
     }
 
     refreshModel();
+}
+
+void TaskView::reconfigureView()
+{
+    /* Adapt columns */
+    m_tasksWidget->setColumnHidden(1, !KTimeTrackerSettings::displaySessionTime());
+    m_tasksWidget->setColumnHidden(2, !KTimeTrackerSettings::displayTime());
+    m_tasksWidget->setColumnHidden(3, !KTimeTrackerSettings::displayTotalSessionTime());
+    m_tasksWidget->setColumnHidden(4, !KTimeTrackerSettings::displayTotalTime());
+    m_tasksWidget->setColumnHidden(5, !KTimeTrackerSettings::displayPriority());
+    m_tasksWidget->setColumnHidden(6, !KTimeTrackerSettings::displayPercentComplete());
+
     refreshView();
 }
 
