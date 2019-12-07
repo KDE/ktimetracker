@@ -33,4 +33,5 @@ def test_relative_path(app):
     app.run('testktimetracker1.ics')
 
     app.addTask('Task1')
+    app.saveAll()
     assert os.path.isfile('/tmp/testktimetracker1.ics')
