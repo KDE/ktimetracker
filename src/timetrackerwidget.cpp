@@ -509,7 +509,7 @@ void TimeTrackerWidget::exportDialog()
 
 void TimeTrackerWidget::startNewSession()
 {
-    currentTaskView()->startNewSession();
+    currentTaskView()->storage()->tasksModel()->startNewSession();
 }
 
 void TimeTrackerWidget::editHistory()

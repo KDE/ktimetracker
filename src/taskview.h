@@ -61,9 +61,6 @@ public:
     /** Close the storage and release lock. */
     void closeStorage();
 
-    /** Reset session time to zero for all tasks.  */
-    void startNewSession();
-
     /** Reset session and total time to zero for all tasks.  */
     void resetTimeForAllTasks();
 

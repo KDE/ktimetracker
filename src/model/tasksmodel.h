@@ -77,6 +77,15 @@ public:
     /** return the task with the given UID */
     Task *taskByUID(const QString &uid);
 
+    /*
+     * Reset session time to zero for all tasks.
+     *
+     * This procedure starts a new session. We speak of session times,
+     * overalltimes (comprising all sessions) and total times (comprising all subtasks).
+     * That is why there is also a total session time.
+     */
+    void startNewSession();
+
 public Q_SLOTS:
     void setActiveIcon(int frameNumber);
 

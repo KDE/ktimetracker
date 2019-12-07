@@ -399,18 +399,6 @@ void TaskView::toggleFocusTracking()
     emit updateButtons();
 }
 
-void TaskView::startNewSession()
-/* This procedure starts a new session. We speak of session times,
-overalltimes (comprising all sessions) and total times (comprising all subtasks).
-That is why there is also a total session time. */
-{
-    qCDebug(KTT_LOG) <<"Entering TaskView::startNewSession";
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        task->startNewSession();
-    }
-    qCDebug(KTT_LOG) << "Leaving TaskView::startNewSession";
-}
-
 void TaskView::resetTimeForAllTasks()
 /* This procedure resets all times (session and overall) for all tasks and subtasks. */
 {

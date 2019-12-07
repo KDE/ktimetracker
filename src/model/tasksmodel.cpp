@@ -368,3 +368,10 @@ Task *TasksModel::taskByUID(const QString &uid)
 
     return nullptr;
 }
+
+void TasksModel::startNewSession()
+{
+    for (Task *task : getAllTasks()) {
+        task->startNewSession();
+    }
+}
