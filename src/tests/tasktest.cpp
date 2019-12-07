@@ -67,7 +67,7 @@ void TaskTest::testRefreshTimes()
     QCOMPARE(5, task2->time());
     QCOMPARE(5, task2->sessionTime());
 
-    taskView->save();
+    QCOMPARE(taskView->storage()->save(), "");
 
     // Open saved file again
     auto *taskView2 = new TaskView();
