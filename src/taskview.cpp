@@ -120,7 +120,6 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
                      "Also quit all applications using this file and remove "
                      "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
         }
-        save();
         for (Task *task : storage()->tasksModel()->getAllTasks()) {
             if (task->name() == newTaskName) {
                 startTimerForNow(task);
@@ -329,7 +328,6 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
             m_idleTimeDetector->startIdleDetection();
 
             task->setRunning(true, startTime);
-            save();
 
             m_activeTasks.append(task);
             emit updateButtons();
@@ -364,7 +362,6 @@ void TaskView::stopAllTimers(const QDateTime& when)
         QApplication::processEvents();
 
         task->setRunning(false, when);
-        save();
 
         dialog.setValue(dialog.value() + 1);
     }
@@ -396,7 +393,6 @@ void TaskView::stopTimerFor(Task* task)
         m_activeTasks.removeAll(task);
 
         task->setRunning(false);
-        save();
 
         if (m_activeTasks.count() == 0) {
             m_idleTimeDetector->stopIdleDetection();
@@ -455,7 +451,6 @@ void TaskView::newTask(const QString &caption, Task *parent)
         int64_t total = 0;
         int64_t session = 0;
         auto *task = addTask(taskName, taskDescription, total, session, desktopList, parent);
-        save();
         if (!task) {
             KMessageBox::error(nullptr, i18n(
                 "Error storing new task. Your changes were not saved. "

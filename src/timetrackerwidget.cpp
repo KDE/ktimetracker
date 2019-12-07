@@ -390,7 +390,6 @@ void TimeTrackerWidget::slotAddTask(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
     taskView->addTask(taskName, QString(), 0, 0, DesktopList(), nullptr);
-    taskView->save();
 }
 
 void TimeTrackerWidget::slotUpdateButtons()
@@ -480,19 +479,16 @@ void TimeTrackerWidget::editTaskTime()
 void TimeTrackerWidget::deleteTask()
 {
     currentTaskView()->deleteTask();
-    currentTaskView()->save();
 }
 
 void TimeTrackerWidget::markTaskAsComplete()
 {
     currentTaskView()->markTaskAsComplete();
-    currentTaskView()->save();
 }
 
 void TimeTrackerWidget::markTaskAsIncomplete()
 {
     currentTaskView()->markTaskAsIncomplete();
-    currentTaskView()->save();
 }
 
 void TimeTrackerWidget::exportDialog()
@@ -594,7 +590,6 @@ void TimeTrackerWidget::addTask( const QString &taskName )
 
     if (taskView) {
         taskView->addTask(taskName, QString(), 0, 0, DesktopList(), nullptr);
-        taskView->save();
     }
 }
 
@@ -606,7 +601,6 @@ void TimeTrackerWidget::addSubTask(const QString &taskName, const QString &taskI
         taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->storage()->tasksModel()->taskByUID(taskId));
         taskView->refreshModel();
         taskView->refreshView();
-        taskView->save();
     }
 }
 
@@ -621,7 +615,6 @@ void TimeTrackerWidget::deleteTask(const QString &taskId)
     for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
         if (task->uid() == taskId) {
             taskView->deleteTaskBatch(task);
-            taskView->save();
             break;
         }
     }
