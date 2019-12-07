@@ -87,11 +87,6 @@ TaskView::TaskView(QWidget *parent)
     m_autoSaveTimer = new QTimer(this);
     connect(m_autoSaveTimer, &QTimer::timeout, this, &TaskView::save);
 
-    // Setup manual save timer (to save changes a little while after they happen)
-    m_manualSaveTimer = new QTimer(this);
-    m_manualSaveTimer->setSingleShot( true );
-    connect(m_manualSaveTimer, &QTimer::timeout, this, &TaskView::save);
-
     // Connect desktop tracker events to task starting/stopping
     m_desktopTracker = new DesktopTracker();
     connect(m_desktopTracker, &DesktopTracker::reachedActiveDesktop, this, &TaskView::startTimerForNow);
@@ -308,11 +303,6 @@ void TaskView::importPlanner(const QString& fileName)
     refreshView();
 }
 
-void TaskView::scheduleSave()
-{
-    m_manualSaveTimer->start(10);
-}
-
 void TaskView::save()
 {
     qCDebug(KTT_LOG) << "Entering TaskView::save()";
@@ -435,7 +425,6 @@ void TaskView::addTimeToActiveTasks(int64_t minutes)
     for (Task *task : m_activeTasks) {
         task->changeTime(minutes, nullptr);
     }
-    scheduleSave();
 }
 
 void TaskView::newTask()
@@ -732,7 +721,6 @@ void TaskView::editTaskTime(const QString& taskUid, int64_t minutes)
     auto* task = m_storage->tasksModel()->taskByUID(taskUid);
     if (task) {
         task->changeTime(minutes, m_storage->eventsModel());
-        scheduleSave();
     }
 }
 

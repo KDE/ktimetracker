@@ -717,7 +717,6 @@ int TimeTrackerWidget::changeTime(const QString &taskId, int64_t minutes)
     }
 
     task->changeTime(minutes, taskView->storage()->eventsModel());
-    taskView->scheduleSave();
     return 0;
 }
 

@@ -61,9 +61,6 @@ public:
     /** Close the storage and release lock. */
     void closeStorage();
 
-    /** Schedule that we should save very soon */
-    void scheduleSave();
-
     /** Add a task to view and storage. */
     Task *addTask(
         const QString& taskname, const QString& taskdescription = QString(),
@@ -202,7 +199,6 @@ private: // member variables
     IdleTimeDetector* m_idleTimeDetector;
     QTimer *m_minuteTimer;
     QTimer *m_autoSaveTimer;
-    QTimer *m_manualSaveTimer;
     DesktopTracker* m_desktopTracker;
 
     TimeTrackerStorage *m_storage;
