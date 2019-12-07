@@ -214,7 +214,8 @@ void TaskView::load(const QUrl &url)
         if (!m_desktopTracker->startTracking().isEmpty()) {
             KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work."));
         }
-        refresh();
+        refreshModel();
+        refreshView();
     }
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
@@ -226,16 +227,18 @@ void TaskView::closeStorage()
     m_storage->closeStorage();
 }
 
-void TaskView::refresh()
+void TaskView::refreshModel()
 {
-    if (!m_tasksWidget) {
-        return;
-    }
-
-    qCDebug(KTT_LOG) << "entering function";
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
         task->invalidateCompletedState();
         task->update();  // maybe there was a change in the times's format
+    }
+}
+
+void TaskView::refreshView()
+{
+    if (!m_tasksWidget) {
+        return;
     }
 
     // remove root decoration if there is no more child.
@@ -296,7 +299,8 @@ QString TaskView::reFreshTimes()
         }
     }
 
-    refresh();
+    refreshModel();
+    refreshView();
     qCDebug(KTT_LOG) << "Leaving TaskView::reFreshTimes()";
     return err;
 }
@@ -310,7 +314,8 @@ void TaskView::importPlanner(const QString& fileName)
     QXmlSimpleReader reader;
     reader.setContentHandler(handler);
     reader.parse(source);
-    refresh();
+    refreshModel();
+    refreshView();
 }
 
 void TaskView::scheduleSave()
@@ -540,7 +545,8 @@ void TaskView::newSubTask()
 
     m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)), true);
 
-    refresh();
+    refreshModel();
+    refreshView();
 }
 
 void TaskView::editTask()
@@ -744,7 +750,8 @@ void TaskView::reconfigure()
         m_autoSaveTimer->stop();
     }
 
-    refresh();
+    refreshModel();
+    refreshView();
 }
 
 //----------------------------------------------------------------------------

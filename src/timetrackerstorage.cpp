@@ -162,7 +162,8 @@ QString TimeTrackerStorage::buildTaskView(const KCalendarCore::Todo::List &todos
         }
     }
 
-    view->refresh();
+    view->refreshModel();
+    view->refreshView();
     return err;
 }
 

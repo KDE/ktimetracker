@@ -113,7 +113,8 @@ public Q_SLOTS:
     void newTask(const QString &caption, Task *parent);
 
     /** Used to refresh (e.g. after import) */
-    void refresh();
+    void refreshModel();
+    void refreshView();
 
     /** used to import tasks from imendio planner */
     void importPlanner(const QString &fileName);
