@@ -53,6 +53,7 @@ public:
     void restoreItemState();
 
     void refresh();
+    void reconfigure();
 
 public Q_SLOTS:
     /** item state stores if a task is expanded so you can see the subtasks */

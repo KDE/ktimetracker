@@ -170,7 +170,7 @@ void TaskView::load(const QUrl &url)
     m_tasksWidget->setRootIsDecorated(true);
 
     reconfigureModel();
-    reconfigureView();
+    m_tasksWidget->reconfigure();
 
     // Connect to the new model created by TimeTrackerStorage::load()
     auto *tasksModel = m_storage->tasksModel();
@@ -733,19 +733,6 @@ void TaskView::reconfigureModel()
     }
 
     refreshModel();
-}
-
-void TaskView::reconfigureView()
-{
-    /* Adapt columns */
-    m_tasksWidget->setColumnHidden(1, !KTimeTrackerSettings::displaySessionTime());
-    m_tasksWidget->setColumnHidden(2, !KTimeTrackerSettings::displayTime());
-    m_tasksWidget->setColumnHidden(3, !KTimeTrackerSettings::displayTotalSessionTime());
-    m_tasksWidget->setColumnHidden(4, !KTimeTrackerSettings::displayTotalTime());
-    m_tasksWidget->setColumnHidden(5, !KTimeTrackerSettings::displayPriority());
-    m_tasksWidget->setColumnHidden(6, !KTimeTrackerSettings::displayPercentComplete());
-
-    refreshView();
 }
 
 //----------------------------------------------------------------------------

@@ -438,7 +438,7 @@ void TimeTrackerWidget::loadSettings()
 
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
     currentTaskView()->reconfigureModel();
-    currentTaskView()->reconfigureView();
+    currentTaskView()->tasksWidget()->reconfigure();
 }
 
 //BEGIN wrapper slots

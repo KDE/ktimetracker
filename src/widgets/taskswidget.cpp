@@ -376,3 +376,16 @@ void TasksWidget::refresh()
     emit updateButtons();
     qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
 }
+
+void TasksWidget::reconfigure()
+{
+    /* Adapt columns */
+    setColumnHidden(1, !KTimeTrackerSettings::displaySessionTime());
+    setColumnHidden(2, !KTimeTrackerSettings::displayTime());
+    setColumnHidden(3, !KTimeTrackerSettings::displayTotalSessionTime());
+    setColumnHidden(4, !KTimeTrackerSettings::displayTotalTime());
+    setColumnHidden(5, !KTimeTrackerSettings::displayPriority());
+    setColumnHidden(6, !KTimeTrackerSettings::displayPercentComplete());
+
+    refresh();
+}

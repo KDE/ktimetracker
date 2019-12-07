@@ -183,7 +183,6 @@ public Q_SLOTS:
 
     /** Reconfigures taskView depending on current configuration. */
     void reconfigureModel();
-    void reconfigureView();
 
     /** Refresh the times of the tasks, e.g. when the history has been changed by the user */
     QString reFreshTimes();
