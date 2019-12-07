@@ -123,15 +123,6 @@ public:
      */
     bool allEventsHaveEndTime(Task *task);
 
-    /**
-     * Deliver if all events of the actual calendar have an endtime
-     *
-     * If ktimetracker has been quitted with one task running, it needs to resumeRunning().
-     * This function delivers if an enddate of an event has not yet been stored.
-     *
-     */
-    bool allEventsHaveEndTime();
-
     QString deleteAllEvents();
 
     /**

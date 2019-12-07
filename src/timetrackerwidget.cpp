@@ -91,11 +91,6 @@ void TimeTrackerWidget::fillLayout(TasksWidget *tasksWidget)
     }
 }
 
-bool TimeTrackerWidget::allEventsHaveEndTiMe()
-{
-    return currentTaskView()->allEventsHaveEndTiMe();
-}
-
 int TimeTrackerWidget::focusSearchBar()
 {
     if (m_searchLine->isEnabled()) {

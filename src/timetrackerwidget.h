@@ -46,13 +46,6 @@ public:
     explicit TimeTrackerWidget(QWidget* parent = nullptr);
     ~TimeTrackerWidget() override = default;
 
-    /** 
-      Delivers if all task have an end time. 
-      This is useful e.g. at the start of the program to see if a timer needs to be resumed.
-      This function checks all (TaskView) mTabWidget->widget() to see if any task is open.
-     */
-    bool allEventsHaveEndTiMe();
-
 private:
     /**
      * Load the specified file in the tasks widget.

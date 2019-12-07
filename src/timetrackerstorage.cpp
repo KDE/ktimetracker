@@ -212,17 +212,6 @@ bool TimeTrackerStorage::allEventsHaveEndTime(Task *task)
     return true;
 }
 
-bool TimeTrackerStorage::allEventsHaveEndTime()
-{
-    for (const auto *event : m_model->eventsModel()->events()) {
-        if (!event->hasEndDate()) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 QString TimeTrackerStorage::deleteAllEvents()
 {
     m_model->eventsModel()->clear();

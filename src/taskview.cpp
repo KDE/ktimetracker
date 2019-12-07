@@ -226,11 +226,6 @@ void TaskView::closeStorage()
     m_storage->closeStorage();
 }
 
-bool TaskView::allEventsHaveEndTiMe()
-{
-    return m_storage->allEventsHaveEndTime();
-}
-
 void TaskView::refresh()
 {
     if (!m_tasksWidget) {
