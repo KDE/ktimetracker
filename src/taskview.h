@@ -223,7 +223,7 @@ private: // member variables
     TasksWidget *m_tasksWidget;
 
 private:
-    void addTimeToActiveTasks(int minutes, bool save_data = true);
+    void addTimeToActiveTasks(int minutes, bool save_data);
     /** item state stores if a task is expanded so you can see the subtasks */
 
 public Q_SLOTS:
