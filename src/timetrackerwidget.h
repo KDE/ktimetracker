@@ -163,8 +163,8 @@ public Q_SLOTS:
     void addSubTask( const QString& taskName, const QString &taskId );
     void deleteTask( const QString &taskId );
     void setPercentComplete( const QString &taskId, int percent );
-    int bookTime(const QString &taskId, const QString &dateTime, int minutes);
-    int changeTime( const QString &taskId, int minutes );
+    int bookTime(const QString &taskId, const QString &dateTime, int64_t minutes);
+    int changeTime(const QString &taskId, int64_t minutes);
     QString error( int errorCode ) const;
     bool isIdleDetectionPossible() const;
     int totalMinutesForTaskId( const QString &taskId ) const;

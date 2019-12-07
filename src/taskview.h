@@ -191,7 +191,7 @@ public Q_SLOTS:
 
     void onTaskDoubleClicked(Task *task);
 
-    void editTaskTime(const QString& taskUid, int minutes);
+    void editTaskTime(const QString& taskUid, int64_t minutes);
 
 Q_SIGNALS:
     void updateButtons();
@@ -227,7 +227,7 @@ private:
      * Add time delta to all active tasks.
      * Does not modify events model.
      */
-    void addTimeToActiveTasks(int minutes);
+    void addTimeToActiveTasks(int64_t minutes);
 
 public Q_SLOTS:
     void minuteUpdate();

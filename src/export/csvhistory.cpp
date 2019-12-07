@@ -28,7 +28,7 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 
-static int todaySeconds(const QDate &date, const KCalendarCore::Event::Ptr &event)
+static int64_t todaySeconds(const QDate &date, const KCalendarCore::Event::Ptr &event)
 {
     if (!event) {
         return 0;
@@ -44,8 +44,8 @@ static int todaySeconds(const QDate &date, const KCalendarCore::Event::Ptr &even
     QDateTime LastMidNight = QDateTime::currentDateTime();
     LastMidNight.setDate(date);
     LastMidNight.setTime(QTime(0, 0));
-    int secsstartTillMidNight = startTime.secsTo(NextMidNight);
-    int secondsToAdd = 0; // seconds that need to be added to the actual cell
+    int64_t secsstartTillMidNight = startTime.secsTo(NextMidNight);
+    int64_t secondsToAdd = 0; // seconds that need to be added to the actual cell
 
     if (startTime.date() == date && event->dtEnd().date() == date) {
         // all the event occurred today
@@ -77,7 +77,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
     QString delim = rc.delimiter;
     const QString cr = QStringLiteral("\n");
     const int64_t intervalLength = from.daysTo(to) + 1;
-    QMap<QString, QVector<int>> secsForUid;
+    QMap<QString, QVector<int64_t>> secsForUid;
     QMap<QString, QString> uidForName;
 
     QString retval;
@@ -92,7 +92,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
         qCDebug(KTT_LOG) << ", Task Name: " << task->name() << ", UID: " << task->uid();
         // uid -> seconds each day
         // * Init each element to zero
-        QVector<int> vector(intervalLength, 0);
+        QVector<int64_t> vector(intervalLength, 0);
         secsForUid[task->uid()] = vector;
 
         // name -> uid

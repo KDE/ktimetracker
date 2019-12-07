@@ -645,7 +645,7 @@ void TimeTrackerWidget::setPercentComplete(const QString &taskId, int percent)
     }
 }
 
-int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, int minutes)
+int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, int64_t minutes)
 {
     QDate startDate;
     QTime startTime;
@@ -694,7 +694,7 @@ int TimeTrackerWidget::bookTime(const QString &taskId, const QString &dateTime, 
     return 0;
 }
 
-int TimeTrackerWidget::changeTime(const QString &taskId, int minutes)
+int TimeTrackerWidget::changeTime(const QString &taskId, int64_t minutes)
 {
     if (minutes <= 0) {
         return KTIMETRACKER_ERR_INVALID_DURATION;

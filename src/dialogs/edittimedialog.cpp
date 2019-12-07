@@ -35,8 +35,7 @@
 
 EditTimeDialog::EditTimeDialog(
     QWidget *parent,
-    const QString &name, const QString &description,
-    const int minutes)
+    const QString &name, const QString &description, int64_t minutes)
     : QDialog(parent)
     , m_initialMinutes(minutes)
     , m_changeMinutes(0)

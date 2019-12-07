@@ -463,7 +463,7 @@ void TaskView::minuteUpdate()
     addTimeToActiveTasks(1);
 }
 
-void TaskView::addTimeToActiveTasks(int minutes)
+void TaskView::addTimeToActiveTasks(int64_t minutes)
 {
     for (Task *task : m_activeTasks) {
         task->changeTime(minutes, nullptr);
@@ -766,7 +766,7 @@ void TaskView::onTaskDoubleClicked(Task *task)
     }
 }
 
-void TaskView::editTaskTime(const QString& taskUid, int minutes)
+void TaskView::editTaskTime(const QString& taskUid, int64_t minutes)
 {
     // update session time if the time was changed
     auto* task = m_storage->tasksModel()->taskByUID(taskUid);
