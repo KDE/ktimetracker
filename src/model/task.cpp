@@ -338,7 +338,11 @@ bool Task::remove(TimeTrackerStorage* storage)
     bool ok = true;
 
     for (int i = 0; i < childCount(); ++i) {
-        Task* task = static_cast<Task*>(child(i));
+        Task* task = dynamic_cast<Task*>(child(i));
+        if (!task) {
+            qFatal("Task::remove: task is nullptr");
+        }
+
         task->remove(storage);
     }
 

@@ -804,11 +804,14 @@ void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int la
     // taskAboutToBeRemoved() slot is called from TasksModelItem's destructor
     // when the Task object is already destructed, thus dynamic_cast would
     // return nullptr.
-    auto *deletedTask = static_cast<Task*>(item);
+    auto *task = dynamic_cast<Task*>(item);
+    if (!task) {
+        qFatal("taskAboutToBeRemoved: task is nullptr");
+    }
 
     // Handle task deletion
     DesktopList desktopList;
-    m_desktopTracker->registerForDesktops(deletedTask, desktopList);
-    m_activeTasks.removeAll(deletedTask);
+    m_desktopTracker->registerForDesktops(task, desktopList);
+    m_activeTasks.removeAll(task);
     emit tasksChanged(m_activeTasks);
 }
