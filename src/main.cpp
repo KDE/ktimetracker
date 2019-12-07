@@ -141,14 +141,13 @@ int main(int argc, char *argv[])
 //            return 0;
 //        }
 //        KUniqueApplication myApp;
-    MainWindow *mainWindow;
-    mainWindow = new MainWindow(url);
-    mainWindow->show();
+    MainWindow mainWindow(url);
+    mainWindow.show();
 
     if (app.isSessionRestored()) {
         const QString className = KXmlGuiWindow::classNameOfToplevel(1);
         if (className == QLatin1String("MainWindow")) {
-            mainWindow->restore(1);
+            mainWindow.restore(1);
         } else {
             qCWarning(KTT_LOG) << "Unknown class " << className << " in session saved data!";
         }

@@ -101,6 +101,7 @@ MainWindow::~MainWindow()
 {
     qCDebug(KTT_LOG) << "MainWindow::~MainWindows: Quitting ktimetracker.";
     saveGeometry();
+    quit();
 }
 
 bool MainWindow::queryClose()
