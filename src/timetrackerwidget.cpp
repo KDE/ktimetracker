@@ -535,7 +535,7 @@ void TimeTrackerWidget::resetAllTimes()
             i18n("Do you really want to reset the time to zero for all tasks? This will delete the entire history."),
             i18nc("@title:window", "Confirmation Required"),
             KGuiItem(i18nc("@action:button", "Reset All Times"))) == KMessageBox::Continue) {
-            currentTaskView()->resetTimeForAllTasks();
+            currentTaskView()->storage()->projectModel()->resetTimeForAllTasks();
         }
     }
 }

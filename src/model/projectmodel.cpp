@@ -65,3 +65,12 @@ std::unique_ptr<FileCalendar> ProjectModel::asCalendar(const QUrl &url) const
 
     return calendar;
 }
+
+void ProjectModel::resetTimeForAllTasks()
+{
+    for (Task *task : tasksModel()->getAllTasks()) {
+        task->resetTimes();
+    }
+
+    eventsModel()->clear();
+}

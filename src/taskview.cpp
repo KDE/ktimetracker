@@ -399,17 +399,6 @@ void TaskView::toggleFocusTracking()
     emit updateButtons();
 }
 
-void TaskView::resetTimeForAllTasks()
-/* This procedure resets all times (session and overall) for all tasks and subtasks. */
-{
-    qCDebug(KTT_LOG) << "Entering function";
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        task->resetTimes();
-    }
-    storage()->deleteAllEvents();
-    qCDebug(KTT_LOG) << "Leaving function";
-}
-
 void TaskView::stopTimerFor(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";

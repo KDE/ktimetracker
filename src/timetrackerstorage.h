@@ -123,8 +123,6 @@ public:
      */
     bool allEventsHaveEndTime(Task *task);
 
-    QString deleteAllEvents();
-
     /**
      * Save all tasks and their totals to an iCalendar file.
      *

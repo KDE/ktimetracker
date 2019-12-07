@@ -211,12 +211,6 @@ bool TimeTrackerStorage::allEventsHaveEndTime(Task *task)
     return true;
 }
 
-QString TimeTrackerStorage::deleteAllEvents()
-{
-    m_model->eventsModel()->clear();
-    return QString();
-}
-
 QString TimeTrackerStorage::save()
 {
     bool removedFromDirWatch = false;

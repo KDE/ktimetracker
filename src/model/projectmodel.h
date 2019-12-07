@@ -38,6 +38,13 @@ public:
 
     std::unique_ptr<FileCalendar> asCalendar(const QUrl &url) const;
 
+    /**
+     * Reset session and total time to zero for all tasks.
+     *
+     * This procedure resets all times (session and overall) for all tasks and subtasks.
+     */
+    void resetTimeForAllTasks();
+
 private:
     TasksModel *m_tasksModel;
     EventsModel *m_eventsModel;
