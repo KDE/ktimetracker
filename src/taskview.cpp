@@ -460,13 +460,13 @@ void TaskView::stopCurrentTimer()
 
 void TaskView::minuteUpdate()
 {
-    addTimeToActiveTasks(1, false);
+    addTimeToActiveTasks(1);
 }
 
-void TaskView::addTimeToActiveTasks(int minutes, bool save_data)
+void TaskView::addTimeToActiveTasks(int minutes)
 {
     for (Task *task : m_activeTasks) {
-        task->changeTime(minutes, save_data ? m_storage->eventsModel() : nullptr);
+        task->changeTime(minutes, nullptr);
     }
     scheduleSave();
 }
@@ -690,7 +690,7 @@ void TaskView::markTaskAsComplete()
 
 void TaskView::subtractTime(int64_t minutes)
 {
-    addTimeToActiveTasks(-minutes, false); // subtract time in memory, but do not store it
+    addTimeToActiveTasks(-minutes);
 }
 
 void TaskView::markTaskAsIncomplete()

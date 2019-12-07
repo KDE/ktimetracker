@@ -223,8 +223,11 @@ private: // member variables
     TasksWidget *m_tasksWidget;
 
 private:
-    void addTimeToActiveTasks(int minutes, bool save_data);
-    /** item state stores if a task is expanded so you can see the subtasks */
+    /**
+     * Add time delta to all active tasks.
+     * Does not modify events model.
+     */
+    void addTimeToActiveTasks(int minutes);
 
 public Q_SLOTS:
     void minuteUpdate();
