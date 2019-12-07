@@ -267,21 +267,6 @@ public:
      */
     KCalendarCore::Todo::Ptr asTodo(const KCalendarCore::Todo::Ptr& todo) const;
 
-    /**
-     *  Add a comment to this task.
-     *  A comment is called "description" in the context of KCalCore::ToDo
-     *
-     * iCal allows multiple comment tags.  So we just add a new comment to the
-     * todo for this task and write the calendar.
-     *
-     * @param task     The task that gets the comment
-     * @param comment  The comment
-     */
-    void addComment(const QString& comment, TimeTrackerStorage* storage);
-
-    /** Retrieve the entire comment for the task. */
-    QString comment() const;
-
     /** tells you whether this task is the root of the task tree */
     bool isRoot() const { return !parentTask(); }
 
@@ -331,9 +316,6 @@ private:
 
     /** The iCal unique ID of the Todo for this task. */
     QString m_uid;
-
-    /** The comment associated with this Task. */
-    QString m_comment;
 
     int m_percentComplete;
 

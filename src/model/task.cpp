@@ -412,7 +412,6 @@ bool Task::parseIncidence(
     name = incident->summary();
     description = incident->description();
     m_uid = incident->uid();
-    m_comment = incident->description();
 
     ok = false;
     minutes = getCustomProperty(incident, QStringLiteral("totalTaskTime")).toInt(&ok);
@@ -541,17 +540,6 @@ void Task::update()
     emit m_projectModel->tasksModel()->dataChanged(first, last, QVector<int>{Qt::DisplayRole});
 }
 
-void Task::addComment(const QString& comment, TimeTrackerStorage* storage)
-{
-    m_comment = m_comment + QString::fromLatin1("\n") + comment;
-
-    // TODO: Use libkcalcore comments
-    // todo->addComment(comment);
-
-    // TODO check return value
-    storage->save();
-}
-
 void Task::startNewSession()
 {
     changeTimes(-m_sessionTime, 0, nullptr);
@@ -562,11 +550,6 @@ void Task::startNewSession()
 QString Task::uid() const
 {
     return m_uid;
-}
-
-QString Task::comment() const
-{
-    return m_comment;
 }
 
 int Task::percentComplete() const
