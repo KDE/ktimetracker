@@ -52,6 +52,8 @@ public:
      */
     void restoreItemState();
 
+    void refresh();
+
 public Q_SLOTS:
     /** item state stores if a task is expanded so you can see the subtasks */
     void itemStateChanged(const QModelIndex &index);

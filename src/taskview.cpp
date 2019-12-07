@@ -238,20 +238,9 @@ void TaskView::refreshModel()
 
 void TaskView::refreshView()
 {
-    if (!m_tasksWidget) {
-        return;
+    if (m_tasksWidget) {
+        m_tasksWidget->refresh();
     }
-
-    // remove root decoration if there is no more child.
-//    int i = 0;
-//    while (itemAt(++i) && itemAt(i)->depth() == 0){};
-    //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
-    // FIXME workaround? seems that the QItemDelegate for the percent column only
-    // works properly if rootIsDecorated == true.
-    m_tasksWidget->setRootIsDecorated(true);
-
-    emit updateButtons();
-    qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
 }
 
 /**

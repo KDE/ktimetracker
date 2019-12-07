@@ -362,3 +362,17 @@ void TasksWidget::setFilterText(const QString &text)
 {
     m_filterProxyModel->setFilterFixedString(text);
 }
+
+void TasksWidget::refresh()
+{
+    // remove root decoration if there is no more child.
+//    int i = 0;
+//    while (itemAt(++i) && itemAt(i)->depth() == 0){};
+    //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
+    // FIXME workaround? seems that the QItemDelegate for the percent column only
+    // works properly if rootIsDecorated == true.
+    setRootIsDecorated(true);
+
+    emit updateButtons();
+    qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
+}
