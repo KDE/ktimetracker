@@ -60,7 +60,7 @@ public:
     Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel);
 
     /* destructor */
-    ~Task() override = default;
+    ~Task() override;
 
     Task* parentTask() const { return dynamic_cast<Task *>(TasksModelItem::parent()); }
 

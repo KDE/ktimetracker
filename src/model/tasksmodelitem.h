@@ -32,7 +32,7 @@ class TasksModelItem
 
 public:
     explicit TasksModelItem(TasksModel *model, TasksModelItem *parent);
-    virtual ~TasksModelItem();
+    virtual ~TasksModelItem() = default;
 
     TasksModelItem *parent() const;
     TasksModelItem *child(int index) const;
@@ -47,6 +47,9 @@ public:
 
     void invalidateRunningState();
     void invalidateCompletedState();
+
+protected:
+    void disconnectFromParent();
 
 private:
     TasksModel *m_model;

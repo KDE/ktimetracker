@@ -99,7 +99,7 @@ void TasksModelItem::addChild(TasksModelItem *child)
     }
 }
 
-TasksModelItem::~TasksModelItem()
+void TasksModelItem::disconnectFromParent()
 {
     TasksModelItem *parent = m_parent ? m_parent : m_model->m_rootItem;
 

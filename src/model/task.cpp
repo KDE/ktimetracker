@@ -70,6 +70,11 @@ Task::Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel)
     init( name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
 }
 
+Task::~Task()
+{
+    disconnectFromParent();
+}
+
 int Task::depth()
 {
     int res = 0;
