@@ -215,9 +215,11 @@ void TaskView::load(const QUrl &url)
         if (!m_desktopTracker->startTracking().isEmpty()) {
             KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work."));
         }
-        refreshModel();
-        refreshView();
     }
+
+    refreshModel();
+    refreshView();
+
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
     }
@@ -238,9 +240,7 @@ void TaskView::refreshModel()
 
 void TaskView::refreshView()
 {
-    if (m_tasksWidget) {
-        m_tasksWidget->refresh();
-    }
+    m_tasksWidget->refresh();
 }
 
 /**

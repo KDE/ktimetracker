@@ -162,8 +162,6 @@ QString TimeTrackerStorage::buildTaskView(const KCalendarCore::Todo::List &todos
         }
     }
 
-    view->refreshModel();
-    view->refreshView();
     return err;
 }
 
@@ -279,6 +277,8 @@ void TimeTrackerStorage::onFileModified()
 //    m_calendar->setTimeSpec( KSystemTimeZones::local() );
     m_calendar.reload();
     buildTaskView(m_calendar.rawTodos(), m_taskView);
+    m_taskView->refreshModel();
+    m_taskView->refreshView();
 
     qCDebug(KTT_LOG) << "exiting onFileModified";
 }
