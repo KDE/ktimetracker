@@ -194,11 +194,12 @@ void TaskView::load(const QUrl &url)
             task->resumeRunning();
             m_activeTasks.append(task);
             emit updateButtons();
-            if (m_activeTasks.count() == 1) {
-                emit timersActive();
-            }
             emit tasksChanged(m_activeTasks);
         }
+    }
+
+    if (m_activeTasks.count() > 0) {
+        emit timersActive();
     }
 
     if (tasksModel->topLevelItemCount() > 0) {
@@ -254,8 +255,6 @@ void TaskView::startCurrentTimer()
 
 void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
 {
-    bool activeTasksWasEmpty = storage()->tasksModel()->getActiveTasks().isEmpty();
-
     qCDebug(KTT_LOG) << "Entering function";
     if (task != nullptr && !task->isRunning()) {
         if (!task->isComplete()) {
@@ -272,7 +271,7 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
         }
     }
 
-    if (activeTasksWasEmpty && !storage()->tasksModel()->getActiveTasks().isEmpty()) {
+    if (!storage()->tasksModel()->getActiveTasks().isEmpty()) {
         emit timersActive();
     }
 }
