@@ -258,7 +258,7 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
     bool activeTasksWasEmpty = storage()->tasksModel()->getActiveTasks().isEmpty();
 
     qCDebug(KTT_LOG) << "Entering function";
-    if (task != nullptr && m_activeTasks.indexOf(task) == -1) {
+    if (task != nullptr && !task->isRunning()) {
         if (!task->isComplete()) {
             if (KTimeTrackerSettings::uniTasking()) {
                 stopAllTimers();
@@ -328,7 +328,7 @@ void TaskView::toggleFocusTracking()
 void TaskView::stopTimerFor(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    if (task != nullptr && m_activeTasks.indexOf(task) != -1) {
+    if (task != nullptr && task->isRunning()) {
         m_activeTasks.removeAll(task);
 
         task->setRunning(false);
