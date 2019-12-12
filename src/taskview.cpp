@@ -212,7 +212,7 @@ void TaskView::load(const QUrl &url)
         }
     }
 
-    refreshModel();
+    storage()->projectModel()->refresh();
     refreshView();
 
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
@@ -223,14 +223,6 @@ void TaskView::load(const QUrl &url)
 void TaskView::closeStorage()
 {
     m_storage->closeStorage();
-}
-
-void TaskView::refreshModel()
-{
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        task->invalidateCompletedState();
-        task->update();  // maybe there was a change in the times's format
-    }
 }
 
 void TaskView::refreshView()
@@ -284,7 +276,7 @@ QString TaskView::reFreshTimes()
         }
     }
 
-    refreshModel();
+    storage()->projectModel()->refresh();
     refreshView();
     qCDebug(KTT_LOG) << "Leaving TaskView::reFreshTimes()";
     return err;
@@ -293,7 +285,7 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     storage()->projectModel()->importPlanner(fileName, m_tasksWidget->currentItem());
-    refreshModel();
+    storage()->projectModel()->refresh();
     refreshView();
 }
 
@@ -486,7 +478,7 @@ void TaskView::newSubTask()
 
     m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)), true);
 
-    refreshModel();
+    storage()->projectModel()->refresh();
     refreshView();
 }
 
@@ -659,7 +651,7 @@ void TaskView::reconfigureModel()
         m_autoSaveTimer->stop();
     }
 
-    refreshModel();
+    storage()->projectModel()->refresh();
 }
 
 //----------------------------------------------------------------------------

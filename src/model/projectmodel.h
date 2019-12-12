@@ -49,6 +49,9 @@ public:
     /** Import tasks from Imendio Planner */
     void importPlanner(const QString &fileName, Task *currentTask);
 
+    /** Used to refresh (e.g. after import) */
+    void refresh();
+
 private:
     TasksModel *m_tasksModel;
     EventsModel *m_eventsModel;

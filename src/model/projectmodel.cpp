@@ -85,3 +85,11 @@ void ProjectModel::importPlanner(const QString &fileName, Task *currentTask)
     reader.setContentHandler(handler);
     reader.parse(source);
 }
+
+void ProjectModel::refresh()
+{
+    for (Task *task : tasksModel()->getAllTasks()) {
+        task->invalidateCompletedState();
+        task->update();  // maybe there was a change in the times's format
+    }
+}
