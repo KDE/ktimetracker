@@ -43,6 +43,7 @@
 #include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 #include "model/eventsmodel.h"
+#include "model/projectmodel.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "treeviewheadercontextmenu.h"
@@ -291,13 +292,7 @@ QString TaskView::reFreshTimes()
 
 void TaskView::importPlanner(const QString& fileName)
 {
-    qCDebug(KTT_LOG) << "entering importPlanner";
-    auto *handler = new PlannerParser(storage()->projectModel(), m_tasksWidget->currentItem());
-    QFile xmlFile(fileName);
-    QXmlInputSource source(&xmlFile);
-    QXmlSimpleReader reader;
-    reader.setContentHandler(handler);
-    reader.parse(source);
+    storage()->projectModel()->importPlanner(fileName, m_tasksWidget->currentItem());
     refreshModel();
     refreshView();
 }

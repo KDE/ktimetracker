@@ -25,8 +25,9 @@
 
 #include "file/filecalendar.h"
 
-class TasksModel;
 class EventsModel;
+class Task;
+class TasksModel;
 
 class ProjectModel
 {
@@ -44,6 +45,9 @@ public:
      * This procedure resets all times (session and overall) for all tasks and subtasks.
      */
     void resetTimeForAllTasks();
+
+    /** Import tasks from Imendio Planner */
+    void importPlanner(const QString &fileName, Task *currentTask);
 
 private:
     TasksModel *m_tasksModel;

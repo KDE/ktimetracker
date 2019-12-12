@@ -22,6 +22,7 @@
 
 #include "event.h"
 #include "eventsmodel.h"
+#include "import/plannerparser.h"
 #include "task.h"
 #include "tasksmodel.h"
 
@@ -73,4 +74,14 @@ void ProjectModel::resetTimeForAllTasks()
     }
 
     eventsModel()->clear();
+}
+
+void ProjectModel::importPlanner(const QString &fileName, Task *currentTask)
+{
+    auto *handler = new PlannerParser(this, currentTask);
+    QFile xmlFile(fileName);
+    QXmlInputSource source(&xmlFile);
+    QXmlSimpleReader reader;
+    reader.setContentHandler(handler);
+    reader.parse(source);
 }
