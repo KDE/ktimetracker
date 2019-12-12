@@ -65,6 +65,8 @@ public:
     QList<TasksModelItem *> getAllItems();
     QList<Task *> getAllTasks();
 
+    QList<Task *> getActiveTasks();
+
     void addChild(TasksModelItem *item);
 
     Qt::DropActions supportedDropActions() const override;

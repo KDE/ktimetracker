@@ -119,11 +119,9 @@ QString TimeTrackerStorage::buildTaskView(const KCalendarCore::Todo::List &todos
     // remember tasks that are running and their start times
     QVector<QString> runningTasks;
     QVector<QDateTime> startTimes;
-    for (Task *task : tasksModel()->getAllTasks()) {
-        if (task->isRunning()) {
-            runningTasks.append(task->uid());
-            startTimes.append(task->startTime());
-        }
+    for (Task *task : tasksModel()->getActiveTasks()) {
+        runningTasks.append(task->uid());
+        startTimes.append(task->startTime());
     }
 
     tasksModel()->clear();

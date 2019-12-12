@@ -251,6 +251,18 @@ QList<Task*> TasksModel::getAllTasks()
     return tasks;
 }
 
+QList<Task*> TasksModel::getActiveTasks()
+{
+    QList<Task*> activeTasks;
+    for (Task *task : getAllTasks()) {
+        if (task->isRunning()) {
+            activeTasks.append(task);
+        }
+    }
+
+    return activeTasks;
+}
+
 QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (section < 0 || orientation != Qt::Horizontal || section >= m_headerLabels.size()) {

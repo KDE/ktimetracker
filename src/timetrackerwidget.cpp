@@ -948,10 +948,8 @@ QStringList TimeTrackerWidget::activeTasks() const
         return result;
     }
 
-    for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
-        if (task->isRunning()) {
-            result << task->name();
-        }
+    for (Task *task : taskView->storage()->tasksModel()->getActiveTasks()) {
+        result << task->name();
     }
 
     return result;
