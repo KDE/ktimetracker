@@ -197,9 +197,11 @@ void TaskView::load(const QUrl &url)
         }
     }
     emit updateButtons();
-    emit tasksChanged(m_activeTasks);
+    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
 
-    if (m_activeTasks.count() > 0) {
+    if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
+        emit timersInactive();
+    } else {
         emit timersActive();
     }
 
@@ -271,7 +273,7 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
     }
 
     emit updateButtons();
-    emit tasksChanged(m_activeTasks);
+    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
 
     if (!storage()->tasksModel()->getActiveTasks().isEmpty()) {
         emit timersActive();
@@ -292,12 +294,14 @@ void TaskView::stopAllTimers(const QDateTime& when)
 {
     qCDebug(KTT_LOG) << "Entering function";
     QProgressDialog dialog(
-        i18nc("@info:progress", "Stopping timers..."), i18n("Cancel"), 0, m_activeTasks.count(), m_tasksWidget);
-    if (m_activeTasks.count() > 1) {
+        i18nc("@info:progress", "Stopping timers..."), i18n("Cancel"),
+        0, storage()->tasksModel()->getActiveTasks().size(),
+        m_tasksWidget);
+    if (storage()->tasksModel()->getActiveTasks().size() > 1) {
         dialog.show();
     }
 
-    for (Task *task : m_activeTasks) {
+    for (Task *task : storage()->tasksModel()->getActiveTasks()) {
         QApplication::processEvents();
 
         task->setRunning(false, when);
