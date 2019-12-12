@@ -52,6 +52,12 @@ public:
     /** Used to refresh (e.g. after import) */
     void refresh();
 
+    /**
+     * Refresh the times of the tasks, e.g. when the history has been changed by the user.
+     * Re-calculate the time for every task based on events in the history.
+     */
+    void refreshTimes();
+
 private:
     TasksModel *m_tasksModel;
     EventsModel *m_eventsModel;

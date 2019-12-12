@@ -225,56 +225,11 @@ void TaskView::closeStorage()
     m_storage->closeStorage();
 }
 
-/**
- * Refresh the times of the tasks, e.g. when the history has been changed by the user.
- * Re-calculate the time for every task based on events in the history.
- */
 QString TaskView::reFreshTimes()
 {
-    QString err;
-
-    // This procedure resets all times (session and overall) for all tasks and subtasks.
-    // Reset session and total time for all tasks - do not touch the storage.
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        task->resetTimes();
-    }
-
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        // get all events for task
-        for (const auto *event : storage()->eventsModel()->eventsForTask(task)) {
-            QDateTime eventStart = event->dtStart();
-            QDateTime eventEnd = event->dtEnd();
-
-            const int64_t duration = event->duration() / 60;
-            task->addTime(duration);
-            qCDebug(KTT_LOG) << "duration is" << duration;
-
-            if (task->sessionStartTiMe().isValid()) {
-                // if there is a session
-                if (task->sessionStartTiMe().secsTo(eventStart) > 0 &&
-                    task->sessionStartTiMe().secsTo(eventEnd) > 0) {
-                    // if the event is after the session start
-                    task->addSessionTime(duration);
-                }
-            } else {
-                // so there is no session at all
-                task->addSessionTime(duration);
-            }
-        }
-    }
-
-    // Recalculate total times after changing hierarchy by drag&drop
-    for (Task *task : storage()->tasksModel()->getAllTasks()) {
-        // Start recursive method recalculateTotalTimesSubtree() for each top-level task.
-        if (task->isRoot()) {
-            task->recalculateTotalTimesSubtree();
-        }
-    }
-
-    storage()->projectModel()->refresh();
+    storage()->projectModel()->refreshTimes();
     tasksWidget()->refresh();
-    qCDebug(KTT_LOG) << "Leaving TaskView::reFreshTimes()";
-    return err;
+    return QString();
 }
 
 void TaskView::importPlanner(const QString& fileName)

@@ -23,6 +23,7 @@
 #include "event.h"
 #include "eventsmodel.h"
 #include "import/plannerparser.h"
+#include "ktt_debug.h"
 #include "task.h"
 #include "tasksmodel.h"
 
@@ -94,4 +95,47 @@ void ProjectModel::refresh()
         task->invalidateCompletedState();
         task->update();  // maybe there was a change in the times's format
     }
+}
+
+void ProjectModel::refreshTimes()
+{
+    // This procedure resets all times (session and overall) for all tasks and subtasks.
+    // Reset session and total time for all tasks - do not touch the storage.
+    for (Task *task : tasksModel()->getAllTasks()) {
+        task->resetTimes();
+    }
+
+    for (Task *task : tasksModel()->getAllTasks()) {
+        // get all events for task
+        for (const auto *event : eventsModel()->eventsForTask(task)) {
+            QDateTime eventStart = event->dtStart();
+            QDateTime eventEnd = event->dtEnd();
+
+            const int64_t duration = event->duration() / 60;
+            task->addTime(duration);
+            qCDebug(KTT_LOG) << "duration is" << duration;
+
+            if (task->sessionStartTiMe().isValid()) {
+                // if there is a session
+                if (task->sessionStartTiMe().secsTo(eventStart) > 0 &&
+                    task->sessionStartTiMe().secsTo(eventEnd) > 0) {
+                    // if the event is after the session start
+                    task->addSessionTime(duration);
+                }
+            } else {
+                // so there is no session at all
+                task->addSessionTime(duration);
+            }
+        }
+    }
+
+    // Recalculate total times after changing hierarchy by drag&drop
+    for (Task *task : tasksModel()->getAllTasks()) {
+        // Start recursive method recalculateTotalTimesSubtree() for each top-level task.
+        if (task->isRoot()) {
+            task->recalculateTotalTimesSubtree();
+        }
+    }
+
+    refresh();
 }
