@@ -145,8 +145,7 @@ TaskView::~TaskView()
 void TaskView::load(const QUrl &url)
 {
     if (m_tasksWidget) {
-        delete m_tasksWidget;
-        m_tasksWidget = nullptr;
+        qFatal("TaskView::load must be called only once");
     }
 
     // if the program is used as an embedded plugin for konqueror, there may be a need

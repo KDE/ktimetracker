@@ -54,8 +54,12 @@ public:
     explicit TaskView(QWidget *parent = nullptr);
     ~TaskView() override;
 
-    //BEGIN model specified
-    /** Load the view from storage.  */
+    /**
+     * Load the view from storage.
+     *
+     * Must be called only once. If you need to open another file,
+     * please create a new TaskView object.
+     */
     void load(const QUrl& url);
 
     /** Close the storage and release lock. */
@@ -66,12 +70,9 @@ public:
         const QString& taskname, const QString& taskdescription = QString(),
         int64_t total = 0, int64_t session = 0, const DesktopList& desktops = QVector<int>(0,0),
         Task* parent = nullptr);
-    //END
 
-    //BEGIN behavior
     /** Returns whether the focus tracking is currently active. */
     bool isFocusTrackingActive() const;
-    //END
 
     TasksWidget *tasksWidget() { return m_tasksWidget; }
 
