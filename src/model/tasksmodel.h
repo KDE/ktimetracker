@@ -88,6 +88,12 @@ public:
      */
     void startNewSession();
 
+    /**
+     * Add time delta to all active tasks.
+     * Does not modify events model.
+     */
+    void addTimeToActiveTasks(int64_t minutes);
+
 public Q_SLOTS:
     void setActiveIcon(int frameNumber);
 

@@ -352,14 +352,7 @@ void TaskView::stopCurrentTimer()
 
 void TaskView::minuteUpdate()
 {
-    addTimeToActiveTasks(1);
-}
-
-void TaskView::addTimeToActiveTasks(int64_t minutes)
-{
-    for (Task *task : m_activeTasks) {
-        task->changeTime(minutes, nullptr);
-    }
+    storage()->tasksModel()->addTimeToActiveTasks(1);
 }
 
 void TaskView::newTask(const QString &caption, Task *parent)
@@ -547,7 +540,7 @@ void TaskView::markTaskAsComplete()
 
 void TaskView::subtractTime(int64_t minutes)
 {
-    addTimeToActiveTasks(-minutes);
+    storage()->tasksModel()->addTimeToActiveTasks(-minutes);
 }
 
 void TaskView::markTaskAsIncomplete()

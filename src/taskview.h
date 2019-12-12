@@ -198,13 +198,6 @@ private: // member variables
 
     TasksWidget *m_tasksWidget;
 
-private:
-    /**
-     * Add time delta to all active tasks.
-     * Does not modify events model.
-     */
-    void addTimeToActiveTasks(int64_t minutes);
-
 public Q_SLOTS:
     void minuteUpdate();
 

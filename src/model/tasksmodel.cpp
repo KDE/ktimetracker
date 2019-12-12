@@ -387,3 +387,10 @@ void TasksModel::startNewSession()
         task->startNewSession();
     }
 }
+
+void TasksModel::addTimeToActiveTasks(int64_t minutes)
+{
+    for (Task *task : getActiveTasks()) {
+        task->changeTime(minutes, nullptr);
+    }
+}
