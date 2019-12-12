@@ -158,11 +158,6 @@ public Q_SLOTS:
     void startTimerForNow(Task *task);
     void stopTimerFor(Task *task);
 
-    /** clears all active tasks. Needed e.g. if iCal file was modified by
-       another program and taskview is cleared without stopping tasks
-        IF YOU DO NOT KNOW WHAT YOU ARE DOING, CALL stopAllTimers INSTEAD */
-    void clearActiveTasks();
-
     /** Reconfigures taskView depending on current configuration. */
     void reconfigureModel();
 
@@ -195,7 +190,6 @@ private: // member variables
     TimeTrackerStorage *m_storage;
     bool m_focusTrackingActive;
     Task* m_lastTaskWithFocus;
-    QList<Task*> m_activeTasks;
 
     FocusDetector *m_focusDetector;
 

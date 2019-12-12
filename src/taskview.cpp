@@ -193,7 +193,6 @@ void TaskView::load(const QUrl &url)
     for (Task *task : storage()->tasksModel()->getAllTasks()) {
         if (!m_storage->allEventsHaveEndTime(task)) {
             task->resumeRunning();
-            m_activeTasks.append(task);
         }
     }
     emit updateButtons();
@@ -267,8 +266,6 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
             m_idleTimeDetector->startIdleDetection();
 
             task->setRunning(true, startTime);
-
-            m_activeTasks.append(task);
         }
     }
 
@@ -283,11 +280,6 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
 void TaskView::startTimerForNow(Task *task)
 {
     startTimerFor(task, QDateTime::currentDateTime());
-}
-
-void TaskView::clearActiveTasks()
-{
-    m_activeTasks.clear();
 }
 
 void TaskView::stopAllTimers(const QDateTime& when)
@@ -310,7 +302,6 @@ void TaskView::stopAllTimers(const QDateTime& when)
     }
 
     m_idleTimeDetector->stopIdleDetection();
-    m_activeTasks.clear();
     emit updateButtons();
     emit timersInactive();
     emit tasksChanged(storage()->tasksModel()->getActiveTasks());
@@ -333,8 +324,6 @@ void TaskView::stopTimerFor(Task* task)
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (task != nullptr && task->isRunning()) {
-        m_activeTasks.removeAll(task);
-
         task->setRunning(false);
 
         if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
@@ -656,7 +645,6 @@ void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int la
 
     // Handle task deletion
     m_desktopTracker->registerForDesktops(task, {});
-    m_activeTasks.removeAll(task);
 }
 
 void TaskView::taskRemoved(const QModelIndex &/*parent*/, int /*first*/, int /*last*/)

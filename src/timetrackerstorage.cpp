@@ -151,7 +151,6 @@ QString TimeTrackerStorage::buildTaskView(const KCalendarCore::Todo::List &todos
         }
     }
 
-    view->clearActiveTasks();
     // restart tasks that have been running with their start times
     for (Task *task : tasksModel()->getAllTasks()) {
         for (int n = 0; n < runningTasks.count(); ++n) {
