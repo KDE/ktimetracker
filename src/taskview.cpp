@@ -255,6 +255,8 @@ void TaskView::startCurrentTimer()
 
 void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
 {
+    bool activeTasksWasEmpty = storage()->tasksModel()->getActiveTasks().isEmpty();
+
     qCDebug(KTT_LOG) << "Entering function";
     if (task != nullptr && m_activeTasks.indexOf(task) == -1) {
         if (!task->isComplete()) {
@@ -267,11 +269,12 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
 
             m_activeTasks.append(task);
             emit updateButtons();
-            if (m_activeTasks.count() == 1) {
-                emit timersActive();
-            }
             emit tasksChanged(m_activeTasks);
         }
+    }
+
+    if (activeTasksWasEmpty && !storage()->tasksModel()->getActiveTasks().isEmpty()) {
+        emit timersActive();
     }
 }
 
@@ -493,13 +496,14 @@ void TaskView::deleteTaskBatch(Task* task)
     task->remove();
     deleteEntry(uid); // forget if the item was expanded or collapsed
 
+    task->delete_recursive();
+
     // Stop idle detection if no more counters are running
-    if (m_activeTasks.count() == 0) {
+    if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
         m_idleTimeDetector->stopIdleDetection();
         emit timersInactive();
     }
 
-    task->delete_recursive();
     emit tasksChanged(m_activeTasks);
 }
 
