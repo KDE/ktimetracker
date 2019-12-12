@@ -147,6 +147,8 @@ public Q_SLOTS:
     void subtractTime(int64_t minutes);
     /** receiving signal that a task is being deleted */
     void taskAboutToBeRemoved(const QModelIndex &parent, int first, int last);
+    /** receiving signal that a task has been deleted */
+    void taskRemoved(const QModelIndex &parent, int first, int last);
 
     /** starts timer for task.
      * @param task      task to start timer of

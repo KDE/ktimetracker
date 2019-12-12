@@ -181,6 +181,7 @@ void TaskView::load(const QUrl &url)
     connect(tasksModel, &TasksModel::taskCompleted, this, &TaskView::stopTimerFor);
     connect(tasksModel, &TasksModel::taskDropped, this, &TaskView::reFreshTimes);
     connect(tasksModel, &QAbstractItemModel::rowsAboutToBeRemoved, this, &TaskView::taskAboutToBeRemoved);
+    connect(tasksModel, &QAbstractItemModel::rowsRemoved, this, &TaskView::taskRemoved);
     connect(storage()->eventsModel(), &EventsModel::timesChanged, this, &TaskView::reFreshTimes);
 
     // Register tasks with desktop tracker
@@ -650,8 +651,11 @@ void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int la
     }
 
     // Handle task deletion
-    DesktopList desktopList;
-    m_desktopTracker->registerForDesktops(task, desktopList);
+    m_desktopTracker->registerForDesktops(task, {});
     m_activeTasks.removeAll(task);
-    emit tasksChanged(m_activeTasks);
+}
+
+void TaskView::taskRemoved(const QModelIndex &/*parent*/, int /*first*/, int /*last*/)
+{
+    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
