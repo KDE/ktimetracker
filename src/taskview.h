@@ -109,8 +109,6 @@ public Q_SLOTS:
     /** Calls editTask dialog for the current task. */
     void editTask();
 
-    void editHistory();
-
     /**
      * Returns a pointer to storage object.
      *

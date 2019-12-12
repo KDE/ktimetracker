@@ -514,12 +514,6 @@ void TaskView::editTask()
     delete dialog;
 }
 
-void TaskView::editHistory()
-{
-    QPointer<HistoryDialog> dialog = new HistoryDialog(m_tasksWidget->parentWidget(), storage()->projectModel());
-    dialog->exec();
-}
-
 void TaskView::setPerCentComplete(int completion)
 {
     Task* task = m_tasksWidget->currentItem();
