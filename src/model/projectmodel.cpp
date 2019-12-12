@@ -84,6 +84,8 @@ void ProjectModel::importPlanner(const QString &fileName, Task *currentTask)
     QXmlSimpleReader reader;
     reader.setContentHandler(handler);
     reader.parse(source);
+
+    refresh();
 }
 
 void ProjectModel::refresh()

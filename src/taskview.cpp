@@ -285,7 +285,6 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     storage()->projectModel()->importPlanner(fileName, m_tasksWidget->currentItem());
-    storage()->projectModel()->refresh();
     refreshView();
 }
 
