@@ -213,7 +213,7 @@ void TaskView::load(const QUrl &url)
     }
 
     storage()->projectModel()->refresh();
-    refreshView();
+    tasksWidget()->refresh();
 
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
@@ -223,11 +223,6 @@ void TaskView::load(const QUrl &url)
 void TaskView::closeStorage()
 {
     m_storage->closeStorage();
-}
-
-void TaskView::refreshView()
-{
-    m_tasksWidget->refresh();
 }
 
 /**
@@ -277,7 +272,7 @@ QString TaskView::reFreshTimes()
     }
 
     storage()->projectModel()->refresh();
-    refreshView();
+    tasksWidget()->refresh();
     qCDebug(KTT_LOG) << "Leaving TaskView::reFreshTimes()";
     return err;
 }
@@ -285,7 +280,7 @@ QString TaskView::reFreshTimes()
 void TaskView::importPlanner(const QString& fileName)
 {
     storage()->projectModel()->importPlanner(fileName, m_tasksWidget->currentItem());
-    refreshView();
+    tasksWidget()->refresh();
 }
 
 void TaskView::save()
@@ -478,7 +473,7 @@ void TaskView::newSubTask()
     m_tasksWidget->setExpanded(m_filterProxyModel->mapFromSource(storage()->tasksModel()->index(task, 0)), true);
 
     storage()->projectModel()->refresh();
-    refreshView();
+    tasksWidget()->refresh();
 }
 
 void TaskView::editTask()

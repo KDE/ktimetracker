@@ -52,7 +52,9 @@ public:
      */
     void restoreItemState();
 
+    /** Used to refresh (e.g. after import) */
     void refresh();
+
     void reconfigure();
 
 public Q_SLOTS:

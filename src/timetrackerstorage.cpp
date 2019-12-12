@@ -44,6 +44,7 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 #include "taskview.h"
+#include "widgets/taskswidget.h"
 
 const QByteArray eventAppName = QByteArray("ktimetracker");
 
@@ -272,7 +273,7 @@ void TimeTrackerStorage::onFileModified()
     m_calendar.reload();
     buildTaskView(m_calendar.rawTodos(), m_taskView);
     m_taskView->storage()->projectModel()->refresh();
-    m_taskView->refreshView();
+    m_taskView->tasksWidget()->refresh();
 
     qCDebug(KTT_LOG) << "exiting onFileModified";
 }
