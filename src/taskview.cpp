@@ -193,10 +193,10 @@ void TaskView::load(const QUrl &url)
         if (!m_storage->allEventsHaveEndTime(task)) {
             task->resumeRunning();
             m_activeTasks.append(task);
-            emit updateButtons();
-            emit tasksChanged(m_activeTasks);
         }
     }
+    emit updateButtons();
+    emit tasksChanged(m_activeTasks);
 
     if (m_activeTasks.count() > 0) {
         emit timersActive();
@@ -266,10 +266,11 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
             task->setRunning(true, startTime);
 
             m_activeTasks.append(task);
-            emit updateButtons();
-            emit tasksChanged(m_activeTasks);
         }
     }
+
+    emit updateButtons();
+    emit tasksChanged(m_activeTasks);
 
     if (!storage()->tasksModel()->getActiveTasks().isEmpty()) {
         emit timersActive();
@@ -307,7 +308,7 @@ void TaskView::stopAllTimers(const QDateTime& when)
     m_activeTasks.clear();
     emit updateButtons();
     emit timersInactive();
-    emit tasksChanged(m_activeTasks);
+    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::toggleFocusTracking()
@@ -331,13 +332,13 @@ void TaskView::stopTimerFor(Task* task)
 
         task->setRunning(false);
 
-        if (m_activeTasks.count() == 0) {
+        if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
             m_idleTimeDetector->stopIdleDetection();
             emit timersInactive();
         }
         emit updateButtons();
     }
-    emit tasksChanged(m_activeTasks);
+    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::stopCurrentTimer()
@@ -495,7 +496,7 @@ void TaskView::deleteTaskBatch(Task* task)
         emit timersInactive();
     }
 
-    emit tasksChanged(m_activeTasks);
+    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::deleteTask(Task* task)
