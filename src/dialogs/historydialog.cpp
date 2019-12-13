@@ -52,7 +52,7 @@ public:
         auto* editor = new QDateTimeEdit(parent);
         editor->setAutoFillBackground(true);
         editor->setPalette(option.palette);
-        editor->setBackgroundRole(QPalette::Background);
+        editor->setBackgroundRole(QPalette::Window);
         return editor;
     }
 

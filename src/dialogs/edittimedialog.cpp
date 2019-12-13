@@ -54,7 +54,7 @@ EditTimeDialog::EditTimeDialog(
     infoGroup->setLayout(infoLayout);
 
     QPalette roPalette;
-    roPalette.setColor(QPalette::Base, palette().color(QPalette::Background));
+    roPalette.setColor(QPalette::Base, palette().color(QPalette::Window));
 
     auto *nameText = new QLineEdit(name, infoGroup);
     nameText->setReadOnly(true);
