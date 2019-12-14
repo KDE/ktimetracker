@@ -98,10 +98,10 @@ void StorageTest::testLockPath()
 #endif
     QCOMPARE(TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile("/tmp/../var/hello.ics")), expected1);
 
-    // SHA-1 of "https://abc/1/привет world.ics"
+    // SHA-1 of "https://abc/1/привет world"
     QCOMPARE(
         TimeTrackerStorage::createLockFileName(QUrl("https://abc/1/привет%20world")),
-        "/tmp/ktimetracker_bebbc77798797d11922012479ee5533a9dd58356_привет world.lock");
+        QDir().absoluteFilePath("/tmp/ktimetracker_7048956ad41735da76ae0da13d116b500753ba9e_привет world.lock"));
 }
 
 QTEST_MAIN(StorageTest)
