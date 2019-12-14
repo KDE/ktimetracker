@@ -89,16 +89,14 @@ void StorageTest::testSaveSimpleTree()
 
 void StorageTest::testLockPath()
 {
-    QCOMPARE(
-        TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile("/tmp/../var/hello.ics")),
 #ifdef Q_OS_WIN
-        // SHA-1 of "C:/var/hello.ics"
-        "/tmp/ktimetracker_a1a9ea47d71476676afa881247fcd8ae915788b5_hello.ics.lock"
+    // SHA-1 of "C:/var/hello.ics"
+    const QString expected1("/tmp/ktimetracker_a1a9ea47d71476676afa881247fcd8ae915788b5_hello.ics.lock");
 #else
-        // SHA-1 of "/var/hello.ics"
-        "/tmp/ktimetracker_290fa23d3a268915fba5b2b2e5818aec381b7044_hello.ics.lock"
+    // SHA-1 of "/var/hello.ics"
+    const QString expected1("/tmp/ktimetracker_290fa23d3a268915fba5b2b2e5818aec381b7044_hello.ics.lock");
 #endif
-    );
+    QCOMPARE(TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile("/tmp/../var/hello.ics")), expected1);
 
     // SHA-1 of "https://abc/1/привет world.ics"
     QCOMPARE(
