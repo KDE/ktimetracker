@@ -137,6 +137,8 @@ public:
 
     bool bookTime(const Task *task, const QDateTime &startDateTime, int64_t durationInSeconds);
 
+    static QString createLockFileName(const QUrl& url);
+
 private Q_SLOTS:
     void onFileModified();
 

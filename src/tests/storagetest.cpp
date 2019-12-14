@@ -34,6 +34,7 @@ class StorageTest : public QObject
 private Q_SLOTS:
     void testSaveEmpty();
     void testSaveSimpleTree();
+    void testLockPath();
 };
 
 void StorageTest::testSaveEmpty()
@@ -84,6 +85,19 @@ void StorageTest::testSaveSimpleTree()
     QCOMPARE(events[3]->summary(), "negative duration");
     QCOMPARE(events[3]->customProperty("ktimetracker", "duration"), "-300");
     QCOMPARE(events[3]->relatedTo(), todos[3]->uid());
+}
+
+void StorageTest::testLockPath()
+{
+    // SHA-1 of "/var/hello.ics"
+    QCOMPARE(
+        TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile("/tmp/../var/hello.ics")),
+        "/tmp/ktimetracker_290fa23d3a268915fba5b2b2e5818aec381b7044_hello.ics.lock");
+
+    // SHA-1 of "https://abc/1/привет world.ics"
+    QCOMPARE(
+        TimeTrackerStorage::createLockFileName(QUrl("https://abc/1/привет%20world")),
+        "/tmp/ktimetracker_bebbc77798797d11922012479ee5533a9dd58356_привет world.lock");
 }
 
 QTEST_MAIN(StorageTest)

@@ -31,9 +31,13 @@
 
 #include "timetrackerstorage.h"
 
+#include <QCryptographicHash>
 #include <QDateTime>
+#include <QDir>
+#include <QFileInfo>
 #include <QLockFile>
 #include <QMultiHash>
+#include <QStandardPaths>
 
 #include <KDirWatch>
 #include <KLocalizedString>
@@ -209,6 +213,35 @@ bool TimeTrackerStorage::allEventsHaveEndTime(Task *task)
     return true;
 }
 
+// static
+QString TimeTrackerStorage::createLockFileName(const QUrl& url)
+{
+    QString canonicalSeedString;
+    QString baseName;
+    if (url.isLocalFile()) {
+        QFileInfo fileInfo(url.toLocalFile());
+        canonicalSeedString = fileInfo.absoluteFilePath();
+        baseName = fileInfo.fileName();
+    } else {
+        canonicalSeedString = url.url();
+        baseName = QFileInfo(url.path()).completeBaseName();
+    }
+
+    // Report failure if canonicalSeedString is empty.
+    if (canonicalSeedString.isEmpty()) {
+        return QString();
+    }
+
+    // Remove characters disallowed by operating systems
+    baseName.replace(QRegExp("[" + QRegExp::escape("\\/:*?\"<>|") + "]"), QString());
+
+    const QString& hash = QCryptographicHash::hash(canonicalSeedString.toUtf8(), QCryptographicHash::Sha1).toHex();
+    const QString& lockBaseName = QStringLiteral("ktimetracker_%1_%2.lock").arg(hash).arg(baseName);
+
+    // Put the lock file in a directory for temporary files
+    return QDir(QStandardPaths::writableLocation(QStandardPaths::TempLocation)).absoluteFilePath(lockBaseName);
+}
+
 QString TimeTrackerStorage::save()
 {
     bool removedFromDirWatch = false;
@@ -223,7 +256,7 @@ QString TimeTrackerStorage::save()
         return QStringLiteral("m_model is nullptr");
     }
 
-    const QString fileLockPath("ktimetrackerics.lock");
+    const QString& fileLockPath = createLockFileName(m_url);
     QLockFile fileLock(fileLockPath);
     if (!fileLock.lock()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_fileLock->lock() failed";
