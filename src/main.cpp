@@ -83,6 +83,15 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     Q_INIT_RESOURCE(ktimetracker);
 
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+
+#ifdef Q_OS_WIN
+    // Force Breeze theme on Windows.
+    // Kate text editor does the same.
+    QApplication::setStyle(QStringLiteral("breeze"));
+#endif
+
     KLocalizedString::setApplicationDomain("ktimetracker");
 
     KAboutData aboutData(
