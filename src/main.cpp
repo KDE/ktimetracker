@@ -132,6 +132,9 @@ int main(int argc, char *argv[])
                         i18nc("@info:credit", "Developer"),
                         QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
+
+    Q_INIT_RESOURCE(icons);
+    QIcon::setThemeSearchPaths(QStringList() << QStringLiteral(":/icons"));
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("ktimetracker")));
 
     QCommandLineParser parser;

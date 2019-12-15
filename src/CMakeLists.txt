@@ -36,6 +36,7 @@ set(ktimetracker_SRCS
     tray.cpp
     treeviewheadercontextmenu.cpp
     $<TARGET_OBJECTS:pics>
+    $<TARGET_OBJECTS:icons>
     $<TARGET_OBJECTS:ktimetracker_app_icon>
 )
 

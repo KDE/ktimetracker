@@ -1,8 +1,4 @@
-file(GLOB ktt_icons *.png *.svgz)
-ecm_install_icons(
-    ICONS       ${ktt_icons}
-    DESTINATION ${KDE_INSTALL_ICONDIR}
-    THEME hicolor
-)
+qt5_add_resources(icons_SRCS icons.qrc)
+add_library(icons OBJECT ${icons_SRCS})
 
 add_subdirectory(app)
