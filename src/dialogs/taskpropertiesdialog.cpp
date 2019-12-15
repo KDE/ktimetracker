@@ -117,6 +117,12 @@ TaskPropertiesDialog::TaskPropertiesDialog(
     mainLayout->addWidget(m_trackingGroup, 0);
     mainLayout->addStretch(0);
     mainLayout->addWidget(m_buttonBox);
+
+    // Do not show ugly empty box when virtual desktops are not available, e.g. on Windows
+    if (numDesktops == 0) {
+        // TODO replace check tracking group with a warning instead
+        m_trackingGroup->hide();
+    }
 }
 
 QString TaskPropertiesDialog::name() const
