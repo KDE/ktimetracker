@@ -274,7 +274,7 @@ void TasksWidget::mousePressEvent(QMouseEvent *event)
 {
     qCDebug(KTT_LOG) << "Entering function, event->button()=" << event->button();
 
-    if (mousePositionInsideCheckbox(event)) {
+    if (mousePositionInsideCheckbox(event) && event->buttons() == Qt::LeftButton) {
         // if the user toggles a task as complete/incomplete
         QModelIndex index = indexAt(event->pos());
         Task *task = taskAtViewIndex(index);
