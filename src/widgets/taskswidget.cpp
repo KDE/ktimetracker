@@ -228,12 +228,10 @@ void TasksWidget::slotSetPriority(QAction* action)
     }
 }
 
-void TasksWidget::mouseMoveEvent( QMouseEvent *event )
+void TasksWidget::mouseMoveEvent(QMouseEvent *event)
 {
-    QModelIndex index = indexAt( event->pos() );
-
-    if (index.isValid() && index.column() == 6)
-    {
+    QModelIndex index = indexAt(event->pos());
+    if (index.isValid() && index.column() == 6 && event->buttons() == Qt::LeftButton) {
         int newValue = (int)((event->pos().x() - visualRect(index).x()) / (double)(visualRect(index).width()) * 101);
         if (newValue > 100) {
             newValue = 100;
