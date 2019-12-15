@@ -80,11 +80,11 @@ QUrl getFileUrl(const QCommandLineParser &parser)
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
-    Q_INIT_RESOURCE(ktimetracker);
-
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+
+    QApplication app(argc, argv);
+    Q_INIT_RESOURCE(ktimetracker);
 
 #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
     // Force Breeze theme on Windows.
