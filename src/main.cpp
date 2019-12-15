@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
     // Force Breeze theme on Windows.
     // Kate text editor does the same.
     QApplication::setStyle(QStringLiteral("breeze"));
