@@ -37,7 +37,6 @@ set(ktimetracker_SRCS
     treeviewheadercontextmenu.cpp
     $<TARGET_OBJECTS:pics>
     $<TARGET_OBJECTS:icons>
-    $<TARGET_OBJECTS:ktimetracker_app_icon>
 )
 
 ecm_qt_declare_logging_category(ktimetracker_SRCS
@@ -81,7 +80,21 @@ target_link_libraries(libktimetracker
     KF5::TextWidgets
 )
 
-add_executable(ktimetracker main.cpp)
+ecm_add_app_icon(ktimetracker_app_icon_SRCS ICONS
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/16-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/22-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/32-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/48-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/64-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/128-apps-ktimetracker.png
+)
+
+# Add ktimetracker_app_icon_SRCS to the .exe target directly, otherwise
+# the icon is not included on Windows.
+add_executable(ktimetracker
+    main.cpp
+    ${ktimetracker_app_icon_SRCS}
+)
 target_link_libraries(ktimetracker libktimetracker)
 
 install(TARGETS ktimetracker ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
