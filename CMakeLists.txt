@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(APP_VERSION_NUMBER "4.99.70")
+set(APP_VERSION_NUMBER "5.0.0")
 project(ktimetracker VERSION ${APP_VERSION_NUMBER})
 
 set(KF5_MIN_VERSION "5.54.0")
