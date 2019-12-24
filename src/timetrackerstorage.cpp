@@ -117,7 +117,7 @@ QUrl TimeTrackerStorage::fileUrl()
     return m_url;
 }
 
-QString TimeTrackerStorage::buildTaskView(const KCalendarCore::Todo::List &todos, TaskView *view)
+QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, TaskView *view)
 // makes *view contain the tasks out of *rc.
 {
     // remember tasks that are running and their start times

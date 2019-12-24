@@ -40,9 +40,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     XmlGui
     TextWidgets
 )
-find_package(KF5 5.63.0 REQUIRED COMPONENTS
-    CalendarCore
-)
+find_package(KF5CalendarCore 4.82.0 CONFIG REQUIRED)
 
 add_subdirectory(pics)
 add_subdirectory(icons)

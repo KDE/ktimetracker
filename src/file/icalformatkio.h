@@ -21,9 +21,9 @@
 #ifndef KTIMETRACKER_ICALFORMATKIO_H
 #define KTIMETRACKER_ICALFORMATKIO_H
 
-#include <KCalendarCore/ICalFormat>
+#include <KCalCore/ICalFormat>
 
-class ICalFormatKIO : public KCalendarCore::ICalFormat
+class ICalFormatKIO : public KCalCore::ICalFormat
 {
 public:
     ICalFormatKIO() = default;
@@ -36,7 +36,7 @@ public:
      * @param urlString Must start with a schema, for example "file:///" or "https://"
      * @return
      */
-    bool load(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString) override;
+    bool load(const KCalCore::Calendar::Ptr &calendar, const QString &urlString) override;
 
     /**
      * Write calendar to local or remote file.
@@ -45,7 +45,7 @@ public:
      * @param urlString Must start with a schema, for example "file:///" or "https://"
      * @return
      */
-    bool save(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString) override;
+    bool save(const KCalCore::Calendar::Ptr &calendar, const QString &urlString) override;
 };
 
 #endif // KTIMETRACKER_ICALFORMATKIO_H

@@ -25,7 +25,7 @@
 
 #include <QDateTime>
 
-#include <KCalendarCore/Todo>
+#include <KCalCore/Todo>
 
 #include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
 #include "model/tasksmodelitem.h"
@@ -57,7 +57,7 @@ public:
     Task(
         const QString& taskname, const QString& taskdescription, int64_t minutes, int64_t sessionTime,
         const DesktopList& desktops, ProjectModel *projectModel, Task* parentTask);
-    Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel);
+    Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel);
 
     /* destructor */
     ~Task() override;
@@ -258,14 +258,14 @@ public:
      *  and use these data to initialize the task.
      */
     bool parseIncidence(
-        const KCalendarCore::Incidence::Ptr &, int64_t& minutes,
+        const KCalCore::Incidence::Ptr &, int64_t& minutes,
         int64_t& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
         int& percent_complete, int& priority);
 
     /**
      *  Load the todo passed in with this tasks info.
      */
-    KCalendarCore::Todo::Ptr asTodo(const KCalendarCore::Todo::Ptr& todo) const;
+    KCalCore::Todo::Ptr asTodo(const KCalCore::Todo::Ptr& todo) const;
 
     /** tells you whether this task is the root of the task tree */
     bool isRoot() const { return !parentTask(); }

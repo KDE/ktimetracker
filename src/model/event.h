@@ -21,7 +21,7 @@
 #ifndef KTIMETRACKER_EVENT_H
 #define KTIMETRACKER_EVENT_H
 
-#include <KCalendarCore/Event>
+#include <KCalCore/Event>
 
 /**
  * We have three types of events:
@@ -40,7 +40,7 @@
 class Event
 {
 public:
-    explicit Event(const KCalendarCore::Event::Ptr &event);
+    explicit Event(const KCalCore::Event::Ptr &event);
 
     QString summary() const;
 
@@ -64,7 +64,7 @@ public:
     /**
      *  Load the event passed in with this event's info.
      */
-    KCalendarCore::Event::Ptr asCalendarEvent(const KCalendarCore::Event::Ptr &event) const;
+    KCalCore::Event::Ptr asCalendarEvent(const KCalCore::Event::Ptr &event) const;
 
 private:
     void updateDuration(QDateTime &changedDt, const QDateTime &otherDt);
