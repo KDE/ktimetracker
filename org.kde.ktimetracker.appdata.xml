@@ -41,6 +41,7 @@
   <summary xml:lang="nl">Persoonlijk tijdgebruik</summary>
   <summary xml:lang="pl">Osobisty czasomierz</summary>
   <summary xml:lang="pt">Gestor do Tempo Pessoal</summary>
+  <summary xml:lang="pt-BR">Gerenciador de tempo pessoal</summary>
   <summary xml:lang="ru">Учёт времени</summary>
   <summary xml:lang="sk">Osobný sledovač času</summary>
   <summary xml:lang="sv">Personlig tidmätning</summary>
@@ -63,6 +64,7 @@
     <p xml:lang="nl">KTimeTracker helpt u uw persoonlijk gebruikte tijd aan verschillende taken and projecten te volgen.</p>
     <p xml:lang="pl">KTimeTracker pomaga zliczyć osobisty czas poświęcony na różne zadania i projekty.</p>
     <p xml:lang="pt">O KTimeTracker ajuda-nos a acompanhar o seu tempo pessoal gasto em várias tarefas e projectos.</p>
+    <p xml:lang="pt-BR">O KTimeTracker ajuda-o a acompanhar o seu tempo pessoal gasto em várias tarefas e projetos.</p>
     <p xml:lang="sv">Ktimerracker hjälper till att hålla reda på personlig tid spenderad på diverse aktiviteter och projekt.</p>
     <p xml:lang="uk">KTimeTracker допоможе вам стежити за вашим особистим часом, який ви витрачаєте на виконання різноманітних завдань та проєктів.</p>
     <p xml:lang="x-test">xxKTimeTracker helps you track your personal time spent on various tasks and projects.xx</p>
@@ -81,6 +83,7 @@
     <p xml:lang="nl">Het is nuttig voor het volgen van in rekening te brengen uren en kan de vastgelegde uren rapporteren per taak en dag.</p>
     <p xml:lang="pl">Użyteczny do liczenia płatnych godzin oraz tworzenia sprawozdań z godzin wykorzystanych na dane zadanie i w danym dniu.</p>
     <p xml:lang="pt">É útil para gerir as horas para facturação e poderá relatar as horas registadas por tarefa e por dia.</p>
+    <p xml:lang="pt-BR">É útil para gerenciar as horas úteis e relacionar as horas registradas por tarefa e por dia.</p>
     <p xml:lang="sv">Det är användbart för att hålla reda på debiterbara timmar och kan rapportera timmar loggade enligt aktivitet och dag.</p>
     <p xml:lang="uk">Ця програма корисна для стеження за обліком годин, вона може створювати звіти за даними, записаними для задачі або протягом дня.</p>
     <p xml:lang="x-test">xxIt is useful for tracking billable hours and can report the hours logged by task and day.xx</p>
@@ -99,6 +102,7 @@
     <p xml:lang="nl">Met KTimeTracker kunt u een in subtaken opgebroken project organiseren met onbeperkte nesting. De standaard sneltoetsen voor toetsenbord en muis zijn eenvoudig en maken het hulpmiddel echt comfortabel en intuïtief te gebruiken.</p>
     <p xml:lang="pl">Z KTimeTracker, można podzielić projekt na podzadania bez ograniczenia zagnieżdżeń. Podstawowe skróty klawiszowe i myszy są proste i czynią narzędzie przyjemne i intuicyjne w użyciu.</p>
     <p xml:lang="pt">Com o KTimeTracker, poderá organizar um projecto decomposto em sub-tarefas com níveis ilimitados. Os atalhos-padrão do teclado e rato são simples e tornam a ferramenta realmente confortável e intuitiva para usar.</p>
+    <p xml:lang="pt-BR">Com o KTimeTracker você poderá organizar um projeto organizado em subtarefas com níveis ilimitados. Os atalhos padrão de teclado e mouse são simples e tornam a ferramenta realmente confortável e intuitiva para usar.</p>
     <p xml:lang="sv">Med Ktimetracker man kan organisera ett nerbrutet projekt som delaktiviteter med obegränsat djup. De vanliga tangentbords- och musgenvägarna är enkla och gör verktyget verkligt bekvämt och intuitivt att använda.</p>
     <p xml:lang="uk">За допомогою KTimeTracker ви можете упорядкувати поділ проєкту на підзавдання (рівень вкладеності не обмежено). Стандартні клавіатурні скорочення та дії за допомогою миші є простими — вони забезпечують зручність та інтуїтивну зрозумілість принципів керування програмою.</p>
     <p xml:lang="x-test">xxWith KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.xx</p>
