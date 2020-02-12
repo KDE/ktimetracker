@@ -13,6 +13,7 @@
   <name xml:lang="et">KTimeTracker</name>
   <name xml:lang="fr">KTimeTracker</name>
   <name xml:lang="gl">KTimeTracker</name>
+  <name xml:lang="ia">KTimeTracker</name>
   <name xml:lang="id">KTimeTracker</name>
   <name xml:lang="it">KTimeTracker</name>
   <name xml:lang="ko">KTimetracker</name>
@@ -35,6 +36,7 @@
   <summary xml:lang="et">Isikliku aja arvestamine</summary>
   <summary xml:lang="fr">Outil de gestion du temps personnel</summary>
   <summary xml:lang="gl">Seguimento do tempo persoal</summary>
+  <summary xml:lang="ia">Traciator de tempore personal</summary>
   <summary xml:lang="id">Pelacak Waktu Personal</summary>
   <summary xml:lang="it">Segnatempo personale</summary>
   <summary xml:lang="ko">개인 시간 추적기</summary>
@@ -120,6 +122,7 @@
       <caption xml:lang="et">KTimeTracker</caption>
       <caption xml:lang="fr">KTimeTracker</caption>
       <caption xml:lang="gl">KTimeTracker</caption>
+      <caption xml:lang="ia">KTimeTracker</caption>
       <caption xml:lang="id">KTimeTracker</caption>
       <caption xml:lang="it">KTimeTracker</caption>
       <caption xml:lang="ko">KTimetracker</caption>
