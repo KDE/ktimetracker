@@ -164,12 +164,12 @@ void TaskView::load(const QUrl &url)
     m_tasksWidget->setRootIsDecorated(true);
 
     reconfigureModel();
-    m_tasksWidget->reconfigure();
 
     // Connect to the new model created by TimeTrackerStorage::load()
     auto *tasksModel = m_storage->tasksModel();
     m_filterProxyModel->setSourceModel(tasksModel);
     m_tasksWidget->setSourceModel(tasksModel);
+    m_tasksWidget->reconfigure();
     for (int i = 0; i <= tasksModel->columnCount(QModelIndex()); ++i) {
         m_tasksWidget->resizeColumnToContents(i);
     }
