@@ -98,7 +98,7 @@
     <p xml:lang="pl">Użyteczny do liczenia płatnych godzin oraz tworzenia sprawozdań z godzin wykorzystanych na dane zadanie i w danym dniu.</p>
     <p xml:lang="pt">É útil para gerir as horas para facturação e poderá relatar as horas registadas por tarefa e por dia.</p>
     <p xml:lang="pt-BR">É útil para gerenciar as horas úteis e relacionar as horas registradas por tarefa e por dia.</p>
-    <p xml:lang="ru">Программа полезна для подсчёта оплачиваемых часов работы. При создании отчёта затраченные часы будут разбиты по задачам и по дням.</p>
+    <p xml:lang="ru">Приложение полезно для подсчёта оплачиваемых часов работы. При создании отчёта затраченные часы будут разбиты по задачам и по дням.</p>
     <p xml:lang="sl">Uporaben je za sledenje plačljivih ur in lahko poroča o prijavljenih urah po dejavnostih in dnevih.</p>
     <p xml:lang="sv">Det är användbart för att hålla reda på debiterbara timmar och kan rapportera timmar loggade enligt aktivitet och dag.</p>
     <p xml:lang="uk">Ця програма корисна для стеження за обліком годин, вона може створювати звіти за даними, записаними для задачі або протягом дня.</p>
@@ -121,6 +121,7 @@
     <p xml:lang="pl">Z KTimeTracker, można podzielić projekt na podzadania bez ograniczenia zagnieżdżeń. Podstawowe skróty klawiszowe i myszy są proste i czynią narzędzie przyjemne i intuicyjne w użyciu.</p>
     <p xml:lang="pt">Com o KTimeTracker, poderá organizar um projecto decomposto em sub-tarefas com níveis ilimitados. Os atalhos-padrão do teclado e rato são simples e tornam a ferramenta realmente confortável e intuitiva para usar.</p>
     <p xml:lang="pt-BR">Com o KTimeTracker você poderá organizar um projeto organizado em subtarefas com níveis ilimitados. Os atalhos padrão de teclado e mouse são simples e tornam a ferramenta realmente confortável e intuitiva para usar.</p>
+    <p xml:lang="ru">KTimeTracker позволяет разбивать проекты на подзадачи с неограниченной глубиной вложенности. Стандартные комбинации для клавиш и мыши интуитивно понятны и облегчают работу с приложением.</p>
     <p xml:lang="sl">S programom KTimeTracker lahko organizirate razčlenjen projekt kot podrejene dejavnosti z neomejenim gnezdenjem. Običajne bližnjice na tipkovnici in miški so preproste in omogočajo, da je orodje resnično udobno in intuitivno za uporabo.</p>
     <p xml:lang="sv">Med Ktimetracker man kan organisera ett nerbrutet projekt som delaktiviteter med obegränsat djup. De vanliga tangentbords- och musgenvägarna är enkla och gör verktyget verkligt bekvämt och intuitivt att använda.</p>
     <p xml:lang="uk">За допомогою KTimeTracker ви можете упорядкувати поділ проєкту на підзавдання (рівень вкладеності не обмежено). Стандартні клавіатурні скорочення та дії за допомогою миші є простими — вони забезпечують зручність та інтуїтивну зрозумілість принципів керування програмою.</p>
