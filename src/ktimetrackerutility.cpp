@@ -33,9 +33,9 @@ QString formatTime(double minutes, bool decimal)
         time.sprintf("%.2f", minutes / 60.0);
         time.replace('.', QLocale().decimalPoint());
     } else {
-        const auto absMinutes = static_cast<int64_t>(std::round(std::fabs(minutes)));
+        const auto absMinutes = static_cast<long long int>(std::round(std::fabs(minutes)));
         time.sprintf(
-            "%s%ld:%02ld",
+            "%s%lld:%02lld",
             minutes < 0 ? QString(QLocale().negativeSign()).toUtf8().data() : "",
             absMinutes / 60, absMinutes % 60);
     }
