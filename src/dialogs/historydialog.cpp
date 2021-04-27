@@ -131,7 +131,9 @@ QString HistoryDialog::listAllEvents()
 
         const Task *parent = dynamic_cast<Task*>(m_projectModel->tasksModel()->taskByUID(event->relatedTo()));
         if (!parent) {
-            qFatal("orphan event");
+            qCWarning(KTT_LOG) << "Unable to load 'relatedTo' entry for " << event->summary();
+            err = "NoRelatedToForEvent";
+            continue;
         }
 
         auto *item = new QTableWidgetItem(parent->name());
