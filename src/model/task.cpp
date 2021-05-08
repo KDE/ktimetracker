@@ -509,13 +509,13 @@ QVariant Task::data(int column, int role) const
                 case 0:
                     return m_name;
                 case 1:
-                    return QVariant::fromValue<int64_t>(m_sessionTime);
+                    return QVariant::fromValue<qlonglong>(m_sessionTime);
                 case 2:
-                    return QVariant::fromValue<int64_t>(m_time);
+                    return QVariant::fromValue<qlonglong>(m_time);
                 case 3:
-                    return QVariant::fromValue<int64_t>(m_totalSessionTime);
+                    return QVariant::fromValue<qlonglong>(m_totalSessionTime);
                 case 4:
-                    return QVariant::fromValue<int64_t>(m_totalTime);
+                    return QVariant::fromValue<qlonglong>(m_totalTime);
                 case 5:
                     return QVariant::fromValue<int>(m_priority);
                 case 6:
