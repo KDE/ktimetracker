@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007 by Thorsten Staerk <dev@staerk.de>
- * Copyright (C) 2019  Alexander Potashev <aspotashev@gmail.com>
+ * Copyright (C) 2019, 2021  Alexander Potashev <aspotashev@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,14 +30,14 @@ QString formatTime(double minutes, bool decimal)
 {
     QString time;
     if (decimal) {
-        time.sprintf("%.2f", minutes / 60.0);
+        time = QStringLiteral("%1").arg(minutes / 60.0, 0, 'f', 2);
         time.replace('.', QLocale().decimalPoint());
     } else {
-        const auto absMinutes = static_cast<long long int>(std::round(std::fabs(minutes)));
-        time.sprintf(
-            "%s%lld:%02lld",
-            minutes < 0 ? QString(QLocale().negativeSign()).toUtf8().data() : "",
-            absMinutes / 60, absMinutes % 60);
+        const auto absMinutes = static_cast<qlonglong>(std::round(std::fabs(minutes)));
+        time = QStringLiteral("%1%2:%3")
+            .arg(minutes < 0 ? QString(QLocale().negativeSign()) : "")
+            .arg(absMinutes / 60)
+            .arg(absMinutes % 60, 2, 10, QLatin1Char('0'));
     }
 
     return time;
