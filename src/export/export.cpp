@@ -24,6 +24,7 @@
 #include <KLocalizedString>
 
 #include "csvhistory.h"
+#include "csveventlog.h"
 #include "csvtotals.h"
 #include "ktt_debug.h"
 #include "model/projectmodel.h"
@@ -36,6 +37,8 @@ QString exportToString(ProjectModel *model, Task *currentTask, const ReportCrite
             return exportCSVToString(model->tasksModel(), rc);
         case ReportCriteria::CSVHistoryExport:
             return exportCSVHistoryToString(model, rc);
+        case ReportCriteria::CSVEventLogExport:
+            return exportCSVEventLogToString(model, rc);
         case ReportCriteria::TextTotalsExport:
             return totalsAsText(model->tasksModel(), currentTask, rc);
         default:

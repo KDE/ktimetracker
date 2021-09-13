@@ -93,6 +93,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QRadioButton" name="radioEventLogCsv">
+        <property name="text">
+         <string>Event Log as CSV</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QRadioButton" name="radioTimesText">
         <property name="text">
          <string>Times as Text</string>

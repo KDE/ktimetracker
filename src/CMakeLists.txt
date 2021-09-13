@@ -4,6 +4,7 @@ set(ktimetracker_SRCS
 
     export/totalsastext.cpp
     export/csvhistory.cpp
+    export/csveventlog.cpp
     export/csvtotals.cpp
     export/export.cpp
 

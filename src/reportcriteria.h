@@ -64,6 +64,10 @@ public:
          * rc tells how the user wants his report, e.g. all times or session times.
          */
         TextTotalsExport = 2,
+        /**
+         * Export the history of all events as csv
+         */
+        CSVEventLogExport = 3,
     };
 
     /**

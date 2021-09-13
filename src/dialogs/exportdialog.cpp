@@ -59,6 +59,7 @@ ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
 
     connect(ui.radioTimesCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioEventLogCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioTimesText, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioComma, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioSemicolon, &QRadioButton::toggled, this, &ExportDialog::updateUI);
@@ -142,6 +143,8 @@ void ExportDialog::updateUI()
         rt = ReportCriteria::CSVTotalsExport;
     } else if (ui.radioHistoryCsv->isChecked()) {
         rt = ReportCriteria::CSVHistoryExport;
+    } else if (ui.radioEventLogCsv->isChecked()) {
+        rt = ReportCriteria::CSVEventLogExport;
     } else if (ui.radioTimesText->isChecked()) {
         rt = ReportCriteria::TextTotalsExport;
     } else {
@@ -152,6 +155,7 @@ void ExportDialog::updateUI()
 
     switch (rt) {
     case ReportCriteria::CSVHistoryExport:
+    case ReportCriteria::CSVEventLogExport:
         ui.grpDateRange->setEnabled(true);
         ui.grpDateRange->show();
         break;
