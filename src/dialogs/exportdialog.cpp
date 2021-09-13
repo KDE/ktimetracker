@@ -148,7 +148,7 @@ void ExportDialog::updateUI()
     } else if (ui.radioTimesText->isChecked()) {
         rt = ReportCriteria::TextTotalsExport;
     } else {
-        qCWarning(KTT_LOG) << "*** ExportDialog::updateUI: Unexpected delimiter choice";
+        qCWarning(KTT_LOG) << "*** ExportDialog::updateUI: Unexpected report type choice";
         rt = ReportCriteria::TextTotalsExport;
     }
     rc.reportType = rt;
