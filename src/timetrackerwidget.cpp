@@ -112,7 +112,7 @@ void TimeTrackerWidget::addTaskView(const QUrl &url)
     connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive);
     connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
 
-    emit setCaption(url.toString());
+    emit currentFileChanged(url.toString());
     m_taskView->load(url);
 
     fillLayout(m_taskView->tasksWidget());
@@ -343,7 +343,7 @@ bool TimeTrackerWidget::closeFile()
     }
 
     emit currentTaskViewChanged();
-    emit setCaption(QString());
+    emit currentFileChanged(QString());
     slotCurrentChanged();
 
     delete taskView; // removeTab does not delete its widget.
@@ -382,8 +382,9 @@ void TimeTrackerWidget::slotCurrentChanged()
         connect(m_taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::minutesUpdated, this, &TimeTrackerWidget::minutesUpdated, Qt::UniqueConnection);
 
-        emit setCaption(m_taskView->storage()->fileUrl().toString());
+        emit currentFileChanged(m_taskView->storage()->fileUrl().toString());
     }
 }
 
@@ -439,6 +440,10 @@ void TimeTrackerWidget::loadSettings()
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
     currentTaskView()->reconfigureModel();
     currentTaskView()->tasksWidget()->reconfigure();
+
+    //  for updating window caption
+    emit currentFileChanged(m_taskView->storage()->fileUrl().toString());
+    emit tasksChanged(currentTaskView()->storage()->tasksModel()->getActiveTasks());
 }
 
 //BEGIN wrapper slots

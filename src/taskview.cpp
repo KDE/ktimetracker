@@ -346,6 +346,7 @@ void TaskView::stopCurrentTimer()
 void TaskView::minuteUpdate()
 {
     storage()->tasksModel()->addTimeToActiveTasks(1);
+    emit minutesUpdated(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::newTask(const QString &caption, Task *parent)

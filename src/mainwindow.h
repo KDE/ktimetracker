@@ -24,6 +24,7 @@
 #define KTIMETRACKER_MAIN_WINDOW_H
 
 #include <KXmlGuiWindow>
+#include <model/task.h>
 
 class TrayIcon;
 class TimeTrackerWidget;
@@ -45,6 +46,8 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void taskViewCustomContextMenuRequested(const QPoint&);
+    void updateWindowCaptionTasks(const QList<Task *> &activeTasks);
+    void updateWindowCaptionFile(const QString &url);
 
 protected:
     bool queryClose() override;

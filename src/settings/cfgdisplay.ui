@@ -50,6 +50,32 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="windowTitleGroupBox">
+     <property name="title">
+      <string>Window Title</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QRadioButton" name="kcfg_windowTitleCurrentFile">
+        <property name="text">
+         <string>Currently opened file</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="kcfg_windowTitleCurrentTask">
+        <property name="text">
+         <string>Current Task and Session Time</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
       <string>Columns Displayed</string>

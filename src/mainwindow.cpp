@@ -34,6 +34,7 @@
 #include "ktt_debug.h"
 #include "model/task.h"
 #include "timetrackerwidget.h"
+#include "ktimetrackerutility.h"
 #include "tray.h"
 
 MainWindow::MainWindow(const QUrl &url)
@@ -64,7 +65,9 @@ MainWindow::MainWindow(const QUrl &url)
 
     // connections
     connect(m_mainWidget, &TimeTrackerWidget::statusBarTextChangeRequested, this, &MainWindow::setStatusBar);
-    connect(m_mainWidget, &TimeTrackerWidget::setCaption, this, QOverload<const QString&>::of(&KMainWindow::setCaption));
+    connect(m_mainWidget, &TimeTrackerWidget::currentFileChanged, this, &MainWindow::updateWindowCaptionFile);
+    connect(m_mainWidget, &TimeTrackerWidget::tasksChanged, this, &MainWindow::updateWindowCaptionTasks);
+    connect(m_mainWidget, &TimeTrackerWidget::minutesUpdated, this, &MainWindow::updateWindowCaptionTasks);
 
     // Setup context menu request handling
     connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
@@ -78,7 +81,6 @@ MainWindow::MainWindow(const QUrl &url)
 
     // Load the specified .ics file in the tasks widget
     m_mainWidget->openFile(url);
-    setCaption(url.url());  // set the window title to our iCal file
 }
 
 //bool KTimeTrackerPart::openFile()
@@ -129,4 +131,38 @@ void MainWindow::quit()
         m_quitRequested = true;
         close();
     }
+}
+
+void MainWindow::updateWindowCaptionFile(const QString &url)
+{
+    if(!KTimeTrackerSettings::windowTitleCurrentFile()) {
+        return;
+    }
+
+    this->setCaption(url);
+}
+
+void MainWindow::updateWindowCaptionTasks(const QList<Task*> &activeTasks)
+{
+    if(!KTimeTrackerSettings::windowTitleCurrentTask()) {
+        return;
+    }
+
+    if (activeTasks.isEmpty()) {
+        this->setCaption(i18n("No active tasks") );
+        return;
+    }
+
+    QString qCaption;
+
+    // Build the caption with all of the names of the active tasks.
+    for (int i = 0; i < activeTasks.count(); ++i) {
+        Task* task = activeTasks.at(i);
+        if (i > 0) {
+            qCaption += i18nc("separator between task names", ", ");
+        }
+        qCaption += formatTime(task->sessionTime()) + " " + task->name();
+    }
+
+    this->setCaption(qCaption);
 }

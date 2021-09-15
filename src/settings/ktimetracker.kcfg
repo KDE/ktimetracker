@@ -54,6 +54,12 @@
     <entry name="decimalFormat" type="Bool">
       <default>false</default>
     </entry>
+    <entry name="windowTitleCurrentFile" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="windowTitleCurrentTask" type="Bool">
+      <default>false</default>
+    </entry>
     <entry name="configPDA" type="Bool">
       <default>false</default>
     </entry>

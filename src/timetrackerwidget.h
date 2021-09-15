@@ -202,7 +202,7 @@ private Q_SLOTS:
     void slotUpdateButtons();
 
 Q_SIGNALS:
-    void setCaption( const QString& qs );
+    void currentFileChanged(const QString& qs);
     void currentTaskChanged();
     void currentTaskViewChanged();
     void updateButtons();
@@ -211,8 +211,13 @@ Q_SIGNALS:
     void timersActive();
     void timersInactive();
 
-    /** Used to update text in tray icon */
+    // Used to update text in tray icon
+    // and window title if the window title is configured to display the active tasks
     void tasksChanged(const QList<Task*> &activeTasks);
+
+    // update recorded minutes of current task
+    // if the window title is configured to display the active tasks
+    void minutesUpdated(const QList<Task*> &activeTasks);
 
 private:
     void fillLayout(TasksWidget *tasksWidget);
