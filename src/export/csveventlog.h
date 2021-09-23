@@ -22,10 +22,12 @@
 #ifndef KTIMETRACKER_CSVEVENTLOG_H
 #define KTIMETRACKER_CSVEVENTLOG_H
 
+#include "model/event.h"
 #include "reportcriteria.h"
 
 class ProjectModel;
 
 QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriteria &rc);
+QString getFullEventName(const Event *event, ProjectModel *projectModel);
 
 #endif //KTIMETRACKER_CSVEVENTLOG_H

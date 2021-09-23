@@ -21,7 +21,6 @@
 
 #include "csveventlog.h"
 
-#include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 #include "model/event.h"
 #include "model/eventsmodel.h"
@@ -57,16 +56,6 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
     for (const auto *event : projectModel->eventsModel()->events()) {
 
         row.clear();
-        // maybe the file is corrupt and (*i)->relatedTo is NULL
-        if (event->relatedTo().isEmpty()) {
-            qCDebug(KTT_LOG) << "There is no 'relatedTo' entry for " << event->summary();
-            continue;
-        }
-
-        Task *parent = dynamic_cast<Task*>(projectModel->tasksModel()->taskByUID(event->relatedTo()));
-        if (!parent) {
-            qFatal("orphan event");
-        }
 
         QDateTime start = event->dtStart();
         QDateTime end = event->dtEnd();
@@ -75,24 +64,12 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
             continue;
         }
 
-        QString fullName;
-        Task* parentTask;
-        parentTask = parent;
-        fullName += parentTask->name();
-        parentTask = parentTask->parentTask();
-        while (parentTask) {
-            fullName = parentTask->name() + "->" + fullName;
-            qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
-            parentTask = parentTask->parentTask();
-            qCDebug(KTT_LOG) << "Parent task: " << parentTask;
-        }
-
         // Write CSV row
         row.append(start.toString(dateTimeFormat));
         row.append(delim);
         row.append(end.toString(dateTimeFormat));
         row.append(delim);
-        row.append(fullName);
+        row.append(getFullEventName(event, projectModel));
         row.append(delim);
 
         qDebug() << "event->comments.count() =" << event->comments().count();
@@ -112,4 +89,33 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
     events.prepend(header);
 
     return events.join("");
+}
+
+QString getFullEventName(const Event *event, ProjectModel *projectModel) {
+    QString fullName;
+
+    // maybe the file is corrupt and (*i)->relatedTo is NULL
+    if (event->relatedTo().isEmpty()) {
+        qCDebug(KTT_LOG) << "There is no 'relatedTo' entry for " << event->summary();
+        return fullName;
+    }
+
+    Task *parent = dynamic_cast<Task*>(projectModel->tasksModel()->taskByUID(event->relatedTo()));
+    if (!parent) {
+        qCDebug(KTT_LOG) << "Skipping orphaned (no related parent task) entry " << event->summary();
+        return fullName;
+    }
+
+    Task* parentTask;
+    parentTask = parent;
+    fullName += parentTask->name();
+    parentTask = parentTask->parentTask();
+    while (parentTask) {
+        fullName = parentTask->name() + "->" + fullName;
+        qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
+        parentTask = parentTask->parentTask();
+        qCDebug(KTT_LOG) << "Parent task: " << parentTask;
+    }
+
+    return fullName;
 }
