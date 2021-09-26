@@ -82,12 +82,12 @@ target_link_libraries(libktimetracker
 )
 
 ecm_add_app_icon(ktimetracker_app_icon_SRCS ICONS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/16-apps-ktimetracker.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/22-apps-ktimetracker.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/32-apps-ktimetracker.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/48-apps-ktimetracker.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/64-apps-ktimetracker.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/app/128-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/breeze-app-icon-png/16-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/breeze-app-icon-png/22-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/breeze-app-icon-png/32-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/breeze-app-icon-png/48-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/breeze-app-icon-png/64-apps-ktimetracker.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/breeze-app-icon-png/128-apps-ktimetracker.png
 )
 
 # Add ktimetracker_app_icon_SRCS to the .exe target directly, otherwise
