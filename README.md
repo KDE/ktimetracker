@@ -6,12 +6,12 @@ There is more info about KTimeTracker at https://userbase.kde.org/KTimeTracker
 
 ## License
 
-* The source code (.h, .cpp and related files - basically everything but the
-  other bullet points in this list) is licensed under the terms of the GNU
-General Public License version 2.  See LICENSES/GPL-2.0-only.txt.
-
 * The documentation (located in doc/) is licensed under the terms of the GNU
   Free Documentation License version 1.2. See LICENSES/GFDL-1.2-only.txt.
+
+* The other files in this repository, including the source code (e.g. .h, .cpp
+  files) are licensed under the terms of the GNU General Public License
+  version 2. See LICENSES/GPL-2.0-only.txt.
 
 ## Credits
 
