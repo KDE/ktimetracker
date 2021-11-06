@@ -9,7 +9,7 @@ set(APP_ICONS_BREEZE
 ecm_install_icons(
     ICONS ${APP_ICONS_BREEZE}
     DESTINATION ${KDE_INSTALL_ICONDIR}
-    THEME breeze
+    THEME hicolor
 )
 
 set(APP_ICONS_BREEZE_DARK
