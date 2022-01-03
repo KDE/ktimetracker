@@ -25,6 +25,7 @@
 #include <QDateTimeEdit>
 #include <QItemDelegate>
 #include <QPushButton>
+#include <QSet>
 
 #include <KMessageBox>
 #include <KStandardGuiItem>
@@ -253,19 +254,37 @@ QString HistoryDialog::refresh()
 
 void HistoryDialog::onDeleteClicked()
 {
-    if (m_ui.historytablewidget->item(m_ui.historytablewidget->currentRow(), 4)) {
-        // if an item is current
-        QString uid = m_ui.historytablewidget->item(m_ui.historytablewidget->currentRow(), 4)->text();
+    // Create a list of rows to delete.
+    // This includes both the current row (i.e. the row the cursor is on) as well as the rows that
+    // are part of the current selection. Because these can overlap and because the selected items
+    // contain one item per cell, not just per row, we use a QSet here to get a unique list of rows.
+    QSet<int> rows;
+    if (m_ui.historytablewidget->currentRow() >= 0) {   // Could be -1 if table is empty or no row is selected
+        rows.insert(m_ui.historytablewidget->currentRow());
+    }
+    for (const auto& item : m_ui.historytablewidget->selectedItems()) {
+        rows.insert(item->row());
+    }
+
+    if (rows.empty()) {
+        KMessageBox::information(this, i18n("Please select a task to delete."));
+        return;
+    }
+
+    bool refresh = false;
+    for (int row : rows) {
+        QString uid = m_ui.historytablewidget->item(row, 4)->text();
         qDebug() << "uid =" << uid;
         const Event *event = m_projectModel->eventsModel()->eventByUID(uid);
         if (event) {
             qCDebug(KTT_LOG) << "removing uid " << event->uid();
             m_projectModel->eventsModel()->removeByUID(event->uid());
-            emit m_projectModel->eventsModel()->timesChanged();
-            this->refresh();
+            refresh = true;
         }
-    } else {
-        KMessageBox::information(this, i18n("Please select a task to delete."));
+    }
+    if (refresh) {
+        emit m_projectModel->eventsModel()->timesChanged();
+        this->refresh();
     }
 }
 
