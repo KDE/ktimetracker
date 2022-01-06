@@ -1,6 +1,10 @@
 This directory contains functional tests for KTimeTracker.
 
 How to start:
+1. Install cairo, gobject-introspection-1.0, cairo-gobject:
+ sudo dnf install python3-cairo-devel gobject-introspection-devel cairo-gobject-devel
+1. Create venv:
+ python3 -m venv ../venv
 1. Install dependencies:
  ../venv/bin/python3 -m pip install -r requirements.txt
 2. Run tests:
