@@ -87,6 +87,7 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
     m_model = new ProjectModel();
 
     if (url.isLocalFile()) {
+        connect(KDirWatch::self(), &KDirWatch::created, this, &TimeTrackerStorage::onFileModified);
         connect(KDirWatch::self(), &KDirWatch::dirty, this, &TimeTrackerStorage::onFileModified);
         if (!KDirWatch::self()->contains(url.toLocalFile())) {
             KDirWatch::self()->addFile(url.toLocalFile());
