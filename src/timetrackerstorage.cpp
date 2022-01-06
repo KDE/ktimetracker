@@ -118,21 +118,19 @@ QUrl TimeTrackerStorage::fileUrl()
 }
 
 QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, TaskView *view)
-// makes *view contain the tasks out of *rc.
 {
-    // remember tasks that are running and their start times
-    QVector<QString> runningTasks{};
-    QVector<QDateTime> startTimes{};
+    // Remember tasks that are running and their start times.
+    // Maps task UID to task's startTime.
+    QHash<QString, QDateTime> startTimeForUid{};
     for (Task *task : tasksModel()->getActiveTasks()) {
-        runningTasks.append(task->uid());
-        startTimes.append(task->startTime());
+        startTimeForUid[task->uid()] = task->startTime();
     }
 
     tasksModel()->clear();
 
-    QMultiHash<QString, Task*> map;
+    QMultiHash<QString, Task *> map;
     for (const auto &todo : todos) {
-        Task* task = new Task(todo, m_model);
+        Task *task = new Task(todo, m_model);
         map.insert(todo->uid(), task);
         task->invalidateCompletedState();
     }
@@ -140,10 +138,10 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, Tas
     // 1.1. Load each task under its parent task.
     QString err{};
     for (const auto &todo : todos) {
-        Task* task = map.value(todo->uid());
+        Task *task = map.value(todo->uid());
         // No relatedTo incident just means this is a top-level task.
         if (!todo->relatedTo().isEmpty()) {
-            Task* newParent = map.value(todo->relatedTo());
+            Task *newParent = map.value(todo->relatedTo());
             // Complete the loading but return a message
             if (!newParent) {
                 err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
@@ -157,10 +155,8 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, Tas
 
     // restart tasks that have been running with their start times
     for (Task *task : tasksModel()->getAllTasks()) {
-        for (int n = 0; n < runningTasks.count(); ++n) {
-            if (runningTasks[n] == task->uid()) {
-                view->startTimerFor(task, startTimes[n]);
-            }
+        if (startTimeForUid.contains(task->uid())) {
+            view->startTimerFor(task, startTimeForUid[task->uid()]);
         }
     }
 
@@ -214,7 +210,7 @@ bool TimeTrackerStorage::allEventsHaveEndTime(Task *task)
 }
 
 // static
-QString TimeTrackerStorage::createLockFileName(const QUrl& url)
+QString TimeTrackerStorage::createLockFileName(const QUrl &url)
 {
     QString canonicalSeedString;
     QString baseName;
@@ -235,8 +231,8 @@ QString TimeTrackerStorage::createLockFileName(const QUrl& url)
     // Remove characters disallowed by operating systems
     baseName.replace(QRegExp("[" + QRegExp::escape("\\/:*?\"<>|") + "]"), QString());
 
-    const QString& hash = QCryptographicHash::hash(canonicalSeedString.toUtf8(), QCryptographicHash::Sha1).toHex();
-    const QString& lockBaseName = QStringLiteral("ktimetracker_%1_%2.lock").arg(hash).arg(baseName);
+    const QString &hash = QCryptographicHash::hash(canonicalSeedString.toUtf8(), QCryptographicHash::Sha1).toHex();
+    const QString &lockBaseName = QStringLiteral("ktimetracker_%1_%2.lock").arg(hash).arg(baseName);
 
     // Put the lock file in a directory for temporary files
     return QDir(QStandardPaths::writableLocation(QStandardPaths::TempLocation)).absoluteFilePath(lockBaseName);
@@ -256,7 +252,7 @@ QString TimeTrackerStorage::save()
         return QStringLiteral("m_model is nullptr");
     }
 
-    const QString& fileLockPath = createLockFileName(m_url);
+    const QString &fileLockPath = createLockFileName(m_url);
     QLockFile fileLock(fileLockPath);
     if (!fileLock.lock()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: m_fileLock->lock() failed";
@@ -267,7 +263,8 @@ QString TimeTrackerStorage::save()
     std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
     if (!calendar->save()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
-        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".", m_url.toString());
+        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".",
+                             m_url.toString());
     } else {
         qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
     }
@@ -282,7 +279,7 @@ QString TimeTrackerStorage::save()
 
 //----------------------------------------------------------------------------
 
-bool TimeTrackerStorage::bookTime(const Task* task, const QDateTime& startDateTime, int64_t durationInSeconds)
+bool TimeTrackerStorage::bookTime(const Task *task, const QDateTime &startDateTime, int64_t durationInSeconds)
 {
     return eventsModel()->bookTime(task, startDateTime, durationInSeconds);
 }
