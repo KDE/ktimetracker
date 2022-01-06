@@ -99,13 +99,12 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
     FileCalendar m_calendar(m_url);
 
     m_taskView = view;
-//    m_calendar->setTimeSpec( KSystemTimeZones::local() );
     m_calendar.reload();
 
     // Build task view from iCal data
     QString err;
     eventsModel()->load(m_calendar.rawEvents());
-    err = buildTaskView(m_calendar.rawTodos(), view);
+    err = buildTaskView(m_calendar.rawTodos(), m_taskView);
 
     if (removedFromDirWatch) {
         KDirWatch::self()->addFile(m_url.toLocalFile());
@@ -300,10 +299,9 @@ void TimeTrackerStorage::onFileModified()
     qCDebug(KTT_LOG) << "entering function";
 
     FileCalendar m_calendar(m_url);
-//    m_calendar->setTimeSpec( KSystemTimeZones::local() );
     m_calendar.reload();
     buildTaskView(m_calendar.rawTodos(), m_taskView);
-    m_taskView->storage()->projectModel()->refresh();
+    projectModel()->refresh();
     m_taskView->tasksWidget()->refresh();
 
     qCDebug(KTT_LOG) << "exiting onFileModified";
