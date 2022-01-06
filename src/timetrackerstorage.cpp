@@ -122,8 +122,8 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, Tas
 // makes *view contain the tasks out of *rc.
 {
     // remember tasks that are running and their start times
-    QVector<QString> runningTasks;
-    QVector<QDateTime> startTimes;
+    QVector<QString> runningTasks{};
+    QVector<QDateTime> startTimes{};
     for (Task *task : tasksModel()->getActiveTasks()) {
         runningTasks.append(task->uid());
         startTimes.append(task->startTime());
@@ -139,7 +139,7 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, Tas
     }
 
     // 1.1. Load each task under its parent task.
-    QString err;
+    QString err{};
     for (const auto &todo : todos) {
         Task* task = map.value(todo->uid());
         // No relatedTo incident just means this is a top-level task.
