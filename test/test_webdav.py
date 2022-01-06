@@ -59,7 +59,7 @@ def test_webdav(app):
 
     # Start webdav server
     daemon = threading.Thread(target=webdav_server)
-    daemon.setDaemon(True)
+    daemon.daemon = True
     daemon.start()
     time.sleep(2)
 
