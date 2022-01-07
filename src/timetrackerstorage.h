@@ -63,6 +63,7 @@ class TimeTrackerStorage : public QObject
 
 public:
     TimeTrackerStorage();
+
     ~TimeTrackerStorage() override = default;
 
     /**
@@ -89,17 +90,17 @@ public:
      */
     QString load(TaskView *taskview, const QUrl &url);
 
-   /**
-    * Return the name of the iCal file
-    */
+    /**
+     * Return the name of the iCal file
+     */
     QUrl fileUrl();
 
-   /**
-    * Build up the taskview.
-    *
-    * This is needed if the iCal file has been modified.
-    */
-    QString buildTaskView(const KCalCore::Todo::List &todos, TaskView *view);
+    /**
+     * Load tasks from calendar's todos.
+     *
+     * This is needed if the iCal file has been modified.
+     */
+    QString loadTasksFromCalendar(const KCalCore::Todo::List &todos);
 
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
@@ -137,7 +138,7 @@ public:
 
     bool bookTime(const Task *task, const QDateTime &startDateTime, int64_t durationInSeconds);
 
-    static QString createLockFileName(const QUrl& url);
+    static QString createLockFileName(const QUrl &url);
 
 private Q_SLOTS:
     void onFileModified();
@@ -145,7 +146,7 @@ private Q_SLOTS:
 private:
     ProjectModel *m_model;
     QUrl m_url;
-    TaskView* m_taskView;
+    TaskView *m_taskView;
 };
 
 #endif // KTIMETRACKER_STORAGE_H

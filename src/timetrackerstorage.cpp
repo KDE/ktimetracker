@@ -104,7 +104,7 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
     // Build task view from iCal data
     QString err;
     eventsModel()->load(m_calendar.rawEvents());
-    err = buildTaskView(m_calendar.rawTodos(), m_taskView);
+    err = loadTasksFromCalendar(m_calendar.rawTodos());
 
     if (removedFromDirWatch) {
         KDirWatch::self()->addFile(m_url.toLocalFile());
@@ -117,15 +117,8 @@ QUrl TimeTrackerStorage::fileUrl()
     return m_url;
 }
 
-QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, TaskView *view)
+QString TimeTrackerStorage::loadTasksFromCalendar(const KCalCore::Todo::List &todos)
 {
-    // Remember tasks that are running and their start times.
-    // Maps task UID to task's startTime.
-    QHash<QString, QDateTime> startTimeForUid{};
-    for (Task *task : tasksModel()->getActiveTasks()) {
-        startTimeForUid[task->uid()] = task->startTime();
-    }
-
     tasksModel()->clear();
 
     QMultiHash<QString, Task *> map;
@@ -150,13 +143,6 @@ QString TimeTrackerStorage::buildTaskView(const KCalCore::Todo::List &todos, Tas
             } else {
                 task->move(newParent);
             }
-        }
-    }
-
-    // restart tasks that have been running with their start times
-    for (Task *task : tasksModel()->getAllTasks()) {
-        if (startTimeForUid.contains(task->uid())) {
-            view->startTimerFor(task, startTimeForUid[task->uid()]);
         }
     }
 
@@ -297,7 +283,23 @@ void TimeTrackerStorage::onFileModified()
 
     FileCalendar m_calendar(m_url);
     m_calendar.reload();
-    buildTaskView(m_calendar.rawTodos(), m_taskView);
+
+    // Remember tasks that are running and their start times.
+    // Maps task UID to task's startTime.
+    QHash<QString, QDateTime> startTimeForUid{};
+    for (Task *task : tasksModel()->getActiveTasks()) {
+        startTimeForUid[task->uid()] = task->startTime();
+    }
+
+    loadTasksFromCalendar(m_calendar.rawTodos());
+
+    // Restart tasks that have been running, with their start times.
+    for (Task *task : tasksModel()->getAllTasks()) {
+        if (startTimeForUid.contains(task->uid())) {
+            m_taskView->startTimerFor(task, startTimeForUid[task->uid()]);
+        }
+    }
+
     projectModel()->refresh();
     m_taskView->tasksWidget()->refresh();
 
