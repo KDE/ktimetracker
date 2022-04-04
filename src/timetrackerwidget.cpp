@@ -234,7 +234,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     newTask->setText(i18nc("@action:inmenu", "&New Task..."));
     newTask->setToolTip(i18nc("@info:tooltip", "Creates new top level task"));
     newTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new top level task."));
-    newTask->setIcon(QIcon::fromTheme("document-new"));
+    newTask->setIcon(QIcon::fromTheme("task-new"));
     actionCollection->setDefaultShortcut(newTask, QKeySequence(Qt::CTRL + Qt::Key_T));
     connect(newTask, &QAction::triggered, this, &TimeTrackerWidget::newTask);
 
@@ -242,7 +242,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     newSubTask->setText(i18nc("@action:inmenu", "New &Subtask..."));
     newSubTask->setToolTip(i18nc("@info:tooltip", "Creates a new subtask to the current selected task"));
     newSubTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new subtask to the current selected task."));
-    newSubTask->setIcon(QIcon::fromTheme("subtask-new-ktimetracker"));
+    newSubTask->setIcon(QIcon::fromTheme("view-task-child"));
     actionCollection->setDefaultShortcut(newSubTask, QKeySequence(Qt::CTRL + Qt::Key_B));
     connect(newSubTask, &QAction::triggered, this, &TimeTrackerWidget::newSubTask);
 
