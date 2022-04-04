@@ -1,13 +1,4 @@
 <!DOCTYPE RCC><RCC version="1.0">
-    <qresource prefix="/icons/hicolor">
-        <file alias="16x16/actions/subtask-new-ktimetracker.png">16-actions-subtask-new-ktimetracker.png</file>
-        <file alias="22x22/actions/subtask-new-ktimetracker.png">22-actions-subtask-new-ktimetracker.png</file>
-        <file alias="32x32/actions/subtask-new-ktimetracker.png">32-actions-subtask-new-ktimetracker.png</file>
-        <file alias="48x48/actions/subtask-new-ktimetracker.png">48-actions-subtask-new-ktimetracker.png</file>
-        <file alias="64x64/actions/subtask-new-ktimetracker.png">64-actions-subtask-new-ktimetracker.png</file>
-        <file alias="128x128/actions/subtask-new-ktimetracker.png">128-actions-subtask-new-ktimetracker.png</file>
-        <file alias="scalable/actions/subtask-new-ktimetracker.svgz">sc-actions-subtask-new-ktimetracker.svgz</file>
-    </qresource>
     <qresource prefix="/icons/breeze">
         <file alias="22x22/apps/ktimetracker.svg">breeze/22-apps-ktimetracker.svg</file>
         <file alias="32x32/apps/ktimetracker.svg">breeze/32-apps-ktimetracker.svg</file>
