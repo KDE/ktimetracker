@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="ktimetracker" version="392">
+<gui name="ktimetracker" version="393">
     <MenuBar>
         <Menu name="file">
             <Action name="file_open" />
