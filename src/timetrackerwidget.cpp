@@ -151,7 +151,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     KStandardAction::save(this, &TimeTrackerWidget::saveFile, actionCollection);
     KStandardAction::preferences(this, &TimeTrackerWidget::showSettingsDialog, actionCollection);
 
-    QAction* startNewSession = actionCollection->addAction(QStringLiteral("start_new_session"));
+    QAction* startNewSession = actionCollection->addAction(QStringLiteral("ktimetracker_start_new_session"));
     startNewSession->setText(i18nc("@action:inmenu", "Start &New Session"));
     startNewSession->setToolTip(i18nc("@info:tooltip", "Starts a new session"));
     startNewSession->setWhatsThis(i18nc(
@@ -410,7 +410,7 @@ void TimeTrackerWidget::slotUpdateButtons()
     action(QStringLiteral("new_sub_task"))->setEnabled(currentTaskView() && currentTaskView()->storage()->isLoaded() && currentTaskView()->storage()->tasksModel()->getAllTasks().size());
     action(QStringLiteral("focustracking"))->setEnabled(currentTaskView());
     action(QStringLiteral("focustracking"))->setChecked(currentTaskView() && currentTaskView()->isFocusTrackingActive());
-    action(QStringLiteral("start_new_session"))->setEnabled(currentTaskView());
+    action(QStringLiteral("ktimetracker_start_new_session"))->setEnabled(currentTaskView());
     action(QStringLiteral("edit_history"))->setEnabled(currentTaskView());
     action(QStringLiteral("reset_all_times"))->setEnabled(currentTaskView());
     action(QStringLiteral("export_dialog"))->setEnabled(currentTaskView());
