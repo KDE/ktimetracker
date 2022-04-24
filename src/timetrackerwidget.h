@@ -43,7 +43,7 @@ class TimeTrackerWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TimeTrackerWidget(QWidget* parent = nullptr);
+    explicit TimeTrackerWidget(QWidget* parent);
     ~TimeTrackerWidget() override = default;
 
 private:
