@@ -28,7 +28,6 @@
             <Action name="new_sub_task" />
             <Action name="delete_task" />
             <Action name="edit_task" />
-            <!--    <Action name="add_comment_to_task" /> -->
             <Separator />
             <Action name="mark_as_complete" />
             <Action name="mark_as_incomplete" />
@@ -45,7 +44,7 @@
         <Action name="start" />
         <Action name="stop" />
         <Action name="delete_task" />
-            <Action name="edit_task" />
+        <Action name="edit_task" />
     </ToolBar>
     <ToolBar position="top" iconText="icononly" noMerge="1" name="taskToolBar" >
       <text>Tasks</text>
