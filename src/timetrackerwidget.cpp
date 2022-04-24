@@ -145,172 +145,209 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
 {
     Q_INIT_RESOURCE(pics);
 
-    m_actionCollection = actionCollection;
-
     KStandardAction::open(this, &TimeTrackerWidget::openFileDialog, actionCollection);
     KStandardAction::save(this, &TimeTrackerWidget::saveFile, actionCollection);
     KStandardAction::preferences(this, &TimeTrackerWidget::showSettingsDialog, actionCollection);
 
-    QAction *startNewSession = actionCollection->addAction(QStringLiteral("ktimetracker_start_new_session"));
-    startNewSession->setText(i18nc("@action:inmenu", "Start &New Session"));
-    startNewSession->setToolTip(i18nc("@info:tooltip", "Starts a new session"));
-    startNewSession->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "This will reset the "
-        "session time to 0 for all tasks, to start a new session, without "
-        "affecting the totals."));
-    connect(startNewSession, &QAction::triggered, this, &TimeTrackerWidget::startNewSession);
+    {
+        QAction *startNewSession = actionCollection->addAction(QStringLiteral("ktimetracker_start_new_session"));
+        startNewSession->setText(i18nc("@action:inmenu", "Start &New Session"));
+        startNewSession->setToolTip(i18nc("@info:tooltip", "Starts a new session"));
+        startNewSession->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "This will reset the "
+            "session time to 0 for all tasks, to start a new session, without "
+            "affecting the totals."));
+        connect(startNewSession, &QAction::triggered, this, &TimeTrackerWidget::startNewSession);
+    }
 
-    QAction *editHistory = actionCollection->addAction(QStringLiteral("edit_history"));
-    editHistory->setText(i18nc("@action:inmenu", "Edit History..."));
-    editHistory->setToolTip(i18nc("@info:tooltip", "Edits history of all tasks of the current document"));
-    editHistory->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "A window will "
-        "be opened where you can change start and stop times of tasks or add a "
-        "comment to them."));
-    editHistory->setIcon(QIcon::fromTheme("view-history"));
-    connect(editHistory, &QAction::triggered, this, &TimeTrackerWidget::editHistory);
+    {
+        QAction *editHistory = actionCollection->addAction(QStringLiteral("edit_history"));
+        editHistory->setText(i18nc("@action:inmenu", "Edit History..."));
+        editHistory->setToolTip(i18nc("@info:tooltip", "Edits history of all tasks of the current document"));
+        editHistory->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "A window will "
+            "be opened where you can change start and stop times of tasks or add a "
+            "comment to them."));
+        editHistory->setIcon(QIcon::fromTheme("view-history"));
+        connect(editHistory, &QAction::triggered, this, &TimeTrackerWidget::editHistory);
+    }
 
-    QAction *resetAllTimes = actionCollection->addAction(QStringLiteral("reset_all_times"));
-    resetAllTimes->setText(i18nc("@action:inmenu", "&Reset All Times"));
-    resetAllTimes->setToolTip(i18nc("@info:tooltip", "Resets all times"));
-    resetAllTimes->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "This will reset the session "
-        "and total time to 0 for all tasks, to restart from scratch."));
-    connect(resetAllTimes, &QAction::triggered, this, &TimeTrackerWidget::resetAllTimes);
+    {
+        QAction *resetAllTimes = actionCollection->addAction(QStringLiteral("reset_all_times"));
+        resetAllTimes->setText(i18nc("@action:inmenu", "&Reset All Times"));
+        resetAllTimes->setToolTip(i18nc("@info:tooltip", "Resets all times"));
+        resetAllTimes->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "This will reset the session "
+            "and total time to 0 for all tasks, to restart from scratch."));
+        connect(resetAllTimes, &QAction::triggered, this, &TimeTrackerWidget::resetAllTimes);
+    }
 
-    QAction *startCurrentTimer = actionCollection->addAction(QStringLiteral("start"));
-    startCurrentTimer->setText(i18nc("@action:inmenu", "&Start"));
-    startCurrentTimer->setToolTip(i18nc("@info:tooltip", "Starts timing for selected task"));
-    startCurrentTimer->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "This will start timing for the "
-        "selected task.\nIt is even possible to time several tasks "
-        "simultaneously.\n\nYou may also start timing of tasks by double clicking "
-        "the left mouse button on a given task. This will, however, stop timing "
-        "of other tasks."));
-    startCurrentTimer->setIcon(QIcon::fromTheme("media-playback-start"));
-    actionCollection->setDefaultShortcut(startCurrentTimer, QKeySequence(Qt::Key_G));
-    connect(startCurrentTimer, &QAction::triggered, this, &TimeTrackerWidget::startCurrentTimer);
+    {
+        QAction *startCurrentTimer = actionCollection->addAction(QStringLiteral("start"));
+        startCurrentTimer->setText(i18nc("@action:inmenu", "&Start"));
+        startCurrentTimer->setToolTip(i18nc("@info:tooltip", "Starts timing for selected task"));
+        startCurrentTimer->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "This will start timing for the "
+            "selected task.\nIt is even possible to time several tasks "
+            "simultaneously.\n\nYou may also start timing of tasks by double clicking "
+            "the left mouse button on a given task. This will, however, stop timing "
+            "of other tasks."));
+        startCurrentTimer->setIcon(QIcon::fromTheme("media-playback-start"));
+        actionCollection->setDefaultShortcut(startCurrentTimer, QKeySequence(Qt::Key_G));
+        connect(startCurrentTimer, &QAction::triggered, this, &TimeTrackerWidget::startCurrentTimer);
+    }
 
-    QAction *stopCurrentTimer = actionCollection->addAction(QStringLiteral("stop"));
-    stopCurrentTimer->setText(i18nc("@action:inmenu", "S&top"));
-    stopCurrentTimer->setToolTip(i18nc("@info:tooltip", "Stops timing of the selected task"));
-    stopCurrentTimer->setWhatsThis(i18nc("@info:whatsthis", "Stops timing of the selected task"));
-    stopCurrentTimer->setIcon(QIcon::fromTheme("media-playback-stop"));
-    connect(stopCurrentTimer, &QAction::triggered, this, &TimeTrackerWidget::stopCurrentTimer);
+    {
+        QAction *stopCurrentTimer = actionCollection->addAction(QStringLiteral("stop"));
+        stopCurrentTimer->setText(i18nc("@action:inmenu", "S&top"));
+        stopCurrentTimer->setToolTip(i18nc("@info:tooltip", "Stops timing of the selected task"));
+        stopCurrentTimer->setWhatsThis(i18nc("@info:whatsthis", "Stops timing of the selected task"));
+        stopCurrentTimer->setIcon(QIcon::fromTheme("media-playback-stop"));
+        connect(stopCurrentTimer, &QAction::triggered, this, &TimeTrackerWidget::stopCurrentTimer);
+    }
 
-    QAction *focusSearchBar = actionCollection->addAction(QStringLiteral("focusSearchBar"));
-    focusSearchBar->setText(i18nc("@action:inmenu", "Focus on Searchbar"));
-    focusSearchBar->setToolTip(i18nc("@info:tooltip", "Sets the focus on the searchbar"));
-    focusSearchBar->setWhatsThis(i18nc("@info:whatsthis", "Sets the focus on the searchbar"));
-    actionCollection->setDefaultShortcut(focusSearchBar, QKeySequence(Qt::Key_S));
-    connect(focusSearchBar, &QAction::triggered, this, &TimeTrackerWidget::focusSearchBar);
+    {
+        QAction *focusSearchBar = actionCollection->addAction(QStringLiteral("focusSearchBar"));
+        focusSearchBar->setText(i18nc("@action:inmenu", "Focus on Searchbar"));
+        focusSearchBar->setToolTip(i18nc("@info:tooltip", "Sets the focus on the searchbar"));
+        focusSearchBar->setWhatsThis(i18nc("@info:whatsthis", "Sets the focus on the searchbar"));
+        actionCollection->setDefaultShortcut(focusSearchBar, QKeySequence(Qt::Key_S));
+        connect(focusSearchBar, &QAction::triggered, this, &TimeTrackerWidget::focusSearchBar);
+    }
 
-    QAction *stopAllTimers = actionCollection->addAction(QStringLiteral("stopAll"));
-    stopAllTimers->setText(i18nc("@action:inmenu", "Stop &All Timers"));
-    stopAllTimers->setToolTip(i18nc("@info:tooltip", "Stops all of the active timers"));
-    stopAllTimers->setWhatsThis(i18nc("@info:whatsthis", "Stops all of the active timers"));
-    actionCollection->setDefaultShortcut(stopAllTimers, QKeySequence(Qt::Key_Escape));
-    connect(stopAllTimers, &QAction::triggered, this, &TimeTrackerWidget::stopAllTimers);
+    {
+        QAction *stopAllTimers = actionCollection->addAction(QStringLiteral("stopAll"));
+        stopAllTimers->setText(i18nc("@action:inmenu", "Stop &All Timers"));
+        stopAllTimers->setToolTip(i18nc("@info:tooltip", "Stops all of the active timers"));
+        stopAllTimers->setWhatsThis(i18nc("@info:whatsthis", "Stops all of the active timers"));
+        actionCollection->setDefaultShortcut(stopAllTimers, QKeySequence(Qt::Key_Escape));
+        connect(stopAllTimers, &QAction::triggered, this, &TimeTrackerWidget::stopAllTimers);
+    }
 
-    QAction *focusTracking = actionCollection->addAction(QStringLiteral("focustracking"));
-    focusTracking->setCheckable(true);
-    focusTracking->setText(i18nc("@action:inmenu", "Track Active Applications"));
-    focusTracking->setToolTip(i18nc(
-        "@info:tooltip",
-        "Auto-creates and updates tasks when the focus of the current window has changed"));
-    focusTracking->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "If the focus of a window changes for the "
-        "first time when this action is enabled, a new task will be created "
-        "with the title of the window as its name and will be started. If there "
-        "already exists such an task it will be started."));
-    connect(focusTracking, &QAction::triggered, this, &TimeTrackerWidget::focusTracking);
+    {
+        QAction *focusTracking = actionCollection->addAction(QStringLiteral("focustracking"));
+        focusTracking->setCheckable(true);
+        focusTracking->setText(i18nc("@action:inmenu", "Track Active Applications"));
+        focusTracking->setToolTip(i18nc(
+            "@info:tooltip",
+            "Auto-creates and updates tasks when the focus of the current window has changed"));
+        focusTracking->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "If the focus of a window changes for the "
+            "first time when this action is enabled, a new task will be created "
+            "with the title of the window as its name and will be started. If there "
+            "already exists such an task it will be started."));
+        connect(focusTracking, &QAction::triggered, this, &TimeTrackerWidget::focusTracking);
+    }
 
-    QAction *newTask = actionCollection->addAction(QStringLiteral("new_task"));
-    newTask->setText(i18nc("@action:inmenu", "&New Task..."));
-    newTask->setToolTip(i18nc("@info:tooltip", "Creates new top level task"));
-    newTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new top level task."));
-    newTask->setIcon(QIcon::fromTheme("task-new"));
-    actionCollection->setDefaultShortcut(newTask, QKeySequence(Qt::CTRL + Qt::Key_T));
-    connect(newTask, &QAction::triggered, this, &TimeTrackerWidget::newTask);
+    {
+        QAction *newTask = actionCollection->addAction(QStringLiteral("new_task"));
+        newTask->setText(i18nc("@action:inmenu", "&New Task..."));
+        newTask->setToolTip(i18nc("@info:tooltip", "Creates new top level task"));
+        newTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new top level task."));
+        newTask->setIcon(QIcon::fromTheme("task-new"));
+        actionCollection->setDefaultShortcut(newTask, QKeySequence(Qt::CTRL + Qt::Key_T));
+        connect(newTask, &QAction::triggered, this, &TimeTrackerWidget::newTask);
+    }
 
-    QAction *newSubTask = actionCollection->addAction(QStringLiteral("new_sub_task"));
-    newSubTask->setText(i18nc("@action:inmenu", "New &Subtask..."));
-    newSubTask->setToolTip(i18nc("@info:tooltip", "Creates a new subtask to the current selected task"));
-    newSubTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new subtask to the current selected task."));
-    newSubTask->setIcon(QIcon::fromTheme("view-task-child"));
-    actionCollection->setDefaultShortcut(newSubTask, QKeySequence(Qt::CTRL + Qt::Key_B));
-    connect(newSubTask, &QAction::triggered, this, &TimeTrackerWidget::newSubTask);
+    {
+        QAction *newSubTask = actionCollection->addAction(QStringLiteral("new_sub_task"));
+        newSubTask->setText(i18nc("@action:inmenu", "New &Subtask..."));
+        newSubTask->setToolTip(i18nc("@info:tooltip", "Creates a new subtask to the current selected task"));
+        newSubTask->setWhatsThis(
+            i18nc("@info:whatsthis", "This will create a new subtask to the current selected task."));
+        newSubTask->setIcon(QIcon::fromTheme("view-task-child"));
+        actionCollection->setDefaultShortcut(newSubTask, QKeySequence(Qt::CTRL + Qt::Key_B));
+        connect(newSubTask, &QAction::triggered, this, &TimeTrackerWidget::newSubTask);
+    }
 
-    QAction *deleteTask = actionCollection->addAction(QStringLiteral("delete_task"));
-    deleteTask->setText(i18nc("@action:inmenu", "&Delete"));
-    deleteTask->setToolTip(i18nc("@info:tooltip", "Deletes selected task"));
-    deleteTask->setWhatsThis(i18nc("@info:whatsthis", "This will delete the selected task(s) and all subtasks."));
-    deleteTask->setIcon(QIcon::fromTheme("edit-delete"));
-    actionCollection->setDefaultShortcut(deleteTask, QKeySequence(Qt::Key_Delete));
-    connect(deleteTask, &QAction::triggered, this, QOverload<>::of(&TimeTrackerWidget::deleteTask));
+    {
+        QAction *deleteTask = actionCollection->addAction(QStringLiteral("delete_task"));
+        deleteTask->setText(i18nc("@action:inmenu", "&Delete"));
+        deleteTask->setToolTip(i18nc("@info:tooltip", "Deletes selected task"));
+        deleteTask->setWhatsThis(i18nc("@info:whatsthis", "This will delete the selected task(s) and all subtasks."));
+        deleteTask->setIcon(QIcon::fromTheme("edit-delete"));
+        actionCollection->setDefaultShortcut(deleteTask, QKeySequence(Qt::Key_Delete));
+        connect(deleteTask, &QAction::triggered, this, QOverload<>::of(&TimeTrackerWidget::deleteTask));
+    }
 
-    QAction *editTask = actionCollection->addAction(QStringLiteral("edit_task"));
-    editTask->setText(i18nc("@action:inmenu", "&Properties"));
-    editTask->setToolTip(i18nc("@info:tooltip", "Edit name or description for selected task"));
-    editTask->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "This will bring up a dialog "
-        "box where you may edit the parameters for the selected task."));
-    editTask->setIcon(QIcon::fromTheme("document-properties"));
-    actionCollection->setDefaultShortcut(editTask, QKeySequence(Qt::CTRL + Qt::Key_E));
-    connect(editTask, &QAction::triggered, this, &TimeTrackerWidget::editTask);
+    {
+        QAction *editTask = actionCollection->addAction(QStringLiteral("edit_task"));
+        editTask->setText(i18nc("@action:inmenu", "&Properties"));
+        editTask->setToolTip(i18nc("@info:tooltip", "Edit name or description for selected task"));
+        editTask->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "This will bring up a dialog "
+            "box where you may edit the parameters for the selected task."));
+        editTask->setIcon(QIcon::fromTheme("document-properties"));
+        actionCollection->setDefaultShortcut(editTask, QKeySequence(Qt::CTRL + Qt::Key_E));
+        connect(editTask, &QAction::triggered, this, &TimeTrackerWidget::editTask);
+    }
 
-    QAction *editTaskTime = actionCollection->addAction(QStringLiteral("edit_task_time"));
-    editTaskTime->setText(i18nc("@action:inmenu", "Edit &Time..."));
-    editTaskTime->setToolTip(i18nc("@info:tooltip", "Edit time for selected task"));
-    editTaskTime->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "This will bring up a dialog "
-        "box where you may edit the times for the selected task."));
-    editTaskTime->setIcon(QIcon::fromTheme("document-edit"));
-    actionCollection->setDefaultShortcut(editTaskTime, QKeySequence(Qt::Key_E));
-    connect(editTaskTime, &QAction::triggered, this, &TimeTrackerWidget::editTaskTime);
+    {
+        QAction *editTaskTime = actionCollection->addAction(QStringLiteral("edit_task_time"));
+        editTaskTime->setText(i18nc("@action:inmenu", "Edit &Time..."));
+        editTaskTime->setToolTip(i18nc("@info:tooltip", "Edit time for selected task"));
+        editTaskTime->setWhatsThis(i18nc(
+            "@info:whatsthis",
+            "This will bring up a dialog "
+            "box where you may edit the times for the selected task."));
+        editTaskTime->setIcon(QIcon::fromTheme("document-edit"));
+        actionCollection->setDefaultShortcut(editTaskTime, QKeySequence(Qt::Key_E));
+        connect(editTaskTime, &QAction::triggered, this, &TimeTrackerWidget::editTaskTime);
+    }
 
-    QAction *markTaskAsComplete = actionCollection->addAction(QStringLiteral("mark_as_complete"));
-    markTaskAsComplete->setText(i18nc("@action:inmenu", "&Mark as Complete"));
-    markTaskAsComplete->setIcon(QPixmap(":/pics/task-complete.xpm"));
-    actionCollection->setDefaultShortcut(markTaskAsComplete, QKeySequence(Qt::CTRL + Qt::Key_M));
-    connect(markTaskAsComplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsComplete);
+    {
+        QAction *markTaskAsComplete = actionCollection->addAction(QStringLiteral("mark_as_complete"));
+        markTaskAsComplete->setText(i18nc("@action:inmenu", "&Mark as Complete"));
+        markTaskAsComplete->setIcon(QPixmap(":/pics/task-complete.xpm"));
+        actionCollection->setDefaultShortcut(markTaskAsComplete, QKeySequence(Qt::CTRL + Qt::Key_M));
+        connect(markTaskAsComplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsComplete);
+    }
 
-    QAction *markTaskAsIncomplete = actionCollection->addAction(QStringLiteral("mark_as_incomplete"));
-    markTaskAsIncomplete->setText(i18nc("@action:inmenu", "&Mark as Incomplete"));
-    markTaskAsIncomplete->setIcon(QPixmap(":/pics/task-incomplete.xpm"));
-    actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
-    connect(markTaskAsIncomplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
+    {
+        QAction *markTaskAsIncomplete = actionCollection->addAction(QStringLiteral("mark_as_incomplete"));
+        markTaskAsIncomplete->setText(i18nc("@action:inmenu", "&Mark as Incomplete"));
+        markTaskAsIncomplete->setIcon(QPixmap(":/pics/task-incomplete.xpm"));
+        actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
+        connect(markTaskAsIncomplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
+    }
 
-    QAction *exportAction = actionCollection->addAction(QStringLiteral("export_dialog"));
-    exportAction->setText(i18nc("@action:inmenu", "&Export..."));
-    exportAction->setIcon(QIcon::fromTheme("document-export"));
-    connect(exportAction, &QAction::triggered, this, &TimeTrackerWidget::exportDialog);
+    {
+        QAction *exportAction = actionCollection->addAction(QStringLiteral("export_dialog"));
+        exportAction->setText(i18nc("@action:inmenu", "&Export..."));
+        exportAction->setIcon(QIcon::fromTheme("document-export"));
+        connect(exportAction, &QAction::triggered, this, &TimeTrackerWidget::exportDialog);
+    }
 
-    QAction *importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
-    importPlanner->setText(i18nc("@action:inmenu", "Import Tasks From &Planner..."));
-    importPlanner->setIcon(QIcon::fromTheme("document-import"));
-    connect(importPlanner, &QAction::triggered, [=]() {
-        const QString &fileName = QFileDialog::getOpenFileName();
-        importPlannerFile(fileName);
-    });
+    {
+        QAction *importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
+        importPlanner->setText(i18nc("@action:inmenu", "Import Tasks From &Planner..."));
+        importPlanner->setIcon(QIcon::fromTheme("document-import"));
+        connect(importPlanner, &QAction::triggered, [=]() {
+            const QString &fileName = QFileDialog::getOpenFileName();
+            importPlannerFile(fileName);
+        });
+    }
 
-    QAction *showSearchBar = actionCollection->addAction(QStringLiteral("searchbar"));
-    showSearchBar->setCheckable(true);
-    showSearchBar->setChecked(KTimeTrackerSettings::showSearchBar());
-    showSearchBar->setText(i18nc("@action:inmenu", "Show Searchbar"));
-    connect(showSearchBar, &QAction::triggered, this, &TimeTrackerWidget::slotSearchBar);
+    {
+        QAction *showSearchBar = actionCollection->addAction(QStringLiteral("searchbar"));
+        showSearchBar->setCheckable(true);
+        showSearchBar->setChecked(KTimeTrackerSettings::showSearchBar());
+        showSearchBar->setText(i18nc("@action:inmenu", "Show Searchbar"));
+        connect(showSearchBar, &QAction::triggered, this, &TimeTrackerWidget::slotSearchBar);
+    }
 
     connect(this, &TimeTrackerWidget::currentTaskChanged, this, &TimeTrackerWidget::slotUpdateButtons);
     connect(this, &TimeTrackerWidget::currentTaskViewChanged, this, &TimeTrackerWidget::slotUpdateButtons);
     connect(this, &TimeTrackerWidget::updateButtons, this, &TimeTrackerWidget::slotUpdateButtons);
     slotUpdateButtons();
+
+    m_actionCollection = actionCollection;
 }
 
 QAction *TimeTrackerWidget::action(const QString &name) const
