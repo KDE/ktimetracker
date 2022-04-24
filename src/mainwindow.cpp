@@ -45,15 +45,12 @@ MainWindow::MainWindow(const QUrl &url)
 {
     qCDebug(KTT_LOG) << "Entering function, url is " << url;
 
-    // we need an instance
     m_mainWidget = new TimeTrackerWidget(this);
     setCentralWidget(m_mainWidget);
 
-    // Setup our actions
-    auto* configureAction = new QAction(this);
+    auto *configureAction = new QAction(this);
     configureAction->setText(i18nc("@action:inmenu", "Configure KTimeTracker..."));
     actionCollection()->addAction("configure_ktimetracker", configureAction);
-
     connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);
     m_mainWidget->setupActions(actionCollection());
 
@@ -70,7 +67,8 @@ MainWindow::MainWindow(const QUrl &url)
     connect(m_mainWidget, &TimeTrackerWidget::minutesUpdated, this, &MainWindow::updateWindowCaptionTasks);
 
     // Setup context menu request handling
-    connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
+    connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this,
+            &MainWindow::taskViewCustomContextMenuRequested);
 
     if (KTimeTrackerSettings::trayIcon()) {
         m_tray = new TrayIcon(this);
@@ -94,7 +92,7 @@ MainWindow::MainWindow(const QUrl &url)
 //    return true;
 //}
 
-void MainWindow::setStatusBar(const QString& qs)
+void MainWindow::setStatusBar(const QString &qs)
 {
     statusBar()->showMessage(i18n(qs.toUtf8()));
 }
@@ -108,7 +106,7 @@ MainWindow::~MainWindow()
 
 bool MainWindow::queryClose()
 {
-    auto* app = dynamic_cast<QGuiApplication*>(QGuiApplication::instance());
+    auto *app = dynamic_cast<QGuiApplication *>(QGuiApplication::instance());
     if (!m_quitRequested && app && !app->isSavingSession()) {
         hide();
         return false;
@@ -117,9 +115,9 @@ bool MainWindow::queryClose()
     return KMainWindow::queryClose();
 }
 
-void MainWindow::taskViewCustomContextMenuRequested( const QPoint& point )
+void MainWindow::taskViewCustomContextMenuRequested(const QPoint &point)
 {
-    QMenu* pop = dynamic_cast<QMenu*>(guiFactory()->container("task_popup", this));
+    QMenu *pop = dynamic_cast<QMenu *>(guiFactory()->container("task_popup", this));
     if (pop) {
         pop->popup(point);
     }
@@ -135,21 +133,21 @@ void MainWindow::quit()
 
 void MainWindow::updateWindowCaptionFile(const QString &url)
 {
-    if(!KTimeTrackerSettings::windowTitleCurrentFile()) {
+    if (!KTimeTrackerSettings::windowTitleCurrentFile()) {
         return;
     }
 
     this->setCaption(url);
 }
 
-void MainWindow::updateWindowCaptionTasks(const QList<Task*> &activeTasks)
+void MainWindow::updateWindowCaptionTasks(const QList<Task *> &activeTasks)
 {
-    if(!KTimeTrackerSettings::windowTitleCurrentTask()) {
+    if (!KTimeTrackerSettings::windowTitleCurrentTask()) {
         return;
     }
 
     if (activeTasks.isEmpty()) {
-        this->setCaption(i18n("No active tasks") );
+        this->setCaption(i18n("No active tasks"));
         return;
     }
 
@@ -157,7 +155,7 @@ void MainWindow::updateWindowCaptionTasks(const QList<Task*> &activeTasks)
 
     // Build the caption with all of the names of the active tasks.
     for (int i = 0; i < activeTasks.count(); ++i) {
-        Task* task = activeTasks.at(i);
+        Task *task = activeTasks.at(i);
         if (i > 0) {
             qCaption += i18nc("separator between task names", ", ");
         }

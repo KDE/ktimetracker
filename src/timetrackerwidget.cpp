@@ -58,7 +58,7 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
 {
     registerDBus();
 
-    QLayout* layout = new QVBoxLayout;
+    QLayout *layout = new QVBoxLayout;
     layout->setMargin(0);
     layout->setSpacing(0);
     setLayout(layout);
@@ -121,12 +121,12 @@ void TimeTrackerWidget::addTaskView(const QUrl &url)
     slotCurrentChanged();
 }
 
-TaskView* TimeTrackerWidget::currentTaskView() const
+TaskView *TimeTrackerWidget::currentTaskView() const
 {
     return m_taskView;
 }
 
-Task* TimeTrackerWidget::currentTask()
+Task *TimeTrackerWidget::currentTask()
 {
     auto *taskView = currentTaskView();
     if (taskView == nullptr) {
@@ -141,7 +141,7 @@ Task* TimeTrackerWidget::currentTask()
     return tasksWidget->currentItem();
 }
 
-void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
+void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
 {
     Q_INIT_RESOURCE(pics);
 
@@ -151,7 +151,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     KStandardAction::save(this, &TimeTrackerWidget::saveFile, actionCollection);
     KStandardAction::preferences(this, &TimeTrackerWidget::showSettingsDialog, actionCollection);
 
-    QAction* startNewSession = actionCollection->addAction(QStringLiteral("ktimetracker_start_new_session"));
+    QAction *startNewSession = actionCollection->addAction(QStringLiteral("ktimetracker_start_new_session"));
     startNewSession->setText(i18nc("@action:inmenu", "Start &New Session"));
     startNewSession->setToolTip(i18nc("@info:tooltip", "Starts a new session"));
     startNewSession->setWhatsThis(i18nc(
@@ -161,7 +161,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
         "affecting the totals."));
     connect(startNewSession, &QAction::triggered, this, &TimeTrackerWidget::startNewSession);
 
-    QAction* editHistory = actionCollection->addAction(QStringLiteral("edit_history"));
+    QAction *editHistory = actionCollection->addAction(QStringLiteral("edit_history"));
     editHistory->setText(i18nc("@action:inmenu", "Edit History..."));
     editHistory->setToolTip(i18nc("@info:tooltip", "Edits history of all tasks of the current document"));
     editHistory->setWhatsThis(i18nc(
@@ -172,7 +172,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     editHistory->setIcon(QIcon::fromTheme("view-history"));
     connect(editHistory, &QAction::triggered, this, &TimeTrackerWidget::editHistory);
 
-    QAction* resetAllTimes = actionCollection->addAction(QStringLiteral("reset_all_times"));
+    QAction *resetAllTimes = actionCollection->addAction(QStringLiteral("reset_all_times"));
     resetAllTimes->setText(i18nc("@action:inmenu", "&Reset All Times"));
     resetAllTimes->setToolTip(i18nc("@info:tooltip", "Resets all times"));
     resetAllTimes->setWhatsThis(i18nc(
@@ -181,7 +181,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
         "and total time to 0 for all tasks, to restart from scratch."));
     connect(resetAllTimes, &QAction::triggered, this, &TimeTrackerWidget::resetAllTimes);
 
-    QAction* startCurrentTimer = actionCollection->addAction(QStringLiteral("start"));
+    QAction *startCurrentTimer = actionCollection->addAction(QStringLiteral("start"));
     startCurrentTimer->setText(i18nc("@action:inmenu", "&Start"));
     startCurrentTimer->setToolTip(i18nc("@info:tooltip", "Starts timing for selected task"));
     startCurrentTimer->setWhatsThis(i18nc(
@@ -195,28 +195,28 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(startCurrentTimer, QKeySequence(Qt::Key_G));
     connect(startCurrentTimer, &QAction::triggered, this, &TimeTrackerWidget::startCurrentTimer);
 
-    QAction* stopCurrentTimer = actionCollection->addAction(QStringLiteral("stop"));
+    QAction *stopCurrentTimer = actionCollection->addAction(QStringLiteral("stop"));
     stopCurrentTimer->setText(i18nc("@action:inmenu", "S&top"));
     stopCurrentTimer->setToolTip(i18nc("@info:tooltip", "Stops timing of the selected task"));
     stopCurrentTimer->setWhatsThis(i18nc("@info:whatsthis", "Stops timing of the selected task"));
     stopCurrentTimer->setIcon(QIcon::fromTheme("media-playback-stop"));
     connect(stopCurrentTimer, &QAction::triggered, this, &TimeTrackerWidget::stopCurrentTimer);
 
-    QAction* focusSearchBar = actionCollection->addAction(QStringLiteral("focusSearchBar"));
+    QAction *focusSearchBar = actionCollection->addAction(QStringLiteral("focusSearchBar"));
     focusSearchBar->setText(i18nc("@action:inmenu", "Focus on Searchbar"));
     focusSearchBar->setToolTip(i18nc("@info:tooltip", "Sets the focus on the searchbar"));
     focusSearchBar->setWhatsThis(i18nc("@info:whatsthis", "Sets the focus on the searchbar"));
     actionCollection->setDefaultShortcut(focusSearchBar, QKeySequence(Qt::Key_S));
     connect(focusSearchBar, &QAction::triggered, this, &TimeTrackerWidget::focusSearchBar);
 
-    QAction* stopAllTimers = actionCollection->addAction(QStringLiteral("stopAll"));
+    QAction *stopAllTimers = actionCollection->addAction(QStringLiteral("stopAll"));
     stopAllTimers->setText(i18nc("@action:inmenu", "Stop &All Timers"));
     stopAllTimers->setToolTip(i18nc("@info:tooltip", "Stops all of the active timers"));
     stopAllTimers->setWhatsThis(i18nc("@info:whatsthis", "Stops all of the active timers"));
     actionCollection->setDefaultShortcut(stopAllTimers, QKeySequence(Qt::Key_Escape));
     connect(stopAllTimers, &QAction::triggered, this, &TimeTrackerWidget::stopAllTimers);
 
-    QAction* focusTracking = actionCollection->addAction(QStringLiteral("focustracking"));
+    QAction *focusTracking = actionCollection->addAction(QStringLiteral("focustracking"));
     focusTracking->setCheckable(true);
     focusTracking->setText(i18nc("@action:inmenu", "Track Active Applications"));
     focusTracking->setToolTip(i18nc(
@@ -230,7 +230,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
         "already exists such an task it will be started."));
     connect(focusTracking, &QAction::triggered, this, &TimeTrackerWidget::focusTracking);
 
-    QAction* newTask = actionCollection->addAction(QStringLiteral("new_task"));
+    QAction *newTask = actionCollection->addAction(QStringLiteral("new_task"));
     newTask->setText(i18nc("@action:inmenu", "&New Task..."));
     newTask->setToolTip(i18nc("@info:tooltip", "Creates new top level task"));
     newTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new top level task."));
@@ -238,7 +238,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(newTask, QKeySequence(Qt::CTRL + Qt::Key_T));
     connect(newTask, &QAction::triggered, this, &TimeTrackerWidget::newTask);
 
-    QAction* newSubTask = actionCollection->addAction(QStringLiteral("new_sub_task"));
+    QAction *newSubTask = actionCollection->addAction(QStringLiteral("new_sub_task"));
     newSubTask->setText(i18nc("@action:inmenu", "New &Subtask..."));
     newSubTask->setToolTip(i18nc("@info:tooltip", "Creates a new subtask to the current selected task"));
     newSubTask->setWhatsThis(i18nc("@info:whatsthis", "This will create a new subtask to the current selected task."));
@@ -246,7 +246,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(newSubTask, QKeySequence(Qt::CTRL + Qt::Key_B));
     connect(newSubTask, &QAction::triggered, this, &TimeTrackerWidget::newSubTask);
 
-    QAction* deleteTask = actionCollection->addAction(QStringLiteral("delete_task"));
+    QAction *deleteTask = actionCollection->addAction(QStringLiteral("delete_task"));
     deleteTask->setText(i18nc("@action:inmenu", "&Delete"));
     deleteTask->setToolTip(i18nc("@info:tooltip", "Deletes selected task"));
     deleteTask->setWhatsThis(i18nc("@info:whatsthis", "This will delete the selected task(s) and all subtasks."));
@@ -254,7 +254,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(deleteTask, QKeySequence(Qt::Key_Delete));
     connect(deleteTask, &QAction::triggered, this, QOverload<>::of(&TimeTrackerWidget::deleteTask));
 
-    QAction* editTask = actionCollection->addAction(QStringLiteral("edit_task"));
+    QAction *editTask = actionCollection->addAction(QStringLiteral("edit_task"));
     editTask->setText(i18nc("@action:inmenu", "&Properties"));
     editTask->setToolTip(i18nc("@info:tooltip", "Edit name or description for selected task"));
     editTask->setWhatsThis(i18nc(
@@ -265,7 +265,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(editTask, QKeySequence(Qt::CTRL + Qt::Key_E));
     connect(editTask, &QAction::triggered, this, &TimeTrackerWidget::editTask);
 
-    QAction* editTaskTime = actionCollection->addAction(QStringLiteral("edit_task_time"));
+    QAction *editTaskTime = actionCollection->addAction(QStringLiteral("edit_task_time"));
     editTaskTime->setText(i18nc("@action:inmenu", "Edit &Time..."));
     editTaskTime->setToolTip(i18nc("@info:tooltip", "Edit time for selected task"));
     editTaskTime->setWhatsThis(i18nc(
@@ -276,24 +276,24 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
     actionCollection->setDefaultShortcut(editTaskTime, QKeySequence(Qt::Key_E));
     connect(editTaskTime, &QAction::triggered, this, &TimeTrackerWidget::editTaskTime);
 
-    QAction* markTaskAsComplete = actionCollection->addAction(QStringLiteral("mark_as_complete"));
+    QAction *markTaskAsComplete = actionCollection->addAction(QStringLiteral("mark_as_complete"));
     markTaskAsComplete->setText(i18nc("@action:inmenu", "&Mark as Complete"));
     markTaskAsComplete->setIcon(QPixmap(":/pics/task-complete.xpm"));
     actionCollection->setDefaultShortcut(markTaskAsComplete, QKeySequence(Qt::CTRL + Qt::Key_M));
     connect(markTaskAsComplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsComplete);
 
-    QAction* markTaskAsIncomplete = actionCollection->addAction(QStringLiteral("mark_as_incomplete"));
+    QAction *markTaskAsIncomplete = actionCollection->addAction(QStringLiteral("mark_as_incomplete"));
     markTaskAsIncomplete->setText(i18nc("@action:inmenu", "&Mark as Incomplete"));
     markTaskAsIncomplete->setIcon(QPixmap(":/pics/task-incomplete.xpm"));
     actionCollection->setDefaultShortcut(markTaskAsIncomplete, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
     connect(markTaskAsIncomplete, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
 
-    QAction* exportAction = actionCollection->addAction(QStringLiteral("export_dialog"));
+    QAction *exportAction = actionCollection->addAction(QStringLiteral("export_dialog"));
     exportAction->setText(i18nc("@action:inmenu", "&Export..."));
     exportAction->setIcon(QIcon::fromTheme("document-export"));
     connect(exportAction, &QAction::triggered, this, &TimeTrackerWidget::exportDialog);
 
-    QAction* importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
+    QAction *importPlanner = actionCollection->addAction(QStringLiteral("import_planner"));
     importPlanner->setText(i18nc("@action:inmenu", "Import Tasks From &Planner..."));
     importPlanner->setIcon(QIcon::fromTheme("document-import"));
     connect(importPlanner, &QAction::triggered, [=]() {
@@ -301,7 +301,7 @@ void TimeTrackerWidget::setupActions(KActionCollection* actionCollection)
         importPlannerFile(fileName);
     });
 
-    QAction* showSearchBar = actionCollection->addAction(QStringLiteral("searchbar"));
+    QAction *showSearchBar = actionCollection->addAction(QStringLiteral("searchbar"));
     showSearchBar->setCheckable(true);
     showSearchBar->setChecked(KTimeTrackerSettings::showSearchBar());
     showSearchBar->setText(i18nc("@action:inmenu", "Show Searchbar"));
@@ -335,7 +335,7 @@ void TimeTrackerWidget::openFileDialog()
 bool TimeTrackerWidget::closeFile()
 {
     qCDebug(KTT_LOG) << "Entering TimeTrackerWidget::closeFile";
-    TaskView* taskView = currentTaskView();
+    TaskView *taskView = currentTaskView();
 
     if (taskView) {
         taskView->save();
@@ -378,7 +378,8 @@ void TimeTrackerWidget::slotCurrentChanged()
 
     if (m_taskView) {
         connect(m_taskView, &TaskView::updateButtons, this, &TimeTrackerWidget::updateButtons, Qt::UniqueConnection);
-        connect(m_taskView, &TaskView::setStatusBarText, this, &TimeTrackerWidget::statusBarTextChangeRequested, Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::setStatusBarText, this, &TimeTrackerWidget::statusBarTextChangeRequested,
+                Qt::UniqueConnection);
         connect(m_taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged, Qt::UniqueConnection);
@@ -407,7 +408,8 @@ void TimeTrackerWidget::slotUpdateButtons()
     action(QStringLiteral("mark_as_incomplete"))->setEnabled(item && item->isComplete());
 
     action(QStringLiteral("new_task"))->setEnabled(currentTaskView());
-    action(QStringLiteral("new_sub_task"))->setEnabled(currentTaskView() && currentTaskView()->storage()->isLoaded() && currentTaskView()->storage()->tasksModel()->getAllTasks().size());
+    action(QStringLiteral("new_sub_task"))->setEnabled(currentTaskView() && currentTaskView()->storage()->isLoaded() &&
+                                                       currentTaskView()->storage()->tasksModel()->getAllTasks().size());
     action(QStringLiteral("focustracking"))->setEnabled(currentTaskView());
     action(QStringLiteral("focustracking"))->setChecked(currentTaskView() && currentTaskView()->isFocusTrackingActive());
     action(QStringLiteral("ktimetracker_start_new_session"))->setEnabled(currentTaskView());
@@ -426,9 +428,12 @@ void TimeTrackerWidget::showSettingsDialog()
 
     auto *dialog = new KConfigDialog(this, "settings", KTimeTrackerSettings::self());
     dialog->setFaceType(KPageDialog::List);
-    dialog->addPage(new KTimeTrackerBehaviorConfig(dialog), i18nc("@title:tab", "Behavior"), QStringLiteral("preferences-other"));
-    dialog->addPage(new KTimeTrackerDisplayConfig(dialog), i18nc("@title:tab", "Appearance"), QStringLiteral("preferences-desktop-theme"));
-    dialog->addPage(new KTimeTrackerStorageConfig(dialog), i18nc("@title:tab", "Storage"), QStringLiteral("system-file-manager"));
+    dialog->addPage(new KTimeTrackerBehaviorConfig(dialog), i18nc("@title:tab", "Behavior"),
+                    QStringLiteral("preferences-other"));
+    dialog->addPage(new KTimeTrackerDisplayConfig(dialog), i18nc("@title:tab", "Appearance"),
+                    QStringLiteral("preferences-desktop-theme"));
+    dialog->addPage(new KTimeTrackerStorageConfig(dialog), i18nc("@title:tab", "Storage"),
+                    QStringLiteral("system-file-manager"));
     connect(dialog, &KConfigDialog::settingsChanged, this, &TimeTrackerWidget::loadSettings);
     dialog->show();
 }
@@ -479,8 +484,8 @@ void TimeTrackerWidget::editTask()
 
 void TimeTrackerWidget::editTaskTime()
 {
-    qCDebug(KTT_LOG) <<"Entering editTask";
-    Task* task = currentTask();
+    qCDebug(KTT_LOG) << "Entering editTask";
+    Task *task = currentTask();
     if (!task) {
         return;
     }
@@ -541,7 +546,8 @@ void TimeTrackerWidget::editHistory()
         if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();
         } else {
-            KMessageBox::information(nullptr, i18nc("@info in message box", "There is no history yet. Start and stop a task and you will have an entry in your history."));
+            KMessageBox::information(nullptr, i18nc("@info in message box",
+                                                    "There is no history yet. Start and stop a task and you will have an entry in your history."));
         }
     }
 }
@@ -589,7 +595,7 @@ QString TimeTrackerWidget::version() const
     return KTIMETRACKER_VERSION_STRING;
 }
 
-QStringList TimeTrackerWidget::taskIdsFromName( const QString &taskName ) const
+QStringList TimeTrackerWidget::taskIdsFromName(const QString &taskName) const
 {
     QStringList result;
 
@@ -607,7 +613,7 @@ QStringList TimeTrackerWidget::taskIdsFromName( const QString &taskName ) const
     return result;
 }
 
-void TimeTrackerWidget::addTask( const QString &taskName )
+void TimeTrackerWidget::addTask(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
 
@@ -621,7 +627,8 @@ void TimeTrackerWidget::addSubTask(const QString &taskName, const QString &taskI
     TaskView *taskView = currentTaskView();
 
     if (taskView) {
-        taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->storage()->tasksModel()->taskByUID(taskId));
+        taskView->addTask(taskName, QString(), 0, 0, DesktopList(),
+                          taskView->storage()->tasksModel()->taskByUID(taskId));
         taskView->storage()->projectModel()->refresh();
         taskView->tasksWidget()->refresh();
     }
@@ -736,26 +743,25 @@ int TimeTrackerWidget::changeTime(const QString &taskId, int64_t minutes)
     return 0;
 }
 
-QString TimeTrackerWidget::error( int errorCode ) const
+QString TimeTrackerWidget::error(int errorCode) const
 {
-    switch ( errorCode )
-    {
+    switch (errorCode) {
         case KTIMETRACKER_ERR_GENERIC_SAVE_FAILED:
-            return i18n( "Save failed, most likely because the file could not be locked." );
+            return i18n("Save failed, most likely because the file could not be locked.");
         case KTIMETRACKER_ERR_COULD_NOT_MODIFY_RESOURCE:
-            return i18n( "Could not modify calendar resource." );
+            return i18n("Could not modify calendar resource.");
         case KTIMETRACKER_ERR_MEMORY_EXHAUSTED:
-            return i18n( "Out of memory--could not create object." );
+            return i18n("Out of memory--could not create object.");
         case KTIMETRACKER_ERR_UID_NOT_FOUND:
-            return i18n( "UID not found." );
+            return i18n("UID not found.");
         case KTIMETRACKER_ERR_INVALID_DATE:
-            return i18n( "Invalidate date--format is YYYY-MM-DD." );
+            return i18n("Invalidate date--format is YYYY-MM-DD.");
         case KTIMETRACKER_ERR_INVALID_TIME:
-            return i18n( "Invalid time--format is YYYY-MM-DDTHH:MM:SS." );
+            return i18n("Invalid time--format is YYYY-MM-DDTHH:MM:SS.");
         case KTIMETRACKER_ERR_INVALID_DURATION:
-            return i18n( "Invalid task duration--must be greater than zero." );
+            return i18n("Invalid task duration--must be greater than zero.");
         default:
-            return i18n( "Invalid error number: %1", errorCode );
+            return i18n("Invalid error number: %1", errorCode);
     }
 }
 
@@ -797,7 +803,7 @@ void TimeTrackerWidget::startTimerFor(const QString &taskId)
     }
 }
 
-bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
+bool TimeTrackerWidget::startTimerForTaskName(const QString &taskName)
 {
     TaskView *taskView = currentTaskView();
     if (!taskView) {
@@ -805,7 +811,7 @@ bool TimeTrackerWidget::startTimerForTaskName( const QString &taskName )
     }
 
     for (Task *task : taskView->storage()->tasksModel()->getAllTasks()) {
-        if (task->name() == taskName ) {
+        if (task->name() == taskName) {
             taskView->startTimerForNow(task);
             return true;
         }
@@ -948,7 +954,7 @@ QStringList TimeTrackerWidget::tasks() const
 QStringList TimeTrackerWidget::activeTasks() const
 {
     QStringList result;
-    TaskView* taskView = currentTaskView();
+    TaskView *taskView = currentTaskView();
     if (!taskView) {
         return result;
     }
@@ -967,7 +973,7 @@ void TimeTrackerWidget::saveAll()
 
 void TimeTrackerWidget::quit()
 {
-    auto* mainWindow = dynamic_cast<MainWindow*>(parent()->parent());
+    auto *mainWindow = dynamic_cast<MainWindow *>(parent()->parent());
     if (mainWindow) {
         mainWindow->quit();
     } else {

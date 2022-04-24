@@ -47,7 +47,7 @@ std::unique_ptr<FileCalendar> ProjectModel::asCalendar(const QUrl &url) const
 {
     std::unique_ptr<FileCalendar> calendar(new FileCalendar(url));
     for (auto *item : m_tasksModel->getAllItems()) {
-        Task *task = dynamic_cast<Task*>(item);
+        Task *task = dynamic_cast<Task *>(item);
 
         KCalCore::Todo::Ptr todo(new KCalCore::Todo());
         calendar->addTodo(task->asTodo(todo));
