@@ -690,7 +690,7 @@ void TimeTrackerWidget::deleteTask(const QString &taskId)
 void TimeTrackerWidget::setPercentComplete(const QString &taskId, int percent)
 {
     TaskView *taskView = currentTaskView();
-    
+
     if (!taskView) {
         return;
     }
