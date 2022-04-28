@@ -28,7 +28,6 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 
-
 QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriteria &rc)
 {
     const QDate &from = rc.from;
@@ -54,13 +53,12 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
 
     // Export all events
     for (const auto *event : projectModel->eventsModel()->events()) {
-
         row.clear();
 
         QDateTime start = event->dtStart();
         QDateTime end = event->dtEnd();
 
-        if(start.date() < from || end.date() > to) {
+        if (start.date() < from || end.date() > to) {
             continue;
         }
 
@@ -91,7 +89,8 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
     return events.join("");
 }
 
-QString getFullEventName(const Event *event, ProjectModel *projectModel) {
+QString getFullEventName(const Event *event, ProjectModel *projectModel)
+{
     QString fullName;
 
     // maybe the file is corrupt and (*i)->relatedTo is NULL
@@ -100,13 +99,13 @@ QString getFullEventName(const Event *event, ProjectModel *projectModel) {
         return fullName;
     }
 
-    Task *parent = dynamic_cast<Task*>(projectModel->tasksModel()->taskByUID(event->relatedTo()));
+    Task *parent = dynamic_cast<Task *>(projectModel->tasksModel()->taskByUID(event->relatedTo()));
     if (!parent) {
         qCDebug(KTT_LOG) << "Skipping orphaned (no related parent task) entry " << event->summary();
         return fullName;
     }
 
-    Task* parentTask;
+    Task *parentTask;
     parentTask = parent;
     fullName += parentTask->name();
     parentTask = parentTask->parentTask();

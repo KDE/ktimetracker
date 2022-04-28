@@ -26,7 +26,7 @@
 
 #include <KLocalizedString>
 
-#include "ktimetrackerutility.h"        // formatTime()
+#include "ktimetrackerutility.h" // formatTime()
 #include "model/task.h"
 #include "model/tasksmodel.h"
 
@@ -43,21 +43,19 @@ static void printTask(Task *task, QString &s, int level, const ReportCriteria &r
 
     s += buf.fill(' ', level);
     if (!rc.sessionTimes) {
-        s += QString(QString::fromLatin1("%1    %2"))
-            .arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth)
-            .arg(task->name());
+        s += QString(QString::fromLatin1("%1    %2")).arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth).arg(task->name());
     } else {
         // print session times
         s += QString(QString::fromLatin1("%1    %2"))
-            .arg(formatTime(static_cast<double>(task->totalSessionTime()), rc.decimalMinutes), timeWidth)
-            .arg(task->name());
+                 .arg(formatTime(static_cast<double>(task->totalSessionTime()), rc.decimalMinutes), timeWidth)
+                 .arg(task->name());
     }
     s += cr;
 
     for (int i = 0; i < task->childCount(); ++i) {
-        Task *subTask = dynamic_cast<Task*>(task->child(i));
+        Task *subTask = dynamic_cast<Task *>(task->child(i));
         if (!rc.sessionTimes) {
-            if (subTask->totalTime()) {// to avoid 00:00 entries
+            if (subTask->totalTime()) { // to avoid 00:00 entries
                 printTask(subTask, s, level + 1, rc);
             }
         } else {
@@ -83,9 +81,7 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
     retval += i18n("Task Totals") + cr;
     retval += QLocale().toString(QDateTime::currentDateTime());
     retval += cr + cr;
-    retval += QString(QString::fromLatin1("%1    %2"))
-        .arg(i18n("Time"), timeWidth)
-        .arg(i18n("Task"));
+    retval += QString(QString::fromLatin1("%1    %2")).arg(i18n("Time"), timeWidth).arg(i18n("Task"));
     retval += cr;
     retval += line;
 
@@ -102,13 +98,13 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
         } else { // print all tasks
             sum = 0;
             for (int i = 0; i < model->topLevelItemCount(); ++i) {
-                Task *task = dynamic_cast<Task*>(model->topLevelItem(i));
+                Task *task = dynamic_cast<Task *>(model->topLevelItem(i));
                 if (!rc.sessionTimes) {
                     sum += task->totalTime();
                 } else {
                     sum += task->totalSessionTime();
                 }
-                if ((task->totalTime() && !rc.sessionTimes) || (task->totalSessionTime() && rc.sessionTimes) ) {
+                if ((task->totalTime() && !rc.sessionTimes) || (task->totalSessionTime() && rc.sessionTimes)) {
                     printTask(task, retval, 0, rc);
                 }
             }
@@ -116,9 +112,7 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
         // total
         buf.fill('-', reportWidth);
         retval += QString(QString::fromLatin1("%1")).arg(buf, timeWidth) + cr;
-        retval += QString(QString::fromLatin1("%1 %2"))
-            .arg(formatTime(sum, rc.decimalMinutes), timeWidth)
-            .arg(i18nc("total time of all tasks", "Total"));
+        retval += QString(QString::fromLatin1("%1 %2")).arg(formatTime(sum, rc.decimalMinutes), timeWidth).arg(i18nc("total time of all tasks", "Total"));
     } else {
         retval += i18n("No tasks.");
     }

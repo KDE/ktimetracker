@@ -63,13 +63,11 @@ bool PlannerParser::startDocument()
     return true;
 }
 
-bool PlannerParser::startElement(
-    const QString& /*namespaceURI*/, const QString& /*localName*/,
-    const QString &qName, const QXmlAttributes &att)
+bool PlannerParser::startElement(const QString & /*namespaceURI*/, const QString & /*localName*/, const QString &qName, const QXmlAttributes &att)
 {
     qDebug() << "entering function";
     QString taskName;
-    int     taskComplete=0;
+    int taskComplete = 0;
 
     // only <task>s within <tasks> are processed
     if (qName == QString::fromLatin1("tasks")) {
@@ -84,7 +82,7 @@ bool PlannerParser::startElement(
             }
 
             if (att.qName(i) == QStringLiteral("percent-complete")) {
-                taskComplete=att.value(i).toInt();
+                taskComplete = att.value(i).toInt();
             }
         }
 
@@ -92,7 +90,7 @@ bool PlannerParser::startElement(
         // new task is a top-level-task). Make task the parenttask, if existing.
         DesktopList dl;
         if (m_level++ > 0) {
-            Task* parentTask = m_task;
+            Task *parentTask = m_task;
             m_task = new Task(taskName, QString(), 0, 0, dl, m_projectModel, parentTask);
         } else {
             m_task = new Task(taskName, QString(), 0, 0, dl, m_projectModel, nullptr);
@@ -104,7 +102,7 @@ bool PlannerParser::startElement(
     return true;
 }
 
-bool PlannerParser::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
+bool PlannerParser::endElement(const QString & /*namespaceURI*/, const QString & /*localName*/, const QString &qName)
 {
     // only <task>s within <tasks> increased level, so only decrease for <task>s within <tasks>
     if (m_withinTasks) {

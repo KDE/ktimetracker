@@ -76,6 +76,7 @@ void FileCalendar::addEvent(const KCalCore::Event::Ptr &event)
     m_calendar->addEvent(event);
 }
 
-KCalCore::Todo::List FileCalendar::rawTodos() const {
+KCalCore::Todo::List FileCalendar::rawTodos() const
+{
     return m_calendar->rawTodos();
 }

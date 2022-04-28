@@ -60,7 +60,7 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
         }
     } else {
         // use remote file
-        auto* const job = KIO::storedGet(url, KIO::Reload);
+        auto *const job = KIO::storedGet(url, KIO::Reload);
         KJobWidgets::setWindow(job, nullptr); // hide progress notification
         if (!job->exec()) {
             setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(url.url())));
@@ -115,7 +115,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
         }
     } else {
         // use remote file
-        auto* const job = KIO::storedPut(textUtf8, url, -1, KIO::Overwrite);
+        auto *const job = KIO::storedPut(textUtf8, url, -1, KIO::Overwrite);
         KJobWidgets::setWindow(job, nullptr); // hide progress notification
         if (!job->exec()) {
             setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(url.url())));

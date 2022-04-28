@@ -94,43 +94,28 @@ int main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain("ktimetracker");
 
-    KAboutData aboutData(
-        QStringLiteral("ktimetracker"),
-        i18n("KTimeTracker"),
-        QStringLiteral(KTIMETRACKER_VERSION_STRING),
-        i18n("KDE Time tracker tool"),
-        KAboutLicense::GPL_V2,
-        i18n("Copyright © 1997-2019 KTimeTracker developers"),
-        QString(),
-        QStringLiteral("https://userbase.kde.org/KTimeTracker"));
+    KAboutData aboutData(QStringLiteral("ktimetracker"),
+                         i18n("KTimeTracker"),
+                         QStringLiteral(KTIMETRACKER_VERSION_STRING),
+                         i18n("KDE Time tracker tool"),
+                         KAboutLicense::GPL_V2,
+                         i18n("Copyright © 1997-2019 KTimeTracker developers"),
+                         QString(),
+                         QStringLiteral("https://userbase.kde.org/KTimeTracker"));
 
     aboutData.addAuthor(i18nc("@info:credit", "Alexander Potashev"),
                         i18nc("@info:credit", "Current Maintainer (since 2019)"),
                         QStringLiteral("aspotashev@gmail.com"));
-    aboutData.addAuthor(i18nc("@info:credit", "Thorsten Stärk"),
-                        i18nc("@info:credit", "Maintainer (2006-2012)"),
-                        QStringLiteral("kde@staerk.de"));
+    aboutData.addAuthor(i18nc("@info:credit", "Thorsten Stärk"), i18nc("@info:credit", "Maintainer (2006-2012)"), QStringLiteral("kde@staerk.de"));
     aboutData.addAuthor(i18nc("@info:credit", "Mark Bucciarelli"),
                         i18nc("@info:credit", "Maintainer (2005-2006)"),
                         QStringLiteral("mark@hubcapconsulting.com"));
-    aboutData.addAuthor(i18nc("@info:credit", "Jesper Pedersen"),
-                        i18nc("@info:credit", "Maintainer (2000-2005)"),
-                        QStringLiteral("blackie@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "Sirtaj Singh Kang"),
-                        i18nc("@info:credit", "Original Author"),
-                        QStringLiteral("taj@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "Mathias Soeken"),
-                        i18nc("@info:credit", "Developer (in 2007)"),
-                        QStringLiteral("msoeken@tzi.de"));
-    aboutData.addAuthor(i18nc("@info:credit", "Kalle Dalheimer"),
-                        i18nc("@info:credit", "Developer (1999-2000)"),
-                        QStringLiteral("kalle@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "Allen Winter"),
-                        i18nc("@info:credit", "Developer"),
-                        QStringLiteral("winter@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "David Faure"),
-                        i18nc("@info:credit", "Developer"),
-                        QStringLiteral("faure@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Jesper Pedersen"), i18nc("@info:credit", "Maintainer (2000-2005)"), QStringLiteral("blackie@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Sirtaj Singh Kang"), i18nc("@info:credit", "Original Author"), QStringLiteral("taj@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Mathias Soeken"), i18nc("@info:credit", "Developer (in 2007)"), QStringLiteral("msoeken@tzi.de"));
+    aboutData.addAuthor(i18nc("@info:credit", "Kalle Dalheimer"), i18nc("@info:credit", "Developer (1999-2000)"), QStringLiteral("kalle@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Allen Winter"), i18nc("@info:credit", "Developer"), QStringLiteral("winter@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "David Faure"), i18nc("@info:credit", "Developer"), QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
 
     Q_INIT_RESOURCE(icons);

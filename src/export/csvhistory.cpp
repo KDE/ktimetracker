@@ -52,7 +52,7 @@ static int64_t todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event
         secondsToAdd = startTime.secsTo(endTime);
     }
 
-    if (startTime.date() == date && endTime.date()>date) {
+    if (startTime.date() == date && endTime.date() > date) {
         // the event started today, but ended later
         secondsToAdd = secsstartTillMidNight;
     }
@@ -98,7 +98,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
         // name -> uid
         // * Create task fullname concatenating each parent's name
         QString fullName;
-        Task* parentTask;
+        Task *parentTask;
         parentTask = task;
         fullName += parentTask->name();
         parentTask = parentTask->parentTask();
@@ -137,7 +137,6 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
         }
     }
 
-
     // Step 3: For each task, generate the matching row for the CSV file
     // We use the two hashmaps to have direct access using the task name
 
@@ -149,7 +148,6 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
         retval.append(from.addDays(i).toString());
     }
     retval.append(cr);
-
 
     // Rest of the CSV file
     QMapIterator<QString, QString> nameUid(uidForName);
