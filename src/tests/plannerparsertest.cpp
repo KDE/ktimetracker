@@ -20,11 +20,11 @@
 
 #include <QTest>
 
-#include "taskview.h"
+#include "helpers.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
+#include "taskview.h"
 #include "widgets/taskswidget.h"
-#include "helpers.h"
 
 class PlannerParserTest : public QObject
 {
@@ -48,9 +48,9 @@ void PlannerParserTest::testEmpty()
     QCOMPARE(model->getAllItems().size(), 21);
 
     QCOMPARE(model->topLevelItemCount(), 4);
-    QCOMPARE(dynamic_cast<Task*>(model->topLevelItem(0))->name(), "Initiation");
+    QCOMPARE(dynamic_cast<Task *>(model->topLevelItem(0))->name(), "Initiation");
 
-    auto *closureTask = dynamic_cast<Task*>(model->topLevelItem(3));
+    auto *closureTask = dynamic_cast<Task *>(model->topLevelItem(3));
     QCOMPARE(closureTask->name(), "Closure");
     QCOMPARE(closureTask->childCount(), 3);
 }
@@ -60,7 +60,7 @@ void PlannerParserTest::testAtTopLevel()
     auto *taskView = createTaskView(this, false);
     QVERIFY(taskView);
 
-    Task* task1 = taskView->addTask("1");
+    Task *task1 = taskView->addTask("1");
     QVERIFY(task1);
     taskView->tasksWidget()->setCurrentIndex(taskView->storage()->tasksModel()->index(task1, 0));
 
@@ -71,10 +71,10 @@ void PlannerParserTest::testAtTopLevel()
     QCOMPARE(model->getAllItems().size(), 22);
 
     QCOMPARE(model->topLevelItemCount(), 5);
-    QCOMPARE(dynamic_cast<Task*>(model->topLevelItem(0))->name(), "1");
-    QCOMPARE(dynamic_cast<Task*>(model->topLevelItem(1))->name(), "Initiation");
+    QCOMPARE(dynamic_cast<Task *>(model->topLevelItem(0))->name(), "1");
+    QCOMPARE(dynamic_cast<Task *>(model->topLevelItem(1))->name(), "Initiation");
 
-    auto *closureTask = dynamic_cast<Task*>(model->topLevelItem(4));
+    auto *closureTask = dynamic_cast<Task *>(model->topLevelItem(4));
     QCOMPARE(closureTask->name(), "Closure");
     QCOMPARE(closureTask->childCount(), 3);
 }
@@ -84,9 +84,9 @@ void PlannerParserTest::testAtSubTask()
     auto *taskView = createTaskView(this, false);
     QVERIFY(taskView);
 
-    Task* task1 = taskView->addTask("1");
+    Task *task1 = taskView->addTask("1");
     QVERIFY(task1);
-    Task* task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
+    Task *task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
     QVERIFY(task2);
     taskView->tasksWidget()->setCurrentIndex(taskView->storage()->tasksModel()->index(task2, 0));
 
@@ -98,10 +98,10 @@ void PlannerParserTest::testAtSubTask()
 
     QCOMPARE(model->topLevelItemCount(), 1);
     QCOMPARE(task1->childCount(), 5);
-    QCOMPARE(dynamic_cast<Task*>(task1->child(0))->name(), "2");
-    QCOMPARE(dynamic_cast<Task*>(task1->child(1))->name(), "Initiation");
+    QCOMPARE(dynamic_cast<Task *>(task1->child(0))->name(), "2");
+    QCOMPARE(dynamic_cast<Task *>(task1->child(1))->name(), "Initiation");
 
-    auto *closureTask = dynamic_cast<Task*>(task1->child(4));
+    auto *closureTask = dynamic_cast<Task *>(task1->child(4));
     QCOMPARE(closureTask->name(), "Closure");
     QCOMPARE(closureTask->childCount(), 3);
 }

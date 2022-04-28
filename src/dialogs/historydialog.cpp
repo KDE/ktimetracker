@@ -59,8 +59,9 @@ public:
 
     void setEditorData(QWidget *editor, const QModelIndex &index) const override
     {
-        QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(), HistoryDialog::dateTimeFormat);
-        auto *dateTimeWidget = dynamic_cast<QDateTimeEdit*>(editor);
+        QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(),
+                                                   HistoryDialog::dateTimeFormat);
+        auto *dateTimeWidget = dynamic_cast<QDateTimeEdit *>(editor);
         if (dateTimeWidget) {
             dateTimeWidget->setDateTime(dateTime);
         } else {
@@ -70,7 +71,7 @@ public:
 
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override
     {
-        auto *dateTimeWidget = dynamic_cast<QDateTimeEdit*>(editor);
+        auto *dateTimeWidget = dynamic_cast<QDateTimeEdit *>(editor);
         if (dateTimeWidget) {
             QDateTime dateTime = dateTimeWidget->dateTime();
             model->setData(index, dateTime.toString(HistoryDialog::dateTimeFormat), Qt::EditRole);
@@ -79,7 +80,9 @@ public:
         }
     }
 
-    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &/*index*/) const override
+    void updateEditorGeometry(QWidget *editor,
+                              const QStyleOptionViewItem &option,
+                              const QModelIndex & /*index*/) const override
     {
         editor->setGeometry(option.rect);
     }
@@ -101,7 +104,7 @@ HistoryDialog::HistoryDialog(QWidget *parent, ProjectModel *projectModel)
     m_ui.historytablewidget->setHorizontalHeaderLabels(
         QStringList{i18n("Task"), i18n("StartTime"), i18n("EndTime"), i18n("Comment"), QStringLiteral("event UID")});
     m_ui.historytablewidget->horizontalHeader()->setStretchLastSection(true);
-    m_ui.historytablewidget->setColumnHidden(4, true);  // hide the "UID" column
+    m_ui.historytablewidget->setColumnHidden(4, true); // hide the "UID" column
     listAllEvents();
     m_ui.historytablewidget->setSortingEnabled(true);
     m_ui.historytablewidget->sortItems(1, Qt::DescendingOrder);
@@ -114,7 +117,8 @@ HistoryDialog::HistoryDialog(QWidget *parent, ProjectModel *projectModel)
 QString HistoryDialog::listAllEvents()
 {
     QString err;
-    // if sorting is enabled and we write to row x, we cannot be sure row x will be in row x some lines later
+    // if sorting is enabled and we write to row x, we cannot be sure row x will
+    // be in row x some lines later
     bool old_sortingenabled = m_ui.historytablewidget->isSortingEnabled();
     m_ui.historytablewidget->setSortingEnabled(false);
     connect(m_ui.historytablewidget, &QTableWidget::cellChanged, this, &HistoryDialog::onCellChanged);
@@ -130,7 +134,7 @@ QString HistoryDialog::listAllEvents()
             continue;
         }
 
-        const Task *parent = dynamic_cast<Task*>(m_projectModel->tasksModel()->taskByUID(event->relatedTo()));
+        const Task *parent = dynamic_cast<Task *>(m_projectModel->tasksModel()->taskByUID(event->relatedTo()));
         if (!parent) {
             qCWarning(KTT_LOG) << "Unable to load 'relatedTo' entry for " << event->summary();
             err = "NoRelatedToForEvent";
@@ -156,11 +160,9 @@ QString HistoryDialog::listAllEvents()
     m_ui.historytablewidget->resizeColumnsToContents();
     m_ui.historytablewidget->setColumnWidth(1, 300);
     m_ui.historytablewidget->setColumnWidth(2, 300);
-    setMinimumSize(
-        m_ui.historytablewidget->columnWidth(0) +
-        m_ui.historytablewidget->columnWidth(1) +
-        m_ui.historytablewidget->columnWidth(2) +
-        m_ui.historytablewidget->columnWidth(3), height());
+    setMinimumSize(m_ui.historytablewidget->columnWidth(0) + m_ui.historytablewidget->columnWidth(1)
+                       + m_ui.historytablewidget->columnWidth(2) + m_ui.historytablewidget->columnWidth(3),
+                   height());
     m_ui.historytablewidget->setSortingEnabled(old_sortingenabled);
     return err;
 }
@@ -169,11 +171,11 @@ void HistoryDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
     switch (e->type()) {
-        case QEvent::LanguageChange:
-            m_ui.retranslateUi(this);
-            break;
-        default:
-            break;
+    case QEvent::LanguageChange:
+        m_ui.retranslateUi(this);
+        break;
+    default:
+        break;
     }
 }
 
@@ -187,59 +189,59 @@ void HistoryDialog::onCellChanged(int row, int col)
     }
 
     switch (col) {
-        case 1: {
-            // StartDate changed
-            qCDebug(KTT_LOG) << "user changed StartDate to" << m_ui.historytablewidget->item(row, col)->text();
-            QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
-            if (!datetime.isValid()) {
-                KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
-                break;
-            }
-
-            QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            Event *event = m_projectModel->eventsModel()->eventByUID(uid);
-
-            event->setDtStart(datetime);
-            // setDtStart could modify date/time, sync it into our table
-            m_ui.historytablewidget->item(row, col)->setText(event->dtStart().toString(dateTimeFormat));
-
-            emit m_projectModel->eventsModel()->timesChanged();
-            qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
+    case 1: {
+        // StartDate changed
+        qCDebug(KTT_LOG) << "user changed StartDate to" << m_ui.historytablewidget->item(row, col)->text();
+        QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
+        if (!datetime.isValid()) {
+            KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
             break;
         }
-        case 2: {
-            // EndDate changed
-            qCDebug(KTT_LOG) << "user changed EndDate to" << m_ui.historytablewidget->item(row,col)->text();
-            QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
-            if (!datetime.isValid()) {
-                KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
-                break;
-            }
 
-            QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            Event *event = m_projectModel->eventsModel()->eventByUID(uid);
+        QString uid = m_ui.historytablewidget->item(row, 4)->text();
+        Event *event = m_projectModel->eventsModel()->eventByUID(uid);
 
-            event->setDtEnd(datetime);
-            // setDtStart could modify date/time, sync it into our table
-            m_ui.historytablewidget->item(row, col)->setText(event->dtEnd().toString(dateTimeFormat));
+        event->setDtStart(datetime);
+        // setDtStart could modify date/time, sync it into our table
+        m_ui.historytablewidget->item(row, col)->setText(event->dtStart().toString(dateTimeFormat));
 
-            emit m_projectModel->eventsModel()->timesChanged();
-            qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
+        emit m_projectModel->eventsModel()->timesChanged();
+        qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
+        break;
+    }
+    case 2: {
+        // EndDate changed
+        qCDebug(KTT_LOG) << "user changed EndDate to" << m_ui.historytablewidget->item(row, col)->text();
+        QDateTime datetime = QDateTime::fromString(m_ui.historytablewidget->item(row, col)->text(), dateTimeFormat);
+        if (!datetime.isValid()) {
+            KMessageBox::information(nullptr, i18n("This is not a valid Date/Time."));
             break;
         }
-        case 3: {
-            // Comment changed
-            qCDebug(KTT_LOG) << "user changed Comment to" << m_ui.historytablewidget->item(row, col)->text();
 
-            QString uid = m_ui.historytablewidget->item(row, 4)->text();
-            Event *event = m_projectModel->eventsModel()->eventByUID(uid);
-            qCDebug(KTT_LOG) << "uid =" << uid;
-            event->addComment(m_ui.historytablewidget->item(row, col)->text());
-            qCDebug(KTT_LOG) << "added" << m_ui.historytablewidget->item(row, col)->text();
-            break;
-        }
-        default:
-            break;
+        QString uid = m_ui.historytablewidget->item(row, 4)->text();
+        Event *event = m_projectModel->eventsModel()->eventByUID(uid);
+
+        event->setDtEnd(datetime);
+        // setDtStart could modify date/time, sync it into our table
+        m_ui.historytablewidget->item(row, col)->setText(event->dtEnd().toString(dateTimeFormat));
+
+        emit m_projectModel->eventsModel()->timesChanged();
+        qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
+        break;
+    }
+    case 3: {
+        // Comment changed
+        qCDebug(KTT_LOG) << "user changed Comment to" << m_ui.historytablewidget->item(row, col)->text();
+
+        QString uid = m_ui.historytablewidget->item(row, 4)->text();
+        Event *event = m_projectModel->eventsModel()->eventByUID(uid);
+        qCDebug(KTT_LOG) << "uid =" << uid;
+        event->addComment(m_ui.historytablewidget->item(row, col)->text());
+        qCDebug(KTT_LOG) << "added" << m_ui.historytablewidget->item(row, col)->text();
+        break;
+    }
+    default:
+        break;
     }
 }
 
@@ -255,14 +257,15 @@ QString HistoryDialog::refresh()
 void HistoryDialog::onDeleteClicked()
 {
     // Create a list of rows to delete.
-    // This includes both the current row (i.e. the row the cursor is on) as well as the rows that
-    // are part of the current selection. Because these can overlap and because the selected items
-    // contain one item per cell, not just per row, we use a QSet here to get a unique list of rows.
+    // This includes both the current row (i.e. the row the cursor is on) as
+    // well as the rows that are part of the current selection. Because these
+    // can overlap and because the selected items contain one item per cell, not
+    // just per row, we use a QSet here to get a unique list of rows.
     QSet<int> rows;
-    if (m_ui.historytablewidget->currentRow() >= 0) {   // Could be -1 if table is empty or no row is selected
+    if (m_ui.historytablewidget->currentRow() >= 0) { // Could be -1 if table is empty or no row is selected
         rows.insert(m_ui.historytablewidget->currentRow());
     }
-    for (const auto& item : m_ui.historytablewidget->selectedItems()) {
+    for (const auto &item : m_ui.historytablewidget->selectedItems()) {
         rows.insert(item->row());
     }
 

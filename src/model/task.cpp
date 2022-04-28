@@ -70,7 +70,15 @@ Task::Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel)
     int priority = 0;
     DesktopList desktops;
 
-    parseIncidence(todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete, priority);
+    parseIncidence(todo,
+                   minutes,
+                   sessionTime,
+                   sessionStartTiMe,
+                   name,
+                   description,
+                   desktops,
+                   percent_complete,
+                   priority);
     init(name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
 }
 
@@ -514,8 +522,8 @@ QVariant Task::data(int column, int role) const
         }
     }
     case SortRole: {
-        // QSortFilterProxyModel::lessThan() supports comparison of a few data types,
-        // here we use some of those: QString, qlonglong, int.
+        // QSortFilterProxyModel::lessThan() supports comparison of a few data
+        // types, here we use some of those: QString, qlonglong, int.
         switch (column) {
         case 0:
             return m_name;

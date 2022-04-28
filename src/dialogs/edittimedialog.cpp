@@ -33,9 +33,7 @@
 
 #include "ktimetrackerutility.h"
 
-EditTimeDialog::EditTimeDialog(
-    QWidget *parent,
-    const QString &name, const QString &description, int64_t minutes)
+EditTimeDialog::EditTimeDialog(QWidget *parent, const QString &name, const QString &description, int64_t minutes)
     : QDialog(parent)
     , m_initialMinutes(minutes)
     , m_changeMinutes(0)
@@ -96,8 +94,8 @@ EditTimeDialog::EditTimeDialog(
     m_buttonBox = new QDialogButtonBox(this);
     m_buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
-    auto *historyButton = new QPushButton(
-        QIcon::fromTheme("document-edit"), i18nc("@action:button", "Edit History..."), m_buttonBox);
+    auto *historyButton =
+        new QPushButton(QIcon::fromTheme("document-edit"), i18nc("@action:button", "Edit History..."), m_buttonBox);
     historyButton->setToolTip(i18n("To change this task's time, you have to edit its event history"));
     m_buttonBox->addButton(historyButton, QDialogButtonBox::HelpRole);
 

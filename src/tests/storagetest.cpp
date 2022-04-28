@@ -23,9 +23,9 @@
 #include <KCalCore/FileStorage>
 #include <KCalCore/ICalFormat>
 
-#include "taskview.h"
-#include "model/task.h"
 #include "helpers.h"
+#include "model/task.h"
+#include "taskview.h"
 
 class StorageTest : public QObject
 {
@@ -57,7 +57,9 @@ void StorageTest::testSaveSimpleTree()
     QCOMPARE(taskView->storage()->save(), "");
 
     KCalCore::MemoryCalendar::Ptr calendar(new KCalCore::MemoryCalendar(QTimeZone::systemTimeZone()));
-    KCalCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().toLocalFile(), new KCalCore::ICalFormat());
+    KCalCore::FileStorage fileStorage(calendar,
+                                      taskView->storage()->fileUrl().toLocalFile(),
+                                      new KCalCore::ICalFormat());
     QVERIFY(fileStorage.load());
 
     auto todos = calendar->rawTodos(KCalCore::TodoSortSummary);
@@ -91,17 +93,22 @@ void StorageTest::testLockPath()
 {
 #ifdef Q_OS_WIN
     // SHA-1 of "C:/var/hello.ics"
-    const QString expectedSuffix1("/ktimetracker_a1a9ea47d71476676afa881247fcd8ae915788b5_hello.ics.lock");
+    const QString expectedSuffix1(
+        "/ktimetracker_a1a9ea47d71476676afa881247fcd8ae915788b5_hello.ics."
+        "lock");
 #else
     // SHA-1 of "/var/hello.ics"
-    const QString expectedSuffix1("/ktimetracker_290fa23d3a268915fba5b2b2e5818aec381b7044_hello.ics.lock");
+    const QString expectedSuffix1(
+        "/ktimetracker_290fa23d3a268915fba5b2b2e5818aec381b7044_hello.ics."
+        "lock");
 #endif
-    QVERIFY(TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile("/tmp/../var/hello.ics")).endsWith(
-        expectedSuffix1));
+    QVERIFY(
+        TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile("/tmp/../var/hello.ics")).endsWith(expectedSuffix1));
 
     // SHA-1 of "https://abc/1/привет world"
-    QVERIFY(TimeTrackerStorage::createLockFileName(QUrl("https://abc/1/привет%20world")).endsWith(
-        QDir().absoluteFilePath("/ktimetracker_7048956ad41735da76ae0da13d116b500753ba9e_привет world.lock")));
+    QVERIFY(TimeTrackerStorage::createLockFileName(QUrl("https://abc/1/привет%20world"))
+                .endsWith(QDir().absoluteFilePath("/ktimetracker_7048956ad41735da76ae0da13d116b500753ba9e_"
+                                                  "привет world.lock")));
 }
 
 QTEST_MAIN(StorageTest)

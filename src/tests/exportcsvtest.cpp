@@ -20,12 +20,12 @@
 
 #include <QTest>
 
-#include "taskview.h"
-#include "model/task.h"
-#include "export/totalsastext.h"
 #include "export/export.h"
-#include "widgets/taskswidget.h"
+#include "export/totalsastext.h"
 #include "helpers.h"
+#include "model/task.h"
+#include "taskview.h"
+#include "widgets/taskswidget.h"
 
 class ExportCSVTest : public QObject
 {
@@ -106,8 +106,7 @@ void ExportCSVTest::testTimesSimpleTree()
     const auto &rc = createRC(ReportCriteria::CSVTotalsExport);
     const QUrl &url = createTempFile(this);
     QVERIFY(!url.isEmpty());
-    QString output = exportToString(taskView->storage()->projectModel(),
-                                    taskView->tasksWidget()->currentItem(), rc);
+    QString output = exportToString(taskView->storage()->projectModel(), taskView->tasksWidget()->currentItem(), rc);
     QCOMPARE(writeExport(output, url), "");
 
     const QString &expected = QStringLiteral(
@@ -126,8 +125,7 @@ void ExportCSVTest::testHistorySimpleTree()
 
     const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
     const QUrl &url = createTempFile(this);
-    QString output = exportToString(taskView->storage()->projectModel(),
-                                    taskView->tasksWidget()->currentItem(), rc);
+    QString output = exportToString(taskView->storage()->projectModel(), taskView->tasksWidget()->currentItem(), rc);
     QCOMPARE(writeExport(output, url), "");
 
     const QString &expected = QStringLiteral(

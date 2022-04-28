@@ -118,7 +118,8 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
                                i18n("Error storing new task. Your changes were not saved. "
                                     "Make sure you can edit your iCalendar file. "
                                     "Also quit all applications using this file and remove "
-                                    "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "));
+                                    "any lock file related to its name from "
+                                    "~/.kde/share/apps/kabc/lock/ "));
         }
         for (Task *task : storage()->tasksModel()->getAllTasks()) {
             if (task->name() == newTaskName) {
@@ -205,10 +206,13 @@ void TaskView::load(const QUrl &url)
 
     if (tasksModel->topLevelItemCount() > 0) {
         m_tasksWidget->restoreItemState();
-        m_tasksWidget->setCurrentIndex(m_filterProxyModel->mapFromSource(tasksModel->index(tasksModel->topLevelItem(0), 0)));
+        m_tasksWidget->setCurrentIndex(
+            m_filterProxyModel->mapFromSource(tasksModel->index(tasksModel->topLevelItem(0), 0)));
 
         if (!m_desktopTracker->startTracking().isEmpty()) {
-            KMessageBox::error(nullptr, i18n("Your virtual desktop number is too high, desktop tracking will not work."));
+            KMessageBox::error(nullptr,
+                               i18n("Your virtual desktop number is too high, "
+                                    "desktop tracking will not work."));
         }
     }
 
@@ -283,7 +287,11 @@ void TaskView::startTimerForNow(Task *task)
 void TaskView::stopAllTimers(const QDateTime &when)
 {
     qCDebug(KTT_LOG) << "Entering function";
-    QProgressDialog dialog(i18nc("@info:progress", "Stopping timers..."), i18n("Cancel"), 0, storage()->tasksModel()->getActiveTasks().size(), m_tasksWidget);
+    QProgressDialog dialog(i18nc("@info:progress", "Stopping timers..."),
+                           i18n("Cancel"),
+                           0,
+                           storage()->tasksModel()->getActiveTasks().size(),
+                           m_tasksWidget);
     if (storage()->tasksModel()->getActiveTasks().size() > 1) {
         dialog.show();
     }
@@ -346,7 +354,8 @@ void TaskView::minuteUpdate()
 
 void TaskView::newTask(const QString &caption, Task *parent)
 {
-    QPointer<TaskPropertiesDialog> dialog = new TaskPropertiesDialog(m_tasksWidget->parentWidget(), caption, QString(), QString(), DesktopList());
+    QPointer<TaskPropertiesDialog> dialog =
+        new TaskPropertiesDialog(m_tasksWidget->parentWidget(), caption, QString(), QString(), DesktopList());
 
     if (dialog->exec() == QDialog::Accepted) {
         QString taskName = i18n("Unnamed Task");
@@ -371,7 +380,8 @@ void TaskView::newTask(const QString &caption, Task *parent)
                                i18n("Error storing new task. Your changes were not saved. "
                                     "Make sure you can edit your iCalendar file. Also quit "
                                     "all applications using this file and remove any lock "
-                                    "file related to its name from ~/.kde/share/apps/kabc/lock/"));
+                                    "file related to its name from "
+                                    "~/.kde/share/apps/kabc/lock/"));
         }
     }
     delete dialog;
@@ -379,7 +389,12 @@ void TaskView::newTask(const QString &caption, Task *parent)
     emit updateButtons();
 }
 
-Task *TaskView::addTask(const QString &taskname, const QString &taskdescription, int64_t total, int64_t session, const DesktopList &desktops, Task *parent)
+Task *TaskView::addTask(const QString &taskname,
+                        const QString &taskdescription,
+                        int64_t total,
+                        int64_t session,
+                        const DesktopList &desktops,
+                        Task *parent)
 {
     qCDebug(KTT_LOG) << "Entering function; taskname =" << taskname;
     m_tasksWidget->setSortingEnabled(false);
@@ -421,8 +436,11 @@ void TaskView::editTask()
     }
 
     auto oldDeskTopList = task->desktops();
-    QPointer<TaskPropertiesDialog> dialog =
-        new TaskPropertiesDialog(m_tasksWidget->parentWidget(), i18nc("@title:window", "Edit Task"), task->name(), task->description(), oldDeskTopList);
+    QPointer<TaskPropertiesDialog> dialog = new TaskPropertiesDialog(m_tasksWidget->parentWidget(),
+                                                                     i18nc("@title:window", "Edit Task"),
+                                                                     task->name(),
+                                                                     task->description(),
+                                                                     oldDeskTopList);
     if (dialog->exec() == QDialog::Accepted) {
         QString name = i18n("Unnamed Task");
         if (!dialog->name().isEmpty()) {
@@ -499,8 +517,10 @@ make this task running and selected. */
         int response = KMessageBox::Continue;
         if (KTimeTrackerSettings::promptDelete()) {
             response = KMessageBox::warningContinueCancel(nullptr,
-                                                          i18n("Are you sure you want to delete the selected task and its entire history?\n"
-                                                               "Note: All subtasks and their history will also be deleted."),
+                                                          i18n("Are you sure you want to delete the selected task and "
+                                                               "its entire history?\n"
+                                                               "Note: All subtasks and their history will also be "
+                                                               "deleted."),
                                                           i18nc("@title:window", "Deleting Task"),
                                                           KStandardGuiItem::del());
         }
@@ -605,7 +625,9 @@ void TaskView::editTaskTime(const QString &taskUid, int64_t minutes)
 void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int last)
 {
     if (first != last) {
-        qFatal("taskAboutToBeRemoved: unexpected removal of multiple items at once");
+        qFatal(
+            "taskAboutToBeRemoved: unexpected removal of multiple items at "
+            "once");
     }
 
     TasksModelItem *item = nullptr;

@@ -36,9 +36,10 @@ IdleTimeDetector::IdleTimeDetector(int maxIdle)
     , m_maxIdle(maxIdle)
     , m_timeoutId(0)
 {
-    connect(
-        KIdleTime::instance(), QOverload<int, int>::of(&KIdleTime::timeoutReached),
-        this, &IdleTimeDetector::timeoutReached);
+    connect(KIdleTime::instance(),
+            QOverload<int, int>::of(&KIdleTime::timeoutReached),
+            this,
+            &IdleTimeDetector::timeoutReached);
 }
 
 // static
@@ -58,7 +59,8 @@ void IdleTimeDetector::timeoutReached(int /*unused*/, int timeout)
     qCDebug(KTT_LOG) << "The desktop has been idle for " << timeout << " msec.";
 
     if (!m_overAllIdleDetect) {
-        // In the preferences the user has indicated that he does not want idle detection.
+        // In the preferences the user has indicated that he does not want idle
+        // detection.
         return;
     }
 
@@ -72,27 +74,31 @@ void IdleTimeDetector::timeoutReached(int /*unused*/, int timeout)
     QString backThen = idleStart.time().toString();
 
     // Create dialog
-    QString hintYes = i18nc(
-        "@info:tooltip", "Apply the idle time since %1 to all active\ntimers and keep them running.", backThen);
+    QString hintYes = i18nc("@info:tooltip",
+                            "Apply the idle time since %1 to all "
+                            "active\ntimers and keep them running.",
+                            backThen);
     KGuiItem buttonYes(i18nc("@action:button", "Continue Timing"), QString(), hintYes, hintYes);
 
     QString hintNo = i18nc("@info:tooltip", "Stop timing and revert back to the time at %1", backThen);
     KGuiItem buttonNo(i18nc("@action:button", "Revert Timing"), QString(), hintNo, hintNo);
 
-    const auto result = KMessageBox::questionYesNo(
-        nullptr,
-        i18n("Desktop has been idle since %1. What do you want to do?", backThen),
-        QString(), buttonYes, buttonNo);
+    const auto result =
+        KMessageBox::questionYesNo(nullptr,
+                                   i18n("Desktop has been idle since %1. What do you want to do?", backThen),
+                                   QString(),
+                                   buttonYes,
+                                   buttonNo);
     switch (result) {
-        case KMessageBox::Yes:
-            startIdleDetection();
-            break;
-        default:
-            qCWarning(KTT_LOG) << "unexpected button clicked" << result;
-            Q_FALLTHROUGH();
-        case KMessageBox::No:
-            revert(dialogStart, idleStart, timeout / 1000 / secsPerMinute);
-            break;
+    case KMessageBox::Yes:
+        startIdleDetection();
+        break;
+    default:
+        qCWarning(KTT_LOG) << "unexpected button clicked" << result;
+        Q_FALLTHROUGH();
+    case KMessageBox::No:
+        revert(dialogStart, idleStart, timeout / 1000 / secsPerMinute);
+        break;
     }
 }
 

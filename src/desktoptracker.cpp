@@ -92,7 +92,7 @@ QString DesktopTracker::startTracking()
     return QString();
 }
 
-void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
+void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
 {
     qCDebug(KTT_LOG) << "Entering function";
     // if no desktop is marked, disable auto tracking for this task
@@ -101,7 +101,7 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
             TaskVector *v = &(m_desktopTracker[i]);
             TaskVector::iterator tit = std::find(v->begin(), v->end(), task);
             if (tit != v->end()) {
-                m_desktopTracker[i].erase( tit );
+                m_desktopTracker[i].erase(tit);
             }
             // if the task was previously tracking this desktop then
             // emit a signal that is not tracking it any more
@@ -118,11 +118,10 @@ void DesktopTracker::registerForDesktops( Task* task, DesktopList desktopList )
     // If enabled: Start it now.
     if (!desktopList.empty()) {
         for (int i = 0; i < maxDesktops; ++i) {
-            TaskVector& v = m_desktopTracker[i];
+            TaskVector &v = m_desktopTracker[i];
             TaskVector::iterator tit = std::find(v.begin(), v.end(), task);
             // Is desktop i in the desktop list?
-            if (std::find( desktopList.begin(), desktopList.end(), i) != desktopList.end()) {
-
+            if (std::find(desktopList.begin(), desktopList.end(), i) != desktopList.end()) {
                 if (tit == v.end()) {
                     // not yet in start vector
                     v.push_back(task); // track in desk i

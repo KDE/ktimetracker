@@ -30,14 +30,17 @@
 
 #include "ktt_debug.h"
 
-TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView* widget, QVector<int> &&excludedColumns)
+TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject *parent, QTreeView *widget, QVector<int> &&excludedColumns)
     : QObject(parent)
     , m_widget(widget)
     , m_contextMenu(nullptr)
     , m_excludedColumns(excludedColumns)
 {
     m_widget->header()->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_widget->header(), &QHeaderView::customContextMenuRequested, this, &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
+    connect(m_widget->header(),
+            &QHeaderView::customContextMenuRequested,
+            this,
+            &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
 
     m_contextMenu = new QMenu(m_widget);
     m_contextMenu->addSection(i18nc("@title:menu", "Columns"));
@@ -46,12 +49,12 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject* parent, QTreeView*
     updateActions();
 }
 
-TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu() 
+TreeViewHeaderContextMenu::~TreeViewHeaderContextMenu()
 {
     qDeleteAll(m_actions);
 }
 
-void TreeViewHeaderContextMenu::slotCustomContextMenuRequested(const QPoint& pos)
+void TreeViewHeaderContextMenu::slotCustomContextMenuRequested(const QPoint &pos)
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (m_widget && m_contextMenu) {
@@ -59,7 +62,7 @@ void TreeViewHeaderContextMenu::slotCustomContextMenuRequested(const QPoint& pos
     }
 }
 
-void TreeViewHeaderContextMenu::updateActions() 
+void TreeViewHeaderContextMenu::updateActions()
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (m_widget) {
@@ -76,7 +79,7 @@ void TreeViewHeaderContextMenu::updateActions()
                 continue;
             }
 
-            auto* action = new QAction(this);
+            auto *action = new QAction(this);
             updateAction(action, c);
             m_actions.append(action);
 
@@ -86,7 +89,7 @@ void TreeViewHeaderContextMenu::updateActions()
     }
 }
 
-void TreeViewHeaderContextMenu::slotTriggered(QAction* action)
+void TreeViewHeaderContextMenu::slotTriggered(QAction *action)
 {
     qCDebug(KTT_LOG) << "Entering function";
     if (m_widget && action) {

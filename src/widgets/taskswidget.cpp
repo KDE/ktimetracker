@@ -36,12 +36,12 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 
-bool readBoolEntry(const QString& key)
+bool readBoolEntry(const QString &key)
 {
     return KSharedConfig::openConfig()->group(QString()).readEntry(key, true);
 }
 
-void writeEntry(const QString& key, bool value)
+void writeEntry(const QString &key, bool value)
 {
     KConfigGroup config = KSharedConfig::openConfig()->group(QString());
     config.writeEntry(key, value);
@@ -52,72 +52,66 @@ void writeEntry(const QString& key, bool value)
 class ProgressColumnDelegate : public QStyledItemDelegate {
 public:
     explicit ProgressColumnDelegate(QObject *parent)
-        : QStyledItemDelegate(parent) {}
+        : QStyledItemDelegate(parent)
+    {
+    }
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override
     {
-        if (index.column () == 6) {
-            QApplication::style()->drawControl( QStyle::CE_ItemViewItem, &option, painter );
+        if (index.column() == 6) {
+            QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &option, painter);
             int rX = option.rect.x() + 2;
             int rY = option.rect.y() + 2;
             int rWidth = option.rect.width() - 4;
             int rHeight = option.rect.height() - 4;
-            int value = index.model()->data( index ).toInt();
+            int value = index.model()->data(index).toInt();
             int newWidth = (int)(rWidth * (value / 100.));
 
-            if(QApplication::isLeftToRight())
-            {
+            if (QApplication::isLeftToRight()) {
                 int mid = rY + rHeight / 2;
                 int width = rWidth / 2;
-                QLinearGradient gradient1( rX, mid, rX + width, mid);
-                gradient1.setColorAt( 0, Qt::red );
-                gradient1.setColorAt( 1, Qt::yellow );
-                painter->fillRect( rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
+                QLinearGradient gradient1(rX, mid, rX + width, mid);
+                gradient1.setColorAt(0, Qt::red);
+                gradient1.setColorAt(1, Qt::yellow);
+                painter->fillRect(rX, rY, (newWidth < width) ? newWidth : width, rHeight, gradient1);
 
-                if (newWidth > width)
-                {
-                    QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
-                    gradient2.setColorAt( 0, Qt::yellow );
-                    gradient2.setColorAt( 1, Qt::green );
-                    painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
+                if (newWidth > width) {
+                    QLinearGradient gradient2(rX + width, mid, rX + 2 * width, mid);
+                    gradient2.setColorAt(0, Qt::yellow);
+                    gradient2.setColorAt(1, Qt::green);
+                    painter->fillRect(rX + width, rY, newWidth - width, rHeight, gradient2);
                 }
 
-                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.window().color() );
-                for (int x = rHeight; x < newWidth; x += rHeight)
-                {
-                    painter->drawLine( rX + x, rY, rX + x, rY + rHeight - 1 );
+                painter->setPen(option.state & QStyle::State_Selected ? option.palette.highlight().color()
+                                                                      : option.palette.window().color());
+                for (int x = rHeight; x < newWidth; x += rHeight) {
+                    painter->drawLine(rX + x, rY, rX + x, rY + rHeight - 1);
                 }
-            }
-            else
-            {
+            } else {
                 int mid = option.rect.height() - rHeight / 2;
                 int width = rWidth / 2;
-                QLinearGradient gradient1( rX, mid, rX + width, mid);
-                gradient1.setColorAt( 0, Qt::red );
-                gradient1.setColorAt( 1, Qt::yellow );
-                painter->fillRect( option.rect.height(), rY, (newWidth < width) ? newWidth : width, rHeight, gradient1 );
+                QLinearGradient gradient1(rX, mid, rX + width, mid);
+                gradient1.setColorAt(0, Qt::red);
+                gradient1.setColorAt(1, Qt::yellow);
+                painter->fillRect(option.rect.height(), rY, (newWidth < width) ? newWidth : width, rHeight, gradient1);
 
-                if (newWidth > width)
-                {
-                    QLinearGradient gradient2( rX + width, mid, rX + 2 * width, mid);
-                    gradient2.setColorAt( 0, Qt::yellow );
-                    gradient2.setColorAt( 1, Qt::green );
-                    painter->fillRect( rX + width, rY, newWidth - width, rHeight, gradient2 );
+                if (newWidth > width) {
+                    QLinearGradient gradient2(rX + width, mid, rX + 2 * width, mid);
+                    gradient2.setColorAt(0, Qt::yellow);
+                    gradient2.setColorAt(1, Qt::green);
+                    painter->fillRect(rX + width, rY, newWidth - width, rHeight, gradient2);
                 }
 
-                painter->setPen( option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.window().color() );
-                for (int x = rWidth- rHeight; x > newWidth; x -= rHeight)
-                {
-                    painter->drawLine( rWidth - x, rY, rWidth - x, rY + rHeight - 1 );
+                painter->setPen(option.state & QStyle::State_Selected ? option.palette.highlight().color()
+                                                                      : option.palette.window().color());
+                for (int x = rWidth - rHeight; x > newWidth; x -= rHeight) {
+                    painter->drawLine(rWidth - x, rY, rWidth - x, rY + rHeight - 1);
                 }
-
             }
-            painter->setPen( Qt::black );
-            painter->drawText( option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %" );
-        }
-        else
-        {
-            QStyledItemDelegate::paint( painter, option, index );
+            painter->setPen(Qt::black);
+            painter->drawText(option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %");
+        } else {
+            QStyledItemDelegate::paint(painter, option, index);
         }
     }
 };
@@ -156,21 +150,21 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
     for (int i = 0; i <= 9; ++i) {
         QString label;
         switch (i) {
-            case 0:
-                label = i18nc("@item:inmenu Task priority", "unspecified");
-                break;
-            case 1:
-                label = i18nc("@item:inmenu Task priority", "1 (highest)");
-                break;
-            case 5:
-                label = i18nc("@item:inmenu Task priority", "5 (medium)");
-                break;
-            case 9:
-                label = i18nc("@item:inmenu Task priority", "9 (lowest)");
-                break;
-            default:
-                label = QString("%1").arg(i);
-                break;
+        case 0:
+            label = i18nc("@item:inmenu Task priority", "unspecified");
+            break;
+        case 1:
+            label = i18nc("@item:inmenu Task priority", "1 (highest)");
+            break;
+        case 5:
+            label = i18nc("@item:inmenu Task priority", "5 (medium)");
+            break;
+        case 9:
+            label = i18nc("@item:inmenu Task priority", "9 (lowest)");
+            break;
+        default:
+            label = QString("%1").arg(i);
+            break;
         }
         m_priority[m_popupPriorityMenu->addAction(label)] = i;
     }
@@ -189,31 +183,32 @@ void TasksWidget::itemStateChanged(const QModelIndex &index)
         return;
     }
 
-    qCDebug(KTT_LOG) <<"TaskView::itemStateChanged()" <<" uid=" << task->uid() <<" state=" << isExpanded(index);
+    qCDebug(KTT_LOG) << "TaskView::itemStateChanged()"
+                     << " uid=" << task->uid() << " state=" << isExpanded(index);
     writeEntry(task->uid(), isExpanded(index));
 }
 
-void TasksWidget::slotCustomContextMenuRequested(const QPoint& pos)
+void TasksWidget::slotCustomContextMenuRequested(const QPoint &pos)
 {
     QPoint newPos = viewport()->mapToGlobal(pos);
     int column = columnAt(pos.x());
 
     switch (column) {
-        case 6: /* percentage */
-            m_popupPercentageMenu->popup(newPos);
-            break;
+    case 6: /* percentage */
+        m_popupPercentageMenu->popup(newPos);
+        break;
 
-        case 5: /* priority */
-            m_popupPriorityMenu->popup(newPos);
-            break;
+    case 5: /* priority */
+        m_popupPriorityMenu->popup(newPos);
+        break;
 
-        default:
-            emit contextMenuRequested(newPos);
-            break;
+    default:
+        emit contextMenuRequested(newPos);
+        break;
     }
 }
 
-void TasksWidget::slotSetPercentage(QAction* action)
+void TasksWidget::slotSetPercentage(QAction *action)
 {
     if (currentItem()) {
         currentItem()->setPercentComplete(m_percentage[action]);
@@ -221,7 +216,7 @@ void TasksWidget::slotSetPercentage(QAction* action)
     }
 }
 
-void TasksWidget::slotSetPriority(QAction* action)
+void TasksWidget::slotSetPriority(QAction *action)
 {
     if (currentItem()) {
         currentItem()->setPriority(m_priority[action]);
@@ -237,28 +232,22 @@ void TasksWidget::mouseMoveEvent(QMouseEvent *event)
             newValue = 100;
         }
 
-        if ( event->modifiers() & Qt::ShiftModifier )
-        {
+        if (event->modifiers() & Qt::ShiftModifier) {
             int delta = newValue % 10;
-            if ( delta >= 5 )
-            {
+            if (delta >= 5) {
                 newValue += (10 - delta);
-            } else
-            {
+            } else {
                 newValue -= delta;
             }
         }
         if (selectionModel()->isSelected(index)) {
             Task *task = taskAtViewIndex(index);
-            if (task)
-            {
+            if (task) {
                 task->setPercentComplete(newValue);
                 emit updateButtons();
             }
         }
-    }
-    else
-    {
+    } else {
         QTreeView::mouseMoveEvent(event);
     }
 }
@@ -267,7 +256,7 @@ bool TasksWidget::mousePositionInsideCheckbox(QMouseEvent *event) const
 {
     QModelIndex index = indexAt(event->pos());
     return index.isValid() && index.column() == 0 && visualRect(index).x() <= event->pos().x()
-         && event->pos().x() < visualRect(index).x() + 19;
+        && event->pos().x() < visualRect(index).x() + 19;
 }
 
 void TasksWidget::mousePressEvent(QMouseEvent *event)
@@ -314,7 +303,7 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
-void TasksWidget::currentChanged(const QModelIndex& /*current*/, const QModelIndex& /*previous*/)
+void TasksWidget::currentChanged(const QModelIndex & /*current*/, const QModelIndex & /*previous*/)
 {
     emit updateButtons();
 }
@@ -325,15 +314,14 @@ void TasksWidget::restoreItemState()
 
     if (m_tasksModel->topLevelItemCount() > 0) {
         for (auto *item : m_tasksModel->getAllItems()) {
-            auto *task = dynamic_cast<Task*>(item);
-            setExpanded(m_filterProxyModel->mapFromSource(
-                m_tasksModel->index(task, 0)), readBoolEntry(task->uid()));
+            auto *task = dynamic_cast<Task *>(item);
+            setExpanded(m_filterProxyModel->mapFromSource(m_tasksModel->index(task, 0)), readBoolEntry(task->uid()));
         }
     }
     qCDebug(KTT_LOG) << "Leaving function";
 }
 
-Task* TasksWidget::taskAtViewIndex(QModelIndex viewIndex)
+Task *TasksWidget::taskAtViewIndex(QModelIndex viewIndex)
 {
 //    if (!m_storage->isLoaded()) {
 //        return nullptr;
@@ -343,7 +331,7 @@ Task* TasksWidget::taskAtViewIndex(QModelIndex viewIndex)
     }
 
     QModelIndex index = m_filterProxyModel->mapToSource(viewIndex);
-    return dynamic_cast<Task*>(m_tasksModel->item(index));
+    return dynamic_cast<Task *>(m_tasksModel->item(index));
 }
 
 void TasksWidget::setSourceModel(TasksModel *tasksModel)
@@ -351,7 +339,7 @@ void TasksWidget::setSourceModel(TasksModel *tasksModel)
     m_tasksModel = tasksModel;
 }
 
-Task* TasksWidget::currentItem()
+Task *TasksWidget::currentItem()
 {
     return taskAtViewIndex(QTreeView::currentIndex());
 }

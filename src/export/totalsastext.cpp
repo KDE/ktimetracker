@@ -36,14 +36,17 @@ static const int reportWidth = taskWidth + timeWidth;
 
 static const auto cr = QStringLiteral("\n");
 
-// Print out "<indent for level> <task total> <task>", for task and subtasks. Used by totalsAsText.
+// Print out "<indent for level> <task total> <task>", for task and subtasks.
+// Used by totalsAsText.
 static void printTask(Task *task, QString &s, int level, const ReportCriteria &rc)
 {
     QString buf;
 
     s += buf.fill(' ', level);
     if (!rc.sessionTimes) {
-        s += QString(QString::fromLatin1("%1    %2")).arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth).arg(task->name());
+        s += QString(QString::fromLatin1("%1    %2"))
+                 .arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth)
+                 .arg(task->name());
     } else {
         // print session times
         s += QString(QString::fromLatin1("%1    %2"))
@@ -112,7 +115,9 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
         // total
         buf.fill('-', reportWidth);
         retval += QString(QString::fromLatin1("%1")).arg(buf, timeWidth) + cr;
-        retval += QString(QString::fromLatin1("%1 %2")).arg(formatTime(sum, rc.decimalMinutes), timeWidth).arg(i18nc("total time of all tasks", "Total"));
+        retval += QString(QString::fromLatin1("%1 %2"))
+                      .arg(formatTime(sum, rc.decimalMinutes), timeWidth)
+                      .arg(i18nc("total time of all tasks", "Total"));
     } else {
         retval += i18n("No tasks.");
     }

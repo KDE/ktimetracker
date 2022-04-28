@@ -86,7 +86,8 @@ void ExportDialog::enableTasksToExportQuestion()
 void ExportDialog::exportToClipboard()
 {
     QString output = exportToString(m_taskView->storage()->projectModel(),
-                                    m_taskView->tasksWidget()->currentItem(), reportCriteria());
+                                    m_taskView->tasksWidget()->currentItem(),
+                                    reportCriteria());
     QApplication::clipboard()->setText(output);
 }
 
@@ -98,7 +99,8 @@ void ExportDialog::exportToFile()
     }
 
     QString output = exportToString(m_taskView->storage()->projectModel(),
-                                    m_taskView->tasksWidget()->currentItem(), reportCriteria());
+                                    m_taskView->tasksWidget()->currentItem(),
+                                    reportCriteria());
     QString err = writeExport(output, url);
     if (err.isEmpty()) {
         // Close export dialog after saving
@@ -113,7 +115,7 @@ ReportCriteria ExportDialog::reportCriteria()
     rc.from = ui.dtFrom->date();
     rc.to = ui.dtTo->date();
     rc.decimalMinutes = (ui.combodecimalminutes->currentText() == i18nc("format to display times", "Decimal"));
-    qCDebug(KTT_LOG) <<"rc.decimalMinutes is" << rc.decimalMinutes;
+    qCDebug(KTT_LOG) << "rc.decimalMinutes is" << rc.decimalMinutes;
 
     if (ui.radioComma->isChecked()) {
         rc.delimiter = ',';
@@ -126,7 +128,8 @@ ReportCriteria ExportDialog::reportCriteria()
     } else if (ui.radioOther->isChecked()) {
         rc.delimiter = ui.txtOther->text();
     } else {
-        qCDebug(KTT_LOG) << "*** ExportDialog::reportCriteria: Unexpected delimiter choice '";
+        qCDebug(KTT_LOG) << "*** ExportDialog::reportCriteria: Unexpected "
+                            "delimiter choice '";
         rc.delimiter = '\t';
     }
 
@@ -167,6 +170,7 @@ void ExportDialog::updateUI()
         break;
     }
 
-    ui.previewText->setText(exportToString(
-        m_taskView->storage()->projectModel(), m_taskView->tasksWidget()->currentItem(), reportCriteria()));
+    ui.previewText->setText(exportToString(m_taskView->storage()->projectModel(),
+                                           m_taskView->tasksWidget()->currentItem(),
+                                           reportCriteria()));
 }

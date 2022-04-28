@@ -161,7 +161,7 @@ int TasksModel::rowCount(const QModelIndex &parent) const
     return 0;
 }
 
-int TasksModel::columnCount(const QModelIndex& /*parent*/) const
+int TasksModel::columnCount(const QModelIndex & /*parent*/) const
 {
     return m_headerLabels.size();
 }
@@ -185,9 +185,13 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
         break;
     case Qt::WhatsThisRole:
         if (index.column() == 0) {
-            return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
+            return i18nc("@info:whatsthis",
+                         "The task name is what you call the task, it can be "
+                         "chosen freely.");
         } else if (index.column() == 1) {
-            return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
+            return i18nc("@info:whatsthis",
+                         "The session time is the time since you last chose "
+                         "\"Start New Session\".");
         }
         break;
     case Qt::DecorationRole: {
@@ -274,13 +278,21 @@ QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int ro
     case Qt::WhatsThisRole:
         switch (section) {
         case 0:
-            return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
+            return i18nc("@info:whatsthis",
+                         "The task name is what you call the task, it can be "
+                         "chosen freely.");
         case 1:
-            return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
+            return i18nc("@info:whatsthis",
+                         "The session time is the time since you last chose "
+                         "\"Start New Session\".");
         case 3:
-            return i18nc("@info:whatsthis", "The total session time is the session time of this task and all its subtasks.");
+            return i18nc("@info:whatsthis",
+                         "The total session time is the session time of this "
+                         "task and all its subtasks.");
         case 4:
-            return i18nc("@info:whatsthis", "The total time is the time of this task and all its subtasks.");
+            return i18nc("@info:whatsthis",
+                         "The total time is the time of this task and all its "
+                         "subtasks.");
         default:
             break;
         }
@@ -320,7 +332,11 @@ Qt::DropActions TasksModel::supportedDropActions() const
     return Qt::MoveAction;
 }
 
-bool TasksModel::canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) const
+bool TasksModel::canDropMimeData(const QMimeData *data,
+                                 Qt::DropAction action,
+                                 int row,
+                                 int column,
+                                 const QModelIndex &parent) const
 {
     if (m_dragCutTaskId.isEmpty()) {
         return false;
@@ -329,7 +345,11 @@ bool TasksModel::canDropMimeData(const QMimeData *data, Qt::DropAction action, i
     return QAbstractItemModel::canDropMimeData(data, action, row, column, parent);
 }
 
-bool TasksModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
+bool TasksModel::dropMimeData(const QMimeData *data,
+                              Qt::DropAction action,
+                              int row,
+                              int column,
+                              const QModelIndex &parent)
 {
     if (!canDropMimeData(data, action, row, column, parent)) {
         return false;

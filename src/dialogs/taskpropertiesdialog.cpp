@@ -36,13 +36,14 @@
 
 #include "ktimetrackerutility.h"
 
-TaskPropertiesDialog::TaskPropertiesDialog(
-    QWidget *parent, const QString &caption,
-    const QString &name, const QString &description,
-    const DesktopList &desktops)
-    : QDialog(parent),
-      m_nameText(nullptr),
-      m_descText(nullptr)
+TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
+                                           const QString &caption,
+                                           const QString &name,
+                                           const QString &description,
+                                           const DesktopList &desktops)
+    : QDialog(parent)
+    , m_nameText(nullptr)
+    , m_descText(nullptr)
 {
     setWindowTitle(caption);
     setModal(true);
@@ -57,10 +58,9 @@ TaskPropertiesDialog::TaskPropertiesDialog(
     infoGroup->setLayout(infoLayout);
 
     m_nameText = new QLineEdit(name, infoGroup);
-    m_nameText->setWhatsThis(i18nc(
-        "@info:whatsthis",
-        "<p>Enter the name of the task here. You can choose it freely.</p>\n"
-        "<p><i>Example:</i> phone with mother</p>"));
+    m_nameText->setWhatsThis(i18nc("@info:whatsthis",
+                                   "<p>Enter the name of the task here. You can choose it freely.</p>\n"
+                                   "<p><i>Example:</i> phone with mother</p>"));
     infoLayout->addWidget(m_nameText, 0, 1);
     infoLayout->addWidget(new QLabel(i18n("Task Name:")), 0, 0);
 
@@ -118,7 +118,8 @@ TaskPropertiesDialog::TaskPropertiesDialog(
     mainLayout->addStretch(0);
     mainLayout->addWidget(m_buttonBox);
 
-    // Do not show ugly empty box when virtual desktops are not available, e.g. on Windows
+    // Do not show ugly empty box when virtual desktops are not available, e.g.
+    // on Windows
     if (numDesktops == 0) {
         // TODO replace check tracking group with a warning instead
         m_trackingGroup->hide();

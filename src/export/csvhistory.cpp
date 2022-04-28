@@ -40,7 +40,8 @@ static int64_t todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event
     QDateTime NextMidNight = startTime;
     NextMidNight.setTime(QTime(0, 0));
     NextMidNight = NextMidNight.addDays(1);
-    // LastMidNight := mdate.setTime(0:00) as it would read in a decent programming language
+    // LastMidNight := mdate.setTime(0:00) as it would read in a decent
+    // programming language
     QDateTime LastMidNight = QDateTime::currentDateTime();
     LastMidNight.setDate(date);
     LastMidNight.setTime(QTime(0, 0));
@@ -120,8 +121,8 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
     std::unique_ptr<FileCalendar> calendar = projectModel->asCalendar(QUrl());
 
     // Step 2: For each date, get the events and calculate the seconds
-    // Store the seconds using secsForUid hashmap, so we don't need to translate uids
-    // We rely on rawEventsForDate to get the events
+    // Store the seconds using secsForUid hashmap, so we don't need to translate
+    // uids We rely on rawEventsForDate to get the events
     qCDebug(KTT_LOG) << "Let's iterate for each date: ";
     int dayCount = 0;
     for (QDate mdate = from; mdate.daysTo(to) >= 0; mdate = mdate.addDays(1)) {

@@ -31,10 +31,10 @@
 #include <KXMLGUIFactory>
 
 #include "ktimetracker.h"
+#include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 #include "model/task.h"
 #include "timetrackerwidget.h"
-#include "ktimetrackerutility.h"
 #include "tray.h"
 
 MainWindow::MainWindow(const QUrl &url)
@@ -67,7 +67,9 @@ MainWindow::MainWindow(const QUrl &url)
     connect(m_mainWidget, &TimeTrackerWidget::minutesUpdated, this, &MainWindow::updateWindowCaptionTasks);
 
     // Setup context menu request handling
-    connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this,
+    connect(m_mainWidget,
+            &TimeTrackerWidget::contextMenuRequested,
+            this,
             &MainWindow::taskViewCustomContextMenuRequested);
 
     if (KTimeTrackerSettings::trayIcon()) {

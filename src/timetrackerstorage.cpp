@@ -137,9 +137,7 @@ QString TimeTrackerStorage::loadTasksFromCalendar(const KCalCore::Todo::List &to
             Task *newParent = map.value(todo->relatedTo());
             // Complete the loading but return a message
             if (!newParent) {
-                err = i18n("Error loading \"%1\": could not find parent (uid=%2)",
-                           task->name(),
-                           todo->relatedTo());
+                err = i18n("Error loading \"%1\": could not find parent (uid=%2)", task->name(), todo->relatedTo());
             } else {
                 task->move(newParent);
             }
@@ -249,8 +247,8 @@ QString TimeTrackerStorage::save()
     std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
     if (!calendar->save()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
-        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".",
-                             m_url.toString());
+        errorMessage =
+            i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".", m_url.toString());
     } else {
         qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
     }

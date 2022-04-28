@@ -23,8 +23,8 @@
 #include <QTemporaryFile>
 #include <QTextStream>
 
-#include "taskview.h"
 #include "model/task.h"
+#include "taskview.h"
 
 class TemporaryFileDeleter : public QObject
 {
@@ -51,7 +51,7 @@ QUrl createTempFile(QObject *parent)
         delete file;
         return {};
     }
-    const QString& fileName = file->fileName();
+    const QString &fileName = file->fileName();
     // We have to destroy the QTemporaryFile here because
     // otherwise on Windows it will block the file, so that
     // the code being tested (e.g. TimeTrackerStorage::save())

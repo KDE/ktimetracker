@@ -35,9 +35,9 @@ QString formatTime(double minutes, bool decimal)
     } else {
         const auto absMinutes = static_cast<qlonglong>(std::round(std::fabs(minutes)));
         time = QStringLiteral("%1%2:%3")
-            .arg(minutes < 0 ? QString(QLocale().negativeSign()) : "")
-            .arg(absMinutes / 60)
-            .arg(absMinutes % 60, 2, 10, QLatin1Char('0'));
+                   .arg(minutes < 0 ? QString(QLocale().negativeSign()) : "")
+                   .arg(absMinutes / 60)
+                   .arg(absMinutes % 60, 2, 10, QLatin1Char('0'));
     }
 
     return time;
@@ -50,12 +50,9 @@ QString getCustomProperty(const KCalCore::Incidence::Ptr &incident, const QStrin
     const QByteArray nameArray = name.toLatin1();
 
     // If a KDE-karm-* exists and not KDE-ktimetracker-*, change this.
-    if (
-        incident->customProperty(eventAppName, nameArray).isNull() &&
-        !incident->customProperty(eventAppNameOld, nameArray).isNull()) {
-        incident->setCustomProperty(
-            eventAppName, nameArray,
-            incident->customProperty(eventAppNameOld, nameArray));
+    if (incident->customProperty(eventAppName, nameArray).isNull()
+        && !incident->customProperty(eventAppNameOld, nameArray).isNull()) {
+        incident->setCustomProperty(eventAppName, nameArray, incident->customProperty(eventAppNameOld, nameArray));
     }
 
     return incident->customProperty(eventAppName, nameArray);

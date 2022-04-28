@@ -42,7 +42,7 @@
 #include "model/task.h"
 #include "timetrackerwidget.h"
 
-TrayIcon::TrayIcon(MainWindow* parent)
+TrayIcon::TrayIcon(MainWindow *parent)
     : KStatusNotifierItem(parent)
 {
     Q_INIT_RESOURCE(pics);
@@ -53,9 +53,9 @@ TrayIcon::TrayIcon(MainWindow* parent)
     connect(m_animation, &QMovie::frameChanged, this, &TrayIcon::setActiveIcon);
     m_animation->jumpToFrame(0);
 
-    auto* widget = dynamic_cast<TimeTrackerWidget*>(parent->centralWidget());
+    auto *widget = dynamic_cast<TimeTrackerWidget *>(parent->centralWidget());
     if (widget) {
-        QAction* action = widget->action("configure_ktimetracker");
+        QAction *action = widget->action("configure_ktimetracker");
         if (action) {
             contextMenu()->addAction(action);
         }
@@ -66,7 +66,7 @@ TrayIcon::TrayIcon(MainWindow* parent)
         }
     }
 
-    updateToolTip(QList<Task*>());
+    updateToolTip(QList<Task *>());
 }
 
 void TrayIcon::startClock()
@@ -84,10 +84,10 @@ void TrayIcon::setActiveIcon(int /*unused*/)
     setIconByPixmap(QIcon(m_animation->currentPixmap()));
 }
 
-void TrayIcon::updateToolTip(const QList<Task*> &activeTasks)
+void TrayIcon::updateToolTip(const QList<Task *> &activeTasks)
 {
     if (activeTasks.isEmpty()) {
-        this->setToolTip( "ktimetracker", "ktimetracker", i18n("No active tasks") );
+        this->setToolTip("ktimetracker", "ktimetracker", i18n("No active tasks"));
         return;
     }
 
@@ -105,7 +105,7 @@ void TrayIcon::updateToolTip(const QList<Task*> &activeTasks)
     // stop building it.
 
     for (int i = 0; i < activeTasks.count(); ++i) {
-        Task* task = activeTasks.at(i);
+        Task *task = activeTasks.at(i);
         if (i > 0) {
             s += i18nc("separator between task names", ", ") + task->name();
         } else {
