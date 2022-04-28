@@ -120,7 +120,6 @@ static KCalCore::Event::Ptr baseEvent(const Task *task)
 
     // Have to turn this off to get datetimes in date fields.
     e->setAllDay(false);
-//    e->setDtStart(KDateTime(task->startTime(), KDateTime::Spec::LocalZone()));
     e->setDtStart(task->startTime());
 
     // So someone can filter this mess out of their calendar display
