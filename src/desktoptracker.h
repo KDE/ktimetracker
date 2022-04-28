@@ -49,11 +49,11 @@ class DesktopTracker : public QObject
 public:
     DesktopTracker();
     /**
-      * Start time tracking of tasks by virtual desktop.
-      *
-      * @returns A QString with the error message, in case of no error an empty QString.
-      *
-      */
+     * Start time tracking of tasks by virtual desktop.
+     *
+     * @returns A QString with the error message, in case of no error an empty QString.
+     *
+     */
     QString startTracking();
     void registerForDesktops( Task* task, DesktopList dl );
     int desktopCount() const { return m_desktopCount; }

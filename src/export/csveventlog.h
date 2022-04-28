@@ -30,4 +30,4 @@ class ProjectModel;
 QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriteria &rc);
 QString getFullEventName(const Event *event, ProjectModel *projectModel);
 
-#endif //KTIMETRACKER_CSVEVENTLOG_H
+#endif // KTIMETRACKER_CSVEVENTLOG_H

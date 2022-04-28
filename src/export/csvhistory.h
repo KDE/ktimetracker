@@ -29,4 +29,4 @@ class ProjectModel;
 
 QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteria &rc);
 
-#endif //KTIMETRACKER_CSVHISTORY_H
+#endif // KTIMETRACKER_CSVHISTORY_H

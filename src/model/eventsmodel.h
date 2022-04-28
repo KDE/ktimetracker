@@ -36,8 +36,8 @@ public:
     ~EventsModel() override;
 
     void load(const KCalCore::Event::List &events);
-    QList<Event*> events() const;
-    QList<Event*> eventsForTask(const Task *task) const;
+    QList<Event *> events() const;
+    QList<Event *> eventsForTask(const Task *task) const;
     Event *eventByUID(const QString &uid) const;
 
     // Delete all events
@@ -73,7 +73,7 @@ public:
      * @param task   The task the change is for.
      * @param delta  Change in task time, in seconds.  Can be negative.
      */
-    void changeTime(const Task* task, int64_t deltaSeconds);
+    void changeTime(const Task *task, int64_t deltaSeconds);
 
     /**
      * Book time to a task.
@@ -100,7 +100,7 @@ Q_SIGNALS:
     void timesChanged();
 
 private:
-    QList<Event*> m_events;
+    QList<Event *> m_events;
 };
 
 #endif // KTIMETRACKER_EVENTSMODEL_H

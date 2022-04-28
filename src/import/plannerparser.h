@@ -45,7 +45,6 @@ test cases:
 class PlannerParser : public QXmlDefaultHandler
 {
 public:
-
     /** Stores the active TaskView in this parser. */
     explicit PlannerParser(ProjectModel *projectModel, Task *currentTask);
 
@@ -53,10 +52,10 @@ public:
     bool startDocument() override;
 
     /** Called when the reader occurs an open tag (e.g. \<b\> ) */
-    bool startElement(const QString&, const QString&, const QString& qName, const QXmlAttributes& att) override;
+    bool startElement(const QString &, const QString &, const QString &qName, const QXmlAttributes &att) override;
 
     /** Called when the reader occurs a closed tag (e.g. \</b\> )*/
-    bool endElement(const QString&, const QString&, const QString& qName) override;
+    bool endElement(const QString &, const QString &, const QString &qName) override;
 
 private:
     bool m_withinTasks;     // within <tasks> ?

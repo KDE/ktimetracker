@@ -23,8 +23,8 @@
 #ifndef KTIMETRACKER_IDLE_TIME_DETECTOR_H
 #define KTIMETRACKER_IDLE_TIME_DETECTOR_H
 
-#include <QObject>
 #include <QDateTime>
+#include <QObject>
 
 /**
  * Keep track of how long the computer has been idle.

@@ -39,7 +39,7 @@ class TrayIcon : public KStatusNotifierItem
     Q_OBJECT
 
 public:
-    explicit TrayIcon(MainWindow* parent);
+    explicit TrayIcon(MainWindow *parent);
     ~TrayIcon() override = default;
 
 private:
@@ -48,7 +48,7 @@ private:
 public Q_SLOTS:
     void startClock();
     void stopClock();
-    void updateToolTip(const QList<Task*> &activeTasks);
+    void updateToolTip(const QList<Task *> &activeTasks);
 
 protected Q_SLOTS:
     void setActiveIcon(int frame);

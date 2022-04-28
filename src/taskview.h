@@ -26,8 +26,8 @@
 #include <QList>
 
 #include "desktoplist.h"
-#include "timetrackerstorage.h"
 #include "reportcriteria.h"
+#include "timetrackerstorage.h"
 
 QT_BEGIN_NAMESPACE
 class QTimer;
@@ -60,16 +60,18 @@ public:
      * Must be called only once. If you need to open another file,
      * please create a new TaskView object.
      */
-    void load(const QUrl& url);
+    void load(const QUrl &url);
 
     /** Close the storage and release lock. */
     void closeStorage();
 
     /** Add a task to view and storage. */
-    Task *addTask(
-        const QString& taskname, const QString& taskdescription = QString(),
-        int64_t total = 0, int64_t session = 0, const DesktopList& desktops = QVector<int>(0,0),
-        Task* parent = nullptr);
+    Task *addTask(const QString &taskname,
+                  const QString &taskdescription = QString(),
+                  int64_t total = 0,
+                  int64_t session = 0,
+                  const DesktopList &desktops = QVector<int>(0, 0),
+                  Task *parent = nullptr);
 
     /** Returns whether the focus tracking is currently active. */
     bool isFocusTrackingActive() const;
@@ -119,7 +121,7 @@ public Q_SLOTS:
      *
      * Hopefully, this will be redesigned as part of the Qt4 migration.
      */
-    TimeTrackerStorage* storage();
+    TimeTrackerStorage *storage();
 
     /**
      * Deletes the given or the current task (and children) from the view.
@@ -135,7 +137,7 @@ public Q_SLOTS:
      * @param task Task to be deleted. If empty, the current task is deleted.
      *             if non-existent, an error message is displayed.
      */
-    void deleteTask(Task* task = nullptr);
+    void deleteTask(Task *task = nullptr);
 
     /** Sets % completed for the current task.
      * @param completion The percentage complete to mark the task as. */
@@ -154,7 +156,7 @@ public Q_SLOTS:
      * @param task      task to start timer of
      * @param startTime if taskview has been modified by another program, we
                             have to set the starting time to not-now. */
-    void startTimerFor(Task *task, const QDateTime& startTime);
+    void startTimerFor(Task *task, const QDateTime &startTime);
     void startTimerForNow(Task *task);
     void stopTimerFor(Task *task);
 
@@ -166,7 +168,7 @@ public Q_SLOTS:
 
     void onTaskDoubleClicked(Task *task);
 
-    void editTaskTime(const QString& taskUid, int64_t minutes);
+    void editTaskTime(const QString &taskUid, int64_t minutes);
 
 Q_SIGNALS:
     void updateButtons();
@@ -174,23 +176,23 @@ Q_SIGNALS:
     void timersInactive();
 
     /** Used to update text in tray icon */
-    void tasksChanged(const QList<Task*> &activeTasks);
-    void minutesUpdated(const QList<Task*> &activeTasks);
+    void tasksChanged(const QList<Task *> &activeTasks);
+    void minutesUpdated(const QList<Task *> &activeTasks);
 
     void setStatusBarText(const QString &text);
-    void contextMenuRequested(const QPoint&);
+    void contextMenuRequested(const QPoint &);
 
 private: // member variables
-    QSortFilterProxyModel* m_filterProxyModel;
+    QSortFilterProxyModel *m_filterProxyModel;
 
-    IdleTimeDetector* m_idleTimeDetector;
+    IdleTimeDetector *m_idleTimeDetector;
     QTimer *m_minuteTimer;
     QTimer *m_autoSaveTimer;
-    DesktopTracker* m_desktopTracker;
+    DesktopTracker *m_desktopTracker;
 
     TimeTrackerStorage *m_storage;
     bool m_focusTrackingActive;
-    Task* m_lastTaskWithFocus;
+    Task *m_lastTaskWithFocus;
 
     FocusDetector *m_focusDetector;
 
@@ -200,7 +202,7 @@ public Q_SLOTS:
     void minuteUpdate();
 
     /** React on the focus having changed to Window QString **/
-    void newFocusWindowDetected(const QString&);
+    void newFocusWindowDetected(const QString &);
 
     void slotColumnToggled(int);
 };

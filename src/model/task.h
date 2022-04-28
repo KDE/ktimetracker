@@ -54,9 +54,13 @@ public:
         SortRole = Qt::UserRole,
     };
 
-    Task(
-        const QString& taskname, const QString& taskdescription, int64_t minutes, int64_t sessionTime,
-        const DesktopList& desktops, ProjectModel *projectModel, Task* parentTask);
+    Task(const QString &taskname,
+         const QString &taskdescription,
+         int64_t minutes,
+         int64_t sessionTime,
+         const DesktopList &desktops,
+         ProjectModel *projectModel,
+         Task *parentTask);
     Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel);
 
     /* destructor */
@@ -80,10 +84,10 @@ public:
 
     /** cut Task out of parent Task or the TaskView and into the
      *  destination Task */
-    void move(TasksModelItem* destination);
+    void move(TasksModelItem *destination);
 
     /** insert Task into the destination Task */
-    void paste(TasksModelItem* destination);
+    void paste(TasksModelItem *destination);
 
     //@{ timing related functions
 
@@ -192,7 +196,7 @@ public:
 
     //@{ desktop related functions
 
-    void setDesktopList(const DesktopList& desktopList);
+    void setDesktopList(const DesktopList &desktopList);
     DesktopList desktops() const;
 
     QString getDesktopStr() const;
@@ -209,20 +213,20 @@ public:
     void setDescription(const QString &description);
 
     /** returns the name of this task.
-    *  @return a pointer to the name.
-    */
+     *  @return a pointer to the name.
+     */
     QString name() const;
 
     /** returns the description of this task.
-    * @return a pointer to the description.
-    */
+     * @return a pointer to the description.
+     */
     QString description() const;
 
     /**
-    * Returns that task name, prefixed by parent tree up to root.
-    *
-    * Task names are separated by a forward slash:  /
-    */
+     * Returns that task name, prefixed by parent tree up to root.
+     *
+     * Task names are separated by a forward slash:  /
+     */
     QString fullName() const;
     //@}
 
@@ -257,15 +261,20 @@ public:
      *  You read the todo, extract its custom properties (like session time)
      *  and use these data to initialize the task.
      */
-    bool parseIncidence(
-        const KCalCore::Incidence::Ptr &, int64_t& minutes,
-        int64_t& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
-        int& percent_complete, int& priority);
+    bool parseIncidence(const KCalCore::Incidence::Ptr &,
+                        int64_t &minutes,
+                        int64_t &sessionMinutes,
+                        QString &sessionStartTiMe,
+                        QString &name,
+                        QString &description,
+                        DesktopList &desktops,
+                        int &percent_complete,
+                        int &priority);
 
     /**
      *  Load the todo passed in with this tasks info.
      */
-    KCalCore::Todo::Ptr asTodo(const KCalCore::Todo::Ptr& todo) const;
+    KCalCore::Todo::Ptr asTodo(const KCalCore::Todo::Ptr &todo) const;
 
     /** tells you whether this task is the root of the task tree */
     bool isRoot() const { return !parentTask(); }
@@ -305,10 +314,14 @@ protected:
 
 private:
     /** initialize a task */
-    void init(
-        const QString& taskname, const QString& taskdescription, int64_t minutes, int64_t sessionTime,
-        const QString& sessionStartTiMe,
-        const DesktopList& desktops, int percent_complete, int priority);
+    void init(const QString &taskname,
+              const QString &taskdescription,
+              int64_t minutes,
+              int64_t sessionTime,
+              const QString &sessionStartTiMe,
+              const DesktopList &desktops,
+              int percent_complete,
+              int priority);
 
     bool m_isRunning;
 

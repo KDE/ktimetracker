@@ -41,7 +41,7 @@ private Q_SLOTS:
     void activateSearch();
 
 private:
-    bool eventFilter(QObject* obj, QEvent* event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
     QLineEdit *m_lineEdit;
     int m_queuedSearches;

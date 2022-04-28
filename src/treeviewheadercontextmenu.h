@@ -23,11 +23,11 @@
 #ifndef TREEVIEWHEADERCONTEXTMENU_H
 #define TREEVIEWHEADERCONTEXTMENU_H
 
+#include <QHash>
+#include <QMenu>
 #include <QObject>
 #include <QPoint>
-#include <QHash>
 #include <QVector>
-#include <QMenu>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -52,23 +52,23 @@ public:
     ~TreeViewHeaderContextMenu() override;
 
 private Q_SLOTS:
-    void slotCustomContextMenuRequested(const QPoint&);
+    void slotCustomContextMenuRequested(const QPoint &);
 
 protected Q_SLOTS:
     void updateActions();
-    void slotTriggered(QAction*);
+    void slotTriggered(QAction *);
     void slotAboutToShow();
 
 Q_SIGNALS:
     void columnToggled(int);
 
 private:
-    void updateAction(QAction* action, int column);
+    void updateAction(QAction *action, int column);
 
     QTreeView *m_widget;
-    QVector<QAction*> m_actions;
+    QVector<QAction *> m_actions;
     QMenu *m_contextMenu;
-    QHash<QAction*, int> m_actionColumnMapping;
+    QHash<QAction *, int> m_actionColumnMapping;
     QVector<int> m_excludedColumns;
 };
 

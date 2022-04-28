@@ -23,9 +23,9 @@
 #ifndef TIMETRACKER_WIDGET_H
 #define TIMETRACKER_WIDGET_H
 
-#include <QWidget>
 #include <QDateTime>
 #include <QUrl>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -38,12 +38,12 @@ class TaskView;
 class SearchLine;
 class TasksWidget;
 
-class TimeTrackerWidget : public QWidget 
+class TimeTrackerWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit TimeTrackerWidget(QWidget* parent);
+    explicit TimeTrackerWidget(QWidget *parent);
     ~TimeTrackerWidget() override = default;
 
 private:
@@ -57,12 +57,12 @@ public:
     /**
       Returns the TaskView widget of the current opened tabpage.
      */
-    TaskView* currentTaskView() const;
+    TaskView *currentTaskView() const;
 
     /**
       Returns the current task of the current opened TaskView widget.
      */
-    Task* currentTask();
+    Task *currentTask();
 
     /**
       initializes the KActionCollection object of a main window for example.
@@ -71,7 +71,7 @@ public:
       @param actionCollection The KActionCollection instance of the host
       object.
      */
-    void setupActions(KActionCollection* actionCollection);
+    void setupActions(KActionCollection *actionCollection);
 
     /**
       returns a generated action by name. You have to call setupActions before.
@@ -79,7 +79,7 @@ public:
       @param name The name of the action
       @returns A pointer to a QAction instance
      */
-    QAction* action(const QString &name) const;
+    QAction *action(const QString &name) const;
 
 public Q_SLOTS:
     /**
@@ -152,35 +152,39 @@ public Q_SLOTS:
     /** \defgroup dbus slots ‘‘dbus slots’’ */
     /* @{ */
     QString version() const;
-    QStringList taskIdsFromName( const QString &taskName ) const;
-    void addTask( const QString &taskName );
-    void addSubTask( const QString& taskName, const QString &taskId );
-    void deleteTask( const QString &taskId );
-    void setPercentComplete( const QString &taskId, int percent );
+    QStringList taskIdsFromName(const QString &taskName) const;
+    void addTask(const QString &taskName);
+    void addSubTask(const QString &taskName, const QString &taskId);
+    void deleteTask(const QString &taskId);
+    void setPercentComplete(const QString &taskId, int percent);
     int bookTime(const QString &taskId, const QString &dateTime, int64_t minutes);
     int changeTime(const QString &taskId, int64_t minutes);
-    QString error( int errorCode ) const;
+    QString error(int errorCode) const;
     bool isIdleDetectionPossible() const;
-    int totalMinutesForTaskId( const QString &taskId ) const;
-    void startTimerFor( const QString &taskId );
-    void stopTimerFor( const QString &taskId );
+    int totalMinutesForTaskId(const QString &taskId) const;
+    void startTimerFor(const QString &taskId);
+    void stopTimerFor(const QString &taskId);
 
-    bool startTimerForTaskName( const QString &taskName );
-    bool stopTimerForTaskName( const QString &taskName );
+    bool startTimerForTaskName(const QString &taskName);
+    bool stopTimerForTaskName(const QString &taskName);
 
   // FIXME rename, when the wrapper slot is removed
     void stopAllTimersDBUS();
-    QString exportCSVFile( const QString &filename, const QString &from,
-                        const QString &to, int type, bool decimalMinutes,
-                        bool allTasks, const QString &delimiter,
-                         const QString &quote );
-    void importPlannerFile( const QString &filename );
+    QString exportCSVFile(const QString &filename,
+                          const QString &from,
+                          const QString &to,
+                          int type,
+                          bool decimalMinutes,
+                          bool allTasks,
+                          const QString &delimiter,
+                          const QString &quote);
+    void importPlannerFile(const QString &filename);
 
     /** return all task names, e.g. for batch processing */
     QStringList tasks() const;
 
     QStringList activeTasks() const;
-    bool isActive( const QString &taskId ) const;
+    bool isActive(const QString &taskId) const;
     bool isTaskNameActive(const QString &taskName) const;
     void saveAll();
     void quit();
@@ -198,26 +202,26 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void slotCurrentChanged();
-    void slotAddTask( const QString &taskName );
+    void slotAddTask(const QString &taskName);
     void slotUpdateButtons();
 
 Q_SIGNALS:
-    void currentFileChanged(const QString& qs);
+    void currentFileChanged(const QString &qs);
     void currentTaskChanged();
     void currentTaskViewChanged();
     void updateButtons();
-    void statusBarTextChangeRequested(const QString& text);
-    void contextMenuRequested( const QPoint &pos );
+    void statusBarTextChangeRequested(const QString &text);
+    void contextMenuRequested(const QPoint &pos);
     void timersActive();
     void timersInactive();
 
     // Used to update text in tray icon
     // and window title if the window title is configured to display the active tasks
-    void tasksChanged(const QList<Task*> &activeTasks);
+    void tasksChanged(const QList<Task *> &activeTasks);
 
     // update recorded minutes of current task
     // if the window title is configured to display the active tasks
-    void minutesUpdated(const QList<Task*> &activeTasks);
+    void minutesUpdated(const QList<Task *> &activeTasks);
 
 private:
     void fillLayout(TasksWidget *tasksWidget);

@@ -41,11 +41,11 @@ public:
     ~MainWindow() override;
 
 public Q_SLOTS:
-    void setStatusBar(const QString&);
+    void setStatusBar(const QString &);
     void quit();
 
 protected Q_SLOTS:
-    void taskViewCustomContextMenuRequested(const QPoint&);
+    void taskViewCustomContextMenuRequested(const QPoint &);
     void updateWindowCaptionTasks(const QList<Task *> &activeTasks);
     void updateWindowCaptionFile(const QString &url);
 
@@ -53,8 +53,8 @@ protected:
     bool queryClose() override;
 
 private:
-    TrayIcon* m_tray;
-    TimeTrackerWidget* m_mainWidget;
+    TrayIcon *m_tray;
+    TimeTrackerWidget *m_mainWidget;
     bool m_quitRequested;
 };
 

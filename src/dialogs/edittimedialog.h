@@ -32,9 +32,7 @@ class EditTimeDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EditTimeDialog(
-        QWidget *parent,
-        const QString &name, const QString &description, int64_t minutes);
+    explicit EditTimeDialog(QWidget *parent, const QString &name, const QString &description, int64_t minutes);
     ~EditTimeDialog() override = default;
 
     int changeMinutes() const { return m_changeMinutes; }

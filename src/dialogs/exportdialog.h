@@ -25,8 +25,8 @@
 
 #include <QDialogButtonBox>
 
-#include "ui_exportdialog.h"
 #include "reportcriteria.h"
+#include "ui_exportdialog.h"
 
 class TaskView;
 

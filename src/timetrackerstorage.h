@@ -23,12 +23,12 @@
 #ifndef KTIMETRACKER_STORAGE_H
 #define KTIMETRACKER_STORAGE_H
 
-#include <KCalCore/Todo>
 #include <KCalCore/Event>
+#include <KCalCore/Todo>
 
-#include "reportcriteria.h"
 #include "desktoplist.h"
 #include "file/filecalendar.h"
+#include "reportcriteria.h"
 
 QT_BEGIN_NAMESPACE
 class QDateTime;

@@ -29,4 +29,4 @@ class TasksModel;
 
 QString exportCSVToString(TasksModel *tasksModel, const ReportCriteria &rc);
 
-#endif //KTIMETRACKER_CSVTOTALS_H
+#endif // KTIMETRACKER_CSVTOTALS_H

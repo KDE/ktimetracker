@@ -78,28 +78,28 @@ public:
     /**
      For history reports, the lower bound of the date range to report on.
      */
-    QDate   from;
+    QDate from;
 
     /**
      For history reports, the upper bound of the date range to report on.
      */
-    QDate   to;
+    QDate to;
 
     /**
      True if the durations should be output in decimal hours.  Otherwise,
      output durations as HH24:MI
      */
-    bool    decimalMinutes;
+    bool decimalMinutes;
 
     /**
      True if user chose to export session times, not all times
      */
-    bool    sessionTimes;
+    bool sessionTimes;
 
-    /** 
+    /**
      True if user chose to export all tasks, not only the selected one
      */
-    bool    allTasks;
+    bool allTasks;
 
     /**
      The delimiter to use when outputting comma-separated value reports.
