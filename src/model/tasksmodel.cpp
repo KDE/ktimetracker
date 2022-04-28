@@ -30,14 +30,13 @@
 
 TasksModel::TasksModel()
     : m_rootItem(new TasksModelItem(this, nullptr))
-    , m_headerLabels{
-        i18nc("@title:column", "Task Name"),
-        i18nc("@title:column", "Session Time"),
-        i18nc("@title:column", "Time"),
-        i18nc("@title:column", "Total Session Time"),
-        i18nc("@title:column", "Total Time"),
-        i18nc("@title:column", "Priority"),
-        i18nc("@title:column", "Percent Complete")}
+    , m_headerLabels{i18nc("@title:column", "Task Name"),
+                     i18nc("@title:column", "Session Time"),
+                     i18nc("@title:column", "Time"),
+                     i18nc("@title:column", "Total Session Time"),
+                     i18nc("@title:column", "Total Time"),
+                     i18nc("@title:column", "Priority"),
+                     i18nc("@title:column", "Percent Complete")}
     , m_clockAnimation(nullptr)
     , m_dragCutTaskId()
 {
@@ -57,7 +56,7 @@ void TasksModel::clear()
     beginResetModel();
 
     // Empty "m_children", move it to "children".
-    QList<TasksModelItem*> children;
+    QList<TasksModelItem *> children;
     children.swap(m_rootItem->m_children);
 
     for (int i = 0; i < children.count(); ++i) {
@@ -95,7 +94,7 @@ TasksModelItem *TasksModel::item(const QModelIndex &index) const
         return nullptr;
     }
 
-    return static_cast<TasksModelItem*>(index.internalPointer());
+    return static_cast<TasksModelItem *>(index.internalPointer());
 }
 
 QModelIndex TasksModel::index(TasksModelItem *item, int column) const
@@ -105,7 +104,7 @@ QModelIndex TasksModel::index(TasksModelItem *item, int column) const
     }
 
     const TasksModelItem *par = item->parent();
-    auto *itm = const_cast<TasksModelItem*>(item);
+    auto *itm = const_cast<TasksModelItem *>(item);
     if (!par) {
         par = m_rootItem;
     }
@@ -174,43 +173,43 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-        case Qt::TextAlignmentRole:
-            // Align task name: left
-            // Align priority: center
-            // Align HH:MM: right
-            if (index.column() == 5) {
-                return Qt::AlignCenter;
-            } else if (index.column() >= 1) {
-                return {Qt::AlignRight | Qt::AlignVCenter};
-            }
-            break;
-        case Qt::WhatsThisRole:
-            if (index.column() == 0) {
-                return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
-            } else if (index.column() == 1) {
-                return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
-            }
-            break;
-        case Qt::DecorationRole: {
-            auto *task = dynamic_cast<Task *>(item(index));
-            if (!task) {
-                return {};
-            }
+    case Qt::TextAlignmentRole:
+        // Align task name: left
+        // Align priority: center
+        // Align HH:MM: right
+        if (index.column() == 5) {
+            return Qt::AlignCenter;
+        } else if (index.column() >= 1) {
+            return {Qt::AlignRight | Qt::AlignVCenter};
+        }
+        break;
+    case Qt::WhatsThisRole:
+        if (index.column() == 0) {
+            return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
+        } else if (index.column() == 1) {
+            return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
+        }
+        break;
+    case Qt::DecorationRole: {
+        auto *task = dynamic_cast<Task *>(item(index));
+        if (!task) {
+            return {};
+        }
 
-            if (index.column() == 0) {
-                return QPixmap(task->isComplete() ? ":/pics/task-complete.xpm" : ":/pics/task-incomplete.xpm");
-            } else if (index.column() == 1) {
-                return task->isRunning() ? m_clockAnimation->currentPixmap() : QPixmap(":/pics/empty-watch.xpm");
-            }
-            break;
+        if (index.column() == 0) {
+            return QPixmap(task->isComplete() ? ":/pics/task-complete.xpm" : ":/pics/task-incomplete.xpm");
+        } else if (index.column() == 1) {
+            return task->isRunning() ? m_clockAnimation->currentPixmap() : QPixmap(":/pics/empty-watch.xpm");
         }
-        default: {
-            TasksModelItem *itm = item(index);
-            if (itm) {
-                return itm->data(index.column(), role);
-            }
-            break;
+        break;
+    }
+    default: {
+        TasksModelItem *itm = item(index);
+        if (itm) {
+            return itm->data(index.column(), role);
         }
+        break;
+    }
     }
 
     return {};
@@ -218,9 +217,9 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
 
 QList<TasksModelItem *> TasksModel::getAllItems()
 {
-    QList<TasksModelItem*> res;
+    QList<TasksModelItem *> res;
 
-    QStack<TasksModelItem*> stack;
+    QStack<TasksModelItem *> stack;
     stack.push(m_rootItem);
     while (!stack.isEmpty()) {
         TasksModelItem *item = stack.pop();
@@ -236,13 +235,13 @@ QList<TasksModelItem *> TasksModel::getAllItems()
     return res;
 }
 
-QList<Task*> TasksModel::getAllTasks()
+QList<Task *> TasksModel::getAllTasks()
 {
-    QList<Task*> tasks;
+    QList<Task *> tasks;
     for (TasksModelItem *item : getAllItems()) {
         // If "item" is not a Task, then we are probably in the middle
         // of class Task or TasksModelItem destructor.
-        Task *task = dynamic_cast<Task*>(item);
+        Task *task = dynamic_cast<Task *>(item);
         if (task) {
             tasks.append(task);
         }
@@ -251,9 +250,9 @@ QList<Task*> TasksModel::getAllTasks()
     return tasks;
 }
 
-QList<Task*> TasksModel::getActiveTasks()
+QList<Task *> TasksModel::getActiveTasks()
 {
-    QList<Task*> activeTasks;
+    QList<Task *> activeTasks;
     for (Task *task : getAllTasks()) {
         if (task->isRunning()) {
             activeTasks.append(task);
@@ -270,24 +269,24 @@ QVariant TasksModel::headerData(int section, Qt::Orientation orientation, int ro
     }
 
     switch (role) {
-        case Qt::DisplayRole:
-            return m_headerLabels[section];
-        case Qt::WhatsThisRole:
-            switch (section) {
-                case 0:
-                    return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
-                case 1:
-                    return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
-                case 3:
-                    return i18nc("@info:whatsthis", "The total session time is the session time of this task and all its subtasks.");
-                case 4:
-                    return i18nc("@info:whatsthis", "The total time is the time of this task and all its subtasks.");
-                default:
-                    break;
-            }
-            break;
+    case Qt::DisplayRole:
+        return m_headerLabels[section];
+    case Qt::WhatsThisRole:
+        switch (section) {
+        case 0:
+            return i18nc("@info:whatsthis", "The task name is what you call the task, it can be chosen freely.");
+        case 1:
+            return i18nc("@info:whatsthis", "The session time is the time since you last chose \"Start New Session\".");
+        case 3:
+            return i18nc("@info:whatsthis", "The total session time is the session time of this task and all its subtasks.");
+        case 4:
+            return i18nc("@info:whatsthis", "The total time is the time of this task and all its subtasks.");
         default:
             break;
+        }
+        break;
+    default:
+        break;
     }
 
     return QAbstractItemModel::headerData(section, orientation, role);
@@ -321,8 +320,7 @@ Qt::DropActions TasksModel::supportedDropActions() const
     return Qt::MoveAction;
 }
 
-bool TasksModel::canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column,
-                                 const QModelIndex &parent) const
+bool TasksModel::canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) const
 {
     if (m_dragCutTaskId.isEmpty()) {
         return false;
@@ -360,7 +358,7 @@ bool TasksModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int 
 
 QMimeData *TasksModel::mimeData(const QModelIndexList &indexes) const
 {
-    auto *task = dynamic_cast<Task*>(item(indexes[0]));
+    auto *task = dynamic_cast<Task *>(item(indexes[0]));
     if (!task) {
         return nullptr;
     }
@@ -372,7 +370,7 @@ QMimeData *TasksModel::mimeData(const QModelIndexList &indexes) const
 Task *TasksModel::taskByUID(const QString &uid)
 {
     for (auto *item : getAllItems()) {
-        auto *task = dynamic_cast<Task*>(item);
+        auto *task = dynamic_cast<Task *>(item);
         if (task->uid() == uid) {
             return task;
         }

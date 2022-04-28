@@ -34,8 +34,13 @@
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Task::Task(const QString& taskName, const QString& taskDescription, int64_t minutes, int64_t sessionTime,
-           const DesktopList& desktops, ProjectModel *projectModel, Task *parentTask)
+Task::Task(const QString &taskName,
+           const QString &taskDescription,
+           int64_t minutes,
+           int64_t sessionTime,
+           const DesktopList &desktops,
+           ProjectModel *projectModel,
+           Task *parentTask)
     : TasksModelItem(projectModel->tasksModel(), parentTask)
     , m_projectModel(projectModel)
 {
@@ -65,9 +70,8 @@ Task::Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel)
     int priority = 0;
     DesktopList desktops;
 
-    parseIncidence( todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete,
-                  priority );
-    init( name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
+    parseIncidence(todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete, priority);
+    init(name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
 }
 
 Task::~Task()
@@ -78,7 +82,7 @@ Task::~Task()
 int Task::depth()
 {
     int res = 0;
-    for (Task* t = parentTask(); t; t = t->parentTask()) {
+    for (Task *t = parentTask(); t; t = t->parentTask()) {
         res++;
     }
 
@@ -86,10 +90,14 @@ int Task::depth()
     return res;
 }
 
-void Task::init(
-    const QString& taskName, const QString& taskDescription, int64_t minutes, int64_t sessionTime,
-    const QString& sessionStartTiMe,
-    const DesktopList& desktops, int percent_complete, int priority)
+void Task::init(const QString &taskName,
+                const QString &taskDescription,
+                int64_t minutes,
+                int64_t sessionTime,
+                const QString &sessionStartTiMe,
+                const DesktopList &desktops,
+                int percent_complete,
+                int priority)
 {
     m_isRunning = false;
     m_name = taskName.trimmed();
@@ -110,14 +118,14 @@ void Task::init(
 void Task::delete_recursive()
 {
     while (this->child(0)) {
-        Task* t = (Task*) this->child(0);
+        Task *t = (Task *)this->child(0);
         t->delete_recursive();
     }
     delete this;
 }
 
 // This is the back-end, the front-end is StartTimerFor()
-void Task::setRunning(bool on, const QDateTime& when)
+void Task::setRunning(bool on, const QDateTime &when)
 {
     if (on != m_isRunning) {
         m_isRunning = on;
@@ -152,7 +160,7 @@ bool Task::isRunning() const
     return m_isRunning;
 }
 
-void Task::setName(const QString& name)
+void Task::setName(const QString &name)
 {
     qCDebug(KTT_LOG) << "Entering function, name=" << name;
 
@@ -163,7 +171,7 @@ void Task::setName(const QString& name)
     }
 }
 
-void Task::setDescription(const QString& description)
+void Task::setDescription(const QString &description)
 {
     qCDebug(KTT_LOG) << "Entering function, description=" << description;
 
@@ -198,7 +206,7 @@ void Task::setPercentComplete(int percent)
     // This behavior is consistent with KOrganizer (as of 2003-09-24).
     if (m_percentComplete == 100) {
         for (int i = 0; i < childCount(); ++i) {
-            Task *task = dynamic_cast<Task*>(child(i));
+            Task *task = dynamic_cast<Task *>(child(i));
             task->setPercentComplete(m_percentComplete);
         }
     }
@@ -223,7 +231,7 @@ bool Task::isComplete()
     return m_percentComplete == 100;
 }
 
-void Task::setDesktopList(const DesktopList& desktopList)
+void Task::setDesktopList(const DesktopList &desktopList)
 {
     m_desktops = desktopList;
 }
@@ -268,7 +276,7 @@ void Task::recalculateTotalTimesSubtree()
     int64_t totalMinutes = time();
     int64_t totalSessionMinutes = sessionTime();
     for (int i = 0; i < this->childCount(); ++i) {
-        Task *subTask = dynamic_cast<Task*>(child(i));
+        Task *subTask = dynamic_cast<Task *>(child(i));
         subTask->recalculateTotalTimesSubtree();
 
         totalMinutes += subTask->totalTime();
@@ -306,9 +314,7 @@ void Task::changeTime(int64_t minutes, EventsModel *eventsModel)
 
 void Task::changeTotalTimes(int64_t minutesSession, int64_t minutes)
 {
-    qCDebug(KTT_LOG)
-        << "Task::changeTotalTimes(" << minutesSession << ","
-        << minutes << ") for" << name();
+    qCDebug(KTT_LOG) << "Task::changeTotalTimes(" << minutesSession << "," << minutes << ") for" << name();
     m_totalSessionTime += minutesSession;
     m_totalTime += minutes;
     update();
@@ -338,7 +344,7 @@ bool Task::remove()
     bool ok = true;
 
     for (int i = 0; i < childCount(); ++i) {
-        Task* task = dynamic_cast<Task*>(child(i));
+        Task *task = dynamic_cast<Task *>(child(i));
         if (!task) {
             qFatal("Task::remove: task is nullptr");
         }
@@ -364,11 +370,11 @@ QString Task::fullName() const
     }
 }
 
-KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
+KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
 {
     Q_ASSERT(todo != nullptr);
 
-    qCDebug(KTT_LOG) <<"Task::asTodo: name() = '" << name() << "'";
+    qCDebug(KTT_LOG) << "Task::asTodo: name() = '" << name() << "'";
     todo->setUid(uid());
     todo->setSummary(name());
     todo->setDescription(description());
@@ -390,7 +396,7 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
     }
 
     todo->setPercentComplete(m_percentComplete);
-    todo->setPriority( m_priority );
+    todo->setPriority(m_priority);
 
     if (parentTask()) {
         todo->setRelatedTo(parentTask()->uid());
@@ -399,10 +405,15 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr& todo) const
     return todo;
 }
 
-bool Task::parseIncidence(
-    const KCalCore::Incidence::Ptr &incident, int64_t& minutes,
-    int64_t& sessionMinutes, QString& sessionStartTiMe, QString& name, QString& description, DesktopList& desktops,
-    int& percent_complete, int& priority)
+bool Task::parseIncidence(const KCalCore::Incidence::Ptr &incident,
+                          int64_t &minutes,
+                          int64_t &sessionMinutes,
+                          QString &sessionStartTiMe,
+                          QString &name,
+                          QString &description,
+                          DesktopList &desktops,
+                          int &percent_complete,
+                          int &priority)
 {
     qCDebug(KTT_LOG) << "Entering function";
     bool ok;
@@ -428,7 +439,7 @@ bool Task::parseIncidence(
     QStringList desktopStrList = desktopList.split(QStringLiteral(","), QString::SkipEmptyParts);
     desktops.clear();
 
-    for (const QString& desktopStr : desktopStrList) {
+    for (const QString &desktopStr : desktopStrList) {
         int desktopInt = desktopStr.toInt(&ok);
         if (ok) {
             desktops.push_back(desktopInt);
@@ -465,14 +476,14 @@ void Task::cut()
 }
 
 // This is needed e.g. to move a task under its parent when loading.
-void Task::paste(TasksModelItem* destination)
+void Task::paste(TasksModelItem *destination)
 {
     destination->insertChild(0, this);
     changeParentTotalTimes(m_totalSessionTime, m_totalTime);
 }
 
 // This is used e.g. to move each task under its parent after loading.
-void Task::move(TasksModelItem* destination)
+void Task::move(TasksModelItem *destination)
 {
     cut();
     paste(destination);
@@ -481,51 +492,51 @@ void Task::move(TasksModelItem* destination)
 QVariant Task::data(int column, int role) const
 {
     switch (role) {
-        case Qt::DisplayRole: {
-            bool b = KTimeTrackerSettings::decimalFormat();
-            switch (column) {
-                case 0:
-                    return m_name;
-                case 1:
-                    return formatTime(m_sessionTime, b);
-                case 2:
-                    return formatTime(m_time, b);
-                case 3:
-                    return formatTime(m_totalSessionTime, b);
-                case 4:
-                    return formatTime(m_totalTime, b);
-                case 5:
-                    return m_priority > 0 ? QString::number(m_priority) : QStringLiteral("--");
-                case 6:
-                    return QString::number(m_percentComplete);
-                default:
-                    return {};
-            }
-        }
-        case SortRole: {
-            // QSortFilterProxyModel::lessThan() supports comparison of a few data types,
-            // here we use some of those: QString, qlonglong, int.
-            switch (column) {
-                case 0:
-                    return m_name;
-                case 1:
-                    return QVariant::fromValue<qlonglong>(m_sessionTime);
-                case 2:
-                    return QVariant::fromValue<qlonglong>(m_time);
-                case 3:
-                    return QVariant::fromValue<qlonglong>(m_totalSessionTime);
-                case 4:
-                    return QVariant::fromValue<qlonglong>(m_totalTime);
-                case 5:
-                    return QVariant::fromValue<int>(m_priority);
-                case 6:
-                    return QVariant::fromValue<int>(m_percentComplete);
-                default:
-                    return {};
-            }
-        }
+    case Qt::DisplayRole: {
+        bool b = KTimeTrackerSettings::decimalFormat();
+        switch (column) {
+        case 0:
+            return m_name;
+        case 1:
+            return formatTime(m_sessionTime, b);
+        case 2:
+            return formatTime(m_time, b);
+        case 3:
+            return formatTime(m_totalSessionTime, b);
+        case 4:
+            return formatTime(m_totalTime, b);
+        case 5:
+            return m_priority > 0 ? QString::number(m_priority) : QStringLiteral("--");
+        case 6:
+            return QString::number(m_percentComplete);
         default:
             return {};
+        }
+    }
+    case SortRole: {
+        // QSortFilterProxyModel::lessThan() supports comparison of a few data types,
+        // here we use some of those: QString, qlonglong, int.
+        switch (column) {
+        case 0:
+            return m_name;
+        case 1:
+            return QVariant::fromValue<qlonglong>(m_sessionTime);
+        case 2:
+            return QVariant::fromValue<qlonglong>(m_time);
+        case 3:
+            return QVariant::fromValue<qlonglong>(m_totalSessionTime);
+        case 4:
+            return QVariant::fromValue<qlonglong>(m_totalTime);
+        case 5:
+            return QVariant::fromValue<int>(m_priority);
+        case 6:
+            return QVariant::fromValue<int>(m_percentComplete);
+        default:
+            return {};
+        }
+    }
+    default:
+        return {};
     }
 }
 

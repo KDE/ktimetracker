@@ -29,7 +29,7 @@ void EventsModel::load(const KCalCore::Event::List &events)
 {
     clear();
 
-    for (const auto& event : events) {
+    for (const auto &event : events) {
         m_events.append(new Event(event));
     }
 }
@@ -39,14 +39,14 @@ EventsModel::~EventsModel()
     clear();
 }
 
-QList<Event*> EventsModel::events() const
+QList<Event *> EventsModel::events() const
 {
     return m_events;
 }
 
-QList<Event*> EventsModel::eventsForTask(const Task *task) const
+QList<Event *> EventsModel::eventsForTask(const Task *task) const
 {
-    QList<Event*> res;
+    QList<Event *> res;
     for (auto *event : events()) {
         if (event->relatedTo() == task->uid()) {
             res.append(event);
@@ -113,7 +113,7 @@ static KCalCore::Event::Ptr baseEvent(const Task *task)
     e->setSummary(task->name());
 
     // Can't use setRelatedToUid()--no error, but no RelatedTo written to disk
-    e->setRelatedTo( task->uid() );
+    e->setRelatedTo(task->uid());
 
     // Debugging: some events where not getting a related-to field written.
     Q_ASSERT(e->relatedTo() == task->uid());
@@ -129,7 +129,7 @@ static KCalCore::Event::Ptr baseEvent(const Task *task)
     return e;
 }
 
-void EventsModel::changeTime(const Task* task, int64_t deltaSeconds)
+void EventsModel::changeTime(const Task *task, int64_t deltaSeconds)
 {
     qCDebug(KTT_LOG) << "Entering function; deltaSeconds=" << deltaSeconds;
     QDateTime end;
@@ -150,7 +150,7 @@ void EventsModel::changeTime(const Task* task, int64_t deltaSeconds)
     addEvent(e);
 }
 
-bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, int64_t durationInSeconds)
+bool EventsModel::bookTime(const Task *task, const QDateTime &startDateTime, int64_t durationInSeconds)
 {
     qCDebug(KTT_LOG) << "Entering function";
 
@@ -158,7 +158,7 @@ bool EventsModel::bookTime(const Task* task, const QDateTime& startDateTime, int
     auto *e = new Event(kcalEvent);
 
     e->setDtStart(startDateTime);
-    e->setDtEnd(startDateTime.addSecs( durationInSeconds));
+    e->setDtEnd(startDateTime.addSecs(durationInSeconds));
 
     // Use a custom property to keep a record of negative durations
     e->setDuration(durationInSeconds);
@@ -178,7 +178,7 @@ void EventsModel::startTask(const Task *task)
 
 void EventsModel::stopTask(const Task *task, const QDateTime &when)
 {
-    QList<Event*> openEvents;
+    QList<Event *> openEvents;
     for (auto *event : eventsForTask(task)) {
         if (!event->hasEndDate()) {
             openEvents.append(event);
@@ -188,8 +188,7 @@ void EventsModel::stopTask(const Task *task, const QDateTime &when)
     if (openEvents.isEmpty()) {
         qCWarning(KTT_LOG) << "Task to stop has no open events, uid=" << task->uid() << ", name=" << task->name();
     } else if (openEvents.size() > 1) {
-        qCWarning(KTT_LOG) << "Task to stop has multiple open events (" << openEvents.size() <<
-            "), uid=" << task->uid() << ", name=" << task->name();
+        qCWarning(KTT_LOG) << "Task to stop has multiple open events (" << openEvents.size() << "), uid=" << task->uid() << ", name=" << task->name();
     }
 
     for (auto *event : openEvents) {

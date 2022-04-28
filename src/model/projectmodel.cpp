@@ -93,7 +93,7 @@ void ProjectModel::refresh()
 {
     for (Task *task : tasksModel()->getAllTasks()) {
         task->invalidateCompletedState();
-        task->update();  // maybe there was a change in the times's format
+        task->update(); // maybe there was a change in the times's format
     }
 }
 
@@ -117,8 +117,7 @@ void ProjectModel::refreshTimes()
 
             if (task->sessionStartTiMe().isValid()) {
                 // if there is a session
-                if (task->sessionStartTiMe().secsTo(eventStart) > 0 &&
-                    task->sessionStartTiMe().secsTo(eventEnd) > 0) {
+                if (task->sessionStartTiMe().secsTo(eventStart) > 0 && task->sessionStartTiMe().secsTo(eventEnd) > 0) {
                     // if the event is after the session start
                     task->addSessionTime(duration);
                 }

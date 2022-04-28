@@ -42,7 +42,8 @@ int TasksModelItem::indexOfChild(TasksModelItem *child) const
     return m_children.indexOf(child);
 }
 
-void TasksModelItem::insertChild(int index, TasksModelItem *child) {
+void TasksModelItem::insertChild(int index, TasksModelItem *child)
+{
     if (index < 0 || index > m_children.count() || child == nullptr) {
         return;
     }
@@ -124,7 +125,8 @@ void TasksModelItem::invalidateRunningState()
     emit m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
 }
 
-void TasksModelItem::invalidateCompletedState() {
+void TasksModelItem::invalidateCompletedState()
+{
     // invalidate icon in column "Task Name"
     QModelIndex index = m_model->index(this, 0);
     emit m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
