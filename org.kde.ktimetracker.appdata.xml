@@ -136,6 +136,7 @@
     <p xml:lang="zh-CN">通过 KTimeTracker，您可以将零碎的项目整理成无限套的小任务。简易标准的键鼠快捷键使本工具十分舒适且直观使用。</p>
   </description>
   <content_rating type="oars-1.1" />
+  <url type="homepage">https://apps.kde.org/ktimetracker</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=ktimetracker</url>
   <screenshots>
     <screenshot type="default">
