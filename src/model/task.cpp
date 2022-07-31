@@ -444,7 +444,7 @@ bool Task::parseIncidence(const KCalCore::Incidence::Ptr &incident,
     sessionStartTiMe = getCustomProperty(incident, QStringLiteral("sessionStartTiMe"));
 
     QString desktopList = getCustomProperty(incident, QStringLiteral("desktopList"));
-    QStringList desktopStrList = desktopList.split(QStringLiteral(","), QString::SkipEmptyParts);
+    QStringList desktopStrList = desktopList.split(QStringLiteral(","), Qt::SkipEmptyParts);
     desktops.clear();
 
     for (const QString &desktopStr : desktopStrList) {
