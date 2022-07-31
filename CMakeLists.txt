@@ -22,7 +22,7 @@ ecm_setup_version(${APP_VERSION_NUMBER}
     VERSION_HEADER src/ktimetracker-version.h
 )
 
-set(QT_REQUIRED_VERSION "5.10.0")
+set(QT_REQUIRED_VERSION "5.14.0")
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Gui Widgets Xml)
 
 # TODO merge these two find_package(KF5) calls when KF 5.63.0 matures
