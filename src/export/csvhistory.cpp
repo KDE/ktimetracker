@@ -156,7 +156,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
     while (nameUid.hasNext()) {
         nameUid.next();
         retval.append(rc.quote + nameUid.key() + rc.quote);
-        qCDebug(KTT_LOG) << nameUid.key() << ": " << nameUid.value() << endl;
+        qCDebug(KTT_LOG) << nameUid.key() << ": " << nameUid.value() <<  Qt::endl;
 
         for (int day = 0; day < intervalLength; day++) {
             qCDebug(KTT_LOG) << "Secs for day " << day << ":" << secsForUid[nameUid.value()][day];
