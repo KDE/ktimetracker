@@ -1,0 +1,1757 @@
+# translation of ktimetracker.po to Swedish
+# Översättning karm.po till Svenska
+# Översättning av karm.po till Svenska
+# Copyright (C) 2000,2002,2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+#
+# Mattias Newzella <newzella@linux.nu>, 2002,2003.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2004, 2006, 2007, 2008, 2009, 2010.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2005, 2011, 2012, 2019, 2021.
+# Arve Eriksson <031299870@telia.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: ktimetracker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-29 00:44+0000\n"
+"PO-Revision-Date: 2021-09-24 16:49+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Mattias Newzella"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "newzella@linux.nu"
+
+#: dialogs/edittimedialog.cpp:42
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Task Time"
+msgstr "Redigera aktivitetstid"
+
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#, kde-format
+msgctxt "@title:group"
+msgid "Task"
+msgstr "Aktivitet"
+
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#, kde-format
+msgid "Task Name:"
+msgstr "Aktivitetsnamn:"
+
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#, kde-format
+msgid "Task Description:"
+msgstr "Aktivitetsbeskrivning:"
+
+#: dialogs/edittimedialog.cpp:71
+#, kde-format
+msgctxt "@title:group"
+msgid "Time Editing"
+msgstr "Tidsredigering"
+
+#: dialogs/edittimedialog.cpp:79
+#, kde-format
+msgid "Current Time:"
+msgstr "Aktuell tid:"
+
+#: dialogs/edittimedialog.cpp:82
+#, kde-format
+msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
+msgid " minute"
+msgid_plural " minutes"
+msgstr[0] " minut"
+msgstr[1] " minuter"
+
+#: dialogs/edittimedialog.cpp:88
+#, kde-format
+msgid "Change Time By:"
+msgstr "Ändra tid med:"
+
+#: dialogs/edittimedialog.cpp:92
+#, kde-format
+msgid "Time After Change:"
+msgstr "Tid efter ändring"
+
+#: dialogs/edittimedialog.cpp:98
+#, kde-format
+msgctxt "@action:button"
+msgid "Edit History..."
+msgstr "Redigera historik..."
+
+#: dialogs/edittimedialog.cpp:99
+#, kde-format
+msgid "To change this task's time, you have to edit its event history"
+msgstr ""
+"För att ändra aktivitetens tid, måste du redigera dess händelsehistorik"
+
+#: dialogs/exportdialog.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Export to File"
+msgstr "Exportera till fil"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
+#, kde-format
+msgctxt "format to display times"
+msgid "Decimal"
+msgstr "Decimal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
+#, kde-format
+msgid "Session Times"
+msgstr "Sessionstider"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.cpp:138 dialogs/exportdialog.ui:205
+#, kde-format
+msgid "All Tasks"
+msgstr "Alla aktiviteter"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
+#: dialogs/exportdialog.ui:14
+#, kde-format
+msgid "Export"
+msgstr "Exportera"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
+#: dialogs/exportdialog.ui:26
+#, kde-format
+msgid "Export Preview"
+msgstr "Exportförhandsgranskning"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
+#: dialogs/exportdialog.ui:50
+#, kde-format
+msgid "Copy to Clipboard"
+msgstr "Kopiera till klippbordet"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
+#: dialogs/exportdialog.ui:60
+#, kde-format
+msgid "Save As..."
+msgstr "Spara som..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
+#: dialogs/exportdialog.ui:75
+#, kde-format
+msgid "Report Type"
+msgstr "Rapporttyp"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
+#: dialogs/exportdialog.ui:81
+#, kde-format
+msgid "Times as CSV"
+msgstr "Tider som CSV"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
+#: dialogs/exportdialog.ui:91
+#, kde-format
+msgid "History as CSV"
+msgstr "Historik som CSV"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
+#: dialogs/exportdialog.ui:98
+#, kde-format
+msgid "Event Log as CSV"
+msgstr "Händelselogg som CSV"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
+#: dialogs/exportdialog.ui:105
+#, kde-format
+msgid "Times as Text"
+msgstr "Tider som text"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:118
+#, kde-format
+msgid ""
+"An inclusive date range for reporting on time card history.  Not enabled "
+"when reporting on totals."
+msgstr ""
+"Ett omslutande datumintervall för att rapportera tidkortshistorik. Aktiveras "
+"inte när totalsummor rapporteras."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:121
+#, kde-format
+msgid "Date Range"
+msgstr "Datumintervall"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: dialogs/exportdialog.ui:127
+#, kde-format
+msgid "From:"
+msgstr "Från:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: dialogs/exportdialog.ui:150
+#, kde-format
+msgid "To:"
+msgstr "Till:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.ui:182
+#, kde-format
+msgid "Hours:Minutes"
+msgstr "Timmar:minuter"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.ui:191
+#, kde-format
+msgid "All Times"
+msgstr "Alla tider"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.ui:210
+#, kde-format
+msgid "Only Selected"
+msgstr "Bara markerade"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:224
+#, kde-format
+msgid "The character used to separate one field from another in the output."
+msgstr ""
+"Tecknet som används för att skilja ett fält från ett annat i utmatningen."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:227
+#, kde-format
+msgid "Delimiter"
+msgstr "Avgränsare"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioComma)
+#: dialogs/exportdialog.ui:233
+#, kde-format
+msgid "Comma"
+msgstr "Kommatecken"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSemicolon)
+#: dialogs/exportdialog.ui:243
+#, kde-format
+msgid "Semicolon"
+msgstr "Semikolon"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioOther)
+#: dialogs/exportdialog.ui:250
+#, kde-format
+msgctxt "user can set an user defined delimiter"
+msgid "Other:"
+msgstr "Annat:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTab)
+#: dialogs/exportdialog.ui:257
+#, kde-format
+msgctxt "tabulator delimiter"
+msgid "Tab"
+msgstr "Tabulator"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
+#: dialogs/exportdialog.ui:264
+#, kde-format
+msgid "Space"
+msgstr "Mellanslag"
+
+#. i18n: ectx: property (text), widget (QLabel, quotesLabel)
+#: dialogs/exportdialog.ui:308
+#, kde-format
+msgid "Quotes:"
+msgstr "Citationstecken:"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:327
+#, kde-format
+msgid "All fields are quoted in the output."
+msgstr "Alla fält citeras i utmatningen."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:331
+#, kde-format
+msgid "\""
+msgstr "\""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:336
+#, kde-format
+msgid "'"
+msgstr "'"
+
+#: dialogs/historydialog.cpp:105 export/totalsastext.cpp:87
+#, kde-format
+msgid "Task"
+msgstr "Aktivitet"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "StartTime"
+msgstr "Starttid"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "EndTime"
+msgstr "Sluttid"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "Comment"
+msgstr "Kommentar"
+
+#: dialogs/historydialog.cpp:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You can change this task's comment, start time and end time."
+msgstr "Du kan ändra aktivitetens kommentar, starttid och sluttid."
+
+#: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
+#, kde-format
+msgid "This is not a valid Date/Time."
+msgstr "Detta är inte ett giltigt datum eller en giltig tid."
+
+#: dialogs/historydialog.cpp:273
+#, kde-format
+msgid "Please select a task to delete."
+msgstr "Markera en aktivitet att ta bort."
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
+#: dialogs/historydialog.ui:14
+#, kde-format
+msgid "Edit History"
+msgstr "Redigera historik"
+
+#: dialogs/taskpropertiesdialog.cpp:62
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"<p>Enter the name of the task here. You can choose it freely.</p>\n"
+"<p><i>Example:</i> phone with mother</p>"
+msgstr ""
+"<p>Ange namnet på aktiviteten här. Det kan väljas fritt.</p>\n"
+"<p><i>Exempel:</i> telefonsamtal med mamma</p>"
+
+#: dialogs/taskpropertiesdialog.cpp:73
+#, kde-format
+msgctxt "@title:group"
+msgid "Auto Tracking"
+msgstr "Automatisk följning"
+
+#: dialogs/taskpropertiesdialog.cpp:90
+#, kde-format
+msgctxt "order number of desktop: 1, 2, ..."
+msgid "%1."
+msgstr "%1."
+
+#: export/export.cpp:63
+#, kde-format
+msgid "Could not open \"%1\"."
+msgstr "Kunde inte öppna \"%1\"."
+
+#: export/totalsastext.cpp:84
+#, kde-format
+msgid "Task Totals"
+msgstr "Totalt aktiviteter"
+
+#: export/totalsastext.cpp:87
+#, kde-format
+msgid "Time"
+msgstr "Tid"
+
+#: export/totalsastext.cpp:120
+#, kde-format
+msgctxt "total time of all tasks"
+msgid "Total"
+msgstr "Total"
+
+#: export/totalsastext.cpp:122
+#, kde-format
+msgid "No tasks."
+msgstr "Inga aktiviteter."
+
+#: idletimedetector.cpp:78
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+"Ändra all aktiv tidtagning till den overksamma\n"
+"tiden sedan %1 och låt dem fortsätta mäta."
+
+#: idletimedetector.cpp:81
+#, kde-format
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Återuppta tidtagning"
+
+#: idletimedetector.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "Avbryt tidtagning och återgå till tiden %1"
+
+#: idletimedetector.cpp:84
+#, kde-format
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Låt tidtagning återgå"
+
+#: idletimedetector.cpp:88
+#, kde-format
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "Skrivbordet har varit overksamt sedan %1. Vad vill du göra?"
+
+#. i18n: ectx: Menu (clock)
+#: ktimetrackerui.rc:19
+#, kde-format
+msgid "&Clock"
+msgstr "&Klocka"
+
+#. i18n: ectx: Menu (task)
+#: ktimetrackerui.rc:26
+#, kde-format
+msgid "&Task"
+msgstr "Ak&tivitet"
+
+#. i18n: ectx: Menu (settings)
+#: ktimetrackerui.rc:36
+#, kde-format
+msgid "&Settings"
+msgstr "In&ställningar"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ktimetrackerui.rc:41
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Huvudverktygsrad"
+
+#. i18n: ectx: ToolBar (taskToolBar)
+#: ktimetrackerui.rc:50
+#, kde-format
+msgid "Tasks"
+msgstr "Aktiviteter"
+
+#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#, kde-format
+msgid "KTimeTracker"
+msgstr "Ktimetracker"
+
+#: main.cpp:102
+#, kde-format
+msgid "KDE Time tracker tool"
+msgstr "Tidmätningsverktyg för KDE"
+
+#: main.cpp:104
+#, kde-format
+msgid "Copyright © 1997-2019 KTimeTracker developers"
+msgstr "Copyright © 1997-2019 Ktimetracker-utvecklarna"
+
+#: main.cpp:108
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Potashev"
+msgstr "Alexander Potashev"
+
+#: main.cpp:109
+#, kde-format
+msgctxt "@info:credit"
+msgid "Current Maintainer (since 2019)"
+msgstr "Nuvarande utvecklare (sedan 2019)"
+
+#: main.cpp:111
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thorsten Stärk"
+msgstr "Thorsten Stärk"
+
+#: main.cpp:112
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2006-2012)"
+msgstr "Underhåll (2006-2012)"
+
+#: main.cpp:114
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mark Bucciarelli"
+msgstr "Mark Bucciarelli"
+
+#: main.cpp:115
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2005-2006)"
+msgstr "Underhåll (2005-2006)"
+
+#: main.cpp:117
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jesper Pedersen"
+msgstr "Jesper Pedersen"
+
+#: main.cpp:118
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2000-2005)"
+msgstr "Underhåll (2000-2005)"
+
+#: main.cpp:120
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sirtaj Singh Kang"
+msgstr "Sirtaj Singh Kang"
+
+#: main.cpp:121
+#, kde-format
+msgctxt "@info:credit"
+msgid "Original Author"
+msgstr "Ursprunglig upphovsman"
+
+#: main.cpp:123
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mathias Soeken"
+msgstr "Mathias Soeken"
+
+#: main.cpp:124
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (in 2007)"
+msgstr "Utvecklare (under 2007)"
+
+#: main.cpp:126
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kalle Dalheimer"
+msgstr "Kalle Dalheimer"
+
+#: main.cpp:127
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (1999-2000)"
+msgstr "Utvecklare (1999-2000)"
+
+#: main.cpp:129
+#, kde-format
+msgctxt "@info:credit"
+msgid "Allen Winter"
+msgstr "Allen Winter"
+
+#: main.cpp:130 main.cpp:133
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr "Utvecklare"
+
+#: main.cpp:132
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:144
+#, kde-format
+msgctxt "@info:shell"
+msgid "Path or URL to iCalendar file to open."
+msgstr "Sökväg eller webbadress till iCalendar-file att öppna."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "Anpassa Ktimetracker..."
+
+#: mainwindow.cpp:152 tray.cpp:90
+#, kde-format
+msgid "No active tasks"
+msgstr "Inga aktiviteter pågår"
+
+#: mainwindow.cpp:162 tray.cpp:110
+#, kde-format
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: model/tasksmodel.cpp:33
+#, kde-format
+msgctxt "@title:column"
+msgid "Task Name"
+msgstr "Aktivitetsnamn"
+
+#: model/tasksmodel.cpp:34
+#, kde-format
+msgctxt "@title:column"
+msgid "Session Time"
+msgstr "Sessionstid"
+
+#: model/tasksmodel.cpp:35
+#, kde-format
+msgctxt "@title:column"
+msgid "Time"
+msgstr "Tid"
+
+#: model/tasksmodel.cpp:36
+#, kde-format
+msgctxt "@title:column"
+msgid "Total Session Time"
+msgstr "Total sessionstid"
+
+#: model/tasksmodel.cpp:37
+#, kde-format
+msgctxt "@title:column"
+msgid "Total Time"
+msgstr "Total tid"
+
+#: model/tasksmodel.cpp:38
+#, kde-format
+msgctxt "@title:column"
+msgid "Priority"
+msgstr "Prioritet"
+
+#: model/tasksmodel.cpp:39
+#, kde-format
+msgctxt "@title:column"
+msgid "Percent Complete"
+msgstr "Procent färdig"
+
+#: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The task name is what you call the task, it can be chosen freely."
+msgstr "Aktivitetsnamnet är vad du kallar aktiviteten. Det kan väljas fritt."
+
+#: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The session time is the time since you last chose \"Start New Session\"."
+msgstr "Sessionstiden är tiden sedan du senast valde \"starta ny session\"."
+
+#: model/tasksmodel.cpp:290
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The total session time is the session time of this task and all its subtasks."
+msgstr ""
+"Den totala sessionstiden är sessionstiden för den här aktiviteten och alla "
+"dess delaktiviteter."
+
+#: model/tasksmodel.cpp:294
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The total time is the time of this task and all its subtasks."
+msgstr ""
+"Den totala tiden är tiden för den här aktiviteten och alla dess "
+"delaktiviteter."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
+#: settings/cfgbehavior.ui:17
+#, kde-format
+msgid "Detect desktop as idle after:"
+msgstr "Anse att skrivbordet är overksamt efter:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
+#: settings/cfgbehavior.ui:24 settings/cfgstorage.ui:36
+#, kde-format
+msgid " min"
+msgstr " minuter"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/cfgbehavior.ui:37
+#, kde-format
+msgid "Minimum desktop active time:"
+msgstr "Minimal aktiv tid för skrivbord:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
+#: settings/cfgbehavior.ui:44
+#, kde-format
+msgid " sec"
+msgstr " sek"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
+#: settings/cfgbehavior.ui:57
+#, kde-format
+msgid "Prompt before deleting tasks"
+msgstr "Fråga innan aktiviteter tas bort"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:64
+#, kde-format
+msgid ""
+"Unitasking - allow only one task to be timed at a time. Does not stop any "
+"timer."
+msgstr ""
+"Tillåt bara tidtagning av en aktivitet åt gången. Stoppar inte någon "
+"tidtagning."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:67
+#, kde-format
+msgid "Allow only one timer at a time"
+msgstr "Tillåt bara en tidtagning åt gången"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
+#: settings/cfgbehavior.ui:74
+#, kde-format
+msgid "Place an icon to the system tray"
+msgstr "Placera en ikon i systembrickan"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: settings/cfgdisplay.ui:29
+#, kde-format
+msgctxt "title of group box, general options"
+msgid "General"
+msgstr "Allmänt"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
+#: settings/cfgdisplay.ui:35
+#, kde-format
+msgid "Decimal number format"
+msgstr "Decimalt talformat"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:42
+#, kde-format
+msgid ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious. It will disable the search bar and every click will pop up a "
+"context menu."
+msgstr ""
+"Välj det här om du har en pekskärm och skärmutrymmet är dyrbart. Det "
+"inaktiverar sökraden och varje klick visar en sammanhangsberoende meny."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:45
+#, kde-format
+msgctxt ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious."
+msgid "Configuration for PDA"
+msgstr "Inställning för handdator"
+
+#. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
+#: settings/cfgdisplay.ui:55
+#, kde-format
+msgid "Window Title"
+msgstr "Fönsterrubrik"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
+#: settings/cfgdisplay.ui:64
+#, kde-format
+msgid "Currently opened file"
+msgstr "Aktuell öppnad fil"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
+#: settings/cfgdisplay.ui:71
+#, kde-format
+msgid "Current Task and Session Time"
+msgstr "Aktuell aktivitet och sessionstid"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: settings/cfgdisplay.ui:81
+#, kde-format
+msgid "Columns Displayed"
+msgstr "Visade kolumner"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
+#: settings/cfgdisplay.ui:87
+#, kde-format
+msgid "Session time"
+msgstr "Sessionstid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
+#: settings/cfgdisplay.ui:94
+#, kde-format
+msgid "Cumulative task time"
+msgstr "Sammanlagd aktivitetstid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
+#: settings/cfgdisplay.ui:101
+#, kde-format
+msgid "Total session time"
+msgstr "Total sessionstid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
+#: settings/cfgdisplay.ui:108
+#, kde-format
+msgid "Total task time"
+msgstr "Total aktivitetstid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
+#: settings/cfgdisplay.ui:115
+#, kde-format
+msgid "Priority"
+msgstr "Prioritet"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
+#: settings/cfgdisplay.ui:122
+#, kde-format
+msgid "Percent complete"
+msgstr "Procent färdig"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_autoSave)
+#: settings/cfgstorage.ui:29
+#, kde-format
+msgid "Save tasks every:"
+msgstr "Spara aktiviteter var:"
+
+#: taskview.cpp:118
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"Fel när ny aktivitet skulle lagras. Dina ändringar sparades inte. Försäkra "
+"dig om att du kan redigera din iCalendar-fil. Avsluta också alla program som "
+"använder filen, och ta bort eventuella låsfiler relaterade till dess namn "
+"från ~/.kde/share/apps/kabc/lock/."
+
+#: taskview.cpp:214
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+"Ditt virtuella skrivbordsnummer är för stort. Skrivbordsföljning kommer inte "
+"att fungera."
+
+#: taskview.cpp:290
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr "Stoppar tidtagning..."
+
+#: taskview.cpp:291
+#, kde-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: taskview.cpp:361 taskview.cpp:445
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Namnlös aktivitet"
+
+#: taskview.cpp:380
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"Fel när ny aktivitet skulle lagras. Dina ändringar sparades inte. Försäkra "
+"dig om att du kan redigera din iCalendar-fil. Avsluta också alla program som "
+"använder filen, och ta bort eventuella låsfiler relaterade till dess namn "
+"från ~/.kde/share/apps/kabc/lock/."
+
+#: taskview.cpp:422
+#, kde-format
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "Ny underaktivitet"
+
+#: taskview.cpp:440
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Redigera aktivitet"
+
+#: taskview.cpp:474 taskview.cpp:515 taskview.cpp:537
+#, kde-format
+msgid "No task selected."
+msgstr "Ingen aktivitet vald."
+
+#: taskview.cpp:520
+#, kde-format
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Är du säker på att du vill ta bort den markerade aktiviteten och hela dess "
+"historik?\n"
+"Observera: Alla delaktiviteter och deras historik kommer också att tas bort."
+
+#: taskview.cpp:524
+#, kde-format
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Tar bort aktivitet"
+
+#: timetrackerstorage.cpp:140
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr ""
+"Fel vid laddning av \"%1\": kunde inte hitta överliggande objekt (unik "
+"identifierare=%2)"
+
+#: timetrackerstorage.cpp:243
+#, kde-format
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "Kunde inte skriva låsfilen \"%1\". Är disken full?"
+
+#: timetrackerstorage.cpp:251
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr "Misslyckades spara iCalender-fil som \"%1\"."
+
+#: timetrackerwidget.cpp:154
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "Starta &ny session"
+
+#: timetrackerwidget.cpp:155
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "Startar en ny session"
+
+#: timetrackerwidget.cpp:157
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"Återställer sessionstiden till 0 för alla aktiviteter, för att starta en ny "
+"session utan att påverka totalsummorna."
+
+#: timetrackerwidget.cpp:165
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "Redigera historik..."
+
+#: timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr "Redigerar historiken för alla aktiviteter i det nuvarande dokumentet"
+
+#: timetrackerwidget.cpp:168
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+"Ett fönster öppnas där du kan ändra start- och stopptider för aktiviteter, "
+"eller lägga till en kommentar om dem."
+
+#: timetrackerwidget.cpp:178
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "Åte&rställ alla tider"
+
+#: timetrackerwidget.cpp:179
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Återställer alla tider"
+
+#: timetrackerwidget.cpp:181
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"Återställer sessions- och totaltiden till 0 för alla aktiviteter, för att "
+"starta om från början."
+
+#: timetrackerwidget.cpp:188
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "&Starta"
+
+#: timetrackerwidget.cpp:189
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "Startar tidtagning för markerad aktivitet"
+
+#: timetrackerwidget.cpp:191
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"Startar tidtagningen för markerad aktivitet.\n"
+"Det är till och med möjligt att ta tid på flera aktiviteter samtidigt.\n"
+"\n"
+"Du kan också starta tidtagning av aktiviteter genom att dubbelklicka med "
+"vänster musknapp på en given aktivitet. Det stoppar dock tidtagning av andra "
+"aktiviteter."
+
+#: timetrackerwidget.cpp:205
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "S&toppa"
+
+#: timetrackerwidget.cpp:206
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "Stoppar tidtagning av markerad aktivitet"
+
+#: timetrackerwidget.cpp:207
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "Stoppar tidtagning av markerad aktivitet"
+
+#: timetrackerwidget.cpp:214
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr "Fokusera på sökrad"
+
+#: timetrackerwidget.cpp:215
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr "Ger fokus till sökraden"
+
+#: timetrackerwidget.cpp:216
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr "Ger fokus till sökraden"
+
+#: timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "Stoppa &all tidtagning"
+
+#: timetrackerwidget.cpp:224
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Stoppar all aktiverad tidtagning"
+
+#: timetrackerwidget.cpp:225
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Stoppar all aktiverad tidtagning"
+
+#: timetrackerwidget.cpp:233
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr "Följ aktiva program"
+
+#: timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+"Skapar och uppdaterar aktiviteter automatiskt när det aktuella fönstrets "
+"fokus har ändrats"
+
+#: timetrackerwidget.cpp:238
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+"Om ett fönsters fokus ändras för första gången när åtgärden är aktiverad, "
+"skapas och startas en ny aktivitet med fönstrets titel som namn. Om en sådan "
+"aktivitet redan finns, startas den."
+
+#: timetrackerwidget.cpp:249
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "&Ny aktivitet..."
+
+#: timetrackerwidget.cpp:250
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Skapar en ny toppnivåaktivitet"
+
+#: timetrackerwidget.cpp:251
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "Skapar en ny toppnivåaktivitet."
+
+#: timetrackerwidget.cpp:259
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "Ny &delaktivitet..."
+
+#: timetrackerwidget.cpp:260
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr ""
+"Skapar en ny delaktivitet till aktiviteten som för närvarande är markerad"
+
+#: timetrackerwidget.cpp:261
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr ""
+"Skapar en ny delaktivitet till aktiviteten som för närvarande är markerad."
+
+#: timetrackerwidget.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "&Ta bort"
+
+#: timetrackerwidget.cpp:270
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Tar bort markerad aktivitet"
+
+#: timetrackerwidget.cpp:271
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "Tar bort markerade aktiviteter och alla deras delaktiviteter."
+
+#: timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr "Egenska&per"
+
+#: timetrackerwidget.cpp:280
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "Redigerar namn eller beskrivning för markerad aktivitet"
+
+#: timetrackerwidget.cpp:282
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"Visar en dialogruta där du kan redigera den markerade aktivitetens "
+"parametrar."
+
+#: timetrackerwidget.cpp:291
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Redigera &tid..."
+
+#: timetrackerwidget.cpp:292
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "Redigerar tid för markerad aktivitet"
+
+#: timetrackerwidget.cpp:294
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"Visar en dialogruta där du kan redigera den markerade aktivitetens tider."
+
+#: timetrackerwidget.cpp:303
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&Markera som färdig"
+
+#: timetrackerwidget.cpp:311
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&Markera som inte färdig"
+
+#: timetrackerwidget.cpp:319
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Exportera..."
+
+#: timetrackerwidget.cpp:326
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "Importera aktiviteter från &Planner..."
+
+#: timetrackerwidget.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr "Visa sökrad"
+
+#: timetrackerwidget.cpp:471
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "Beteende"
+
+#: timetrackerwidget.cpp:474
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr "Utseende"
+
+#: timetrackerwidget.cpp:477
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "Lagring"
+
+#: timetrackerwidget.cpp:514
+#, kde-format
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "Ny aktivitet"
+
+#: timetrackerwidget.cpp:593
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+"Det finns inte någon historik ännu. Starta och stoppa en aktivitet så ser du "
+"en post i historiken."
+
+#: timetrackerwidget.cpp:603
+#, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+"Vill du verkligen återställa tiden till noll för alla aktiviteter? Det tar "
+"bort hela historiken."
+
+#: timetrackerwidget.cpp:605
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "Bekräftelse krävs"
+
+#: timetrackerwidget.cpp:606
+#, kde-format
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "Återställ alla tider"
+
+#: timetrackerwidget.cpp:795
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr "Misslyckades spara, troligen på grund av att filen inte kunde låsas."
+
+#: timetrackerwidget.cpp:797
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "Kunde inte ändra kalenderresurs."
+
+#: timetrackerwidget.cpp:799
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "Slut på minne. Kunde inte skapa objekt."
+
+#: timetrackerwidget.cpp:801
+#, kde-format
+msgid "UID not found."
+msgstr "Unik identifierare hittades inte."
+
+#: timetrackerwidget.cpp:803
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "Ogiltigt datum. Formatet är ÅÅÅÅ-MM-DD."
+
+#: timetrackerwidget.cpp:805
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "Ogiltig tid. Formatet är ÅÅÅÅ-MM-DDTHH:MM:SS."
+
+#: timetrackerwidget.cpp:807
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "Ogiltig aktivitetslängd. Den måste vara större än noll."
+
+#: timetrackerwidget.cpp:809
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "Ogiltigt felnummer: %1"
+
+#: timetrackerwidget.cpp:1038
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+"Det här är Ktimetracker, KDE:s program för att hjälpa dig hålla reda på din "
+"tid. Det är bäst att börja med att skapa din första aktivtet: mata in den i "
+"fältet där det står \"Sök eller lägg till aktivitet\"."
+
+#: timetrackerwidget.cpp:1045
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+"Du har redan skapat en aktivitet. Nu kan du starta och stoppa tidtagning."
+
+#: tray.cpp:95
+#, kde-format
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: treeviewheadercontextmenu.cpp:46
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "Kolumner"
+
+#: widgets/searchline.cpp:37
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search or add task"
+msgstr "Sök eller lägg till aktivitet"
+
+#: widgets/searchline.cpp:39
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is a combined field. As long as you do not press Enter, it acts as a "
+"filter. Then, only tasks that match your input are shown. As soon as you "
+"press Enter, your input is used as name to create a new task."
+msgstr ""
+"Det här är ett kombinerat fält. Så länge du inte trycker på returtangenten, "
+"fungerar det som ett filter, som bara visar aktiviteter som motsvarar det du "
+"skriver in. Så snart du trycker på returtangenten, används det du skrivit in "
+"för att skapa en ny aktivitet."
+
+#: widgets/taskswidget.cpp:143
+#, kde-format
+msgctxt "@item:inmenu Task progress"
+msgid "%1 %"
+msgstr "%1 %"
+
+#: widgets/taskswidget.cpp:154
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "unspecified"
+msgstr "inte angiven"
+
+#: widgets/taskswidget.cpp:157
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "1 (highest)"
+msgstr "1 (högsta)"
+
+#: widgets/taskswidget.cpp:160
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "5 (medium)"
+msgstr "5 (normal)"
+
+#: widgets/taskswidget.cpp:163
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "9 (lowest)"
+msgstr "9 (lägsta)"
+
+#~ msgid "CSV Export"
+#~ msgstr "CSV-export"
+
+#~ msgid "Continue timing. Timing has started at %1"
+#~ msgstr "Återuppta tidtagning. Tidtagning startade %1"
+
+#~ msgid "&Edit..."
+#~ msgstr "&Redigera..."
+
+#~ msgid "Add/Edit a task"
+#~ msgstr "Lägg till eller redigera en aktivitet"
+
+#~ msgid "Delete"
+#~ msgstr "&Ta bort"
+
+#~ msgid "Close"
+#~ msgstr "Stäng"
+
+#~ msgid "Change time (in minutes, e.g. -60)"
+#~ msgstr "Ändra tid (i minuter, t.ex. -60)"
+
+#~ msgid "Cannot create new file."
+#~ msgstr "Kan inte skapa ny fil."
+
+#~ msgid "Could not save."
+#~ msgstr "Kunde inte spara."
+
+#~ msgid "&Import"
+#~ msgstr "&Importera"
+
+#~ msgid "&Export Times..."
+#~ msgstr "&Exportera tider..."
+
+#~ msgid "Export &History..."
+#~ msgstr "Exportera &historik..."
+
+#~ msgid "The file where KTimeTracker will write the data."
+#~ msgstr "Filen där Ktimetracker skriver data."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter the name of the "
+#~ "task here. You can choose it freely.</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Example:</span> phone with mother</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Skriv in aktivitetens "
+#~ "namn här. Du kan välja det helt fritt.</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Exempel:</span> telefonsamtal med mamma</p></body></html>"
+
+#~ msgid "KArmReminder"
+#~ msgstr "Karm påminnelse"
+
+#~ msgid "(c) 2006"
+#~ msgstr "© 2006"
+
+#~ msgid "Someone, probably you, has called karm.\n"
+#~ msgstr "Någon, troligen du, har anropat Karm.\n"
+
+#~ msgid ""
+#~ "KArm has been renamed to KTimeTracker. This makes it easier to "
+#~ "recognize.\n"
+#~ "Compatibility advice: Do not give ktimetracker files to karm users. Using "
+#~ "karm files with ktimetracker is possible.\n"
+#~ msgstr ""
+#~ "Karm har bytt namn till Ktimetracker. Det gör programmet lättare att "
+#~ "känna igen.\n"
+#~ " Ett kompatibilitetsråd: Ge inte Ktimetracker-filer till Karm-användare. "
+#~ "Det är möjligt att använda Karm-filer med Ktimetracker.\n"
+
+#~ msgid ""
+#~ "Please learn to call ktimetracker as this reminder may be removed in the "
+#~ "future.\n"
+#~ msgstr ""
+#~ "Lär dig att anropa Ktimetracker, eftersom denna påminnelse kan komma att "
+#~ "tas bort i framtiden.\n"
+
+#~ msgid ""
+#~ "Someone, probably you, has called karm. KArm has been renamed to "
+#~ "KTimeTracker. This makes it easier to recognize. Compatibility advice: Do "
+#~ "not give ktimetracker files to karm users. Using karm files with "
+#~ "ktimetracker is possible. Please learn to call ktimetracker as this "
+#~ "reminder may be removed in the future."
+#~ msgstr ""
+#~ "Någon, troligen du, har anropat Karm. Karm har bytt namn till "
+#~ "Ktimetracker. Det gör programmet lättare att känna igen. Ett "
+#~ "kompatibilitetsråd: Ge inte Ktimetracker-filer till Karm-användare. Det "
+#~ "är möjligt att använda Karm-filer med Ktimetracker. Lär dig att anropa "
+#~ "Ktimetracker, eftersom denna påminnelse kan komma att tas bort i "
+#~ "framtiden."
+
+#~ msgid "KArm is now ktimetracker"
+#~ msgstr "Karm är nu Ktimetracker"
+
+#~ msgid "ktimetracker"
+#~ msgstr "Ktimetracker"
+
+#~ msgid "Configure key bindings"
+#~ msgstr "Anpassa tangentbindningar"
+
+#~ msgid ""
+#~ "This will let you configure keybindings which are specific to ktimetracker"
+#~ msgstr ""
+#~ "Det här låter dig anpassa tangentbindningar som är specifika för "
+#~ "Ktimetracker"
+
+#~ msgid "&File"
+#~ msgstr "&Arkiv"
+
+#~ msgid "Just caught a software interrupt."
+#~ msgstr "Tog precis emot ett programvaruavbrott."
+
+#~ msgid "List all tasks as text output"
+#~ msgstr "Lista alla aktiviteter som textdata"
+
+#~ msgid "Add task <taskname>"
+#~ msgstr "Lägg till aktivitet <aktivitetsnamn>"
+
+#~ msgid "Delete task <taskid>"
+#~ msgstr "Tar bort aktivitet <aktivitetsid>"
+
+#~ msgid "Print the task ids for all tasks named <taskname>"
+#~ msgstr ""
+#~ "Skriv ut aktivitetsid för alla aktiviteter med namnet <aktivitetsnamn>"
+
+#~ msgid "Start timer for task <taskid>"
+#~ msgstr "Starta tidtagning för aktivitet <aktivitetsid>"
+
+#~ msgid "Stop timer for task <taskid>"
+#~ msgstr "Stoppa tidtagning för aktivitet <aktivitetsid>"
+
+#~ msgid "Deliver total minutes for task id"
+#~ msgstr "Leverera totalt antal minuter för aktivitetsid"
+
+#~ msgid "Outputs the version"
+#~ msgstr "Matar ut versionen"
+
+#~ msgid "Could not create the KTimeTracker part."
+#~ msgstr "Kunde inte skapa Ktimetracker-delprogrammet."
+
+#~ msgid "Could not find the KTimeTracker part."
+#~ msgstr "Kunde inte hitta Ktimetracker-delprogrammet."
+
+#~ msgid "task_popup"
+#~ msgstr "Aktivitetsdialogruta"
+
+#~ msgid "File"
+#~ msgstr "Arkiv"
+
+#~ msgid "Help"
+#~ msgstr "Hjälp"
+
+#~ msgid "Configure"
+#~ msgstr "Anpassa"
+
+#~ msgid "toolBar"
+#~ msgstr "Verktygsrad"
+
+#~ msgid "Load"
+#~ msgstr "Ladda"
+
+#~ msgid "Save"
+#~ msgstr "Spara"
+
+#~ msgid "Quit"
+#~ msgstr "Avsluta"
+
+#~ msgid "Configure ktimetracker"
+#~ msgstr "Anpassa Ktimetracker"
+
+#~ msgid "Week of %1"
+#~ msgstr "Vecka under %1"
+
+#~ msgid "Settings"
+#~ msgstr "Inställningar"
+
+#~ msgid "Show"
+#~ msgstr "Visa"
+
+#~ msgid "Hide"
+#~ msgstr "Dölj"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialogruta"
+
+#~ msgid "This document has not been saved yet. Do you want to save it?"
+#~ msgstr "Dokumentet har inte ännu sparats. Vill du spara det?"
+
+#~ msgid "Untitled"
+#~ msgstr "Namnlös"
+
+#~ msgid "delete"
+#~ msgstr "ta bort"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Successfully saved file "
+#~ msgstr "Sparade fil med lyckat resultat "
+
+#~ msgid "(c) 1997-2010, the KDE PIM Developers"
+#~ msgstr "© 1997-2010, KDE PIM-utvecklarna"
+
+#~ msgid "Help3"
+#~ msgstr "Hjälp3"
+
+#~ msgid "MainWindow"
+#~ msgstr "Huvudfönster"
+
+#~ msgctxt "abbreviation for hours"
+#~ msgid " hr. "
+#~ msgstr " t. "
+
+#~ msgctxt "abbreviation for minutes"
+#~ msgid " min. "
+#~ msgstr " min. "
+
+#~ msgid ""
+#~ "With desktop tracking, you can associate every task with a virtual "
+#~ "desktop. As soon as you enter this desktop, timing for this task is "
+#~ "started.\n"
+#~ "\n"
+#~ "Select the desktop(s) that will automatically start the timer of this "
+#~ "task."
+#~ msgstr ""
+#~ "Med skrivbordsföljning kan du koppla varje aktivitet till ett virtuellt "
+#~ "skrivbord. Så fort du går till skrivbordet, startas tidtagning för "
+#~ "aktiviteten.\n"
+#~ "\n"
+#~ "Välj skrivbord som automatiskt startar tidtagning för den här aktiviteten."
+
+#~ msgid "Desktop tracking enabled"
+#~ msgstr "Skrivbordsföljning aktiverad"
+
+#~ msgid "Desktop 5"
+#~ msgstr "Skrivbord 5"
+
+#~ msgid "Desktop 4"
+#~ msgstr "Skrivbord 4"
+
+#~ msgid "Desktop 3"
+#~ msgstr "Skrivbord 3"
+
+#~ msgid "Desktop 2"
+#~ msgstr "Skrivbord 2"
+
+#~ msgid "Desktop 1"
+#~ msgstr "Skrivbord 1"
+
+#~ msgid "Desktop 8"
+#~ msgstr "Skrivbord 8"
+
+#~ msgid "Desktop 9"
+#~ msgstr "Skrivbord 9"
+
+#~ msgid "Desktop 6"
+#~ msgstr "Skrivbord 6"
+
+#~ msgid "Desktop 7"
+#~ msgstr "Skrivbord 7"
+
+#~ msgid "Desktop 10"
+#~ msgstr "Skrivbord 10"
+
+#~ msgid "Desktop 12"
+#~ msgstr "Skrivbord 12"
+
+#~ msgid "Desktop 17"
+#~ msgstr "Skrivbord 17"
+
+#~ msgid "Desktop 11"
+#~ msgstr "Skrivbord 11"
+
+#~ msgid "Desktop 16"
+#~ msgstr "Skrivbord 16"
+
+#~ msgid "Desktop 13"
+#~ msgstr "Skrivbord 13"
+
+#~ msgid "Desktop 18"
+#~ msgstr "Skrivbord 18"
+
+#~ msgid "Desktop 14"
+#~ msgstr "Skrivbord 14"
+
+#~ msgid "Desktop 19"
+#~ msgstr "Skrivbord 19"
+
+#~ msgid "Desktop 15"
+#~ msgstr "Skrivbord 15"
+
+#~ msgid "Desktop 20"
+#~ msgstr "Skrivbord 20"
+
+#~ msgid "Task &name:"
+#~ msgstr "Aktivitets&namn:"
+
+#~ msgid "Edit &absolute"
+#~ msgstr "Redigera a&bsolut"
+
+#~ msgid "&Time:"
+#~ msgstr "&Tid:"
+
+#~ msgid "&Session time:"
+#~ msgstr "&Sessionstid:"
+
+#~ msgid "Edit &relative (apply to both time and session time)"
+#~ msgstr "Redigera &relativ (gäller sessionen och totalt)"
+
+#~ msgid ""
+#~ "Use this option to set the time spent on this task to an absolute value.\n"
+#~ "\n"
+#~ "For example, if you have worked exactly four hours on this task during "
+#~ "the current session, you would set the Session time to 4 hr."
+#~ msgstr ""
+#~ "Använd alternativet för att ange tiden som använts för aktiviteten till "
+#~ "ett absolut värde.\n"
+#~ "\n"
+#~ "Om du till exempel har arbetat exakt fyra timmar med aktiviteten under "
+#~ "nuvarande session, skulle du ange sessionstiden som 4 timmar."
+
+#~ msgid ""
+#~ "Use this option to change the time spent on this task relative to its "
+#~ "current value.\n"
+#~ "\n"
+#~ "For example, if you worked on this task for one hour without the timer "
+#~ "running, you would add 1 hr."
+#~ msgstr ""
+#~ "Använd alternativet för att ange tiden som använts för aktiviteten i "
+#~ "förhållande till dess nuvarande värde.\n"
+#~ "\n"
+#~ "Om du till exempel har arbetat en timma med aktiviteten utan att "
+#~ "tidtagningen varit igång, skulle du lägga till 1 timma."
+
+#~ msgid ""
+#~ "This is the time the task has been running since all times were reset."
+#~ msgstr ""
+#~ "Det här är tiden som aktiviteten har körts sedan alla tider återställdes."
+
+#~ msgid "This is the time the task has been running this session."
+#~ msgstr "Det här är tiden som aktiviteten har körts i den här sessionen."
+
+#~ msgid ""
+#~ "Specify how much time to add or subtract to the overall and session time"
+#~ msgstr ""
+#~ "Ange hur mycket tid som skall läggas till eller dras ifrån sessionen och "
+#~ "totala tiden."
+
+#~ msgid "myName"
+#~ msgstr "mitt_namn"

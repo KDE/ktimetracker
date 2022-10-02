@@ -1,0 +1,1904 @@
+# translation of karm.po to Frysk
+# Rinse de Vries <Rinse@kde.nl>, 2001-2002.
+# Rinse de Vries <rinse@kde.nl>, 2003, 2004.
+# Rinse de Vries <rinsedevries@home.nl>, 2003.
+# Tom Albers <toma@omat.nl>, 2004.
+# Bram Schoenmakers <bramschoenmakers@kde.nl>, 2004, 2005, 2006, 2007.
+# Rinse de Vries <rinsedevries@kde.nl>, 2004, 2005, 2007.
+# Sander Koning <skoning@ch.tudelft.nl>, 2005.
+# translation of karm.po to
+# Nederlandse vertaling van
+# Copyright (C) 2001-2002 KDE e.v..
+# KDE-vertaalgroep Nederlands <www.kde.nl>
+msgid ""
+msgstr ""
+"Project-Id-Version: karm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-29 00:44+0000\n"
+"PO-Revision-Date: 2007-04-19 20:35+0200\n"
+"Last-Translator: Rinse de Vries <rinsedevries@kde.nl>\n"
+"Language-Team: Frysk <kde-i18n-fry@kde.org>\n"
+"Language: fy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Douwe "
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "  "
+
+#: dialogs/edittimedialog.cpp:42
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task Time"
+msgstr "Taak bewurkje"
+
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#, fuzzy, kde-format
+#| msgid "Task"
+msgctxt "@title:group"
+msgid "Task"
+msgstr "Taak"
+
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#, fuzzy, kde-format
+#| msgid "Task Name"
+msgid "Task Name:"
+msgstr "Taaknamme"
+
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#, kde-format
+msgid "Task Description:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:71
+#, kde-format
+msgctxt "@title:group"
+msgid "Time Editing"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:79
+#, kde-format
+msgid "Current Time:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:82
+#, fuzzy, kde-format
+#| msgid " min"
+msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
+msgid " minute"
+msgid_plural " minutes"
+msgstr[0] " minuten"
+msgstr[1] " minuten"
+
+#: dialogs/edittimedialog.cpp:88
+#, kde-format
+msgid "Change Time By:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:92
+#, kde-format
+msgid "Time After Change:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:98
+#, fuzzy, kde-format
+#| msgid "&Edit..."
+msgctxt "@action:button"
+msgid "Edit History..."
+msgstr "Wizig&je..."
+
+#: dialogs/edittimedialog.cpp:99
+#, kde-format
+msgid "To change this task's time, you have to edit its event history"
+msgstr ""
+
+#: dialogs/exportdialog.cpp:96
+#, fuzzy, kde-format
+#| msgid "Export to:"
+msgctxt "@title:window"
+msgid "Export to File"
+msgstr "Eksportearje nei:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
+#, fuzzy, kde-format
+#| msgid "Decimal"
+msgctxt "format to display times"
+msgid "Decimal"
+msgstr "Desimaal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
+#, fuzzy, kde-format
+#| msgid "Session Time"
+msgid "Session Times"
+msgstr "Sesjetiid"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.cpp:138 dialogs/exportdialog.ui:205
+#, kde-format
+msgid "All Tasks"
+msgstr "Alle taken"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
+#: dialogs/exportdialog.ui:14
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgid "Export"
+msgstr "&Ekportearje"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
+#: dialogs/exportdialog.ui:26
+#, fuzzy, kde-format
+#| msgid "Export Progress"
+msgid "Export Preview"
+msgstr "Avensaasje eksport"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
+#: dialogs/exportdialog.ui:50
+#, fuzzy, kde-format
+#| msgid "Copy Totals to Clipboard"
+msgid "Copy to Clipboard"
+msgstr "Totalen kopiearje nei klamboerd"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
+#: dialogs/exportdialog.ui:60
+#, kde-format
+msgid "Save As..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
+#: dialogs/exportdialog.ui:75
+#, kde-format
+msgid "Report Type"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
+#: dialogs/exportdialog.ui:81
+#, kde-format
+msgid "Times as CSV"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
+#: dialogs/exportdialog.ui:91
+#, kde-format
+msgid "History as CSV"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
+#: dialogs/exportdialog.ui:98
+#, fuzzy, kde-format
+#| msgid "&Export to CSV File..."
+msgid "Event Log as CSV"
+msgstr "&Eksportearje nei CSV-triem..."
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
+#: dialogs/exportdialog.ui:105
+#, kde-format
+msgid "Times as Text"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:118
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>An inclusive date range for reporting on time card history.  Not "
+#| "enabled when reporting on totals.</p>"
+msgid ""
+"An inclusive date range for reporting on time card history.  Not enabled "
+"when reporting on totals."
+msgstr ""
+"<p>In dekkend datumberik om de tiidkaartskiednis te melden. Stiet út as de "
+"totale tiden toand wurde.</p>"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:121
+#, kde-format
+msgid "Date Range"
+msgstr "Datumberik"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: dialogs/exportdialog.ui:127
+#, kde-format
+msgid "From:"
+msgstr "Fan:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: dialogs/exportdialog.ui:150
+#, kde-format
+msgid "To:"
+msgstr "Oant:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.ui:182
+#, kde-format
+msgid "Hours:Minutes"
+msgstr "Oeren:Minuten"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.ui:191
+#, fuzzy, kde-format
+#| msgid "Reset All Times"
+msgid "All Times"
+msgstr "Alle tiden tebeksette"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.ui:210
+#, fuzzy, kde-format
+#| msgid "Selected Task"
+msgid "Only Selected"
+msgstr "Selektearre taak"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:224
+#, fuzzy, kde-format
+#| msgid "The character used to seperate one field from another in the output."
+msgid "The character used to separate one field from another in the output."
+msgstr "It teken dat yn de útfier it iene fjid fan it oare fjild skiedet."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:227
+#, kde-format
+msgid "Delimiter"
+msgstr "Skiedingsteken"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioComma)
+#: dialogs/exportdialog.ui:233
+#, kde-format
+msgid "Comma"
+msgstr "Komma"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSemicolon)
+#: dialogs/exportdialog.ui:243
+#, kde-format
+msgid "Semicolon"
+msgstr "Puntkomma"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioOther)
+#: dialogs/exportdialog.ui:250
+#, fuzzy, kde-format
+#| msgid "Other:"
+msgctxt "user can set an user defined delimiter"
+msgid "Other:"
+msgstr "Oars:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTab)
+#: dialogs/exportdialog.ui:257
+#, fuzzy, kde-format
+#| msgid "Tab"
+msgctxt "tabulator delimiter"
+msgid "Tab"
+msgstr "Tab"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
+#: dialogs/exportdialog.ui:264
+#, kde-format
+msgid "Space"
+msgstr "Spaasje"
+
+#. i18n: ectx: property (text), widget (QLabel, quotesLabel)
+#: dialogs/exportdialog.ui:308
+#, kde-format
+msgid "Quotes:"
+msgstr "Oanhellingstekens:"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:327
+#, kde-format
+msgid "All fields are quoted in the output."
+msgstr "Alle fjilden wurde yn de útfier oanhelle."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:331
+#, kde-format
+msgid "\""
+msgstr "\""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:336
+#, kde-format
+msgid "'"
+msgstr "'"
+
+#: dialogs/historydialog.cpp:105 export/totalsastext.cpp:87
+#, kde-format
+msgid "Task"
+msgstr "Taak"
+
+#: dialogs/historydialog.cpp:105
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgid "StartTime"
+msgstr "Totale tiid"
+
+#: dialogs/historydialog.cpp:105
+#, fuzzy, kde-format
+#| msgid "Time"
+msgid "EndTime"
+msgstr "Tiid"
+
+#: dialogs/historydialog.cpp:105
+#, fuzzy, kde-format
+#| msgid "Comma"
+msgid "Comment"
+msgstr "Komma"
+
+#: dialogs/historydialog.cpp:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You can change this task's comment, start time and end time."
+msgstr ""
+
+#: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
+#, kde-format
+msgid "This is not a valid Date/Time."
+msgstr ""
+
+#: dialogs/historydialog.cpp:273
+#, kde-format
+msgid "Please select a task to delete."
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
+#: dialogs/historydialog.ui:14
+#, fuzzy, kde-format
+#| msgid "Task History"
+msgid "Edit History"
+msgstr "Taakskiednis"
+
+#: dialogs/taskpropertiesdialog.cpp:62
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"<p>Enter the name of the task here. You can choose it freely.</p>\n"
+"<p><i>Example:</i> phone with mother</p>"
+msgstr ""
+
+#: dialogs/taskpropertiesdialog.cpp:73
+#, fuzzy, kde-format
+#| msgid "A&uto tracking"
+msgctxt "@title:group"
+msgid "Auto Tracking"
+msgstr "A&utomatysk folgje"
+
+#: dialogs/taskpropertiesdialog.cpp:90
+#, kde-format
+msgctxt "order number of desktop: 1, 2, ..."
+msgid "%1."
+msgstr ""
+
+#: export/export.cpp:63
+#, kde-format
+msgid "Could not open \"%1\"."
+msgstr "\"%1\" koe net iepene wurde."
+
+#: export/totalsastext.cpp:84
+#, kde-format
+msgid "Task Totals"
+msgstr "Taaktotaal"
+
+#: export/totalsastext.cpp:87
+#, kde-format
+msgid "Time"
+msgstr "Tiid"
+
+#: export/totalsastext.cpp:120
+#, fuzzy, kde-format
+#| msgid "Total"
+msgctxt "total time of all tasks"
+msgid "Total"
+msgstr "Totaal"
+
+#: export/totalsastext.cpp:122
+#, kde-format
+msgid "No tasks."
+msgstr "Gjin taken."
+
+#: idletimedetector.cpp:78
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: idletimedetector.cpp:81
+#, fuzzy, kde-format
+#| msgid "Continue Timing"
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Trochgean mei tiid opnimmen"
+
+#: idletimedetector.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr ""
+
+#: idletimedetector.cpp:84
+#, fuzzy, kde-format
+#| msgid "Revert && Continue"
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Tebeksette & trochgean"
+
+#: idletimedetector.cpp:88
+#, fuzzy, kde-format
+#| msgid "Desktop has been idle since %1. What should we do?"
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "It buroblêd is sûnt %1 ynaktyf. Wat sille wy dwaan?"
+
+#. i18n: ectx: Menu (clock)
+#: ktimetrackerui.rc:19
+#, kde-format
+msgid "&Clock"
+msgstr "&Klok"
+
+#. i18n: ectx: Menu (task)
+#: ktimetrackerui.rc:26
+#, kde-format
+msgid "&Task"
+msgstr "&Taak"
+
+#. i18n: ectx: Menu (settings)
+#: ktimetrackerui.rc:36
+#, fuzzy, kde-format
+#| msgid "Display Settings"
+msgid "&Settings"
+msgstr "Ynstellings foar de werjefte"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ktimetrackerui.rc:41
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#. i18n: ectx: ToolBar (taskToolBar)
+#: ktimetrackerui.rc:50
+#, fuzzy, kde-format
+#| msgid "Task"
+msgid "Tasks"
+msgstr "Taak"
+
+#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#, fuzzy, kde-format
+#| msgid "KDE Time tracker tool"
+msgid "KTimeTracker"
+msgstr "KDE-tiidregistraasje"
+
+#: main.cpp:102
+#, kde-format
+msgid "KDE Time tracker tool"
+msgstr "KDE-tiidregistraasje"
+
+#: main.cpp:104
+#, kde-format
+msgid "Copyright © 1997-2019 KTimeTracker developers"
+msgstr ""
+
+#: main.cpp:108
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Potashev"
+msgstr ""
+
+#: main.cpp:109
+#, fuzzy, kde-format
+#| msgid "Current Maintainer"
+msgctxt "@info:credit"
+msgid "Current Maintainer (since 2019)"
+msgstr "De ûnderhâlder fan dit stuit"
+
+#: main.cpp:111
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thorsten Stärk"
+msgstr ""
+
+#: main.cpp:112
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2006-2012)"
+msgstr ""
+
+#: main.cpp:114
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mark Bucciarelli"
+msgstr ""
+
+#: main.cpp:115
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2005-2006)"
+msgstr ""
+
+#: main.cpp:117
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jesper Pedersen"
+msgstr ""
+
+#: main.cpp:118
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2000-2005)"
+msgstr ""
+
+#: main.cpp:120
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sirtaj Singh Kang"
+msgstr ""
+
+#: main.cpp:121
+#, fuzzy, kde-format
+#| msgid "Original Author"
+msgctxt "@info:credit"
+msgid "Original Author"
+msgstr "Oarspronklike auteur"
+
+#: main.cpp:123
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mathias Soeken"
+msgstr ""
+
+#: main.cpp:124
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (in 2007)"
+msgstr ""
+
+#: main.cpp:126
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kalle Dalheimer"
+msgstr ""
+
+#: main.cpp:127
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (1999-2000)"
+msgstr ""
+
+#: main.cpp:129
+#, kde-format
+msgctxt "@info:credit"
+msgid "Allen Winter"
+msgstr ""
+
+#: main.cpp:130 main.cpp:133
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:132
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr ""
+
+#: main.cpp:144
+#, fuzzy, kde-format
+#| msgid "The iCalendar file to open"
+msgctxt "@info:shell"
+msgid "Path or URL to iCalendar file to open."
+msgstr "It te iepenjen iCalendar-triem"
+
+#: mainwindow.cpp:52
+#, fuzzy, kde-format
+#| msgid "Configure KArm..."
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "KArm ynstelle..."
+
+#: mainwindow.cpp:152 tray.cpp:90
+#, kde-format
+msgid "No active tasks"
+msgstr "Gjin aktive taken"
+
+#: mainwindow.cpp:162 tray.cpp:110
+#, fuzzy, kde-format
+#| msgid ", "
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: model/tasksmodel.cpp:33
+#, fuzzy, kde-format
+#| msgid "Task Name"
+msgctxt "@title:column"
+msgid "Task Name"
+msgstr "Taaknamme"
+
+#: model/tasksmodel.cpp:34
+#, fuzzy, kde-format
+#| msgid "Session Time"
+msgctxt "@title:column"
+msgid "Session Time"
+msgstr "Sesjetiid"
+
+#: model/tasksmodel.cpp:35
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
+msgid "Time"
+msgstr "Tiid"
+
+#: model/tasksmodel.cpp:36
+#, fuzzy, kde-format
+#| msgid "Total Session Time"
+msgctxt "@title:column"
+msgid "Total Session Time"
+msgstr "Totale sesjetiid"
+
+#: model/tasksmodel.cpp:37
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgctxt "@title:column"
+msgid "Total Time"
+msgstr "Totale tiid"
+
+#: model/tasksmodel.cpp:38
+#, kde-format
+msgctxt "@title:column"
+msgid "Priority"
+msgstr ""
+
+#: model/tasksmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgctxt "@title:column"
+msgid "Percent Complete"
+msgstr "&Markearje as klear"
+
+#: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The task name is what you call the task, it can be chosen freely."
+msgstr ""
+
+#: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The session time is the time since you last chose \"Start New Session\"."
+msgstr ""
+
+#: model/tasksmodel.cpp:290
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"The total session time is the session time of this task and all its subtasks."
+msgstr "Hjirmei wiskje jo de selektearre taak en alle taheakke subtaken."
+
+#: model/tasksmodel.cpp:294
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid "The total time is the time of this task and all its subtasks."
+msgstr "Hjirmei wiskje jo de selektearre taak en alle taheakke subtaken."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
+#: settings/cfgbehavior.ui:17
+#, fuzzy, kde-format
+#| msgid "Detect desktop as idle after"
+msgid "Detect desktop as idle after:"
+msgstr "Ynaktiviteit fan buroblêd werkenne nei"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
+#: settings/cfgbehavior.ui:24 settings/cfgstorage.ui:36
+#, kde-format
+msgid " min"
+msgstr " minuten"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/cfgbehavior.ui:37
+#, kde-format
+msgid "Minimum desktop active time:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
+#: settings/cfgbehavior.ui:44
+#, kde-format
+msgid " sec"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
+#: settings/cfgbehavior.ui:57
+#, kde-format
+msgid "Prompt before deleting tasks"
+msgstr "Om in befêstiging freegje eardat taken wiske wurde"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:64
+#, kde-format
+msgid ""
+"Unitasking - allow only one task to be timed at a time. Does not stop any "
+"timer."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:67
+#, kde-format
+msgid "Allow only one timer at a time"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
+#: settings/cfgbehavior.ui:74
+#, kde-format
+msgid "Place an icon to the system tray"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: settings/cfgdisplay.ui:29
+#, kde-format
+msgctxt "title of group box, general options"
+msgid "General"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
+#: settings/cfgdisplay.ui:35
+#, fuzzy, kde-format
+#| msgid "Time Format"
+msgid "Decimal number format"
+msgstr "Tiidformaat"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:42
+#, kde-format
+msgid ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious. It will disable the search bar and every click will pop up a "
+"context menu."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:45
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious."
+msgid "Configuration for PDA"
+msgstr "Befêstiging fereaske"
+
+#. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
+#: settings/cfgdisplay.ui:55
+#, kde-format
+msgid "Window Title"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
+#: settings/cfgdisplay.ui:64
+#, kde-format
+msgid "Currently opened file"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
+#: settings/cfgdisplay.ui:71
+#, fuzzy, kde-format
+#| msgid "Total Session Time"
+msgid "Current Task and Session Time"
+msgstr "Totale sesjetiid"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: settings/cfgdisplay.ui:81
+#, fuzzy, kde-format
+#| msgid "Columns displayed:"
+msgid "Columns Displayed"
+msgstr "Toande kolommen:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
+#: settings/cfgdisplay.ui:87
+#, kde-format
+msgid "Session time"
+msgstr "Sesjetiid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
+#: settings/cfgdisplay.ui:94
+#, kde-format
+msgid "Cumulative task time"
+msgstr "Kumulative taaktiid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
+#: settings/cfgdisplay.ui:101
+#, kde-format
+msgid "Total session time"
+msgstr "Totale sesjetiid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
+#: settings/cfgdisplay.ui:108
+#, kde-format
+msgid "Total task time"
+msgstr "Totale taaktiid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
+#: settings/cfgdisplay.ui:115
+#, kde-format
+msgid "Priority"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
+#: settings/cfgdisplay.ui:122
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgid "Percent complete"
+msgstr "&Markearje as klear"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_autoSave)
+#: settings/cfgstorage.ui:29
+#, fuzzy, kde-format
+#| msgid "Save tasks every"
+msgid "Save tasks every:"
+msgstr "Taken opslaan elke"
+
+#: taskview.cpp:118
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"Der gie wat mis by it opslaan fan de nije taak. Kontrolearje oft jo jo "
+"iCalendar-triem bewurkje kinne. Slút ek alle tapassings ôf dy't gebrûk "
+"meitsje fan dit triem en wiskje elk skoatteltriem út ~/.kde/share/apps/kabc/"
+"lock "
+
+#: taskview.cpp:214
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+
+#: taskview.cpp:290
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: taskview.cpp:291
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: taskview.cpp:361 taskview.cpp:445
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Unneambere taak"
+
+#: taskview.cpp:380
+#, fuzzy, kde-format
+#| msgid ""
+#| "Error storing new task. Your changes were not saved. Make sure you can "
+#| "edit your iCalendar file. Also quit all applications using this file and "
+#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
+#| "lock/ "
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"Der gie wat mis by it opslaan fan de nije taak. Kontrolearje oft jo jo "
+"iCalendar-triem bewurkje kinne. Slút ek alle tapassings ôf dy't gebrûk "
+"meitsje fan dit triem en wiskje elk skoatteltriem út ~/.kde/share/apps/kabc/"
+"lock "
+
+#: taskview.cpp:422
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "Nije subtaak"
+
+#: taskview.cpp:440
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Taak bewurkje"
+
+#: taskview.cpp:474 taskview.cpp:515 taskview.cpp:537
+#, kde-format
+msgid "No task selected."
+msgstr "Gjin taak selektearre"
+
+#: taskview.cpp:520
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to delete the task named\n"
+#| "\"%1\" and its entire history?\n"
+#| "NOTE: all its subtasks and their history will also be deleted."
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Wolle jo werklik de taak mei de namme\n"
+"\"%1\" wiskje ynklusyf de skiednis der fan?\n"
+"Opmerking: alle hjirby hearrende subtaken en skiednissen wurde ek wiske."
+
+#: taskview.cpp:524
+#, fuzzy, kde-format
+#| msgid "Deleting Task"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Taakwiskjen"
+
+#: timetrackerstorage.cpp:140
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "Fout by laden fan \"%1\": byhearrende haadtaak is net fûn (uid=%2)"
+
+#: timetrackerstorage.cpp:243
+#, fuzzy, kde-format
+#| msgid "Could not open \"%1\"."
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "\"%1\" koe net iepene wurde."
+
+#: timetrackerstorage.cpp:251
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+# Stiet de ampersand hjir goed?
+#: timetrackerwidget.cpp:154
+#, fuzzy, kde-format
+#| msgid "Start &New Session"
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "&Nije sesje starte"
+
+#: timetrackerwidget.cpp:155
+#, fuzzy, kde-format
+#| msgid "Start a new session"
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "Start in nije sesje"
+
+#: timetrackerwidget.cpp:157
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session time to 0 for all tasks, to start a new "
+#| "session, without affecting the totals."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"Hjirmei sette jo de sesjetiid foar alle taken op nul, om in nije sesje te "
+"starten, sûnder dat dit ynfloed hat op de totalen."
+
+#: timetrackerwidget.cpp:165
+#, fuzzy, kde-format
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "Wizig&je..."
+
+#: timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr ""
+
+#: timetrackerwidget.cpp:168
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+
+#: timetrackerwidget.cpp:178
+#, fuzzy, kde-format
+#| msgid "&Reset All Times"
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "Alle tiden &tebeksette"
+
+#: timetrackerwidget.cpp:179
+#, fuzzy, kde-format
+#| msgid "Reset all times"
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Alle tiden tebeksette"
+
+#: timetrackerwidget.cpp:181
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session and total time to 0 for all tasks, to restart "
+#| "from scratch."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"Hjirmei sette jo de sesjetiid foar alle taken op nul, sadat jo wer fan "
+"foaren ôf oan begjinne kinne."
+
+#: timetrackerwidget.cpp:188
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "Totale tiid"
+
+#: timetrackerwidget.cpp:189
+#, fuzzy, kde-format
+#| msgid "Start timing for selected task"
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "Begjin mei tiid opnimmen fan de selektearre taak."
+
+#: timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will start timing for the selected task.\n"
+#| "It is even possible to time several tasks simultaneously.\n"
+#| "\n"
+#| "You may also start timing of a tasks by double clicking the left mouse "
+#| "button on a given task. This will, however, stop timing of other tasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"Hjirmei starte jo de tiidopname fan de selektearre taak.\n"
+"It is boppedat mooglik om de tiid foar ferskillende taken simultaan op te "
+"nimmen.\n"
+"\n"
+"Jo kinne ek begjinne mei de tiidopname fan in taak troch mei de lofter "
+"mûsknop te dûbelklikken op in bepaalde taak. Hjirmei sette jo lykwols wol de "
+"tiidopname fan oare taken stil."
+
+#: timetrackerwidget.cpp:205
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "S&topje"
+
+#: timetrackerwidget.cpp:206
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "Set de tiidopname fan de selekteare taak stil"
+
+#: timetrackerwidget.cpp:207
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "Set de tiidopname fan de selekteare taak stil"
+
+#: timetrackerwidget.cpp:214
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:215
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:216
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:223
+#, fuzzy, kde-format
+#| msgid "Stop &All Timers"
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "&Alle tiden stopje"
+
+#: timetrackerwidget.cpp:224
+#, fuzzy, kde-format
+#| msgid "Stop all of the active timers"
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Tiidmjitting foar alle aktive taken stilsette"
+
+#: timetrackerwidget.cpp:225
+#, fuzzy, kde-format
+#| msgid "Stop all of the active timers"
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Tiidmjitting foar alle aktive taken stilsette"
+
+#: timetrackerwidget.cpp:233
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr ""
+
+#: timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+
+#: timetrackerwidget.cpp:238
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+
+#: timetrackerwidget.cpp:249
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "Nije taak"
+
+#: timetrackerwidget.cpp:250
+#, fuzzy, kde-format
+#| msgid "Create new top level task"
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Meitsje in nije topnivo-taak oan"
+
+#: timetrackerwidget.cpp:251
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "Hjirmei meitsje jo in nije taak fan it heechste nivo oan."
+
+#: timetrackerwidget.cpp:259
+#, fuzzy, kde-format
+#| msgid "New &Subtask..."
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "Nije &subtaak..."
+
+#: timetrackerwidget.cpp:260
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "Hjirmei meitsje jo in nije taak fan it heechste nivo oan."
+
+#: timetrackerwidget.cpp:261
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "Hjirmei meitsje jo in nije taak fan it heechste nivo oan."
+
+#: timetrackerwidget.cpp:269
+#, fuzzy, kde-format
+#| msgid "Delimiter"
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "Skiedingsteken"
+
+#: timetrackerwidget.cpp:270
+#, fuzzy, kde-format
+#| msgid "Delete selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Seletearre taak wiskje"
+
+#: timetrackerwidget.cpp:271
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "Hjirmei wiskje jo de selektearre taak en alle taheakke subtaken."
+
+#: timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: timetrackerwidget.cpp:280
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "Bewurkje de namme of tiden fan de selektearre taak"
+
+#: timetrackerwidget.cpp:282
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"Hjirmei starte jo in dialoochfinster wêryn't jo de parameters fan de "
+"selektearre taak bewurkje kinne."
+
+#: timetrackerwidget.cpp:291
+#, fuzzy, kde-format
+#| msgid "Print Times"
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Oantal útprintingen"
+
+#: timetrackerwidget.cpp:292
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "Bewurkje de namme of tiden fan de selektearre taak"
+
+#: timetrackerwidget.cpp:294
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"Hjirmei starte jo in dialoochfinster wêryn't jo de parameters fan de "
+"selektearre taak bewurkje kinne."
+
+#: timetrackerwidget.cpp:303
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&Markearje as klear"
+
+#: timetrackerwidget.cpp:311
+#, fuzzy, kde-format
+#| msgid "&Mark as Incomplete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&Markearje as net-klear"
+
+#: timetrackerwidget.cpp:319
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Ekportearje"
+
+#: timetrackerwidget.cpp:326
+#, fuzzy, kde-format
+#| msgid "Import Tasks From &Planner..."
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "Taken ymportearje fan &planner..."
+
+#: timetrackerwidget.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:471
+#, fuzzy, kde-format
+#| msgid "Behavior"
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "Gedrach"
+
+#: timetrackerwidget.cpp:474
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr ""
+
+#: timetrackerwidget.cpp:477
+#, fuzzy, kde-format
+#| msgid "Storage"
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "Opslach"
+
+#: timetrackerwidget.cpp:514
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "Nije taak"
+
+#: timetrackerwidget.cpp:593
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+
+#: timetrackerwidget.cpp:603
+#, fuzzy, kde-format
+#| msgid "Do you really want to reset the time to zero for all tasks?"
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr "Wolle jo werklik de tiid foar alle taken tekbeksette nei 0?"
+
+#: timetrackerwidget.cpp:605
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "Befêstiging fereaske"
+
+#: timetrackerwidget.cpp:606
+#, fuzzy, kde-format
+#| msgid "Reset All Times"
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "Alle tiden tebeksette"
+
+#: timetrackerwidget.cpp:795
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr ""
+"Opslaan mislearre, nei alle gedachten omdat de triem net skoattele wurde koe."
+
+#: timetrackerwidget.cpp:797
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "Koe de boarne fan agendagegevens net wizigje."
+
+#: timetrackerwidget.cpp:799
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "Net genôch ûnthâld -- koe gjin objekt mear oanmeitsje."
+
+#: timetrackerwidget.cpp:801
+#, kde-format
+msgid "UID not found."
+msgstr "UID net fûn."
+
+#: timetrackerwidget.cpp:803
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "Unjildige datum -- formaat is JJJJ-MM-DD."
+
+#: timetrackerwidget.cpp:805
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "Unjildige tiid -- formaat is JJJJ-MM-DDTUU:MM:SS."
+
+#: timetrackerwidget.cpp:807
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "Unjildige taakdoer -- moat grutter wêze as nul."
+
+#: timetrackerwidget.cpp:809
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "Unjildich foutnûmer: %1"
+
+#: timetrackerwidget.cpp:1038
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+
+#: timetrackerwidget.cpp:1045
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+
+#: tray.cpp:95
+#, fuzzy, kde-format
+#| msgid ", ..."
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: treeviewheadercontextmenu.cpp:46
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr ""
+
+#: widgets/searchline.cpp:37
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search or add task"
+msgstr ""
+
+#: widgets/searchline.cpp:39
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is a combined field. As long as you do not press Enter, it acts as a "
+"filter. Then, only tasks that match your input are shown. As soon as you "
+"press Enter, your input is used as name to create a new task."
+msgstr ""
+
+#: widgets/taskswidget.cpp:143
+#, kde-format
+msgctxt "@item:inmenu Task progress"
+msgid "%1 %"
+msgstr ""
+
+#: widgets/taskswidget.cpp:154
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "unspecified"
+msgstr ""
+
+#: widgets/taskswidget.cpp:157
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "1 (highest)"
+msgstr ""
+
+#: widgets/taskswidget.cpp:160
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "5 (medium)"
+msgstr ""
+
+#: widgets/taskswidget.cpp:163
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "9 (lowest)"
+msgstr ""
+
+#~ msgid "CSV Export"
+#~ msgstr "CSV-eksport"
+
+#~ msgid "&Edit..."
+#~ msgstr "Wizig&je..."
+
+#, fuzzy
+#~| msgid "Edit Task"
+#~ msgid "Add/Edit a task"
+#~ msgstr "Taak bewurkje"
+
+#, fuzzy
+#~| msgid "Delimiter"
+#~ msgid "Delete"
+#~ msgstr "Skiedingsteken"
+
+#, fuzzy
+#~| msgid "Could not open \"%1\"."
+#~ msgid "Could not save."
+#~ msgstr "\"%1\" koe net iepene wurde."
+
+#, fuzzy
+#~| msgid "&Copy Totals to Clipboard"
+#~ msgctxt "@action:button"
+#~ msgid "E&xport to Clipboard"
+#~ msgstr "Totalen &kopiearje nei klamboerd"
+
+#, fuzzy
+#~| msgid "&Export"
+#~ msgid "&Import"
+#~ msgstr "&Ekportearje"
+
+#, fuzzy
+#~| msgid "&Export to CSV File..."
+#~ msgid "&Export Times..."
+#~ msgstr "&Eksportearje nei CSV-triem..."
+
+#, fuzzy
+#~| msgid "Export &History to CSV File..."
+#~ msgid "Export &History..."
+#~ msgstr "Skied&nis exportearje nei  CSV-triem..."
+
+#, fuzzy
+#~| msgid "The file where Karm will write the data."
+#~ msgid "The file where KTimeTracker will write the data."
+#~ msgstr "De triem wêr't de gegevens hinne skreaun wurde."
+
+#, fuzzy
+#~| msgid "KDE Time tracker tool"
+#~ msgid "ktimetracker"
+#~ msgstr "KDE-tiidregistraasje"
+
+#~ msgid "Configure key bindings"
+#~ msgstr "Toetsebinings ynstelle"
+
+#, fuzzy
+#~| msgid "This will let you configure keybindings which is specific to karm"
+#~ msgid ""
+#~ "This will let you configure keybindings which are specific to ktimetracker"
+#~ msgstr "Hjir kinne jo de toetsebinings foar karm ynstelle."
+
+#~ msgid "Just caught a software interrupt."
+#~ msgstr "Software-ûnderbrekking fûn."
+
+#, fuzzy
+#~| msgid "Delete selected task"
+#~ msgid "Delete task <taskid>"
+#~ msgstr "Seletearre taak wiskje"
+
+#, fuzzy
+#~| msgid "Start timing for selected task"
+#~ msgid "Start timer for task <taskid>"
+#~ msgstr "Begjin mei tiid opnimmen fan de selektearre taak."
+
+#, fuzzy
+#~| msgid "Start timing for selected task"
+#~ msgid "Stop timer for task <taskid>"
+#~ msgstr "Begjin mei tiid opnimmen fan de selektearre taak."
+
+#~ msgid "task_popup"
+#~ msgstr "task_popup"
+
+#, fuzzy
+#~| msgid "Space"
+#~ msgid "Save"
+#~ msgstr "Spaasje"
+
+#, fuzzy
+#~| msgid "Configure KArm..."
+#~ msgid "Configure ktimetracker"
+#~ msgstr "KArm ynstelle..."
+
+#~ msgid "Week of %1"
+#~ msgstr "Wike fan %1"
+
+#, fuzzy
+#~| msgid "Display Settings"
+#~ msgid "Settings"
+#~ msgstr "Ynstellings foar de werjefte"
+
+#, fuzzy
+#~| msgid "Print Dialog"
+#~ msgid "Dialog"
+#~ msgstr "Printerdialooch"
+
+#, fuzzy
+#~| msgid "Delimiter"
+#~ msgid "delete"
+#~ msgstr "Skiedingsteken"
+
+#, fuzzy
+#~| msgid "Successfully saved tasks and history"
+#~ msgid "Successfully saved file "
+#~ msgstr "Taken en skiednis binne súksesfol opslein"
+
+#~ msgid "Task &name:"
+#~ msgstr "Taak&namme:"
+
+#~ msgid "Edit &absolute"
+#~ msgstr "&Absolute tiid bewurkje"
+
+#~ msgid "&Time:"
+#~ msgstr "&Tiid:"
+
+#, fuzzy
+#~| msgid "&Session time: "
+#~ msgid "&Session time:"
+#~ msgstr "&Sesjetiid: "
+
+#~ msgid "Edit &relative (apply to both time and session time)"
+#~ msgstr "&Relative tiid bewurkje (tapasse op de sesje en it totaal)"
+
+#~ msgid "In Desktop"
+#~ msgstr "Op it buroblêd"
+
+#~ msgid "Enter the name of the task here. This name is for your eyes only."
+#~ msgstr ""
+#~ "Fier hjir de namme fan de taak yn. Dizze namme is allinnich foar jo eagen "
+#~ "bestimd."
+
+#~ msgid ""
+#~ "Use this option to set the time spent on this task to an absolute value.\n"
+#~ "\n"
+#~ "For example, if you have worked exactly four hours on this task during "
+#~ "the current session, you would set the Session time to 4 hr."
+#~ msgstr ""
+#~ "Brûk dizze opsje om de bestege tiid oan dizze taak yn in absolute wearde "
+#~ "om te setten.\n"
+#~ "\n"
+#~ "At jo bg. yn dizze sesje op'e kop ôf 4 oeren wurke hawwe oan dizze taak, "
+#~ "dan sil de sesjetiid op 4 oere setten wurde."
+
+#~ msgid ""
+#~ "Use this option to change the time spent on this task relative to its "
+#~ "current value.\n"
+#~ "\n"
+#~ "For example, if you worked on this task for one hour without the timer "
+#~ "running, you would add 1 hr."
+#~ msgstr ""
+#~ "Brûk dizze opsje om de tiid te wizigjen dy't oan dizze taak bestege is.\n"
+#~ "\n"
+#~ "Bygelyks, at jo in oere oan dizze taak wurke hawwe sûnder dat de tiidklok "
+#~ "rûn, set hjir dan 1 oere by."
+
+#~ msgid ""
+#~ "This is the time the task has been running since all times were reset."
+#~ msgstr ""
+#~ "Salang hat de taak draaid sûnt it momint dat alle tiden tebek setten "
+#~ "binne."
+
+#~ msgid "This is the time the task has been running this session."
+#~ msgstr "Dit is de tiid dy't sûnt dizze sesje fan de taak ferrûn is."
+
+#~ msgid ""
+#~ "Specify how much time to add or subtract to the overall and session time"
+#~ msgstr ""
+#~ "Bepaal hjir hoefolle tiid der by/ôf moat fan de totale en sesjetiid."
+
+#, fuzzy
+#~| msgid ""
+#~| "Use this option to automatically start the timer on this task when you "
+#~| "switch to the specified desktop(s)."
+#~ msgid ""
+#~ "Use this option to automatically start the timer on this task when you "
+#~ "switch to the specified desktop(s). Select the desktop(s) that will "
+#~ "automatically start the timer on this task."
+#~ msgstr ""
+#~ "Brûk dizze opsje om de tiidmjitting foar dizze taak te starten at jo nei "
+#~ "de opjûne buroblêden oerskeakelje."
+
+# ENG hr en NL u. Ik haw it mar net ôfkoarte en oere folút skreaun.Oere soe oars o. wurde en dat liket my betizend.
+#~ msgctxt "abbreviation for hours"
+#~ msgid " hr. "
+#~ msgstr " oere "
+
+#~ msgctxt "abbreviation for minutes"
+#~ msgid " min. "
+#~ msgstr " min. "
+
+#, fuzzy
+#~| msgid "Total Time"
+#~ msgid "Start/Stop Timer"
+#~ msgstr "Totale tiid"
+
+#~ msgid "Session: %1"
+#~ msgstr "Sesje: %1"
+
+#, fuzzy
+#~| msgid "Total: %1"
+#~ msgctxt "total time of all tasks"
+#~ msgid "Total: %1"
+#~ msgstr "Totaal: %1"
+
+#~ msgid "Session"
+#~ msgstr "Sesje"
+
+# logged stiet net yn de list. Hoe moatte wy hjir mei oan?
+#~ msgid "No hours logged."
+#~ msgstr "Gjin oeren logge."
+
+#~ msgid "Task History"
+#~ msgstr "Taakskiednis"
+
+#~ msgid "From %1 to %2"
+#~ msgstr "Fan %1 oant %2"
+
+#~ msgid "Printed on: %1"
+#~ msgstr "Utprinte op: %1"
+
+#~ msgid "Selected Task"
+#~ msgstr "Selektearre taak"
+
+#~ msgid "Summarize per week"
+#~ msgstr "Gearfetsje per wike"
+
+#~ msgid "Totals only"
+#~ msgstr "Allinnich totalen"
+
+#~ msgid "KArm"
+#~ msgstr "KArm"
+
+#~ msgid ""
+#~ "Are you sure you want to delete the task named\n"
+#~ "\"%1\" and its entire history?"
+#~ msgstr ""
+#~ "Wolle jo werklik de taak mei de namme\n"
+#~ "\"%1\" wiskje ynklusyf de skiednis derfan?"
+
+#~ msgid "karmPart"
+#~ msgstr "karmPart"
+
+#, fuzzy
+#~| msgid "Display"
+#~ msgctxt "settings page for customizing user interface"
+#~ msgid "Display"
+#~ msgstr "Werjefte"
+
+#~ msgid "Task History\n"
+#~ msgstr "Taakskiednis\n"
+
+#~ msgid "Sum"
+#~ msgstr "Tiid"
+
+#~ msgid "Total Sum"
+#~ msgstr "Totale tiid"
+
+#~ msgid "Task Hierarchy"
+#~ msgstr "Taakskiednis"
+
+# gelogd-logge? De list seit hjir neat oer
+#~ msgid "  No hours logged."
+#~ msgstr "  Gjin oeren logge."
+
+#~ msgid "Task Name "
+#~ msgstr "Taaknamme "
+
+#~ msgid "KArm - %1"
+#~ msgstr "KArm - %1"
+
+#, fuzzy
+#~| msgid "&New..."
+#~ msgctxt "creating a new task"
+#~ msgid "&New..."
+#~ msgstr "&Nij..."
+
+#~ msgid "Export &History to CSV File..."
+#~ msgstr "Skied&nis exportearje nei  CSV-triem..."
+
+#~ msgid "Copy task totals to clipboard"
+#~ msgstr "Taaktotalen nei klamboerd kopiearje"
+
+#~ msgid "Copy time card history to clipboard."
+#~ msgstr "Tiidkaartskiednis nei klamboerd kopiearje."
+
+#~ msgid "Log history"
+#~ msgstr "Logskiednis"
+
+#~ msgid "Successfully exported History to CSV-file"
+#~ msgstr "Skiednis súksesfol fuortskreaun nei CSV-triem"
+
+#, fuzzy
+#~| msgid "Behavior"
+#~ msgid "BehaviorPage"
+#~ msgstr "Gedrach"
+
+#, fuzzy
+#~| msgid "Display"
+#~ msgid "DisplayPage"
+#~ msgstr "Werjefte"
+
+#, fuzzy
+#~| msgid "Storage"
+#~ msgid "StoragePage"
+#~ msgstr "Opslach"
+
+#~ msgid "Preferences"
+#~ msgstr "Foarkarren"
+
+#~ msgid "Behavior Settings"
+#~ msgstr "Ynstellings foar gedrach"
+
+#~ msgid "Display Settings"
+#~ msgstr "Ynstellings foar de werjefte"
+
+#~ msgid "Storage Settings"
+#~ msgstr "Ynstellings foar opslaan"
+
+#~ msgid "iCalendar file:"
+#~ msgstr "iCalendar-triem:"
+
+#~ msgid "radioDecimal"
+#~ msgstr "radioDesimaal"
+
+#~ msgid ""
+#~ "Select the desktop(s) that will automatically start the timer on this "
+#~ "task."
+#~ msgstr ""
+#~ "Selektearje de buroblêden dy't der foar soargje sille dat de tiidmjitting "
+#~ "foar dizze taak automatysk start."
+
+#~ msgid "Idle Detection"
+#~ msgstr "Ynaktiviteitsdeteksje"
+
+#~ msgid "Revert && Stop"
+#~ msgstr "Tebeksette & stopje"
+
+#~ msgid "Copy &History to Clipboard"
+#~ msgstr "Skied&nis kopiearje nei klamboerd"
+
+#~ msgid "Import &Legacy Flat File..."
+#~ msgstr "Ald \"p&lat\" triem ymportearje..."
+
+#~ msgid "File \"%1\" not found."
+#~ msgstr "Triem \"%1\" net fûn."
+
+#~ msgid "&Copy Session Time to Clipboard"
+#~ msgstr "Sesjetiid &kopiearje nei klamboerd"
+
+# Fuortskriuwe(wurdlist) net brûkt troch dat Ymport der as tsjinstelling njonken stiet
+#~ msgid "&Import/Export"
+#~ msgstr "&Ymportearje/Exportearje"
+
+#~ msgid ""
+#~ "<p>You can choose to output time values in fractions of an hour or in "
+#~ "minutes.</p>\n"
+#~ "<p>For example, if the value is 5 hours and 45 minutes, then the Decimal "
+#~ "option would output <tt>5.75</tt>, and the Hours:Minutes option would "
+#~ "output <tt>5:45</tt></p>"
+#~ msgstr ""
+#~ "<p>Jo kinne der foar kieze om tiden út te drukken yn dielen fan in oere "
+#~ "of yn minuten.</p>\n"
+#~ "<p>At de tiid bygelyks 5 oere en 45 minuten is, dan sil de opsje Desimaal "
+#~ "<tt>5,75</tt> jaan, en de opsje Oeren:Minuten sil <tt>5.45</tt></p> jaan."
+
+#~ msgid ""
+#~ "Saving is impossible, so timing is useless. \n"
+#~ "Saving problems may result from a full harddisk, a directory name instead "
+#~ "of a file name, or stale locks. Check that your harddisk has enough "
+#~ "space, that your calendar file exists and is a file and remove stale "
+#~ "locks, typically from ~/.kde/share/apps/kabc/lock."
+#~ msgstr ""
+#~ "It is net mooglik om op te slaan dus it hat gjin sin om de tiid by te "
+#~ "hâlden.\n"
+#~ "Opslachproblemen kinne ûntstean troch in folle hurde skiif, in mapnamme "
+#~ "ynstee fan in triemnamme of ferskoatteltriemmen (meastal yn ~/.kde/share/"
+#~ "apps/kabc/lock)."
+
+#~ msgid ""
+#~ "Copy totals for just this task and its subtasks, or copy totals for all "
+#~ "tasks?"
+#~ msgstr ""
+#~ "Allinnich totalen foar dizze taak en derby hearrende subtaken kopiearje "
+#~ "of alle taken kopiearje?"
+
+#~ msgid "Copy This Task"
+#~ msgstr "Dizze taak kopiearje"
+
+#~ msgid "Copy All Tasks"
+#~ msgstr "Alle taken kopiearje"
+
+#~ msgid ""
+#~ "Copy session time for just this task and its subtasks, or copy session "
+#~ "time for all tasks?"
+#~ msgstr ""
+#~ "Allinnich de sesjetiid foar dizze taak en derby hearrende subtaken "
+#~ "kopiearje of alle taken kopiearje?"
+
+#~ msgid "Copy Session Time to Clipboard"
+#~ msgstr "Sesjetijd nei klamboerd kopiearje"
+
+#~ msgid "Task Name shows the name of a task or subtask you are working on."
+#~ msgstr ""
+#~ "Taaknamme toant de namme fan de taak of subtaak dêr't jo mei dwaande "
+#~ "binne."
+
+#~ msgid ""
+#~ "Session time: Time for this task since you chose \"Start New Session\".\n"
+#~ "Total Session time: Time for this task and all its subtasks since you "
+#~ "chose \"Start New Session\".\n"
+#~ "Time: Overall time for this task.\n"
+#~ "Total Time: Overall time for this task and all its subtasks."
+#~ msgstr ""
+#~ "Sesjetiid: De tiid foar dizze taak sûnt it momint dat jo \"Nije sesje "
+#~ "starte\" oanklikt hawwe.\n"
+#~ "Totale sesjetiid: De tiid foar dizze taak en alle byhearrende subtaken "
+#~ "sûnt it momint dat jo \"Nije sesje starte\" oanklikt hawwe.\n"
+#~ "Tiid: Globale tiid foar dizze taak.\n"
+#~ "Totale tiid: De globale tiid fan dizze taak en alle byhearrende subtaken."

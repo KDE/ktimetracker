@@ -1,0 +1,1197 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Catalan  "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>El manual del &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Revisor</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    &traductor.Antoni.Bella; 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>19 de novembre de 2019</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>El &ktimetracker; segueix el temps dedicat a diferents tasques.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>hora</keyword>
+    <keyword
+>seguidor</keyword>
+    <keyword
+>projecte</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>El &ktimetracker; segueix el temps dedicat a diferents tasques. És útil per al seguiment de les hores facturables i informar de les hores registrades per treball i per dia.</para>
+
+<para
+>Aquest historial del temps es pot exportar a un fitxer de text delimitat per comes per a la seva importació a altres eines de gestió de projectes i/o de facturació.</para>
+
+<para
+>El &ktimetracker; detecta quan el teclat i el ratolí estan inactius i pot associar diferents tasques amb diferents escriptoris, dues eines que poden ajudar a mantenir el temporitzador en la tasca correcta.</para>
+
+<para
+>El &ktimetracker; va ser escrit originalment per en &Sirtaj.Singh.Kang;. La seva pàgina web és <ulink url="https://userbase.kde.org/KTimeTracker"
+>https://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>Usar el &ktimetracker;</title>
+
+<sect1 id="starting">
+<title
+>Començar amb el &ktimetracker;</title>
+
+<para
+>Escriviu <command
+>ktimetracker</command
+> a l'indicador d'ordres o seleccioneu <guimenuitem
+>Seguiment horari personal</guimenuitem
+> des del grup <menuchoice
+> <guimenu
+>Aplicacions</guimenu
+><guisubmenu
+>Utilitats</guisubmenu
+> </menuchoice
+> en el <guimenu
+>Llançador d'aplicacions del Plasma</guimenu
+>. Les opcions d'ordres de les &Qt; i els &kf5-full; estan disponibles, vegeu les pàgines man qt5options i kf5options. </para>
+
+<para
+>El &ktimetracker; proporciona una opció d'ordre addicional que us permet introduir el nom del fitxer iCalendar que s'utilitza per emmagatzemar l'historial de treball. Introduïu un fitxer d'iCalendar remot mitjançant &HTTP; o &FTP;, com a part del nom de fitxer, per exemple, https://www.meulloc.com/mevesdades/meutreball.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Tasques</title>
+
+<informalexample>
+<para
+><emphasis
+>Problema:</emphasis
+> Sou un consultor independent de programari amb molts clients. Alguns clients tenen múltiples projectes. Durant el transcurs d'un dia, alterneu entre diferents projectes. Necessiteu controlar el temps per generar les factures mensuals.</para>
+<para
+><emphasis
+>Solució:</emphasis
+> Creeu una tasca de nivell superior per a cada client i una subtasca per a cada projecte del client. Per a projectes que requereixen un seguiment més detallat, creeu una llista de subtasques del projecte. Controlareu el temps fent doble clic sobre la tasca en la qual esteu treballant actualment.</para>
+</informalexample>
+
+<para
+>El &ktimetracker; proporciona una gran flexibilitat en el seguiment del vostre temps, permetent tasques i profunditat il·limitades. El temps pot estar annexat a qualsevol tasca, i pot estar activa més d'una tasca en un moment donat.</para>
+<para
+>El &ktimetracker; us permet editar l'historial de la vostra tasca i posar un comentari per a tots els esdeveniments que s'han aturat.</para>
+<para
+>Per crear una tasca de nivell superior, seleccioneu <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tasca</guimenu
+> <guimenuitem
+>Tasca nova...</guimenuitem
+> </menuchoice
+>. Per crear una subtasca, ressalteu la tasca principal i seleccioneu <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tasca</guimenu
+> <guimenuitem
+>Subtasca nova...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Quan sortiu del &ktimetracker;, la llista de tasques serà desada a un fitxer en el disc. La pròxima vegada que s'obri, es tornarà a carregar la llista de tasques des del mateix fitxer.</para>
+
+<para
+>El &ktimetracker; pot importar i exportar tasques per a reduir al mínim el vostre treball. Vegeu <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Temporitzadors</title>
+
+<informalexample>
+<para
+><emphasis
+>Problema:</emphasis
+> Per ser solvent, heu de facturar una mitjana de cinc hores al dia. Per mantenir-vos en el camí, veieu els totals diaris i setmanals.</para>
+<para
+><emphasis
+>Solució:</emphasis
+> Reinicieu el temporitzador de la sessió al començament de cada jornada de treball i reinicieu tots els cronòmetres al començament de cada setmana.</para
+> </informalexample>
+
+<para
+>El &ktimetracker; fa un seguiment de temps simple. Per iniciar el registre de temps contra una tasca, feu doble clic a la tasca. Per aturar el registre de temps, feu doble clic a la tasca de nou. Les tasques actives mostren un petit rellotge a la columna de <guilabel
+>Temps de la sessió</guilabel
+>.</para>
+
+<para
+>Un altre indici visual de l'activitat a l'historial és la icona del &ktimetracker; a la safata del sistema. Quan una tasca està activa, es mourà la segona mà a la icona. Si situeu el punter del ratolí sobre aquesta icona, es mostrarà el nom de la tasca activa en un consell. Si està activa més d'una tasca, els noms de les tasques en el consell se separen amb comes.</para>
+
+<para
+>El &ktimetracker; manté dos temporitzadors per a cada tasca: una per al temps de la sessió i un altre per al temps total. En la configuració per defecte, el &ktimetracker; mostra dues columnes per cada temporitzador, donant com a resultat un total de quatre columnes per a cada tasca:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Temps de la sessió</guilabel
+></term>
+<listitem
+><para
+>El temps dedicat a la tasca des que va començar la sessió.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Temps</guilabel
+></term
+> <listitem
+><para
+>El temps dedicat a la tasca d'ençà que es van restablir tots els temps.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Temps total de la sessió</guilabel
+></term>
+<listitem
+><para
+>El temps dedicat a la tasca i totes les seves subtasques des que va començar la sessió.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Temps total</guilabel
+></term>
+<listitem
+><para
+>El temps dedicat a la tasca i totes les seves subtasques des que es van restablir tots els temps.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Per iniciar una sessió nova, seleccioneu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Inicia una sessió nova</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Per reiniciar tots els temps, seleccioneu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Reinicialitza tots els temps</guimenuitem
+> </menuchoice
+>. </para>
+
+<sect2
+><title
+>Seguiment a l'escriptori</title>
+
+<informalexample>
+<para
+><emphasis
+>Problema:</emphasis
+> Teniu dos projectes principals entre els quals canvieu cada dia. Per ajudar-vos a organitzar el vostre treball, manteniu els fitxers del projecte 1 a l'escriptori 1 i els del projecte 2 a l'escriptori 2.</para>
+
+<para
+><emphasis
+>Solució:</emphasis
+> Associeu una tasca de projecte 1 amb l'escriptori 1 i una tasca de projecte 2 amb l'escriptori 2. Quan canvieu entre els escriptoris aquesta s'activarà, el &ktimetracker; aturarà automàticament la tasca de projecte i iniciarà l'altra.</para>
+</informalexample>
+
+<para
+>Per associar una tasca amb un o més escriptoris, seleccioneu <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tasca</guimenu
+> <guimenuitem
+>Propietats</guimenuitem
+> </menuchoice
+>. Activeu el <guilabel
+>Seguiment automàtic</guilabel
+> i seleccioneu l'escriptori o escriptoris a associar amb aquesta tasca. Quan algun dels escriptoris seleccionats es converteixi en actiu, després d'un breu retard, el &ktimetracker; iniciarà automàticament el registre de temps contra aquesta tasca.</para>
+
+</sect2>
+
+<sect2
+><title
+>Detecció d'inactivitat</title>
+
+<informalexample
+> <para
+><emphasis
+>Problema:</emphasis
+> Sortiu del treball el divendres per fer un encàrrec i oblideu aturar el temporitzador. Quan torneu el dilluns, el temporitzador segueix funcionant.</para>
+<para
+><emphasis
+>Solució:</emphasis
+> Activeu la detecció d'inactivitat a la pàgina <guilabel
+>Comportament</guilabel
+> del diàleg de configuració.</para>
+</informalexample>
+
+<para
+>El &ktimetracker; es pot configurar per detectar quan el ratolí i el teclat estan inactius. Si el ratolí i el teclat estan inactius per més d'un nombre especificat de minuts, el &ktimetracker; mostrarà el següent diàleg:</para>
+
+<screenshot>
+ <screeninfo
+>Detecció d'inactivitat del &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Diàleg de detecció d'inactivitat del &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Continua cronometrant</guibutton
+></term>
+<listitem
+><para
+>Aplica el temps d'inactivitat a tots els temporitzadors actius i els manté en funcionament.</para
+><para
+>Quan esteu treballant en la tasca(ques) mentre l'ordinador estava inactiu i encara ho està.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Reverteix el cronometratge</guibutton
+></term>
+<listitem
+><para
+>Resta la quantitat de temps d'inactivitat de tots els temporitzadors actius i els atura.</para
+><para
+>Quan no esteu treballant en la tasca(ques) mentre l'ordinador estava inactiu i encara no ho està.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Altres sistemes</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>El &ktimetracker;, com el &korganizer; i iCal d'Apple, utilitzen el format <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> estàndard de la indústria per a les seves dades. El &ktimetracker; pot llegir i escriure les llistes de tasques pendents creades per aquestes dues aplicacions.</para>
+<para
+>Fins i tot podeu treballar de forma sincrònica sobre un fitxer amb &korganizer; i &ktimetracker;. Si un programa canvia el fitxer, els canvis es propagaran a l'altra aplicació de forma automàtica. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Planificador</title>
+
+<para
+>Com un típic cas d'ús, és possible que vulgueu planificar un projecte amb l'eina de gestió de projectes Imendio Planner (de <ulink url="&Planner.web;"
+>&Planner;</ulink
+>) i importar les seves tasques al &ktimetracker; amb <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Importa</guisubmenu
+><guimenuitem
+>Importa les tasques des del Planner...</guimenuitem
+> </menuchoice
+>, al format <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> estàndard de la indústria. Un cop fet, sereu capaç de programar tasques en el &korganizer;, i comptar el vostre temps en el &ktimetracker;. Aquesta és una manera d'ajudar-vos a assegurar que el vostre projecte es manté en el temps i sota el pressupost.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>El &ktimetracker; admet nombrosos mètodes que es poden utilitzar amb &DBus;. </para>
+<para
+>Hi ha dues maneres d'utilitzar la interfície de &DBus;: L'&IGU; de les &Qt; és <application
+>qdbusviewer</application
+> i la línia d'ordres <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>Script de Bash que mostra la versió del &ktimetracker;</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "ktimetracker no s'està executant"
+</programlisting>
+</example>
+
+<para
+>La interfície de &DBus; actual del &ktimetracker; actualment és utilitzada principalment per a realitzar proves automatitzades, i per això és molt limitada. Per a una completa definició de la interfície, vegeu l'<xref linkend="dbusappendix"/>.</para>
+
+<para
+>Per a veure la interfície de &DBus; completa de la versió del &ktimetracker; instal·lada al vostre sistema, executeu el següent script:</para>
+
+<example
+><title
+>Llistar la interfície de &DBus; del &ktimetracker; a la consola</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker no s'està executant"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Exportar els totals com a CSV</title>
+
+<para
+>El &ktimetracker; pot exportar els totals i l'historial d'ambdós a un format de fitxer separat per comes. Per exportar els totals, seleccioneu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Exporta...</guimenuitem
+> </menuchoice
+> i el &ktimetracker; mostrarà el diàleg d'exportació. </para>
+
+<para
+>Seleccioneu l'opció <guibutton
+>Temps com a CSV</guibutton
+> al grup <guilabel
+>Tipus d'informe</guilabel
+>. El diàleg tindrà un aspecte com segueix: </para>
+
+<screenshot>
+<screeninfo
+>Exporta els temps com a CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Exporta els temps com a CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Si cal, modifiqueu els valors predeterminats del diàleg. Obtindreu una vista prèvia de la sortida CSV al costat dret del diàleg. Feu clic a <guibutton
+>Desa com a...</guibutton
+>i el &ktimetracker; exportarà els totals de totes les tasques cap al fitxer que introduïu en un diàleg de fitxers.</para>
+
+<para
+>Utilitzeu el botó <guibutton
+>Copia al porta-retalls</guibutton
+> per exportar els temps al porta-retalls.</para>
+
+<para
+>Vet aquí un altre exemple del format de sortida:</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 feature plan",,,0.00,0.00,0.00,0.00
+,,"bugs",,,0.00,1.13,0.00,1.13
+,,"checkin changes - translation strings",,,0.00,0.00,0.00,0.00
+,,"time card report",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"web stuff",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Les tasques de nivell superior surten a la primera columna, les subtasques a la segona, i així successivament. Les dades de temps surten després de la profunditat de tasques màxima (cinc en aquest exemple). La primera columna de temps és <guilabel
+>Temps de la sessió</guilabel
+>, la segona és <guilabel
+>Hora</guilabel
+>, la tercera és <guilabel
+>Temps total de la sessió</guilabel
+> i la quarta és <guilabel
+>Temps total</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Exportar l'historial a CSV</title>
+
+<para
+>Per exportar l'historial de tasques, seleccioneu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Exporta</guisubmenu
+> <guimenuitem
+>Exporta...</guimenuitem
+> </menuchoice
+> i el &ktimetracker; mostrarà el mateix diàleg d'exportació com es mostra a dalt. Seleccioneu l'opció <guibutton
+>Historial com a CSV</guibutton
+> en el grup <guilabel
+>Tipus d'informe</guilabel
+>. </para>
+
+<para
+>Seleccioneu un interval de dates amb el que voleu cobrir l'historial de tasques. Si cal, modifiqueu els valors predeterminats del diàleg. Obtindreu una vista prèvia de la sortida CSV al costat dret del diàleg. Feu clic a <guibutton
+>Desa com a...</guibutton
+>i el &ktimetracker; exportarà els totals de totes les tasques cap al fitxer que introduïu en un diàleg de fitxers.</para>
+
+<para
+>Utilitzeu el botó <guibutton
+>Copia al porta-retalls</guibutton
+> per exportar els temps al porta-retalls.</para>
+
+<para
+>Vet aquí un exemple del format de sortida:</para>
+
+<literallayout
+><computeroutput>
+Task History
+From Tuesday 06 July 2004 to Tuesday 13 July 2004
+Printed on: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 feature plan"
+,1.13,,,,,,,1.13,,,"bugs"
+,,,,,,,,0.00,,,"checkin changes - translation strings"
+,,,,,,,,0.00,,,"time card report"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promo"
+,,,,,,,,0.00,,"web stuff"
+</computeroutput
+>
+</literallayout>
+
+<para
+>Les tres primeres línies identifiquen quan es va generar l'informe i per a quin interval de dates. La quarta fila és una llista separada per comes de les dates en l'interval de dates, en format ISO 8601 (AAAA-MM-DD). Totes les files posteriors llisten el temps registrat contra cada tasca. L'última columna numèrica és el total de files per a cada dia. El nom de la tasca s'imprimeix després de la columna de totals, i se sagna per indicar la relació entre tasca/subtasca. Els noms de les tasques de nivell superior apareixen a la primera columna després del total.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>La interfície del &ktimetracker;</title>
+
+<para
+>La finestra principal del &ktimetracker; disposa dels següents components: barra de menús, barra d'eines, barra de cerca, finestra de tasca/hora i barra d'estat.</para>
+
+<para
+>La barra de cerca és un camp combinat. Sempre que no premeu &Intro;, actua com un filtre. Llavors, només es mostren les tasques que coincideixen amb l'entrada. Tan aviat com premeu &Intro;, la vostra entrada s'utilitzarà com a nom per crear una tasca nova. </para>
+
+<para
+>Escolliu <guilabel
+>Configuració per a la PDA</guilabel
+> a la pàgina <guilabel
+>Aparença</guilabel
+> en el diàleg de configuració si teniu una pantalla tàctil i l'espai de la pantalla és preuat. S'inhabilitarà la barra de cerca i haureu de fer clic a un menú contextual perquè aparegui.</para>
+
+<screenshot>
+<screeninfo
+>Pantalla del &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Pantalla del &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>La finestra de tasca/hora</title>
+
+<para
+>Les diverses tasques que es mostren en aquesta finestra, juntament amb el temps acumulat per a cadascuna en la sessió actual i en total. Les tasques que heu programat tenen una petita icona de rellotge al costat del temps de la sessió.</para>
+
+<para
+>Es poden crear subtasques per a cada tasca. Fent clic als signes més i menys davant de la tasca principal commuteu la vista de les seves subtasques associades. El temps total acumulat per a una tasca inclou els temps de les seves subtasques, així com el seu propi temps acumulat.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>La barra d'eines i la barra d'estat</title>
+<para
+>La barra d'eines conté icones per a les següents ordres:</para>
+
+<note
+><para
+>Totes es comporten de forma idèntica al menú d'ordres.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Tasca nova</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Subtasca nova</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Inicia</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Atura</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Elimina</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Edita</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Obre</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Desa</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>La barra d'estat informa del nom del fitxer on es desen les dades.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Crèdits i llicència</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Copyright del programa:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Col·laboradors (en ordre alfabètic)</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>El &ktimetracker; es va inspirar en una molt efectiva utilitat d'en Harald Tveit Alvestrand anomenada <application
+>titrax</application
+>, la qual no només està basada en el conjunt d'eines Xt.</para>
+
+<para
+>Copyright de la documentació 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; i &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Glossari</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>tasca activa</glossterm>
+<glossdef
+><para
+>Una tasca que té un funcionament automàtic.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Un protocol de comunicació entre processos. Nom curt per a «Desktop Bus» (bus d'escriptori).</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>escriptori</glossterm>
+<glossdef
+><para
+>&GNU;/&Linux;, FreeBSD i altres sistemes que executen el servidor X.Org tenen múltiples escriptoris. Típicament podeu tenir fins a quatre escriptoris diferents instal·lats. Cada escriptori pot mostrar el seu propi conjunt de programes i fitxers. Quan s'inicia el &plasma; del &kde; per primera vegada, l'escriptori que es veu és Escriptori 1. Si premeu <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>, veureu Escriptori 2. En prémer <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> anireu de tornada a Escriptori 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>historial</glossterm>
+<glossdef
+><para
+>Si el &ktimetracker; està configurat per registrar l'historial, registrarà cada vegada que inicieu/atureu l'esdeveniment temporitzador. Aquest historial no es netejarà quan es reiniciïn els temps i es mantindrà al fitxer fins que la tasca sigui eliminada.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>sessió</glossterm>
+<glossdef
+><para
+>Un punt de partida definit per l'usuari per als temporitzadors de sessió. Una sessió nova comença quan seleccioneu <menuchoice
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Inicia una sessió nova</guimenuitem
+> </menuchoice
+>. Les dades de sessió no es desen quan creeu una sessió nova. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Temps de la sessió</guilabel
+></glossterm
+> <glossdef
+><para
+>El temps dedicat a la tasca des que va començar la sessió.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>safata del sistema</glossterm>
+<glossdef
+><para
+>La safata del sistema es troba a la barra que (de manera predeterminada en el &plasma; del &kde;) apareix a la part inferior de la pantalla. En aquesta safata del sistema apareix la icona <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> del &ktimetracker; que es troba al costat dret.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>tasca de nivell superior</glossterm>
+<glossdef
+><para
+>Una tasca sense tasques pares.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Temps total de la sessió</guilabel
+></glossterm
+> <glossdef
+><para
+>El temps dedicat a la tasca i totes les seves subtasques des que va començar la sessió.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Temps</guilabel
+></glossterm>
+<glossdef
+><para
+>El temps dedicat a la tasca d'ençà que es van restablir tots els temps.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Temps total</guilabel
+></glossterm>
+<glossdef
+><para
+>El temps dedicat a la tasca i totes les seves subtasques des que es van restablir tots els temps.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>Interfície de &DBus;</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Retorna la versió del &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Descripció</title>
+<para
+><function
+>version()</function
+> és una crida de &DBus; que retorna el nombre de versió del &ktimetracker;, per exemple 4.3.1. El nombre de versió es retorna com una cadena en el format típic de GNU major.menor.bugfix.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>Sortir del &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Descripció</title>
+<para
+><function
+>quit()</function
+> és una crida de &DBus; que proporciona una manera amb la qual un programa extern pot sortir del &ktimetracker;. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Afegeix una tasca nova.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString nom_tasca)
+</synopsis>
+<refsect2>
+<title
+>Paràmetres</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>nom_tasca</parameter
+></term>
+<listitem>
+<para
+>El nom de la tasca nova.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descripció</title>
+<para
+><function
+>addTask(QString nom_tasca)</function
+> és una crida de &DBus; que afegeix una tasca pendent nova de nivell superior a l'emmagatzematge actual. Es retorna l'UID de la tasca nova. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->

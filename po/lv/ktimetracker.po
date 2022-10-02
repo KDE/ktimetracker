@@ -1,0 +1,1808 @@
+# translation of ktimetracker.po to Lavtian
+# Copyright (C) 2008 Free Software Foundation, Inc.
+#
+# Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008, 2010.
+# Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: ktimetracker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-29 00:44+0000\n"
+"PO-Revision-Date: 2010-01-15 21:04+0200\n"
+"Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Viesturs Zariņš"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "viesturs.zarins@mii.lu.lv"
+
+#: dialogs/edittimedialog.cpp:42
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task Time"
+msgstr "Rediģēt darbu"
+
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#, fuzzy, kde-format
+#| msgid "Task"
+msgctxt "@title:group"
+msgid "Task"
+msgstr "Darbs"
+
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#, kde-format
+msgid "Task Name:"
+msgstr "Darba nosaukums:"
+
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#, kde-format
+msgid "Task Description:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:71
+#, kde-format
+msgctxt "@title:group"
+msgid "Time Editing"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:79
+#, kde-format
+msgid "Current Time:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:82
+#, fuzzy, kde-format
+#| msgid " min"
+msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
+msgid " minute"
+msgid_plural " minutes"
+msgstr[0] " min"
+msgstr[1] " min"
+msgstr[2] " min"
+
+#: dialogs/edittimedialog.cpp:88
+#, kde-format
+msgid "Change Time By:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:92
+#, kde-format
+msgid "Time After Change:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:98
+#, fuzzy, kde-format
+#| msgid "Edit History..."
+msgctxt "@action:button"
+msgid "Edit History..."
+msgstr "Rediģēt vēsturi..."
+
+#: dialogs/edittimedialog.cpp:99
+#, fuzzy, kde-format
+#| msgid "To change this task's time, you have to edit its event history."
+msgid "To change this task's time, you have to edit its event history"
+msgstr "Lai izmainītu darba nosaukumu, jārediģē tā notikuma vēsture."
+
+#: dialogs/exportdialog.cpp:96
+#, fuzzy, kde-format
+#| msgid "Export Progress"
+msgctxt "@title:window"
+msgid "Export to File"
+msgstr "Eksporta progress"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
+#, kde-format
+msgctxt "format to display times"
+msgid "Decimal"
+msgstr "Decimāli"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
+#, kde-format
+msgid "Session Times"
+msgstr "Sesijas laiki"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.cpp:138 dialogs/exportdialog.ui:205
+#, kde-format
+msgid "All Tasks"
+msgstr "Visi darbi"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
+#: dialogs/exportdialog.ui:14
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "&Export"
+msgid "Export"
+msgstr "&Eksportēt"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
+#: dialogs/exportdialog.ui:26
+#, fuzzy, kde-format
+#| msgid "Export Progress"
+msgid "Export Preview"
+msgstr "Eksporta progress"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
+#: dialogs/exportdialog.ui:50
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "E&xport to Clipboard"
+msgid "Copy to Clipboard"
+msgstr "E&ksportēt uz starpliktuvi"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
+#: dialogs/exportdialog.ui:60
+#, kde-format
+msgid "Save As..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
+#: dialogs/exportdialog.ui:75
+#, kde-format
+msgid "Report Type"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
+#: dialogs/exportdialog.ui:81
+#, kde-format
+msgid "Times as CSV"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
+#: dialogs/exportdialog.ui:91
+#, kde-format
+msgid "History as CSV"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
+#: dialogs/exportdialog.ui:98
+#, fuzzy, kde-format
+#| msgid "Export to:"
+msgid "Event Log as CSV"
+msgstr "Eksportēt uz:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
+#: dialogs/exportdialog.ui:105
+#, kde-format
+msgid "Times as Text"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:118
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>An inclusive date range for reporting on time card history.  Not "
+#| "enabled when reporting on totals.</p>"
+msgid ""
+"An inclusive date range for reporting on time card history.  Not enabled "
+"when reporting on totals."
+msgstr ""
+"<p>Datumu diapazons, par kuru veidot vēstures atskaiti. Netiek lietots, "
+"veidojot kopsummas.</p>"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:121
+#, kde-format
+msgid "Date Range"
+msgstr "Datumu diapazons"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: dialogs/exportdialog.ui:127
+#, kde-format
+msgid "From:"
+msgstr "No:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: dialogs/exportdialog.ui:150
+#, kde-format
+msgid "To:"
+msgstr "Līdz:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.ui:182
+#, kde-format
+msgid "Hours:Minutes"
+msgstr "Stundas:Minūtes"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.ui:191
+#, kde-format
+msgid "All Times"
+msgstr "Visi laiki"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.ui:210
+#, kde-format
+msgid "Only Selected"
+msgstr "Tikai izvēlētie"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:224
+#, kde-format
+msgid "The character used to separate one field from another in the output."
+msgstr "Rakstzīme, ar ko izvadā atdalīt laukus."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:227
+#, kde-format
+msgid "Delimiter"
+msgstr "Atdalītājs"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioComma)
+#: dialogs/exportdialog.ui:233
+#, kde-format
+msgid "Comma"
+msgstr "Komats"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSemicolon)
+#: dialogs/exportdialog.ui:243
+#, kde-format
+msgid "Semicolon"
+msgstr "Semikols"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioOther)
+#: dialogs/exportdialog.ui:250
+#, kde-format
+msgctxt "user can set an user defined delimiter"
+msgid "Other:"
+msgstr "Cits:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTab)
+#: dialogs/exportdialog.ui:257
+#, kde-format
+msgctxt "tabulator delimiter"
+msgid "Tab"
+msgstr "Tabulācija"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
+#: dialogs/exportdialog.ui:264
+#, kde-format
+msgid "Space"
+msgstr "Atstarpe"
+
+#. i18n: ectx: property (text), widget (QLabel, quotesLabel)
+#: dialogs/exportdialog.ui:308
+#, kde-format
+msgid "Quotes:"
+msgstr "Pēdiņas:"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:327
+#, kde-format
+msgid "All fields are quoted in the output."
+msgstr "Visi izvadītie lauki tiks ielikti pēdiņās:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:331
+#, kde-format
+msgid "\""
+msgstr "\""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:336
+#, kde-format
+msgid "'"
+msgstr "'"
+
+#: dialogs/historydialog.cpp:105 export/totalsastext.cpp:87
+#, kde-format
+msgid "Task"
+msgstr "Darbs"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "StartTime"
+msgstr "Sākšanas laiks"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "EndTime"
+msgstr "Beigšanas laiks"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "Comment"
+msgstr "Komentārs"
+
+#: dialogs/historydialog.cpp:146
+#, fuzzy, kde-format
+#| msgid "You can change this task's comment, start time and end time."
+msgctxt "@info:whatsthis"
+msgid "You can change this task's comment, start time and end time."
+msgstr "Jūs varat mainīt šī darba komentāru, sākuma un beigu laiku."
+
+#: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
+#, kde-format
+msgid "This is not a valid Date/Time."
+msgstr "Šis nav derīgs Datums/Laiks."
+
+#: dialogs/historydialog.cpp:273
+#, kde-format
+msgid "Please select a task to delete."
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
+#: dialogs/historydialog.ui:14
+#, kde-format
+msgid "Edit History"
+msgstr "Rediģēt vēsturi"
+
+#: dialogs/taskpropertiesdialog.cpp:62
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"<p>Enter the name of the task here. You can choose it freely.</p>\n"
+"<p><i>Example:</i> phone with mother</p>"
+msgstr ""
+
+#: dialogs/taskpropertiesdialog.cpp:73
+#, fuzzy, kde-format
+#| msgid "Auto Tracking"
+msgctxt "@title:group"
+msgid "Auto Tracking"
+msgstr "Automātiska sekošana"
+
+#: dialogs/taskpropertiesdialog.cpp:90
+#, kde-format
+msgctxt "order number of desktop: 1, 2, ..."
+msgid "%1."
+msgstr ""
+
+#: export/export.cpp:63
+#, kde-format
+msgid "Could not open \"%1\"."
+msgstr "Neizdevās atvērt \"%1\"."
+
+#: export/totalsastext.cpp:84
+#, kde-format
+msgid "Task Totals"
+msgstr "Darbu kopsavilkumi"
+
+#: export/totalsastext.cpp:87
+#, kde-format
+msgid "Time"
+msgstr "Laiks"
+
+#: export/totalsastext.cpp:120
+#, kde-format
+msgctxt "total time of all tasks"
+msgid "Total"
+msgstr "Kopā"
+
+#: export/totalsastext.cpp:122
+#, kde-format
+msgid "No tasks."
+msgstr "Nav darbu."
+
+#: idletimedetector.cpp:78
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: idletimedetector.cpp:81
+#, fuzzy, kde-format
+#| msgid "Continue timing."
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Turpināt skaitīšanu."
+
+#: idletimedetector.cpp:83
+#, fuzzy, kde-format
+#| msgid "Stop timing and revert back to the time at %1."
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "Apturēt skaitīšanu un atgriezties atpakaļ laikā uz %1."
+
+#: idletimedetector.cpp:84
+#, fuzzy, kde-format
+#| msgid "Revert timing"
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Atgriezt skaitīšanu"
+
+#: idletimedetector.cpp:88
+#, kde-format
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr ""
+
+#. i18n: ectx: Menu (clock)
+#: ktimetrackerui.rc:19
+#, kde-format
+msgid "&Clock"
+msgstr "&Pulkstenis"
+
+#. i18n: ectx: Menu (task)
+#: ktimetrackerui.rc:26
+#, kde-format
+msgid "&Task"
+msgstr "&Darbs"
+
+#. i18n: ectx: Menu (settings)
+#: ktimetrackerui.rc:36
+#, kde-format
+msgid "&Settings"
+msgstr "Ie&statījumi"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ktimetrackerui.rc:41
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Galvenā rīkjosla "
+
+#. i18n: ectx: ToolBar (taskToolBar)
+#: ktimetrackerui.rc:50
+#, kde-format
+msgid "Tasks"
+msgstr "Darbi"
+
+#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#, kde-format
+msgid "KTimeTracker"
+msgstr "KTimeTracker"
+
+#: main.cpp:102
+#, kde-format
+msgid "KDE Time tracker tool"
+msgstr "KDE laika uzskaites rīks"
+
+#: main.cpp:104
+#, kde-format
+msgid "Copyright © 1997-2019 KTimeTracker developers"
+msgstr ""
+
+#: main.cpp:108
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Potashev"
+msgstr ""
+
+#: main.cpp:109
+#, fuzzy, kde-format
+#| msgid "Current Maintainer"
+msgctxt "@info:credit"
+msgid "Current Maintainer (since 2019)"
+msgstr "Pašreizējais uzturētājs"
+
+#: main.cpp:111
+#, fuzzy, kde-format
+#| msgid "Thorsten St&auml;rk"
+msgctxt "@info:credit"
+msgid "Thorsten Stärk"
+msgstr "Thorsten St&auml;rk"
+
+#: main.cpp:112
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2006-2012)"
+msgstr ""
+
+#: main.cpp:114
+#, fuzzy, kde-format
+#| msgid "Mark Bucciarelli"
+msgctxt "@info:credit"
+msgid "Mark Bucciarelli"
+msgstr "Mark Bucciarelli"
+
+#: main.cpp:115
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2005-2006)"
+msgstr ""
+
+#: main.cpp:117
+#, fuzzy, kde-format
+#| msgid "Jesper Pedersen"
+msgctxt "@info:credit"
+msgid "Jesper Pedersen"
+msgstr "Jesper Pedersen"
+
+#: main.cpp:118
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2000-2005)"
+msgstr ""
+
+#: main.cpp:120
+#, fuzzy, kde-format
+#| msgid "Sirtaj Singh Kang"
+msgctxt "@info:credit"
+msgid "Sirtaj Singh Kang"
+msgstr "Sirtaj Singh Kang"
+
+#: main.cpp:121
+#, fuzzy, kde-format
+#| msgid "Original Author"
+msgctxt "@info:credit"
+msgid "Original Author"
+msgstr "Sākotnējais autors"
+
+#: main.cpp:123
+#, fuzzy, kde-format
+#| msgid "Mathias Soeken"
+msgctxt "@info:credit"
+msgid "Mathias Soeken"
+msgstr "Mathias Soeken"
+
+#: main.cpp:124
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (in 2007)"
+msgstr ""
+
+#: main.cpp:126
+#, fuzzy, kde-format
+#| msgid "Kalle Dalheimer"
+msgctxt "@info:credit"
+msgid "Kalle Dalheimer"
+msgstr "Kalle Dalheimer"
+
+#: main.cpp:127
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (1999-2000)"
+msgstr ""
+
+#: main.cpp:129
+#, fuzzy, kde-format
+#| msgid "Allen Winter"
+msgctxt "@info:credit"
+msgid "Allen Winter"
+msgstr "Allen Winter"
+
+#: main.cpp:130 main.cpp:133
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:132
+#, fuzzy, kde-format
+#| msgid "David Faure"
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:144
+#, fuzzy, kde-format
+#| msgid "The iCalendar file to open"
+msgctxt "@info:shell"
+msgid "Path or URL to iCalendar file to open."
+msgstr "Atveramais iCalendar fails"
+
+#: mainwindow.cpp:52
+#, fuzzy, kde-format
+#| msgid "Configure KTimeTracker..."
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "Konfigurēt KTimeTracker..."
+
+#: mainwindow.cpp:152 tray.cpp:90
+#, kde-format
+msgid "No active tasks"
+msgstr "Nav aktīvu darbu"
+
+#: mainwindow.cpp:162 tray.cpp:110
+#, fuzzy, kde-format
+#| msgid ", "
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: model/tasksmodel.cpp:33
+#, fuzzy, kde-format
+#| msgid "Task Name"
+msgctxt "@title:column"
+msgid "Task Name"
+msgstr "Darba nosaukums"
+
+#: model/tasksmodel.cpp:34
+#, fuzzy, kde-format
+#| msgid "Session Time"
+msgctxt "@title:column"
+msgid "Session Time"
+msgstr "Sesijas laiks"
+
+#: model/tasksmodel.cpp:35
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
+msgid "Time"
+msgstr "Laiks"
+
+#: model/tasksmodel.cpp:36
+#, fuzzy, kde-format
+#| msgid "Total Session Time"
+msgctxt "@title:column"
+msgid "Total Session Time"
+msgstr "Kopējas sesijas laiks"
+
+#: model/tasksmodel.cpp:37
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgctxt "@title:column"
+msgid "Total Time"
+msgstr "Kopējais laiks"
+
+#: model/tasksmodel.cpp:38
+#, fuzzy, kde-format
+#| msgid "Priority"
+msgctxt "@title:column"
+msgid "Priority"
+msgstr "Prioritāte"
+
+#: model/tasksmodel.cpp:39
+#, fuzzy, kde-format
+#| msgid "Percent Complete"
+msgctxt "@title:column"
+msgid "Percent Complete"
+msgstr "Procenti pabeigts"
+
+#: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The task name is what you call the task, it can be chosen freely."
+msgstr ""
+
+#: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The session time is the time since you last chose \"Start New Session\"."
+msgstr ""
+
+#: model/tasksmodel.cpp:290
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task(s) and all subtasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"The total session time is the session time of this task and all its subtasks."
+msgstr "Šis dzēš izvēlēto darbu un visus tā apakšdarbus."
+
+#: model/tasksmodel.cpp:294
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task(s) and all subtasks."
+msgctxt "@info:whatsthis"
+msgid "The total time is the time of this task and all its subtasks."
+msgstr "Šis dzēš izvēlēto darbu un visus tā apakšdarbus."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
+#: settings/cfgbehavior.ui:17
+#, kde-format
+msgid "Detect desktop as idle after:"
+msgstr "Noteikt darbvirsmas dīkstāvi pēc:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
+#: settings/cfgbehavior.ui:24 settings/cfgstorage.ui:36
+#, kde-format
+msgid " min"
+msgstr " min"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/cfgbehavior.ui:37
+#, kde-format
+msgid "Minimum desktop active time:"
+msgstr "Minimālais darbvirsmas aktivitātes laiks:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
+#: settings/cfgbehavior.ui:44
+#, kde-format
+msgid " sec"
+msgstr " sek"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
+#: settings/cfgbehavior.ui:57
+#, kde-format
+msgid "Prompt before deleting tasks"
+msgstr "Vaicāt apstiprinājumu dzēšot darbus"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:64
+#, kde-format
+msgid ""
+"Unitasking - allow only one task to be timed at a time. Does not stop any "
+"timer."
+msgstr ""
+"Viendarbošana - vienlaicīgi laiks tiek pieskaitīts tikai vienam darbam. "
+"Neaptur laika skaitītājus."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:67
+#, kde-format
+msgid "Allow only one timer at a time"
+msgstr "Ļaut darināt vienlaicīgi tikai vienu laika skaitītāju"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
+#: settings/cfgbehavior.ui:74
+#, kde-format
+msgid "Place an icon to the system tray"
+msgstr "Pievienot ikonu sistēmas ikonu joslai"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: settings/cfgdisplay.ui:29
+#, kde-format
+msgctxt "title of group box, general options"
+msgid "General"
+msgstr "Pamata"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
+#: settings/cfgdisplay.ui:35
+#, kde-format
+msgid "Decimal number format"
+msgstr "Decimāls skaitļu formāts"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:42
+#, fuzzy, kde-format
+#| msgid ""
+#| "Choose this if you have a touchscreen and your screen real estate is "
+#| "precious"
+msgid ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious. It will disable the search bar and every click will pop up a "
+"context menu."
+msgstr ""
+"Izvēlieties šo, ja jums ir skārienjutīgs ekrāns un jums ir maz vietas uz "
+"ekrāna"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:45
+#, kde-format
+msgctxt ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious."
+msgid "Configuration for PDA"
+msgstr "PDA konfigurācija"
+
+#. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
+#: settings/cfgdisplay.ui:55
+#, kde-format
+msgid "Window Title"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
+#: settings/cfgdisplay.ui:64
+#, kde-format
+msgid "Currently opened file"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
+#: settings/cfgdisplay.ui:71
+#, fuzzy, kde-format
+#| msgid "Total Session Time"
+msgid "Current Task and Session Time"
+msgstr "Kopējas sesijas laiks"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: settings/cfgdisplay.ui:81
+#, kde-format
+msgid "Columns Displayed"
+msgstr "Rādītās kolonas"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
+#: settings/cfgdisplay.ui:87
+#, kde-format
+msgid "Session time"
+msgstr "Sesijas laiks"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
+#: settings/cfgdisplay.ui:94
+#, kde-format
+msgid "Cumulative task time"
+msgstr "Kopējais darbu laiks"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
+#: settings/cfgdisplay.ui:101
+#, kde-format
+msgid "Total session time"
+msgstr "Kopējas sesijas laiks"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
+#: settings/cfgdisplay.ui:108
+#, kde-format
+msgid "Total task time"
+msgstr "Kopējais darba laiks"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
+#: settings/cfgdisplay.ui:115
+#, kde-format
+msgid "Priority"
+msgstr "Prioritāte"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
+#: settings/cfgdisplay.ui:122
+#, kde-format
+msgid "Percent complete"
+msgstr "Procenti pabeigts"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_autoSave)
+#: settings/cfgstorage.ui:29
+#, kde-format
+msgid "Save tasks every:"
+msgstr "Saglabāt darbus ik pēc:"
+
+#: taskview.cpp:118
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"Kļūda jauna darba saglabāšanā. Jūsu izmaiņas nav saglabātas. Pārliecinieties "
+"ka varat rediģēt jūsu iCalendar failu. Aizveriet visas programmas, kas "
+"izmanto šo failu un izdzēsiet visus jūsu faila slēgšanas failus no ~/.kde/"
+"share/apps/kabc/lock/ "
+
+#: taskview.cpp:214
+#, fuzzy, kde-format
+#| msgid ""
+#| "Your virtual desktop number is too high, desktop tracking will not work"
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+"Jūsu virtuālās darbvirsmas numurs ir pārāk liels, darbvirsmas izsekošana "
+"nestrādās"
+
+#: taskview.cpp:290
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: taskview.cpp:291
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: taskview.cpp:361 taskview.cpp:445
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Nenosaukts darbs"
+
+#: taskview.cpp:380
+#, fuzzy, kde-format
+#| msgid ""
+#| "Error storing new task. Your changes were not saved. Make sure you can "
+#| "edit your iCalendar file. Also quit all applications using this file and "
+#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
+#| "lock/ "
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"Kļūda jauna darba saglabāšanā. Jūsu izmaiņas nav saglabātas. Pārliecinieties "
+"ka varat rediģēt jūsu iCalendar failu. Aizveriet visas programmas, kas "
+"izmanto šo failu un izdzēsiet visus jūsu faila slēgšanas failus no ~/.kde/"
+"share/apps/kabc/lock/ "
+
+#: taskview.cpp:422
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "Jauns apakšdarbs"
+
+#: taskview.cpp:440
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Rediģēt darbu"
+
+#: taskview.cpp:474 taskview.cpp:515 taskview.cpp:537
+#, kde-format
+msgid "No task selected."
+msgstr "Nav izvēlēts neviens darbs"
+
+#: taskview.cpp:520
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to delete the selected task(s) and their entire "
+#| "history?\n"
+#| "NOTE: all subtasks and their history will also be deleted."
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Vai tiešām vēlaties dzēst izvēlētos darbus un visu to vēsturi?\n"
+"PIEZĪME: tiks izdzēsti arī visi apakšdarbi un to vēstures."
+
+#: taskview.cpp:524
+#, fuzzy, kde-format
+#| msgid "Deleting Task(s)"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Dzēs darbus"
+
+#: timetrackerstorage.cpp:140
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "Kļūda ielādējot \"%1\": neizdevās atrast vecāku (uid=%2)"
+
+#: timetrackerstorage.cpp:243
+#, fuzzy, kde-format
+#| msgid "Could not save. Disk full ?"
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "Nevar saglabāt. Disks pilns ?"
+
+#: timetrackerstorage.cpp:251
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: timetrackerwidget.cpp:154
+#, fuzzy, kde-format
+#| msgid "Start &New Session"
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "Sākt &jaunu sesiju"
+
+#: timetrackerwidget.cpp:155
+#, fuzzy, kde-format
+#| msgid "Starts a new session"
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "Sāk jaunu sesiju"
+
+#: timetrackerwidget.cpp:157
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session time to 0 for all tasks, to start a new "
+#| "session, without affecting the totals."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"Šis nometīs visu darbu sesijas laikus uz 0, tas sāk jaunu sesiju, nemainot "
+"kopējo nostrādāto laiku."
+
+#: timetrackerwidget.cpp:165
+#, fuzzy, kde-format
+#| msgid "Edit History..."
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "Rediģēt vēsturi..."
+
+#: timetrackerwidget.cpp:166
+#, fuzzy, kde-format
+#| msgid "Edits history of all tasks of the current document"
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr "Rediģē aktīvā dokumenta visu darbu vēsturi."
+
+#: timetrackerwidget.cpp:168
+#, fuzzy, kde-format
+#| msgid ""
+#| "A window will be opened where you can change start and stop times of "
+#| "tasks or add a comment to them."
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+"Tiks atvērts logs, kurā jūs varēsiet mainīt darbu sākšanas un apturēšanas "
+"laikus un komentēt tos."
+
+#: timetrackerwidget.cpp:178
+#, fuzzy, kde-format
+#| msgid "&Reset All Times"
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "&Nomest visus laikus"
+
+#: timetrackerwidget.cpp:179
+#, fuzzy, kde-format
+#| msgid "Resets all times"
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Nomet visus laikus"
+
+#: timetrackerwidget.cpp:181
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session and total time to 0 for all tasks, to restart "
+#| "from scratch."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"Šis nometīs visu darbu sesijas no kopējo laiku uz 0, lai sāktu no sākuma."
+
+#: timetrackerwidget.cpp:188
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "&Sākt"
+
+#: timetrackerwidget.cpp:189
+#, fuzzy, kde-format
+#| msgid "Starts timing for selected task"
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "Sāk izvēlēdā darba laika skaitīšanu"
+
+#: timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will start timing for the selected task.\n"
+#| "It is even possible to time several tasks simultanously.\n"
+#| "\n"
+#| "You may also start timing of tasks by double clicking the left mouse "
+#| "button on a given task. This will, however, stop timing of other tasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"Šis sāks skaitīt laiku izvēlētajam darbam.\n"
+"Ir iespējams skaitīt laiku vairākiem darbiem uzreiz.\n"
+"\n"
+"Jūs varat sākt skaitīt laiku darbiem arī veidot dubultklišķi uz tiem. Bet "
+"tas apturēs visu citu darbu laika atskaiti."
+
+#: timetrackerwidget.cpp:205
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "Ap&turēt"
+
+#: timetrackerwidget.cpp:206
+#, fuzzy, kde-format
+#| msgid "Stops timing of the selected task"
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "Aptur izvēlētā darba laika atskaiti"
+
+#: timetrackerwidget.cpp:207
+#, fuzzy, kde-format
+#| msgid "Stops timing of the selected task"
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "Aptur izvēlētā darba laika atskaiti"
+
+#: timetrackerwidget.cpp:214
+#, fuzzy, kde-format
+#| msgid "Focus on Searchbar"
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr "Fokusēties uz meklēšanas joslu"
+
+#: timetrackerwidget.cpp:215
+#, fuzzy, kde-format
+#| msgid "Sets the focus on the searchbar"
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr "Iestata fokusu uz meklēšanas joslu"
+
+#: timetrackerwidget.cpp:216
+#, fuzzy, kde-format
+#| msgid "Sets the focus on the searchbar"
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr "Iestata fokusu uz meklēšanas joslu"
+
+#: timetrackerwidget.cpp:223
+#, fuzzy, kde-format
+#| msgid "Stop &All Timers"
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "&Apturēt visus darbus"
+
+#: timetrackerwidget.cpp:224
+#, fuzzy, kde-format
+#| msgid "Stops all of the active timers"
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Aptur visus aktīvos darbus"
+
+#: timetrackerwidget.cpp:225
+#, fuzzy, kde-format
+#| msgid "Stops all of the active timers"
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Aptur visus aktīvos darbus"
+
+#: timetrackerwidget.cpp:233
+#, fuzzy, kde-format
+#| msgid "Track Active Applications"
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr "Izsekot aktīvās programmas"
+
+#: timetrackerwidget.cpp:235
+#, fuzzy, kde-format
+#| msgid ""
+#| "Auto-creates and updates tasks when the focus of the current window has "
+#| "changed"
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr "Automātiksi izveido un atjauno darbus, kad mainās aktīvais logs"
+
+#: timetrackerwidget.cpp:238
+#, fuzzy, kde-format
+#| msgid ""
+#| "If the focus of a window changes for the first time when this action is "
+#| "enabled, a new task will be created with the title of the window as its "
+#| "name and will be started. If there already exists such an task it will be "
+#| "started."
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+"Ja logs kļūst aktīvs pirmo reizi un šis ir ieslēgts, tiks izveidots jauns "
+"darbs, kura nosaukums būs loga nosaukums. Ja tāds darbs jau eksistē, tas "
+"tiks sākts."
+
+#: timetrackerwidget.cpp:249
+#, fuzzy, kde-format
+#| msgid "&New Task..."
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "&Jauns darbs..."
+
+#: timetrackerwidget.cpp:250
+#, fuzzy, kde-format
+#| msgid "Creates new top level task"
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Izveido jaunu augšējā līmeņa darbu"
+
+#: timetrackerwidget.cpp:251
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "Šis izveidos jaunu augšējā līmeņa darbu."
+
+#: timetrackerwidget.cpp:259
+#, fuzzy, kde-format
+#| msgid "New &Subtask..."
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "Jauns a&pakšdarbs..."
+
+#: timetrackerwidget.cpp:260
+#, fuzzy, kde-format
+#| msgid "Creates a new subtask to the current selected task"
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "Izveidot izvēlētajam darbam jaunu apakšdarbu"
+
+#: timetrackerwidget.cpp:261
+#, fuzzy, kde-format
+#| msgid "This will create a new subtask to the current selected task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "Šis šobrīd izvēlētajam darbam izveidos jaunu apakšdarbu."
+
+#: timetrackerwidget.cpp:269
+#, fuzzy, kde-format
+#| msgid "&Delete"
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "&Dzēst"
+
+#: timetrackerwidget.cpp:270
+#, fuzzy, kde-format
+#| msgid "Deletes selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Dzēš izvēlēto darbu"
+
+#: timetrackerwidget.cpp:271
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task(s) and all subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "Šis dzēš izvēlēto darbu un visus tā apakšdarbus."
+
+#: timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: timetrackerwidget.cpp:280
+#, fuzzy, kde-format
+#| msgid "Edits name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "Rediģē izvēlētā darba nosaukumu un laikus"
+
+#: timetrackerwidget.cpp:282
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr "Šis atvērt logu, kurā varēs rediģēt izvēlētā darba parametrus."
+
+#: timetrackerwidget.cpp:291
+#, fuzzy, kde-format
+#| msgid "Edit Times"
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Rediģēt laikus"
+
+#: timetrackerwidget.cpp:292
+#, fuzzy, kde-format
+#| msgid "Edits name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "Rediģē izvēlētā darba nosaukumu un laikus"
+
+#: timetrackerwidget.cpp:294
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr "Šis atvērt logu, kurā varēs rediģēt izvēlētā darba parametrus."
+
+#: timetrackerwidget.cpp:303
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&Atzīmēt kā pabeigtu"
+
+#: timetrackerwidget.cpp:311
+#, fuzzy, kde-format
+#| msgid "&Mark as Incomplete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&Atzīmēt kā nepabeigtu"
+
+#: timetrackerwidget.cpp:319
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Eksportēt"
+
+#: timetrackerwidget.cpp:326
+#, fuzzy, kde-format
+#| msgid "Import Tasks From &Planner..."
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "Importēt darbus no &plānotāja..."
+
+#: timetrackerwidget.cpp:338
+#, fuzzy, kde-format
+#| msgid "Show Searchbar"
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr "Rādīt meklēšanas joslu"
+
+#: timetrackerwidget.cpp:471
+#, fuzzy, kde-format
+#| msgid "Behavior"
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "Izturēšanās"
+
+#: timetrackerwidget.cpp:474
+#, fuzzy, kde-format
+#| msgctxt "settings page for customizing user interface"
+#| msgid "Appearance"
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr "Izskats"
+
+#: timetrackerwidget.cpp:477
+#, fuzzy, kde-format
+#| msgid "Storage"
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "Glabāšana"
+
+#: timetrackerwidget.cpp:514
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "Jauns darbs"
+
+#: timetrackerwidget.cpp:593
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+"Vēl nav vēstures. Sāciet un apturiet kādu darbu, lai piepildītu vēsturi."
+
+#: timetrackerwidget.cpp:603
+#, fuzzy, kde-format
+#| msgid "Do you really want to reset the time to zero for all tasks?"
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr "Vai tiešām vēlaties visiem darbiem atstatīt laiku uz nulli?"
+
+#: timetrackerwidget.cpp:605
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "Nepieciešams apstiprinājums"
+
+#: timetrackerwidget.cpp:606
+#, fuzzy, kde-format
+#| msgid "Reset All Times"
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "Atstatīt visus laikus"
+
+#: timetrackerwidget.cpp:795
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr "Neizdevās saglabāt, visdrīzāk neizdevās slēgt failu."
+
+#: timetrackerwidget.cpp:797
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "Neizdevās mainīt kalendāra resursu."
+
+#: timetrackerwidget.cpp:799
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "Nepietiek atmiņas -- nevar izveidot objektu."
+
+#: timetrackerwidget.cpp:801
+#, kde-format
+msgid "UID not found."
+msgstr "UID nav atrasts."
+
+#: timetrackerwidget.cpp:803
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "Nederīgs datums -- formāts ir GGGG-MM-DD."
+
+#: timetrackerwidget.cpp:805
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "Nederīgs laiks -- formāts ir GGGG-MM-DDTStSt:MM:SekSek"
+
+#: timetrackerwidget.cpp:807
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "Nederīgs darba ilgums -- jābūt lielākam par nulli."
+
+#: timetrackerwidget.cpp:809
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "Nederīgs kļūdas numurs: %1"
+
+#: timetrackerwidget.cpp:1038
+#, fuzzy, kde-format
+#| msgid ""
+#| "This is ktimetracker, KDE's program to help you track your time. Best, "
+#| "start with creating your first task - enter it into the field where you "
+#| "see \"search or add task\"."
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+"Šis ir ktimetracker, KDE programma, kas palīdz skaitīt patērēto laiku. "
+"Sāciet ar pirmā darba izveidošanu - ievadiet tā nosaukumu laukā \"meklēt vai "
+"pievienot darbu\"."
+
+#: timetrackerwidget.cpp:1045
+#, fuzzy, kde-format
+#| msgid "You have already created a task. You can now start and stop timing"
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+"Jūs jau esat izveidojis darbu. Tagad jūs varat sākt un apturēt laika "
+"skaitīšanu"
+
+#: tray.cpp:95
+#, fuzzy, kde-format
+#| msgid ", ..."
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: treeviewheadercontextmenu.cpp:46
+#, fuzzy, kde-format
+#| msgid "Columns"
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "Kolonnas"
+
+#: widgets/searchline.cpp:37
+#, fuzzy, kde-format
+#| msgid "Search or add task"
+msgctxt "@info:placeholder"
+msgid "Search or add task"
+msgstr "Meklēt vai pievienot darbu"
+
+#: widgets/searchline.cpp:39
+#, fuzzy, kde-format
+#| msgid ""
+#| "This is a combined field. As long as you do not type ENTER, it acts as a "
+#| "filter. Then, only tasks that match your input are shown. As soon as you "
+#| "type ENTER, your input is used as name to create a new task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This is a combined field. As long as you do not press Enter, it acts as a "
+"filter. Then, only tasks that match your input are shown. As soon as you "
+"press Enter, your input is used as name to create a new task."
+msgstr ""
+"Šis ir kombinēts laiks. Ja vien jūs nenospiežat ENTER, tas darbojas kā "
+"filtrs. Nospiežot ENTER, tas izveido jaunu darbu ar ievadīto tekstu kā tā "
+"nosaukumu."
+
+#: widgets/taskswidget.cpp:143
+#, fuzzy, kde-format
+#| msgid "%1 %"
+msgctxt "@item:inmenu Task progress"
+msgid "%1 %"
+msgstr "%1 %"
+
+#: widgets/taskswidget.cpp:154
+#, fuzzy, kde-format
+#| msgid "unspecified"
+msgctxt "@item:inmenu Task priority"
+msgid "unspecified"
+msgstr "nenorādīts"
+
+#: widgets/taskswidget.cpp:157
+#, fuzzy, kde-format
+#| msgctxt "combox entry for highest priority"
+#| msgid "1 (highest)"
+msgctxt "@item:inmenu Task priority"
+msgid "1 (highest)"
+msgstr "1 (augstākā)"
+
+#: widgets/taskswidget.cpp:160
+#, fuzzy, kde-format
+#| msgctxt "combox entry for medium priority"
+#| msgid "5 (medium)"
+msgctxt "@item:inmenu Task priority"
+msgid "5 (medium)"
+msgstr "5 (vidēja)"
+
+#: widgets/taskswidget.cpp:163
+#, fuzzy, kde-format
+#| msgctxt "combox entry for lowest priority"
+#| msgid "9 (lowest)"
+msgctxt "@item:inmenu Task priority"
+msgid "9 (lowest)"
+msgstr "9 (zemākā)"
+
+#~ msgid "CSV Export"
+#~ msgstr "Eksportēt CSV"
+
+#~ msgid "Continue timing. Timing has started at %1"
+#~ msgstr "Turpināt skaitīšanu. Skaitīšana sākta %1"
+
+#~ msgid "&Edit..."
+#~ msgstr "R&ediģēt..."
+
+#, fuzzy
+#~| msgid "Edit Task"
+#~ msgid "Add/Edit a task"
+#~ msgstr "Rediģēt darbu"
+
+#, fuzzy
+#~| msgid "&Delete"
+#~ msgid "Delete"
+#~ msgstr "&Dzēst"
+
+#~ msgid "Cannot create new file."
+#~ msgstr "Neizdevās izveidot jaunu failu"
+
+#~ msgid "Could not save."
+#~ msgstr "Nevar saglabāt."
+
+#~ msgid "&Import"
+#~ msgstr "&Importēt"
+
+#~ msgid "&Export Times..."
+#~ msgstr "&Eksportēt laikus..."
+
+#~ msgid "Export &History..."
+#~ msgstr "Eksportēt &vēsturi..."
+
+#~ msgid "The file where KTimeTracker will write the data."
+#~ msgstr "Fails, kur KTimeTracker saglabāt datus."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter the name of the "
+#~ "task here. You can choose it freely.</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Example:</span> phone with mother</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Šeit ievadiet darba "
+#~ "nosaukumu. Rakstiet ko gribat.</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Piemēram:</span> piezvanīt mātei</p></body></html>"
+
+#~ msgid "KArmReminder"
+#~ msgstr "KArmReminder"
+
+#~ msgid "(c) 2006"
+#~ msgstr "(c) 2006"
+
+#~ msgid "Someone, probably you, has called karm.\n"
+#~ msgstr "Kāds, iespējams jūs pats, palaida karm.\n"
+
+#~ msgid ""
+#~ "KArm has been renamed to KTimeTracker. This makes it easier to "
+#~ "recognize.\n"
+#~ "Compatibility advice: Do not give ktimetracker files to karm users. Using "
+#~ "karm files with ktimetracker is possible.\n"
+#~ msgstr ""
+#~ "KArm ir pārdēvēts par KTimeTracker. Tas to padara vieglāk atpazīstamu.\n"
+#~ "Savietojamības padoms: Nedodiet karm lietotājiem ktimetracker failus. "
+#~ "Karm failu izmantošana ar ktimetracker nav iespējama.\n"
+
+#~ msgid ""
+#~ "Please learn to call ktimetracker as this reminder may be removed in the "
+#~ "future.\n"
+#~ msgstr ""
+#~ "Lūdzu turpmāk laidiet ktimetracker, jo šis atgādinājums nākotnē tiks "
+#~ "noņemts.\n"
+
+#~ msgid ""
+#~ "Someone, probably you, has called karm. KArm has been renamed to "
+#~ "KTimeTracker. This makes it easier to recognize. Compatibility advice: Do "
+#~ "not give ktimetracker files to karm users. Using karm files with "
+#~ "ktimetracker is possible. Please learn to call ktimetracker as this "
+#~ "reminder may be removed in the future."
+#~ msgstr ""
+#~ "Kāds, iespējams jūs, palaida karm. KArm ir pārdēvēts par KTimeTracker.  "
+#~ "Tas to padara vieglāk atpazīstamu. Savietojamības padoms: Nedodiet karm "
+#~ "lietotājiem ktimetracker failus. Karm failu izmantošana ar ktimetracker "
+#~ "nav iespējama. Lūdzu turpmāk laidiet ktimetracker, jo šis atgādinājums "
+#~ "nākotnē tiks noņemts"
+
+#~ msgid "KArm is now ktimetracker"
+#~ msgstr "KArm tagad ir ktimetracker"
+
+#~ msgid "ktimetracker"
+#~ msgstr "ktimetracker"
+
+#~ msgid "Configure key bindings"
+#~ msgstr "Konfigurēt tastatūras īsceļus"
+
+#~ msgid ""
+#~ "This will let you configure keybindings which are specific to ktimetracker"
+#~ msgstr "Šis ļauj jums konfigurēt ktimetracker tastatūras īsceļus"
+
+#~ msgid "&File"
+#~ msgstr "&Fails"
+
+#~ msgid "Just caught a software interrupt."
+#~ msgstr "Tika saņemts programmas pātraukums."
+
+#~ msgid "List all tasks as text output"
+#~ msgstr "Uzskaitīt visus darbus teksta izvadā"
+
+#~ msgid "Add task <taskname>"
+#~ msgstr "Pievienot darbu <taskname>"
+
+#~ msgid "Delete task <taskid>"
+#~ msgstr "Dzēst darbu <taskid>"
+
+#~ msgid "Print the task ids for all tasks named <taskname>"
+#~ msgstr "Izdrukāt darbu IDus visiem darbiem, kas saucas <taskname>"
+
+#~ msgid "Start timer for task <taskid>"
+#~ msgstr "Sākt laika skaitīšanu darbam <taskid>"
+
+#~ msgid "Stop timer for task <taskid>"
+#~ msgstr "Apturēt laika skaitīšanu darbam <taskid>"
+
+#~ msgid "Deliver total minutes for task id"
+#~ msgstr "Pateikt darba ID kopējo minūšu skaitu"
+
+#~ msgid "Outputs the version"
+#~ msgstr "Izvada versiju"
+
+#, fuzzy
+#~| msgid "Could not find the KTimeTracker part."
+#~ msgid "Could not create the KTimeTracker part."
+#~ msgstr "Neizdevās atrast KTimeTracker daļu."
+
+#~ msgid "Could not find the KTimeTracker part."
+#~ msgstr "Neizdevās atrast KTimeTracker daļu."
+
+#~ msgid "File"
+#~ msgstr "Fails"
+
+#~ msgid "Help"
+#~ msgstr "Palīdzība"
+
+#~ msgid "Load"
+#~ msgstr "Ielādēt"
+
+#~ msgid "Save"
+#~ msgstr "Saglabāt"
+
+#~ msgid "Quit"
+#~ msgstr "Iziet"
+
+#, fuzzy
+#~| msgid "Configure KTimeTracker..."
+#~ msgid "Configure ktimetracker"
+#~ msgstr "Konfigurēt KTimeTracker..."
+
+#~ msgid "Week of %1"
+#~ msgstr "%1 nedēļa"
+
+#~ msgid "Settings"
+#~ msgstr "Iestatījumi"
+
+#~ msgid "Show"
+#~ msgstr "Rādīt"
+
+#~ msgid "Hide"
+#~ msgstr "Slēpt"
+
+#~ msgid "Dialog"
+#~ msgstr "Logs"
+
+#~ msgid "This document has not been saved yet. Do you want to save it?"
+#~ msgstr "Šis dokuments vēl nav saglabāts. Vai vēlaties saglabāt to?"
+
+#~ msgid "Untitled"
+#~ msgstr "Nenosaukts"
+
+#~ msgid "delete"
+#~ msgstr "dzēst"
+
+#~ msgid "(c) 1997-2009, KDE PIM Developers"
+#~ msgstr "(c) 1997-2009, KDE PIM izstrādātāji"
+
+#~ msgid "Successfully saved file "
+#~ msgstr "Fails veiksmīgi saglabāts "
+
+#~ msgid "Task &name:"
+#~ msgstr "Darba &nosaukums:"
+
+#~ msgid "Edit &absolute"
+#~ msgstr "Rediģēt &absolūto"
+
+#~ msgid "&Time:"
+#~ msgstr "&Laiks:"
+
+#~ msgid "&Session time:"
+#~ msgstr "&Sesijas ilgums:"
+
+#~ msgid "Edit &relative (apply to both time and session time)"
+#~ msgstr "Rediģēt &relatīvi (gan laiku gan sesijas ilgumu)"
+
+#~ msgid "In Desktop"
+#~ msgstr "Darbvirsmā"
+
+#~ msgid "Enter the name of the task here. This name is for your eyes only."
+#~ msgstr ""
+#~ "Šeit ievadiet darba nosaukumu. Šis nosaukums tiks rādīts tikai jums."
+
+#~ msgid ""
+#~ "Use this option to set the time spent on this task to an absolute value.\n"
+#~ "\n"
+#~ "For example, if you have worked exactly four hours on this task during "
+#~ "the current session, you would set the Session time to 4 hr."
+#~ msgstr ""
+#~ "Izmantojiet šo, lai norādītu patērēto laiku kā absolūtu vērtību.\n"
+#~ "\n"
+#~ "Piemēram, ja esat šajā sesijā pie šī darba nostrādājis tieši četras "
+#~ "stundas, jūs sesijas laikā ierakstītu 4 st."
+
+#~ msgid ""
+#~ "Use this option to change the time spent on this task relative to its "
+#~ "current value.\n"
+#~ "\n"
+#~ "For example, if you worked on this task for one hour without the timer "
+#~ "running, you would add 1 hr."
+#~ msgstr ""
+#~ "Izmantojiet šo, lai mainītu darbam veltīto laiku, norādot laika izmaiņu "
+#~ "pret esošo vērtību.\n"
+#~ "\n"
+#~ "Piemēram, ja jūs stundu strādājāt bez automātiskas laika skaitīšanas, jūs "
+#~ "pievienotu 1 st."
+
+#~ msgid ""
+#~ "This is the time the task has been running since all times were reset."
+#~ msgstr "Šis ir laiks, cik ilgi notiek darbs kopš visu laiku nomešanas."
+
+#~ msgid "This is the time the task has been running this session."
+#~ msgstr "Šis ir laiks cik ilgi notiek šis darbs šajā sesijā."
+
+#~ msgid ""
+#~ "Specify how much time to add or subtract to the overall and session time"
+#~ msgstr ""
+#~ "Norādiet cik daudz laika pievienot vai noņemt kopējam sesijas laikam"
+
+#~ msgid ""
+#~ "Use this option to automatically start the timer on this task when you "
+#~ "switch to the specified desktop(s). Select the desktop(s) that will "
+#~ "automatically start the timer on this task."
+#~ msgstr ""
+#~ "Izmantojiet šo, kas automātiski sāk laika skaitīšanu, kad pārslēdzas uz "
+#~ "izvēlēto darbvirsmu. Izvēlieties darbvirsmu(as), kas automātiski sāk šī "
+#~ "darba laika skaitīšanu."
+
+#~ msgctxt "abbreviation for hours"
+#~ msgid " hr. "
+#~ msgstr " st. "
+
+#~ msgctxt "abbreviation for minutes"
+#~ msgid " min. "
+#~ msgstr " min. "
+
+#~ msgid "myName"
+#~ msgstr "mansVārds"
+
+#~ msgid "Session: %1"
+#~ msgstr "Sesija: %1"
+
+#~ msgctxt "total time of all tasks"
+#~ msgid "Total: %1"
+#~ msgstr "Kopā: %1"
+
+#~ msgid "Session"
+#~ msgstr "Sesija"

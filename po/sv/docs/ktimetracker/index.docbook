@@ -1,0 +1,1213 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Swedish "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>Handbok &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Granskare</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    <othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@comhem.se</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>2019-11-19</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; håller reda på tiden som används för olika aktiviteter.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>tid</keyword>
+    <keyword
+>spåra</keyword>
+    <keyword
+>projekt</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+>&ktimetracker; håller reda på tiden som används för olika aktiviteter. Det är användbar för att hålla reda på fakturerad kundtid och kan rapportera timmarna loggade enligt aktivitet och dag.</para>
+
+<para
+>Denna tidshistorik kan exporteras till en textfil avgränsad med kommatecken, för att importera till andra fakturerings- eller projekthanteringsverktyg.</para>
+
+<para
+>&ktimetracker; detekterar när tangentbordet och musen är inaktiva och kan koppla ihop olika aktiviteter med olika skrivbord, två verktyg som kan hjälpa till att hålla tidtagningen igång för den riktiga aktiviteten.</para>
+
+<para
+>&ktimetracker; skrevs ursprungligen av &Sirtaj.Singh.Kang;. Dess hemsida är <ulink url="https://userbase.kde.org/KTimeTracker"
+>https://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>Att använda &ktimetracker;</title>
+
+<sect1 id="starting">
+<title
+>Starta &ktimetracker;</title>
+
+<para
+>Skriv <command
+>ktimetracker</command
+> på kommandoraden eller välj <guimenuitem
+>Personlig tidmätare</guimenuitem
+> från gruppen <menuchoice
+><guimenu
+>Program</guimenu
+><guisubmenu
+>Verktyg</guisubmenu
+></menuchoice
+> i <guimenu
+>Plasmas startprogram</guimenu
+>. De vanliga &Qt;- och KF5-kommandoväljarna är tillgängliga. Se manualsidorna qt5options och kf5options. </para>
+
+<para
+>&ktimetracker; tillhandahåller ytterligare en kommandoradsväljare som låter dig ange namnet på den ICalendar-fil som används för att lagra din arbetshistorik. Du skriver in en fjärrkalenderfil genom att använda &HTTP; eller &FTP; som en del av filnamnet, till exempel https://www.min_plats.se/min_data/mitt_arbete.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Aktiviteter</title>
+
+<informalexample>
+<para
+><emphasis
+>Problem:</emphasis
+> Du är en programvarukonsult med många kunder. Vissa kunder har flera projekt. Under en dag byter du fram och tillbaka mellan olika projekt. Du behöver hålla reda på din tid för att skapa månadsvisa fakturor.</para>
+<para
+><emphasis
+>Lösning:</emphasis
+> Skapa en toppnivåaktivitet för varje kund, och en delaktivitet för varje kundprojekt. För projekt som kräver mer detaljerad uppföljning, skapa en lista med delaktiviteter i projektet. Håll reda på tiden genom att dubbelklicka på aktiviteten som du för närvarande arbetar med.</para>
+</informalexample>
+
+<para
+>&ktimetracker; tillhandahåller stor flexibilitet för att hålla reda på din tid, och tillåter obegränsat antal aktiviteter och aktivitetsdjup. Tid kan loggas för vilken aktivitet som helst, och mer än en aktivitet kan pågå vid en given tidpunkt.</para>
+<para
+>&ktimetracker; låter dig redigera aktiviteternas historik, och lägga till en kommentar för varje händelse som du har stoppat.</para>
+<para
+>För att skapa en toppnivåaktivitet, välj <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Aktivitet</guimenu
+> <guimenuitem
+>Ny aktivitet...</guimenuitem
+> </menuchoice
+> För att skapa en delaktivitet, markera överliggande aktivitet och välj <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Aktivitet</guimenu
+> <guimenuitem
+>Ny delaktivitet...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>När &ktimetracker; avslutas, sparas aktivitetslistan i en fil på disken. När det öppnas nästa gång, laddas aktivitetslistan från samma fil.</para>
+
+<para
+>&ktimetracker; kan importera och exportera uppgifter för att minimera ditt arbetet. Se <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Inspelningstider</title>
+
+<informalexample>
+<para
+><emphasis
+>Problem:</emphasis
+> För att förbli lönsam, måste du fakturera i medeltal fem timmar per dag. För att hålla dig på spåret, bevakar du dina dagliga och veckovisa totalvärden.</para>
+<para
+><emphasis
+>Lösning:</emphasis
+> Återställ sessionstiden vid början av varje arbetsdag, och återställ alla tider i början av varje vecka.</para
+> </informalexample>
+
+<para
+>&ktimetracker; gör det enkelt att hålla reda på tid. För att börja logga tid för en aktivitet, dubbelklicka på aktiviteten. För att stoppa logga tid, dubbelklicka på aktiviteten igen. Pågående aktiviteter visar en liten klocka i kolumnen <guilabel
+>Sessionstid</guilabel
+>.</para>
+
+<para
+>En annan synlig indikering att aktiviteter loggas är &ktimetracker;s ikon i systembrickan. När en aktivitet pågår, rör sig ikonens sekundvisare. Om du håller musen på ikonen, visas namnet på den pågående aktiviteten med ett verktygstips. Om mer än en aktivitet pågår, skiljs aktivitetsnamnen åt med kommatecken i verktygstipset.</para>
+
+<para
+>&ktimetracker; hanterar två tider för varje aktivitet: en för sessionstiden och en för den totala tiden. Med normalinställningar, visar &ktimetracker; två kolumner för varje tid, vilket resulterar i totalt fyra kolumner för varje aktivitet:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Sessionstid</guilabel
+></term>
+<listitem
+><para
+>Tiden som använts för aktiviteten sedan sessionen började.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Tid</guilabel
+></term
+> <listitem
+><para
+>Tiden som använts för aktiviteten sedan all tidtagning återställdes.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Total sessionstid</guilabel
+></term>
+<listitem
+><para
+>Tiden som använts för aktiviteten och alla dess delaktiviteter sedan sessionen började.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Total tid</guilabel
+></term>
+<listitem
+><para
+>Tiden som använts för aktiviteten och alla dess delaktiviteter sedan all tidtagning återställdes.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>För att starta en ny session, välj <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Starta nysession</guimenuitem
+></menuchoice
+> </para>
+
+<para
+>För att återställa alla tider, välj <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Återställ alla tider</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>Skrivbordsföljning</title>
+
+<informalexample>
+<para
+><emphasis
+>Problem:</emphasis
+> Du har två huvudprojekt som du byter mellan varje dag. För att hjälpa till att organisera arbetet, har du projektfilerna för det första projektet på det första skrivbordet, och projektfilerna för det andra projektet på det andra skrivbordet.</para>
+
+<para
+><emphasis
+>Lösning:</emphasis
+> Koppla ihop aktiviteten för det första projektet med det första skrivbordet och aktiviteten för det andra projektet med det andra skrivbordet. När du byter från det andra skrivbordet till det första, stoppar &ktimetracker; automatiskt aktiviteten för det andra projektet, och startar aktiviteten för det första projektet.</para>
+</informalexample>
+
+<para
+>För att koppla ihop en aktivitet med ett eller flera skrivbord, välj <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Aktivitet</guimenu
+> <guimenuitem
+>Egenskaper</guimenuitem
+> </menuchoice
+>. Aktivera <guilabel
+>Automatisk följning</guilabel
+> och välj skrivbordet eller skrivborden som ska kopplas ihop med aktiviteten. När något av de valda skrivborden visas, börjar &ktimetracker; automatiskt logga tid för aktiviteten efter en kort fördröjning.</para>
+
+</sect2>
+
+<sect2
+><title
+>Upptäckt inaktivitet</title>
+
+<informalexample
+> <para
+><emphasis
+>Problem:</emphasis
+> Du slutar arbetet tidigt på fredag för att göra ett ärende och glömmer att stoppa tidtagningen. När du kommer tillbaka på måndag, pågår tidtagningen fortfarande.</para>
+<para
+><emphasis
+>Lösning:</emphasis
+> Aktivera upptäckt av inaktivitet på sidan <guilabel
+>Beteende</guilabel
+> i inställningsdialogrutan.</para>
+</informalexample>
+
+<para
+>&ktimetracker; kan ställas in att detektera när musen och tangentbordet är inaktiva. Om musen och tangentbordet är inaktiva längre än angivet antal minuter, visar &ktimetracker; följande dialogruta:</para>
+
+<screenshot>
+ <screeninfo
+>Upptäckt inaktivitet i &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&ktimetracker;s dialogruta Upptäckt inaktivitet</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Återuppta tidtagning</guibutton
+></term>
+<listitem
+><para
+>Lägg till inaktiv tid för alla aktiva tidtagare och låt dem fortsätta att köra.</para
+><para
+>Du arbetade med uppgifterna medan datorn var inaktiv, och den är det fortfarande.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Låt tidtagning återgå</guibutton
+></term>
+<listitem
+><para
+>Subtrahera storleken på inaktiv tid från alla aktiva tidtagare och stoppa dem.</para
+><para
+>Du arbetade inte med uppgifterna medan datorn var inaktiv, och du gör det fortfarande inte.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Andra system</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker;, liksom &korganizer; och Apples iCal, använder industristandardformatet <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> för data. &ktimetracker; kan läsa och skriva att-göra-listor som skapas av dessa två program.</para>
+<para
+>Det går till och med att arbeta synkront med en fil i &korganizer; och &ktimetracker;. Om ett program ändrar filen, överförs uppdateringarna automatiskt till det andra programmet. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Planner</title>
+
+<para
+>Som ett typiskt användarfall, kan du vilja planera ett projekt med projekthanteringsverktyget <ulink url="&Planner.web;"
+>&Planner;</ulink
+> och importera dess aktiviteter till &ktimetracker; med <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guisubmenu
+>Importera</guisubmenu
+><guimenuitem
+>Importera aktiviteter från Planner...</guimenuitem
+></menuchoice
+>, för att få dem på industristandard-formatet <ulink url="https://www.faqs.org/rfcs/rfc2445.html"
+>iCalendar</ulink
+>. När du har gjort det kan du schemalägga aktiviteterna i &korganizer; och hålla reda på tiden du arbetar med dem i &ktimetracker;. Det är ett sätt att kontrollera om projektet håller sig innanför budget- och tidsramarna.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>&ktimetracker; stöder fler olika metoder som kan användas med &DBus;. </para>
+<para
+>Det finns två sätt att använda &DBus;-gränssnittet: &Qt;s grafiska användargränssnitt <application
+>qdbusviewer</application
+> och <application
+>qdbus</application
+> på kommandoraden. </para>
+
+<example
+><title
+>Bash-skript som ekar &ktimetracker;s version</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "ktimetracker kör inte"
+</programlisting>
+</example>
+
+<para
+>&ktimetracker;s nuvarande &DBus; gränssnitt används för närvarande i huvudsak för automatiserade tester, så det är mycket begränsat. För den fullständiga definitionen av gränssnittet, se <xref linkend="dbusappendix"/>.</para>
+
+<para
+>För att se det fullständiga &DBus; gränssnittet för versionen av &ktimetracker; som är installerad på ditt system, kör följande Bash-skript.</para>
+
+<example
+><title
+>Visa lista med &ktimetracker;s &DBus; gränssnitt på terminalen</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker kör inte"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Exportera totalvärden till CSV</title>
+
+<para
+>&ktimetracker; kan både exportera totalvärden och historik till ett filformat avgränsat med kommatecken. För att exportera totalvärden, välj <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera...</guisubmenu
+> </menuchoice
+>, så visar &ktimetracker; exportdialogrutan. </para>
+
+<para
+>Välj alternativet <guibutton
+>Tider som CSV</guibutton
+> i gruppen <guilabel
+>Rapporttyp</guilabel
+>. Dialogrutan ser då ut på följande sätt: </para>
+
+<screenshot>
+<screeninfo
+>Exportera tider som CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Exportera tider som CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Ändra förvalda värden i dialogrutan om det behövs. Du kan förhandsgranska CSV-utdata på höger sida av dialogrutan. Klicka på <guibutton
+>Spara som...</guibutton
+>, så exporterar &ktimetracker; totalvärdena för alla aktiviteter till filen du angav i fildialogrutan.</para>
+
+<para
+>Använd knappen <guibutton
+>Kopiera till klippbordet</guibutton
+> för att exportera tiderna till klippbordet.</para>
+
+<para
+>Här är ett annat exempel på utmatningsformatet:</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 funktionsplan",,,0.00,0.00,0.00,0.00
+,,"felrättning",,,0.00,1.13,0.00,1.13
+,,"arkivera ändringar - översättningar",,,0.00,0.00,0.00,0.00
+,,"tidrapport",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promotion",,,,0.00,0.00,0.00,0.00
+,"websaker",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Toppnivåaktiviteter skrivs ut i första kolumnen, delaktiviteter i den andra och så vidare. Tidsdata skrivs ut efter maximalt aktivitetsdjup (fem i exemplet). Den första tidskolumnen är <guilabel
+>Sessionstid</guilabel
+>, den andra är <guilabel
+>Tid</guilabel
+>, den tredje är <guilabel
+>Total sessionstid</guilabel
+> och den fjärde är <guilabel
+>Total tid</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Exportera historik till CSV</title>
+
+<para
+>För att exportera aktivitetshistorik, välj <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Exportera</guisubmenu
+> <guimenuitem
+>Exportera...</guimenuitem
+> </menuchoice
+>, så visar &ktimetracker; samma exportdialogruta som visas ovan. Välj alternativet <guibutton
+>Historik som CSV</guibutton
+> i gruppen <guilabel
+>Rapporttyp</guilabel
+>. </para>
+
+<para
+>Välj ett dataintervall som du vill att aktivitetshistoriken ska täcka. Skriv in filnamnet du vill exportera data till, och ändra övriga förvalda värden i dialogrutan om det behövs. Klicka på <guibutton
+>Exportera</guibutton
+>, så exporterar &ktimetracker; aktivitetshistoriken för alla aktiviteter till filen du valde.</para>
+
+<para
+>Använd knappen <guibutton
+>Kopiera till klippbordet</guibutton
+> för att exportera tiderna till klippbordet.</para>
+
+<para
+>Här är ett exempel på utmatningsformatet:</para>
+
+<literallayout
+><computeroutput>
+Aktivitetshistorik
+Från tisdagen den 06 juli 2004 till tisdagen den 13 juli 2004
+Utskriven den: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 funktionsplan"
+,1.13,,,,,,,1.13,,,"felrättning"
+,,,,,,,,0.00,,,"arkivera ändringar - översättningar"
+,,,,,,,,0.00,,,"tidrapport"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promotion"
+,,,,,,,,0.00,,"webbsaker"
+</computeroutput
+>
+</literallayout>
+
+<para
+>De första tre raderna anger när rapporten skapades och för vilket datumintervall. Den fjärde raden är en lista med datum i datumintervallet, åtskilda med kommatecken, på ISO 8601-format (ÅÅÅÅ-MM-DD). Alla följande rader listar tiden som loggats för varje aktivitet. Den sista numeriska kolumnen är radens totaltid för alla dagar. Aktivitetsnamnet skrivs ut efter totaltidskolumnen, och är indenterad för att ange förhållandet mellan aktiviteter och delaktiviteter. Namn på toppnivåaktiviteter visas i den första kolumnen efter totaltiderna.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>&ktimetracker;s gränssnitt</title>
+
+<para
+>Huvudfönstret för &ktimetracker; har följande delar: menyrad, verktygsrad, sökrad, aktivitets/tidsfönster och en statusrad.</para>
+
+<para
+>Sökraden är ett kombinerat fält. Så länge du inte trycker på returtangenten, fungerar det som ett filter, som bara visar aktiviteter som motsvarar det du skriver in. Så snart du trycker på returtangenten, används det du skrivit in för att skapa en ny aktivitet. </para>
+
+<para
+>Välj <guilabel
+>Inställning för handdator</guilabel
+> på sidan <guilabel
+>Utseende</guilabel
+> i inställningsdialogrutan om du har en pekskärm och skärmutrymmet är dyrbart. Det inaktiverar sökraden och varje klick visar en sammanhangsberoende meny.</para>
+
+<screenshot>
+<screeninfo
+>&ktimetracker;s fönster</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&ktimetracker;s fönster</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>Aktivitets/tidsfönstret</title>
+
+<para
+>De olika aktiviteterna visas i det här fönstret, tillsammans med tiden som har gått åt för var och en i den nuvarande sessionen och totalt. Aktiviteter som tidsmäts har en liten klockikon intill sessionstiden.</para>
+
+<para
+>Delaktiviteter kan skapas för varje aktivitet. Genom att klicka på plus- och minustecknen framför huvudaktiviteten visas eller döljs motsvarande delaktiviteter. Den totala tiden som gått åt för en aktivitet innehåller tiderna för dess delaktiviteter samt dess egen åtgångna tid.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>Verktygsraden och statusraden</title>
+<para
+>Verktygsraden innehåller ikoner för följande kommandon:</para>
+
+<note
+><para
+>Alla beter sig på samma sätt som menykommandot.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Ny aktivitet</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Ny delaktivitet</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Start</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Stoppa</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Ta bort</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Redigera</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Öppna</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Spara</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Statusraden rapporterar namnet på filen där data sparades.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Tack till och licens</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Program copyright:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Bidragsgivare</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>&ktimetracker; inspirerades av Harald Tveit Alvestrands mycket användbara verktyg som heter <application
+>titrax</application
+>, vars enda fel är att det är baserat på Xt-verktygslådan.</para>
+
+<para
+>Dokumentation copyright 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; och &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Ordförklaring</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>pågående aktivitet</glossterm>
+<glossdef
+><para
+>En aktivitet som har tidtagning igång.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Ett protokollet för kommunikation mellan processer. Kort för Desktop Bus.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>skrivbord</glossterm>
+<glossdef
+><para
+>&GNU;/&Linux;, FreeBSD och andra system som kör X.Org-servern har flera skrivbord. Du har typiskt fyra olika skrivbord installerade som standard. Varje skrivbord kan visa sin egen uppsättning med program och filer. När &kde; &plasma; först startas, är skrivbordet du ser Skrivbord 1. Om du trycker på <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>, visas Skrivbord 2. Att trycka på <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> går tillbaka till Skrivbord 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>historik</glossterm>
+<glossdef
+><para
+>Om &ktimetracker; är inställd för att logga historik, lagras varje start och stopp av tidtagning som en händelse. Historiken rensas aldrig när tider återställs, utan förblir i filen till aktiviteten tas bort.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>session</glossterm>
+<glossdef
+><para
+>En användardefinierad startpunkt för sessionstider. En ny session börjar när du väljer <menuchoice
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Starta ny session</guimenuitem
+> </menuchoice
+>. Sessionsdata sparas inte när du skapar en ny session. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Sessionstid</guilabel
+></glossterm
+> <glossdef
+><para
+>Tiden som använts för aktiviteten sedan sessionen började.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>systembricka</glossterm>
+<glossdef
+><para
+>Systembrickan finns i raden som (normalt i &kde; &plasma;) visas längst ner på skärmen. På den här systembrickan <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> finns &ktimetracker;s ikon längst till höger.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>toppnivåaktivitet</glossterm>
+<glossdef
+><para
+>En aktivitet utan överliggande aktiviteter.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Total sessionstid</guilabel
+></glossterm
+> <glossdef
+><para
+>Tiden som använts för aktiviteten och alla dess delaktiviteter sedan sessionen började.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Tid</guilabel
+></glossterm>
+<glossdef
+><para
+>Tiden som använts för aktiviteten sedan all tidtagning återställdes.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Total tid</guilabel
+></glossterm>
+<glossdef
+><para
+>Tiden som använts för aktiviteten och alla dess delaktiviteter sedan all tidtagning återställdes.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>&DBus; gränssnitt</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Returnerar &ktimetracker;s version.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Beskrivning</title>
+<para
+><function
+>version()</function
+> är ett &DBus; anrop som returnerar &ktimetracker;s versionsnummer, till exempel 4.3.1. Versionsnumret returneras som en sträng med det typiska &GNU;-formatet huvudversion.delversion.felrättning.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>Avsluta &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Beskrivning</title>
+<para
+><function
+>quit()</function
+> är ett &DBus; anrop som tillhandahåller ett sätt för ett externt program att avsluta &ktimetracker; på ett snyggt sätt. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Lägg till ny aktivitet.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString aktivitetsnamn)
+</synopsis>
+<refsect2>
+<title
+>Parametrar</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>aktivitetsnamn</parameter
+></term>
+<listitem>
+<para
+>Namnet på den nya aktiviteten.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beskrivning</title>
+<para
+><function
+>addTask(QString aktivitetsnamn)</function
+> är en &DBus; funktion som lägger till en ny uppgift på översta nivån i nuvarande lagringsobjekt. Den nya uppgiftens användarid returneras. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->

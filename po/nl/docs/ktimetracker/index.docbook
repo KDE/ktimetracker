@@ -1,0 +1,1195 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Dutch "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>Het handboek van &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Nalezer</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    &Tom.Albers;&Sander.Koning;&Natalie.Koning; 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>2019-11-19</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; houdt de tijd bij die besteed wordt aan verschillende taken.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>tijd</keyword>
+    <keyword
+>bijhouder</keyword>
+    <keyword
+>project</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<para
+>&ktimetracker; houdt de tijd bij die besteed wordt aan verschillende taken. Het kan gebruikt worden om de tijd bij te houden van taken die bijvoorbeeld aan klanten gefactureerd moet worden, de tijd kan per taak en per dag gerapporteerd worden.</para>
+
+<para
+>Deze tijdsgeschiedenis kan naar een komma-gescheiden tekstbestand ge&euml;xporteerd worden om dit in andere facturerings- of projectbeheer-hulpmiddelen te importeren.</para>
+
+<para
+>&ktimetracker; detecteert wanneer uw toetsenbord en muis ongebruikt zijn en kan verschillende taken aan diverse bureaubladen koppelen, twee hulpmiddelen die kunnen helpen bij het correct bijhouden van de taken.</para>
+
+<para
+>&ktimetracker; is oorspronkelijk geschreven door &Sirtaj.Singh.Kang;. Zijn homepagina is <ulink url="http://userbase.kde.org/KTimeTracker"
+>https://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>&ktimetracker; gebruiken</title>
+
+<sect1 id="starting">
+<title
+>&ktimetracker; starten</title>
+
+<para
+>Typ <command
+>ktimetracker</command
+> in op de commandoregel of kies <guimenuitem
+>Tijdsregistratie</guimenuitem
+> uit de groep <guimenu
+>Applicaties</guimenu
+><guisubmenu
+>Hulpmiddelen</guisubmenu
+> van het <guimenu
+>Plasma starter van toepassingen</guimenu
+>. De generieke &Qt; en &kf5-full; opdrachtparameters zijn beschikbaar, zie man-pagina's qt5options en kf5options.  </para>
+
+<para
+>&ktimetracker; biedt een additionele opdrachtoptie waarmee u de naam van het iCalendar-bestand kunt opgeven dat gebruikt wordt om uw werkgeschiedenis in op te slaan. U kunt een extern iCalendar-bestand opgeven door &HTTP; of &FTP; als deel van de bestandsnaam te gebruiken, bijvoorbeeld https://www.mijnsite.com/mijndata/mijnwerk.ics</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Taken</title>
+
+<informalexample>
+<para
+><emphasis
+>Probleem:</emphasis
+> U bent een freelance software-consultant met veel klanten. Sommige klanten hebben meerdere projecten. Gedurende een dag schakelt u heen en weer tussen de verschillende projecten. U moet uw tijd bijhouden om maandelijkse rekeningen te kunnen maken.</para>
+<para
+><emphasis
+>Oplossing:</emphasis
+> Maak een topniveau-taak voor elke klant en een subtaak voor elk project. Voor projecten die gedetailleerder bijgehouden moeten worden, maakt u een lijst van project-subtaken. U houdt de tijd bij door te dubbelklikken op de taak waar u op het moment aan werkt.</para>
+</informalexample>
+
+<para
+>&ktimetracker; biedt grote flexibiliteit in het bijhouden van uw tijd door een ongelimiteerd aantal taken en taakniveaus. Tijd kan bij elke taak worden bijgehouden en er kunnen meerdere taken tegelijkertijd actief zijn.</para>
+<para
+>&ktimetracker; stelt u in staat de geschiedenis van uw taken te bewerken en een toelichting te zetten bij elke gebeurtenis die u hebt gestopt.</para>
+<para
+>Om een topniveau-taak aan te maken kiest u <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Taak</guimenu
+> <guimenuitem
+>Nieuwe taak...</guimenuitem
+> </menuchoice
+>. Om een subtaak aan te maken activeert u de bovenliggende taak en kiest u <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Taak</guimenu
+> <guimenuitem
+>Nieuwe subtaak...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Als u &ktimetracker; afsluit wordt de takenlijst opgeslagen in een bestand op uw schijf. Bij de volgende start wordt de takenlijst uit hetzelfde bestand geladen.</para>
+
+<para
+>&ktimetracker; kan taken importeren en exporteren om uw werk te minimaliseren. Zie <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Timers</title>
+
+<informalexample>
+<para
+><emphasis
+>Probleem:</emphasis
+> Om al uw uitgaven te kunnen doen moet u een gemiddelde van vijf uur per dag factureren. Om ervoor te zorgen dat u dit haalt, houdt u uw dag- en weektotalen in de gaten.</para>
+<para
+><emphasis
+>Oplossing:</emphasis
+> Reset de sessie-timer aan het begin van elke werkdag en reset alle timers aan het begin van elke week.</para
+> </informalexample>
+
+<para
+>&ktimetracker; maakt het bijhouden van tijd eenvoudig. Om de tijd die aan een taak besteed wordt bij te houden dubbelklikt u op de taak. Om het bijhouden te stoppen, dubbelklikt u opnieuw op de taak. Actieve taken worden aangegeven door een klokje in de kolom <guilabel
+>Sessietijd</guilabel
+>.</para>
+
+<para
+>Een andere visuele aanwijzing van activiteit is het systeemvakpictogram van &ktimetracker;. Als er een taak actief is, beweegt de secondewijzer in het pictogram. Als u de muiswijzer op dit pictogram laat rusten, wordt de naam van de actieve taak in een hulpballon weergegeven. Als er meer dan één taak actief is, worden de taaknamen in de hulpballon gescheiden door komma's.</para>
+
+<para
+>&ktimetracker; houdt twee timers bij voor elke taak: één voor de sessietijd en één voor de totale tijd. In de standaardinstelling geeft &ktimetracker; twee kolommen voor elke timer weer, hetgeen op vier kolommen voor elke taak uitkomt:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Sessietijd</guilabel
+></term>
+<listitem
+><para
+>De tijd die aan de taak is besteed sinds het begin van de sessie.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Tijd</guilabel
+></term
+> <listitem
+><para
+>De tijd die aan de taak is besteed sinds alle tijden gereset zijn.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Totale sessietijd</guilabel
+></term>
+<listitem
+><para
+>De tijd die aan de taak en alle subtaken ervan besteed is sinds het begin van de sessie.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Totale tijd</guilabel
+></term>
+<listitem
+><para
+>De tijd die aan de taak en alle subtaken ervan is besteed sinds alle tijden gereset zijn.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Om een nieuwe sessie te starten, kiest u het menu <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuwe sessie starten</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Om alle tijden te resetten, kiest u het menu <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Alle tijden resetten</guimenuitem
+> </menuchoice
+>. </para>
+
+<sect2
+><title
+>Bureaubladen volgen</title>
+
+<informalexample>
+<para
+><emphasis
+>Probleem:</emphasis
+> U hebt twee hoofdprojecten waartussen u elke dag heen en weer schakelt. Om uw werk te organiseren houdt u de bestanden van project 1 op bureaublad 1 en die van project 2 op bureaublad 2.</para>
+
+<para
+><emphasis
+>Oplossing:</emphasis
+> Verbind de taak van project 1 met bureaublad 1 en de taak van project 2 met bureaublad 2. Als u van bureaublad 2 naar bureaublad 1 overschakelt, stopt &ktimetracker; automatisch de taak van project 2 en start de taak van project 1.</para>
+</informalexample>
+
+<para
+>Om een taak met één of meer bureaubladen te verbinden, kiest u het menu <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Taak</guimenu
+> <guimenuitem
+>Eigenschappen</guimenuitem
+> </menuchoice
+>. Schakel <guilabel
+>Automatisch volgen</guilabel
+> in en kies de bureaubladen waaraan u de taak wilt verbinden. Als één van de gekozen bureaubladen actief wordt, begint &ktimetracker; na korte tijd automatisch de tijd voor die taak bij te houden.</para>
+
+</sect2>
+
+<sect2
+><title
+>Inactiviteitsdetectie</title>
+
+<informalexample
+> <para
+><emphasis
+>Probleem:</emphasis
+> U gaat vroeg van uw werk weg op vrijdag om een bericht te bezorgen en vergeet de timer stop te zetten. Als u terugkomt op maandag loopt de timer nog steeds.</para>
+<para
+><emphasis
+>Oplossing:</emphasis
+> Schakel inactiviteitsdetectie in op de pagina <guilabel
+>Gedrag</guilabel
+> van de instellingendialoog.</para>
+</informalexample>
+
+<para
+>&ktimetracker; kan ingesteld worden om inactiviteit van muis en toetsenbord te detecteren. Als de muis en het toetsenbord langer dan de ingestelde tijd inactief zijn, toont &ktimetracker; het volgende dialoogvenster:</para>
+
+<screenshot>
+ <screeninfo
+>Inactiviteitsdetectie van &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Het dialoogvenster "Inactiviteitsdetectie" van &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Tijdsmeting voortzetten</guibutton
+></term>
+<listitem
+><para
+>Pas de inactieve tijd toe op alle actieve timers en laat ze lopen.</para
+><para
+>U was aan de taken aan het werk toen uw computer inactief was en bent nog steeds aan het werk.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Tijdsmeting terugdraaien</guibutton
+></term>
+<listitem
+><para
+>Trek de hoeveelheid inactieve tijd van alle actieve timers af en stop de timers.</para
+><para
+>U was niet aan de taken aan het werken toen uw computer inactief was en u bent nog steeds niet aan het werk.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Andere systemen</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker; gebruikt, net als &korganizer; en Apple's iCal, de industriestandaard <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> als formaat voor gegevens. &ktimetracker; kan takenlijsten van deze twee toepassingen lezen en schrijven.</para>
+<para
+>U kunt zelfs synchroon op één bestand werken met &korganizer; en &ktimetracker;. Als een programma het bestand wijzigt, dan worden die automatisch doorgestuurd naar de andere toepassing. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Planner</title>
+
+<para
+>Als een typisch voorbeeld wilt u wellicht een project plannen met het projectbeheergereedschap Imendio Planner (van <ulink url="&Planner.web;"
+>&Planner;</ulink
+>) en de taken daaruit importeren in &ktimetracker; met <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Importeren</guisubmenu
+><guimenuitem
+>Taken van planner importeren...</guimenuitem
+> </menuchoice
+>, om ze in het industrie-standaardformaat <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> te hebben. Als u dat gedaan hebt, kunt u de taken in &korganizer; inroosteren en de tijd die u aan de taken besteed hebt in &ktimetracker; bijhouden. Dat is één manier om ervoor te zorgen dat uw project op tijd en binnen het budget afkomt.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>&ktimetracker; ondersteunt vele methoden die gebruikt kunnen worden met &DBus;. </para>
+<para
+>Er zijn twee manieren om het &DBus;-interface te gebruiken: &Qt;'s &GUI; <application
+>qdbusviewer</application
+> en de commandoregel <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>Bash-script dat de versie van &ktimetracker; weergeeft</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "ktimetracker not running"
+</programlisting>
+</example>
+
+<para
+>&ktimetracker;'s huidige &DBus;-interface wordt momenteel vooral gebruikt voor geautomatiseerd testen en is dus erg beperkt. Zie voor de volledige interfacedefinitie <xref linkend="dbusappendix"/>.</para>
+
+<para
+>Om de volledige &DBus;-interface te zien van de &ktimetracker;-versie die op uw systeem staat, voert u het volgende Bash-script uit:</para>
+
+<example
+><title
+>&ktimetracker;'s &DBus;-interface op het scherm weergeven</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker not running"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Totalen exporteren naar CSV</title>
+
+<para
+>&ktimetracker; kan zowel totalen als geschiedenis naar een komma-gescheiden bestand exporteren. Om totalen te exporteren, kiest u het menu <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Exporteren...</guisubmenu
+> <guimenuitem
+>Tijden exporteren...</guimenuitem
+> </menuchoice
+> en &ktimetracker; toont de exportdialoog. </para>
+
+<para
+>Selecteer de optie <guibutton
+>Tijden als CSV</guibutton
+> in groep <guilabel
+>Type rapport</guilabel
+>. De dialoog zal er als volgt uitzien: </para>
+
+<screenshot>
+<screeninfo
+>Exporttijden als CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Exporttijden als CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Wijzig de standaarden van de dialoog indien nodig. U kunt de CSV-uitvoer bekijken aan de rechterkant van de dialoog. Klik op <guibutton
+>Opslaan als...</guibutton
+> en &ktimetracker; exporteert de totalen voor alle taken naar het ingevoerde bestand.</para>
+
+<para
+>Gebruik de knop <guibutton
+>Naar klembord kopiëren</guibutton
+> om de tijden naar het klembord te exporteren.</para>
+
+<para
+>Hier is nog een voorbeeld van het uitvoerformaat:</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 plan",,,0.00,0.00,0.00,0.00
+,,"bugs",,,0.00,1.13,0.00,1.13
+,,"wijzigingen - vertalingen",,,0.00,0.00,0.00,0.00
+,,"tijdrapport",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"web-dingen",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Topniveau-taken staan in de eerste kolom, subtaken in de tweede, en zo door. De tijdsgegevens worden vermeld na de maximale taakdiepte (vijf in dit voorbeeld). De eerste tijdkolom is <guilabel
+>Sessietijd</guilabel
+>, de tweede <guilabel
+>Tijd</guilabel
+>, de derde <guilabel
+>Totale sessietijd</guilabel
+> en de vierde de <guilabel
+>Totale tijd</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Geschiedenis naar CSV exporteren</title>
+
+<para
+>Om de taakgeschiedenis te exporteren, kiest u <menuchoice
+> <guimenu
+>Bestand </guimenu
+> <guisubmenu
+>Exporteren</guisubmenu
+> <guimenuitem
+>Exporteren...</guimenuitem
+> </menuchoice
+> en &ktimetracker; toont hetzelfde dialoogvenster als hierboven. Selecteer optie <guibutton
+>Geschiedenis als CSV</guibutton
+> in groep <guilabel
+>Type rapport</guilabel
+>. </para>
+
+<para
+>Selecteer een datumreeks waarvan u wilt dat de takengeschiedenis wordt gedekt. Wijzig de standaarden van de dialoog indien nodig. U kunt de CSV-uitvoer bekijken aan de rechterkant van de dialoog. Klik op <guibutton
+>Opslaan als...</guibutton
+> en &ktimetracker; exporteert de totalen voor alle taken naar het ingevoerde bestand.</para>
+
+<para
+>Gebruik de knop <guibutton
+>Naar klembord kopiëren</guibutton
+> om de tijden naar het klembord te exporteren.</para>
+
+<para
+>Hier is een voorbeeld van het uitvoerformaat:</para>
+
+<literallayout
+><computeroutput>
+Taakgeschiedenis
+Van dinsdag 06 juli 2004 tot dinsdag 13 juli 2004
+Afgedrukt op: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 plan"
+,1.13,,,,,,,1.13,,,"bugs"
+,,,,,,,,0.00,,,"wijzigingen - vertalingen"
+,,,,,,,,0.00,,,"tijdrapportt"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promo"
+,,,,,,,,0.00,,"web-dingen"
+</computeroutput
+>
+</literallayout>
+
+<para
+>De eerste drie regels geven aan wanneer het rapport gegenereerd is en voor welk datumbereik. De vierde regel is een komma-gescheiden lijst met de datums in het bereik in ISO 8601 formaat (jjjj-mm-dd). Alle volgende rijen geven de tijd weer die per taak gelogd is. De laatste numerieke kolom is het rijtotaal over alle dagen. De taaknaam wordt afgedrukt na de totaalkolom en is ingesprongen om taak-/subtaakrelaties aan te geven. Namen van topniveau taken verschijnen in de eerste kolom na het totaal.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>Het uiterlijk van &ktimetracker;</title>
+
+<para
+>Het hoofdvenster van &ktimetracker; bestaat uit de volgende onderdelen: menubalk, werkbalk, zoekbalk, taak- en tijdvak en een statusbalk.</para>
+
+<para
+>De zoekbalk is een gecombineerd veld. Zolang u &Enter; niet indrukt zal het veld zich als een filter gedragen. Alleen de taken die met uw invoer overeen komen worden dan getoond. Zodra u op &Enter; hebt gedrukt zal uw invoer als naam voor een nieuwe taak worden beschouwd. </para>
+
+<para
+>Kies <guilabel
+>Instellingen voor PDA</guilabel
+> in de pagina <guilabel
+>Uiterlijk</guilabel
+> van de instellingendialoog bij gebruik van een aanraakscherm met beperkte afmetingen. Het schakelt de zoekbalk uit en elke klik laat een contextmenu verschijnen.</para>
+
+<screenshot>
+<screeninfo
+>Het venster van &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Het venster van &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>Het taak- en tijdvak</title>
+
+<para
+>De verschillende taken worden in dit vak weergegeven, tezamen met de tijd die aan deze taak is besteed. Zowel de tijd van de sessie als de totaal besteedde tijd. Taken die op dit moment bijgehouden worden hebben een klokje bij de sessietijd staan.</para>
+
+<para
+>Voor iedere taak kunnen er subtaken gecreërd worden. Door het plus- en minteken voor de hoofdtaak kan de weergave van de subtaken aan- en uitgezet worden. De totale tijd van een hoofdtaak is de tijd van de taak zelf tezamen met de tijden van de subtaken.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>De werkbalk en statusbalk</title>
+<para
+>De werkbalk bevat pictogrammen voor de volgende acties:</para>
+
+<note
+><para
+>De functionaliteit is overigens identiek aan de opties uit het menu.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Nieuwe taak</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Nieuwe subtaak</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Starten</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Stoppen</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Verwijderen</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Bewerken</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Openen</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Opslaan</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>De statusbalk rapporteert de naam van het bestand waarin de gegevens zijn opgeslagen.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Dankbetuigingen en licentie</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Programma copyright:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Bijdragen door (in alfabetische volgorde)</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>De auteur van &ktimetracker; is geinspireerd door de toepassing <application
+>titrax</application
+> van Harald Tveit Alvestrand. Het nadeel van die toepassing is echter dat het gebaseerd is op de Xt-toolkit.</para>
+
+<para
+>Documentatie copyright 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; en &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+&meld.fouten;&vertaling.tom;&vertaling.sander;&vertaling.natalie;&vertaling.freek; &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Woordenlijst</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>actieve taak</glossterm>
+<glossdef
+><para
+>Een taak waarvan een timer loopt.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Een communicatieprotocol tussen processen. Afkorting van Desktop Bus.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>bureaublad</glossterm>
+<glossdef
+><para
+>&GNU;/&Linux;, FreeBSD en andere systemen die X.org Server draaien hebben meerdere bureaubladen. U hebt normaal gesproken vier verschillende bureaubladen. Elk bureaublad kan een eigen verzameling programma's en bestanden weergeven. Als &kde; &plasma; opstart ziet u bureaublad 1. Als u <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+> drukt, ziet u bureaublad 2. Met <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> brengt u bureaublad 1 terug. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>geschiedenis</glossterm>
+<glossdef
+><para
+>Als &ktimetracker; ingesteld is om geschiedenis bij te houden, wordt elke start- of stopgebeurtenis onthouden. Deze geschiedenis wordt niet gewist als de tijden worden gereset en wordt onthouden totdat de taak wordt verwijderd.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>sessie</glossterm>
+<glossdef
+><para
+>Een gebruikergedefinieerd beginpunt voor de sessietimers. Een nieuwe sessie begint als u het menu <menuchoice
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuwe sessie starten</guimenuitem
+> </menuchoice
+> kiest. Sessiegegevens worden niet opgeslagen als u een nieuwe sessie start. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Sessietijd</guilabel
+></glossterm
+> <glossdef
+><para
+>De tijd die aan de taak is besteed sinds het begin van de sessie.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>systeemvak</glossterm>
+<glossdef
+><para
+>Het systeemvak bevindt zich in de balk die (standaard in &kde; &plasma;) onderaan uw scherm verschijnt. In dit systeemvak <inlinemediaobject
+><imageobject
+><imagedata fileref="systray.png" format="PNG"/></imageobject
+></inlinemediaobject
+> bevindt het &ktimetracker;-pictogram zich uiterst rechts.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>topniveau-taak</glossterm>
+<glossdef
+><para
+>Een taak zonder bovenliggende taken.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Totale sessietijd</guilabel
+></glossterm
+> <glossdef
+><para
+>De tijd die aan de taak en alle subtaken ervan besteed is sinds het begin van de sessie.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Tijd</guilabel
+></glossterm>
+<glossdef
+><para
+>De tijd die aan de taak is besteed sinds alle tijden gereset zijn.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Totale tijd</guilabel
+></glossterm>
+<glossdef
+><para
+>De tijd die aan de taak en alle subtaken ervan is besteed sinds alle tijden gereset zijn.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>&DBus;-interface</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Retourneer de versie van &ktimetracker;</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Beschrijving</title>
+<para
+><function
+>version()</function
+> is een &DBus;-aanroep die &ktimetracker;'s versienummer retourneert; bijvoorbeeld 4.3.1. Het versienummer wordt geretourneerd als een tekenreeks in het standaard &GNU;-formaat hoofdversie.subversie.bugfix.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>&ktimetracker; afsluiten.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Beschrijving</title>
+<para
+><function
+>quit()</function
+> is een &DBus;-aanroep die een manier biedt waarmee een extern programma &ktimetracker; beschaafd kan afsluiten. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Nieuwe taak toevoegen.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+<para
+>De naam van de nieuwe taak.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beschrijving</title>
+<para
+><function
+>addTask(QString taaknaam)</function
+> is een &DBus;-aanroep die een nieuwe topniveau-taak aan het huidige bestand toevoegt. De UID van de nieuwe taak wordt geretourneerd. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->

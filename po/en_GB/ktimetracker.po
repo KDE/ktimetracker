@@ -1,0 +1,1770 @@
+# translation of ktimetracker.po to British English
+# Copyright (C) 2003, 2004, 2005, 2009 Free Software Foundation, Inc.
+#
+# Malcolm Hunter <malcolm.hunter@gmx.co.uk>, 2003, 2004, 2005.
+# Andrew Coles <andrew_coles@yahoo.co.uk>, 2004, 2005, 2009, 2010, 2011.
+# Steve Allewell <steve.allewell@gmail.com>, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: ktimetracker\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-29 00:44+0000\n"
+"PO-Revision-Date: 2021-10-10 11:09+0100\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.08.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "John Knight, Steve Allewell"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "anarchist_tomato@herzeleid.net, steve.allewell@gmail.com"
+
+#: dialogs/edittimedialog.cpp:42
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Task Time"
+msgstr "Edit Task Time"
+
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#, kde-format
+msgctxt "@title:group"
+msgid "Task"
+msgstr "Task"
+
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#, kde-format
+msgid "Task Name:"
+msgstr "Task Name:"
+
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#, kde-format
+msgid "Task Description:"
+msgstr "Task Description:"
+
+#: dialogs/edittimedialog.cpp:71
+#, kde-format
+msgctxt "@title:group"
+msgid "Time Editing"
+msgstr "Time Editing"
+
+#: dialogs/edittimedialog.cpp:79
+#, kde-format
+msgid "Current Time:"
+msgstr "Current Time:"
+
+#: dialogs/edittimedialog.cpp:82
+#, kde-format
+msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
+msgid " minute"
+msgid_plural " minutes"
+msgstr[0] " minute"
+msgstr[1] " minutes"
+
+#: dialogs/edittimedialog.cpp:88
+#, kde-format
+msgid "Change Time By:"
+msgstr "Change Time By:"
+
+#: dialogs/edittimedialog.cpp:92
+#, kde-format
+msgid "Time After Change:"
+msgstr "Time After Change:"
+
+#: dialogs/edittimedialog.cpp:98
+#, kde-format
+msgctxt "@action:button"
+msgid "Edit History..."
+msgstr "Edit History..."
+
+#: dialogs/edittimedialog.cpp:99
+#, kde-format
+msgid "To change this task's time, you have to edit its event history"
+msgstr "To change this task's time, you have to edit its event history"
+
+#: dialogs/exportdialog.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Export to File"
+msgstr "Export to File"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
+#, kde-format
+msgctxt "format to display times"
+msgid "Decimal"
+msgstr "Decimal"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
+#, kde-format
+msgid "Session Times"
+msgstr "Session Times"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.cpp:138 dialogs/exportdialog.ui:205
+#, kde-format
+msgid "All Tasks"
+msgstr "All Tasks"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
+#: dialogs/exportdialog.ui:14
+#, kde-format
+msgid "Export"
+msgstr "Export"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
+#: dialogs/exportdialog.ui:26
+#, kde-format
+msgid "Export Preview"
+msgstr "Export Preview"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
+#: dialogs/exportdialog.ui:50
+#, kde-format
+msgid "Copy to Clipboard"
+msgstr "Copy to Clipboard"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
+#: dialogs/exportdialog.ui:60
+#, kde-format
+msgid "Save As..."
+msgstr "Save As..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
+#: dialogs/exportdialog.ui:75
+#, kde-format
+msgid "Report Type"
+msgstr "Report Type"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
+#: dialogs/exportdialog.ui:81
+#, kde-format
+msgid "Times as CSV"
+msgstr "Times as CSV"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
+#: dialogs/exportdialog.ui:91
+#, kde-format
+msgid "History as CSV"
+msgstr "History as CSV"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
+#: dialogs/exportdialog.ui:98
+#, kde-format
+msgid "Event Log as CSV"
+msgstr "Event Log as CSV"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
+#: dialogs/exportdialog.ui:105
+#, kde-format
+msgid "Times as Text"
+msgstr "Times as Text"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:118
+#, kde-format
+msgid ""
+"An inclusive date range for reporting on time card history.  Not enabled "
+"when reporting on totals."
+msgstr ""
+"An inclusive date range for reporting on time card history.  Not enabled "
+"when reporting on totals."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:121
+#, kde-format
+msgid "Date Range"
+msgstr "Date Range"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: dialogs/exportdialog.ui:127
+#, kde-format
+msgid "From:"
+msgstr "From:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: dialogs/exportdialog.ui:150
+#, kde-format
+msgid "To:"
+msgstr "To:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.ui:182
+#, kde-format
+msgid "Hours:Minutes"
+msgstr "Hours:Minutes"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.ui:191
+#, kde-format
+msgid "All Times"
+msgstr "All Times"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.ui:210
+#, kde-format
+msgid "Only Selected"
+msgstr "Only Selected"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:224
+#, kde-format
+msgid "The character used to separate one field from another in the output."
+msgstr "The character used to separate one field from another in the output."
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:227
+#, kde-format
+msgid "Delimiter"
+msgstr "Delimiter"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioComma)
+#: dialogs/exportdialog.ui:233
+#, kde-format
+msgid "Comma"
+msgstr "Comma"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSemicolon)
+#: dialogs/exportdialog.ui:243
+#, kde-format
+msgid "Semicolon"
+msgstr "Semicolon"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioOther)
+#: dialogs/exportdialog.ui:250
+#, kde-format
+msgctxt "user can set an user defined delimiter"
+msgid "Other:"
+msgstr "Other:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTab)
+#: dialogs/exportdialog.ui:257
+#, kde-format
+msgctxt "tabulator delimiter"
+msgid "Tab"
+msgstr "Tab"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
+#: dialogs/exportdialog.ui:264
+#, kde-format
+msgid "Space"
+msgstr "Space"
+
+#. i18n: ectx: property (text), widget (QLabel, quotesLabel)
+#: dialogs/exportdialog.ui:308
+#, kde-format
+msgid "Quotes:"
+msgstr "Quotes:"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:327
+#, kde-format
+msgid "All fields are quoted in the output."
+msgstr "All fields are quoted in the output."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:331
+#, kde-format
+msgid "\""
+msgstr "\""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:336
+#, kde-format
+msgid "'"
+msgstr "'"
+
+#: dialogs/historydialog.cpp:105 export/totalsastext.cpp:87
+#, kde-format
+msgid "Task"
+msgstr "Task"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "StartTime"
+msgstr "StartTime"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "EndTime"
+msgstr "EndTime"
+
+#: dialogs/historydialog.cpp:105
+#, kde-format
+msgid "Comment"
+msgstr "Comment"
+
+#: dialogs/historydialog.cpp:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You can change this task's comment, start time and end time."
+msgstr "You can change this task's comment, start time and end time."
+
+#: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
+#, kde-format
+msgid "This is not a valid Date/Time."
+msgstr "This is not a valid Date/Time."
+
+#: dialogs/historydialog.cpp:273
+#, kde-format
+msgid "Please select a task to delete."
+msgstr "Please select a task to delete."
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
+#: dialogs/historydialog.ui:14
+#, kde-format
+msgid "Edit History"
+msgstr "Edit History"
+
+#: dialogs/taskpropertiesdialog.cpp:62
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"<p>Enter the name of the task here. You can choose it freely.</p>\n"
+"<p><i>Example:</i> phone with mother</p>"
+msgstr ""
+"<p>Enter the name of the task here. You can choose it freely.</p>\n"
+"<p><i>Example:</i> phone with mother</p>"
+
+#: dialogs/taskpropertiesdialog.cpp:73
+#, kde-format
+msgctxt "@title:group"
+msgid "Auto Tracking"
+msgstr "Auto Tracking"
+
+#: dialogs/taskpropertiesdialog.cpp:90
+#, kde-format
+msgctxt "order number of desktop: 1, 2, ..."
+msgid "%1."
+msgstr "%1."
+
+#: export/export.cpp:63
+#, kde-format
+msgid "Could not open \"%1\"."
+msgstr "Could not open \"%1\"."
+
+#: export/totalsastext.cpp:84
+#, kde-format
+msgid "Task Totals"
+msgstr "Task Totals"
+
+#: export/totalsastext.cpp:87
+#, kde-format
+msgid "Time"
+msgstr "Time"
+
+#: export/totalsastext.cpp:120
+#, kde-format
+msgctxt "total time of all tasks"
+msgid "Total"
+msgstr "Total"
+
+#: export/totalsastext.cpp:122
+#, kde-format
+msgid "No tasks."
+msgstr "No tasks."
+
+#: idletimedetector.cpp:78
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+
+#: idletimedetector.cpp:81
+#, kde-format
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Continue Timing"
+
+#: idletimedetector.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "Stop timing and revert back to the time at %1"
+
+#: idletimedetector.cpp:84
+#, kde-format
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Revert Timing"
+
+#: idletimedetector.cpp:88
+#, kde-format
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "Desktop has been idle since %1. What do you want to do?"
+
+#. i18n: ectx: Menu (clock)
+#: ktimetrackerui.rc:19
+#, kde-format
+msgid "&Clock"
+msgstr "&Clock"
+
+#. i18n: ectx: Menu (task)
+#: ktimetrackerui.rc:26
+#, kde-format
+msgid "&Task"
+msgstr "&Task"
+
+#. i18n: ectx: Menu (settings)
+#: ktimetrackerui.rc:36
+#, kde-format
+msgid "&Settings"
+msgstr "&Settings"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ktimetrackerui.rc:41
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Main Toolbar"
+
+#. i18n: ectx: ToolBar (taskToolBar)
+#: ktimetrackerui.rc:50
+#, kde-format
+msgid "Tasks"
+msgstr "Tasks"
+
+#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#, kde-format
+msgid "KTimeTracker"
+msgstr "KTimeTracker"
+
+#: main.cpp:102
+#, kde-format
+msgid "KDE Time tracker tool"
+msgstr "KDE Time tracker tool"
+
+#: main.cpp:104
+#, kde-format
+msgid "Copyright © 1997-2019 KTimeTracker developers"
+msgstr "Copyright © 1997-2019 KTimeTracker developers"
+
+#: main.cpp:108
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Potashev"
+msgstr "Alexander Potashev"
+
+#: main.cpp:109
+#, kde-format
+msgctxt "@info:credit"
+msgid "Current Maintainer (since 2019)"
+msgstr "Current Maintainer (since 2019)"
+
+#: main.cpp:111
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thorsten Stärk"
+msgstr "Thorsten Stärk"
+
+#: main.cpp:112
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2006-2012)"
+msgstr "Maintainer (2006-2012)"
+
+#: main.cpp:114
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mark Bucciarelli"
+msgstr "Mark Bucciarelli"
+
+#: main.cpp:115
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2005-2006)"
+msgstr "Maintainer (2005-2006)"
+
+#: main.cpp:117
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jesper Pedersen"
+msgstr "Jesper Pedersen"
+
+#: main.cpp:118
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2000-2005)"
+msgstr "Maintainer (2000-2005)"
+
+#: main.cpp:120
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sirtaj Singh Kang"
+msgstr "Sirtaj Singh Kang"
+
+#: main.cpp:121
+#, kde-format
+msgctxt "@info:credit"
+msgid "Original Author"
+msgstr "Original Author"
+
+#: main.cpp:123
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mathias Soeken"
+msgstr "Mathias Soeken"
+
+#: main.cpp:124
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (in 2007)"
+msgstr "Developer (in 2007)"
+
+#: main.cpp:126
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kalle Dalheimer"
+msgstr "Kalle Dalheimer"
+
+#: main.cpp:127
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (1999-2000)"
+msgstr "Developer (1999-2000)"
+
+#: main.cpp:129
+#, kde-format
+msgctxt "@info:credit"
+msgid "Allen Winter"
+msgstr "Allen Winter"
+
+#: main.cpp:130 main.cpp:133
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr "Developer"
+
+#: main.cpp:132
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr "David Faure"
+
+#: main.cpp:144
+#, kde-format
+msgctxt "@info:shell"
+msgid "Path or URL to iCalendar file to open."
+msgstr "Path or URL to iCalendar file to open."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "Configure KTimeTracker..."
+
+#: mainwindow.cpp:152 tray.cpp:90
+#, kde-format
+msgid "No active tasks"
+msgstr "No active tasks"
+
+#: mainwindow.cpp:162 tray.cpp:110
+#, kde-format
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: model/tasksmodel.cpp:33
+#, kde-format
+msgctxt "@title:column"
+msgid "Task Name"
+msgstr "Task Name"
+
+#: model/tasksmodel.cpp:34
+#, kde-format
+msgctxt "@title:column"
+msgid "Session Time"
+msgstr "Session Time"
+
+#: model/tasksmodel.cpp:35
+#, kde-format
+msgctxt "@title:column"
+msgid "Time"
+msgstr "Time"
+
+#: model/tasksmodel.cpp:36
+#, kde-format
+msgctxt "@title:column"
+msgid "Total Session Time"
+msgstr "Total Session Time"
+
+#: model/tasksmodel.cpp:37
+#, kde-format
+msgctxt "@title:column"
+msgid "Total Time"
+msgstr "Total Time"
+
+#: model/tasksmodel.cpp:38
+#, kde-format
+msgctxt "@title:column"
+msgid "Priority"
+msgstr "Priority"
+
+#: model/tasksmodel.cpp:39
+#, kde-format
+msgctxt "@title:column"
+msgid "Percent Complete"
+msgstr "Percent Complete"
+
+#: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The task name is what you call the task, it can be chosen freely."
+msgstr "The task name is what you call the task, it can be chosen freely."
+
+#: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The session time is the time since you last chose \"Start New Session\"."
+msgstr ""
+"The session time is the time since you last chose \"Start New Session\"."
+
+#: model/tasksmodel.cpp:290
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The total session time is the session time of this task and all its subtasks."
+msgstr ""
+"The total session time is the session time of this task and all its subtasks."
+
+#: model/tasksmodel.cpp:294
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The total time is the time of this task and all its subtasks."
+msgstr "The total time is the time of this task and all its subtasks."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
+#: settings/cfgbehavior.ui:17
+#, kde-format
+msgid "Detect desktop as idle after:"
+msgstr "Detect desktop as idle after:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
+#: settings/cfgbehavior.ui:24 settings/cfgstorage.ui:36
+#, kde-format
+msgid " min"
+msgstr " min"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/cfgbehavior.ui:37
+#, kde-format
+msgid "Minimum desktop active time:"
+msgstr "Minimum desktop active time:"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
+#: settings/cfgbehavior.ui:44
+#, kde-format
+msgid " sec"
+msgstr " sec"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
+#: settings/cfgbehavior.ui:57
+#, kde-format
+msgid "Prompt before deleting tasks"
+msgstr "Prompt before deleting tasks"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:64
+#, kde-format
+msgid ""
+"Unitasking - allow only one task to be timed at a time. Does not stop any "
+"timer."
+msgstr ""
+"Unitasking - allow only one task to be timed at a time. Does not stop any "
+"timer."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:67
+#, kde-format
+msgid "Allow only one timer at a time"
+msgstr "Allow only one timer at a time"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
+#: settings/cfgbehavior.ui:74
+#, kde-format
+msgid "Place an icon to the system tray"
+msgstr "Place an icon to the system tray"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: settings/cfgdisplay.ui:29
+#, kde-format
+msgctxt "title of group box, general options"
+msgid "General"
+msgstr "General"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
+#: settings/cfgdisplay.ui:35
+#, kde-format
+msgid "Decimal number format"
+msgstr "Decimal number format"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:42
+#, kde-format
+msgid ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious. It will disable the search bar and every click will pop up a "
+"context menu."
+msgstr ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious. It will disable the search bar and every click will pop up a "
+"context menu."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:45
+#, kde-format
+msgctxt ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious."
+msgid "Configuration for PDA"
+msgstr "Configuration for PDA"
+
+#. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
+#: settings/cfgdisplay.ui:55
+#, kde-format
+msgid "Window Title"
+msgstr "Window Title"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
+#: settings/cfgdisplay.ui:64
+#, kde-format
+msgid "Currently opened file"
+msgstr "Currently opened file"
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
+#: settings/cfgdisplay.ui:71
+#, kde-format
+msgid "Current Task and Session Time"
+msgstr "Current Task and Session Time"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: settings/cfgdisplay.ui:81
+#, kde-format
+msgid "Columns Displayed"
+msgstr "Columns Displayed"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
+#: settings/cfgdisplay.ui:87
+#, kde-format
+msgid "Session time"
+msgstr "Session time"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
+#: settings/cfgdisplay.ui:94
+#, kde-format
+msgid "Cumulative task time"
+msgstr "Cumulative task time"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
+#: settings/cfgdisplay.ui:101
+#, kde-format
+msgid "Total session time"
+msgstr "Total session time"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
+#: settings/cfgdisplay.ui:108
+#, kde-format
+msgid "Total task time"
+msgstr "Total task time"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
+#: settings/cfgdisplay.ui:115
+#, kde-format
+msgid "Priority"
+msgstr "Priority"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
+#: settings/cfgdisplay.ui:122
+#, kde-format
+msgid "Percent complete"
+msgstr "Percent complete"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_autoSave)
+#: settings/cfgstorage.ui:29
+#, kde-format
+msgid "Save tasks every:"
+msgstr "Save tasks every:"
+
+#: taskview.cpp:118
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+
+#: taskview.cpp:214
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+
+#: taskview.cpp:290
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr "Stopping timers..."
+
+#: taskview.cpp:291
+#, kde-format
+msgid "Cancel"
+msgstr "Cancel"
+
+#: taskview.cpp:361 taskview.cpp:445
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Unnamed Task"
+
+#: taskview.cpp:380
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+
+#: taskview.cpp:422
+#, kde-format
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "New Sub Task"
+
+#: taskview.cpp:440
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Edit Task"
+
+#: taskview.cpp:474 taskview.cpp:515 taskview.cpp:537
+#, kde-format
+msgid "No task selected."
+msgstr "No task selected."
+
+#: taskview.cpp:520
+#, kde-format
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+
+#: taskview.cpp:524
+#, kde-format
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Deleting Task"
+
+#: timetrackerstorage.cpp:140
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "Error loading \"%1\": could not find parent (uid=%2)"
+
+#: timetrackerstorage.cpp:243
+#, kde-format
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "Could not write lock file \"%1\". Disk full?"
+
+#: timetrackerstorage.cpp:251
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr "Failed to save iCalendar file as \"%1\"."
+
+#: timetrackerwidget.cpp:154
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "Start &New Session"
+
+#: timetrackerwidget.cpp:155
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "Starts a new session"
+
+#: timetrackerwidget.cpp:157
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+
+#: timetrackerwidget.cpp:165
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "Edit History..."
+
+#: timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr "Edits history of all tasks of the current document"
+
+#: timetrackerwidget.cpp:168
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+
+#: timetrackerwidget.cpp:178
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "&Reset All Times"
+
+#: timetrackerwidget.cpp:179
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Resets all times"
+
+#: timetrackerwidget.cpp:181
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+
+#: timetrackerwidget.cpp:188
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "&Start"
+
+#: timetrackerwidget.cpp:189
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "Starts timing for selected task"
+
+#: timetrackerwidget.cpp:191
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+
+#: timetrackerwidget.cpp:205
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "S&top"
+
+#: timetrackerwidget.cpp:206
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "Stops timing of the selected task"
+
+#: timetrackerwidget.cpp:207
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "Stops timing of the selected task"
+
+#: timetrackerwidget.cpp:214
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr "Focus on Searchbar"
+
+#: timetrackerwidget.cpp:215
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr "Sets the focus on the searchbar"
+
+#: timetrackerwidget.cpp:216
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr "Sets the focus on the searchbar"
+
+#: timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "Stop &All Timers"
+
+#: timetrackerwidget.cpp:224
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Stops all of the active timers"
+
+#: timetrackerwidget.cpp:225
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Stops all of the active timers"
+
+#: timetrackerwidget.cpp:233
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr "Track Active Applications"
+
+#: timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+
+#: timetrackerwidget.cpp:238
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+
+#: timetrackerwidget.cpp:249
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "&New Task..."
+
+#: timetrackerwidget.cpp:250
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Creates new top level task"
+
+#: timetrackerwidget.cpp:251
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "This will create a new top level task."
+
+#: timetrackerwidget.cpp:259
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "New &Subtask..."
+
+#: timetrackerwidget.cpp:260
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "Creates a new subtask to the current selected task"
+
+#: timetrackerwidget.cpp:261
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "This will create a new subtask to the current selected task."
+
+#: timetrackerwidget.cpp:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "&Delete"
+
+#: timetrackerwidget.cpp:270
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Deletes selected task"
+
+#: timetrackerwidget.cpp:271
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "This will delete the selected task(s) and all subtasks."
+
+#: timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr "&Properties"
+
+#: timetrackerwidget.cpp:280
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "Edit name or description for selected task"
+
+#: timetrackerwidget.cpp:282
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"This will bring up a dialogue box where you may edit the parameters for the "
+"selected task."
+
+#: timetrackerwidget.cpp:291
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Edit &Time..."
+
+#: timetrackerwidget.cpp:292
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "Edit time for selected task"
+
+#: timetrackerwidget.cpp:294
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"This will bring up a dialogue box where you may edit the times for the "
+"selected task."
+
+#: timetrackerwidget.cpp:303
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&Mark as Complete"
+
+#: timetrackerwidget.cpp:311
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&Mark as Incomplete"
+
+#: timetrackerwidget.cpp:319
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Export..."
+
+#: timetrackerwidget.cpp:326
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "Import Tasks From &Planner..."
+
+#: timetrackerwidget.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr "Show Searchbar"
+
+#: timetrackerwidget.cpp:471
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "Behaviour"
+
+#: timetrackerwidget.cpp:474
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr "Appearance"
+
+#: timetrackerwidget.cpp:477
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "Storage"
+
+#: timetrackerwidget.cpp:514
+#, kde-format
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "New Task"
+
+#: timetrackerwidget.cpp:593
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+
+#: timetrackerwidget.cpp:603
+#, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+
+#: timetrackerwidget.cpp:605
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "Confirmation Required"
+
+#: timetrackerwidget.cpp:606
+#, kde-format
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "Reset All Times"
+
+#: timetrackerwidget.cpp:795
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr "Save failed, most likely because the file could not be locked."
+
+#: timetrackerwidget.cpp:797
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "Could not modify calendar resource."
+
+#: timetrackerwidget.cpp:799
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "Out of memory--could not create object."
+
+#: timetrackerwidget.cpp:801
+#, kde-format
+msgid "UID not found."
+msgstr "UID not found."
+
+#: timetrackerwidget.cpp:803
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "Invalidate date--format is YYYY-MM-DD."
+
+#: timetrackerwidget.cpp:805
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+
+#: timetrackerwidget.cpp:807
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "Invalid task duration--must be greater than zero."
+
+#: timetrackerwidget.cpp:809
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "Invalid error number: %1"
+
+#: timetrackerwidget.cpp:1038
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+
+#: timetrackerwidget.cpp:1045
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr "You have already created a task. You can now start and stop timing."
+
+#: tray.cpp:95
+#, kde-format
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: treeviewheadercontextmenu.cpp:46
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "Columns"
+
+#: widgets/searchline.cpp:37
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search or add task"
+msgstr "Search or add task"
+
+#: widgets/searchline.cpp:39
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is a combined field. As long as you do not press Enter, it acts as a "
+"filter. Then, only tasks that match your input are shown. As soon as you "
+"press Enter, your input is used as name to create a new task."
+msgstr ""
+"This is a combined field. As long as you do not press Enter, it acts as a "
+"filter. Then, only tasks that match your input are shown. As soon as you "
+"press Enter, your input is used as name to create a new task."
+
+#: widgets/taskswidget.cpp:143
+#, kde-format
+msgctxt "@item:inmenu Task progress"
+msgid "%1 %"
+msgstr "%1 %"
+
+#: widgets/taskswidget.cpp:154
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "unspecified"
+msgstr "unspecified"
+
+#: widgets/taskswidget.cpp:157
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "1 (highest)"
+msgstr "1 (highest)"
+
+#: widgets/taskswidget.cpp:160
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "5 (medium)"
+msgstr "5 (medium)"
+
+#: widgets/taskswidget.cpp:163
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "9 (lowest)"
+msgstr "9 (lowest)"
+
+#~ msgid "CSV Export"
+#~ msgstr "CSV Export"
+
+#~ msgid "Continue timing. Timing has started at %1"
+#~ msgstr "Continue timing. Timing has started at %1"
+
+#~ msgid "&Edit..."
+#~ msgstr "&Edit..."
+
+#~ msgid "Add/Edit a task"
+#~ msgstr "Add/Edit a task"
+
+#~ msgid "Delete"
+#~ msgstr "Delete"
+
+#~ msgid "Close"
+#~ msgstr "Close"
+
+#~ msgid "Change time (in minutes, e.g. -60)"
+#~ msgstr "Change time (in minutes, e.g. -60)"
+
+#~ msgid "Cannot create new file."
+#~ msgstr "Cannot create new file."
+
+#~ msgid "Could not save."
+#~ msgstr "Could not save."
+
+#~ msgid "&Import"
+#~ msgstr "&Import"
+
+#~ msgid "&Export Times..."
+#~ msgstr "&Export Times..."
+
+#~ msgid "Export &History..."
+#~ msgstr "Export &History..."
+
+#~ msgid "The file where KTimeTracker will write the data."
+#~ msgstr "The file where KTimeTracker will write the data."
+
+#~ msgid ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter the name of the "
+#~ "task here. You can choose it freely.</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Example:</span> phone with mother</p></body></html>"
+#~ msgstr ""
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter the name of the "
+#~ "task here. You can choose it freely.</p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "style:italic;\">Example:</span> phone with mother</p></body></html>"
+
+#~ msgid "KArmReminder"
+#~ msgstr "KArmReminder"
+
+#~ msgid "(c) 2006"
+#~ msgstr "(c) 2006"
+
+#~ msgid "Someone, probably you, has called karm.\n"
+#~ msgstr "Someone, probably you, has called karm.\n"
+
+#~ msgid ""
+#~ "KArm has been renamed to KTimeTracker. This makes it easier to "
+#~ "recognize.\n"
+#~ "Compatibility advice: Do not give ktimetracker files to karm users. Using "
+#~ "karm files with ktimetracker is possible.\n"
+#~ msgstr ""
+#~ "KArm has been renamed to KTimeTracker. This makes it easier to "
+#~ "recognise.\n"
+#~ "Compatibility advice: Do not give ktimetracker files to karm users. Using "
+#~ "karm files with ktimetracker is possible.\n"
+
+#~ msgid ""
+#~ "Please learn to call ktimetracker as this reminder may be removed in the "
+#~ "future.\n"
+#~ msgstr ""
+#~ "Please learn to call ktimetracker as this reminder may be removed in the "
+#~ "future.\n"
+
+#~ msgid ""
+#~ "Someone, probably you, has called karm. KArm has been renamed to "
+#~ "KTimeTracker. This makes it easier to recognize. Compatibility advice: Do "
+#~ "not give ktimetracker files to karm users. Using karm files with "
+#~ "ktimetracker is possible. Please learn to call ktimetracker as this "
+#~ "reminder may be removed in the future."
+#~ msgstr ""
+#~ "Someone, probably you, has called karm. KArm has been renamed to "
+#~ "KTimeTracker. This makes it easier to recognise. Compatibility advice: Do "
+#~ "not give ktimetracker files to karm users. Using karm files with "
+#~ "ktimetracker is possible. Please learn to call ktimetracker as this "
+#~ "reminder may be removed in the future."
+
+#~ msgid "KArm is now ktimetracker"
+#~ msgstr "KArm is now ktimetracker"
+
+#~ msgid "ktimetracker"
+#~ msgstr "ktimetracker"
+
+#~ msgid "Configure key bindings"
+#~ msgstr "Configure key bindings"
+
+#~ msgid ""
+#~ "This will let you configure keybindings which are specific to ktimetracker"
+#~ msgstr ""
+#~ "This will let you configure keybindings which are specific to ktimetracker"
+
+#~ msgid "&File"
+#~ msgstr "&File"
+
+#~ msgid "Just caught a software interrupt."
+#~ msgstr "Just caught a software interrupt."
+
+#~ msgid "List all tasks as text output"
+#~ msgstr "List all tasks as text output"
+
+#~ msgid "Add task <taskname>"
+#~ msgstr "Add task <taskname>"
+
+#~ msgid "Delete task <taskid>"
+#~ msgstr "Delete task <taskid>"
+
+#~ msgid "Print the task ids for all tasks named <taskname>"
+#~ msgstr "Print the task ids for all tasks named <taskname>"
+
+#~ msgid "Start timer for task <taskid>"
+#~ msgstr "Start timer for task <taskid>"
+
+#~ msgid "Stop timer for task <taskid>"
+#~ msgstr "Stop timer for task <taskid>"
+
+#~ msgid "Deliver total minutes for task id"
+#~ msgstr "Deliver total minutes for task id"
+
+#~ msgid "Outputs the version"
+#~ msgstr "Outputs the version"
+
+#~ msgid "Could not create the KTimeTracker part."
+#~ msgstr "Could not create the KTimeTracker part."
+
+#~ msgid "Could not find the KTimeTracker part."
+#~ msgstr "Could not find the KTimeTracker part."
+
+#~ msgid "task_popup"
+#~ msgstr "task_popup"
+
+#~ msgid "File"
+#~ msgstr "File"
+
+#~ msgid "Help"
+#~ msgstr "Help"
+
+#~ msgid "Configure"
+#~ msgstr "Configure"
+
+#~ msgid "toolBar"
+#~ msgstr "toolBar"
+
+#~ msgid "Load"
+#~ msgstr "Load"
+
+#~ msgid "Save"
+#~ msgstr "Save"
+
+#~ msgid "Quit"
+#~ msgstr "Quit"
+
+#~ msgid "Configure ktimetracker"
+#~ msgstr "Configure ktimetracker"
+
+#~ msgid "Week of %1"
+#~ msgstr "Week of %1"
+
+#~ msgid "Settings"
+#~ msgstr "Settings"
+
+#~ msgid "Show"
+#~ msgstr "Show"
+
+#~ msgid "Hide"
+#~ msgstr "Hide"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialogue"
+
+#~ msgid "This document has not been saved yet. Do you want to save it?"
+#~ msgstr "This document has not been saved yet. Do you want to save it?"
+
+#~ msgid "Untitled"
+#~ msgstr "Untitled"
+
+#~ msgid "delete"
+#~ msgstr "delete"
+
+#~ msgid "Successfully saved file "
+#~ msgstr "Successfully saved file "
+
+#~ msgid "(c) 1997-2010, the KDE PIM Developers"
+#~ msgstr "(c) 1997-2010, the KDE PIM Developers"
+
+#~ msgid "Help3"
+#~ msgstr "Help3"
+
+#~ msgctxt "abbreviation for hours"
+#~ msgid " hr. "
+#~ msgstr " hr. "
+
+#~ msgctxt "abbreviation for minutes"
+#~ msgid " min. "
+#~ msgstr " min. "
+
+#, fuzzy
+#~| msgid ""
+#~| "Use this option to automatically start the timer on this task when you "
+#~| "switch to the specified desktop(s). Select the desktop(s) that will "
+#~| "automatically start the timer on this task."
+#~ msgid ""
+#~ "With desktop tracking, you can associate every task with a virtual "
+#~ "desktop. As soon as you enter this desktop, timing for this task is "
+#~ "started.\n"
+#~ "\n"
+#~ "Select the desktop(s) that will automatically start the timer of this "
+#~ "task."
+#~ msgstr ""
+#~ "Use this option to automatically start the timer on this task when you "
+#~ "switch to the specified desktop(s). Select the desktop(s) that will "
+#~ "automatically start the timer on this task."
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 5"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 4"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 3"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 2"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 1"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 8"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 9"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 6"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 7"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 10"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 12"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 17"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 11"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 16"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 13"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 18"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 14"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 19"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 15"
+#~ msgstr "In Desktop"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 20"
+#~ msgstr "In Desktop"
+
+#~ msgid "Task &name:"
+#~ msgstr "Task &name:"
+
+#~ msgid "Edit &absolute"
+#~ msgstr "Edit &absolute"
+
+#~ msgid "&Time:"
+#~ msgstr "&Time:"
+
+#~ msgid "&Session time:"
+#~ msgstr "&Session time:"
+
+#~ msgid "Edit &relative (apply to both time and session time)"
+#~ msgstr "Edit &relative (apply to both time and session time)"
+
+#~ msgid ""
+#~ "Use this option to set the time spent on this task to an absolute value.\n"
+#~ "\n"
+#~ "For example, if you have worked exactly four hours on this task during "
+#~ "the current session, you would set the Session time to 4 hr."
+#~ msgstr ""
+#~ "Use this option to set the time spent on this task to an absolute value.\n"
+#~ "\n"
+#~ "For example, if you have worked exactly four hours on this task during "
+#~ "the current session, you would set the Session time to 4 hr."
+
+#~ msgid ""
+#~ "Use this option to change the time spent on this task relative to its "
+#~ "current value.\n"
+#~ "\n"
+#~ "For example, if you worked on this task for one hour without the timer "
+#~ "running, you would add 1 hr."
+#~ msgstr ""
+#~ "Use this option to change the time spent on this task relative to its "
+#~ "current value.\n"
+#~ "\n"
+#~ "For example, if you worked on this task for one hour without the timer "
+#~ "running, you would add 1 hr."
+
+#~ msgid ""
+#~ "This is the time the task has been running since all times were reset."
+#~ msgstr ""
+#~ "This is the time the task has been running since all times were reset."
+
+#~ msgid "This is the time the task has been running this session."
+#~ msgstr "This is the time the task has been running this session."
+
+#~ msgid ""
+#~ "Specify how much time to add or subtract to the overall and session time"
+#~ msgstr ""
+#~ "Specify how much time to add or subtract to the overall and session time"
+
+#~ msgid "myName"
+#~ msgstr "myName"

@@ -1,0 +1,1229 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Spanish "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>El manual de &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Revisor</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    <othercredit role="translator"
+><firstname
+>Juan Manuel</firstname
+><surname
+>García Molina</surname
+><affiliation
+><address
+><email
+>juanma@superiodico.net</email
+></address
+></affiliation
+><contrib
+>Traductor</contrib
+></othercredit
+> <othercredit role="translator"
+><firstname
+>Javier</firstname
+><surname
+>Viñal</surname
+><affiliation
+><address
+> <email
+>fjvinal@gmail.com</email
+></address
+></affiliation
+> <contrib
+>Traductor</contrib
+></othercredit
+> 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>2019-11-19</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; registra el tiempo empleado en varias tareas.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>tiempo</keyword>
+    <keyword
+>registro</keyword>
+    <keyword
+>proyecto</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducción</title>
+
+<para
+>&ktimetracker; registra el tiempo empleado en varias tareas. Es útil para registrar horas para que sean facturadas y para informar de las horas que se pasa registrado por tarea y día.</para>
+
+<para
+>El historial de tiempos se puede exportar como un archivo de texto separado por comas para importar en otras herramientas de facturación o de gestión de proyectos.</para>
+
+<para
+>&ktimetracker; detecta si el teclado y el ratón están inactivos y puede asociar diferentes tareas con diferentes escritorios, dos herramientas que pueden ayudarle a conseguir que el temporizador ejecute la tarea correcta.</para>
+
+<para
+>&ktimetracker; fue escrito originalmente por &Sirtaj.Singh.Kang;. Su página inicial es <ulink url="https://userbase.kde.org/KTimeTracker"
+>https://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>Usar &ktimetracker;</title>
+
+<sect1 id="starting">
+<title
+>Iniciar &ktimetracker;</title>
+
+<para
+>Escriba <command
+>ktimetracker</command
+> en la línea de órdenes o seleccione <guimenuitem
+>Seguimiento de tiempo personal</guimenuitem
+> en el grupo <menuchoice
+><guimenu
+>Aplicaciones</guimenu
+> <guisubmenu
+>Utilidades</guisubmenu
+> </menuchoice
+> en el <guimenu
+>Lanzador de aplicaciones de Plasma</guimenu
+>. Están disponibles las opciones de órdenes genéricas de &Qt; y &kf5-full;. Consulte las páginas de manual «qt5options» y «kf5options». </para>
+
+<para
+>&ktimetracker; proporciona una opción adicional en la orden que le permite indicar el nombre del archivo de iCalendar que se usa para almacenar el histórico de su trabajo. Para indicar un archivo remoto de iCalendar puede usar &HTTP; o &FTP; como parte del nombre del archivo. Por ejemplo, https://www.mysite.com/mydata/mylabor.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Tareas</title>
+
+<informalexample>
+<para
+><emphasis
+>Problema:</emphasis
+> Es un consultor de software libre con muchos clientes. Algunos clientes tienen varios proyectos. A lo largo del día, puede cambiar entre varios proyectos. Tiene que seguirle la pista al tiempo empleado para generar los recibos mensuales.</para>
+<para
+><emphasis
+>Solución:</emphasis
+> Cree una tarea de nivel superior para cada cliente y una subtarea para cada proyecto de cada cliente. Para los proyectos que necesiten un seguimiento más detallado, cree una lista de subtareas para el proyecto. Haga el seguimiento mediante un doble clic en la tarea en la que va a trabajar.</para>
+</informalexample>
+
+<para
+>&ktimetracker; le proporciona una gran flexibilidad para hacer el seguimiento de su tiempo, permitiendo tareas y profundidad de tareas ilimitadas. El tiempo se puede registrar en cualquier tarea y puede haber más de una tarea activa en cualquier momento.</para>
+<para
+>&ktimetracker; le permite editar su historial de tareas y poner un comentario para cada evento que haya detenido.</para>
+<para
+>Para crear una tarea de nivel superior, seleccione <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tarea</guimenu
+> <guimenuitem
+>Nueva tarea...</guimenuitem
+> </menuchoice
+>. Para crear una subtarea, resalte la tarea padre y seleccione <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tarea</guimenu
+> <guimenuitem
+>Nueva subtarea...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Cuando salga de &ktimetracker;, la lista de tareas se guardará en un archivo de su disco. La próxima vez que lo abra, recargará la lista de tareas desde el mismo archivo.</para>
+
+<para
+>&ktimetracker; puede importar y exportar tareas para minimizar su trabajo. Consulte <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Temporizadores</title>
+
+<informalexample>
+<para
+><emphasis
+>Problema:</emphasis
+> Para ser solvente, debe emitir una factura de una media de cinco horas al día. Para seguirle la pista, puede ver los totales diarios y semanales.</para>
+<para
+><emphasis
+>Solución:</emphasis
+> Reinicia el temporizador de la sesión al comienzo de cada día de trabajo y reinicia todos los temporizadores al comienzo de cada semana.</para
+> </informalexample>
+
+<para
+>&ktimetracker; hace más sencillo el seguimiento del tiempo. Para comenzar a registrar el tiempo de una tarea, haga doble clic sobre la tarea. Para detener el registro del tiempo, vuelva a hacer doble clic sobre la tarea. Las tareas activas muestran un pequeño reloj en la columna <guilabel
+>Tiempo de sesión</guilabel
+>.</para>
+
+<para
+>Otra pista visual de la actividad de registro de &ktimetracker; en el icono de la bandeja del sistema. Cuando esté activa una tarea, se moverá la mano del icono. Si hace descansar el puntero del ratón sobre el icono, el nombre de la tarea activa se mostrará en un consejo emergente. Si hay más de una tarea activa, los nombres en el consejo estarán separados por comas.</para>
+
+<para
+>&ktimetracker; mantiene dos temporizadores para cada tarea: uno para el tiempo de la sesión y otro para el tiempo total. En la configuración predeterminada, &ktimetracker;muestra dos columnas por cada temporizador, dando como resultado un total de cuatro columnas para cada tarea:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Tiempo de sesión</guilabel
+></term>
+<listitem
+><para
+>El tiempo empleado en la tarea desde que comenzó la sesión.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Tiempo</guilabel
+></term
+> <listitem
+><para
+>El tiempo empleado en la tarea desde que se reiniciaron todos los tiempos.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Tiempo total de la sesión</guilabel
+></term>
+<listitem
+><para
+>El tiempo empleado en la tarea y en todas las subtareas desde que comenzó la sesión.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Tiempo total</guilabel
+></term>
+<listitem
+><para
+>El tiempo empleado en la tarea y todas sus subtareas desde que se reiniciaron todos los tiempos.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Para iniciar una nueva sesión, seleccione <menuchoice
+> <guimenu
+>Archivo</guimenu
+> <guimenuitem
+>Iniciar nueva sesión</guimenuitem
+> </menuchoice
+> </para>
+
+<para
+>Para reiniciar todos los tiempos, seleccione <menuchoice
+> <guimenu
+>Archivo</guimenu
+> <guimenuitem
+>Reiniciar todos los tiempos</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>Seguimiento de escritorio</title>
+
+<informalexample>
+<para
+><emphasis
+>Problema:</emphasis
+> Tiene dos proyectos principales entre los que cambia a lo largo del día. Para ayudarle a organizar el trabajo, puede mantener los archivos del proyecto 1 en el escritorio 1 y los del proyecto 2 en el escritorio 2.</para>
+
+<para
+><emphasis
+>Solución:</emphasis
+> Asocie las tareas del proyecto 1 con el escritorio 1 y las tareas del proyecto 2 con el escritorio 2. Cuando cambie desde el escritorio 2 al escritorio 1, &ktimetracker; detendrá automáticamente la tarea del proyecto 2 e iniciará la tarea del proyecto 1.</para>
+</informalexample>
+
+<para
+>Para asociar una tarea con uno o más escritorios, seleccione <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tarea</guimenu
+> <guimenuitem
+>Propiedades</guimenuitem
+> </menuchoice
+>. Active <guilabel
+>Seguimiento automático</guilabel
+> y seleccione el escritorio o escritorios que va a asociar con esta tarea. Cuando se active alguno de los escritorios seleccionados, &ktimetracker;; comenzará a registrar automáticamente el tiempo de esa tarea tras un breve retraso.</para>
+
+</sect2>
+
+<sect2
+><title
+>Detección de inactividad</title>
+
+<informalexample
+> <para
+><emphasis
+>Problema:</emphasis
+> Ha dejado el trabajo el viernes por la mañana para ejecutar un mandado y olvidó detener el temporizador. Cuando vuelve el lunes, el temporizador sigue funcionando.</para>
+<para
+><emphasis
+>Solución:</emphasis
+> Active la detección de inactividad en la página de <guilabel
+>Comportamiento</guilabel
+> del diálogo de preferencias.</para>
+</informalexample>
+
+<para
+>Puede configurar &ktimetracker; para que detecte cuando están inactivos el ratón y el teclado. Si durante un tiempo (los minutos especificados) no se ha producido ninguna acción en el teclado ni en el ratón, &ktimetracker; muestra el siguiente cuadro de diálogo:</para>
+
+<screenshot>
+ <screeninfo
+>Detección de inactividad de &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Cuadro de diálogo de detección de inactividad de &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Continuar la temporización</guibutton
+></term>
+<listitem
+><para
+>Aplica el tiempo de inactividad a todos los temporizadores activos y los mantiene funcionando.</para
+><para
+>Estuvo trabajando en las tareas mientras el equipo estuvo inactivo y ahora va a seguir.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Revertir la temporización</guibutton
+></term>
+<listitem
+><para
+>Resta la cantidad de tiempo de inactividad de todos los temporizadores activos y los detiene.</para
+><para
+>No estuvo trabajando en las tareas mientras el equipo estuvo inactivo y no lo va a hacer ahora.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Otros sistemas</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker;, al igual que &korganizer; e iCal de Apple, usa el formato estándar de la industria <ulink url="https://tools.ietf.org/html/rfc2445"
+> iCalendar</ulink
+> para los datos. &ktimetracker; puede leer y escribir las listas de tareas pendientes que crean esas dos aplicaciones.</para>
+<para
+>Usted incluso puede trabajar de forma sincronizada con &korganizer; y &ktimetracker;. Si uno de los programas cambia el archivo, las actualizaciones se propagan a la otra aplicación automáticamente. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Planner</title>
+
+<para
+>Como caso de uso típico, puede querer planificar un proyecto con la herramienta de gestión de proyectos <ulink url="&Planner.web;"
+>&Planner;</ulink
+> e importar sus tareas en &ktimetracker; con <menuchoice
+><guimenu
+>Archivo</guimenu
+> <guisubmenu
+>Importar</guisubmenu
+><guimenuitem
+>Import tareas desde Planner...</guimenuitem
+> </menuchoice
+>, para tenerlos en el formato <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>, estándar de la industria. Haciendo esto, podrá planificar las tareas en &korganizer; y contabilizar su tiempo en &ktimetracker;. Es una forma de ayudarle a asegurar que su proyecto está dentro de los límites temporales y de presupuesto.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>&ktimetracker; permite numerosos métodos que se pueden usar con &DBus;. </para>
+<para
+>Existen dos modos de usar la interfaz de &DBus;: la interfaz gráfica de &Qt; <application
+>qdbusviewer</application
+> y la orden de la consola <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>Guion de Bash que muestra la versión de &ktimetracker;</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "ktimetracker not running"
+</programlisting>
+</example>
+
+<para
+>La interfaz &DBus; actual de &ktimetracker; se usa principalmente para comprobaciones automatizadas, por lo que está muy limitado. Para la definición completa de la interfaz, consulte el <xref linkend="dbusappendix"/>.</para>
+
+<para
+>Para ver la interfaz &DBus; completa de la versión de &ktimetracker; que está instalada en su sistema, ejecute el siguiente guion de Bash:</para>
+
+<example
+><title
+>Lista la interfaz &DBus; de &ktimetracker; en la consola</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker not running"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Exportar los totales como CSV</title>
+
+<para
+>&ktimetracker; puede exportar tanto los totales como el historial con el formato de archivo separado por comas. Para exportar los totales, seleccione <menuchoice
+> <guimenu
+>Archivo</guimenu
+> <guimenuitem
+>Exportar...</guimenuitem
+> </menuchoice
+> y &ktimetracker; mostrará el diálogo de exportación. </para>
+
+<para
+>Seleccione la opción <guibutton
+>Horas como CSV</guibutton
+> en el grupo <guilabel
+>Tipo de informe</guilabel
+>. El diálogo se mostrará al siguiente: </para>
+
+<screenshot>
+<screeninfo
+>Exportar tiempos como CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Exportar tiempos como CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Modifique los valores predeterminados del diálogo si es necesario. Puede ver una vista previa de la salida CSV en la parte derecha del diálogo. Pulse <guibutton
+>Guardar como...</guibutton
+> para que &ktimetracker; exporte los totales de todas las tareas en el archivo que haya introducido en el diálogo.</para>
+
+<para
+>Use el botón <guibutton
+>Copiar al portapapeles</guibutton
+> para exportar los tiempos al portapapeles</para>
+
+<para
+>Aquí tiene otro ejemplo del formato de la salida:</para>
+
+<literallayout
+><computeroutput>
+«kde»,,,,,0.00,0.00,6.88,9.83
+,«ktimetracker»,,,,6.88,8.70,6.88,9.83
+,,«3.2 feature plan»,,,0.00,0.00,0.00,0.00
+,,«bugs»,,,0.00,1.13,0.00,1.13
+,,«checkin changes - translation strings»,,,0.00,0.00,0.00,0.00
+,,«time card report»,,,0.00,0.00,0.00,0.00
+,«kopete»,,,,0.00,0.00,0.00,0.00
+,«promo»,,,,0.00,0.00,0.00,0.00
+,«web stuff»,,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Las tareas de nivel superior se muestran en la primera columna, las subtareas en la segunda y así sucesivamente. Los datos del tiempo se muestran tras la profundidad más alta (cinco en este ejemplo). El tiempo de la primera columna en el <guilabel
+>Tiempo de sesión</guilabel
+>, el segundo es el <guilabel
+>Tiempo</guilabel
+>, el tercero es el <guilabel
+>Tiempo total de sesión</guilabel
+> y el cuarto es el <guilabel
+>Tiempo total</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Exportar el historial como CSV</title>
+
+<para
+>Para exportar el historial de la tarea, seleccione <menuchoice
+> <guimenu
+>Archivo</guimenu
+> <guisubmenu
+>Exportar</guisubmenu
+> <guimenuitem
+>Exportar...</guimenuitem
+> </menuchoice
+> y &ktimetracker; mostrará el mismo diálogo de exportación que se mostró arriba. Seleccione la opción <guibutton
+>Historial como CSV</guibutton
+> en el grupo <guilabel
+>Tipo de informe</guilabel
+>. </para>
+
+<para
+>Seleccione el intervalo de fechas que desea que cubra el historial de la tarea. Modifique los valores predeterminados del diálogo si es necesario. Puede ver una vista previa de la salida CSV en la parte derecha del diálogo. Pulse <guibutton
+>Guardar como...</guibutton
+> para que &ktimetracker; exporte los totales de todas las tareas en el archivo que haya introducido en el diálogo.</para>
+
+<para
+>Use el botón <guibutton
+>Copiar al portapapeles</guibutton
+> para exportar los tiempos al portapapeles</para>
+
+<para
+>Aquí tiene un ejemplo del formato de la salida:</para>
+
+<literallayout
+><computeroutput>
+Task History
+From Tuesday 06 July 2004 to Tuesday 13 July 2004
+Printed on: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,«kde»
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,«ktimetracker»
+,,,,,,,,0.00,,,«3.2 feature plan»
+,1.13,,,,,,,1.13,,,«bugs»
+,,,,,,,,0.00,,,«checkin changes - translation strings»
+,,,,,,,,0.00,,,«time card report»
+,,,,,,,,0.00,,«kopete»
+,,,,,,,,0.00,,«promo»
+,,,,,,,,0.00,,«web stuff»
+</computeroutput
+>
+</literallayout>
+
+<para
+>Las primeras tres líneas identifican cuándo se generó el informe y en qué intervalo de fechas. La cuarta fila es una lista separada por comas de las fechas del rango, en formato ISO 8601 (AAAA-MM-DD). Todas las filas siguientes muestran el tiempo registrado para cada tarea. La última columna numérica es la fila de totales para todos los días. El nombre de la tarea se imprime tras la columna de totales y se pretende que indique las relaciones de tareas y subtareas. Los nombres de las tareas de nivel superior aparecen en la primera columna tras el total.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>La interfaz de &ktimetracker;</title>
+
+<para
+>La ventana principal de &ktimetracker; tiene los siguientes componentes: barra de menú, barra de búsqueda, barra de herramientas, ventana de tarea/tiempo y barra de estado.</para>
+
+<para
+>La barra de búsquedas es un campo combinado. Mientras usted no pulse &Enter;, actuará como un filtro. Entonces, solo se muestran las tareas coincidentes con su entrada. Tan pronto como usted pulse &Enter;, su entrada se usa como nombre para crear una nueva tarea. </para>
+
+<para
+>Elija <guilabel
+>Configuración para PDA</guilabel
+> en la página <guilabel
+> Aspecto</guilabel
+> del diálogo de preferencias si usted dispone de una pantalla sensible al tacto y el estado real de la pantalla es muy valioso. Esto desactivará la barra de búsqueda y cada pulsación desplegará un menú emergente.</para>
+
+<screenshot>
+<screeninfo
+>Pantalla de &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Pantalla de &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>La ventana de tarea/tiempo</title>
+
+<para
+>En esta ventana se muestran las diferentes tareas, junto con el tiempo acumulado para cada uno en la sesión actual y en total. Las tareas de las que se sigue el tiempo tiene un pequeño icono de reloj junto al tiempo de sesión.</para>
+
+<para
+>Se pueden crear subtareas para cada tarea. Al pulsar sobre los signos más y menos que están delante de las tareas principales, conmuta la vista de las subtareas asociadas. El tiempo total acumulado para una tarea incluye los tiempos para sus subtareas, así como su propio tiempo acumulado.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>La barra de herramientas y la barra de estado</title>
+<para
+>La barra de herramientas contiene iconos para las siguientes órdenes:</para>
+
+<note
+><para
+>Todos los comportamientos son idénticos a la orden menú.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Nueva tarea</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Nueva subtarea</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Iniciar</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Detener</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Borrar</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Editar</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Abrir</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Guardar</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>La barra de estado informa del nombre del archivo en el que se guardaron los datos.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Créditos y licencia</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Derechos de autor del programa:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Colaboradores (en orden alfabético)</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>&ktimetracker; se inspiró en una utilidad muy buena de Harald Tveit Alverstrand llamada <application
+>titrax</application
+>. La única pega era que estaba basada en la herramienta Xt.</para>
+
+<para
+>Derechos de autor de la documentación 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; y &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>Traducido por Juan Manuel García Molina<email
+>juanma@superiodico.net</email
+> y Javier Viñal <email
+>fjvinal@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Glosario</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>tarea activa</glossterm>
+<glossdef
+><para
+>Una tarea que tiene un temporizador funcionando.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Un protocolo de comunicación entre procesos;. Es una abreviatura de Desktop Bus.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>escritorio</glossterm>
+<glossdef
+><para
+>&GNU;/&Linux;, FreeBSD y otros sistemas que ejecutan el servidor X.Org tienen múltiples escritorios. Normalmente, usted tendrá cuatro escritorios diferentes instalados de forma predeterminada. Cada escritorio puede mostrar su propio conjunto de programas y archivos. Cuando &kde; &plasma; se inicia por primera vez, el escritorio que ve es el 1. Si presiona <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>, verá el escritorio 2. Si presiona <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+>, volverá el escritorio 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>historial</glossterm>
+<glossdef
+><para
+>Si &ktimetracker; está configurado para que registre el historial, grabará cada evento de inicio/parada del temporizador. Este historial no se limpia nunca cuando se reinician los tiempos y permanece en el archivo hasta que se borra la tarea.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>sesión</glossterm>
+<glossdef
+><para
+>Un punto de inicio definido por el usuario para los temporizadores de la sesión. Una sesión nueva comienza cuando selecciona <menuchoice
+> <guimenu
+>Archivo</guimenu
+> <guimenuitem
+>Iniciar nueva sesión</guimenuitem
+> </menuchoice
+>. Los datos de la sesión no se guardan cuando crea una sesión nueva. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Tiempo de sesión</guilabel
+></glossterm
+> <glossdef
+><para
+>El tiempo empleado en la tarea desde que comenzó la sesión.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>bandeja del sistema</glossterm>
+<glossdef
+><para
+>La bandeja del sistema es la barra que aparece (de forma predeterminada en &kde; &plasma;) en la parte inferior de la pantalla. En esta bandeja del sistema, el icono de &ktimetracker; <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> está a la derecha.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>tarea de nivel superior</glossterm>
+<glossdef
+><para
+>Una tarea que no tiene tareas padre.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Tiempo total de la sesión</guilabel
+></glossterm
+> <glossdef
+><para
+>El tiempo empleado en la tarea y en todas las subtareas desde que comenzó la sesión.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Tiempo</guilabel
+></glossterm>
+<glossdef
+><para
+>El tiempo empleado en la tarea desde que se reiniciaron todos los tiempos.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Tiempo total</guilabel
+></glossterm>
+<glossdef
+><para
+>El tiempo empleado en la tarea y todas sus subtareas desde que se reiniciaron todos los tiempos.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>Interfaz &DBus;</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Devuelve la ejecución de «versión» de &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Descripción</title>
+<para
+><function
+>version()</function
+> es una llamada &DBus; que devuelve el número de versión de &ktimetracker;. Por ejemplo, 4.3.1. El número de versión se devuelve como una cadena con el típico formato de &GNU; de mayor.menor.corrección de fallos.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>Salir de &ktimetracker;</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Descripción</title>
+<para
+><function
+>quit()</function
+> es una llamada &DBus; que proporciona un medio para que un programa externo pueda apagar de forma elegante &ktimetracker;. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Añade una tarea nueva.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parámetros</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>nombre de tarea</parameter
+></term>
+<listitem>
+<para
+>El nombre de la tarea nueva.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descripción</title>
+<para
+><function
+>addTask(QString taskname)</function
+> es una llamada &DBus; que añade una tarea pendiente de nivel superior al almacenamiento actual. Se devuelve el UID de la nueva tarea pendiente. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->

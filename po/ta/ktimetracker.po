@@ -1,0 +1,1873 @@
+# translation of karm.po to
+# translation of karm.po to
+# Copyright (C) 2004 Free Software Foundation, Inc.
+#
+# root <root@localhost.localdomain>, 2004.
+# Kishore G <kishore96@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: karm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-04-29 00:44+0000\n"
+"PO-Revision-Date: 2021-01-18 19:18+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "சிவகுமார் சண்முகசுந்தரம்,கோமதி சிவகுமார்,துரையப்பா வசீகரன்"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sshanmu@yahoo.com,gomathiss@hotmail.com,t_vasee@yahoo.com"
+
+#: dialogs/edittimedialog.cpp:42
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task Time"
+msgstr "பணியைத் தொகு"
+
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#, fuzzy, kde-format
+#| msgid "Task"
+msgctxt "@title:group"
+msgid "Task"
+msgstr "பணி"
+
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#, fuzzy, kde-format
+#| msgid "Task Name"
+msgid "Task Name:"
+msgstr "செயல் பெயர்"
+
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#, kde-format
+msgid "Task Description:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:71
+#, kde-format
+msgctxt "@title:group"
+msgid "Time Editing"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:79
+#, kde-format
+msgid "Current Time:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:82
+#, fuzzy, kde-format
+#| msgid " min"
+msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
+msgid " minute"
+msgid_plural " minutes"
+msgstr[0] "நிமிடம்"
+msgstr[1] "நிமிடம்"
+
+#: dialogs/edittimedialog.cpp:88
+#, kde-format
+msgid "Change Time By:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:92
+#, kde-format
+msgid "Time After Change:"
+msgstr ""
+
+#: dialogs/edittimedialog.cpp:98
+#, fuzzy, kde-format
+#| msgid "Log history"
+msgctxt "@action:button"
+msgid "Edit History..."
+msgstr "வரலாற்று பதிவு"
+
+#: dialogs/edittimedialog.cpp:99
+#, kde-format
+msgid "To change this task's time, you have to edit its event history"
+msgstr ""
+
+#: dialogs/exportdialog.cpp:96
+#, fuzzy, kde-format
+#| msgid "Export to:"
+msgctxt "@title:window"
+msgid "Export to File"
+msgstr "ஏற்றுமதி"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
+#, fuzzy, kde-format
+#| msgid "Decimal"
+msgctxt "format to display times"
+msgid "Decimal"
+msgstr "தசமம்"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
+#, fuzzy, kde-format
+msgid "Session Times"
+msgstr "அமர்வு நேரம்"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.cpp:138 dialogs/exportdialog.ui:205
+#, fuzzy, kde-format
+msgid "All Tasks"
+msgstr "அனைத்து பணிகளையும் நகலெடு"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
+#: dialogs/exportdialog.ui:14
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgid "Export"
+msgstr "ஏற்றுமதி"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
+#: dialogs/exportdialog.ui:26
+#, fuzzy, kde-format
+#| msgid "Export Progress"
+msgid "Export Preview"
+msgstr "ஏற்றுமதி நடைபெறுகிறது"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
+#: dialogs/exportdialog.ui:50
+#, fuzzy, kde-format
+#| msgid "Copy Totals to Clipboard"
+msgid "Copy to Clipboard"
+msgstr "மொத்தத்தையும் கிளிப்போர்டில் நகலெடு"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
+#: dialogs/exportdialog.ui:60
+#, kde-format
+msgid "Save As..."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
+#: dialogs/exportdialog.ui:75
+#, kde-format
+msgid "Report Type"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
+#: dialogs/exportdialog.ui:81
+#, kde-format
+msgid "Times as CSV"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
+#: dialogs/exportdialog.ui:91
+#, kde-format
+msgid "History as CSV"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
+#: dialogs/exportdialog.ui:98
+#, fuzzy, kde-format
+#| msgid "&Export to CSV File..."
+msgid "Event Log as CSV"
+msgstr "CSV கோப்பிற்கு ஏற்றுமதி செய்"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
+#: dialogs/exportdialog.ui:105
+#, kde-format
+msgid "Times as Text"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:118
+#, kde-format
+msgid ""
+"An inclusive date range for reporting on time card history.  Not enabled "
+"when reporting on totals."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
+#: dialogs/exportdialog.ui:121
+#, kde-format
+msgid "Date Range"
+msgstr "தேதி வரம்பு"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: dialogs/exportdialog.ui:127
+#, kde-format
+msgid "From:"
+msgstr "அனுப்புநர்:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
+#: dialogs/exportdialog.ui:150
+#, kde-format
+msgid "To:"
+msgstr "பெறுநர்:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
+#: dialogs/exportdialog.ui:182
+#, kde-format
+msgid "Hours:Minutes"
+msgstr "மணிநேரங்கள் : நிமிடங்கள்"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
+#: dialogs/exportdialog.ui:191
+#, fuzzy, kde-format
+msgid "All Times"
+msgstr "எல்லா நேரத்தையும் மாற்றியமை"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
+#: dialogs/exportdialog.ui:210
+#, fuzzy, kde-format
+msgid "Only Selected"
+msgstr "பணியை அழிக்கிறது"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:224
+#, fuzzy, kde-format
+#| msgid "The character used to seperate one field from another in the output."
+msgid "The character used to separate one field from another in the output."
+msgstr "வெளியீட்டில் ஒரு புலத்தையும் மற்றொன்றையும் பிரிக்கும் எழுத்து"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
+#: dialogs/exportdialog.ui:227
+#, kde-format
+msgid "Delimiter"
+msgstr "வரையறை"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioComma)
+#: dialogs/exportdialog.ui:233
+#, kde-format
+msgid "Comma"
+msgstr "கால்புள்ளி"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSemicolon)
+#: dialogs/exportdialog.ui:243
+#, kde-format
+msgid "Semicolon"
+msgstr "அரைப்புள்ளி"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioOther)
+#: dialogs/exportdialog.ui:250
+#, fuzzy, kde-format
+#| msgid "Other:"
+msgctxt "user can set an user defined delimiter"
+msgid "Other:"
+msgstr "பிற"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioTab)
+#: dialogs/exportdialog.ui:257
+#, fuzzy, kde-format
+#| msgid "Tab"
+msgctxt "tabulator delimiter"
+msgid "Tab"
+msgstr "தத்தல்"
+
+#. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
+#: dialogs/exportdialog.ui:264
+#, kde-format
+msgid "Space"
+msgstr "இடைவெளி"
+
+#. i18n: ectx: property (text), widget (QLabel, quotesLabel)
+#: dialogs/exportdialog.ui:308
+#, kde-format
+msgid "Quotes:"
+msgstr "அடைப்புக்குறிகள்"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:327
+#, kde-format
+msgid "All fields are quoted in the output."
+msgstr "அனைத்து புலங்களும் வெளியீட்டில் அடைக்கப்பட்டிருக்கும்."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:331
+#, kde-format
+msgid "\""
+msgstr "\""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
+#: dialogs/exportdialog.ui:336
+#, kde-format
+msgid "'"
+msgstr "'"
+
+#: dialogs/historydialog.cpp:105 export/totalsastext.cpp:87
+#, kde-format
+msgid "Task"
+msgstr "பணி"
+
+#: dialogs/historydialog.cpp:105
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgid "StartTime"
+msgstr "மொத்த நேரம்"
+
+#: dialogs/historydialog.cpp:105
+#, fuzzy, kde-format
+#| msgid "Time"
+msgid "EndTime"
+msgstr "நேரம்"
+
+#: dialogs/historydialog.cpp:105
+#, fuzzy, kde-format
+#| msgid "Comma"
+msgid "Comment"
+msgstr "கால்புள்ளி"
+
+#: dialogs/historydialog.cpp:146
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You can change this task's comment, start time and end time."
+msgstr ""
+
+#: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
+#, kde-format
+msgid "This is not a valid Date/Time."
+msgstr ""
+
+#: dialogs/historydialog.cpp:273
+#, kde-format
+msgid "Please select a task to delete."
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
+#: dialogs/historydialog.ui:14
+#, fuzzy, kde-format
+#| msgid "Log history"
+msgid "Edit History"
+msgstr "வரலாற்று பதிவு"
+
+#: dialogs/taskpropertiesdialog.cpp:62
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"<p>Enter the name of the task here. You can choose it freely.</p>\n"
+"<p><i>Example:</i> phone with mother</p>"
+msgstr ""
+
+#: dialogs/taskpropertiesdialog.cpp:73
+#, fuzzy, kde-format
+#| msgid "A&uto tracking"
+msgctxt "@title:group"
+msgid "Auto Tracking"
+msgstr "தானாக கவனித்தல்"
+
+#: dialogs/taskpropertiesdialog.cpp:90
+#, kde-format
+msgctxt "order number of desktop: 1, 2, ..."
+msgid "%1."
+msgstr ""
+
+#: export/export.cpp:63
+#, kde-format
+msgid "Could not open \"%1\"."
+msgstr "திறக்க முடியவில்லை\"%1\"."
+
+#: export/totalsastext.cpp:84
+#, kde-format
+msgid "Task Totals"
+msgstr "மொத்த பணி"
+
+#: export/totalsastext.cpp:87
+#, kde-format
+msgid "Time"
+msgstr "நேரம்"
+
+#: export/totalsastext.cpp:120
+#, fuzzy, kde-format
+#| msgid "Total"
+msgctxt "total time of all tasks"
+msgid "Total"
+msgstr "மொத்தம்"
+
+#: export/totalsastext.cpp:122
+#, kde-format
+msgid "No tasks."
+msgstr "பணிகள் இல்லை"
+
+#: idletimedetector.cpp:78
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: idletimedetector.cpp:81
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "நேரத்தை தொடரவும்"
+
+#: idletimedetector.cpp:83
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr ""
+
+#: idletimedetector.cpp:84
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "திருப்பு &&  தொடர்"
+
+#: idletimedetector.cpp:88
+#, fuzzy, kde-format
+#| msgid "Desktop has been idle since %1. What should we do?"
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "%1 லிருந்து மேசை செயல்படவில்லை. என்ன செய்ய வேண்டும்?"
+
+#. i18n: ectx: Menu (clock)
+#: ktimetrackerui.rc:19
+#, kde-format
+msgid "&Clock"
+msgstr "கடிகாரம்"
+
+#. i18n: ectx: Menu (task)
+#: ktimetrackerui.rc:26
+#, kde-format
+msgid "&Task"
+msgstr "செயல்"
+
+#. i18n: ectx: Menu (settings)
+#: ktimetrackerui.rc:36
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "அமைவுகளை காட்டு"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: ktimetrackerui.rc:41
+#, kde-format
+msgid "Main Toolbar"
+msgstr "பிரதான கருவிப்பட்டை"
+
+#. i18n: ectx: ToolBar (taskToolBar)
+#: ktimetrackerui.rc:50
+#, fuzzy, kde-format
+#| msgid "Task"
+msgid "Tasks"
+msgstr "பணி"
+
+#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#, fuzzy, kde-format
+msgid "KTimeTracker"
+msgstr "KDE நேரம் பின்பற்றும் கருவி"
+
+#: main.cpp:102
+#, kde-format
+msgid "KDE Time tracker tool"
+msgstr "KDE நேரம் பின்பற்றும் கருவி"
+
+#: main.cpp:104
+#, kde-format
+msgid "Copyright © 1997-2019 KTimeTracker developers"
+msgstr ""
+
+#: main.cpp:108
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Potashev"
+msgstr ""
+
+#: main.cpp:109
+#, fuzzy, kde-format
+#| msgid "Current Maintainer"
+msgctxt "@info:credit"
+msgid "Current Maintainer (since 2019)"
+msgstr "நடப்பு பராமரிப்பான்"
+
+#: main.cpp:111
+#, kde-format
+msgctxt "@info:credit"
+msgid "Thorsten Stärk"
+msgstr ""
+
+#: main.cpp:112
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2006-2012)"
+msgstr ""
+
+#: main.cpp:114
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mark Bucciarelli"
+msgstr ""
+
+#: main.cpp:115
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2005-2006)"
+msgstr ""
+
+#: main.cpp:117
+#, kde-format
+msgctxt "@info:credit"
+msgid "Jesper Pedersen"
+msgstr ""
+
+#: main.cpp:118
+#, kde-format
+msgctxt "@info:credit"
+msgid "Maintainer (2000-2005)"
+msgstr ""
+
+#: main.cpp:120
+#, kde-format
+msgctxt "@info:credit"
+msgid "Sirtaj Singh Kang"
+msgstr ""
+
+#: main.cpp:121
+#, fuzzy, kde-format
+#| msgid "Original Author"
+msgctxt "@info:credit"
+msgid "Original Author"
+msgstr "மூல ஆசிரியர்"
+
+#: main.cpp:123
+#, kde-format
+msgctxt "@info:credit"
+msgid "Mathias Soeken"
+msgstr ""
+
+#: main.cpp:124
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (in 2007)"
+msgstr ""
+
+#: main.cpp:126
+#, kde-format
+msgctxt "@info:credit"
+msgid "Kalle Dalheimer"
+msgstr ""
+
+#: main.cpp:127
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer (1999-2000)"
+msgstr ""
+
+#: main.cpp:129
+#, kde-format
+msgctxt "@info:credit"
+msgid "Allen Winter"
+msgstr ""
+
+#: main.cpp:130 main.cpp:133
+#, kde-format
+msgctxt "@info:credit"
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:132
+#, kde-format
+msgctxt "@info:credit"
+msgid "David Faure"
+msgstr ""
+
+#: main.cpp:144
+#, fuzzy, kde-format
+#| msgid "The iCalendar file to open"
+msgctxt "@info:shell"
+msgid "Path or URL to iCalendar file to open."
+msgstr "திறக்கவேண்டிய iCalendar கோப்பு:"
+
+#: mainwindow.cpp:52
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "KDE நேரம் பின்பற்றும் கருவி"
+
+#: mainwindow.cpp:152 tray.cpp:90
+#, kde-format
+msgid "No active tasks"
+msgstr "செயல்களை தானாக சேமி"
+
+#: mainwindow.cpp:162 tray.cpp:110
+#, fuzzy, kde-format
+#| msgid ", "
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: model/tasksmodel.cpp:33
+#, fuzzy, kde-format
+#| msgid "Task Name"
+msgctxt "@title:column"
+msgid "Task Name"
+msgstr "செயல் பெயர்"
+
+#: model/tasksmodel.cpp:34
+#, fuzzy, kde-format
+#| msgid "Session Time"
+msgctxt "@title:column"
+msgid "Session Time"
+msgstr "அமர்வு நேரம்"
+
+#: model/tasksmodel.cpp:35
+#, fuzzy, kde-format
+#| msgid "Time"
+msgctxt "@title:column"
+msgid "Time"
+msgstr "நேரம்"
+
+#: model/tasksmodel.cpp:36
+#, fuzzy, kde-format
+#| msgid "Total Session Time"
+msgctxt "@title:column"
+msgid "Total Session Time"
+msgstr "மொத்த அமர்வு நேரம்"
+
+#: model/tasksmodel.cpp:37
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgctxt "@title:column"
+msgid "Total Time"
+msgstr "மொத்த நேரம்"
+
+#: model/tasksmodel.cpp:38
+#, kde-format
+msgctxt "@title:column"
+msgid "Priority"
+msgstr ""
+
+#: model/tasksmodel.cpp:39
+#, fuzzy, kde-format
+msgctxt "@title:column"
+msgid "Percent Complete"
+msgstr "&முடிந்ததாக குறிக்கவும்"
+
+#: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
+#, fuzzy, kde-format
+#| msgid "Enter the name of the task here. This name is for your eyes only."
+msgctxt "@info:whatsthis"
+msgid "The task name is what you call the task, it can be chosen freely."
+msgstr "பணிக்குரிய பெயரைத் தருக. இந்த பெயரை நீங்கள் மட்டுமே அறிவீர்கள்."
+
+#: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"The session time is the time since you last chose \"Start New Session\"."
+msgstr ""
+
+#: model/tasksmodel.cpp:290
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"The total session time is the session time of this task and all its subtasks."
+msgstr "இது தேர்வு செய்யப்பட்ட பணியையும் அதன் துணை பணிகளையும் அழிக்கும்."
+
+#: model/tasksmodel.cpp:294
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid "The total time is the time of this task and all its subtasks."
+msgstr "இது தேர்வு செய்யப்பட்ட பணியையும் அதன் துணை பணிகளையும் அழிக்கும்."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
+#: settings/cfgbehavior.ui:17
+#, fuzzy, kde-format
+#| msgid "Detect desktop as idle after"
+msgid "Detect desktop as idle after:"
+msgstr "பணிமேடை வேலை இல்லாமல் இருப்பது பிறகு கண்டுபிடிக்கப்படும்"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
+#: settings/cfgbehavior.ui:24 settings/cfgstorage.ui:36
+#, kde-format
+msgid " min"
+msgstr "நிமிடம்"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: settings/cfgbehavior.ui:37
+#, kde-format
+msgid "Minimum desktop active time:"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
+#: settings/cfgbehavior.ui:44
+#, kde-format
+msgid " sec"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
+#: settings/cfgbehavior.ui:57
+#, kde-format
+msgid "Prompt before deleting tasks"
+msgstr "பணிகளை அழிக்கும் முன் எச்சரி"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:64
+#, kde-format
+msgid ""
+"Unitasking - allow only one task to be timed at a time. Does not stop any "
+"timer."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
+#: settings/cfgbehavior.ui:67
+#, kde-format
+msgid "Allow only one timer at a time"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
+#: settings/cfgbehavior.ui:74
+#, kde-format
+msgid "Place an icon to the system tray"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: settings/cfgdisplay.ui:29
+#, kde-format
+msgctxt "title of group box, general options"
+msgid "General"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
+#: settings/cfgdisplay.ui:35
+#, fuzzy, kde-format
+msgid "Decimal number format"
+msgstr "நேர வடிவம்"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:42
+#, kde-format
+msgid ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious. It will disable the search bar and every click will pop up a "
+"context menu."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
+#: settings/cfgdisplay.ui:45
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt ""
+"Choose this if you have a touchscreen and your screen real estate is "
+"precious."
+msgid "Configuration for PDA"
+msgstr "உறுதி செய்"
+
+#. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
+#: settings/cfgdisplay.ui:55
+#, kde-format
+msgid "Window Title"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
+#: settings/cfgdisplay.ui:64
+#, kde-format
+msgid "Currently opened file"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
+#: settings/cfgdisplay.ui:71
+#, fuzzy, kde-format
+#| msgid "Total Session Time"
+msgid "Current Task and Session Time"
+msgstr "மொத்த அமர்வு நேரம்"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: settings/cfgdisplay.ui:81
+#, fuzzy, kde-format
+#| msgid "Columns displayed:"
+msgid "Columns Displayed"
+msgstr "காட்டப்பட்ட நிரல்கள்."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
+#: settings/cfgdisplay.ui:87
+#, kde-format
+msgid "Session time"
+msgstr "அமர்வு நேரம்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
+#: settings/cfgdisplay.ui:94
+#, kde-format
+msgid "Cumulative task time"
+msgstr "மொத்த பணி நேரம் "
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
+#: settings/cfgdisplay.ui:101
+#, kde-format
+msgid "Total session time"
+msgstr "மொத்த அமர்வு நேரம்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
+#: settings/cfgdisplay.ui:108
+#, kde-format
+msgid "Total task time"
+msgstr "மொத்த பணி நேரம்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
+#: settings/cfgdisplay.ui:115
+#, kde-format
+msgid "Priority"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
+#: settings/cfgdisplay.ui:122
+#, fuzzy, kde-format
+msgid "Percent complete"
+msgstr "&முடிந்ததாக குறிக்கவும்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_autoSave)
+#: settings/cfgstorage.ui:29
+#, fuzzy, kde-format
+#| msgid "Save tasks every"
+msgid "Save tasks every:"
+msgstr "அனைத்து பணிகளையும் சேமி"
+
+#: taskview.cpp:118
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+
+#: taskview.cpp:214
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+
+#: taskview.cpp:290
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: taskview.cpp:291
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: taskview.cpp:361 taskview.cpp:445
+#, kde-format
+msgid "Unnamed Task"
+msgstr "பெயரிடப்படாத பணி"
+
+#: taskview.cpp:380
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+
+#: taskview.cpp:422
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "புதிய துணை பணி"
+
+#: taskview.cpp:440
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "பணியைத் தொகு"
+
+#: taskview.cpp:474 taskview.cpp:515 taskview.cpp:537
+#, kde-format
+msgid "No task selected."
+msgstr "பணி எதுவும் தேர்ந்தெடுக்கபடவில்லை."
+
+#: taskview.cpp:520
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to delete the task named\n"
+#| "\"%1\" and its entire history?\n"
+#| "NOTE: all its subtasks and their history will also be deleted."
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"\"%1\" என்று பெயரிடப்பட்ட பணியை அழிக்க வேண்டுமா?\n"
+"மற்றும் அதன் மொத்த வரலாற்றையும்?\".\n"
+"குறிப்பு: அதன் அனைத்து துணைப்பணிகள் மற்றும் அதன் வரலாறு அழிக்கப்படும்!"
+
+#: taskview.cpp:524
+#, fuzzy, kde-format
+#| msgid "Deleting Task"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "பணியை அழிக்கிறது"
+
+#: timetrackerstorage.cpp:140
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "உள்வாங்கும் போது பிழை \"%1\": மூலக்கோப்பினை கண்டுபிடிக்க முடியவில்லை(uid=%2)"
+
+#: timetrackerstorage.cpp:243
+#, fuzzy, kde-format
+#| msgid "Could not open \"%1\"."
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "திறக்க முடியவில்லை\"%1\"."
+
+#: timetrackerstorage.cpp:251
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: timetrackerwidget.cpp:154
+#, fuzzy, kde-format
+#| msgid "Start &New Session"
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "புதிய அமர்வை உருவாக்கு"
+
+#: timetrackerwidget.cpp:155
+#, fuzzy, kde-format
+#| msgid "Start a new session"
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "புதிய அமர்வை உருவாக்கு"
+
+#: timetrackerwidget.cpp:157
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session time to 0 for all tasks, to start a new "
+#| "session, without affecting the totals."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr "இது மொத்த அமர்வை பாதிக்காமல் புதிய அமர்வை 0 த்திலிருந்து மீட்டமைக்கும்"
+
+#: timetrackerwidget.cpp:165
+#, fuzzy, kde-format
+#| msgid "Log history"
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "வரலாற்று பதிவு"
+
+#: timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr ""
+
+#: timetrackerwidget.cpp:168
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+
+#: timetrackerwidget.cpp:178
+#, fuzzy, kde-format
+#| msgid "&Reset All Times"
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "அமர்வு நேரத்தை மீட்கவும்"
+
+#: timetrackerwidget.cpp:179
+#, fuzzy, kde-format
+#| msgid "Reset all times"
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "அனைத்து நேரங்களையும் மீட்கவும்"
+
+#: timetrackerwidget.cpp:181
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session and total time to 0 for all tasks, to restart "
+#| "from scratch."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr "இது மொத்த அமர்வை பாதிக்காமல் புதிய அமர்வை 0 த்திலிருந்து மீட்டமைக்கும்"
+
+#: timetrackerwidget.cpp:188
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "மொத்த நேரம்"
+
+#: timetrackerwidget.cpp:189
+#, fuzzy, kde-format
+#| msgid "Start timing for selected task"
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "குறிப்பிட்ட பணிக்கு நேரங்கணித்தலைத் தொடங்கு"
+
+#: timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will start timing for the selected task.\n"
+#| "It is even possible to time several tasks simultaneously.\n"
+#| "\n"
+#| "You may also start timing of a tasks by double clicking the left mouse "
+#| "button on a given task. This will, however, stop timing of other tasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of a tasks by double clicking the left mouse "
+"button on a given task. This will, however, stop timing of other tasks."
+
+#: timetrackerwidget.cpp:205
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "நிறுத்து"
+
+#: timetrackerwidget.cpp:206
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "குறிப்பிட்ட பணிக்கு நேரங்கணித்தலை நிறுத்து"
+
+#: timetrackerwidget.cpp:207
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "குறிப்பிட்ட பணிக்கு நேரங்கணித்தலை நிறுத்து"
+
+#: timetrackerwidget.cpp:214
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:215
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:216
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:223
+#, fuzzy, kde-format
+#| msgid "Stop &All Timers"
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "எல்லா நேரத்தையும் நிறுத்து"
+
+#: timetrackerwidget.cpp:224
+#, fuzzy, kde-format
+#| msgid "Stop all of the active timers"
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "செயலில் உள்ள அனைத்து நேரங்கணித்தலை நிறுத்து"
+
+#: timetrackerwidget.cpp:225
+#, fuzzy, kde-format
+#| msgid "Stop all of the active timers"
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "செயலில் உள்ள அனைத்து நேரங்கணித்தலை நிறுத்து"
+
+#: timetrackerwidget.cpp:233
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr ""
+
+#: timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+
+#: timetrackerwidget.cpp:238
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+
+#: timetrackerwidget.cpp:249
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "புதிய பணி"
+
+#: timetrackerwidget.cpp:250
+#, fuzzy, kde-format
+#| msgid "Create new top level task"
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "புதிய மேல்நிலைப்பணியைத் தொடங்கு"
+
+#: timetrackerwidget.cpp:251
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "This will create a new top level task."
+
+#: timetrackerwidget.cpp:259
+#, fuzzy, kde-format
+#| msgid "New &Subtask..."
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "புதிய துணைச்செயல்"
+
+#: timetrackerwidget.cpp:260
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "This will create a new top level task."
+
+#: timetrackerwidget.cpp:261
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "This will create a new top level task."
+
+#: timetrackerwidget.cpp:269
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "வரையறை"
+
+#: timetrackerwidget.cpp:270
+#, fuzzy, kde-format
+#| msgid "Delete selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "தேர்வு செய்யப்பட்ட பணியை அழி"
+
+#: timetrackerwidget.cpp:271
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "இது தேர்வு செய்யப்பட்ட பணியையும் அதன் துணை பணிகளையும் அழிக்கும்."
+
+#: timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: timetrackerwidget.cpp:280
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "தேர்வு செய்த பணிக்குரிய பெயரையோ நேரங்களையோ தொகுக்கலாம்."
+
+#: timetrackerwidget.cpp:282
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"இது தேர்வு செய்த பணிக்குரிய அளவுருக்களை தொகுக்கும் உரையாடல் பெட்டியை கொண்டு வரும்."
+
+#: timetrackerwidget.cpp:291
+#, fuzzy, kde-format
+#| msgid "Print Times"
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "அச்சடிக்கும் நேரம்"
+
+#: timetrackerwidget.cpp:292
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "தேர்வு செய்த பணிக்குரிய பெயரையோ நேரங்களையோ தொகுக்கலாம்."
+
+#: timetrackerwidget.cpp:294
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"இது தேர்வு செய்த பணிக்குரிய அளவுருக்களை தொகுக்கும் உரையாடல் பெட்டியை கொண்டு வரும்."
+
+#: timetrackerwidget.cpp:303
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&முடிந்ததாக குறிக்கவும்"
+
+#: timetrackerwidget.cpp:311
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&முடிந்ததாக குறிக்கவும்"
+
+#: timetrackerwidget.cpp:319
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "ஏற்றுமதி"
+
+#: timetrackerwidget.cpp:326
+#, fuzzy, kde-format
+#| msgid "Import Tasks From &Planner..."
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "&தயாரிப்பானில் இருந்து பணிகளை கீழிறக்கு..."
+
+#: timetrackerwidget.cpp:338
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr ""
+
+#: timetrackerwidget.cpp:471
+#, fuzzy, kde-format
+#| msgid "Behavior"
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "நடத்தை"
+
+#: timetrackerwidget.cpp:474
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr ""
+
+#: timetrackerwidget.cpp:477
+#, fuzzy, kde-format
+#| msgid "Storage"
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "கிடங்கு"
+
+#: timetrackerwidget.cpp:514
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "புதிய பணி"
+
+#: timetrackerwidget.cpp:593
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+
+#: timetrackerwidget.cpp:603
+#, fuzzy, kde-format
+#| msgid "Do you really want to reset the time to zero for all tasks?"
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr "எல்லா செயல்களுக்கும் நேரத்தை 0வாக மாற்றியமைக்க வேண்டுமா?"
+
+#: timetrackerwidget.cpp:605
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "உறுதி செய்"
+
+#: timetrackerwidget.cpp:606
+#, fuzzy, kde-format
+#| msgid "Reset All Times"
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "எல்லா நேரத்தையும் மாற்றியமை"
+
+#: timetrackerwidget.cpp:795
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr ""
+
+#: timetrackerwidget.cpp:797
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr ""
+
+#: timetrackerwidget.cpp:799
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr ""
+
+#: timetrackerwidget.cpp:801
+#, fuzzy, kde-format
+msgid "UID not found."
+msgstr "கோப்பு \"%1\" கண்டுபிடிக்க முடியவில்லை."
+
+#: timetrackerwidget.cpp:803
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr ""
+
+#: timetrackerwidget.cpp:805
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr ""
+
+#: timetrackerwidget.cpp:807
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr ""
+
+#: timetrackerwidget.cpp:809
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr ""
+
+#: timetrackerwidget.cpp:1038
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+
+#: timetrackerwidget.cpp:1045
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+
+#: tray.cpp:95
+#, fuzzy, kde-format
+#| msgid ", ..."
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: treeviewheadercontextmenu.cpp:46
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr ""
+
+#: widgets/searchline.cpp:37
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Search or add task"
+msgstr ""
+
+#: widgets/searchline.cpp:39
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is a combined field. As long as you do not press Enter, it acts as a "
+"filter. Then, only tasks that match your input are shown. As soon as you "
+"press Enter, your input is used as name to create a new task."
+msgstr ""
+
+#: widgets/taskswidget.cpp:143
+#, kde-format
+msgctxt "@item:inmenu Task progress"
+msgid "%1 %"
+msgstr ""
+
+#: widgets/taskswidget.cpp:154
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "unspecified"
+msgstr ""
+
+#: widgets/taskswidget.cpp:157
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "1 (highest)"
+msgstr ""
+
+#: widgets/taskswidget.cpp:160
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "5 (medium)"
+msgstr ""
+
+#: widgets/taskswidget.cpp:163
+#, kde-format
+msgctxt "@item:inmenu Task priority"
+msgid "9 (lowest)"
+msgstr ""
+
+#~ msgid "CSV Export"
+#~ msgstr "CSV ஏற்றுமதி"
+
+#~ msgid "&Edit..."
+#~ msgstr "தொகு"
+
+#, fuzzy
+#~| msgid "Edit Task"
+#~ msgid "Add/Edit a task"
+#~ msgstr "பணியைத் தொகு"
+
+#, fuzzy
+#~ msgid "Delete"
+#~ msgstr "வரையறை"
+
+#, fuzzy
+#~| msgid "Could not open \"%1\"."
+#~ msgid "Could not save."
+#~ msgstr "திறக்க முடியவில்லை\"%1\"."
+
+#, fuzzy
+#~ msgctxt "@action:button"
+#~ msgid "E&xport to Clipboard"
+#~ msgstr "கூட்டுத்தொகையை தற்காலிக நினைவிடத்தில் சேமி"
+
+#, fuzzy
+#~| msgid "&Export"
+#~ msgid "&Import"
+#~ msgstr "ஏற்றுமதி"
+
+#, fuzzy
+#~ msgid "&Export Times..."
+#~ msgstr "CSV கோப்பிற்கு ஏற்றுமதி செய்"
+
+#, fuzzy
+#~ msgid "Export &History..."
+#~ msgstr "CSV கோப்பிற்கு வரலாற்றை ஏற்றுமதி செய்..."
+
+#, fuzzy
+#~| msgid "The file where Karm will write the data."
+#~ msgid "The file where KTimeTracker will write the data."
+#~ msgstr "இந்த கோப்பில் karm தரவுகளை எழுதும்"
+
+#, fuzzy
+#~ msgid "ktimetracker"
+#~ msgstr "KDE நேரம் பின்பற்றும் கருவி"
+
+#~ msgid "Configure key bindings"
+#~ msgstr "விசைப்பிணைப்புக்களை கட்டமை"
+
+#, fuzzy
+#~| msgid "This will let you configure keybindings which is specific to karm"
+#~ msgid ""
+#~ "This will let you configure keybindings which are specific to ktimetracker"
+#~ msgstr "karm இற்குரித்தான விசைப்பிணைப்புக்களை கட்டமைக்க இது உதவும்."
+
+#~ msgid "Just caught a software interrupt."
+#~ msgstr "மென்பொருள் தடை நிகழ்ந்துள்ளது"
+
+#, fuzzy
+#~| msgid "Delete selected task"
+#~ msgid "Delete task <taskid>"
+#~ msgstr "தேர்வு செய்யப்பட்ட பணியை அழி"
+
+#, fuzzy
+#~| msgid "Start timing for selected task"
+#~ msgid "Start timer for task <taskid>"
+#~ msgstr "குறிப்பிட்ட பணிக்கு நேரங்கணித்தலைத் தொடங்கு"
+
+#, fuzzy
+#~| msgid "Start timing for selected task"
+#~ msgid "Stop timer for task <taskid>"
+#~ msgstr "குறிப்பிட்ட பணிக்கு நேரங்கணித்தலைத் தொடங்கு"
+
+#~ msgid "task_popup"
+#~ msgstr "பணி_தோன்றும் சாளரம்"
+
+#, fuzzy
+#~| msgid "Space"
+#~ msgid "Save"
+#~ msgstr "இடைவெளி"
+
+#, fuzzy
+#~ msgid "Configure ktimetracker"
+#~ msgstr "KDE நேரம் பின்பற்றும் கருவி"
+
+#~ msgid "Week of %1"
+#~ msgstr "வாரத்தில்%1"
+
+#, fuzzy
+#~ msgid "Settings"
+#~ msgstr "அமைவுகளை காட்டு"
+
+#, fuzzy
+#~| msgid "Print Dialog"
+#~ msgid "Dialog"
+#~ msgstr "அச்சடிக்கும் உரையாடல் பெட்டி"
+
+#, fuzzy
+#~ msgid "delete"
+#~ msgstr "வரையறை"
+
+#, fuzzy
+#~| msgid "Successfully saved tasks and history"
+#~ msgid "Successfully saved file "
+#~ msgstr "வெற்றிகரமான சேமிக்கப்பட்ட பணிகள் மற்றும் வரலாறு"
+
+#, fuzzy
+#~ msgctxt "abbreviation for hours"
+#~ msgid " hr. "
+#~ msgstr ""
+#~ "_: abbreviation for hours\n"
+#~ " hr. "
+
+#, fuzzy
+#~ msgctxt "abbreviation for minutes"
+#~ msgid " min. "
+#~ msgstr ""
+#~ "_: abbreviation for minutes\n"
+#~ " min. "
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 5"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 4"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 3"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 2"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 1"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 8"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 9"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 6"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 7"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 10"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 12"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 17"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 11"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 16"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 13"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 18"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 14"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 19"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 15"
+#~ msgstr "பணிமேடையில்"
+
+#, fuzzy
+#~| msgid "In Desktop"
+#~ msgid "Desktop 20"
+#~ msgstr "பணிமேடையில்"
+
+#~ msgid "Task &name:"
+#~ msgstr "செயல் பெயர்"
+
+#~ msgid "Edit &absolute"
+#~ msgstr "முழுமையாக தொகு"
+
+#~ msgid "&Time:"
+#~ msgstr "நேரம்"
+
+#, fuzzy
+#~| msgid "&Session time: "
+#~ msgid "&Session time:"
+#~ msgstr "&அமர்வு நேரம்:"
+
+#~ msgid "Edit &relative (apply to both time and session time)"
+#~ msgstr "சார்பாகத் தொகு(நேரம் மற்றும் அமர்வு நேரம் இரண்டிற்கும் செயற்படுத்து)"
+
+#~ msgid ""
+#~ "Use this option to set the time spent on this task to an absolute value.\n"
+#~ "\n"
+#~ "For example, if you have worked exactly four hours on this task during "
+#~ "the current session, you would set the Session time to 4 hr."
+#~ msgstr ""
+#~ "இந்த பணியில் செலவிடப்பட்ட நேரத்தை சரியான மதிப்பில் அமைக்க இந்த தேர்வை பயன்படுத்தவும்.\n"
+#~ "உதாரணமாக, நடப்பு அமர்வில் நான்கு மணிநேரம் பணி செய்திருந்தால்,  அமர்வு நேரத்தை 4 "
+#~ "மணிநேரம் என்று அமைக்கவும்."
+
+#~ msgid ""
+#~ "This is the time the task has been running since all times were reset."
+#~ msgstr "இந்த அமர்வில் இப்பணி இயங்கிய நேரம் இதுவாகும்."
+
+#~ msgid "This is the time the task has been running this session."
+#~ msgstr "இந்த அமர்வில் இப்பணி இயங்கிய நேரம் இதுவாகும்."
+
+#~ msgid ""
+#~ "Specify how much time to add or subtract to the overall and session time"
+#~ msgstr "மொத்த மற்றும் அமர்வு நேரத்திலிருந்து கூட்ட/கழிக்க வேண்டிய நேரத்தைக் குறிப்பிடுக"
+
+#, fuzzy
+#~| msgid "Total Time"
+#~ msgid "Start/Stop Timer"
+#~ msgstr "மொத்த நேரம்"
+
+#~ msgid "Session: %1"
+#~ msgstr "அமர்வு: %1"
+
+#, fuzzy
+#~| msgid "Total: %1"
+#~ msgctxt "total time of all tasks"
+#~ msgid "Total: %1"
+#~ msgstr "மொத்தம்: %1"
+
+#~ msgid "Session"
+#~ msgstr "அமர்வு"
+
+#, fuzzy
+#~ msgid "No hours logged."
+#~ msgstr "எந்த நேரமும் பதிவு செய்யப்படவில்லை"
+
+#~ msgid "Task History"
+#~ msgstr "பணி வரலாறு"
+
+#~ msgid "From %1 to %2"
+#~ msgstr " %1 லிருந்து %2 க்கு"
+
+#~ msgid "Printed on: %1"
+#~ msgstr "%1 அச்சடிக்கப்பட்டது"
+
+#, fuzzy
+#~ msgid "Selected Task"
+#~ msgstr "பணியை அழிக்கிறது"
+
+#, fuzzy
+#~ msgid "Totals only"
+#~ msgstr "மொத்தம்"
+
+#~ msgid "KArm"
+#~ msgstr "KArm"
+
+#~ msgid ""
+#~ "Are you sure you want to delete the task named\n"
+#~ "\"%1\" and its entire history?"
+#~ msgstr ""
+#~ "\"%1\" என்று பெயரிடப்பட்ட பணியை அழிக்க வேண்டுமா?\n"
+#~ "மற்றும் அதன் மொத்த வரலாற்றையும்?"
+
+#, fuzzy
+#~| msgid "Display"
+#~ msgctxt "settings page for customizing user interface"
+#~ msgid "Display"
+#~ msgstr "காட்சி"
+
+#~ msgid "Task History\n"
+#~ msgstr "பணி வரலாறு\n"
+
+#~ msgid "Sum"
+#~ msgstr "மொத்தம்"
+
+#~ msgid "Total Sum"
+#~ msgstr "மொத்த தொகை"
+
+#~ msgid "Task Hierarchy"
+#~ msgstr "பணி வரலாறு"
+
+#~ msgid "  No hours logged."
+#~ msgstr "எந்த நேரமும் பதிவு செய்யப்படவில்லை"
+
+#~ msgid "Task Name "
+#~ msgstr "பணியின் பெயர்"
+
+#~ msgid "KArm - %1"
+#~ msgstr "KArm - %1"
+
+#, fuzzy
+#~| msgid "&New..."
+#~ msgctxt "creating a new task"
+#~ msgid "&New..."
+#~ msgstr "புதிய"
+
+#~ msgid "Export &History to CSV File..."
+#~ msgstr "CSV கோப்பிற்கு வரலாற்றை ஏற்றுமதி செய்..."
+
+#~ msgid "Copy task totals to clipboard"
+#~ msgstr "பணி மொத்தத்தையும் தற்காலிக நினைவகத்தில் நகலெடுக்கவும்"
+
+#~ msgid "Copy time card history to clipboard."
+#~ msgstr " "
+
+#~ msgid "Log history"
+#~ msgstr "வரலாற்று பதிவு"
+
+#~ msgid "Successfully exported History to CSV-file"
+#~ msgstr "CSV கோப்பிற்கு வரலாற்றை வெற்றிகரமாக ஏற்றப்பட்டது"
+
+#, fuzzy
+#~| msgid "Behavior"
+#~ msgid "BehaviorPage"
+#~ msgstr "நடத்தை"
+
+#, fuzzy
+#~| msgid "Display"
+#~ msgid "DisplayPage"
+#~ msgstr "காட்சி"
+
+#, fuzzy
+#~| msgid "Storage"
+#~ msgid "StoragePage"
+#~ msgstr "கிடங்கு"
+
+#~ msgid "Preferences"
+#~ msgstr "முன்னுரிமைகள்"
+
+#~ msgid "Behavior Settings"
+#~ msgstr "நடத்தை அமைவுகள்"
+
+#~ msgid "Display Settings"
+#~ msgstr "அமைவுகளை காட்டு"
+
+#~ msgid "Storage Settings"
+#~ msgstr "கிடங்கு அமைவு"
+
+#~ msgid "iCalendar file:"
+#~ msgstr "iநாள்காட்டி கோப்பு:"
+
+#~ msgid ""
+#~ "Select the desktop(s) that will automatically start the timer on this "
+#~ "task."
+#~ msgstr "இந்த பணியில் தானாகவே துவங்கும் நேரங்காட்டி மேல்மேசை(கள்)ஐ தேர்ந்தெடு."
+
+#, fuzzy
+#~ msgid "Show history"
+#~ msgstr "வரலாற்று பதிவு"
+
+#~ msgid "radioDecimal"
+#~ msgstr "ரேடியோதசமம்"
+
+#~ msgid "Idle Detection"
+#~ msgstr "செயல்படாததை கண்டுபிடித்தல்"
+
+#~ msgid "Revert && Stop"
+#~ msgstr "திருப்பு &&  நிறுத்து"
+
+#~ msgid "Copy &History to Clipboard"
+#~ msgstr "வரலாற்றை தற்காலிக நினைவிடத்தில் சேமி"
+
+#~ msgid "Import &Legacy Flat File..."
+#~ msgstr "பழைய கோப்புகளை இறக்குமதி செய்..."
+
+#~ msgid "File \"%1\" not found."
+#~ msgstr "கோப்பு \"%1\" கண்டுபிடிக்க முடியவில்லை."
+
+#, fuzzy
+#~ msgid "&Copy Session Time to Clipboard"
+#~ msgstr "கூட்டுத்தொகையை தற்காலிக நினைவிடத்தில் சேமி"
+
+#~ msgid "&Import/Export"
+#~ msgstr "இறக்குமதி/ஏற்றுமதி"
+
+#~ msgid ""
+#~ "Copy totals for just this task and its subtasks, or copy totals for all "
+#~ "tasks?"
+#~ msgstr ""
+#~ "இந்த பணி மற்றும் அதன் துணை பணிகளின் மொத்தத்தையும் நகலெடு அல்லது அனைத்து பணிகளின் "
+#~ "மொத்தத்தையும் நகலெடு"
+
+#~ msgid "Copy This Task"
+#~ msgstr "இந்தப் பணியை நகலெடு"
+
+#~ msgid "Copy All Tasks"
+#~ msgstr "அனைத்து பணிகளையும் நகலெடு"
+
+#, fuzzy
+#~ msgid ""
+#~ "Copy session time for just this task and its subtasks, or copy session "
+#~ "time for all tasks?"
+#~ msgstr ""
+#~ "இந்த பணி மற்றும் அதன் துணை பணிகளின் மொத்தத்தையும் நகலெடு அல்லது அனைத்து பணிகளின் "
+#~ "மொத்தத்தையும் நகலெடு"
+
+#, fuzzy
+#~ msgid "Copy Session Time to Clipboard"
+#~ msgstr "வரலாற்றை தற்காலிக நினைவிடத்தில் சேமி"

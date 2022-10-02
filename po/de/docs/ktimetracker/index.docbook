@@ -1,0 +1,1216 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % German "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>Das Handbuch zu &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Korrektur gelesen von</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    <othercredit role="translator"
+><firstname
+>Gregor</firstname
+><surname
+>Zumstein</surname
+><contrib
+>Deutsche Übersetzung</contrib
+><affiliation
+><address
+><email
+>zumstein@ssd.ethz.ch</email
+></address
+></affiliation
+></othercredit
+> <othercredit role="translator"
+><firstname
+>Thomas</firstname
+><surname
+>Reitelbach</surname
+><contrib
+>Deutsche Übersetzung</contrib
+><affiliation
+><address
+><email
+>tr@erdfunkstelle.de</email
+></address
+></affiliation
+></othercredit
+> 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>2019-11-19</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; misst die Zeit, die für verschiedene laufende Aufgaben benötigt wird.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>zeit</keyword>
+    <keyword
+>verfolger</keyword>
+    <keyword
+>projekt</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Einleitung</title>
+
+<para
+>&ktimetracker; misst die Zeit, die für verschiedene Aufgaben aufgewendet wird. Das Programm ist nützlich, wenn z. B. die für verschiedene Kunden aufgewendeten Stunden verrechnet werden müssen oder einfach nur, wenn Sie wissen möchten, wieviele Stunden am Tag Sie Doom spielen oder den Heise-Newsticker lesen.</para>
+
+<para
+>Der zeitliche Ablauf kann in eine durch Komma getrennte Liste exportiert werden und ist leicht in Abrechnungs- oder Projektverwaltungs-Software importierbar.</para>
+
+<para
+>&ktimetracker; erkennt automatisch, wenn Ihre Tastatur und Maus unbenutzt sind und kann verschiedene Aufgaben unterschiedlichen Arbeitsflächen zuordnen. Dies hilft der Stoppuhr, die Zeit für die jeweils korrekte Aufgabe zu messen.</para>
+
+<para
+>&ktimetracker; wurde ursprünglich von &Sirtaj.Singh.Kang; geschrieben. Die Webseite finden Sie unter <ulink url="https://userbase.kde.org/KTimeTracker"
+>http://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>&ktimetracker; verwenden</title>
+
+<sect1 id="starting">
+<title
+>Starten von &ktimetracker;</title>
+
+<para
+>Geben Sie <command
+>ktimetracker</command
+> auf der Befehlszeile ein oder wählen Sie <guimenuitem
+>KTimetracker (Persönliche Zeiterfassung)</guimenuitem
+> aus der Gruppe <menuchoice
+> <guimenu
+>Anwendungen</guimenu
+><guisubmenu
+>Dienstprogramme</guisubmenu
+></menuchoice
+> im <guimenu
+>Plasma-Anwendungsmenü</guimenu
+>. Die allgemeinen Befehlszeilenoptionen von &Qt; und &kf5-full; sind verfügbar und in den Handbuchseiten für qt5options und kf5options dokumentiert. </para>
+
+<para
+>&ktimetracker; verfügt über einen Befehlszeilenparameter, mit dem Sie den Namen einer iCalendar-Datei angeben können, in die der Zeitverlauf gespeichert werden kann. Sie können auch eine entfernte Kalenderdatei angeben, indem Sie den &HTTP;- oder &FTP;-Teil als Teil des Dateinamens angeben. Zum Beispiel http://www.meinserver.de/meinedaten/zeiterfassung.ics. </para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Aufgaben</title>
+
+<informalexample>
+<para
+><emphasis
+>Problemstellung:</emphasis
+> Sie sind Berater für freie Software und haben viele Kunden. Einige Kunden haben mehrere Projekte. Im Laufe eines Tages arbeiten Sie abwechselnd an unterschiedlichen Projekten. Sie müssen die Arbeitszeiten für jedes Projekt messen, damit Sie am Monatsende die Rechnung stellen können.</para>
+<para
+><emphasis
+>Lösung:</emphasis
+> Erstellen Sie für jeden Kunden eine Aufgabe und eine Teilaufgabe für jedes Kundenprojekt. Falls Sie eine detailliertere Verfolgung für ein Projekt benötigen, erstellen Sie eine Liste von Projekt-Teilaufgaben. Sie verfolgen die aufgewendete Zeit für ein Teilprojekt, indem Sie auf die Aufgabe in &ktimetracker; doppelklicken.</para>
+</informalexample>
+
+<para
+>&ktimetracker; lässt Ihnen jede erdenkliche Flexibilität beim Erfassen der aufgewendeten Zeit. Sie können beliebig viele Aufgaben und Teilaufgaben erstellen. Sie können die Zeit auch für mehrere Aufgaben gleichzeitig messen.</para>
+<para
+>&ktimetracker; ermöglicht es Ihnen, den Aufgabenverlauf zu bearbeiten und einen Kommentar für jedes Ereignis, das angehalten wurde, hinzuzufügen. </para>
+<para
+>Um eine neue Hauptaufgabe zu erstellen, wählen Sie <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+></shortcut
+><guimenu
+>Aufgabe</guimenu
+> <guimenuitem
+>Neu ...</guimenuitem
+></menuchoice
+>. Um eine neue Teilaufgabe zu erstellen, wählen Sie zuerst die Hauptaufgabe und dann <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+></shortcut
+><guimenu
+>Aufgabe</guimenu
+> <guimenuitem
+>Neue Teilaufgabe ...</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Beim Beenden von &ktimetracker; wird die Aufgabenliste in einer Datei gespeichert. Beim nächsten Programmstart wird die Aufgabenliste wieder aus dieser Datei geladen.</para>
+
+<para
+>&ktimetracker; kann Aufgaben übrigens auch importieren und exportieren und Ihnen damit die Arbeit erleichtern. Schauen Sie dazu unter <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Zeitmesser</title>
+
+<informalexample>
+<para
+><emphasis
+>Problemstellung:</emphasis
+> Um rentabel zu sein, müssen Sie jeden Tag mindestens 5 Stunden Arbeitszeit berechnen können. Um auf dem Laufenden zu bleiben, überwachen Sie Ihre täglichen und wöchentlichen Ergebnisse.</para>
+<para
+><emphasis
+>Lösung:</emphasis
+> Setzen Sie die Zeitmessung der Sitzung zu Beginn jedes Arbeitstages und alle Zeitmessungen zu Beginn jeder Woche zurück.</para
+> </informalexample>
+
+<para
+>Mit &ktimetracker; ist die Zeiterfassung einer Aufgabe sehr einfach. Um die Zeiterfassung einer Aufgabe zu starten, klicken Sie doppelt auf die Aufgabe. Zum Stoppen doppelklicken Sie erneut darauf. Neben allen aktiven Aufgaben sehen Sie eine kleine animierte Uhr in der Spalte <guilabel
+>Sitzungszeit</guilabel
+>.</para>
+
+<para
+>Ein weiterer visueller Hinweis auf die aktive Zeiterfassung ist das Symbol von &ktimetracker; im Systemabschnitt der Kontrollleiste. Wenn gerade eine Aufgabe aktiv ist, wird die kleine Uhr animiert. Wenn Sie mit dem Mauszeiger über dem Symbol verweilen, wird ein kleines Infofenster angezeigt, dem Sie die aktiven Aufgaben entnehmen können.</para>
+
+<para
+>&ktimetracker; verwaltet zwei Stoppuhren je Aufgabe: Eine für die Sitzungszeit und eine für die Gesamtzeit. In der Voreinstellung werden zwei Spalten für jede Stoppuhr angezeigt. Daraus ergeben sich vier Spalten pro Aufgabe.</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Sitzungszeit</guilabel
+></term>
+<listitem
+><para
+>Die seit Sitzungsbeginn abgelaufene Zeit.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Zeit</guilabel
+></term
+> <listitem
+><para
+>Die für die Aufgabe aufgewendet Zeit seit dem letzten Zurücksetzen der Stoppuhren.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Gesamte Sitzungszeit</guilabel
+></term>
+<listitem
+><para
+>Die für die Aufgabe und alle Unteraufgaben aufgewendete Zeit seit Sitzungsbeginn.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Gesamtzeit</guilabel
+></term>
+<listitem
+><para
+>Die Zeit, die für die Aufgabe und alle Unteraufgaben seit dem letzten Zurücksetzen aufgewendet wurde.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Um eine neue Sitzung zu beginnen, wählen Sie <menuchoice
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neue Sitzung starten</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Um alle Zeiten zurückzusetzen, wählen Sie <menuchoice
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Alle Zeiten zurücksetzen</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>Arbeitsflächen beobachten</title>
+
+<informalexample>
+<para
+><emphasis
+>Problemstellung:</emphasis
+> Sie haben zwei Hauptprojekte, an denen Sie während des Tages abwechselnd arbeiten. Um Ihre Arbeitsorganisation zu erleichtern, halten Sie die Dateien und Programme für Projekt 1 auf der Arbeitsfläche 1 und die für Projekt 2 auf der Arbeitsfläche 2 vor.</para>
+
+<para
+><emphasis
+>Lösung:</emphasis
+> Ordnen Sie die Aufgabe für Projekt 1 der Arbeitsfläche 1 und die Aufgabe für Projekt 2 der Arbeitsfläche 2 zu. Wenn Sie von der Arbeitsfläche 2 zu 1 wechseln, hält &ktimetracker; die Zeiterfassung für Projekt 2 an und startet die Zeiterfassung für Projekt 1.</para>
+</informalexample>
+
+<para
+>Um eine Aufgabe mehreren Arbeitsflächen zuzuordnen, wählen Sie <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Aufgabe</guimenu
+> <guimenuitem
+>Eigenschaften</guimenuitem
+> </menuchoice
+>. Schalten Sie die Funktion <guilabel
+>Automatisches Verfolgen</guilabel
+> ein und wählen Sie die Arbeitsflächen mit den Ankreuzfeldern aus. Wenn eine der gewählten Arbeitsflächen aktiv wird, startet &ktimetracker; nach kurzer Zeit automatisch die Zeiterfassung für die Aufgabe.</para>
+
+</sect2>
+
+<sect2
+><title
+>Untätigkeit erkennen</title>
+
+<informalexample
+> <para
+><emphasis
+>Problemstellung:</emphasis
+> Sie verlassen am Freitag Nachmittag die Arbeit früher als geplant, weil Sie vielleicht noch Besorgungen machen müssen. In der Eile vergessen Sie, die Zeiterfassung anzuhalten. Wenn Sie am nächsten Montag auf die Arbeit kommen, läuft die Stoppuhr immer noch.</para>
+<para
+><emphasis
+>Lösung:</emphasis
+> Schalten Sie die Erkennung von Untätigkeit im Einrichtungsdialog auf der Seite <guilabel
+>Verhalten</guilabel
+> ein.</para>
+</informalexample>
+
+<para
+>&ktimetracker; kann so eingerichtet werden, dass es automatisch erkennt, wenn weder Maus noch Tastatur benutzt werden. Wenn Sie länger als die angegebene Zeit untätig sind, zeigt &ktimetracker; den folgenden Dialog an:</para>
+
+<screenshot>
+ <screeninfo
+>&ktimetracker; Untätigkeit erkennen</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&ktimetracker; Untätigkeit erkennen</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Zeitmessung weiterlaufen lassen</guibutton
+></term>
+<listitem
+><para
+>Zählt die untätige Zeit zu allen aktiven Zeitmessungen und belässt die Zeitmessung aktiviert.</para
+><para
+>Obwohl Sie am Rechner untätig waren, haben Sie dennoch an der Aufgabe gearbeitet und sind immer noch damit beschäftigt.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Zeitmessung zurücksetzen</guibutton
+></term>
+<listitem
+><para
+>Zieht die untätig verbrachte Zeit von den aktiven Zeitmessungen ab und hält diese an.</para
+><para
+>Während der Rechner untätig war haben Sie nicht an der Aufgabe gearbeitet und Sie beschäftigen sich immer noch mit etwas anderem.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Andere Systeme</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker; verwendet wie &korganizer; und Apples iCal den Industriestandard <ulink url="https://tools.ietf.org/html/rfc2445"
+>Calendar</ulink
+> als Datenformat. &ktimetracker; kann die Datendateien dieser beiden Programme sowohl lesen als auch schreiben.</para>
+<para
+>Sie können sogar gleichzeitig mit einer Datei in &korganizer; und &ktimetracker; arbeiten. Ändert eines der Programme die Daten, werden die Aktualisierungen automatisch an das andere Programm weitergegeben. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Planer</title>
+
+<para
+>Ein typischer Anwendungsfall wäre die Planung eines Projekts mit dem Projektplanungsprogramm <ulink url="&Planner.web;"
+>&Planner;</ulink
+> und der Import der Aufgaben in &ktimetracker; mit <menuchoice
+><guimenu
+>Datei</guimenu
+> <guisubmenu
+>Importieren</guisubmenu
+><guimenuitem
+>Aufgaben aus  Planner übernehmen ...</guimenuitem
+></menuchoice
+>, um sie im <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>-Format vorliegen zu haben. Wenn Sie dies erledigt haben, sind Sie in der Lage, die Aufgaben in &korganizer; zu planen und die Zeit mit &ktimetracker; zu erfassen. Dies ist eine der Möglichkeiten, Ihr Projekt zu planen und im Budgetrahmen zu halten.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>&ktimetracker; unterstützt zahlreiche Methoden, die mit &DBus; benutzt werden können. </para>
+<para
+>Es gibt zwei Möglichkeiten die &DBus;-Schnittstelle zu verwenden: &Qt;s &GUI;-Programm <application
+>qdbusviewer</application
+> und auf der Befehlszeile <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>Es folgt ein Bash-Skript, das die Version von &ktimetracker; ausgibt:</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "KTimetracker läuft nicht"
+</programlisting>
+</example>
+
+<para
+>Derzeit wird die &DBus;-Schnittstelle von &ktimetracker; nur für automatisiertes Testen verwendet. Daher ist die Liste der Funktionen noch sehr kurz. Die vollständige Schnittstellen-Definition finden Sie im Abschnitt <xref linkend="dbusappendix"/>.</para>
+
+<para
+>Mit dem folgenden Bash-Skript können Sie die vollständige &DBus;-Schnittstelle Ihrer &ktimetracker;-Version einsehen:</para>
+
+<example
+><title
+>Auflistung der &DBus;-Schnittstelle für &ktimetracker; auf die Konsole</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "KTimetracker läuft nicht"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Als CVS-Datei exportieren</title>
+
+<para
+>&ktimetracker; kann sowohl die Gesamtzeiten als auch den Verlauf in eine durch Komma getrennte Datei exportieren. Dafür wählen Sie <menuchoice
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Exportieren ...</guimenuitem
+> </menuchoice
+>. Daraufhin sehen Sie den folgenden Dialog: </para>
+
+<para
+>Wählen Sie die Option <guibutton
+>Zeiten als CSV</guibutton
+> in der Gruppe <guilabel
+>Berichttyp</guilabel
+>. Der Dialog sieht folgendermaßen aus: </para>
+
+<screenshot>
+<screeninfo
+>Zeiten als CSV-Datei exportieren</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Zeiten als CSV-Datei exportieren</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Stellen die Einstellungen im Dialog nach Bedarf ein. Rechts wird eine Vorschau der CSV-Ausgabe angezeigt. Klicken Sie nun auf <guibutton
+>Speichern unter</guibutton
+>.  &ktimetracker; exportiert nun die Gesamtzeit für alle Aufgaben in eine Datei, die Sie im Dateidialog auswählen können.</para>
+
+<para
+>Benutzen Sie den Knopf <guibutton
+>In die Zwischenablage kopieren</guibutton
+>, um die Zeiten auch dort einzufügen.</para>
+
+<para
+>Hier sehen Sie eine weitere Beispielausgabe:</para>
+
+<literallayout
+><computeroutput>
+„Übersetzung KDE“,,1,05,1,30,2,20,2,65
+,„KTimetracker-Doku“,1,15,1,35,1,15,1,35
+</computeroutput
+>
+</literallayout>
+
+<para
+>Hauptaufgaben erscheinen in der ersten Spalte, Teilaufgaben in der zweiten, und so weiter. Die Zeitdaten werden nach der maximalen Aufgabenverschachtelung (zwei in diesem Beispiel) ausgegeben. Die erste Zeit-Spalte enthält die <guilabel
+>Sitzungszeit</guilabel
+>, die zweite die <guilabel
+>Zeit</guilabel
+>, die dritte die <guilabel
+>Gesamte Sitzungszeit</guilabel
+> und die vierte ist die <guilabel
+>Gesamtzeit</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Verlauf als CSV exportieren</title>
+
+<para
+>Um den Aufgabenverlauf zu exportieren, wählen Sie <menuchoice
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Exportieren ...</guimenuitem
+> </menuchoice
+>. &ktimetracker; zeigt den obigen Dialog an. Wählen Sie <guibutton
+>Verlauf als CSV</guibutton
+> in der Gruppe <guilabel
+>Berichttyp</guilabel
+>. </para>
+
+<para
+>Wählen Sie einen Datenbereich für den Export an. Stellen die Einstellungen im Dialog nach Bedarf ein. Rechts wird eine Vorschau der CSV-Ausgabe angezeigt. Klicken Sie nun auf <guibutton
+>Speichern unter</guibutton
+>.  &ktimetracker; exportiert nun die Gesamtzeit für alle Aufgaben in eine Datei, die Sie im Dateidialog auswählen können.</para>
+
+<para
+>Benutzen Sie den Knopf <guibutton
+>In die Zwischenablage kopieren</guibutton
+>, um die Zeiten auch dort einzufügen.</para>
+
+<para
+>Hier sehen Sie eine Beispielausgabe:</para>
+
+<literallayout
+><computeroutput>
+Aufgabenverlauf
+Von Montag 30 Januar 2006 bis Montag 30 Januar 2006
+Gedruckt am: 30.01.2006 19:50
+2006-01-30,Summe,Gesamtsumme,Aufgabenhierarchie
+0,00,0,00,0,00,,„Übersetzung KDE“
+0,00,0,00,0,00,,,„KTimetracker-Doku“
+0,00,0,00,,Gesamt
+</computeroutput
+>
+</literallayout>
+
+<para
+>Die ersten drei Zeilen geben an, wann und für welchen Datumsbereich der Bericht erstellt wurde. Die vierte Zeile enthält eine durch Komma getrennte Liste der Daten im Format ISO 8601 (JJJJ-MM-TT). Alle folgenden Zeilen enthalten die Daten für jede Aufgabe. Die letzte Zahlenspalte enthält das Gesamtergebnis pro Zeile für alle Tage. Die letzte Spalte enthält den Aufgabennamen, eingerückt nach Aufgaben und Teilaufgaben. Hauptaufgaben erscheinen direkt nach der Summenspalte.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>Die Benutzeroberfläche von &ktimetracker;</title>
+
+<para
+>Das Hauptfenster von &ktimetracker; besteht aus den folgenden Komponenten: Menüleiste, Werkzeugleiste, Suchleiste, Zeit/Aufgaben-Fenster und Statusleiste.</para>
+
+<para
+>Die Suchleiste hat zwei Funktionen: Wenn Sie nur etwas eingeben, ohne die &Enter;-Taste zu drücken, so funktioniert das Feld als Filter, nur auf den Filter passende Aufgaben werden angezeigt. Drücken Sie allerdings die Taste &Enter;, so wird eine neue Aufgabe mit dem eingegebenen Namen angelegt. </para>
+
+<para
+>Wählen Sie <guilabel
+>Einstellungen für PDA</guilabel
+> im Einrichtungsdialog auf der Seite <guilabel
+>Erscheinungsbild</guilabel
+>, wenn Sie über einen Touchscreen mit wenig Platz verfügen. Die Suchleiste wird dadurch abgeschaltet, jeder Klick wird ein Kontextmenü öffnen.</para>
+
+<screenshot>
+<screeninfo
+>&ktimetracker; Hauptfenster</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&ktimetracker; Hauptfenster</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>Das Zeit/Aufgaben-Fenster</title>
+
+<para
+>Hier werden die verschiedenen Aufgaben angezeigt, inklusive der mit dieser Aufgabe verbrachten Zeit (aktuelle Sitzung und total). Aufgaben, die gemessen werden, haben ein kleines Symbol in der Spalte Sitzungszeit.</para>
+
+<para
+>Für jede Aufgabe können Unteraufgaben erstellt werden. Ein Klick auf das Plus-Symbol neben einer Aufgabe zeigt alle Teilaufgaben an, ein weiterer Klick blendet sie aus. Die Gesamtzeit einer Aufgabe setzt sich zusammen aus der Zeit aller Teilaufgaben und der eigenen Zeit.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>Die Werkzeug- und Statusleiste</title>
+<para
+>Die Werkzeugleiste enthält Symbole für die folgenden Befehle:</para>
+
+<note
+><para
+>Alle verhalten sich wie die entsprechenden Menübefehle.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Neue Aufgabe</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Neue Teilaufgabe</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Start</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Stopp</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Löschen</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Bearbeiten</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Öffnen</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Speichern</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Die Statusleiste zeigt den Namen der Datei an, in die die Daten gespeichert wurden.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Danksagungen und Lizenz</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Copyright des Programms:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli, <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Mitwirkende (in alphabetischer Reihenfolge)</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>&ktimetracker; wurde von Harald Tveit Alvestrands nützlichem Werkzeug <application
+>Titrax</application
+> inspiriert, dessen einziger Mangel das verwendete Xt-Toolkit ist.</para>
+
+<para
+>Copyright für die Dokumentation 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; and &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>Übersetzung Gregor Zumstein <email
+>zumstein@ssd.ethz.ch</email
+>, Thomas Reitelbach <email
+>tr@erdfunkstelle.de</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Glossar</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>Aktive Aufgabe</glossterm>
+<glossdef
+><para
+>Eine Aufgabe mit laufender Zeitmessung.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Ein Interprozess-Kommunikationsprotokoll. Dies ist die Abkürzung für Desktop-Bus.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>Arbeitsfläche</glossterm>
+<glossdef
+><para
+>&GNU;/&Linux;, FreeBSD und andere Betriebssysteme, die X-Org-Server verwenden, haben mehrere Arbeitsflächen. Typischerweise haben Sie in KDE vier verschiedene Arbeitsflächen installiert. Jede kann einen eigenen Satz an Programmen und Dateien enthalten. Beim ersten &plasma;-Start in &kde; sehen Sie normalerweise die 1. Arbeitsfläche. Wenn Sie <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+> drücken sehen Sie die Arbeitsfläche 2. Wenn Sie <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> drücken, sehen Sie wieder die Arbeitsfläche 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>Verlauf</glossterm>
+<glossdef
+><para
+>Wenn &ktimetracker; Funktion <quote
+>Verlauf protokollieren</quote
+> aktiv ist, wird jedes Start/Stopp-Ereignis der Stoppuhren protokolliert. Der Verlauf wird beim Zurücksetzen der Zeiten nicht gelöscht und bleibt auch in der Datei gespeichert, bis die Aufgabe gelöscht wird.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>Sitzung</glossterm>
+<glossdef
+><para
+>Ein benutzerdefinierter Startpunkt für eine Sitzungs-Zeitmessung. Eine neue Sitzung beginnt, wenn Sie <menuchoice
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neue Sitzung starten</guimenuitem
+> </menuchoice
+> auswählen. Die Sitzungsdaten werden nicht gespeichert, wenn Sie eine neue Sitzung beginnen. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Sitzungszeit</guilabel
+></glossterm
+> <glossdef
+><para
+>Die seit Sitzungsbeginn abgelaufene Zeit.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>Systemabschnitt der Kontrollleiste</glossterm>
+<glossdef
+><para
+>Der Systemabschnitt der Kontrollleiste ist in der Voreinstellung in &kde;-&plasma; der rechte untere Bereich in der Kontrollleiste, in dem das <inlinemediaobject
+> <imageobject
+><imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> Symbol von &ktimetracker; angezeigt wird.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>Hauptaufgabe</glossterm>
+<glossdef
+><para
+>Eine Aufgabe auf der obersten Ebene; sie hat keine Eltern-Aufgaben.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Gesamte Sitzungszeit</guilabel
+></glossterm
+> <glossdef
+><para
+>Die für die Aufgabe und alle Unteraufgaben aufgewendete Zeit seit Sitzungsbeginn.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Zeit</guilabel
+></glossterm>
+<glossdef
+><para
+>Die für die Aufgabe aufgewendet Zeit seit dem letzten Zurücksetzen der Stoppuhren.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Gesamtzeit</guilabel
+></glossterm>
+<glossdef
+><para
+>Die Zeit, die für die Aufgabe und alle Unteraufgaben seit dem letzten Zurücksetzen aufgewendet wurde.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>Die &DBus;-Schnittstelle</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Gibt die Versionsnummer von &ktimetracker; zurück.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Beschreibung</title>
+<para
+><function
+>version()</function
+> ist ein &DBus;-Aufruf, der die Versionsnummer von &ktimetracker; zurückgibt; z. B. 4.3.1. Die Versionsnummer wird als Zeichenfolge im typischen &GNU;-Format als Major.Minor.Bugfix ausgegeben.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>&ktimetracker; beenden</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Beschreibung</title>
+<para
+><function
+>quit()</function
+> ist ein &DBus;-Aufruf, mit dem eine externe Anwendung &ktimetracker; auf regulärem Weg beenden kann. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Fügt eine neue Aufgabe hinzu.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString Aufgabenname)
+</synopsis>
+<refsect2>
+<title
+>Parameter</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>Aufgabenname</parameter
+></term>
+<listitem>
+<para
+>Der Name der neuen Aufgabe.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beschreibung</title>
+<para
+><function
+>addTask(QString Aufgabenname)</function
+> ist ein &DBus;-Aufruf, mit dem Sie eine neue Aufgabe zur geöffneten Datei hinzufügen können. Der Rückgabewert enthält die UID der neuen Aufgabe. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->

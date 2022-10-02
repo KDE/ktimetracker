@@ -1,0 +1,1214 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Ukrainian "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>Підручник з &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Рецензент</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    <othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>19 листопада 2019 року</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; — інструмент для слідкування за часом, витраченим на різноманітні задачі.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>час</keyword>
+    <keyword
+>інструмент спостереження</keyword>
+    <keyword
+>проєкт</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Вступ</title>
+
+<para
+>&ktimetracker; стежить за часом, який ви витрачаєте на роботу над різноманітними задачами. Ця програма корисна для стеження за обліком годин, вона може створювати звіти за даними, записаними для задачі або протягом дня.</para>
+
+<para
+>Цей журнал розподілу часу можна експортувати як файл тексту, розміченого комами, для наступного імпорту до інших інструментів обліку часу і/або керування проєктами.</para>
+
+<para
+>&ktimetracker; може визначати час, коли клавіатуру та мишу вашого комп’ютера не буде задіяно, а також пов’язувати різні задачі з різними стільницями, ці два інструменти можуть допомогти вам стежити за тим, щоб таймер виконував відлік часу для належної задачі.</para>
+
+<para
+>Першу версію &ktimetracker; було створено &Sirtaj.Singh.Kang;. Домашню сторінку програми розташовано за адресою <ulink url="https://userbase.kde.org/KTimeTracker/uk"
+>http://userbase.kde.org/KTimeTracker/uk</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>Користування &ktimetracker;</title>
+
+<sect1 id="starting">
+<title
+>Як запустити &ktimetracker;</title>
+
+<para
+>Введіть команду <command
+>ktimetracker</command
+> у командному рядку або оберіть пункт <guimenuitem
+>Персональний лічильник часу</guimenuitem
+> з групи <menuchoice
+> <guimenu
+>Інструменти</guimenu
+><guisubmenu
+>Утиліти</guisubmenu
+> </menuchoice
+> у <guimenu
+>меню запуску програм Плазми</guimenu
+>. Можна скористатися загальними параметрами командного рядка &Qt; та &kf5-full; (див. сторінки підручника щодо qt5options та kf5options). </para>
+
+<para
+>Під час запуску &ktimetracker; можна скористатися додатковим параметром командного рядка, за допомогою якого можна вказати назву файла iCalendar, який використовується для зберігання журналу вашої роботи. Ви можете вказати віддалений файл iCalendar за допомогою частин адрес &HTTP; або &FTP;, доданих до назви файла; наприклад https://www.mysite.com/mydata/mylabor.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Задачі</title>
+
+<informalexample>
+<para
+><emphasis
+>Проблема:</emphasis
+> ви є консультантом з вільного програмного забезпечення, у вас багато клієнтів. Деякі з клієнтів мають по декілька проєктів. Протягом дня ви перемикаєтеся з одного проєкту на інший. Вам потрібно стежити за вашим часом, щоб потім створити рахунок за місяць роботи.</para>
+<para
+><emphasis
+>Вирішення:</emphasis
+> створіть по одній задачі верхнього рівня для кожного з клієнтів і по підзадачі на кожен з проєктів клієнта. Для проєктів, які потребують докладнішого стеження, створіть список підзадач. Увімкнути стеження за часом можна подвійним клацанням на задачі, над якою ви зараз працюєте.</para>
+</informalexample>
+
+<para
+>У &ktimetracker; закладено значну гнучкість у стеженні за розподілом вашого часу, ви можете визначати необмежену кількість задач і необмежену глибину вкладеності підзадач. Ви можете увійти до будь-якої з задач і активізовувати декілька задач одночасно у будь-який момент часу.</para>
+<para
+>У &ktimetracker; передбачено можливість редагування журналу завдань та додавання коментарів щодо кожної зупиненої вами події.</para>
+<para
+>Щоб створити задачу найвищого рівня, скористайтеся пунктом меню <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Задача</guimenu
+> <guimenuitem
+>Створити задачу...</guimenuitem
+> </menuchoice
+>. Щоб створити підзадачу, оберіть основну задачу і скористайтеся пунктом меню <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Задача</guimenu
+> <guimenuitem
+>Нова підзадача...</guimenuitem
+> </menuchoice
+> </para>
+
+<para
+>Під час виходу з &ktimetracker; список задач зберігається у файлі на диску вашого комп’ютера. Під час наступного запуску програми цей список буде завантажено з вказаного файла.</para>
+
+<para
+>&ktimetracker; може імпортувати і експортувати задачі, що полегшить вам життя. Див. <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Таймери</title>
+
+<informalexample>
+<para
+><emphasis
+>Проблема:</emphasis
+> Щоб мати достатньо грошей, вам слід працювати в середньому п’ять годин на добу. Щоб бути в курсі подій, вам слід переглянути загальні цифри за день і тиждень.</para>
+<para
+><emphasis
+>Вирішення:</emphasis
+> Повертайте таймер сеансу у нульове значення на початку кожного робочого дня і повертайте нульові значення всім таймерам на початку кожного тижня.</para
+> </informalexample>
+
+<para
+>З &ktimetracker; слідкувати за часом просто. Щоб розпочати відлік часу для задачі, просто наведіть вказівник на позначку задачі і двічі клацніть лівою кнопкою миші. Щоб зупинити відлік часу, ще раз наведіть вказівник миші на запис задачі і двічі клацніть лівою кнопкою миші. Для активних задач у стовпчику <guilabel
+>Тривалість сеансу</guilabel
+> буде показано маленький секундомір.</para>
+
+<para
+>Ще одним засобом показу спостереження за поточною активністю &ktimetracker; є піктограма системного лотка. Якщо активною є певна задача, друга стрілка годинника на піктограмі рухається. Якщо ви наведете вказівник миші на цю піктограму, у контекстному вікні буде показано назву поточної задачі. Якщо активними є декілька задач, назви задач у контекстному вікні буде відокремлено комами.</para>
+
+<para
+>У &ktimetracker; кожній задачі відповідають два таймери: один лічить час сеансу, а інший — загальний час. За типового налаштування, &ktimetracker; показує для кожного з таймерів по два стовпчики, що дає нам загалом чотири стовпчики для кожної задачі:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Тривалість сеансу</guilabel
+></term>
+<listitem
+><para
+>Час, витрачений на задачу з початку сеансу.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Час</guilabel
+></term
+> <listitem
+><para
+>Час, витрачений на задачу, з моменту останнього скидання показань таймерів.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Загальна тривалість сеансу</guilabel
+></term>
+<listitem
+><para
+>Час, витрачений на задачу і всі її підзадачі з початку сеансу.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Всього часу</guilabel
+></term>
+<listitem
+><para
+>Час, витрачений на задачу і всі її підзадачі, з моменту останнього скидання показань таймерів.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Щоб розпочати новий сеанс, скористайтеся пунктом меню <menuchoice
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Запустити новий сеанс</guimenuitem
+> </menuchoice
+> </para>
+
+<para
+>Щоб повернути нульові значення всіх таймерів, скористайтеся пунктом меню <menuchoice
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Скинути всі таймери</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>Стеження за стільницями</title>
+
+<informalexample>
+<para
+><emphasis
+>Проблема:</emphasis
+> Протягом дня ви перемикаєтеся між двома задачами. Для того, щоб впорядкувати вашу роботу, ви зберігаєте файли проєкту 1 на Стільниці 1, а файли проєкту 2 — на Стільниці 2.</para>
+
+<para
+><emphasis
+>Вирішення:</emphasis
+> Пов’яжіть задачу проєкту 1 зі Стільницею 1, а задачу проєкту 2 зі Стільницею 2. Коли ви перемикатиметеся зі Стільниці 2 на Стільницю 1, &ktimetracker; автоматично зупинятиме таймер задачі проєкту 2 і запускатиме таймер задачі проєкту 1.</para>
+</informalexample>
+
+<para
+>Щоб пов’язати задачу з одною або декількома стільницями, скористайтеся пунктом меню <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Задача</guimenu
+> <guimenuitem
+>Властивості</guimenuitem
+> </menuchoice
+>. Позначте у вікні, що відкриється, пункт <guilabel
+>Автоматичне стеження</guilabel
+>, а потім позначте стільницю або стільниці, які буде пов’язано з задачею. Коли ставатиме активною одна з позначених стільниць, протягом короткого проміжку часу &ktimetracker; автоматично розпочинатиме відлік часу для відповідної задачі.</para>
+
+</sect2>
+
+<sect2
+><title
+>Визначення бездіяльності</title>
+
+<informalexample
+> <para
+><emphasis
+>Проблема:</emphasis
+> Ви полишили роботу вранці у п’ятницю через важливе доручення і забули зупинити таймер. Коли ви повернулися до роботи у понеділок, таймер все ще продовжував відлік часу.</para>
+<para
+><emphasis
+>Вирішення:</emphasis
+> Увімкніть визначення бездіяльності на сторінці <guilabel
+>Поведінка</guilabel
+> діалогового вікна параметрів програми.</para>
+</informalexample>
+
+<para
+>&ktimetracker; можна налаштувати так, щоб програма виявляла відсутність руху миші і натискань клавіш клавіатури. Якщо з боку миші і клавіатури не спостерігається руху протягом вказаної кількості хвилин, &ktimetracker; відкриває таке діалогове вікно:</para>
+
+<screenshot>
+ <screeninfo
+>Визначення бездіяльності у &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Діалогове вікно визначення бездіяльності &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Продовжити лічити час</guibutton
+></term>
+<listitem
+><para
+>Застосуйте час бездіяльності до всіх активних таймерів і продовжувати відлік.</para
+><para
+>Ви працювали над задачами, доки комп’ютер був бездіяльним, і продовжуєте працювати далі.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Зворотний відлік</guibutton
+></term>
+<listitem
+><para
+>Відняти час бездіяльності від всіх активних таймерів і зупинити їх.</para
+><para
+>Ви не працювали над задачами, доки комп’ютер був бездіяльним, і продовжуєте робити інші речі.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Інші системи</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker;, подібно до &korganizer; і Apple iCal, використовує для зберігання даних загальноприйнятий стандартний формат даних <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>. &ktimetracker; може читати і записувати списки завдань, створені цими двома програмами.</para>
+<para
+>Ви навіть можете працювати одночасно над одним файлом у &korganizer; і &ktimetracker;. Якщо файл буде змінено у одній програмі, оновлення буде передано іншій програмі автоматично. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Планувальник</title>
+
+<para
+>У типовому випадку використання, у вас може виникнути потреба у плануванні проєкту за допомогою інструменту для керування проєктами <ulink url="&Planner.web;"
+>&Planner;</ulink
+>, а потім імпортувати список задач до &ktimetracker; за допомогою пункту меню <menuchoice
+><guimenu
+>Файл</guimenu
+> <guisubmenu
+>Імпорт</guisubmenu
+><guimenuitem
+>Імпортувати задачі з плановика...</guimenuitem
+></menuchoice
+>, щоб отримувати їх у загальноприйнятому стандартному форматі <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>. Якщо ви зробите це, ви зможете скласти розклад задач у &korganizer;, а потім здійснювати облік за допомогою &ktimetracker;. Таким чином, можна контролювати стан виконання і бюджет проєкту.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>У &ktimetracker; передбачено підтримку декількох методів, якими можна скористатися за допомогою &DBus;. </para>
+<para
+>Існує два способи скористатися інтерфейсом &DBus;: графічний інтерфейс <application
+>qdbusviewer</application
+>, та інструмент командного рядка <application
+>qdbus</application
+>, що є складовими частинами &Qt;. </para>
+
+<example
+><title
+>Скрипт Bash, який виводить версію &ktimetracker;</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "ktimetracker не запущено"
+</programlisting>
+</example>
+
+<para
+>У поточній версії &ktimetracker; інтерфейс &DBus; використовується в основному з метою автоматизації перевірки, він є дуже обмеженим. Повний опис інтерфейсу можна знайти у розділі <xref linkend="dbusappendix"/>.</para>
+
+<para
+>Щоб ознайомитися з повним переліком інтерфейсів &DBus;, які надає у ваше розпорядження версія &ktimetracker;, встановлена у вашій системі, виконайте такий скрипт Bash:</para>
+
+<example
+><title
+>Показує список інтерфейсів &DBus; &ktimetracker; у консолі</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker не запущено"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Експорт загальних даних до CSV</title>
+
+<para
+>&ktimetracker; може експортувати як підсумкові дані, так і дані журналу у текстовому форматі з відокремленням комами. Щоб експортувати підсумкові дані, скористайтеся пунктом меню <menuchoice
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Експортувати...</guimenuitem
+> </menuchoice
+>. У відповідь &ktimetracker; відкриє діалогове вікно експортування даних. </para>
+
+<para
+>Виберіть варіант <guibutton
+>Час як CSV</guibutton
+> у групі <guilabel
+>Тип звіту</guilabel
+>. Відповідне діалогове вікно має виглядати так: </para>
+
+<screenshot>
+<screeninfo
+>Експортування даних щодо часу у форматі CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Експортування даних щодо часу у форматі CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Якщо потрібно, змініть типові параметри з діалогового вікна. Попередній результат виведення даних у форматі CSV буде показано у правій частині діалогового вікна. Натисніть кнопку <guibutton
+>Зберегти як...</guibutton
+>, і &ktimetracker; експортує загальний журнал задач до вказаного вами файла.</para>
+
+<para
+>Щоб експортувати часові дані до буфера обміну даними, натисніть кнопку <guibutton
+>Копіювати до буфера</guibutton
+></para>
+
+<para
+>Ось ще один приклад формату виведення:</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 feature plan",,,0.00,0.00,0.00,0.00
+,,"bugs",,,0.00,1.13,0.00,1.13
+,,"checkin changes - translation strings",,,0.00,0.00,0.00,0.00
+,,"time card report",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"web stuff",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Задачі верхнього рівня буде виведено до першого стовпчика, підзадачі — до другого тощо. Дані щодо часу буде наведено після найглибшої задачі у ієрархії задач (у нашому прикладі у п’ятому стовпчику). Перший стовпчик з часом буде мати назву <guilabel
+>Тривалість сеансу</guilabel
+>, другий — <guilabel
+>Час</guilabel
+>, третій — <guilabel
+>Загальна тривалість сеансу</guilabel
+>, а четвертий — <guilabel
+>Загальна тривалість</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Експорт історії до CSV</title>
+
+<para
+>Щоб експортувати історію задачі, скористайтеся пунктом меню <menuchoice
+> <guimenu
+>Файл</guimenu
+> <guisubmenu
+>Імпорт/Експорт</guisubmenu
+> <guimenuitem
+>Експортувати...</guimenuitem
+> </menuchoice
+>, &ktimetracker; відкриє те саме діалогове вікно, що і показане вище. Виберіть варіант <guibutton
+>Журнал як CSV</guibutton
+> у групі <guilabel
+>Тип звіту</guilabel
+>. </para>
+
+<para
+>Виберіть діапазон дат для журналу задач. Якщо потрібно, змініть типові параметри з діалогового вікна. Попередній результат виведення даних у форматі CSV буде показано у правій частині діалогового вікна. Натисніть кнопку <guibutton
+>Зберегти як...</guibutton
+>, і &ktimetracker; експортує загальний журнал задач до вказаного вами файла.</para>
+
+<para
+>Щоб експортувати часові дані до буфера обміну даними, натисніть кнопку <guibutton
+>Копіювати до буфера</guibutton
+></para>
+
+<para
+>Ось приклад формату виведення:</para>
+
+<literallayout
+><computeroutput>
+Історія задач
+З Вівторок 06 липня 2004 до Вівторок 13 липня 2004
+Надруковано: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 feature plan"
+,1.13,,,,,,,1.13,,,"bugs"
+,,,,,,,,0.00,,,"checkin changes - translation strings"
+,,,,,,,,0.00,,,"time card report"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promo"
+,,,,,,,,0.00,,"web stuff"
+</computeroutput
+>
+</literallayout>
+
+<para
+>Перші три рядки вказують на те, коли було створено звіт, і для якого проміжку часу його було створено. У четвертому рядку буде показано список дат у діапазоні дат, у форматі ISO 8601 (РРРР-ММ-ДД). У наступних рядках списку буде показано час, відлічений для кожної з задач. У останньому стовпчику буде показано загальний підсумок для всіх днів. Назву задачі буде виведено за останнім стовпчиком з відступом, який позначатиме зв’язок задача-підзадача. Назви задач верхнього рівня буде показано у першому стовпчику після підсумків.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>Інтерфейс &ktimetracker;</title>
+
+<para
+>Головне вікно &ktimetracker; складається з таких елементів: смужки меню, панелі інструментів, панелі пошуку, вікна задач і відліку часу і смужки стану.</para>
+
+<para
+>Панель пошуку містить комбіноване поле. До того часу, доки ви не натиснете &Enter;, це поле діє як фільтр. Буде показано лише задачі, що відповідають введеній вами інформації. Коли ви натиснете &Enter;, введена вами інформація буде використана як назва нової задачі. </para>
+
+<para
+>Позначте пункт <guilabel
+>Налаштування для КПК</guilabel
+> на сторінці <guilabel
+>Вигляд</guilabel
+> у діалоговому вікні параметрів програми, якщо у вашого комп’ютера сенсорний екран, тому слід використовувати поверхню екрана якомога повніше. Програмою буде приховано панель пошуку, кожне клацання відкриватиме контекстне меню.</para>
+
+<screenshot>
+<screeninfo
+>Вікно &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Вікно &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>Вікно «Задача/Час»</title>
+
+<para
+>У цьому вікні буде показано різноманітні задачі разом з часом, який було відлічено для кожної з них протягом поточного сеансу і загалом. Задачі, для яких виконується відлік, буде позначено маленьким годинничком поряд з часом сеансу.</para>
+
+<para
+>Для кожної з задач можна створювати підзадачі. Натискання значка з плюсом і мінусом перед записом головної задачі розгортатиме або згортатиме перегляд пов’язаних підзадач. До загального часу, відліченого для задачі, буде включено час, витрачений на кожну з підзадач, а також власний час задачі.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>Панель інструментів і смужка стану</title>
+<para
+>На панелі інструментів (пеналі) буде показано піктограми для таких команд:</para>
+
+<note
+><para
+>Результат дії цих команд повністю збігається з відповідними командами меню.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Нова задача</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Нова підзадача</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Почати</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Зупинити</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Вилучити</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Змінити</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Відкрити</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Зберегти</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Смужка стану повідомить вам про назву файла, у якому буде збережено дані.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Подяки і ліцензія</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Авторські права на програму:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>&Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;, 1997–2000 </para
+></listitem>
+
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+>, 2001–2002 </para
+></listitem>
+
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+>, 2003–2004 </para
+></listitem>
+
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+>, 2004–2011 </para
+></listitem>
+
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+>, 2019 </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Учасники розробки (за абеткою)</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Ідею &ktimetracker; було запозичено з дуже корисної програми Harald Tveit Alvestrand з назвою <application
+>titrax</application
+>, єдиним недоліком якої було те, що її було засновано на наборі інструментів Xt.</para>
+
+<para
+>Авторські права на документацію до програми належать &Jonathan.Singer; &Jonathan.Singer.mail; і &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;, ©2000–2004</para>
+
+<para
+>Переклад українською: Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Глосарій</title>
+
+<glossdiv>
+<title
+>А</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>активна задача</glossterm>
+<glossdef
+><para
+>Задача, для якої запущено таймер.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Протокол взаємодії між процесами. Назва є скороченням від Desktop Bus (канал стільниці).</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>стільниця</glossterm>
+<glossdef
+><para
+>У &GNU;/&Linux;, FreeBSD та інших системах, де працює сервер X.Org існує декілька стільниць. Типово, буде встановлено чотири різних стільниці. На кожній зі стільниць може бути показано власний набір програм і файлів. Після першого запуску Плазми &kde; ви побачите Стільницю 1. Якщо натиснути комбінацію клавіш <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>, ви побачите Стільницю 2. Натискання комбінації клавіш <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> поверне вас на Стільницю 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>Ж</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>журнал</glossterm>
+<glossdef
+><para
+>Якщо &ktimetracker; налаштовано на запис історії, програма запише кожну подію з запуску/зупинки таймера. Ця історія не спорожнюється під час скидання значень таймерів і залишається записаною у файлі до того часу, доки ви не вилучите задачу.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>С</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>сеанс</glossterm>
+<glossdef
+><para
+>Визначена користувачем точка запуску таймерів сеансу. Розпочати новий сеанс можна розпочати за допомогою пункту меню <menuchoice
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Запустити новий сеанс</guimenuitem
+> </menuchoice
+>. Дані сеансу не зберігаються під час створення нового сеансу. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Тривалість сеансу</guilabel
+></glossterm
+> <glossdef
+><para
+>Час, витрачений на задачу з початку сеансу.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>системний лоток</glossterm>
+<glossdef
+><para
+>Системний лоток — це панель у Плазмі &kde;, яка (типово) розташовується в нижній частині екрана. У цьому системному лотку <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> піктограма &ktimetracker; розташовується праворуч.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>З</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>задача найвищого рівня</glossterm>
+<glossdef
+><para
+>Задача, у якої немає батьківських задач.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Загальна тривалість сеансу</guilabel
+></glossterm
+> <glossdef
+><para
+>Час, витрачений на задачу і всі її підзадачі з початку сеансу.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Час</guilabel
+></glossterm>
+<glossdef
+><para
+>Час, витрачений на задачу, з моменту останнього скидання показань таймерів.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Всього часу</guilabel
+></glossterm>
+<glossdef
+><para
+>Час, витрачений на задачу і всі її підзадачі, з моменту останнього скидання показань таймерів.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>Інтерфейс &DBus;</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Повертає версію &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Опис</title>
+<para
+>Функція <function
+>version()</function
+> — це виклик &DBus;, який повертає номер версії &ktimetracker;, наприклад 4.3.1. Номер версії повертається як рядок у типовому форматі &GNU;, основна.додаткова.виправлення.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>Завершити роботу &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Опис</title>
+<para
+><function
+>quit()</function
+> — це виклик &DBus;, за допомогою якого зовнішня програма може належним чином завершити роботу &ktimetracker;. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Додати нову задачу.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Параметри</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+<para
+>Назва нової задачі.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Опис</title>
+<para
+>Функція <function
+>addTask(QString taskname)</function
+> — це виклик &DBus;, який додає нове завдання найвищого рівня до поточного списку. Функція поверне унікальний ідентифікатор (UID) створеної задачі. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->
