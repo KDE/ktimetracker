@@ -325,7 +325,7 @@ msgstr "Esta no és una data/hora vàlida."
 #: dialogs/historydialog.cpp:273
 #, kde-format
 msgid "Please select a task to delete."
-msgstr "Seleccioneu una tasca a suprimir."
+msgstr "Seleccioneu una tasca que se suprimirà."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
 #: dialogs/historydialog.ui:14
