@@ -69,6 +69,7 @@ Exec=ktimetracker
 Icon=ktimetracker
 X-DocPath=ktimetracker/index.html
 Type=Application
+SingleMainWindow=true
 Terminal=false
 X-KDE-StartupNotify=true
 X-DBUS-StartupType=Unique
