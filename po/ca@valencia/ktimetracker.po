@@ -694,8 +694,8 @@ msgid ""
 "Unitasking - allow only one task to be timed at a time. Does not stop any "
 "timer."
 msgstr ""
-"Tasca única -només permet una tasca a cronometrar en cada moment-. No para "
-"cap cronòmetre."
+"Tasca única -només permet que es cronometre una tasca en cada moment-. No "
+"para cap cronòmetre."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
 #: settings/cfgbehavior.ui:67
