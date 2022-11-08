@@ -1031,13 +1031,13 @@ msgstr "Focus en la barra de busca"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
-msgstr "Establix el focus a la barra de busca"
+msgstr "Establix el focus en la barra de busca"
 
 #: timetrackerwidget.cpp:216
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
-msgstr "Establix el focus a la barra de busca"
+msgstr "Establix el focus en la barra de busca"
 
 #: timetrackerwidget.cpp:223
 #, kde-format
