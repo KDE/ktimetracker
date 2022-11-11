@@ -339,12 +339,12 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
         connect(action, &QAction::triggered, this, &TimeTrackerWidget::slotSearchBar);
     }
 
+    m_actionCollection = actionCollection;
+
     connect(this, &TimeTrackerWidget::currentTaskChanged, this, &TimeTrackerWidget::slotUpdateButtons);
     connect(this, &TimeTrackerWidget::currentTaskViewChanged, this, &TimeTrackerWidget::slotUpdateButtons);
     connect(this, &TimeTrackerWidget::updateButtons, this, &TimeTrackerWidget::slotUpdateButtons);
     slotUpdateButtons();
-
-    m_actionCollection = actionCollection;
 }
 
 QAction *TimeTrackerWidget::action(const QString &name) const
