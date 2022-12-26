@@ -4,4 +4,4 @@ PyGObject==3.42.0
 pytest==6.2.5
 pytest-benchmark==3.4.1
 PyWebDAV3==0.9.14
-wheel==0.37.1
+wheel==0.38.1
