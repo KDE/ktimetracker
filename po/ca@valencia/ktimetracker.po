@@ -58,7 +58,7 @@ msgstr "Descripció de la tasca:"
 #, kde-format
 msgctxt "@title:group"
 msgid "Time Editing"
-msgstr "Edició de l'hora"
+msgstr "Editeu l'hora"
 
 #: dialogs/edittimedialog.cpp:79
 #, kde-format
@@ -999,7 +999,7 @@ msgstr ""
 "Iniciarà el cronometratge de la tasca seleccionada.\n"
 "Inclús és possible cronometrar diverses tasques simultàniament.\n"
 "\n"
-"També podeu iniciar el cronometratge de les tasques fent un clic doble amb "
+"També podeu iniciar el cronometratge de les tasques fent un doble clic amb "
 "el botó esquerre en la tasca desitjada. Tanmateix, açò pararà el "
 "cronometratge de les altres tasques."
 
