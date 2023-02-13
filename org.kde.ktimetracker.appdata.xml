@@ -9,6 +9,7 @@
   <name xml:lang="cs">KTimeTracker</name>
   <name xml:lang="de">KTimeTracker</name>
   <name xml:lang="en-GB">KTimeTracker</name>
+  <name xml:lang="eo">KTimeTracker</name>
   <name xml:lang="es">KTimeTracker</name>
   <name xml:lang="et">KTimeTracker</name>
   <name xml:lang="fi">KTimeTracker</name>
@@ -38,6 +39,7 @@
   <summary xml:lang="ca-valencia">Seguidor personal del temps</summary>
   <summary xml:lang="de">Persönliche Zeiterfassung</summary>
   <summary xml:lang="en-GB">Personal Time Tracker</summary>
+  <summary xml:lang="eo">Persona Tempsekvilo</summary>
   <summary xml:lang="es">Seguimiento del tiempo personal</summary>
   <summary xml:lang="et">Isikliku aja arvestamine</summary>
   <summary xml:lang="fi">Henkilökohtainen ajankäytön seuranta</summary>
@@ -68,6 +70,7 @@
     <p xml:lang="ca-valencia">KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
     <p xml:lang="de">KTimeTracker misst die Zeit, die Sie für verschiedene Aufgaben und Projekte benötigen</p>
     <p xml:lang="en-GB">KTimeTracker helps you track your personal time spent on various tasks and projects.</p>
+    <p xml:lang="eo">KTimeTracker helpas vin spuri vian personan tempon elspezitan je variaj taskoj kaj projektoj.</p>
     <p xml:lang="es">KTimeTracker le ayuda a hacer un seguimiento del tiempo personal invertido en diversas tareas y proyectos.</p>
     <p xml:lang="et">KTimeTracker aitab silma peal hoida ajal, mis sul kulub mitmesugustele ülesannetele ja projektidele.</p>
     <p xml:lang="fi">KTimeTracker auttaa pitämään kirjaa eri tehtäviin ja projekteihin käyttämästäsi ajasta.</p>
@@ -153,6 +156,7 @@
       <caption xml:lang="cs">KTimeTracker</caption>
       <caption xml:lang="de">KTimeTracker</caption>
       <caption xml:lang="en-GB">KTimeTracker</caption>
+      <caption xml:lang="eo">KTimeTracker</caption>
       <caption xml:lang="es">KTimeTracker</caption>
       <caption xml:lang="et">KTimeTracker</caption>
       <caption xml:lang="fi">KTimeTracker</caption>
