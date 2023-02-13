@@ -47,7 +47,7 @@ public Q_SLOTS:
 protected Q_SLOTS:
     void taskViewCustomContextMenuRequested(const QPoint &);
     void updateWindowCaptionTasks(const QList<Task *> &activeTasks);
-    void updateWindowCaptionFile(const QString &url);
+    void updateWindowCaptionFile(const QUrl &url);
 
 protected:
     bool queryClose() override;

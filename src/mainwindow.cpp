@@ -133,13 +133,13 @@ void MainWindow::quit()
     }
 }
 
-void MainWindow::updateWindowCaptionFile(const QString &url)
+void MainWindow::updateWindowCaptionFile(const QUrl &url)
 {
     if (!KTimeTrackerSettings::windowTitleCurrentFile()) {
         return;
     }
 
-    this->setCaption(url);
+    this->setCaption(url.toDisplayString(QUrl::PreferLocalFile));
 }
 
 void MainWindow::updateWindowCaptionTasks(const QList<Task *> &activeTasks)

@@ -112,7 +112,7 @@ void TimeTrackerWidget::addTaskView(const QUrl &url)
     connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive);
     connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged);
 
-    emit currentFileChanged(url.toString());
+    emit currentFileChanged(url);
     m_taskView->load(url);
 
     fillLayout(m_taskView->tasksWidget());
@@ -377,7 +377,7 @@ bool TimeTrackerWidget::closeFile()
     }
 
     emit currentTaskViewChanged();
-    emit currentFileChanged(QString());
+    emit currentFileChanged(QUrl());
     slotCurrentChanged();
 
     delete taskView; // removeTab does not delete its widget.
@@ -422,7 +422,7 @@ void TimeTrackerWidget::slotCurrentChanged()
         connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::minutesUpdated, this, &TimeTrackerWidget::minutesUpdated, Qt::UniqueConnection);
 
-        emit currentFileChanged(m_taskView->storage()->fileUrl().toString());
+        emit currentFileChanged(m_taskView->storage()->fileUrl());
     }
 }
 
@@ -489,7 +489,7 @@ void TimeTrackerWidget::loadSettings()
     currentTaskView()->tasksWidget()->reconfigure();
 
     //  for updating window caption
-    emit currentFileChanged(m_taskView->storage()->fileUrl().toString());
+    emit currentFileChanged(m_taskView->storage()->fileUrl());
     emit tasksChanged(currentTaskView()->storage()->tasksModel()->getActiveTasks());
 }
 

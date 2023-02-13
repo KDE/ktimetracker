@@ -206,7 +206,7 @@ private Q_SLOTS:
     void slotUpdateButtons();
 
 Q_SIGNALS:
-    void currentFileChanged(const QString &qs);
+    void currentFileChanged(const QUrl &file);
     void currentTaskChanged();
     void currentTaskViewChanged();
     void updateButtons();
