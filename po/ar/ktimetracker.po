@@ -447,7 +447,7 @@ msgstr "أداة تسجيل الوقت في KDE."
 #: main.cpp:102
 #, fuzzy, kde-format
 msgid "KDE Time tracker tool"
-msgstr "كدي الوقت متتبع أداة"
+msgstr "كِيدِي الوقت متتبع أداة"
 
 #: main.cpp:104
 #, kde-format
@@ -1501,7 +1501,7 @@ msgstr "٩ (منخفضة)"
 
 #, fuzzy
 #~ msgid "(c) 1997-2010, the KDE PIM Developers"
-#~ msgstr "c كدي مدير المعلومات الشخصي المطوّرون"
+#~ msgstr "c كِيدِي مدير المعلومات الشخصي المطوّرون"
 
 #, fuzzy
 #~ msgctxt "abbreviation for minutes"
