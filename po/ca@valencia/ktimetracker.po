@@ -100,7 +100,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
-msgstr "Exporta a un fitxer"
+msgstr "Exporta cap a un fitxer"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
