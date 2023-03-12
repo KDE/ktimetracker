@@ -50,7 +50,7 @@ MainWindow::MainWindow(const QUrl &url)
 
     auto *configureAction = new QAction(this);
     configureAction->setText(i18nc("@action:inmenu", "Configure KTimeTracker..."));
-    actionCollection()->addAction("configure_ktimetracker", configureAction);
+    actionCollection()->addAction(QStringLiteral("configure_ktimetracker"), configureAction);
     connect(configureAction, &QAction::triggered, m_mainWidget, &TimeTrackerWidget::showSettingsDialog);
     m_mainWidget->setupActions(actionCollection());
 
@@ -96,7 +96,7 @@ MainWindow::MainWindow(const QUrl &url)
 
 void MainWindow::setStatusBar(const QString &qs)
 {
-    statusBar()->showMessage(i18n(qs.toUtf8()));
+    statusBar()->showMessage(i18n(qs.toUtf8().constData()));
 }
 
 MainWindow::~MainWindow()
@@ -119,7 +119,7 @@ bool MainWindow::queryClose()
 
 void MainWindow::taskViewCustomContextMenuRequested(const QPoint &point)
 {
-    QMenu *pop = dynamic_cast<QMenu *>(guiFactory()->container("task_popup", this));
+    QMenu *pop = dynamic_cast<QMenu *>(guiFactory()->container(QStringLiteral("task_popup"), this));
     if (pop) {
         pop->popup(point);
     }
@@ -161,7 +161,7 @@ void MainWindow::updateWindowCaptionTasks(const QList<Task *> &activeTasks)
         if (i > 0) {
             qCaption += i18nc("separator between task names", ", ");
         }
-        qCaption += formatTime(task->sessionTime()) + " " + task->name();
+        qCaption += formatTime(task->sessionTime()) + QStringLiteral(" ") + task->name();
     }
 
     this->setCaption(qCaption);

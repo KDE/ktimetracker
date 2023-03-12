@@ -213,9 +213,9 @@ QString TimeTrackerStorage::createLockFileName(const QUrl &url)
     }
 
     // Remove characters disallowed by operating systems
-    baseName.replace(QRegExp("[" + QRegExp::escape("\\/:*?\"<>|") + "]"), QString());
+    baseName.replace(QRegExp(QStringLiteral("[") + QRegExp::escape(QStringLiteral("\\/:*?\"<>|")) + QStringLiteral("]")), QString());
 
-    const QString &hash = QCryptographicHash::hash(canonicalSeedString.toUtf8(), QCryptographicHash::Sha1).toHex();
+    const QString &hash = QString::fromLatin1(QCryptographicHash::hash(canonicalSeedString.toUtf8(), QCryptographicHash::Sha1).toHex());
     const QString &lockBaseName = QStringLiteral("ktimetracker_%1_%2.lock").arg(hash).arg(baseName);
 
     // Put the lock file in a directory for temporary files

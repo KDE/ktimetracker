@@ -97,7 +97,7 @@ void TreeViewHeaderContextMenu::slotTriggered(QAction *action)
         bool hidden = m_widget->isColumnHidden(column);
         m_widget->setColumnHidden(column, !hidden);
         updateAction(action, column);
-        emit columnToggled(column);
+        Q_EMIT columnToggled(column);
     }
 }
 

@@ -109,7 +109,7 @@ public:
                 }
             }
             painter->setPen(Qt::black);
-            painter->drawText(option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + " %");
+            painter->drawText(option.rect, Qt::AlignCenter | Qt::AlignVCenter, QString::number(value) + QString::fromLatin1(" %"));
         } else {
             QStyledItemDelegate::paint(painter, option, index);
         }
@@ -163,7 +163,7 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
             label = i18nc("@item:inmenu Task priority", "9 (lowest)");
             break;
         default:
-            label = QString("%1").arg(i);
+            label = QStringLiteral("%1").arg(i);
             break;
         }
         m_priority[m_popupPriorityMenu->addAction(label)] = i;
@@ -203,7 +203,7 @@ void TasksWidget::slotCustomContextMenuRequested(const QPoint &pos)
         break;
 
     default:
-        emit contextMenuRequested(newPos);
+        Q_EMIT contextMenuRequested(newPos);
         break;
     }
 }
@@ -212,7 +212,7 @@ void TasksWidget::slotSetPercentage(QAction *action)
 {
     if (currentItem()) {
         currentItem()->setPercentComplete(m_percentage[action]);
-        emit updateButtons();
+        Q_EMIT updateButtons();
     }
 }
 
@@ -244,7 +244,7 @@ void TasksWidget::mouseMoveEvent(QMouseEvent *event)
             Task *task = taskAtViewIndex(index);
             if (task) {
                 task->setPercentComplete(newValue);
-                emit updateButtons();
+                Q_EMIT updateButtons();
             }
         }
     } else {
@@ -273,14 +273,14 @@ void TasksWidget::mousePressEvent(QMouseEvent *event)
             } else {
                 task->setPercentComplete(100);
             }
-            emit updateButtons();
+            Q_EMIT updateButtons();
         }
     } else {
         // the user did not mark a task as complete/incomplete
         if (KTimeTrackerSettings::configPDA()) {
             // if you have a touchscreen, you cannot right-click. So, display context menu on any click.
             QPoint newPos = viewport()->mapToGlobal(event->pos());
-            emit contextMenuRequested(newPos);
+            Q_EMIT contextMenuRequested(newPos);
         }
 
         QTreeView::mousePressEvent(event);
@@ -296,7 +296,7 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
     if (index.isValid() && !mousePositionInsideCheckbox(event)) {
         Task *task = taskAtViewIndex(index);
         if (task) {
-            emit taskDoubleClicked(task);
+            Q_EMIT taskDoubleClicked(task);
         }
     } else {
         QTreeView::mouseDoubleClickEvent(event);
@@ -305,7 +305,7 @@ void TasksWidget::mouseDoubleClickEvent(QMouseEvent *event)
 
 void TasksWidget::currentChanged(const QModelIndex & /*current*/, const QModelIndex & /*previous*/)
 {
-    emit updateButtons();
+    Q_EMIT updateButtons();
 }
 
 void TasksWidget::restoreItemState()
@@ -359,7 +359,7 @@ void TasksWidget::refresh()
     // works properly if rootIsDecorated == true.
     setRootIsDecorated(true);
 
-    emit updateButtons();
+    Q_EMIT updateButtons();
     qCDebug(KTT_LOG) << "exiting TaskView::refresh()";
 }
 

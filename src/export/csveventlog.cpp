@@ -40,15 +40,15 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
     QString header;
 
     // Write header columns
-    header.append("Start");
+    header.append(QStringLiteral("Start"));
     header.append(delim);
-    header.append("End");
+    header.append(QStringLiteral("End"));
     header.append(delim);
-    header.append("Task name");
+    header.append(QStringLiteral("Task name"));
     header.append(delim);
-    header.append("Comment");
+    header.append(QStringLiteral("Comment"));
     header.append(delim);
-    header.append("UID");
+    header.append(QStringLiteral("UID"));
     header.append(cr);
 
     // Export all events
@@ -86,7 +86,7 @@ QString exportCSVEventLogToString(ProjectModel *projectModel, const ReportCriter
     // prepend header after sorting
     events.prepend(header);
 
-    return events.join("");
+    return events.join(QStringLiteral(""));
 }
 
 QString getFullEventName(const Event *event, ProjectModel *projectModel)
@@ -110,7 +110,7 @@ QString getFullEventName(const Event *event, ProjectModel *projectModel)
     fullName += parentTask->name();
     parentTask = parentTask->parentTask();
     while (parentTask) {
-        fullName = parentTask->name() + "->" + fullName;
+        fullName = parentTask->name() + QStringLiteral("->") + fullName;
         qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
         parentTask = parentTask->parentTask();
         qCDebug(KTT_LOG) << "Parent task: " << parentTask;

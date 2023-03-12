@@ -50,7 +50,7 @@ Task::Task(const QString &taskName,
         m_projectModel->tasksModel()->addChild(this);
     }
 
-    init(taskName, taskDescription, minutes, sessionTime, nullptr, desktops, 0, 0);
+    init(taskName, taskDescription, minutes, sessionTime, QStringLiteral(), desktops, 0, 0);
 
     m_uid = KCalCore::CalFormat::createUniqueId();
 }
@@ -205,7 +205,7 @@ void Task::setPercentComplete(int percent)
     }
 
     if (isRunning() && m_percentComplete == 100) {
-        emit m_projectModel->tasksModel()->taskCompleted(this);
+        Q_EMIT m_projectModel->tasksModel()->taskCompleted(this);
     }
 
     invalidateCompletedState();
@@ -553,7 +553,7 @@ void Task::update()
 {
     QModelIndex first = m_projectModel->tasksModel()->index(this, 0);
     QModelIndex last = m_projectModel->tasksModel()->index(this, 6);
-    emit m_projectModel->tasksModel()->dataChanged(first, last, QVector<int>{Qt::DisplayRole});
+    Q_EMIT m_projectModel->tasksModel()->dataChanged(first, last, QVector<int>{Qt::DisplayRole});
 }
 
 void Task::startNewSession()

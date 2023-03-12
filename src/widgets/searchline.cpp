@@ -56,7 +56,7 @@ bool SearchLine::eventFilter(QObject *obj, QEvent *event)
         auto *keyEvent = dynamic_cast<QKeyEvent *>(event);
         if (keyEvent && (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)) {
             if (!m_lineEdit->displayText().isEmpty()) {
-                emit textSubmitted(m_lineEdit->displayText());
+                Q_EMIT textSubmitted(m_lineEdit->displayText());
                 m_lineEdit->clear();
             }
 
@@ -80,6 +80,6 @@ void SearchLine::activateSearch()
     m_queuedSearches--;
 
     if (m_queuedSearches == 0) {
-        emit searchUpdated(m_queuedSearchText);
+        Q_EMIT searchUpdated(m_queuedSearchText);
     }
 }

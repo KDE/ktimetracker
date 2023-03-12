@@ -122,12 +122,12 @@ void TasksModelItem::invalidateRunningState()
 {
     // invalidate icon in column "Session Time"
     QModelIndex index = m_model->index(this, 1);
-    emit m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
+    Q_EMIT m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
 }
 
 void TasksModelItem::invalidateCompletedState()
 {
     // invalidate icon in column "Task Name"
     QModelIndex index = m_model->index(this, 0);
-    emit m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
+    Q_EMIT m_model->dataChanged(index, index, QVector<int>{Qt::DecorationRole});
 }

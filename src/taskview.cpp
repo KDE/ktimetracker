@@ -97,7 +97,7 @@ TaskView::TaskView(QWidget *parent)
 void TaskView::newFocusWindowDetected(const QString &taskName)
 {
     QString newTaskName = taskName;
-    newTaskName.remove('\n');
+    newTaskName.remove(QChar::fromLatin1('\n'));
 
     if (!m_focusTrackingActive) {
         return;
@@ -128,7 +128,7 @@ void TaskView::newFocusWindowDetected(const QString &taskName)
             }
         }
     }
-    emit updateButtons();
+    Q_EMIT updateButtons();
 }
 
 TimeTrackerStorage *TaskView::storage()
@@ -195,13 +195,13 @@ void TaskView::load(const QUrl &url)
             task->resumeRunning();
         }
     }
-    emit updateButtons();
-    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT updateButtons();
+    Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 
     if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
-        emit timersInactive();
+        Q_EMIT timersInactive();
     } else {
-        emit timersActive();
+        Q_EMIT timersActive();
     }
 
     if (tasksModel->topLevelItemCount() > 0) {
@@ -271,11 +271,11 @@ void TaskView::startTimerFor(Task *task, const QDateTime &startTime)
         }
     }
 
-    emit updateButtons();
-    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT updateButtons();
+    Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 
     if (!storage()->tasksModel()->getActiveTasks().isEmpty()) {
-        emit timersActive();
+        Q_EMIT timersActive();
     }
 }
 
@@ -305,9 +305,9 @@ void TaskView::stopAllTimers(const QDateTime &when)
     }
 
     m_idleTimeDetector->stopIdleDetection();
-    emit updateButtons();
-    emit timersInactive();
-    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT updateButtons();
+    Q_EMIT timersInactive();
+    Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::toggleFocusTracking()
@@ -320,7 +320,7 @@ void TaskView::toggleFocusTracking()
         stopTimerFor(m_lastTaskWithFocus);
     }
 
-    emit updateButtons();
+    Q_EMIT updateButtons();
 }
 
 void TaskView::stopTimerFor(Task *task)
@@ -331,11 +331,11 @@ void TaskView::stopTimerFor(Task *task)
 
         if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
             m_idleTimeDetector->stopIdleDetection();
-            emit timersInactive();
+            Q_EMIT timersInactive();
         }
-        emit updateButtons();
+        Q_EMIT updateButtons();
     }
-    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::stopCurrentTimer()
@@ -349,7 +349,7 @@ void TaskView::stopCurrentTimer()
 void TaskView::minuteUpdate()
 {
     storage()->tasksModel()->addTimeToActiveTasks(1);
-    emit minutesUpdated(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT minutesUpdated(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::newTask(const QString &caption, Task *parent)
@@ -386,7 +386,7 @@ void TaskView::newTask(const QString &caption, Task *parent)
     }
     delete dialog;
 
-    emit updateButtons();
+    Q_EMIT updateButtons();
 }
 
 Task *TaskView::addTask(const QString &taskname,
@@ -461,7 +461,7 @@ void TaskView::editTask()
             task->setDesktopList(desktopList);
             m_desktopTracker->registerForDesktops(task, desktopList);
         }
-        emit updateButtons();
+        Q_EMIT updateButtons();
     }
 
     delete dialog;
@@ -481,7 +481,7 @@ void TaskView::setPerCentComplete(int completion)
     if (completion < 100) {
         task->setPercentComplete(completion);
         task->invalidateCompletedState();
-        emit updateButtons();
+        Q_EMIT updateButtons();
     }
 }
 
@@ -496,10 +496,10 @@ void TaskView::deleteTaskBatch(Task *task)
     // Stop idle detection if no more counters are running
     if (storage()->tasksModel()->getActiveTasks().isEmpty()) {
         m_idleTimeDetector->stopIdleDetection();
-        emit timersInactive();
+        Q_EMIT timersInactive();
     }
 
-    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
 
 void TaskView::deleteTask(Task *task)
@@ -540,7 +540,7 @@ void TaskView::markTaskAsComplete()
 
     m_tasksWidget->currentItem()->setPercentComplete(100);
     m_tasksWidget->currentItem()->invalidateCompletedState();
-    emit updateButtons();
+    Q_EMIT updateButtons();
 }
 
 void TaskView::subtractTime(int64_t minutes)
@@ -663,5 +663,5 @@ void TaskView::taskAboutToBeRemoved(const QModelIndex &parent, int first, int la
 
 void TaskView::taskRemoved(const QModelIndex & /*parent*/, int /*first*/, int /*last*/)
 {
-    emit tasksChanged(storage()->tasksModel()->getActiveTasks());
+    Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 }

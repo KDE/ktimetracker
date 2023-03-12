@@ -31,11 +31,11 @@ QString formatTime(double minutes, bool decimal)
     QString time;
     if (decimal) {
         time = QStringLiteral("%1").arg(minutes / 60.0, 0, 'f', 2);
-        time.replace('.', QLocale().decimalPoint());
+        time.replace(QChar::fromLatin1('.'), QLocale().decimalPoint());
     } else {
         const auto absMinutes = static_cast<qlonglong>(std::round(std::fabs(minutes)));
         time = QStringLiteral("%1%2:%3")
-                   .arg(minutes < 0 ? QString(QLocale().negativeSign()) : "")
+                   .arg(minutes < 0 ? QString(QLocale().negativeSign()) : QStringLiteral())
                    .arg(absMinutes / 60)
                    .arg(absMinutes % 60, 2, 10, QLatin1Char('0'));
     }

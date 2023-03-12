@@ -95,7 +95,7 @@ EditTimeDialog::EditTimeDialog(QWidget *parent, const QString &name, const QStri
     m_buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
     auto *historyButton =
-        new QPushButton(QIcon::fromTheme("document-edit"), i18nc("@action:button", "Edit History..."), m_buttonBox);
+        new QPushButton(QIcon::fromTheme(QStringLiteral("document-edit")), i18nc("@action:button", "Edit History..."), m_buttonBox);
     historyButton->setToolTip(i18n("To change this task's time, you have to edit its event history"));
     m_buttonBox->addButton(historyButton, QDialogButtonBox::HelpRole);
 

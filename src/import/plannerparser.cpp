@@ -109,11 +109,11 @@ bool PlannerParser::endElement(const QString & /*namespaceURI*/, const QString &
 {
     // only <task>s within <tasks> increased level, so only decrease for <task>s within <tasks>
     if (m_withinTasks) {
-        if (qName == "task" && m_level-- >= 0) {
+        if (qName == QStringLiteral("task") && m_level-- >= 0) {
             m_task = m_task->parentTask();
         }
 
-        if (qName == "tasks") {
+        if (qName == QStringLiteral("tasks")) {
             m_withinTasks = false;
         }
     }

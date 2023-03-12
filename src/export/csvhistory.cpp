@@ -104,7 +104,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
         fullName += parentTask->name();
         parentTask = parentTask->parentTask();
         while (parentTask) {
-            fullName = parentTask->name() + "->" + fullName;
+            fullName = parentTask->name() + QStringLiteral("->") + fullName;
             qCDebug(KTT_LOG) << "Fullname(inside): " << fullName;
             parentTask = parentTask->parentTask();
             qCDebug(KTT_LOG) << "Parent task: " << parentTask;
@@ -143,7 +143,7 @@ QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteri
 
     // First CSV file line
     // FIXME: localize strings and date formats
-    retval.append("\"Task name\"");
+    retval.append(QStringLiteral("\"Task name\""));
     for (int i = 0; i < intervalLength; ++i) {
         retval.append(delim);
         retval.append(from.addDays(i).toString());

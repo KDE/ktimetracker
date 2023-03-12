@@ -62,7 +62,7 @@ QUrl getFileUrl(const QCommandLineParser &parser)
     } else {
         // customFile is not given as parameter
         QString result =
-            QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "ktimetracker/ktimetracker.ics"));
+            QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ktimetracker/ktimetracker.ics")));
         if (result.isEmpty()) {
             result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/')
                 + QStringLiteral("ktimetracker.ics");
@@ -70,7 +70,7 @@ QUrl getFileUrl(const QCommandLineParser &parser)
             QFileInfo fileInfo(result);
             QDir().mkpath(fileInfo.absolutePath());
 
-            QFile oldFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "karm/karm.ics"));
+            QFile oldFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("karm/karm.ics")));
             if (oldFile.exists()) {
                 oldFile.copy(result);
             }

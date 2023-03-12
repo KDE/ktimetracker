@@ -112,8 +112,8 @@ void IdleTimeDetector::revert(const QDateTime &dialogStart, const QDateTime &idl
     // revert and stop
     QDateTime end = QDateTime::currentDateTime();
     const int64_t diff = dialogStart.secsTo(end) / secsPerMinute;
-    emit subtractTime(idleMinutes + diff); // subtract the time that has been added on the display
-    emit stopAllTimers(idleStart);
+    Q_EMIT subtractTime(idleMinutes + diff); // subtract the time that has been added on the display
+    Q_EMIT stopAllTimers(idleStart);
 }
 
 void IdleTimeDetector::startIdleDetection()

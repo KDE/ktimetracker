@@ -46,7 +46,7 @@ ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
     // If decimal symbol is a comma, then default field separator to semi-colon.
     // In France and Germany, one-and-a-half is written as 1,5 not 1.5
     QChar d = QLocale().decimalPoint();
-    if (QChar(',') == d) {
+    if (QChar::fromLatin1(',') == d) {
         ui.radioSemicolon->setChecked(true);
     } else {
         ui.radioComma->setChecked(true);
@@ -106,7 +106,7 @@ void ExportDialog::exportToFile()
         // Close export dialog after saving
         accept();
     } else {
-        KMessageBox::error(parentWidget(), i18n(err.toLatin1()));
+        KMessageBox::error(parentWidget(), i18n(err.toLatin1().constData()));
     }
 }
 
@@ -118,19 +118,19 @@ ReportCriteria ExportDialog::reportCriteria()
     qCDebug(KTT_LOG) << "rc.decimalMinutes is" << rc.decimalMinutes;
 
     if (ui.radioComma->isChecked()) {
-        rc.delimiter = ',';
+        rc.delimiter = QChar::fromLatin1(',');
     } else if (ui.radioTab->isChecked()) {
-        rc.delimiter = '\t';
+        rc.delimiter = QChar::fromLatin1('\t');
     } else if (ui.radioSemicolon->isChecked()) {
-        rc.delimiter = ';';
+        rc.delimiter = QChar::fromLatin1(';');
     } else if (ui.radioSpace->isChecked()) {
-        rc.delimiter = ' ';
+        rc.delimiter = QChar::fromLatin1(' ');
     } else if (ui.radioOther->isChecked()) {
         rc.delimiter = ui.txtOther->text();
     } else {
         qCDebug(KTT_LOG) << "*** ExportDialog::reportCriteria: Unexpected "
                             "delimiter choice '";
-        rc.delimiter = '\t';
+        rc.delimiter = QChar::fromLatin1('\t');
     }
 
     rc.quote = ui.cboQuote->currentText();

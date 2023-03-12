@@ -42,7 +42,7 @@ static void printTask(Task *task, QString &s, int level, const ReportCriteria &r
 {
     QString buf;
 
-    s += buf.fill(' ', level);
+    s += buf.fill(QChar::fromLatin1(' '), level);
     if (!rc.sessionTimes) {
         s += QString(QString::fromLatin1("%1    %2"))
                  .arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth)
@@ -77,7 +77,7 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
     int64_t sum;
     bool justThisTask = !rc.allTasks;
 
-    line.fill('-', reportWidth);
+    line.fill(QChar::fromLatin1('-'), reportWidth);
     line += cr;
 
     // header
@@ -113,7 +113,7 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
             }
         }
         // total
-        buf.fill('-', reportWidth);
+        buf.fill(QChar::fromLatin1('-'), reportWidth);
         retval += QString(QString::fromLatin1("%1")).arg(buf, timeWidth) + cr;
         retval += QString(QString::fromLatin1("%1 %2"))
                       .arg(formatTime(sum, rc.decimalMinutes), timeWidth)

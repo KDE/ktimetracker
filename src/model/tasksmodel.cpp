@@ -42,7 +42,7 @@ TasksModel::TasksModel()
 {
     Q_INIT_RESOURCE(pics);
 
-    m_clockAnimation = new QMovie(":/pics/watch.gif", QByteArray(), this);
+    m_clockAnimation = new QMovie(QStringLiteral(":/pics/watch.gif"), QByteArray(), this);
 
     // Prepare animated icon
     connect(m_clockAnimation, &QMovie::frameChanged, this, &TasksModel::setActiveIcon);
@@ -201,9 +201,9 @@ QVariant TasksModel::data(const QModelIndex &index, int role) const
         }
 
         if (index.column() == 0) {
-            return QPixmap(task->isComplete() ? ":/pics/task-complete.xpm" : ":/pics/task-incomplete.xpm");
+            return QPixmap(task->isComplete() ? QStringLiteral(":/pics/task-complete.xpm") : QStringLiteral(":/pics/task-incomplete.xpm"));
         } else if (index.column() == 1) {
-            return task->isRunning() ? m_clockAnimation->currentPixmap() : QPixmap(":/pics/empty-watch.xpm");
+            return task->isRunning() ? m_clockAnimation->currentPixmap() : QPixmap(QStringLiteral(":/pics/empty-watch.xpm"));
         }
         break;
     }
@@ -372,7 +372,7 @@ bool TasksModel::dropMimeData(const QMimeData *data,
     }
 
     task->move(newParent);
-    emit taskDropped();
+    Q_EMIT taskDropped();
     return true;
 }
 

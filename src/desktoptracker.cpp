@@ -63,12 +63,12 @@ void DesktopTracker::changeTimers()
 
     // stop trackers for m_previousDesktop
     for (Task *task : m_desktopTracker[m_previousDesktop]) {
-        emit leftActiveDesktop(task);
+        Q_EMIT leftActiveDesktop(task);
     }
 
     // start trackers for desktop
     for (Task *task : m_desktopTracker[m_desktop]) {
-        emit reachedActiveDesktop(task);
+        Q_EMIT reachedActiveDesktop(task);
     }
 
     m_previousDesktop = m_desktop;
@@ -86,7 +86,7 @@ QString DesktopTracker::startTracking()
     }
 
     for (Task *task : m_desktopTracker[currentDesktop]) {
-        emit reachedActiveDesktop(task);
+        Q_EMIT reachedActiveDesktop(task);
     }
 
     return QString();
@@ -106,7 +106,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
             // if the task was previously tracking this desktop then
             // emit a signal that is not tracking it any more
             if (i == KWindowSystem::currentDesktop() - 1) {
-                emit leftActiveDesktop(task);
+                Q_EMIT leftActiveDesktop(task);
             }
         }
         qCDebug(KTT_LOG) << "Leaving function, desktopList.size=0";
@@ -134,7 +134,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                     // if the task was previously tracking this desktop then
                     // emit a signal that is not tracking it any more
                     if (i == KWindowSystem::currentDesktop() - 1) {
-                        emit leftActiveDesktop(task);
+                        Q_EMIT leftActiveDesktop(task);
                     }
                 }
             }

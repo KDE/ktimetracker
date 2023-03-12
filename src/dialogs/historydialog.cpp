@@ -130,14 +130,14 @@ QString HistoryDialog::listAllEvents()
         // maybe the file is corrupt and (*i)->relatedTo is NULL
         if (event->relatedTo().isEmpty()) {
             qCDebug(KTT_LOG) << "There is no 'relatedTo' entry for " << event->summary();
-            err = "NoRelatedToForEvent";
+            err = QStringLiteral("NoRelatedToForEvent");
             continue;
         }
 
         const Task *parent = dynamic_cast<Task *>(m_projectModel->tasksModel()->taskByUID(event->relatedTo()));
         if (!parent) {
             qCWarning(KTT_LOG) << "Unable to load 'relatedTo' entry for " << event->summary();
-            err = "NoRelatedToForEvent";
+            err = QStringLiteral("NoRelatedToForEvent");
             continue;
         }
 
@@ -205,7 +205,7 @@ void HistoryDialog::onCellChanged(int row, int col)
         // setDtStart could modify date/time, sync it into our table
         m_ui.historytablewidget->item(row, col)->setText(event->dtStart().toString(dateTimeFormat));
 
-        emit m_projectModel->eventsModel()->timesChanged();
+        Q_EMIT m_projectModel->eventsModel()->timesChanged();
         qCDebug(KTT_LOG) << "Program SetDtStart to" << m_ui.historytablewidget->item(row, col)->text();
         break;
     }
@@ -225,7 +225,7 @@ void HistoryDialog::onCellChanged(int row, int col)
         // setDtStart could modify date/time, sync it into our table
         m_ui.historytablewidget->item(row, col)->setText(event->dtEnd().toString(dateTimeFormat));
 
-        emit m_projectModel->eventsModel()->timesChanged();
+        Q_EMIT m_projectModel->eventsModel()->timesChanged();
         qCDebug(KTT_LOG) << "Program SetDtEnd to" << m_ui.historytablewidget->item(row, col)->text();
         break;
     }
@@ -286,7 +286,7 @@ void HistoryDialog::onDeleteClicked()
         }
     }
     if (refresh) {
-        emit m_projectModel->eventsModel()->timesChanged();
+        Q_EMIT m_projectModel->eventsModel()->timesChanged();
         this->refresh();
     }
 }
