@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 set(APP_VERSION_NUMBER "5.0.1")
 project(ktimetracker VERSION ${APP_VERSION_NUMBER})
 
-set(KF5_MIN_VERSION "5.54.0")
+# Older versions have this bug: https://bugs.kde.org/show_bug.cgi?id=451946
+set(KF5_MIN_VERSION "5.93.0")
 
 find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
