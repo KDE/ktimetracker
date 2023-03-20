@@ -26,8 +26,7 @@
 #include "model/task.h"
 #include "taskview.h"
 
-class TemporaryFileDeleter : public QObject
-{
+class TemporaryFileDeleter : public QObject {
 public:
     explicit TemporaryFileDeleter(QObject *parent, QString fileName)
         : QObject(parent)
@@ -77,9 +76,9 @@ TaskView *createTaskView(QObject *parent, bool simpleTree)
     taskView->load(icsFile);
 
     if (simpleTree) {
-        Task* task1 = taskView->addTask(QStringLiteral("1"));
-        Task* task2 = taskView->addTask(QStringLiteral("2"), QString(), 0, 0, QVector<int>(0, 0), task1);
-        Task* task3 = taskView->addTask(QStringLiteral("3"));
+        Task *task1 = taskView->addTask(QStringLiteral("1"));
+        Task *task2 = taskView->addTask(QStringLiteral("2"), QString(), 0, 0, QVector<int>(0, 0), task1);
+        Task *task3 = taskView->addTask(QStringLiteral("3"));
 
         task1->changeTime(5, taskView->storage()->eventsModel()); // add 5 minutes
         task2->changeTime(3, taskView->storage()->eventsModel()); // add 3 minutes

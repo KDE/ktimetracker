@@ -44,12 +44,12 @@ void TaskTest::testProperties()
     auto *taskView = createTaskView(this, false);
     QVERIFY(taskView);
 
-    auto *task1 = taskView->addTask("1");
+    auto *task1 = taskView->addTask(QStringLiteral("1"));
     QVERIFY(task1);
     QVERIFY(task1->isRoot());
     QCOMPARE(task1->depth(), 0);
 
-    auto *task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
+    auto *task2 = taskView->addTask(QStringLiteral("2"), QString(), 0, 0, QVector<int>(0, 0), task1);
     QVERIFY(task2);
     QVERIFY(!task2->isRoot());
     QCOMPARE(task2->depth(), 1);
@@ -60,14 +60,14 @@ void TaskTest::testRefreshTimes()
     auto *taskView = createTaskView(this, false);
     QVERIFY(taskView);
 
-    auto *task1 = taskView->addTask("1");
-    auto *task2 = taskView->addTask("2", QString(), 0, 0, QVector<int>(0, 0), task1);
+    auto *task1 = taskView->addTask(QStringLiteral("1"));
+    auto *task2 = taskView->addTask(QStringLiteral("2"), QString(), 0, 0, QVector<int>(0, 0), task1);
     task2->changeTime(5, taskView->storage()->eventsModel());
 
     QCOMPARE(5, task2->time());
     QCOMPARE(5, task2->sessionTime());
 
-    QCOMPARE(taskView->storage()->save(), "");
+    QCOMPARE(taskView->storage()->save(), QString());
 
     // Open saved file again
     auto *taskView2 = new TaskView();
@@ -85,7 +85,7 @@ void TaskTest::testDurationFromEvent()
     auto *taskView = createTaskView(this, false);
     QVERIFY(taskView);
 
-    auto *task = taskView->addTask("1");
+    auto *task = taskView->addTask(QStringLiteral("1"));
     task->changeTime(1, taskView->storage()->eventsModel());
     QCOMPARE(task->time(), 1);
 
@@ -105,7 +105,7 @@ void TaskTest::testDeleteRunning()
     auto *taskView = createTaskView(this, false);
     QVERIFY(taskView);
 
-    auto *task = taskView->addTask("1");
+    auto *task = taskView->addTask(QStringLiteral("1"));
     taskView->startTimerForNow(task);
 
     taskView->deleteTaskBatch(task);

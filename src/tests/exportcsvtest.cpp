@@ -50,8 +50,8 @@ ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type)
     rc.decimalMinutes = false;
     rc.sessionTimes = false;
     rc.allTasks = true;
-    rc.delimiter = ';';
-    rc.quote = '"';
+    rc.delimiter = QChar::fromLatin1(';');
+    rc.quote = QChar::fromLatin1('"');
 
     return rc;
 }
@@ -107,7 +107,7 @@ void ExportCSVTest::testTimesSimpleTree()
     const QUrl &url = createTempFile(this);
     QVERIFY(!url.isEmpty());
     QString output = exportToString(taskView->storage()->projectModel(), taskView->tasksWidget()->currentItem(), rc);
-    QCOMPARE(writeExport(output, url), "");
+    QCOMPARE(writeExport(output, url), QString());
 
     const QString &expected = QStringLiteral(
         "\"3\";;0:07;0:07;0:07;0:07\n"
@@ -126,7 +126,7 @@ void ExportCSVTest::testHistorySimpleTree()
     const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
     const QUrl &url = createTempFile(this);
     QString output = exportToString(taskView->storage()->projectModel(), taskView->tasksWidget()->currentItem(), rc);
-    QCOMPARE(writeExport(output, url), "");
+    QCOMPARE(writeExport(output, url), QString());
 
     const QString &expected = QStringLiteral(
         "\"Task name\";%1\n"
