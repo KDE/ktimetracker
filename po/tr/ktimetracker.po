@@ -35,7 +35,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "mevlutkocak@hotmail.com, oebilgen@uekae.tubitak.gov.tr, engincagatay@yahoo."
-"com"
+"com, emir_sari@icloud.com"
 
 #: dialogs/edittimedialog.cpp:42
 #, kde-format
