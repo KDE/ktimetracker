@@ -1326,19 +1326,19 @@ msgstr "غير محدّدة"
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
-msgstr "١ (عالية)"
+msgstr "1 (عالية)"
 
 #: widgets/taskswidget.cpp:160
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
-msgstr "٥ (متوسّطة)"
+msgstr "5 (متوسّطة)"
 
 #: widgets/taskswidget.cpp:163
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
-msgstr "٩ (منخفضة)"
+msgstr "9 (منخفضة)"
 
 #, fuzzy
 #~ msgid "CSV Export"
