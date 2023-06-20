@@ -760,7 +760,7 @@ msgstr "Tempo da tarefa e sesión"
 #: settings/cfgdisplay.ui:81
 #, kde-format
 msgid "Columns Displayed"
-msgstr "Columnas mostradas"
+msgstr "Columnas amosadas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
 #: settings/cfgdisplay.ui:87
@@ -1204,7 +1204,7 @@ msgstr "Importar tarefas do &Planificador..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
-msgstr "Mostrar a barra de Busca rápida"
+msgstr "Amosar a barra de Busca rápida"
 
 #: timetrackerwidget.cpp:471
 #, kde-format
@@ -1346,9 +1346,8 @@ msgid ""
 "press Enter, your input is used as name to create a new task."
 msgstr ""
 "Este é un campo combinado. Mentres non prema Intro, funciona como un filtro. "
-"Só se mostran as tarefas que coincidan co que vaia escribindo. Logo de "
-"premer Intro, o que teña escrito emprégase como nome da nova tarefa que se "
-"crea."
+"Só se amosan as tarefas que coincidan co que vaia escribindo. Logo de premer "
+"Intro, o que teña escrito úsase como nome da nova tarefa que se crea."
 
 #: widgets/taskswidget.cpp:143
 #, kde-format
