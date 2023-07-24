@@ -2,14 +2,14 @@
 # Copyright (C) 1999, 2000, 2001, 2007 Free Software Foundation, Inc.
 # Byeong-Chan Kim <redhands@linux.sarang.net>, 1999.
 # Park Shinjo <peremen@gmail.com>, 2007, 2009, 2013.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-04-29 00:44+0000\n"
-"PO-Revision-Date: 2022-05-15 22:40+0200\n"
+"PO-Revision-Date: 2023-07-23 20:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -805,8 +805,8 @@ msgid ""
 msgstr ""
 "새 작업을 저장하는 중 오류가 발생했습니다. 변경 사항은 저장되지 않았습니다. "
 "iCalendar 파일을 편집할 수 있는지 확인하십시오. 또한 이 파일을 사용하는 모든 "
-"프로그램을 종료하고, ~/.kde/share/apps/kabc/lock 안에 있는 모든 잠금 파일을 "
-"삭제하십시오."
+"앱을 종료하고, ~/.kde/share/apps/kabc/lock 안에 있는 모든 잠금 파일을 삭제하"
+"십시오."
 
 #: taskview.cpp:214
 #, kde-format
@@ -839,8 +839,8 @@ msgid ""
 msgstr ""
 "새 작업을 저장하는 중 오류가 발생했습니다. 변경 사항은 저장되지 않았습니다. "
 "iCalendar 파일을 편집할 수 있는지 확인하십시오. 또한 이 파일을 사용하는 모든 "
-"프로그램을 종료하고, ~/.kde/share/apps/kabc/lock 안에 있는 모든 잠금 파일을 "
-"삭제하십시오."
+"앱을 종료하고, ~/.kde/share/apps/kabc/lock 안에 있는 모든 잠금 파일을 삭제하"
+"십시오."
 
 #: taskview.cpp:422
 #, kde-format
@@ -1007,19 +1007,19 @@ msgstr "선택한 작업의 시간 측정을 중단합니다"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
-msgstr "검색 표시줄에 초점 맞춤"
+msgstr "검색 표시줄에 포커스 맞춤"
 
 #: timetrackerwidget.cpp:215
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
-msgstr "검색 표시줄에 초점 맞춤"
+msgstr "검색 표시줄에 포커스 맞춤"
 
 #: timetrackerwidget.cpp:216
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
-msgstr "검색 표시줄에 초점 맞춤"
+msgstr "검색 표시줄에 포커스 맞춤"
 
 #: timetrackerwidget.cpp:223
 #, kde-format
@@ -1043,7 +1043,7 @@ msgstr "모든 활성화된 타이머를 정지시킵니다"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
-msgstr "활성 프로그램 추적하기"
+msgstr "활성 앱 추적하기"
 
 #: timetrackerwidget.cpp:235
 #, kde-format
@@ -1051,7 +1051,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Auto-creates and updates tasks when the focus of the current window has "
 "changed"
-msgstr "현재 창의 초점이 변경되었을 때 작업을 자동으로 생성하고 업데이트"
+msgstr "현재 창의 포커스가 변경되었을 때 작업을 자동으로 생성하고 업데이트"
 
 #: timetrackerwidget.cpp:238
 #, kde-format
@@ -1061,9 +1061,9 @@ msgid ""
 "enabled, a new task will be created with the title of the window as its name "
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
-"이 동작을 사용하고 창의 초점이 최초로 변경되면, 변경된 창의 제목을 기준으로 "
-"새로운 작업이 만들어지고 시작됩니다. 같은 제목을 가진 작업이 있다면 그 작업"
-"이 시작됩니다."
+"이 동작을 사용하고 창의 포커스가 최초로 변경되면, 변경된 창의 제목을 기준으"
+"로 새로운 작업이 만들어지고 시작됩니다. 같은 제목을 가진 작업이 있다면 그 작"
+"업이 시작됩니다."
 
 #: timetrackerwidget.cpp:249
 #, kde-format
