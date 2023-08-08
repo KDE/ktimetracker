@@ -1250,7 +1250,7 @@ msgstr "저장에 실패했습니다. 대부분 경우 파일을 잠글 수 없�
 #: timetrackerwidget.cpp:797
 #, kde-format
 msgid "Could not modify calendar resource."
-msgstr "달력 자원을 수정할 수 없습니다."
+msgstr "달력 리소스를 수정할 수 없습니다."
 
 #: timetrackerwidget.cpp:799
 #, kde-format
