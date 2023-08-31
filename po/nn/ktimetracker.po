@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-04-29 00:44+0000\n"
-"PO-Revision-Date: 2023-03-11 23:29+0100\n"
+"PO-Revision-Date: 2023-08-30 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -85,12 +85,12 @@ msgstr "Tid etter endring:"
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr "Rediger hendingslogg …"
+msgstr "Rediger tidslogg …"
 
 #: dialogs/edittimedialog.cpp:99
 #, kde-format
 msgid "To change this task's time, you have to edit its event history"
-msgstr "Du må redigera hendingsloggen for å endra tida til denne oppgåva."
+msgstr "Du må redigera tidsloggen for å endra tider for denne oppgåva."
 
 #: dialogs/exportdialog.cpp:96
 #, kde-format
@@ -103,7 +103,7 @@ msgstr "Eksporter til fil"
 #, kde-format
 msgctxt "format to display times"
 msgid "Decimal"
-msgstr "Som desimaltal"
+msgstr "Desimaltal"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
 #: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
@@ -145,7 +145,7 @@ msgstr "Lagra som …"
 #: dialogs/exportdialog.ui:75
 #, kde-format
 msgid "Report Type"
-msgstr "Rapporttype"
+msgstr "Type rapport"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
 #: dialogs/exportdialog.ui:81
@@ -157,7 +157,7 @@ msgstr "Tider som CSV"
 #: dialogs/exportdialog.ui:91
 #, kde-format
 msgid "History as CSV"
-msgstr "Hendingslogg som CSV"
+msgstr "Historie som CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
 #: dialogs/exportdialog.ui:98
@@ -178,14 +178,14 @@ msgid ""
 "An inclusive date range for reporting on time card history.  Not enabled "
 "when reporting on totals."
 msgstr ""
-"Eit datoområde for rapportering i tidsbrukloggen. Vert ikkje brukt ved "
+"Eit datoområde for rapportering av tidsbruk. Vert ikkje brukt ved "
 "rapportering av totaltid."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
 #: dialogs/exportdialog.ui:121
 #, kde-format
 msgid "Date Range"
-msgstr "Dataområde"
+msgstr "Periode"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: dialogs/exportdialog.ui:127
@@ -203,7 +203,7 @@ msgstr "Til:"
 #: dialogs/exportdialog.ui:182
 #, kde-format
 msgid "Hours:Minutes"
-msgstr "Som timar:minutt"
+msgstr "Timar:minutt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
 #: dialogs/exportdialog.ui:191
@@ -215,7 +215,7 @@ msgstr "Alle tider"
 #: dialogs/exportdialog.ui:210
 #, kde-format
 msgid "Only Selected"
-msgstr "Berre valde"
+msgstr "Berre merkte"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
 #: dialogs/exportdialog.ui:224
@@ -273,6 +273,7 @@ msgstr "Hermeteikn:"
 msgid "All fields are quoted in the output."
 msgstr "Bruk hermeteikn rundt alle felta."
 
+# Ska ikkje omsetjast. Standard hermeteikn for CSV er ", ikkje «, “, ‘ eller liknande.
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
 #: dialogs/exportdialog.ui:331
 #, kde-format
@@ -319,13 +320,13 @@ msgstr "Dette er ikkje eit gyldig tidspunkt."
 #: dialogs/historydialog.cpp:273
 #, kde-format
 msgid "Please select a task to delete."
-msgstr "Vel oppgåva du vil sletta"
+msgstr "Vel oppgåva du vil sletta."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
 #: dialogs/historydialog.ui:14
 #, kde-format
 msgid "Edit History"
-msgstr "Rediger logg"
+msgstr "Rediger tidslogg"
 
 #: dialogs/taskpropertiesdialog.cpp:62
 #, kde-format
@@ -559,7 +560,7 @@ msgstr "David Faure"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
-msgstr "Adresse til iCalender-fila du vil opna"
+msgstr "Adresse til iCalender-fila du vil opna."
 
 #: mainwindow.cpp:52
 #, kde-format
@@ -730,7 +731,7 @@ msgctxt ""
 "Choose this if you have a touchscreen and your screen real estate is "
 "precious."
 msgid "Configuration for PDA"
-msgstr "Oppsett for PDA"
+msgstr "Utforming for PDA-ar"
 
 #. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
 #: settings/cfgdisplay.ui:55
@@ -748,7 +749,7 @@ msgstr "Fil open no"
 #: settings/cfgdisplay.ui:71
 #, kde-format
 msgid "Current Task and Session Time"
-msgstr "Gjelande oppgåve- og økttid"
+msgstr "Gjeldande oppgåve- og økttid"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: settings/cfgdisplay.ui:81
@@ -808,7 +809,7 @@ msgid ""
 msgstr ""
 "Feil ved lagring av oppgåva. Endringane vart ikkje lagra. Sjå til at du kan "
 "redigera iCalendar-fila. Prøv òg å avslutta alle programma som brukar fila, "
-"og fjern eventuelle låsefiler knytt til filnamnet frå «~/.kde/share/apps/"
+"og fjern eventuelle låsefiler knytte til filnamnet frå «~/.kde/share/apps/"
 "kabc/lock/»."
 
 #: taskview.cpp:214
@@ -816,8 +817,8 @@ msgstr ""
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr ""
-"Talet på virtuelt skrivebord er for høgt. Automatisk oppdaging av "
-"skrivebordsaktivitet vert ikkje brukt."
+"Talet på virtuelle skrivebord er for høgt. Automatisk oppdaging av "
+"skrivebords­aktivitet vert ikkje brukt."
 
 #: taskview.cpp:290
 #, kde-format
@@ -845,7 +846,7 @@ msgid ""
 msgstr ""
 "Feil ved lagring av oppgåva. Endringane vart ikkje lagra. Sjå til at du kan "
 "redigera iCalendar-fila. Prøv òg å avslutta alle programma som brukar fila, "
-"og fjern eventuelle låsefiler knytt til filnamnet frå «~/.kde/share/apps/"
+"og fjern eventuelle låsefiler knytte til filnamnet frå «~/.kde/share/apps/"
 "kabc/lock/»."
 
 #: taskview.cpp:422
@@ -871,7 +872,7 @@ msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
 "Note: All subtasks and their history will also be deleted."
 msgstr ""
-"Er du sikker på at du vil sletta den valde oppgåva og tilhøyrande logg?\n"
+"Er du sikker på at du vil sletta den valde oppgåva og tilhøyrande tidslogg?\n"
 "Merk at alle underoppgåver og loggane deira òg vert sletta då."
 
 #: taskview.cpp:524
@@ -923,13 +924,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr "Rediger logg …"
+msgstr "Rediger tidslogg …"
 
 #: timetrackerwidget.cpp:166
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
-msgstr "Rediger loggen til alle oppgåvene i dokumentet"
+msgstr "Rediger tidsloggen til alle oppgåvene i dokumentet"
 
 #: timetrackerwidget.cpp:168
 #, kde-format
@@ -973,7 +974,7 @@ msgstr "&Start"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
-msgstr "Startar tidtaking av den valde oppgåva"
+msgstr "Start tidtaking av den valde oppgåva"
 
 #: timetrackerwidget.cpp:191
 #, kde-format
@@ -988,7 +989,7 @@ msgstr ""
 "Dette vil starta tidtakinga av den valde oppgåva. Du kan ta tida på fleire "
 "oppgåver samtidig.\n"
 "\n"
-"Du kan òg starta tidtakinga ved å dobbeltklikka med venstre museknapp på ei "
+"Du kan òg starta tidtakinga ved å dobbelt­klikka med venstre museknapp på ei "
 "oppgåve, men då vert tidtakinga av dei andre oppgåvene automatisk stoppa."
 
 #: timetrackerwidget.cpp:205
@@ -1001,13 +1002,13 @@ msgstr "S&topp"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
-msgstr "Dette vil stoppa tidtakinga av den valde oppgåva"
+msgstr "Stopp tidtaking av den valde oppgåva"
 
 #: timetrackerwidget.cpp:207
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
-msgstr "Dette vil stoppa tidtakinga av den valde oppgåva"
+msgstr "Dette vil stoppa tidtakinga av den valde oppgåva."
 
 #: timetrackerwidget.cpp:214
 #, kde-format
@@ -1019,7 +1020,7 @@ msgstr "Set fokus på søkjelinja"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
-msgstr "Set fokus på søkjelinja"
+msgstr "Dette set fokus på søkjelinja."
 
 #: timetrackerwidget.cpp:216
 #, kde-format
@@ -1037,13 +1038,13 @@ msgstr "Stopp &alle tidtakarar"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
-msgstr "Stoppar alle verksame tidtakarar"
+msgstr "Stopp alle verksame tidtakarar"
 
 #: timetrackerwidget.cpp:225
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
-msgstr "Stoppar alle verksame tidtakarar"
+msgstr "Dette stoppar alle verksame tidtakarar."
 
 #: timetrackerwidget.cpp:233
 #, kde-format
@@ -1119,7 +1120,7 @@ msgstr "&Slett"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
-msgstr "Slettar den valde oppgåva"
+msgstr "Slett den valde oppgåva"
 
 #: timetrackerwidget.cpp:271
 #, kde-format
@@ -1233,8 +1234,8 @@ msgid ""
 "There is no history yet. Start and stop a task and you will have an entry in "
 "your history."
 msgstr ""
-"Det finst ikkje nokon logg enno. Start og stopp ei oppgåve for å leggja til "
-"ei oppføring i loggen."
+"Det finst ikkje nokon tidslogg enno. Start og stopp ei oppgåve for å leggja "
+"til ei oppføring i loggen."
 
 #: timetrackerwidget.cpp:603
 #, kde-format
@@ -1243,7 +1244,7 @@ msgid ""
 "the entire history."
 msgstr ""
 "Er du sikker på at du vil nullstilla tida for alle oppgåvene? Dette vil "
-"sletta heile loggen."
+"sletta heile tidsloggen."
 
 #: timetrackerwidget.cpp:605
 #, kde-format
@@ -1286,8 +1287,8 @@ msgstr "Ugyldig dato. Formatet er ÅÅÅÅ-MM-DD."
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr ""
-"Ugyldig tidspunkt. Formatet er ÅÅÅÅ-MM-DDTHH:MM:SS (H = timar og T må stå "
-"slik)."
+"Ugyldig tidspunkt. Formatet er ÅÅÅÅ-MM-DDTHH:MM:SS (H = timar, og T er "
+"klokkeslett­markør, som må stå slik)."
 
 #: timetrackerwidget.cpp:807
 #, kde-format
@@ -1307,7 +1308,7 @@ msgid ""
 "with creating your first task - enter it into the field where you see "
 "\"Search or add task\"."
 msgstr ""
-"Dette er KTimeTracker – eit KDE-program for å hjelpa deg å halda orden på "
+"Dette er KTimeTracker – eit KDE-program for å hjelpa deg å halda orden på "
 "tidsbruken. Skriv inn namnet på oppgåva du vil leggja til i feltet der det "
 "står «Søk eller legg til oppgåve»."
 
@@ -1315,7 +1316,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
-msgstr "Du har alt lagd til ei oppgåve. Du kan no starta og stoppa tidtakinga."
+msgstr "Du har alt lagt til ei oppgåve. Du kan no starta og stoppa tidtakinga."
 
 #: tray.cpp:95
 #, kde-format
