@@ -1350,10 +1350,10 @@ msgid ""
 "filter. Then, only tasks that match your input are shown. As soon as you "
 "press Enter, your input is used as name to create a new task."
 msgstr ""
-"Este és un camp combinat. Sempre que no premeu Retorn, actua com un filtre. "
-"Llavors, només es mostren les tasques que coincidixen amb l'entrada. Tan "
-"prompte com premeu Retorn, la vostra entrada s'utilitzarà com a nom per a "
-"crear una tasca nova."
+"Este és un camp combinat. Sempre que no premeu «Retorn», actua com un "
+"filtre. Llavors, només es mostren les tasques que coincidixen amb l'entrada. "
+"Tan prompte com premeu «Retorn», la vostra entrada s'utilitzarà com a nom "
+"per a crear una tasca nova."
 
 #: widgets/taskswidget.cpp:143
 #, kde-format
