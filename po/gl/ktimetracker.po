@@ -272,7 +272,7 @@ msgstr "Citas:"
 #: dialogs/exportdialog.ui:327
 #, kde-format
 msgid "All fields are quoted in the output."
-msgstr "Todos os campos entre aspas na saída."
+msgstr "Todos os campos entre comiñas na saída."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
 #: dialogs/exportdialog.ui:331
