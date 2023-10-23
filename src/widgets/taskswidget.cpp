@@ -139,7 +139,7 @@ TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyMode
 
     // Context menu for task progress percentage
     m_popupPercentageMenu = new QMenu(this);
-    for (int i = 0; i <= 100; i += 10) {
+    for (int i = 0; i <= 100; i += 5) {
         QString label = i18nc("@item:inmenu Task progress", "%1 %", i);
         m_percentage[m_popupPercentageMenu->addAction(label)] = i;
     }
