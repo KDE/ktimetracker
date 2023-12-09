@@ -84,19 +84,19 @@ void IdleTimeDetector::timeoutReached(int /*unused*/, int timeout)
     KGuiItem buttonNo(i18nc("@action:button", "Revert Timing"), QString(), hintNo, hintNo);
 
     const auto result =
-        KMessageBox::questionYesNo(nullptr,
+        KMessageBox::questionTwoActions(nullptr,
                                    i18n("Desktop has been idle since %1. What do you want to do?", backThen),
                                    QString(),
                                    buttonYes,
                                    buttonNo);
     switch (result) {
-    case KMessageBox::Yes:
+    case KMessageBox::ButtonCode::PrimaryAction:
         startIdleDetection();
         break;
     default:
         qCWarning(KTT_LOG) << "unexpected button clicked" << result;
         Q_FALLTHROUGH();
-    case KMessageBox::No:
+    case KMessageBox::ButtonCode::SecondaryAction:
         revert(dialogStart, idleStart, timeout / 1000 / secsPerMinute);
         break;
     }

@@ -43,7 +43,7 @@ QString formatTime(double minutes, bool decimal)
     return time;
 }
 
-QString getCustomProperty(const KCalCore::Incidence::Ptr &incident, const QString &name)
+QString getCustomProperty(const KCalendarCore::Incidence::Ptr &incident, const QString &name)
 {
     static const QByteArray eventAppName = QByteArray("ktimetracker");
     static const QByteArray eventAppNameOld = QByteArray("karm");

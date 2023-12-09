@@ -45,7 +45,7 @@ ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
 
     // If decimal symbol is a comma, then default field separator to semi-colon.
     // In France and Germany, one-and-a-half is written as 1,5 not 1.5
-    QChar d = QLocale().decimalPoint();
+    QString d = QLocale().decimalPoint();
     if (QChar::fromLatin1(',') == d) {
         ui.radioSemicolon->setChecked(true);
     } else {

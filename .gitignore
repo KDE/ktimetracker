@@ -5,6 +5,7 @@
 Doxyfile
 svnmerge-commit-message.txt
 __pycache__
+compile_commands.json
 
 # Vim
 .*.swp

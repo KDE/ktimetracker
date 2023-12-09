@@ -28,7 +28,7 @@
 #include "model/task.h"
 #include "model/tasksmodel.h"
 
-static int64_t todaySeconds(const QDate &date, const KCalCore::Event::Ptr &event)
+static int64_t todaySeconds(const QDate &date, const KCalendarCore::Event::Ptr &event)
 {
     if (!event) {
         return 0;

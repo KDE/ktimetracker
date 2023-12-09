@@ -23,6 +23,8 @@
 
 #include <QDialog>
 #include <QList>
+#include <QScrollArea>
+
 
 #include "desktoplist.h"
 
@@ -46,6 +48,8 @@ public:
     DesktopList desktops() const;
 
 private:
+    QScrollArea *m_scrollArea;
+    int m_numDesktops;
     QLineEdit *m_nameText;
     QPlainTextEdit *m_descText;
     QGroupBox *m_trackingGroup;

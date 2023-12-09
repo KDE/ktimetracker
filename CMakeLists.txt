@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 3.16)
-set(APP_VERSION_NUMBER "5.0.1")
+cmake_minimum_required(VERSION 3.20)
+set(APP_VERSION_NUMBER "6.0.0")
 project(ktimetracker VERSION ${APP_VERSION_NUMBER})
 
-# Older versions have this bug: https://bugs.kde.org/show_bug.cgi?id=451946
-set(KF5_MIN_VERSION "5.93.0")
+set(KF6_MIN_VERSION "5.240.0")
 
-find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF6_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -23,11 +22,10 @@ ecm_setup_version(${APP_VERSION_NUMBER}
     VERSION_HEADER src/ktimetracker-version.h
 )
 
-set(QT_REQUIRED_VERSION "5.14.0")
-find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Gui Widgets Xml)
+set(QT_REQUIRED_VERSION "6.4.0")
+find_package(Qt6 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Gui Widgets Xml Core5Compat)
 
-# TODO merge these two find_package(KF5) calls when KF 5.63.0 matures
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Config
     ConfigWidgets
     DBusAddons
@@ -37,11 +35,13 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     JobWidgets
     KIO
     Notifications
+    StatusNotifierItem
     WindowSystem
     XmlGui
     TextWidgets
+    CalendarCore
+    KCMUtils
 )
-find_package(KF5CalendarCore 4.82.0 CONFIG REQUIRED)
 
 add_subdirectory(pics)
 add_subdirectory(icons)

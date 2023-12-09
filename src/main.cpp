@@ -64,7 +64,7 @@ QUrl getFileUrl(const QCommandLineParser &parser)
         QString result =
             QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ktimetracker/ktimetracker.ics")));
         if (result.isEmpty()) {
-            result = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/')
+            result = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + QLatin1Char('/')
                 + QStringLiteral("ktimetracker.ics");
 
             QFileInfo fileInfo(result);
@@ -82,9 +82,6 @@ QUrl getFileUrl(const QCommandLineParser &parser)
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
-
     QApplication app(argc, argv);
     Q_INIT_RESOURCE(ktimetracker);
 

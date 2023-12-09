@@ -22,16 +22,24 @@
 
 #include "focusdetector.h"
 
+#include <KX11Extras>
+#include <KWindowInfo>
 #include <KWindowSystem>
 
 #include "ktimetrackerutility.h"
 
 FocusDetector::FocusDetector()
 {
-    connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &FocusDetector::onFocusChanged);
+    if(KWindowSystem::isPlatformX11())
+    {
+        connect(KX11Extras::self(), &KX11Extras::activeWindowChanged, this, &FocusDetector::onFocusChanged);
+    }
 }
 
 void FocusDetector::onFocusChanged(WId /*unused*/)
 {
-    Q_EMIT newFocus(KWindowInfo(KWindowSystem::activeWindow(), NET::WMName).name());
+    if(KWindowSystem::isPlatformX11())
+    {
+        Q_EMIT newFocus(KWindowInfo(KX11Extras::activeWindow(), NET::WMName).name());
+    }
 }

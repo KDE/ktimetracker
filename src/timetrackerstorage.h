@@ -23,8 +23,8 @@
 #ifndef KTIMETRACKER_STORAGE_H
 #define KTIMETRACKER_STORAGE_H
 
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
+#include <KCalendarCore/Event>
+#include <KCalendarCore/Todo>
 
 #include "desktoplist.h"
 #include "file/filecalendar.h"
@@ -100,7 +100,7 @@ public:
      *
      * This is needed if the iCal file has been modified.
      */
-    QString loadTasksFromCalendar(const KCalCore::Todo::List &todos);
+    QString loadTasksFromCalendar(const KCalendarCore::Todo::List &todos);
 
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();

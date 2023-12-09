@@ -117,7 +117,7 @@ QUrl TimeTrackerStorage::fileUrl()
     return m_url;
 }
 
-QString TimeTrackerStorage::loadTasksFromCalendar(const KCalCore::Todo::List &todos)
+QString TimeTrackerStorage::loadTasksFromCalendar(const KCalendarCore::Todo::List &todos)
 {
     tasksModel()->clear();
 
@@ -213,7 +213,7 @@ QString TimeTrackerStorage::createLockFileName(const QUrl &url)
     }
 
     // Remove characters disallowed by operating systems
-    baseName.replace(QRegExp(QStringLiteral("[") + QRegExp::escape(QStringLiteral("\\/:*?\"<>|")) + QStringLiteral("]")), QString());
+    baseName.replace(QRegularExpression(QStringLiteral("[") + QRegularExpression::escape(QStringLiteral("\\/:*?\"<>|")) + QStringLiteral("]")), QString());
 
     const QString &hash = QString::fromLatin1(QCryptographicHash::hash(canonicalSeedString.toUtf8(), QCryptographicHash::Sha1).toHex());
     const QString &lockBaseName = QStringLiteral("ktimetracker_%1_%2.lock").arg(hash).arg(baseName);

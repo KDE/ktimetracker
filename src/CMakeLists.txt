@@ -46,7 +46,7 @@ ecm_qt_declare_logging_category(ktimetracker_SRCS
     CATEGORY_NAME log_ktt
 )
 
-qt5_add_dbus_adaptor(ktimetracker_SRCS
+qt_add_dbus_adaptor(ktimetracker_SRCS
     org.kde.ktimetracker.ktimetracker.xml
     timetrackerwidget.h
     TimeTrackerWidget
@@ -64,21 +64,24 @@ ki18n_wrap_ui(ktimetracker_SRCS
 
 kconfig_add_kcfg_files(ktimetracker_SRCS settings/ktimetracker.kcfgc)
 
-qt5_add_resources(ktimetracker_SRCS ktimetracker.qrc)
+qt_add_resources(ktimetracker_SRCS ktimetracker.qrc)
 
 add_library(libktimetracker STATIC ${ktimetracker_SRCS})
 target_link_libraries(libktimetracker
-    KF5::ConfigWidgets
-    KF5::WindowSystem
-    KF5::Notifications
-    KF5::I18n
-    KF5::XmlGui
-    KF5::JobWidgets
-    KF5::KIOCore
-    KF5::IdleTime
-    KF5::DBusAddons
-    KF5::CalendarCore
-    KF5::TextWidgets
+    Qt6::Core5Compat
+    KF6::ConfigWidgets
+    KF6::WindowSystem
+    KF6::Notifications
+    KF6::StatusNotifierItem
+    KF6::I18n
+    KF6::XmlGui
+    KF6::JobWidgets
+    KF6::KIOCore
+    KF6::IdleTime
+    KF6::DBusAddons
+    KF6::CalendarCore
+    KF6::TextWidgets
+    KF6::KCMUtils
 )
 
 ecm_add_app_icon(ktimetracker_app_icon_SRCS ICONS

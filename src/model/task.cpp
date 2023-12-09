@@ -22,7 +22,7 @@
 
 #include "task.h"
 
-#include <KCalCore/CalFormat>
+#include <KCalendarCore/CalFormat>
 
 #include "ktimetracker.h"
 #include "ktimetrackerutility.h"
@@ -52,10 +52,10 @@ Task::Task(const QString &taskName,
 
     init(taskName, taskDescription, minutes, sessionTime, QStringLiteral(), desktops, 0, 0);
 
-    m_uid = KCalCore::CalFormat::createUniqueId();
+    m_uid = KCalendarCore::CalFormat::createUniqueId();
 }
 
-Task::Task(const KCalCore::Todo::Ptr &todo, ProjectModel *projectModel)
+Task::Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel)
     : TasksModelItem(projectModel->tasksModel(), nullptr)
     , m_projectModel(projectModel)
 {
@@ -378,7 +378,7 @@ QString Task::fullName() const
     }
 }
 
-KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
+KCalendarCore::Todo::Ptr Task::asTodo(const KCalendarCore::Todo::Ptr &todo) const
 {
     Q_ASSERT(todo != nullptr);
 
@@ -413,7 +413,7 @@ KCalCore::Todo::Ptr Task::asTodo(const KCalCore::Todo::Ptr &todo) const
     return todo;
 }
 
-bool Task::parseIncidence(const KCalCore::Incidence::Ptr &incident,
+bool Task::parseIncidence(const KCalendarCore::Incidence::Ptr &incident,
                           int64_t &minutes,
                           int64_t &sessionMinutes,
                           QString &sessionStartTiMe,
@@ -453,7 +453,7 @@ bool Task::parseIncidence(const KCalCore::Incidence::Ptr &incident,
             desktops.push_back(desktopInt);
         }
     }
-    percent_complete = incident.staticCast<KCalCore::Todo>()->percentComplete();
+    percent_complete = incident.staticCast<KCalendarCore::Todo>()->percentComplete();
     priority = incident->priority();
     return true;
 }

@@ -1,4 +1,4 @@
-qt5_add_resources(icons_SRCS icons.qrc)
+qt_add_resources(icons_SRCS icons.qrc)
 add_library(icons OBJECT ${icons_SRCS})
 
 set(APP_ICONS_BREEZE

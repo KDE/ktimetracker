@@ -30,10 +30,10 @@
 #include "tray.h"
 
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QMenu>
 #include <QMovie>
 #include <QToolTip>
+#include <QScreen>
 
 #include <KLocalizedString>
 
@@ -94,7 +94,7 @@ void TrayIcon::updateToolTip(const QList<Task *> &activeTasks)
     QFontMetrics fm(QToolTip::font());
     const QString continued = i18nc("ellipsis to truncate long list of tasks", ", ...");
     const int buffer = fm.boundingRect(continued).width();
-    const int desktopWidth = QApplication::desktop()->screenGeometry(associatedWidget()).width();
+    const int desktopWidth = associatedWindow()->screen()->geometry().width();
     const int maxWidth = desktopWidth - buffer;
 
     QString qTip;

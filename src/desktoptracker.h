@@ -56,6 +56,7 @@ public:
      */
     QString startTracking();
     void registerForDesktops( Task* task, DesktopList dl );
+    int numDesktops = 0;
     int desktopCount() const { return m_desktopCount; }
 
 public Q_SLOTS:
@@ -73,9 +74,9 @@ private:
     // E.g.: desktopTrackerStop[3] contains a vector with
     // all tasks to be notified, when switching to/from desk 3.
     TaskVector m_desktopTracker[maxDesktops];
-    int m_previousDesktop;
+    int m_previousDesktop = 0;
     int m_desktopCount;
-    int m_desktop;
+    int m_desktop = 0;
     QTimer *m_timer;
 };
 

@@ -27,7 +27,7 @@
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
-Event::Event(const KCalCore::Event::Ptr &event)
+Event::Event(const KCalendarCore::Event::Ptr &event)
     : m_summary(event->summary())
     , m_dtStart(event->dtStart())
     , m_dtEnd(event->hasEndDate() ? event->dtEnd() : QDateTime())
@@ -144,7 +144,7 @@ int64_t Event::duration() const
     return m_duration;
 }
 
-KCalCore::Event::Ptr Event::asCalendarEvent(const KCalCore::Event::Ptr &event) const
+KCalendarCore::Event::Ptr Event::asCalendarEvent(const KCalendarCore::Event::Ptr &event) const
 {
     Q_ASSERT(event != nullptr);
 

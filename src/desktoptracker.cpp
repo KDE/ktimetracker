@@ -24,6 +24,7 @@
 
 #include <QTimer>
 
+#include <KX11Extras>
 #include <KWindowSystem>
 
 #include "ktimetracker.h"
@@ -31,15 +32,18 @@
 #include "ktt_debug.h"
 
 DesktopTracker::DesktopTracker()
-    // currentDesktop will return 0 if no window manager is started
-    : m_previousDesktop(std::max(KWindowSystem::currentDesktop() - 1, 0))
-    , m_desktopCount(KWindowSystem::numberOfDesktops())
-    // currentDesktop will return 0 if no window manager is started
-    , m_desktop(std::max(KWindowSystem::currentDesktop() - 1, 0))
+    : m_desktopCount(numDesktops)
     , m_timer(new QTimer(this))
 {
-    // Setup desktop change handling
-    connect(KWindowSystem::self(), &KWindowSystem::currentDesktopChanged, this, &DesktopTracker::handleDesktopChange);
+    if(KWindowSystem::isPlatformX11())
+    {
+        // currentDesktop will return 0 if no window manager is started
+        m_previousDesktop = std::max(KX11Extras::currentDesktop() - 1, 0);
+        m_desktop = std::max(KX11Extras::currentDesktop() - 1, 0);
+        numDesktops = KX11Extras::numberOfDesktops();
+        // Setup desktop change handling
+        connect(KX11Extras::self(), &KX11Extras::currentDesktopChanged, this, &DesktopTracker::handleDesktopChange);
+    }
 
     m_timer->setSingleShot(true);
     connect(m_timer, &QTimer::timeout, this, &DesktopTracker::changeTimers);
@@ -76,17 +80,20 @@ void DesktopTracker::changeTimers()
 
 QString DesktopTracker::startTracking()
 {
-    int currentDesktop = KWindowSystem::currentDesktop() - 1;
-    if (currentDesktop < 0) {
-        currentDesktop = 0;
-    }
+    if(KWindowSystem::isPlatformX11())
+    {
+        int currentDesktop = KX11Extras::currentDesktop() - 1;
+        if (currentDesktop < 0) {
+            currentDesktop = 0;
+        }
 
-    if (currentDesktop >= maxDesktops) {
-        return QStringLiteral("desktop number too high, desktop tracking will not work");
-    }
+        if (currentDesktop >= maxDesktops) {
+            return QStringLiteral("desktop number too high, desktop tracking will not work");
+        }
 
-    for (Task *task : m_desktopTracker[currentDesktop]) {
-        Q_EMIT reachedActiveDesktop(task);
+        for (Task *task : m_desktopTracker[currentDesktop]) {
+            Q_EMIT reachedActiveDesktop(task);
+        }
     }
 
     return QString();
@@ -103,10 +110,13 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
             if (tit != v->end()) {
                 m_desktopTracker[i].erase(tit);
             }
-            // if the task was previously tracking this desktop then
-            // emit a signal that is not tracking it any more
-            if (i == KWindowSystem::currentDesktop() - 1) {
-                Q_EMIT leftActiveDesktop(task);
+            if(KWindowSystem::isPlatformX11())
+            {
+                // if the task was previously tracking this desktop then
+                // emit a signal that is not tracking it any more
+                if (i == KX11Extras::currentDesktop() - 1) {
+                    Q_EMIT leftActiveDesktop(task);
+                }
             }
         }
         qCDebug(KTT_LOG) << "Leaving function, desktopList.size=0";
@@ -131,10 +141,13 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                 if (tit != v.end()) {
                     // not in start vector any more
                     v.erase(tit); // so we delete it from desktopTracker
-                    // if the task was previously tracking this desktop then
-                    // emit a signal that is not tracking it any more
-                    if (i == KWindowSystem::currentDesktop() - 1) {
-                        Q_EMIT leftActiveDesktop(task);
+                    if(KWindowSystem::isPlatformX11())
+                    {
+                        // if the task was previously tracking this desktop then
+                        // emit a signal that is not tracking it any more
+                        if (i == KX11Extras::currentDesktop() - 1) {
+                            Q_EMIT leftActiveDesktop(task);
+                        }
                     }
                 }
             }

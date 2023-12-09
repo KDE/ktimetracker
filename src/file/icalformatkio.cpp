@@ -22,14 +22,14 @@
 
 #include <QSaveFile>
 
-#include <KCalCore/Exceptions>
+#include <KCalendarCore/Exceptions>
 
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
-
+#include <KCalendarCore/ICalFormat>
 #include "ktt_debug.h"
 
-bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString &urlString)
+bool ICalFormatKIO::load(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString)
 {
     qCDebug(KTT_LOG) << "ICalFormatKIO::load:" << urlString;
 
@@ -46,7 +46,7 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
         // Local file exists
         if (!file.open(QIODevice::ReadOnly)) {
             qCWarning(KTT_LOG) << "load file open error: " << file.errorString() << ";filename=" << urlString;
-            setException(new KCalCore::Exception(KCalCore::Exception::LoadError));
+            setException(new KCalendarCore::Exception(KCalendarCore::Exception::LoadError));
             return false;
         }
         const QByteArray text = file.readAll().trimmed();
@@ -56,14 +56,14 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
             // empty files are valid
             return true;
         } else {
-            return fromRawString(calendar, text, false, urlString);
+            return fromRawString(calendar, text);
         }
     } else {
         // use remote file
         auto *const job = KIO::storedGet(url, KIO::Reload);
         KJobWidgets::setWindow(job, nullptr); // hide progress notification
         if (!job->exec()) {
-            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(url.url())));
+            setException(new KCalendarCore::Exception(KCalendarCore::Exception::SaveErrorSaveFile, QStringList(url.url())));
             return false;
         }
 
@@ -72,12 +72,12 @@ bool ICalFormatKIO::load(const KCalCore::Calendar::Ptr &calendar, const QString 
             // empty files are valid
             return true;
         } else {
-            return fromRawString(calendar, text, false, urlString);
+            return fromRawString(calendar, text);
         }
     }
 }
 
-bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString &urlString)
+bool ICalFormatKIO::save(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString)
 {
     qCDebug(KTT_LOG) << "ICalFormatKIO::save:" << urlString;
 
@@ -102,7 +102,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
         QSaveFile file(url.toLocalFile());
         if (!file.open(QIODevice::WriteOnly)) {
             qCWarning(KTT_LOG) << "save file open error: " << file.errorString() << ";local path" << file.fileName();
-            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorOpenFile, QStringList(urlString)));
+            setException(new KCalendarCore::Exception(KCalendarCore::Exception::SaveErrorOpenFile, QStringList(urlString)));
             return false;
         }
 
@@ -110,7 +110,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
 
         if (!file.commit()) {
             qCWarning(KTT_LOG) << "file finalize error:" << file.errorString() << ";local path" << file.fileName();
-            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(urlString)));
+            setException(new KCalendarCore::Exception(KCalendarCore::Exception::SaveErrorSaveFile, QStringList(urlString)));
             return false;
         }
     } else {
@@ -118,7 +118,7 @@ bool ICalFormatKIO::save(const KCalCore::Calendar::Ptr &calendar, const QString 
         auto *const job = KIO::storedPut(textUtf8, url, -1, KIO::Overwrite);
         KJobWidgets::setWindow(job, nullptr); // hide progress notification
         if (!job->exec()) {
-            setException(new KCalCore::Exception(KCalCore::Exception::SaveErrorSaveFile, QStringList(url.url())));
+            setException(new KCalendarCore::Exception(KCalendarCore::Exception::SaveErrorSaveFile, QStringList(url.url())));
             qCWarning(KTT_LOG) << "save remote error: " << job->errorString();
             return false;
         }

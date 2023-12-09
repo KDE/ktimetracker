@@ -59,7 +59,7 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     registerDBus();
 
     QLayout *layout = new QVBoxLayout;
-    layout->setMargin(0);
+    layout->setContentsMargins(0,0,0,0);
     layout->setSpacing(0);
     setLayout(layout);
 
@@ -250,7 +250,7 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
         action->setToolTip(i18nc("@info:tooltip", "Creates new top level task"));
         action->setWhatsThis(i18nc("@info:whatsthis", "This will create a new top level task."));
         action->setIcon(QIcon::fromTheme(QStringLiteral("task-new")));
-        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_T));
+        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_T));
         connect(action, &QAction::triggered, this, &TimeTrackerWidget::newTask);
     }
 
@@ -260,7 +260,7 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
         action->setToolTip(i18nc("@info:tooltip", "Creates a new subtask to the current selected task"));
         action->setWhatsThis(i18nc("@info:whatsthis", "This will create a new subtask to the current selected task."));
         action->setIcon(QIcon::fromTheme(QStringLiteral("view-task-child")));
-        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_B));
+        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_B));
         connect(action, &QAction::triggered, this, &TimeTrackerWidget::newSubTask);
     }
 
@@ -282,7 +282,7 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
                                    "This will bring up a dialog "
                                    "box where you may edit the parameters for the selected task."));
         action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
-        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_E));
+        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_E));
         connect(action, &QAction::triggered, this, &TimeTrackerWidget::editTask);
     }
 
@@ -302,7 +302,7 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
         QAction *action = actionCollection->addAction(QStringLiteral("mark_as_complete"));
         action->setText(i18nc("@action:inmenu", "&Mark as Complete"));
         action->setIcon(QPixmap(QStringLiteral(":/pics/task-complete.xpm")));
-        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::Key_M));
+        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::Key_M));
         connect(action, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsComplete);
     }
 
@@ -310,7 +310,7 @@ void TimeTrackerWidget::setupActions(KActionCollection *actionCollection)
         QAction *action = actionCollection->addAction(QStringLiteral("mark_as_incomplete"));
         action->setText(i18nc("@action:inmenu", "&Mark as Incomplete"));
         action->setIcon(QPixmap(QStringLiteral(":/pics/task-incomplete.xpm")));
-        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
+        actionCollection->setDefaultShortcut(action, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_M));
         connect(action, &QAction::triggered, this, &TimeTrackerWidget::markTaskAsIncomplete);
     }
 
@@ -467,13 +467,19 @@ void TimeTrackerWidget::showSettingsDialog()
 
     auto *dialog = new KConfigDialog(this, QStringLiteral("settings"), KTimeTrackerSettings::self());
     dialog->setFaceType(KPageDialog::List);
-    dialog->addPage(new KTimeTrackerBehaviorConfig(dialog),
+    KTimeTrackerBehaviorConfig *behaviorConfig = new KTimeTrackerBehaviorConfig(dialog);
+    QWidget *behaviorConfigWidget = behaviorConfig->widget();
+    dialog->addPage(behaviorConfigWidget,
                     i18nc("@title:tab", "Behavior"),
                     QStringLiteral("preferences-other"));
-    dialog->addPage(new KTimeTrackerDisplayConfig(dialog),
+    KTimeTrackerDisplayConfig *displayConfig = new KTimeTrackerDisplayConfig(dialog);
+    QWidget *displayConfigWidget = displayConfig->widget();
+    dialog->addPage(displayConfigWidget,
                     i18nc("@title:tab", "Appearance"),
                     QStringLiteral("preferences-desktop-theme"));
-    dialog->addPage(new KTimeTrackerStorageConfig(dialog),
+    KTimeTrackerStorageConfig *storageConfig = new KTimeTrackerStorageConfig(dialog);
+    QWidget *storageConfigWidget = storageConfig->widget();
+    dialog->addPage(storageConfigWidget,
                     i18nc("@title:tab", "Storage"),
                     QStringLiteral("system-file-manager"));
     connect(dialog, &KConfigDialog::settingsChanged, this, &TimeTrackerWidget::loadSettings);

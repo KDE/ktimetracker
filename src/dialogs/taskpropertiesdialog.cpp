@@ -28,12 +28,11 @@
 #include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QPushButton>
-#include <QScrollArea>
 
 #include <KLocalizedString>
 #include <KPluralHandlingSpinBox>
+#include <KX11Extras>
 #include <KWindowSystem>
-
 #include "ktimetrackerutility.h"
 
 TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
@@ -72,40 +71,52 @@ TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
     // Desktop tracking group
     m_trackingGroup = new QGroupBox(i18nc("@title:group", "Auto Tracking"), this);
     m_trackingGroup->setCheckable(true);
+    m_trackingGroup->hide();
+    if(KWindowSystem::isPlatformX11())
+    {
+        m_trackingGroup->show();
+    }
     m_trackingGroup->setChecked(!desktops.isEmpty());
-
     auto *trackingLayout = new QHBoxLayout(m_trackingGroup);
     m_trackingGroup->setLayout(trackingLayout);
+    m_scrollArea = new QScrollArea(m_trackingGroup);
 
-    auto *scrollArea = new QScrollArea(m_trackingGroup);
-
-    const int numDesktops = KWindowSystem::numberOfDesktops();
+    if(KWindowSystem::isPlatformX11())
+    {
+        m_numDesktops = KX11Extras::numberOfDesktops();
+    }
 
     auto *desktopsWidget = new QWidget(m_trackingGroup);
-    auto *desktopsLayout = new QGridLayout(scrollArea);
-    desktopsLayout->addItem(new QSpacerItem(50, 0), 0, 2, numDesktops, 1);
-    desktopsWidget->setLayout(desktopsLayout);
+    auto *desktopsLayout = new QGridLayout(m_scrollArea);
 
-    for (int i = 0; i < numDesktops; ++i) {
-        desktopsLayout->addWidget(new QLabel(i18nc("order number of desktop: 1, 2, ...", "%1.", i + 1)), i, 0);
+    if(KWindowSystem::isPlatformX11())
+    {
+        desktopsLayout->addItem(new QSpacerItem(50, 0), 0, 2, m_numDesktops, 1);
+        desktopsWidget->setLayout(desktopsLayout);
 
-        auto *checkbox = new QCheckBox(KWindowSystem::desktopName(i + 1));
-        desktopsLayout->addWidget(checkbox, i, 1);
-        m_trackingDesktops.append(checkbox);
-    }
+        for (int i = 0; i < m_numDesktops; ++i) {
+            desktopsLayout->addWidget(new QLabel(i18nc("order number of desktop: 1, 2, ...", "%1.", i + 1)), i, 0);
 
-    for (int index : desktops) {
-        if (index >= 0 && index < numDesktops) {
-            m_trackingDesktops[index]->setChecked(true);
+            auto *checkbox = new QCheckBox(KX11Extras::desktopName(i + 1));
+            desktopsLayout->addWidget(checkbox, i, 1);
+            m_trackingDesktops.append(checkbox);
+        }
+
+        for (int index : desktops) {
+            if (index >= 0 && index < m_numDesktops) {
+                m_trackingDesktops[index]->setChecked(true);
+            }
         }
     }
+    m_scrollArea->setWidget(desktopsWidget);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    scrollArea->setWidget(desktopsWidget);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    trackingLayout->addStretch(1);
-    trackingLayout->addWidget(scrollArea);
-    trackingLayout->addStretch(1);
+    if(KWindowSystem::isPlatformX11())
+    {
+        trackingLayout->addStretch(1);
+        trackingLayout->addWidget(m_scrollArea);
+        trackingLayout->addStretch(1);
+    }
 
     auto *m_buttonBox = new QDialogButtonBox(this);
     m_buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
@@ -114,15 +125,21 @@ TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
     connect(m_buttonBox, &QDialogButtonBox::rejected, this, &TaskPropertiesDialog::reject);
 
     mainLayout->addWidget(infoGroup);
-    mainLayout->addWidget(m_trackingGroup, 0);
-    mainLayout->addStretch(0);
+    if(KWindowSystem::isPlatformX11())
+    {
+        mainLayout->addWidget(m_trackingGroup, 0);
+        mainLayout->addStretch(0);
+    }
     mainLayout->addWidget(m_buttonBox);
 
-    // Do not show ugly empty box when virtual desktops are not available, e.g.
-    // on Windows
-    if (numDesktops == 0) {
-        // TODO replace check tracking group with a warning instead
-        m_trackingGroup->hide();
+    if(KWindowSystem::isPlatformX11())
+    {
+        // Do not show ugly empty box when virtual desktops are not available, e.g.
+        // on Windows
+        if (m_numDesktops == 0) {
+            // TODO replace check tracking group with a warning instead
+            m_trackingGroup->hide();
+        }
     }
 }
 
