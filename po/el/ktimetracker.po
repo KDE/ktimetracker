@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:35+0000\n"
+"POT-Creation-Date: 2023-12-10 01:58+0000\n"
 "PO-Revision-Date: 2012-09-20 20:10+0200\n"
 "Last-Translator: Dimitrios Glentadakis <dglent@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -38,19 +38,19 @@ msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "Επεξεργασία εργασίας"
 
-#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:55
 #, fuzzy, kde-format
 #| msgid "Task"
 msgctxt "@title:group"
 msgid "Task"
 msgstr "Εργασία"
 
-#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:64
 #, kde-format
 msgid "Task Name:"
 msgstr "Όνομα εργασίας:"
 
-#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:69
 #, fuzzy, kde-format
 #| msgid "Description:"
 msgid "Task Description:"
@@ -349,7 +349,7 @@ msgstr "Επιλέξτε εργασία για διαγραφή."
 msgid "Edit History"
 msgstr "Επεξεργασία ιστορικού"
 
-#: dialogs/taskpropertiesdialog.cpp:62
+#: dialogs/taskpropertiesdialog.cpp:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -357,14 +357,14 @@ msgid ""
 "<p><i>Example:</i> phone with mother</p>"
 msgstr ""
 
-#: dialogs/taskpropertiesdialog.cpp:73
+#: dialogs/taskpropertiesdialog.cpp:72
 #, fuzzy, kde-format
 #| msgid "Auto Tracking"
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "Αυτόματη καταγραφή"
 
-#: dialogs/taskpropertiesdialog.cpp:90
+#: dialogs/taskpropertiesdialog.cpp:98
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -462,135 +462,135 @@ msgstr "Κύρια γραμμή εργαλείων"
 msgid "Tasks"
 msgstr "Εργασίες"
 
-#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#: main.cpp:97 model/event.cpp:167 model/eventsmodel.cpp:126
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:102
+#: main.cpp:99
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "Εργαλείο καταγραφής χρόνου του KDE"
 
-#: main.cpp:104
+#: main.cpp:101
 #, fuzzy, kde-format
 #| msgid "Copyright © 1997-2012 KDE PIM authors"
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr "Copyright © 1997-2012 οι συγγραφείς του KDE PIM"
 
-#: main.cpp:108
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr ""
 
-#: main.cpp:109
+#: main.cpp:106
 #, fuzzy, kde-format
 #| msgid "Current Maintainer"
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "Τρέχων συντηρητής"
 
-#: main.cpp:111
+#: main.cpp:108
 #, fuzzy, kde-format
 #| msgid "Thorsten Stärk"
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
 
-#: main.cpp:112
+#: main.cpp:109
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr ""
 
-#: main.cpp:114
+#: main.cpp:111
 #, fuzzy, kde-format
 #| msgid "Mark Bucciarelli"
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:115
+#: main.cpp:112
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr ""
 
-#: main.cpp:117
+#: main.cpp:114
 #, fuzzy, kde-format
 #| msgid "Jesper Pedersen"
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:118
+#: main.cpp:115
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr ""
 
-#: main.cpp:120
+#: main.cpp:117
 #, fuzzy, kde-format
 #| msgid "Sirtaj Singh Kang"
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:121
+#: main.cpp:118
 #, fuzzy, kde-format
 #| msgid "Original Author"
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "Αρχικός συγγραφέας"
 
-#: main.cpp:123
+#: main.cpp:120
 #, fuzzy, kde-format
 #| msgid "Mathias Soeken"
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:124
+#: main.cpp:121
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr ""
 
-#: main.cpp:126
+#: main.cpp:123
 #, fuzzy, kde-format
 #| msgid "Kalle Dalheimer"
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:127
+#: main.cpp:124
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr ""
 
-#: main.cpp:129
+#: main.cpp:126
 #, fuzzy, kde-format
 #| msgid "Allen Winter"
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:130 main.cpp:133
+#: main.cpp:127 main.cpp:130
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:132
+#: main.cpp:129
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:144
+#: main.cpp:141
 #, fuzzy, kde-format
 #| msgid "The iCalendar file to open"
 msgctxt "@info:shell"
@@ -1344,14 +1344,14 @@ msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Εμφάνιση γραμμής αναζήτησης"
 
-#: timetrackerwidget.cpp:471
+#: timetrackerwidget.cpp:473
 #, fuzzy, kde-format
 #| msgid "Behavior"
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
-#: timetrackerwidget.cpp:474
+#: timetrackerwidget.cpp:478
 #, fuzzy, kde-format
 #| msgctxt "settings page for customizing user interface"
 #| msgid "Appearance"
@@ -1359,21 +1359,21 @@ msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: timetrackerwidget.cpp:477
+#: timetrackerwidget.cpp:483
 #, fuzzy, kde-format
 #| msgid "Storage"
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Αποθήκευση"
 
-#: timetrackerwidget.cpp:514
+#: timetrackerwidget.cpp:520
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Νέα εργασία"
 
-#: timetrackerwidget.cpp:593
+#: timetrackerwidget.cpp:599
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -1383,7 +1383,7 @@ msgstr ""
 "Δεν υπάρχει ιστορικό για την ώρα. Εκκινήστε και σταματήστε μια εργασία για "
 "να εμφανιστεί μια καταχώρηση στο ιστορικό σας."
 
-#: timetrackerwidget.cpp:603
+#: timetrackerwidget.cpp:609
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -1392,63 +1392,63 @@ msgstr ""
 "Θέλετε πραγματικά να μηδενίσετε το χρόνο για όλες τις εργασίες; Έτσι θα "
 "διαγραφεί όλο το ιστορικό."
 
-#: timetrackerwidget.cpp:605
+#: timetrackerwidget.cpp:611
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Απαιτείται επιβεβαίωση"
 
-#: timetrackerwidget.cpp:606
+#: timetrackerwidget.cpp:612
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Μηδενισμός όλων των μετρητών"
 
-#: timetrackerwidget.cpp:795
+#: timetrackerwidget.cpp:801
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 "Η αποθήκευση απέτυχε, πιθανότατα γιατί δεν είναι δυνατό το κλείδωμα του "
 "αρχείου."
 
-#: timetrackerwidget.cpp:797
+#: timetrackerwidget.cpp:803
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Αδύνατη η τροποποίηση του πόρου ημερολογίου."
 
-#: timetrackerwidget.cpp:799
+#: timetrackerwidget.cpp:805
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Τέλος μνήμης--αδυναμία δημιουργίας αντικειμένου."
 
-#: timetrackerwidget.cpp:801
+#: timetrackerwidget.cpp:807
 #, kde-format
 msgid "UID not found."
 msgstr "Το UID δε βρέθηκε."
 
-#: timetrackerwidget.cpp:803
+#: timetrackerwidget.cpp:809
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Μη έγκυρη ημερομηνία--η μορφή είναι ΕΕΕΕ-ΜΜ-μμ."
 
-#: timetrackerwidget.cpp:805
+#: timetrackerwidget.cpp:811
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Μη έγκυρος χρόνος--η μορφή είναι ΕΕΕΕ-ΜΜ-μμTΩΩ:ΛΛ:ΔΔ."
 
-#: timetrackerwidget.cpp:807
+#: timetrackerwidget.cpp:813
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Μη έγκυρη διάρκεια εργασίας--πρέπει να είναι μεγαλύτερη από μηδέν."
 
-#: timetrackerwidget.cpp:809
+#: timetrackerwidget.cpp:815
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Μη έγκυρος αριθμός σφάλματος: %1"
 
-#: timetrackerwidget.cpp:1038
+#: timetrackerwidget.cpp:1044
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -1464,7 +1464,7 @@ msgstr ""
 "χρόνου σας. Ξεκινήστε δημιουργώντας την πρώτη σας εργασία - εισάγετέ την στο "
 "πεδίο \"αναζήτηση και προσθήκη εργασίας\"."
 
-#: timetrackerwidget.cpp:1045
+#: timetrackerwidget.cpp:1051
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"

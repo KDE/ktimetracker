@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:35+0000\n"
+"POT-Creation-Date: 2023-12-10 01:58+0000\n"
 "PO-Revision-Date: 2006-02-12 19:43+0100\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -34,20 +34,20 @@ msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "Вазифани таҳрирлаш"
 
-#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:55
 #, fuzzy, kde-format
 #| msgid "Task"
 msgctxt "@title:group"
 msgid "Task"
 msgstr "Вазифа"
 
-#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:64
 #, fuzzy, kde-format
 #| msgid "Task Name"
 msgid "Task Name:"
 msgstr "Вазифа номи"
 
-#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:69
 #, kde-format
 msgid "Task Description:"
 msgstr ""
@@ -338,7 +338,7 @@ msgstr ""
 msgid "Edit History"
 msgstr "Лог тарихи"
 
-#: dialogs/taskpropertiesdialog.cpp:62
+#: dialogs/taskpropertiesdialog.cpp:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -346,13 +346,13 @@ msgid ""
 "<p><i>Example:</i> phone with mother</p>"
 msgstr ""
 
-#: dialogs/taskpropertiesdialog.cpp:73
+#: dialogs/taskpropertiesdialog.cpp:72
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr ""
 
-#: dialogs/taskpropertiesdialog.cpp:90
+#: dialogs/taskpropertiesdialog.cpp:98
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -448,126 +448,126 @@ msgstr ""
 msgid "Tasks"
 msgstr "Вазифа"
 
-#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#: main.cpp:97 model/event.cpp:167 model/eventsmodel.cpp:126
 #, kde-format
 msgid "KTimeTracker"
 msgstr ""
 
-#: main.cpp:102
+#: main.cpp:99
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr ""
 
-#: main.cpp:104
+#: main.cpp:101
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr ""
 
-#: main.cpp:108
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr ""
 
-#: main.cpp:109
+#: main.cpp:106
 #, fuzzy, kde-format
 #| msgid "Current Maintainer"
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "Жорий таъминловчи"
 
-#: main.cpp:111
+#: main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr ""
 
-#: main.cpp:112
+#: main.cpp:109
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr ""
 
-#: main.cpp:114
+#: main.cpp:111
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr ""
 
-#: main.cpp:115
+#: main.cpp:112
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr ""
 
-#: main.cpp:117
+#: main.cpp:114
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr ""
 
-#: main.cpp:118
+#: main.cpp:115
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr ""
 
-#: main.cpp:120
+#: main.cpp:117
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr ""
 
-#: main.cpp:121
+#: main.cpp:118
 #, fuzzy, kde-format
 #| msgid "Original Author"
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "Биринчи муаллиф"
 
-#: main.cpp:123
+#: main.cpp:120
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr ""
 
-#: main.cpp:124
+#: main.cpp:121
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr ""
 
-#: main.cpp:126
+#: main.cpp:123
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr ""
 
-#: main.cpp:127
+#: main.cpp:124
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr ""
 
-#: main.cpp:129
+#: main.cpp:126
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr ""
 
-#: main.cpp:130 main.cpp:133
+#: main.cpp:127 main.cpp:130
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:132
+#: main.cpp:129
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr ""
 
-#: main.cpp:144
+#: main.cpp:141
 #, fuzzy, kde-format
 #| msgid "The iCalendar file to open"
 msgctxt "@info:shell"
@@ -1218,34 +1218,34 @@ msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr ""
 
-#: timetrackerwidget.cpp:471
+#: timetrackerwidget.cpp:473
 #, fuzzy, kde-format
 #| msgid "Behavior"
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Хусусиятлар"
 
-#: timetrackerwidget.cpp:474
+#: timetrackerwidget.cpp:478
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr ""
 
-#: timetrackerwidget.cpp:477
+#: timetrackerwidget.cpp:483
 #, fuzzy, kde-format
 #| msgid "Storage"
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Сақлаш"
 
-#: timetrackerwidget.cpp:514
+#: timetrackerwidget.cpp:520
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Янги вазифа"
 
-#: timetrackerwidget.cpp:593
+#: timetrackerwidget.cpp:599
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -1253,67 +1253,67 @@ msgid ""
 "your history."
 msgstr ""
 
-#: timetrackerwidget.cpp:603
+#: timetrackerwidget.cpp:609
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
 msgstr ""
 
-#: timetrackerwidget.cpp:605
+#: timetrackerwidget.cpp:611
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Тасдиқлаш талаб қилинади"
 
-#: timetrackerwidget.cpp:606
+#: timetrackerwidget.cpp:612
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Ҳамма таймерларни &тўхтатиш"
 
-#: timetrackerwidget.cpp:795
+#: timetrackerwidget.cpp:801
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 
-#: timetrackerwidget.cpp:797
+#: timetrackerwidget.cpp:803
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Календар манбасини ўзгартириб бўлмади."
 
-#: timetrackerwidget.cpp:799
+#: timetrackerwidget.cpp:805
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Объект яратилмади--хотира етишмайди."
 
-#: timetrackerwidget.cpp:801
+#: timetrackerwidget.cpp:807
 #, kde-format
 msgid "UID not found."
 msgstr "UID топилмади."
 
-#: timetrackerwidget.cpp:803
+#: timetrackerwidget.cpp:809
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr ""
 
-#: timetrackerwidget.cpp:805
+#: timetrackerwidget.cpp:811
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr ""
 
-#: timetrackerwidget.cpp:807
+#: timetrackerwidget.cpp:813
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr ""
 
-#: timetrackerwidget.cpp:809
+#: timetrackerwidget.cpp:815
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Ноаниқ хато рақами: %1"
 
-#: timetrackerwidget.cpp:1038
+#: timetrackerwidget.cpp:1044
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1322,7 +1322,7 @@ msgid ""
 "\"Search or add task\"."
 msgstr ""
 
-#: timetrackerwidget.cpp:1045
+#: timetrackerwidget.cpp:1051
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."

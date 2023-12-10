@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:35+0000\n"
+"POT-Creation-Date: 2023-12-10 01:58+0000\n"
 "PO-Revision-Date: 2023-07-23 20:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -35,18 +35,18 @@ msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "작업 시간 편집"
 
-#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:55
 #, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "작업"
 
-#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:64
 #, kde-format
 msgid "Task Name:"
 msgstr "작업 이름:"
 
-#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:69
 #, kde-format
 msgid "Task Description:"
 msgstr "작업 설명:"
@@ -325,7 +325,7 @@ msgstr "삭제할 작업을 선택하십시오."
 msgid "Edit History"
 msgstr "과거 기록 편집"
 
-#: dialogs/taskpropertiesdialog.cpp:62
+#: dialogs/taskpropertiesdialog.cpp:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -335,13 +335,13 @@ msgstr ""
 "<p>작업 이름을 입력하십시오. 원하는 대로 입력할 수 있습니다.</p>\n"
 "<p><i>예:</i> 엄마에게 전화 걸기</p>"
 
-#: dialogs/taskpropertiesdialog.cpp:73
+#: dialogs/taskpropertiesdialog.cpp:72
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "자동 추적"
 
-#: dialogs/taskpropertiesdialog.cpp:90
+#: dialogs/taskpropertiesdialog.cpp:98
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -436,124 +436,124 @@ msgstr "주 도구 모음"
 msgid "Tasks"
 msgstr "작업"
 
-#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#: main.cpp:97 model/event.cpp:167 model/eventsmodel.cpp:126
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:102
+#: main.cpp:99
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "KDE 시간 추적 도구"
 
-#: main.cpp:104
+#: main.cpp:101
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr "Copyright © 1997-2019 KTimeTracker developers"
 
-#: main.cpp:108
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr "Alexander Potashev"
 
-#: main.cpp:109
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "현재 관리자(2019년 이후)"
 
-#: main.cpp:111
+#: main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
 
-#: main.cpp:112
+#: main.cpp:109
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr "관리자(2006년-2012년)"
 
-#: main.cpp:114
+#: main.cpp:111
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:115
+#: main.cpp:112
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr "관리자(2005년-2006년)"
 
-#: main.cpp:117
+#: main.cpp:114
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:118
+#: main.cpp:115
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr "관리자(2000년-2005년)"
 
-#: main.cpp:120
+#: main.cpp:117
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:121
+#: main.cpp:118
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "원 작성자"
 
-#: main.cpp:123
+#: main.cpp:120
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:124
+#: main.cpp:121
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr "개발자(2007년)"
 
-#: main.cpp:126
+#: main.cpp:123
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:127
+#: main.cpp:124
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr "개발자(1999년-2000년)"
 
-#: main.cpp:129
+#: main.cpp:126
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:130 main.cpp:133
+#: main.cpp:127 main.cpp:130
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr "개발자"
 
-#: main.cpp:132
+#: main.cpp:129
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:144
+#: main.cpp:141
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
@@ -1189,31 +1189,31 @@ msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "검색 표시줄 표시"
 
-#: timetrackerwidget.cpp:471
+#: timetrackerwidget.cpp:473
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "행동"
 
-#: timetrackerwidget.cpp:474
+#: timetrackerwidget.cpp:478
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "모양"
 
-#: timetrackerwidget.cpp:477
+#: timetrackerwidget.cpp:483
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "저장소"
 
-#: timetrackerwidget.cpp:514
+#: timetrackerwidget.cpp:520
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "새 작업"
 
-#: timetrackerwidget.cpp:593
+#: timetrackerwidget.cpp:599
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -1222,7 +1222,7 @@ msgid ""
 msgstr ""
 "아직 과거 기록이 없습니다. 작업을 시작하고 정지하면 과거 기록이 추가됩니다."
 
-#: timetrackerwidget.cpp:603
+#: timetrackerwidget.cpp:609
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -1230,59 +1230,59 @@ msgid ""
 msgstr ""
 "모든 작업의 시간을 0으로 초기화하시겠습니까? 전체 과거 기록을 삭제합니다."
 
-#: timetrackerwidget.cpp:605
+#: timetrackerwidget.cpp:611
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "확인 필요"
 
-#: timetrackerwidget.cpp:606
+#: timetrackerwidget.cpp:612
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "모든 시간 초기화"
 
-#: timetrackerwidget.cpp:795
+#: timetrackerwidget.cpp:801
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "저장에 실패했습니다. 대부분 경우 파일을 잠글 수 없습니다."
 
-#: timetrackerwidget.cpp:797
+#: timetrackerwidget.cpp:803
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "달력 리소스를 수정할 수 없습니다."
 
-#: timetrackerwidget.cpp:799
+#: timetrackerwidget.cpp:805
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "메모리 부족--개체를 만들 수 없습니다."
 
-#: timetrackerwidget.cpp:801
+#: timetrackerwidget.cpp:807
 #, kde-format
 msgid "UID not found."
 msgstr "UID를 찾을 수 없습니다."
 
-#: timetrackerwidget.cpp:803
+#: timetrackerwidget.cpp:809
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "잘못된 날짜--형식은 YYYY-MM-DD입니다."
 
-#: timetrackerwidget.cpp:805
+#: timetrackerwidget.cpp:811
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "잘못된 시간--형식은 YYYY-MM-DDTHH:MM:SS입니다."
 
-#: timetrackerwidget.cpp:807
+#: timetrackerwidget.cpp:813
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "잘못된 작업 기간--0보다 커야 합니다."
 
-#: timetrackerwidget.cpp:809
+#: timetrackerwidget.cpp:815
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "잘못된 오류 번호: %1"
 
-#: timetrackerwidget.cpp:1038
+#: timetrackerwidget.cpp:1044
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1293,7 +1293,7 @@ msgstr ""
 "KTimeTracker는 작업 시간을 측정하는 KDE 프로그램입니다. 첫 작업을 추가하려면 "
 "\"작업 검색 및 추가\" 필드에 입력하십시오."
 
-#: timetrackerwidget.cpp:1045
+#: timetrackerwidget.cpp:1051
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."

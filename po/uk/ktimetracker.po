@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:35+0000\n"
+"POT-Creation-Date: 2023-12-10 01:58+0000\n"
 "PO-Revision-Date: 2021-09-25 09:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -39,18 +39,18 @@ msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "Редагування часу задачі"
 
-#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:56
+#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:55
 #, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "Задача"
 
-#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:65
+#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:64
 #, kde-format
 msgid "Task Name:"
 msgstr "Назва задачі:"
 
-#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:70
+#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:69
 #, kde-format
 msgid "Task Description:"
 msgstr "Опис задачі:"
@@ -332,7 +332,7 @@ msgstr "Будь ласка, вкажіть запис завдання, яки�
 msgid "Edit History"
 msgstr "Редагувати історію"
 
-#: dialogs/taskpropertiesdialog.cpp:62
+#: dialogs/taskpropertiesdialog.cpp:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -342,13 +342,13 @@ msgstr ""
 "<p>Тут слід вказати назву завдання. Назва може бути довільною.</p>\n"
 "<p><i>Приклад:</i> зателефонувати матусі</p>"
 
-#: dialogs/taskpropertiesdialog.cpp:73
+#: dialogs/taskpropertiesdialog.cpp:72
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "Автоматичне стеження"
 
-#: dialogs/taskpropertiesdialog.cpp:90
+#: dialogs/taskpropertiesdialog.cpp:98
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -443,124 +443,124 @@ msgstr "Головний пенал"
 msgid "Tasks"
 msgstr "Задачі"
 
-#: main.cpp:100 model/event.cpp:167 model/eventsmodel.cpp:126
+#: main.cpp:97 model/event.cpp:167 model/eventsmodel.cpp:126
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:102
+#: main.cpp:99
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "Утиліта стеження за часом KDE"
 
-#: main.cpp:104
+#: main.cpp:101
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr "© Розробники KTimeTracker, 1997–2019"
 
-#: main.cpp:108
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr "Alexander Potashev"
 
-#: main.cpp:109
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "Поточний супровідник (з 2019 року)"
 
-#: main.cpp:111
+#: main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
 
-#: main.cpp:112
+#: main.cpp:109
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr "Супровідник (2006-2012)"
 
-#: main.cpp:114
+#: main.cpp:111
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:115
+#: main.cpp:112
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr "Супровідник (2005-2006)"
 
-#: main.cpp:117
+#: main.cpp:114
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:118
+#: main.cpp:115
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr "Супровідник (2000-2005)"
 
-#: main.cpp:120
+#: main.cpp:117
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:121
+#: main.cpp:118
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "Перший автор"
 
-#: main.cpp:123
+#: main.cpp:120
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:124
+#: main.cpp:121
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr "Розробник (у 2007 році)"
 
-#: main.cpp:126
+#: main.cpp:123
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:127
+#: main.cpp:124
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr "Розробник (1999-2000)"
 
-#: main.cpp:129
+#: main.cpp:126
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:130 main.cpp:133
+#: main.cpp:127 main.cpp:130
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr "Розробник"
 
-#: main.cpp:132
+#: main.cpp:129
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:144
+#: main.cpp:141
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
@@ -1208,31 +1208,31 @@ msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Показати панель пошуку"
 
-#: timetrackerwidget.cpp:471
+#: timetrackerwidget.cpp:473
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Поведінка"
 
-#: timetrackerwidget.cpp:474
+#: timetrackerwidget.cpp:478
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: timetrackerwidget.cpp:477
+#: timetrackerwidget.cpp:483
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Зберігання"
 
-#: timetrackerwidget.cpp:514
+#: timetrackerwidget.cpp:520
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Нова задача"
 
-#: timetrackerwidget.cpp:593
+#: timetrackerwidget.cpp:599
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -1242,7 +1242,7 @@ msgstr ""
 "Цього ще немає у історії. Почніть і зупиніть задачу, і у вас буде "
 "відповідний запис у історії."
 
-#: timetrackerwidget.cpp:603
+#: timetrackerwidget.cpp:609
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -1251,60 +1251,60 @@ msgstr ""
 "Ви дійсно хочете скинути час всіх задач до нуля? Якщо ви зробите це, весь "
 "журнал таймерів буде вилучено."
 
-#: timetrackerwidget.cpp:605
+#: timetrackerwidget.cpp:611
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Потрібне підтвердження"
 
-#: timetrackerwidget.cpp:606
+#: timetrackerwidget.cpp:612
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Скинути всі таймери"
 
-#: timetrackerwidget.cpp:795
+#: timetrackerwidget.cpp:801
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 "Не вдалось зберегти, найімовірніше тому, що не вдалось заблокувати файл."
 
-#: timetrackerwidget.cpp:797
+#: timetrackerwidget.cpp:803
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Не вдалось змінити ресурс календаря."
 
-#: timetrackerwidget.cpp:799
+#: timetrackerwidget.cpp:805
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Недостатньо пам'яті — не вдалось створити об'єкт."
 
-#: timetrackerwidget.cpp:801
+#: timetrackerwidget.cpp:807
 #, kde-format
 msgid "UID not found."
 msgstr "Не знайдено UID."
 
-#: timetrackerwidget.cpp:803
+#: timetrackerwidget.cpp:809
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Некоректний формат дати. Має бути РРРР-ММ-ДД."
 
-#: timetrackerwidget.cpp:805
+#: timetrackerwidget.cpp:811
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Некоректний формат дати. Має бути РРРР-ММ-ДДTГГ:ХХ:СС."
 
-#: timetrackerwidget.cpp:807
+#: timetrackerwidget.cpp:813
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Некоректна тривалість задачі — мусить бути більша, ніж нуль."
 
-#: timetrackerwidget.cpp:809
+#: timetrackerwidget.cpp:815
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Некоректний номер помилки: %1"
 
-#: timetrackerwidget.cpp:1038
+#: timetrackerwidget.cpp:1044
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1316,7 +1316,7 @@ msgstr ""
 "часом. Найкраще розпочати зі створення вашої власної задачі — введіть її у "
 "поле, де ви бачите напис «Знайти або додати задачу»."
 
-#: timetrackerwidget.cpp:1045
+#: timetrackerwidget.cpp:1051
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
