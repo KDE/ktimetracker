@@ -81,6 +81,8 @@ msgid " minute"
 msgid_plural " minutes"
 msgstr[0] " דקות"
 msgstr[1] " דקות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: dialogs/edittimedialog.cpp:88
 #, kde-format
