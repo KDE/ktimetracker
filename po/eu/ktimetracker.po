@@ -1,7 +1,7 @@
 # Translation for ktimetracker.po to Euskara/Basque (eu).
 # Copyright (C) 2003-2023 This file is copyright:
 # This file is distributed under the same licese as the ktimetracker package.
-# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Marcos  <marcos@euskalgnu.org>, 2003.
@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-10 01:58+0000\n"
-"PO-Revision-Date: 2023-12-10 22:06+0100\n"
+"PO-Revision-Date: 2023-12-14 19:56+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, kde-format
@@ -178,16 +178,13 @@ msgstr "Denbora testu gisa"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
 #: dialogs/exportdialog.ui:118
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p>An inclusive date range for reporting on time card history.  Not "
-#| "enabled when reporting on totals.</p>"
+#, kde-format
 msgid ""
 "An inclusive date range for reporting on time card history.  Not enabled "
 "when reporting on totals."
 msgstr ""
-"Ordu txartel historien txostenerako data barruti inklusibo bat. Ez da "
-"aktibatuko guztizkoen berri batean."
+"Ordu-txartelaren historiari buruz berri emateko data-barruti inklusibo bat. "
+"Ez da aktibatzen guztizkoen berri ematean."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
 #: dialogs/exportdialog.ui:121
@@ -215,9 +212,9 @@ msgstr "Orduak:Minutuak"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
 #: dialogs/exportdialog.ui:191
-#, fuzzy, kde-format
+#, kde-format
 msgid "All Times"
-msgstr "Berrezarri denbora guztiak"
+msgstr "Denbora guztiak"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
 #: dialogs/exportdialog.ui:210
@@ -348,11 +345,10 @@ msgstr ""
 "<p><i>Adibidez:</i> telefono deia amarekin</p>"
 
 #: dialogs/taskpropertiesdialog.cpp:72
-#, fuzzy, kde-format
-#| msgid "A&uto tracking"
+#, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
-msgstr "A&uto-jarraipena"
+msgstr "Jarraipen automatikoa"
 
 #: dialogs/taskpropertiesdialog.cpp:98
 #, kde-format
@@ -393,6 +389,8 @@ msgid ""
 "Apply the idle time since %1 to all active\n"
 "timers and keep them running."
 msgstr ""
+"%1(e)tik jarduerarik gabeko denbora, tenporizadore\n"
+"aktibo guztiei aplikatu, eta haiek martxan mantendu."
 
 #: idletimedetector.cpp:81
 #, kde-format
@@ -415,7 +413,7 @@ msgstr "Lehengoratu denbora neurketa"
 #: idletimedetector.cpp:88
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr ""
+msgstr "Mahaigaina %1(e)tik jarduerarik gabe egon da. Zer egin nahi duzu?"
 
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:19
@@ -652,19 +650,20 @@ msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
 msgstr ""
+"Saioaren denbora osoa, ataza honen saioko denbora eta bere azpiataza "
+"guztiena da."
 
 #: model/tasksmodel.cpp:294
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
-msgstr ""
+msgstr "Denbora osoa, ataza honen denbora eta bere azpiataza guztiena da."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
 #: settings/cfgbehavior.ui:17
-#, fuzzy, kde-format
-#| msgid "Detect desktop as idle after"
+#, kde-format
 msgid "Detect desktop as idle after:"
-msgstr "Detektatu mahaigaina inaktibo bezala honen ondoren"
+msgstr "Hauteman mahaigaina jarduerarik gabe dagoela, hau igarotakoan:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
@@ -677,13 +676,13 @@ msgstr " min"
 #: settings/cfgbehavior.ui:37
 #, kde-format
 msgid "Minimum desktop active time:"
-msgstr ""
+msgstr "Mahaigainaren gutxieneko jarduera denbora:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
 #: settings/cfgbehavior.ui:44
 #, kde-format
 msgid " sec"
-msgstr " seg"
+msgstr " s"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
 #: settings/cfgbehavior.ui:57
@@ -698,18 +697,20 @@ msgid ""
 "Unitasking - allow only one task to be timed at a time. Does not stop any "
 "timer."
 msgstr ""
+"Ataza bakarra - aldiko ataza bakarraren denbora hartzea baimendu. Ez du "
+"tenporizadorerik gelditzen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
 #: settings/cfgbehavior.ui:67
 #, kde-format
 msgid "Allow only one timer at a time"
-msgstr ""
+msgstr "Aldiko tenporizadore bakarra baimendu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
 #: settings/cfgbehavior.ui:74
 #, kde-format
 msgid "Place an icon to the system tray"
-msgstr ""
+msgstr "Jarri ikono bat sistemaren erretiluan"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: settings/cfgdisplay.ui:29
@@ -732,6 +733,9 @@ msgid ""
 "precious. It will disable the search bar and every click will pop up a "
 "context menu."
 msgstr ""
+"Aukeratu hori, ukimen-pantaila izanda, zure pantailaren azalera baliotsua "
+"bada. Bilaketa-barra ezgaitu eta klik orok testuinguru-menu bat azaleratuko "
+"du."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
 #: settings/cfgdisplay.ui:45
@@ -825,12 +829,14 @@ msgstr ""
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr ""
+"Zure alegiazko mahaigain kopurua handiegia da, mahaigainen jarraipena ez da "
+"ibiliko."
 
 #: taskview.cpp:290
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
-msgstr ""
+msgstr "Tenporizadoreak geldiarazten..."
 
 #: taskview.cpp:291
 #, kde-format
@@ -843,21 +849,16 @@ msgid "Unnamed Task"
 msgstr "Izengabeko ataza"
 
 #: taskview.cpp:380
-#, fuzzy, kde-format
-#| msgid ""
-#| "Error storing new task. Your changes were not saved. Make sure you can "
-#| "edit your iCalendar file. Also quit all applications using this file and "
-#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
-#| "lock/ "
+#, kde-format
 msgid ""
 "Error storing new task. Your changes were not saved. Make sure you can edit "
 "your iCalendar file. Also quit all applications using this file and remove "
 "any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
 msgstr ""
-"Errorea ataza berria biltegiratzean. Zure aldaketak ez dira gordeko. "
-"Ziurtatu zure iCalendar fitxategia edita dezakezula. Itxi fitxategi hau "
-"darabilten aplikazio guztiak eta kendu bere izenarekin erlazionatutako "
-"blokeo-fitxategi guztiak \"~/.kde/share/apps/kabc/lock/\"-etik"
+"Errorea ataza berria biltegiratzean. Zure aldaketak ez dira gorde. Ziurtatu "
+"zure iCalendar fitxategia edita dezakezula. Gainera, itxi fitxategi hori "
+"erabiltzen duten aplikazio guztiak eta kendu bere izenari lotutako giltzatze-"
+"fitxategi oro « ~/.kde/share/apps/kabc/lock/ » karpetatik"
 
 #: taskview.cpp:422
 #, kde-format
@@ -877,18 +878,13 @@ msgid "No task selected."
 msgstr "Ez da atazarik hautatu."
 
 #: taskview.cpp:520
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to delete the task named\n"
-#| "\"%1\" and its entire history?\n"
-#| "NOTE: all its subtasks and their history will also be deleted."
+#, kde-format
 msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
 "Note: All subtasks and their history will also be deleted."
 msgstr ""
-"Ziur zaude \"%1\" izeneko ataza eta bere historia osoa\n"
-"ezabatu nahi dituzula?\n"
-"Oharra: azpi-zeregin guztiak eta hauen historiak ere ezabatuko dira."
+"Ziur zaude hautatutako ataza eta haren historia osoa ezabatu nahi duzula?\n"
+"Oharra: Azpiataza guztiak eta haien historiak ere ezabatuko dira."
 
 #: taskview.cpp:524
 #, kde-format
@@ -902,17 +898,16 @@ msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr "Errorea \"%1\" kargatzean: ezin da gurasoa (uid=%2) aurkitu"
 
 #: timetrackerstorage.cpp:243
-#, fuzzy, kde-format
-#| msgid "Could not open \"%1\"."
+#, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "Ezin da \"%1\" ireki."
+msgstr "Ezin izan du \"%1\" giltzatze-fitxategia idatzi. Diskoa beteta?"
 
 #: timetrackerstorage.cpp:251
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
+msgstr "iCalendar fitxategia \"%1\" gisa gordetzea huts egin du."
 
 #: timetrackerwidget.cpp:154
 #, kde-format
@@ -933,6 +928,8 @@ msgid ""
 "This will reset the session time to 0 for all tasks, to start a new session, "
 "without affecting the totals."
 msgstr ""
+"Horrek, ataza guztien saio-denbora 0ra ezarriko du, guztizkoei eragin gabe, "
+"saio berri bat hasteko."
 
 #: timetrackerwidget.cpp:165
 #, kde-format
@@ -953,6 +950,8 @@ msgid ""
 "A window will be opened where you can change start and stop times of tasks "
 "or add a comment to them."
 msgstr ""
+"Leiho bat irekiko da, atazen hasierako eta bukaerako denborak aldatzeko edo "
+"haiei iruzkin bat gehitzeko aukera ematen duena."
 
 #: timetrackerwidget.cpp:178
 #, kde-format
@@ -973,6 +972,8 @@ msgid ""
 "This will reset the session and total time to 0 for all tasks, to restart "
 "from scratch."
 msgstr ""
+"Horrek, hutsetik berrabiatzeko, ataza guztietarako saio-denbora eta denbora "
+"osoa 0ra berrezarriko ditu."
 
 #: timetrackerwidget.cpp:188
 #, kde-format
@@ -996,6 +997,12 @@ msgid ""
 "You may also start timing of tasks by double clicking the left mouse button "
 "on a given task. This will, however, stop timing of other tasks."
 msgstr ""
+"Hori, hautatutako atazaren denbora neurtzen hasiko da.\n"
+"Hainbat atazen denbora aldi berean neurtzeko aukera dago.\n"
+"\n"
+"Ataza jakin batean saguaren ezker botoiarekin klik bikoitza eginez ere "
+"atazen denbora neurtzen has zintezke. Horrek, dena den, beste atazen denbora "
+"neurtzea geldituko du."
 
 #: timetrackerwidget.cpp:205
 #, kde-format
@@ -1055,7 +1062,7 @@ msgstr "Gelditu aktibo dauden tenporizadore guztiak"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
-msgstr ""
+msgstr "Aplikazio aktiboen jarraipena"
 
 #: timetrackerwidget.cpp:235
 #, kde-format
@@ -1064,6 +1071,8 @@ msgid ""
 "Auto-creates and updates tasks when the focus of the current window has "
 "changed"
 msgstr ""
+"Atazak automatikoki sortu eta eguneratzen ditu uneko leihoko fokua aldatzen "
+"denean"
 
 #: timetrackerwidget.cpp:238
 #, kde-format
@@ -1073,6 +1082,9 @@ msgid ""
 "enabled, a new task will be created with the title of the window as its name "
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
+"Leiho baten fokua lehen aldiz aldatzen bada ekintza hori gaituta dagoenean, "
+"leihoaren titulua izen gisa duen ataza berri bat sortu eta abiaraziko da. "
+"Izen hori duen ataza bat aurrez badago, hura abiaraziko da."
 
 #: timetrackerwidget.cpp:249
 #, kde-format
@@ -1102,13 +1114,13 @@ msgstr "A&zpiataza berria..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
-msgstr ""
+msgstr "Hautatutako uneko atazaren azpiataza berri bat sortzen du"
 
 #: timetrackerwidget.cpp:261
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
-msgstr ""
+msgstr "Horrek hautatutako uneko atazaren azpiataza berri bat sortuko du."
 
 #: timetrackerwidget.cpp:269
 #, kde-format
@@ -1147,6 +1159,8 @@ msgid ""
 "This will bring up a dialog box where you may edit the parameters for the "
 "selected task."
 msgstr ""
+"Horrek, hautatutako atazaren parametroak editatzeko elkarrizketa-koadro bat "
+"ekarriko du."
 
 #: timetrackerwidget.cpp:291
 #, kde-format
@@ -1167,6 +1181,8 @@ msgid ""
 "This will bring up a dialog box where you may edit the times for the "
 "selected task."
 msgstr ""
+"Horrek, hautatutako atazaren denborak editatzeko elkarrizketa-koadro bat "
+"ekarriko du."
 
 #: timetrackerwidget.cpp:303
 #, kde-format
@@ -1190,7 +1206,7 @@ msgstr "&Esportatu..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
-msgstr ""
+msgstr "Inportatu atazak «&Panner»etik..."
 
 #: timetrackerwidget.cpp:338
 #, kde-format
@@ -1229,6 +1245,8 @@ msgid ""
 "There is no history yet. Start and stop a task and you will have an entry in "
 "your history."
 msgstr ""
+"Oraindik ez dago historiarik. Abiarazi eta geldiarazi ataza bat, eta zure "
+"historian sarrera bat izango duzu."
 
 #: timetrackerwidget.cpp:609
 #, kde-format
@@ -1300,6 +1318,9 @@ msgid ""
 "with creating your first task - enter it into the field where you see "
 "\"Search or add task\"."
 msgstr ""
+"Hau «ktimetracker» da, zure denboraren jarraipena egiten laguntzeko KDEren "
+"programa. Onena, zure lehenengo ataza sortzen hastea - sartu ezazu haren "
+"izena \"Ataza bilatu edo gehitu\" eremuan."
 
 #: timetrackerwidget.cpp:1051
 #, kde-format
@@ -1324,7 +1345,7 @@ msgstr "Zutabeak"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search or add task"
-msgstr "Bilatu edo gehitu ataza"
+msgstr "Ataza bilatu edo gehitu"
 
 #: widgets/searchline.cpp:39
 #, kde-format
@@ -1334,6 +1355,10 @@ msgid ""
 "filter. Then, only tasks that match your input are shown. As soon as you "
 "press Enter, your input is used as name to create a new task."
 msgstr ""
+"Hori, eremu konbinatu bat da. Sartu sakatzen ez duzun bitartean, iragazki "
+"gisa aritzen da. Zuk sartutakoarekin bat datozen atazak bakarrik erakusten "
+"dira. Sartu sakatzen duzun bezain laster, zuk sartutakoa ataza berri bat "
+"sortzeko izen gisa erabiltzen da."
 
 #: widgets/taskswidget.cpp:143
 #, kde-format
