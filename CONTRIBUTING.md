@@ -11,8 +11,8 @@ The KTimeTracker source code is modular and easy to understand.
 
 The main structure is: main loads mainwindow, which loads timetrackerwidget, which loads taskview and searchline.
 
-The base for a class is: taskmodelitem -> task. A task can have a representation as an event for iCalendar management.
-
+The basics for understanding tasks is: taskmodelitem -> task.
+A task can have a representation as an event for iCalendar management.
 The projectmodel manages both tasks and events.
 
 The rest consists of minor dialogs or actions.
