@@ -13,19 +13,20 @@
 # Konstantin Bogdanov <var1able@var1able.ru>, 2011.
 # Julia Dronova <juliette.tux@gmail.com>, 2012.
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
+# SPDX-FileCopyrightText: 2024 Alexander Yavorsky <kekcuha@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-10 01:58+0000\n"
-"PO-Revision-Date: 2019-12-02 12:29+0300\n"
-"Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
+"PO-Revision-Date: 2024-01-10 22:05+0300\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -176,11 +177,9 @@ msgstr "Исторические данные в CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
 #: dialogs/exportdialog.ui:98
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export as CSV"
+#, kde-format
 msgid "Event Log as CSV"
-msgstr "Экспорт в CSV"
+msgstr "Журнал событий в CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
 #: dialogs/exportdialog.ui:105
@@ -754,21 +753,19 @@ msgstr "Оптимизировать для карманных устройст�
 #: settings/cfgdisplay.ui:55
 #, kde-format
 msgid "Window Title"
-msgstr ""
+msgstr "Заголовок окна"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
 #: settings/cfgdisplay.ui:64
 #, kde-format
 msgid "Currently opened file"
-msgstr ""
+msgstr "Текущий открытый файл"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
 #: settings/cfgdisplay.ui:71
-#, fuzzy, kde-format
-#| msgctxt "@title:column"
-#| msgid "Total Session Time"
+#, kde-format
 msgid "Current Task and Session Time"
-msgstr "Общее время сеанса"
+msgstr "Текущая задача и время сеанса"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: settings/cfgdisplay.ui:81
