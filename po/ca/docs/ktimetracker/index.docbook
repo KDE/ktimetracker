@@ -155,7 +155,7 @@
 >. Les opcions d'ordres de les &Qt; i els &kf5-full; estan disponibles, vegeu les pàgines man qt5options i kf5options. </para>
 
 <para
->El &ktimetracker; proporciona una opció d'ordre addicional que us permet introduir el nom del fitxer iCalendar que s'utilitza per emmagatzemar l'historial de treball. Introduïu un fitxer d'iCalendar remot mitjançant &HTTP; o &FTP;, com a part del nom de fitxer, per exemple, https://www.meulloc.com/mevesdades/meutreball.ics.</para>
+>El &ktimetracker; proporciona una opció d'ordre addicional que us permet introduir el nom del fitxer iCalendar que s'utilitza per a emmagatzemar l'historial de treball. Introduïu un fitxer d'iCalendar remot mitjançant &HTTP; o &FTP;, com a part del nom de fitxer, per exemple, https://www.meulloc.com/mevesdades/meutreball.ics.</para>
 
 </sect1>
 
@@ -167,7 +167,7 @@
 <para
 ><emphasis
 >Problema:</emphasis
-> Sou un consultor independent de programari amb molts clients. Alguns clients tenen múltiples projectes. Durant el transcurs d'un dia, alterneu entre diferents projectes. Necessiteu controlar el temps per generar les factures mensuals.</para>
+> Sou un consultor independent de programari amb molts clients. Alguns clients tenen múltiples projectes. Durant el transcurs d'un dia, alterneu entre diferents projectes. Necessiteu controlar el temps per a generar les factures mensuals.</para>
 <para
 ><emphasis
 >Solució:</emphasis
@@ -179,7 +179,7 @@
 <para
 >El &ktimetracker; us permet editar l'historial de la vostra tasca i posar un comentari per a tots els esdeveniments que s'han aturat.</para>
 <para
->Per crear una tasca de nivell superior, seleccioneu <menuchoice
+>Per a crear una tasca de nivell superior, seleccioneu <menuchoice
 > <shortcut
 > <keycombo action="simul"
 >&Ctrl;<keycap
@@ -191,7 +191,7 @@
 > <guimenuitem
 >Tasca nova...</guimenuitem
 > </menuchoice
->. Per crear una subtasca, ressalteu la tasca principal i seleccioneu <menuchoice
+>. Per a crear una subtasca, ressalteu la tasca principal i seleccioneu <menuchoice
 > <shortcut
 > <keycombo action="simul"
 >&Ctrl;<keycap
@@ -221,7 +221,7 @@
 <para
 ><emphasis
 >Problema:</emphasis
-> Per ser solvent, heu de facturar una mitjana de cinc hores al dia. Per mantenir-vos en el camí, veieu els totals diaris i setmanals.</para>
+> Per a ser solvent, heu de facturar una mitjana de cinc hores al dia. Per a mantenir-vos en el camí, veieu els totals diaris i setmanals.</para>
 <para
 ><emphasis
 >Solució:</emphasis
@@ -229,7 +229,7 @@
 > </informalexample>
 
 <para
->El &ktimetracker; fa un seguiment de temps simple. Per iniciar el registre de temps contra una tasca, feu doble clic a la tasca. Per aturar el registre de temps, feu doble clic a la tasca de nou. Les tasques actives mostren un petit rellotge a la columna de <guilabel
+>El &ktimetracker; fa un seguiment de temps simple. Per a iniciar el registre de temps contra una tasca, feu doble clic a la tasca. Per a aturar el registre de temps, feu doble clic a la tasca de nou. Les tasques actives mostren un petit rellotge a la columna de <guilabel
 >Temps de la sessió</guilabel
 >.</para>
 
@@ -290,7 +290,7 @@
 </variablelist>
 
 <para
->Per iniciar una sessió nova, seleccioneu <menuchoice
+>Per a iniciar una sessió nova, seleccioneu <menuchoice
 > <guimenu
 >Fitxer</guimenu
 > <guimenuitem
@@ -299,7 +299,7 @@
 >. </para>
 
 <para
->Per reiniciar tots els temps, seleccioneu <menuchoice
+>Per a reiniciar tots els temps, seleccioneu <menuchoice
 > <guimenu
 >Fitxer</guimenu
 > <guimenuitem
@@ -315,7 +315,7 @@
 <para
 ><emphasis
 >Problema:</emphasis
-> Teniu dos projectes principals entre els quals canvieu cada dia. Per ajudar-vos a organitzar el vostre treball, manteniu els fitxers del projecte 1 a l'escriptori 1 i els del projecte 2 a l'escriptori 2.</para>
+> Teniu dos projectes principals entre els quals canvieu cada dia. Per a ajudar-vos a organitzar el vostre treball, manteniu els fitxers del projecte 1 a l'escriptori 1 i els del projecte 2 a l'escriptori 2.</para>
 
 <para
 ><emphasis
@@ -324,7 +324,7 @@
 </informalexample>
 
 <para
->Per associar una tasca amb un o més escriptoris, seleccioneu <menuchoice
+>Per a associar una tasca amb un o més escriptoris, seleccioneu <menuchoice
 > <shortcut
 > <keycombo action="simul"
 >&Ctrl;<keycap
@@ -350,7 +350,7 @@
 > <para
 ><emphasis
 >Problema:</emphasis
-> Sortiu del treball el divendres per fer un encàrrec i oblideu aturar el temporitzador. Quan torneu el dilluns, el temporitzador segueix funcionant.</para>
+> Sortiu del treball el divendres per a fer un encàrrec i oblideu aturar el temporitzador. Quan torneu el dilluns, el temporitzador segueix funcionant.</para>
 <para
 ><emphasis
 >Solució:</emphasis
@@ -360,7 +360,7 @@
 </informalexample>
 
 <para
->El &ktimetracker; es pot configurar per detectar quan el ratolí i el teclat estan inactius. Si el ratolí i el teclat estan inactius per més d'un nombre especificat de minuts, el &ktimetracker; mostrarà el següent diàleg:</para>
+>El &ktimetracker; es pot configurar per a detectar quan el ratolí i el teclat estan inactius. Si el ratolí i el teclat estan inactius per més d'un nombre especificat de minuts, el &ktimetracker; mostrarà el següent diàleg:</para>
 
 <screenshot>
  <screeninfo
@@ -488,7 +488,7 @@
 >Exportar els totals com a CSV</title>
 
 <para
->El &ktimetracker; pot exportar els totals i l'historial d'ambdós a un format de fitxer separat per comes. Per exportar els totals, seleccioneu <menuchoice
+>El &ktimetracker; pot exportar els totals i l'historial d'ambdós a un format de fitxer separat per comes. Per a exportar els totals, seleccioneu <menuchoice
 > <guimenu
 >Fitxer</guimenu
 > <guimenuitem
@@ -525,7 +525,7 @@
 <para
 >Utilitzeu el botó <guibutton
 >Copia al porta-retalls</guibutton
-> per exportar els temps al porta-retalls.</para>
+> per a exportar els temps al porta-retalls.</para>
 
 <para
 >Vet aquí un altre exemple del format de sortida:</para>
@@ -564,7 +564,7 @@
 >Exportar l'historial a CSV</title>
 
 <para
->Per exportar l'historial de tasques, seleccioneu <menuchoice
+>Per a exportar l'historial de tasques, seleccioneu <menuchoice
 > <guimenu
 >Fitxer</guimenu
 > <guisubmenu
@@ -586,7 +586,7 @@
 <para
 >Utilitzeu el botó <guibutton
 >Copia al porta-retalls</guibutton
-> per exportar els temps al porta-retalls.</para>
+> per a exportar els temps al porta-retalls.</para>
 
 <para
 >Vet aquí un exemple del format de sortida:</para>
@@ -611,7 +611,7 @@ Printed on: 2004-07-13 18:10
 </literallayout>
 
 <para
->Les tres primeres línies identifiquen quan es va generar l'informe i per a quin interval de dates. La quarta fila és una llista separada per comes de les dates en l'interval de dates, en format ISO 8601 (AAAA-MM-DD). Totes les files posteriors llisten el temps registrat contra cada tasca. L'última columna numèrica és el total de files per a cada dia. El nom de la tasca s'imprimeix després de la columna de totals, i se sagna per indicar la relació entre tasca/subtasca. Els noms de les tasques de nivell superior apareixen a la primera columna després del total.</para>
+>Les tres primeres línies identifiquen quan es va generar l'informe i per a quin interval de dates. La quarta fila és una llista separada per comes de les dates en l'interval de dates, en format ISO 8601 (AAAA-MM-DD). Totes les files posteriors llisten el temps registrat contra cada tasca. L'última columna numèrica és el total de files per a cada dia. El nom de la tasca s'imprimeix després de la columna de totals, i se sagna per a indicar la relació entre tasca/subtasca. Els noms de les tasques de nivell superior apareixen a la primera columna després del total.</para>
 
 </sect2>
 </sect1>
@@ -626,7 +626,7 @@ Printed on: 2004-07-13 18:10
 >La finestra principal del &ktimetracker; disposa dels següents components: barra de menús, barra d'eines, barra de cerca, finestra de tasca/hora i barra d'estat.</para>
 
 <para
->La barra de cerca és un camp combinat. Sempre que no premeu &Intro;, actua com un filtre. Llavors, només es mostren les tasques que coincideixen amb l'entrada. Tan aviat com premeu &Intro;, la vostra entrada s'utilitzarà com a nom per crear una tasca nova. </para>
+>La barra de cerca és un camp combinat. Sempre que no premeu &Intro;, actua com un filtre. Llavors, només es mostren les tasques que coincideixen amb l'entrada. Tan aviat com premeu &Intro;, la vostra entrada s'utilitzarà com a nom per a crear una tasca nova. </para>
 
 <para
 >Escolliu <guilabel
@@ -926,7 +926,7 @@ Printed on: 2004-07-13 18:10
 >historial</glossterm>
 <glossdef
 ><para
->Si el &ktimetracker; està configurat per registrar l'historial, registrarà cada vegada que inicieu/atureu l'esdeveniment temporitzador. Aquest historial no es netejarà quan es reiniciïn els temps i es mantindrà al fitxer fins que la tasca sigui eliminada.</para
+>Si el &ktimetracker; està configurat per a registrar l'historial, registrarà cada vegada que inicieu/atureu l'esdeveniment temporitzador. Aquest historial no es netejarà quan es reiniciïn els temps i es mantindrà al fitxer fins que la tasca sigui eliminada.</para
 ></glossdef>
 </glossentry>
 </glossdiv>
