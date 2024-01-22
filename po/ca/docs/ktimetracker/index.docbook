@@ -1054,7 +1054,7 @@ Printed on: 2004-07-13 18:10
 <para
 ><function
 >version()</function
-> és una crida de &DBus; que retorna el nombre de versió del &ktimetracker;, per exemple 4.3.1. El nombre de versió es retorna com una cadena en el format típic de GNU major.menor.bugfix.</para>
+> és una crida de &DBus; que retorna el número de versió del &ktimetracker;, per exemple 4.3.1. El número de versió es retorna com una cadena en el format típic de GNU major.menor.bugfix.</para>
 </refsect1>
 </refentry>
 
