@@ -71,6 +71,6 @@ X-DocPath=ktimetracker/index.html
 Type=Application
 SingleMainWindow=true
 Terminal=false
-X-KDE-StartupNotify=true
+StartupNotify=true
 X-DBUS-StartupType=Unique
 Categories=Qt;KDE;Utility;Office;Monitor;X-KDE-Utilities-PIM;
