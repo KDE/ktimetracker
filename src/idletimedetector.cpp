@@ -22,7 +22,6 @@
 
 #include "idletimedetector.h"
 
-#include <QDateTime>
 
 #include <KIdleTime>
 #include <KLocalizedString>

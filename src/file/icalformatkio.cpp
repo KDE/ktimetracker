@@ -26,7 +26,6 @@
 
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
-#include <KCalendarCore/ICalFormat>
 #include "ktt_debug.h"
 
 bool ICalFormatKIO::load(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString)

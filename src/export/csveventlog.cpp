@@ -22,7 +22,6 @@
 #include "csveventlog.h"
 
 #include "ktt_debug.h"
-#include "model/event.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
 #include "model/task.h"
