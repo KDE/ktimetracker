@@ -303,3 +303,5 @@ void TimeTrackerStorage::onFileModified()
 
     qCDebug(KTT_LOG) << "exiting onFileModified";
 }
+
+#include "moc_timetrackerstorage.cpp"

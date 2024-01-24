@@ -156,3 +156,5 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
     }
     qCDebug(KTT_LOG) << "Leaving function";
 }
+
+#include "moc_desktoptracker.cpp"

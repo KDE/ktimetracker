@@ -120,3 +120,5 @@ void EditTimeDialog::update(int newValue)
     m_timePreview->setText(formatTime(m_initialMinutes + newValue));
     m_changeMinutes = newValue;
 }
+
+#include "moc_edittimedialog.cpp"

@@ -412,3 +412,5 @@ void TasksModel::addTimeToActiveTasks(int64_t minutes)
         task->changeTime(minutes, nullptr);
     }
 }
+
+#include "moc_tasksmodel.cpp"

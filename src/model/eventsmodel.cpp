@@ -196,3 +196,5 @@ void EventsModel::stopTask(const Task *task, const QDateTime &when)
         event->setDtEnd(when);
     }
 }
+
+#include "moc_eventsmodel.cpp"

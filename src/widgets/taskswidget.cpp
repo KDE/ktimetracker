@@ -375,3 +375,5 @@ void TasksWidget::reconfigure()
 
     refresh();
 }
+
+#include "moc_taskswidget.cpp"

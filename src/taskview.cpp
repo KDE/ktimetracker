@@ -665,3 +665,5 @@ void TaskView::taskRemoved(const QModelIndex & /*parent*/, int /*first*/, int /*
 {
     Q_EMIT tasksChanged(storage()->tasksModel()->getActiveTasks());
 }
+
+#include "moc_taskview.cpp"

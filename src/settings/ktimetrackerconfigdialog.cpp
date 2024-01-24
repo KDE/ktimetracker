@@ -65,3 +65,5 @@ KTimeTrackerDisplayConfig::KTimeTrackerDisplayConfig(QWidget *parent)
     addConfig(KTimeTrackerSettings::self(), displayPage);
     load();
 }
+
+#include "moc_ktimetrackerconfigdialog.cpp"

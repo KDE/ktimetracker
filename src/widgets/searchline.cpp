@@ -83,3 +83,5 @@ void SearchLine::activateSearch()
         Q_EMIT searchUpdated(m_queuedSearchText);
     }
 }
+
+#include "moc_searchline.cpp"

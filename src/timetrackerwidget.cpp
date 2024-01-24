@@ -1057,3 +1057,5 @@ bool TimeTrackerWidget::event(QEvent *event) // inherited from QWidget
 }
 // END of dbus slots group
 /* @} */
+
+#include "moc_timetrackerwidget.cpp"

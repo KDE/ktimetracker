@@ -43,3 +43,5 @@ void FocusDetector::onFocusChanged(WId /*unused*/)
         Q_EMIT newFocus(KWindowInfo(KX11Extras::activeWindow(), NET::WMName).name());
     }
 }
+
+#include "moc_focusdetector.cpp"

@@ -166,3 +166,5 @@ void MainWindow::updateWindowCaptionTasks(const QList<Task *> &activeTasks)
 
     this->setCaption(qCaption);
 }
+
+#include "moc_mainwindow.cpp"

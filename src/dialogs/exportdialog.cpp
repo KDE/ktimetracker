@@ -174,3 +174,5 @@ void ExportDialog::updateUI()
                                            m_taskView->tasksWidget()->currentItem(),
                                            reportCriteria()));
 }
+
+#include "moc_exportdialog.cpp"

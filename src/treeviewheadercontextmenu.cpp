@@ -115,3 +115,5 @@ void TreeViewHeaderContextMenu::updateAction(QAction *action, int column)
     action->setChecked(!m_widget->isColumnHidden(column));
     action->setText(m_widget->model()->headerData(column, Qt::Horizontal).toString());
 }
+
+#include "moc_treeviewheadercontextmenu.cpp"
