@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2021-09-30 22:49+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -374,7 +374,7 @@ msgstr "Total"
 msgid "No tasks."
 msgstr "Nulle cargas."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -384,25 +384,25 @@ msgstr ""
 "Applica le tempore dicoccupate usque %1 a omne\n"
 "active temporisatores e mantene los executante."
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Continua calcular le tempore."
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "Stoppa calculo de tempore e retorna al tempore de %1"
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Reverte calculo de tempore"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "Scriptorio ha essite otiante ab %1. Cosa tu vole facer?"

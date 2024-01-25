@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2023-12-20 17:00+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -372,7 +372,7 @@ msgstr "總計"
 msgid "No tasks."
 msgstr "沒有工作"
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -380,27 +380,27 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "繼續計時"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, fuzzy, kde-format
 #| msgid "Stop timing and revert back to the time at %1."
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "停止計時，並在 %1 時回復"
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 #| msgid "Revert timing"
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "重返並繼續"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "桌面從 %1 開始閒置。您打算怎麼做？"

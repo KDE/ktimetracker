@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2023-07-23 20:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -373,7 +373,7 @@ msgstr "합계"
 msgid "No tasks."
 msgstr "작업 없음."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -383,25 +383,25 @@ msgstr ""
 "모든 활성 타이머에 %1 이후의 휴식\n"
 "시간을 적용하고 계속 진행합니다."
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "시간 계속 재기"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "시간 재기를 중지하고 %1의 시간으로 되돌림"
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "시간 되돌리기"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "작업 환경이 %1부터 유휴 상태입니다. 무엇을 하시겠습니까?"

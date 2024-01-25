@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2009-07-28 20:22+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -392,7 +392,7 @@ msgstr "Samtals"
 msgid "No tasks."
 msgstr "Engin verkefni."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -400,25 +400,25 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Mæla tíma áfram"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr ""
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Bakka og halda áfram"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2023-12-10 00:47+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -375,7 +375,7 @@ msgstr "ჯამში"
 msgid "No tasks."
 msgstr "ამოცანების გარეშე."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -385,25 +385,25 @@ msgstr ""
 "%1-დან უქმე დროს დამატება ყველა აქტიური ტაიმერისთვის\n"
 "და მათი გაშვებულ მდგომარეობაში შენარჩუნება."
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "ათვლის გაგრძელება"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "ათვლს შეწყვეტა და დაბრუნება დროზე %1"
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "ათვლის შებრუნება"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "სამუშაო მაგიდა უქმეა %1-ის შემდეგ. რა გინდა, ქნა?"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2021-10-05 17:26-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -381,7 +381,7 @@ msgstr "Total"
 msgid "No tasks."
 msgstr "Nenhuma tarefa."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -391,25 +391,25 @@ msgstr ""
 "Aplicar o tempo ocioso desde %1 para todos os\n"
 "temporizadores ativos e mantenha-os em execução."
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Continuar cronometragem"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "Parar cronometragem e retornar para o tempo em %1"
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Reverter cronometragem"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "A área de trabalho ficou ociosa desde %1. O que deseja fazer?"

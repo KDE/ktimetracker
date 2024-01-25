@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2021-09-24 16:49+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -379,7 +379,7 @@ msgstr "Total"
 msgid "No tasks."
 msgstr "Inga aktiviteter."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -389,25 +389,25 @@ msgstr ""
 "Ändra all aktiv tidtagning till den overksamma\n"
 "tiden sedan %1 och låt dem fortsätta mäta."
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Återuppta tidtagning"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "Avbryt tidtagning och återgå till tiden %1"
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Låt tidtagning återgå"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "Skrivbordet har varit overksamt sedan %1. Vad vill du göra?"

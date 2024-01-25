@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2007-02-25 14:51+0100\n"
 "Last-Translator: Bozidar Proevski <bobibobi@freemail.com.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -393,7 +393,7 @@ msgstr "Вкупно"
 msgid "No tasks."
 msgstr "Нема задачи."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -401,25 +401,25 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Продолжи со мерење на времето"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr ""
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Поништи ги измените и продолжи"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, fuzzy, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "Десктопот е во мирување од %1. Што треба да правиме?"

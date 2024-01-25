@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2012-08-05 05:43+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -387,7 +387,7 @@ msgstr "Қорытындысы"
 msgid "No tasks."
 msgstr "Тапсырма жоқ."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -395,28 +395,28 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, fuzzy, kde-format
 #| msgid "Continue timing."
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Уақыт санауын жалғастыру"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, fuzzy, kde-format
 #| msgid "Stop timing and revert back to the time at %1."
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "Уақыт санауын тоқтатып, %1 уақытына оралу."
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 #| msgid "Revert timing"
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Бір уақытқа оралу"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, fuzzy, kde-format
 #| msgid "Desktop has been idle since %1. What do you want to do ?"
 msgid "Desktop has been idle since %1. What do you want to do?"

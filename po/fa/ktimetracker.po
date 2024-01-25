@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2007-09-03 13:40+0330\n"
 "Last-Translator: Nazanin Kazemi <kazemi@itland.ir>\n"
 "Language-Team: Persian <kde-i18n-fa@kde.org>\n"
@@ -385,7 +385,7 @@ msgstr "کل"
 msgid "No tasks."
 msgstr "بدون تکلیف."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -393,27 +393,27 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, fuzzy, kde-format
 #| msgid "Continue timing."
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "ادامه زمان‌بندی."
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr ""
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 #| msgid "Revert timing"
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "رجعت زمان‌بندی"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr ""

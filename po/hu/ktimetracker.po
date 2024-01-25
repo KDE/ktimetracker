@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2021-11-19 14:13+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -383,7 +383,7 @@ msgstr "Összesen"
 msgid "No tasks."
 msgstr "Nincs egy feladat sem."
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -391,28 +391,28 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, fuzzy, kde-format
 #| msgid "Continue timing."
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Az időmérés folytatása."
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, fuzzy, kde-format
 #| msgid "Stop timing and revert back to the time at %1."
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "Az időmérés leállítása, visszaváltás ide: %1."
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 #| msgid "Revert timing"
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Az időmérés visszavonása"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, fuzzy, kde-format
 #| msgid "Desktop has been idle since %1. What do you want to do ?"
 msgid "Desktop has been idle since %1. What do you want to do?"

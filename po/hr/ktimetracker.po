@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-10 01:58+0000\n"
+"POT-Creation-Date: 2024-01-25 00:37+0000\n"
 "PO-Revision-Date: 2010-02-10 22:57+0100\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -382,7 +382,7 @@ msgstr "Ukupno"
 msgid "No tasks."
 msgstr ""
 
-#: idletimedetector.cpp:78
+#: idletimedetector.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -390,25 +390,25 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: idletimedetector.cpp:81
+#: idletimedetector.cpp:80
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Pokreni štopericu"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr ""
 
-#: idletimedetector.cpp:84
+#: idletimedetector.cpp:83
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Vrati na prethodno i nastavi"
 
-#: idletimedetector.cpp:88
+#: idletimedetector.cpp:87
 #, fuzzy, kde-format
 #| msgid "Desktop has been idle since %1. What should we do?"
 msgid "Desktop has been idle since %1. What do you want to do?"
