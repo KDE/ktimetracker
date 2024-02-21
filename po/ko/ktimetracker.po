@@ -719,7 +719,7 @@ msgid ""
 "context menu."
 msgstr ""
 "터치스크린을 사용하고 있고 화면 공간이 좁으면 선택하십시오. 검색 표시줄을 숨"
-"기며 클릭할 때마다 콘텍스트 메뉴를 표시합니다."
+"기며 클릭할 때마다 상황에 맞는 메뉴를 표시합니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
 #: settings/cfgdisplay.ui:45
