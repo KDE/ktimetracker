@@ -1,12 +1,12 @@
 # Copyright (C).
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2012.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2012, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: karm-0.5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-25 00:37+0000\n"
-"PO-Revision-Date: 2012-12-22 11:50+0200\n"
+"PO-Revision-Date: 2024-02-24 15:44+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -27,79 +28,75 @@ msgid "Your emails"
 msgstr "sergiu@cip.md"
 
 #: dialogs/edittimedialog.cpp:42
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task Time"
-msgstr "Modifică sarcina"
+msgstr "Modifică durata sarcinii"
 
 #: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:55
-#, fuzzy, kde-format
-#| msgid "Task"
+#, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "Sarcină"
 
 #: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:64
-#, fuzzy, kde-format
-#| msgid "Task Name"
+#, kde-format
 msgid "Task Name:"
-msgstr "Denumire sarcină"
+msgstr "Denumire sarcină:"
 
 #: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:69
 #, kde-format
 msgid "Task Description:"
-msgstr ""
+msgstr "Descriere sarcină:"
 
 #: dialogs/edittimedialog.cpp:71
 #, kde-format
 msgctxt "@title:group"
 msgid "Time Editing"
-msgstr ""
+msgstr "Modificarea duratei"
 
 #: dialogs/edittimedialog.cpp:79
 #, kde-format
 msgid "Current Time:"
-msgstr ""
+msgstr "Ora actuală:"
 
 #: dialogs/edittimedialog.cpp:82
-#, fuzzy, kde-format
-#| msgid " min"
+#, kde-format
 msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
 msgid " minute"
 msgid_plural " minutes"
-msgstr[0] " min"
-msgstr[1] " min"
-msgstr[2] " min"
+msgstr[0] " minut"
+msgstr[1] " minute"
+msgstr[2] " de minute"
 
 #: dialogs/edittimedialog.cpp:88
 #, kde-format
 msgid "Change Time By:"
-msgstr ""
+msgstr "Schimbă durata cu:"
 
 #: dialogs/edittimedialog.cpp:92
 #, kde-format
 msgid "Time After Change:"
-msgstr ""
+msgstr "Durată după schimbare:"
 
 #: dialogs/edittimedialog.cpp:98
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr "Redactare istoric..."
+msgstr "Modifică istoricul…"
 
 #: dialogs/edittimedialog.cpp:99
 #, kde-format
 msgid "To change this task's time, you have to edit its event history"
 msgstr ""
+"Pentru a schimba durata acestei sarcini, trebuie să-i modificați istoricul "
+"evenimentelor"
 
 #: dialogs/exportdialog.cpp:96
-#, fuzzy, kde-format
-#| msgid "Export Progress"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
-msgstr "Progresul exportului"
+msgstr "Exportă în fișier"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
@@ -122,63 +119,57 @@ msgstr "Toate sarcinile"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
 #: dialogs/exportdialog.ui:14
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export"
+#, kde-format
 msgid "Export"
-msgstr "&Export"
+msgstr "Exportă"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
 #: dialogs/exportdialog.ui:26
-#, fuzzy, kde-format
-#| msgid "Export Progress"
+#, kde-format
 msgid "Export Preview"
-msgstr "Progresul exportului"
+msgstr "Previzualizarea exportului"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
 #: dialogs/exportdialog.ui:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "E&xport to Clipboard"
+#, kde-format
 msgid "Copy to Clipboard"
-msgstr "E&xportă în clipboard"
+msgstr "Copiază în clipboard"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
 #: dialogs/exportdialog.ui:60
 #, kde-format
 msgid "Save As..."
-msgstr ""
+msgstr "Salvează ca…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
 #: dialogs/exportdialog.ui:75
 #, kde-format
 msgid "Report Type"
-msgstr ""
+msgstr "Tipul raportului"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
 #: dialogs/exportdialog.ui:81
 #, kde-format
 msgid "Times as CSV"
-msgstr ""
+msgstr "Duratele ca CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
 #: dialogs/exportdialog.ui:91
 #, kde-format
 msgid "History as CSV"
-msgstr ""
+msgstr "Istoricul ca CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
 #: dialogs/exportdialog.ui:98
-#, fuzzy, kde-format
-#| msgid "Export to:"
+#, kde-format
 msgid "Event Log as CSV"
-msgstr "Exportă în:"
+msgstr "Jurnalul evenimentelor ca CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
 #: dialogs/exportdialog.ui:105
 #, kde-format
 msgid "Times as Text"
-msgstr ""
+msgstr "Duratele ca text"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
 #: dialogs/exportdialog.ui:118
@@ -192,7 +183,7 @@ msgstr ""
 #: dialogs/exportdialog.ui:121
 #, kde-format
 msgid "Date Range"
-msgstr ""
+msgstr "Perioadă de timp"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: dialogs/exportdialog.ui:127
@@ -204,7 +195,7 @@ msgstr "De la:"
 #: dialogs/exportdialog.ui:150
 #, kde-format
 msgid "To:"
-msgstr "Către:"
+msgstr "Până la:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.ui:182
@@ -216,19 +207,19 @@ msgstr "ore:minute"
 #: dialogs/exportdialog.ui:191
 #, kde-format
 msgid "All Times"
-msgstr "Toți timpii"
+msgstr "Toate duratele"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
 #: dialogs/exportdialog.ui:210
 #, kde-format
 msgid "Only Selected"
-msgstr "Doar aleși"
+msgstr "Doar cele alese"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
 #: dialogs/exportdialog.ui:224
 #, kde-format
 msgid "The character used to separate one field from another in the output."
-msgstr ""
+msgstr "Caracterul folosit pentru a separa câmpurile în rezultat."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
 #: dialogs/exportdialog.ui:227
@@ -278,7 +269,7 @@ msgstr "Citate:"
 #: dialogs/exportdialog.ui:327
 #, kde-format
 msgid "All fields are quoted in the output."
-msgstr ""
+msgstr "Toate câmpurile sunt încadrate în ghilimele în rezultat."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
 #: dialogs/exportdialog.ui:331
@@ -305,7 +296,7 @@ msgstr "Timp de început"
 #: dialogs/historydialog.cpp:105
 #, kde-format
 msgid "EndTime"
-msgstr "Timp de sfîrșit"
+msgstr "Timp de sfârșit"
 
 #: dialogs/historydialog.cpp:105
 #, kde-format
@@ -317,23 +308,24 @@ msgstr "Comentariu"
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr ""
+"Puteți modifica comentariul sarcinii, timpul de început și cel de sfârșit al "
+"acesteia."
 
 #: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
 #, kde-format
 msgid "This is not a valid Date/Time."
-msgstr ""
+msgstr "Această dată și oră nu sunt valide."
 
 #: dialogs/historydialog.cpp:273
 #, kde-format
 msgid "Please select a task to delete."
-msgstr ""
+msgstr "Alegeți o sarcină de șters."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
 #: dialogs/historydialog.ui:14
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgid "Edit History"
-msgstr "Redactare istoric..."
+msgstr "Modifică istoricul"
 
 #: dialogs/taskpropertiesdialog.cpp:61
 #, kde-format
@@ -342,33 +334,35 @@ msgid ""
 "<p>Enter the name of the task here. You can choose it freely.</p>\n"
 "<p><i>Example:</i> phone with mother</p>"
 msgstr ""
+"<p>Introduceți aici denumirea sarcinii. O puteți alege liber.</p>\n"
+"<p><i>De exemplu:</i> apel cu mama</p>"
 
 #: dialogs/taskpropertiesdialog.cpp:72
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
-msgstr ""
+msgstr "Urmărire automată"
 
 #: dialogs/taskpropertiesdialog.cpp:98
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
-msgstr ""
+msgstr "%1."
 
 #: export/export.cpp:63
 #, kde-format
 msgid "Could not open \"%1\"."
-msgstr ""
+msgstr "Nu s-a putut deschide „%1”."
 
 #: export/totalsastext.cpp:84
-#, fuzzy, kde-format
+#, kde-format
 msgid "Task Totals"
-msgstr "Total"
+msgstr "Totaluri sarcină"
 
 #: export/totalsastext.cpp:87
 #, kde-format
 msgid "Time"
-msgstr "Timp"
+msgstr "Durată"
 
 #: export/totalsastext.cpp:120
 #, kde-format
@@ -638,20 +632,16 @@ msgid "Priority"
 msgstr "Prioritate"
 
 #: model/tasksmodel.cpp:39
-#, fuzzy, kde-format
-#| msgid "Percent Complete"
+#, kde-format
 msgctxt "@title:column"
 msgid "Percent Complete"
 msgstr "Procente încheiat"
 
 #: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
-#, fuzzy, kde-format
-#| msgid "Enter the name of the task here. This name is for your eyes only."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "The task name is what you call the task, it can be chosen freely."
-msgstr ""
-"Introduceți aici numele programului. Acesta este numai ca o referință pentru "
-"dumneavoastră."
+msgstr "Denumirea sarcinii poate fi aleasă liber."
 
 #: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
 #, kde-format
@@ -659,21 +649,25 @@ msgctxt "@info:whatsthis"
 msgid ""
 "The session time is the time since you last chose \"Start New Session\"."
 msgstr ""
+"Durata sesiunii arată timpul scurs de când ați ales să începeți o sesiune "
+"nouă."
 
 #: model/tasksmodel.cpp:290
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task and all its subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
-msgstr "Aceasta va șterge procesul selectat și toate subprocesele lui."
+msgstr ""
+"Durata totală a sesiunii e compusă din timpul scurs în această sesiune și "
+"toate subsarcinile acesteia."
 
 #: model/tasksmodel.cpp:294
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task and all its subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
-msgstr "Aceasta va șterge procesul selectat și toate subprocesele lui."
+msgstr ""
+"Durata totală e compusă din timpul scurs în această sarcină și toate "
+"subsarcinile acesteia."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
 #: settings/cfgbehavior.ui:17
@@ -692,7 +686,7 @@ msgstr " min"
 #: settings/cfgbehavior.ui:37
 #, kde-format
 msgid "Minimum desktop active time:"
-msgstr ""
+msgstr "Durată minimă de activitate a biroului:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
 #: settings/cfgbehavior.ui:44
@@ -750,32 +744,30 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
 #: settings/cfgdisplay.ui:45
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
+#, kde-format
 msgctxt ""
 "Choose this if you have a touchscreen and your screen real estate is "
 "precious."
 msgid "Configuration for PDA"
-msgstr "Cerere de confirmare"
+msgstr "Configurare pentru calculator de buzunar"
 
 #. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
 #: settings/cfgdisplay.ui:55
 #, kde-format
 msgid "Window Title"
-msgstr ""
+msgstr "Titlu fereastră"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
 #: settings/cfgdisplay.ui:64
 #, kde-format
 msgid "Currently opened file"
-msgstr ""
+msgstr "Fișier deschis acum"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
 #: settings/cfgdisplay.ui:71
-#, fuzzy, kde-format
-#| msgid "Total Session Time"
+#, kde-format
 msgid "Current Task and Session Time"
-msgstr "Timp total sesiune"
+msgstr "Durata sarcinii și sesiunii actuale"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: settings/cfgdisplay.ui:81
@@ -787,27 +779,25 @@ msgstr "Coloane afișate"
 #: settings/cfgdisplay.ui:87
 #, kde-format
 msgid "Session time"
-msgstr "Timp sesiune"
+msgstr "Durată sesiune"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
 #: settings/cfgdisplay.ui:94
 #, kde-format
 msgid "Cumulative task time"
-msgstr ""
+msgstr "Durată cumulată sarcini"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
 #: settings/cfgdisplay.ui:101
-#, fuzzy, kde-format
-#| msgid "Total Session Time"
+#, kde-format
 msgid "Total session time"
-msgstr "Timp total sesiune"
+msgstr "Durată totală sesiune"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
 #: settings/cfgdisplay.ui:108
-#, fuzzy, kde-format
-#| msgid "Total Time"
+#, kde-format
 msgid "Total task time"
-msgstr "Timp total"
+msgstr "Durată totală sarcină"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
 #: settings/cfgdisplay.ui:115
@@ -840,17 +830,18 @@ msgstr ""
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr ""
+"Numărul de birouri virtuale e prea mare, urmărirea biroului nu va funcționa."
 
 #: taskview.cpp:290
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
-msgstr ""
+msgstr "Se opresc temporizatorii…"
 
 #: taskview.cpp:291
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Renunță"
 
 #: taskview.cpp:361 taskview.cpp:445
 #, kde-format
@@ -866,15 +857,13 @@ msgid ""
 msgstr ""
 
 #: taskview.cpp:422
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
 msgstr "Subsarcină nouă"
 
 #: taskview.cpp:440
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
 msgstr "Modifică sarcina"
@@ -885,33 +874,30 @@ msgid "No task selected."
 msgstr "Nicio sarcină aleasă."
 
 #: taskview.cpp:520
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
 "Note: All subtasks and their history will also be deleted."
 msgstr ""
-"Sigur doriți să ștergeți acest procesul\n"
-"cu numele \"%1\"?\n"
-"OBSERVAȚIE: toate subprocesele lui vor fi șterse!"
+"Sigur doriți să ștergeți sarcina aleasă și întregul istoric al acesteia?\n"
+"Rețineți: toate subsarcinile și istoricul acestora vor fi șterse de asemenea."
 
 #: taskview.cpp:524
-#, fuzzy, kde-format
-#| msgid "Deleting Task(s)"
+#, kde-format
 msgctxt "@title:window"
 msgid "Deleting Task"
-msgstr "Se șterg sarcinile"
+msgstr "Se șterge sarcina"
 
 #: timetrackerstorage.cpp:140
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr ""
+msgstr "Eroare la încărcarea „%1”: părintele nu a putut fi găsit (uid=%2)"
 
 #: timetrackerstorage.cpp:243
-#, fuzzy, kde-format
-#| msgid "Could not save."
+#, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "Nu s-a putut salva."
+msgstr "Nu s-a putut scrie fișierul cu blocaj „%1”. E plin discul?"
 
 #: timetrackerstorage.cpp:251
 #, kde-format
@@ -920,15 +906,13 @@ msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
 #: timetrackerwidget.cpp:154
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "Începe sesiune &nouă"
 
 #: timetrackerwidget.cpp:155
-#, fuzzy, kde-format
-#| msgid "Starts a new session"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "Începe o sesiune nouă"
@@ -943,17 +927,16 @@ msgstr ""
 "Aceasta va determina resetarea timpului de sesiune pentru toate procesele."
 
 #: timetrackerwidget.cpp:165
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr "Redactare istoric..."
+msgstr "Modifică istoricul…"
 
 #: timetrackerwidget.cpp:166
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
-msgstr ""
+msgstr "Modifică istoricul tuturor sarcinilor documentului actual"
 
 #: timetrackerwidget.cpp:168
 #, kde-format
@@ -964,16 +947,16 @@ msgid ""
 msgstr ""
 
 #: timetrackerwidget.cpp:178
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
-msgstr "&Resetează timpul sesiunii"
+msgstr "&Reinițializează toate duratele"
 
 #: timetrackerwidget.cpp:179
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
-msgstr "Resetează timpul sesiunii"
+msgstr "Reinițializează toate duratele"
 
 #: timetrackerwidget.cpp:181
 #, fuzzy, kde-format
@@ -985,18 +968,16 @@ msgstr ""
 "Aceasta va determina resetarea timpului de sesiune pentru toate procesele."
 
 #: timetrackerwidget.cpp:188
-#, fuzzy, kde-format
-#| msgid "Total Time"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
-msgstr "Timp total"
+msgstr "&Pornește"
 
 #: timetrackerwidget.cpp:189
-#, fuzzy, kde-format
-#| msgid "Start timing for selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
-msgstr "Pornește temporizarea procesului selectat"
+msgstr "Pornește cronometrul sarcinii alese"
 
 #: timetrackerwidget.cpp:191
 #, fuzzy, kde-format
@@ -1022,68 +1003,64 @@ msgstr ""
 "celorlalte procese."
 
 #: timetrackerwidget.cpp:205
-#, fuzzy, kde-format
-#| msgid "S&top"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
-msgstr "&Oprește"
+msgstr "Opreș&te"
 
 #: timetrackerwidget.cpp:206
-#, fuzzy, kde-format
-#| msgid "Stop timing of the selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
-msgstr "Oprește temporizarea procesului selectat"
+msgstr "Oprește cronometrul sarcinii alese"
 
 #: timetrackerwidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "Stop timing of the selected task"
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
-msgstr "Oprește temporizarea procesului selectat"
+msgstr "Oprește cronometrul sarcinii alese"
 
 #: timetrackerwidget.cpp:214
-#, fuzzy, kde-format
-#| msgid "Show Searchbar"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
-msgstr "Arată bara de căutare"
+msgstr "Focalizează bara de căutare"
 
 #: timetrackerwidget.cpp:215
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
-msgstr ""
+msgstr "Stabilește focalizare pe bara de căutare"
 
 #: timetrackerwidget.cpp:216
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
-msgstr ""
+msgstr "Stabilește focalizare pe bara de căutare"
 
 #: timetrackerwidget.cpp:223
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
-msgstr "&Resetează timpul sesiunii"
+msgstr "Oprește to&ate cronometrele"
 
 #: timetrackerwidget.cpp:224
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
-msgstr "Oprește temporizarea procesului selectat"
+msgstr "Oprește toate cronometrele active"
 
 #: timetrackerwidget.cpp:225
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
-msgstr "Oprește temporizarea procesului selectat"
+msgstr "Oprește toate cronometrele active"
 
 #: timetrackerwidget.cpp:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
-msgstr ""
+msgstr "Urmărește aplicațiile active"
 
 #: timetrackerwidget.cpp:235
 #, kde-format
@@ -1103,150 +1080,129 @@ msgid ""
 msgstr ""
 
 #: timetrackerwidget.cpp:249
-#, fuzzy, kde-format
-#| msgid "&New Task..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
-msgstr "Sarcină &nouă..."
+msgstr "Sarcină &nouă…"
 
 #: timetrackerwidget.cpp:250
-#, fuzzy, kde-format
-#| msgid "Create new top level task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
-msgstr "Creează un nou proces principal"
+msgstr "Creează o sarcină nouă de nivel superior"
 
 #: timetrackerwidget.cpp:251
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
-msgstr "Aceasta determină crearea un proces principal, nesubordonat."
+msgstr "Aceasta va crea o sarcină nouă de nivel superior."
 
 #: timetrackerwidget.cpp:259
-#, fuzzy, kde-format
-#| msgid "New &Subtask..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
-msgstr "&Subsarcină nouă..."
+msgstr "&Subsarcină nouă…"
 
 #: timetrackerwidget.cpp:260
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
-msgstr "Aceasta determină crearea un proces principal, nesubordonat."
+msgstr "Creează o subsarcină nouă pentru sarcina aleasă acum"
 
 #: timetrackerwidget.cpp:261
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
-msgstr "Aceasta determină crearea un proces principal, nesubordonat."
+msgstr "Aceasta va crea o subsarcină nouă pentru sarcina aleasă acum."
 
 #: timetrackerwidget.cpp:269
-#, fuzzy, kde-format
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "Ș&terge"
 
 #: timetrackerwidget.cpp:270
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "Șterge sarcina aleasă"
 
 #: timetrackerwidget.cpp:271
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task and all its subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
-msgstr "Aceasta va șterge procesul selectat și toate subprocesele lui."
+msgstr "Va șterge sarcinile alese și toate subsarcinile acestora."
 
 #: timetrackerwidget.cpp:279
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
-msgstr ""
+msgstr "&Proprietăți"
 
 #: timetrackerwidget.cpp:280
-#, fuzzy, kde-format
-#| msgid "Edit name or times for selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
-msgstr "Editează numele sau timpii pentru procesul selectat"
+msgstr "Modifică denumirea sau descrierea pentru sarcina aleasă"
 
 #: timetrackerwidget.cpp:282
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "This will bring up a dialog box where you may edit the parameters for the "
 "selected task."
 msgstr ""
-"Aceasta vă permite să editați parametrii procesului selectat prin afișarea "
-"dialogului de editare."
+"Va deschide o casetă de dialog în care puteți modifica parametrii pentru "
+"sarcina aleasă."
 
 #: timetrackerwidget.cpp:291
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
-msgstr "Timp sesiune"
+msgstr "Modifică dura&ta…"
 
 #: timetrackerwidget.cpp:292
-#, fuzzy, kde-format
-#| msgid "Edit name or times for selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
-msgstr "Editează numele sau timpii pentru procesul selectat"
+msgstr "Modifică durata pentru sarcina aleasă"
 
 #: timetrackerwidget.cpp:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "This will bring up a dialog box where you may edit the times for the "
 "selected task."
 msgstr ""
-"Aceasta vă permite să editați parametrii procesului selectat prin afișarea "
-"dialogului de editare."
+"Va deschide o casetă de dialog în care puteți modifica duratele pentru "
+"sarcina aleasă."
 
 #: timetrackerwidget.cpp:303
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
-msgstr "&Marchează ca încheiată"
+msgstr "&Marchează ca finalizată"
 
 #: timetrackerwidget.cpp:311
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
-msgstr "&Marchează ca încheiată"
+msgstr "&Marchează ca nefinalizată"
 
 #: timetrackerwidget.cpp:319
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr "&Export"
+msgstr "&Exportă…"
 
 #: timetrackerwidget.cpp:326
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
-msgstr ""
+msgstr "Importă sarcini din &Planificator…"
 
 #: timetrackerwidget.cpp:338
-#, fuzzy, kde-format
-#| msgid "Show Searchbar"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Arată bara de căutare"
@@ -1255,12 +1211,10 @@ msgstr "Arată bara de căutare"
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
-msgstr ""
+msgstr "Comportament"
 
 #: timetrackerwidget.cpp:478
-#, fuzzy, kde-format
-#| msgctxt "settings page for customizing user interface"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Aspect"
@@ -1269,11 +1223,10 @@ msgstr "Aspect"
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
-msgstr ""
+msgstr "Stocare"
 
 #: timetrackerwidget.cpp:520
-#, fuzzy, kde-format
-#| msgid "New Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Sarcină nouă"
@@ -1285,6 +1238,8 @@ msgid ""
 "There is no history yet. Start and stop a task and you will have an entry in "
 "your history."
 msgstr ""
+"Nu există istoric. Porniți și opriți o sarcină și veți avea o înregistrare "
+"în istoric."
 
 #: timetrackerwidget.cpp:609
 #, kde-format
@@ -1292,59 +1247,60 @@ msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
 msgstr ""
+"Sigur doriți să reinițializați durata la zero pentru toate sarcinile? "
+"Aceasta va șterge întregul istoric."
 
 #: timetrackerwidget.cpp:611
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
-msgstr "Cerere de confirmare"
+msgstr "E necesară confirmarea"
 
 #: timetrackerwidget.cpp:612
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
-msgstr "&Resetează timpul sesiunii"
+msgstr "Reinițializează toate duratele"
 
 #: timetrackerwidget.cpp:801
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
-msgstr ""
+msgstr "Salvarea a eșuat, probabil pentru că fișierul nu a putut fi blocat."
 
 #: timetrackerwidget.cpp:803
 #, kde-format
 msgid "Could not modify calendar resource."
-msgstr ""
+msgstr "Resursa de calendar nu a putut fi modificată."
 
 #: timetrackerwidget.cpp:805
 #, kde-format
 msgid "Out of memory--could not create object."
-msgstr ""
+msgstr "Memorie epuizată – obiectul nu a putut fi creat."
 
 #: timetrackerwidget.cpp:807
 #, kde-format
 msgid "UID not found."
-msgstr ""
+msgstr "UID-ul nu a fost găsit."
 
 #: timetrackerwidget.cpp:809
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr ""
+msgstr "Dată eronată – formatul e YYYY-MM-DD."
 
 #: timetrackerwidget.cpp:811
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr ""
+msgstr "Timp eronat – formatul e YYYY-MM-DDTHH:MM:SS."
 
 #: timetrackerwidget.cpp:813
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
-msgstr ""
+msgstr "Durată eronată a sarcinii – trebuie să fie mai mare ca zero."
 
 #: timetrackerwidget.cpp:815
 #, kde-format
 msgid "Invalid error number: %1"
-msgstr ""
+msgstr "Număr de eroare eronat: %1"
 
 #: timetrackerwidget.cpp:1044
 #, kde-format
@@ -1359,23 +1315,22 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
-msgstr ""
+msgstr "Ați creat deja o sarcină, puteți porni și opri cronometrarea."
 
 #: tray.cpp:95
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
-msgstr ""
+msgstr ", …"
 
 #: treeviewheadercontextmenu.cpp:46
 #, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
-msgstr ""
+msgstr "Coloane"
 
 #: widgets/searchline.cpp:37
-#, fuzzy, kde-format
-#| msgid "Search or add task"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search or add task"
 msgstr "Caută sau adaugă sarcină"
@@ -1390,39 +1345,31 @@ msgid ""
 msgstr ""
 
 #: widgets/taskswidget.cpp:143
-#, fuzzy, kde-format
-#| msgid "%1 %"
+#, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
 msgstr "%1 %"
 
 #: widgets/taskswidget.cpp:154
-#, fuzzy, kde-format
-#| msgid "unspecified"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
 msgstr "nespecificat"
 
 #: widgets/taskswidget.cpp:157
-#, fuzzy, kde-format
-#| msgctxt "combox entry for highest priority"
-#| msgid "1 (highest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
 msgstr "1 (cea mai mare)"
 
 #: widgets/taskswidget.cpp:160
-#, fuzzy, kde-format
-#| msgctxt "combox entry for medium priority"
-#| msgid "5 (medium)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
 msgstr "5 (medie)"
 
 #: widgets/taskswidget.cpp:163
-#, fuzzy, kde-format
-#| msgctxt "combox entry for lowest priority"
-#| msgid "9 (lowest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
 msgstr "9 (cea mai mică)"
