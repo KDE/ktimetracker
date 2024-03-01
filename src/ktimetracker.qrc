@@ -1,3 +1,8 @@
+<!--
+# SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
 <RCC>
     <qresource prefix="/kxmlgui5/ktimetracker">
         <file>ktimetrackerui.rc</file>

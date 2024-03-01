@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DisplayPage</class>
+<!--
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-FileCopyrightText: 2021 David Stächele <david@daiwai.de>
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<class>DisplayPage</class>
  <widget class="QWidget" name="DisplayPage">
   <property name="geometry">
    <rect>

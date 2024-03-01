@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
+# SPDX-FileCopyrightText: 2022 Toni Asensi Esteve <toni.asensi@kdemail.net>
+# SPDX-FileCopyrightText: 2024 Laurent Montel <montel@kde.org>
+
+# SPDX-License-Identifier: CC0-1.0
+
 [Desktop Entry]
 Name=KTimeTracker
 Name[ca]=KTimeTracker

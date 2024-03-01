@@ -1,3 +1,13 @@
+# SPDX-FileCopyrightText: 2019, 2022, 2023 Alexander Potashev <aspotashev@gmail.com>
+# SPDX-FileCopyrightText: 2019 Andreas Sturmlechner <asturm@gentoo.org>
+# SPDX-FileCopyrightText: 2019 Friedrich W. H. Kossebau <kossebau@kde.org>
+# SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
+# SPDX-FileCopyrightText: 2022 Christophe Giboudeaux <christophe@krop.fr>
+# SPDX-FileCopyrightText: 2023 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
+# SPDX-FileCopyrightText: 2024 Konstantin Avadov <konstantin.avadov@yahoo.com>
+
+# SPDX-License-Identifier: BSD-3-Clause
+
 cmake_minimum_required(VERSION 3.20)
 set(APP_VERSION_NUMBER "6.0.0")
 project(ktimetracker VERSION ${APP_VERSION_NUMBER})

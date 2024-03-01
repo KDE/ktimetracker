@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-License-Identifier: CC0-1.0
+-->
+
 KTimeTracker 5.0 (release date: ?)
 --------
 - Ported to KDE Frameworks 5

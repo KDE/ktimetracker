@@ -1,0 +1,16 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: ktimetracker
+Upstream-Contact: Thiago Masato Costa Sueto <thiago.sueto@kde.org>
+Source: https://invent.kde.org/pim/ktimetracker
+
+Files: .flatpak-manifest.json
+Copyright: 2023 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
+License: CC0-1.0
+
+Files: icons/*.png icons/*.svg
+Copyright: 2014 Uri Herrera <uri_herrera@nitrux.in> and others
+License: LGPL-3.0-only
+
+Files: test/*.ics test/README src/tests/*.ics src/tests/*.planner pics/*.xpm pics/*.gif doc/*.png
+Copyright: 2019 Alexander Potashev <aspotashev@gmail.com>
+License: CC0-1.0

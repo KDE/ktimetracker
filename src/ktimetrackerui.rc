@@ -1,4 +1,8 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<!--
+SPDX-FileCopyrightText: 2019, 2022 Alexander Potashev <aspotashev@gmail.com>
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
 <gui name="ktimetracker" version="393">
     <MenuBar>
         <Menu name="file">

@@ -1,3 +1,8 @@
+<!--
+# SPDX-FileCopyrightText: 2024 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
+# SPDX-License-Identifier: CC0-1.0
+-->
+
 # Contributing to KTimeTracker
 
 The source code for KTimeTracker can be found at https://invent.kde.org/pim/ktimetracker

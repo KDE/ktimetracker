@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+# SPDX-FileCopyrightText: 2021 David Stächele <david@daiwai.de>
+# SPDX-License-Identifier: BSD-3-Clause
+
 set(ktimetracker_SRCS
     dialogs/edittimedialog.cpp
     dialogs/taskpropertiesdialog.cpp

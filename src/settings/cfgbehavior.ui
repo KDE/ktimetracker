@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+<!--
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
  <class>BehaviorPage</class>
  <widget class="QWidget" name="BehaviorPage">
   <property name="geometry">
