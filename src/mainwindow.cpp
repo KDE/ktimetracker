@@ -93,8 +93,7 @@ MainWindow::~MainWindow()
 
 bool MainWindow::queryClose()
 {
-    auto *app = dynamic_cast<QGuiApplication *>(QGuiApplication::instance());
-    if (!m_quitRequested && app && !app->isSavingSession()) {
+    if (!m_quitRequested && qApp && !qApp->isSavingSession()) {
         hide();
         return false;
     }
