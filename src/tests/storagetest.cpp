@@ -8,6 +8,7 @@
 
 #include <KCalendarCore/FileStorage>
 #include <KCalendarCore/ICalFormat>
+#include <KCalendarCore/MemoryCalendar>
 
 #include "helpers.h"
 #include "model/task.h"
