@@ -89,3 +89,13 @@ The rest consists of minor dialogs or actions.
 * Remove mention to karm.ics files
 * Check why openFile() and saveFile() are commented out
 * Find out the practical differente between timetrackerstorage and file/icalformatkio
+
+## Notes
+
+* When running clangd, you might see the warning
+"Must specify at least one argument for '...' parameter of variadic macro"
+when using qCDebug / qCWarning. This is fine and ignorable and in fact is
+present in ECM KDECompilerSettings by default. You are probably
+using an IDE like QtCreator which has its own separate settings for clangd,
+refer to https://planet.kde.org/ahmad-samir-2021-10-07-gcc-clang-d-lsp-client-kate-and-variadic-macro-warnings-a-short-story/
+to disable these warnings.
