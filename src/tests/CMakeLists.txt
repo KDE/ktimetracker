@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
-# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-License-Identifier: BSD-2-Clause
 
 find_package(Qt6Test CONFIG REQUIRED)
 include(ECMAddTests)

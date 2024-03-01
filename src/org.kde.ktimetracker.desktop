@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2022 Toni Asensi Esteve <toni.asensi@kdemail.net>
 # SPDX-FileCopyrightText: 2024 Laurent Montel <montel@kde.org>
 
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: GPL-2.0-or-later
 
 [Desktop Entry]
 Name=KTimeTracker

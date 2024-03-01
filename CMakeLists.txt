@@ -6,7 +6,7 @@
 # SPDX-FileCopyrightText: 2023 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
 # SPDX-FileCopyrightText: 2024 Konstantin Avadov <konstantin.avadov@yahoo.com>
 
-# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-License-Identifier: BSD-2-Clause
 
 cmake_minimum_required(VERSION 3.20)
 set(APP_VERSION_NUMBER "6.0.0")

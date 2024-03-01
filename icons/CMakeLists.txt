@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
-# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-License-Identifier: BSD-2-Clause
 
 qt_add_resources(icons_SRCS icons.qrc)
 add_library(icons OBJECT ${icons_SRCS})

@@ -2,7 +2,7 @@
 
 # SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
 # SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: GPL-2.0-or-later
 
 $EXTRACTRC `find . -name \*.ui` >> rc.cpp
 $EXTRACTRC `find . -name \*.rc` >> rc.cpp

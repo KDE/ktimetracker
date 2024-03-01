@@ -1,7 +1,7 @@
 <!--
 # SPDX-FileCopyrightText: 2021 Alexander Potashev <aspotashev@gmail.com>
 # SPDX-FileCopyrightText: 2024 Thiago Masato Costa Sueto <thiago.sueto@kde.org>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
 # KTimeTracker
