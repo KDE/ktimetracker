@@ -11,9 +11,6 @@
 #include <KCalendarCore/Event>
 #include <KCalendarCore/Todo>
 
-#include "desktoplist.h"
-#include "file/filecalendar.h"
-#include "reportcriteria.h"
 
 QT_BEGIN_NAMESPACE
 class QDateTime;

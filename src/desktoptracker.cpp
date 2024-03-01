@@ -13,7 +13,6 @@
 #include <KWindowSystem>
 
 #include "ktimetracker.h"
-#include "ktimetrackerutility.h"
 #include "ktt_debug.h"
 
 DesktopTracker::DesktopTracker()

@@ -11,7 +11,6 @@
 #include <KWindowInfo>
 #include <KWindowSystem>
 
-#include "ktimetrackerutility.h"
 
 FocusDetector::FocusDetector()
 {

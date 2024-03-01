@@ -15,7 +15,6 @@
 #include <KMessageBox>
 #include <KStandardGuiItem>
 
-#include "file/filecalendar.h"
 #include "ktt_debug.h"
 #include "model/event.h"
 #include "model/eventsmodel.h"

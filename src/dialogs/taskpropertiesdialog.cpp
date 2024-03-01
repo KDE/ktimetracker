@@ -19,7 +19,6 @@
 #include <KPluralHandlingSpinBox>
 #include <KX11Extras>
 #include <KWindowSystem>
-#include "ktimetrackerutility.h"
 
 TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
                                            const QString &caption,

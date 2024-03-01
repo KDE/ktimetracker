@@ -22,7 +22,6 @@
 
 #include <KLocalizedString>
 
-#include "ktt_debug.h"
 #include "mainwindow.h"
 #include "model/task.h"
 #include "timetrackerwidget.h"

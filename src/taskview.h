@@ -11,7 +11,6 @@
 #include <QList>
 
 #include "desktoplist.h"
-#include "reportcriteria.h"
 #include "timetrackerstorage.h"
 
 QT_BEGIN_NAMESPACE

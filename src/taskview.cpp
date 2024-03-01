@@ -16,7 +16,6 @@
 #include <KMessageBox>
 
 #include "desktoptracker.h"
-#include "dialogs/edittimedialog.h"
 #include "dialogs/exportdialog.h"
 #include "dialogs/historydialog.h"
 #include "dialogs/taskpropertiesdialog.h"
