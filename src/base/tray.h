@@ -11,6 +11,8 @@
 #include <QList>
 
 #include <KStatusNotifierItem>
+#include <KXmlGuiWindow>
+
 
 QT_BEGIN_NAMESPACE
 class QMovie;
@@ -24,7 +26,7 @@ class TrayIcon : public KStatusNotifierItem
     Q_OBJECT
 
 public:
-    explicit TrayIcon(MainWindow *parent);
+    explicit TrayIcon(KXmlGuiWindow *parent);
     ~TrayIcon() override = default;
 
 private:

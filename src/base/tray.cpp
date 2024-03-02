@@ -22,11 +22,10 @@
 
 #include <KLocalizedString>
 
-#include "mainwindow.h"
 #include "model/task.h"
 #include "timetrackerwidget.h"
 
-TrayIcon::TrayIcon(MainWindow *parent)
+TrayIcon::TrayIcon(KXmlGuiWindow *parent)
     : KStatusNotifierItem(parent)
 {
     Q_INIT_RESOURCE(pics);
