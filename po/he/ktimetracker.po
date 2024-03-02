@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 8858.0.karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-25 00:37+0000\n"
+"POT-Creation-Date: 2024-03-02 00:38+0000\n"
 "PO-Revision-Date: 2023-12-13 22:13+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -38,40 +38,40 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-l10n-he@kde.org"
 
-#: dialogs/edittimedialog.cpp:42
+#: dialogs/edittimedialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "עריכת זמן המשימה"
 
-#: dialogs/edittimedialog.cpp:50 dialogs/taskpropertiesdialog.cpp:55
+#: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:40
 #, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "משימה"
 
-#: dialogs/edittimedialog.cpp:61 dialogs/taskpropertiesdialog.cpp:64
+#: dialogs/edittimedialog.cpp:47 dialogs/taskpropertiesdialog.cpp:49
 #, kde-format
 msgid "Task Name:"
 msgstr "שם המשימה:"
 
-#: dialogs/edittimedialog.cpp:68 dialogs/taskpropertiesdialog.cpp:69
+#: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:54
 #, kde-format
 msgid "Task Description:"
 msgstr "תיאור משימה:"
 
-#: dialogs/edittimedialog.cpp:71
+#: dialogs/edittimedialog.cpp:57
 #, kde-format
 msgctxt "@title:group"
 msgid "Time Editing"
 msgstr "עריכת זמן"
 
-#: dialogs/edittimedialog.cpp:79
+#: dialogs/edittimedialog.cpp:65
 #, kde-format
 msgid "Current Time:"
 msgstr "זמן נוכחי:"
 
-#: dialogs/edittimedialog.cpp:82
+#: dialogs/edittimedialog.cpp:68
 #, kde-format
 msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
 msgid " minute"
@@ -81,108 +81,108 @@ msgstr[1] " דקות"
 msgstr[2] " דקות"
 msgstr[3] " דקות"
 
-#: dialogs/edittimedialog.cpp:88
+#: dialogs/edittimedialog.cpp:74
 #, kde-format
 msgid "Change Time By:"
 msgstr "הזחת הזמן ב־:"
 
-#: dialogs/edittimedialog.cpp:92
+#: dialogs/edittimedialog.cpp:78
 #, kde-format
 msgid "Time After Change:"
 msgstr "הזמן לאחר השינוי:"
 
-#: dialogs/edittimedialog.cpp:98
+#: dialogs/edittimedialog.cpp:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
 msgstr "עריכת היסטוריה…"
 
-#: dialogs/edittimedialog.cpp:99
+#: dialogs/edittimedialog.cpp:85
 #, kde-format
 msgid "To change this task's time, you have to edit its event history"
 msgstr "כדי לשנות את הזמן של המשימה הזאת, צריך לערוך את היסטוריית האירועים שלה"
 
-#: dialogs/exportdialog.cpp:96
+#: dialogs/exportdialog.cpp:81
 #, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
 msgstr "ייצוא לקובץ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
-#: dialogs/exportdialog.cpp:117 dialogs/exportdialog.ui:177
+#: dialogs/exportdialog.cpp:102 dialogs/exportdialog.ui:184
 #, kde-format
 msgctxt "format to display times"
 msgid "Decimal"
 msgstr "עשרוני"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
-#: dialogs/exportdialog.cpp:137 dialogs/exportdialog.ui:196
+#: dialogs/exportdialog.cpp:122 dialogs/exportdialog.ui:203
 #, kde-format
 msgid "Session Times"
 msgstr "זמני הפעלות"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
-#: dialogs/exportdialog.cpp:138 dialogs/exportdialog.ui:205
+#: dialogs/exportdialog.cpp:123 dialogs/exportdialog.ui:212
 #, kde-format
 msgid "All Tasks"
 msgstr "כל המשימות"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
-#: dialogs/exportdialog.ui:14
+#: dialogs/exportdialog.ui:21
 #, kde-format
 msgid "Export"
 msgstr "ייצוא"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
-#: dialogs/exportdialog.ui:26
+#: dialogs/exportdialog.ui:33
 #, kde-format
 msgid "Export Preview"
 msgstr "ייצוא תצוגה מקדימה"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
-#: dialogs/exportdialog.ui:50
+#: dialogs/exportdialog.ui:57
 #, kde-format
 msgid "Copy to Clipboard"
 msgstr "העתקה ללוח הגזירים"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
-#: dialogs/exportdialog.ui:60
+#: dialogs/exportdialog.ui:67
 #, kde-format
 msgid "Save As..."
 msgstr "שמירה בשם…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
-#: dialogs/exportdialog.ui:75
+#: dialogs/exportdialog.ui:82
 #, kde-format
 msgid "Report Type"
 msgstr "סוג הדיווח"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesCsv)
-#: dialogs/exportdialog.ui:81
+#: dialogs/exportdialog.ui:88
 #, kde-format
 msgid "Times as CSV"
 msgstr "זמנים כ־CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioHistoryCsv)
-#: dialogs/exportdialog.ui:91
+#: dialogs/exportdialog.ui:98
 #, kde-format
 msgid "History as CSV"
 msgstr "היסטוריה כ־CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
-#: dialogs/exportdialog.ui:98
+#: dialogs/exportdialog.ui:105
 #, kde-format
 msgid "Event Log as CSV"
 msgstr "יומן אירועים כ־CSV"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
-#: dialogs/exportdialog.ui:105
+#: dialogs/exportdialog.ui:112
 #, kde-format
 msgid "Times as Text"
 msgstr "זמנים כטקסט"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDateRange)
-#: dialogs/exportdialog.ui:118
+#: dialogs/exportdialog.ui:125
 #, kde-format
 msgid ""
 "An inclusive date range for reporting on time card history.  Not enabled "
@@ -192,152 +192,152 @@ msgstr ""
 "סיכומים."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
-#: dialogs/exportdialog.ui:121
+#: dialogs/exportdialog.ui:128
 #, kde-format
 msgid "Date Range"
 msgstr "טווח תאריכים"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: dialogs/exportdialog.ui:127
+#: dialogs/exportdialog.ui:134
 #, kde-format
 msgid "From:"
 msgstr "מאת:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: dialogs/exportdialog.ui:150
+#: dialogs/exportdialog.ui:157
 #, kde-format
 msgid "To:"
 msgstr "אל:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
-#: dialogs/exportdialog.ui:182
+#: dialogs/exportdialog.ui:189
 #, kde-format
 msgid "Hours:Minutes"
 msgstr "שעות:דקות"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
-#: dialogs/exportdialog.ui:191
+#: dialogs/exportdialog.ui:198
 #, kde-format
 msgid "All Times"
 msgstr "כל הזמנים"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
-#: dialogs/exportdialog.ui:210
+#: dialogs/exportdialog.ui:217
 #, kde-format
 msgid "Only Selected"
 msgstr "רק הנבחרים"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, grpDelimiter)
-#: dialogs/exportdialog.ui:224
+#: dialogs/exportdialog.ui:231
 #, kde-format
 msgid "The character used to separate one field from another in the output."
 msgstr "התו המשמש להפרדה בין שדות בקובץ הפלט."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDelimiter)
-#: dialogs/exportdialog.ui:227
+#: dialogs/exportdialog.ui:234
 #, kde-format
 msgid "Delimiter"
 msgstr "תו מפריד"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioComma)
-#: dialogs/exportdialog.ui:233
+#: dialogs/exportdialog.ui:240
 #, kde-format
 msgid "Comma"
 msgstr "פסיק"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioSemicolon)
-#: dialogs/exportdialog.ui:243
+#: dialogs/exportdialog.ui:250
 #, kde-format
 msgid "Semicolon"
 msgstr "נקודתיים"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioOther)
-#: dialogs/exportdialog.ui:250
+#: dialogs/exportdialog.ui:257
 #, kde-format
 msgctxt "user can set an user defined delimiter"
 msgid "Other:"
 msgstr "אחר:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTab)
-#: dialogs/exportdialog.ui:257
+#: dialogs/exportdialog.ui:264
 #, kde-format
 msgctxt "tabulator delimiter"
 msgid "Tab"
 msgstr "לשונית"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
-#: dialogs/exportdialog.ui:264
+#: dialogs/exportdialog.ui:271
 #, kde-format
 msgid "Space"
 msgstr "רווח"
 
 #. i18n: ectx: property (text), widget (QLabel, quotesLabel)
-#: dialogs/exportdialog.ui:308
+#: dialogs/exportdialog.ui:315
 #, kde-format
 msgid "Quotes:"
 msgstr "גרשיים:"
 
 #. i18n: ectx: property (whatsThis), widget (QComboBox, cboQuote)
-#: dialogs/exportdialog.ui:327
+#: dialogs/exportdialog.ui:334
 #, kde-format
 msgid "All fields are quoted in the output."
 msgstr "כל השדות מצוטטים בפלט."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
-#: dialogs/exportdialog.ui:331
+#: dialogs/exportdialog.ui:338
 #, kde-format
 msgid "\""
 msgstr "\""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
-#: dialogs/exportdialog.ui:336
+#: dialogs/exportdialog.ui:343
 #, kde-format
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:105 export/totalsastext.cpp:87
+#: dialogs/historydialog.cpp:89 export/totalsastext.cpp:72
 #, kde-format
 msgid "Task"
 msgstr "משימה"
 
-#: dialogs/historydialog.cpp:105
+#: dialogs/historydialog.cpp:89
 #, kde-format
 msgid "StartTime"
 msgstr "זמן התחלה"
 
-#: dialogs/historydialog.cpp:105
+#: dialogs/historydialog.cpp:89
 #, kde-format
 msgid "EndTime"
 msgstr "זמן סיום"
 
-#: dialogs/historydialog.cpp:105
+#: dialogs/historydialog.cpp:89
 #, kde-format
 msgid "Comment"
 msgstr "הערה"
 
-#: dialogs/historydialog.cpp:146
+#: dialogs/historydialog.cpp:130
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr "אפשר לשנות את ההערה, זמן ההתחלה והסיום של המשימה הזאת."
 
-#: dialogs/historydialog.cpp:197 dialogs/historydialog.cpp:217
+#: dialogs/historydialog.cpp:181 dialogs/historydialog.cpp:201
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "אלו לא תאריך/שעה תקפים."
 
-#: dialogs/historydialog.cpp:273
+#: dialogs/historydialog.cpp:257
 #, kde-format
 msgid "Please select a task to delete."
 msgstr "נא לבחור משימה למחיקה."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
-#: dialogs/historydialog.ui:14
+#: dialogs/historydialog.ui:21
 #, kde-format
 msgid "Edit History"
 msgstr "עריכת היסטוריה"
 
-#: dialogs/taskpropertiesdialog.cpp:61
+#: dialogs/taskpropertiesdialog.cpp:46
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -347,45 +347,45 @@ msgstr ""
 "<p>נא למלא כאן את שם המשימה. שדה פתוח לגמרי.</p>\n"
 "<p><i>לדוגמה:</i> להתקשר לאימא</p>"
 
-#: dialogs/taskpropertiesdialog.cpp:72
+#: dialogs/taskpropertiesdialog.cpp:57
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "מעקב אוטומטי"
 
-#: dialogs/taskpropertiesdialog.cpp:98
+#: dialogs/taskpropertiesdialog.cpp:83
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
 msgstr "%1."
 
-#: export/export.cpp:63
+#: export/export.cpp:49
 #, kde-format
 msgid "Could not open \"%1\"."
 msgstr "אי אפשר לפתוח את „%1”."
 
-#: export/totalsastext.cpp:84
+#: export/totalsastext.cpp:69
 #, kde-format
 msgid "Task Totals"
 msgstr "סך הכול למשימות"
 
-#: export/totalsastext.cpp:87
+#: export/totalsastext.cpp:72
 #, kde-format
 msgid "Time"
 msgstr "זמן"
 
-#: export/totalsastext.cpp:120
+#: export/totalsastext.cpp:105
 #, kde-format
 msgctxt "total time of all tasks"
 msgid "Total"
 msgstr "סך הכול"
 
-#: export/totalsastext.cpp:122
+#: export/totalsastext.cpp:107
 #, kde-format
 msgid "No tasks."
 msgstr "אין משימות."
 
-#: idletimedetector.cpp:77
+#: idletimedetector.cpp:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -395,300 +395,300 @@ msgstr ""
 "החלת זמן חוסר הפעילות מאז %1 על כל המתזמנים\n"
 "הפעילים ולדאוג שימשיכו לרוץ."
 
-#: idletimedetector.cpp:80
+#: idletimedetector.cpp:65
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "המשך תזמון"
 
-#: idletimedetector.cpp:82
+#: idletimedetector.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "עצירת התזמון וחזרה לזמן ב־%1"
 
-#: idletimedetector.cpp:83
+#: idletimedetector.cpp:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "שחזור תזמון"
 
-#: idletimedetector.cpp:87
+#: idletimedetector.cpp:72
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "שולחן העבודה לא פעיל מאז %1. מה לעשות?"
 
 #. i18n: ectx: Menu (clock)
-#: ktimetrackerui.rc:19
+#: ktimetrackerui.rc:23
 #, kde-format
 msgid "&Clock"
 msgstr "&שעון"
 
 #. i18n: ectx: Menu (task)
-#: ktimetrackerui.rc:26
+#: ktimetrackerui.rc:30
 #, kde-format
 msgid "&Task"
 msgstr "מ&שימה"
 
 #. i18n: ectx: Menu (settings)
-#: ktimetrackerui.rc:36
+#: ktimetrackerui.rc:40
 #, kde-format
 msgid "&Settings"
 msgstr "ה&גדרות"
 
 #. i18n: ectx: ToolBar (mainToolBar)
-#: ktimetrackerui.rc:41
+#: ktimetrackerui.rc:45
 #, kde-format
 msgid "Main Toolbar"
 msgstr "סרגל כלים ראשי"
 
 #. i18n: ectx: ToolBar (taskToolBar)
-#: ktimetrackerui.rc:50
+#: ktimetrackerui.rc:54
 #, kde-format
 msgid "Tasks"
 msgstr "משימות"
 
-#: main.cpp:97 model/event.cpp:167 model/eventsmodel.cpp:126
+#: main.cpp:79 model/event.cpp:153 model/eventsmodel.cpp:112
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:99
+#: main.cpp:81
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "כלי מעקב זמן ל־KDE"
 
-#: main.cpp:101
+#: main.cpp:83
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr "כל הזכויות שמורות © 1997‏-2019 מפתח KTimeTracker"
 
-#: main.cpp:105
+#: main.cpp:87
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr "אלכסנדר פוטאשב"
 
-#: main.cpp:106
+#: main.cpp:88
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "מתחזק נוכחי (מאז 2019)"
 
-#: main.cpp:108
+#: main.cpp:90
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "תורסתן סטרק"
 
-#: main.cpp:109
+#: main.cpp:91
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr "מתחזק (2006‏-2012)"
 
-#: main.cpp:111
+#: main.cpp:93
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "מארק בוצ׳יארלי"
 
-#: main.cpp:112
+#: main.cpp:94
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr "מתחזק (2005‏-2006)"
 
-#: main.cpp:114
+#: main.cpp:96
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "ג׳ספר פדרסן"
 
-#: main.cpp:115
+#: main.cpp:97
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr "מתחזק (2000‏-2005)"
 
-#: main.cpp:117
+#: main.cpp:99
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "סירטג׳ סינג קאנג"
 
-#: main.cpp:118
+#: main.cpp:100
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "יוצר מקורי"
 
-#: main.cpp:120
+#: main.cpp:102
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "מתיאס זוקן"
 
-#: main.cpp:121
+#: main.cpp:103
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr "מפתח (ב־2007)"
 
-#: main.cpp:123
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "קאל דלהיימר"
 
-#: main.cpp:124
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr "מפתח (1999-‏2000)"
 
-#: main.cpp:126
+#: main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "אלן וינטר"
 
-#: main.cpp:127 main.cpp:130
+#: main.cpp:109 main.cpp:112
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr "מפתח"
 
-#: main.cpp:129
+#: main.cpp:111
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "דוד פור"
 
-#: main.cpp:141
+#: main.cpp:123
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
 msgstr "נתיב או כתובת של קובץ iCalendar לפתיחה."
 
-#: mainwindow.cpp:52
+#: mainwindow.cpp:37
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "הגדרת KTimeTracker…"
 
-#: mainwindow.cpp:152 tray.cpp:90
+#: mainwindow.cpp:136 tray.cpp:74
 #, kde-format
 msgid "No active tasks"
 msgstr "אין משימות פעילות"
 
-#: mainwindow.cpp:162 tray.cpp:110
+#: mainwindow.cpp:146 tray.cpp:94
 #, kde-format
 msgctxt "separator between task names"
 msgid ", "
 msgstr ", "
 
-#: model/tasksmodel.cpp:33
+#: model/tasksmodel.cpp:19
 #, kde-format
 msgctxt "@title:column"
 msgid "Task Name"
 msgstr "שם המשימה"
 
-#: model/tasksmodel.cpp:34
+#: model/tasksmodel.cpp:20
 #, kde-format
 msgctxt "@title:column"
 msgid "Session Time"
 msgstr "זמן ההפעלה"
 
-#: model/tasksmodel.cpp:35
+#: model/tasksmodel.cpp:21
 #, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "זמן"
 
-#: model/tasksmodel.cpp:36
+#: model/tasksmodel.cpp:22
 #, kde-format
 msgctxt "@title:column"
 msgid "Total Session Time"
 msgstr "זמן ההפעלה הכולל"
 
-#: model/tasksmodel.cpp:37
+#: model/tasksmodel.cpp:23
 #, kde-format
 msgctxt "@title:column"
 msgid "Total Time"
 msgstr "זמן כולל"
 
-#: model/tasksmodel.cpp:38
+#: model/tasksmodel.cpp:24
 #, kde-format
 msgctxt "@title:column"
 msgid "Priority"
 msgstr "עדיפות"
 
-#: model/tasksmodel.cpp:39
+#: model/tasksmodel.cpp:25
 #, kde-format
 msgctxt "@title:column"
 msgid "Percent Complete"
 msgstr "אחוזים שהושלמו"
 
-#: model/tasksmodel.cpp:189 model/tasksmodel.cpp:282
+#: model/tasksmodel.cpp:175 model/tasksmodel.cpp:268
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The task name is what you call the task, it can be chosen freely."
 msgstr "השם למשימה, פתוח לחלוטין."
 
-#: model/tasksmodel.cpp:193 model/tasksmodel.cpp:286
+#: model/tasksmodel.cpp:179 model/tasksmodel.cpp:272
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The session time is the time since you last chose \"Start New Session\"."
 msgstr "זמן ההפעלה הוא הזמן מאז שבחרת ב„התחלת הפעלה חדשה” בפעם האחרונה."
 
-#: model/tasksmodel.cpp:290
+#: model/tasksmodel.cpp:276
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
 msgstr "זמן ההפעלה הכולל הוא זמן ההפעלה של המשימה על תת־משימותיה."
 
-#: model/tasksmodel.cpp:294
+#: model/tasksmodel.cpp:280
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
 msgstr "זמן הכולל הוא הזמן של המשימה הזאת על תת־משימותיה."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
-#: settings/cfgbehavior.ui:17
+#: settings/cfgbehavior.ui:21
 #, kde-format
 msgid "Detect desktop as idle after:"
 msgstr "זיהוי חוסר פעילות בשולחן העבודה לאחר:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
-#: settings/cfgbehavior.ui:24 settings/cfgstorage.ui:36
+#: settings/cfgbehavior.ui:28 settings/cfgstorage.ui:40
 #, kde-format
 msgid " min"
 msgstr " דק׳"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: settings/cfgbehavior.ui:37
+#: settings/cfgbehavior.ui:41
 #, kde-format
 msgid "Minimum desktop active time:"
 msgstr "זמן מזערי לפעילות שולחן עבודה:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
-#: settings/cfgbehavior.ui:44
+#: settings/cfgbehavior.ui:48
 #, kde-format
 msgid " sec"
 msgstr " שנ׳"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_promptDelete)
-#: settings/cfgbehavior.ui:57
+#: settings/cfgbehavior.ui:61
 #, kde-format
 msgid "Prompt before deleting tasks"
 msgstr "בקשת אישור לפני מחיקת משימה"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_uniTasking)
-#: settings/cfgbehavior.ui:64
+#: settings/cfgbehavior.ui:68
 #, kde-format
 msgid ""
 "Unitasking - allow only one task to be timed at a time. Does not stop any "
@@ -698,32 +698,32 @@ msgstr ""
 "כלשהם."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
-#: settings/cfgbehavior.ui:67
+#: settings/cfgbehavior.ui:71
 #, kde-format
 msgid "Allow only one timer at a time"
 msgstr "לאפשר רק מתזמן אחד בכל רגע נתון"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
-#: settings/cfgbehavior.ui:74
+#: settings/cfgbehavior.ui:78
 #, kde-format
 msgid "Place an icon to the system tray"
 msgstr "הצגת סמל במגש המערכת"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: settings/cfgdisplay.ui:29
+#: settings/cfgdisplay.ui:34
 #, kde-format
 msgctxt "title of group box, general options"
 msgid "General"
 msgstr "כללי"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
-#: settings/cfgdisplay.ui:35
+#: settings/cfgdisplay.ui:40
 #, kde-format
 msgid "Decimal number format"
 msgstr "תבנית מספרים עשרוניים"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_configPDA)
-#: settings/cfgdisplay.ui:42
+#: settings/cfgdisplay.ui:47
 #, kde-format
 msgid ""
 "Choose this if you have a touchscreen and your screen real estate is "
@@ -734,7 +734,7 @@ msgstr ""
 "סרגל החיפוש וכל לחיצה תקפיץ תפריט הקשר."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
-#: settings/cfgdisplay.ui:45
+#: settings/cfgdisplay.ui:50
 #, kde-format
 msgctxt ""
 "Choose this if you have a touchscreen and your screen real estate is "
@@ -743,72 +743,72 @@ msgid "Configuration for PDA"
 msgstr "הגדרות למסך מגע"
 
 #. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
-#: settings/cfgdisplay.ui:55
+#: settings/cfgdisplay.ui:60
 #, kde-format
 msgid "Window Title"
 msgstr "כותרת חלון"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
-#: settings/cfgdisplay.ui:64
+#: settings/cfgdisplay.ui:69
 #, kde-format
 msgid "Currently opened file"
 msgstr "קובץ שפתוח כרגע"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
-#: settings/cfgdisplay.ui:71
+#: settings/cfgdisplay.ui:76
 #, kde-format
 msgid "Current Task and Session Time"
 msgstr "זמן המשימה וההפעלה הנוכחי"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: settings/cfgdisplay.ui:81
+#: settings/cfgdisplay.ui:86
 #, kde-format
 msgid "Columns Displayed"
 msgstr "עמודות מוצגות"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
-#: settings/cfgdisplay.ui:87
+#: settings/cfgdisplay.ui:92
 #, kde-format
 msgid "Session time"
 msgstr "זמן הפעלה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
-#: settings/cfgdisplay.ui:94
+#: settings/cfgdisplay.ui:99
 #, kde-format
 msgid "Cumulative task time"
 msgstr "זמן משימות מצטבר"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
-#: settings/cfgdisplay.ui:101
+#: settings/cfgdisplay.ui:106
 #, kde-format
 msgid "Total session time"
 msgstr "סך פרקי הזמן"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalTime)
-#: settings/cfgdisplay.ui:108
+#: settings/cfgdisplay.ui:113
 #, kde-format
 msgid "Total task time"
 msgstr "זמן משימות כולל"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPriority)
-#: settings/cfgdisplay.ui:115
+#: settings/cfgdisplay.ui:120
 #, kde-format
 msgid "Priority"
 msgstr "עדיפות"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
-#: settings/cfgdisplay.ui:122
+#: settings/cfgdisplay.ui:127
 #, kde-format
 msgid "Percent complete"
 msgstr "אחוזי השלמה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_autoSave)
-#: settings/cfgstorage.ui:29
+#: settings/cfgstorage.ui:33
 #, kde-format
 msgid "Save tasks every:"
 msgstr "לשמור משימות כל:"
 
-#: taskview.cpp:118
+#: taskview.cpp:102
 #, kde-format
 msgid ""
 "Error storing new task. Your changes were not saved. Make sure you can edit "
@@ -819,30 +819,30 @@ msgstr ""
 "את קובץ ה־iCalendar שלך. כמו כן, יש לצאת מכל היישומים שמשתמשים בקובץ הזה "
 "ולהסיר קובצי נעילה שקשורים לשם שלו מתוך ‎~/.kde/share/apps/kabc/lock/‎ "
 
-#: taskview.cpp:214
+#: taskview.cpp:198
 #, kde-format
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr ""
 "מספר שולחן העבודה הווירטואלי שלך גבוה מדי, מעקב שולחנות עבודה לא יעבוד."
 
-#: taskview.cpp:290
+#: taskview.cpp:274
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
 msgstr "המתזמנים נעצרים…"
 
-#: taskview.cpp:291
+#: taskview.cpp:275
 #, kde-format
 msgid "Cancel"
 msgstr "ביטול"
 
-#: taskview.cpp:361 taskview.cpp:445
+#: taskview.cpp:345 taskview.cpp:429
 #, kde-format
 msgid "Unnamed Task"
 msgstr "משימה ללא שם"
 
-#: taskview.cpp:380
+#: taskview.cpp:364
 #, kde-format
 msgid ""
 "Error storing new task. Your changes were not saved. Make sure you can edit "
@@ -853,24 +853,24 @@ msgstr ""
 "את קובץ ה־iCalendar שלך. כמו כן, יש לצאת מכל היישומים שמשתמשים בקובץ הזה "
 "ולהסיר קובצי נעילה שקשורים לשם שלו מתוך ‎~/.kde/share/apps/kabc/lock/‎"
 
-#: taskview.cpp:422
+#: taskview.cpp:406
 #, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
 msgstr "תת־משימה חדשה"
 
-#: taskview.cpp:440
+#: taskview.cpp:424
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
 msgstr "עריכת המשימה"
 
-#: taskview.cpp:474 taskview.cpp:515 taskview.cpp:537
+#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
 #, kde-format
 msgid "No task selected."
 msgstr "לא נבחרה משימה."
 
-#: taskview.cpp:520
+#: taskview.cpp:504
 #, kde-format
 msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
@@ -879,42 +879,42 @@ msgstr ""
 "למחוק את המשימה הנבחרת ואת כל ההיסטוריה שלה?\n"
 "לתשומת ליבך: כל המשימות וההיסטוריה שלהן תימחקנה."
 
-#: taskview.cpp:524
+#: taskview.cpp:508
 #, kde-format
 msgctxt "@title:window"
 msgid "Deleting Task"
 msgstr "מחיקת משימה"
 
-#: timetrackerstorage.cpp:140
+#: timetrackerstorage.cpp:125
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr "שגיאה בטעינת „%1”: ההורה (uid=%2) לא נמצא"
 
-#: timetrackerstorage.cpp:243
+#: timetrackerstorage.cpp:228
 #, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr "אי אפשר לכתוב את קובץ הנעילה „%1”. הכונן מלא?"
 
-#: timetrackerstorage.cpp:251
+#: timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
 msgstr "שמירת קובץ ה־iCalendar בשם „%1” נכשלה."
 
-#: timetrackerwidget.cpp:154
+#: timetrackerwidget.cpp:139
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "התחלת ה&פעלה חדשה"
 
-#: timetrackerwidget.cpp:155
+#: timetrackerwidget.cpp:140
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "מתחיל הפעלה חדשה"
 
-#: timetrackerwidget.cpp:157
+#: timetrackerwidget.cpp:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -924,19 +924,19 @@ msgstr ""
 "פעולה זו תאפס את זמן ההפעלה ל־0 עבור כל המשימות, כדי להתחיל הפעלה חדשה מבלי "
 "להשפיע על סיכומי הזמנים."
 
-#: timetrackerwidget.cpp:165
+#: timetrackerwidget.cpp:150
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "עריכת היסטוריה…"
 
-#: timetrackerwidget.cpp:166
+#: timetrackerwidget.cpp:151
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "היסטוריית עריכות של כל המשימות מהמסמך הנוכחי"
 
-#: timetrackerwidget.cpp:168
+#: timetrackerwidget.cpp:153
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -946,19 +946,19 @@ msgstr ""
 "חלון ייפתח בו אפשר לשנות את זמני ההתחלה והסיום של משימות או להוסיף עליהן "
 "הערה."
 
-#: timetrackerwidget.cpp:178
+#: timetrackerwidget.cpp:163
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "&איפוס כל הזמנים"
 
-#: timetrackerwidget.cpp:179
+#: timetrackerwidget.cpp:164
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "מאפס את כל הזמנים"
 
-#: timetrackerwidget.cpp:181
+#: timetrackerwidget.cpp:166
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -968,19 +968,19 @@ msgstr ""
 "פעולה זו תאפס את זמן ההפעלה והסיכום הכולל ל־0 לכל המשימות, כדי להתחיל מהתחלה "
 "לגמרי."
 
-#: timetrackerwidget.cpp:188
+#: timetrackerwidget.cpp:173
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "הת&חלה"
 
-#: timetrackerwidget.cpp:189
+#: timetrackerwidget.cpp:174
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "מתחיל תזמון למשימה הנבחרת"
 
-#: timetrackerwidget.cpp:191
+#: timetrackerwidget.cpp:176
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -996,67 +996,67 @@ msgstr ""
 "אפשר גם להתחיל תזמון של משימות בלחיצה כפולה על הלחצן השמאלי בעכבר או על "
 "משימה מסוימת. פעולה זו עשויה, מצד שני, לעצור תזמון של משימות אחרות."
 
-#: timetrackerwidget.cpp:205
+#: timetrackerwidget.cpp:190
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "ע&צירה"
 
-#: timetrackerwidget.cpp:206
+#: timetrackerwidget.cpp:191
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "עוצר תזמון של המשימה הנבחרת"
 
-#: timetrackerwidget.cpp:207
+#: timetrackerwidget.cpp:192
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "עוצר תזמון של המשימה הנבחרת"
 
-#: timetrackerwidget.cpp:214
+#: timetrackerwidget.cpp:199
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "התמקדות על סרגל החיפוש"
 
-#: timetrackerwidget.cpp:215
+#: timetrackerwidget.cpp:200
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "מגדיר את המיקוד על סרגל החיפוש"
 
-#: timetrackerwidget.cpp:216
+#: timetrackerwidget.cpp:201
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "מגדיר את המיקוד על סרגל החיפוש"
 
-#: timetrackerwidget.cpp:223
+#: timetrackerwidget.cpp:208
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "ע&צירת כל המתזמנים"
 
-#: timetrackerwidget.cpp:224
+#: timetrackerwidget.cpp:209
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "עוצר את כל המתזמנים הפעילים"
 
-#: timetrackerwidget.cpp:225
+#: timetrackerwidget.cpp:210
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "עוצר את כל המתזמנים הפעילים"
 
-#: timetrackerwidget.cpp:233
+#: timetrackerwidget.cpp:218
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "מעקב אחר יישומים פעילים"
 
-#: timetrackerwidget.cpp:235
+#: timetrackerwidget.cpp:220
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1064,7 +1064,7 @@ msgid ""
 "changed"
 msgstr "יוצר ומעדכן משימות אוטומטית כשהמיקוד של החלון הנוכחי השתנה"
 
-#: timetrackerwidget.cpp:238
+#: timetrackerwidget.cpp:223
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1075,73 +1075,73 @@ msgstr ""
 "אם מיקוד של חלון משתנה לראשונה כאשר הפעולה הזאת פעילה, משימה חדשה תיווצר עם "
 "כותרת החלון כשמה והיא תופעל. אם כבר קיימת משימה כזאת היא תתחיל לרוץ."
 
-#: timetrackerwidget.cpp:249
+#: timetrackerwidget.cpp:234
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "משימה &חדשה…"
 
-#: timetrackerwidget.cpp:250
+#: timetrackerwidget.cpp:235
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "יוצר משימה חדשה ברמה עליונה"
 
-#: timetrackerwidget.cpp:251
+#: timetrackerwidget.cpp:236
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "פעולה זו תיצור משימה חדשה ברמה עליונה."
 
-#: timetrackerwidget.cpp:259
+#: timetrackerwidget.cpp:244
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "&תת־משימה חדשה…"
 
-#: timetrackerwidget.cpp:260
+#: timetrackerwidget.cpp:245
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "יוצר תת־משימות חדשות תחת המשימה הנבחרת"
 
-#: timetrackerwidget.cpp:261
+#: timetrackerwidget.cpp:246
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr "פעולה זו תיצור תת־משימות חדשות למשימה הנוכחית הנבחרת."
 
-#: timetrackerwidget.cpp:269
+#: timetrackerwidget.cpp:254
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "מ&חיקה"
 
-#: timetrackerwidget.cpp:270
+#: timetrackerwidget.cpp:255
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "מוחק את המשימה הנבחרת"
 
-#: timetrackerwidget.cpp:271
+#: timetrackerwidget.cpp:256
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
 msgstr "הפעולה הזאת תמחק את המשימות הנבחרות על תת־המשימות שלהן."
 
-#: timetrackerwidget.cpp:279
+#: timetrackerwidget.cpp:264
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
 msgstr "מ&אפיינים"
 
-#: timetrackerwidget.cpp:280
+#: timetrackerwidget.cpp:265
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
 msgstr "עריכת שם או תאריך למשימה הנבחרת"
 
-#: timetrackerwidget.cpp:282
+#: timetrackerwidget.cpp:267
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1149,19 +1149,19 @@ msgid ""
 "selected task."
 msgstr "יקפיץ חלונית בה אפשר לערוך את משתני המשימה הנבחרת."
 
-#: timetrackerwidget.cpp:291
+#: timetrackerwidget.cpp:276
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
 msgstr "&עריכת זמן…"
 
-#: timetrackerwidget.cpp:292
+#: timetrackerwidget.cpp:277
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
 msgstr "עריכת הזמן למשימה הנבחרת"
 
-#: timetrackerwidget.cpp:294
+#: timetrackerwidget.cpp:279
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1169,61 +1169,61 @@ msgid ""
 "selected task."
 msgstr "יקפיץ חלונית בה אפשר לערוך את זמני המשימה הנבחרת."
 
-#: timetrackerwidget.cpp:303
+#: timetrackerwidget.cpp:288
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "&סימון כמשימה שהושלמה"
 
-#: timetrackerwidget.cpp:311
+#: timetrackerwidget.cpp:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "&סימון כמשימה שלא הושלמה"
 
-#: timetrackerwidget.cpp:319
+#: timetrackerwidget.cpp:304
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
 msgstr "יי&צוא…"
 
-#: timetrackerwidget.cpp:326
+#: timetrackerwidget.cpp:311
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "ייבוא משימ&ות מ־Planner…"
 
-#: timetrackerwidget.cpp:338
+#: timetrackerwidget.cpp:323
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "הצגת סרגל חיפוש"
 
-#: timetrackerwidget.cpp:473
+#: timetrackerwidget.cpp:458
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "התנהגות"
 
-#: timetrackerwidget.cpp:478
+#: timetrackerwidget.cpp:463
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "מראה"
 
-#: timetrackerwidget.cpp:483
+#: timetrackerwidget.cpp:468
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "אחסון"
 
-#: timetrackerwidget.cpp:520
+#: timetrackerwidget.cpp:505
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "משימה חדשה"
 
-#: timetrackerwidget.cpp:599
+#: timetrackerwidget.cpp:584
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -1232,66 +1232,66 @@ msgid ""
 msgstr ""
 "עדיין אין היסטוריה. יש להתחיל ולעצור משימה ואז תופיעה רשומה בהיסטוריה שלך."
 
-#: timetrackerwidget.cpp:609
+#: timetrackerwidget.cpp:594
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
 msgstr "לאפס את הזמנים של כל המשימות? פעולה זו תמחק את כל ההיסטוריה."
 
-#: timetrackerwidget.cpp:611
+#: timetrackerwidget.cpp:596
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "נדרש אישור"
 
-#: timetrackerwidget.cpp:612
+#: timetrackerwidget.cpp:597
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "איפוס כל הזמנים"
 
-#: timetrackerwidget.cpp:801
+#: timetrackerwidget.cpp:786
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "השמירה נכשלה, ככל הנראה כיוון שאי אפשר לנעול את הקובץ."
 
-#: timetrackerwidget.cpp:803
+#: timetrackerwidget.cpp:788
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "אי אפשר לערוך את משאב לוח השנה."
 
-#: timetrackerwidget.cpp:805
+#: timetrackerwidget.cpp:790
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "נגמר הזיכרון--אי אפשר ליצור עצם."
 
-#: timetrackerwidget.cpp:807
+#: timetrackerwidget.cpp:792
 #, kde-format
 msgid "UID not found."
 msgstr "מזהה ייחודי לא נמצא."
 
-#: timetrackerwidget.cpp:809
+#: timetrackerwidget.cpp:794
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "תאריך שגוי--התבנית היא YYYY-MM-DD."
 
-#: timetrackerwidget.cpp:811
+#: timetrackerwidget.cpp:796
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "זמן שגוי--התבנית היא YYYY-MM-DDTHH:MM:SS."
 
-#: timetrackerwidget.cpp:813
+#: timetrackerwidget.cpp:798
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "משך משימה שגוי--חייב להיות גדול מאפס."
 
-#: timetrackerwidget.cpp:815
+#: timetrackerwidget.cpp:800
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "מספר שגיאה שגוי: %1"
 
-#: timetrackerwidget.cpp:1044
+#: timetrackerwidget.cpp:1029
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1303,31 +1303,31 @@ msgstr ""
 "להתחיל ביצירת המשימה הראשונה שלך - להכניס אותה לשדה בו מופיע „חיפוש או הוספת "
 "משימה”."
 
-#: timetrackerwidget.cpp:1051
+#: timetrackerwidget.cpp:1036
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr "כבר יצרת משימה. עכשיו אפשר להתחיל ולעצור תזמון."
 
-#: tray.cpp:95
+#: tray.cpp:79
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
 msgstr ", …"
 
-#: treeviewheadercontextmenu.cpp:46
+#: treeviewheadercontextmenu.cpp:31
 #, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
 msgstr "עמודות"
 
-#: widgets/searchline.cpp:37
+#: widgets/searchline.cpp:23
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search or add task"
 msgstr "חיפוש או הוספת משימה"
 
-#: widgets/searchline.cpp:39
+#: widgets/searchline.cpp:25
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1339,31 +1339,31 @@ msgstr ""
 "משימות שעונות על הקלט שלך מופיעות. ברגע הלחיצה על Enter, הקלט משמש כשם "
 "ליצירת משימה חדשה."
 
-#: widgets/taskswidget.cpp:143
+#: widgets/taskswidget.cpp:129
 #, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: widgets/taskswidget.cpp:154
+#: widgets/taskswidget.cpp:140
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
 msgstr "לא צוין"
 
-#: widgets/taskswidget.cpp:157
+#: widgets/taskswidget.cpp:143
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
 msgstr "1 (הגבוהה ביותר)"
 
-#: widgets/taskswidget.cpp:160
+#: widgets/taskswidget.cpp:146
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
 msgstr "5 (בינונית)"
 
-#: widgets/taskswidget.cpp:163
+#: widgets/taskswidget.cpp:149
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
