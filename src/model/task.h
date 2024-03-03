@@ -12,7 +12,7 @@
 
 #include <KCalendarCore/Todo>
 
-#include "desktoplist.h" // Required b/c DesktopList is a typedef not a class.
+#include "base/desktoplist.h" // Required b/c DesktopList is a typedef not a class.
 #include "model/tasksmodelitem.h"
 
 class TimeTrackerStorage;

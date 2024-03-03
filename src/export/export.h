@@ -9,7 +9,7 @@
 
 #include <QString>
 
-#include "reportcriteria.h"
+#include "base/reportcriteria.h"
 
 class ProjectModel;
 class Task;

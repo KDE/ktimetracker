@@ -10,7 +10,7 @@
 
 #include <QDialogButtonBox>
 
-#include "reportcriteria.h"
+#include "base/reportcriteria.h"
 #include "ui_exportdialog.h"
 
 class TaskView;

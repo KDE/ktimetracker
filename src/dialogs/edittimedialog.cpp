@@ -17,7 +17,7 @@
 #include <KLocalizedString>
 #include <KPluralHandlingSpinBox>
 
-#include "ktimetrackerutility.h"
+#include "base/ktimetrackerutility.h"
 
 EditTimeDialog::EditTimeDialog(QWidget *parent, const QString &name, const QString &description, int64_t minutes)
     : QDialog(parent)

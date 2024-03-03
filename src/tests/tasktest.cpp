@@ -10,7 +10,7 @@
 #include "model/eventsmodel.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
-#include "taskview.h"
+#include "base/taskview.h"
 
 #include "helpers.h"
 

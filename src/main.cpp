@@ -20,7 +20,7 @@
 
 #include "ktimetracker-version.h"
 #include "ktt_debug.h"
-#include "mainwindow.h"
+#include "base/mainwindow.h"
 
 // Deliver the path/URL to the iCalendar file to be used
 QUrl getFileUrl(const QCommandLineParser &parser)
@@ -65,7 +65,7 @@ QUrl getFileUrl(const QCommandLineParser &parser)
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    Q_INIT_RESOURCE(ktimetracker);
+    // Q_INIT_RESOURCE(ktimetracker);
 
 #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
     // Force Breeze theme on Windows.
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
 
-    Q_INIT_RESOURCE(icons);
+    // Q_INIT_RESOURCE(icons);
     QIcon::setThemeSearchPaths(QStringList() << QStringLiteral(":/icons"));
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("ktimetracker")));
 

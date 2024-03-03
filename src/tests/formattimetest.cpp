@@ -6,7 +6,7 @@
 
 #include <QTest>
 
-#include "ktimetrackerutility.h"
+#include "base/ktimetrackerutility.h"
 
 class UtilsTest : public QObject
 {

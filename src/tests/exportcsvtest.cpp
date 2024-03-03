@@ -10,7 +10,7 @@
 #include "export/totalsastext.h"
 #include "helpers.h"
 #include "model/task.h"
-#include "taskview.h"
+#include "base/taskview.h"
 #include "widgets/taskswidget.h"
 
 class ExportCSVTest : public QObject

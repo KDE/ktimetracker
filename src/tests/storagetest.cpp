@@ -12,7 +12,7 @@
 
 #include "helpers.h"
 #include "model/task.h"
-#include "taskview.h"
+#include "base/taskview.h"
 
 class StorageTest : public QObject
 {

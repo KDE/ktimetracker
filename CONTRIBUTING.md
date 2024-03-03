@@ -24,18 +24,18 @@ The rest consists of minor dialogs or actions.
 
 ---
 
-* **desktoplist**: a single typedef for DesktopList used in model/task, dialogs/taskpropertiesdialog, desktoptracker, plannerparser, taskview, timetrackerstorage, timetrackerwidget and main
-* **desktoptracker**: X11-only feature where tasks only run in certain virtual desktops
-* **focusdetector**: X11-only detection for which window is currently active, used in taskview
-* **idletimedetector**: uses KIdleTime to store the time spent idling, includes KGuiItem dialog
-* **ktimetrackerutility**: generic collection of utilities to manage locale, time format, errors (used in ktimetrackerwidget)
-* **mainwindow**: KXmlGuiWindow with a central widget TimeTrackerWidget, manages X11 window tracking, TrayIcon, and with KActionCollection shortcuts
-* **reportcriteria**: collection of enums and values for exporting backup copies (work reports)
-* **taskview**: main area where tasks will be listed, initialized by ktimetrackerwidget which is initialized in mainwindow which is initialized in main
-* **timetrackerstorage**: base to save and load **local** iCalendar files
-* **timetrackerwidget**: very large, the container for the taskview, searchline and definitions for KActionCollection actions, as well as most actions from the first screen and menu
-* **tray**: simple KStatusNotifierItem and its actions
-* **treeviewheadercontextmenu**: used for context menus in taskview, including when clicking the column titles
+* **base/desktoplist**: a single typedef for DesktopList used in model/task, dialogs/taskpropertiesdialog, desktoptracker, plannerparser, taskview, timetrackerstorage, timetrackerwidget and main
+* **base/desktoptracker**: X11-only feature where tasks only run in certain virtual desktops
+* **base/focusdetector**: X11-only detection for which window is currently active, used in taskview
+* **base/idletimedetector**: uses KIdleTime to store the time spent idling, includes KGuiItem dialog
+* **base/ktimetrackerutility**: generic collection of utilities to manage locale, time format, errors (used in ktimetrackerwidget)
+* **base/mainwindow**: KXmlGuiWindow with a central widget TimeTrackerWidget, manages X11 window tracking, TrayIcon, and with KActionCollection shortcuts
+* **base/reportcriteria**: collection of enums and values for exporting backup copies (work reports)
+* **base/taskview**: main area where tasks will be listed, initialized by ktimetrackerwidget which is initialized in mainwindow which is initialized in main
+* **base/timetrackerstorage**: base to save and load **local** iCalendar files
+* **base/timetrackerwidget**: very large, the container for the taskview, searchline and definitions for KActionCollection actions, as well as most actions from the first screen and menu, used as parent to generate DBus calls
+* **base/tray**: simple KStatusNotifierItem and its actions
+* **base/treeviewheadercontextmenu**: used for context menus in taskview, including when clicking the column titles
 
 ---
 
@@ -89,6 +89,7 @@ The rest consists of minor dialogs or actions.
 * Remove mention to karm.ics files
 * Check why openFile() and saveFile() are commented out
 * Find out the practical differente between timetrackerstorage and file/icalformatkio
+* Remove all cyclic dependencies
 
 ## Notes
 

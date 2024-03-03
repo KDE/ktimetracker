@@ -10,7 +10,7 @@
 #include <QTextStream>
 
 #include "model/task.h"
-#include "taskview.h"
+#include "base/taskview.h"
 
 class TemporaryFileDeleter : public QObject {
 public:

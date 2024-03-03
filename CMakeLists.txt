@@ -35,11 +35,18 @@ ecm_setup_version(${APP_VERSION_NUMBER}
 )
 
 set(QT_REQUIRED_VERSION "6.4.0")
-find_package(Qt6 ${QT_REQUIRED_VERSION} CONFIG REQUIRED DBus Gui Widgets Xml Core5Compat)
+find_package(Qt6 ${QT_REQUIRED_VERSION} CONFIG REQUIRED
+    DBus
+    Gui
+    Widgets
+    Xml
+    Core5Compat
+)
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Config
     ConfigWidgets
+    CoreAddons
     DBusAddons
     DocTools
     I18n
@@ -55,7 +62,6 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KCMUtils
 )
 
-add_subdirectory(pics)
 add_subdirectory(icons)
 add_subdirectory(doc)
 add_subdirectory(src)

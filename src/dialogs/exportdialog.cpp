@@ -16,7 +16,7 @@
 
 #include "export/export.h"
 #include "ktt_debug.h"
-#include "taskview.h"
+#include "base/taskview.h"
 #include "widgets/taskswidget.h"
 
 ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)

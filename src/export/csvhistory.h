@@ -8,7 +8,7 @@
 #ifndef KTIMETRACKER_CSVHISTORY_H
 #define KTIMETRACKER_CSVHISTORY_H
 
-#include "reportcriteria.h"
+#include "base/reportcriteria.h"
 
 class ProjectModel;
 

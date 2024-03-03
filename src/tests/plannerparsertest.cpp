@@ -9,7 +9,7 @@
 #include "helpers.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
-#include "taskview.h"
+#include "base/taskview.h"
 #include "widgets/taskswidget.h"
 
 class PlannerParserTest : public QObject

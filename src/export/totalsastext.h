@@ -8,7 +8,7 @@
 #ifndef KTIMETRACKER_TOTALSASTEXT_H
 #define KTIMETRACKER_TOTALSASTEXT_H
 
-#include "reportcriteria.h"
+#include "base/reportcriteria.h"
 
 class TasksModel;
 class Task;

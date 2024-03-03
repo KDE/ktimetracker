@@ -12,7 +12,7 @@
 #include <QScrollArea>
 
 
-#include "desktoplist.h"
+#include "base/desktoplist.h"
 
 class QLineEdit;
 class QPlainTextEdit;

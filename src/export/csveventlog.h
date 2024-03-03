@@ -8,7 +8,7 @@
 #define KTIMETRACKER_CSVEVENTLOG_H
 
 #include "model/event.h"
-#include "reportcriteria.h"
+#include "base/reportcriteria.h"
 
 class ProjectModel;
 

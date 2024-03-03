@@ -11,7 +11,7 @@
 
 #include <KLocalizedString>
 
-#include "ktimetrackerutility.h" // formatTime()
+#include "base/ktimetrackerutility.h" // formatTime()
 #include "model/task.h"
 #include "model/tasksmodel.h"
 

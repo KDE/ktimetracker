@@ -9,7 +9,7 @@
 
 #include <QApplication>
 
-#include "ktimetrackerutility.h"
+#include "base/ktimetrackerutility.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
 

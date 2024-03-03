@@ -8,7 +8,7 @@
 #ifndef KTIMETRACKER_CSVTOTALS_H
 #define KTIMETRACKER_CSVTOTALS_H
 
-#include "reportcriteria.h"
+#include "base/reportcriteria.h"
 
 class TasksModel;
 
