@@ -3,12 +3,12 @@
 
 target_sources(ktt-model
     PRIVATE
-    event.cpp
-    eventsmodel.cpp
-    projectmodel.cpp
-    task.cpp
-    tasksmodel.cpp
-    tasksmodelitem.cpp
+    event.cpp event.h
+    eventsmodel.cpp eventsmodel.h
+    projectmodel.cpp projectmodel.h
+    task.cpp task.h
+    tasksmodel.cpp tasksmodel.h
+    tasksmodelitem.cpp tasksmodelitem.h
 )
 
 target_link_libraries(ktt-model

@@ -3,10 +3,10 @@
 
 target_sources(ktt-dialogs
     PRIVATE
-    edittimedialog.cpp
-    exportdialog.cpp
-    historydialog.cpp
-    taskpropertiesdialog.cpp
+    edittimedialog.cpp edittimedialog.h
+    exportdialog.cpp exportdialog.h
+    historydialog.cpp historydialog.h
+    taskpropertiesdialog.cpp taskpropertiesdialog.h
     exportdialog.ui
     historydialog.ui
 )

@@ -3,14 +3,15 @@
 
 target_sources(ktt-export
     PRIVATE
-    csveventlog.cpp
-    csvhistory.cpp
-    csvtotals.cpp
-    export.cpp
-    totalsastext.cpp
+    csveventlog.cpp csveventlog.h
+    csvhistory.cpp csvhistory.h
+    csvtotals.cpp csvtotals.h
+    export.cpp export.h
+    totalsastext.cpp totalsastext.h
 )
 
 target_link_libraries(ktt-export
     PRIVATE
     ktt-deps
 )
+

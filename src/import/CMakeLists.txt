@@ -3,7 +3,7 @@
 
 target_sources(ktt-import
     PRIVATE
-    plannerparser.cpp
+    plannerparser.cpp plannerparser.h
 )
 
 target_link_libraries(ktt-import

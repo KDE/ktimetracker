@@ -15,21 +15,16 @@ target_link_libraries(ktt-general
 target_sources(ktt-base
     PRIVATE
     ${ktt-dbus}
-    desktoptracker.cpp
-    desktoptracker.h
-    focusdetector.cpp
-    focusdetector.h
-    idletimedetector.cpp
-    idletimedetector.h
-    ktimetrackerutility.cpp
-    ktimetrackerutility.h
-    mainwindow.cpp
-    mainwindow.h
-    taskview.cpp
-    timetrackerstorage.cpp
-    timetrackerwidget.cpp
-    tray.cpp
-    treeviewheadercontextmenu.cpp
+    desktoptracker.cpp desktoptracker.h
+    focusdetector.cpp focusdetector.h
+    idletimedetector.cpp idletimedetector.h
+    ktimetrackerutility.cpp ktimetrackerutility.h
+    mainwindow.cpp mainwindow.h
+    taskview.cpp taskview.h
+    timetrackerstorage.cpp timetrackerstorage.h
+    timetrackerwidget.cpp timetrackerwidget.h
+    tray.cpp tray.h
+    treeviewheadercontextmenu.cpp treeviewheadercontextmenu.h
 )
 
 target_link_libraries(ktt-base

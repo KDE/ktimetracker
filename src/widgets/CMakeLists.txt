@@ -3,8 +3,8 @@
 
 target_sources(ktt-widgets
     PRIVATE
-    searchline.cpp
-    taskswidget.cpp
+    searchline.cpp searchline.h
+    taskswidget.cpp taskswidget.h
 )
 
 target_link_libraries(ktt-widgets

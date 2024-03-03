@@ -3,7 +3,7 @@
 
 target_sources(ktt-settings
     PRIVATE
-    ktimetrackerconfigdialog.cpp
+    ktimetrackerconfigdialog.cpp ktimetrackerconfigdialog.h
     cfgbehavior.ui
     cfgdisplay.ui
     cfgstorage.ui
