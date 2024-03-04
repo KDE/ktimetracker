@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-04 00:38+0000\n"
 "PO-Revision-Date: 2021-11-19 14:13+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -28,6 +28,616 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "kelemeng@gnome.hu,ulysses@fsf.hu,tszanto@interware.hu,trombipeti@gmail.com"
+
+#: base/idletimedetector.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: base/idletimedetector.cpp:65
+#, fuzzy, kde-format
+#| msgid "Continue timing."
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Az időmérés folytatása."
+
+#: base/idletimedetector.cpp:67
+#, fuzzy, kde-format
+#| msgid "Stop timing and revert back to the time at %1."
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "Az időmérés leállítása, visszaváltás ide: %1."
+
+#: base/idletimedetector.cpp:68
+#, fuzzy, kde-format
+#| msgid "Revert timing"
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Az időmérés visszavonása"
+
+#: base/idletimedetector.cpp:72
+#, fuzzy, kde-format
+#| msgid "Desktop has been idle since %1. What do you want to do ?"
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "Az asztal %1 óta tétlen. Mit kíván tenni?"
+
+#: base/mainwindow.cpp:37
+#, fuzzy, kde-format
+#| msgid "Configure KTimeTracker..."
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "Beállítóablak: KTimeTracker..."
+
+#: base/mainwindow.cpp:136 base/tray.cpp:74
+#, kde-format
+msgid "No active tasks"
+msgstr "Nincs aktív feladat"
+
+#: base/mainwindow.cpp:146 base/tray.cpp:94
+#, fuzzy, kde-format
+#| msgid ", "
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: base/taskview.cpp:102
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"Nem sikerült eltárolni az új feladatot. A módosítások nem lettek elmentve. "
+"Ellenőrizze, hogy az iCalendar-fájl szerkeszthető-e, zárja be a fájlt "
+"használó alkalmazásokat és törölje a fájlra vonatkozó zároló fájlokat innen: "
+"~/.kde/share/apps/kabc/lock/ "
+
+#: base/taskview.cpp:198
+#, fuzzy, kde-format
+#| msgid ""
+#| "Your virtual desktop number is too high, desktop tracking will not work"
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr "Az asztalazonosító túl nagy, ezért az asztalkövetés nem fog működni"
+
+#: base/taskview.cpp:274
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: base/taskview.cpp:275
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: base/taskview.cpp:345 base/taskview.cpp:429
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Névtelen feladat"
+
+#: base/taskview.cpp:364
+#, fuzzy, kde-format
+#| msgid ""
+#| "Error storing new task. Your changes were not saved. Make sure you can "
+#| "edit your iCalendar file. Also quit all applications using this file and "
+#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
+#| "lock/ "
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"Nem sikerült eltárolni az új feladatot. A módosítások nem lettek elmentve. "
+"Ellenőrizze, hogy az iCalendar-fájl szerkeszthető-e, zárja be a fájlt "
+"használó alkalmazásokat és törölje a fájlra vonatkozó zároló fájlokat innen: "
+"~/.kde/share/apps/kabc/lock/ "
+
+#: base/taskview.cpp:406
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "Új részfeladat"
+
+#: base/taskview.cpp:424
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Feladat szerkesztése"
+
+#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#, kde-format
+msgid "No task selected."
+msgstr "Nincs kijelölve egy feladat sem."
+
+#: base/taskview.cpp:504
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to delete the selected task and its entire "
+#| "history?\n"
+#| "NOTE: all subtasks and their history will also be deleted."
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Biztosan törölni akarja a kiválasztott feladatot és az összes előzményét?\n"
+"FIGYELEM: az összes részfeladat és azok előzményei is törölve lesznek."
+
+#: base/taskview.cpp:508
+#, fuzzy, kde-format
+#| msgid "Deleting Task"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Feladat törlése"
+
+#: base/timetrackerstorage.cpp:125
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr ""
+"Hiba történt a(z) \"%1\" fájl betöltésekor: a szülőelem nem található (UID="
+"%2)"
+
+#: base/timetrackerstorage.cpp:228
+#, fuzzy, kde-format
+#| msgid "Could not save. Disk full?"
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "A mentés sikertelen. Megtelt a merevlemez?"
+
+#: base/timetrackerstorage.cpp:236
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "Új munkafolyamat ke&zdése"
+
+#: base/timetrackerwidget.cpp:140
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "Új munkamenet kezdése"
+
+#: base/timetrackerwidget.cpp:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"Ennek hatására az összes feladat munkafolyamatbeli ideje lenullázódik. Új "
+"munkafolyamat kezdhető, az összesített érték nem változik."
+
+#: base/timetrackerwidget.cpp:150
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "Előzmények szerkesztése…"
+
+#: base/timetrackerwidget.cpp:151
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr ""
+"Szerkeszteni engedi az aktuális dokumentum összes feladatának előzményeit."
+
+#: base/timetrackerwidget.cpp:153
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+"Megnyílik egy ablak, ahol a feladatok kezdési és leállítási ideje "
+"beállítható, illetve megjegyzés fűzhető a feladatokhoz."
+
+#: base/timetrackerwidget.cpp:163
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "Az összes időérték n&ullázása"
+
+#: base/timetrackerwidget.cpp:164
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Az összes számláló nullázása"
+
+#: base/timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"Ennek hatására az összes feladat munkafolyamatbeli és összesített ideje is "
+"lenullázódik. Így lehet teljesen alapállapotba állni."
+
+#: base/timetrackerwidget.cpp:173
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "&Indítás"
+
+#: base/timetrackerwidget.cpp:174
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "A kiválasztott feladat időmérésének megkezdése"
+
+#: base/timetrackerwidget.cpp:176
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"Ennek hatására elkezdődik a kiválasztott feladat időmérése.\n"
+"Egyszerre több feladat időmérése is folyhat.\n"
+"\n"
+"Egy feladat időmérése úgy is elindítható, ha duplán rákattint a feladat "
+"nevére. Ekkor azonban az összes többi feladat időmérése leáll."
+
+#: base/timetrackerwidget.cpp:190
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "&Leállítás"
+
+#: base/timetrackerwidget.cpp:191
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "A kijelölt feladat időmérésének leállítása"
+
+#: base/timetrackerwidget.cpp:192
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "A kijelölt feladat időmérésének leállítása"
+
+#: base/timetrackerwidget.cpp:199
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr "Fókusz a keresősávra"
+
+#: base/timetrackerwidget.cpp:200
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr "A keresősávra állítja a fókuszt"
+
+#: base/timetrackerwidget.cpp:201
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr "A keresősávra állítja a fókuszt"
+
+#: base/timetrackerwidget.cpp:208
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "Az összes i&dőmérés leállítása"
+
+#: base/timetrackerwidget.cpp:209
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Leállítja az összes futó időmérést"
+
+#: base/timetrackerwidget.cpp:210
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Leállítja az összes futó időmérést"
+
+#: base/timetrackerwidget.cpp:218
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr "Követi az aktív alkalmazásokat"
+
+#: base/timetrackerwidget.cpp:220
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+"Automatikusan létrehoz és frissít feladatokat, ha megváltozik az aktuális "
+"ablak"
+
+#: base/timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+"Ha ez a művelet engedélyezett és először megváltozik a fókuszált ablak, új "
+"feladat jön létre az ablakcímmel mint névvel, és elkezdődik az időmérés. Ha "
+"már létezik ilyen nevű feladat, akkor elkezdődik az időmérése."
+
+#: base/timetrackerwidget.cpp:234
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "Ú&j feladat…"
+
+#: base/timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Új felső szintű feladat"
+
+#: base/timetrackerwidget.cpp:236
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "Itt lehet létrehozni egy új felső szintű feladatot."
+
+#: base/timetrackerwidget.cpp:244
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "Új &részfeladat…"
+
+#: base/timetrackerwidget.cpp:245
+#, fuzzy, kde-format
+#| msgid "Creates a new subtask to the current selected task"
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "Új részfeladatot hoz létre az aktuális feladat alatt"
+
+#: base/timetrackerwidget.cpp:246
+#, fuzzy, kde-format
+#| msgid "This will create a new subtask to the current selected task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "Itt lehet létrehozni egy új alfeladatot a jelenlegi feladat alatt."
+
+#: base/timetrackerwidget.cpp:254
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "&Törlés"
+
+#: base/timetrackerwidget.cpp:255
+#, fuzzy, kde-format
+#| msgid "Deletes selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Törli a kijelölt feladatot"
+
+#: base/timetrackerwidget.cpp:256
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task(s) and all subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "Itt lehet törölni a kijelölt feladatokat részfeladatokkal együtt."
+
+#: base/timetrackerwidget.cpp:264
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:265
+#, fuzzy, kde-format
+#| msgid "Edits name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "A kijelölt feladat nevének és időértékeinek módosítása"
+
+#: base/timetrackerwidget.cpp:267
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"Ennek kiválasztásakor megjelenik egy párbeszédablak, melyben módosítani "
+"lehet a kijelölt feladat paramétereit."
+
+#: base/timetrackerwidget.cpp:276
+#, fuzzy, kde-format
+#| msgid "Edit Times"
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Idők szerkesztése"
+
+#: base/timetrackerwidget.cpp:277
+#, fuzzy, kde-format
+#| msgid "Edits name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "A kijelölt feladat nevének és időértékeinek módosítása"
+
+#: base/timetrackerwidget.cpp:279
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"Ennek kiválasztásakor megjelenik egy párbeszédablak, melyben módosítani "
+"lehet a kijelölt feladat paramétereit."
+
+#: base/timetrackerwidget.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "Megjelölés be&fejezettnek"
+
+#: base/timetrackerwidget.cpp:296
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "Megjelölés nem be&fejezettnek"
+
+#: base/timetrackerwidget.cpp:304
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Exportálás…"
+
+#: base/timetrackerwidget.cpp:311
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "Feladatok importálása a &tervezőből…"
+
+#: base/timetrackerwidget.cpp:323
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr "Keresősáv"
+
+#: base/timetrackerwidget.cpp:458
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:463
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:468
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:505
+#, kde-format
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "Új feladat"
+
+#: base/timetrackerwidget.cpp:584
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+"Nincs előzmény. Indítsa el és állítsa le a feladatot, hogy létrejöjjön az "
+"előzmény."
+
+#: base/timetrackerwidget.cpp:594
+#, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+"Valóban vissza szeretné állítani az órát 0-ra az összes feladathoz? Ez "
+"minden előzményt törölni fog."
+
+#: base/timetrackerwidget.cpp:596
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "Megerősítés szükséges"
+
+#: base/timetrackerwidget.cpp:597
+#, kde-format
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "Az összes időérték nullázása"
+
+#: base/timetrackerwidget.cpp:786
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr ""
+"A mentés nem sikerült, valószínűleg azért, mert nem lehetett zárolni a fájlt."
+
+#: base/timetrackerwidget.cpp:788
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "Nem sikerült módosítani a naptár-erőforrást."
+
+#: base/timetrackerwidget.cpp:790
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "Elfogyott a memória, ezért nem sikerült létrehozni egy objektumot."
+
+#: base/timetrackerwidget.cpp:792
+#, kde-format
+msgid "UID not found."
+msgstr "Nem található a UID."
+
+#: base/timetrackerwidget.cpp:794
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "Érvénytelen dátumformátum: ÉÉÉÉ-HH-NN."
+
+#: base/timetrackerwidget.cpp:796
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "Érvénytelen időformátum: ÉÉÉÉ-HH-NNDÓÓ:PP:MM."
+
+#: base/timetrackerwidget.cpp:798
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "Érvénytelen a feladat időtartama: nagyobbnak kell lennie nullánál."
+
+#: base/timetrackerwidget.cpp:800
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "Érvénytelen hibaszám: %1"
+
+#: base/timetrackerwidget.cpp:1029
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+"Ez a KTimeTracker program, mely különféle feladatokra fordított idő "
+"nyilvántartásában segíthet. Új feladat kezdéséhez írja be a kívánt szöveget "
+"az „Új feladat/keresés” mezőbe."
+
+#: base/timetrackerwidget.cpp:1036
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr "Már létezik feladat, elindíthatja és leállíthatja az időmérést."
+
+#: base/tray.cpp:79
+#, kde-format
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", …"
+
+#: base/treeviewheadercontextmenu.cpp:31
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "Oszlopok"
 
 #: dialogs/edittimedialog.cpp:28
 #, fuzzy, kde-format
@@ -383,41 +993,6 @@ msgstr "Összesen"
 msgid "No tasks."
 msgstr "Nincs egy feladat sem."
 
-#: idletimedetector.cpp:62
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Apply the idle time since %1 to all active\n"
-"timers and keep them running."
-msgstr ""
-
-#: idletimedetector.cpp:65
-#, fuzzy, kde-format
-#| msgid "Continue timing."
-msgctxt "@action:button"
-msgid "Continue Timing"
-msgstr "Az időmérés folytatása."
-
-#: idletimedetector.cpp:67
-#, fuzzy, kde-format
-#| msgid "Stop timing and revert back to the time at %1."
-msgctxt "@info:tooltip"
-msgid "Stop timing and revert back to the time at %1"
-msgstr "Az időmérés leállítása, visszaváltás ide: %1."
-
-#: idletimedetector.cpp:68
-#, fuzzy, kde-format
-#| msgid "Revert timing"
-msgctxt "@action:button"
-msgid "Revert Timing"
-msgstr "Az időmérés visszavonása"
-
-#: idletimedetector.cpp:72
-#, fuzzy, kde-format
-#| msgid "Desktop has been idle since %1. What do you want to do ?"
-msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr "Az asztal %1 óta tétlen. Mit kíván tenni?"
-
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:23
 #, kde-format
@@ -582,25 +1157,6 @@ msgstr "David Faure"
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
 msgstr "A megnyitandó iCalendar-fájl"
-
-#: mainwindow.cpp:37
-#, fuzzy, kde-format
-#| msgid "Configure KTimeTracker..."
-msgctxt "@action:inmenu"
-msgid "Configure KTimeTracker..."
-msgstr "Beállítóablak: KTimeTracker..."
-
-#: mainwindow.cpp:136 tray.cpp:74
-#, kde-format
-msgid "No active tasks"
-msgstr "Nincs aktív feladat"
-
-#: mainwindow.cpp:146 tray.cpp:94
-#, fuzzy, kde-format
-#| msgid ", "
-msgctxt "separator between task names"
-msgid ", "
-msgstr ", "
 
 #: model/tasksmodel.cpp:19
 #, fuzzy, kde-format
@@ -837,562 +1393,6 @@ msgstr "Befejezettség"
 #, kde-format
 msgid "Save tasks every:"
 msgstr "A feladatok mentési időköze:"
-
-#: taskview.cpp:102
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
-msgstr ""
-"Nem sikerült eltárolni az új feladatot. A módosítások nem lettek elmentve. "
-"Ellenőrizze, hogy az iCalendar-fájl szerkeszthető-e, zárja be a fájlt "
-"használó alkalmazásokat és törölje a fájlra vonatkozó zároló fájlokat innen: "
-"~/.kde/share/apps/kabc/lock/ "
-
-#: taskview.cpp:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Your virtual desktop number is too high, desktop tracking will not work"
-msgid ""
-"Your virtual desktop number is too high, desktop tracking will not work."
-msgstr "Az asztalazonosító túl nagy, ezért az asztalkövetés nem fog működni"
-
-#: taskview.cpp:274
-#, kde-format
-msgctxt "@info:progress"
-msgid "Stopping timers..."
-msgstr ""
-
-#: taskview.cpp:275
-#, kde-format
-msgid "Cancel"
-msgstr ""
-
-#: taskview.cpp:345 taskview.cpp:429
-#, kde-format
-msgid "Unnamed Task"
-msgstr "Névtelen feladat"
-
-#: taskview.cpp:364
-#, fuzzy, kde-format
-#| msgid ""
-#| "Error storing new task. Your changes were not saved. Make sure you can "
-#| "edit your iCalendar file. Also quit all applications using this file and "
-#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
-#| "lock/ "
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
-msgstr ""
-"Nem sikerült eltárolni az új feladatot. A módosítások nem lettek elmentve. "
-"Ellenőrizze, hogy az iCalendar-fájl szerkeszthető-e, zárja be a fájlt "
-"használó alkalmazásokat és törölje a fájlra vonatkozó zároló fájlokat innen: "
-"~/.kde/share/apps/kabc/lock/ "
-
-#: taskview.cpp:406
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
-msgctxt "@title:window"
-msgid "New Sub Task"
-msgstr "Új részfeladat"
-
-#: taskview.cpp:424
-#, fuzzy, kde-format
-#| msgid "Edit Task"
-msgctxt "@title:window"
-msgid "Edit Task"
-msgstr "Feladat szerkesztése"
-
-#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
-#, kde-format
-msgid "No task selected."
-msgstr "Nincs kijelölve egy feladat sem."
-
-#: taskview.cpp:504
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to delete the selected task and its entire "
-#| "history?\n"
-#| "NOTE: all subtasks and their history will also be deleted."
-msgid ""
-"Are you sure you want to delete the selected task and its entire history?\n"
-"Note: All subtasks and their history will also be deleted."
-msgstr ""
-"Biztosan törölni akarja a kiválasztott feladatot és az összes előzményét?\n"
-"FIGYELEM: az összes részfeladat és azok előzményei is törölve lesznek."
-
-#: taskview.cpp:508
-#, fuzzy, kde-format
-#| msgid "Deleting Task"
-msgctxt "@title:window"
-msgid "Deleting Task"
-msgstr "Feladat törlése"
-
-#: timetrackerstorage.cpp:125
-#, kde-format
-msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr ""
-"Hiba történt a(z) \"%1\" fájl betöltésekor: a szülőelem nem található (UID="
-"%2)"
-
-#: timetrackerstorage.cpp:228
-#, fuzzy, kde-format
-#| msgid "Could not save. Disk full?"
-msgctxt "%1=lock file path"
-msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "A mentés sikertelen. Megtelt a merevlemez?"
-
-#: timetrackerstorage.cpp:236
-#, kde-format
-msgctxt "%1=destination file path/URL"
-msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:139
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Start &New Session"
-msgstr "Új munkafolyamat ke&zdése"
-
-#: timetrackerwidget.cpp:140
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts a new session"
-msgstr "Új munkamenet kezdése"
-
-#: timetrackerwidget.cpp:142
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session time to 0 for all tasks, to start a new session, "
-"without affecting the totals."
-msgstr ""
-"Ennek hatására az összes feladat munkafolyamatbeli ideje lenullázódik. Új "
-"munkafolyamat kezdhető, az összesített érték nem változik."
-
-#: timetrackerwidget.cpp:150
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit History..."
-msgstr "Előzmények szerkesztése…"
-
-#: timetrackerwidget.cpp:151
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edits history of all tasks of the current document"
-msgstr ""
-"Szerkeszteni engedi az aktuális dokumentum összes feladatának előzményeit."
-
-#: timetrackerwidget.cpp:153
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"A window will be opened where you can change start and stop times of tasks "
-"or add a comment to them."
-msgstr ""
-"Megnyílik egy ablak, ahol a feladatok kezdési és leállítási ideje "
-"beállítható, illetve megjegyzés fűzhető a feladatokhoz."
-
-#: timetrackerwidget.cpp:163
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Reset All Times"
-msgstr "Az összes időérték n&ullázása"
-
-#: timetrackerwidget.cpp:164
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Resets all times"
-msgstr "Az összes számláló nullázása"
-
-#: timetrackerwidget.cpp:166
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session and total time to 0 for all tasks, to restart "
-"from scratch."
-msgstr ""
-"Ennek hatására az összes feladat munkafolyamatbeli és összesített ideje is "
-"lenullázódik. Így lehet teljesen alapállapotba állni."
-
-#: timetrackerwidget.cpp:173
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Start"
-msgstr "&Indítás"
-
-#: timetrackerwidget.cpp:174
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts timing for selected task"
-msgstr "A kiválasztott feladat időmérésének megkezdése"
-
-#: timetrackerwidget.cpp:176
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will start timing for the selected task.\n"
-"It is even possible to time several tasks simultaneously.\n"
-"\n"
-"You may also start timing of tasks by double clicking the left mouse button "
-"on a given task. This will, however, stop timing of other tasks."
-msgstr ""
-"Ennek hatására elkezdődik a kiválasztott feladat időmérése.\n"
-"Egyszerre több feladat időmérése is folyhat.\n"
-"\n"
-"Egy feladat időmérése úgy is elindítható, ha duplán rákattint a feladat "
-"nevére. Ekkor azonban az összes többi feladat időmérése leáll."
-
-#: timetrackerwidget.cpp:190
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "S&top"
-msgstr "&Leállítás"
-
-#: timetrackerwidget.cpp:191
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops timing of the selected task"
-msgstr "A kijelölt feladat időmérésének leállítása"
-
-#: timetrackerwidget.cpp:192
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops timing of the selected task"
-msgstr "A kijelölt feladat időmérésének leállítása"
-
-#: timetrackerwidget.cpp:199
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Focus on Searchbar"
-msgstr "Fókusz a keresősávra"
-
-#: timetrackerwidget.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Sets the focus on the searchbar"
-msgstr "A keresősávra állítja a fókuszt"
-
-#: timetrackerwidget.cpp:201
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Sets the focus on the searchbar"
-msgstr "A keresősávra állítja a fókuszt"
-
-#: timetrackerwidget.cpp:208
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Stop &All Timers"
-msgstr "Az összes i&dőmérés leállítása"
-
-#: timetrackerwidget.cpp:209
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops all of the active timers"
-msgstr "Leállítja az összes futó időmérést"
-
-#: timetrackerwidget.cpp:210
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops all of the active timers"
-msgstr "Leállítja az összes futó időmérést"
-
-#: timetrackerwidget.cpp:218
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Track Active Applications"
-msgstr "Követi az aktív alkalmazásokat"
-
-#: timetrackerwidget.cpp:220
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Auto-creates and updates tasks when the focus of the current window has "
-"changed"
-msgstr ""
-"Automatikusan létrehoz és frissít feladatokat, ha megváltozik az aktuális "
-"ablak"
-
-#: timetrackerwidget.cpp:223
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If the focus of a window changes for the first time when this action is "
-"enabled, a new task will be created with the title of the window as its name "
-"and will be started. If there already exists such an task it will be started."
-msgstr ""
-"Ha ez a művelet engedélyezett és először megváltozik a fókuszált ablak, új "
-"feladat jön létre az ablakcímmel mint névvel, és elkezdődik az időmérés. Ha "
-"már létezik ilyen nevű feladat, akkor elkezdődik az időmérése."
-
-#: timetrackerwidget.cpp:234
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&New Task..."
-msgstr "Ú&j feladat…"
-
-#: timetrackerwidget.cpp:235
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Creates new top level task"
-msgstr "Új felső szintű feladat"
-
-#: timetrackerwidget.cpp:236
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will create a new top level task."
-msgstr "Itt lehet létrehozni egy új felső szintű feladatot."
-
-#: timetrackerwidget.cpp:244
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "New &Subtask..."
-msgstr "Új &részfeladat…"
-
-#: timetrackerwidget.cpp:245
-#, fuzzy, kde-format
-#| msgid "Creates a new subtask to the current selected task"
-msgctxt "@info:tooltip"
-msgid "Creates a new subtask to the current selected task"
-msgstr "Új részfeladatot hoz létre az aktuális feladat alatt"
-
-#: timetrackerwidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "This will create a new subtask to the current selected task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new subtask to the current selected task."
-msgstr "Itt lehet létrehozni egy új alfeladatot a jelenlegi feladat alatt."
-
-#: timetrackerwidget.cpp:254
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Delete"
-msgstr "&Törlés"
-
-#: timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
-msgctxt "@info:tooltip"
-msgid "Deletes selected task"
-msgstr "Törli a kijelölt feladatot"
-
-#: timetrackerwidget.cpp:256
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task(s) and all subtasks."
-msgctxt "@info:whatsthis"
-msgid "This will delete the selected task(s) and all subtasks."
-msgstr "Itt lehet törölni a kijelölt feladatokat részfeladatokkal együtt."
-
-#: timetrackerwidget.cpp:264
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Properties"
-msgstr ""
-
-#: timetrackerwidget.cpp:265
-#, fuzzy, kde-format
-#| msgid "Edits name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit name or description for selected task"
-msgstr "A kijelölt feladat nevének és időértékeinek módosítása"
-
-#: timetrackerwidget.cpp:267
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the parameters for the "
-"selected task."
-msgstr ""
-"Ennek kiválasztásakor megjelenik egy párbeszédablak, melyben módosítani "
-"lehet a kijelölt feladat paramétereit."
-
-#: timetrackerwidget.cpp:276
-#, fuzzy, kde-format
-#| msgid "Edit Times"
-msgctxt "@action:inmenu"
-msgid "Edit &Time..."
-msgstr "Idők szerkesztése"
-
-#: timetrackerwidget.cpp:277
-#, fuzzy, kde-format
-#| msgid "Edits name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit time for selected task"
-msgstr "A kijelölt feladat nevének és időértékeinek módosítása"
-
-#: timetrackerwidget.cpp:279
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the times for the "
-"selected task."
-msgstr ""
-"Ennek kiválasztásakor megjelenik egy párbeszédablak, melyben módosítani "
-"lehet a kijelölt feladat paramétereit."
-
-#: timetrackerwidget.cpp:288
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Complete"
-msgstr "Megjelölés be&fejezettnek"
-
-#: timetrackerwidget.cpp:296
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Incomplete"
-msgstr "Megjelölés nem be&fejezettnek"
-
-#: timetrackerwidget.cpp:304
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Export..."
-msgstr "&Exportálás…"
-
-#: timetrackerwidget.cpp:311
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Import Tasks From &Planner..."
-msgstr "Feladatok importálása a &tervezőből…"
-
-#: timetrackerwidget.cpp:323
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Show Searchbar"
-msgstr "Keresősáv"
-
-#: timetrackerwidget.cpp:458
-#, kde-format
-msgctxt "@title:tab"
-msgid "Behavior"
-msgstr ""
-
-#: timetrackerwidget.cpp:463
-#, kde-format
-msgctxt "@title:tab"
-msgid "Appearance"
-msgstr ""
-
-#: timetrackerwidget.cpp:468
-#, kde-format
-msgctxt "@title:tab"
-msgid "Storage"
-msgstr ""
-
-#: timetrackerwidget.cpp:505
-#, kde-format
-msgctxt "@title:window"
-msgid "New Task"
-msgstr "Új feladat"
-
-#: timetrackerwidget.cpp:584
-#, kde-format
-msgctxt "@info in message box"
-msgid ""
-"There is no history yet. Start and stop a task and you will have an entry in "
-"your history."
-msgstr ""
-"Nincs előzmény. Indítsa el és állítsa le a feladatot, hogy létrejöjjön az "
-"előzmény."
-
-#: timetrackerwidget.cpp:594
-#, kde-format
-msgid ""
-"Do you really want to reset the time to zero for all tasks? This will delete "
-"the entire history."
-msgstr ""
-"Valóban vissza szeretné állítani az órát 0-ra az összes feladathoz? Ez "
-"minden előzményt törölni fog."
-
-#: timetrackerwidget.cpp:596
-#, kde-format
-msgctxt "@title:window"
-msgid "Confirmation Required"
-msgstr "Megerősítés szükséges"
-
-#: timetrackerwidget.cpp:597
-#, kde-format
-msgctxt "@action:button"
-msgid "Reset All Times"
-msgstr "Az összes időérték nullázása"
-
-#: timetrackerwidget.cpp:786
-#, kde-format
-msgid "Save failed, most likely because the file could not be locked."
-msgstr ""
-"A mentés nem sikerült, valószínűleg azért, mert nem lehetett zárolni a fájlt."
-
-#: timetrackerwidget.cpp:788
-#, kde-format
-msgid "Could not modify calendar resource."
-msgstr "Nem sikerült módosítani a naptár-erőforrást."
-
-#: timetrackerwidget.cpp:790
-#, kde-format
-msgid "Out of memory--could not create object."
-msgstr "Elfogyott a memória, ezért nem sikerült létrehozni egy objektumot."
-
-#: timetrackerwidget.cpp:792
-#, kde-format
-msgid "UID not found."
-msgstr "Nem található a UID."
-
-#: timetrackerwidget.cpp:794
-#, kde-format
-msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr "Érvénytelen dátumformátum: ÉÉÉÉ-HH-NN."
-
-#: timetrackerwidget.cpp:796
-#, kde-format
-msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr "Érvénytelen időformátum: ÉÉÉÉ-HH-NNDÓÓ:PP:MM."
-
-#: timetrackerwidget.cpp:798
-#, kde-format
-msgid "Invalid task duration--must be greater than zero."
-msgstr "Érvénytelen a feladat időtartama: nagyobbnak kell lennie nullánál."
-
-#: timetrackerwidget.cpp:800
-#, kde-format
-msgid "Invalid error number: %1"
-msgstr "Érvénytelen hibaszám: %1"
-
-#: timetrackerwidget.cpp:1029
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This is ktimetracker, KDE's program to help you track your time. Best, start "
-"with creating your first task - enter it into the field where you see "
-"\"Search or add task\"."
-msgstr ""
-"Ez a KTimeTracker program, mely különféle feladatokra fordított idő "
-"nyilvántartásában segíthet. Új feladat kezdéséhez írja be a kívánt szöveget "
-"az „Új feladat/keresés” mezőbe."
-
-#: timetrackerwidget.cpp:1036
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "You have already created a task. You can now start and stop timing."
-msgstr "Már létezik feladat, elindíthatja és leállíthatja az időmérést."
-
-#: tray.cpp:79
-#, kde-format
-msgctxt "ellipsis to truncate long list of tasks"
-msgid ", ..."
-msgstr ", …"
-
-#: treeviewheadercontextmenu.cpp:31
-#, kde-format
-msgctxt "@title:menu"
-msgid "Columns"
-msgstr "Oszlopok"
 
 #: widgets/searchline.cpp:23
 #, kde-format

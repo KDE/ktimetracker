@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-04 00:38+0000\n"
 "PO-Revision-Date: 2002-10-09 17:08+0200\n"
 "Last-Translator: Thelma Lungcuzo <thelma@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -32,6 +32,588 @@ msgstr "Thelma Lungcuzo"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "thelma@translate.org.za"
+
+#: base/idletimedetector.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: base/idletimedetector.cpp:65
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Qhubekekisa Ukalisho lwexesha"
+
+#: base/idletimedetector.cpp:67
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr ""
+
+#: base/idletimedetector.cpp:68
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Buyisela ze Uqhubeke"
+
+#: base/idletimedetector.cpp:72
+#, fuzzy, kde-format
+#| msgid "Desktop has been idle since %1. What should we do?"
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "I Desktop ime ukusukela %1. Singenza ntoni?"
+
+#: base/mainwindow.cpp:37
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "i-KDE Ixesha isixhobo sokukangela."
+
+#: base/mainwindow.cpp:136 base/tray.cpp:74
+#, fuzzy, kde-format
+msgid "No active tasks"
+msgstr "Igcina imisebenzi ngokuzenzekelayo"
+
+#: base/mainwindow.cpp:146 base/tray.cpp:94
+#, kde-format
+msgctxt "separator between task names"
+msgid ", "
+msgstr ""
+
+#: base/taskview.cpp:102
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+
+#: base/taskview.cpp:198
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+
+#: base/taskview.cpp:274
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: base/taskview.cpp:275
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: base/taskview.cpp:345 base/taskview.cpp:429
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Umsebenzi Ongenagama"
+
+#: base/taskview.cpp:364
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+
+#: base/taskview.cpp:406
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "Omtsha Umsebenzi Osezantsi"
+
+#: base/taskview.cpp:424
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Hlela Umsebenzi"
+
+#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#, fuzzy, kde-format
+msgid "No task selected."
+msgstr "Akukho msebenzi okhetiweyo"
+
+#: base/taskview.cpp:504
+#, fuzzy, kde-format
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Uqinisekile ukuna ufuna ukucima umsebenzi onikwe igama\n"
+"\"%1\"\n"
+"QAPHELA: yonke imisebenzi yayo esezantsi izakucinywa!"
+
+#: base/taskview.cpp:508
+#, fuzzy, kde-format
+#| msgid "Deleting Task"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Icima Umsebenzi"
+
+#: base/timetrackerstorage.cpp:125
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr ""
+
+#: base/timetrackerstorage.cpp:228
+#, kde-format
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr ""
+
+#: base/timetrackerstorage.cpp:236
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:140
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:142
+#, fuzzy, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr "Oku kuzaku cwangcisa kwakhona ixesha lemisebenzi yonke."
+
+#: base/timetrackerwidget.cpp:150
+#, fuzzy, kde-format
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "&Hlela..."
+
+#: base/timetrackerwidget.cpp:151
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:153
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:163
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "&Cwangcisa kwakhona Amaxesha Esiqendu"
+
+#: base/timetrackerwidget.cpp:164
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Cwangcisa kwakhona ixesha lesiqendu"
+
+#: base/timetrackerwidget.cpp:166
+#, fuzzy, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr "Oku kuzaku cwangcisa kwakhona ixesha lemisebenzi yonke."
+
+#: base/timetrackerwidget.cpp:173
+#, fuzzy, kde-format
+#| msgid "Total Time"
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "Ixesha Elipheleleyo"
+
+#: base/timetrackerwidget.cpp:174
+#, fuzzy, kde-format
+#| msgid "Start timing for selected task"
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "Qala ukalisho lwexesha lwemisebenzi ekhetiweyo"
+
+#: base/timetrackerwidget.cpp:176
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will start timing for the selected task.\n"
+#| "It is even possible to time several tasks simultaneously.\n"
+#| "\n"
+#| "You may also start timing of a tasks by double clicking the left mouse "
+#| "button on a given task. This will, however, stop timing of other tasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"Oku kuzakuqala ukalisho lwexesha lomsebenzi okhethiweyo\n"
+"Kuyakwazeka futhi ukunika ixesha imisebenzi emininzi ngaxesha linye.\n"
+"\n"
+"Nawe ungaqala ukalisho lwexesha lwemisebenzi ngoku nqakraza kabini ekhohlo "
+"kwi qhosha lemouse kumsebenzi onikiweyo. Oku nakanjani, kuza, kumisa "
+"ukukalishwa kwexesha lweminye imisebenzi."
+
+#: base/timetrackerwidget.cpp:190
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "Mi&sa"
+
+#: base/timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
+
+#: base/timetrackerwidget.cpp:192
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
+
+#: base/timetrackerwidget.cpp:199
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:200
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:201
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:208
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "&Cwangcisa kwakhona Amaxesha Esiqendu"
+
+#: base/timetrackerwidget.cpp:209
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
+
+#: base/timetrackerwidget.cpp:210
+#, fuzzy, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
+
+#: base/timetrackerwidget.cpp:218
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:220
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:234
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "Umsebenzi Omtsha"
+
+#: base/timetrackerwidget.cpp:235
+#, fuzzy, kde-format
+#| msgid "Create new top level task"
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Yenza umsebenzi ophezulu womphakamo omtsha"
+
+#: base/timetrackerwidget.cpp:236
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "Oku kuzakwenza umsebenzi omtsha okumphakamo ophezulu."
+
+#: base/timetrackerwidget.cpp:244
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "Umsebenzi osezantsi Omtsha..."
+
+#: base/timetrackerwidget.cpp:245
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "Oku kuzakwenza umsebenzi omtsha okumphakamo ophezulu."
+
+#: base/timetrackerwidget.cpp:246
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "Oku kuzakwenza umsebenzi omtsha okumphakamo ophezulu."
+
+#: base/timetrackerwidget.cpp:254
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:255
+#, fuzzy, kde-format
+#| msgid "Delete selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Cima umsebenzi okhethiweyo"
+
+#: base/timetrackerwidget.cpp:256
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr ""
+"Oku kuzakucima umsebenzi okhethiweyo kunye nayoyonke imisebenzi esezantsi."
+
+#: base/timetrackerwidget.cpp:264
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:265
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "Hlela igama okanye amaxesha okhetho lomsebenzi"
+
+#: base/timetrackerwidget.cpp:267
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"Oku kuzakuzisa ibhokisi yencoko yababini apho ungahlela inani elinkeza "
+"iziphumo zomsebenzi okhethiweyo."
+
+#: base/timetrackerwidget.cpp:276
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Ixesha Lesiqendu"
+
+#: base/timetrackerwidget.cpp:277
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "Hlela igama okanye amaxesha okhetho lomsebenzi"
+
+#: base/timetrackerwidget.cpp:279
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"Oku kuzakuzisa ibhokisi yencoko yababini apho ungahlela inani elinkeza "
+"iziphumo zomsebenzi okhethiweyo."
+
+#: base/timetrackerwidget.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:296
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:304
+#, fuzzy, kde-format
+#| msgid "&Edit..."
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Hlela..."
+
+#: base/timetrackerwidget.cpp:311
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:323
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:458
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:463
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:468
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:505
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "Umsebenzi Omtsha"
+
+#: base/timetrackerwidget.cpp:584
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:594
+#, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:596
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:597
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "&Cwangcisa kwakhona Amaxesha Esiqendu"
+
+#: base/timetrackerwidget.cpp:786
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:788
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:790
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:792
+#, kde-format
+msgid "UID not found."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:794
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:796
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:798
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:800
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:1029
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:1036
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+
+#: base/tray.cpp:79
+#, kde-format
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ""
+
+#: base/treeviewheadercontextmenu.cpp:31
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:28
 #, fuzzy, kde-format
@@ -383,38 +965,6 @@ msgstr "Iyonke"
 msgid "No tasks."
 msgstr "Igcina imisebenzi ngokuzenzekelayo"
 
-#: idletimedetector.cpp:62
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Apply the idle time since %1 to all active\n"
-"timers and keep them running."
-msgstr ""
-
-#: idletimedetector.cpp:65
-#, fuzzy, kde-format
-msgctxt "@action:button"
-msgid "Continue Timing"
-msgstr "Qhubekekisa Ukalisho lwexesha"
-
-#: idletimedetector.cpp:67
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stop timing and revert back to the time at %1"
-msgstr ""
-
-#: idletimedetector.cpp:68
-#, fuzzy, kde-format
-msgctxt "@action:button"
-msgid "Revert Timing"
-msgstr "Buyisela ze Uqhubeke"
-
-#: idletimedetector.cpp:72
-#, fuzzy, kde-format
-#| msgid "Desktop has been idle since %1. What should we do?"
-msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr "I Desktop ime ukusukela %1. Singenza ntoni?"
-
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:23
 #, fuzzy, kde-format
@@ -568,23 +1118,6 @@ msgstr ""
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
-msgstr ""
-
-#: mainwindow.cpp:37
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "Configure KTimeTracker..."
-msgstr "i-KDE Ixesha isixhobo sokukangela."
-
-#: mainwindow.cpp:136 tray.cpp:74
-#, fuzzy, kde-format
-msgid "No active tasks"
-msgstr "Igcina imisebenzi ngokuzenzekelayo"
-
-#: mainwindow.cpp:146 tray.cpp:94
-#, kde-format
-msgctxt "separator between task names"
-msgid ", "
 msgstr ""
 
 #: model/tasksmodel.cpp:19
@@ -809,539 +1342,6 @@ msgstr ""
 #: settings/cfgstorage.ui:33
 #, kde-format
 msgid "Save tasks every:"
-msgstr ""
-
-#: taskview.cpp:102
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
-msgstr ""
-
-#: taskview.cpp:198
-#, kde-format
-msgid ""
-"Your virtual desktop number is too high, desktop tracking will not work."
-msgstr ""
-
-#: taskview.cpp:274
-#, kde-format
-msgctxt "@info:progress"
-msgid "Stopping timers..."
-msgstr ""
-
-#: taskview.cpp:275
-#, kde-format
-msgid "Cancel"
-msgstr ""
-
-#: taskview.cpp:345 taskview.cpp:429
-#, kde-format
-msgid "Unnamed Task"
-msgstr "Umsebenzi Ongenagama"
-
-#: taskview.cpp:364
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
-msgstr ""
-
-#: taskview.cpp:406
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
-msgctxt "@title:window"
-msgid "New Sub Task"
-msgstr "Omtsha Umsebenzi Osezantsi"
-
-#: taskview.cpp:424
-#, fuzzy, kde-format
-#| msgid "Edit Task"
-msgctxt "@title:window"
-msgid "Edit Task"
-msgstr "Hlela Umsebenzi"
-
-#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
-#, fuzzy, kde-format
-msgid "No task selected."
-msgstr "Akukho msebenzi okhetiweyo"
-
-#: taskview.cpp:504
-#, fuzzy, kde-format
-msgid ""
-"Are you sure you want to delete the selected task and its entire history?\n"
-"Note: All subtasks and their history will also be deleted."
-msgstr ""
-"Uqinisekile ukuna ufuna ukucima umsebenzi onikwe igama\n"
-"\"%1\"\n"
-"QAPHELA: yonke imisebenzi yayo esezantsi izakucinywa!"
-
-#: taskview.cpp:508
-#, fuzzy, kde-format
-#| msgid "Deleting Task"
-msgctxt "@title:window"
-msgid "Deleting Task"
-msgstr "Icima Umsebenzi"
-
-#: timetrackerstorage.cpp:125
-#, kde-format
-msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr ""
-
-#: timetrackerstorage.cpp:228
-#, kde-format
-msgctxt "%1=lock file path"
-msgid "Could not write lock file \"%1\". Disk full?"
-msgstr ""
-
-#: timetrackerstorage.cpp:236
-#, kde-format
-msgctxt "%1=destination file path/URL"
-msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:139
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Start &New Session"
-msgstr ""
-
-#: timetrackerwidget.cpp:140
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts a new session"
-msgstr ""
-
-#: timetrackerwidget.cpp:142
-#, fuzzy, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session time to 0 for all tasks, to start a new session, "
-"without affecting the totals."
-msgstr "Oku kuzaku cwangcisa kwakhona ixesha lemisebenzi yonke."
-
-#: timetrackerwidget.cpp:150
-#, fuzzy, kde-format
-#| msgid "&Edit..."
-msgctxt "@action:inmenu"
-msgid "Edit History..."
-msgstr "&Hlela..."
-
-#: timetrackerwidget.cpp:151
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edits history of all tasks of the current document"
-msgstr ""
-
-#: timetrackerwidget.cpp:153
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"A window will be opened where you can change start and stop times of tasks "
-"or add a comment to them."
-msgstr ""
-
-#: timetrackerwidget.cpp:163
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "&Reset All Times"
-msgstr "&Cwangcisa kwakhona Amaxesha Esiqendu"
-
-#: timetrackerwidget.cpp:164
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Resets all times"
-msgstr "Cwangcisa kwakhona ixesha lesiqendu"
-
-#: timetrackerwidget.cpp:166
-#, fuzzy, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session and total time to 0 for all tasks, to restart "
-"from scratch."
-msgstr "Oku kuzaku cwangcisa kwakhona ixesha lemisebenzi yonke."
-
-#: timetrackerwidget.cpp:173
-#, fuzzy, kde-format
-#| msgid "Total Time"
-msgctxt "@action:inmenu"
-msgid "&Start"
-msgstr "Ixesha Elipheleleyo"
-
-#: timetrackerwidget.cpp:174
-#, fuzzy, kde-format
-#| msgid "Start timing for selected task"
-msgctxt "@info:tooltip"
-msgid "Starts timing for selected task"
-msgstr "Qala ukalisho lwexesha lwemisebenzi ekhetiweyo"
-
-#: timetrackerwidget.cpp:176
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will start timing for the selected task.\n"
-#| "It is even possible to time several tasks simultaneously.\n"
-#| "\n"
-#| "You may also start timing of a tasks by double clicking the left mouse "
-#| "button on a given task. This will, however, stop timing of other tasks."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will start timing for the selected task.\n"
-"It is even possible to time several tasks simultaneously.\n"
-"\n"
-"You may also start timing of tasks by double clicking the left mouse button "
-"on a given task. This will, however, stop timing of other tasks."
-msgstr ""
-"Oku kuzakuqala ukalisho lwexesha lomsebenzi okhethiweyo\n"
-"Kuyakwazeka futhi ukunika ixesha imisebenzi emininzi ngaxesha linye.\n"
-"\n"
-"Nawe ungaqala ukalisho lwexesha lwemisebenzi ngoku nqakraza kabini ekhohlo "
-"kwi qhosha lemouse kumsebenzi onikiweyo. Oku nakanjani, kuza, kumisa "
-"ukukalishwa kwexesha lweminye imisebenzi."
-
-#: timetrackerwidget.cpp:190
-#, fuzzy, kde-format
-#| msgid "S&top"
-msgctxt "@action:inmenu"
-msgid "S&top"
-msgstr "Mi&sa"
-
-#: timetrackerwidget.cpp:191
-#, fuzzy, kde-format
-#| msgid "Stop timing of the selected task"
-msgctxt "@info:tooltip"
-msgid "Stops timing of the selected task"
-msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
-
-#: timetrackerwidget.cpp:192
-#, fuzzy, kde-format
-#| msgid "Stop timing of the selected task"
-msgctxt "@info:whatsthis"
-msgid "Stops timing of the selected task"
-msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
-
-#: timetrackerwidget.cpp:199
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Focus on Searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Sets the focus on the searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:201
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Sets the focus on the searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:208
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "Stop &All Timers"
-msgstr "&Cwangcisa kwakhona Amaxesha Esiqendu"
-
-#: timetrackerwidget.cpp:209
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops all of the active timers"
-msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
-
-#: timetrackerwidget.cpp:210
-#, fuzzy, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops all of the active timers"
-msgstr "Misa ukalisho lwexesha lomsebenzi okhethiweyo"
-
-#: timetrackerwidget.cpp:218
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Track Active Applications"
-msgstr ""
-
-#: timetrackerwidget.cpp:220
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Auto-creates and updates tasks when the focus of the current window has "
-"changed"
-msgstr ""
-
-#: timetrackerwidget.cpp:223
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If the focus of a window changes for the first time when this action is "
-"enabled, a new task will be created with the title of the window as its name "
-"and will be started. If there already exists such an task it will be started."
-msgstr ""
-
-#: timetrackerwidget.cpp:234
-#, fuzzy, kde-format
-#| msgid "New Task"
-msgctxt "@action:inmenu"
-msgid "&New Task..."
-msgstr "Umsebenzi Omtsha"
-
-#: timetrackerwidget.cpp:235
-#, fuzzy, kde-format
-#| msgid "Create new top level task"
-msgctxt "@info:tooltip"
-msgid "Creates new top level task"
-msgstr "Yenza umsebenzi ophezulu womphakamo omtsha"
-
-#: timetrackerwidget.cpp:236
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new top level task."
-msgstr "Oku kuzakwenza umsebenzi omtsha okumphakamo ophezulu."
-
-#: timetrackerwidget.cpp:244
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "New &Subtask..."
-msgstr "Umsebenzi osezantsi Omtsha..."
-
-#: timetrackerwidget.cpp:245
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:tooltip"
-msgid "Creates a new subtask to the current selected task"
-msgstr "Oku kuzakwenza umsebenzi omtsha okumphakamo ophezulu."
-
-#: timetrackerwidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new subtask to the current selected task."
-msgstr "Oku kuzakwenza umsebenzi omtsha okumphakamo ophezulu."
-
-#: timetrackerwidget.cpp:254
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Delete"
-msgstr ""
-
-#: timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-#| msgid "Delete selected task"
-msgctxt "@info:tooltip"
-msgid "Deletes selected task"
-msgstr "Cima umsebenzi okhethiweyo"
-
-#: timetrackerwidget.cpp:256
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task and all its subtasks."
-msgctxt "@info:whatsthis"
-msgid "This will delete the selected task(s) and all subtasks."
-msgstr ""
-"Oku kuzakucima umsebenzi okhethiweyo kunye nayoyonke imisebenzi esezantsi."
-
-#: timetrackerwidget.cpp:264
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Properties"
-msgstr ""
-
-#: timetrackerwidget.cpp:265
-#, fuzzy, kde-format
-#| msgid "Edit name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit name or description for selected task"
-msgstr "Hlela igama okanye amaxesha okhetho lomsebenzi"
-
-#: timetrackerwidget.cpp:267
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the parameters for the "
-"selected task."
-msgstr ""
-"Oku kuzakuzisa ibhokisi yencoko yababini apho ungahlela inani elinkeza "
-"iziphumo zomsebenzi okhethiweyo."
-
-#: timetrackerwidget.cpp:276
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit &Time..."
-msgstr "Ixesha Lesiqendu"
-
-#: timetrackerwidget.cpp:277
-#, fuzzy, kde-format
-#| msgid "Edit name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit time for selected task"
-msgstr "Hlela igama okanye amaxesha okhetho lomsebenzi"
-
-#: timetrackerwidget.cpp:279
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the times for the "
-"selected task."
-msgstr ""
-"Oku kuzakuzisa ibhokisi yencoko yababini apho ungahlela inani elinkeza "
-"iziphumo zomsebenzi okhethiweyo."
-
-#: timetrackerwidget.cpp:288
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Complete"
-msgstr ""
-
-#: timetrackerwidget.cpp:296
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Incomplete"
-msgstr ""
-
-#: timetrackerwidget.cpp:304
-#, fuzzy, kde-format
-#| msgid "&Edit..."
-msgctxt "@action:inmenu"
-msgid "&Export..."
-msgstr "&Hlela..."
-
-#: timetrackerwidget.cpp:311
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Import Tasks From &Planner..."
-msgstr ""
-
-#: timetrackerwidget.cpp:323
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Show Searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:458
-#, kde-format
-msgctxt "@title:tab"
-msgid "Behavior"
-msgstr ""
-
-#: timetrackerwidget.cpp:463
-#, kde-format
-msgctxt "@title:tab"
-msgid "Appearance"
-msgstr ""
-
-#: timetrackerwidget.cpp:468
-#, kde-format
-msgctxt "@title:tab"
-msgid "Storage"
-msgstr ""
-
-#: timetrackerwidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "New Task"
-msgctxt "@title:window"
-msgid "New Task"
-msgstr "Umsebenzi Omtsha"
-
-#: timetrackerwidget.cpp:584
-#, kde-format
-msgctxt "@info in message box"
-msgid ""
-"There is no history yet. Start and stop a task and you will have an entry in "
-"your history."
-msgstr ""
-
-#: timetrackerwidget.cpp:594
-#, kde-format
-msgid ""
-"Do you really want to reset the time to zero for all tasks? This will delete "
-"the entire history."
-msgstr ""
-
-#: timetrackerwidget.cpp:596
-#, kde-format
-msgctxt "@title:window"
-msgid "Confirmation Required"
-msgstr ""
-
-#: timetrackerwidget.cpp:597
-#, fuzzy, kde-format
-msgctxt "@action:button"
-msgid "Reset All Times"
-msgstr "&Cwangcisa kwakhona Amaxesha Esiqendu"
-
-#: timetrackerwidget.cpp:786
-#, kde-format
-msgid "Save failed, most likely because the file could not be locked."
-msgstr ""
-
-#: timetrackerwidget.cpp:788
-#, kde-format
-msgid "Could not modify calendar resource."
-msgstr ""
-
-#: timetrackerwidget.cpp:790
-#, kde-format
-msgid "Out of memory--could not create object."
-msgstr ""
-
-#: timetrackerwidget.cpp:792
-#, kde-format
-msgid "UID not found."
-msgstr ""
-
-#: timetrackerwidget.cpp:794
-#, kde-format
-msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr ""
-
-#: timetrackerwidget.cpp:796
-#, kde-format
-msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr ""
-
-#: timetrackerwidget.cpp:798
-#, kde-format
-msgid "Invalid task duration--must be greater than zero."
-msgstr ""
-
-#: timetrackerwidget.cpp:800
-#, kde-format
-msgid "Invalid error number: %1"
-msgstr ""
-
-#: timetrackerwidget.cpp:1029
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This is ktimetracker, KDE's program to help you track your time. Best, start "
-"with creating your first task - enter it into the field where you see "
-"\"Search or add task\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:1036
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "You have already created a task. You can now start and stop timing."
-msgstr ""
-
-#: tray.cpp:79
-#, kde-format
-msgctxt "ellipsis to truncate long list of tasks"
-msgid ", ..."
-msgstr ""
-
-#: treeviewheadercontextmenu.cpp:31
-#, kde-format
-msgctxt "@title:menu"
-msgid "Columns"
 msgstr ""
 
 #: widgets/searchline.cpp:23

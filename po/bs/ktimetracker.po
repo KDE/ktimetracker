@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdepim\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-04 00:38+0000\n"
 "PO-Revision-Date: 2013-10-18 20:14+0000\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -29,6 +29,674 @@ msgstr "Elmir Hadzikadunic,Samir Ribić,Vedran Ljubovic"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ek@etf.ba,samir.ribic@etf.unsa.ba,vljubovic@smartnet.ba"
+
+#: base/idletimedetector.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: base/idletimedetector.cpp:65
+#, fuzzy, kde-format
+#| msgid "Continue timing."
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "Nastavivrijeme."
+
+#: base/idletimedetector.cpp:67
+#, fuzzy, kde-format
+#| msgid "Stop timing and revert back to the time at %1."
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "Zaustavi vrijeme i vrati na vrijeme u %1."
+
+#: base/idletimedetector.cpp:68
+#, fuzzy, kde-format
+#| msgid "Revert timing"
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "Vrati vrijeme."
+
+#: base/idletimedetector.cpp:72
+#, fuzzy, kde-format
+#| msgid "Desktop has been idle since %1. What do you want to do ?"
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "Desktop je neaktivan nakon %1. Šta želite uraditi ?"
+
+#: base/mainwindow.cpp:37
+#, fuzzy, kde-format
+#| msgid "Configure KTimeTracker..."
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "Konfiguracija KTimeTracker ..."
+
+#: base/mainwindow.cpp:136 base/tray.cpp:74
+#, kde-format
+msgid "No active tasks"
+msgstr "Nema aktivnih zadataka"
+
+#: base/mainwindow.cpp:146 base/tray.cpp:94
+#, fuzzy, kde-format
+#| msgid ", "
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: base/taskview.cpp:102
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"Greška pri smještanju novog zadatka. Vaše izmjene nisu sačuvane. Provjerite "
+"da li možete da mijenjate datoteka vašeg iCalendar-a. Takođe, zatvorite sve "
+"programe koji koriste ovaj datoteku i uklonite svaku datoteku zaključavanja "
+"koji se odnosi na njega iz ~/.kde/share/apps/kabc/lock/ "
+
+#: base/taskview.cpp:198
+#, fuzzy, kde-format
+#| msgid ""
+#| "Your virtual desktop number is too high, desktop tracking will not work"
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+"Virtualni broj vašeg desktopa je previsok, praćenje vašeg desktopa neće "
+"raditi"
+
+#: base/taskview.cpp:274
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: base/taskview.cpp:275
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: base/taskview.cpp:345 base/taskview.cpp:429
+#, kde-format
+msgid "Unnamed Task"
+msgstr "Bezimeni zadatak"
+
+#: base/taskview.cpp:364
+#, fuzzy, kde-format
+#| msgid ""
+#| "Error storing new task. Your changes were not saved. Make sure you can "
+#| "edit your iCalendar file. Also quit all applications using this file and "
+#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
+#| "lock/ "
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"Greška pri smještanju novog zadatka. Vaše izmjene nisu sačuvane. Provjerite "
+"da li možete da mijenjate datoteka vašeg iCalendar-a. Takođe, zatvorite sve "
+"programe koji koriste ovaj datoteku i uklonite svaku datoteku zaključavanja "
+"koji se odnosi na njega iz ~/.kde/share/apps/kabc/lock/ "
+
+#: base/taskview.cpp:406
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "Novi podzadatak"
+
+#: base/taskview.cpp:424
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "Izmijeni zadatak"
+
+#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#, kde-format
+msgid "No task selected."
+msgstr "Nema izabranih zadataka."
+
+#: base/taskview.cpp:504
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to delete the selected task and its entire "
+#| "history?\n"
+#| "NOTE: all subtasks and their history will also be deleted."
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"Da li ste sigurni da želite da izbrišete izabrani zadatak i svu istoriju?\n"
+"NAPOMENA: svi podzadaci i njihova istorija će takođe biti obrisani."
+
+#: base/taskview.cpp:508
+#, fuzzy, kde-format
+#| msgid "Deleting Task"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "Brišem zadatak"
+
+#: base/timetrackerstorage.cpp:125
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "Greška tokom učitavanja '%1': nije moguće pronaći roditelja (uid=%2)"
+
+#: base/timetrackerstorage.cpp:228
+#, fuzzy, kde-format
+#| msgid "Could not save. Disk full?"
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "Ne mogu snimiti. Da li je disk pun?"
+
+#: base/timetrackerstorage.cpp:236
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:139
+#, fuzzy, kde-format
+#| msgid "Start &New Session"
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "Započni &novu sesiju"
+
+#: base/timetrackerwidget.cpp:140
+#, fuzzy, kde-format
+#| msgid "Starts a new session"
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "Počinje nova sesija"
+
+#: base/timetrackerwidget.cpp:142
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session time to 0 for all tasks, to start a new "
+#| "session, without affecting the totals."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"Ovo će poništiti vrijeme sesije na nulu za sve zadatke da bi se pokrenula "
+"nova sesija bez uticaja na ukupne vrijednosti."
+
+#: base/timetrackerwidget.cpp:150
+#, fuzzy, kde-format
+#| msgid "Edit History..."
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "Izmijeni historiju"
+
+#: base/timetrackerwidget.cpp:151
+#, fuzzy, kde-format
+#| msgid "Edits history of all tasks of the current document"
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr "Uređuje historiju svih zadataka trenutnih dokumenata"
+
+#: base/timetrackerwidget.cpp:153
+#, fuzzy, kde-format
+#| msgid ""
+#| "A window will be opened where you can change start and stop times of "
+#| "tasks or add a comment to them."
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+"Prozor će se otvoriti gdje možete promijeniti vrijeme početka i završetka "
+"zadataka ili dodati kometar na njih."
+
+#: base/timetrackerwidget.cpp:163
+#, fuzzy, kde-format
+#| msgid "&Reset All Times"
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "&Poništi sva vremena"
+
+#: base/timetrackerwidget.cpp:164
+#, fuzzy, kde-format
+#| msgid "Resets all times"
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "Poništi sva vremena"
+
+#: base/timetrackerwidget.cpp:166
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session and total time to 0 for all tasks, to restart "
+#| "from scratch."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"Ovo će poništiti ukupno vrijeme i vrijeme sesije na nulu za sve zadatke da "
+"bi se počelo od početka."
+
+#: base/timetrackerwidget.cpp:173
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "&Počni"
+
+#: base/timetrackerwidget.cpp:174
+#, fuzzy, kde-format
+#| msgid "Starts timing for selected task"
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "Počinje računanje vremena za odabrani zadatak"
+
+#: base/timetrackerwidget.cpp:176
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will start timing for the selected task.\n"
+#| "It is even possible to time several tasks simultanously.\n"
+#| "\n"
+#| "You may also start timing of tasks by double clicking the left mouse "
+#| "button on a given task. This will, however, stop timing of other tasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"Ovo će započeti računanje vremena za odabrani zadatak.\n"
+"Čak je moguće simultano postaviti vrijeme pojedinih zadataka.\n"
+"Vi možete takođe početi mjerenje zadataka dvostrukim klikom lijeve tipke "
+"miša na određeni zadatak. To će, međutim, zaustaviti mjerenje drugih poslova."
+
+#: base/timetrackerwidget.cpp:190
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "Zaus&tavi"
+
+#: base/timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+#| msgid "Stops timing of the selected task"
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "Zaustavlja proračun vremena za odabrani zadatak"
+
+#: base/timetrackerwidget.cpp:192
+#, fuzzy, kde-format
+#| msgid "Stops timing of the selected task"
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "Zaustavlja proračun vremena za odabrani zadatak"
+
+#: base/timetrackerwidget.cpp:199
+#, fuzzy, kde-format
+#| msgid "Focus on Searchbar"
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr "Fokus na traku za pretragu"
+
+#: base/timetrackerwidget.cpp:200
+#, fuzzy, kde-format
+#| msgid "Sets the focus on the searchbar"
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr "Postavlja fokus na traku za pretragu"
+
+#: base/timetrackerwidget.cpp:201
+#, fuzzy, kde-format
+#| msgid "Sets the focus on the searchbar"
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr "Postavlja fokus na traku za pretragu"
+
+#: base/timetrackerwidget.cpp:208
+#, fuzzy, kde-format
+#| msgid "Stop &All Timers"
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "Zaustavi sve &satove"
+
+#: base/timetrackerwidget.cpp:209
+#, fuzzy, kde-format
+#| msgid "Stops all of the active timers"
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "Zaustavlja sve aktivne brojače"
+
+#: base/timetrackerwidget.cpp:210
+#, fuzzy, kde-format
+#| msgid "Stops all of the active timers"
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "Zaustavlja sve aktivne brojače"
+
+#: base/timetrackerwidget.cpp:218
+#, fuzzy, kde-format
+#| msgid "Track Active Applications"
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr "Slijedi aktivnu aplikaciju"
+
+#: base/timetrackerwidget.cpp:220
+#, fuzzy, kde-format
+#| msgid ""
+#| "Auto-creates and updates tasks when the focus of the current window has "
+#| "changed"
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+"Stvara sam i ažurira poslove kada se fokus trenutnog prozora promijenio"
+
+#: base/timetrackerwidget.cpp:223
+#, fuzzy, kde-format
+#| msgid ""
+#| "If the focus of a window changes for the first time when this action is "
+#| "enabled, a new task will be created with the title of the window as its "
+#| "name and will be started. If there already exists such an task it will be "
+#| "started."
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+"Ukoliko se fokus prozora promjeni po prvi put kada je ova akcija omogućena, "
+"novi zadatak će biti kreiran pod imenom datog prozora i počeće sa radom. "
+"Ukoliko već postoji takav zadatak, počeće sa radom."
+
+#: base/timetrackerwidget.cpp:234
+#, fuzzy, kde-format
+#| msgid "&New Task..."
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "&Novi zadatak..."
+
+#: base/timetrackerwidget.cpp:235
+#, fuzzy, kde-format
+#| msgid "Creates new top level task"
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "Kreira zadatak najvišeg nivoa"
+
+#: base/timetrackerwidget.cpp:236
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "Ovo će napraviti novi zadatak najvišeg nivoa."
+
+#: base/timetrackerwidget.cpp:244
+#, fuzzy, kde-format
+#| msgid "New &Subtask..."
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "Novi &podzadatak..."
+
+#: base/timetrackerwidget.cpp:245
+#, fuzzy, kde-format
+#| msgid "Creates a new subtask to the current selected task"
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "Stvara novi podzadatak za trenutno odabrani zadatak"
+
+#: base/timetrackerwidget.cpp:246
+#, fuzzy, kde-format
+#| msgid "This will create a new subtask to the current selected task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "Ovo će stvoritit novi podzadatak za trenutno odabrani zadatak"
+
+#: base/timetrackerwidget.cpp:254
+#, fuzzy, kde-format
+#| msgid "&Delete"
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "&Obriši"
+
+#: base/timetrackerwidget.cpp:255
+#, fuzzy, kde-format
+#| msgid "Deletes selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "Briše izabrani zadatak"
+
+#: base/timetrackerwidget.cpp:256
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task(s) and all subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "Ovo će obrisati označene zadatake(zadatak) i sve podzadatke"
+
+#: base/timetrackerwidget.cpp:264
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:265
+#, fuzzy, kde-format
+#| msgid "Edits name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "Uređuje naziv ili vrijeme računanja odabranog zadatka"
+
+#: base/timetrackerwidget.cpp:267
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"Pojavit će se dijalog u kojem možete uređivati parametre izabranog zadatka."
+
+#: base/timetrackerwidget.cpp:276
+#, fuzzy, kde-format
+#| msgid "Edit Times"
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "Izmijeni vrijeme"
+
+#: base/timetrackerwidget.cpp:277
+#, fuzzy, kde-format
+#| msgid "Edits name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "Uređuje naziv ili vrijeme računanja odabranog zadatka"
+
+#: base/timetrackerwidget.cpp:279
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"Pojavit će se dijalog u kojem možete uređivati parametre izabranog zadatka."
+
+#: base/timetrackerwidget.cpp:288
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&Označi kao završeno"
+
+#: base/timetrackerwidget.cpp:296
+#, fuzzy, kde-format
+#| msgid "&Mark as Incomplete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&Označi kao nezavršeno"
+
+#: base/timetrackerwidget.cpp:304
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&Izvezi"
+
+#: base/timetrackerwidget.cpp:311
+#, fuzzy, kde-format
+#| msgid "Import Tasks From &Planner..."
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "Uvezi zadatke iz &planera..."
+
+#: base/timetrackerwidget.cpp:323
+#, fuzzy, kde-format
+#| msgid "Show Searchbar"
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr "Prikaži traku za pretragu"
+
+#: base/timetrackerwidget.cpp:458
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:463
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:468
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:505
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "Novi zadatak"
+
+#: base/timetrackerwidget.cpp:584
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+"Nema historije još. Počnite i zavšite zadatak i imaćete pristup vašoj "
+"historiji."
+
+#: base/timetrackerwidget.cpp:594
+#, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+"Da li želite zaista vratiti vrijeme na početak za sve zadatke. To će "
+"obrisati cijelu istoriju."
+
+#: base/timetrackerwidget.cpp:596
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "Potrebna je potvrda"
+
+#: base/timetrackerwidget.cpp:597
+#, fuzzy, kde-format
+#| msgid "Reset All Times"
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "Resetuj sva vremena"
+
+#: base/timetrackerwidget.cpp:786
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr ""
+"Snimanje nije uspjelo, verovatno zato što datoteka nije mogla biti "
+"zaključana."
+
+#: base/timetrackerwidget.cpp:788
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "Ne mogu da izmijenim izvor kalendara."
+
+#: base/timetrackerwidget.cpp:790
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "Nedostatak memorije--ne mogu da napravim objekat."
+
+#: base/timetrackerwidget.cpp:792
+#, kde-format
+msgid "UID not found."
+msgstr "UID nije pronađen."
+
+#: base/timetrackerwidget.cpp:794
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "Neispravan datum--format je GGGG-MM-DD."
+
+#: base/timetrackerwidget.cpp:796
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "Neispravno vrijeme--format je GGGG-MM-DDTHH:MM:SS"
+
+#: base/timetrackerwidget.cpp:798
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "Neispravno trajanje zadatka--mora biti veće od nule."
+
+#: base/timetrackerwidget.cpp:800
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "Neispravan broj greške: %1"
+
+#: base/timetrackerwidget.cpp:1029
+#, fuzzy, kde-format
+#| msgid ""
+#| "This is ktimetracker, KDE's program to help you track your time. Best, "
+#| "start with creating your first task - enter it into the field where you "
+#| "see \"search or add task\"."
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+"Ovo je ktimetracker, KDE je program koji vam pomaže da slijedite vrijeme. "
+"Najbolje je započeti sa stvaranjem svog prvog zadatka - ući u polje gdje "
+"možete vidjeti \"pretraživanje ili dodajte zadatak\"."
+
+#: base/timetrackerwidget.cpp:1036
+#, fuzzy, kde-format
+#| msgid "You have already created a task. You can now start and stop timing"
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+"Već ste kreirali zadatak. Možete započeti i zaustaviti vaše računanje vremena"
+
+#: base/tray.cpp:79
+#, fuzzy, kde-format
+#| msgid ", ..."
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: base/treeviewheadercontextmenu.cpp:31
+#, fuzzy, kde-format
+#| msgid "Columns"
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "Kolone"
 
 #: dialogs/edittimedialog.cpp:28
 #, fuzzy, kde-format
@@ -394,41 +1062,6 @@ msgstr "Ukupno"
 msgid "No tasks."
 msgstr "Nema zadataka."
 
-#: idletimedetector.cpp:62
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Apply the idle time since %1 to all active\n"
-"timers and keep them running."
-msgstr ""
-
-#: idletimedetector.cpp:65
-#, fuzzy, kde-format
-#| msgid "Continue timing."
-msgctxt "@action:button"
-msgid "Continue Timing"
-msgstr "Nastavivrijeme."
-
-#: idletimedetector.cpp:67
-#, fuzzy, kde-format
-#| msgid "Stop timing and revert back to the time at %1."
-msgctxt "@info:tooltip"
-msgid "Stop timing and revert back to the time at %1"
-msgstr "Zaustavi vrijeme i vrati na vrijeme u %1."
-
-#: idletimedetector.cpp:68
-#, fuzzy, kde-format
-#| msgid "Revert timing"
-msgctxt "@action:button"
-msgid "Revert Timing"
-msgstr "Vrati vrijeme."
-
-#: idletimedetector.cpp:72
-#, fuzzy, kde-format
-#| msgid "Desktop has been idle since %1. What do you want to do ?"
-msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr "Desktop je neaktivan nakon %1. Šta želite uraditi ?"
-
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:23
 #, kde-format
@@ -593,25 +1226,6 @@ msgstr "David Faure"
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
 msgstr "iCalendar datoteka za otvaranje"
-
-#: mainwindow.cpp:37
-#, fuzzy, kde-format
-#| msgid "Configure KTimeTracker..."
-msgctxt "@action:inmenu"
-msgid "Configure KTimeTracker..."
-msgstr "Konfiguracija KTimeTracker ..."
-
-#: mainwindow.cpp:136 tray.cpp:74
-#, kde-format
-msgid "No active tasks"
-msgstr "Nema aktivnih zadataka"
-
-#: mainwindow.cpp:146 tray.cpp:94
-#, fuzzy, kde-format
-#| msgid ", "
-msgctxt "separator between task names"
-msgid ", "
-msgstr ", "
 
 #: model/tasksmodel.cpp:19
 #, fuzzy, kde-format
@@ -848,620 +1462,6 @@ msgstr "Procenat završen"
 #, kde-format
 msgid "Save tasks every:"
 msgstr "Sačuvaj zadatke svakih:"
-
-#: taskview.cpp:102
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
-msgstr ""
-"Greška pri smještanju novog zadatka. Vaše izmjene nisu sačuvane. Provjerite "
-"da li možete da mijenjate datoteka vašeg iCalendar-a. Takođe, zatvorite sve "
-"programe koji koriste ovaj datoteku i uklonite svaku datoteku zaključavanja "
-"koji se odnosi na njega iz ~/.kde/share/apps/kabc/lock/ "
-
-#: taskview.cpp:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Your virtual desktop number is too high, desktop tracking will not work"
-msgid ""
-"Your virtual desktop number is too high, desktop tracking will not work."
-msgstr ""
-"Virtualni broj vašeg desktopa je previsok, praćenje vašeg desktopa neće "
-"raditi"
-
-#: taskview.cpp:274
-#, kde-format
-msgctxt "@info:progress"
-msgid "Stopping timers..."
-msgstr ""
-
-#: taskview.cpp:275
-#, kde-format
-msgid "Cancel"
-msgstr ""
-
-#: taskview.cpp:345 taskview.cpp:429
-#, kde-format
-msgid "Unnamed Task"
-msgstr "Bezimeni zadatak"
-
-#: taskview.cpp:364
-#, fuzzy, kde-format
-#| msgid ""
-#| "Error storing new task. Your changes were not saved. Make sure you can "
-#| "edit your iCalendar file. Also quit all applications using this file and "
-#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
-#| "lock/ "
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
-msgstr ""
-"Greška pri smještanju novog zadatka. Vaše izmjene nisu sačuvane. Provjerite "
-"da li možete da mijenjate datoteka vašeg iCalendar-a. Takođe, zatvorite sve "
-"programe koji koriste ovaj datoteku i uklonite svaku datoteku zaključavanja "
-"koji se odnosi na njega iz ~/.kde/share/apps/kabc/lock/ "
-
-#: taskview.cpp:406
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
-msgctxt "@title:window"
-msgid "New Sub Task"
-msgstr "Novi podzadatak"
-
-#: taskview.cpp:424
-#, fuzzy, kde-format
-#| msgid "Edit Task"
-msgctxt "@title:window"
-msgid "Edit Task"
-msgstr "Izmijeni zadatak"
-
-#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
-#, kde-format
-msgid "No task selected."
-msgstr "Nema izabranih zadataka."
-
-#: taskview.cpp:504
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to delete the selected task and its entire "
-#| "history?\n"
-#| "NOTE: all subtasks and their history will also be deleted."
-msgid ""
-"Are you sure you want to delete the selected task and its entire history?\n"
-"Note: All subtasks and their history will also be deleted."
-msgstr ""
-"Da li ste sigurni da želite da izbrišete izabrani zadatak i svu istoriju?\n"
-"NAPOMENA: svi podzadaci i njihova istorija će takođe biti obrisani."
-
-#: taskview.cpp:508
-#, fuzzy, kde-format
-#| msgid "Deleting Task"
-msgctxt "@title:window"
-msgid "Deleting Task"
-msgstr "Brišem zadatak"
-
-#: timetrackerstorage.cpp:125
-#, kde-format
-msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr "Greška tokom učitavanja '%1': nije moguće pronaći roditelja (uid=%2)"
-
-#: timetrackerstorage.cpp:228
-#, fuzzy, kde-format
-#| msgid "Could not save. Disk full?"
-msgctxt "%1=lock file path"
-msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "Ne mogu snimiti. Da li je disk pun?"
-
-#: timetrackerstorage.cpp:236
-#, kde-format
-msgctxt "%1=destination file path/URL"
-msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
-msgctxt "@action:inmenu"
-msgid "Start &New Session"
-msgstr "Započni &novu sesiju"
-
-#: timetrackerwidget.cpp:140
-#, fuzzy, kde-format
-#| msgid "Starts a new session"
-msgctxt "@info:tooltip"
-msgid "Starts a new session"
-msgstr "Počinje nova sesija"
-
-#: timetrackerwidget.cpp:142
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will reset the session time to 0 for all tasks, to start a new "
-#| "session, without affecting the totals."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session time to 0 for all tasks, to start a new session, "
-"without affecting the totals."
-msgstr ""
-"Ovo će poništiti vrijeme sesije na nulu za sve zadatke da bi se pokrenula "
-"nova sesija bez uticaja na ukupne vrijednosti."
-
-#: timetrackerwidget.cpp:150
-#, fuzzy, kde-format
-#| msgid "Edit History..."
-msgctxt "@action:inmenu"
-msgid "Edit History..."
-msgstr "Izmijeni historiju"
-
-#: timetrackerwidget.cpp:151
-#, fuzzy, kde-format
-#| msgid "Edits history of all tasks of the current document"
-msgctxt "@info:tooltip"
-msgid "Edits history of all tasks of the current document"
-msgstr "Uređuje historiju svih zadataka trenutnih dokumenata"
-
-#: timetrackerwidget.cpp:153
-#, fuzzy, kde-format
-#| msgid ""
-#| "A window will be opened where you can change start and stop times of "
-#| "tasks or add a comment to them."
-msgctxt "@info:whatsthis"
-msgid ""
-"A window will be opened where you can change start and stop times of tasks "
-"or add a comment to them."
-msgstr ""
-"Prozor će se otvoriti gdje možete promijeniti vrijeme početka i završetka "
-"zadataka ili dodati kometar na njih."
-
-#: timetrackerwidget.cpp:163
-#, fuzzy, kde-format
-#| msgid "&Reset All Times"
-msgctxt "@action:inmenu"
-msgid "&Reset All Times"
-msgstr "&Poništi sva vremena"
-
-#: timetrackerwidget.cpp:164
-#, fuzzy, kde-format
-#| msgid "Resets all times"
-msgctxt "@info:tooltip"
-msgid "Resets all times"
-msgstr "Poništi sva vremena"
-
-#: timetrackerwidget.cpp:166
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will reset the session and total time to 0 for all tasks, to restart "
-#| "from scratch."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session and total time to 0 for all tasks, to restart "
-"from scratch."
-msgstr ""
-"Ovo će poništiti ukupno vrijeme i vrijeme sesije na nulu za sve zadatke da "
-"bi se počelo od početka."
-
-#: timetrackerwidget.cpp:173
-#, fuzzy, kde-format
-#| msgid "&Start"
-msgctxt "@action:inmenu"
-msgid "&Start"
-msgstr "&Počni"
-
-#: timetrackerwidget.cpp:174
-#, fuzzy, kde-format
-#| msgid "Starts timing for selected task"
-msgctxt "@info:tooltip"
-msgid "Starts timing for selected task"
-msgstr "Počinje računanje vremena za odabrani zadatak"
-
-#: timetrackerwidget.cpp:176
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will start timing for the selected task.\n"
-#| "It is even possible to time several tasks simultanously.\n"
-#| "\n"
-#| "You may also start timing of tasks by double clicking the left mouse "
-#| "button on a given task. This will, however, stop timing of other tasks."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will start timing for the selected task.\n"
-"It is even possible to time several tasks simultaneously.\n"
-"\n"
-"You may also start timing of tasks by double clicking the left mouse button "
-"on a given task. This will, however, stop timing of other tasks."
-msgstr ""
-"Ovo će započeti računanje vremena za odabrani zadatak.\n"
-"Čak je moguće simultano postaviti vrijeme pojedinih zadataka.\n"
-"Vi možete takođe početi mjerenje zadataka dvostrukim klikom lijeve tipke "
-"miša na određeni zadatak. To će, međutim, zaustaviti mjerenje drugih poslova."
-
-#: timetrackerwidget.cpp:190
-#, fuzzy, kde-format
-#| msgid "S&top"
-msgctxt "@action:inmenu"
-msgid "S&top"
-msgstr "Zaus&tavi"
-
-#: timetrackerwidget.cpp:191
-#, fuzzy, kde-format
-#| msgid "Stops timing of the selected task"
-msgctxt "@info:tooltip"
-msgid "Stops timing of the selected task"
-msgstr "Zaustavlja proračun vremena za odabrani zadatak"
-
-#: timetrackerwidget.cpp:192
-#, fuzzy, kde-format
-#| msgid "Stops timing of the selected task"
-msgctxt "@info:whatsthis"
-msgid "Stops timing of the selected task"
-msgstr "Zaustavlja proračun vremena za odabrani zadatak"
-
-#: timetrackerwidget.cpp:199
-#, fuzzy, kde-format
-#| msgid "Focus on Searchbar"
-msgctxt "@action:inmenu"
-msgid "Focus on Searchbar"
-msgstr "Fokus na traku za pretragu"
-
-#: timetrackerwidget.cpp:200
-#, fuzzy, kde-format
-#| msgid "Sets the focus on the searchbar"
-msgctxt "@info:tooltip"
-msgid "Sets the focus on the searchbar"
-msgstr "Postavlja fokus na traku za pretragu"
-
-#: timetrackerwidget.cpp:201
-#, fuzzy, kde-format
-#| msgid "Sets the focus on the searchbar"
-msgctxt "@info:whatsthis"
-msgid "Sets the focus on the searchbar"
-msgstr "Postavlja fokus na traku za pretragu"
-
-#: timetrackerwidget.cpp:208
-#, fuzzy, kde-format
-#| msgid "Stop &All Timers"
-msgctxt "@action:inmenu"
-msgid "Stop &All Timers"
-msgstr "Zaustavi sve &satove"
-
-#: timetrackerwidget.cpp:209
-#, fuzzy, kde-format
-#| msgid "Stops all of the active timers"
-msgctxt "@info:tooltip"
-msgid "Stops all of the active timers"
-msgstr "Zaustavlja sve aktivne brojače"
-
-#: timetrackerwidget.cpp:210
-#, fuzzy, kde-format
-#| msgid "Stops all of the active timers"
-msgctxt "@info:whatsthis"
-msgid "Stops all of the active timers"
-msgstr "Zaustavlja sve aktivne brojače"
-
-#: timetrackerwidget.cpp:218
-#, fuzzy, kde-format
-#| msgid "Track Active Applications"
-msgctxt "@action:inmenu"
-msgid "Track Active Applications"
-msgstr "Slijedi aktivnu aplikaciju"
-
-#: timetrackerwidget.cpp:220
-#, fuzzy, kde-format
-#| msgid ""
-#| "Auto-creates and updates tasks when the focus of the current window has "
-#| "changed"
-msgctxt "@info:tooltip"
-msgid ""
-"Auto-creates and updates tasks when the focus of the current window has "
-"changed"
-msgstr ""
-"Stvara sam i ažurira poslove kada se fokus trenutnog prozora promijenio"
-
-#: timetrackerwidget.cpp:223
-#, fuzzy, kde-format
-#| msgid ""
-#| "If the focus of a window changes for the first time when this action is "
-#| "enabled, a new task will be created with the title of the window as its "
-#| "name and will be started. If there already exists such an task it will be "
-#| "started."
-msgctxt "@info:whatsthis"
-msgid ""
-"If the focus of a window changes for the first time when this action is "
-"enabled, a new task will be created with the title of the window as its name "
-"and will be started. If there already exists such an task it will be started."
-msgstr ""
-"Ukoliko se fokus prozora promjeni po prvi put kada je ova akcija omogućena, "
-"novi zadatak će biti kreiran pod imenom datog prozora i počeće sa radom. "
-"Ukoliko već postoji takav zadatak, počeće sa radom."
-
-#: timetrackerwidget.cpp:234
-#, fuzzy, kde-format
-#| msgid "&New Task..."
-msgctxt "@action:inmenu"
-msgid "&New Task..."
-msgstr "&Novi zadatak..."
-
-#: timetrackerwidget.cpp:235
-#, fuzzy, kde-format
-#| msgid "Creates new top level task"
-msgctxt "@info:tooltip"
-msgid "Creates new top level task"
-msgstr "Kreira zadatak najvišeg nivoa"
-
-#: timetrackerwidget.cpp:236
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new top level task."
-msgstr "Ovo će napraviti novi zadatak najvišeg nivoa."
-
-#: timetrackerwidget.cpp:244
-#, fuzzy, kde-format
-#| msgid "New &Subtask..."
-msgctxt "@action:inmenu"
-msgid "New &Subtask..."
-msgstr "Novi &podzadatak..."
-
-#: timetrackerwidget.cpp:245
-#, fuzzy, kde-format
-#| msgid "Creates a new subtask to the current selected task"
-msgctxt "@info:tooltip"
-msgid "Creates a new subtask to the current selected task"
-msgstr "Stvara novi podzadatak za trenutno odabrani zadatak"
-
-#: timetrackerwidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "This will create a new subtask to the current selected task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new subtask to the current selected task."
-msgstr "Ovo će stvoritit novi podzadatak za trenutno odabrani zadatak"
-
-#: timetrackerwidget.cpp:254
-#, fuzzy, kde-format
-#| msgid "&Delete"
-msgctxt "@action:inmenu"
-msgid "&Delete"
-msgstr "&Obriši"
-
-#: timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
-msgctxt "@info:tooltip"
-msgid "Deletes selected task"
-msgstr "Briše izabrani zadatak"
-
-#: timetrackerwidget.cpp:256
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task(s) and all subtasks."
-msgctxt "@info:whatsthis"
-msgid "This will delete the selected task(s) and all subtasks."
-msgstr "Ovo će obrisati označene zadatake(zadatak) i sve podzadatke"
-
-#: timetrackerwidget.cpp:264
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Properties"
-msgstr ""
-
-#: timetrackerwidget.cpp:265
-#, fuzzy, kde-format
-#| msgid "Edits name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit name or description for selected task"
-msgstr "Uređuje naziv ili vrijeme računanja odabranog zadatka"
-
-#: timetrackerwidget.cpp:267
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the parameters for the "
-"selected task."
-msgstr ""
-"Pojavit će se dijalog u kojem možete uređivati parametre izabranog zadatka."
-
-#: timetrackerwidget.cpp:276
-#, fuzzy, kde-format
-#| msgid "Edit Times"
-msgctxt "@action:inmenu"
-msgid "Edit &Time..."
-msgstr "Izmijeni vrijeme"
-
-#: timetrackerwidget.cpp:277
-#, fuzzy, kde-format
-#| msgid "Edits name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit time for selected task"
-msgstr "Uređuje naziv ili vrijeme računanja odabranog zadatka"
-
-#: timetrackerwidget.cpp:279
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the times for the "
-"selected task."
-msgstr ""
-"Pojavit će se dijalog u kojem možete uređivati parametre izabranog zadatka."
-
-#: timetrackerwidget.cpp:288
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
-msgctxt "@action:inmenu"
-msgid "&Mark as Complete"
-msgstr "&Označi kao završeno"
-
-#: timetrackerwidget.cpp:296
-#, fuzzy, kde-format
-#| msgid "&Mark as Incomplete"
-msgctxt "@action:inmenu"
-msgid "&Mark as Incomplete"
-msgstr "&Označi kao nezavršeno"
-
-#: timetrackerwidget.cpp:304
-#, fuzzy, kde-format
-#| msgid "&Export"
-msgctxt "@action:inmenu"
-msgid "&Export..."
-msgstr "&Izvezi"
-
-#: timetrackerwidget.cpp:311
-#, fuzzy, kde-format
-#| msgid "Import Tasks From &Planner..."
-msgctxt "@action:inmenu"
-msgid "Import Tasks From &Planner..."
-msgstr "Uvezi zadatke iz &planera..."
-
-#: timetrackerwidget.cpp:323
-#, fuzzy, kde-format
-#| msgid "Show Searchbar"
-msgctxt "@action:inmenu"
-msgid "Show Searchbar"
-msgstr "Prikaži traku za pretragu"
-
-#: timetrackerwidget.cpp:458
-#, kde-format
-msgctxt "@title:tab"
-msgid "Behavior"
-msgstr ""
-
-#: timetrackerwidget.cpp:463
-#, kde-format
-msgctxt "@title:tab"
-msgid "Appearance"
-msgstr ""
-
-#: timetrackerwidget.cpp:468
-#, kde-format
-msgctxt "@title:tab"
-msgid "Storage"
-msgstr ""
-
-#: timetrackerwidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "New Task"
-msgctxt "@title:window"
-msgid "New Task"
-msgstr "Novi zadatak"
-
-#: timetrackerwidget.cpp:584
-#, kde-format
-msgctxt "@info in message box"
-msgid ""
-"There is no history yet. Start and stop a task and you will have an entry in "
-"your history."
-msgstr ""
-"Nema historije još. Počnite i zavšite zadatak i imaćete pristup vašoj "
-"historiji."
-
-#: timetrackerwidget.cpp:594
-#, kde-format
-msgid ""
-"Do you really want to reset the time to zero for all tasks? This will delete "
-"the entire history."
-msgstr ""
-"Da li želite zaista vratiti vrijeme na početak za sve zadatke. To će "
-"obrisati cijelu istoriju."
-
-#: timetrackerwidget.cpp:596
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
-msgctxt "@title:window"
-msgid "Confirmation Required"
-msgstr "Potrebna je potvrda"
-
-#: timetrackerwidget.cpp:597
-#, fuzzy, kde-format
-#| msgid "Reset All Times"
-msgctxt "@action:button"
-msgid "Reset All Times"
-msgstr "Resetuj sva vremena"
-
-#: timetrackerwidget.cpp:786
-#, kde-format
-msgid "Save failed, most likely because the file could not be locked."
-msgstr ""
-"Snimanje nije uspjelo, verovatno zato što datoteka nije mogla biti "
-"zaključana."
-
-#: timetrackerwidget.cpp:788
-#, kde-format
-msgid "Could not modify calendar resource."
-msgstr "Ne mogu da izmijenim izvor kalendara."
-
-#: timetrackerwidget.cpp:790
-#, kde-format
-msgid "Out of memory--could not create object."
-msgstr "Nedostatak memorije--ne mogu da napravim objekat."
-
-#: timetrackerwidget.cpp:792
-#, kde-format
-msgid "UID not found."
-msgstr "UID nije pronađen."
-
-#: timetrackerwidget.cpp:794
-#, kde-format
-msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr "Neispravan datum--format je GGGG-MM-DD."
-
-#: timetrackerwidget.cpp:796
-#, kde-format
-msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr "Neispravno vrijeme--format je GGGG-MM-DDTHH:MM:SS"
-
-#: timetrackerwidget.cpp:798
-#, kde-format
-msgid "Invalid task duration--must be greater than zero."
-msgstr "Neispravno trajanje zadatka--mora biti veće od nule."
-
-#: timetrackerwidget.cpp:800
-#, kde-format
-msgid "Invalid error number: %1"
-msgstr "Neispravan broj greške: %1"
-
-#: timetrackerwidget.cpp:1029
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is ktimetracker, KDE's program to help you track your time. Best, "
-#| "start with creating your first task - enter it into the field where you "
-#| "see \"search or add task\"."
-msgctxt "@info:whatsthis"
-msgid ""
-"This is ktimetracker, KDE's program to help you track your time. Best, start "
-"with creating your first task - enter it into the field where you see "
-"\"Search or add task\"."
-msgstr ""
-"Ovo je ktimetracker, KDE je program koji vam pomaže da slijedite vrijeme. "
-"Najbolje je započeti sa stvaranjem svog prvog zadatka - ući u polje gdje "
-"možete vidjeti \"pretraživanje ili dodajte zadatak\"."
-
-#: timetrackerwidget.cpp:1036
-#, fuzzy, kde-format
-#| msgid "You have already created a task. You can now start and stop timing"
-msgctxt "@info:whatsthis"
-msgid "You have already created a task. You can now start and stop timing."
-msgstr ""
-"Već ste kreirali zadatak. Možete započeti i zaustaviti vaše računanje vremena"
-
-#: tray.cpp:79
-#, fuzzy, kde-format
-#| msgid ", ..."
-msgctxt "ellipsis to truncate long list of tasks"
-msgid ", ..."
-msgstr ", ..."
-
-#: treeviewheadercontextmenu.cpp:31
-#, fuzzy, kde-format
-#| msgid "Columns"
-msgctxt "@title:menu"
-msgid "Columns"
-msgstr "Kolone"
 
 #: widgets/searchline.cpp:23
 #, fuzzy, kde-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-04 00:38+0000\n"
 "PO-Revision-Date: 2022-09-06 20:57+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -28,6 +28,551 @@ msgstr "فريق تعريب لينكس"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "contact@arabeyes.org"
+
+#: base/idletimedetector.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: base/idletimedetector.cpp:65
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "استمر."
+
+#: base/idletimedetector.cpp:67
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "قف و يعكس إلى الخلف إلى وقت عند."
+
+#: base/idletimedetector.cpp:68
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "ارتداد"
+
+#: base/idletimedetector.cpp:72
+#, kde-format
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr ""
+
+#: base/mainwindow.cpp:37
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "أداة تسجيل الوقت في KDE."
+
+#: base/mainwindow.cpp:136 base/tray.cpp:74
+#, fuzzy, kde-format
+msgid "No active tasks"
+msgstr "لا نشط"
+
+#: base/mainwindow.cpp:146 base/tray.cpp:94
+#, fuzzy, kde-format
+msgctxt "separator between task names"
+msgid ", "
+msgstr "، "
+
+#: base/taskview.cpp:102
+#, fuzzy, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"خطأ جديد المهمة ملكك ليس Make حرّر ملفّ أيضًا اخرج الكل تطبيقات ملفّ و أزِل أي "
+"منها قفل ملفّ إلى الاسم من مشاركات قفل "
+
+#: base/taskview.cpp:198
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+
+#: base/taskview.cpp:274
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: base/taskview.cpp:275
+#, kde-format
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: base/taskview.cpp:345 base/taskview.cpp:429
+#, kde-format
+msgid "Unnamed Task"
+msgstr "مهمة من دون اسم"
+
+#: base/taskview.cpp:364
+#, fuzzy, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"خطأ جديد المهمة ملكك ليس Make حرّر ملفّ أيضًا اخرج الكل تطبيقات ملفّ و أزِل أي "
+"منها قفل ملفّ إلى الاسم من مشاركات قفل "
+
+#: base/taskview.cpp:406
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "مهمة فرعية جديدة"
+
+#: base/taskview.cpp:424
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "حرر المهمة"
+
+#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#, fuzzy, kde-format
+msgid "No task selected."
+msgstr "لا المهمة مُنتقى."
+
+#: base/taskview.cpp:504
+#, fuzzy, kde-format
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr "هل إلى حذف المهمة مسمى n و تاريخ الكل و تاريخ محذوف."
+
+#: base/taskview.cpp:508
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "جاري إلغاء المهمة"
+
+#: base/timetrackerstorage.cpp:125
+#, fuzzy, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "خطأ يجري التحميل ليس ابحث أب رمز المستخدم"
+
+#: base/timetrackerstorage.cpp:228
+#, fuzzy, kde-format
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "لم أتمكن من فتح \"%1\"."
+
+#: base/timetrackerstorage.cpp:236
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "ا&بدأ جلسة جديدة"
+
+#: base/timetrackerwidget.cpp:140
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:150
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "حرر التاريخ…"
+
+#: base/timetrackerwidget.cpp:151
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:153
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:163
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "إعادة تعيين الكل Times"
+
+#: base/timetrackerwidget.cpp:164
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "إعادة تعيين الكل Times"
+
+#: base/timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:173
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "ا&بدأ"
+
+#: base/timetrackerwidget.cpp:174
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "مختار مهمَّة"
+
+#: base/timetrackerwidget.cpp:176
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:190
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "أو&قِف"
+
+#: base/timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "مختار مهمَّة"
+
+#: base/timetrackerwidget.cpp:192
+#, fuzzy, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "مختار مهمَّة"
+
+#: base/timetrackerwidget.cpp:199
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:200
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:201
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:208
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "الكل Times"
+
+#: base/timetrackerwidget.cpp:209
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:210
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:218
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:220
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:234
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "&مهمة جديدة..."
+
+#: base/timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:236
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:244
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "مهمة فرعية جديدة"
+
+#: base/timetrackerwidget.cpp:245
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:246
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:254
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "ا&حذف"
+
+#: base/timetrackerwidget.cpp:255
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "مختار مهمَّة"
+
+#: base/timetrackerwidget.cpp:256
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:264
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr "&خصائص"
+
+#: base/timetrackerwidget.cpp:265
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "مختار مهمَّة"
+
+#: base/timetrackerwidget.cpp:267
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:276
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "اطبع Times"
+
+#: base/timetrackerwidget.cpp:277
+#, fuzzy, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "مختار مهمَّة"
+
+#: base/timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:288
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "بالمائة تام"
+
+#: base/timetrackerwidget.cpp:296
+#, fuzzy, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "بالمائة تام"
+
+#: base/timetrackerwidget.cpp:304
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&صدّر..."
+
+#: base/timetrackerwidget.cpp:311
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:323
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:458
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "السّلوك"
+
+#: base/timetrackerwidget.cpp:463
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr "المظهر"
+
+#: base/timetrackerwidget.cpp:468
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "التخزين"
+
+#: base/timetrackerwidget.cpp:505
+#, kde-format
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "مهمة جديدة"
+
+#: base/timetrackerwidget.cpp:584
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:594
+#, fuzzy, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+"تنفيذ إلى أعد الضبط وقت إلى يضع أصفارا\n"
+"صفر لـ الكل?"
+
+#: base/timetrackerwidget.cpp:596
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "التأكيد مطلوب"
+
+#: base/timetrackerwidget.cpp:597
+#, fuzzy, kde-format
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "إعادة تعيين الكل Times"
+
+#: base/timetrackerwidget.cpp:786
+#, fuzzy, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr "احفظ failed ملفّ ليس مقفل."
+
+#: base/timetrackerwidget.cpp:788
+#, fuzzy, kde-format
+msgid "Could not modify calendar resource."
+msgstr "يمكن أن ليس تغيير رزنامة مورِد."
+
+#: base/timetrackerwidget.cpp:790
+#, fuzzy, kde-format
+msgid "Out of memory--could not create object."
+msgstr "خارج من ذاكرة ليس إ_نشئ كائن."
+
+#: base/timetrackerwidget.cpp:792
+#, fuzzy, kde-format
+msgid "UID not found."
+msgstr "رمز المستخدم ليس موجود."
+
+#: base/timetrackerwidget.cpp:794
+#, fuzzy, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "أبطل التاريخ تنسيق هو YYYY MM DD."
+
+#: base/timetrackerwidget.cpp:796
+#, fuzzy, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "غير صحيح وقت تنسيق هو YYYY MM MM ب‌ب."
+
+#: base/timetrackerwidget.cpp:798
+#, fuzzy, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr ""
+"غير صحيح المهمة يضع أصفارا\n"
+"صفر."
+
+#: base/timetrackerwidget.cpp:800
+#, fuzzy, kde-format
+msgid "Invalid error number: %1"
+msgstr "غير صحيح خطأ رقم 1"
+
+#: base/timetrackerwidget.cpp:1029
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:1036
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+
+#: base/tray.cpp:79
+#, kde-format
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ""
+
+#: base/treeviewheadercontextmenu.cpp:31
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "الأعمدة"
 
 #: dialogs/edittimedialog.cpp:28
 #, fuzzy, kde-format
@@ -378,37 +923,6 @@ msgstr "المجموع"
 msgid "No tasks."
 msgstr "لا مهامّ"
 
-#: idletimedetector.cpp:62
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Apply the idle time since %1 to all active\n"
-"timers and keep them running."
-msgstr ""
-
-#: idletimedetector.cpp:65
-#, fuzzy, kde-format
-msgctxt "@action:button"
-msgid "Continue Timing"
-msgstr "استمر."
-
-#: idletimedetector.cpp:67
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Stop timing and revert back to the time at %1"
-msgstr "قف و يعكس إلى الخلف إلى وقت عند."
-
-#: idletimedetector.cpp:68
-#, fuzzy, kde-format
-msgctxt "@action:button"
-msgid "Revert Timing"
-msgstr "ارتداد"
-
-#: idletimedetector.cpp:72
-#, kde-format
-msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr ""
-
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:23
 #, kde-format
@@ -562,23 +1076,6 @@ msgstr "David Faure"
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
 msgstr "الـ ملفّ إلى فتح"
-
-#: mainwindow.cpp:37
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "Configure KTimeTracker..."
-msgstr "أداة تسجيل الوقت في KDE."
-
-#: mainwindow.cpp:136 tray.cpp:74
-#, fuzzy, kde-format
-msgid "No active tasks"
-msgstr "لا نشط"
-
-#: mainwindow.cpp:146 tray.cpp:94
-#, fuzzy, kde-format
-msgctxt "separator between task names"
-msgid ", "
-msgstr "، "
 
 #: model/tasksmodel.cpp:19
 #, fuzzy, kde-format
@@ -797,503 +1294,6 @@ msgstr "نسبة الإكمال"
 #, fuzzy, kde-format
 msgid "Save tasks every:"
 msgstr "احفظ كل"
-
-#: taskview.cpp:102
-#, fuzzy, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
-msgstr ""
-"خطأ جديد المهمة ملكك ليس Make حرّر ملفّ أيضًا اخرج الكل تطبيقات ملفّ و أزِل أي "
-"منها قفل ملفّ إلى الاسم من مشاركات قفل "
-
-#: taskview.cpp:198
-#, kde-format
-msgid ""
-"Your virtual desktop number is too high, desktop tracking will not work."
-msgstr ""
-
-#: taskview.cpp:274
-#, kde-format
-msgctxt "@info:progress"
-msgid "Stopping timers..."
-msgstr ""
-
-#: taskview.cpp:275
-#, kde-format
-msgid "Cancel"
-msgstr "ألغِ"
-
-#: taskview.cpp:345 taskview.cpp:429
-#, kde-format
-msgid "Unnamed Task"
-msgstr "مهمة من دون اسم"
-
-#: taskview.cpp:364
-#, fuzzy, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
-msgstr ""
-"خطأ جديد المهمة ملكك ليس Make حرّر ملفّ أيضًا اخرج الكل تطبيقات ملفّ و أزِل أي "
-"منها قفل ملفّ إلى الاسم من مشاركات قفل "
-
-#: taskview.cpp:406
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
-msgctxt "@title:window"
-msgid "New Sub Task"
-msgstr "مهمة فرعية جديدة"
-
-#: taskview.cpp:424
-#, fuzzy, kde-format
-#| msgid "Edit Task"
-msgctxt "@title:window"
-msgid "Edit Task"
-msgstr "حرر المهمة"
-
-#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
-#, fuzzy, kde-format
-msgid "No task selected."
-msgstr "لا المهمة مُنتقى."
-
-#: taskview.cpp:504
-#, fuzzy, kde-format
-msgid ""
-"Are you sure you want to delete the selected task and its entire history?\n"
-"Note: All subtasks and their history will also be deleted."
-msgstr "هل إلى حذف المهمة مسمى n و تاريخ الكل و تاريخ محذوف."
-
-#: taskview.cpp:508
-#, fuzzy, kde-format
-msgctxt "@title:window"
-msgid "Deleting Task"
-msgstr "جاري إلغاء المهمة"
-
-#: timetrackerstorage.cpp:125
-#, fuzzy, kde-format
-msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr "خطأ يجري التحميل ليس ابحث أب رمز المستخدم"
-
-#: timetrackerstorage.cpp:228
-#, fuzzy, kde-format
-msgctxt "%1=lock file path"
-msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "لم أتمكن من فتح \"%1\"."
-
-#: timetrackerstorage.cpp:236
-#, kde-format
-msgctxt "%1=destination file path/URL"
-msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:139
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Start &New Session"
-msgstr "ا&بدأ جلسة جديدة"
-
-#: timetrackerwidget.cpp:140
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts a new session"
-msgstr ""
-
-#: timetrackerwidget.cpp:142
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session time to 0 for all tasks, to start a new session, "
-"without affecting the totals."
-msgstr ""
-
-#: timetrackerwidget.cpp:150
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit History..."
-msgstr "حرر التاريخ…"
-
-#: timetrackerwidget.cpp:151
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edits history of all tasks of the current document"
-msgstr ""
-
-#: timetrackerwidget.cpp:153
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"A window will be opened where you can change start and stop times of tasks "
-"or add a comment to them."
-msgstr ""
-
-#: timetrackerwidget.cpp:163
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "&Reset All Times"
-msgstr "إعادة تعيين الكل Times"
-
-#: timetrackerwidget.cpp:164
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Resets all times"
-msgstr "إعادة تعيين الكل Times"
-
-#: timetrackerwidget.cpp:166
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session and total time to 0 for all tasks, to restart "
-"from scratch."
-msgstr ""
-
-#: timetrackerwidget.cpp:173
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Start"
-msgstr "ا&بدأ"
-
-#: timetrackerwidget.cpp:174
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts timing for selected task"
-msgstr "مختار مهمَّة"
-
-#: timetrackerwidget.cpp:176
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will start timing for the selected task.\n"
-"It is even possible to time several tasks simultaneously.\n"
-"\n"
-"You may also start timing of tasks by double clicking the left mouse button "
-"on a given task. This will, however, stop timing of other tasks."
-msgstr ""
-
-#: timetrackerwidget.cpp:190
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "S&top"
-msgstr "أو&قِف"
-
-#: timetrackerwidget.cpp:191
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops timing of the selected task"
-msgstr "مختار مهمَّة"
-
-#: timetrackerwidget.cpp:192
-#, fuzzy, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops timing of the selected task"
-msgstr "مختار مهمَّة"
-
-#: timetrackerwidget.cpp:199
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Focus on Searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Sets the focus on the searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:201
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Sets the focus on the searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:208
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "Stop &All Timers"
-msgstr "الكل Times"
-
-#: timetrackerwidget.cpp:209
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops all of the active timers"
-msgstr ""
-
-#: timetrackerwidget.cpp:210
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops all of the active timers"
-msgstr ""
-
-#: timetrackerwidget.cpp:218
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Track Active Applications"
-msgstr ""
-
-#: timetrackerwidget.cpp:220
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Auto-creates and updates tasks when the focus of the current window has "
-"changed"
-msgstr ""
-
-#: timetrackerwidget.cpp:223
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If the focus of a window changes for the first time when this action is "
-"enabled, a new task will be created with the title of the window as its name "
-"and will be started. If there already exists such an task it will be started."
-msgstr ""
-
-#: timetrackerwidget.cpp:234
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&New Task..."
-msgstr "&مهمة جديدة..."
-
-#: timetrackerwidget.cpp:235
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Creates new top level task"
-msgstr ""
-
-#: timetrackerwidget.cpp:236
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will create a new top level task."
-msgstr ""
-
-#: timetrackerwidget.cpp:244
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "New &Subtask..."
-msgstr "مهمة فرعية جديدة"
-
-#: timetrackerwidget.cpp:245
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Creates a new subtask to the current selected task"
-msgstr ""
-
-#: timetrackerwidget.cpp:246
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will create a new subtask to the current selected task."
-msgstr ""
-
-#: timetrackerwidget.cpp:254
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Delete"
-msgstr "ا&حذف"
-
-#: timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Deletes selected task"
-msgstr "مختار مهمَّة"
-
-#: timetrackerwidget.cpp:256
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will delete the selected task(s) and all subtasks."
-msgstr ""
-
-#: timetrackerwidget.cpp:264
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Properties"
-msgstr "&خصائص"
-
-#: timetrackerwidget.cpp:265
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Edit name or description for selected task"
-msgstr "مختار مهمَّة"
-
-#: timetrackerwidget.cpp:267
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the parameters for the "
-"selected task."
-msgstr ""
-
-#: timetrackerwidget.cpp:276
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit &Time..."
-msgstr "اطبع Times"
-
-#: timetrackerwidget.cpp:277
-#, fuzzy, kde-format
-msgctxt "@info:tooltip"
-msgid "Edit time for selected task"
-msgstr "مختار مهمَّة"
-
-#: timetrackerwidget.cpp:279
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the times for the "
-"selected task."
-msgstr ""
-
-#: timetrackerwidget.cpp:288
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Complete"
-msgstr "بالمائة تام"
-
-#: timetrackerwidget.cpp:296
-#, fuzzy, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Incomplete"
-msgstr "بالمائة تام"
-
-#: timetrackerwidget.cpp:304
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Export..."
-msgstr "&صدّر..."
-
-#: timetrackerwidget.cpp:311
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Import Tasks From &Planner..."
-msgstr ""
-
-#: timetrackerwidget.cpp:323
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Show Searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:458
-#, kde-format
-msgctxt "@title:tab"
-msgid "Behavior"
-msgstr "السّلوك"
-
-#: timetrackerwidget.cpp:463
-#, kde-format
-msgctxt "@title:tab"
-msgid "Appearance"
-msgstr "المظهر"
-
-#: timetrackerwidget.cpp:468
-#, kde-format
-msgctxt "@title:tab"
-msgid "Storage"
-msgstr "التخزين"
-
-#: timetrackerwidget.cpp:505
-#, kde-format
-msgctxt "@title:window"
-msgid "New Task"
-msgstr "مهمة جديدة"
-
-#: timetrackerwidget.cpp:584
-#, kde-format
-msgctxt "@info in message box"
-msgid ""
-"There is no history yet. Start and stop a task and you will have an entry in "
-"your history."
-msgstr ""
-
-#: timetrackerwidget.cpp:594
-#, fuzzy, kde-format
-msgid ""
-"Do you really want to reset the time to zero for all tasks? This will delete "
-"the entire history."
-msgstr ""
-"تنفيذ إلى أعد الضبط وقت إلى يضع أصفارا\n"
-"صفر لـ الكل?"
-
-#: timetrackerwidget.cpp:596
-#, kde-format
-msgctxt "@title:window"
-msgid "Confirmation Required"
-msgstr "التأكيد مطلوب"
-
-#: timetrackerwidget.cpp:597
-#, fuzzy, kde-format
-msgctxt "@action:button"
-msgid "Reset All Times"
-msgstr "إعادة تعيين الكل Times"
-
-#: timetrackerwidget.cpp:786
-#, fuzzy, kde-format
-msgid "Save failed, most likely because the file could not be locked."
-msgstr "احفظ failed ملفّ ليس مقفل."
-
-#: timetrackerwidget.cpp:788
-#, fuzzy, kde-format
-msgid "Could not modify calendar resource."
-msgstr "يمكن أن ليس تغيير رزنامة مورِد."
-
-#: timetrackerwidget.cpp:790
-#, fuzzy, kde-format
-msgid "Out of memory--could not create object."
-msgstr "خارج من ذاكرة ليس إ_نشئ كائن."
-
-#: timetrackerwidget.cpp:792
-#, fuzzy, kde-format
-msgid "UID not found."
-msgstr "رمز المستخدم ليس موجود."
-
-#: timetrackerwidget.cpp:794
-#, fuzzy, kde-format
-msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr "أبطل التاريخ تنسيق هو YYYY MM DD."
-
-#: timetrackerwidget.cpp:796
-#, fuzzy, kde-format
-msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr "غير صحيح وقت تنسيق هو YYYY MM MM ب‌ب."
-
-#: timetrackerwidget.cpp:798
-#, fuzzy, kde-format
-msgid "Invalid task duration--must be greater than zero."
-msgstr ""
-"غير صحيح المهمة يضع أصفارا\n"
-"صفر."
-
-#: timetrackerwidget.cpp:800
-#, fuzzy, kde-format
-msgid "Invalid error number: %1"
-msgstr "غير صحيح خطأ رقم 1"
-
-#: timetrackerwidget.cpp:1029
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This is ktimetracker, KDE's program to help you track your time. Best, start "
-"with creating your first task - enter it into the field where you see "
-"\"Search or add task\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:1036
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "You have already created a task. You can now start and stop timing."
-msgstr ""
-
-#: tray.cpp:79
-#, kde-format
-msgctxt "ellipsis to truncate long list of tasks"
-msgid ", ..."
-msgstr ""
-
-#: treeviewheadercontextmenu.cpp:31
-#, kde-format
-msgctxt "@title:menu"
-msgid "Columns"
-msgstr "الأعمدة"
 
 #: widgets/searchline.cpp:23
 #, fuzzy, kde-format

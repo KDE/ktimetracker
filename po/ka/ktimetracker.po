@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-04 00:38+0000\n"
 "PO-Revision-Date: 2023-12-10 00:47+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -27,6 +27,581 @@ msgstr "Temuri Doghonadze"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Temuri.doghonadze@gmail.com"
+
+#: base/idletimedetector.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+"%1-დან უქმე დროს დამატება ყველა აქტიური ტაიმერისთვის\n"
+"და მათი გაშვებულ მდგომარეობაში შენარჩუნება."
+
+#: base/idletimedetector.cpp:65
+#, kde-format
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "ათვლის გაგრძელება"
+
+#: base/idletimedetector.cpp:67
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "ათვლს შეწყვეტა და დაბრუნება დროზე %1"
+
+#: base/idletimedetector.cpp:68
+#, kde-format
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "ათვლის შებრუნება"
+
+#: base/idletimedetector.cpp:72
+#, kde-format
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr "სამუშაო მაგიდა უქმეა %1-ის შემდეგ. რა გინდა, ქნა?"
+
+#: base/mainwindow.cpp:37
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "KTimeTracker-ის მორგება..."
+
+#: base/mainwindow.cpp:136 base/tray.cpp:74
+#, kde-format
+msgid "No active tasks"
+msgstr "აქტიური ამოცანების გარეშე"
+
+#: base/mainwindow.cpp:146 base/tray.cpp:94
+#, kde-format
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: base/taskview.cpp:102
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"ახალი ამოცანის დამახსოვრების შეცდომა. თქვენი ცვლილებები არ შენახულა. "
+"დარწმუნდით, რომ თქვენი iCalendar ფაილის ჩასწორებაზე წვდომა გაგაჩნიათ. ასევე "
+"ახურეთ ყველა აპლიკაცია, რომელიც ამ ფაილს იყენებს და წაშალეთ ყველა ბლოკის "
+"ფაილი, რომელიც მის სახელს წააგავს საქაღალდიდან ~/.kde/share/apps/kabc/lock/ "
+
+#: base/taskview.cpp:198
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+"თქვენი ვირტუალური სამუშაო მაგიდის ნომერი ძალიან დიდია. სამუშაო მაგიდის "
+"ტრეკინგი არ იმუშავებს."
+
+#: base/taskview.cpp:274
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr "ტაიმერების გაჩერება..."
+
+#: base/taskview.cpp:275
+#, kde-format
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: base/taskview.cpp:345 base/taskview.cpp:429
+#, kde-format
+msgid "Unnamed Task"
+msgstr "უსახელო ამოცანა"
+
+#: base/taskview.cpp:364
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"ახალი ამოცანის დამახსოვრების შეცდომა. თქვენი ცვლილებები არ შენახულა. "
+"დარწმუნდით, რომ თქვენი iCalendar ფაილის ჩასწორებაზე წვდომა გაგაჩნიათ. ასევე "
+"ახურეთ ყველა აპლიკაცია, რომელიც ამ ფაილს იყენებს და წაშალეთ ყველა ბლოკის "
+"ფაილი, რომელიც მის სახელს წააგავს საქაღალდიდან ~/.kde/share/apps/kabc/lock/"
+
+#: base/taskview.cpp:406
+#, kde-format
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "ახალი ქვედავალება"
+
+#: base/taskview.cpp:424
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "ამოცანის ჩასწორება"
+
+#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#, kde-format
+msgid "No task selected."
+msgstr "ამოცანა არჩეული არაა."
+
+#: base/taskview.cpp:504
+#, kde-format
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ მონიშნული ამოცანა და მთელი "
+"მისი ისტორია?\n"
+"შენიშვნა: ასევე წაიშლება ქვეამოცანები და მათი ისტორიაც."
+
+#: base/taskview.cpp:508
+#, kde-format
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "ამოცანის წაშლა"
+
+#: base/timetrackerstorage.cpp:125
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "\"%1\"-ის ჩატვირთვის შეცდომა: მშობელი (uid=%2) ვერ ვიპოვე"
+
+#: base/timetrackerstorage.cpp:228
+#, kde-format
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "ბლოკის ფაილში \"%1\" ჩაწერის შეცდომა. დისკი სავსეა?"
+
+#: base/timetrackerstorage.cpp:236
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr "შეცდომა iCalendar-ის ფაილის \"%1\"-ად შენახვისას."
+
+#: base/timetrackerwidget.cpp:139
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "ახალი სესიის &დაწყება"
+
+#: base/timetrackerwidget.cpp:140
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "ახალი სესიის დაწყება"
+
+#: base/timetrackerwidget.cpp:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"ეს სესიის დროს ყველა ამოცანისთვის გაანულებს ახალი სესიის დასაწყებად, ჯამების "
+"შეუცვლელად."
+
+#: base/timetrackerwidget.cpp:150
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "ისტორიის ჩასწორება..."
+
+#: base/timetrackerwidget.cpp:151
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr "ჩაასწორებს მიმდინარე დოკუმენტის ყველა ამოცანის ისტორიას"
+
+#: base/timetrackerwidget.cpp:153
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+"გაიხსნება ფანჯარა, სადაც შეგეძლებათ შეცვალოთ დრო, როდის იწყება და სრულდება "
+"ამოცანები და მათ კომენტარები დაამატოთ."
+
+#: base/timetrackerwidget.cpp:163
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "&დროების საწყის მნიშვნელობაზე დაბრუნება"
+
+#: base/timetrackerwidget.cpp:164
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "დროების საწყის მნიშვნელობაზე დაბრუნება"
+
+#: base/timetrackerwidget.cpp:166
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr ""
+"ეს სესიას და სრულ დროს გაანულებს ყველა ამოცანისთვის, რათა ის თავიდან დაიწყოთ."
+
+#: base/timetrackerwidget.cpp:173
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "&გაშვება"
+
+#: base/timetrackerwidget.cpp:174
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "მიმდინარე ამოცანის ათვლის დაწყება"
+
+#: base/timetrackerwidget.cpp:176
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"ეს გაუშვებს მონიშნული ამოცანის ათვლას.\n"
+"ასევე დაშვებულია რამდენიმე ამოცანის ერთდროული ათვლაც.\n"
+"\n"
+"ასევე შეგიძლიათ, ამოცანების დროის ათვლა მათზე თაგუნას მარცხენა ღილაკის "
+"ორმაგი წკაპით დაიწყოთ. მაგრამ, ეს სხვა ამოცანების ათვლას გააჩერებს."
+
+#: base/timetrackerwidget.cpp:190
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "&გაჩერება"
+
+#: base/timetrackerwidget.cpp:191
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "მიმდინარე ამოცანის ათვლის დასრულება"
+
+#: base/timetrackerwidget.cpp:192
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "მიმდინარე ამოცანის ათვლის დასრულება"
+
+#: base/timetrackerwidget.cpp:199
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr "ფოკუსი ძებნის პანელზე"
+
+#: base/timetrackerwidget.cpp:200
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr "ფოკუსის დაყეენბა ძებნის პანელზე"
+
+#: base/timetrackerwidget.cpp:201
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr "ფოკუსის დაყეენბა ძებნის პანელზე"
+
+#: base/timetrackerwidget.cpp:208
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "&ყველა ტაიმერის გაჩერება"
+
+#: base/timetrackerwidget.cpp:209
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "ყველა აქტიური ტაიმერის გაჩერება"
+
+#: base/timetrackerwidget.cpp:210
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "გააჩნერებს ყველა აქტიურ ტამერს"
+
+#: base/timetrackerwidget.cpp:218
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr "აქტიური აპლიკაციის თვაყურის დევნება"
+
+#: base/timetrackerwidget.cpp:220
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+"ავტომატურად შექმნის და განაახლებს ამოცანებს, როცა მიმდინარე ფანჯრის ფოკუსი "
+"შეიცვლება"
+
+#: base/timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+"თუ ფანჯრის ფოკუსი შეიცვლება პირველად, როცა ეს ამ ქმედებას ჩართავთ, შეიქმნება "
+"ახალი ამოცანა ფანჯრის სათაურის სახელით დაა ის გაეშვება. თუ ასეთი ამოცანა "
+"უკვე არსებობს, ის გაეშვება."
+
+#: base/timetrackerwidget.cpp:234
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "&ახალი ამოცანა..."
+
+#: base/timetrackerwidget.cpp:235
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "ქმნის ახალ მაღალი დონის ამოცანას"
+
+#: base/timetrackerwidget.cpp:236
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "ქმნის ახალ მაღალი დონის ამოცანას."
+
+#: base/timetrackerwidget.cpp:244
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "&ახალი ქვეამოცანა..."
+
+#: base/timetrackerwidget.cpp:245
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "ეს მოცემული ამოცანიდან ახალ ქვეამოცანას შექმნის"
+
+#: base/timetrackerwidget.cpp:246
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "ეს მოცემული ამოცანიდან ახალ ქვეამოცანას შექმნის."
+
+#: base/timetrackerwidget.cpp:254
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "&წაშლა"
+
+#: base/timetrackerwidget.cpp:255
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "წაშლის მონიშნულ ამოცანას"
+
+#: base/timetrackerwidget.cpp:256
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "ეს მონიშნულ ამოცანებს და მათ ყველა ქვეამოცანას წაშლის."
+
+#: base/timetrackerwidget.cpp:264
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr "&თვისებები"
+
+#: base/timetrackerwidget.cpp:265
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "მონიშნული ამოცანის სახელის ან აღწერის ჩასწორება"
+
+#: base/timetrackerwidget.cpp:267
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"ეს გამოიტანს დიალოგურ ფანჯარას, სადაც მონიშნული ამოცანის პარამეტრების "
+"ჩასწორება შეგიძლიათ."
+
+#: base/timetrackerwidget.cpp:276
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "&დროის ჩასწორება..."
+
+#: base/timetrackerwidget.cpp:277
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "მონიშნული ამოცანის დროის ჩასწორება"
+
+#: base/timetrackerwidget.cpp:279
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"ეს გამოიტანს დიალოგურ ფანჯარას, სადაც მონიშნული ამოცანის დროების ჩასწორება "
+"შეგიძლიათ."
+
+#: base/timetrackerwidget.cpp:288
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "&დასრულებულად მონიშვნა"
+
+#: base/timetrackerwidget.cpp:296
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "&დაუსრულებლად მონიშვნა"
+
+#: base/timetrackerwidget.cpp:304
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "&გატანა..."
+
+#: base/timetrackerwidget.cpp:311
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "ამოცანების შემოტანა &Planner-დან..."
+
+#: base/timetrackerwidget.cpp:323
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr "ძებნის პანელის ჩვენება"
+
+#: base/timetrackerwidget.cpp:458
+#, kde-format
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "ქცევა"
+
+#: base/timetrackerwidget.cpp:463
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr "გარემოს იერსახე"
+
+#: base/timetrackerwidget.cpp:468
+#, kde-format
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "საცავი"
+
+#: base/timetrackerwidget.cpp:505
+#, kde-format
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "ახალი ამოცანა"
+
+#: base/timetrackerwidget.cpp:584
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+"ჯერ ისტორია არ გაქვთ. გაუშვით და გააჩერეთ ამოცანა და ისტორიაში ჩანაწერი "
+"გაგიჩნდებათ."
+
+#: base/timetrackerwidget.cpp:594
+#, kde-format
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr ""
+"მართლა გნებავთ ყველა ამოცანის დროის ნულზე დაყენება? ეს მთელ ისტორიას წაშლის."
+
+#: base/timetrackerwidget.cpp:596
+#, kde-format
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "საჭიროა თანხმობა"
+
+#: base/timetrackerwidget.cpp:597
+#, kde-format
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "დროების საწყის მნიშვნელობაზე დაბრუნება"
+
+#: base/timetrackerwidget.cpp:786
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr "შენახვა ჩავარდა, რადგან ფაილის დაბლოკვა შეუძლებელია."
+
+#: base/timetrackerwidget.cpp:788
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "კალენდარის რესურსის ჩასწორება შეუძლებელია."
+
+#: base/timetrackerwidget.cpp:790
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "არასაკმარისი მეხსიერება--ობიექტის შექმნა შეუძლებელია."
+
+#: base/timetrackerwidget.cpp:792
+#, kde-format
+msgid "UID not found."
+msgstr "UID ვერ ვიპოვე."
+
+#: base/timetrackerwidget.cpp:794
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "არასწორი თარიღი--ფორმატია წწწწ-თთ-დდ."
+
+#: base/timetrackerwidget.cpp:796
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "არასწორი დრო-- ფორმატია წწწ-მმ-დდTსს:წწ:წწ."
+
+#: base/timetrackerwidget.cpp:798
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "არასწორი ამოცანის ხანგრძლივობა--ნულზე მეტი უნდა იყოს."
+
+#: base/timetrackerwidget.cpp:800
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "შეცდომის არასწორი ნომერი: %1"
+
+#: base/timetrackerwidget.cpp:1029
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+"ეს KTimeTracker-ია, KDE-ის პროგრამა, რომელი თქვენი დროის თვალყურის დევნებაში "
+"დაგეხმარებათ. დაიწყეთ თქვენი პირველი ამოცანის შექმნით - შეიყვანეთ ის ველში, "
+"რომელსაც აწერია \"ამოცანის ძებნა ან დამატება\"."
+
+#: base/timetrackerwidget.cpp:1036
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr "ახალი ამოცანა უკვე შექმენით. ახლა დრო დაუნიშნეთ."
+
+#: base/tray.cpp:79
+#, kde-format
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: base/treeviewheadercontextmenu.cpp:31
+#, kde-format
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "სვეტები"
 
 #: dialogs/edittimedialog.cpp:28
 #, kde-format
@@ -375,39 +950,6 @@ msgstr "ჯამში"
 msgid "No tasks."
 msgstr "ამოცანების გარეშე."
 
-#: idletimedetector.cpp:62
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Apply the idle time since %1 to all active\n"
-"timers and keep them running."
-msgstr ""
-"%1-დან უქმე დროს დამატება ყველა აქტიური ტაიმერისთვის\n"
-"და მათი გაშვებულ მდგომარეობაში შენარჩუნება."
-
-#: idletimedetector.cpp:65
-#, kde-format
-msgctxt "@action:button"
-msgid "Continue Timing"
-msgstr "ათვლის გაგრძელება"
-
-#: idletimedetector.cpp:67
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stop timing and revert back to the time at %1"
-msgstr "ათვლს შეწყვეტა და დაბრუნება დროზე %1"
-
-#: idletimedetector.cpp:68
-#, kde-format
-msgctxt "@action:button"
-msgid "Revert Timing"
-msgstr "ათვლის შებრუნება"
-
-#: idletimedetector.cpp:72
-#, kde-format
-msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr "სამუშაო მაგიდა უქმეა %1-ის შემდეგ. რა გინდა, ქნა?"
-
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:23
 #, kde-format
@@ -560,23 +1102,6 @@ msgstr "David Faure"
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
 msgstr "ბილიკი ან ბმული გასახსნელ iCalendar-ის ფაილამდე."
-
-#: mainwindow.cpp:37
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Configure KTimeTracker..."
-msgstr "KTimeTracker-ის მორგება..."
-
-#: mainwindow.cpp:136 tray.cpp:74
-#, kde-format
-msgid "No active tasks"
-msgstr "აქტიური ამოცანების გარეშე"
-
-#: mainwindow.cpp:146 tray.cpp:94
-#, kde-format
-msgctxt "separator between task names"
-msgid ", "
-msgstr ", "
 
 #: model/tasksmodel.cpp:19
 #, kde-format
@@ -799,531 +1324,6 @@ msgstr "პროცენტი დასრულებულია"
 #, kde-format
 msgid "Save tasks every:"
 msgstr "ამოცანის შენახვა ყოველ:"
-
-#: taskview.cpp:102
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
-msgstr ""
-"ახალი ამოცანის დამახსოვრების შეცდომა. თქვენი ცვლილებები არ შენახულა. "
-"დარწმუნდით, რომ თქვენი iCalendar ფაილის ჩასწორებაზე წვდომა გაგაჩნიათ. ასევე "
-"ახურეთ ყველა აპლიკაცია, რომელიც ამ ფაილს იყენებს და წაშალეთ ყველა ბლოკის "
-"ფაილი, რომელიც მის სახელს წააგავს საქაღალდიდან ~/.kde/share/apps/kabc/lock/ "
-
-#: taskview.cpp:198
-#, kde-format
-msgid ""
-"Your virtual desktop number is too high, desktop tracking will not work."
-msgstr ""
-"თქვენი ვირტუალური სამუშაო მაგიდის ნომერი ძალიან დიდია. სამუშაო მაგიდის "
-"ტრეკინგი არ იმუშავებს."
-
-#: taskview.cpp:274
-#, kde-format
-msgctxt "@info:progress"
-msgid "Stopping timers..."
-msgstr "ტაიმერების გაჩერება..."
-
-#: taskview.cpp:275
-#, kde-format
-msgid "Cancel"
-msgstr "გაუქმება"
-
-#: taskview.cpp:345 taskview.cpp:429
-#, kde-format
-msgid "Unnamed Task"
-msgstr "უსახელო ამოცანა"
-
-#: taskview.cpp:364
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
-msgstr ""
-"ახალი ამოცანის დამახსოვრების შეცდომა. თქვენი ცვლილებები არ შენახულა. "
-"დარწმუნდით, რომ თქვენი iCalendar ფაილის ჩასწორებაზე წვდომა გაგაჩნიათ. ასევე "
-"ახურეთ ყველა აპლიკაცია, რომელიც ამ ფაილს იყენებს და წაშალეთ ყველა ბლოკის "
-"ფაილი, რომელიც მის სახელს წააგავს საქაღალდიდან ~/.kde/share/apps/kabc/lock/"
-
-#: taskview.cpp:406
-#, kde-format
-msgctxt "@title:window"
-msgid "New Sub Task"
-msgstr "ახალი ქვედავალება"
-
-#: taskview.cpp:424
-#, kde-format
-msgctxt "@title:window"
-msgid "Edit Task"
-msgstr "ამოცანის ჩასწორება"
-
-#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
-#, kde-format
-msgid "No task selected."
-msgstr "ამოცანა არჩეული არაა."
-
-#: taskview.cpp:504
-#, kde-format
-msgid ""
-"Are you sure you want to delete the selected task and its entire history?\n"
-"Note: All subtasks and their history will also be deleted."
-msgstr ""
-"დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ მონიშნული ამოცანა და მთელი "
-"მისი ისტორია?\n"
-"შენიშვნა: ასევე წაიშლება ქვეამოცანები და მათი ისტორიაც."
-
-#: taskview.cpp:508
-#, kde-format
-msgctxt "@title:window"
-msgid "Deleting Task"
-msgstr "ამოცანის წაშლა"
-
-#: timetrackerstorage.cpp:125
-#, kde-format
-msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr "\"%1\"-ის ჩატვირთვის შეცდომა: მშობელი (uid=%2) ვერ ვიპოვე"
-
-#: timetrackerstorage.cpp:228
-#, kde-format
-msgctxt "%1=lock file path"
-msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "ბლოკის ფაილში \"%1\" ჩაწერის შეცდომა. დისკი სავსეა?"
-
-#: timetrackerstorage.cpp:236
-#, kde-format
-msgctxt "%1=destination file path/URL"
-msgid "Failed to save iCalendar file as \"%1\"."
-msgstr "შეცდომა iCalendar-ის ფაილის \"%1\"-ად შენახვისას."
-
-#: timetrackerwidget.cpp:139
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Start &New Session"
-msgstr "ახალი სესიის &დაწყება"
-
-#: timetrackerwidget.cpp:140
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts a new session"
-msgstr "ახალი სესიის დაწყება"
-
-#: timetrackerwidget.cpp:142
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session time to 0 for all tasks, to start a new session, "
-"without affecting the totals."
-msgstr ""
-"ეს სესიის დროს ყველა ამოცანისთვის გაანულებს ახალი სესიის დასაწყებად, ჯამების "
-"შეუცვლელად."
-
-#: timetrackerwidget.cpp:150
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit History..."
-msgstr "ისტორიის ჩასწორება..."
-
-#: timetrackerwidget.cpp:151
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edits history of all tasks of the current document"
-msgstr "ჩაასწორებს მიმდინარე დოკუმენტის ყველა ამოცანის ისტორიას"
-
-#: timetrackerwidget.cpp:153
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"A window will be opened where you can change start and stop times of tasks "
-"or add a comment to them."
-msgstr ""
-"გაიხსნება ფანჯარა, სადაც შეგეძლებათ შეცვალოთ დრო, როდის იწყება და სრულდება "
-"ამოცანები და მათ კომენტარები დაამატოთ."
-
-#: timetrackerwidget.cpp:163
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Reset All Times"
-msgstr "&დროების საწყის მნიშვნელობაზე დაბრუნება"
-
-#: timetrackerwidget.cpp:164
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Resets all times"
-msgstr "დროების საწყის მნიშვნელობაზე დაბრუნება"
-
-#: timetrackerwidget.cpp:166
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session and total time to 0 for all tasks, to restart "
-"from scratch."
-msgstr ""
-"ეს სესიას და სრულ დროს გაანულებს ყველა ამოცანისთვის, რათა ის თავიდან დაიწყოთ."
-
-#: timetrackerwidget.cpp:173
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Start"
-msgstr "&გაშვება"
-
-#: timetrackerwidget.cpp:174
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Starts timing for selected task"
-msgstr "მიმდინარე ამოცანის ათვლის დაწყება"
-
-#: timetrackerwidget.cpp:176
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will start timing for the selected task.\n"
-"It is even possible to time several tasks simultaneously.\n"
-"\n"
-"You may also start timing of tasks by double clicking the left mouse button "
-"on a given task. This will, however, stop timing of other tasks."
-msgstr ""
-"ეს გაუშვებს მონიშნული ამოცანის ათვლას.\n"
-"ასევე დაშვებულია რამდენიმე ამოცანის ერთდროული ათვლაც.\n"
-"\n"
-"ასევე შეგიძლიათ, ამოცანების დროის ათვლა მათზე თაგუნას მარცხენა ღილაკის "
-"ორმაგი წკაპით დაიწყოთ. მაგრამ, ეს სხვა ამოცანების ათვლას გააჩერებს."
-
-#: timetrackerwidget.cpp:190
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "S&top"
-msgstr "&გაჩერება"
-
-#: timetrackerwidget.cpp:191
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops timing of the selected task"
-msgstr "მიმდინარე ამოცანის ათვლის დასრულება"
-
-#: timetrackerwidget.cpp:192
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops timing of the selected task"
-msgstr "მიმდინარე ამოცანის ათვლის დასრულება"
-
-#: timetrackerwidget.cpp:199
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Focus on Searchbar"
-msgstr "ფოკუსი ძებნის პანელზე"
-
-#: timetrackerwidget.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Sets the focus on the searchbar"
-msgstr "ფოკუსის დაყეენბა ძებნის პანელზე"
-
-#: timetrackerwidget.cpp:201
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Sets the focus on the searchbar"
-msgstr "ფოკუსის დაყეენბა ძებნის პანელზე"
-
-#: timetrackerwidget.cpp:208
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Stop &All Timers"
-msgstr "&ყველა ტაიმერის გაჩერება"
-
-#: timetrackerwidget.cpp:209
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Stops all of the active timers"
-msgstr "ყველა აქტიური ტაიმერის გაჩერება"
-
-#: timetrackerwidget.cpp:210
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Stops all of the active timers"
-msgstr "გააჩნერებს ყველა აქტიურ ტამერს"
-
-#: timetrackerwidget.cpp:218
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Track Active Applications"
-msgstr "აქტიური აპლიკაციის თვაყურის დევნება"
-
-#: timetrackerwidget.cpp:220
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Auto-creates and updates tasks when the focus of the current window has "
-"changed"
-msgstr ""
-"ავტომატურად შექმნის და განაახლებს ამოცანებს, როცა მიმდინარე ფანჯრის ფოკუსი "
-"შეიცვლება"
-
-#: timetrackerwidget.cpp:223
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If the focus of a window changes for the first time when this action is "
-"enabled, a new task will be created with the title of the window as its name "
-"and will be started. If there already exists such an task it will be started."
-msgstr ""
-"თუ ფანჯრის ფოკუსი შეიცვლება პირველად, როცა ეს ამ ქმედებას ჩართავთ, შეიქმნება "
-"ახალი ამოცანა ფანჯრის სათაურის სახელით დაა ის გაეშვება. თუ ასეთი ამოცანა "
-"უკვე არსებობს, ის გაეშვება."
-
-#: timetrackerwidget.cpp:234
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&New Task..."
-msgstr "&ახალი ამოცანა..."
-
-#: timetrackerwidget.cpp:235
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Creates new top level task"
-msgstr "ქმნის ახალ მაღალი დონის ამოცანას"
-
-#: timetrackerwidget.cpp:236
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will create a new top level task."
-msgstr "ქმნის ახალ მაღალი დონის ამოცანას."
-
-#: timetrackerwidget.cpp:244
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "New &Subtask..."
-msgstr "&ახალი ქვეამოცანა..."
-
-#: timetrackerwidget.cpp:245
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Creates a new subtask to the current selected task"
-msgstr "ეს მოცემული ამოცანიდან ახალ ქვეამოცანას შექმნის"
-
-#: timetrackerwidget.cpp:246
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will create a new subtask to the current selected task."
-msgstr "ეს მოცემული ამოცანიდან ახალ ქვეამოცანას შექმნის."
-
-#: timetrackerwidget.cpp:254
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Delete"
-msgstr "&წაშლა"
-
-#: timetrackerwidget.cpp:255
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Deletes selected task"
-msgstr "წაშლის მონიშნულ ამოცანას"
-
-#: timetrackerwidget.cpp:256
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "This will delete the selected task(s) and all subtasks."
-msgstr "ეს მონიშნულ ამოცანებს და მათ ყველა ქვეამოცანას წაშლის."
-
-#: timetrackerwidget.cpp:264
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Properties"
-msgstr "&თვისებები"
-
-#: timetrackerwidget.cpp:265
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edit name or description for selected task"
-msgstr "მონიშნული ამოცანის სახელის ან აღწერის ჩასწორება"
-
-#: timetrackerwidget.cpp:267
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the parameters for the "
-"selected task."
-msgstr ""
-"ეს გამოიტანს დიალოგურ ფანჯარას, სადაც მონიშნული ამოცანის პარამეტრების "
-"ჩასწორება შეგიძლიათ."
-
-#: timetrackerwidget.cpp:276
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit &Time..."
-msgstr "&დროის ჩასწორება..."
-
-#: timetrackerwidget.cpp:277
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edit time for selected task"
-msgstr "მონიშნული ამოცანის დროის ჩასწორება"
-
-#: timetrackerwidget.cpp:279
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the times for the "
-"selected task."
-msgstr ""
-"ეს გამოიტანს დიალოგურ ფანჯარას, სადაც მონიშნული ამოცანის დროების ჩასწორება "
-"შეგიძლიათ."
-
-#: timetrackerwidget.cpp:288
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Complete"
-msgstr "&დასრულებულად მონიშვნა"
-
-#: timetrackerwidget.cpp:296
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Mark as Incomplete"
-msgstr "&დაუსრულებლად მონიშვნა"
-
-#: timetrackerwidget.cpp:304
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Export..."
-msgstr "&გატანა..."
-
-#: timetrackerwidget.cpp:311
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Import Tasks From &Planner..."
-msgstr "ამოცანების შემოტანა &Planner-დან..."
-
-#: timetrackerwidget.cpp:323
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Show Searchbar"
-msgstr "ძებნის პანელის ჩვენება"
-
-#: timetrackerwidget.cpp:458
-#, kde-format
-msgctxt "@title:tab"
-msgid "Behavior"
-msgstr "ქცევა"
-
-#: timetrackerwidget.cpp:463
-#, kde-format
-msgctxt "@title:tab"
-msgid "Appearance"
-msgstr "გარემოს იერსახე"
-
-#: timetrackerwidget.cpp:468
-#, kde-format
-msgctxt "@title:tab"
-msgid "Storage"
-msgstr "საცავი"
-
-#: timetrackerwidget.cpp:505
-#, kde-format
-msgctxt "@title:window"
-msgid "New Task"
-msgstr "ახალი ამოცანა"
-
-#: timetrackerwidget.cpp:584
-#, kde-format
-msgctxt "@info in message box"
-msgid ""
-"There is no history yet. Start and stop a task and you will have an entry in "
-"your history."
-msgstr ""
-"ჯერ ისტორია არ გაქვთ. გაუშვით და გააჩერეთ ამოცანა და ისტორიაში ჩანაწერი "
-"გაგიჩნდებათ."
-
-#: timetrackerwidget.cpp:594
-#, kde-format
-msgid ""
-"Do you really want to reset the time to zero for all tasks? This will delete "
-"the entire history."
-msgstr ""
-"მართლა გნებავთ ყველა ამოცანის დროის ნულზე დაყენება? ეს მთელ ისტორიას წაშლის."
-
-#: timetrackerwidget.cpp:596
-#, kde-format
-msgctxt "@title:window"
-msgid "Confirmation Required"
-msgstr "საჭიროა თანხმობა"
-
-#: timetrackerwidget.cpp:597
-#, kde-format
-msgctxt "@action:button"
-msgid "Reset All Times"
-msgstr "დროების საწყის მნიშვნელობაზე დაბრუნება"
-
-#: timetrackerwidget.cpp:786
-#, kde-format
-msgid "Save failed, most likely because the file could not be locked."
-msgstr "შენახვა ჩავარდა, რადგან ფაილის დაბლოკვა შეუძლებელია."
-
-#: timetrackerwidget.cpp:788
-#, kde-format
-msgid "Could not modify calendar resource."
-msgstr "კალენდარის რესურსის ჩასწორება შეუძლებელია."
-
-#: timetrackerwidget.cpp:790
-#, kde-format
-msgid "Out of memory--could not create object."
-msgstr "არასაკმარისი მეხსიერება--ობიექტის შექმნა შეუძლებელია."
-
-#: timetrackerwidget.cpp:792
-#, kde-format
-msgid "UID not found."
-msgstr "UID ვერ ვიპოვე."
-
-#: timetrackerwidget.cpp:794
-#, kde-format
-msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr "არასწორი თარიღი--ფორმატია წწწწ-თთ-დდ."
-
-#: timetrackerwidget.cpp:796
-#, kde-format
-msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr "არასწორი დრო-- ფორმატია წწწ-მმ-დდTსს:წწ:წწ."
-
-#: timetrackerwidget.cpp:798
-#, kde-format
-msgid "Invalid task duration--must be greater than zero."
-msgstr "არასწორი ამოცანის ხანგრძლივობა--ნულზე მეტი უნდა იყოს."
-
-#: timetrackerwidget.cpp:800
-#, kde-format
-msgid "Invalid error number: %1"
-msgstr "შეცდომის არასწორი ნომერი: %1"
-
-#: timetrackerwidget.cpp:1029
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This is ktimetracker, KDE's program to help you track your time. Best, start "
-"with creating your first task - enter it into the field where you see "
-"\"Search or add task\"."
-msgstr ""
-"ეს KTimeTracker-ია, KDE-ის პროგრამა, რომელი თქვენი დროის თვალყურის დევნებაში "
-"დაგეხმარებათ. დაიწყეთ თქვენი პირველი ამოცანის შექმნით - შეიყვანეთ ის ველში, "
-"რომელსაც აწერია \"ამოცანის ძებნა ან დამატება\"."
-
-#: timetrackerwidget.cpp:1036
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "You have already created a task. You can now start and stop timing."
-msgstr "ახალი ამოცანა უკვე შექმენით. ახლა დრო დაუნიშნეთ."
-
-#: tray.cpp:79
-#, kde-format
-msgctxt "ellipsis to truncate long list of tasks"
-msgid ", ..."
-msgstr ", ..."
-
-#: treeviewheadercontextmenu.cpp:31
-#, kde-format
-msgctxt "@title:menu"
-msgid "Columns"
-msgstr "სვეტები"
 
 #: widgets/searchline.cpp:23
 #, kde-format

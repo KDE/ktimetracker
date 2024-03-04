@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-04 00:38+0000\n"
 "PO-Revision-Date: 2007-09-07 12:56+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -26,6 +26,635 @@ msgstr "Nabin Gautam"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "nabin@mpp.org.np"
+
+#: base/idletimedetector.cpp:62
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Apply the idle time since %1 to all active\n"
+"timers and keep them running."
+msgstr ""
+
+#: base/idletimedetector.cpp:65
+#, fuzzy, kde-format
+#| msgid "Continue timing."
+msgctxt "@action:button"
+msgid "Continue Timing"
+msgstr "समय गणना जारी राख्नुहोस् ।"
+
+#: base/idletimedetector.cpp:67
+#, fuzzy, kde-format
+#| msgid "Stop timing and revert back to the time at %1."
+msgctxt "@info:tooltip"
+msgid "Stop timing and revert back to the time at %1"
+msgstr "समय गणना रोक्नुहोस् र समयलाई %1 मा फर्काउनुहोस् ।"
+
+#: base/idletimedetector.cpp:68
+#, fuzzy, kde-format
+#| msgid "Revert timing"
+msgctxt "@action:button"
+msgid "Revert Timing"
+msgstr "समय गणना पछाडि फर्काउनुहोस्"
+
+#: base/idletimedetector.cpp:72
+#, kde-format
+msgid "Desktop has been idle since %1. What do you want to do?"
+msgstr ""
+
+#: base/mainwindow.cpp:37
+#, fuzzy, kde-format
+#| msgid "Configure KArm..."
+msgctxt "@action:inmenu"
+msgid "Configure KTimeTracker..."
+msgstr "केडीई आर्म कन्फिगर गर्नुहोस्..."
+
+#: base/mainwindow.cpp:136 base/tray.cpp:74
+#, kde-format
+msgid "No active tasks"
+msgstr "सक्रिय कार्य छैन"
+
+#: base/mainwindow.cpp:146 base/tray.cpp:94
+#, fuzzy, kde-format
+#| msgid ", "
+msgctxt "separator between task names"
+msgid ", "
+msgstr ", "
+
+#: base/taskview.cpp:102
+#, kde-format
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
+msgstr ""
+"नयाँ कार्य भण्डारण गर्दा त्रुटि । तपाईँका परिवर्तन बचत गरिएका थिएनन् । तपाईँ आई "
+"क्यालेन्डर फाइल सम्पादन गर्न निश्चित हुनुहोस् । यस फाइलको प्रयोग गरेर सबै अनुप्रयोग अन्त्य "
+"गर्नुहोस् र ~/.kde/share/apps/kabc/lock/ बाट यसको नामसँग सम्बन्धित ताल्चा लगाउने कुनै "
+"पनि फाइल हटाउनुहोस् ।"
+
+#: base/taskview.cpp:198
+#, kde-format
+msgid ""
+"Your virtual desktop number is too high, desktop tracking will not work."
+msgstr ""
+
+#: base/taskview.cpp:274
+#, kde-format
+msgctxt "@info:progress"
+msgid "Stopping timers..."
+msgstr ""
+
+#: base/taskview.cpp:275
+#, fuzzy, kde-format
+#| msgid "&Cancel"
+msgid "Cancel"
+msgstr "रद्द गर्नुहोस्"
+
+#: base/taskview.cpp:345 base/taskview.cpp:429
+#, kde-format
+msgid "Unnamed Task"
+msgstr "नाम नदिइएको कार्य"
+
+#: base/taskview.cpp:364
+#, fuzzy, kde-format
+#| msgid ""
+#| "Error storing new task. Your changes were not saved. Make sure you can "
+#| "edit your iCalendar file. Also quit all applications using this file and "
+#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
+#| "lock/ "
+msgid ""
+"Error storing new task. Your changes were not saved. Make sure you can edit "
+"your iCalendar file. Also quit all applications using this file and remove "
+"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
+msgstr ""
+"नयाँ कार्य भण्डारण गर्दा त्रुटि । तपाईँका परिवर्तन बचत गरिएका थिएनन् । तपाईँ आई "
+"क्यालेन्डर फाइल सम्पादन गर्न निश्चित हुनुहोस् । यस फाइलको प्रयोग गरेर सबै अनुप्रयोग अन्त्य "
+"गर्नुहोस् र ~/.kde/share/apps/kabc/lock/ बाट यसको नामसँग सम्बन्धित ताल्चा लगाउने कुनै "
+"पनि फाइल हटाउनुहोस् ।"
+
+#: base/taskview.cpp:406
+#, fuzzy, kde-format
+#| msgid "New Sub Task"
+msgctxt "@title:window"
+msgid "New Sub Task"
+msgstr "नयाँ उप-कार्य"
+
+#: base/taskview.cpp:424
+#, fuzzy, kde-format
+#| msgid "Edit Task"
+msgctxt "@title:window"
+msgid "Edit Task"
+msgstr "कार्य सम्पादन गर्नुहोस्"
+
+#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#, kde-format
+msgid "No task selected."
+msgstr "कार्य चयन गरिएको छैन ।"
+
+#: base/taskview.cpp:504
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to delete the task named\n"
+#| "\"%1\" and its entire history?\n"
+#| "NOTE: all its subtasks and their history will also be deleted."
+msgid ""
+"Are you sure you want to delete the selected task and its entire history?\n"
+"Note: All subtasks and their history will also be deleted."
+msgstr ""
+"तपाईँ\n"
+"\"%1\" नाम गरिएको कार्य र यसको पूरै इतिहास मेट्न निश्चित हुनुहुन्छ ?\n"
+"द्रष्टव्य: यसका सबै सहायक कार्य र तीनका इतिहास पनि मेटिन्छन् ।"
+
+#: base/taskview.cpp:508
+#, fuzzy, kde-format
+#| msgid "Deleting Task"
+msgctxt "@title:window"
+msgid "Deleting Task"
+msgstr "कार्य मेट्दै"
+
+#: base/timetrackerstorage.cpp:125
+#, kde-format
+msgid "Error loading \"%1\": could not find parent (uid=%2)"
+msgstr "\"%1\" लोड गर्दा त्रुटि: प्यारेन्ट (uid=%2) फेला पार्न सकेन"
+
+#: base/timetrackerstorage.cpp:228
+#, fuzzy, kde-format
+#| msgid "Could not open \"%1\"."
+msgctxt "%1=lock file path"
+msgid "Could not write lock file \"%1\". Disk full?"
+msgstr "\"%1\" खोल्न सकेन ।"
+
+#: base/timetrackerstorage.cpp:236
+#, kde-format
+msgctxt "%1=destination file path/URL"
+msgid "Failed to save iCalendar file as \"%1\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:139
+#, fuzzy, kde-format
+#| msgid "Start &New Session"
+msgctxt "@action:inmenu"
+msgid "Start &New Session"
+msgstr "नयाँ सत्र सुरु गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:140
+#, fuzzy, kde-format
+#| msgid "Start a new session"
+msgctxt "@info:tooltip"
+msgid "Starts a new session"
+msgstr "नयाँ सत्र सुरु गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:142
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session time to 0 for all tasks, to start a new "
+#| "session, without affecting the totals."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session time to 0 for all tasks, to start a new session, "
+"without affecting the totals."
+msgstr ""
+"कूल सबैलाई प्रभाव नपारिकन, नयाँ सत्र सुरु गर्न, यसले सबै कार्यका लागि सत्र समय रिसेट गर्नेछ "
+"।छ ।"
+
+#: base/timetrackerwidget.cpp:150
+#, fuzzy, kde-format
+#| msgid "Edit history"
+msgctxt "@action:inmenu"
+msgid "Edit History..."
+msgstr "इतिहास सम्पादन गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:151
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Edits history of all tasks of the current document"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:153
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"A window will be opened where you can change start and stop times of tasks "
+"or add a comment to them."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:163
+#, fuzzy, kde-format
+#| msgid "&Reset All Times"
+msgctxt "@action:inmenu"
+msgid "&Reset All Times"
+msgstr "सबै समय रिसेट गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:164
+#, fuzzy, kde-format
+#| msgid "Reset all times"
+msgctxt "@info:tooltip"
+msgid "Resets all times"
+msgstr "सबै समय रिसेट गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:166
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will reset the session and total time to 0 for all tasks, to restart "
+#| "from scratch."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will reset the session and total time to 0 for all tasks, to restart "
+"from scratch."
+msgstr "यसले स्क्र्याचबाट पुन: सुरु गर्न, सबै कार्यका लागि सत्र र कूल समय ० मा रिसेट गर्नेछ ।"
+
+#: base/timetrackerwidget.cpp:173
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action:inmenu"
+msgid "&Start"
+msgstr "सुरु गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:174
+#, fuzzy, kde-format
+#| msgid "Start timing for selected task"
+msgctxt "@info:tooltip"
+msgid "Starts timing for selected task"
+msgstr "चयन गरिएका कार्यका लागि टाइमिङ सुरु गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:176
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will start timing for the selected task.\n"
+#| "It is even possible to time several tasks simultaneously.\n"
+#| "\n"
+#| "You may also start timing of a tasks by double clicking the left mouse "
+#| "button on a given task. This will, however, stop timing of other tasks."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will start timing for the selected task.\n"
+"It is even possible to time several tasks simultaneously.\n"
+"\n"
+"You may also start timing of tasks by double clicking the left mouse button "
+"on a given task. This will, however, stop timing of other tasks."
+msgstr ""
+"यसले चयन गरेका कार्यका लागि टाइमिङ सुरु गर्नेछ ।\n"
+"तापनि एकैसाथ धेरै कार्यमा समय दिन सम्भव हुन्छ ।\n"
+"\n"
+"तपाईँले दिएका कार्यमा माउसको बायाँ बटन डबल क्लिक गरेर कार्यको टाइमिङ सुरु गर्न सक्नुहुन्छ "
+"। तापनि, यसले, अन्य कार्यको टाइमिङ रोक्नेछ ।"
+
+#: base/timetrackerwidget.cpp:190
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action:inmenu"
+msgid "S&top"
+msgstr "रोक्नुहोस्"
+
+#: base/timetrackerwidget.cpp:191
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:tooltip"
+msgid "Stops timing of the selected task"
+msgstr "चयन गरिएका कार्यको टाइमिङ रोक्नुहोस्"
+
+#: base/timetrackerwidget.cpp:192
+#, fuzzy, kde-format
+#| msgid "Stop timing of the selected task"
+msgctxt "@info:whatsthis"
+msgid "Stops timing of the selected task"
+msgstr "चयन गरिएका कार्यको टाइमिङ रोक्नुहोस्"
+
+#: base/timetrackerwidget.cpp:199
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Focus on Searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:200
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:201
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Sets the focus on the searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:208
+#, fuzzy, kde-format
+#| msgid "Stop &All Timers"
+msgctxt "@action:inmenu"
+msgid "Stop &All Timers"
+msgstr "सबै टाइमर रोक्नुहोस्"
+
+#: base/timetrackerwidget.cpp:209
+#, fuzzy, kde-format
+#| msgid "Stop all of the active timers"
+msgctxt "@info:tooltip"
+msgid "Stops all of the active timers"
+msgstr "सबै सक्रिय टाइमर रोक्नुहोस्"
+
+#: base/timetrackerwidget.cpp:210
+#, fuzzy, kde-format
+#| msgid "Stop all of the active timers"
+msgctxt "@info:whatsthis"
+msgid "Stops all of the active timers"
+msgstr "सबै सक्रिय टाइमर रोक्नुहोस्"
+
+#: base/timetrackerwidget.cpp:218
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Track Active Applications"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:220
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Auto-creates and updates tasks when the focus of the current window has "
+"changed"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:223
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If the focus of a window changes for the first time when this action is "
+"enabled, a new task will be created with the title of the window as its name "
+"and will be started. If there already exists such an task it will be started."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:234
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@action:inmenu"
+msgid "&New Task..."
+msgstr "नयाँ कार्य"
+
+#: base/timetrackerwidget.cpp:235
+#, fuzzy, kde-format
+#| msgid "Create new top level task"
+msgctxt "@info:tooltip"
+msgid "Creates new top level task"
+msgstr "नयाँ उच्च स्तर कार्य सिर्जना गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:236
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new top level task."
+msgstr "यसले नयाँ उच्च स्तर कार्य सिर्जना गर्नेछ ।"
+
+#: base/timetrackerwidget.cpp:244
+#, fuzzy, kde-format
+#| msgid "New &Subtask..."
+msgctxt "@action:inmenu"
+msgid "New &Subtask..."
+msgstr "नयाँ उप-कार्य..."
+
+#: base/timetrackerwidget.cpp:245
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:tooltip"
+msgid "Creates a new subtask to the current selected task"
+msgstr "यसले नयाँ उच्च स्तर कार्य सिर्जना गर्नेछ ।"
+
+#: base/timetrackerwidget.cpp:246
+#, fuzzy, kde-format
+#| msgid "This will create a new top level task."
+msgctxt "@info:whatsthis"
+msgid "This will create a new subtask to the current selected task."
+msgstr "यसले नयाँ उच्च स्तर कार्य सिर्जना गर्नेछ ।"
+
+#: base/timetrackerwidget.cpp:254
+#, fuzzy, kde-format
+#| msgid "&Delete"
+msgctxt "@action:inmenu"
+msgid "&Delete"
+msgstr "मेट्नुहोस्"
+
+#: base/timetrackerwidget.cpp:255
+#, fuzzy, kde-format
+#| msgid "Delete selected task"
+msgctxt "@info:tooltip"
+msgid "Deletes selected task"
+msgstr "चयन गरिएका कार्य मेट्नुहोस्"
+
+#: base/timetrackerwidget.cpp:256
+#, fuzzy, kde-format
+#| msgid "This will delete the selected task and all its subtasks."
+msgctxt "@info:whatsthis"
+msgid "This will delete the selected task(s) and all subtasks."
+msgstr "यसले चयन गरिएका कार्य र यसका सबै उप-कार्य मेट्नेछ ।"
+
+#: base/timetrackerwidget.cpp:264
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "&Properties"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:265
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit name or description for selected task"
+msgstr "चयन गरिएका कार्यका लागि नाम वा समय सम्पादन गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:267
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the parameters for the "
+"selected task."
+msgstr ""
+"यसले चयन गरिएका कार्यका लागि तपाईँले परिमिति सम्पादन गर्न सक्ने संवाद बाकस ल्याउनेछ ।"
+
+#: base/timetrackerwidget.cpp:276
+#, fuzzy, kde-format
+#| msgid "Print Times"
+msgctxt "@action:inmenu"
+msgid "Edit &Time..."
+msgstr "मुद्रण समय"
+
+#: base/timetrackerwidget.cpp:277
+#, fuzzy, kde-format
+#| msgid "Edit name or times for selected task"
+msgctxt "@info:tooltip"
+msgid "Edit time for selected task"
+msgstr "चयन गरिएका कार्यका लागि नाम वा समय सम्पादन गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:279
+#, fuzzy, kde-format
+#| msgid ""
+#| "This will bring up a dialog box where you may edit the parameters for the "
+#| "selected task."
+msgctxt "@info:whatsthis"
+msgid ""
+"This will bring up a dialog box where you may edit the times for the "
+"selected task."
+msgstr ""
+"यसले चयन गरिएका कार्यका लागि तपाईँले परिमिति सम्पादन गर्न सक्ने संवाद बाकस ल्याउनेछ ।"
+
+#: base/timetrackerwidget.cpp:288
+#, fuzzy, kde-format
+#| msgid "&Mark as Complete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Complete"
+msgstr "समापनका रूपमा चिनो लगाउनुहोस्"
+
+#: base/timetrackerwidget.cpp:296
+#, fuzzy, kde-format
+#| msgid "&Mark as Incomplete"
+msgctxt "@action:inmenu"
+msgid "&Mark as Incomplete"
+msgstr "अपूर्णका रूपमा चिनो लगाउनुहोस्"
+
+#: base/timetrackerwidget.cpp:304
+#, fuzzy, kde-format
+#| msgid "&Export"
+msgctxt "@action:inmenu"
+msgid "&Export..."
+msgstr "निर्यात गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:311
+#, fuzzy, kde-format
+#| msgid "Import Tasks From &Planner..."
+msgctxt "@action:inmenu"
+msgid "Import Tasks From &Planner..."
+msgstr "योजनाकर्ताबाट कार्य आयात गर्नुहोस्..."
+
+#: base/timetrackerwidget.cpp:323
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Show Searchbar"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:458
+#, fuzzy, kde-format
+#| msgid "Behavior"
+msgctxt "@title:tab"
+msgid "Behavior"
+msgstr "व्यवहार"
+
+#: base/timetrackerwidget.cpp:463
+#, kde-format
+msgctxt "@title:tab"
+msgid "Appearance"
+msgstr ""
+
+#: base/timetrackerwidget.cpp:468
+#, fuzzy, kde-format
+#| msgid "Storage"
+msgctxt "@title:tab"
+msgid "Storage"
+msgstr "भण्डारण"
+
+#: base/timetrackerwidget.cpp:505
+#, fuzzy, kde-format
+#| msgid "New Task"
+msgctxt "@title:window"
+msgid "New Task"
+msgstr "नयाँ कार्य"
+
+#: base/timetrackerwidget.cpp:584
+#, kde-format
+msgctxt "@info in message box"
+msgid ""
+"There is no history yet. Start and stop a task and you will have an entry in "
+"your history."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:594
+#, fuzzy, kde-format
+#| msgid "Do you really want to reset the time to zero for all tasks?"
+msgid ""
+"Do you really want to reset the time to zero for all tasks? This will delete "
+"the entire history."
+msgstr "साँच्चिकै तपाईँले सबै कार्यका लागि समय शून्यमा रिसेट गर्न चाहनुहुन्छ ?"
+
+#: base/timetrackerwidget.cpp:596
+#, fuzzy, kde-format
+#| msgid "Confirmation Required"
+msgctxt "@title:window"
+msgid "Confirmation Required"
+msgstr "स्वीकृति आवश्यक"
+
+#: base/timetrackerwidget.cpp:597
+#, fuzzy, kde-format
+#| msgid "Reset All Times"
+msgctxt "@action:button"
+msgid "Reset All Times"
+msgstr "सबै समय रिसेट गर्नुहोस्"
+
+#: base/timetrackerwidget.cpp:786
+#, kde-format
+msgid "Save failed, most likely because the file could not be locked."
+msgstr "बचत असफल भयो, यसको कारणले धेरै जसो फाइलमा ताल्चा लगाउन सक्ने छैन ।"
+
+#: base/timetrackerwidget.cpp:788
+#, kde-format
+msgid "Could not modify calendar resource."
+msgstr "क्यालेन्डर स्रोत परिमार्जन गर्न सकेन ।"
+
+#: base/timetrackerwidget.cpp:790
+#, kde-format
+msgid "Out of memory--could not create object."
+msgstr "स्मृति बाहिर--वस्तु सिर्जना गर्न सकेन ।"
+
+#: base/timetrackerwidget.cpp:792
+#, kde-format
+msgid "UID not found."
+msgstr "UID फेला परेन ।"
+
+#: base/timetrackerwidget.cpp:794
+#, kde-format
+msgid "Invalidate date--format is YYYY-MM-DD."
+msgstr "अवैध मिति--ढाँचा YYYY-MM-DD हो ।"
+
+#: base/timetrackerwidget.cpp:796
+#, kde-format
+msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
+msgstr "अवैध समय--ढाँचा YYYY-MM-DDTHH:MM:SS हो ।"
+
+#: base/timetrackerwidget.cpp:798
+#, kde-format
+msgid "Invalid task duration--must be greater than zero."
+msgstr "अवैद्य कार्य अवधि--शून्य भन्दा ठूलो हुनुपर्छ ।"
+
+#: base/timetrackerwidget.cpp:800
+#, kde-format
+msgid "Invalid error number: %1"
+msgstr "अवैद्य त्रुटि नम्बर: %1"
+
+#: base/timetrackerwidget.cpp:1029
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"This is ktimetracker, KDE's program to help you track your time. Best, start "
+"with creating your first task - enter it into the field where you see "
+"\"Search or add task\"."
+msgstr ""
+
+#: base/timetrackerwidget.cpp:1036
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "You have already created a task. You can now start and stop timing."
+msgstr ""
+
+#: base/tray.cpp:79
+#, fuzzy, kde-format
+#| msgid ", ..."
+msgctxt "ellipsis to truncate long list of tasks"
+msgid ", ..."
+msgstr ", ..."
+
+#: base/treeviewheadercontextmenu.cpp:31
+#, fuzzy, kde-format
+#| msgid "Columns"
+msgctxt "@title:menu"
+msgid "Columns"
+msgstr "स्तम्भ"
 
 #: dialogs/edittimedialog.cpp:28
 #, fuzzy, kde-format
@@ -394,40 +1023,6 @@ msgstr "कूल"
 msgid "No tasks."
 msgstr "कार्य होइन ।"
 
-#: idletimedetector.cpp:62
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Apply the idle time since %1 to all active\n"
-"timers and keep them running."
-msgstr ""
-
-#: idletimedetector.cpp:65
-#, fuzzy, kde-format
-#| msgid "Continue timing."
-msgctxt "@action:button"
-msgid "Continue Timing"
-msgstr "समय गणना जारी राख्नुहोस् ।"
-
-#: idletimedetector.cpp:67
-#, fuzzy, kde-format
-#| msgid "Stop timing and revert back to the time at %1."
-msgctxt "@info:tooltip"
-msgid "Stop timing and revert back to the time at %1"
-msgstr "समय गणना रोक्नुहोस् र समयलाई %1 मा फर्काउनुहोस् ।"
-
-#: idletimedetector.cpp:68
-#, fuzzy, kde-format
-#| msgid "Revert timing"
-msgctxt "@action:button"
-msgid "Revert Timing"
-msgstr "समय गणना पछाडि फर्काउनुहोस्"
-
-#: idletimedetector.cpp:72
-#, kde-format
-msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr ""
-
 #. i18n: ectx: Menu (clock)
 #: ktimetrackerui.rc:23
 #, kde-format
@@ -592,25 +1187,6 @@ msgstr "डेभिड फाउर"
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
 msgstr "खोलिने आई क्यालेन्डर फाइल"
-
-#: mainwindow.cpp:37
-#, fuzzy, kde-format
-#| msgid "Configure KArm..."
-msgctxt "@action:inmenu"
-msgid "Configure KTimeTracker..."
-msgstr "केडीई आर्म कन्फिगर गर्नुहोस्..."
-
-#: mainwindow.cpp:136 tray.cpp:74
-#, kde-format
-msgid "No active tasks"
-msgstr "सक्रिय कार्य छैन"
-
-#: mainwindow.cpp:146 tray.cpp:94
-#, fuzzy, kde-format
-#| msgid ", "
-msgctxt "separator between task names"
-msgid ", "
-msgstr ", "
 
 #: model/tasksmodel.cpp:19
 #, fuzzy, kde-format
@@ -846,582 +1422,6 @@ msgstr "समापन प्रतिशत"
 #| msgid "Save tasks every"
 msgid "Save tasks every:"
 msgstr "प्रत्येक कार्यलाई बचत गर्नुहोस्"
-
-#: taskview.cpp:102
-#, kde-format
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
-msgstr ""
-"नयाँ कार्य भण्डारण गर्दा त्रुटि । तपाईँका परिवर्तन बचत गरिएका थिएनन् । तपाईँ आई "
-"क्यालेन्डर फाइल सम्पादन गर्न निश्चित हुनुहोस् । यस फाइलको प्रयोग गरेर सबै अनुप्रयोग अन्त्य "
-"गर्नुहोस् र ~/.kde/share/apps/kabc/lock/ बाट यसको नामसँग सम्बन्धित ताल्चा लगाउने कुनै "
-"पनि फाइल हटाउनुहोस् ।"
-
-#: taskview.cpp:198
-#, kde-format
-msgid ""
-"Your virtual desktop number is too high, desktop tracking will not work."
-msgstr ""
-
-#: taskview.cpp:274
-#, kde-format
-msgctxt "@info:progress"
-msgid "Stopping timers..."
-msgstr ""
-
-#: taskview.cpp:275
-#, fuzzy, kde-format
-#| msgid "&Cancel"
-msgid "Cancel"
-msgstr "रद्द गर्नुहोस्"
-
-#: taskview.cpp:345 taskview.cpp:429
-#, kde-format
-msgid "Unnamed Task"
-msgstr "नाम नदिइएको कार्य"
-
-#: taskview.cpp:364
-#, fuzzy, kde-format
-#| msgid ""
-#| "Error storing new task. Your changes were not saved. Make sure you can "
-#| "edit your iCalendar file. Also quit all applications using this file and "
-#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
-#| "lock/ "
-msgid ""
-"Error storing new task. Your changes were not saved. Make sure you can edit "
-"your iCalendar file. Also quit all applications using this file and remove "
-"any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
-msgstr ""
-"नयाँ कार्य भण्डारण गर्दा त्रुटि । तपाईँका परिवर्तन बचत गरिएका थिएनन् । तपाईँ आई "
-"क्यालेन्डर फाइल सम्पादन गर्न निश्चित हुनुहोस् । यस फाइलको प्रयोग गरेर सबै अनुप्रयोग अन्त्य "
-"गर्नुहोस् र ~/.kde/share/apps/kabc/lock/ बाट यसको नामसँग सम्बन्धित ताल्चा लगाउने कुनै "
-"पनि फाइल हटाउनुहोस् ।"
-
-#: taskview.cpp:406
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
-msgctxt "@title:window"
-msgid "New Sub Task"
-msgstr "नयाँ उप-कार्य"
-
-#: taskview.cpp:424
-#, fuzzy, kde-format
-#| msgid "Edit Task"
-msgctxt "@title:window"
-msgid "Edit Task"
-msgstr "कार्य सम्पादन गर्नुहोस्"
-
-#: taskview.cpp:458 taskview.cpp:499 taskview.cpp:521
-#, kde-format
-msgid "No task selected."
-msgstr "कार्य चयन गरिएको छैन ।"
-
-#: taskview.cpp:504
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to delete the task named\n"
-#| "\"%1\" and its entire history?\n"
-#| "NOTE: all its subtasks and their history will also be deleted."
-msgid ""
-"Are you sure you want to delete the selected task and its entire history?\n"
-"Note: All subtasks and their history will also be deleted."
-msgstr ""
-"तपाईँ\n"
-"\"%1\" नाम गरिएको कार्य र यसको पूरै इतिहास मेट्न निश्चित हुनुहुन्छ ?\n"
-"द्रष्टव्य: यसका सबै सहायक कार्य र तीनका इतिहास पनि मेटिन्छन् ।"
-
-#: taskview.cpp:508
-#, fuzzy, kde-format
-#| msgid "Deleting Task"
-msgctxt "@title:window"
-msgid "Deleting Task"
-msgstr "कार्य मेट्दै"
-
-#: timetrackerstorage.cpp:125
-#, kde-format
-msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr "\"%1\" लोड गर्दा त्रुटि: प्यारेन्ट (uid=%2) फेला पार्न सकेन"
-
-#: timetrackerstorage.cpp:228
-#, fuzzy, kde-format
-#| msgid "Could not open \"%1\"."
-msgctxt "%1=lock file path"
-msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "\"%1\" खोल्न सकेन ।"
-
-#: timetrackerstorage.cpp:236
-#, kde-format
-msgctxt "%1=destination file path/URL"
-msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
-msgctxt "@action:inmenu"
-msgid "Start &New Session"
-msgstr "नयाँ सत्र सुरु गर्नुहोस्"
-
-#: timetrackerwidget.cpp:140
-#, fuzzy, kde-format
-#| msgid "Start a new session"
-msgctxt "@info:tooltip"
-msgid "Starts a new session"
-msgstr "नयाँ सत्र सुरु गर्नुहोस्"
-
-#: timetrackerwidget.cpp:142
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will reset the session time to 0 for all tasks, to start a new "
-#| "session, without affecting the totals."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session time to 0 for all tasks, to start a new session, "
-"without affecting the totals."
-msgstr ""
-"कूल सबैलाई प्रभाव नपारिकन, नयाँ सत्र सुरु गर्न, यसले सबै कार्यका लागि सत्र समय रिसेट गर्नेछ "
-"।छ ।"
-
-#: timetrackerwidget.cpp:150
-#, fuzzy, kde-format
-#| msgid "Edit history"
-msgctxt "@action:inmenu"
-msgid "Edit History..."
-msgstr "इतिहास सम्पादन गर्नुहोस्"
-
-#: timetrackerwidget.cpp:151
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Edits history of all tasks of the current document"
-msgstr ""
-
-#: timetrackerwidget.cpp:153
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"A window will be opened where you can change start and stop times of tasks "
-"or add a comment to them."
-msgstr ""
-
-#: timetrackerwidget.cpp:163
-#, fuzzy, kde-format
-#| msgid "&Reset All Times"
-msgctxt "@action:inmenu"
-msgid "&Reset All Times"
-msgstr "सबै समय रिसेट गर्नुहोस्"
-
-#: timetrackerwidget.cpp:164
-#, fuzzy, kde-format
-#| msgid "Reset all times"
-msgctxt "@info:tooltip"
-msgid "Resets all times"
-msgstr "सबै समय रिसेट गर्नुहोस्"
-
-#: timetrackerwidget.cpp:166
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will reset the session and total time to 0 for all tasks, to restart "
-#| "from scratch."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will reset the session and total time to 0 for all tasks, to restart "
-"from scratch."
-msgstr "यसले स्क्र्याचबाट पुन: सुरु गर्न, सबै कार्यका लागि सत्र र कूल समय ० मा रिसेट गर्नेछ ।"
-
-#: timetrackerwidget.cpp:173
-#, fuzzy, kde-format
-#| msgid "&Start"
-msgctxt "@action:inmenu"
-msgid "&Start"
-msgstr "सुरु गर्नुहोस्"
-
-#: timetrackerwidget.cpp:174
-#, fuzzy, kde-format
-#| msgid "Start timing for selected task"
-msgctxt "@info:tooltip"
-msgid "Starts timing for selected task"
-msgstr "चयन गरिएका कार्यका लागि टाइमिङ सुरु गर्नुहोस्"
-
-#: timetrackerwidget.cpp:176
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will start timing for the selected task.\n"
-#| "It is even possible to time several tasks simultaneously.\n"
-#| "\n"
-#| "You may also start timing of a tasks by double clicking the left mouse "
-#| "button on a given task. This will, however, stop timing of other tasks."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will start timing for the selected task.\n"
-"It is even possible to time several tasks simultaneously.\n"
-"\n"
-"You may also start timing of tasks by double clicking the left mouse button "
-"on a given task. This will, however, stop timing of other tasks."
-msgstr ""
-"यसले चयन गरेका कार्यका लागि टाइमिङ सुरु गर्नेछ ।\n"
-"तापनि एकैसाथ धेरै कार्यमा समय दिन सम्भव हुन्छ ।\n"
-"\n"
-"तपाईँले दिएका कार्यमा माउसको बायाँ बटन डबल क्लिक गरेर कार्यको टाइमिङ सुरु गर्न सक्नुहुन्छ "
-"। तापनि, यसले, अन्य कार्यको टाइमिङ रोक्नेछ ।"
-
-#: timetrackerwidget.cpp:190
-#, fuzzy, kde-format
-#| msgid "S&top"
-msgctxt "@action:inmenu"
-msgid "S&top"
-msgstr "रोक्नुहोस्"
-
-#: timetrackerwidget.cpp:191
-#, fuzzy, kde-format
-#| msgid "Stop timing of the selected task"
-msgctxt "@info:tooltip"
-msgid "Stops timing of the selected task"
-msgstr "चयन गरिएका कार्यको टाइमिङ रोक्नुहोस्"
-
-#: timetrackerwidget.cpp:192
-#, fuzzy, kde-format
-#| msgid "Stop timing of the selected task"
-msgctxt "@info:whatsthis"
-msgid "Stops timing of the selected task"
-msgstr "चयन गरिएका कार्यको टाइमिङ रोक्नुहोस्"
-
-#: timetrackerwidget.cpp:199
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Focus on Searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Sets the focus on the searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:201
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "Sets the focus on the searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:208
-#, fuzzy, kde-format
-#| msgid "Stop &All Timers"
-msgctxt "@action:inmenu"
-msgid "Stop &All Timers"
-msgstr "सबै टाइमर रोक्नुहोस्"
-
-#: timetrackerwidget.cpp:209
-#, fuzzy, kde-format
-#| msgid "Stop all of the active timers"
-msgctxt "@info:tooltip"
-msgid "Stops all of the active timers"
-msgstr "सबै सक्रिय टाइमर रोक्नुहोस्"
-
-#: timetrackerwidget.cpp:210
-#, fuzzy, kde-format
-#| msgid "Stop all of the active timers"
-msgctxt "@info:whatsthis"
-msgid "Stops all of the active timers"
-msgstr "सबै सक्रिय टाइमर रोक्नुहोस्"
-
-#: timetrackerwidget.cpp:218
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Track Active Applications"
-msgstr ""
-
-#: timetrackerwidget.cpp:220
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Auto-creates and updates tasks when the focus of the current window has "
-"changed"
-msgstr ""
-
-#: timetrackerwidget.cpp:223
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If the focus of a window changes for the first time when this action is "
-"enabled, a new task will be created with the title of the window as its name "
-"and will be started. If there already exists such an task it will be started."
-msgstr ""
-
-#: timetrackerwidget.cpp:234
-#, fuzzy, kde-format
-#| msgid "New Task"
-msgctxt "@action:inmenu"
-msgid "&New Task..."
-msgstr "नयाँ कार्य"
-
-#: timetrackerwidget.cpp:235
-#, fuzzy, kde-format
-#| msgid "Create new top level task"
-msgctxt "@info:tooltip"
-msgid "Creates new top level task"
-msgstr "नयाँ उच्च स्तर कार्य सिर्जना गर्नुहोस्"
-
-#: timetrackerwidget.cpp:236
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new top level task."
-msgstr "यसले नयाँ उच्च स्तर कार्य सिर्जना गर्नेछ ।"
-
-#: timetrackerwidget.cpp:244
-#, fuzzy, kde-format
-#| msgid "New &Subtask..."
-msgctxt "@action:inmenu"
-msgid "New &Subtask..."
-msgstr "नयाँ उप-कार्य..."
-
-#: timetrackerwidget.cpp:245
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:tooltip"
-msgid "Creates a new subtask to the current selected task"
-msgstr "यसले नयाँ उच्च स्तर कार्य सिर्जना गर्नेछ ।"
-
-#: timetrackerwidget.cpp:246
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
-msgctxt "@info:whatsthis"
-msgid "This will create a new subtask to the current selected task."
-msgstr "यसले नयाँ उच्च स्तर कार्य सिर्जना गर्नेछ ।"
-
-#: timetrackerwidget.cpp:254
-#, fuzzy, kde-format
-#| msgid "&Delete"
-msgctxt "@action:inmenu"
-msgid "&Delete"
-msgstr "मेट्नुहोस्"
-
-#: timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-#| msgid "Delete selected task"
-msgctxt "@info:tooltip"
-msgid "Deletes selected task"
-msgstr "चयन गरिएका कार्य मेट्नुहोस्"
-
-#: timetrackerwidget.cpp:256
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task and all its subtasks."
-msgctxt "@info:whatsthis"
-msgid "This will delete the selected task(s) and all subtasks."
-msgstr "यसले चयन गरिएका कार्य र यसका सबै उप-कार्य मेट्नेछ ।"
-
-#: timetrackerwidget.cpp:264
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "&Properties"
-msgstr ""
-
-#: timetrackerwidget.cpp:265
-#, fuzzy, kde-format
-#| msgid "Edit name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit name or description for selected task"
-msgstr "चयन गरिएका कार्यका लागि नाम वा समय सम्पादन गर्नुहोस्"
-
-#: timetrackerwidget.cpp:267
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the parameters for the "
-"selected task."
-msgstr ""
-"यसले चयन गरिएका कार्यका लागि तपाईँले परिमिति सम्पादन गर्न सक्ने संवाद बाकस ल्याउनेछ ।"
-
-#: timetrackerwidget.cpp:276
-#, fuzzy, kde-format
-#| msgid "Print Times"
-msgctxt "@action:inmenu"
-msgid "Edit &Time..."
-msgstr "मुद्रण समय"
-
-#: timetrackerwidget.cpp:277
-#, fuzzy, kde-format
-#| msgid "Edit name or times for selected task"
-msgctxt "@info:tooltip"
-msgid "Edit time for selected task"
-msgstr "चयन गरिएका कार्यका लागि नाम वा समय सम्पादन गर्नुहोस्"
-
-#: timetrackerwidget.cpp:279
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
-msgctxt "@info:whatsthis"
-msgid ""
-"This will bring up a dialog box where you may edit the times for the "
-"selected task."
-msgstr ""
-"यसले चयन गरिएका कार्यका लागि तपाईँले परिमिति सम्पादन गर्न सक्ने संवाद बाकस ल्याउनेछ ।"
-
-#: timetrackerwidget.cpp:288
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
-msgctxt "@action:inmenu"
-msgid "&Mark as Complete"
-msgstr "समापनका रूपमा चिनो लगाउनुहोस्"
-
-#: timetrackerwidget.cpp:296
-#, fuzzy, kde-format
-#| msgid "&Mark as Incomplete"
-msgctxt "@action:inmenu"
-msgid "&Mark as Incomplete"
-msgstr "अपूर्णका रूपमा चिनो लगाउनुहोस्"
-
-#: timetrackerwidget.cpp:304
-#, fuzzy, kde-format
-#| msgid "&Export"
-msgctxt "@action:inmenu"
-msgid "&Export..."
-msgstr "निर्यात गर्नुहोस्"
-
-#: timetrackerwidget.cpp:311
-#, fuzzy, kde-format
-#| msgid "Import Tasks From &Planner..."
-msgctxt "@action:inmenu"
-msgid "Import Tasks From &Planner..."
-msgstr "योजनाकर्ताबाट कार्य आयात गर्नुहोस्..."
-
-#: timetrackerwidget.cpp:323
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Show Searchbar"
-msgstr ""
-
-#: timetrackerwidget.cpp:458
-#, fuzzy, kde-format
-#| msgid "Behavior"
-msgctxt "@title:tab"
-msgid "Behavior"
-msgstr "व्यवहार"
-
-#: timetrackerwidget.cpp:463
-#, kde-format
-msgctxt "@title:tab"
-msgid "Appearance"
-msgstr ""
-
-#: timetrackerwidget.cpp:468
-#, fuzzy, kde-format
-#| msgid "Storage"
-msgctxt "@title:tab"
-msgid "Storage"
-msgstr "भण्डारण"
-
-#: timetrackerwidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "New Task"
-msgctxt "@title:window"
-msgid "New Task"
-msgstr "नयाँ कार्य"
-
-#: timetrackerwidget.cpp:584
-#, kde-format
-msgctxt "@info in message box"
-msgid ""
-"There is no history yet. Start and stop a task and you will have an entry in "
-"your history."
-msgstr ""
-
-#: timetrackerwidget.cpp:594
-#, fuzzy, kde-format
-#| msgid "Do you really want to reset the time to zero for all tasks?"
-msgid ""
-"Do you really want to reset the time to zero for all tasks? This will delete "
-"the entire history."
-msgstr "साँच्चिकै तपाईँले सबै कार्यका लागि समय शून्यमा रिसेट गर्न चाहनुहुन्छ ?"
-
-#: timetrackerwidget.cpp:596
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
-msgctxt "@title:window"
-msgid "Confirmation Required"
-msgstr "स्वीकृति आवश्यक"
-
-#: timetrackerwidget.cpp:597
-#, fuzzy, kde-format
-#| msgid "Reset All Times"
-msgctxt "@action:button"
-msgid "Reset All Times"
-msgstr "सबै समय रिसेट गर्नुहोस्"
-
-#: timetrackerwidget.cpp:786
-#, kde-format
-msgid "Save failed, most likely because the file could not be locked."
-msgstr "बचत असफल भयो, यसको कारणले धेरै जसो फाइलमा ताल्चा लगाउन सक्ने छैन ।"
-
-#: timetrackerwidget.cpp:788
-#, kde-format
-msgid "Could not modify calendar resource."
-msgstr "क्यालेन्डर स्रोत परिमार्जन गर्न सकेन ।"
-
-#: timetrackerwidget.cpp:790
-#, kde-format
-msgid "Out of memory--could not create object."
-msgstr "स्मृति बाहिर--वस्तु सिर्जना गर्न सकेन ।"
-
-#: timetrackerwidget.cpp:792
-#, kde-format
-msgid "UID not found."
-msgstr "UID फेला परेन ।"
-
-#: timetrackerwidget.cpp:794
-#, kde-format
-msgid "Invalidate date--format is YYYY-MM-DD."
-msgstr "अवैध मिति--ढाँचा YYYY-MM-DD हो ।"
-
-#: timetrackerwidget.cpp:796
-#, kde-format
-msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
-msgstr "अवैध समय--ढाँचा YYYY-MM-DDTHH:MM:SS हो ।"
-
-#: timetrackerwidget.cpp:798
-#, kde-format
-msgid "Invalid task duration--must be greater than zero."
-msgstr "अवैद्य कार्य अवधि--शून्य भन्दा ठूलो हुनुपर्छ ।"
-
-#: timetrackerwidget.cpp:800
-#, kde-format
-msgid "Invalid error number: %1"
-msgstr "अवैद्य त्रुटि नम्बर: %1"
-
-#: timetrackerwidget.cpp:1029
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid ""
-"This is ktimetracker, KDE's program to help you track your time. Best, start "
-"with creating your first task - enter it into the field where you see "
-"\"Search or add task\"."
-msgstr ""
-
-#: timetrackerwidget.cpp:1036
-#, kde-format
-msgctxt "@info:whatsthis"
-msgid "You have already created a task. You can now start and stop timing."
-msgstr ""
-
-#: tray.cpp:79
-#, fuzzy, kde-format
-#| msgid ", ..."
-msgctxt "ellipsis to truncate long list of tasks"
-msgid ", ..."
-msgstr ", ..."
-
-#: treeviewheadercontextmenu.cpp:31
-#, fuzzy, kde-format
-#| msgid "Columns"
-msgctxt "@title:menu"
-msgid "Columns"
-msgstr "स्तम्भ"
 
 #: widgets/searchline.cpp:23
 #, kde-format
