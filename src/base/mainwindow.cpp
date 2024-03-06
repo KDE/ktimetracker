@@ -94,7 +94,7 @@ MainWindow::~MainWindow()
 bool MainWindow::queryClose()
 {
     if (!m_quitRequested && qApp && !qApp->isSavingSession()) {
-        hide();
+        this->windowHandle()->hide();
         return false;
     }
 
