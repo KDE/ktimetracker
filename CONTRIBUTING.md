@@ -90,6 +90,7 @@ The rest consists of minor dialogs or actions.
 * Check why openFile() and saveFile() are commented out
 * Find out the practical differente between timetrackerstorage and file/icalformatkio
 * Remove all cyclic dependencies
+* Make it build for Windows again
 
 ## Notes
 

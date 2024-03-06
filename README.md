@@ -8,9 +8,11 @@
 
 [KTimeTracker](https://apps.kde.org/ktimetracker/) tracks time spent on various tasks. It is useful for tracking hours to be billed to different clients or just to find out what percentage of your day is spent playing Doom or reading Slashdot.
 
-You can install KTimeTracker on Linux via [Discover](appstream://org.kde.ktimetracker.desktop) or as a [flatpak on Flathub](https://flathub.org/apps/details/org.kde.ktimetracker). You can also install KTimeTracker (built with Qt 5) for [Windows](https://binary-factory.kde.org/job/KTimeTracker_Stable_win64/).
+You can install KTimeTracker on Linux via [Discover](appstream://org.kde.ktimetracker.desktop) or as a [Flatpak on Flathub](https://flathub.org/apps/org.kde.ktimetracker).
 
-<a href='https://flathub.org/apps/details/org.kde.ktimetracker'><img width='190px' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-i-en.png'/></a>
+For developers and bug reporters we provide [Flatpak Nightlies](https://cdn.kde.org/flatpak/ktimetracker-nightly/org.kde.ktimetracker.flatpakref).
+
+<a href='https://flathub.org/apps/org.kde.ktimetracker'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
 If you'd like to contribute to KTimeTracker, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
