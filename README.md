@@ -12,10 +12,7 @@ You can install KTimeTracker on Linux via [Discover](appstream://org.kde.ktimetr
 
 For developers and bug reporters we provide [Flatpak Nightlies](https://cdn.kde.org/flatpak/ktimetracker-nightly/org.kde.ktimetracker.flatpakref).
 
-The last Windows builds for KTimeTracker before the port for Qt6 are available:
-
-* [executable built with MSVC](https://invent.kde.org/pim/ktimetracker/-/jobs/1629409/artifacts/file/.kde-ci-packages/ktimetracker-kf5-265-windows-cl-msvc2019-x86_64.exe) ([full file list](https://invent.kde.org/pim/ktimetracker/-/jobs/1629409/artifacts/browse/.kde-ci-packages/))
-* [executable built with MinGW](https://invent.kde.org/pim/ktimetracker/-/jobs/1629410/artifacts/file/.kde-ci-packages/ktimetracker-kf5-265-windows-gcc-x86_64.exe) ([full file list](https://invent.kde.org/pim/ktimetracker/-/jobs/1629410/artifacts/browse/.kde-ci-packages/))
+The last Windows build for KTimeTracker before the port for Qt6 can be downloaded [here](https://invent.kde.org/pim/ktimetracker/-/jobs/1629409/artifacts/file/.kde-ci-packages/ktimetracker-kf5-265-windows-cl-msvc2019-x86_64.exe) ([full file list and checksum](https://invent.kde.org/pim/ktimetracker/-/jobs/1629409/artifacts/browse/.kde-ci-packages/))
 
 <a href='https://flathub.org/apps/org.kde.ktimetracker'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
