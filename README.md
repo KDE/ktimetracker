@@ -6,6 +6,8 @@
 
 # KTimeTracker
 
+![pipeline](https://invent.kde.org/pim/ktimetracker/badges/master/pipeline.svg?ignore_skipped=true)
+
 [KTimeTracker](https://apps.kde.org/ktimetracker/) tracks time spent on various tasks. It is useful for tracking hours to be billed to different clients or just to find out what percentage of your day is spent playing Doom or reading Slashdot.
 
 You can install KTimeTracker on Linux via [Discover](appstream://org.kde.ktimetracker.desktop) or as a [Flatpak on Flathub](https://flathub.org/apps/org.kde.ktimetracker).
