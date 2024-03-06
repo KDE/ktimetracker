@@ -24,7 +24,6 @@
 #include "ktimetracker.h"
 #include "ktimetrackerutility.h"
 #include "ktt_debug.h"
-#include "mainwindow.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
 #include "model/task.h"
@@ -1013,12 +1012,7 @@ void TimeTrackerWidget::saveAll()
 
 void TimeTrackerWidget::quit()
 {
-    auto *mainWindow = dynamic_cast<MainWindow *>(parent()->parent());
-    if (mainWindow) {
-        mainWindow->quit();
-    } else {
-        qCWarning(KTT_LOG) << "Cast to MainWindow failed";
-    }
+    qApp->quit();
 }
 
 bool TimeTrackerWidget::event(QEvent *event) // inherited from QWidget
