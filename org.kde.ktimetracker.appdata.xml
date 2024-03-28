@@ -10,6 +10,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>KTimeTracker</name>
+  <name xml:lang="ast">KTimeTracker</name>
   <name xml:lang="ca">KTimeTracker</name>
   <name xml:lang="ca-valencia">KTimeTracker</name>
   <name xml:lang="cs">KTimeTracker</name>
@@ -172,6 +173,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <screenshots>
     <screenshot type="default">
       <caption>KTimeTracker</caption>
+      <caption xml:lang="ast">KTimeTracker</caption>
       <caption xml:lang="ca">KTimeTracker</caption>
       <caption xml:lang="ca-valencia">KTimeTracker</caption>
       <caption xml:lang="cs">KTimeTracker</caption>
