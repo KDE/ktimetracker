@@ -8,7 +8,13 @@
 > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE">
 ]>
-
+<!--
+SPDX-FileCopyrightText: 2000-2004 Jonathan Singer
+SPDX-FileCopyrightText: 2004-2005 Mark Bucciarelli <mark@hubcapconsulting.com>
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
+SPDX-License-Identifier: GFDL-1.2-only
+-->
 <book id="ktimetracker" lang="&language;">
 
 <bookinfo id="ktimetrackerinfo">
@@ -880,8 +886,7 @@
 >Переклад українською: Юрій Чорноіван <email
 >yurchor@ukr.net</email
 ></para
-> 
-&underFDL; &underGPL; </chapter>
+> &underFDL; &underGPL; </chapter>
 
 <glossary id="glossary">
 <title
