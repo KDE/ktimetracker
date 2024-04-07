@@ -18,9 +18,8 @@
       "buildsystem": "cmake-ninja",
       "sources": [
         {
-          "type": "git",
-          "branch": "master",
-          "url": "https://invent.kde.org/pim/ktimetracker.git"
+          "type": "dir",
+          "path": "."
         }
       ]
     }
