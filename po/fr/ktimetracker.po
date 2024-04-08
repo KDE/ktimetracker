@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-04-08 00:38+0000\n"
 "PO-Revision-Date: 2021-09-25 09:46+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -199,19 +199,19 @@ msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
 msgstr "Impossible d'enregistrer le fichier iCalendar sous « %1 »."
 
-#: base/timetrackerwidget.cpp:139
+#: base/timetrackerwidget.cpp:138
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "Démarrer une &nouvelle session"
 
-#: base/timetrackerwidget.cpp:140
+#: base/timetrackerwidget.cpp:139
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "Démarre une nouvelle session"
 
-#: base/timetrackerwidget.cpp:142
+#: base/timetrackerwidget.cpp:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -221,19 +221,19 @@ msgstr ""
 "Ceci va remettre à zéro la durée de session de toutes les tâches, pour "
 "démarrer une nouvelle session sans affecter les totaux."
 
-#: base/timetrackerwidget.cpp:150
+#: base/timetrackerwidget.cpp:149
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "Modifier l'historique..."
 
-#: base/timetrackerwidget.cpp:151
+#: base/timetrackerwidget.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "Modifie l'historique de toutes les tâches du document actuel"
 
-#: base/timetrackerwidget.cpp:153
+#: base/timetrackerwidget.cpp:152
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -243,19 +243,19 @@ msgstr ""
 "Une fenêtre sera ouverte pour vous permettre de modifier les dates et heures "
 "de démarrage et d'arrêt des tâches ou d'y ajouter des commentaires."
 
-#: base/timetrackerwidget.cpp:163
+#: base/timetrackerwidget.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "&Ré-initialiser toutes les durées"
 
-#: base/timetrackerwidget.cpp:164
+#: base/timetrackerwidget.cpp:163
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "Ré-initialise toutes les durées"
 
-#: base/timetrackerwidget.cpp:166
+#: base/timetrackerwidget.cpp:165
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -265,19 +265,19 @@ msgstr ""
 "Ceci ré-initialisera les durées de session et les totaux à la valeur 0 pour "
 "toutes les tâches afin de repartir depuis le début."
 
-#: base/timetrackerwidget.cpp:173
+#: base/timetrackerwidget.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "&Démarrer"
 
-#: base/timetrackerwidget.cpp:174
+#: base/timetrackerwidget.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "Démarre le chronométrage pour la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:176
+#: base/timetrackerwidget.cpp:175
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -294,67 +294,67 @@ msgstr ""
 "double clic dessus avec le bouton gauche de la souris. Néanmoins, ceci "
 "arrêtera toutes les autres tâches."
 
-#: base/timetrackerwidget.cpp:190
+#: base/timetrackerwidget.cpp:189
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "Arrê&ter"
 
-#: base/timetrackerwidget.cpp:191
+#: base/timetrackerwidget.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "Arrête le chronométrage de la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:192
+#: base/timetrackerwidget.cpp:191
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "Arrête le chronométrage de la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:199
+#: base/timetrackerwidget.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "Focus sur la barre de recherche"
 
-#: base/timetrackerwidget.cpp:200
+#: base/timetrackerwidget.cpp:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "Donne le focus à la barre de recherche"
 
-#: base/timetrackerwidget.cpp:201
+#: base/timetrackerwidget.cpp:200
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "Donne le focus à la barre de recherche"
 
-#: base/timetrackerwidget.cpp:208
+#: base/timetrackerwidget.cpp:207
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "&Arrêter tous les chronomètres"
 
-#: base/timetrackerwidget.cpp:209
+#: base/timetrackerwidget.cpp:208
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "Arrête tous les chronomètres actifs"
 
-#: base/timetrackerwidget.cpp:210
+#: base/timetrackerwidget.cpp:209
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "Arrête tous les chronomètres actifs"
 
-#: base/timetrackerwidget.cpp:218
+#: base/timetrackerwidget.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "Surveiller les applications actives"
 
-#: base/timetrackerwidget.cpp:220
+#: base/timetrackerwidget.cpp:219
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -364,7 +364,7 @@ msgstr ""
 "Crée automatiquement des tâches et les met à jour lors d'un changement de "
 "focus de la fenêtre actuelle."
 
-#: base/timetrackerwidget.cpp:223
+#: base/timetrackerwidget.cpp:222
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -377,56 +377,56 @@ msgstr ""
 "portera le même nom que le titre de la fenêtre. Si une tâche existante "
 "possède le même nom, alors celle-ci sera démarrée."
 
-#: base/timetrackerwidget.cpp:234
+#: base/timetrackerwidget.cpp:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "&Nouvelle tâche..."
 
-#: base/timetrackerwidget.cpp:235
+#: base/timetrackerwidget.cpp:234
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "Crée une nouvelle tâche au niveau le plus élevé"
 
-#: base/timetrackerwidget.cpp:236
+#: base/timetrackerwidget.cpp:235
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "Ceci créera une nouvelle tâche au niveau le plus élevé."
 
-#: base/timetrackerwidget.cpp:244
+#: base/timetrackerwidget.cpp:243
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "Nouvelle &sous-tâche..."
 
-#: base/timetrackerwidget.cpp:245
+#: base/timetrackerwidget.cpp:244
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "Crée une nouvelle sous-tâche au niveau de la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:246
+#: base/timetrackerwidget.cpp:245
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr ""
 "Ceci créera une nouvelle sous-tâche au niveau de la tâche sélectionnée."
 
-#: base/timetrackerwidget.cpp:254
+#: base/timetrackerwidget.cpp:253
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "&Supprimer"
 
-#: base/timetrackerwidget.cpp:255
+#: base/timetrackerwidget.cpp:254
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "Supprime la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:256
+#: base/timetrackerwidget.cpp:255
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
@@ -434,19 +434,19 @@ msgstr ""
 "Ceci supprimera la ou les tâches(s) sélectionnée(s) et toutes leurs sous-"
 "tâches."
 
-#: base/timetrackerwidget.cpp:264
+#: base/timetrackerwidget.cpp:263
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
 msgstr "&Propriétés"
 
-#: base/timetrackerwidget.cpp:265
+#: base/timetrackerwidget.cpp:264
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
 msgstr "Modifie le nom ou la description de la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:267
+#: base/timetrackerwidget.cpp:266
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -456,19 +456,19 @@ msgstr ""
 "Ceci ouvrira une boîte de dialogue où vous pourrez modifier les paramètres "
 "de la tâche sélectionnée."
 
-#: base/timetrackerwidget.cpp:276
+#: base/timetrackerwidget.cpp:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
 msgstr "Modifier la durée..."
 
-#: base/timetrackerwidget.cpp:277
+#: base/timetrackerwidget.cpp:276
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
 msgstr "Modifie la durée de la tâche sélectionnée"
 
-#: base/timetrackerwidget.cpp:279
+#: base/timetrackerwidget.cpp:278
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -478,61 +478,61 @@ msgstr ""
 "Ceci ouvrira une boîte de dialogue où vous pourrez modifier les durées de la "
 "tâche sélectionnée."
 
-#: base/timetrackerwidget.cpp:288
+#: base/timetrackerwidget.cpp:287
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "&Marquer comme « Terminée »"
 
-#: base/timetrackerwidget.cpp:296
+#: base/timetrackerwidget.cpp:295
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "&Marquer comme « Inachevée »"
 
-#: base/timetrackerwidget.cpp:304
+#: base/timetrackerwidget.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
 msgstr "&Exporter..."
 
-#: base/timetrackerwidget.cpp:311
+#: base/timetrackerwidget.cpp:310
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "Importer les tâches depuis &Planner..."
 
-#: base/timetrackerwidget.cpp:323
+#: base/timetrackerwidget.cpp:322
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Afficher la barre de recherche"
 
-#: base/timetrackerwidget.cpp:458
+#: base/timetrackerwidget.cpp:457
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Comportement"
 
-#: base/timetrackerwidget.cpp:463
+#: base/timetrackerwidget.cpp:462
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Apparence"
 
-#: base/timetrackerwidget.cpp:468
+#: base/timetrackerwidget.cpp:467
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Stockage"
 
-#: base/timetrackerwidget.cpp:505
+#: base/timetrackerwidget.cpp:504
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Nouvelle tâche"
 
-#: base/timetrackerwidget.cpp:584
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -542,7 +542,7 @@ msgstr ""
 "Il n'y a aucun historique pour le moment. Démarrez ou arrêtez une tâche et "
 "vous aurez alors des informations dans l'historique."
 
-#: base/timetrackerwidget.cpp:594
+#: base/timetrackerwidget.cpp:593
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -551,62 +551,62 @@ msgstr ""
 "Voulez-vous vraiment ré-initialiser la durée de toutes les tâches à la "
 "valeur zéro ? Ceci supprimera tout l'historique."
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:595
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Confirmation nécessaire"
 
-#: base/timetrackerwidget.cpp:597
+#: base/timetrackerwidget.cpp:596
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Ré-initialiser toutes les durées"
 
-#: base/timetrackerwidget.cpp:786
+#: base/timetrackerwidget.cpp:785
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 "L'enregistrement a échoué, probablement car le fichier n'a pu être "
 "verrouillé."
 
-#: base/timetrackerwidget.cpp:788
+#: base/timetrackerwidget.cpp:787
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Impossible de modifier une ressource du calendrier."
 
-#: base/timetrackerwidget.cpp:790
+#: base/timetrackerwidget.cpp:789
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Plus de mémoire disponible. Impossible de créer l'objet."
 
-#: base/timetrackerwidget.cpp:792
+#: base/timetrackerwidget.cpp:791
 #, kde-format
 msgid "UID not found."
 msgstr "Impossible de trouver l'« UID »."
 
-#: base/timetrackerwidget.cpp:794
+#: base/timetrackerwidget.cpp:793
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Date incorrecte. Le format est AAAA-MM-JJ."
 
-#: base/timetrackerwidget.cpp:796
+#: base/timetrackerwidget.cpp:795
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Heure incorrecte. Le format est AAAA-MM-JJTHH:MM:SS"
 
-#: base/timetrackerwidget.cpp:798
+#: base/timetrackerwidget.cpp:797
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Durée non valable de la tâche. Celle-ci doit être supérieure à zéro."
 
-#: base/timetrackerwidget.cpp:800
+#: base/timetrackerwidget.cpp:799
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Numéro d'erreur non valable : %1"
 
 # unreviewed-context
-#: base/timetrackerwidget.cpp:1029
+#: base/timetrackerwidget.cpp:1023
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -618,7 +618,7 @@ msgstr ""
 "temps. Commencez par créer votre première tâche en saisissant son nom dans "
 "le champ « Chercher ou ajouter une tâche »."
 
-#: base/timetrackerwidget.cpp:1036
+#: base/timetrackerwidget.cpp:1030
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."

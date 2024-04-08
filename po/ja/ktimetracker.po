@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-04-08 00:38+0000\n"
 "PO-Revision-Date: 2012-01-28 16:12-0800\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
@@ -196,21 +196,21 @@ msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
-#: base/timetrackerwidget.cpp:139
+#: base/timetrackerwidget.cpp:138
 #, fuzzy, kde-format
 #| msgid "Start &New Session"
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "新しいセッションを開始(&N)"
 
-#: base/timetrackerwidget.cpp:140
+#: base/timetrackerwidget.cpp:139
 #, fuzzy, kde-format
 #| msgid "Starts a new session"
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "新しいセッションを開始"
 
-#: base/timetrackerwidget.cpp:142
+#: base/timetrackerwidget.cpp:141
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will reset the session time to 0 for all tasks, to start a new "
@@ -223,21 +223,21 @@ msgstr ""
 "すべてのタスクのセッション時間を 0 にリセットして新しいセッションを開始しま"
 "す。合計時間はリセットされません。"
 
-#: base/timetrackerwidget.cpp:150
+#: base/timetrackerwidget.cpp:149
 #, fuzzy, kde-format
 #| msgid "Edit History..."
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "履歴を編集..."
 
-#: base/timetrackerwidget.cpp:151
+#: base/timetrackerwidget.cpp:150
 #, fuzzy, kde-format
 #| msgid "Edits history of all tasks of the current document"
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "現在の文書のすべてのタスクの履歴を編集"
 
-#: base/timetrackerwidget.cpp:153
+#: base/timetrackerwidget.cpp:152
 #, fuzzy, kde-format
 #| msgid ""
 #| "A window will be opened where you can change start and stop times of "
@@ -250,21 +250,21 @@ msgstr ""
 "別のウィンドウが開き、そこでタスクの開始時間、終了時間、コメントを変更できま"
 "す。"
 
-#: base/timetrackerwidget.cpp:163
+#: base/timetrackerwidget.cpp:162
 #, fuzzy, kde-format
 #| msgid "&Reset All Times"
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "すべての時間をリセット(&R)"
 
-#: base/timetrackerwidget.cpp:164
+#: base/timetrackerwidget.cpp:163
 #, fuzzy, kde-format
 #| msgid "Resets all times"
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "すべての時間をリセット"
 
-#: base/timetrackerwidget.cpp:166
+#: base/timetrackerwidget.cpp:165
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will reset the session and total time to 0 for all tasks, to restart "
@@ -277,21 +277,21 @@ msgstr ""
 "すべてのタスクのセッション時間と合計時間を 0 にリセットして最初から計測を開始"
 "します。"
 
-#: base/timetrackerwidget.cpp:173
+#: base/timetrackerwidget.cpp:172
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "開始(&S)"
 
-#: base/timetrackerwidget.cpp:174
+#: base/timetrackerwidget.cpp:173
 #, fuzzy, kde-format
 #| msgid "Starts timing for selected task"
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "選択したタスクの時間計測を開始"
 
-#: base/timetrackerwidget.cpp:176
+#: base/timetrackerwidget.cpp:175
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will start timing for the selected task.\n"
@@ -313,77 +313,77 @@ msgstr ""
 "タスクを左ボタンでダブルクリックして計測を開始することもできますが、その場合"
 "は他のタスクの計測は停止します。"
 
-#: base/timetrackerwidget.cpp:190
+#: base/timetrackerwidget.cpp:189
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "停止(&T)"
 
-#: base/timetrackerwidget.cpp:191
+#: base/timetrackerwidget.cpp:190
 #, fuzzy, kde-format
 #| msgid "Stops timing of the selected task"
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "選択したタスクの時間計測を停止"
 
-#: base/timetrackerwidget.cpp:192
+#: base/timetrackerwidget.cpp:191
 #, fuzzy, kde-format
 #| msgid "Stops timing of the selected task"
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "選択したタスクの時間計測を停止"
 
-#: base/timetrackerwidget.cpp:199
+#: base/timetrackerwidget.cpp:198
 #, fuzzy, kde-format
 #| msgid "Focus on Searchbar"
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "検索バーをフォーカス"
 
-#: base/timetrackerwidget.cpp:200
+#: base/timetrackerwidget.cpp:199
 #, fuzzy, kde-format
 #| msgid "Sets the focus on the searchbar"
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "検索フィールドにカーソルを合わせます"
 
-#: base/timetrackerwidget.cpp:201
+#: base/timetrackerwidget.cpp:200
 #, fuzzy, kde-format
 #| msgid "Sets the focus on the searchbar"
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "検索フィールドにカーソルを合わせます"
 
-#: base/timetrackerwidget.cpp:208
+#: base/timetrackerwidget.cpp:207
 #, fuzzy, kde-format
 #| msgid "Stop &All Timers"
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "すべてのタイマーを停止(&A)"
 
-#: base/timetrackerwidget.cpp:209
+#: base/timetrackerwidget.cpp:208
 #, fuzzy, kde-format
 #| msgid "Stops all of the active timers"
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "実行中のすべてのタイマーを停止"
 
-#: base/timetrackerwidget.cpp:210
+#: base/timetrackerwidget.cpp:209
 #, fuzzy, kde-format
 #| msgid "Stops all of the active timers"
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "実行中のすべてのタイマーを停止"
 
-#: base/timetrackerwidget.cpp:218
+#: base/timetrackerwidget.cpp:217
 #, fuzzy, kde-format
 #| msgid "Track Active Applications"
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "アクティブなアプリケーションを追跡"
 
-#: base/timetrackerwidget.cpp:220
+#: base/timetrackerwidget.cpp:219
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto-creates and updates tasks when the focus of the current window has "
@@ -395,7 +395,7 @@ msgid ""
 msgstr ""
 "新しいウィンドウにフォーカスが移ったときに自動的にタスクを作成/更新します"
 
-#: base/timetrackerwidget.cpp:223
+#: base/timetrackerwidget.cpp:222
 #, fuzzy, kde-format
 #| msgid ""
 #| "If the focus of a window changes for the first time when this action is "
@@ -412,83 +412,83 @@ msgstr ""
 "に、そのウィンドウのタイトルを名前とするタスクが自動的に作成され、時間計測が"
 "開始されます。タスクが既に存在する場合は、時間計測が開始されます。"
 
-#: base/timetrackerwidget.cpp:234
+#: base/timetrackerwidget.cpp:233
 #, fuzzy, kde-format
 #| msgid "&New Task..."
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "新しいタスク(&N)..."
 
-#: base/timetrackerwidget.cpp:235
+#: base/timetrackerwidget.cpp:234
 #, fuzzy, kde-format
 #| msgid "Creates new top level task"
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "新しいトップレベルタスクを作成"
 
-#: base/timetrackerwidget.cpp:236
+#: base/timetrackerwidget.cpp:235
 #, fuzzy, kde-format
 #| msgid "This will create a new top level task."
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "新しいトップレベルのタスクを作成します。"
 
-#: base/timetrackerwidget.cpp:244
+#: base/timetrackerwidget.cpp:243
 #, fuzzy, kde-format
 #| msgid "New &Subtask..."
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "新しいサブタスク(&S)..."
 
-#: base/timetrackerwidget.cpp:245
+#: base/timetrackerwidget.cpp:244
 #, fuzzy, kde-format
 #| msgid "Creates a new subtask to the current selected task"
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "現在選択されているタスクに新しいサブタスクを追加"
 
-#: base/timetrackerwidget.cpp:246
+#: base/timetrackerwidget.cpp:245
 #, fuzzy, kde-format
 #| msgid "This will create a new subtask to the current selected task."
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr "現在選択されているタスクに新しいサブタスクを追加します。"
 
-#: base/timetrackerwidget.cpp:254
+#: base/timetrackerwidget.cpp:253
 #, fuzzy, kde-format
 #| msgid "&Delete"
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "削除(&D)"
 
-#: base/timetrackerwidget.cpp:255
+#: base/timetrackerwidget.cpp:254
 #, fuzzy, kde-format
 #| msgid "Deletes selected task"
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "選択したタスクを削除"
 
-#: base/timetrackerwidget.cpp:256
+#: base/timetrackerwidget.cpp:255
 #, fuzzy, kde-format
 #| msgid "This will delete the selected task(s) and all subtasks."
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
 msgstr "選択したタスクとそのサブタスクをすべて削除します。"
 
-#: base/timetrackerwidget.cpp:264
+#: base/timetrackerwidget.cpp:263
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:265
+#: base/timetrackerwidget.cpp:264
 #, fuzzy, kde-format
 #| msgid "Edits name or times for selected task"
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
 msgstr "選択したタスクの名前や時間を編集"
 
-#: base/timetrackerwidget.cpp:267
+#: base/timetrackerwidget.cpp:266
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will bring up a dialog box where you may edit the parameters for the "
@@ -499,21 +499,21 @@ msgid ""
 "selected task."
 msgstr "選択したタスクのパラメータをダイアログボックスで編集します。"
 
-#: base/timetrackerwidget.cpp:276
+#: base/timetrackerwidget.cpp:275
 #, fuzzy, kde-format
 #| msgid "Edit Times"
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
 msgstr "時間を編集"
 
-#: base/timetrackerwidget.cpp:277
+#: base/timetrackerwidget.cpp:276
 #, fuzzy, kde-format
 #| msgid "Edits name or times for selected task"
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
 msgstr "選択したタスクの名前や時間を編集"
 
-#: base/timetrackerwidget.cpp:279
+#: base/timetrackerwidget.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will bring up a dialog box where you may edit the parameters for the "
@@ -524,67 +524,67 @@ msgid ""
 "selected task."
 msgstr "選択したタスクのパラメータをダイアログボックスで編集します。"
 
-#: base/timetrackerwidget.cpp:288
+#: base/timetrackerwidget.cpp:287
 #, fuzzy, kde-format
 #| msgid "&Mark as Complete"
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "完了としてマーク(&M)"
 
-#: base/timetrackerwidget.cpp:296
+#: base/timetrackerwidget.cpp:295
 #, fuzzy, kde-format
 #| msgid "&Mark as Incomplete"
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "未完了としてマーク(&M)"
 
-#: base/timetrackerwidget.cpp:304
+#: base/timetrackerwidget.cpp:303
 #, fuzzy, kde-format
 #| msgid "&Export"
 msgctxt "@action:inmenu"
 msgid "&Export..."
 msgstr "エクスポート(&E)"
 
-#: base/timetrackerwidget.cpp:311
+#: base/timetrackerwidget.cpp:310
 #, fuzzy, kde-format
 #| msgid "Import Tasks From &Planner..."
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "Planner からタスクをインポート(&P)..."
 
-#: base/timetrackerwidget.cpp:323
+#: base/timetrackerwidget.cpp:322
 #, fuzzy, kde-format
 #| msgid "Show Searchbar"
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "検索バーを表示"
 
-#: base/timetrackerwidget.cpp:458
+#: base/timetrackerwidget.cpp:457
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:463
+#: base/timetrackerwidget.cpp:462
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:468
+#: base/timetrackerwidget.cpp:467
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:505
+#: base/timetrackerwidget.cpp:504
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "新しいタスク"
 
-#: base/timetrackerwidget.cpp:584
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -593,7 +593,7 @@ msgid ""
 msgstr ""
 "まだ履歴はありません。タスクの時間計測を開始/停止すると、履歴が作成されます。"
 
-#: base/timetrackerwidget.cpp:594
+#: base/timetrackerwidget.cpp:593
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -602,61 +602,61 @@ msgstr ""
 "本当にすべてのタスクの時間を 0 にリセットしますか？履歴のすべてが削除されま"
 "す。"
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:595
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "確認が必要です"
 
-#: base/timetrackerwidget.cpp:597
+#: base/timetrackerwidget.cpp:596
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "すべての時間をリセット"
 
-#: base/timetrackerwidget.cpp:786
+#: base/timetrackerwidget.cpp:785
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "保存に失敗しました。おそらくファイルをロックできなかったためです。"
 
-#: base/timetrackerwidget.cpp:788
+#: base/timetrackerwidget.cpp:787
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "カレンダーリソースを変更できませんでした。"
 
-#: base/timetrackerwidget.cpp:790
+#: base/timetrackerwidget.cpp:789
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "メモリ不足--オブジェクトを作成できませんでした。"
 
-#: base/timetrackerwidget.cpp:792
+#: base/timetrackerwidget.cpp:791
 #, kde-format
 msgid "UID not found."
 msgstr "UID が見つかりません。"
 
-#: base/timetrackerwidget.cpp:794
+#: base/timetrackerwidget.cpp:793
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "無効な時間--フォーマットは YYYY-MM-DDTHH:MM:SS です。"
 
-#: base/timetrackerwidget.cpp:796
+#: base/timetrackerwidget.cpp:795
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "無効な時間--フォーマットは YYYY-MM-DDTHH:MM:SS です。"
 
-#: base/timetrackerwidget.cpp:798
+#: base/timetrackerwidget.cpp:797
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "無効なタスクの継続時間--0 より大きくしてください。"
 
-#: base/timetrackerwidget.cpp:800
+#: base/timetrackerwidget.cpp:799
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "無効なエラー番号: %1"
 
-#: base/timetrackerwidget.cpp:1029
+#: base/timetrackerwidget.cpp:1023
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -672,7 +672,7 @@ msgstr ""
 "索/追加」というメッセージが表示されているフィールドにタスクの名前を入力してタ"
 "スクを作成してください。"
 
-#: base/timetrackerwidget.cpp:1036
+#: base/timetrackerwidget.cpp:1030
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"

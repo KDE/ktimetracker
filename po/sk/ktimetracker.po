@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-04-08 00:38+0000\n"
 "PO-Revision-Date: 2021-11-15 17:54+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -194,21 +194,21 @@ msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
-#: base/timetrackerwidget.cpp:139
+#: base/timetrackerwidget.cpp:138
 #, fuzzy, kde-format
 #| msgid "Start &New Session"
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "Spustiť nové sedenie"
 
-#: base/timetrackerwidget.cpp:140
+#: base/timetrackerwidget.cpp:139
 #, fuzzy, kde-format
 #| msgid "Starts a new session"
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "Spustí nové sedenie"
 
-#: base/timetrackerwidget.cpp:142
+#: base/timetrackerwidget.cpp:141
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will reset the session time to 0 for all tasks, to start a new "
@@ -221,21 +221,21 @@ msgstr ""
 "Toto vynuluje čas sedenia na 0 pre všetky úlohy, pre štart nového sedenia, "
 "bez ovplivnenia celku."
 
-#: base/timetrackerwidget.cpp:150
+#: base/timetrackerwidget.cpp:149
 #, fuzzy, kde-format
 #| msgid "Edit History..."
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "Upraviť históriu"
 
-#: base/timetrackerwidget.cpp:151
+#: base/timetrackerwidget.cpp:150
 #, fuzzy, kde-format
 #| msgid "Edits history of all tasks of the current document"
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "Upraví históriu všetkých úloh aktuálneho dokumentu"
 
-#: base/timetrackerwidget.cpp:153
+#: base/timetrackerwidget.cpp:152
 #, fuzzy, kde-format
 #| msgid ""
 #| "A window will be opened where you can change start and stop times of "
@@ -248,21 +248,21 @@ msgstr ""
 "Otvorí sa okno, v ktorom môžete zmeniť čas spustenia a ukončenia úloh alebo "
 "pridať komentár k nim."
 
-#: base/timetrackerwidget.cpp:163
+#: base/timetrackerwidget.cpp:162
 #, fuzzy, kde-format
 #| msgid "&Reset All Times"
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "&Vynulovať všetky časy"
 
-#: base/timetrackerwidget.cpp:164
+#: base/timetrackerwidget.cpp:163
 #, fuzzy, kde-format
 #| msgid "Resets all times"
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "Vynuluje všetky časy"
 
-#: base/timetrackerwidget.cpp:166
+#: base/timetrackerwidget.cpp:165
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will reset the session and total time to 0 for all tasks, to restart "
@@ -275,21 +275,21 @@ msgstr ""
 "Toto vynuluje čas sedenia a celkový čas na 0 pre všetky úlohy, pre nové "
 "spustenie od začiatku."
 
-#: base/timetrackerwidget.cpp:173
+#: base/timetrackerwidget.cpp:172
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "Spustiť"
 
-#: base/timetrackerwidget.cpp:174
+#: base/timetrackerwidget.cpp:173
 #, fuzzy, kde-format
 #| msgid "Starts timing for selected task"
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "Začne meraťť čas vybranej úlohy"
 
-#: base/timetrackerwidget.cpp:176
+#: base/timetrackerwidget.cpp:175
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will start timing for the selected task.\n"
@@ -311,77 +311,77 @@ msgstr ""
 "Spustiť meranie času úloh môžete aj dvojitým kliknutím ľavým tlačidlom myši "
 "na danej úlohe. To ale zastaví meranie času ostatných úloh."
 
-#: base/timetrackerwidget.cpp:190
+#: base/timetrackerwidget.cpp:189
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "Zastaviť"
 
-#: base/timetrackerwidget.cpp:191
+#: base/timetrackerwidget.cpp:190
 #, fuzzy, kde-format
 #| msgid "Stops timing of the selected task"
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "Zastaví meranie času vybranej úlohy"
 
-#: base/timetrackerwidget.cpp:192
+#: base/timetrackerwidget.cpp:191
 #, fuzzy, kde-format
 #| msgid "Stops timing of the selected task"
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "Zastaví meranie času vybranej úlohy"
 
-#: base/timetrackerwidget.cpp:199
+#: base/timetrackerwidget.cpp:198
 #, fuzzy, kde-format
 #| msgid "Focus on Searchbar"
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "Zameranie na vyhľadávací panel"
 
-#: base/timetrackerwidget.cpp:200
+#: base/timetrackerwidget.cpp:199
 #, fuzzy, kde-format
 #| msgid "Sets the focus on the searchbar"
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "Nastaví zameranie na vyhľadávací panel"
 
-#: base/timetrackerwidget.cpp:201
+#: base/timetrackerwidget.cpp:200
 #, fuzzy, kde-format
 #| msgid "Sets the focus on the searchbar"
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "Nastaví zameranie na vyhľadávací panel"
 
-#: base/timetrackerwidget.cpp:208
+#: base/timetrackerwidget.cpp:207
 #, fuzzy, kde-format
 #| msgid "Stop &All Timers"
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "Z&astaviť všetky časovače"
 
-#: base/timetrackerwidget.cpp:209
+#: base/timetrackerwidget.cpp:208
 #, fuzzy, kde-format
 #| msgid "Stops all of the active timers"
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "Zastaví všetky aktívne časovače"
 
-#: base/timetrackerwidget.cpp:210
+#: base/timetrackerwidget.cpp:209
 #, fuzzy, kde-format
 #| msgid "Stops all of the active timers"
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "Zastaví všetky aktívne časovače"
 
-#: base/timetrackerwidget.cpp:218
+#: base/timetrackerwidget.cpp:217
 #, fuzzy, kde-format
 #| msgid "Track Active Applications"
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "Sledovať aktívne aplikácie"
 
-#: base/timetrackerwidget.cpp:220
+#: base/timetrackerwidget.cpp:219
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto-creates and updates tasks when the focus of the current window has "
@@ -394,7 +394,7 @@ msgstr ""
 "Automaticky vytvorí a aktualizuje úlohy, ak sa sa zmenilo aktuálne aktívne "
 "okno. "
 
-#: base/timetrackerwidget.cpp:223
+#: base/timetrackerwidget.cpp:222
 #, fuzzy, kde-format
 #| msgid ""
 #| "If the focus of a window changes for the first time when this action is "
@@ -411,83 +411,83 @@ msgstr ""
 "bude vytvorená nová úloha s titulkom okna ako jej názov a spustí sa. Ak už "
 "existuje taká úloha, bude spustená."
 
-#: base/timetrackerwidget.cpp:234
+#: base/timetrackerwidget.cpp:233
 #, fuzzy, kde-format
 #| msgid "&New Task..."
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "Nová úloha..."
 
-#: base/timetrackerwidget.cpp:235
+#: base/timetrackerwidget.cpp:234
 #, fuzzy, kde-format
 #| msgid "Creates new top level task"
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "Vytvorí novú úlohu najvyššej úrovne"
 
-#: base/timetrackerwidget.cpp:236
+#: base/timetrackerwidget.cpp:235
 #, fuzzy, kde-format
 #| msgid "This will create a new top level task."
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "Toto vytvorí novú úlohu najvyššej úrovne"
 
-#: base/timetrackerwidget.cpp:244
+#: base/timetrackerwidget.cpp:243
 #, fuzzy, kde-format
 #| msgid "New &Subtask..."
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "Nová &pod-úloha..."
 
-#: base/timetrackerwidget.cpp:245
+#: base/timetrackerwidget.cpp:244
 #, fuzzy, kde-format
 #| msgid "Creates a new subtask to the current selected task"
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "Vytvorí novú pod-úlohu k aktuálne vybranej úlohe."
 
-#: base/timetrackerwidget.cpp:246
+#: base/timetrackerwidget.cpp:245
 #, fuzzy, kde-format
 #| msgid "This will create a new subtask to the current selected task."
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr "Toto vytvorí novú pod-úlohu k aktuálne vybranej úlohe."
 
-#: base/timetrackerwidget.cpp:254
+#: base/timetrackerwidget.cpp:253
 #, fuzzy, kde-format
 #| msgid "&Delete"
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "O&dstrániť"
 
-#: base/timetrackerwidget.cpp:255
+#: base/timetrackerwidget.cpp:254
 #, fuzzy, kde-format
 #| msgid "Deletes selected task"
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "Vymaže vybrané úlohy"
 
-#: base/timetrackerwidget.cpp:256
+#: base/timetrackerwidget.cpp:255
 #, fuzzy, kde-format
 #| msgid "This will delete the selected task(s) and all subtasks."
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
 msgstr "Toto odstráni vybranú úlohu(y) a všetky pod-úlohy."
 
-#: base/timetrackerwidget.cpp:264
+#: base/timetrackerwidget.cpp:263
 #, fuzzy, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
 msgstr "&Vlastnosti"
 
-#: base/timetrackerwidget.cpp:265
+#: base/timetrackerwidget.cpp:264
 #, fuzzy, kde-format
 #| msgid "Edits name or times for selected task"
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
 msgstr "Upraví meno alebo časy vybranej úlohy"
 
-#: base/timetrackerwidget.cpp:267
+#: base/timetrackerwidget.cpp:266
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will bring up a dialog box where you may edit the parameters for the "
@@ -498,21 +498,21 @@ msgid ""
 "selected task."
 msgstr "Toto zobrazí dialóg, kde je možné upraviť parametre vybranej úlohy."
 
-#: base/timetrackerwidget.cpp:276
+#: base/timetrackerwidget.cpp:275
 #, fuzzy, kde-format
 #| msgid "Edit Times"
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
 msgstr "Upraviť časy"
 
-#: base/timetrackerwidget.cpp:277
+#: base/timetrackerwidget.cpp:276
 #, fuzzy, kde-format
 #| msgid "Edits name or times for selected task"
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
 msgstr "Upraví meno alebo časy vybranej úlohy"
 
-#: base/timetrackerwidget.cpp:279
+#: base/timetrackerwidget.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will bring up a dialog box where you may edit the parameters for the "
@@ -523,66 +523,66 @@ msgid ""
 "selected task."
 msgstr "Toto zobrazí dialóg, kde je možné upraviť parametre vybranej úlohy."
 
-#: base/timetrackerwidget.cpp:288
+#: base/timetrackerwidget.cpp:287
 #, fuzzy, kde-format
 #| msgid "&Mark as Complete"
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "&Označiť ako dokončené"
 
-#: base/timetrackerwidget.cpp:296
+#: base/timetrackerwidget.cpp:295
 #, fuzzy, kde-format
 #| msgid "&Mark as Incomplete"
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "&Označiť ako nedokončené"
 
-#: base/timetrackerwidget.cpp:304
+#: base/timetrackerwidget.cpp:303
 #, fuzzy, kde-format
 #| msgid "&Export"
 msgctxt "@action:inmenu"
 msgid "&Export..."
 msgstr "&Exportovať..."
 
-#: base/timetrackerwidget.cpp:311
+#: base/timetrackerwidget.cpp:310
 #, fuzzy, kde-format
 #| msgid "Import Tasks From &Planner..."
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "Importovať úlohy z &plánovača..."
 
-#: base/timetrackerwidget.cpp:323
+#: base/timetrackerwidget.cpp:322
 #, fuzzy, kde-format
 #| msgid "Show Searchbar"
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Zobraziť panel vyhľadávania"
 
-#: base/timetrackerwidget.cpp:458
+#: base/timetrackerwidget.cpp:457
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Správanie"
 
-#: base/timetrackerwidget.cpp:463
+#: base/timetrackerwidget.cpp:462
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: base/timetrackerwidget.cpp:468
+#: base/timetrackerwidget.cpp:467
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Úložisko"
 
-#: base/timetrackerwidget.cpp:505
+#: base/timetrackerwidget.cpp:504
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Nová úloha"
 
-#: base/timetrackerwidget.cpp:584
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -592,7 +592,7 @@ msgstr ""
 "Zatiaľ nie je žiadna história. Spustite a zastavte úlohu a budete mať "
 "položku v histórii."
 
-#: base/timetrackerwidget.cpp:594
+#: base/timetrackerwidget.cpp:593
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -601,61 +601,61 @@ msgstr ""
 "Naozaj chcete resetovať čas pre všetky úlohy na nulu? Tým dôjde k vymazaniu "
 "celej histórie."
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:595
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Vyžaduje sa potvrdenie"
 
-#: base/timetrackerwidget.cpp:597
+#: base/timetrackerwidget.cpp:596
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Vynulovať všetky časy"
 
-#: base/timetrackerwidget.cpp:786
+#: base/timetrackerwidget.cpp:785
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "Uloženie zlyhalo, najpravdepodobnejšie pretože súbor sa nedá zamknúť."
 
-#: base/timetrackerwidget.cpp:788
+#: base/timetrackerwidget.cpp:787
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Nedá sa zmeniť zdroj kalendára."
 
-#: base/timetrackerwidget.cpp:790
+#: base/timetrackerwidget.cpp:789
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Nedostatok pamäte - nedá sa vytvoriť objekt."
 
-#: base/timetrackerwidget.cpp:792
+#: base/timetrackerwidget.cpp:791
 #, kde-format
 msgid "UID not found."
 msgstr "UID nenájdený."
 
-#: base/timetrackerwidget.cpp:794
+#: base/timetrackerwidget.cpp:793
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Neplatný formát dátumu je YYYY-MM-DD."
 
-#: base/timetrackerwidget.cpp:796
+#: base/timetrackerwidget.cpp:795
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Neplatný formát času je YYYY-MM-DDTHH:MM:SS."
 
-#: base/timetrackerwidget.cpp:798
+#: base/timetrackerwidget.cpp:797
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Neplatná dĺžka úlohy - musí byť väčšia ako nula."
 
-#: base/timetrackerwidget.cpp:800
+#: base/timetrackerwidget.cpp:799
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Neplatné číslo chyby: %1"
 
-#: base/timetrackerwidget.cpp:1029
+#: base/timetrackerwidget.cpp:1023
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -671,7 +671,7 @@ msgstr ""
 "je začať s vytvorením vašej prvej úlohy - zadajte ju do poľa, kde uvidíte "
 "\"hľadať alebo pridať úlohu\"."
 
-#: base/timetrackerwidget.cpp:1036
+#: base/timetrackerwidget.cpp:1030
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"

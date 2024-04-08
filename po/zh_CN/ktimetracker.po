@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-04-08 00:38+0000\n"
 "PO-Revision-Date: 2024-03-30 19:37\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -170,19 +170,19 @@ msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
 msgstr "无法将 iCalendar 文件另存为“%1”。"
 
-#: base/timetrackerwidget.cpp:139
+#: base/timetrackerwidget.cpp:138
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "启动新会话(&N)"
 
-#: base/timetrackerwidget.cpp:140
+#: base/timetrackerwidget.cpp:139
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "启动一个新会话"
 
-#: base/timetrackerwidget.cpp:142
+#: base/timetrackerwidget.cpp:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -191,19 +191,19 @@ msgid ""
 msgstr ""
 "此操作将把所有任务的会话时间设为 0，并在不影响总时间的情况下启动新会话。"
 
-#: base/timetrackerwidget.cpp:150
+#: base/timetrackerwidget.cpp:149
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "编辑历史..."
 
-#: base/timetrackerwidget.cpp:151
+#: base/timetrackerwidget.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "编辑当前文档下所有任务的历史记录"
 
-#: base/timetrackerwidget.cpp:153
+#: base/timetrackerwidget.cpp:152
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -211,19 +211,19 @@ msgid ""
 "or add a comment to them."
 msgstr "此按钮将打开一个窗口，供您更改任务的开始和停止时间，或添加注释。"
 
-#: base/timetrackerwidget.cpp:163
+#: base/timetrackerwidget.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "重置所有时间(&R)"
 
-#: base/timetrackerwidget.cpp:164
+#: base/timetrackerwidget.cpp:163
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "重置所有时间"
 
-#: base/timetrackerwidget.cpp:166
+#: base/timetrackerwidget.cpp:165
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -231,19 +231,19 @@ msgid ""
 "from scratch."
 msgstr "此按钮将重置会话并把所有任务的总计时间重置为 0，再从头开始。"
 
-#: base/timetrackerwidget.cpp:173
+#: base/timetrackerwidget.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "开始(&S)"
 
-#: base/timetrackerwidget.cpp:174
+#: base/timetrackerwidget.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "开始所选任务的计时"
 
-#: base/timetrackerwidget.cpp:176
+#: base/timetrackerwidget.cpp:175
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -258,67 +258,67 @@ msgstr ""
 "\n"
 "您还能用鼠标左键双击任务开始计时，不过会停止其他任务的计时。"
 
-#: base/timetrackerwidget.cpp:190
+#: base/timetrackerwidget.cpp:189
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "停止(&T)"
 
-#: base/timetrackerwidget.cpp:191
+#: base/timetrackerwidget.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "停止所选任务的计时"
 
-#: base/timetrackerwidget.cpp:192
+#: base/timetrackerwidget.cpp:191
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "停止所选任务的计时"
 
-#: base/timetrackerwidget.cpp:199
+#: base/timetrackerwidget.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "聚焦到搜索栏"
 
-#: base/timetrackerwidget.cpp:200
+#: base/timetrackerwidget.cpp:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "将焦点移至搜索栏"
 
-#: base/timetrackerwidget.cpp:201
+#: base/timetrackerwidget.cpp:200
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "将焦点移至搜索栏"
 
-#: base/timetrackerwidget.cpp:208
+#: base/timetrackerwidget.cpp:207
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "停止所有计时器(&A)"
 
-#: base/timetrackerwidget.cpp:209
+#: base/timetrackerwidget.cpp:208
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "停止所有活动的计时器"
 
-#: base/timetrackerwidget.cpp:210
+#: base/timetrackerwidget.cpp:209
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "停止所有活动的计时器"
 
-#: base/timetrackerwidget.cpp:218
+#: base/timetrackerwidget.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "跟踪活动的应用程序"
 
-#: base/timetrackerwidget.cpp:220
+#: base/timetrackerwidget.cpp:219
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -326,7 +326,7 @@ msgid ""
 "changed"
 msgstr "在当前窗口的焦点改变时，自动创建和更新任务"
 
-#: base/timetrackerwidget.cpp:223
+#: base/timetrackerwidget.cpp:222
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -337,73 +337,73 @@ msgstr ""
 "启用此操作后，在窗口焦点首次发生变化时，将创建并启动一个名为窗口标题的新任"
 "务。若已有相同任务，则会直接启动该任务。"
 
-#: base/timetrackerwidget.cpp:234
+#: base/timetrackerwidget.cpp:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "新建任务(&N)..."
 
-#: base/timetrackerwidget.cpp:235
+#: base/timetrackerwidget.cpp:234
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "新建顶级任务"
 
-#: base/timetrackerwidget.cpp:236
+#: base/timetrackerwidget.cpp:235
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "此按钮将新建一个顶级任务。"
 
-#: base/timetrackerwidget.cpp:244
+#: base/timetrackerwidget.cpp:243
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "新建子任务(&S)..."
 
-#: base/timetrackerwidget.cpp:245
+#: base/timetrackerwidget.cpp:244
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "为当前选定的任务创建一个新子任务"
 
-#: base/timetrackerwidget.cpp:246
+#: base/timetrackerwidget.cpp:245
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr "这将为当前选定的任务创建一个新的子任务。"
 
-#: base/timetrackerwidget.cpp:254
+#: base/timetrackerwidget.cpp:253
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "删除(&D)"
 
-#: base/timetrackerwidget.cpp:255
+#: base/timetrackerwidget.cpp:254
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "删除选中的任务"
 
-#: base/timetrackerwidget.cpp:256
+#: base/timetrackerwidget.cpp:255
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
 msgstr "这将删除选定的任务和所有子任务。"
 
-#: base/timetrackerwidget.cpp:264
+#: base/timetrackerwidget.cpp:263
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
 msgstr "属性(&P)"
 
-#: base/timetrackerwidget.cpp:265
+#: base/timetrackerwidget.cpp:264
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
 msgstr "编辑所选任务的名称或描述"
 
-#: base/timetrackerwidget.cpp:267
+#: base/timetrackerwidget.cpp:266
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -411,19 +411,19 @@ msgid ""
 "selected task."
 msgstr "这将会显示一个对话框，您可以在其中编辑选定任务的参数。"
 
-#: base/timetrackerwidget.cpp:276
+#: base/timetrackerwidget.cpp:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
 msgstr "编辑时间(&T)..."
 
-#: base/timetrackerwidget.cpp:277
+#: base/timetrackerwidget.cpp:276
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
 msgstr "编辑选定任务的时间"
 
-#: base/timetrackerwidget.cpp:279
+#: base/timetrackerwidget.cpp:278
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -431,61 +431,61 @@ msgid ""
 "selected task."
 msgstr "这将打开一个对话框供您编辑选中任务的参数。"
 
-#: base/timetrackerwidget.cpp:288
+#: base/timetrackerwidget.cpp:287
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "标记为完成(&M)"
 
-#: base/timetrackerwidget.cpp:296
+#: base/timetrackerwidget.cpp:295
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "标记为未完成(&M)"
 
-#: base/timetrackerwidget.cpp:304
+#: base/timetrackerwidget.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
 msgstr "导出(&E)..."
 
-#: base/timetrackerwidget.cpp:311
+#: base/timetrackerwidget.cpp:310
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "从 &Planner 导入任务..."
 
-#: base/timetrackerwidget.cpp:323
+#: base/timetrackerwidget.cpp:322
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "显示搜索栏"
 
-#: base/timetrackerwidget.cpp:458
+#: base/timetrackerwidget.cpp:457
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "行为"
 
-#: base/timetrackerwidget.cpp:463
+#: base/timetrackerwidget.cpp:462
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "外观"
 
-#: base/timetrackerwidget.cpp:468
+#: base/timetrackerwidget.cpp:467
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "存储"
 
-#: base/timetrackerwidget.cpp:505
+#: base/timetrackerwidget.cpp:504
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "新任务"
 
-#: base/timetrackerwidget.cpp:584
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -493,66 +493,66 @@ msgid ""
 "your history."
 msgstr "现在还没有历史。启动并停止一个任务后，将会向历史中写入条目。"
 
-#: base/timetrackerwidget.cpp:594
+#: base/timetrackerwidget.cpp:593
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
 msgstr "您真的想要将全部任务的时间重置为零吗？这将删除整个历史。"
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:595
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "需要确认"
 
-#: base/timetrackerwidget.cpp:597
+#: base/timetrackerwidget.cpp:596
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "重置所有时间"
 
-#: base/timetrackerwidget.cpp:786
+#: base/timetrackerwidget.cpp:785
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "保存失败，很可能是文件无法锁定。"
 
-#: base/timetrackerwidget.cpp:788
+#: base/timetrackerwidget.cpp:787
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "无法修改日历资源。"
 
-#: base/timetrackerwidget.cpp:790
+#: base/timetrackerwidget.cpp:789
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "内存溢出--无法创建对象。"
 
-#: base/timetrackerwidget.cpp:792
+#: base/timetrackerwidget.cpp:791
 #, kde-format
 msgid "UID not found."
 msgstr "UID 未找到。"
 
-#: base/timetrackerwidget.cpp:794
+#: base/timetrackerwidget.cpp:793
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "无效的日期--格式为 YYYY-MM-DD。"
 
-#: base/timetrackerwidget.cpp:796
+#: base/timetrackerwidget.cpp:795
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "无效的时间--格式为YYYY-MM-DDTHH:MM:SS。"
 
-#: base/timetrackerwidget.cpp:798
+#: base/timetrackerwidget.cpp:797
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "无效的任务持续时间--必须大于零。"
 
-#: base/timetrackerwidget.cpp:800
+#: base/timetrackerwidget.cpp:799
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "无效的错误号：%1"
 
-#: base/timetrackerwidget.cpp:1029
+#: base/timetrackerwidget.cpp:1023
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -563,7 +563,7 @@ msgstr ""
 "这是 KDE 的时间跟踪程序 ktimetracker。您可以先创建一个自己的任务，就在“搜索或"
 "添加任务”那里输入内容。"
 
-#: base/timetrackerwidget.cpp:1036
+#: base/timetrackerwidget.cpp:1030
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."

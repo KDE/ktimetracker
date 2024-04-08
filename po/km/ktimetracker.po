@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-04 00:38+0000\n"
+"POT-Creation-Date: 2024-04-08 00:38+0000\n"
 "PO-Revision-Date: 2012-06-15 10:36+0700\n"
 "Last-Translator: Sophea <sophea@khmeros.info>\n"
 "Language-Team: Khmer <>\n"
@@ -192,21 +192,21 @@ msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
-#: base/timetrackerwidget.cpp:139
+#: base/timetrackerwidget.cpp:138
 #, fuzzy, kde-format
 #| msgid "Start &New Session"
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "ចាប់​ផ្ដើម​សម័យ​ថ្មី"
 
-#: base/timetrackerwidget.cpp:140
+#: base/timetrackerwidget.cpp:139
 #, fuzzy, kde-format
 #| msgid "Starts a new session"
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "ចាប់ផ្ដើម​សម័យ​ថ្មី"
 
-#: base/timetrackerwidget.cpp:142
+#: base/timetrackerwidget.cpp:141
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will reset the session time to 0 for all tasks, to start a new "
@@ -219,21 +219,21 @@ msgstr ""
 "វា​នឹង​កំណត់​ពេល​សម័យ ទៅ ០ សម្រាប់​ភារកិច្ច​ទាំងអស់​ឡើងវិញ គឺ​ដើម្បី​ចាប់​ផ្ដើមសម័យ​ថ្មី ដោយ​គ្មាន​ជះ​ឥទ្ធិពល​ដល់​"
 "ការ​សរុប ។"
 
-#: base/timetrackerwidget.cpp:150
+#: base/timetrackerwidget.cpp:149
 #, fuzzy, kde-format
 #| msgid "Edit History..."
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "កែសម្រួល​ប្រវត្តិ..."
 
-#: base/timetrackerwidget.cpp:151
+#: base/timetrackerwidget.cpp:150
 #, fuzzy, kde-format
 #| msgid "Edits history of all tasks of the current document"
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "កែសម្រួល​ប្រវត្តិ​​នៃ​ភារកិច្ច​ទាំងអស់​របស់​​ឯកសារ​បច្ចុប្បន្ន"
 
-#: base/timetrackerwidget.cpp:153
+#: base/timetrackerwidget.cpp:152
 #, fuzzy, kde-format
 #| msgid ""
 #| "A window will be opened where you can change start and stop times of "
@@ -246,21 +246,21 @@ msgstr ""
 "បង្អួច​នឹង​ត្រូវ​បាន​បើក នៅ​កន្លែង​ដែលអ្នក​អាច​ផ្លាស់ប្ដូរ​ពេលវេលា​ចាប់ផ្ដើម និង​បញ្ឈប់​របស់​ភារកិច្ច ឬ​បន្ថែម​"
 "សេចក្ដី​អធិប្បាយ​ឲ្យ​ពួកវា ។"
 
-#: base/timetrackerwidget.cpp:163
+#: base/timetrackerwidget.cpp:162
 #, fuzzy, kde-format
 #| msgid "&Reset All Times"
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "កំណត់​ពេលវេលា​ទាំងអស់​ឡើង​វិញ"
 
-#: base/timetrackerwidget.cpp:164
+#: base/timetrackerwidget.cpp:163
 #, fuzzy, kde-format
 #| msgid "Resets all times"
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "កំណត់​ពេលវេលា​ទាំងអស់​ឡើង​វិញ"
 
-#: base/timetrackerwidget.cpp:166
+#: base/timetrackerwidget.cpp:165
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will reset the session and total time to 0 for all tasks, to restart "
@@ -273,21 +273,21 @@ msgstr ""
 "វា​នឹង​កំណត់​ពេល​សម័យ និង ពេលវេលា​សរុប​ទៅ​ ០ ឡើង​វិញ​សម្រាប់​​គ្រប់​ភារកិច្ច​ទាំងអស់ គឺដើម្បី​ចាប់​ផ្ដើម​ពី​ការ​គូស​"
 "វាស ។"
 
-#: base/timetrackerwidget.cpp:173
+#: base/timetrackerwidget.cpp:172
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "ចាប់ផ្ដើម"
 
-#: base/timetrackerwidget.cpp:174
+#: base/timetrackerwidget.cpp:173
 #, fuzzy, kde-format
 #| msgid "Starts timing for selected task"
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "ចាប់ផ្ដើម​កំណត់​ពេល​សម្រាប់​ភារកិច្ច​ដែល​បាន​ជ្រើស"
 
-#: base/timetrackerwidget.cpp:176
+#: base/timetrackerwidget.cpp:175
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will start timing for the selected task.\n"
@@ -309,77 +309,77 @@ msgstr ""
 "អ្នក​ក៏អាច​ចាប់ផ្ដើម​កំណត់​ពេល​ភារកិច្ច​ដោយ​ចុច​​ប៊ូតុង​កណ្ដុរ​ឆ្វេង​ទ្វេដង​លើ​ភារកិច្ច​ដែល​បាន​ផ្ដល់ ។ ទោះ​ជា​យ៉ាង​ណា​"
 "ក៏​ដោយ វា​នឹង​បញ្ឈប់​កា​រកំណត់​ពេលភារកិច្ច​ផ្សេងៗ​ទៀត ។"
 
-#: base/timetrackerwidget.cpp:190
+#: base/timetrackerwidget.cpp:189
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "ឈប់"
 
-#: base/timetrackerwidget.cpp:191
+#: base/timetrackerwidget.cpp:190
 #, fuzzy, kde-format
 #| msgid "Stops timing of the selected task"
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "បញ្ឈប់​ការ​កំណត់​ពេល​ភារកិច្ច​ដែល​បាន​ជ្រើស"
 
-#: base/timetrackerwidget.cpp:192
+#: base/timetrackerwidget.cpp:191
 #, fuzzy, kde-format
 #| msgid "Stops timing of the selected task"
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "បញ្ឈប់​ការ​កំណត់​ពេល​ភារកិច្ច​ដែល​បាន​ជ្រើស"
 
-#: base/timetrackerwidget.cpp:199
+#: base/timetrackerwidget.cpp:198
 #, fuzzy, kde-format
 #| msgid "Focus on Searchbar"
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "ផ្ដោត​លើ​របារ​ស្វែងរក"
 
-#: base/timetrackerwidget.cpp:200
+#: base/timetrackerwidget.cpp:199
 #, fuzzy, kde-format
 #| msgid "Sets the focus on the searchbar"
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "កំណត់​កា​រផ្ដោត​លើ​របារ​ស្វែងរក"
 
-#: base/timetrackerwidget.cpp:201
+#: base/timetrackerwidget.cpp:200
 #, fuzzy, kde-format
 #| msgid "Sets the focus on the searchbar"
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "កំណត់​កា​រផ្ដោត​លើ​របារ​ស្វែងរក"
 
-#: base/timetrackerwidget.cpp:208
+#: base/timetrackerwidget.cpp:207
 #, fuzzy, kde-format
 #| msgid "Stop &All Timers"
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "បញ្ឈប់​ឧបករណ៍​កំណត់​ពេលវេលា​ទាំងអស់​"
 
-#: base/timetrackerwidget.cpp:209
+#: base/timetrackerwidget.cpp:208
 #, fuzzy, kde-format
 #| msgid "Stops all of the active timers"
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "បញ្ឈប់​កម្មវិធីកំណត់​ពេល​ដែល​សកម្ម​ទាំងអស់"
 
-#: base/timetrackerwidget.cpp:210
+#: base/timetrackerwidget.cpp:209
 #, fuzzy, kde-format
 #| msgid "Stops all of the active timers"
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "បញ្ឈប់​កម្មវិធីកំណត់​ពេល​ដែល​សកម្ម​ទាំងអស់"
 
-#: base/timetrackerwidget.cpp:218
+#: base/timetrackerwidget.cpp:217
 #, fuzzy, kde-format
 #| msgid "Track Active Applications"
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "តាមដាន​កម្មវិធី​សកម្ម"
 
-#: base/timetrackerwidget.cpp:220
+#: base/timetrackerwidget.cpp:219
 #, fuzzy, kde-format
 #| msgid ""
 #| "Auto-creates and updates tasks when the focus of the current window has "
@@ -392,7 +392,7 @@ msgstr ""
 "បង្កើត​ដោយ​ស្វ័យ​ប្រវត្តិ និង​ធ្វើ​បច្ចុប្បន្នភាព​ភារកិច្ច​​ នៅ​ពេល​ផ្ដោត​អារម្មណ៍​លើ​បង្អួច​បច្ចុប្បន្ន​ដែល​បាន​"
 "ផ្លាស់ប្ដូរ"
 
-#: base/timetrackerwidget.cpp:223
+#: base/timetrackerwidget.cpp:222
 #, fuzzy, kde-format
 #| msgid ""
 #| "If the focus of a window changes for the first time when this action is "
@@ -409,83 +409,83 @@ msgstr ""
 "ភារកិច្ច​ថ្មី​មួយ​នឹង​ត្រូវ​បានបង្កើត​ដោយ​មាន​ចំណង​ជើង​របស់​បង្អួច​ជា​ឈ្មោះ​របស់​វា នឹង​ត្រូវ​បាន​ចាប់​ផ្ដើម ។ ប្រសិន​"
 "បើ​វា​មាន​រួច​ហើយ ​ភារកិច្ច​ប្រភេទ​ហ្នឹង នឹង​ត្រូវ​បាន​ចាប់ផ្ដើម ។"
 
-#: base/timetrackerwidget.cpp:234
+#: base/timetrackerwidget.cpp:233
 #, fuzzy, kde-format
 #| msgid "&New Task..."
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "ភារកិច្ច​ថ្មី..."
 
-#: base/timetrackerwidget.cpp:235
+#: base/timetrackerwidget.cpp:234
 #, fuzzy, kde-format
 #| msgid "Creates new top level task"
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "បង្កើត​ភារកិច្ច​កម្រិត​កំពូល​ថ្មី"
 
-#: base/timetrackerwidget.cpp:236
+#: base/timetrackerwidget.cpp:235
 #, fuzzy, kde-format
 #| msgid "This will create a new top level task."
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "វា​នឹង​បង្កើត​ភារកិច្ច​កម្រិត​កំពូល​ថ្មី ។"
 
-#: base/timetrackerwidget.cpp:244
+#: base/timetrackerwidget.cpp:243
 #, fuzzy, kde-format
 #| msgid "New &Subtask..."
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "ភារកិច្ចរង​ថ្មី​..."
 
-#: base/timetrackerwidget.cpp:245
+#: base/timetrackerwidget.cpp:244
 #, fuzzy, kde-format
 #| msgid "Creates a new subtask to the current selected task"
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "បង្កើត​ភារកិច្ច​រង​ថ្មី​មួយ​ទៅ​ភារកិច្ច​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន"
 
-#: base/timetrackerwidget.cpp:246
+#: base/timetrackerwidget.cpp:245
 #, fuzzy, kde-format
 #| msgid "This will create a new subtask to the current selected task."
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr "វា​នឹង​បង្កើត​ភារកិច្ច​រង​ថ្មី​មួយ​ទៅ​ភារកិច្ច​ដែល​បានជ្រើស​បច្ចុប្បន្ន ។"
 
-#: base/timetrackerwidget.cpp:254
+#: base/timetrackerwidget.cpp:253
 #, fuzzy, kde-format
 #| msgid "&Delete"
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "លុប"
 
-#: base/timetrackerwidget.cpp:255
+#: base/timetrackerwidget.cpp:254
 #, fuzzy, kde-format
 #| msgid "Deletes selected task"
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "លុប​ភារកិច្ច​ដែល​បាន​ជ្រើស​"
 
-#: base/timetrackerwidget.cpp:256
+#: base/timetrackerwidget.cpp:255
 #, fuzzy, kde-format
 #| msgid "This will delete the selected task(s) and all subtasks."
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
 msgstr "​វា​នឹង​លុប​ភារកិច្ច​ដែល​បានជ្រើស​ និង​ភារកិច្ច​រង​ទាំងអស់​របស់​វា​ ។"
 
-#: base/timetrackerwidget.cpp:264
+#: base/timetrackerwidget.cpp:263
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:265
+#: base/timetrackerwidget.cpp:264
 #, fuzzy, kde-format
 #| msgid "Edits name or times for selected task"
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
 msgstr "កែសម្រួល​ឈ្មោះ ឬ​ពេល​សម្រាប់​ភារកិច្ច​ដែល​បាន​ជ្រើស"
 
-#: base/timetrackerwidget.cpp:267
+#: base/timetrackerwidget.cpp:266
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will bring up a dialog box where you may edit the parameters for the "
@@ -496,21 +496,21 @@ msgid ""
 "selected task."
 msgstr "វា​នឹង​បង្ហាញ​ប្រអប់ ដែលអ្នក​អាច​កែសម្រួល​ប៉ារ៉ាម៉ែត្រ​សម្រាប់​ភារកិច្ច​ដែលបាន​ជ្រើស ។"
 
-#: base/timetrackerwidget.cpp:276
+#: base/timetrackerwidget.cpp:275
 #, fuzzy, kde-format
 #| msgid "Edit Times"
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
 msgstr "កែសម្រួល​ពេលវេលា​"
 
-#: base/timetrackerwidget.cpp:277
+#: base/timetrackerwidget.cpp:276
 #, fuzzy, kde-format
 #| msgid "Edits name or times for selected task"
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
 msgstr "កែសម្រួល​ឈ្មោះ ឬ​ពេល​សម្រាប់​ភារកិច្ច​ដែល​បាន​ជ្រើស"
 
-#: base/timetrackerwidget.cpp:279
+#: base/timetrackerwidget.cpp:278
 #, fuzzy, kde-format
 #| msgid ""
 #| "This will bring up a dialog box where you may edit the parameters for the "
@@ -521,67 +521,67 @@ msgid ""
 "selected task."
 msgstr "វា​នឹង​បង្ហាញ​ប្រអប់ ដែលអ្នក​អាច​កែសម្រួល​ប៉ារ៉ាម៉ែត្រ​សម្រាប់​ភារកិច្ច​ដែលបាន​ជ្រើស ។"
 
-#: base/timetrackerwidget.cpp:288
+#: base/timetrackerwidget.cpp:287
 #, fuzzy, kde-format
 #| msgid "&Mark as Complete"
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "សម្គាល់​ថា​បាន​បញ្ចប់​ទាំង​ស្រុង"
 
-#: base/timetrackerwidget.cpp:296
+#: base/timetrackerwidget.cpp:295
 #, fuzzy, kde-format
 #| msgid "&Mark as Incomplete"
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "សម្គាល់​ថា​មិន​ទាន់​បាន​បញ្ចប់​ទាំងស្រុង"
 
-#: base/timetrackerwidget.cpp:304
+#: base/timetrackerwidget.cpp:303
 #, fuzzy, kde-format
 #| msgid "&Export"
 msgctxt "@action:inmenu"
 msgid "&Export..."
 msgstr "នាំចេញ"
 
-#: base/timetrackerwidget.cpp:311
+#: base/timetrackerwidget.cpp:310
 #, fuzzy, kde-format
 #| msgid "Import Tasks From &Planner..."
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "នាំ​ភារកិច្ច​ចូល​ពី​កម្មវិធី​គ្រោង..."
 
-#: base/timetrackerwidget.cpp:323
+#: base/timetrackerwidget.cpp:322
 #, fuzzy, kde-format
 #| msgid "Show Searchbar"
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "បង្ហាញ​របារ​ស្វែងរក"
 
-#: base/timetrackerwidget.cpp:458
+#: base/timetrackerwidget.cpp:457
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:463
+#: base/timetrackerwidget.cpp:462
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:468
+#: base/timetrackerwidget.cpp:467
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:505
+#: base/timetrackerwidget.cpp:504
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "ភារកិច្ច​ថ្មី"
 
-#: base/timetrackerwidget.cpp:584
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -590,7 +590,7 @@ msgid ""
 msgstr ""
 "មិន​ទាន់​មាន​ប្រវត្តិ​នៅ​ឡើយទេ ។ ចាប់ផ្ដើម និង​បញ្ឈប់​ភារកិច្ច និង​អ្នក​នឹង​មាន​ធាតុ​មួយ​នៅ​ក្នុង​ប្រវត្តិ​របស់​អ្នក ។"
 
-#: base/timetrackerwidget.cpp:594
+#: base/timetrackerwidget.cpp:593
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -598,61 +598,61 @@ msgid ""
 msgstr ""
 "អ្នក​ពិត​ជា​ចង់​កំណត់​ពេលវេលា​ឡើងវិញ​ទៅ​សូន្យ​សម្រាប់​គ្រប់​ភារកិច្ច​ទាំងអស់​មែន​ឬ ? វា​​នឹង​លុប​​ប្រវត្តិ​ទាំងមូល​ ។"
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:595
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "ទាមទារ​ការ​អះអាង"
 
-#: base/timetrackerwidget.cpp:597
+#: base/timetrackerwidget.cpp:596
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "កំណត់​ពេល​វេលាទាំងអស់​ឡើងវិញ"
 
-#: base/timetrackerwidget.cpp:786
+#: base/timetrackerwidget.cpp:785
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "ការ​រក្សាទុក​បាន​បរាជ័យ ទំនង​មកពី​​មិន​អាច​ចាក់​សោឯកសារ ។"
 
-#: base/timetrackerwidget.cpp:788
+#: base/timetrackerwidget.cpp:787
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "មិន​អាច​កែប្រែ​ធនធាន​ប្រតិទិន​បានទេ ។"
 
-#: base/timetrackerwidget.cpp:790
+#: base/timetrackerwidget.cpp:789
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "អស់​សតិ​ក្នុងការ​បង្កើត​វត្ថុ ។"
 
-#: base/timetrackerwidget.cpp:792
+#: base/timetrackerwidget.cpp:791
 #, kde-format
 msgid "UID not found."
 msgstr "រក​មិន​ឃើញ​លេខ​សម្គាល់​អ្នក​ប្រើ​ទេ ។"
 
-#: base/timetrackerwidget.cpp:794
+#: base/timetrackerwidget.cpp:793
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "កាល​បរិច្ឆេទ​មិនត្រឹមត្រូវ ទ្រង់ទ្រាយ​របស់វា​គឺ YYYY-MM-DD ។"
 
-#: base/timetrackerwidget.cpp:796
+#: base/timetrackerwidget.cpp:795
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "ពេល​វេលា​មិនត្រឹមត្រូវ ទ្រង់ទ្រាយ​របស់វា​គឺ YYYY-MM-DDTHH:MM:SS ។"
 
-#: base/timetrackerwidget.cpp:798
+#: base/timetrackerwidget.cpp:797
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "ថិរវេលា​ភារកិច្ច​មិនត្រឹមត្រូវ វា​ត្រូវ​តែ​មាន​តម្លៃ​ធំជា​សូន្យ ។"
 
-#: base/timetrackerwidget.cpp:800
+#: base/timetrackerwidget.cpp:799
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "លេខ​កំហុស​មិន​ត្រឹមត្រូវ ៖ %1"
 
-#: base/timetrackerwidget.cpp:1029
+#: base/timetrackerwidget.cpp:1023
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -667,7 +667,7 @@ msgstr ""
 "នេះគឺ​ជា ktimetracker កម្មវិធី​របស់ KDE ជួយ​អ្នក​ឲ្យ​តាមដាន​ពេលវេលា​របស់​អ្នក ។ យក​ល្អ​ចាប់ផ្ដើម​ដោយ​"
 "បង្កើត​ភារកិច្ច​ដំបូង​របស់​អ្នក ដោយ​បញ្ចូល​វា​ទៅ​ក្នុង​វាល​ដែល​អ្នក​ឃើញ\"ស្វែងរក ​ឬ​បន្ថែម​ភារកិច្ច\" ។"
 
-#: base/timetrackerwidget.cpp:1036
+#: base/timetrackerwidget.cpp:1030
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"
