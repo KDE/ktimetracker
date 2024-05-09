@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-08 00:38+0000\n"
-"PO-Revision-Date: 2024-04-22 18:00+0900\n"
+"PO-Revision-Date: 2024-05-09 07:09+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -36,6 +36,8 @@ msgid ""
 "Apply the idle time since %1 to all active\n"
 "timers and keep them running."
 msgstr ""
+"將從 %1 以來的空閒時間套用到所有作用中的\n"
+"計時器上並讓它們持續運作。"
 
 #: base/idletimedetector.cpp:65
 #, kde-format
@@ -44,18 +46,16 @@ msgid "Continue Timing"
 msgstr "繼續計時"
 
 #: base/idletimedetector.cpp:67
-#, fuzzy, kde-format
-#| msgid "Stop timing and revert back to the time at %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
-msgstr "停止計時，並在 %1 時回復"
+msgstr "停止計時，並回復到 %1 時的時間"
 
 #: base/idletimedetector.cpp:68
-#, fuzzy, kde-format
-#| msgid "Revert timing"
+#, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
-msgstr "重返並繼續"
+msgstr "回復計時"
 
 #: base/idletimedetector.cpp:72
 #, kde-format
@@ -627,7 +627,7 @@ msgstr[0] " 分鐘"
 #: dialogs/edittimedialog.cpp:74
 #, kde-format
 msgid "Change Time By:"
-msgstr ""
+msgstr "變更時間："
 
 #: dialogs/edittimedialog.cpp:78
 #, kde-format
@@ -898,7 +898,7 @@ msgstr "自動追蹤"
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
-msgstr ""
+msgstr "%1。"
 
 #: export/export.cpp:49
 #, kde-format
