@@ -69,7 +69,7 @@ msgstr "L'escriptori ha sigut inactiu durant %1. Què voleu fer?"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
-msgstr "Configura KTimeTracker..."
+msgstr "Configura KTimeTracker…"
 
 #: base/mainwindow.cpp:136 base/tray.cpp:74
 #, kde-format
@@ -106,7 +106,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
-msgstr "Parada dels temporitzadors..."
+msgstr "Parada dels temporitzadors…"
 
 #: base/taskview.cpp:275
 #, kde-format
@@ -207,7 +207,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr "Edita l'historial..."
+msgstr "Edita l'historial…"
 
 #: base/timetrackerwidget.cpp:150
 #, kde-format
@@ -362,7 +362,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
-msgstr "Tasca &nova..."
+msgstr "Tasca &nova…"
 
 #: base/timetrackerwidget.cpp:234
 #, kde-format
@@ -380,7 +380,7 @@ msgstr "Crearà una tasca de primer nivell."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
-msgstr "&Subtasca nova..."
+msgstr "&Subtasca nova…"
 
 #: base/timetrackerwidget.cpp:244
 #, kde-format
@@ -437,7 +437,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
-msgstr "Edita el &temps..."
+msgstr "Edita el &temps…"
 
 #: base/timetrackerwidget.cpp:276
 #, kde-format
@@ -469,13 +469,13 @@ msgstr "&Marca com a no finalitzada"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr "&Exporta..."
+msgstr "&Exporta…"
 
 #: base/timetrackerwidget.cpp:310
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
-msgstr "Importa les tasques des del &Planificador..."
+msgstr "Importa les tasques des del &Planificador…"
 
 #: base/timetrackerwidget.cpp:322
 #, kde-format
@@ -601,7 +601,7 @@ msgstr "Ja heu creat una tasca. Ara podeu iniciar i parar el cronometratge."
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
-msgstr ",..."
+msgstr "…"
 
 #: base/treeviewheadercontextmenu.cpp:31
 #, kde-format
@@ -664,7 +664,7 @@ msgstr "Hora després del canvi:"
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr "Edita l'historial..."
+msgstr "Edita l'historial…"
 
 #: dialogs/edittimedialog.cpp:85
 #, kde-format
@@ -720,7 +720,7 @@ msgstr "Copia a dins del porta-retalls"
 #: dialogs/exportdialog.ui:67
 #, kde-format
 msgid "Save As..."
-msgstr "Anomena i guarda..."
+msgstr "Anomena i guarda…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
 #: dialogs/exportdialog.ui:82
