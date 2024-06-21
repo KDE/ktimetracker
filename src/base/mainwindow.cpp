@@ -103,7 +103,7 @@ bool MainWindow::queryClose()
 
 void MainWindow::taskViewCustomContextMenuRequested(const QPoint &point)
 {
-    QMenu *pop = dynamic_cast<QMenu *>(guiFactory()->container(QStringLiteral("task_popup"), this));
+    QMenu *pop = qobject_cast<QMenu *>(guiFactory()->container(QStringLiteral("task_popup"), this));
     if (pop) {
         pop->popup(point);
     }

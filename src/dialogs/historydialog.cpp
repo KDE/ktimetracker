@@ -45,7 +45,7 @@ public:
     {
         QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(),
                                                    HistoryDialog::dateTimeFormat);
-        auto *dateTimeWidget = dynamic_cast<QDateTimeEdit *>(editor);
+        auto *dateTimeWidget = qobject_cast<QDateTimeEdit *>(editor);
         if (dateTimeWidget) {
             dateTimeWidget->setDateTime(dateTime);
         } else {
@@ -55,7 +55,7 @@ public:
 
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override
     {
-        auto *dateTimeWidget = dynamic_cast<QDateTimeEdit *>(editor);
+        auto *dateTimeWidget = qobject_cast<QDateTimeEdit *>(editor);
         if (dateTimeWidget) {
             QDateTime dateTime = dateTimeWidget->dateTime();
             model->setData(index, dateTime.toString(HistoryDialog::dateTimeFormat), Qt::EditRole);

@@ -141,7 +141,7 @@ void TaskView::load(const QUrl &url)
         return;
     }
 
-    m_tasksWidget = new TasksWidget(dynamic_cast<QWidget *>(parent()), m_filterProxyModel, nullptr);
+    m_tasksWidget = new TasksWidget(qobject_cast<QWidget *>(parent()), m_filterProxyModel, nullptr);
     connect(m_tasksWidget, &TasksWidget::updateButtons, this, &TaskView::updateButtons);
     connect(m_tasksWidget, &TasksWidget::contextMenuRequested, this, &TaskView::contextMenuRequested);
     connect(m_tasksWidget, &TasksWidget::taskDoubleClicked, this, &TaskView::onTaskDoubleClicked);

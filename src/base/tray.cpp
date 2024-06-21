@@ -37,7 +37,7 @@ TrayIcon::TrayIcon(MainWindow *parent)
     connect(m_animation, &QMovie::frameChanged, this, &TrayIcon::setActiveIcon);
     m_animation->jumpToFrame(0);
 
-    auto *widget = dynamic_cast<TimeTrackerWidget *>(parent->centralWidget());
+    auto *widget = qobject_cast<TimeTrackerWidget *>(parent->centralWidget());
     if (widget) {
         QAction *action = widget->action(QStringLiteral("configure_ktimetracker"));
         if (action) {
