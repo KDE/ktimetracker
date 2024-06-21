@@ -17,8 +17,10 @@
 
 #include <KLocalizedString>
 #include <KPluralHandlingSpinBox>
-#include <KX11Extras>
-#include <KWindowSystem>
+#ifdef Q_OS_LINUX
+    #include <KX11Extras>
+    #include <KWindowSystem>
+#endif // Q_OS_LINUX
 
 TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
                                            const QString &caption,
@@ -57,23 +59,27 @@ TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
     m_trackingGroup = new QGroupBox(i18nc("@title:group", "Auto Tracking"), this);
     m_trackingGroup->setCheckable(true);
     m_trackingGroup->hide();
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         m_trackingGroup->show();
     }
+#endif
     m_trackingGroup->setChecked(!desktops.isEmpty());
     auto *trackingLayout = new QHBoxLayout(m_trackingGroup);
     m_trackingGroup->setLayout(trackingLayout);
     m_scrollArea = new QScrollArea(m_trackingGroup);
 
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         m_numDesktops = KX11Extras::numberOfDesktops();
     }
-
+#endif
     auto *desktopsWidget = new QWidget(m_trackingGroup);
     auto *desktopsLayout = new QGridLayout(m_scrollArea);
 
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         desktopsLayout->addItem(new QSpacerItem(50, 0), 0, 2, m_numDesktops, 1);
@@ -93,16 +99,18 @@ TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
             }
         }
     }
+#endif
     m_scrollArea->setWidget(desktopsWidget);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         trackingLayout->addStretch(1);
         trackingLayout->addWidget(m_scrollArea);
         trackingLayout->addStretch(1);
     }
-
+#endif
     auto *m_buttonBox = new QDialogButtonBox(this);
     m_buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
@@ -110,13 +118,16 @@ TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
     connect(m_buttonBox, &QDialogButtonBox::rejected, this, &TaskPropertiesDialog::reject);
 
     mainLayout->addWidget(infoGroup);
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         mainLayout->addWidget(m_trackingGroup, 0);
         mainLayout->addStretch(0);
     }
+#endif
     mainLayout->addWidget(m_buttonBox);
 
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         // Do not show ugly empty box when virtual desktops are not available, e.g.
@@ -126,6 +137,7 @@ TaskPropertiesDialog::TaskPropertiesDialog(QWidget *parent,
             m_trackingGroup->hide();
         }
     }
+#endif
 }
 
 QString TaskPropertiesDialog::name() const
