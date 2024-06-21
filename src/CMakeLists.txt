@@ -30,6 +30,7 @@ target_link_libraries(ktt-deps
     KF6::KCMUtils
     KF6::TextWidgets
     KF6::KIOCore
+    KF6::IconThemes
 )
 
 if(NOT WIN32)

@@ -59,6 +59,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     TextWidgets
     CalendarCore
     KCMUtils
+    IconThemes
 )
 
 if(NOT WIN32)
