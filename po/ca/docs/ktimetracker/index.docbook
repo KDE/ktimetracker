@@ -8,7 +8,13 @@
 > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE">
 ]>
-
+<!--
+SPDX-FileCopyrightText: 2000-2004 Jonathan Singer
+SPDX-FileCopyrightText: 2004-2005 Mark Bucciarelli <mark@hubcapconsulting.com>
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
+SPDX-License-Identifier: GFDL-1.2-only
+-->
 <book id="ktimetracker" lang="&language;">
 
 <bookinfo id="ktimetrackerinfo">
@@ -700,7 +706,7 @@ Printed on: 2004-07-13 18:10
 <listitem
 ><para
 ><guiicon
->Elimina</guiicon
+>Suprimeix</guiicon
 ></para
 ></listitem>
 <listitem
@@ -926,7 +932,7 @@ Printed on: 2004-07-13 18:10
 >historial</glossterm>
 <glossdef
 ><para
->Si el &ktimetracker; està configurat per a registrar l'historial, registrarà cada vegada que inicieu/atureu l'esdeveniment temporitzador. Aquest historial no es netejarà quan es reiniciïn els temps i es mantindrà al fitxer fins que la tasca sigui eliminada.</para
+>Si el &ktimetracker; està configurat per a registrar l'historial, registrarà cada vegada que inicieu/atureu l'esdeveniment temporitzador. Aquest historial no es netejarà quan es reiniciïn els temps i es mantindrà al fitxer fins que la tasca se suprimeixi.</para
 ></glossdef>
 </glossentry>
 </glossdiv>
