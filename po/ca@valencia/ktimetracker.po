@@ -1,24 +1,24 @@
 # Translation of ktimetracker.po to Catalan (Valencian)
-# Copyright (C) 1998-2022 This_file_is_part_of_KDE
+# Copyright (C) 1998-2024 This_file_is_part_of_KDE
 #
 # Sebastià Pla i Sanz <sps@sastia.com>, 1998, 1999, 2000, 2004.
 # Antoni Bella Pérez <antonibella5@orange.es>, 2003, 2014, 2019, 2020.
 # Albert Astals Cid <aacid@kde.org>, 2004, 2005.
-# Josep M. Ferrer <txemaq@gmail.com>, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2019, 2021, 2022, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Manuel Tortosa Moreno <manutortosa@chakra-project.org>, 2009, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-08 00:38+0000\n"
-"PO-Revision-Date: 2022-03-31 20:38+0200\n"
+"PO-Revision-Date: 2024-07-31 12:30+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -153,8 +153,8 @@ msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
 "Note: All subtasks and their history will also be deleted."
 msgstr ""
-"Segur que voleu eliminar la tasca seleccionada i tot el seu historial?\n"
-"Nota: També s'eliminaran totes les seues subtasques i els seus historials."
+"Segur que voleu suprimir la tasca seleccionada i tot el seu historial?\n"
+"Nota: També se suprimiran totes les seues subtasques i els seus historials."
 
 #: base/taskview.cpp:508
 #, kde-format
@@ -398,19 +398,19 @@ msgstr "Crearà una subtasca nova a la tasca seleccionada."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
-msgstr "&Elimina"
+msgstr "Sup&rimix"
 
 #: base/timetrackerwidget.cpp:254
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
-msgstr "Elimina la tasca seleccionada"
+msgstr "Suprimix la tasca seleccionada"
 
 #: base/timetrackerwidget.cpp:255
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
-msgstr "Eliminarà la tasca seleccionada i totes les seues subtasques."
+msgstr "Suprimirà la tasca seleccionada i totes les seues subtasques."
 
 #: base/timetrackerwidget.cpp:263
 #, kde-format
@@ -523,7 +523,7 @@ msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
 msgstr ""
-"Segur que voleu posar el temps a zero per a totes les tasques? Açò eliminarà "
+"Segur que voleu posar el temps a zero per a totes les tasques? Açò suprimirà "
 "tot l'historial."
 
 #: base/timetrackerwidget.cpp:595
