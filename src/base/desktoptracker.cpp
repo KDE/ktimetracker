@@ -9,8 +9,10 @@
 
 #include <QTimer>
 
-#include <KX11Extras>
-#include <KWindowSystem>
+#ifdef Q_OS_LINUX
+    #include <KX11Extras>
+    #include <KWindowSystem>
+#endif // Q_OS_LINUX
 
 #include "ktimetracker.h"
 #include "ktt_debug.h"
@@ -19,6 +21,7 @@ DesktopTracker::DesktopTracker()
     : m_desktopCount(numDesktops)
     , m_timer(new QTimer(this))
 {
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         // currentDesktop will return 0 if no window manager is started
@@ -28,7 +31,7 @@ DesktopTracker::DesktopTracker()
         // Setup desktop change handling
         connect(KX11Extras::self(), &KX11Extras::currentDesktopChanged, this, &DesktopTracker::handleDesktopChange);
     }
-
+#endif
     m_timer->setSingleShot(true);
     connect(m_timer, &QTimer::timeout, this, &DesktopTracker::changeTimers);
 }
@@ -64,6 +67,7 @@ void DesktopTracker::changeTimers()
 
 QString DesktopTracker::startTracking()
 {
+#ifdef Q_OS_LINUX
     if(KWindowSystem::isPlatformX11())
     {
         int currentDesktop = KX11Extras::currentDesktop() - 1;
@@ -79,7 +83,7 @@ QString DesktopTracker::startTracking()
             Q_EMIT reachedActiveDesktop(task);
         }
     }
-
+#endif
     return QString();
 }
 
@@ -94,6 +98,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
             if (tit != v->end()) {
                 m_desktopTracker[i].erase(tit);
             }
+#ifdef Q_OS_LINUX
             if(KWindowSystem::isPlatformX11())
             {
                 // if the task was previously tracking this desktop then
@@ -102,6 +107,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                     Q_EMIT leftActiveDesktop(task);
                 }
             }
+#endif
         }
         qCDebug(KTT_LOG) << "Leaving function, desktopList.size=0";
         return;
@@ -125,6 +131,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                 if (tit != v.end()) {
                     // not in start vector any more
                     v.erase(tit); // so we delete it from desktopTracker
+#ifdef Q_OS_LINUX
                     if(KWindowSystem::isPlatformX11())
                     {
                         // if the task was previously tracking this desktop then
@@ -133,6 +140,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                             Q_EMIT leftActiveDesktop(task);
                         }
                     }
+#endif
                 }
             }
         }

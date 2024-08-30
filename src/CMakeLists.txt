@@ -23,7 +23,6 @@ target_link_libraries(ktt-deps
     KF6::DBusAddons
     KF6::XmlGui
     KF6::CalendarCore
-    KF6::WindowSystem
     KF6::ConfigGui
     KF6::IdleTime
     KF6::ConfigWidgets
@@ -31,7 +30,15 @@ target_link_libraries(ktt-deps
     KF6::KCMUtils
     KF6::TextWidgets
     KF6::KIOCore
+    KF6::IconThemes
 )
+
+if(NOT WIN32)
+    target_link_libraries(ktt-deps
+        INTERFACE
+        KF6::WindowSystem
+    )
+endif()
 
 kconfig_add_kcfg_files(ktt-general settings/ktimetracker.kcfgc)
 

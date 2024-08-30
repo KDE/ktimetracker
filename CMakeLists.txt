@@ -55,12 +55,18 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KIO
     Notifications
     StatusNotifierItem
-    WindowSystem
     XmlGui
     TextWidgets
     CalendarCore
     KCMUtils
+    IconThemes
 )
+
+if(NOT WIN32)
+    find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
+        WindowSystem
+    )
+endif()
 
 add_subdirectory(icons)
 add_subdirectory(doc)
