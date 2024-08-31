@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-08 00:38+0000\n"
+"POT-Creation-Date: 2024-08-31 00:39+0000\n"
 "PO-Revision-Date: 2023-07-23 20:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -600,18 +600,18 @@ msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "작업 시간 편집"
 
-#: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:40
+#: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "작업"
 
-#: dialogs/edittimedialog.cpp:47 dialogs/taskpropertiesdialog.cpp:49
+#: dialogs/edittimedialog.cpp:47 dialogs/taskpropertiesdialog.cpp:51
 #, kde-format
 msgid "Task Name:"
 msgstr "작업 이름:"
 
-#: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:54
+#: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:56
 #, kde-format
 msgid "Task Description:"
 msgstr "작업 설명:"
@@ -890,7 +890,7 @@ msgstr "삭제할 작업을 선택하십시오."
 msgid "Edit History"
 msgstr "과거 기록 편집"
 
-#: dialogs/taskpropertiesdialog.cpp:46
+#: dialogs/taskpropertiesdialog.cpp:48
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -900,13 +900,13 @@ msgstr ""
 "<p>작업 이름을 입력하십시오. 원하는 대로 입력할 수 있습니다.</p>\n"
 "<p><i>예:</i> 엄마에게 전화 걸기</p>"
 
-#: dialogs/taskpropertiesdialog.cpp:57
+#: dialogs/taskpropertiesdialog.cpp:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "자동 추적"
 
-#: dialogs/taskpropertiesdialog.cpp:83
+#: dialogs/taskpropertiesdialog.cpp:89
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -968,124 +968,124 @@ msgstr "주 도구 모음"
 msgid "Tasks"
 msgstr "작업"
 
-#: main.cpp:79 model/event.cpp:153 model/eventsmodel.cpp:112
+#: main.cpp:89 model/event.cpp:153 model/eventsmodel.cpp:112
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:81
+#: main.cpp:91
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "KDE 시간 추적 도구"
 
-#: main.cpp:83
+#: main.cpp:93
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr "Copyright © 1997-2019 KTimeTracker developers"
 
-#: main.cpp:87
+#: main.cpp:97
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr "Alexander Potashev"
 
-#: main.cpp:88
+#: main.cpp:98
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "현재 관리자(2019년 이후)"
 
-#: main.cpp:90
+#: main.cpp:100
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
 
-#: main.cpp:91
+#: main.cpp:101
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr "관리자(2006년-2012년)"
 
-#: main.cpp:93
+#: main.cpp:103
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:94
+#: main.cpp:104
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr "관리자(2005년-2006년)"
 
-#: main.cpp:96
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:97
+#: main.cpp:107
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr "관리자(2000년-2005년)"
 
-#: main.cpp:99
+#: main.cpp:109
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:100
+#: main.cpp:110
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "원 작성자"
 
-#: main.cpp:102
+#: main.cpp:112
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:103
+#: main.cpp:113
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr "개발자(2007년)"
 
-#: main.cpp:105
+#: main.cpp:115
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:106
+#: main.cpp:116
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr "개발자(1999년-2000년)"
 
-#: main.cpp:108
+#: main.cpp:118
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:109 main.cpp:112
+#: main.cpp:119 main.cpp:122
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr "개발자"
 
-#: main.cpp:111
+#: main.cpp:121
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:123
+#: main.cpp:133
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."

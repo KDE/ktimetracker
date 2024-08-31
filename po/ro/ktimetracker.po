@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm-0.5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-08 00:38+0000\n"
+"POT-Creation-Date: 2024-08-31 00:39+0000\n"
 "PO-Revision-Date: 2024-02-24 15:44+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -595,18 +595,18 @@ msgctxt "@title:window"
 msgid "Edit Task Time"
 msgstr "Modifică durata sarcinii"
 
-#: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:40
+#: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "Sarcină"
 
-#: dialogs/edittimedialog.cpp:47 dialogs/taskpropertiesdialog.cpp:49
+#: dialogs/edittimedialog.cpp:47 dialogs/taskpropertiesdialog.cpp:51
 #, kde-format
 msgid "Task Name:"
 msgstr "Denumire sarcină:"
 
-#: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:54
+#: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:56
 #, kde-format
 msgid "Task Description:"
 msgstr "Descriere sarcină:"
@@ -889,7 +889,7 @@ msgstr "Alegeți o sarcină de șters."
 msgid "Edit History"
 msgstr "Modifică istoricul"
 
-#: dialogs/taskpropertiesdialog.cpp:46
+#: dialogs/taskpropertiesdialog.cpp:48
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -899,13 +899,13 @@ msgstr ""
 "<p>Introduceți aici denumirea sarcinii. O puteți alege liber.</p>\n"
 "<p><i>De exemplu:</i> apel cu mama</p>"
 
-#: dialogs/taskpropertiesdialog.cpp:57
+#: dialogs/taskpropertiesdialog.cpp:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "Urmărire automată"
 
-#: dialogs/taskpropertiesdialog.cpp:83
+#: dialogs/taskpropertiesdialog.cpp:89
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -967,134 +967,134 @@ msgstr "Bara de unelte principală"
 msgid "Tasks"
 msgstr "Sarcini"
 
-#: main.cpp:79 model/event.cpp:153 model/eventsmodel.cpp:112
+#: main.cpp:89 model/event.cpp:153 model/eventsmodel.cpp:112
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:81
+#: main.cpp:91
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "Utilitar KDE de administrat timpul"
 
-#: main.cpp:83
+#: main.cpp:93
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr ""
 
-#: main.cpp:87
+#: main.cpp:97
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr ""
 
-#: main.cpp:88
+#: main.cpp:98
 #, fuzzy, kde-format
 #| msgid "Current Maintainer"
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "Responsabil actual"
 
-#: main.cpp:90
+#: main.cpp:100
 #, fuzzy, kde-format
 #| msgid "Thorsten St&auml;rk"
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten St&auml;rk"
 
-#: main.cpp:91
+#: main.cpp:101
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr ""
 
-#: main.cpp:93
+#: main.cpp:103
 #, fuzzy, kde-format
 #| msgid "Mark Bucciarelli"
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:94
+#: main.cpp:104
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr ""
 
-#: main.cpp:96
+#: main.cpp:106
 #, fuzzy, kde-format
 #| msgid "Jesper Pedersen"
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:97
+#: main.cpp:107
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr ""
 
-#: main.cpp:99
+#: main.cpp:109
 #, fuzzy, kde-format
 #| msgid "Sirtaj Singh Kang"
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:100
+#: main.cpp:110
 #, fuzzy, kde-format
 #| msgid "Original Author"
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "Autor original"
 
-#: main.cpp:102
+#: main.cpp:112
 #, fuzzy, kde-format
 #| msgid "Mathias Soeken"
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:103
+#: main.cpp:113
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr ""
 
-#: main.cpp:105
+#: main.cpp:115
 #, fuzzy, kde-format
 #| msgid "Kalle Dalheimer"
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:106
+#: main.cpp:116
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr ""
 
-#: main.cpp:108
+#: main.cpp:118
 #, fuzzy, kde-format
 #| msgid "Allen Winter"
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:109 main.cpp:112
+#: main.cpp:119 main.cpp:122
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:111
+#: main.cpp:121
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:123
+#: main.cpp:133
 #, fuzzy, kde-format
 #| msgid "The iCalendar file to open"
 msgctxt "@info:shell"
