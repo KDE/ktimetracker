@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,22 +40,19 @@ msgid ""
 msgstr ""
 
 #: base/idletimedetector.cpp:65
-#, fuzzy, kde-format
-#| msgid "Continue timing."
+#, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
-msgstr "Συνέχεια χρονομέτρησης."
+msgstr "Συνέχεια χρονομέτρησης"
 
 #: base/idletimedetector.cpp:67
-#, fuzzy, kde-format
-#| msgid "Stop timing and revert back to the time at %1."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
-msgstr "Σταμάτημα χρονομέτρησης και επαναφορά του χρόνου σε %1."
+msgstr "Σταμάτημα χρονομέτρησης και επαναφορά του χρόνου σε %1"
 
 #: base/idletimedetector.cpp:68
-#, fuzzy, kde-format
-#| msgid "Revert timing"
+#, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Επαναφορά χρονομέτρησης"
@@ -68,8 +65,7 @@ msgstr ""
 "Η επιφάνεια εργασίας έχει παραμείνει ανενεργή από %1. Τι θέλετε να κάνετε ;"
 
 #: base/mainwindow.cpp:37
-#, fuzzy, kde-format
-#| msgid "Configure KTimeTracker..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "Διαμόρφωση του KTimeTracker..."
@@ -80,8 +76,7 @@ msgid "No active tasks"
 msgstr "Μη ενεργές εργασίες"
 
 #: base/mainwindow.cpp:146 base/tray.cpp:94
-#, fuzzy, kde-format
-#| msgid ", "
+#, kde-format
 msgctxt "separator between task names"
 msgid ", "
 msgstr ", "
@@ -100,14 +95,12 @@ msgstr ""
 "share/apps/kabc/lock/ "
 
 #: base/taskview.cpp:198
-#, fuzzy, kde-format
-#| msgid ""
-#| "Your virtual desktop number is too high, desktop tracking will not work"
+#, kde-format
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr ""
 "Ο αριθμός εικονικής επιφάνειας εργασίας είναι πολύ μεγάλος, η ανίχνευση "
-"επιφάνειας εργασίας δε θα λειτουργήσει"
+"επιφάνειας εργασίας δε θα λειτουργήσει."
 
 #: base/taskview.cpp:274
 #, kde-format
@@ -144,15 +137,13 @@ msgstr ""
 "share/apps/kabc/lock/ "
 
 #: base/taskview.cpp:406
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
 msgstr "Νέα υποεργασία"
 
 #: base/taskview.cpp:424
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
 msgstr "Επεξεργασία εργασίας"
@@ -177,8 +168,7 @@ msgstr ""
 "ΣΗΜΕΙΩΣΗ: όλες οι υποεργασίες και τα ιστορικά τους θα διαγραφούν επίσης."
 
 #: base/taskview.cpp:508
-#, fuzzy, kde-format
-#| msgid "Deleting Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Deleting Task"
 msgstr "Διαγραφή εργασίας"
@@ -202,24 +192,19 @@ msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
 #: base/timetrackerwidget.cpp:138
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
 msgstr "Έναρξη &νέας συνεδρίας"
 
 #: base/timetrackerwidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "Starts a new session"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
 msgstr "Έναρξη μιας νέας συνεδρίας"
 
 #: base/timetrackerwidget.cpp:141
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will reset the session time to 0 for all tasks, to start a new "
-#| "session, without affecting the totals."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "This will reset the session time to 0 for all tasks, to start a new session, "
@@ -229,24 +214,19 @@ msgstr ""
 "έναρξη μιας νέας συνεδρίας, χωρίς να επηρεάζει τα σύνολα."
 
 #: base/timetrackerwidget.cpp:149
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
 msgstr "Επεξεργασία ιστορικού..."
 
 #: base/timetrackerwidget.cpp:150
-#, fuzzy, kde-format
-#| msgid "Edits history of all tasks of the current document"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
 msgstr "Επεξεργασία ιστορικού όλων των εργασιών του τρέχοντος εγγράφου"
 
 #: base/timetrackerwidget.cpp:152
-#, fuzzy, kde-format
-#| msgid ""
-#| "A window will be opened where you can change start and stop times of "
-#| "tasks or add a comment to them."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "A window will be opened where you can change start and stop times of tasks "
@@ -256,24 +236,19 @@ msgstr ""
 "εργασιών ή προσθήκη ενός σχολίου σε αυτές."
 
 #: base/timetrackerwidget.cpp:162
-#, fuzzy, kde-format
-#| msgid "&Reset All Times"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
 msgstr "&Μηδενισμός όλων των χρόνων"
 
 #: base/timetrackerwidget.cpp:163
-#, fuzzy, kde-format
-#| msgid "Resets all times"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
 msgstr "Μηδενισμός όλων των χρόνων"
 
 #: base/timetrackerwidget.cpp:165
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will reset the session and total time to 0 for all tasks, to restart "
-#| "from scratch."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "This will reset the session and total time to 0 for all tasks, to restart "
@@ -283,15 +258,13 @@ msgstr ""
 "εργασίες, για επανεκκίνηση από την αρχή."
 
 #: base/timetrackerwidget.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "Έ&ναρξη"
 
 #: base/timetrackerwidget.cpp:173
-#, fuzzy, kde-format
-#| msgid "Starts timing for selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
 msgstr "Έναρξη χρονομέτρησης για την επιλεγμένη εργασία"
@@ -319,80 +292,67 @@ msgstr ""
 "Αυτό ωστόσο θα σταματήσει τη χρονομέτρηση των άλλων εργασιών."
 
 #: base/timetrackerwidget.cpp:189
-#, fuzzy, kde-format
-#| msgid "S&top"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "Σ&ταμάτημα"
 
 #: base/timetrackerwidget.cpp:190
-#, fuzzy, kde-format
-#| msgid "Stops timing of the selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
 msgstr "Σταμάτημα χρονομέτρησης της επιλεγμένης εργασίας"
 
 #: base/timetrackerwidget.cpp:191
-#, fuzzy, kde-format
-#| msgid "Stops timing of the selected task"
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
 msgstr "Σταμάτημα χρονομέτρησης της επιλεγμένης εργασίας"
 
 #: base/timetrackerwidget.cpp:198
-#, fuzzy, kde-format
-#| msgid "Focus on Searchbar"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
 msgstr "Εστίαση στη γραμμή αναζήτησης"
 
 #: base/timetrackerwidget.cpp:199
-#, fuzzy, kde-format
-#| msgid "Sets the focus on the searchbar"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
 msgstr "Ορισμός της εστίασης στη γραμμή αναζήτησης"
 
 #: base/timetrackerwidget.cpp:200
-#, fuzzy, kde-format
-#| msgid "Sets the focus on the searchbar"
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
 msgstr "Ορισμός της εστίασης στη γραμμή αναζήτησης"
 
 #: base/timetrackerwidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "Stop &All Timers"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
 msgstr "Σταμάτημα ό&λων των χρονομέτρων"
 
 #: base/timetrackerwidget.cpp:208
-#, fuzzy, kde-format
-#| msgid "Stops all of the active timers"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
 msgstr "Σταμάτημα όλων των ενεργών χρονομέτρων"
 
 #: base/timetrackerwidget.cpp:209
-#, fuzzy, kde-format
-#| msgid "Stops all of the active timers"
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
 msgstr "Σταμάτημα όλων των ενεργών χρονομέτρων"
 
 #: base/timetrackerwidget.cpp:217
-#, fuzzy, kde-format
-#| msgid "Track Active Applications"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
 msgstr "Ανίχνευση ενεργών εφαρμογών"
 
 #: base/timetrackerwidget.cpp:219
-#, fuzzy, kde-format
-#| msgid ""
-#| "Auto-creates and updates tasks when the focus of the current window has "
-#| "changed"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Auto-creates and updates tasks when the focus of the current window has "
@@ -402,12 +362,7 @@ msgstr ""
 "του τρέχοντος παραθύρου"
 
 #: base/timetrackerwidget.cpp:222
-#, fuzzy, kde-format
-#| msgid ""
-#| "If the focus of a window changes for the first time when this action is "
-#| "enabled, a new task will be created with the title of the window as its "
-#| "name and will be started. If there already exists such an task it will be "
-#| "started."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If the focus of a window changes for the first time when this action is "
@@ -420,64 +375,55 @@ msgstr ""
 "εκκίνηση αυτής."
 
 #: base/timetrackerwidget.cpp:233
-#, fuzzy, kde-format
-#| msgid "&New Task..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
 msgstr "&Νέα εργασία..."
 
 #: base/timetrackerwidget.cpp:234
-#, fuzzy, kde-format
-#| msgid "Creates new top level task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
 msgstr "Δημιουργία νέας εργασίας ανωτέρου επιπέδου"
 
 #: base/timetrackerwidget.cpp:235
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
 msgstr "Αυτό δημιουργεί μια νέα εργασία στο ανώτερο επίπεδο."
 
 #: base/timetrackerwidget.cpp:243
-#, fuzzy, kde-format
-#| msgid "New &Subtask..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
 msgstr "Νέα &υποεργασία..."
 
 #: base/timetrackerwidget.cpp:244
-#, fuzzy, kde-format
-#| msgid "Creates a new subtask to the current selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
 msgstr "Δημιουργία μιας νέας υποεργασίας στην τρέχουσα επιλεγμένη εργασία"
 
 #: base/timetrackerwidget.cpp:245
-#, fuzzy, kde-format
-#| msgid "This will create a new subtask to the current selected task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
 msgstr "Αυτό δημιουργεί μια νέα υποεργασία στην τρέχουσα επιλεγμένη εργασία."
 
 #: base/timetrackerwidget.cpp:253
-#, fuzzy, kde-format
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "&Διαγραφή"
 
 #: base/timetrackerwidget.cpp:254
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
 msgstr "Διαγραφή επιλεγμένης εργασίας"
 
 #: base/timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task(s) and all subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
 msgstr ""
@@ -497,10 +443,7 @@ msgid "Edit name or description for selected task"
 msgstr "Επεξεργασία ονόματος ή χρόνων της επιλεγμένης εργασίας"
 
 #: base/timetrackerwidget.cpp:266
-#, fuzzy, kde-format
-#| msgid ""
-#| "This will bring up a dialog box where you may edit the parameters for the "
-#| "selected task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "This will bring up a dialog box where you may edit the parameters for the "
@@ -537,65 +480,55 @@ msgstr ""
 "παραμέτρων της επιλεγμένης εργασίας."
 
 #: base/timetrackerwidget.cpp:287
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
 msgstr "&Σημείωση ως ολοκληρωμένη"
 
 #: base/timetrackerwidget.cpp:295
-#, fuzzy, kde-format
-#| msgid "&Mark as Incomplete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
 msgstr "&Σημείωση ως μη ολοκληρωμένη"
 
 #: base/timetrackerwidget.cpp:303
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr "&Εξαγωγή"
+msgstr "&Εξαγωγή..."
 
 #: base/timetrackerwidget.cpp:310
-#, fuzzy, kde-format
-#| msgid "Import Tasks From &Planner..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
 msgstr "Εισαγωγή εργασιών α&πό το Planner..."
 
 #: base/timetrackerwidget.cpp:322
-#, fuzzy, kde-format
-#| msgid "Show Searchbar"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Εμφάνιση γραμμής αναζήτησης"
 
 #: base/timetrackerwidget.cpp:457
-#, fuzzy, kde-format
-#| msgid "Behavior"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Συμπεριφορά"
 
 #: base/timetrackerwidget.cpp:462
-#, fuzzy, kde-format
-#| msgctxt "settings page for customizing user interface"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
 #: base/timetrackerwidget.cpp:467
-#, fuzzy, kde-format
-#| msgid "Storage"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Αποθήκευση"
 
 #: base/timetrackerwidget.cpp:504
-#, fuzzy, kde-format
-#| msgid "New Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Νέα εργασία"
@@ -620,15 +553,13 @@ msgstr ""
 "διαγραφεί όλο το ιστορικό."
 
 #: base/timetrackerwidget.cpp:595
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Απαιτείται επιβεβαίωση"
 
 #: base/timetrackerwidget.cpp:596
-#, fuzzy, kde-format
-#| msgid "Reset All Times"
+#, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Μηδενισμός όλων των μετρητών"
@@ -692,23 +623,21 @@ msgstr ""
 "πεδίο \"αναζήτηση και προσθήκη εργασίας\"."
 
 #: base/timetrackerwidget.cpp:1030
-#, fuzzy, kde-format
-#| msgid "You have already created a task. You can now start and stop timing"
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr ""
-"Έχετε ήδη δημιουργήσει μια εργασία. Τώρα μπορείτε να αρχίσετε τη χρονομέτρηση"
+"Έχετε ήδη δημιουργήσει μια εργασία. Τώρα μπορείτε να αρχίσετε τη "
+"χρονομέτρηση."
 
 #: base/tray.cpp:79
-#, fuzzy, kde-format
-#| msgid ", ..."
+#, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
 msgstr ", ..."
 
 #: base/treeviewheadercontextmenu.cpp:31
-#, fuzzy, kde-format
-#| msgid "Columns"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
 msgstr "Στήλες"
@@ -721,8 +650,7 @@ msgid "Edit Task Time"
 msgstr "Επεξεργασία εργασίας"
 
 #: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:42
-#, fuzzy, kde-format
-#| msgid "Task"
+#, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "Εργασία"
@@ -769,19 +697,17 @@ msgid "Time After Change:"
 msgstr ""
 
 #: dialogs/edittimedialog.cpp:84
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
 msgstr "Επεξεργασία ιστορικού..."
 
 #: dialogs/edittimedialog.cpp:85
-#, fuzzy, kde-format
-#| msgid "To change this task's time, you have to edit its event history."
+#, kde-format
 msgid "To change this task's time, you have to edit its event history"
 msgstr ""
 "Για να τροποποιήσετε την ώρα αυτής της εργασίας θα πρέπει να επεξεργαστείτε "
-"το ιστορικό συμβάντων."
+"το ιστορικό συμβάντων"
 
 #: dialogs/exportdialog.cpp:81
 #, fuzzy, kde-format
@@ -811,11 +737,9 @@ msgstr "Όλες οι εργασίες"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
 #: dialogs/exportdialog.ui:21
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export"
+#, kde-format
 msgid "Export"
-msgstr "&Εξαγωγή"
+msgstr "Εξαγωγή"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
 #: dialogs/exportdialog.ui:33
@@ -1007,8 +931,7 @@ msgid "Comment"
 msgstr "Σχόλια"
 
 #: dialogs/historydialog.cpp:130
-#, fuzzy, kde-format
-#| msgid "You can change this task's comment, start time and end time."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr ""
@@ -1040,8 +963,7 @@ msgid ""
 msgstr ""
 
 #: dialogs/taskpropertiesdialog.cpp:59
-#, fuzzy, kde-format
-#| msgid "Auto Tracking"
+#, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "Αυτόματη καταγραφή"
@@ -1138,8 +1060,7 @@ msgid "Current Maintainer (since 2019)"
 msgstr "Τρέχων συντηρητής"
 
 #: main.cpp:100
-#, fuzzy, kde-format
-#| msgid "Thorsten Stärk"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
@@ -1151,8 +1072,7 @@ msgid "Maintainer (2006-2012)"
 msgstr ""
 
 #: main.cpp:103
-#, fuzzy, kde-format
-#| msgid "Mark Bucciarelli"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
@@ -1164,8 +1084,7 @@ msgid "Maintainer (2005-2006)"
 msgstr ""
 
 #: main.cpp:106
-#, fuzzy, kde-format
-#| msgid "Jesper Pedersen"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
@@ -1177,22 +1096,19 @@ msgid "Maintainer (2000-2005)"
 msgstr ""
 
 #: main.cpp:109
-#, fuzzy, kde-format
-#| msgid "Sirtaj Singh Kang"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
 #: main.cpp:110
-#, fuzzy, kde-format
-#| msgid "Original Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "Αρχικός συγγραφέας"
 
 #: main.cpp:112
-#, fuzzy, kde-format
-#| msgid "Mathias Soeken"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
@@ -1204,8 +1120,7 @@ msgid "Developer (in 2007)"
 msgstr ""
 
 #: main.cpp:115
-#, fuzzy, kde-format
-#| msgid "Kalle Dalheimer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
@@ -1217,8 +1132,7 @@ msgid "Developer (1999-2000)"
 msgstr ""
 
 #: main.cpp:118
-#, fuzzy, kde-format
-#| msgid "Allen Winter"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
@@ -1230,8 +1144,7 @@ msgid "Developer"
 msgstr ""
 
 #: main.cpp:121
-#, fuzzy, kde-format
-#| msgid "David Faure"
+#, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
@@ -1244,57 +1157,49 @@ msgid "Path or URL to iCalendar file to open."
 msgstr "Το αρχείο iCalendar που θα ανοιχτεί"
 
 #: model/tasksmodel.cpp:19
-#, fuzzy, kde-format
-#| msgid "Task Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Task Name"
 msgstr "Όνομα εργασίας"
 
 #: model/tasksmodel.cpp:20
-#, fuzzy, kde-format
-#| msgid "Session Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Session Time"
 msgstr "Χρόνος περιόδου"
 
 #: model/tasksmodel.cpp:21
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "Χρόνος"
 
 #: model/tasksmodel.cpp:22
-#, fuzzy, kde-format
-#| msgid "Total Session Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Total Session Time"
 msgstr "Συνολικός χρόνος περιόδου"
 
 #: model/tasksmodel.cpp:23
-#, fuzzy, kde-format
-#| msgid "Total Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Total Time"
 msgstr "Συνολικός χρόνος"
 
 #: model/tasksmodel.cpp:24
-#, fuzzy, kde-format
-#| msgid "Priority"
+#, kde-format
 msgctxt "@title:column"
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
 #: model/tasksmodel.cpp:25
-#, fuzzy, kde-format
-#| msgid "Percent Complete"
+#, kde-format
 msgctxt "@title:column"
 msgid "Percent Complete"
 msgstr "Ποσοστό ολοκλήρωσης"
 
 #: model/tasksmodel.cpp:175 model/tasksmodel.cpp:268
-#, fuzzy, kde-format
-#| msgid "The task name is what you call the task, it can be chosen freely."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "The task name is what you call the task, it can be chosen freely."
 msgstr ""
@@ -1302,21 +1207,16 @@ msgstr ""
 "να επιλεγεί ελεύθερα."
 
 #: model/tasksmodel.cpp:179 model/tasksmodel.cpp:272
-#, fuzzy, kde-format
-#| msgid ""
-#| "The session time is the time since you last chose \"start new session.\""
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The session time is the time since you last chose \"Start New Session\"."
 msgstr ""
 "Ο χρόνος συνεδρίας είναι ο χρόνος στον οποίο την τελευταία φορά επιλέξατε "
-"\"έναρξη νέας συνεδρίας\""
+"\"έναρξη νέας συνεδρίας\"."
 
 #: model/tasksmodel.cpp:276
-#, fuzzy, kde-format
-#| msgid ""
-#| "The total session time is the session time of this task and all its "
-#| "subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
@@ -1325,8 +1225,7 @@ msgstr ""
 "όλων των υποεργασιών της."
 
 #: model/tasksmodel.cpp:280
-#, fuzzy, kde-format
-#| msgid "The total time is the time of this task and all its subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
 msgstr ""
@@ -1487,8 +1386,7 @@ msgid "Save tasks every:"
 msgstr "Αποθήκευση εργασιών κάθε:"
 
 #: widgets/searchline.cpp:23
-#, fuzzy, kde-format
-#| msgid "Search or add task"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search or add task"
 msgstr "Αναζήτηση ή προσθήκη εργασίας"
@@ -1511,39 +1409,31 @@ msgstr ""
 "χρησιμοποιηθεί ως όνομα για τη δημιουργία μιας νέας εργασίας."
 
 #: widgets/taskswidget.cpp:129
-#, fuzzy, kde-format
-#| msgid "%1 %"
+#, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
 msgstr "%1 %"
 
 #: widgets/taskswidget.cpp:140
-#, fuzzy, kde-format
-#| msgid "unspecified"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
 msgstr "μη ορισμένο"
 
 #: widgets/taskswidget.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "combox entry for highest priority"
-#| msgid "1 (highest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
 msgstr "1 (υψηλότερο)"
 
 #: widgets/taskswidget.cpp:146
-#, fuzzy, kde-format
-#| msgctxt "combox entry for medium priority"
-#| msgid "5 (medium)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
 msgstr "5 (μεσαίο)"
 
 #: widgets/taskswidget.cpp:149
-#, fuzzy, kde-format
-#| msgctxt "combox entry for lowest priority"
-#| msgid "9 (lowest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
 msgstr "9 (χαμηλότερο)"
