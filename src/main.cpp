@@ -18,6 +18,7 @@
 #include <KDBusService>
 #include <KLocalizedString>
 #include <KIconTheme>
+#include <KCrash>
 
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
 #if HAVE_STYLE_MANAGER
@@ -122,6 +123,8 @@ int main(int argc, char *argv[])
                         i18nc("@info:credit", "Developer"),
                         QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
+
+    KCrash::initialize();
 
     Q_INIT_RESOURCE(icons);
     QIcon::setThemeSearchPaths(QStringList() << QStringLiteral(":/icons"));

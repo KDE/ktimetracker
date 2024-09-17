@@ -60,6 +60,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     CalendarCore
     KCMUtils
     IconThemes
+    Crash
 )
 
 if(NOT WIN32)
