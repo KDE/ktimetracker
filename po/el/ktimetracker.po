@@ -58,11 +58,10 @@ msgid "Revert Timing"
 msgstr "Επαναφορά χρονομέτρησης"
 
 #: base/idletimedetector.cpp:72
-#, fuzzy, kde-format
-#| msgid "Desktop has been idle since %1. What do you want to do ?"
+#, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr ""
-"Η επιφάνεια εργασίας έχει παραμείνει ανενεργή από %1. Τι θέλετε να κάνετε ;"
+"Η επιφάνεια εργασίας έχει παραμείνει ανενεργή από %1. Τι θέλετε να κάνετε;"
 
 #: base/mainwindow.cpp:37
 #, kde-format
@@ -119,12 +118,7 @@ msgid "Unnamed Task"
 msgstr "Ανώνυμη εργασία"
 
 #: base/taskview.cpp:364
-#, fuzzy, kde-format
-#| msgid ""
-#| "Error storing new task. Your changes were not saved. Make sure you can "
-#| "edit your iCalendar file. Also quit all applications using this file and "
-#| "remove any lock file related to its name from ~/.kde/share/apps/kabc/"
-#| "lock/ "
+#, kde-format
 msgid ""
 "Error storing new task. Your changes were not saved. Make sure you can edit "
 "your iCalendar file. Also quit all applications using this file and remove "
@@ -134,7 +128,7 @@ msgstr ""
 "Σιγουρευτείτε ότι μπορείτε να επεξεργαστείτε το αρχείο σας iCalendar. Επίσης "
 "βγείτε από όλες τις εφαρμογές που χρησιμοποιούν αυτό το αρχείο και αφαιρέστε "
 "οποιοδήποτε αρχείο κλειδώματος που σχετίζεται με το όνομα της από το ~/.kde/"
-"share/apps/kabc/lock/ "
+"share/apps/kabc/lock/"
 
 #: base/taskview.cpp:406
 #, kde-format
@@ -154,18 +148,14 @@ msgid "No task selected."
 msgstr "Καμία εργασία επιλεγμένη."
 
 #: base/taskview.cpp:504
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to delete the selected task and its entire "
-#| "history?\n"
-#| "NOTE: all subtasks and their history will also be deleted."
+#, kde-format
 msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
 "Note: All subtasks and their history will also be deleted."
 msgstr ""
 "Είστε βέβαιοι ότι θέλετε να διαγράψετε την επιλεγμένη εργασία και όλο το "
 "ιστορικό της;\n"
-"ΣΗΜΕΙΩΣΗ: όλες οι υποεργασίες και τα ιστορικά τους θα διαγραφούν επίσης."
+"Σημείωση: Όλες οι υποεργασίες και τα ιστορικά τους θα διαγραφούν επίσης."
 
 #: base/taskview.cpp:508
 #, kde-format
@@ -607,11 +597,7 @@ msgid "Invalid error number: %1"
 msgstr "Μη έγκυρος αριθμός σφάλματος: %1"
 
 #: base/timetrackerwidget.cpp:1023
-#, fuzzy, kde-format
-#| msgid ""
-#| "This is ktimetracker, KDE's program to help you track your time. Best, "
-#| "start with creating your first task - enter it into the field where you "
-#| "see \"search or add task\"."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "This is ktimetracker, KDE's program to help you track your time. Best, start "
@@ -620,7 +606,7 @@ msgid ""
 msgstr ""
 "Αυτό είναι το ktimetracker, Το πρόγραμμα του KDE για την καταγραφή του "
 "χρόνου σας. Ξεκινήστε δημιουργώντας την πρώτη σας εργασία - εισάγετέ την στο "
-"πεδίο \"αναζήτηση και προσθήκη εργασίας\"."
+"πεδίο \"Αναζήτηση και προσθήκη εργασίας\"."
 
 #: base/timetrackerwidget.cpp:1030
 #, kde-format
