@@ -1,0 +1,1219 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Slovenian "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+<!--
+SPDX-FileCopyrightText: 2000-2004 Jonathan Singer
+SPDX-FileCopyrightText: 2004-2005 Mark Bucciarelli <mark@hubcapconsulting.com>
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
+SPDX-License-Identifier: GFDL-1.2-only
+-->
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>&ktimetracker; Priročnik</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Recenzent</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    <othercredit role="translator"
+><firstname
+>Matjaž</firstname
+><surname
+>Jeran</surname
+><affiliation
+><address
+><email
+>matjaz.jeran@amis.net</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>19.11.2019</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; spremlja čas porabljen za različna opravila.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>čas</keyword>
+    <keyword
+>sledilnik</keyword>
+    <keyword
+>projekt</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+>&ktimetracker; spremlja čas, porabljen za različna opravila. Uporaben je za sledenje plačljivim uram in lahko poroča o zabeleženih urah glede na opravilo in dan.</para>
+
+<para
+>To časovno zgodovino je mogoče izvoziti v besedilno datoteko, ločeno z vejicami, za uvoz v druga orodja za obračunavanje in/ali upravljanje projektov.</para>
+
+<para
+>&ktimetracker; zazna, kdaj sta tipkovnica in miška nedejavni in lahko poveže različna opravila z različnimi namizji, dve orodji, ki lahko pomagata, da časovnik deluje pri pravilnem opravilu.</para>
+
+<para
+>&ktimetracker; je prvotno napisal &Sirtaj.Singh.Kang;. Njegova domača stran je <ulink url="https://userbase.kde.org/KTimeTracker"
+>https://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>Uporaba &ktimetracker;</title>
+
+<sect1 id="starting">
+<title
+>Zagon &ktimetracker;</title>
+
+<para
+>Vnesite <command
+>ktimetracker</command
+> v ukazni poziv ali izberite <guimenuitem
+>Osebni sledilnik časa</guimenuitem
+> v <menuchoice
+> <guimenu
+>Aplikacije</guimenu
+><guisubmenu
+>Pripomočki</guisubmenu
+> </menuchoice
+> skupino v <guimenu
+>Zaganjalnik aplikacij Plasma</guimenu
+>. Generični &Qt; in &kf5-full; na voljo so ukazne možnosti, glejte priročnik strani qt5options in kf5options. </para>
+
+<para
+>&ktimetracker; ponuja dodatno ukazno možnost, ki vam omogoča vnos imena datoteke iCalendar, ki se uporablja za shranjevanje vaše zgodovine dela. Oddaljeno datoteko iCalendar vnesete z &HTTP; ali &FTP; kot del imena datoteke; na primer https://www.mysite.com/mydata/mylabor.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Opravila</title>
+
+<informalexample>
+<para
+><emphasis
+>Težava:</emphasis
+> Ste samostojni svetovalec za programsko opremo s številnimi strankami. Nekatere stranke imajo več projektov. Tekom dneva preklapljate med različnimi projekti. Za ustvarjanje mesečnih računov morate spremljati svoj čas.</para>
+<para
+><emphasis
+>Rešitev:</emphasis
+> Ustvarite eno opravilo najvišje ravni za vsako stranko in podopravilo za vsak projekt stranke. Za projekte, ki zahtevajo podrobnejše sledenje, ustvarite seznam projektnih podopravil. Sledite času tako, da dvokliknete opravilo, ki ga trenutno opravljate.</para>
+</informalexample>
+
+<para
+>&ktimetracker; zagotavlja veliko prilagodljivost pri sledenju vašemu času, kar omogoča neomejene naloge in globino nalog. Čas se lahko zabeleži za katero koli opravilo in v danem trenutku je lahko aktivnih več kot eno opravilo.</para>
+<para
+>&ktimetracker; omogoča urejanje zgodovine vašega opravila in dodajanje komentarja za vsak dogodek, ki ste ga ustavili.</para>
+<para
+>Če želite ustvariti opravilo na najvišji ravni, izberite <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Naloga</guimenu
+> <guimenuitem
+>Novo opravilo...</guimenuitem
+> </menuchoice
+>. Če želite ustvariti podopravilo, označite nadrejeno opravilo in izberite <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Task</guimenu
+> <guimenuitem
+>Novo podopravilo...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Ko &ktimetracker; zapusti, se seznam opravil shrani v datoteko na vašem disku. Ko se naslednjič odpre, znova naloži seznam opravil iz iste datoteke.</para>
+
+<para
+>&ktimetracker; lahko uvozi in izvozi naloge, da zmanjša vaše delo. Glejte <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Časovniki</title>
+
+<informalexample>
+<para
+><emphasis
+>Težava:</emphasis
+> Če želite ostati plačilno sposobni, morate zaračunavati povprečno po pet ur na dan. Če želite ostati, opazujte svoje dnevne in tedenske skupne vrednosti.</para>
+<para
+><emphasis
+>Rešitev:</emphasis
+> Ponastavite časovnik seje na začetku vsakega delovnega dne in ponastavite vse časovnike na začetku vsakega tedna.</para
+> </informalexample>
+
+<para
+>&ktimetracker; omogoča enostavno sledenje času. Če želite začeti beležiti čas za opravilo, dvokliknite opravilo. Če želite ustaviti beleženje časa, znova dvokliknite opravilo. Aktivna opravila prikazujejo majhno uro v stolpcu <guilabel
+>Čas seje</guilabel
+>.</para>
+
+<para
+>Drug vizualni namig o dejavnosti beleženja je &ktimetracker; ikona sistemske vrstice. Ko je opravilo aktivno, se sekundni kazalec v ikoni premakne. Če miškin kazalec postavite nad to ikono, se bo v opisu orodja prikazalo ime aktivnega opravila. Če je aktivnih več kot eno opravilo, so imena opravil v opisu orodja ločena z vejicami.</para>
+
+<para
+>&ktimetracker; vzdržuje dva časovnika za vsako opravilo: enega za čas seje in enega za skupni čas. V privzeti konfiguraciji &ktimetracker; prikaže dva stolpca za vsak časovnik, kar pomeni skupno štiri stolpce za vsako opravilo:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Čas seje</guilabel
+></term>
+<listitem
+><para
+>Čas, porabljen za opravilo od začetka seje.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Čas</guilabel
+></term
+> <listitem
+><para
+>Čas, porabljen za opravilo od ponastavitve vseh časov.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Skupni čas seje</guilabel
+></term>
+<listitem
+><para
+>Čas, porabljen za opravilo in vse njegove podnaloge od začetka seje.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Skupni čas</guilabel
+></term>
+<listitem
+><para
+>Čas, porabljen za opravilo in vse njegove podopravila, odkar so bili vsi časi ponastavljeni.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Za začetek nove seje izberite <menuchoice
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Začni novo sejo</guimenuitem
+> </menuchoice
+> </para>
+
+<para
+>Če želite ponastaviti vse čase, izberite <menuchoice
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Ponastavi vse čase</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>Sledenje namizju</title>
+
+<informalexample>
+<para
+><emphasis
+>Težava:</emphasis
+> Imate dva glavna projekta, med katerima vsak dan preklapljate. Za lažje organiziranje dela hranite datoteke projekta 1 na namizju 1 in datoteke projekta 2 na namizju 2.</para>
+
+<para
+><emphasis
+>Rešitev:</emphasis
+> Povežite opravilo projekta 1 z namizjem 1 in opravilo projekta 2 z namizjem 2. Ko preklopite iz namizja 2 na namizje 1, &ktimetracker; samodejno ustavi nalogo projekta 2 in zažene nalogo projekta 1.</para>
+</informalexample>
+
+<para
+>Če želite nalogo povezati z enim ali več namizji, izberite <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Opravilo</guimenu 
+> <guimenuitem
+>Lastnosti</guimenuitem
+> </menuchoice
+>. Vklopite <guilabel
+>Samodejno sledenje</guilabel
+> in izberite namizje ali namizja, ki jih želite povezati s to nalogo. Ko postane katero od izbranih namizij aktivno, po kratkem zamiku &ktimetracker; bo samodejno začel beležiti čas za to opravilo.</para>
+
+</sect2>
+
+<sect2
+><title
+>Zaznavanje nedejavnosti</title>
+
+<informalexample
+> <para
+><emphasis
+>Težava:</emphasis
+> V petek zgodaj odidete iz službe po opravku in pozabite ustaviti časovnik. Ko se vrnete v ponedeljek, časovnik še teče.</para>
+<para
+><emphasis
+>Rešitev:</emphasis
+> Vklopite zaznavanje nedejavnosti na strani <guilabel
+>Vedenje</guilabel
+> pogovornega okna z nastavitvami.</para>
+</informalexample>
+
+<para
+>&ktimetracker; lahko konfigurirate tako, da zazna, ko miška in tipkovnica postaneta nedejavni. Če sta miška in tipkovnica nedejavni dlje od podanega števila minut, &ktimetracker; prikaže naslednje pogovorno okno:</para>
+
+<screenshot>
+ <screeninfo
+>&ktimetracker; Zaznavanje nedejavnosti</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&ktimetracker; Pogovorno okno za zaznavanje nedejavnosti</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Nadaljujte z merjenjem časa</guibutton
+></term>
+<listitem
+><para
+>Uporabi čas nedejavnosti za vse aktivne časovnike in pusti, da tečejo.</para
+><para
+>Delali ste na nalogah, medtem ko je bil vaš računalnik v mirovanju in še vedno ste.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Povrni čas</guibutton
+></term>
+<listitem
+><para
+>Od vseh aktivnih časovnikov odštejte čas nedejavnosti in jih zaustavite.</para
+><para
+>Niste delali na nalogah, medtem ko je bil vaš računalnik nedejaven, in še vedno ne delate.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Drugi sistemi</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker;, kot &korganizer; in Applov iCal, za svoje podatke uporablja industrijsko standardno obliko <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>. &ktimetracker; lahko bere in piše sezname opravil, ki jih ustvarita ti dve aplikaciji.</para>
+<para
+>Lahko celo sinhrono delate na eni datoteki z &korganizer; in &ktimetracker;. Če en program spremeni datoteko, se posodobitve samodejno prenesejo v drugo aplikacijo. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Planer</title>
+
+<para
+>Kot tipičen primer uporabe bi morda želeli načrtovati projekt z orodjem za upravljanje projektov <ulink url="&Planner.web;"
+>&Planner;</ulink
+> in uvoziti njegove naloge v &ktimetracker; z <menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guisubmenu
+>Uvoz</guisubmenu
+><guimenuitem
+>Uvozi opravila iz načrtovalnika...</guimenuitem
+> </menuchoice
+>, da so v industrijskem standardu <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>. Ko to storite, lahko načrtujete naloge v &korganizer; in svoj čas zanje upoštevate v &ktimetracker;. To je eden od načinov, kako zagotoviti, da bo vaš projekt potekal pravočasno in v okviru proračuna.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>&ktimetracker; podpira številne metode, ki jih je mogoče uporabiti z &DBus;. </para>
+<para
+>Obstajata dva načina za uporabo &DBus; vmesnik: &Qt;'s &GUI; <application
+>qdbusviewer</application
+> in ukazna vrstica <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>Bash skript, ki vrne različico &ktimetracker;</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker različica 2
+>/dev/null || echo "ktimetracker ne teče"
+</programlisting>
+</example>
+
+<para
+>trenutni &DBus; &ktimetracker; vmesnik se trenutno uporablja predvsem za avtomatsko testiranje, zato je zelo omejen. Za celotno definicijo vmesnika glejte <xref linkend="dbusappendix"/>.</para>
+
+<para
+>Za ogled celotnega &DBus; vmesnik programa &ktimetracker; različico, nameščeno v vašem sistemu, zaženite naslednji skript Bash:</para>
+
+<example
+><title
+>Seznam &DBus; &ktimetracker; vmesnik do konzole</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker ne teče"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Izvozi skupne vrednosti v CSV</title>
+
+<para
+>&ktimetracker; lahko izvozi vsote in zgodovino v obliko datoteke ločeno z vejicami. Če želite izvoziti vsote, izberite <menuchoice
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Izvozi...</guimenuitem
+> </menuchoice
+> in &ktimetracker; prikaže pogovorno okno za izvoz. </para>
+
+<para
+>Izberite možnost <guibutton
+>Časi kot CSV</guibutton
+> v skupini <guilabel
+>Vrsta poročila</guilabel
+>. Pogovorno okno bo videti takole: </para>
+
+<screenshot>
+<screeninfo
+>Izvozi čase kot CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Izvozi čase kot CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Po potrebi spremenite privzete nastavitve pogovornega okna. Izpis CSV si lahko ogledate na desni strani pogovornega okna. Kliknite <guibutton
+>Shrani kot...</guibutton
+> in &ktimetracker; izvozi vsote za vsa opravila v datoteko, ki jo vnesete v pogovorno okno datoteke.</para>
+
+<para
+>Za izvoz časov v odložišče uporabite gumb <guibutton
+>Kopiraj v odložišče</guibutton
+>.</para>
+
+<para
+>Tukaj je še en primer izhodnega formata:</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 feature plan",,,0.00,0.00,0.00,0.00
+,,"bugs",,,0.00,1.13,0.00,1.13
+,,"checkin changes - translation strings",,,0.00,0.00,0.00,0.00
+,,"time card report",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"web stuff",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Opravila najvišje ravni so izpisane v prvem stolpcu, podopravila v drugem itd. Časovni podatki se izpišejo po največji globini opravila (pet v tem primeru). Prvi časovni stolpec je <guilabel
+>Čas seje</guilabel
+>, drugi <guilabel
+>Čas</guilabel
+>, tretji <guilabel
+>Skupni čas seje</guilabel
+> in četrti <guilabel
+>Skupni čas </guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Izvoz zgodovine v CSV</title>
+
+<para
+>Za izvoz zgodovine opravil izberite <menuchoice
+> <guimenu
+>Datoteka</guimenu
+> <guisubmenu
+>Izvoz</guisubmenu
+> <guimenuitem
+>Izvoz...</guimenuitem
+> </menuchoice
+> in &ktimetracker; prikaže isto pogovorno okno za izvoz, kot je prikazano zgoraj. Izberite možnost <guibutton
+>Zgodovina kot CSV</guibutton
+> v skupini <guilabel
+>Vrsta poročila</guilabel
+>. </para>
+
+<para
+>Izberite časovno obdobje, za katerega želite, da zajema zgodovina opravil. Po potrebi spremenite privzete nastavitve pogovornega okna. Izpis CSV si lahko ogledate na desni strani pogovornega okna. Kliknite <guibutton
+>Shrani kot...</guibutton
+> in &ktimetracker; izvozi vsote za vsa opravila v datoteko, ki jo vnesete v pogovorno okno datoteke.</para>
+
+<para
+>Za izvoz časov v odložišče uporabite gumb <guibutton
+>Kopiraj v odložišče</guibutton
+>.</para>
+
+<para
+>Tukaj je primer izhodnega formata:</para>
+
+<literallayout
+><computeroutput>
+Task History
+From Tuesday 06 July 2004 to Tuesday 13 July 2004
+Printed on: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 feature plan"
+,1.13,,,,,,,1.13,,,"bugs"
+,,,,,,,,0.00,,,"checkin changes - translation strings"
+,,,,,,,,0.00,,,"time card report"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promo"
+,,,,,,,,0.00,,"web stuff"
+</computeroutput
+>
+</literallayout>
+
+<para
+>Prve tri vrstice določajo, kdaj je bilo poročilo ustvarjeno in za katero časovno obdobje. Četrta vrstica je z vejicami ločen seznam datumov v časovnem obdobju v formatu ISO 8601 (LLLL-MM-DD). Vse naslednje vrstice navajajo čas, zabeležen za vsako nalogo. Zadnji številski stolpec je vsota vrstic za vse dni. Ime opravila je natisnjeno za stolpcem s skupnim zneskom in je zamaknjeno, da označuje razmerje opravilo/podopravilo. Imena opravil na najvišji ravni so prikazana v prvem stolpcu za skupno vsoto.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>&ktimetracker; vmesnik</title>
+
+<para
+>Glavni &ktimetracker; ima naslednje komponente: menijsko vrstico, orodno vrstico, iskalno vrstico, opravilno/časovno okno in vrstico stanja.</para>
+
+<para
+>Iskalna vrstica je kombinirano polje. Dokler ne pritisnete &Enter;, deluje kot filter. Nato so prikazana samo opravila, ki se ujemajo z vašim vnosom. Takoj ko pritisnete &Enter;, se vaš vnos uporabi kot ime za ustvarjanje novega opravila.. </para>
+
+<para
+>Izberite <guilabel
+>Konfiguracija za PDA</guilabel
+> na strani <guilabel
+>Videz</guilabel
+> v pogovornem oknu z nastavitvami, če imate zaslon na dotik in je površina vašega zaslona dragocena. Onemogočil bo iskalno vrstico in ob vsakem kliku se bo pojavil kontekstni meni.</para>
+
+<screenshot>
+<screeninfo
+>&ktimetracker; Zaslon</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&ktimetracker; Zaslon</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>Okno Opravila/Čas</title>
+
+<para
+>V tem oknu so prikazane različna opravila, skupaj s časom, zbranim za vsako v trenutni seji in skupaj. Opravila, ki se časovno določajo, imajo poleg časa seje majhno ikono ure.</para>
+
+<para
+>Za vsako opravilo je mogoče ustvariti podopravila. Če kliknete znak plus in znak minus pred glavnim opravilom, preklopite pogled povezanih podopravil. Skupni čas, zbran za opravilo, vključuje čase za njegova podopravila in lasten skupni čas.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>Orodna vrstica in vrstica stanja</title>
+<para
+>Orodna vrstica vsebuje ikone za naslednje ukaze:</para>
+
+<note
+><para
+>Vsi se obnašajo enako kot menijski ukaz.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Novo opravilo</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Novo podopravilo</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Začetek</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Ustavi</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Izbriši</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Uredi</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Odpri</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Shrani</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Vrstica stanja poroča o imenu datoteke, v katero so bili shranjeni podatki.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Zasluge in licenca</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Avtorske pravice programa:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Aleksander Potašev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Sodelujoči (po abecednem vrstnem redu)</para>
+<itemizedlist>
+<listitem
+><para
+>Aleksander Potašev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>&ktimetracker; je bil navdihnjen z zelo uporabnim pripomočkom Haralda Tveita Alvestranda, imenovanim <application
+>titrax</application
+>, katerega edina pomanjkljivost je, da temelji na orodju Xt.</para>
+
+<para
+>Avtorske pravice za dokumentacijo 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; in &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>Prevod: Matjaž Jeran<email
+>matjaz.jeran@amis.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Glosar</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>aktivno opravilo</glossterm>
+<glossdef
+><para
+>Opravilo, pri katerem teče časovnik.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Medprocesni komunikacijski protokol. Okrajšava za Desktop Bus.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>namizje</glossterm>
+<glossdef
+><para
+>&GNU;/&Linux;, FreeBSD in drugi sistemi, ki poganjajo X.Org Server, imajo več namizij. Običajno imate lahko privzeto nameščena štiri različna namizja. Vsako namizje lahko prikaže svoj niz programov in datotek. Ko &kde; &plasma; ko se prvič zažene, je namizje, ki ga vidite, Namizje 1. Če pritisnete <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>, boste videli Namizje 2. S pritiskom <keycombo action=" simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> bo vrnil Namizje 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>zgodovina</glossterm>
+<glossdef
+><para
+>Če &ktimetracker; je konfiguriran za beleženje zgodovine, bo zabeležil vsak dogodek časovnika za zagon/ustavitev. Ta zgodovina se ne izbriše, ko se časi ponastavijo, in ostane v datoteki, dokler opravilo ni izbrisano.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>seja</glossterm>
+<glossdef
+><para
+>Uporabniško določena začetna točka za časovnike seje. Nova seja se začne, ko izberete <menuchoice
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Začni novo sejo</guimenuitem
+> </menuchoice
+>. Podatki o seji se ne shranijo, ko ustvarite novo sejo. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Čas seje</guilabel
+></glossterm
+> <glossdef
+><para
+>Čas, porabljen za opravilo od začetka seje.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>sistemski pladenj</glossterm>
+<glossdef
+><para
+>Sistemski pladenj je v vrstici, ki se (privzeto v &kde; &plasma;) prikaže na dnu zaslona. V tem sistemskem pladnju <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> &ktimetracker; ikona je skrajno desno.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>opravilo na najvišji ravni</glossterm>
+<glossdef
+><para
+>Opravilo brez nadrejenih opravil.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Skupni čas seje</guilabel
+></glossterm
+> <glossdef
+><para
+>Čas, porabljen za opravilo in vse njegove podnaloge od začetka seje.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Čas</guilabel
+></glossterm>
+<glossdef
+><para
+>Čas, porabljen za opravilo od ponastavitve vseh časov.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Skupni čas</guilabel
+></glossterm>
+<glossdef
+><para
+>Čas, porabljen za opravilo in vse njegove podopravila, odkar so bili vsi časi ponastavljeni.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>&DBus; Vmesnik</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>različica</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>različica</refname>
+<refpurpose
+>Vrni različico &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>Različica QString()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Opis</title>
+<para
+><function
+>version()</function
+> je &DBus; klic, ki vrne številko različice &ktimetracker; na primer 4.3.1. Številka različice je vrnjena kot niz v tipičnem &GNU; oblika major.minor.bugfix.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>zapusti</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>zapusti</refname>
+<refpurpose
+>Končaj &ktimetracker;'.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Opis</title>
+<para
+><function
+>quit()</function
+> je &DBus; klic, ki omogoča, da lahko zunanji program elegantno zaustavi &ktimetracker;. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Dodajte novo nalogo.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString ime opravila)
+</synopsis>
+<refsect2>
+<title
+>Parametri</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>ime opravila</parameter
+></term>
+<listitem>
+<para
+>Ime novega opravila.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Opis</title>
+<para
+><function
+>addTask(QString taskname)</function
+> je &DBus; klic, ki trenutnemu pomnilniku doda novo opravilo na najvišji ravni. Vrne se UID novega opravila. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->
