@@ -6,20 +6,20 @@
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007.
 # Krasimir Aranudov <krasi.arnaudov@gmail.com>, 2007.
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-17 00:40+0000\n"
-"PO-Revision-Date: 2022-07-08 11:25+0200\n"
+"PO-Revision-Date: 2024-11-09 20:04+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -149,7 +149,7 @@ msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
 "Note: All subtasks and their history will also be deleted."
 msgstr ""
-"Сигурни ли сте, че искате задачата \"%1\" и историята, принадлежаща към нея, "
+"Сигурни ли сте, че искате задачата „%1“ и историята, принадлежаща към нея, "
 "да бъдат изтрити?\n"
 "Имайте предвид, че всички подзадачи и историите им също ще бъдат изтрити."
 
@@ -163,14 +163,14 @@ msgstr "Изтриване на задача"
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr ""
-"Грешка при зареждане на \"%1\". Не може да бъде намерен родителския елемент "
+"Грешка при зареждане на „%1“. Не може да бъде намерен родителския елемент "
 "(uid=%2)"
 
 #: base/timetrackerstorage.cpp:228
 #, fuzzy, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "Грешка при отваряне на \"%1\"."
+msgstr "Грешка при отваряне на „%1“."
 
 #: base/timetrackerstorage.cpp:236
 #, kde-format
@@ -913,7 +913,7 @@ msgstr ""
 #: export/export.cpp:49
 #, kde-format
 msgid "Could not open \"%1\"."
-msgstr "Грешка при отваряне на \"%1\"."
+msgstr "Грешка при отваряне на „%1“."
 
 #: export/totalsastext.cpp:69
 #, kde-format
