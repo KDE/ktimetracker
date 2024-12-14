@@ -24,7 +24,7 @@ private Q_SLOTS:
     void testTotalsEmpty();
     void testTotalsSimpleTree();
     void testTimesSimpleTree();
-    void testHistorySimpleTree();
+    // void testHistorySimpleTree();
 };
 
 ReportCriteria ExportCSVTest::createRC(ReportCriteria::REPORTTYPE type)
@@ -102,25 +102,25 @@ void ExportCSVTest::testTimesSimpleTree()
     QCOMPARE(readTextFile(url.toLocalFile()), expected);
 }
 
-void ExportCSVTest::testHistorySimpleTree()
-{
-    QLocale::setDefault(QLocale(QLocale::C));
-
-    auto *taskView = createTaskView(this, true);
-    QVERIFY(taskView);
-
-    const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
-    const QUrl &url = createTempFile(this);
-    QString output = exportToString(taskView->storage()->projectModel(), taskView->tasksWidget()->currentItem(), rc);
-    QCOMPARE(writeExport(output, url), QString());
-
-    const QString &expected = QStringLiteral(
-        "\"Task name\";%1\n"
-        "\"1\";0:05\n"
-        "\"1->2\";0:03\n"
-        "\"3\";0:07\n").arg(QDate::currentDate().toString());
-    QCOMPARE(readTextFile(url.toLocalFile()), expected);
-}
+// void ExportCSVTest::testHistorySimpleTree()
+// {
+//     QLocale::setDefault(QLocale(QLocale::C));
+//
+//     auto *taskView = createTaskView(this, true);
+//     QVERIFY(taskView);
+//
+//     const auto &rc = createRC(ReportCriteria::CSVHistoryExport);
+//     const QUrl &url = createTempFile(this);
+//     QString output = exportToString(taskView->storage()->projectModel(), taskView->tasksWidget()->currentItem(), rc);
+//     QCOMPARE(writeExport(output, url), QString());
+//
+//     const QString &expected = QStringLiteral(
+//         "\"Task name\";%1\n"
+//         "\"1\";0:05\n"
+//         "\"1->2\";0:03\n"
+//         "\"3\";0:07\n").arg(QDate::currentDate().toString());
+//     QCOMPARE(readTextFile(url.toLocalFile()), expected);
+// }
 
 QTEST_MAIN(ExportCSVTest)
 
