@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #: base/idletimedetector.cpp:62
 #, kde-format
@@ -34,24 +34,26 @@ msgid ""
 "Apply the idle time since %1 to all active\n"
 "timers and keep them running."
 msgstr ""
+"%1 तः निष्क्रियसमयं सर्वेषु सक्रियेषु प्रयोजयन्तु\n"
+"समयनिर्धारकान् चालयन्ति च।"
 
 #: base/idletimedetector.cpp:65
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
-msgstr ""
+msgstr "समयनिर्धारणं निरन्तरं कुर्वन्तु"
 
 #: base/idletimedetector.cpp:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
-msgstr ""
+msgstr "समयं त्यक्त्वा %1 इत्यत्र समयं प्रति पुनः आगच्छन्तु"
 
 #: base/idletimedetector.cpp:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
-msgstr ""
+msgstr "समयं प्रत्यावर्तयन्तु"
 
 #: base/idletimedetector.cpp:72
 #, kde-format
@@ -62,7 +64,7 @@ msgstr "%1 तः डेस्कटॉप् निष्क्रियः अ
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
-msgstr ""
+msgstr "KTimeTracker विन्यस्तं कुर्वन्तु..."
 
 #: base/mainwindow.cpp:136 base/tray.cpp:74
 #, kde-format
@@ -73,7 +75,7 @@ msgstr "सक्रियकार्यं नास्ति"
 #, kde-format
 msgctxt "separator between task names"
 msgid ", "
-msgstr ""
+msgstr ", ९. "
 
 #: base/taskview.cpp:102
 #, kde-format
@@ -97,7 +99,7 @@ msgstr "भवतः वर्चुअल् डेस्कटॉप् सङ
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
-msgstr ""
+msgstr "समयनिर्धारकं स्थगयन्..."
 
 #: base/taskview.cpp:275
 #, kde-format
@@ -125,13 +127,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
-msgstr ""
+msgstr "नवीन उप कार्य"
 
 #: base/taskview.cpp:424
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
-msgstr ""
+msgstr "सम्पादन कार्य"
 
 #: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
 #, kde-format
@@ -151,7 +153,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Deleting Task"
-msgstr ""
+msgstr "कार्यं विलोपनम्"
 
 #: base/timetrackerstorage.cpp:125
 #, kde-format
@@ -162,25 +164,25 @@ msgstr "\"%1\" लोड् करणं त्रुटि: मातापि�
 #, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr ""
+msgstr "\"%1\" इति तालसञ्चिकां लिखितुं न शक्यते । डिस्क पूर्णा?"
 
 #: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
+msgstr "iCalendar सञ्चिकां \"%1\" इति रूपेण रक्षितुं असफलम् ।"
 
 #: base/timetrackerwidget.cpp:138
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
-msgstr ""
+msgstr "प्रारम्भ &नव सत्र"
 
 #: base/timetrackerwidget.cpp:139
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
-msgstr ""
+msgstr "नूतनं सत्रं आरभते"
 
 #: base/timetrackerwidget.cpp:141
 #, kde-format
@@ -189,18 +191,20 @@ msgid ""
 "This will reset the session time to 0 for all tasks, to start a new session, "
 "without affecting the totals."
 msgstr ""
+"एतेन सर्वेषां कार्याणां कृते सत्रसमयः 0 इति पुनः सेट् भविष्यति, नूतनसत्रस्य आरम्भार्थं, कुलानाम् "
+"प्रभावं विना ।"
 
 #: base/timetrackerwidget.cpp:149
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr ""
+msgstr "इतिहास सम्पादयतु..."
 
 #: base/timetrackerwidget.cpp:150
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
-msgstr ""
+msgstr "वर्तमानदस्तावेजस्य सर्वेषां कार्याणां इतिहासं सम्पादयति"
 
 #: base/timetrackerwidget.cpp:152
 #, kde-format
@@ -209,18 +213,20 @@ msgid ""
 "A window will be opened where you can change start and stop times of tasks "
 "or add a comment to them."
 msgstr ""
+"एकं विण्डो उद्घाट्यते यत्र भवान् कार्याणां आरम्भ-विराम-समयं परिवर्तयितुं वा तेषु टिप्पणीं "
+"योजयितुं वा शक्नोति ।"
 
 #: base/timetrackerwidget.cpp:162
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
-msgstr ""
+msgstr "&सर्वसमयं पुनः सेट् कुर्वन्तु"
 
 #: base/timetrackerwidget.cpp:163
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
-msgstr ""
+msgstr "सर्वदा पुनः सेट् करोति"
 
 #: base/timetrackerwidget.cpp:165
 #, kde-format
@@ -229,18 +235,19 @@ msgid ""
 "This will reset the session and total time to 0 for all tasks, to restart "
 "from scratch."
 msgstr ""
+"एतेन सर्वेषां कार्याणां कृते सत्रं कुलसमयं च 0 इति पुनः सेट् भविष्यति, आद्यतः पुनः आरभ्यतुं ।"
 
 #: base/timetrackerwidget.cpp:172
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
-msgstr ""
+msgstr "&प्रारंभः"
 
 #: base/timetrackerwidget.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
-msgstr ""
+msgstr "चयनितकार्यस्य समयनिर्धारणं आरभते"
 
 #: base/timetrackerwidget.cpp:175
 #, kde-format
@@ -252,66 +259,71 @@ msgid ""
 "You may also start timing of tasks by double clicking the left mouse button "
 "on a given task. This will, however, stop timing of other tasks."
 msgstr ""
+"एतेन चयनितकार्यस्य समयः आरभ्यते ।\n"
+"युगपत् अनेककार्यस्य समयनिर्धारणमपि सम्भवति ।\n"
+"\n"
+"दत्तकार्यस्य वाममूषकस्य बटन् द्विवारं क्लिक् कृत्वा कार्याणां समयनिर्धारणमपि आरभुं शक्नुवन्ति । "
+"एतेन तु अन्यकार्यस्य समयः स्थगितः भविष्यति ।"
 
 #: base/timetrackerwidget.cpp:189
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
-msgstr ""
+msgstr "विरमतु"
 
 #: base/timetrackerwidget.cpp:190
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
-msgstr ""
+msgstr "चयनितकार्यस्य समयनिर्धारणं स्थगयति"
 
 #: base/timetrackerwidget.cpp:191
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
-msgstr ""
+msgstr "चयनितकार्यस्य समयनिर्धारणं स्थगयति"
 
 #: base/timetrackerwidget.cpp:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Focus on Searchbar"
-msgstr ""
+msgstr "Searchbar इत्यत्र ध्यानं दत्तव्यम्"
 
 #: base/timetrackerwidget.cpp:199
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the focus on the searchbar"
-msgstr ""
+msgstr "अन्वेषणपट्टिकायां केन्द्रीकरणं सेट् करोति"
 
 #: base/timetrackerwidget.cpp:200
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Sets the focus on the searchbar"
-msgstr ""
+msgstr "अन्वेषणपट्टिकायां केन्द्रीकरणं सेट् करोति"
 
 #: base/timetrackerwidget.cpp:207
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
-msgstr ""
+msgstr "Stop &All Timers इति"
 
 #: base/timetrackerwidget.cpp:208
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops all of the active timers"
-msgstr ""
+msgstr "सक्रियसमयनिर्धारकान् सर्वान् स्थगयति"
 
 #: base/timetrackerwidget.cpp:209
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops all of the active timers"
-msgstr ""
+msgstr "सक्रियसमयनिर्धारकान् सर्वान् स्थगयति"
 
 #: base/timetrackerwidget.cpp:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Track Active Applications"
-msgstr ""
+msgstr "सक्रिय अनुप्रयोगानाम् अनुसरणं कुर्वन्तु"
 
 #: base/timetrackerwidget.cpp:219
 #, kde-format
@@ -320,6 +332,7 @@ msgid ""
 "Auto-creates and updates tasks when the focus of the current window has "
 "changed"
 msgstr ""
+"वर्तमानविण्डो इत्यस्य केन्द्रबिन्दुः परिवर्तितः चेत् कार्याणि स्वयमेव निर्माति, अद्यतनं च करोति"
 
 #: base/timetrackerwidget.cpp:222
 #, kde-format
@@ -329,72 +342,75 @@ msgid ""
 "enabled, a new task will be created with the title of the window as its name "
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
+"यदि प्रथमवारं विण्डो इत्यस्य केन्द्रबिन्दुः परिवर्तते यदा एषा क्रिया सक्षमा भवति तर्हि "
+"विण्डो इत्यस्य शीर्षकं नामरूपेण नूतनं कार्यं निर्मीयते, आरभ्यते च यदि पूर्वमेव एतादृशं कार्यं "
+"विद्यते तर्हि तत् आरभ्यते।"
 
 #: base/timetrackerwidget.cpp:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
-msgstr ""
+msgstr "&नव कार्य..."
 
 #: base/timetrackerwidget.cpp:234
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
-msgstr ""
+msgstr "नूतनं शीर्षस्तरीयं कार्यं निर्माति"
 
 #: base/timetrackerwidget.cpp:235
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
-msgstr ""
+msgstr "एतेन नूतनं शीर्षस्तरीयं कार्यं निर्मीयते ।"
 
 #: base/timetrackerwidget.cpp:243
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
-msgstr ""
+msgstr "नवीन &उपकार्य..."
 
 #: base/timetrackerwidget.cpp:244
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
-msgstr ""
+msgstr "वर्तमानचयनितकार्यस्य कृते नूतनं उपकार्यं निर्माति"
 
 #: base/timetrackerwidget.cpp:245
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
-msgstr ""
+msgstr "एतेन वर्तमानचयनितकार्यस्य नूतनं उपकार्यं निर्मास्यति ।"
 
 #: base/timetrackerwidget.cpp:253
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
-msgstr ""
+msgstr "&लुप्"
 
 #: base/timetrackerwidget.cpp:254
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
-msgstr ""
+msgstr "चयनितं कार्यं विलोपयति"
 
 #: base/timetrackerwidget.cpp:255
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
-msgstr ""
+msgstr "एतेन चयनितं कार्यं (कार्यं) सर्वाणि उपकार्यं च विलोप्यते ।"
 
 #: base/timetrackerwidget.cpp:263
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
-msgstr ""
+msgstr "&गुणाः"
 
 #: base/timetrackerwidget.cpp:264
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
-msgstr ""
+msgstr "चयनितकार्यस्य नाम वा विवरणं वा सम्पादयन्तु"
 
 #: base/timetrackerwidget.cpp:266
 #, kde-format
@@ -403,18 +419,19 @@ msgid ""
 "This will bring up a dialog box where you may edit the parameters for the "
 "selected task."
 msgstr ""
+"एतेन एकं संवादपेटिका आगमिष्यति यत्र भवान् चयनितकार्यस्य मापदण्डान् सम्पादयितुं शक्नोति ।"
 
 #: base/timetrackerwidget.cpp:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
-msgstr ""
+msgstr "सम्पादनम् &समय..."
 
 #: base/timetrackerwidget.cpp:276
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
-msgstr ""
+msgstr "चयनितकार्यस्य कृते समयं सम्पादयन्तु"
 
 #: base/timetrackerwidget.cpp:278
 #, kde-format
@@ -422,61 +439,61 @@ msgctxt "@info:whatsthis"
 msgid ""
 "This will bring up a dialog box where you may edit the times for the "
 "selected task."
-msgstr ""
+msgstr "एतेन एकं संवादपेटिका आगमिष्यति यत्र भवान् चयनितकार्यस्य समयान् सम्पादयितुं शक्नोति ।"
 
 #: base/timetrackerwidget.cpp:287
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
-msgstr ""
+msgstr "&Comple इति चिह्नं कुर्वन्तु"
 
 #: base/timetrackerwidget.cpp:295
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
-msgstr ""
+msgstr "&अपूर्ण इति चिह्नं कुर्वन्तु"
 
 #: base/timetrackerwidget.cpp:303
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr ""
+msgstr "&निर्यात..."
 
 #: base/timetrackerwidget.cpp:310
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
-msgstr ""
+msgstr "&Planner तः कार्याणि आयातयन्तु..."
 
 #: base/timetrackerwidget.cpp:322
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Show Searchbar"
-msgstr ""
+msgstr "अन्वेषणपट्टिकां दर्शयतु"
 
 #: base/timetrackerwidget.cpp:457
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
-msgstr ""
+msgstr "व्यवहार"
 
 #: base/timetrackerwidget.cpp:462
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
-msgstr ""
+msgstr "स्वरूपम्‌"
 
 #: base/timetrackerwidget.cpp:467
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
-msgstr ""
+msgstr "संग्रहण"
 
 #: base/timetrackerwidget.cpp:504
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
-msgstr ""
+msgstr "नवीनं कार्यम्"
 
 #: base/timetrackerwidget.cpp:583
 #, kde-format
@@ -485,6 +502,7 @@ msgid ""
 "There is no history yet. Start and stop a task and you will have an entry in "
 "your history."
 msgstr ""
+"अद्यापि इतिहासः नास्ति। कार्यं आरभ्य स्थगयन्तु ततः भवतः इतिहासे एकः प्रविष्टिः भविष्यति।"
 
 #: base/timetrackerwidget.cpp:593
 #, kde-format
@@ -499,13 +517,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
-msgstr ""
+msgstr "पुष्टिकरणम् आवश्यकम्"
 
 #: base/timetrackerwidget.cpp:596
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
-msgstr ""
+msgstr "All Times पुनः सेट् कुर्वन्तु"
 
 #: base/timetrackerwidget.cpp:785
 #, kde-format
@@ -555,30 +573,34 @@ msgid ""
 "with creating your first task - enter it into the field where you see "
 "\"Search or add task\"."
 msgstr ""
+"एषः ktimetracker इति KDE इत्यस्य कार्यक्रमः यत् भवतः समयं निरीक्षितुं साहाय्यं करोति । "
+"सर्वोत्तमम्, प्रथमं कार्यं निर्मातुं आरभत - यस्मिन् क्षेत्रे \"Search or add task\" इति "
+"पश्यन्ति तत्र प्रविशन्तु ।"
 
 #: base/timetrackerwidget.cpp:1030
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr ""
+"भवता पूर्वमेव कार्यं निर्मितम्। इदानीं भवन्तः समयनिर्धारणं आरभ्य स्थगयितुं च शक्नुवन्ति ।"
 
 #: base/tray.cpp:79
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
-msgstr ""
+msgstr ", ..."
 
 #: base/treeviewheadercontextmenu.cpp:31
 #, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
-msgstr ""
+msgstr "स्तम्भाः"
 
 #: dialogs/edittimedialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Task Time"
-msgstr ""
+msgstr "कार्यसमय सम्पादयतु"
 
 #: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:42
 #, kde-format
@@ -600,7 +622,7 @@ msgstr "कार्यविवरणम् : १."
 #, kde-format
 msgctxt "@title:group"
 msgid "Time Editing"
-msgstr ""
+msgstr "समय सम्पादन"
 
 #: dialogs/edittimedialog.cpp:65
 #, kde-format
@@ -612,8 +634,8 @@ msgstr "वर्तमान समय : १."
 msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
 msgid " minute"
 msgid_plural " minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " क्षणं"
+msgstr[1] " पन्चनिमेषः"
 
 #: dialogs/edittimedialog.cpp:74
 #, kde-format
@@ -629,7 +651,7 @@ msgstr "परिवर्तनस्य अनन्तरं समयः : �
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr ""
+msgstr "इतिहास सम्पादयतु..."
 
 #: dialogs/edittimedialog.cpp:85
 #, kde-format
@@ -640,14 +662,14 @@ msgstr "अस्य कार्यस्य समयं परिवर्त
 #, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
-msgstr ""
+msgstr "File मध्ये निर्यातं कुर्वन्तु"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.cpp:102 dialogs/exportdialog.ui:184
 #, kde-format
 msgctxt "format to display times"
 msgid "Decimal"
-msgstr ""
+msgstr "दशमलवः"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
 #: dialogs/exportdialog.cpp:122 dialogs/exportdialog.ui:203
@@ -790,14 +812,14 @@ msgstr "अर्धविराम"
 #, kde-format
 msgctxt "user can set an user defined delimiter"
 msgid "Other:"
-msgstr ""
+msgstr "इतर:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTab)
 #: dialogs/exportdialog.ui:264
 #, kde-format
 msgctxt "tabulator delimiter"
 msgid "Tab"
-msgstr ""
+msgstr "टब"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioSpace)
 #: dialogs/exportdialog.ui:271
@@ -853,7 +875,7 @@ msgstr "टिप्पणी"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
-msgstr ""
+msgstr "अस्य कार्यस्य टिप्पणीं, आरम्भसमयं, समाप्तिसमयं च परिवर्तयितुं शक्नुवन्ति ।"
 
 #: dialogs/historydialog.cpp:181 dialogs/historydialog.cpp:201
 #, kde-format
@@ -878,18 +900,20 @@ msgid ""
 "<p>Enter the name of the task here. You can choose it freely.</p>\n"
 "<p><i>Example:</i> phone with mother</p>"
 msgstr ""
+"<p>कार्यस्य नाम अत्र प्रविशतु। भवन्तः स्वतन्त्रतया तत् चिन्वितुं शक्नुवन्ति।</p><p> "
+"<i>उदाहरणम् :</i> मातुः सह दूरभाषः</p>"
 
 #: dialogs/taskpropertiesdialog.cpp:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
-msgstr ""
+msgstr "स्वतः अनुसरणम्"
 
 #: dialogs/taskpropertiesdialog.cpp:89
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
-msgstr ""
+msgstr "%1."
 
 #: export/export.cpp:49
 #, kde-format
@@ -910,7 +934,7 @@ msgstr "कालः"
 #, kde-format
 msgctxt "total time of all tasks"
 msgid "Total"
-msgstr ""
+msgstr "कुल"
 
 #: export/totalsastext.cpp:107
 #, kde-format
@@ -966,121 +990,121 @@ msgstr "प्रतिलिपि अधिकार © 1997-2019 KTimeTracker
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
-msgstr ""
+msgstr "अलेक्जेण्डर पोटाशेव"
 
 #: main.cpp:99
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
-msgstr ""
+msgstr "वर्तमान परिपालकः (२०१९ तः) २."
 
 #: main.cpp:101
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
-msgstr ""
+msgstr "थोर्स्टेन स्टार्क"
 
 #: main.cpp:102
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
-msgstr ""
+msgstr "अनुरक्षणकर्ता (२००६-२०१२) २."
 
 #: main.cpp:104
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
-msgstr ""
+msgstr "मार्क बुचियारेल्लि"
 
 #: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
-msgstr ""
+msgstr "अनुरक्षणकर्ता (२००५-२००६) २."
 
 #: main.cpp:107
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
-msgstr ""
+msgstr "जेस्पर पेडरसेन्"
 
 #: main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
-msgstr ""
+msgstr "अनुरक्षणकर्ता (२०००-२००५) २."
 
 #: main.cpp:110
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
-msgstr ""
+msgstr "सिरताज सिंह कांग"
 
 #: main.cpp:111
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
-msgstr ""
+msgstr "मूल लेखक"
 
 #: main.cpp:113
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
-msgstr ""
+msgstr "मथियस सोएकेन्"
 
 #: main.cpp:114
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
-msgstr ""
+msgstr "विकासकः (२००७ तमे वर्षे) २."
 
 #: main.cpp:116
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
-msgstr ""
+msgstr "डालहेमर इत्यस्मै सम्पर्कं कुर्वन्तु"
 
 #: main.cpp:117
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
-msgstr ""
+msgstr "विकासकः (१९९९-२०००) २."
 
 #: main.cpp:119
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
-msgstr ""
+msgstr "सर्वं शिशिरं"
 
 #: main.cpp:120 main.cpp:123
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "विकासकः"
 
 #: main.cpp:122
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr ""
+msgstr "डेविड फौरे"
 
 #: main.cpp:136
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
-msgstr ""
+msgstr "उद्घाटयितुं iCalendar सञ्चिकायाः मार्गः अथवा URL ।"
 
 #: model/tasksmodel.cpp:19
 #, kde-format
 msgctxt "@title:column"
 msgid "Task Name"
-msgstr ""
+msgstr "कार्यनाम"
 
 #: model/tasksmodel.cpp:20
 #, kde-format
 msgctxt "@title:column"
 msgid "Session Time"
-msgstr ""
+msgstr "सत्रसमयः"
 
 #: model/tasksmodel.cpp:21
 #, kde-format
@@ -1092,13 +1116,13 @@ msgstr "कालः"
 #, kde-format
 msgctxt "@title:column"
 msgid "Total Session Time"
-msgstr ""
+msgstr "कुल सत्र समय"
 
 #: model/tasksmodel.cpp:23
 #, kde-format
 msgctxt "@title:column"
 msgid "Total Time"
-msgstr ""
+msgstr "कुल समय"
 
 #: model/tasksmodel.cpp:24
 #, kde-format
@@ -1110,33 +1134,33 @@ msgstr "पूर्ववर्तिता"
 #, kde-format
 msgctxt "@title:column"
 msgid "Percent Complete"
-msgstr ""
+msgstr "प्रतिशतं सम्पूर्णम्"
 
 #: model/tasksmodel.cpp:175 model/tasksmodel.cpp:268
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The task name is what you call the task, it can be chosen freely."
-msgstr ""
+msgstr "कार्यनाम यत् भवन्तः कार्यम् इति वदन्ति, तत् स्वतन्त्रतया चयनं कर्तुं शक्यते।"
 
 #: model/tasksmodel.cpp:179 model/tasksmodel.cpp:272
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The session time is the time since you last chose \"Start New Session\"."
-msgstr ""
+msgstr "सत्रसमयः सः समयः यदा भवान् अन्तिमे समये \"नवीनसत्रं आरभत\" इति चिनोति स्म ।"
 
 #: model/tasksmodel.cpp:276
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
-msgstr ""
+msgstr "कुलसत्रसमयः अस्य कार्यस्य तस्य सर्वेषां उपकार्यस्य च सत्रसमयः भवति ।"
 
 #: model/tasksmodel.cpp:280
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
-msgstr ""
+msgstr "कुलकालः अस्य कार्यस्य सर्वेषां उपकार्यस्य च समयः ।"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
 #: settings/cfgbehavior.ui:21
@@ -1196,7 +1220,7 @@ msgstr "सिस्टम् ट्रे मध्ये एकं चिह�
 #, kde-format
 msgctxt "title of group box, general options"
 msgid "General"
-msgstr ""
+msgstr "सामान्य"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_decimalFormat)
 #: settings/cfgdisplay.ui:40
@@ -1223,7 +1247,7 @@ msgctxt ""
 "Choose this if you have a touchscreen and your screen real estate is "
 "precious."
 msgid "Configuration for PDA"
-msgstr ""
+msgstr "PDA कृते विन्यासः"
 
 #. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
 #: settings/cfgdisplay.ui:60
@@ -1295,7 +1319,7 @@ msgstr "प्रत्येकं कार्याणि रक्षन्�
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search or add task"
-msgstr ""
+msgstr "कार्यं अन्वेष्टुम् अथवा योजयतु"
 
 #: widgets/searchline.cpp:25
 #, kde-format
@@ -1305,33 +1329,36 @@ msgid ""
 "filter. Then, only tasks that match your input are shown. As soon as you "
 "press Enter, your input is used as name to create a new task."
 msgstr ""
+"एतत् संयुक्तक्षेत्रम् अस्ति। यावत् भवन्तः Enter न नुदन्ति तावत् एतत् फ़िल्टर इत्यस्य कार्यं करोति "
+"। ततः, केवलं तानि कार्याणि दर्शितानि ये भवतः निवेशेन सह सङ्गतानि सन्ति । Enter "
+"नुदनमात्रेण भवतः निवेशः नूतनं कार्यं निर्मातुं नामरूपेण उपयुज्यते ।"
 
 #: widgets/taskswidget.cpp:129
 #, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
-msgstr ""
+msgstr "%1 % ."
 
 #: widgets/taskswidget.cpp:140
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
-msgstr ""
+msgstr "अनिर्दिष्टम्"
 
 #: widgets/taskswidget.cpp:143
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
-msgstr ""
+msgstr "१ (उच्चतमः) २."
 
 #: widgets/taskswidget.cpp:146
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
-msgstr ""
+msgstr "५ (मध्यम) २."
 
 #: widgets/taskswidget.cpp:149
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
-msgstr ""
+msgstr "९ (अधमतम) २."
