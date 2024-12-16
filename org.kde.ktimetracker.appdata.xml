@@ -28,6 +28,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <name xml:lang="fr">KTimeTracker</name>
   <name xml:lang="gl">KTimeTracker</name>
   <name xml:lang="he">KTimeTracker</name>
+  <name xml:lang="hi">केटाइमट्रैकर</name>
   <name xml:lang="ia">KTimeTracker</name>
   <name xml:lang="id">KTimeTracker</name>
   <name xml:lang="it">KTimeTracker</name>
@@ -62,6 +63,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <summary xml:lang="fr">Outil de gestion du temps personnel</summary>
   <summary xml:lang="gl">Seguimento do tempo persoal</summary>
   <summary xml:lang="he">עוקב תזמונים אישי</summary>
+  <summary xml:lang="hi">व्यक्तिगत समय ट्रैकर</summary>
   <summary xml:lang="ia">Traciator de tempore personal</summary>
   <summary xml:lang="id">Pelacak Waktu Personal</summary>
   <summary xml:lang="it">Segnatempo personale</summary>
@@ -97,6 +99,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="fr">KTimeTracker vous aide à suivre le temps que vous passez sur différentes tâches et projets.</p>
     <p xml:lang="gl">KTimeTracker axuda a facer un seguimento do tempo persoal que se dedica a distintas tarefas e proxectos.</p>
     <p xml:lang="he">KTimeTracker מסייע לך לעקוב אחר הזמן האישי שהשקעת במגוון משימות ומיזמים.</p>
+    <p xml:lang="hi">KTimeTracker आपको विभिन्न कार्यों और परियोजनाओं पर खर्च किए गए अपने व्यक्तिगत समय को ट्रैक करने में मदद करता है।</p>
     <p xml:lang="ia">Ktimetracker adjuta te a traciar tu tempore personal passate sur varie cargas e projectos.</p>
     <p xml:lang="id">KTimeTracker membantu kamu melacak waktu personal yang dihabiskan pada berbagai tugas dan projekmu.</p>
     <p xml:lang="it">KTimeTracker ti aiuta a tenere traccia del tempo personale speso in varie attività e progetti.</p>
@@ -130,6 +133,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="fr">Il vous permet de calculer vos heures facturables et de créer des rapports par tâche et par jour.</p>
     <p xml:lang="gl">Resulta útil para facer un seguimento de horas de traballo e pode informar das horas rexistradas por tarefa e día.</p>
     <p xml:lang="he">שימושי למעקב אחר שעות לחיוב ומאפשר לדווח על השעות שתועדו לפי משימה ויום.</p>
+    <p xml:lang="hi">यह बिल योग्य घंटों पर नज़र रखने के लिए उपयोगी है और कार्य और दिन के अनुसार लॉग किए गए घंटों की रिपोर्ट कर सकता है।</p>
     <p xml:lang="ia">Illo es utile per traciar horas facturabile  e pote reportar le horas de accesso per carga e die.</p>
     <p xml:lang="id">Ini berguna untuk melacak jam terbang dan bisa melaporkan jam yang dicatat berdasarkan tugas dan harian.</p>
     <p xml:lang="it">È utile per tracciare ore fatturabili e fornire resoconti delle ore registrate per attività e giorno.</p>
@@ -163,6 +167,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="fr">Grâce à KTimeTracker, vous pouvez organiser un projet en sous-tâches avec un nombre illimité de niveaux. Les raccourcis clavier et souris sont simples, de manière à ce que l'outil soit intuitif et confortable à utiliser.</p>
     <p xml:lang="gl">Con KTimeTracker pode  organizar un proxecto en tarefas aniñadas en niveis ilimitados. Os atallos de teclado e rato estándar son simples e fornecer unha experiencia cómoda e intuitiva.</p>
     <p xml:lang="he">עם KTimeTracker, אפשר לארגן מיזם מפורק לתת־משימות עם רמות קינון אינסופיות. קיצורי המקלדת והעכבר הרגילים הם פשוטים והופכים את הכלי לנוח ומסביר פנים במיוחד.</p>
+    <p xml:lang="hi">KTimeTracker के साथ, आप एक टूटी हुई परियोजना को असीमित नेस्टिंग के साथ उप-कार्यों के रूप में व्यवस्थित कर सकते हैं। मानक कीबोर्ड और माउस शॉर्टकट सरल हैं और उपकरण को उपयोग करने के लिए वास्तव में आरामदायक और सहज बनाते हैं।</p>
     <p xml:lang="ia">Con KTiMETracker tu pote organizar un projecto subdividite in subcargas con annidationes sin limite. Le vias breve standard de clavriero e mus es simple e face le instrumento vermente confortabile e intuitive de usar.</p>
     <p xml:lang="id">Dengan KTimeTracker,kamu bisa mengatur projek yang kacau sebagai subtugas dengan bersarang tanpa batas. Pintasan keyboard dan mouse standar yang sederhana dan membuat alat ini benar-benar nyaman dan intuitif untuk digunakan.</p>
     <p xml:lang="it">Con KTimeTracker, puoi organizzare un progetto frammentato come sotto-attività con nidificazione illimitata. Le scorciatoie standard per tastiera e mouse sono semplici e rendono lo strumento davvero comodo e intuitivo da utilizzare.</p>
@@ -204,6 +209,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <caption xml:lang="fr">KTimeTracker</caption>
       <caption xml:lang="gl">KTimeTracker</caption>
       <caption xml:lang="he">KTimeTracker</caption>
+      <caption xml:lang="hi">केटाइमट्रैकर</caption>
       <caption xml:lang="ia">KTimeTracker</caption>
       <caption xml:lang="id">KTimeTracker</caption>
       <caption xml:lang="it">KTimeTracker</caption>
