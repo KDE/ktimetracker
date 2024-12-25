@@ -1,0 +1,1205 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % French "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+<!--
+SPDX-FileCopyrightText: 2000-2004 Jonathan Singer
+SPDX-FileCopyrightText: 2004-2005 Mark Bucciarelli <mark@hubcapconsulting.com>
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
+SPDX-License-Identifier: GFDL-1.2-only
+-->
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>Manuel de &ktimetracker;</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>Réviseur</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    &traducteurAlviseCavallari; &traducteurGerardDelafond; &traducteurLudovicGrossard; &traducteurXavierBesnard; 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>19-11-2019</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>&ktimetracker; chronomètre le temps passé sur différentes activités.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>KDE</keyword>
+    <keyword
+>ktimetracker</keyword>
+    <keyword
+>temps</keyword>
+    <keyword
+>chronomètre</keyword>
+    <keyword
+>projet</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introduction</title>
+
+<para
+>&ktimetracker; chronomètre le temps passé sur différentes activités. Il est utile pour définir les heures pouvant être facturées et permet de relater les heures effectuées par activité et par jour.</para>
+
+<para
+>Cet historique du temps peut être exporté vers un fichier CSV (dont les valeurs sont séparées par des virgules) pour être ensuite importé dans un autre outil de facturation ou de gestion de projet.</para>
+
+<para
+>&ktimetracker; détecte lorsque le clavier ainsi que la souris sont inactifs, et peut associer différentes activités avec différents bureaux. Cela permet de maintenir le chronomètre en fonction sur la bonne activité.</para>
+
+<para
+>&ktimetracker; a été initialement écrit par &Sirtaj.Singh.Kang;. Sa page d'accueil est <ulink url="http://userbase.kde.org/KTimeTracker"
+>http://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>Utiliser &ktimetracker;</title>
+
+<sect1 id="starting">
+<title
+>Démarrer &ktimetracker;</title>
+
+<para
+>Saisissez <command
+>ktimetracker</command
+> en ligne de commandes ou sélectionnez <guimenuitem
+>Suivi du temps personnel</guimenuitem
+> dans le groupe <menuchoice
+><guimenu
+>Applications</guimenu
+><guisubmenu
+>Utilitaires</guisubmenu
+></menuchoice
+> du <guimenu
+>lanceur d'applications de KDE</guimenu
+>. Les options standards des commandes &Qt; et &kf5-full; sont disponibles. Veuillez consulter les pages de manuel (man) pour qt5options et kf5options. </para>
+
+<para
+>&ktimetracker; fournit une option supplémentaire de ligne de commandes vous permettant de définir le nom du fichier « iCalendar » à utiliser pour enregistrer l'historique de votre travail. Vous pouvez définir un fichier distant « iCalendar » en utilisant les préfixes &HTTP; ou &FTP;  dans le nom de fichier. Par exemple : http://www.mon-site.com/mes-données/mon-travail.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>Activités</title>
+
+<informalexample>
+<para
+><emphasis
+>Problème :</emphasis
+> Vous êtes consultant indépendant en logiciels, avec plusieurs clients. Certains de vos clients ont de nombreux projets. Durant vos journées, vous ne cessez de basculer d'un projet à un autre. Vous avez besoin de suivre votre répartition du temps, afin de pouvoir établir vos factures mensuelles.</para>
+<para
+><emphasis
+>Solution :</emphasis
+> Créez une activité au niveau le plus haut pour chaque client, et une sous-activité pour chaque projet client. Pour les projets qui nécessitent un suivi plus détaillé, créez une liste de sous-activités de projet. Chronométrez le temps en double-cliquant l'activité sur laquelle vous allez travailler.</para>
+</informalexample>
+
+<para
+>&ktimetracker; fournit une grande souplesse dans le suivi de votre temps, en autorisant une quantité infinie d'activités et de niveaux. Le temps peut être mesuré pour n'importe quelle activité, et plusieurs activités peuvent être actives simultanément.</para>
+<para
+>&ktimetracker; vous permet d'éditer l'historique de vos activités et de commenter chaque évènement que vous avez arrêté.</para>
+<para
+>Pour créer une activité au niveau le plus haut, veuillez sélectionner <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tâche</guimenu
+> <guimenuitem
+>Nouvelle tâche...</guimenuitem
+> </menuchoice
+>. Pour créer une sous-tâche, veuillez cliquer sur l'activité parent puis sélectionner <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tâche</guimenu
+> <guimenuitem
+>Nouvelle sous-tâche...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>Lorsque &ktimetracker; est arrêté, la liste des activités est enregistrée dans un fichier sur votre disque. Au prochain démarrage, la liste des activités sera ainsi reprise.</para>
+
+<para
+>&ktimetracker; peut importer et exporter des tâches, afin de faciliter votre travail. veuillez vous référer à <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>Chronomètres</title>
+
+<informalexample>
+<para
+><emphasis
+>Problème :</emphasis
+> Pour rester solvable, vous devez pouvoir facturer une moyenne de cinq heures journalières. Pour cela, vous observez vos totaux quotidiens et hebdomadaires.</para>
+<para
+><emphasis
+>Solution :</emphasis
+> Mettez à zéro le chronomètre de session au commencement de chaque journée ouvrée, et mettez à zéro tous les chronomètres au commencement de chaque semaine.</para
+> </informalexample>
+
+<para
+>&ktimetracker; facilite le chronométrage. Pour démarrer le chronométrage d'une activité, il vous suffit de double-cliquer dessus. Pour arrêter le chronométrage, double-cliquez à nouveau sur l'activité. Les activités actives affichent une petite horloge dans la colonne <guilabel
+>Durée de la session</guilabel
+></para>
+
+<para
+>Un autre indicateur visuel de l'activité de &ktimetracker; est l'icône dans la boîte à miniatures. Lorsqu'une activité est active, la deuxième main de l'icône bouge. Si vous passez le pointeur de la souris sur l'icône, alors le nom de l'activité active s'affichera dans une infobulle. Lorsque plusieurs activités sont actives, leurs noms sont affichés dans l'infobulle, séparés par une virgule.</para>
+
+<para
+>Chaque activité dans &ktimetracker; possède deux minuteries : une pour la durée de la session, et une autre pour la durée totale. Dans la configuration par défaut, &ktimetracker; affiche deux colonnes pour chaque minuterie, soit un total de quatre colonnes pour chaque activité :</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>Durée de la session</guilabel
+></term>
+<listitem
+><para
+>Le temps passé sur l'activité depuis que la session a été démarrée.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Durée</guilabel
+></term
+> <listitem
+><para
+>Le temps passé sur l'activité depuis que tous les temps ont été remis à zéro.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Durée totale de la session</guilabel
+></term>
+<listitem
+><para
+>Le temps passé sur l'activité et toutes ses sous-activités depuis que la session a été démarrée.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>Durée totale</guilabel
+></term>
+<listitem
+><para
+>Le temps passé sur l'activité et toutes ses sous-activités depuis que tous les temps ont été remis à zéro.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>Pour commencer une nouvelle session, sélectionnez <menuchoice
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Démarrer une nouvelle session</guimenuitem
+> </menuchoice
+> </para>
+
+<para
+>Pour mettre à zéro tous les compteurs, Sélectionnez <menuchoice
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Réinitialiser toutes les durées</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>Chronométrage du bureau</title>
+
+<informalexample>
+<para
+><emphasis
+>Problème :</emphasis
+> Vous travaillez simultanément sur deux projets. Afin de mieux organiser votre travail, vous maintenez tous les fichiers du projet 1 sur le Bureau 1, et tous les fichiers du projet 2 sur le Bureau 2.</para>
+
+<para
+><emphasis
+>Solution :</emphasis
+> Associez l'activité du projet 1 avec le Bureau 1, et l'activité du projet 2 avec le Bureau 2. Lorsque vous basculez du Bureau 2 vers le Bureau 1, &ktimetracker; arrête immédiatement l'activité du projet 2 et démarre l'activité du projet 1.</para>
+</informalexample>
+
+<para
+>Pour associer une tâche avec un ou plusieurs bureaux, veuillez sélectionner <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Tâche</guimenu
+> <guimenuitem
+>Propriétés</guimenuitem
+> </menuchoice
+>. Veuillez cocher le <guilabel
+>Suivi automatique</guilabel
+> et sélectionner le ou les bureaux à associer avec cette tâche. Lorsque l'un de des bureaux sélectionnés devient actif, &ktimetracker; démarrera automatiquement après un court délai le chronomètre de cette tâche.</para>
+
+</sect2>
+
+<sect2
+><title
+>Détection d'inactivité</title>
+
+<informalexample
+> <para
+><emphasis
+>Problème :</emphasis
+> Vous quittez tôt le bureau le vendredi pour faire vos courses, et oubliez d'arrêter le chronomètre. Lorsque vous revenez le lundi, le compteur tourne toujours.</para>
+<para
+><emphasis
+>Solution :</emphasis
+> Validez la détection d'inactivité dans la page <guilabel
+>Comportement</guilabel
+> de la boîte de configuration.</para>
+</informalexample>
+
+<para
+>&ktimetracker; peut être configuré pour reconnaître lorsque le clavier et la souris deviennent inactifs. S'ils restent inactifs pendant un nombre spécifié de minutes, &ktimetracker; affiche la boîte de dialogue suivante :</para>
+
+<screenshot>
+ <screeninfo
+>Détection d'inactivité de &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Boîte de dialogue de détection d'inactivité de &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>Continuer le chronométrage</guibutton
+></term>
+<listitem
+><para
+>Applique la durée d'inactivité à tous les compteurs actifs, et continue à chronométrer.</para
+><para
+>Vous travailliez sur les activités lorsque votre ordinateur était en veille, et continuez à travailler sur celles-ci.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>Chronométrage en décomptage</guibutton
+></term>
+<listitem
+><para
+>Soustrait la durée d'inactivité de tous les compteurs, et les arrête.</para
+><para
+>Vous ne travailliez pas sur les activités lorsque votre ordinateur était en veille, et ne l'êtes toujours pas.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>Autres systèmes</title>
+<sect2 id="korganizer"
+><title
+>&korganizer;</title>
+
+<para
+>&ktimetracker;, comme &korganizer; et l'application d'Apple iCal, utilise le format standard <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> pour ses données. &ktimetracker; peut lire et écrire les listes de tâches à faire, créées par ces deux applications.</para>
+<para
+>Vous pouvez même travailler sur le même fichier, de manière synchronisée, avec &korganizer; et &ktimetracker;. Si un de ces deux programmes modifie le fichier, ses changements seront automatiquement propagés à l'autre application. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>Agenda</title>
+
+<para
+>Comme exemple d'utilisation typique, vous pourriez vouloir planifier un projet avec l'outil de gestion de projets <ulink url="&Planner.web;"
+>&Planner;</ulink
+> et importer les tâches définies dans ce dernier dans &ktimetracker; avec <menuchoice
+><guimenu
+>Fichier</guimenu
+> <guisubmenu
+>Importer</guisubmenu
+><guimenuitem
+>Importer les tâches depuis Planner...</guimenuitem
+></menuchoice
+>, pour les mettre dans le format standard <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+>. En faisant cela, vous êtes capable de planifier les tâches avec &korganizer;, et y affecter vos heures avec &ktimetracker;. C'est là un moyen pour vous aider à maintenir votre projet dans les délais et dans le budget.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>&DBus;</title>
+
+<para
+>&ktimetracker; prend en charge de nombreuses méthodes pouvant être utilisées avec &DBus;. </para>
+<para
+>Il existe deux manières d'utiliser l'interface &DBus; : &GUI; de &Qt; <application
+>qdbusviewer</application
+> ou la ligne de commande <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>Script Bash qui retourne la version de &ktimetracker;</title>
+<programlisting
+>qdbus org.kde.ktimetracker / KTimeTracker version 2
+>/dev/null || echo « ktimetracker non lancé »
+</programlisting>
+</example>
+
+<para
+>L'interface actuelle sous &DBus; de &ktimetracker; est essentiellement utilisée pour effectuer des tests automatiques. Par conséquent, elle est donc encore très limitée. Pour la définition complète de l'interface, veuillez vous consulter la page <xref linkend="dbusappendix"/>.</para>
+
+<para
+>Pour afficher la totalité de l'interface &DBus; de la version de &ktimetracker; installée sur votre système, veuillez exécuter le script Bash suivant :</para>
+
+<example
+><title
+>Lister sur une console l'interface &DBus; de &ktimetracker;</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo « ktimetracker non lancé »
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>Exporter les totaux vers CSV</title>
+
+<para
+>&ktimetracker; peut exporter à la fois, les totaux ainsi que l'historique vers un fichier au format « CSV », dont les valeurs sont séparées par des virgules. Pour exporter les totaux, veuillez sélectionner <menuchoice
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Exporter</guimenuitem
+></menuchoice
+>. &ktimetracker; affichera alors la boîte de dialogue suivante : </para>
+
+<para
+>Sélectionnez l'option <guibutton
+>Heures en « CSV »</guibutton
+> dans le groupe <guilabel
+>Signaler un type</guilabel
+>. La boîte de dialogue va se présenter comme suit : </para>
+
+<screenshot>
+<screeninfo
+>Exporter les heures au format « CSV »</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Exporter les heures au format « CSV » </phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Modifier les paramètres par défaut de la boîte de dialogue, si nécessaire. Vous pouvez avoir un aperçu de la sortie au format « csv » sur le côté droit de la boîte de dialogue. Veuillez cliquer sur <guibutton
+>Exporter comme...</guibutton
+> et &ktimetracker;exportera la totalité des tâches vers ce fichier avec le nom que vous avez saisi dans la boîte de dialogue.</para>
+
+<para
+>Utilisez le bouton <guibutton
+>Copier vers le presse-papier</guibutton
+> pour exporter les durées vers le presse-papier.</para>
+
+<para
+>Voici un autre exemple du format de sortie :</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 plan de fonctionnalités",,,0.00,0.00,0.00,0.00
+,,"",,,0.00,1.13,0.00,1.13
+,,"vérification des modifications - chaînes de traduction",,,0.00,0.00,0.00,0.00
+,,"time card report",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"équipe Internet",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>Les activités au niveau le plus haut apparaissent dans la première colonne, les sous-activités dans la seconde, et ainsi de suite. Les données de durée apparaissent après le niveau d'activité le plus faible (cinq dans cet exemple). La première colonne de durée indique la <guilabel
+>Durée de session</guilabel
+>, la seconde la <guilabel
+>Durée</guilabel
+>, la troisième la <guilabel
+>Durée totale de session</guilabel
+>, et la quatrième la <guilabel
+>Durée totale</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>Exporter l'historique vers CSV</title>
+
+<para
+>Pour exporter l'historique des tâches, veuillez sélectionner <menuchoice
+> <guimenu
+>Fichier</guimenu
+> <guisubmenu
+>Exporter</guisubmenu
+> <guimenuitem
+>Exporter...</guimenuitem
+> </menuchoice
+>. &ktimetracker; affiche la même boîte de dialogue que celle qui est affichée ci-dessus. Veuillez sélectionner l'option <guibutton
+>Historique au format « CSV »</guibutton
+> dans le groupe <guilabel
+>Signaler un type</guilabel
+>. </para>
+
+<para
+>Veuillez sélectionner un intervalle de donnée que vous souhaitez couvrir dans votre historique de tâches. Modifiez si nécessaire les paramètres par défaut de la boîte de dialogue. Vous pouvez avoir un aperçu du résultat au format « CSV » sur le coté droit de la boîte de dialogue. Veuillez cliquer sur le bouton <guibutton
+>Enregistrer sous...</guibutton
+> et &ktimetracker;exportera la totalité de vos tâches vers le fichier que vous avez saisi dans la boîte de dialogue.</para>
+
+<para
+>Utilisez le bouton <guibutton
+>Copier vers le presse-papier</guibutton
+> pour exporter les durées vers le presse-papier.</para>
+
+<para
+>Voici un exemple du format de sortie :</para>
+
+<literallayout
+><computeroutput>
+Historique des tâches
+De Mardi 06 Juillet 2004 à Mardi 13 Juillet 2004
+Imprimé le : 2004-07-13 18 : 10
+2004-07-06, 2004-07-07, 2004-07-08, 2004-07-09, 2004-07-10, 2004-07-11, 2004-07-12, 2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 plan des fonctionnalités"
+,1.13,,,,,,,1.13,,,"bogues"
+,,,,,,,,0.00,,,"vérification des modifications - chaînes de traduction"
+,,,,,,,,0.00,,,"time card report"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promotion"
+,,,,,,,,0.00,,"équipe Internet"
+</computeroutput
+>
+</literallayout>
+
+<para
+>Les trois premières lignes identifient la date de création du rapport, et la période de temps. La quatrième ligne est une liste délimitée par des virgules contenant les dates dans la période de temps, au format ISO 8601 (AAAA-MM-JJ). Toutes les lignes suivantes indiquent les temps relevés pour chaque activité. La dernière colonne numérique indique le total de la ligne sur toute la période de temps. Le nom de l'activité est écrit après la colonne des totaux, et est indentée de manière à indiquer la relation entre une activité et les sous-activités. Les activités au niveau le plus haut apparaissent donc dans la première colonne après le total.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>L'interface de &ktimetracker;</title>
+
+<para
+>La fenêtre principale de &ktimetracker; présente les composants suivants : barre de menus, barre d'outils, barre de recherche, fenêtre de tâches et de durées, et barre d'état.</para>
+
+<para
+>La barre de recherche est un champ combiné. Tant que vous ne saisissez pas &Enter;, ce champ agit comme un champ de filtrage. Ainsi, seules les activités correspondant au nom que vous avez saisi sont affichées. Mais dès que vous saisissez &Enter;, une nouvelle activité est créée avec le nom que vous avez saisi. </para>
+
+<para
+>Choisissez <guilabel
+>Configuration pour PDA</guilabel
+> dans la page <guilabel
+>Apparence</guilabel
+> de la boîte de configuration si vous possédez un écran tactile qui est délicat. Cette option désactivera la barre de recherche, et à chaque clic s'affichera un menu contextuel.</para>
+
+<screenshot>
+<screeninfo
+>L'écran de &ktimetracker;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>L'écran de &ktimetracker;</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>La fenêtre de tâches et de durées</title>
+
+<para
+>Les différentes tâches sont affichées dans cette fenêtre, avec le temps accumulé pour chacune dans la session en cours et au total. Les tâches en cours de chronométrage ont une icône en forme d'horloge à côté du temps associé à la session.</para>
+
+<para
+>Des sous-tâches peuvent être créées pour chaque tâche. Cliquez sur les signes + ou - en regard de chaque tâche pour afficher ou cacher ses sous-tâches associées. La durée totale de la tâche inclut les durées des différentes sous-tâches, ainsi que sa propre durée accumulée.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>La barre d'outils et la barre d'état</title>
+<para
+>La barre d'outils contient des icônes pour les commandes suivantes :</para>
+
+<note
+><para
+>Toutes se comportent exactement comme les commandes des menus.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>Nouvelle activité</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Nouvelle sous-activité</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Démarrer</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Arrêter</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Supprimer</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Modifier</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Ouvrir</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>Enregistrer</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>La barre d'état indique le nom du fichier d'enregistrement des données.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Remerciements et licence</title>
+
+<para
+>&ktimetracker; </para>
+
+<para
+>Copyright du programme :</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001 - 2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>Contributeurs :</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>&ktimetracker; a été inspiré par l'utilitaire <application
+>titrax</application
+> de Harald Tveit Alvestrand, dont le seul défaut est d'utiliser la boîte à outils « Xt ».</para>
+
+<para
+>Copyright de la documentation 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; et &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>Traduction française par &AlviseCavallari;, &GerardDelafond;, &LudovicGrossard;</para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>Glossaire</title>
+
+<glossdiv>
+<title
+>A</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>activité active</glossterm>
+<glossdef
+><para
+>Une activité dont le chronomètre est en fonction</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>D</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>&DBus;</glossterm>
+<glossdef
+><para
+>Un protocole de communication inter-processus. Acronyme pour <quote
+>Desktop Bus</quote
+></para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>bureau</glossterm>
+<glossdef
+><para
+>&GNU; / &Linux;, FreeBSD et d'autres systèmes utilisant le système « X-Org » permettent d'avoir plusieurs bureaux. Vous pouvez avoir en général, quatre bureaux installés par défaut. Chaque bureau peut afficher son propre ensemble de programmes et de fichiers. Au démarrage de &kde;  &plasma;, le bureau affiché est le bureau numéro 1. Grâce à un  appui sur <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>, vous basculer au bureau numéro 2. Grâce à un  appui sur <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+>, vous revenez au bureau numéro 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>H</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>historique</glossterm>
+<glossdef
+><para
+>Si &ktimetracker; est configuré pour enregistrer l'historique, il enregistrera chaque évènement de démarrage / arrêt. Cet historique n'est pas effacé lorsque les compteurs sont remis à zéro ; il reste dans le fichier tant que l'activité n'est pas supprimée.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>S</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>session</glossterm>
+<glossdef
+><para
+>Un point de départ défini par les utilisateurs pour les chronomètres de session. Une nouvelle session débute lorsque vous sélectionnez <menuchoice
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Démarrer une nouvelle session</guimenuitem
+> </menuchoice
+>. Les données de session ne sont pas enregistrées lorsque vous créez une nouvelle session. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>Durée de la session</guilabel
+></glossterm
+> <glossdef
+><para
+>Le temps passé sur l'activité depuis que la session a été démarrée.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>boîte à miniatures</glossterm>
+<glossdef
+><para
+>La boîte à miniatures se trouve dans la barre apparaissant (Par défaut dans &kde; &plasma;) en bas de votre écran. Dans cette boîte à miniatures <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> l'icône de &ktimetracker; se trouve à l'extrémité droite.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>T</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>activité au niveau le plus haut</glossterm>
+<glossdef
+><para
+>Une activité sans activité parent.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>Durée totale de la session</guilabel
+></glossterm
+> <glossdef
+><para
+>Le temps passé sur l'activité et toutes ses sous-activités depuis que la session a été démarrée.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>Durée</guilabel
+></glossterm>
+<glossdef
+><para
+>Le temps passé sur l'activité depuis que tous les temps ont été remis à zéro.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>Durée totale</guilabel
+></glossterm>
+<glossdef
+><para
+>Le temps passé sur l'activité et toutes ses sous-activités depuis que tous les temps ont été remis à zéro.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>L'interface &DBus;</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>version</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>version</refname>
+<refpurpose
+>Retourne la version de &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>version()</function
+> est un appel &DBus; qui retourne la version de &ktimetracker;, par exemple 4.3.1. La version est retournée sous forme de chaîne de caractères, dont le format majeure.mineure.correction est caractéristique de &GNU;.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>quit</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>quit</refname>
+<refpurpose
+>Quitter &ktimetracker;.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>quit()</function
+> est un appel &DBus; qui permet à un programme externe de terminer élégamment &ktimetracker;. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>addTask</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>addTask</refname>
+<refpurpose
+>Ajoute une nouvelle activité.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString nom-tâche)
+</synopsis>
+<refsect2>
+<title
+>Paramètres</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>nom-tâche</parameter
+></term>
+<listitem>
+<para
+>Le nom d'une activité.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>addTask(QString nom-tâche)</function
+> est un appel &DBus; ajoutant une nouvelle tâche au niveau le plus haut dans l'enregistrement actuel. Cette fonction retourne l'identifiant « UID » de la nouvelle tâche. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->
