@@ -161,7 +161,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 >. Les options standards des commandes &Qt; et &kf5-full; sont disponibles. Veuillez consulter les pages de manuel (man) pour qt5options et kf5options. </para>
 
 <para
->&ktimetracker; fournit une option supplémentaire de ligne de commandes vous permettant de définir le nom du fichier « iCalendar » à utiliser pour enregistrer l'historique de votre travail. Vous pouvez définir un fichier distant « iCalendar » en utilisant les préfixes &HTTP; ou &FTP;  dans le nom de fichier. Par exemple : http://www.mon-site.com/mes-données/mon-travail.ics.</para>
+>&ktimetracker; fournit une option supplémentaire de ligne de commandes vous permettant de définir le nom du fichier « iCalendar » à utiliser pour enregistrer l'historique de votre travail. Vous pouvez définir un fichier distant « iCalendar » en utilisant les préfixes &HTTP; ou &FTP; dans le nom de fichier. Par exemple : http://www.mon-site.com/mes-données/mon-travail.ics.</para>
 
 </sect1>
 
@@ -911,11 +911,11 @@ Imprimé le : 2004-07-13 18 : 10
 >bureau</glossterm>
 <glossdef
 ><para
->&GNU; / &Linux;, FreeBSD et d'autres systèmes utilisant le système « X-Org » permettent d'avoir plusieurs bureaux. Vous pouvez avoir en général, quatre bureaux installés par défaut. Chaque bureau peut afficher son propre ensemble de programmes et de fichiers. Au démarrage de &kde;  &plasma;, le bureau affiché est le bureau numéro 1. Grâce à un  appui sur <keycombo action="simul"
+>&GNU; / &Linux;, FreeBSD et d'autres systèmes utilisant le système « X-Org » permettent d'avoir plusieurs bureaux. Vous pouvez avoir en général, quatre bureaux installés par défaut. Chaque bureau peut afficher son propre ensemble de programmes et de fichiers. Au démarrage de &kde; &plasma;, le bureau affiché est le bureau numéro 1. Grâce à un appui sur <keycombo action="simul"
 >&Ctrl;<keycap
 >F2</keycap
 ></keycombo
->, vous basculer au bureau numéro 2. Grâce à un  appui sur <keycombo action="simul"
+>, vous basculer au bureau numéro 2. Grâce à un appui sur <keycombo action="simul"
 >&Ctrl;<keycap
 >F1</keycap
 ></keycombo
