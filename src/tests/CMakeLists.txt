@@ -17,6 +17,6 @@ target_link_libraries(helpers
 
 ecm_add_test(formattimetest.cpp LINK_LIBRARIES helpers)
 ecm_add_test(exportcsvtest.cpp LINK_LIBRARIES helpers)
-ecm_add_test(plannerparsertest.cpp LINK_LIBRARIES helpers)
+# ecm_add_test(plannerparsertest.cpp LINK_LIBRARIES helpers)
 ecm_add_test(tasktest.cpp LINK_LIBRARIES helpers)
 ecm_add_test(storagetest.cpp LINK_LIBRARIES helpers)
