@@ -6,6 +6,7 @@
 
 [Desktop Entry]
 Name=KTimeTracker
+Name[ar]=متعقب الوقت
 Name[ast]=KTimeTracker
 Name[ca]=KTimeTracker
 Name[ca@valencia]=KTimeTracker
@@ -43,6 +44,7 @@ Name[x-test]=xxKTimeTrackerxx
 Name[zh_CN]=KTimeTracker
 Name[zh_TW]=KTimeTracker
 GenericName=Personal Time Tracker
+GenericName[ar]=متعقب الوقت شخصي
 GenericName[ca]=Seguidor personal del temps
 GenericName[ca@valencia]=Seguidor personal del temps
 GenericName[cs]=Osobní sledovač času
