@@ -27,12 +27,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Thomas Reitelbach,Gregor Zumstein, Stefan Winter"
+msgstr "Deutsches KDE-Übersetzungsteam"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "tr@erdfunkstelle.de, gz@orchester-bremgarten.ch, swinter@kde.org"
+msgstr "kde-i18n-de@kde.org"
 
 #: base/idletimedetector.cpp:62
 #, kde-format
