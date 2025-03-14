@@ -9,13 +9,13 @@
 # Mevlüt KOÇAK <mevlut_kocak@milliemlak.gov.tr>, 2003.
 # Ozan Eren BILGEN <oebilgen@uekae.tubitak.gov.tr>, 2005.
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdepim-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-17 00:40+0000\n"
-"PO-Revision-Date: 2024-03-22 16:14+0300\n"
+"PO-Revision-Date: 2025-03-13 22:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.1\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -74,7 +74,7 @@ msgstr "%1 zamanından bu yana Masaüstü boşta. Ne yapmak istiyorsunuz?"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
-msgstr "K Zamanölçer'i Yapılandır..."
+msgstr "K Zamanölçer’i Yapılandır…"
 
 #: base/mainwindow.cpp:136 base/tray.cpp:74
 #, kde-format
@@ -109,7 +109,7 @@ msgstr "Sanal masaüstü sayısı çok fazla, masaüstü izleme çalışmayacak.
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
-msgstr "Sayaçlar durduruluyor..."
+msgstr "Sayaçlar durduruluyor…"
 
 #: base/taskview.cpp:275
 #, kde-format
@@ -168,19 +168,19 @@ msgstr "Görev Siliniyor"
 #: base/timetrackerstorage.cpp:125
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
-msgstr "\"%1\" yüklemesinde hata oluştu: Ebeveyn (uid=%2) bulunamadı"
+msgstr "“%1” yüklemesinde hata oluştu: (uid=%2) üst ögesi bulunamadı."
 
 #: base/timetrackerstorage.cpp:228
 #, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "Kilit dosyası \"%1\" yazılamadı. Disk dolu olabilir mi?"
+msgstr "Kilit dosyası “%1” yazılamadı. Disk dolu olabilir mi?"
 
 #: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
-msgstr "iCalendar dosyası, \"%1\" olarak kaydedilemedi."
+msgstr "iCalendar dosyası, “%1” olarak kaydedilemedi."
 
 #: base/timetrackerwidget.cpp:138
 #, kde-format
@@ -208,7 +208,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr "Geçmişi Düzenle..."
+msgstr "Geçmişi Düzenle…"
 
 #: base/timetrackerwidget.cpp:150
 #, kde-format
@@ -223,7 +223,7 @@ msgid ""
 "A window will be opened where you can change start and stop times of tasks "
 "or add a comment to them."
 msgstr ""
-"Görevlerin başlangıç-bitiş zamanlarını düzenleyebileceğiniz ve onlara "
+"Görevlerin başlangıç–bitiş zamanlarını düzenleyebileceğiniz ve onlara "
 "açıklamalar ekleyebileceğiniz bir pencere açılacak."
 
 #: base/timetrackerwidget.cpp:162
@@ -363,7 +363,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
-msgstr "&Yeni Görev..."
+msgstr "&Yeni Görev…"
 
 #: base/timetrackerwidget.cpp:234
 #, kde-format
@@ -381,7 +381,7 @@ msgstr "Bu yeni bir üst düzey görev oluşturacaktır."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
-msgstr "Yeni Alt &Görev..."
+msgstr "Yeni Alt &Görev…"
 
 #: base/timetrackerwidget.cpp:244
 #, kde-format
@@ -439,7 +439,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
-msgstr "Süreyi Düzenle..."
+msgstr "Süreyi Düzenle…"
 
 #: base/timetrackerwidget.cpp:276
 #, kde-format
@@ -473,13 +473,13 @@ msgstr "Tamamlanmadı Olarak İ&mle"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr "Dışa &Aktar..."
+msgstr "Dışa &Aktar…"
 
 #: base/timetrackerwidget.cpp:310
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
-msgstr "Planner'dan Görevleri İç&e Aktar..."
+msgstr "Planner’dan Görevler İç&e Aktar…"
 
 #: base/timetrackerwidget.cpp:322
 #, kde-format
@@ -555,7 +555,7 @@ msgstr "Takvim kaynağı değiştirilemedi."
 #: base/timetrackerwidget.cpp:789
 #, kde-format
 msgid "Out of memory--could not create object."
-msgstr "Bellek yetersiz -- nesne oluşturulamadı."
+msgstr "Bellek yetersiz — nesne oluşturulamadı."
 
 #: base/timetrackerwidget.cpp:791
 #, kde-format
@@ -575,7 +575,7 @@ msgstr "Geçersiz zaman biçimi YYYY-MM-DDTHH:MM:SS."
 #: base/timetrackerwidget.cpp:797
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
-msgstr "Geçersiz görev süresi -- sıfırdan büyük olmalıdır."
+msgstr "Geçersiz görev süresi — sıfırdan büyük olmalıdır."
 
 #: base/timetrackerwidget.cpp:799
 #, kde-format
@@ -590,9 +590,9 @@ msgid ""
 "with creating your first task - enter it into the field where you see "
 "\"Search or add task\"."
 msgstr ""
-"K Zamanölçer, KDE'nin zamanınızı tutmanıza yardımcı olan programıdır. "
-"Başlamak için, ilk görevinizi oluşturun; onu \"Ara veya görev ekle\" "
-"bölümüne girin."
+"K Zamanölçer, KDE’nin zamanınızı tutmanıza yardımcı olan programıdır. "
+"Başlamak için ilk görevinizi oluşturun; onu “Ara veya görev ekle” bölümüne "
+"girin."
 
 #: base/timetrackerwidget.cpp:1030
 #, kde-format
@@ -606,7 +606,7 @@ msgstr ""
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
-msgstr ", ..."
+msgstr ", …"
 
 #: base/treeviewheadercontextmenu.cpp:31
 #, kde-format
@@ -669,7 +669,7 @@ msgstr "Değişiklik Sonrası Zaman:"
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr "Geçmişi Düzenle..."
+msgstr "Geçmişi Düzenle…"
 
 #: dialogs/edittimedialog.cpp:85
 #, kde-format
@@ -725,7 +725,7 @@ msgstr "Panoya Kopyala"
 #: dialogs/exportdialog.ui:67
 #, kde-format
 msgid "Save As..."
-msgstr "Farklı Kaydet..."
+msgstr "Farklı Kaydet…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
 #: dialogs/exportdialog.ui:82
@@ -939,7 +939,7 @@ msgstr "%1."
 #: export/export.cpp:49
 #, kde-format
 msgid "Could not open \"%1\"."
-msgstr "\"%1\" açılamadı."
+msgstr "“%1” açılamadı."
 
 #: export/totalsastext.cpp:69
 #, kde-format
@@ -1000,12 +1000,12 @@ msgstr "K Zamanölçer"
 #: main.cpp:92
 #, kde-format
 msgid "KDE Time tracker tool"
-msgstr "KDE Zaman izleme aracı"
+msgstr "KDE zaman izleme aracı"
 
 #: main.cpp:94
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
-msgstr "Telif hakkı © 1997-2019 K Zamanölçer geliştiricileri"
+msgstr "© 1997–2019 K Zamanölçer geliştiricileri"
 
 #: main.cpp:98
 #, kde-format
@@ -1017,7 +1017,7 @@ msgstr "Alexander Potashev"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
-msgstr "Projeyi Sürdüren (2019'dan bu yana)"
+msgstr "Şu anki bakımcı (2019’dan bu yana)"
 
 #: main.cpp:101
 #, kde-format
@@ -1029,7 +1029,7 @@ msgstr "Thorsten Stärk"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
-msgstr "Projeyi Sürdüren (2006-2012)"
+msgstr "Bakımcı (2006–2012)"
 
 #: main.cpp:104
 #, kde-format
@@ -1041,7 +1041,7 @@ msgstr "Mark Bucciarelli"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
-msgstr "Projeyi Sürdüren (2005-2006)"
+msgstr "Bakımcı (2005–2006)"
 
 #: main.cpp:107
 #, kde-format
@@ -1053,7 +1053,7 @@ msgstr "Jesper Pedersen"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
-msgstr "Projeyi Sürdüren (2000-2005)"
+msgstr "Bakımcı (2000–2005)"
 
 #: main.cpp:110
 #, kde-format
@@ -1065,7 +1065,7 @@ msgstr "Sirtaj Singh Kang"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
-msgstr "İlk Yazar"
+msgstr "Özgün yazar"
 
 #: main.cpp:113
 #, kde-format
@@ -1089,7 +1089,7 @@ msgstr "Kalle Dalheimer"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
-msgstr "Geliştirici (1999-2000)"
+msgstr "Geliştirici (1999–2000)"
 
 #: main.cpp:119
 #, kde-format
@@ -1113,7 +1113,7 @@ msgstr "David Faure"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
-msgstr "Açılacak iCalendar dosyasının yolu veya URL'si."
+msgstr "Açılacak iCalendar dosyasının yolu veya URL’si."
 
 #: model/tasksmodel.cpp:19
 #, kde-format
@@ -1170,7 +1170,7 @@ msgctxt "@info:whatsthis"
 msgid ""
 "The session time is the time since you last chose \"Start New Session\"."
 msgstr ""
-"Oturum zamanı, \"Yeni Oturum Başlat\"ı en son seçtiğinizden bu yana geçen "
+"Oturum zamanı, “Yeni Oturum Başlat”ı en son seçtiğinizden bu yana geçen "
 "zamandır."
 
 #: model/tasksmodel.cpp:276
@@ -1226,7 +1226,7 @@ msgid ""
 "Unitasking - allow only one task to be timed at a time. Does not stop any "
 "timer."
 msgstr ""
-"Görev Tekleştirme - bir kerede yalnızca bir görevin  izin ver. Herhangi bir "
+"Görev Tekleştirme — bir kerede yalnızca bir göreve izin verin. Herhangi bir "
 "sayacı durdurmaz."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
@@ -1354,9 +1354,9 @@ msgid ""
 "filter. Then, only tasks that match your input are shown. As soon as you "
 "press Enter, your input is used as name to create a new task."
 msgstr ""
-"Bu, bileşik bir alandır. Giriş'e basmadığınız sürece, bir süzgeç olarak "
+"Bu, bileşik bir alandır. Giriş’e basmadığınız sürece, bir süzgeç olarak "
 "çalışır. Veri girildiğinde, girdiğiniz veriyle eşleşen görevler gösterilir. "
-"Giriş'e basar basmaz, girdiğiniz metin yeni bir görevin adı olarak "
+"Giriş’e basar basmaz, girdiğiniz metin yeni bir görevin adı olarak "
 "kullanılır."
 
 #: widgets/taskswidget.cpp:129
