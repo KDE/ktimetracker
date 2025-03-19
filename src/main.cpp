@@ -159,5 +159,11 @@ int main(int argc, char *argv[])
         }
     }
 
+    QObject::connect(&dbusService, &KDBusService::activateRequested, mainWindow, [mainWindow] {
+        mainWindow->show();
+        mainWindow->raise();
+        mainWindow->activateWindow();
+    });
+
     return app.exec();
 }
