@@ -48,6 +48,7 @@ public:
         auto *dateTimeWidget = qobject_cast<QDateTimeEdit *>(editor);
         if (dateTimeWidget) {
             dateTimeWidget->setDateTime(dateTime);
+            dateTimeWidget->setDisplayFormat(HistoryDialog::dateTimeFormat);
         } else {
             qCWarning(KTT_LOG) << "Cast to QDateTimeEdit failed";
         }
