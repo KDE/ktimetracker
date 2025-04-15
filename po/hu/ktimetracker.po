@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 00:40+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2021-11-19 14:13+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -903,27 +903,27 @@ msgstr "\""
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:89 export/totalsastext.cpp:72
+#: dialogs/historydialog.cpp:90 export/totalsastext.cpp:72
 #, kde-format
 msgid "Task"
 msgstr "Feladat"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "StartTime"
 msgstr "Kezdési idő"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "EndTime"
 msgstr "Befejezési idő"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "Comment"
 msgstr "Megjegyzés"
 
-#: dialogs/historydialog.cpp:130
+#: dialogs/historydialog.cpp:131
 #, fuzzy, kde-format
 #| msgid "You can change this task's comment, start time and end time."
 msgctxt "@info:whatsthis"
@@ -931,12 +931,12 @@ msgid "You can change this task's comment, start time and end time."
 msgstr ""
 "Megváltoztathatja a feladat megjegyzését, a kezdési és a befejezési időt."
 
-#: dialogs/historydialog.cpp:181 dialogs/historydialog.cpp:201
+#: dialogs/historydialog.cpp:182 dialogs/historydialog.cpp:202
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "Érvénytelen dátum vagy idő."
 
-#: dialogs/historydialog.cpp:257
+#: dialogs/historydialog.cpp:258
 #, kde-format
 msgid "Please select a task to delete."
 msgstr "Válassza ki a törlendő feladatot."

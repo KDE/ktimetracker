@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 00:40+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2024-01-10 22:05+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -872,38 +872,38 @@ msgstr "\""
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:89 export/totalsastext.cpp:72
+#: dialogs/historydialog.cpp:90 export/totalsastext.cpp:72
 #, kde-format
 msgid "Task"
 msgstr "Задача"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "StartTime"
 msgstr "Время начала"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "EndTime"
 msgstr "Время завершения"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "Comment"
 msgstr "Комментарий"
 
-#: dialogs/historydialog.cpp:130
+#: dialogs/historydialog.cpp:131
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr "Можно изменить время начала, завершения и комментарий этой задачи."
 
-#: dialogs/historydialog.cpp:181 dialogs/historydialog.cpp:201
+#: dialogs/historydialog.cpp:182 dialogs/historydialog.cpp:202
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "Неправильная дата или время."
 
-#: dialogs/historydialog.cpp:257
+#: dialogs/historydialog.cpp:258
 #, kde-format
 msgid "Please select a task to delete."
 msgstr "Выберите задачу для удаления."

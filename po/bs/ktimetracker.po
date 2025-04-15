@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdepim\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 00:40+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2013-10-18 20:14+0000\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -972,39 +972,39 @@ msgstr "\""
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:89 export/totalsastext.cpp:72
+#: dialogs/historydialog.cpp:90 export/totalsastext.cpp:72
 #, kde-format
 msgid "Task"
 msgstr "Zadatak"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "StartTime"
 msgstr "Početno vrijeme"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "EndTime"
 msgstr "Krajnje vrijeme"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "Comment"
 msgstr "Komentar"
 
-#: dialogs/historydialog.cpp:130
+#: dialogs/historydialog.cpp:131
 #, fuzzy, kde-format
 #| msgid "You can change this task's comment, start time and end time."
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr "Možete promijeniti komentar ovog zadatka, vrijeme početka i završetka."
 
-#: dialogs/historydialog.cpp:181 dialogs/historydialog.cpp:201
+#: dialogs/historydialog.cpp:182 dialogs/historydialog.cpp:202
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "Nije ispravan datum/vrijeme."
 
-#: dialogs/historydialog.cpp:257
+#: dialogs/historydialog.cpp:258
 #, kde-format
 msgid "Please select a task to delete."
 msgstr "Molim odaberite zadatak za brisanje"

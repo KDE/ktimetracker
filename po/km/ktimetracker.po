@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 00:40+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2012-06-15 10:36+0700\n"
 "Last-Translator: Sophea <sophea@khmeros.info>\n"
 "Language-Team: Khmer <>\n"
@@ -958,39 +958,39 @@ msgstr "\""
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:89 export/totalsastext.cpp:72
+#: dialogs/historydialog.cpp:90 export/totalsastext.cpp:72
 #, kde-format
 msgid "Task"
 msgstr "ភារកិច្ច"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "StartTime"
 msgstr "ពេលវេលា​ចាប់ផ្ដើម"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "EndTime"
 msgstr "ពេលវេលា​បញ្ចប់"
 
-#: dialogs/historydialog.cpp:89
+#: dialogs/historydialog.cpp:90
 #, kde-format
 msgid "Comment"
 msgstr "សេចក្ដី​អធិប្បាយ"
 
-#: dialogs/historydialog.cpp:130
+#: dialogs/historydialog.cpp:131
 #, fuzzy, kde-format
 #| msgid "You can change this task's comment, start time and end time."
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr "អ្នក​អាច​ផ្លាស់ប្ដូរ​សេចក្ដី​អធិប្បាយ​របស់​ភារកិច្ច​នេះ ពេលវេលា​ចាប់ផ្ដើម និង​បញ្ឈប់ ។"
 
-#: dialogs/historydialog.cpp:181 dialogs/historydialog.cpp:201
+#: dialogs/historydialog.cpp:182 dialogs/historydialog.cpp:202
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "នេះ​មិន​មែន​ជា​កាលបរិច្ឆេទ/ពេលវេលា​ត្រឹមត្រូវ​ទេ ។"
 
-#: dialogs/historydialog.cpp:257
+#: dialogs/historydialog.cpp:258
 #, kde-format
 msgid "Please select a task to delete."
 msgstr "សូម​ជ្រើស​ភារកិច្ច​ត្រូវ​លុប​ ។"
