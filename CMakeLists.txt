@@ -28,6 +28,8 @@ include(ECMInstallIcons)
 include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 include(FeatureSummary)
+include(KDEClangFormat)
+include(KDEGitCommitHooks)
 
 ecm_setup_version(${APP_VERSION_NUMBER}
     VARIABLE_PREFIX KTIMETRACKER
@@ -72,6 +74,11 @@ endif()
 add_subdirectory(icons)
 add_subdirectory(doc)
 add_subdirectory(src)
+
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 install(FILES org.kde.ktimetracker.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
