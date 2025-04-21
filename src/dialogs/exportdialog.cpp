@@ -14,9 +14,9 @@
 
 #include <KMessageBox>
 
+#include "base/taskview.h"
 #include "export/export.h"
 #include "ktt_debug.h"
-#include "base/taskview.h"
 #include "widgets/taskswidget.h"
 
 ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
@@ -65,14 +65,12 @@ ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
 void ExportDialog::enableTasksToExportQuestion()
 {
     return;
-    //grpTasksToExport->setEnabled( true );
+    // grpTasksToExport->setEnabled( true );
 }
 
 void ExportDialog::exportToClipboard()
 {
-    QString output = exportToString(m_taskView->storage()->projectModel(),
-                                    m_taskView->tasksWidget()->currentItem(),
-                                    reportCriteria());
+    QString output = exportToString(m_taskView->storage()->projectModel(), m_taskView->tasksWidget()->currentItem(), reportCriteria());
     QApplication::clipboard()->setText(output);
 }
 
@@ -83,9 +81,7 @@ void ExportDialog::exportToFile()
         return;
     }
 
-    QString output = exportToString(m_taskView->storage()->projectModel(),
-                                    m_taskView->tasksWidget()->currentItem(),
-                                    reportCriteria());
+    QString output = exportToString(m_taskView->storage()->projectModel(), m_taskView->tasksWidget()->currentItem(), reportCriteria());
     QString err = writeExport(output, url);
     if (err.isEmpty()) {
         // Close export dialog after saving
@@ -155,9 +151,7 @@ void ExportDialog::updateUI()
         break;
     }
 
-    ui.previewText->setText(exportToString(m_taskView->storage()->projectModel(),
-                                           m_taskView->tasksWidget()->currentItem(),
-                                           reportCriteria()));
+    ui.previewText->setText(exportToString(m_taskView->storage()->projectModel(), m_taskView->tasksWidget()->currentItem(), reportCriteria()));
 }
 
 #include "moc_exportdialog.cpp"

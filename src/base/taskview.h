@@ -60,7 +60,10 @@ public:
     /** Returns whether the focus tracking is currently active. */
     bool isFocusTrackingActive() const;
 
-    TasksWidget *tasksWidget() { return m_tasksWidget; }
+    TasksWidget *tasksWidget()
+    {
+        return m_tasksWidget;
+    }
 
 public Q_SLOTS:
     /** Save to persistent storage. */

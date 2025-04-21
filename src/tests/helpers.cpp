@@ -9,10 +9,11 @@
 #include <QTemporaryFile>
 #include <QTextStream>
 
-#include "model/task.h"
 #include "base/taskview.h"
+#include "model/task.h"
 
-class TemporaryFileDeleter : public QObject {
+class TemporaryFileDeleter : public QObject
+{
 public:
     explicit TemporaryFileDeleter(QObject *parent, QString fileName)
         : QObject(parent)

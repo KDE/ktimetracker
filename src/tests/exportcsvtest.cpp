@@ -6,11 +6,11 @@
 
 #include <QTest>
 
+#include "base/taskview.h"
 #include "export/export.h"
 #include "export/totalsastext.h"
 #include "helpers.h"
 #include "model/task.h"
-#include "base/taskview.h"
 #include "widgets/taskswidget.h"
 
 class ExportCSVTest : public QObject
@@ -51,11 +51,10 @@ void ExportCSVTest::testTotalsEmpty()
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(
-        "Task Totals\n%1\n\n"
-        "  Time    Task\n----------------------------------------------\nNo tasks.").arg(timeString);
-    QCOMPARE(
-        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport)),
-        expected);
+                                  "Task Totals\n%1\n\n"
+                                  "  Time    Task\n----------------------------------------------\nNo tasks.")
+                                  .arg(timeString);
+    QCOMPARE(totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport)), expected);
 }
 
 void ExportCSVTest::testTotalsSimpleTree()
@@ -67,19 +66,18 @@ void ExportCSVTest::testTotalsSimpleTree()
 
     const QString &timeString = QLocale().toString(QDateTime::currentDateTime());
     const QString &expected = QStringLiteral(
-        "Task Totals\n"
-         "%1\n"
-         "\n"
-         "  Time    Task\n"
-         "----------------------------------------------\n"
-         "  0:08    1\n"
-         "   0:03    2\n"
-         "  0:07    3\n"
-         "----------------------------------------------\n"
-         "  0:15 Total").arg(timeString);
-    QCOMPARE(
-        totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport)),
-        expected);
+                                  "Task Totals\n"
+                                  "%1\n"
+                                  "\n"
+                                  "  Time    Task\n"
+                                  "----------------------------------------------\n"
+                                  "  0:08    1\n"
+                                  "   0:03    2\n"
+                                  "  0:07    3\n"
+                                  "----------------------------------------------\n"
+                                  "  0:15 Total")
+                                  .arg(timeString);
+    QCOMPARE(totalsAsText(taskView->storage()->tasksModel(), taskView->tasksWidget()->currentItem(), createRC(ReportCriteria::CSVTotalsExport)), expected);
 }
 
 void ExportCSVTest::testTimesSimpleTree()

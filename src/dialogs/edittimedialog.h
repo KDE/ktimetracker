@@ -21,8 +21,14 @@ public:
     explicit EditTimeDialog(QWidget *parent, const QString &name, const QString &description, int64_t minutes);
     ~EditTimeDialog() override = default;
 
-    int changeMinutes() const { return m_changeMinutes; }
-    bool editHistoryRequested() const { return m_editHistoryRequested; }
+    int changeMinutes() const
+    {
+        return m_changeMinutes;
+    }
+    bool editHistoryRequested() const
+    {
+        return m_editHistoryRequested;
+    }
 
 protected Q_SLOTS:
     void update(int newValue);

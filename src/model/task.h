@@ -51,7 +51,10 @@ public:
     /* destructor */
     ~Task() override;
 
-    Task* parentTask() const { return dynamic_cast<Task *>(TasksModelItem::parent()); }
+    Task *parentTask() const
+    {
+        return dynamic_cast<Task *>(TasksModelItem::parent());
+    }
 
     /** Return unique iCalendar Todo ID for this task. */
     QString uid() const;
@@ -136,12 +139,18 @@ public:
     /** Sets the total time, does not change the parent's total time.
       This means the parent's total time can run out of sync.
       */
-    void setTotalTime(int64_t minutes) { m_totalTime = minutes; }
+    void setTotalTime(int64_t minutes)
+    {
+        m_totalTime = minutes;
+    }
 
     /** Sets the total session time, does not change the parent's total session time.
       This means the parent's total session time can run out of sync.
       */
-    void setTotalSessionTime(int64_t minutes) { m_totalSessionTime = minutes; }
+    void setTotalSessionTime(int64_t minutes)
+    {
+        m_totalSessionTime = minutes;
+    }
 
     /** A recursive function to calculate the total time/session time of a task. */
     void recalculateTotalTimesSubtree();
@@ -163,11 +172,23 @@ public:
     void resetTimes();
 
     /** @return time in minutes */
-    int64_t time() const { return m_time; }
+    int64_t time() const
+    {
+        return m_time;
+    }
     /** @return total time in minutes */
-    int64_t totalTime() const { return m_totalTime; }
-    int64_t sessionTime() const { return m_sessionTime; }
-    int64_t totalSessionTime() const { return m_totalSessionTime; }
+    int64_t totalTime() const
+    {
+        return m_totalTime;
+    }
+    int64_t sessionTime() const
+    {
+        return m_sessionTime;
+    }
+    int64_t totalSessionTime() const
+    {
+        return m_totalSessionTime;
+    }
     QDateTime sessionStartTiMe() const;
 
     /**
@@ -262,7 +283,10 @@ public:
     KCalendarCore::Todo::Ptr asTodo(const KCalendarCore::Todo::Ptr &todo) const;
 
     /** tells you whether this task is the root of the task tree */
-    bool isRoot() const { return !parentTask(); }
+    bool isRoot() const
+    {
+        return !parentTask();
+    }
 
     /** remove Task with all it's children
      * Removes task as well as all event history for this task.

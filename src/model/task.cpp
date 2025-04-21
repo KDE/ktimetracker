@@ -9,13 +9,13 @@
 
 #include <KCalendarCore/CalFormat>
 
-#include "ktimetracker.h"
 #include "base/ktimetrackerutility.h"
+#include "base/timetrackerstorage.h"
+#include "ktimetracker.h"
 #include "ktt_debug.h"
 #include "model/eventsmodel.h"
 #include "model/projectmodel.h"
 #include "model/tasksmodel.h"
-#include "base/timetrackerstorage.h"
 
 static const QByteArray eventAppName = QByteArray("ktimetracker");
 
@@ -55,15 +55,7 @@ Task::Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel)
     int priority = 0;
     DesktopList desktops;
 
-    parseIncidence(todo,
-                   minutes,
-                   sessionTime,
-                   sessionStartTiMe,
-                   name,
-                   description,
-                   desktops,
-                   percent_complete,
-                   priority);
+    parseIncidence(todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete, priority);
     init(name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
 }
 
@@ -128,7 +120,7 @@ void Task::setRunning(bool on, const QDateTime &when)
             m_lastStart = when;
             qCDebug(KTT_LOG) << "task has been started for " << when;
 
-//            m_projectModel->eventsModel()->startTask(this, when);
+            //            m_projectModel->eventsModel()->startTask(this, when);
             m_projectModel->eventsModel()->startTask(this);
         } else {
             m_projectModel->eventsModel()->stopTask(this, when);
@@ -547,7 +539,7 @@ void Task::startNewSession()
     m_sessionStartTime = QDateTime::currentDateTime();
 }
 
-//BEGIN Properties
+// BEGIN Properties
 QString Task::uid() const
 {
     return m_uid;
@@ -587,4 +579,4 @@ DesktopList Task::desktops() const
 {
     return m_desktops;
 }
-//END
+// END

@@ -7,7 +7,6 @@
 
 #include "idletimedetector.h"
 
-
 #include <KIdleTime>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -20,10 +19,7 @@ IdleTimeDetector::IdleTimeDetector(int maxIdle)
     , m_maxIdle(maxIdle)
     , m_timeoutId(0)
 {
-    connect(KIdleTime::instance(),
-            QOverload<int, int>::of(&KIdleTime::timeoutReached),
-            this,
-            &IdleTimeDetector::timeoutReached);
+    connect(KIdleTime::instance(), QOverload<int, int>::of(&KIdleTime::timeoutReached), this, &IdleTimeDetector::timeoutReached);
 }
 
 // static
@@ -68,11 +64,7 @@ void IdleTimeDetector::timeoutReached(int /*unused*/, int timeout)
     KGuiItem buttonNo(i18nc("@action:button", "Revert Timing"), QString(), hintNo, hintNo);
 
     const auto result =
-        KMessageBox::questionTwoActions(nullptr,
-                                   i18n("Desktop has been idle since %1. What do you want to do?", backThen),
-                                   QString(),
-                                   buttonYes,
-                                   buttonNo);
+        KMessageBox::questionTwoActions(nullptr, i18n("Desktop has been idle since %1. What do you want to do?", backThen), QString(), buttonYes, buttonNo);
     switch (result) {
     case KMessageBox::ButtonCode::PrimaryAction:
         startIdleDetection();

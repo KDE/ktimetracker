@@ -43,7 +43,7 @@ TimeTrackerWidget::TimeTrackerWidget(QWidget *parent)
     registerDBus();
 
     QLayout *layout = new QVBoxLayout;
-    layout->setContentsMargins(0,0,0,0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     setLayout(layout);
 
@@ -396,11 +396,7 @@ void TimeTrackerWidget::slotCurrentChanged()
 
     if (m_taskView) {
         connect(m_taskView, &TaskView::updateButtons, this, &TimeTrackerWidget::updateButtons, Qt::UniqueConnection);
-        connect(m_taskView,
-                &TaskView::setStatusBarText,
-                this,
-                &TimeTrackerWidget::statusBarTextChangeRequested,
-                Qt::UniqueConnection);
+        connect(m_taskView, &TaskView::setStatusBarText, this, &TimeTrackerWidget::statusBarTextChangeRequested, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::timersActive, this, &TimeTrackerWidget::timersActive, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::timersInactive, this, &TimeTrackerWidget::timersInactive, Qt::UniqueConnection);
         connect(m_taskView, &TaskView::tasksChanged, this, &TimeTrackerWidget::tasksChanged, Qt::UniqueConnection);
@@ -430,11 +426,9 @@ void TimeTrackerWidget::slotUpdateButtons()
 
     action(QStringLiteral("new_task"))->setEnabled(currentTaskView());
     action(QStringLiteral("new_sub_task"))
-        ->setEnabled(currentTaskView() && currentTaskView()->storage()->isLoaded()
-                     && currentTaskView()->storage()->tasksModel()->getAllTasks().size());
+        ->setEnabled(currentTaskView() && currentTaskView()->storage()->isLoaded() && currentTaskView()->storage()->tasksModel()->getAllTasks().size());
     action(QStringLiteral("focustracking"))->setEnabled(currentTaskView());
-    action(QStringLiteral("focustracking"))
-        ->setChecked(currentTaskView() && currentTaskView()->isFocusTrackingActive());
+    action(QStringLiteral("focustracking"))->setChecked(currentTaskView() && currentTaskView()->isFocusTrackingActive());
     action(QStringLiteral("ktimetracker_start_new_session"))->setEnabled(currentTaskView());
     action(QStringLiteral("edit_history"))->setEnabled(currentTaskView());
     action(QStringLiteral("reset_all_times"))->setEnabled(currentTaskView());
@@ -453,19 +447,13 @@ void TimeTrackerWidget::showSettingsDialog()
     dialog->setFaceType(KPageDialog::List);
     KTimeTrackerBehaviorConfig *behaviorConfig = new KTimeTrackerBehaviorConfig(dialog);
     QWidget *behaviorConfigWidget = behaviorConfig->widget();
-    dialog->addPage(behaviorConfigWidget,
-                    i18nc("@title:tab", "Behavior"),
-                    QStringLiteral("preferences-other"));
+    dialog->addPage(behaviorConfigWidget, i18nc("@title:tab", "Behavior"), QStringLiteral("preferences-other"));
     KTimeTrackerDisplayConfig *displayConfig = new KTimeTrackerDisplayConfig(dialog);
     QWidget *displayConfigWidget = displayConfig->widget();
-    dialog->addPage(displayConfigWidget,
-                    i18nc("@title:tab", "Appearance"),
-                    QStringLiteral("preferences-desktop-theme"));
+    dialog->addPage(displayConfigWidget, i18nc("@title:tab", "Appearance"), QStringLiteral("preferences-desktop-theme"));
     KTimeTrackerStorageConfig *storageConfig = new KTimeTrackerStorageConfig(dialog);
     QWidget *storageConfigWidget = storageConfig->widget();
-    dialog->addPage(storageConfigWidget,
-                    i18nc("@title:tab", "Storage"),
-                    QStringLiteral("system-file-manager"));
+    dialog->addPage(storageConfigWidget, i18nc("@title:tab", "Storage"), QStringLiteral("system-file-manager"));
     connect(dialog, &KConfigDialog::settingsChanged, this, &TimeTrackerWidget::loadSettings);
     dialog->show();
 }
@@ -483,7 +471,7 @@ void TimeTrackerWidget::loadSettings()
     Q_EMIT tasksChanged(currentTaskView()->storage()->tasksModel()->getActiveTasks());
 }
 
-//BEGIN wrapper slots
+// BEGIN wrapper slots
 void TimeTrackerWidget::startCurrentTimer()
 {
     currentTaskView()->startCurrentTimer();
@@ -522,8 +510,7 @@ void TimeTrackerWidget::editTaskTime()
         return;
     }
 
-    QPointer<EditTimeDialog> editTimeDialog =
-        new EditTimeDialog(this, task->name(), task->description(), static_cast<int>(task->time()));
+    QPointer<EditTimeDialog> editTimeDialog = new EditTimeDialog(this, task->name(), task->description(), static_cast<int>(task->time()));
 
     if (editTimeDialog->exec() == QDialog::Accepted) {
         if (editTimeDialog->editHistoryRequested()) {
@@ -573,8 +560,7 @@ void TimeTrackerWidget::editHistory()
     // HistoryDialog is the new HistoryDialog, but the EditHiStoryDiaLog exists as well.
     // HistoryDialog can be edited with qtcreator and qtdesigner, EditHiStoryDiaLog cannot.
     if (currentTaskView()) {
-        QPointer<HistoryDialog> dialog =
-            new HistoryDialog(currentTaskView()->tasksWidget(), currentTaskView()->storage()->projectModel());
+        QPointer<HistoryDialog> dialog = new HistoryDialog(currentTaskView()->tasksWidget(), currentTaskView()->storage()->projectModel());
         if (currentTaskView()->storage()->eventsModel()->events().count() != 0) {
             dialog->exec();
         } else {
@@ -613,7 +599,7 @@ void TimeTrackerWidget::slotSearchBar()
     action(QStringLiteral("searchbar"))->setChecked(!currentVisible);
     showSearchBar(!currentVisible);
 }
-//END
+// END
 
 /** \defgroup dbus slots ‘‘dbus slots’’ */
 /* @{ */
@@ -662,8 +648,7 @@ void TimeTrackerWidget::addSubTask(const QString &taskName, const QString &taskI
     TaskView *taskView = currentTaskView();
 
     if (taskView) {
-        taskView
-            ->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->storage()->tasksModel()->taskByUID(taskId));
+        taskView->addTask(taskName, QString(), 0, 0, DesktopList(), taskView->storage()->tasksModel()->taskByUID(taskId));
         taskView->storage()->projectModel()->refresh();
         taskView->tasksWidget()->refresh();
     }
@@ -758,7 +743,7 @@ int TimeTrackerWidget::changeTime(const QString &taskId, int64_t minutes)
     // Find task
     TaskView *taskView = currentTaskView();
     if (!taskView) {
-        //FIXME: it mimics the behaviour with the for loop, but I am not sure semantics were right. Maybe a new error code must be defined?
+        // FIXME: it mimics the behaviour with the for loop, but I am not sure semantics were right. Maybe a new error code must be defined?
         return KTIMETRACKER_ERR_UID_NOT_FOUND;
     }
 

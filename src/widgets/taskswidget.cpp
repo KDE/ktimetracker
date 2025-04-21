@@ -34,8 +34,9 @@ void writeEntry(const QString &key, bool value)
     config.sync();
 }
 
-//BEGIN ProgressColumnDelegate (custom painting of the progress column)
-class ProgressColumnDelegate : public QStyledItemDelegate {
+// BEGIN ProgressColumnDelegate (custom painting of the progress column)
+class ProgressColumnDelegate : public QStyledItemDelegate
+{
 public:
     explicit ProgressColumnDelegate(QObject *parent)
         : QStyledItemDelegate(parent)
@@ -68,8 +69,7 @@ public:
                     painter->fillRect(rX + width, rY, newWidth - width, rHeight, gradient2);
                 }
 
-                painter->setPen(option.state & QStyle::State_Selected ? option.palette.highlight().color()
-                                                                      : option.palette.window().color());
+                painter->setPen(option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.window().color());
                 for (int x = rHeight; x < newWidth; x += rHeight) {
                     painter->drawLine(rX + x, rY, rX + x, rY + rHeight - 1);
                 }
@@ -88,8 +88,7 @@ public:
                     painter->fillRect(rX + width, rY, newWidth - width, rHeight, gradient2);
                 }
 
-                painter->setPen(option.state & QStyle::State_Selected ? option.palette.highlight().color()
-                                                                      : option.palette.window().color());
+                painter->setPen(option.state & QStyle::State_Selected ? option.palette.highlight().color() : option.palette.window().color());
                 for (int x = rWidth - rHeight; x > newWidth; x -= rHeight) {
                     painter->drawLine(rWidth - x, rY, rWidth - x, rY + rHeight - 1);
                 }
@@ -101,7 +100,7 @@ public:
         }
     }
 };
-//END
+// END
 
 TasksWidget::TasksWidget(QWidget *parent, QSortFilterProxyModel *filterProxyModel, TasksModel *tasksModel)
     : QTreeView(parent)
@@ -241,8 +240,7 @@ void TasksWidget::mouseMoveEvent(QMouseEvent *event)
 bool TasksWidget::mousePositionInsideCheckbox(QMouseEvent *event) const
 {
     QModelIndex index = indexAt(event->pos());
-    return index.isValid() && index.column() == 0 && visualRect(index).x() <= event->pos().x()
-        && event->pos().x() < visualRect(index).x() + 19;
+    return index.isValid() && index.column() == 0 && visualRect(index).x() <= event->pos().x() && event->pos().x() < visualRect(index).x() + 19;
 }
 
 void TasksWidget::mousePressEvent(QMouseEvent *event)
@@ -309,9 +307,9 @@ void TasksWidget::restoreItemState()
 
 Task *TasksWidget::taskAtViewIndex(QModelIndex viewIndex)
 {
-//    if (!m_storage->isLoaded()) {
-//        return nullptr;
-//    }
+    //    if (!m_storage->isLoaded()) {
+    //        return nullptr;
+    //    }
     if (!m_tasksModel) {
         return nullptr;
     }
@@ -338,9 +336,9 @@ void TasksWidget::setFilterText(const QString &text)
 void TasksWidget::refresh()
 {
     // remove root decoration if there is no more child.
-//    int i = 0;
-//    while (itemAt(++i) && itemAt(i)->depth() == 0){};
-    //setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
+    //    int i = 0;
+    //    while (itemAt(++i) && itemAt(i)->depth() == 0){};
+    // setRootIsDecorated( itemAt( i ) && ( itemAt( i )->depth() != 0 ) );
     // FIXME workaround? seems that the QItemDelegate for the percent column only
     // works properly if rootIsDecorated == true.
     setRootIsDecorated(true);

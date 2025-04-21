@@ -111,7 +111,7 @@ public Q_SLOTS:
     /** Open export dialog. */
     void exportDialog();
 
-    //BEGIN wrapper slots
+    // BEGIN wrapper slots
     /*
      * The following slots are wrapper slots which fires the corresponding
      * slot of the current taskview.
@@ -132,7 +132,7 @@ public Q_SLOTS:
     void resetAllTimes();
     void focusTracking();
     void slotSearchBar();
-    //END
+    // END
 
     /** \defgroup dbus slots ‘‘dbus slots’’ */
     /* @{ */
@@ -153,7 +153,7 @@ public Q_SLOTS:
     bool startTimerForTaskName(const QString &taskName);
     bool stopTimerForTaskName(const QString &taskName);
 
-  // FIXME rename, when the wrapper slot is removed
+    // FIXME rename, when the wrapper slot is removed
     void stopAllTimersDBUS();
     QString exportCSVFile(const QString &filename,
                           const QString &from,

@@ -17,8 +17,8 @@
 #include <QApplication>
 #include <QMenu>
 #include <QMovie>
-#include <QToolTip>
 #include <QScreen>
+#include <QToolTip>
 
 #include <KLocalizedString>
 

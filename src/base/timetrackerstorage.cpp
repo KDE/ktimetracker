@@ -6,13 +6,13 @@
 */
 
 /** TimeTrackerStorage
-  * This class cares for the storage of ktimetracker's data.
-  * ktimetracker's data is
-  * - tasks like "programming for customer foo"
-  * - events like "from 2009-09-07, 8pm till 10pm programming for customer foo"
-  * tasks are like the items on your todo list, events are dates when you worked on them.
-  * ktimetracker's data is stored in a ResourceCalendar object hold by mCalendar.
-  */
+ * This class cares for the storage of ktimetracker's data.
+ * ktimetracker's data is
+ * - tasks like "programming for customer foo"
+ * - events like "from 2009-09-07, 8pm till 10pm programming for customer foo"
+ * tasks are like the items on your todo list, events are dates when you worked on them.
+ * ktimetracker's data is stored in a ResourceCalendar object hold by mCalendar.
+ */
 
 #include "timetrackerstorage.h"
 
@@ -232,8 +232,7 @@ QString TimeTrackerStorage::save()
     std::unique_ptr<FileCalendar> calendar = m_model->asCalendar(m_url);
     if (!calendar->save()) {
         qCWarning(KTT_LOG) << "TimeTrackerStorage::save: calendar->save() failed";
-        errorMessage =
-            i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".", m_url.toString());
+        errorMessage = i18nc("%1=destination file path/URL", "Failed to save iCalendar file as \"%1\".", m_url.toString());
     } else {
         qCDebug(KTT_LOG) << "TimeTrackerStorage::save: wrote tasks to" << m_url;
     }

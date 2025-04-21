@@ -24,15 +24,15 @@ QString exportCSVToString(TasksModel *tasksModel, const ReportCriteria &rc)
     // Find max task depth
     int maxdepth = 0;
     for (Task *task : tasksModel->getAllTasks()) {
-//        if (dialog.wasCanceled()) {
-//            break;
-//        }
-//
-//        dialog.setValue(dialog.value() + 1);
+        //        if (dialog.wasCanceled()) {
+        //            break;
+        //        }
+        //
+        //        dialog.setValue(dialog.value() + 1);
 
-//        if (tasknr % 15 == 0) {
-//            QApplication::processEvents(); // repainting is slow
-//        }
+        //        if (tasknr % 15 == 0) {
+        //            QApplication::processEvents(); // repainting is slow
+        //        }
         QApplication::processEvents();
 
         if (task->depth() > maxdepth) {
@@ -42,15 +42,15 @@ QString exportCSVToString(TasksModel *tasksModel, const ReportCriteria &rc)
 
     // Export to file
     for (Task *task : tasksModel->getAllTasks()) {
-//        if (dialog.wasCanceled()) {
-//            break;
-//        }
-//
-//        dialog.setValue(dialog.value() + 1);
+        //        if (dialog.wasCanceled()) {
+        //            break;
+        //        }
+        //
+        //        dialog.setValue(dialog.value() + 1);
 
-//        if (tasknr % 15 == 0) {
-//            QApplication::processEvents(); // repainting is slow
-//        }
+        //        if (tasknr % 15 == 0) {
+        //            QApplication::processEvents(); // repainting is slow
+        //        }
         QApplication::processEvents();
 
         // indent the task in the csv-file:

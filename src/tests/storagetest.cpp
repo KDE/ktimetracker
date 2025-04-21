@@ -10,9 +10,9 @@
 #include <KCalendarCore/ICalFormat>
 #include <KCalendarCore/MemoryCalendar>
 
+#include "base/taskview.h"
 #include "helpers.h"
 #include "model/task.h"
-#include "base/taskview.h"
 
 class StorageTest : public QObject
 {
@@ -38,15 +38,13 @@ void StorageTest::testSaveSimpleTree()
     auto *taskView = createTaskView(this, true);
     QVERIFY(taskView);
 
-    Task* negativeTask = taskView->addTask(QStringLiteral("negative duration"));
+    Task *negativeTask = taskView->addTask(QStringLiteral("negative duration"));
     negativeTask->changeTime(-5, taskView->storage()->eventsModel()); // subtract 5 minutes
 
     QCOMPARE(taskView->storage()->save(), QString());
 
     KCalendarCore::MemoryCalendar::Ptr calendar(new KCalendarCore::MemoryCalendar(QTimeZone::systemTimeZone()));
-    KCalendarCore::FileStorage fileStorage(calendar,
-                                      taskView->storage()->fileUrl().toLocalFile(),
-                                      new KCalendarCore::ICalFormat());
+    KCalendarCore::FileStorage fileStorage(calendar, taskView->storage()->fileUrl().toLocalFile(), new KCalendarCore::ICalFormat());
     QVERIFY(fileStorage.load());
 
     auto todos = calendar->rawTodos(KCalendarCore::TodoSortSummary);
@@ -89,8 +87,7 @@ void StorageTest::testLockPath()
         "/ktimetracker_290fa23d3a268915fba5b2b2e5818aec381b7044_hello.ics."
         "lock");
 #endif
-    QVERIFY(
-        TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile(QStringLiteral("/tmp/../var/hello.ics"))).endsWith(expectedSuffix1));
+    QVERIFY(TimeTrackerStorage::createLockFileName(QUrl::fromLocalFile(QStringLiteral("/tmp/../var/hello.ics"))).endsWith(expectedSuffix1));
 
     // SHA-1 of "https://abc/1/привет world"
     QVERIFY(TimeTrackerStorage::createLockFileName(QUrl(QStringLiteral("https://abc/1/привет%20world")))

@@ -59,8 +59,8 @@ QString writeExport(const QString &data, const QUrl &url)
         }
     } else {
         // use remote file
-        auto* const job = KIO::storedPut(data.toUtf8(), url, -1);
-        //KJobWidgets::setWindow(job, &dialog); // TODO: add progress dialog
+        auto *const job = KIO::storedPut(data.toUtf8(), url, -1);
+        // KJobWidgets::setWindow(job, &dialog); // TODO: add progress dialog
         if (!job->exec()) {
             err = QString::fromLatin1("Could not upload");
         }

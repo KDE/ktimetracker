@@ -40,9 +40,12 @@ public:
      *
      */
     QString startTracking();
-    void registerForDesktops( Task* task, DesktopList dl );
+    void registerForDesktops(Task *task, DesktopList dl);
     int numDesktops = 0;
-    int desktopCount() const { return m_desktopCount; }
+    int desktopCount() const
+    {
+        return m_desktopCount;
+    }
 
 public Q_SLOTS:
     void handleDesktopChange(int desktop);

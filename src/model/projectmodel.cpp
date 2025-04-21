@@ -39,12 +39,10 @@ std::unique_ptr<FileCalendar> ProjectModel::asCalendar(const QUrl &url) const
         calendar->addTodo(task->asTodo(todo));
     }
 
-
     // TODO: Use libkcalcore comments
     // todo->addComment(comment);
     // temporary
-//     todo->setDescription(task->comment());
-
+    //     todo->setDescription(task->comment());
 
     for (Event *event : m_eventsModel->events()) {
         KCalendarCore::Event::Ptr calEvent(new KCalendarCore::Event());

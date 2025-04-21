@@ -8,16 +8,15 @@
 #include "focusdetector.h"
 
 #ifdef Q_OS_LINUX
-    #include <KX11Extras>
-    #include <KWindowInfo>
-    #include <KWindowSystem>
+#include <KWindowInfo>
+#include <KWindowSystem>
+#include <KX11Extras>
 #endif
 
 FocusDetector::FocusDetector()
 {
 #ifdef Q_OS_LINUX
-    if(KWindowSystem::isPlatformX11())
-    {
+    if (KWindowSystem::isPlatformX11()) {
         connect(KX11Extras::self(), &KX11Extras::activeWindowChanged, this, &FocusDetector::onFocusChanged);
     }
 #endif
@@ -26,8 +25,7 @@ FocusDetector::FocusDetector()
 void FocusDetector::onFocusChanged(WId /*unused*/)
 {
 #ifdef Q_OS_LINUX
-    if(KWindowSystem::isPlatformX11())
-    {
+    if (KWindowSystem::isPlatformX11()) {
         Q_EMIT newFocus(KWindowInfo(KX11Extras::activeWindow(), NET::WMName).name());
     }
 #endif

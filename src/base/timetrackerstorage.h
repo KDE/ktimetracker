@@ -11,7 +11,6 @@
 #include <KCalendarCore/Event>
 #include <KCalendarCore/Todo>
 
-
 QT_BEGIN_NAMESPACE
 class QDateTime;
 class QLockFile;
@@ -87,7 +86,10 @@ public:
     /** Close calendar and clear view.  Release lock if holding one. */
     void closeStorage();
 
-    bool isLoaded() const { return m_model; }
+    bool isLoaded() const
+    {
+        return m_model;
+    }
 
     /** list of all events */
     EventsModel *eventsModel();

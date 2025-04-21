@@ -10,8 +10,8 @@
 #include <QTimer>
 
 #ifdef Q_OS_LINUX
-    #include <KX11Extras>
-    #include <KWindowSystem>
+#include <KWindowSystem>
+#include <KX11Extras>
 #endif // Q_OS_LINUX
 
 #include "ktimetracker.h"
@@ -22,8 +22,7 @@ DesktopTracker::DesktopTracker()
     , m_timer(new QTimer(this))
 {
 #ifdef Q_OS_LINUX
-    if(KWindowSystem::isPlatformX11())
-    {
+    if (KWindowSystem::isPlatformX11()) {
         // currentDesktop will return 0 if no window manager is started
         m_previousDesktop = std::max(KX11Extras::currentDesktop() - 1, 0);
         m_desktop = std::max(KX11Extras::currentDesktop() - 1, 0);
@@ -68,8 +67,7 @@ void DesktopTracker::changeTimers()
 QString DesktopTracker::startTracking()
 {
 #ifdef Q_OS_LINUX
-    if(KWindowSystem::isPlatformX11())
-    {
+    if (KWindowSystem::isPlatformX11()) {
         int currentDesktop = KX11Extras::currentDesktop() - 1;
         if (currentDesktop < 0) {
             currentDesktop = 0;
@@ -99,8 +97,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                 m_desktopTracker[i].erase(tit);
             }
 #ifdef Q_OS_LINUX
-            if(KWindowSystem::isPlatformX11())
-            {
+            if (KWindowSystem::isPlatformX11()) {
                 // if the task was previously tracking this desktop then
                 // emit a signal that is not tracking it any more
                 if (i == KX11Extras::currentDesktop() - 1) {
@@ -132,8 +129,7 @@ void DesktopTracker::registerForDesktops(Task *task, DesktopList desktopList)
                     // not in start vector any more
                     v.erase(tit); // so we delete it from desktopTracker
 #ifdef Q_OS_LINUX
-                    if(KWindowSystem::isPlatformX11())
-                    {
+                    if (KWindowSystem::isPlatformX11()) {
                         // if the task was previously tracking this desktop then
                         // emit a signal that is not tracking it any more
                         if (i == KX11Extras::currentDesktop() - 1) {

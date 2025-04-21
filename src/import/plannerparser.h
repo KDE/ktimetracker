@@ -43,10 +43,10 @@ public:
     bool endElement(const QString &, const QString &, const QString &qName) override;
 
 private:
-    bool m_withinTasks;     // within <tasks> ?
+    bool m_withinTasks; // within <tasks> ?
     ProjectModel *m_projectModel;
-    Task* m_task;
-    int m_level;            // m_level=1: task is top-level-task
+    Task *m_task;
+    int m_level; // m_level=1: task is top-level-task
 };
 
 #endif

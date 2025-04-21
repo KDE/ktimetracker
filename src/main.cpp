@@ -15,19 +15,19 @@
 #include <QStandardPaths>
 
 #include <KAboutData>
-#include <KDBusService>
-#include <KLocalizedString>
-#include <KIconTheme>
 #include <KCrash>
+#include <KDBusService>
+#include <KIconTheme>
+#include <KLocalizedString>
 
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
 #if HAVE_STYLE_MANAGER
 #include <KStyleManager>
 #endif
 
+#include "base/mainwindow.h"
 #include "ktimetracker-version.h"
 #include "ktt_debug.h"
-#include "base/mainwindow.h"
 
 // Deliver the path/URL to the iCalendar file to be used
 QUrl getFileUrl(const QCommandLineParser &parser)
@@ -50,11 +50,9 @@ QUrl getFileUrl(const QCommandLineParser &parser)
         return url;
     } else {
         // customFile is not given as parameter
-        QString result =
-            QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ktimetracker/ktimetracker.ics")));
+        QString result = QString(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("ktimetracker/ktimetracker.ics")));
         if (result.isEmpty()) {
-            result = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + QLatin1Char('/')
-                + QStringLiteral("ktimetracker.ics");
+            result = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker.ics");
 
             QFileInfo fileInfo(result);
             QDir().mkpath(fileInfo.absolutePath());
@@ -98,30 +96,16 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(i18nc("@info:credit", "Alexander Potashev"),
                         i18nc("@info:credit", "Current Maintainer (since 2019)"),
                         QStringLiteral("aspotashev@gmail.com"));
-    aboutData.addAuthor(i18nc("@info:credit", "Thorsten Stärk"),
-                        i18nc("@info:credit", "Maintainer (2006-2012)"),
-                        QStringLiteral("kde@staerk.de"));
+    aboutData.addAuthor(i18nc("@info:credit", "Thorsten Stärk"), i18nc("@info:credit", "Maintainer (2006-2012)"), QStringLiteral("kde@staerk.de"));
     aboutData.addAuthor(i18nc("@info:credit", "Mark Bucciarelli"),
                         i18nc("@info:credit", "Maintainer (2005-2006)"),
                         QStringLiteral("mark@hubcapconsulting.com"));
-    aboutData.addAuthor(i18nc("@info:credit", "Jesper Pedersen"),
-                        i18nc("@info:credit", "Maintainer (2000-2005)"),
-                        QStringLiteral("blackie@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "Sirtaj Singh Kang"),
-                        i18nc("@info:credit", "Original Author"),
-                        QStringLiteral("taj@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "Mathias Soeken"),
-                        i18nc("@info:credit", "Developer (in 2007)"),
-                        QStringLiteral("msoeken@tzi.de"));
-    aboutData.addAuthor(i18nc("@info:credit", "Kalle Dalheimer"),
-                        i18nc("@info:credit", "Developer (1999-2000)"),
-                        QStringLiteral("kalle@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "Allen Winter"),
-                        i18nc("@info:credit", "Developer"),
-                        QStringLiteral("winter@kde.org"));
-    aboutData.addAuthor(i18nc("@info:credit", "David Faure"),
-                        i18nc("@info:credit", "Developer"),
-                        QStringLiteral("faure@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Jesper Pedersen"), i18nc("@info:credit", "Maintainer (2000-2005)"), QStringLiteral("blackie@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Sirtaj Singh Kang"), i18nc("@info:credit", "Original Author"), QStringLiteral("taj@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Mathias Soeken"), i18nc("@info:credit", "Developer (in 2007)"), QStringLiteral("msoeken@tzi.de"));
+    aboutData.addAuthor(i18nc("@info:credit", "Kalle Dalheimer"), i18nc("@info:credit", "Developer (1999-2000)"), QStringLiteral("kalle@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "Allen Winter"), i18nc("@info:credit", "Developer"), QStringLiteral("winter@kde.org"));
+    aboutData.addAuthor(i18nc("@info:credit", "David Faure"), i18nc("@info:credit", "Developer"), QStringLiteral("faure@kde.org"));
     KAboutData::setApplicationData(aboutData);
 
     KCrash::initialize();
@@ -142,11 +126,11 @@ int main(int argc, char *argv[])
 
     const QUrl &url = getFileUrl(parser);
 
-//        if (!KUniqueApplication::start()) {
-//            qCDebug(KTT_LOG) << "Other instance is already running, exiting!";
-//            return 0;
-//        }
-//        KUniqueApplication myApp;
+    //        if (!KUniqueApplication::start()) {
+    //            qCDebug(KTT_LOG) << "Other instance is already running, exiting!";
+    //            return 0;
+    //        }
+    //        KUniqueApplication myApp;
     QPointer<MainWindow> mainWindow = new MainWindow(url);
     mainWindow->show();
 

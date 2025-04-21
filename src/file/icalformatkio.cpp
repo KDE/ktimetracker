@@ -10,9 +10,9 @@
 
 #include <KCalendarCore/Exceptions>
 
+#include "ktt_debug.h"
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
-#include "ktt_debug.h"
 
 bool ICalFormatKIO::load(const KCalendarCore::Calendar::Ptr &calendar, const QString &urlString)
 {
@@ -77,9 +77,9 @@ bool ICalFormatKIO::save(const KCalendarCore::Calendar::Ptr &calendar, const QSt
     QByteArray textUtf8 = text.toUtf8();
 
     // TODO: Write backup file (i.e. backup the existing file somewhere, e.g. to ~/.local/share/apps/ktimetracker/backups/)
-//    const QString backupFile = urlString + QLatin1Char('~');
-//    QFile::remove(backupFile);
-//    QFile::copy(urlString, backupFile);
+    //    const QString backupFile = urlString + QLatin1Char('~');
+    //    QFile::remove(backupFile);
+    //    QFile::copy(urlString, backupFile);
 
     // save, either locally or remote
     QUrl url(urlString);

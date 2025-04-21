@@ -22,10 +22,7 @@ TreeViewHeaderContextMenu::TreeViewHeaderContextMenu(QObject *parent, QTreeView 
     , m_excludedColumns(excludedColumns)
 {
     m_widget->header()->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_widget->header(),
-            &QHeaderView::customContextMenuRequested,
-            this,
-            &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
+    connect(m_widget->header(), &QHeaderView::customContextMenuRequested, this, &TreeViewHeaderContextMenu::slotCustomContextMenuRequested);
 
     m_contextMenu = new QMenu(m_widget);
     m_contextMenu->addSection(i18nc("@title:menu", "Columns"));

@@ -35,8 +35,7 @@ QString getCustomProperty(const KCalendarCore::Incidence::Ptr &incident, const Q
     const QByteArray nameArray = name.toLatin1();
 
     // If a KDE-karm-* exists and not KDE-ktimetracker-*, change this.
-    if (incident->customProperty(eventAppName, nameArray).isNull()
-        && !incident->customProperty(eventAppNameOld, nameArray).isNull()) {
+    if (incident->customProperty(eventAppName, nameArray).isNull() && !incident->customProperty(eventAppNameOld, nameArray).isNull()) {
         incident->setCustomProperty(eventAppName, nameArray, incident->customProperty(eventAppNameOld, nameArray));
     }
 

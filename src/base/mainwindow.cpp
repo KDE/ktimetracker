@@ -52,10 +52,7 @@ MainWindow::MainWindow(const QUrl &url)
     connect(m_mainWidget, &TimeTrackerWidget::minutesUpdated, this, &MainWindow::updateWindowCaptionTasks);
 
     // Setup context menu request handling
-    connect(m_mainWidget,
-            &TimeTrackerWidget::contextMenuRequested,
-            this,
-            &MainWindow::taskViewCustomContextMenuRequested);
+    connect(m_mainWidget, &TimeTrackerWidget::contextMenuRequested, this, &MainWindow::taskViewCustomContextMenuRequested);
 
     if (KTimeTrackerSettings::trayIcon()) {
         m_tray = new TrayIcon(this);
@@ -68,16 +65,17 @@ MainWindow::MainWindow(const QUrl &url)
     m_mainWidget->openFile(url);
 }
 
-//bool KTimeTrackerPart::openFile()
+// bool KTimeTrackerPart::openFile()
 //{
-//    return openFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + QStringLiteral("ktimetracker/ktimetracker.ics"));
-//}
+//     return openFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') +
+//     QStringLiteral("ktimetracker/ktimetracker.ics"));
+// }
 
-//bool KTimeTrackerPart::saveFile()
+// bool KTimeTrackerPart::saveFile()
 //{
-//    m_mainWidget->saveFile();
-//    return true;
-//}
+//     m_mainWidget->saveFile();
+//     return true;
+// }
 
 void MainWindow::setStatusBar(const QString &qs)
 {

@@ -6,11 +6,11 @@
 
 #include <QTest>
 
+#include "base/taskview.h"
 #include "dialogs/historydialog.h"
 #include "model/eventsmodel.h"
 #include "model/task.h"
 #include "model/tasksmodel.h"
-#include "base/taskview.h"
 
 #include "helpers.h"
 

@@ -47,10 +47,7 @@ bool PlannerParser::startDocument()
     return true;
 }
 
-bool PlannerParser::startElement(const QString & /*namespaceURI*/,
-                                 const QString & /*localName*/,
-                                 const QString &qName,
-                                 const QXmlAttributes &att)
+bool PlannerParser::startElement(const QString & /*namespaceURI*/, const QString & /*localName*/, const QString &qName, const QXmlAttributes &att)
 {
     qDebug() << "entering function";
     QString taskName;

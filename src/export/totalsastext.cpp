@@ -29,9 +29,7 @@ static void printTask(Task *task, QString &s, int level, const ReportCriteria &r
 
     s += buf.fill(QChar::fromLatin1(' '), level);
     if (!rc.sessionTimes) {
-        s += QString(QString::fromLatin1("%1    %2"))
-                 .arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth)
-                 .arg(task->name());
+        s += QString(QString::fromLatin1("%1    %2")).arg(formatTime(static_cast<double>(task->totalTime()), rc.decimalMinutes), timeWidth).arg(task->name());
     } else {
         // print session times
         s += QString(QString::fromLatin1("%1    %2"))
@@ -100,9 +98,7 @@ QString totalsAsText(TasksModel *model, Task *currentItem, const ReportCriteria 
         // total
         buf.fill(QChar::fromLatin1('-'), reportWidth);
         retval += QString(QString::fromLatin1("%1")).arg(buf, timeWidth) + cr;
-        retval += QString(QString::fromLatin1("%1 %2"))
-                      .arg(formatTime(sum, rc.decimalMinutes), timeWidth)
-                      .arg(i18nc("total time of all tasks", "Total"));
+        retval += QString(QString::fromLatin1("%1 %2")).arg(formatTime(sum, rc.decimalMinutes), timeWidth).arg(i18nc("total time of all tasks", "Total"));
     } else {
         retval += i18n("No tasks.");
     }

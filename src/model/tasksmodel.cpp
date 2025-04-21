@@ -318,11 +318,7 @@ Qt::DropActions TasksModel::supportedDropActions() const
     return Qt::MoveAction;
 }
 
-bool TasksModel::canDropMimeData(const QMimeData *data,
-                                 Qt::DropAction action,
-                                 int row,
-                                 int column,
-                                 const QModelIndex &parent) const
+bool TasksModel::canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) const
 {
     if (m_dragCutTaskId.isEmpty()) {
         return false;
@@ -331,11 +327,7 @@ bool TasksModel::canDropMimeData(const QMimeData *data,
     return QAbstractItemModel::canDropMimeData(data, action, row, column, parent);
 }
 
-bool TasksModel::dropMimeData(const QMimeData *data,
-                              Qt::DropAction action,
-                              int row,
-                              int column,
-                              const QModelIndex &parent)
+bool TasksModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
     if (!canDropMimeData(data, action, row, column, parent)) {
         return false;

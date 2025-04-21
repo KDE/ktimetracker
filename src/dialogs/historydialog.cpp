@@ -32,9 +32,9 @@ public:
     {
     }
 
-    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex & /*index*/) const override
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex & /*index*/) const override
     {
-        auto* editor = new QDateTimeEdit(parent);
+        auto *editor = new QDateTimeEdit(parent);
         editor->setAutoFillBackground(true);
         editor->setPalette(option.palette);
         editor->setBackgroundRole(QPalette::Window);
@@ -43,8 +43,7 @@ public:
 
     void setEditorData(QWidget *editor, const QModelIndex &index) const override
     {
-        QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(),
-                                                   HistoryDialog::dateTimeFormat);
+        QDateTime dateTime = QDateTime::fromString(index.model()->data(index, Qt::DisplayRole).toString(), HistoryDialog::dateTimeFormat);
         auto *dateTimeWidget = qobject_cast<QDateTimeEdit *>(editor);
         if (dateTimeWidget) {
             dateTimeWidget->setDateTime(dateTime);
@@ -65,9 +64,7 @@ public:
         }
     }
 
-    void updateEditorGeometry(QWidget *editor,
-                              const QStyleOptionViewItem &option,
-                              const QModelIndex & /*index*/) const override
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex & /*index*/) const override
     {
         editor->setGeometry(option.rect);
     }
@@ -145,8 +142,8 @@ QString HistoryDialog::listAllEvents()
     m_ui.historytablewidget->resizeColumnsToContents();
     m_ui.historytablewidget->setColumnWidth(1, 300);
     m_ui.historytablewidget->setColumnWidth(2, 300);
-    setMinimumSize(m_ui.historytablewidget->columnWidth(0) + m_ui.historytablewidget->columnWidth(1)
-                       + m_ui.historytablewidget->columnWidth(2) + m_ui.historytablewidget->columnWidth(3),
+    setMinimumSize(m_ui.historytablewidget->columnWidth(0) + m_ui.historytablewidget->columnWidth(1) + m_ui.historytablewidget->columnWidth(2)
+                       + m_ui.historytablewidget->columnWidth(3),
                    height());
     m_ui.historytablewidget->setSortingEnabled(old_sortingenabled);
     return err;
