@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-15 00:42+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2021-09-25 09:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -33,7 +33,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "rysin@kde.org,ivanpetrouchtchak@yahoo.com"
 
-#: base/idletimedetector.cpp:62
+#: base/idletimedetector.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -43,25 +43,25 @@ msgstr ""
 "Застосувати час бездіяльності з %1 до всіх активних\n"
 "таймерів і продовжувати відлік."
 
-#: base/idletimedetector.cpp:65
+#: base/idletimedetector.cpp:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "Продовжити відлік"
 
-#: base/idletimedetector.cpp:67
+#: base/idletimedetector.cpp:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "Зупинити відлік і повернутися до часу %1"
 
-#: base/idletimedetector.cpp:68
+#: base/idletimedetector.cpp:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "Зворотний відлік"
 
-#: base/idletimedetector.cpp:72
+#: base/idletimedetector.cpp:67
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr "Стільниця перебуває у бездіяльності з %1. Яку дію слід виконати?"
@@ -72,12 +72,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "Налаштувати KTimeTracker..."
 
-#: base/mainwindow.cpp:136 base/tray.cpp:74
+#: base/mainwindow.cpp:134 base/tray.cpp:74
 #, kde-format
 msgid "No active tasks"
 msgstr "Немає активних задач"
 
-#: base/mainwindow.cpp:146 base/tray.cpp:94
+#: base/mainwindow.cpp:144 base/tray.cpp:94
 #, kde-format
 msgctxt "separator between task names"
 msgid ", "
@@ -95,7 +95,7 @@ msgstr ""
 "використовують цей файл і вилучіть всі файли блокування, які відносяться до "
 "нього з ~/.kde/share/apps/kabc/lock/ "
 
-#: base/taskview.cpp:198
+#: base/taskview.cpp:197
 #, kde-format
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
@@ -103,23 +103,23 @@ msgstr ""
 "Кількість ваших віртуальних стільниць є завеликою, слідкування за "
 "стільницями не працюватиме."
 
-#: base/taskview.cpp:274
+#: base/taskview.cpp:273
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
 msgstr "Зупиняємо відлік…"
 
-#: base/taskview.cpp:275
+#: base/taskview.cpp:273
 #, kde-format
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: base/taskview.cpp:345 base/taskview.cpp:429
+#: base/taskview.cpp:339 base/taskview.cpp:415
 #, kde-format
 msgid "Unnamed Task"
 msgstr "Задача без назви"
 
-#: base/taskview.cpp:364
+#: base/taskview.cpp:358
 #, kde-format
 msgid ""
 "Error storing new task. Your changes were not saved. Make sure you can edit "
@@ -131,24 +131,24 @@ msgstr ""
 "використовують цей файл і вилучіть всі файли блокування, які відносяться до "
 "нього з ~/.kde/share/apps/kabc/lock/"
 
-#: base/taskview.cpp:406
+#: base/taskview.cpp:395
 #, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
 msgstr "Нова підзадача"
 
-#: base/taskview.cpp:424
+#: base/taskview.cpp:413
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
 msgstr "Редагувати задачу"
 
-#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#: base/taskview.cpp:444 base/taskview.cpp:485 base/taskview.cpp:507
 #, kde-format
 msgid "No task selected."
 msgstr "Задачу не вибрано."
 
-#: base/taskview.cpp:504
+#: base/taskview.cpp:490
 #, kde-format
 msgid ""
 "Are you sure you want to delete the selected task and its entire history?\n"
@@ -157,7 +157,7 @@ msgstr ""
 "Ви впевнені, що хочете вилучити позначену задачу і всю її історію?\n"
 "Зауваження: всі підзадачі і їхня історія також будуть вилучені."
 
-#: base/taskview.cpp:508
+#: base/taskview.cpp:494
 #, kde-format
 msgctxt "@title:window"
 msgid "Deleting Task"
@@ -174,7 +174,7 @@ msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr "Не вдалося записати файл блокування «%1». Диск переповнено?"
 
-#: base/timetrackerstorage.cpp:236
+#: base/timetrackerstorage.cpp:235
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
@@ -483,31 +483,31 @@ msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "Показати панель пошуку"
 
-#: base/timetrackerwidget.cpp:457
+#: base/timetrackerwidget.cpp:450
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr "Поведінка"
 
-#: base/timetrackerwidget.cpp:462
+#: base/timetrackerwidget.cpp:453
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: base/timetrackerwidget.cpp:467
+#: base/timetrackerwidget.cpp:456
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Зберігання"
 
-#: base/timetrackerwidget.cpp:504
+#: base/timetrackerwidget.cpp:492
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Нова задача"
 
-#: base/timetrackerwidget.cpp:583
+#: base/timetrackerwidget.cpp:569
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -517,7 +517,7 @@ msgstr ""
 "Цього ще немає у історії. Почніть і зупиніть задачу, і у вас буде "
 "відповідний запис у історії."
 
-#: base/timetrackerwidget.cpp:593
+#: base/timetrackerwidget.cpp:579
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -526,60 +526,60 @@ msgstr ""
 "Ви дійсно хочете скинути час всіх задач до нуля? Якщо ви зробите це, весь "
 "журнал таймерів буде вилучено."
 
-#: base/timetrackerwidget.cpp:595
+#: base/timetrackerwidget.cpp:581
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Потрібне підтвердження"
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:582
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Скинути всі таймери"
 
-#: base/timetrackerwidget.cpp:785
+#: base/timetrackerwidget.cpp:770
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 "Не вдалось зберегти, найімовірніше тому, що не вдалось заблокувати файл."
 
-#: base/timetrackerwidget.cpp:787
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Не вдалось змінити ресурс календаря."
 
-#: base/timetrackerwidget.cpp:789
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Недостатньо пам'яті — не вдалось створити об'єкт."
 
-#: base/timetrackerwidget.cpp:791
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "UID not found."
 msgstr "Не знайдено UID."
 
-#: base/timetrackerwidget.cpp:793
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Некоректний формат дати. Має бути РРРР-ММ-ДД."
 
-#: base/timetrackerwidget.cpp:795
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Некоректний формат дати. Має бути РРРР-ММ-ДДTГГ:ХХ:СС."
 
-#: base/timetrackerwidget.cpp:797
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Некоректна тривалість задачі — мусить бути більша, ніж нуль."
 
-#: base/timetrackerwidget.cpp:799
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Некоректний номер помилки: %1"
 
-#: base/timetrackerwidget.cpp:1023
+#: base/timetrackerwidget.cpp:1008
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -591,7 +591,7 @@ msgstr ""
 "часом. Найкраще розпочати зі створення вашої власної задачі — введіть її у "
 "поле, де ви бачите напис «Знайти або додати задачу»."
 
-#: base/timetrackerwidget.cpp:1030
+#: base/timetrackerwidget.cpp:1015
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
@@ -605,7 +605,7 @@ msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
 msgstr ", ..."
 
-#: base/treeviewheadercontextmenu.cpp:31
+#: base/treeviewheadercontextmenu.cpp:28
 #, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
@@ -664,38 +664,38 @@ msgstr "Змінити час на:"
 msgid "Time After Change:"
 msgstr "Час після зміни:"
 
-#: dialogs/edittimedialog.cpp:84
+#: dialogs/edittimedialog.cpp:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
 msgstr "Редагувати історію..."
 
-#: dialogs/edittimedialog.cpp:85
+#: dialogs/edittimedialog.cpp:84
 #, kde-format
 msgid "To change this task's time, you have to edit its event history"
 msgstr "Щоб змінити час цього завдання, вам слід змінити його журнал подій."
 
-#: dialogs/exportdialog.cpp:81
+#: dialogs/exportdialog.cpp:79
 #, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
 msgstr "Експорт до файла"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
-#: dialogs/exportdialog.cpp:102 dialogs/exportdialog.ui:184
+#: dialogs/exportdialog.cpp:98 dialogs/exportdialog.ui:184
 #, kde-format
 msgctxt "format to display times"
 msgid "Decimal"
 msgstr "Десятковий"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
-#: dialogs/exportdialog.cpp:122 dialogs/exportdialog.ui:203
+#: dialogs/exportdialog.cpp:118 dialogs/exportdialog.ui:203
 #, kde-format
 msgid "Session Times"
 msgstr "Час сеансу"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
-#: dialogs/exportdialog.cpp:123 dialogs/exportdialog.ui:212
+#: dialogs/exportdialog.cpp:119 dialogs/exportdialog.ui:212
 #, kde-format
 msgid "All Tasks"
 msgstr "Всі задачі"
@@ -868,38 +868,38 @@ msgstr "\""
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:90 export/totalsastext.cpp:72
+#: dialogs/historydialog.cpp:87 export/totalsastext.cpp:70
 #, kde-format
 msgid "Task"
 msgstr "Задача"
 
-#: dialogs/historydialog.cpp:90
+#: dialogs/historydialog.cpp:87
 #, kde-format
 msgid "StartTime"
 msgstr "Час початку"
 
-#: dialogs/historydialog.cpp:90
+#: dialogs/historydialog.cpp:87
 #, kde-format
 msgid "EndTime"
 msgstr "Час кінця"
 
-#: dialogs/historydialog.cpp:90
+#: dialogs/historydialog.cpp:87
 #, kde-format
 msgid "Comment"
 msgstr "Коментар"
 
-#: dialogs/historydialog.cpp:131
+#: dialogs/historydialog.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr "Ви можете змінити коментар цієї задачі, час початку і час завершення."
 
-#: dialogs/historydialog.cpp:182 dialogs/historydialog.cpp:202
+#: dialogs/historydialog.cpp:179 dialogs/historydialog.cpp:199
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "Ця Дата/Час не є коректними."
 
-#: dialogs/historydialog.cpp:258
+#: dialogs/historydialog.cpp:255
 #, kde-format
 msgid "Please select a task to delete."
 msgstr "Будь ласка, вкажіть запис завдання, який слід вилучити."
@@ -926,7 +926,7 @@ msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "Автоматичне стеження"
 
-#: dialogs/taskpropertiesdialog.cpp:89
+#: dialogs/taskpropertiesdialog.cpp:86
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -937,23 +937,23 @@ msgstr "%1."
 msgid "Could not open \"%1\"."
 msgstr "Неможливо відкрити «%1»."
 
-#: export/totalsastext.cpp:69
+#: export/totalsastext.cpp:67
 #, kde-format
 msgid "Task Totals"
 msgstr "Підсумки задач"
 
-#: export/totalsastext.cpp:72
+#: export/totalsastext.cpp:70
 #, kde-format
 msgid "Time"
 msgstr "Час"
 
-#: export/totalsastext.cpp:105
+#: export/totalsastext.cpp:101
 #, kde-format
 msgctxt "total time of all tasks"
 msgid "Total"
 msgstr "Всього"
 
-#: export/totalsastext.cpp:107
+#: export/totalsastext.cpp:103
 #, kde-format
 msgid "No tasks."
 msgstr "Немає задач."
@@ -988,124 +988,124 @@ msgstr "Головний пенал"
 msgid "Tasks"
 msgstr "Задачі"
 
-#: main.cpp:90 model/event.cpp:153 model/eventsmodel.cpp:112
+#: main.cpp:88 model/event.cpp:153 model/eventsmodel.cpp:112
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:92
+#: main.cpp:90
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "Утиліта стеження за часом KDE"
 
-#: main.cpp:94
+#: main.cpp:92
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr "© Розробники KTimeTracker, 1997–2019"
 
-#: main.cpp:98
+#: main.cpp:96
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr "Alexander Potashev"
 
-#: main.cpp:99
+#: main.cpp:97
 #, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "Поточний супровідник (з 2019 року)"
 
-#: main.cpp:101
+#: main.cpp:99
 #, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
 
-#: main.cpp:102
+#: main.cpp:99
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr "Супровідник (2006-2012)"
 
-#: main.cpp:104
+#: main.cpp:100
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:105
+#: main.cpp:101
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr "Супровідник (2005-2006)"
 
-#: main.cpp:107
+#: main.cpp:103
 #, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:108
+#: main.cpp:103
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr "Супровідник (2000-2005)"
 
-#: main.cpp:110
+#: main.cpp:104
 #, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:111
+#: main.cpp:104
 #, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "Перший автор"
 
-#: main.cpp:113
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:114
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr "Розробник (у 2007 році)"
 
-#: main.cpp:116
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:117
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr "Розробник (1999-2000)"
 
-#: main.cpp:119
+#: main.cpp:107
 #, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:120 main.cpp:123
+#: main.cpp:107 main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr "Розробник"
 
-#: main.cpp:122
+#: main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:136
+#: main.cpp:120
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
@@ -1355,31 +1355,31 @@ msgstr ""
 "інформації. Коли ви натиснете Enter, введена вами інформація буде "
 "використана як назва нової задачі."
 
-#: widgets/taskswidget.cpp:129
+#: widgets/taskswidget.cpp:128
 #, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: widgets/taskswidget.cpp:140
+#: widgets/taskswidget.cpp:139
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
 msgstr "не вказано"
 
-#: widgets/taskswidget.cpp:143
+#: widgets/taskswidget.cpp:142
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
 msgstr "1 (найвищий)"
 
-#: widgets/taskswidget.cpp:146
+#: widgets/taskswidget.cpp:145
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
 msgstr "5 (середній)"
 
-#: widgets/taskswidget.cpp:149
+#: widgets/taskswidget.cpp:148
 #, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"

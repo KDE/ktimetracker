@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-15 00:42+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2012-01-28 16:12-0800\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
@@ -31,7 +31,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "imura@cs.titech.ac.jp,shinobo@leo.bekkoame.ne.jp,tsuno@ngy.1st.ne.jp"
 
-#: base/idletimedetector.cpp:62
+#: base/idletimedetector.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -39,28 +39,28 @@ msgid ""
 "timers and keep them running."
 msgstr ""
 
-#: base/idletimedetector.cpp:65
+#: base/idletimedetector.cpp:61
 #, fuzzy, kde-format
 #| msgid "Continue timing."
 msgctxt "@action:button"
 msgid "Continue Timing"
 msgstr "時間計測を継続します。"
 
-#: base/idletimedetector.cpp:67
+#: base/idletimedetector.cpp:63
 #, fuzzy, kde-format
 #| msgid "Stop timing and revert back to the time at %1."
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
 msgstr "時間計測を停止し、%1 の時間に戻します。"
 
-#: base/idletimedetector.cpp:68
+#: base/idletimedetector.cpp:64
 #, fuzzy, kde-format
 #| msgid "Revert timing"
 msgctxt "@action:button"
 msgid "Revert Timing"
 msgstr "時間計測を元に戻します。"
 
-#: base/idletimedetector.cpp:72
+#: base/idletimedetector.cpp:67
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr ""
@@ -72,12 +72,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "Ktimetracker を設定..."
 
-#: base/mainwindow.cpp:136 base/tray.cpp:74
+#: base/mainwindow.cpp:134 base/tray.cpp:74
 #, kde-format
 msgid "No active tasks"
 msgstr "アクティブなタスクはありません"
 
-#: base/mainwindow.cpp:146 base/tray.cpp:94
+#: base/mainwindow.cpp:144 base/tray.cpp:94
 #, fuzzy, kde-format
 #| msgid ", "
 msgctxt "separator between task names"
@@ -96,7 +96,7 @@ msgstr ""
 "ケーションを終了し、<filename>~/.kde/share/apps/kabc/lock/</filename> からそ"
 "の名前に関連するあらゆるロックファイルを削除してください。"
 
-#: base/taskview.cpp:198
+#: base/taskview.cpp:197
 #, fuzzy, kde-format
 #| msgid ""
 #| "Your virtual desktop number is too high, desktop tracking will not work"
@@ -104,23 +104,23 @@ msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr "仮想デスクトップの番号が大きすぎます。デスクトップの追跡はできません。"
 
-#: base/taskview.cpp:274
+#: base/taskview.cpp:273
 #, kde-format
 msgctxt "@info:progress"
 msgid "Stopping timers..."
 msgstr ""
 
-#: base/taskview.cpp:275
+#: base/taskview.cpp:273
 #, kde-format
 msgid "Cancel"
 msgstr ""
 
-#: base/taskview.cpp:345 base/taskview.cpp:429
+#: base/taskview.cpp:339 base/taskview.cpp:415
 #, kde-format
 msgid "Unnamed Task"
 msgstr "名前のないタスク"
 
-#: base/taskview.cpp:364
+#: base/taskview.cpp:358
 #, fuzzy, kde-format
 #| msgid ""
 #| "Error storing new task. Your changes were not saved. Make sure you can "
@@ -137,26 +137,26 @@ msgstr ""
 "ケーションを終了し、<filename>~/.kde/share/apps/kabc/lock/</filename> からそ"
 "の名前に関連するあらゆるロックファイルを削除してください。"
 
-#: base/taskview.cpp:406
+#: base/taskview.cpp:395
 #, fuzzy, kde-format
 #| msgid "New Sub Task"
 msgctxt "@title:window"
 msgid "New Sub Task"
 msgstr "新しいサブタスク"
 
-#: base/taskview.cpp:424
+#: base/taskview.cpp:413
 #, fuzzy, kde-format
 #| msgid "Edit Task"
 msgctxt "@title:window"
 msgid "Edit Task"
 msgstr "タスクを編集"
 
-#: base/taskview.cpp:458 base/taskview.cpp:499 base/taskview.cpp:521
+#: base/taskview.cpp:444 base/taskview.cpp:485 base/taskview.cpp:507
 #, kde-format
 msgid "No task selected."
 msgstr "タスクが選択されていません。"
 
-#: base/taskview.cpp:504
+#: base/taskview.cpp:490
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you want to delete the selected task and its entire "
@@ -169,7 +169,7 @@ msgstr ""
 "本当に選択したタスクとその履歴全体を削除しますか？\n"
 "<note>サブタスクとその履歴もすべて削除されます。</note>"
 
-#: base/taskview.cpp:508
+#: base/taskview.cpp:494
 #, fuzzy, kde-format
 #| msgid "Deleting Task"
 msgctxt "@title:window"
@@ -190,7 +190,7 @@ msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr "保存できませんでした。ディスクに空きはありますか？"
 
-#: base/timetrackerstorage.cpp:236
+#: base/timetrackerstorage.cpp:235
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
@@ -559,32 +559,32 @@ msgctxt "@action:inmenu"
 msgid "Show Searchbar"
 msgstr "検索バーを表示"
 
-#: base/timetrackerwidget.cpp:457
+#: base/timetrackerwidget.cpp:450
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:462
+#: base/timetrackerwidget.cpp:453
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:467
+#: base/timetrackerwidget.cpp:456
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:504
+#: base/timetrackerwidget.cpp:492
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "新しいタスク"
 
-#: base/timetrackerwidget.cpp:583
+#: base/timetrackerwidget.cpp:569
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -593,7 +593,7 @@ msgid ""
 msgstr ""
 "まだ履歴はありません。タスクの時間計測を開始/停止すると、履歴が作成されます。"
 
-#: base/timetrackerwidget.cpp:593
+#: base/timetrackerwidget.cpp:579
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -602,61 +602,61 @@ msgstr ""
 "本当にすべてのタスクの時間を 0 にリセットしますか？履歴のすべてが削除されま"
 "す。"
 
-#: base/timetrackerwidget.cpp:595
+#: base/timetrackerwidget.cpp:581
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "確認が必要です"
 
-#: base/timetrackerwidget.cpp:596
+#: base/timetrackerwidget.cpp:582
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "すべての時間をリセット"
 
-#: base/timetrackerwidget.cpp:785
+#: base/timetrackerwidget.cpp:770
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "保存に失敗しました。おそらくファイルをロックできなかったためです。"
 
-#: base/timetrackerwidget.cpp:787
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "カレンダーリソースを変更できませんでした。"
 
-#: base/timetrackerwidget.cpp:789
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "メモリ不足--オブジェクトを作成できませんでした。"
 
-#: base/timetrackerwidget.cpp:791
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "UID not found."
 msgstr "UID が見つかりません。"
 
-#: base/timetrackerwidget.cpp:793
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "無効な時間--フォーマットは YYYY-MM-DDTHH:MM:SS です。"
 
-#: base/timetrackerwidget.cpp:795
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "無効な時間--フォーマットは YYYY-MM-DDTHH:MM:SS です。"
 
-#: base/timetrackerwidget.cpp:797
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "無効なタスクの継続時間--0 より大きくしてください。"
 
-#: base/timetrackerwidget.cpp:799
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "無効なエラー番号: %1"
 
-#: base/timetrackerwidget.cpp:1023
+#: base/timetrackerwidget.cpp:1008
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -672,7 +672,7 @@ msgstr ""
 "索/追加」というメッセージが表示されているフィールドにタスクの名前を入力してタ"
 "スクを作成してください。"
 
-#: base/timetrackerwidget.cpp:1030
+#: base/timetrackerwidget.cpp:1015
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"
@@ -686,7 +686,7 @@ msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
 msgstr ", ..."
 
-#: base/treeviewheadercontextmenu.cpp:31
+#: base/treeviewheadercontextmenu.cpp:28
 #, fuzzy, kde-format
 #| msgid "Columns"
 msgctxt "@title:menu"
@@ -746,19 +746,19 @@ msgstr ""
 msgid "Time After Change:"
 msgstr ""
 
-#: dialogs/edittimedialog.cpp:84
+#: dialogs/edittimedialog.cpp:83
 #, fuzzy, kde-format
 #| msgid "Edit History..."
 msgctxt "@action:button"
 msgid "Edit History..."
 msgstr "履歴を編集..."
 
-#: dialogs/edittimedialog.cpp:85
+#: dialogs/edittimedialog.cpp:84
 #, kde-format
 msgid "To change this task's time, you have to edit its event history"
 msgstr ""
 
-#: dialogs/exportdialog.cpp:81
+#: dialogs/exportdialog.cpp:79
 #, fuzzy, kde-format
 #| msgid "Export Progress"
 msgctxt "@title:window"
@@ -766,20 +766,20 @@ msgid "Export to File"
 msgstr "進捗をエクスポート"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
-#: dialogs/exportdialog.cpp:102 dialogs/exportdialog.ui:184
+#: dialogs/exportdialog.cpp:98 dialogs/exportdialog.ui:184
 #, kde-format
 msgctxt "format to display times"
 msgid "Decimal"
 msgstr "十進数表記"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combosessiontimes)
-#: dialogs/exportdialog.cpp:122 dialogs/exportdialog.ui:203
+#: dialogs/exportdialog.cpp:118 dialogs/exportdialog.ui:203
 #, kde-format
 msgid "Session Times"
 msgstr "セッション時間"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboalltasks)
-#: dialogs/exportdialog.cpp:123 dialogs/exportdialog.ui:212
+#: dialogs/exportdialog.cpp:119 dialogs/exportdialog.ui:212
 #, kde-format
 msgid "All Tasks"
 msgstr "すべてのタスク"
@@ -958,39 +958,39 @@ msgstr "\""
 msgid "'"
 msgstr "'"
 
-#: dialogs/historydialog.cpp:90 export/totalsastext.cpp:72
+#: dialogs/historydialog.cpp:87 export/totalsastext.cpp:70
 #, kde-format
 msgid "Task"
 msgstr "タスク"
 
-#: dialogs/historydialog.cpp:90
+#: dialogs/historydialog.cpp:87
 #, kde-format
 msgid "StartTime"
 msgstr "開始時間"
 
-#: dialogs/historydialog.cpp:90
+#: dialogs/historydialog.cpp:87
 #, kde-format
 msgid "EndTime"
 msgstr "終了時間"
 
-#: dialogs/historydialog.cpp:90
+#: dialogs/historydialog.cpp:87
 #, kde-format
 msgid "Comment"
 msgstr "コメント"
 
-#: dialogs/historydialog.cpp:131
+#: dialogs/historydialog.cpp:128
 #, fuzzy, kde-format
 #| msgid "You can change this task's comment, start time and end time."
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
 msgstr "このタスクのコメント、開始時間、終了時間を変更できます。"
 
-#: dialogs/historydialog.cpp:182 dialogs/historydialog.cpp:202
+#: dialogs/historydialog.cpp:179 dialogs/historydialog.cpp:199
 #, kde-format
 msgid "This is not a valid Date/Time."
 msgstr "これは有効な日付/時間ではありません。"
 
-#: dialogs/historydialog.cpp:258
+#: dialogs/historydialog.cpp:255
 #, kde-format
 msgid "Please select a task to delete."
 msgstr ""
@@ -1016,7 +1016,7 @@ msgctxt "@title:group"
 msgid "Auto Tracking"
 msgstr "自動追跡"
 
-#: dialogs/taskpropertiesdialog.cpp:89
+#: dialogs/taskpropertiesdialog.cpp:86
 #, kde-format
 msgctxt "order number of desktop: 1, 2, ..."
 msgid "%1."
@@ -1027,23 +1027,23 @@ msgstr ""
 msgid "Could not open \"%1\"."
 msgstr "<filename>%1</filename> を開けませんでした。"
 
-#: export/totalsastext.cpp:69
+#: export/totalsastext.cpp:67
 #, kde-format
 msgid "Task Totals"
 msgstr "タスク合計"
 
-#: export/totalsastext.cpp:72
+#: export/totalsastext.cpp:70
 #, kde-format
 msgid "Time"
 msgstr "時間"
 
-#: export/totalsastext.cpp:105
+#: export/totalsastext.cpp:101
 #, kde-format
 msgctxt "total time of all tasks"
 msgid "Total"
 msgstr "合計"
 
-#: export/totalsastext.cpp:107
+#: export/totalsastext.cpp:103
 #, kde-format
 msgid "No tasks."
 msgstr "タスクがありません。"
@@ -1078,134 +1078,134 @@ msgstr "メインツールバー"
 msgid "Tasks"
 msgstr "タスク"
 
-#: main.cpp:90 model/event.cpp:153 model/eventsmodel.cpp:112
+#: main.cpp:88 model/event.cpp:153 model/eventsmodel.cpp:112
 #, kde-format
 msgid "KTimeTracker"
 msgstr "KTimeTracker"
 
-#: main.cpp:92
+#: main.cpp:90
 #, kde-format
 msgid "KDE Time tracker tool"
 msgstr "KDE 時間追跡ツール"
 
-#: main.cpp:94
+#: main.cpp:92
 #, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
 msgstr ""
 
-#: main.cpp:98
+#: main.cpp:96
 #, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Potashev"
 msgstr ""
 
-#: main.cpp:99
+#: main.cpp:97
 #, fuzzy, kde-format
 #| msgid "Current Maintainer"
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
 msgstr "現在のメンテナ"
 
-#: main.cpp:101
+#: main.cpp:99
 #, fuzzy, kde-format
 #| msgid "Thorsten Stärk"
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
 msgstr "Thorsten Stärk"
 
-#: main.cpp:102
+#: main.cpp:99
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2006-2012)"
 msgstr ""
 
-#: main.cpp:104
+#: main.cpp:100
 #, fuzzy, kde-format
 #| msgid "Mark Bucciarelli"
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
 msgstr "Mark Bucciarelli"
 
-#: main.cpp:105
+#: main.cpp:101
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2005-2006)"
 msgstr ""
 
-#: main.cpp:107
+#: main.cpp:103
 #, fuzzy, kde-format
 #| msgid "Jesper Pedersen"
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
 msgstr "Jesper Pedersen"
 
-#: main.cpp:108
+#: main.cpp:103
 #, kde-format
 msgctxt "@info:credit"
 msgid "Maintainer (2000-2005)"
 msgstr ""
 
-#: main.cpp:110
+#: main.cpp:104
 #, fuzzy, kde-format
 #| msgid "Sirtaj Singh Kang"
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
 msgstr "Sirtaj Singh Kang"
 
-#: main.cpp:111
+#: main.cpp:104
 #, fuzzy, kde-format
 #| msgid "Original Author"
 msgctxt "@info:credit"
 msgid "Original Author"
 msgstr "オリジナルの作者"
 
-#: main.cpp:113
+#: main.cpp:105
 #, fuzzy, kde-format
 #| msgid "Mathias Soeken"
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
 
-#: main.cpp:114
+#: main.cpp:105
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
 msgstr ""
 
-#: main.cpp:116
+#: main.cpp:106
 #, fuzzy, kde-format
 #| msgid "Kalle Dalheimer"
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
 
-#: main.cpp:117
+#: main.cpp:106
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (1999-2000)"
 msgstr ""
 
-#: main.cpp:119
+#: main.cpp:107
 #, fuzzy, kde-format
 #| msgid "Allen Winter"
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
 
-#: main.cpp:120 main.cpp:123
+#: main.cpp:107 main.cpp:108
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
 msgstr ""
 
-#: main.cpp:122
+#: main.cpp:108
 #, fuzzy, kde-format
 #| msgid "David Faure"
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
 
-#: main.cpp:136
+#: main.cpp:120
 #, fuzzy, kde-format
 #| msgid "The iCalendar file to open"
 msgctxt "@info:shell"
@@ -1466,21 +1466,21 @@ msgstr ""
 "機能し、入力した文字列にマッチするタスクのみが表示されます。Enter を押すと、"
 "入力した文字列を名前とする新しいタスクが作成されます。"
 
-#: widgets/taskswidget.cpp:129
+#: widgets/taskswidget.cpp:128
 #, fuzzy, kde-format
 #| msgid "%1 %"
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
 msgstr "%1%"
 
-#: widgets/taskswidget.cpp:140
+#: widgets/taskswidget.cpp:139
 #, fuzzy, kde-format
 #| msgid "unspecified"
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
 msgstr "指定なし"
 
-#: widgets/taskswidget.cpp:143
+#: widgets/taskswidget.cpp:142
 #, fuzzy, kde-format
 #| msgctxt "combox entry for highest priority"
 #| msgid "1 (highest)"
@@ -1488,7 +1488,7 @@ msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
 msgstr "1 (最高)"
 
-#: widgets/taskswidget.cpp:146
+#: widgets/taskswidget.cpp:145
 #, fuzzy, kde-format
 #| msgctxt "combox entry for medium priority"
 #| msgid "5 (medium)"
@@ -1496,7 +1496,7 @@ msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
 msgstr "5 (中)"
 
-#: widgets/taskswidget.cpp:149
+#: widgets/taskswidget.cpp:148
 #, fuzzy, kde-format
 #| msgctxt "combox entry for lowest priority"
 #| msgid "9 (lowest)"
