@@ -245,6 +245,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <binary>ktimetracker</binary>
   </provides>
   <releases>
+    <release version="6.0.0" date="2025-06-17"/>
     <release version="5.0.1" date="2019-12-21">
       <artifacts>
         <artifact type="binary" platform="x86_64-windows-msvc">
