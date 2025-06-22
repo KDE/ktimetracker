@@ -83,5 +83,6 @@ kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 install(FILES org.kde.ktimetracker.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 ki18n_install(po)
+kdoctools_install(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
