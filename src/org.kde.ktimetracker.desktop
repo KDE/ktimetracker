@@ -88,4 +88,4 @@ SingleMainWindow=true
 Terminal=false
 StartupNotify=true
 X-DBUS-StartupType=Unique
-Categories=Qt;KDE;Utility;Office;Monitor;X-KDE-Utilities-PIM;
+Categories=Qt;KDE;Office;ProjectManagement;X-KDE-Utilities-PIM;
