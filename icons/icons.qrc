@@ -5,15 +5,13 @@ SPDX-FileCopyrightText: 2022 Jens Küspert <jens.kuespert@gmx.de>
 SPDX-License-Identifier: GPL-2.0-or-later
 -->
 
-<!DOCTYPE RCC><RCC version="1.0">
-    <qresource prefix="/icons/breeze">
-        <file alias="22x22/apps/ktimetracker.svg">breeze/22-apps-ktimetracker.svg</file>
-        <file alias="32x32/apps/ktimetracker.svg">breeze/32-apps-ktimetracker.svg</file>
-        <file alias="48x48/apps/ktimetracker.svg">breeze/48-apps-ktimetracker.svg</file>
-    </qresource>
-    <qresource prefix="/icons/breeze-dark">
-        <file alias="22x22/apps/ktimetracker.svg">breeze-dark/22-apps-ktimetracker.svg</file>
-        <file alias="32x32/apps/ktimetracker.svg">breeze-dark/32-apps-ktimetracker.svg</file>
-        <file alias="48x48/apps/ktimetracker.svg">breeze-dark/48-apps-ktimetracker.svg</file>
+<!DOCTYPE RCC>
+<RCC version="1.0">
+        <qresource prefix="/icons">
+                <file alias="22x22/apps/ktimetracker.png">22-apps-ktimetracker.png</file>
+                <file alias="32x32/apps/ktimetracker.png">32-apps-ktimetracker.png</file>
+                <file alias="48x48/apps/ktimetracker.png">48-apps-ktimetracker.png</file>
+                <file alias="64x64/apps/ktimetracker.png">64-apps-ktimetracker.png</file>
+                <file alias="128x128/apps/ktimetracker.png">128-apps-ktimetracker.png</file>
     </qresource>
 </RCC>

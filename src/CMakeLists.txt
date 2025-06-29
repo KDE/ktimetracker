@@ -83,12 +83,12 @@ ki18n_wrap_ui(ktimetracker
 # Add icons to the .exe target directly, otherwise
 # they are not included on Windows.
 ecm_add_app_icon(ktimetracker ICONS
-    ${CMAKE_SOURCE_DIR}/icons/breeze-app-icon-png/16-apps-ktimetracker.png
-    ${CMAKE_SOURCE_DIR}/icons/breeze-app-icon-png/22-apps-ktimetracker.png
-    ${CMAKE_SOURCE_DIR}/icons/breeze-app-icon-png/32-apps-ktimetracker.png
-    ${CMAKE_SOURCE_DIR}/icons/breeze-app-icon-png/48-apps-ktimetracker.png
-    ${CMAKE_SOURCE_DIR}/icons/breeze-app-icon-png/64-apps-ktimetracker.png
-    ${CMAKE_SOURCE_DIR}/icons/breeze-app-icon-png/128-apps-ktimetracker.png
+    ${CMAKE_SOURCE_DIR}/icons/16-apps-ktimetracker.png
+    ${CMAKE_SOURCE_DIR}/icons/22-apps-ktimetracker.png
+    ${CMAKE_SOURCE_DIR}/icons/32-apps-ktimetracker.png
+    ${CMAKE_SOURCE_DIR}/icons/48-apps-ktimetracker.png
+    ${CMAKE_SOURCE_DIR}/icons/64-apps-ktimetracker.png
+    ${CMAKE_SOURCE_DIR}/icons/128-apps-ktimetracker.png
 )
 
 target_link_libraries(ktimetracker
