@@ -10,8 +10,9 @@
 
 #include "base/reportcriteria.h"
 
+class Task;
 class ProjectModel;
 
-QString exportCSVHistoryToString(ProjectModel *projectModel, const ReportCriteria &rc);
+QString exportCSVHistoryToString(ProjectModel *projectModel, Task *currentItem, const ReportCriteria &rc);
 
 #endif // KTIMETRACKER_CSVHISTORY_H

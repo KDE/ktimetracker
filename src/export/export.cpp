@@ -22,7 +22,7 @@ QString exportToString(ProjectModel *model, Task *currentTask, const ReportCrite
     case ReportCriteria::CSVTotalsExport:
         return exportCSVToString(model->tasksModel(), rc);
     case ReportCriteria::CSVHistoryExport:
-        return exportCSVHistoryToString(model, rc);
+        return exportCSVHistoryToString(model, currentTask, rc);
     case ReportCriteria::CSVEventLogExport:
         return exportCSVEventLogToString(model, rc);
     case ReportCriteria::TextTotalsExport:

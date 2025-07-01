@@ -9,6 +9,7 @@
 #define KTIMETRACKER_TASK_H
 
 #include <QDateTime>
+#include <QList>
 
 #include <KCalendarCore/Todo>
 
@@ -287,6 +288,9 @@ public:
     {
         return !parentTask();
     }
+
+    /** This task and all its descendant tasks. */
+    QList<Task *> selfAndDescendants() const;
 
     /** remove Task with all it's children
      * Removes task as well as all event history for this task.

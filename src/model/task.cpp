@@ -75,6 +75,19 @@ int Task::depth()
     return res;
 }
 
+QList<Task *> Task::selfAndDescendants() const
+{
+    QList<Task *> out;
+    out.append(const_cast<Task *>(this));
+    for (int i = 0; i < childCount(); ++i) {
+        Task *subTask = dynamic_cast<Task *>(child(i));
+        if (subTask) {
+            out += subTask->selfAndDescendants();
+        }
+    }
+    return out;
+}
+
 void Task::init(const QString &taskName,
                 const QString &taskDescription,
                 int64_t minutes,
