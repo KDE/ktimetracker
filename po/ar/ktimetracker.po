@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 00:44+0000\n"
-"PO-Revision-Date: 2025-02-23 21:05+0400\n"
+"PO-Revision-Date: 2025-08-04 21:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -191,8 +191,8 @@ msgid ""
 "This will reset the session time to 0 for all tasks, to start a new session, "
 "without affecting the totals."
 msgstr ""
-"سيؤدي ذلك إلى إعادة تعيين وقت الجلسة إلى 0 لجميع المهام ، لبدء جلسة جديدة ، "
-"دون التأثير على المجاميع."
+"سيؤدي ذلك إلى تصفير وقت الجلسة إلى 0 لجميع المهام ، لبدء جلسة جديدة ، دون "
+"التأثير على المجاميع."
 
 #: base/timetrackerwidget.cpp:149
 #, kde-format
@@ -234,7 +234,7 @@ msgid ""
 "This will reset the session and total time to 0 for all tasks, to restart "
 "from scratch."
 msgstr ""
-"سيؤدي هذا إلى إعادة تعيين الجلسة والوقت الإجمالي إلى 0 لجميع المهام، لإعادة "
+"سيؤدي هذا إلى تصفير الجلسة والوقت الإجمالي إلى 0 لجميع المهام، لإعادة "
 "التشغيل من البداية."
 
 #: base/timetrackerwidget.cpp:172
@@ -331,7 +331,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Auto-creates and updates tasks when the focus of the current window has "
 "changed"
-msgstr "تنشئ المهام وتحديثها تلقائيًا عند تغيير تركيز النافذة الحالية"
+msgstr "تنشئ المهام وتحديثها آليًّا عند تغيير تركيز النافذة الحالية"
 
 #: base/timetrackerwidget.cpp:222
 #, kde-format
@@ -506,9 +506,7 @@ msgstr "لا يوجد سجل حتى الآن. ابدأ مهمة وأوقفها �
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
-msgstr ""
-"هل تريد حقاً إعادة ضبط الوقت إلى الصفر لجميع المهام؟ سيؤدي ذلك إلى حذف السجل "
-"بأكمله."
+msgstr "هل تريد حقاً تصفير الوقت لجميع المهام؟ سيؤدي ذلك إلى حذف السجل بأكمله."
 
 #: base/timetrackerwidget.cpp:581
 #, kde-format
@@ -906,7 +904,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
-msgstr "التتبع الآلي"
+msgstr "التتبع الآليّ"
 
 #: dialogs/taskpropertiesdialog.cpp:86
 #, kde-format
