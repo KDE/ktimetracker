@@ -191,7 +191,7 @@ msgid ""
 "This will reset the session time to 0 for all tasks, to start a new session, "
 "without affecting the totals."
 msgstr ""
-"سيؤدي ذلك إلى تصفير وقت الجلسة إلى 0 لجميع المهام ، لبدء جلسة جديدة ، دون "
+"سيؤدي ذلك إلى تصفير وقت الجلسة إلى 0 لجميع المهام، لبدء جلسة جديدة، دون "
 "التأثير على المجاميع."
 
 #: base/timetrackerwidget.cpp:149
