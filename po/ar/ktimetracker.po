@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 00:44+0000\n"
-"PO-Revision-Date: 2025-08-04 21:00+0400\n"
+"PO-Revision-Date: 2025-08-14 13:21+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -87,8 +87,8 @@ msgid ""
 "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
 msgstr ""
 "حدث خطأ أثناء تخزين المهمة الجديدة. لم يحفظ تغييراتك. تأكد من إمكانية تعديل "
-"ملف iCalendar. قم أيضًا بإنهاء جميع التطبيقات التي تستخدم هذا الملف وإزالة أي "
-"ملف قفل مرتبط باسمه من ~/.kde/share/apps/kabc/lock/ "
+"ملف iCalendar. أنهِ أيضًا جميع التطبيقات التي تستخدم هذا الملف وإزالة أي ملف "
+"قفل مرتبط باسمه من ~/.kde/share/apps/kabc/lock/ "
 
 #: base/taskview.cpp:197
 #, kde-format
@@ -120,8 +120,8 @@ msgid ""
 "any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
 msgstr ""
 "حدث خطأ أثناء تخزين المهمة الجديدة. لم يحفظ تغييراتك. تأكد من إمكانية تعديل "
-"ملف iCalendar. قم أيضًا بإنهاء جميع التطبيقات التي تستخدم هذا الملف وإزالة أي "
-"ملف قفل مرتبط باسمه من ~/.kde/share/apps/kabc/lock/"
+"ملف iCalendar. أنهِ أيضًا جميع التطبيقات التي تستخدم هذا الملف وإزالة أي ملف "
+"قفل مرتبط باسمه من ~/.kde/share/apps/kabc/lock/"
 
 #: base/taskview.cpp:395
 #, kde-format
@@ -342,8 +342,8 @@ msgid ""
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
 "إذا تغير التركيز في النافذة لأول مرة عند تمكين هذا الإجراء، فستُنشئ مهمة "
-"جديدة بعنوان النافذة كاسم لها وستبدأ. إذا كانت هذه المهمة موجودة بالفعل "
-"فستبدأ المهمة."
+"جديدة بعنوان النافذة كاسم لها وستبدأ. إذا كانت هذه المهمة موجودة فعلًا فستبدأ "
+"المهمة."
 
 #: base/timetrackerwidget.cpp:233
 #, kde-format
