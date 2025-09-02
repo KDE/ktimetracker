@@ -587,7 +587,7 @@ msgid ""
 "with creating your first task - enter it into the field where you see "
 "\"Search or add task\"."
 msgstr ""
-"Este és KTimeTracker, el programa de KDE per a ajudar-vos a registrar el "
+"Este és KTimeTracker, el programa de KDE per ajudar-vos a registrar el "
 "temps. Millor, comenceu creant la primera tasca -introduïu-la en el camp que "
 "vegeu «Busca o afig una tasca»-."
 
@@ -902,7 +902,7 @@ msgstr "Esta no és una data/hora vàlida."
 #: dialogs/historydialog.cpp:255
 #, kde-format
 msgid "Please select a task to delete."
-msgstr "Seleccioneu una tasca que se suprimirà."
+msgstr "Trieu una tasca que se suprimirà."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
 #: dialogs/historydialog.ui:21
@@ -1257,8 +1257,8 @@ msgid ""
 "precious. It will disable the search bar and every click will pop up a "
 "context menu."
 msgstr ""
-"Seleccioneu açò si teniu una pantalla tàctil i l'estat real de la pantalla "
-"és valuós. Desactivarà la barra de busca i cada clic farà aparéixer un menú "
+"Trieu açò si teniu una pantalla tàctil i l'estat real de la pantalla és "
+"valuós. Desactivarà la barra de busca i cada clic farà aparéixer un menú "
 "contextual."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
