@@ -48,7 +48,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <name xml:lang="sv">Ktimerracker</name>
   <name xml:lang="tr">K Zamanölçer</name>
   <name xml:lang="uk">KTimeTracker</name>
-  <name xml:lang="x-test">xxKTimeTrackerxx</name>
   <name xml:lang="zh-CN">KTimeTracker</name>
   <name xml:lang="zh-TW">KTimeTracker</name>
   <summary>Personal Time Tracker</summary>
@@ -84,7 +83,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <summary xml:lang="sv">Personlig tidmätning</summary>
   <summary xml:lang="tr">Kişisel Zaman Ölçer</summary>
   <summary xml:lang="uk">Програма для керування особистим часом</summary>
-  <summary xml:lang="x-test">xxPersonal Time Trackerxx</summary>
   <summary xml:lang="zh-CN">个人时间追踪器</summary>
   <summary xml:lang="zh-TW">個人時間追蹤器</summary>
   <description>
@@ -120,7 +118,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="sv">Ktimerracker hjälper till att hålla reda på personlig tid spenderad på diverse aktiviteter och projekt.</p>
     <p xml:lang="tr">K Zamanölçer, çeşitli görevler ve projeler üzerinde harcadığınız zamanı ölçmenize yarar.</p>
     <p xml:lang="uk">KTimeTracker допоможе вам стежити за вашим особистим часом, який ви витрачаєте на виконання різноманітних завдань та проєктів.</p>
-    <p xml:lang="x-test">xxKTimeTracker helps you track your personal time spent on various tasks and projects.xx</p>
     <p xml:lang="zh-CN">KTimeTracker 可帮助您追踪花在各种任务和项目上的个人时间。</p>
     <p xml:lang="zh-TW">KTimeTracker 幫您追蹤花費於各種事情與專案的個人時間。</p>
     <p>It is useful for tracking billable hours and can report the hours logged by task and day.</p>
@@ -155,7 +152,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="sv">Det är användbart för att hålla reda på debiterbara timmar och kan rapportera timmar loggade enligt aktivitet och dag.</p>
     <p xml:lang="tr">Fatura etmeniz gereken çalışma saatlerini ve görev ve tarih başına harcanan saatleri ölçmek için yararlıdır.</p>
     <p xml:lang="uk">Ця програма корисна для стеження за обліком годин, вона може створювати звіти за даними, записаними для задачі або протягом дня.</p>
-    <p xml:lang="x-test">xxIt is useful for tracking billable hours and can report the hours logged by task and day.xx</p>
     <p xml:lang="zh-CN">它有助于追踪带薪时间，并可按任务和日期报告小时数。</p>
     <p xml:lang="zh-TW">它可以用來追蹤計費工時，並依工作或日期來回報已紀錄的時數。</p>
     <p>With KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.</p>
@@ -190,7 +186,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="sv">Med Ktimetracker man kan organisera ett nerbrutet projekt som delaktiviteter med obegränsat djup. De vanliga tangentbords- och musgenvägarna är enkla och gör verktyget verkligt bekvämt och intuitivt att använda.</p>
     <p xml:lang="tr">K Zamanölçer ile, alt ögelere ayrılmış bir projeyi sınırsız dallandırma ile organize edebilirsiniz. Standart klavye ve fare kısayolları çok yalındır ve kullanımı olabildiğince konforlu ve rahat kılar.</p>
     <p xml:lang="uk">За допомогою KTimeTracker ви можете упорядкувати поділ проєкту на підзавдання (рівень вкладеності не обмежено). Стандартні клавіатурні скорочення та дії за допомогою миші є простими — вони забезпечують зручність та інтуїтивну зрозумілість принципів керування програмою.</p>
-    <p xml:lang="x-test">xxWith KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.xx</p>
     <p xml:lang="zh-CN">通过 KTimeTracker，您可以将零碎的项目整理成无限套的小任务。简易标准的键鼠快捷键使本工具十分舒适且直观使用。</p>
     <p xml:lang="zh-TW">利用 KTimeTracker，您可以將專案分為子工作來管理，子工作之下也能有更多子工作，沒有層數限制。標準提供的鍵盤與滑鼠快捷鍵簡潔易懂，讓此工具使用起來直覺且順暢。</p>
   </description>
@@ -234,7 +229,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <caption xml:lang="sv">Ktimerracker</caption>
       <caption xml:lang="tr">K Zamanölçer</caption>
       <caption xml:lang="uk">KTimeTracker</caption>
-      <caption xml:lang="x-test">xxKTimeTrackerxx</caption>
       <caption xml:lang="zh-CN">KTimeTracker</caption>
       <caption xml:lang="zh-TW">KTimeTracker</caption>
       <image>https://cdn.kde.org/screenshots/ktimetracker/ktimetracker.png</image>
