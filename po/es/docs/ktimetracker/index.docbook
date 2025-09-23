@@ -223,7 +223,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guimenu
 >Tarea</guimenu
 > <guimenuitem
->Nueva tarea...</guimenuitem
+>Nueva tarea…</guimenuitem
 > </menuchoice
 >. Para crear una subtarea, resalte la tarea padre y seleccione <menuchoice
 > <shortcut
@@ -235,7 +235,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guimenu
 >Tarea</guimenu
 > <guimenuitem
->Nueva subtarea...</guimenuitem
+>Nueva subtarea…</guimenuitem
 > </menuchoice
 >. </para>
 
@@ -471,7 +471,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guisubmenu
 >Importar</guisubmenu
 ><guimenuitem
->Import tareas desde Planner...</guimenuitem
+>Import tareas desde Planner…</guimenuitem
 > </menuchoice
 >, para tenerlos en el formato <ulink url="https://tools.ietf.org/html/rfc2445"
 >iCalendar</ulink
@@ -526,7 +526,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guimenu
 >Archivo</guimenu
 > <guimenuitem
->Exportar...</guimenuitem
+>Exportar…</guimenuitem
 > </menuchoice
 > y &ktimetracker; mostrará el diálogo de exportación. </para>
 
@@ -553,7 +553,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 
 <para
 >Modifique los valores predeterminados del diálogo si es necesario. Puede ver una vista previa de la salida CSV en la parte derecha del diálogo. Pulse <guibutton
->Guardar como...</guibutton
+>Guardar como…</guibutton
 > para que &ktimetracker; exporte los totales de todas las tareas en el archivo que haya introducido en el diálogo.</para>
 
 <para
@@ -604,7 +604,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guisubmenu
 >Exportar</guisubmenu
 > <guimenuitem
->Exportar...</guimenuitem
+>Exportar…</guimenuitem
 > </menuchoice
 > y &ktimetracker; mostrará el mismo diálogo de exportación que se mostró arriba. Seleccione la opción <guibutton
 >Historial como CSV</guibutton
@@ -614,7 +614,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 
 <para
 >Seleccione el intervalo de fechas que desea que cubra el historial de la tarea. Modifique los valores predeterminados del diálogo si es necesario. Puede ver una vista previa de la salida CSV en la parte derecha del diálogo. Pulse <guibutton
->Guardar como...</guibutton
+>Guardar como…</guibutton
 > para que &ktimetracker; exporte los totales de todas las tareas en el archivo que haya introducido en el diálogo.</para>
 
 <para
