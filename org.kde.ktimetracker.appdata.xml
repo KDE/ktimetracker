@@ -35,6 +35,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <name xml:lang="it">KTimeTracker</name>
   <name xml:lang="ka">KTimeTracker</name>
   <name xml:lang="ko">KTimetracker</name>
+  <name xml:lang="lt">KTimeTracker</name>
   <name xml:lang="lv">KTimeTracker</name>
   <name xml:lang="nl">KTimeTracker</name>
   <name xml:lang="nn">KTimeTracker</name>
@@ -70,6 +71,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <summary xml:lang="it">Segnatempo personale</summary>
   <summary xml:lang="ka">პირადი დროის ტრეკერი</summary>
   <summary xml:lang="ko">개인 시간 추적기</summary>
+  <summary xml:lang="lt">Asmeninis laiko seklys</summary>
   <summary xml:lang="lv">Personīgais laika uzskaitītājs</summary>
   <summary xml:lang="nl">Persoonlijk tijdgebruik</summary>
   <summary xml:lang="nn">Personleg tidtakar</summary>
@@ -106,6 +108,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="it">KTimeTracker ti aiuta a tenere traccia del tempo personale speso in varie attività e progetti.</p>
     <p xml:lang="ka">KTimeTracker დაგეხმარებათ, თვალყური ადევნოთ თქვენს პირად დროს, რომელსაც სხვადასხვა ამოცანებზე და პროექტებზე ხარჯავთ.</p>
     <p xml:lang="ko">KTimeTracker는 다양한 작업과 프로젝트에 투자한 개인 시간을 추적합니다.</p>
+    <p xml:lang="lt">KTimeTracker padeda jums sekti, kiek asmeninio laiko skyrėte įvarioms užduotims ir projektams.</p>
     <p xml:lang="lv">„KTimeTracker“ jums palīdzēs sekot līdzi laikam, ko pavadāt pie dažādiem darbiem un projektiem.</p>
     <p xml:lang="nl">KTimeTracker helpt u uw persoonlijk gebruikte tijd aan verschillende taken and projecten te volgen.</p>
     <p xml:lang="nn">KTimeTracker hjelper deg å halda oversikt over kor mykje tid du brukar på ulike oppgåver og prosjekt.</p>
@@ -216,6 +219,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <caption xml:lang="it">KTimeTracker</caption>
       <caption xml:lang="ka">KTimeTracker</caption>
       <caption xml:lang="ko">KTimetracker</caption>
+      <caption xml:lang="lt">KTimeTracker</caption>
       <caption xml:lang="lv">KTimeTracker</caption>
       <caption xml:lang="nl">KTimeTracker</caption>
       <caption xml:lang="nn">KTimeTracker</caption>
