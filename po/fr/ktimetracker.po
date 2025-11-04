@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 00:44+0000\n"
-"PO-Revision-Date: 2021-09-25 09:46+0200\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"PO-Revision-Date: 2023-01-08 18:45+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -453,7 +453,7 @@ msgid ""
 "This will bring up a dialog box where you may edit the parameters for the "
 "selected task."
 msgstr ""
-"Ceci ouvrira une boîte de dialogue où vous pourrez modifier les paramètres "
+"Ceci ouvrira une boite de dialogue où vous pourrez modifier les paramètres "
 "de la tâche sélectionnée."
 
 #: base/timetrackerwidget.cpp:275
@@ -475,7 +475,7 @@ msgid ""
 "This will bring up a dialog box where you may edit the times for the "
 "selected task."
 msgstr ""
-"Ceci ouvrira une boîte de dialogue où vous pourrez modifier les durées de la "
+"Ceci ouvrira une boite de dialogue où vous pourrez modifier les durées de la "
 "tâche sélectionnée."
 
 #: base/timetrackerwidget.cpp:287
@@ -1268,7 +1268,7 @@ msgstr "N'autoriser qu'un seul chronomètre à la fois"
 #: settings/cfgbehavior.ui:78
 #, kde-format
 msgid "Place an icon to the system tray"
-msgstr "Placer une icône dans la boîte à miniatures"
+msgstr "Placer une icône dans la boite à miniatures"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: settings/cfgdisplay.ui:34
