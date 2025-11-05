@@ -240,7 +240,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 ></para>
 
 <para
->Un autre indicateur visuel de l'activité de &ktimetracker; est l'icône dans la boîte à miniatures. Lorsqu'une activité est active, la deuxième main de l'icône bouge. Si vous passez le pointeur de la souris sur l'icône, alors le nom de l'activité active s'affichera dans une infobulle. Lorsque plusieurs activités sont actives, leurs noms sont affichés dans l'infobulle, séparés par une virgule.</para>
+>Un autre indicateur visuel de l'activité de &ktimetracker; est l'icône dans la boite à miniatures. Lorsqu'une activité est active, la deuxième main de l'icône bouge. Si vous passez le pointeur de la souris sur l'icône, alors le nom de l'activité active s'affichera dans une infobulle. Lorsque plusieurs activités sont actives, leurs noms sont affichés dans l'infobulle, séparés par une virgule.</para>
 
 <para
 >Chaque activité dans &ktimetracker; possède deux minuteries : une pour la durée de la session, et une autre pour la durée totale. Dans la configuration par défaut, &ktimetracker; affiche deux colonnes pour chaque minuterie, soit un total de quatre colonnes pour chaque activité :</para>
@@ -362,11 +362,11 @@ SPDX-License-Identifier: GFDL-1.2-only
 >Solution :</emphasis
 > Validez la détection d'inactivité dans la page <guilabel
 >Comportement</guilabel
-> de la boîte de configuration.</para>
+> de la boite de configuration.</para>
 </informalexample>
 
 <para
->&ktimetracker; peut être configuré pour reconnaître lorsque le clavier et la souris deviennent inactifs. S'ils restent inactifs pendant un nombre spécifié de minutes, &ktimetracker; affiche la boîte de dialogue suivante :</para>
+>&ktimetracker; peut être configuré pour reconnaître lorsque le clavier et la souris deviennent inactifs. S'ils restent inactifs pendant un nombre spécifié de minutes, &ktimetracker; affiche la boite de dialogue suivante :</para>
 
 <screenshot>
  <screeninfo
@@ -500,14 +500,14 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guimenuitem
 >Exporter</guimenuitem
 ></menuchoice
->. &ktimetracker; affichera alors la boîte de dialogue suivante : </para>
+>. &ktimetracker; affichera alors la boite de dialogue suivante : </para>
 
 <para
 >Sélectionnez l'option <guibutton
 >Heures en « CSV »</guibutton
 > dans le groupe <guilabel
 >Signaler un type</guilabel
->. La boîte de dialogue va se présenter comme suit : </para>
+>. La boite de dialogue va se présenter comme suit : </para>
 
 <screenshot>
 <screeninfo
@@ -524,9 +524,9 @@ SPDX-License-Identifier: GFDL-1.2-only
 </screenshot>
 
 <para
->Modifier les paramètres par défaut de la boîte de dialogue, si nécessaire. Vous pouvez avoir un aperçu de la sortie au format « csv » sur le côté droit de la boîte de dialogue. Veuillez cliquer sur <guibutton
+>Modifier les paramètres par défaut de la boite de dialogue, si nécessaire. Vous pouvez avoir un aperçu de la sortie au format « csv » sur le côté droit de la boite de dialogue. Veuillez cliquer sur <guibutton
 >Exporter comme...</guibutton
-> et &ktimetracker;exportera la totalité des tâches vers ce fichier avec le nom que vous avez saisi dans la boîte de dialogue.</para>
+> et &ktimetracker;exportera la totalité des tâches vers ce fichier avec le nom que vous avez saisi dans la boite de dialogue.</para>
 
 <para
 >Utilisez le bouton <guibutton
@@ -542,7 +542,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 ,"ktimetracker",,,,6.88,8.70,6.88,9.83
 ,,"3.2 plan de fonctionnalités",,,0.00,0.00,0.00,0.00
 ,,"",,,0.00,1.13,0.00,1.13
-,,"vérification des modifications - chaînes de traduction",,,0.00,0.00,0.00,0.00
+,,"vérification des modifications - chaines de traduction",,,0.00,0.00,0.00,0.00
 ,,"time card report",,,0.00,0.00,0.00,0.00
 ,"kopete",,,,0.00,0.00,0.00,0.00
 ,"promo",,,,0.00,0.00,0.00,0.00
@@ -578,16 +578,16 @@ SPDX-License-Identifier: GFDL-1.2-only
 > <guimenuitem
 >Exporter...</guimenuitem
 > </menuchoice
->. &ktimetracker; affiche la même boîte de dialogue que celle qui est affichée ci-dessus. Veuillez sélectionner l'option <guibutton
+>. &ktimetracker; affiche la même boite de dialogue que celle qui est affichée ci-dessus. Veuillez sélectionner l'option <guibutton
 >Historique au format « CSV »</guibutton
 > dans le groupe <guilabel
 >Signaler un type</guilabel
 >. </para>
 
 <para
->Veuillez sélectionner un intervalle de donnée que vous souhaitez couvrir dans votre historique de tâches. Modifiez si nécessaire les paramètres par défaut de la boîte de dialogue. Vous pouvez avoir un aperçu du résultat au format « CSV » sur le coté droit de la boîte de dialogue. Veuillez cliquer sur le bouton <guibutton
+>Veuillez sélectionner un intervalle de donnée que vous souhaitez couvrir dans votre historique de tâches. Modifiez si nécessaire les paramètres par défaut de la boite de dialogue. Vous pouvez avoir un aperçu du résultat au format « CSV » sur le coté droit de la boite de dialogue. Veuillez cliquer sur le bouton <guibutton
 >Enregistrer sous...</guibutton
-> et &ktimetracker;exportera la totalité de vos tâches vers le fichier que vous avez saisi dans la boîte de dialogue.</para>
+> et &ktimetracker;exportera la totalité de vos tâches vers le fichier que vous avez saisi dans la boite de dialogue.</para>
 
 <para
 >Utilisez le bouton <guibutton
@@ -607,7 +607,7 @@ Imprimé le : 2004-07-13 18 : 10
 ,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
 ,,,,,,,,0.00,,,"3.2 plan des fonctionnalités"
 ,1.13,,,,,,,1.13,,,"bogues"
-,,,,,,,,0.00,,,"vérification des modifications - chaînes de traduction"
+,,,,,,,,0.00,,,"vérification des modifications - chaines de traduction"
 ,,,,,,,,0.00,,,"time card report"
 ,,,,,,,,0.00,,"kopete"
 ,,,,,,,,0.00,,"promotion"
@@ -639,7 +639,7 @@ Imprimé le : 2004-07-13 18 : 10
 >Configuration pour PDA</guilabel
 > dans la page <guilabel
 >Apparence</guilabel
-> de la boîte de configuration si vous possédez un écran tactile qui est délicat. Cette option désactivera la barre de recherche, et à chaque clic s'affichera un menu contextuel.</para>
+> de la boite de configuration si vous possédez un écran tactile qui est délicat. Cette option désactivera la barre de recherche, et à chaque clic s'affichera un menu contextuel.</para>
 
 <screenshot>
 <screeninfo
@@ -863,7 +863,7 @@ Imprimé le : 2004-07-13 18 : 10
 <para
 >&ktimetracker; a été inspiré par l'utilitaire <application
 >titrax</application
-> de Harald Tveit Alvestrand, dont le seul défaut est d'utiliser la boîte à outils « Xt ».</para>
+> de Harald Tveit Alvestrand, dont le seul défaut est d'utiliser la boite à outils « Xt ».</para>
 
 <para
 >Copyright de la documentation 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; et &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
@@ -973,10 +973,10 @@ Imprimé le : 2004-07-13 18 : 10
 
 <glossentry id="gloss-system-tray"
 > <glossterm
->boîte à miniatures</glossterm>
+>boite à miniatures</glossterm>
 <glossdef
 ><para
->La boîte à miniatures se trouve dans la barre apparaissant (Par défaut dans &kde; &plasma;) en bas de votre écran. Dans cette boîte à miniatures <inlinemediaobject
+>La boite à miniatures se trouve dans la barre apparaissant (Par défaut dans &kde; &plasma;) en bas de votre écran. Dans cette boite à miniatures <inlinemediaobject
 > <imageobject
 > <imagedata fileref="systray.png" format="PNG"/></imageobject
 > </inlinemediaobject
@@ -1062,7 +1062,7 @@ Imprimé le : 2004-07-13 18 : 10
 <para
 ><function
 >version()</function
-> est un appel &DBus; qui retourne la version de &ktimetracker;, par exemple 4.3.1. La version est retournée sous forme de chaîne de caractères, dont le format majeure.mineure.correction est caractéristique de &GNU;.</para>
+> est un appel &DBus; qui retourne la version de &ktimetracker;, par exemple 4.3.1. La version est retournée sous forme de chaine de caractères, dont le format majeure.mineure.correction est caractéristique de &GNU;.</para>
 </refsect1>
 </refentry>
 
