@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-01-05 18:54+0200\n"
+"PO-Revision-Date: 2026-01-06 15:04+0200\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -35,6 +35,8 @@ msgid ""
 "Apply the idle time since %1 to all active\n"
 "timers and keep them running."
 msgstr ""
+"Taikyti neveiklumo laiką nuo %1 visiems aktyviems\n"
+"laikmačiams ir palikti juos veikiančius."
 
 #: base/idletimedetector.cpp:61
 #, kde-format
@@ -192,6 +194,8 @@ msgid ""
 "This will reset the session time to 0 for all tasks, to start a new session, "
 "without affecting the totals."
 msgstr ""
+"Tai atstatys visų užduočių seanso laiką į 0, kad būtų pradėtas naujas "
+"seansas, nepaveikiant bendrųjų reikšmių."
 
 #: base/timetrackerwidget.cpp:149
 #, kde-format
@@ -206,12 +210,14 @@ msgid "Edits history of all tasks of the current document"
 msgstr "Taiso visų dabartinio dokumento užduočių istoriją"
 
 #: base/timetrackerwidget.cpp:152
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "A window will be opened where you can change start and stop times of tasks "
 "or add a comment to them."
-msgstr "Bus atvertas langas, kuriame galėsite keisti pradžios ir "
+msgstr ""
+"Bus atvertas langas, kuriame galėsite keisti užduočių pradžios ir sustabdymo "
+"laikus arba pridėti joms komentarą."
 
 #: base/timetrackerwidget.cpp:162
 #, kde-format
@@ -232,6 +238,8 @@ msgid ""
 "This will reset the session and total time to 0 for all tasks, to restart "
 "from scratch."
 msgstr ""
+"Tai atstatys visų užduočių seanso ir bendrą laiką į 0, kad būtų iš naujo "
+"pradėta nuo tuščio lapo."
 
 #: base/timetrackerwidget.cpp:172
 #, kde-format
@@ -340,6 +348,9 @@ msgid ""
 "enabled, a new task will be created with the title of the window as its name "
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
+"Jeigu įjungus šį veiksmą lango fokusavimas pasikeičia pirmą kartą, tada bus "
+"sukurta ir paleista nauja užduotis, kurios pavadinimas atitiks lango "
+"pavadinimą. Jei tokia užduotis jau yra, ji bus paleista."
 
 #: base/timetrackerwidget.cpp:233
 #, kde-format
@@ -746,6 +757,8 @@ msgid ""
 "An inclusive date range for reporting on time card history.  Not enabled "
 "when reporting on totals."
 msgstr ""
+"Datų rėžis įskaitytinai, skirtas ataskaitoms apie laiko kortelių istoriją.  "
+"Neįjungtas teikiant ataskaitas apie bendrąsias reikšmes."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
 #: dialogs/exportdialog.ui:128
@@ -838,7 +851,7 @@ msgstr "Kabutės:"
 #: dialogs/exportdialog.ui:334
 #, kde-format
 msgid "All fields are quoted in the output."
-msgstr ""
+msgstr "Visi laukai išvestyje bus kabutėse."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
 #: dialogs/exportdialog.ui:338
@@ -923,9 +936,9 @@ msgid "Could not open \"%1\"."
 msgstr "Nepavyko atverti „%1“."
 
 #: export/totalsastext.cpp:67
-#, fuzzy, kde-format
+#, kde-format
 msgid "Task Totals"
-msgstr "Viso užduočių"
+msgstr "Užduoties bendrosios reikšmės"
 
 #: export/totalsastext.cpp:70
 #, kde-format
@@ -1208,6 +1221,8 @@ msgid ""
 "Unitasking - allow only one task to be timed at a time. Does not stop any "
 "timer."
 msgstr ""
+"Vienos užduoties veiksena – leisti vienu metu skaičiuoti tik vienos "
+"užduoties laiką. Nesustabdo jokių laikmačių."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
 #: settings/cfgbehavior.ui:71
@@ -1242,6 +1257,9 @@ msgid ""
 "precious. It will disable the search bar and every click will pop up a "
 "context menu."
 msgstr ""
+"Pasirinkite tai, jeigu turite jutiklinį ekraną ir jums svarbu taupyti vietą "
+"ekrane. Ši parinktis išjungs paieškos juostą, o kiekvienas spustelėjimas "
+"iškels kontekstinį meniu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
 #: settings/cfgdisplay.ui:50
