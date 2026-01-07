@@ -143,6 +143,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="it">È utile per tracciare ore fatturabili e fornire resoconti delle ore registrate per attività e giorno.</p>
     <p xml:lang="ka">სასარგებლოა გადახდადი საათების თვალყურის სადევნებად და შეუძლია, ანგარიში ამოცანის და დღის მიხედვით შეგიქმნათ.</p>
     <p xml:lang="ko">작업별과 업무일별로 시간을 보고하고 공임 계산에 사용할 수 있습니다.</p>
+    <p xml:lang="lt">Ši programa yra naudinga sekant apmokamas valandas ir gali rodyti pagal užduotį ir dienas registruotų valandų ataskaitas.</p>
     <p xml:lang="lv">Tā ir noderīga programma, lai uzskaitītu stundas, par kurām izrakstīt rēķinu, jo prot uzskaitīt pie katra darba pavadītās stundas pa dienām.</p>
     <p xml:lang="nl">Het is nuttig voor het volgen van in rekening te brengen uren en kan de vastgelegde uren rapporteren per taak en dag.</p>
     <p xml:lang="nn">Det er nyttig for fakturering av timar, og det kan visa rapportar over tidsbruk fordelt på oppgåve og dato.</p>
@@ -177,6 +178,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="it">Con KTimeTracker, puoi organizzare un progetto frammentato come sotto-attività con nidificazione illimitata. Le scorciatoie standard per tastiera e mouse sono semplici e rendono lo strumento davvero comodo e intuitivo da utilizzare.</p>
     <p xml:lang="ka">KTimeTracker-თან ერთად შეგიძლიათ, განუსაზღვრელად ერთმანეთში ჩადგმულ ქვეამოცანებად დაშლილი პროექტის ორგანზაცია მოახდინოთ. სტანდარტული კლავიატურისა და თაგუნას მალსახმობები მარტივია და პროგრამას ინტუიტიურს და კომფორტულს ხდის.</p>
     <p xml:lang="ko">KTimeTracker를 사용하여 프로젝트를 다단계의 하위 작업으로 구성할 수 있습니다. 키보드 단축키와 마우스 동작을 사용하여 사용 편의성을 극대화합니다.</p>
+    <p xml:lang="lt">Naudodami KTimeTracker galite tvarkyti išskaidytą projektą kaip dalines užduotis su neribota įdėtimi. Paprasti standartiniai klaviatūros ir pelės spartieji klavišai padaro naudojimąsi įrankiu patogų ir intuityvų.</p>
     <p xml:lang="lv">Ar „KTimeTracker“ varat izkārtot sarežģītāku projektu neierobežotos apakšdarbos. Programmas standarta tastatūras un peles saīsnes ir vienkāršas, kas tās izmantošanu padara komfortablu un intuitīvu.</p>
     <p xml:lang="nl">Met KTimeTracker kunt u een in subtaken opgebroken project organiseren met onbeperkte nesting. De standaard sneltoetsen voor toetsenbord en muis zijn eenvoudig en maken het hulpmiddel echt comfortabel en intuïtief te gebruiken.</p>
     <p xml:lang="nn">Med KTimeTracker kan organisera prosjekt med underoppgåver på vilkårleg mange nivå. Standard snøggtastar og musesnarvegar er enkle og gjer programmet svært behageleg og intuitivt å bruka.</p>
