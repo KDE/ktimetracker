@@ -89,8 +89,8 @@ msgid ""
 "your iCalendar file. Also quit all applications using this file and remove "
 "any lock file related to its name from ~/.kde/share/apps/kabc/lock/ "
 msgstr ""
-"S'ha produït un error en guardar la tasca nova. No s'han guardat els canvis. "
-"Comproveu que podeu editar el fitxer iCalendar. Eixiu de totes les "
+"S'ha produït un error mentre es guardava la tasca nova. No s'han guardat els "
+"canvis. Comproveu que podeu editar el fitxer iCalendar. Eixiu de totes les "
 "aplicacions que empren este fitxer i suprimiu qualsevol fitxer de bloqueig "
 "relacionat amb el seu nom de ~/.kde/share/apps/kabc/lock/ "
 
@@ -125,8 +125,8 @@ msgid ""
 "your iCalendar file. Also quit all applications using this file and remove "
 "any lock file related to its name from ~/.kde/share/apps/kabc/lock/"
 msgstr ""
-"S'ha produït un error en guardar la tasca nova. No s'han guardat els canvis. "
-"Comproveu que podeu editar el fitxer iCalendar. Eixiu de totes les "
+"S'ha produït un error mentre es guardava la tasca nova. No s'han guardat els "
+"canvis. Comproveu que podeu editar el fitxer iCalendar. Eixiu de totes les "
 "aplicacions que empren este fitxer i suprimiu qualsevol fitxer de bloqueig "
 "relacionat amb el seu nom de ~/.kde/share/apps/kabc/lock/"
 
@@ -166,8 +166,8 @@ msgstr "S'està eliminant la tasca"
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr ""
-"S'ha produït un error en carregar el fitxer «%1»: No s'ha pogut trobar al "
-"pare (UID=%2)"
+"S'ha produït un error mentre es carregava el fitxer «%1»: No s'ha pogut "
+"trobar al pare (UID=%2)"
 
 #: base/timetrackerstorage.cpp:228
 #, kde-format
@@ -179,7 +179,7 @@ msgstr "No s'ha pogut escriure el fitxer de bloqueig «%1». El disc està ple?"
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
-msgstr "No s'ha pogut guardar el fitxer iCalendar a «%1»."
+msgstr "Ha fallat mentre es guardava el fitxer iCalendar a «%1»."
 
 #: base/timetrackerwidget.cpp:138
 #, kde-format
@@ -542,7 +542,8 @@ msgstr "Reinicialitza tots els temps"
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
-"No s'ha pogut guardar, segurament perquè el fitxer no s'ha pogut blocar."
+"Ha fallat mentre es guardava, segurament perquè el fitxer no s'ha pogut "
+"blocar."
 
 #: base/timetrackerwidget.cpp:772
 #, kde-format
