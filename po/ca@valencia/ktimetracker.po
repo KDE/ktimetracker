@@ -280,7 +280,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
-msgstr "A&tura"
+msgstr "&Para"
 
 #: base/timetrackerwidget.cpp:190
 #, kde-format
