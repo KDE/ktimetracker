@@ -9,6 +9,7 @@
 
 *~
 
+.cache/
 *.orig
 *.user
 Doxyfile
