@@ -5,14 +5,26 @@ SPDX-FileCopyrightText: 2022 Matthias Mailänder <matthias@mailaender.name>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 -->
-<component type="desktop">
-  <id>org.kde.ktimetracker.desktop</id>
+<component type="desktop-application">
+  <id>org.kde.ktimetracker</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <developer id="org.kde">
     <name translate="no">KDE</name>
   </developer>
   <launchable type="desktop-id">org.kde.ktimetracker.desktop</launchable>
+  <content_rating type="oars-1.1"/>
+  <url type="homepage">https://apps.kde.org/ktimetracker</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=ktimetracker</url>
+  <url type="vcs-browser">https://invent.kde.org/pim/ktimetracker</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>ktimetracker</binary>
+    <id>org.kde.ktimetracker.desktop</id>
+  </provides>
+  <replaces>
+    <id>org.kde.ktimetracker.desktop</id>
+  </replaces>
   <name>KTimeTracker</name>
   <name xml:lang="ar">متعقب الوقت</name>
   <name xml:lang="ast">KTimeTracker</name>
@@ -194,9 +206,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="zh-CN">通过 KTimeTracker，您可以将零碎的项目整理成无限套的小任务。简易标准的键鼠快捷键使本工具十分舒适且直观使用。</p>
     <p xml:lang="zh-TW">利用 KTimeTracker，您可以將專案分為子工作來管理，子工作之下也能有更多子工作，沒有層數限制。標準提供的鍵盤與滑鼠快捷鍵簡潔易懂，讓此工具使用起來直覺且順暢。</p>
   </description>
-  <content_rating type="oars-1.1"/>
-  <url type="homepage">https://apps.kde.org/ktimetracker</url>
-  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=ktimetracker</url>
   <screenshots>
     <screenshot type="default">
       <caption>KTimeTracker</caption>
@@ -240,10 +249,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <image>https://cdn.kde.org/screenshots/ktimetracker/ktimetracker.png</image>
     </screenshot>
   </screenshots>
-  <project_group>KDE</project_group>
-  <provides>
-    <binary>ktimetracker</binary>
-  </provides>
   <releases>
     <release version="6.0.0" date="2025-06-17"/>
     <release version="5.0.1" date="2019-12-21">
