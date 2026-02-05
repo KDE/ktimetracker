@@ -269,8 +269,6 @@ public:
      *  and use these data to initialize the task.
      */
     bool parseIncidence(const KCalendarCore::Incidence::Ptr &,
-                        int64_t &minutes,
-                        int64_t &sessionMinutes,
                         QString &sessionStartTiMe,
                         QString &name,
                         QString &description,

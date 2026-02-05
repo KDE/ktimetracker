@@ -90,6 +90,7 @@ QString TimeTrackerStorage::load(TaskView *view, const QUrl &url)
     QString err;
     eventsModel()->load(m_calendar.rawEvents());
     err = loadTasksFromCalendar(m_calendar.rawTodos());
+    projectModel()->refreshTimes();
 
     if (removedFromDirWatch) {
         KDirWatch::self()->addFile(m_url.toLocalFile());
@@ -274,6 +275,7 @@ void TimeTrackerStorage::onFileModified()
     }
 
     loadTasksFromCalendar(m_calendar.rawTodos());
+    projectModel()->refreshTimes();
 
     // Restart tasks that have been running, with their start times.
     for (Task *task : tasksModel()->getAllTasks()) {

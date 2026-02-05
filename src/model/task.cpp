@@ -55,7 +55,7 @@ Task::Task(const KCalendarCore::Todo::Ptr &todo, ProjectModel *projectModel)
     int priority = 0;
     DesktopList desktops;
 
-    parseIncidence(todo, minutes, sessionTime, sessionStartTiMe, name, description, desktops, percent_complete, priority);
+    parseIncidence(todo, sessionStartTiMe, name, description, desktops, percent_complete, priority);
     init(name, description, minutes, sessionTime, sessionStartTiMe, desktops, percent_complete, priority);
 }
 
@@ -382,8 +382,6 @@ KCalendarCore::Todo::Ptr Task::asTodo(const KCalendarCore::Todo::Ptr &todo) cons
     // time the file is opened.
     // todo->setDtStart( current );
 
-    todo->setCustomProperty(eventAppName, QByteArray("totalTaskTime"), QString::number(m_time));
-    todo->setCustomProperty(eventAppName, QByteArray("totalSessionTime"), QString::number(m_sessionTime));
     todo->setCustomProperty(eventAppName, QByteArray("sessionStartTiMe"), m_sessionStartTime.toString());
     qDebug() << "m_sessionStartTime=" << m_sessionStartTime.toString();
 
@@ -404,8 +402,6 @@ KCalendarCore::Todo::Ptr Task::asTodo(const KCalendarCore::Todo::Ptr &todo) cons
 }
 
 bool Task::parseIncidence(const KCalendarCore::Incidence::Ptr &incident,
-                          int64_t &minutes,
-                          int64_t &sessionMinutes,
                           QString &sessionStartTiMe,
                           QString &name,
                           QString &description,
@@ -418,18 +414,6 @@ bool Task::parseIncidence(const KCalendarCore::Incidence::Ptr &incident,
     name = incident->summary();
     description = incident->description();
     m_uid = incident->uid();
-
-    ok = false;
-    minutes = getCustomProperty(incident, QStringLiteral("totalTaskTime")).toInt(&ok);
-    if (!ok) {
-        minutes = 0;
-    }
-
-    ok = false;
-    sessionMinutes = getCustomProperty(incident, QStringLiteral("totalSessionTime")).toInt(&ok);
-    if (!ok) {
-        sessionMinutes = 0;
-    }
 
     sessionStartTiMe = getCustomProperty(incident, QStringLiteral("sessionStartTiMe"));
 

@@ -51,15 +51,11 @@ void StorageTest::testSaveSimpleTree()
     QCOMPARE(todos.size(), 4);
 
     QCOMPARE(todos[0]->summary(), QStringLiteral("1"));
-    QCOMPARE(todos[0]->customProperty("ktimetracker", "totalSessionTime"), QStringLiteral("5"));
-    QCOMPARE(todos[0]->customProperty("ktimetracker", "totalTaskTime"), QStringLiteral("5"));
 
     QCOMPARE(todos[1]->summary(), QStringLiteral("2"));
     QCOMPARE(todos[1]->relatedTo(), todos[0]->uid());
 
     QCOMPARE(todos[3]->summary(), QStringLiteral("negative duration"));
-    QCOMPARE(todos[3]->customProperty("ktimetracker", "totalSessionTime"), QStringLiteral("-5"));
-    QCOMPARE(todos[3]->customProperty("ktimetracker", "totalTaskTime"), QStringLiteral("-5"));
 
     auto events = calendar->rawEvents(KCalendarCore::EventSortSummary);
     QCOMPARE(events.size(), 4);
