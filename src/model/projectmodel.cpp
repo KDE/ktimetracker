@@ -90,26 +90,30 @@ void ProjectModel::refreshTimes()
     }
 
     for (Task *task : tasksModel()->getAllTasks()) {
+        int64_t totalSeconds = 0;
+        int64_t sessionSeconds = 0;
         // get all events for task
         for (const auto *event : eventsModel()->eventsForTask(task)) {
             QDateTime eventStart = event->dtStart();
             QDateTime eventEnd = event->dtEnd();
 
-            const int64_t duration = event->duration() / 60;
-            task->addTime(duration);
-            qCDebug(KTT_LOG) << "duration is" << duration;
+            const int64_t durationSeconds = event->duration();
+            totalSeconds += durationSeconds;
+            qCDebug(KTT_LOG) << "duration is" << durationSeconds;
 
             if (task->sessionStartTiMe().isValid()) {
                 // if there is a session
                 if (task->sessionStartTiMe().secsTo(eventStart) > 0 && task->sessionStartTiMe().secsTo(eventEnd) > 0) {
                     // if the event is after the session start
-                    task->addSessionTime(duration);
+                    sessionSeconds += durationSeconds;
                 }
             } else {
                 // so there is no session at all
-                task->addSessionTime(duration);
+                sessionSeconds += durationSeconds;
             }
         }
+        task->addTime(totalSeconds / 60);
+        task->addSessionTime(sessionSeconds / 60);
     }
 
     // Recalculate total times after changing hierarchy by drag&drop
