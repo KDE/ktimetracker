@@ -59,11 +59,10 @@ msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr ""
 
 #: base/mainwindow.cpp:37
-#, fuzzy, kde-format
-#| msgid "Configure KTimeTracker..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
-msgstr "Cumraigh KTimeTracker..."
+msgstr ""
 
 #: base/mainwindow.cpp:134 base/tray.cpp:74
 #, kde-format
@@ -71,11 +70,10 @@ msgid "No active tasks"
 msgstr "Gan tascanna gníomhacha"
 
 #: base/mainwindow.cpp:144 base/tray.cpp:94
-#, fuzzy, kde-format
-#| msgid ", "
+#, kde-format
 msgctxt "separator between task names"
 msgid ", "
-msgstr ", "
+msgstr ""
 
 #: base/taskview.cpp:102
 #, kde-format
@@ -116,18 +114,16 @@ msgid ""
 msgstr ""
 
 #: base/taskview.cpp:395
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
-msgstr "Fothasc Nua"
+msgstr ""
 
 #: base/taskview.cpp:413
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
-msgstr "Cuir Tasc in Eagar"
+msgstr ""
 
 #: base/taskview.cpp:444 base/taskview.cpp:485 base/taskview.cpp:507
 #, kde-format
@@ -142,11 +138,10 @@ msgid ""
 msgstr ""
 
 #: base/taskview.cpp:494
-#, fuzzy, kde-format
-#| msgid "Deleting Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Deleting Task"
-msgstr "Tasc á Scriosadh"
+msgstr ""
 
 #: base/timetrackerstorage.cpp:125
 #, kde-format
@@ -155,11 +150,10 @@ msgstr ""
 "Earráid agus \"%1\" á luchtú: níorbh fhéidir an mháthair a aimsiú (uid=%2)"
 
 #: base/timetrackerstorage.cpp:228
-#, fuzzy, kde-format
-#| msgid "Could not save. Disk full?"
+#, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr "Níorbh fhéidir sábháil. An bhfuil an diosca lán?"
+msgstr ""
 
 #: base/timetrackerstorage.cpp:235
 #, kde-format
@@ -168,18 +162,16 @@ msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
 #: base/timetrackerwidget.cpp:138
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
-msgstr "Tosaig&h Seisiún Nua"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "Starts a new session"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
-msgstr "Tosaigh seisiún nua"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:141
 #, kde-format
@@ -190,11 +182,10 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:149
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr "Stair Eagarthóireachta..."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:150
 #, kde-format
@@ -211,18 +202,16 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:162
-#, fuzzy, kde-format
-#| msgid "&Reset All Times"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Reset All Times"
-msgstr "&Athshocraigh Gach Am"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:163
-#, fuzzy, kde-format
-#| msgid "Resets all times"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Resets all times"
-msgstr "Athshocraigh gach am"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:165
 #, kde-format
@@ -233,18 +222,16 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
-msgstr "&Tosaigh"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:173
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
-msgstr "Scrios an tasc roghnaithe"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:175
 #, kde-format
@@ -258,25 +245,22 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:189
-#, fuzzy, kde-format
-#| msgid "S&top"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
-msgstr "S&tad"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:190
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
-msgstr "Scrios an tasc roghnaithe"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:191
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
-msgstr "Scrios an tasc roghnaithe"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:198
 #, kde-format
@@ -297,11 +281,10 @@ msgid "Sets the focus on the searchbar"
 msgstr ""
 
 #: base/timetrackerwidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "Stop &All Timers"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Stop &All Timers"
-msgstr "Stop G&ach Uaineadóir"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:208
 #, kde-format
@@ -339,67 +322,58 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:233
-#, fuzzy, kde-format
-#| msgid "&New Task..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
-msgstr "Tasc &Nua..."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:234
-#, fuzzy, kde-format
-#| msgid "Creates new top level task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates new top level task"
-msgstr "Cruthaigh tasc nua barrleibhéil"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:235
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new top level task."
-msgstr "Cruthaíonn sé seo tasc nua barrleibhéil."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:243
-#, fuzzy, kde-format
-#| msgid "New &Subtask..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
-msgstr "&Fothasc Nua..."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:244
-#, fuzzy, kde-format
-#| msgid "Creates new top level task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new subtask to the current selected task"
-msgstr "Cruthaigh tasc nua barrleibhéil"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:245
-#, fuzzy, kde-format
-#| msgid "This will create a new top level task."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will create a new subtask to the current selected task."
-msgstr "Cruthaíonn sé seo tasc nua barrleibhéil."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:253
-#, fuzzy, kde-format
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
-msgstr "&Scrios"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:254
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes selected task"
-msgstr "Scrios an tasc roghnaithe"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:255
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task(s) and all subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "This will delete the selected task(s) and all subtasks."
-msgstr "Scriosfaidh sé seo na tascanna roghnaithe agus gach fothasc."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:263
 #, kde-format
@@ -408,11 +382,10 @@ msgid "&Properties"
 msgstr ""
 
 #: base/timetrackerwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit name or description for selected task"
-msgstr "Scrios an tasc roghnaithe"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:266
 #, kde-format
@@ -423,18 +396,16 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:275
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
-msgstr "Cuir Tasc in Eagar"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:276
-#, fuzzy, kde-format
-#| msgid "Deletes selected task"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Edit time for selected task"
-msgstr "Scrios an tasc roghnaithe"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:278
 #, kde-format
@@ -445,32 +416,28 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:287
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Complete"
-msgstr "&Marcáil \"Críochnaithe\""
+msgstr ""
 
 #: base/timetrackerwidget.cpp:295
-#, fuzzy, kde-format
-#| msgid "&Mark as Incomplete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Mark as Incomplete"
-msgstr "&Marcáil \"Neamhchríochnaithe\""
+msgstr ""
 
 #: base/timetrackerwidget.cpp:303
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr "&Easpórtáil"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:310
-#, fuzzy, kde-format
-#| msgid "Import Tasks From &Planner..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Import Tasks From &Planner..."
-msgstr "Iompórtáil Tascanna Ó &Phleanálaí..."
+msgstr ""
 
 #: base/timetrackerwidget.cpp:322
 #, kde-format
@@ -479,11 +446,10 @@ msgid "Show Searchbar"
 msgstr ""
 
 #: base/timetrackerwidget.cpp:450
-#, fuzzy, kde-format
-#| msgid "Behavior"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
-msgstr "Oibriú"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:453
 #, kde-format
@@ -492,18 +458,16 @@ msgid "Appearance"
 msgstr ""
 
 #: base/timetrackerwidget.cpp:456
-#, fuzzy, kde-format
-#| msgid "Storage"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
-msgstr "Stóras"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:492
-#, fuzzy, kde-format
-#| msgid "New Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Task"
-msgstr "Tasc Nua"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:569
 #, kde-format
@@ -521,18 +485,16 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:581
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
-msgstr "Ní mór cinntiú"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:582
-#, fuzzy, kde-format
-#| msgid "Reset All Times"
+#, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
-msgstr "Athshocraigh Gach Am"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:770
 #, kde-format
@@ -590,32 +552,28 @@ msgid "You have already created a task. You can now start and stop timing."
 msgstr ""
 
 #: base/tray.cpp:79
-#, fuzzy, kde-format
-#| msgid ", ..."
+#, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
-msgstr ", ..."
+msgstr ""
 
 #: base/treeviewheadercontextmenu.cpp:28
-#, fuzzy, kde-format
-#| msgid "Columns"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
-msgstr "Colúin"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:28
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task Time"
-msgstr "Cuir Tasc in Eagar"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:42
-#, fuzzy, kde-format
-#| msgid "Task"
+#, kde-format
 msgctxt "@title:group"
 msgid "Task"
-msgstr "Tasc"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:47 dialogs/taskpropertiesdialog.cpp:51
 #, kde-format
@@ -623,10 +581,9 @@ msgid "Task Name:"
 msgstr "Ainm an Tasc:"
 
 #: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Description:"
+#, kde-format
 msgid "Task Description:"
-msgstr "Cur Síos:"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:57
 #, kde-format
@@ -640,16 +597,12 @@ msgid "Current Time:"
 msgstr ""
 
 #: dialogs/edittimedialog.cpp:68
-#, fuzzy, kde-format
-#| msgid " min"
+#, kde-format
 msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
 msgid " minute"
 msgid_plural " minutes"
-msgstr[0] " nóiméad"
-msgstr[1] " nóiméad"
-msgstr[2] " nóiméad"
-msgstr[3] " nóiméad"
-msgstr[4] " nóiméad"
+msgstr[0] ""
+msgstr[1] ""
 
 #: dialogs/edittimedialog.cpp:74
 #, kde-format
@@ -662,11 +615,10 @@ msgid "Time After Change:"
 msgstr ""
 
 #: dialogs/edittimedialog.cpp:83
-#, fuzzy, kde-format
-#| msgid "Edit History..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr "Stair Eagarthóireachta..."
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:84
 #, kde-format
@@ -674,11 +626,10 @@ msgid "To change this task's time, you have to edit its event history"
 msgstr ""
 
 #: dialogs/exportdialog.cpp:79
-#, fuzzy, kde-format
-#| msgid "Export to:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
-msgstr "Easpórtáil go:"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.cpp:98 dialogs/exportdialog.ui:184
@@ -701,25 +652,21 @@ msgstr "Gach Tasc"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
 #: dialogs/exportdialog.ui:21
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export"
+#, kde-format
 msgid "Export"
-msgstr "&Easpórtáil"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
 #: dialogs/exportdialog.ui:33
-#, fuzzy, kde-format
-#| msgid "Export Progress"
+#, kde-format
 msgid "Export Preview"
-msgstr "Dul Chun Cinn na hEaspórtála"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, btnToClipboard)
 #: dialogs/exportdialog.ui:57
-#, fuzzy, kde-format
-#| msgid "Copy Totals to Clipboard"
+#, kde-format
 msgid "Copy to Clipboard"
-msgstr "Cóipeáil Iomláin go dtí an Ghearrthaisce"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
 #: dialogs/exportdialog.ui:67
@@ -747,10 +694,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
 #: dialogs/exportdialog.ui:105
-#, fuzzy, kde-format
-#| msgid "&Export to CSV File..."
+#, kde-format
 msgid "Event Log as CSV"
-msgstr "&Easpórtáil go Comhad CSV..."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
 #: dialogs/exportdialog.ui:112
@@ -922,11 +868,10 @@ msgid ""
 msgstr ""
 
 #: dialogs/taskpropertiesdialog.cpp:59
-#, fuzzy, kde-format
-#| msgid "Auto Tracking"
+#, kde-format
 msgctxt "@title:group"
 msgid "Auto Tracking"
-msgstr "UathRianú"
+msgstr ""
 
 #: dialogs/taskpropertiesdialog.cpp:86
 #, kde-format
@@ -1001,10 +946,9 @@ msgid "KDE Time tracker tool"
 msgstr ""
 
 #: main.cpp:92
-#, fuzzy, kde-format
-#| msgid "Copyright © 1997-2012 KDE PIM authors"
+#, kde-format
 msgid "Copyright © 1997-2019 KTimeTracker developers"
-msgstr "© 1997-2012 Údair KDE PIM"
+msgstr ""
 
 #: main.cpp:96
 #, kde-format
@@ -1013,18 +957,16 @@ msgid "Alexander Potashev"
 msgstr ""
 
 #: main.cpp:97
-#, fuzzy, kde-format
-#| msgid "Current Maintainer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
-msgstr "Cothaitheoir Reatha"
+msgstr ""
 
 #: main.cpp:99
-#, fuzzy, kde-format
-#| msgid "Thorsten Stärk"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Thorsten Stärk"
-msgstr "Thorsten Stärk"
+msgstr ""
 
 #: main.cpp:99
 #, kde-format
@@ -1033,11 +975,10 @@ msgid "Maintainer (2006-2012)"
 msgstr ""
 
 #: main.cpp:100
-#, fuzzy, kde-format
-#| msgid "Mark Bucciarelli"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Mark Bucciarelli"
-msgstr "Mark Bucciarelli"
+msgstr ""
 
 #: main.cpp:101
 #, kde-format
@@ -1046,11 +987,10 @@ msgid "Maintainer (2005-2006)"
 msgstr ""
 
 #: main.cpp:103
-#, fuzzy, kde-format
-#| msgid "Jesper Pedersen"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Jesper Pedersen"
-msgstr "Jesper Pedersen"
+msgstr ""
 
 #: main.cpp:103
 #, kde-format
@@ -1059,25 +999,22 @@ msgid "Maintainer (2000-2005)"
 msgstr ""
 
 #: main.cpp:104
-#, fuzzy, kde-format
-#| msgid "Sirtaj Singh Kang"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Sirtaj Singh Kang"
-msgstr "Sirtaj Singh Kang"
+msgstr ""
 
 #: main.cpp:104
-#, fuzzy, kde-format
-#| msgid "Original Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
-msgstr "An Chéad Údar"
+msgstr ""
 
 #: main.cpp:105
-#, fuzzy, kde-format
-#| msgid "Mathias Soeken"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
-msgstr "Mathias Soeken"
+msgstr ""
 
 #: main.cpp:105
 #, kde-format
@@ -1086,11 +1023,10 @@ msgid "Developer (in 2007)"
 msgstr ""
 
 #: main.cpp:106
-#, fuzzy, kde-format
-#| msgid "Kalle Dalheimer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
-msgstr "Kalle Dalheimer"
+msgstr ""
 
 #: main.cpp:106
 #, kde-format
@@ -1099,11 +1035,10 @@ msgid "Developer (1999-2000)"
 msgstr ""
 
 #: main.cpp:107
-#, fuzzy, kde-format
-#| msgid "Allen Winter"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
-msgstr "Allen Winter"
+msgstr ""
 
 #: main.cpp:107 main.cpp:108
 #, kde-format
@@ -1112,67 +1047,58 @@ msgid "Developer"
 msgstr ""
 
 #: main.cpp:108
-#, fuzzy, kde-format
-#| msgid "David Faure"
+#, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
-msgstr "David Faure"
+msgstr ""
 
 #: main.cpp:120
-#, fuzzy, kde-format
-#| msgid "The iCalendar file to open"
+#, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
-msgstr "Comhad iCalendar le hoscailt"
+msgstr ""
 
 #: model/tasksmodel.cpp:19
-#, fuzzy, kde-format
-#| msgid "Task Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Task Name"
-msgstr "Ainm an Tasc"
+msgstr ""
 
 #: model/tasksmodel.cpp:20
-#, fuzzy, kde-format
-#| msgid "Session Times"
+#, kde-format
 msgctxt "@title:column"
 msgid "Session Time"
-msgstr "Amanna Seisiúin"
+msgstr ""
 
 #: model/tasksmodel.cpp:21
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
-msgstr "Am"
+msgstr ""
 
 #: model/tasksmodel.cpp:22
-#, fuzzy, kde-format
-#| msgid "Total Session Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Total Session Time"
-msgstr "Am Iomlán an tSeisiúin"
+msgstr ""
 
 #: model/tasksmodel.cpp:23
-#, fuzzy, kde-format
-#| msgid "Total Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Total Time"
-msgstr "Am Iomlán"
+msgstr ""
 
 #: model/tasksmodel.cpp:24
-#, fuzzy, kde-format
-#| msgid "Priority"
+#, kde-format
 msgctxt "@title:column"
 msgid "Priority"
-msgstr "Tosaíocht"
+msgstr ""
 
 #: model/tasksmodel.cpp:25
-#, fuzzy, kde-format
-#| msgid "&Mark as Complete"
+#, kde-format
 msgctxt "@title:column"
 msgid "Percent Complete"
-msgstr "&Marcáil \"Críochnaithe\""
+msgstr ""
 
 #: model/tasksmodel.cpp:175 model/tasksmodel.cpp:268
 #, kde-format
@@ -1188,19 +1114,17 @@ msgid ""
 msgstr ""
 
 #: model/tasksmodel.cpp:276
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task(s) and all subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
-msgstr "Scriosfaidh sé seo na tascanna roghnaithe agus gach fothasc."
+msgstr ""
 
 #: model/tasksmodel.cpp:280
-#, fuzzy, kde-format
-#| msgid "This will delete the selected task(s) and all subtasks."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
-msgstr "Scriosfaidh sé seo na tascanna roghnaithe agus gach fothasc."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
 #: settings/cfgbehavior.ui:21
@@ -1277,13 +1201,12 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
 #: settings/cfgdisplay.ui:50
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
+#, kde-format
 msgctxt ""
 "Choose this if you have a touchscreen and your screen real estate is "
 "precious."
 msgid "Configuration for PDA"
-msgstr "Ní mór cinntiú"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, windowTitleGroupBox)
 #: settings/cfgdisplay.ui:60
@@ -1299,10 +1222,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentTask)
 #: settings/cfgdisplay.ui:76
-#, fuzzy, kde-format
-#| msgid "Total Session Time"
+#, kde-format
 msgid "Current Task and Session Time"
-msgstr "Am Iomlán an tSeisiúin"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: settings/cfgdisplay.ui:86
@@ -1312,17 +1234,15 @@ msgstr "Colúin Taispeánta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displaySessionTime)
 #: settings/cfgdisplay.ui:92
-#, fuzzy, kde-format
-#| msgid "&Session time:"
+#, kde-format
 msgid "Session time"
-msgstr "Am &Seisiúin:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTime)
 #: settings/cfgdisplay.ui:99
-#, fuzzy, kde-format
-#| msgid "Total task time"
+#, kde-format
 msgid "Cumulative task time"
-msgstr "Am iomlán an tasc"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayTotalSessionTime)
 #: settings/cfgdisplay.ui:106
@@ -1370,274 +1290,31 @@ msgid ""
 msgstr ""
 
 #: widgets/taskswidget.cpp:128
-#, fuzzy, kde-format
-#| msgid "%1 %"
+#, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
-msgstr "%1 %"
+msgstr ""
 
 #: widgets/taskswidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "unspecified"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
-msgstr "gan sonrú"
+msgstr ""
 
 #: widgets/taskswidget.cpp:142
-#, fuzzy, kde-format
-#| msgctxt "combox entry for highest priority"
-#| msgid "1 (highest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
-msgstr "1 (is airde)"
+msgstr ""
 
 #: widgets/taskswidget.cpp:145
-#, fuzzy, kde-format
-#| msgctxt "combox entry for medium priority"
-#| msgid "5 (medium)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
-msgstr "5 (measartha)"
+msgstr ""
 
 #: widgets/taskswidget.cpp:148
-#, fuzzy, kde-format
-#| msgctxt "combox entry for lowest priority"
-#| msgid "9 (lowest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
-msgstr "9 (is ísle)"
-
-#~ msgid "CSV Export"
-#~ msgstr "Easpórtáil CSV"
-
-#~ msgid "&Edit..."
-#~ msgstr "&Eagar..."
-
-#, fuzzy
-#~| msgid "Edit Task"
-#~ msgid "Add/Edit a task"
-#~ msgstr "Cuir Tasc in Eagar"
-
-#~ msgid "Delete"
-#~ msgstr "Scrios"
-
-#~ msgid "Close"
-#~ msgstr "Dún"
-
-#~ msgid "Could not save."
-#~ msgstr "Níorbh fhéidir sábháil."
-
-#~ msgctxt "@action:button"
-#~ msgid "E&xport to Clipboard"
-#~ msgstr "&Easpórtáil go dtí an Ghearrthaisce"
-
-#~ msgid "&Import"
-#~ msgstr "&Iompórtáil"
-
-#~ msgid "&Export Times..."
-#~ msgstr "&Easpórtáil Amanna..."
-
-#~ msgid "Export &History..."
-#~ msgstr "Easpórtáil &Stair..."
-
-#~ msgid "The file where KTimeTracker will write the data."
-#~ msgstr "An comhad ina scríobhfaidh KTimeTracker na sonraí."
-
-#~ msgid "KArmReminder"
-#~ msgstr "KArmReminder"
-
-#~ msgid "(c) 2006"
-#~ msgstr "© 2006"
-
-#~ msgid "ktimetracker"
-#~ msgstr "ktimetracker"
-
-#~ msgid "Configure key bindings"
-#~ msgstr "Cumraigh ceangal eochracha"
-
-#~ msgid "&File"
-#~ msgstr "&Comhad"
-
-#~ msgid "Just caught a software interrupt."
-#~ msgstr "Fuarthas idirbhriseadh bogearraí."
-
-#~ msgid "Add task <taskname>"
-#~ msgstr "Cuir tasc <taskname> leis"
-
-#~ msgid "Delete task <taskid>"
-#~ msgstr "Scrios tasc <taskid>"
-
-#~ msgid "task_popup"
-#~ msgstr "task_popup"
-
-#~ msgid "File"
-#~ msgstr "Comhad"
-
-#~ msgid "Help"
-#~ msgstr "Cabhair"
-
-#~ msgid "Configure"
-#~ msgstr "Cumraigh"
-
-#~ msgid "toolBar"
-#~ msgstr "Barra Uirlisí"
-
-#~ msgid "Load"
-#~ msgstr "Luchtaigh"
-
-#~ msgid "Save"
-#~ msgstr "Sábháil"
-
-#~ msgid "Quit"
-#~ msgstr "Scoir"
-
-#~ msgid "Configure ktimetracker"
-#~ msgstr "Cumraigh ktimetracker"
-
-#~ msgid "Week of %1"
-#~ msgstr "Seachtain %1"
-
-#~ msgid "Settings"
-#~ msgstr "Socruithe"
-
-#~ msgid "Show"
-#~ msgstr "Taispeáin"
-
-#~ msgid "Hide"
-#~ msgstr "Folaigh"
-
-#~ msgid "Dialog"
-#~ msgstr "Dialóg"
-
-#~ msgid "Untitled"
-#~ msgstr "Gan Teideal"
-
-#~ msgid "delete"
-#~ msgstr "scrios"
-
-#~| msgid "(c) 1997-2009, KDE PIM Developers"
-#~ msgid "(c) 1997-2010, the KDE PIM Developers"
-#~ msgstr "© 1997-2009, Forbróirí KDE PIM"
-
-#~ msgctxt "abbreviation for hours"
-#~ msgid " hr. "
-#~ msgstr " uaire "
-
-#~ msgctxt "abbreviation for minutes"
-#~ msgid " min. "
-#~ msgstr " nóim. "
-
-#~ msgid "Task &name:"
-#~ msgstr "Ai&nm an tasc:"
-
-#~ msgid "&Time:"
-#~ msgstr "&Am:"
-
-#~ msgid "Session: %1"
-#~ msgstr "Seisiún: %1"
-
-#~ msgctxt "total time of all tasks"
-#~ msgid "Total: %1"
-#~ msgstr "Am Iomlán: %1"
-
-#~ msgid "Session"
-#~ msgstr "Seisiún"
-
-#~ msgid "From %1 to %2"
-#~ msgstr "Ó %1 go %2"
-
-#~ msgid "Printed on: %1"
-#~ msgstr "Priontáilte ar: %1"
-
-#~ msgid "Selected Task"
-#~ msgstr "Tasc Roghnaithe"
-
-#~ msgid "Summarize per week"
-#~ msgstr "Achoimrigh uair sa tseachtain"
-
-# #-#-#-#-#  tmp.XXXXK5LpVx (PACKAGE VERSION)  #-#-#-#-#
-# #-#-#-#-#  temp2.po (yudit 2.7.6)  #-#-#-#-#
-# #-#-#-#-#  tmp.XXXXMZ2Xhi (yudit 2.7.6)  #-#-#-#-#
-# #-#-#-#-#  temp1.po (firefox 1.0_pre)  #-#-#-#-#
-# #-#-#-#-#  tmp.XXXXXKxGod (aspell 0.60.1-b20041017)  #-#-#-#-#
-# #-#-#-#-#  mandrake.ga.po (grpmi)  #-#-#-#-#
-# used in the stats page table
-#~ msgid "Totals only"
-#~ msgstr "Iomláin amháin"
-
-#~ msgid "KArm"
-#~ msgstr "KArm"
-
-#~ msgid "karmPart"
-#~ msgstr "karmPart"
-
-#~ msgctxt "settings page for customizing user interface"
-#~ msgid "Display"
-#~ msgstr "Taispeáint"
-
-#~ msgid "Task History\n"
-#~ msgstr "Stair an Tasc\n"
-
-#~ msgid "Sum"
-#~ msgstr "Suim"
-
-#~ msgid "Total Sum"
-#~ msgstr "Lánsuim"
-
-#~ msgid "Task Hierarchy"
-#~ msgstr "Ordlathas Tascanna"
-
-#~ msgid "Task Name "
-#~ msgstr "Ainm an Tasc "
-
-#~ msgid "KArm - %1"
-#~ msgstr "KArm - %1"
-
-#~ msgctxt "creating a new task"
-#~ msgid "&New..."
-#~ msgstr "&Nua..."
-
-#~ msgid "Export &History to CSV File..."
-#~ msgstr "Easpórtáil &Stair go Comhad CSV..."
-
-#~ msgid "BehaviorPage"
-#~ msgstr "LeathanachOibrithe"
-
-#~ msgid "DisplayPage"
-#~ msgstr "LeathanachTaispeána"
-
-#~ msgid "StoragePage"
-#~ msgstr "LeathanachStórais"
-
-#~ msgid "Preferences"
-#~ msgstr "Sainroghanna"
-
-#~ msgid "Behavior Settings"
-#~ msgstr "Socruithe Oibrithe"
-
-#~ msgid "Display Settings"
-#~ msgstr "Socruithe an Scáileáin"
-
-#~ msgid "Storage Settings"
-#~ msgstr "Socruithe Stórála"
-
-#~ msgid "iCalendar file:"
-#~ msgstr "Comhad iCalendar:"
-
-#~ msgid "Revert && Stop"
-#~ msgstr "Fill agus Stop"
-
-#~ msgid "Copy &History to Clipboard"
-#~ msgstr "Cóipeáil &Stair go dtí an Ghearrthaisce"
-
-#~ msgid "File \"%1\" not found."
-#~ msgstr "Comhad \"%1\" gan aimsiú."
-
-#~ msgid "&Import/Export"
-#~ msgstr "&Iompórtáil/Easpórtáil"
-
-#~ msgid "Copy This Task"
-#~ msgstr "Cóipeáil an Tasc Seo"
-
-#~ msgid "Copy All Tasks"
-#~ msgstr "Cóipeáil Gach Tasc"
+msgstr ""
