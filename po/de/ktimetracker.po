@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-27 00:45+0000\n"
 "PO-Revision-Date: 2021-10-20 16:10+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -167,21 +167,21 @@ msgctxt "@title:window"
 msgid "Deleting Task"
 msgstr "Aufgabe löschen"
 
-#: base/timetrackerstorage.cpp:125
+#: base/timetrackerstorage.cpp:126
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr ""
 "Fehler beim Laden von „%1“: übergeordneter Eintrag kann nicht gefunden "
 "werden (uid=%2)"
 
-#: base/timetrackerstorage.cpp:228
+#: base/timetrackerstorage.cpp:229
 #, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr ""
 "Die Sperrdatei „%1“ kann nicht geschrieben werden. Ist die Festplatte voll?"
 
-#: base/timetrackerstorage.cpp:235
+#: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."

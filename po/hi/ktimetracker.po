@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-27 00:45+0000\n"
 "PO-Revision-Date: 2024-12-15 17:36+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -153,18 +153,18 @@ msgctxt "@title:window"
 msgid "Deleting Task"
 msgstr "कार्य हटाना"
 
-#: base/timetrackerstorage.cpp:125
+#: base/timetrackerstorage.cpp:126
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr "\"%1\" लोड करते समय त्रुटि: पैरेंट नहीं मिल सका (uid=%2)"
 
-#: base/timetrackerstorage.cpp:228
+#: base/timetrackerstorage.cpp:229
 #, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr "लॉक फ़ाइल \"%1\" नहीं लिखी जा सकी. डिस्क भरी हुई है?"
 
-#: base/timetrackerstorage.cpp:235
+#: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."

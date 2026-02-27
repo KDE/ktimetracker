@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mimos\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-27 00:45+0000\n"
 "PO-Revision-Date: 2005-10-14 13:28+0800\n"
 "Last-Translator: junetazawawi <junetazawawi@yahoo.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -153,19 +153,19 @@ msgctxt "@title:window"
 msgid "Deleting Task"
 msgstr "Menghapuskan Tugasan"
 
-#: base/timetrackerstorage.cpp:125
+#: base/timetrackerstorage.cpp:126
 #, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr "Ralat memuatkan \"%1\": tidak dapat mencari induk (uid=%2)"
 
-#: base/timetrackerstorage.cpp:228
+#: base/timetrackerstorage.cpp:229
 #, fuzzy, kde-format
 #| msgid "Could not open \"%1\"."
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr "Tidak dapat membuka\"%1\"."
 
-#: base/timetrackerstorage.cpp:235
+#: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: karm 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-27 00:45+0000\n"
 "PO-Revision-Date: 2010-02-10 22:57+0100\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -157,18 +157,18 @@ msgctxt "@title:window"
 msgid "Deleting Task"
 msgstr "Brišem zadatak"
 
-#: base/timetrackerstorage.cpp:125
+#: base/timetrackerstorage.cpp:126
 #, fuzzy, kde-format
 msgid "Error loading \"%1\": could not find parent (uid=%2)"
 msgstr "Greška tokom učitavanja „%1“: nije moguće pronaći roditelja (uid=%2)"
 
-#: base/timetrackerstorage.cpp:228
+#: base/timetrackerstorage.cpp:229
 #, fuzzy, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
 msgstr "Nisam mogao otvoriti „%1“."
 
-#: base/timetrackerstorage.cpp:235
+#: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
