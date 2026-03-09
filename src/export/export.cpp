@@ -12,6 +12,9 @@
 #include "csveventlog.h"
 #include "csvhistory.h"
 #include "csvtotals.h"
+#include "dailyreport.h"
+#include "perioddailyreport.h"
+#include "periodreport.h"
 #include "ktt_debug.h"
 #include "model/projectmodel.h"
 #include "totalsastext.h"
@@ -27,6 +30,12 @@ QString exportToString(ProjectModel *model, Task *currentTask, const ReportCrite
         return exportCSVEventLogToString(model, rc);
     case ReportCriteria::TextTotalsExport:
         return totalsAsText(model->tasksModel(), currentTask, rc);
+    case ReportCriteria::DailyReport:
+        return exportDailyReportToString(model, rc);
+    case ReportCriteria::PeriodReport:
+        return exportPeriodReportToString(model, rc);
+    case ReportCriteria::PeriodDailyReport:
+        return exportPeriodDailyReportToString(model, rc);
     default:
         return QString();
     }

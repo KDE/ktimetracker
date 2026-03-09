@@ -46,6 +46,9 @@ ExportDialog::ExportDialog(QWidget *parent, TaskView *taskView)
     connect(ui.radioHistoryCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioEventLogCsv, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioTimesText, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioDailyReport, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioPeriodReport, &QRadioButton::toggled, this, &ExportDialog::updateUI);
+    connect(ui.radioPeriodDailyReport, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioComma, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioSemicolon, &QRadioButton::toggled, this, &ExportDialog::updateUI);
     connect(ui.radioOther, &QRadioButton::toggled, this, &ExportDialog::updateUI);
@@ -94,7 +97,7 @@ void ExportDialog::exportToFile()
 ReportCriteria ExportDialog::reportCriteria()
 {
     rc.from = ui.dtFrom->date();
-    rc.to = ui.dtTo->date();
+    rc.to = (rc.reportType == ReportCriteria::DailyReport) ? rc.from : ui.dtTo->date();
     rc.decimalMinutes = (ui.combodecimalminutes->currentText() == i18nc("format to display times", "Decimal"));
     qCDebug(KTT_LOG) << "rc.decimalMinutes is" << rc.decimalMinutes;
 
@@ -131,6 +134,12 @@ void ExportDialog::updateUI()
         rt = ReportCriteria::CSVEventLogExport;
     } else if (ui.radioTimesText->isChecked()) {
         rt = ReportCriteria::TextTotalsExport;
+    } else if (ui.radioDailyReport->isChecked()) {
+        rt = ReportCriteria::DailyReport;
+    } else if (ui.radioPeriodReport->isChecked()) {
+        rt = ReportCriteria::PeriodReport;
+    } else if (ui.radioPeriodDailyReport->isChecked()) {
+        rt = ReportCriteria::PeriodDailyReport;
     } else {
         qCWarning(KTT_LOG) << "*** ExportDialog::updateUI: Unexpected report type choice";
         rt = ReportCriteria::TextTotalsExport;
@@ -140,8 +149,20 @@ void ExportDialog::updateUI()
     switch (rt) {
     case ReportCriteria::CSVHistoryExport:
     case ReportCriteria::CSVEventLogExport:
+    case ReportCriteria::PeriodReport:
+    case ReportCriteria::PeriodDailyReport:
         ui.grpDateRange->setEnabled(true);
         ui.grpDateRange->show();
+        ui.textLabel1->setText(i18n("From:"));
+        ui.dtTo->show();
+        ui.textLabel1_2->show();
+        break;
+    case ReportCriteria::DailyReport:
+        ui.grpDateRange->setEnabled(true);
+        ui.grpDateRange->show();
+        ui.textLabel1->setText(i18n("Date:"));
+        ui.dtTo->hide();
+        ui.textLabel1_2->hide();
         break;
     case ReportCriteria::TextTotalsExport:
     case ReportCriteria::CSVTotalsExport:

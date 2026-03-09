@@ -6,7 +6,10 @@ target_sources(ktt-export
     csveventlog.cpp csveventlog.h
     csvhistory.cpp csvhistory.h
     csvtotals.cpp csvtotals.h
+    dailyreport.cpp dailyreport.h
     export.cpp export.h
+    perioddailyreport.cpp perioddailyreport.h
+    periodreport.cpp periodreport.h
     totalsastext.cpp totalsastext.h
 )
 

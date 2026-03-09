@@ -113,6 +113,27 @@ SPDX-License-Identifier: GPL-2.0-or-later
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QRadioButton" name="radioDailyReport">
+        <property name="text">
+         <string>Daily Report as Text</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioPeriodReport">
+        <property name="text">
+         <string>Period Report as Text</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioPeriodDailyReport">
+        <property name="text">
+         <string>Period Daily Report as Text</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

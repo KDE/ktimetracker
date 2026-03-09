@@ -53,6 +53,19 @@ public:
          * Export the history of all events as csv
          */
         CSVEventLogExport = 3,
+        /**
+         * Daily report: tasks with comments and time for a given day.
+         */
+        DailyReport = 4,
+        /**
+         * Period report: tasks with comments and total time for an arbitrary date range.
+         */
+        PeriodReport = 5,
+        /**
+         * Period daily report: per-day breakdown of tasks with comments and time,
+         * day totals, and grand total for the date range.
+         */
+        PeriodDailyReport = 6,
     };
 
     /**
