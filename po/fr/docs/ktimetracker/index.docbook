@@ -911,7 +911,7 @@ Imprimé le : 2004-07-13 18 : 10
 >bureau</glossterm>
 <glossdef
 ><para
->&GNU; / &Linux;, FreeBSD et d'autres systèmes utilisant le système « X-Org » permettent d'avoir plusieurs bureaux. Vous pouvez avoir en général, quatre bureaux installés par défaut. Chaque bureau peut afficher son propre ensemble de programmes et de fichiers. Au démarrage de &kde; &plasma;, le bureau affiché est le bureau numéro 1. Grâce à un appui sur <keycombo action="simul"
+>&GNU; / &Linux;, FreeBSD et d'autres systèmes utilisant le système « X.Org » permettent d'avoir plusieurs bureaux. Vous pouvez avoir en général, quatre bureaux installés par défaut. Chaque bureau peut afficher son propre ensemble de programmes et de fichiers. Au démarrage de &kde; &plasma;, le bureau affiché est le bureau numéro 1. Grâce à un appui sur <keycombo action="simul"
 >&Ctrl;<keycap
 >F2</keycap
 ></keycombo
