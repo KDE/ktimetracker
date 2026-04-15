@@ -54,6 +54,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <name xml:lang="pl">KTimeTracker</name>
   <name xml:lang="pt">KTimeTracker</name>
   <name xml:lang="pt-BR">KTimeTracker</name>
+  <name xml:lang="ro">KTimeTracker</name>
   <name xml:lang="ru">KTimeTracker</name>
   <name xml:lang="sa">KTimeTracker</name>
   <name xml:lang="sk">KTimeTracker</name>
@@ -90,6 +91,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <summary xml:lang="pl">Osobisty czasomierz</summary>
   <summary xml:lang="pt">Gestor do Tempo Pessoal</summary>
   <summary xml:lang="pt-BR">Gerenciador de tempo pessoal</summary>
+  <summary xml:lang="ro">Utilitar de contorizat timpul</summary>
   <summary xml:lang="ru">Учёт времени</summary>
   <summary xml:lang="sa">व्यक्तिगत समय निरीक्षक</summary>
   <summary xml:lang="sk">Osobný sledovač času</summary>
@@ -240,6 +242,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <caption xml:lang="pl">KTimeTracker</caption>
       <caption xml:lang="pt">KTimeTracker</caption>
       <caption xml:lang="pt-BR">KTimeTracker</caption>
+      <caption xml:lang="ro">KTimeTracker</caption>
       <caption xml:lang="ru">KTimeTracker</caption>
       <caption xml:lang="sa">KTimeTracker</caption>
       <caption xml:lang="sk">KTimeTracker</caption>
