@@ -599,7 +599,7 @@ msgstr ", ..."
 #, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
-msgstr "Stľpce"
+msgstr "Stĺpce"
 
 #: dialogs/edittimedialog.cpp:28
 #, kde-format
