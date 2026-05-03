@@ -9,13 +9,13 @@
 # Mevlüt KOÇAK <mevlut_kocak@milliemlak.gov.tr>, 2003.
 # Ozan Eren BILGEN <oebilgen@uekae.tubitak.gov.tr>, 2005.
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdepim-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2025-12-22 18:06+0300\n"
+"PO-Revision-Date: 2026-05-02 18:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -356,7 +356,7 @@ msgid ""
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
 "Bu eylem ilk kez etkinleştirildiğinde bir pencerenin odağı değişirse o "
-"pencerenin adıyla yeni bir görev oluşturulur ve başlatılır. Halihazırda "
+"pencerenin adıyla yeni bir görev oluşturulur ve başlatılır. Hâlihazırda "
 "böyle bir görev varsa o başlatılır."
 
 #: base/timetrackerwidget.cpp:233
@@ -599,7 +599,7 @@ msgstr ""
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr ""
-"Halihazırda bir görev oluşturdunuz. Şimdi zamanlayıcıyı başlatıp "
+"Hâlihazırda bir görev oluşturdunuz. Şimdi zamanlayıcıyı başlatıp "
 "durdurabilirsiniz."
 
 #: base/tray.cpp:79
