@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 19:52-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #: base/idletimedetector.cpp:58
 #, kde-format
@@ -59,11 +60,10 @@ msgid "Desktop has been idle since %1. What do you want to do?"
 msgstr ""
 
 #: base/mainwindow.cpp:37
-#, fuzzy, kde-format
-#| msgid "KTimeTracker"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
-msgstr "KTimeTracker"
+msgstr ""
 
 #: base/mainwindow.cpp:134 base/tray.cpp:74
 #, kde-format
@@ -71,8 +71,7 @@ msgid "No active tasks"
 msgstr ""
 
 #: base/mainwindow.cpp:144 base/tray.cpp:94
-#, fuzzy, kde-format
-#| msgid ", "
+#, kde-format
 msgctxt "separator between task names"
 msgid ", "
 msgstr "، "
@@ -100,7 +99,7 @@ msgstr ""
 #: base/taskview.cpp:273
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "ۋاز كەچ"
 
 #: base/taskview.cpp:339 base/taskview.cpp:415
 #, kde-format
@@ -116,15 +115,13 @@ msgid ""
 msgstr ""
 
 #: base/taskview.cpp:395
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Sub Task"
-msgstr "يېڭى تارماق ۋەزىپە"
+msgstr ""
 
 #: base/taskview.cpp:413
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task"
 msgstr "ۋەزىپە تەھرىرلەش"
@@ -165,18 +162,16 @@ msgid "Failed to save iCalendar file as \"%1\"."
 msgstr ""
 
 #: base/timetrackerwidget.cpp:138
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Start &New Session"
-msgstr "يېڭى ئەڭگىمە باشلا(&N)"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "Start &New Session"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts a new session"
-msgstr "يېڭى ئەڭگىمە باشلا(&N)"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:141
 #, kde-format
@@ -187,11 +182,10 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:149
-#, fuzzy, kde-format
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit History..."
-msgstr "تەھرىر(&E)…"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:150
 #, kde-format
@@ -228,8 +222,7 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:172
-#, fuzzy, kde-format
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Start"
 msgstr "باشلا(&S)"
@@ -252,8 +245,7 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:189
-#, fuzzy, kde-format
-#| msgid "S&top"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "S&top"
 msgstr "توختا(&T)"
@@ -330,11 +322,10 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:233
-#, fuzzy, kde-format
-#| msgid "New Task"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&New Task..."
-msgstr "يېڭى ۋەزىپە"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:234
 #, kde-format
@@ -349,11 +340,10 @@ msgid "This will create a new top level task."
 msgstr ""
 
 #: base/timetrackerwidget.cpp:243
-#, fuzzy, kde-format
-#| msgid "New Sub Task"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "New &Subtask..."
-msgstr "يېڭى تارماق ۋەزىپە"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:244
 #, kde-format
@@ -368,8 +358,7 @@ msgid "This will create a new subtask to the current selected task."
 msgstr ""
 
 #: base/timetrackerwidget.cpp:253
-#, fuzzy, kde-format
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Delete"
 msgstr "ئۆچۈر(&D)"
@@ -390,7 +379,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Properties"
-msgstr ""
+msgstr "خاسلىق(&P)"
 
 #: base/timetrackerwidget.cpp:264
 #, kde-format
@@ -407,11 +396,10 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:275
-#, fuzzy, kde-format
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit &Time..."
-msgstr "تەھرىر(&E)…"
+msgstr ""
 
 #: base/timetrackerwidget.cpp:276
 #, kde-format
@@ -440,11 +428,10 @@ msgid "&Mark as Incomplete"
 msgstr ""
 
 #: base/timetrackerwidget.cpp:303
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Export..."
-msgstr "چىقار(&E)"
+msgstr "ئېكسپورت قىل(&E)…"
 
 #: base/timetrackerwidget.cpp:310
 #, kde-format
@@ -462,23 +449,22 @@ msgstr ""
 #, kde-format
 msgctxt "@title:tab"
 msgid "Behavior"
-msgstr ""
+msgstr "قىلمىش"
 
 #: base/timetrackerwidget.cpp:453
 #, kde-format
 msgctxt "@title:tab"
 msgid "Appearance"
-msgstr ""
+msgstr "قىياپەت"
 
 #: base/timetrackerwidget.cpp:456
 #, kde-format
 msgctxt "@title:tab"
 msgid "Storage"
-msgstr ""
+msgstr "ساقلىغۇچ"
 
 #: base/timetrackerwidget.cpp:492
-#, fuzzy, kde-format
-#| msgid "New Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "يېڭى ۋەزىپە"
@@ -499,8 +485,7 @@ msgid ""
 msgstr ""
 
 #: base/timetrackerwidget.cpp:581
-#, fuzzy, kde-format
-#| msgid "Confirmation Required"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "جەزملەش زۆرۈر"
@@ -573,22 +558,19 @@ msgid ", ..."
 msgstr ""
 
 #: base/treeviewheadercontextmenu.cpp:28
-#, fuzzy, kde-format
-#| msgid "Columns"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Columns"
-msgstr "ئىستونلار"
+msgstr "رەت"
 
 #: dialogs/edittimedialog.cpp:28
-#, fuzzy, kde-format
-#| msgid "Edit Task"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Task Time"
-msgstr "ۋەزىپە تەھرىرلەش"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:36 dialogs/taskpropertiesdialog.cpp:42
-#, fuzzy, kde-format
-#| msgid "Task"
+#, kde-format
 msgctxt "@title:group"
 msgid "Task"
 msgstr "ۋەزىپە"
@@ -599,10 +581,9 @@ msgid "Task Name:"
 msgstr "ۋەزىپە ئاتى:"
 
 #: dialogs/edittimedialog.cpp:54 dialogs/taskpropertiesdialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Description:"
+#, kde-format
 msgid "Task Description:"
-msgstr "چۈشەندۈرۈش:"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:57
 #, kde-format
@@ -616,8 +597,7 @@ msgid "Current Time:"
 msgstr ""
 
 #: dialogs/edittimedialog.cpp:68
-#, fuzzy, kde-format
-#| msgid " min"
+#, kde-format
 msgctxt "@item:valuesuffix Change Time By: ... minute(s)"
 msgid " minute"
 msgid_plural " minutes"
@@ -634,11 +614,10 @@ msgid "Time After Change:"
 msgstr ""
 
 #: dialogs/edittimedialog.cpp:83
-#, fuzzy, kde-format
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit History..."
-msgstr "تەھرىر(&E)…"
+msgstr ""
 
 #: dialogs/edittimedialog.cpp:84
 #, kde-format
@@ -646,12 +625,10 @@ msgid "To change this task's time, you have to edit its event history"
 msgstr ""
 
 #: dialogs/exportdialog.cpp:79
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export to File"
-msgstr "چىقار(&E)"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.cpp:98 dialogs/exportdialog.ui:184
@@ -670,15 +647,13 @@ msgstr ""
 #: dialogs/exportdialog.cpp:119 dialogs/exportdialog.ui:212
 #, kde-format
 msgid "All Tasks"
-msgstr "بارلىق ۋەزىپىلەر"
+msgstr "ھەممە ۋەزىپە"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, ExportDialog)
 #: dialogs/exportdialog.ui:21
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Export"
+#, kde-format
 msgid "Export"
-msgstr "چىقار(&E)"
+msgstr "چىقار"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpPreview)
 #: dialogs/exportdialog.ui:33
@@ -690,13 +665,13 @@ msgstr ""
 #: dialogs/exportdialog.ui:57
 #, kde-format
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "چاپلاش تاختىسىغا كۆچۈر"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnSaveAs)
 #: dialogs/exportdialog.ui:67
 #, kde-format
 msgid "Save As..."
-msgstr ""
+msgstr "باشقا ئاتتا ساقلا…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpReportType)
 #: dialogs/exportdialog.ui:82
@@ -718,10 +693,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioEventLogCsv)
 #: dialogs/exportdialog.ui:105
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgid "Event Log as CSV"
-msgstr "چىقار(&E)"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioTimesText)
 #: dialogs/exportdialog.ui:112
@@ -747,13 +721,13 @@ msgstr "چېسلا دائىرىسى"
 #: dialogs/exportdialog.ui:134
 #, kde-format
 msgid "From:"
-msgstr "ئەۋەتكۈچى:"
+msgstr "كىمدىن:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: dialogs/exportdialog.ui:157
 #, kde-format
 msgid "To:"
-msgstr "خەت تاپشۇرۇۋالغۇچى："
+msgstr "كىمگە:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, combodecimalminutes)
 #: dialogs/exportdialog.ui:189
@@ -833,13 +807,13 @@ msgstr ""
 #: dialogs/exportdialog.ui:338
 #, kde-format
 msgid "\""
-msgstr "\""
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, cboQuote)
 #: dialogs/exportdialog.ui:343
 #, kde-format
 msgid "'"
-msgstr "'"
+msgstr ""
 
 #: dialogs/historydialog.cpp:87 export/totalsastext.cpp:70
 #, kde-format
@@ -957,7 +931,7 @@ msgstr "ئاساسىي قورال بالداق"
 #: ktimetrackerui.rc:54
 #, kde-format
 msgid "Tasks"
-msgstr "ۋەزىپىلەر"
+msgstr "ۋەزىپە"
 
 #: main.cpp:88 model/event.cpp:153 model/eventsmodel.cpp:112
 #, kde-format
@@ -981,11 +955,10 @@ msgid "Alexander Potashev"
 msgstr ""
 
 #: main.cpp:97
-#, fuzzy, kde-format
-#| msgid "Current Maintainer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Current Maintainer (since 2019)"
-msgstr "نۆۋەتتىكى مەسئۇلى"
+msgstr ""
 
 #: main.cpp:99
 #, kde-format
@@ -1030,15 +1003,13 @@ msgid "Sirtaj Singh Kang"
 msgstr ""
 
 #: main.cpp:104
-#, fuzzy, kde-format
-#| msgid "Original Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Original Author"
-msgstr "ئەسلى ئاپتور"
+msgstr "ئەسلى يازغۇچى"
 
 #: main.cpp:105
-#, fuzzy, kde-format
-#| msgid "Mathias Soeken"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Mathias Soeken"
 msgstr "Mathias Soeken"
@@ -1050,8 +1021,7 @@ msgid "Developer (in 2007)"
 msgstr ""
 
 #: main.cpp:106
-#, fuzzy, kde-format
-#| msgid "Kalle Dalheimer"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Kalle Dalheimer"
 msgstr "Kalle Dalheimer"
@@ -1063,8 +1033,7 @@ msgid "Developer (1999-2000)"
 msgstr ""
 
 #: main.cpp:107
-#, fuzzy, kde-format
-#| msgid "Allen Winter"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Allen Winter"
 msgstr "Allen Winter"
@@ -1073,11 +1042,10 @@ msgstr "Allen Winter"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer"
-msgstr ""
+msgstr "ئىجادكار"
 
 #: main.cpp:108
-#, fuzzy, kde-format
-#| msgid "David Faure"
+#, kde-format
 msgctxt "@info:credit"
 msgid "David Faure"
 msgstr "David Faure"
@@ -1089,11 +1057,10 @@ msgid "Path or URL to iCalendar file to open."
 msgstr ""
 
 #: model/tasksmodel.cpp:19
-#, fuzzy, kde-format
-#| msgid "Task Name"
+#, kde-format
 msgctxt "@title:column"
 msgid "Task Name"
-msgstr "ۋەزىپە نامى"
+msgstr ""
 
 #: model/tasksmodel.cpp:20
 #, kde-format
@@ -1102,8 +1069,7 @@ msgid "Session Time"
 msgstr ""
 
 #: model/tasksmodel.cpp:21
-#, fuzzy, kde-format
-#| msgid "Time"
+#, kde-format
 msgctxt "@title:column"
 msgid "Time"
 msgstr "ۋاقىت"
@@ -1115,19 +1081,16 @@ msgid "Total Session Time"
 msgstr ""
 
 #: model/tasksmodel.cpp:23
-#, fuzzy, kde-format
-#| msgctxt "total time of all tasks"
-#| msgid "Total"
+#, kde-format
 msgctxt "@title:column"
 msgid "Total Time"
-msgstr "جەمئىي"
+msgstr ""
 
 #: model/tasksmodel.cpp:24
-#, fuzzy, kde-format
-#| msgid "Priority"
+#, kde-format
 msgctxt "@title:column"
 msgid "Priority"
-msgstr "مەرتىۋە"
+msgstr "ئالدىنلىق"
 
 #: model/tasksmodel.cpp:25
 #, kde-format
@@ -1247,7 +1210,7 @@ msgstr ""
 #: settings/cfgdisplay.ui:60
 #, kde-format
 msgid "Window Title"
-msgstr ""
+msgstr "كۆزنەك ماۋزۇسى"
 
 #. i18n: ectx: property (text), widget (QRadioButton, kcfg_windowTitleCurrentFile)
 #: settings/cfgdisplay.ui:69
@@ -1295,7 +1258,7 @@ msgstr ""
 #: settings/cfgdisplay.ui:120
 #, kde-format
 msgid "Priority"
-msgstr "مەرتىۋە"
+msgstr "ئالدىنلىق"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_displayPercentComplete)
 #: settings/cfgdisplay.ui:127
@@ -1325,39 +1288,31 @@ msgid ""
 msgstr ""
 
 #: widgets/taskswidget.cpp:128
-#, fuzzy, kde-format
-#| msgid "%1 %"
+#, kde-format
 msgctxt "@item:inmenu Task progress"
 msgid "%1 %"
 msgstr "%1 %"
 
 #: widgets/taskswidget.cpp:139
-#, fuzzy, kde-format
-#| msgid "unspecified"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "unspecified"
 msgstr "كۆرسىتىلمىگەن"
 
 #: widgets/taskswidget.cpp:142
-#, fuzzy, kde-format
-#| msgctxt "combox entry for highest priority"
-#| msgid "1 (highest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "1 (highest)"
 msgstr "1 (ئەڭ يۇقىرى)"
 
 #: widgets/taskswidget.cpp:145
-#, fuzzy, kde-format
-#| msgctxt "combox entry for medium priority"
-#| msgid "5 (medium)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "5 (medium)"
 msgstr "5 (ئوتتۇرا)"
 
 #: widgets/taskswidget.cpp:148
-#, fuzzy, kde-format
-#| msgctxt "combox entry for lowest priority"
-#| msgid "9 (lowest)"
+#, kde-format
 msgctxt "@item:inmenu Task priority"
 msgid "9 (lowest)"
 msgstr "9 (ئەڭ تۆۋەن)"
