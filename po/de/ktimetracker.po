@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 1998 Matthias Kalle Dalheimer <kalle@kde.org>
 # SPDX-FileCopyrightText: 2002 Thomas Diehl <thd@kde.org>
 # SPDX-FileCopyrightText: 2003 Stephan Johach <lucardus@onlinehome.de>
-# SPDX-FileCopyrightText: 2003-2005 Gregor Zumstein <zumstein@ssd.ethz.ch>
 # SPDX-FileCopyrightText: 2003, 2005-2006 Stefan Winter <swinter@kde.org>
+# SPDX-FileCopyrightText: 2003-2005 Gregor Zumstein <zumstein@ssd.ethz.ch>
 # SPDX-FileCopyrightText: 2005 Stephan Johach <hunsum@gmx.de>
 # SPDX-FileCopyrightText: 2005-2010 Thomas Reitelbach <tr@erdfunkstelle.de>
 # SPDX-FileCopyrightText: 2008-2011, 2019-2021 Burkhard Lück <lueck@hube-lueck.de>
