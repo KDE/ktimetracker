@@ -149,7 +149,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 >Einleitung</title>
 
 <para
->&ktimetracker; misst die Zeit, die für verschiedene Aufgaben aufgewendet wird. Das Programm ist nützlich, wenn z. B. die für verschiedene Kunden aufgewendeten Stunden verrechnet werden müssen oder einfach nur, wenn Sie wissen möchten, wieviele Stunden am Tag Sie Doom spielen oder den Heise-Newsticker lesen.</para>
+>&ktimetracker; misst die Zeit, die für verschiedene Aufgaben aufgewendet wird. Das Programm ist nützlich, wenn z. B. die für verschiedene Kunden aufgewendeten Stunden verrechnet werden müssen oder einfach nur, wenn Sie wissen möchten, wieviele Stunden am Tag Sie Doom spielen oder den Heise-Newsticker lesen.</para>
 
 <para
 >Der zeitliche Ablauf kann in eine durch Komma getrennte Liste exportiert werden und ist leicht in Abrechnungs- oder Projektverwaltungs-Software importierbar.</para>
@@ -394,7 +394,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 </informalexample>
 
 <para
->&ktimetracker; kann so eingerichtet werden, dass es automatisch erkennt, wenn weder Maus noch Tastatur benutzt werden. Wenn Sie länger als die angegebene Zeit untätig sind, zeigt &ktimetracker; den folgenden Dialog an:</para>
+>&ktimetracker; kann so eingerichtet werden, dass es automatisch erkennt, wenn weder Maus noch Tastatur verwendet werden. Wenn Sie länger als die angegebene Zeit untätig sind, zeigt &ktimetracker; den folgenden Dialog an:</para>
 
 <screenshot>
  <screeninfo
@@ -484,7 +484,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 >&DBus;</title>
 
 <para
->&ktimetracker; unterstützt zahlreiche Methoden, die mit &DBus; benutzt werden können. </para>
+>&ktimetracker; unterstützt zahlreiche Methoden, die mit &DBus; verwendet werden können. </para>
 <para
 >Es gibt zwei Möglichkeiten die &DBus;-Schnittstelle zu verwenden: &Qt;s &GUI;-Programm <application
 >qdbusviewer</application
@@ -557,7 +557,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 >.  &ktimetracker; exportiert nun die Gesamtzeit für alle Aufgaben in eine Datei, die Sie im Dateidialog auswählen können.</para>
 
 <para
->Benutzen Sie den Knopf <guibutton
+>Verwenden Sie den Knopf <guibutton
 >In die Zwischenablage kopieren</guibutton
 >, um die Zeiten auch dort einzufügen.</para>
 
@@ -609,7 +609,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 >.  &ktimetracker; exportiert nun die Gesamtzeit für alle Aufgaben in eine Datei, die Sie im Dateidialog auswählen können.</para>
 
 <para
->Benutzen Sie den Knopf <guibutton
+>Verwenden Sie den Knopf <guibutton
 >In die Zwischenablage kopieren</guibutton
 >, um die Zeiten auch dort einzufügen.</para>
 
@@ -1079,7 +1079,7 @@ Gedruckt am: 30.01.2006 19:50
 <para
 ><function
 >version()</function
-> ist ein &DBus;-Aufruf, der die Versionsnummer von &ktimetracker; zurückgibt; z. B. 4.3.1. Die Versionsnummer wird als Zeichenfolge im typischen &GNU;-Format als Major.Minor.Bugfix ausgegeben.</para>
+> ist ein &DBus;-Aufruf, der die Versionsnummer von &ktimetracker; zurückgibt; z. B. 4.3.1. Die Versionsnummer wird als Zeichenfolge im typischen &GNU;-Format als Major.Minor.Bugfix ausgegeben.</para>
 </refsect1>
 </refentry>
 
