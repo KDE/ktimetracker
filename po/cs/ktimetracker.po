@@ -3,31 +3,32 @@
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2013, 2019, 2020.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2013.
 # Vit Pelcak <vit@pelcak.org>, 2021, 2023.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: karm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2023-02-22 16:43+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-08-09 10:36+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák"
+msgstr "Vít Pelčák,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org"
+msgstr "vit@pelcak.org,libor.filipek@gmail.com"
 
 #: base/idletimedetector.cpp:58
 #, kde-format
@@ -36,6 +37,8 @@ msgid ""
 "Apply the idle time since %1 to all active\n"
 "timers and keep them running."
 msgstr ""
+"Použít dobu nečinnosti od %1 na všechny aktivní\n"
+"časovače a udržet je v chodu."
 
 #: base/idletimedetector.cpp:61
 #, kde-format
@@ -47,7 +50,7 @@ msgstr "Pokračovat v měření času"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stop timing and revert back to the time at %1"
-msgstr ""
+msgstr "Zastavit měření času a vrátit se k času uvedenému v %1"
 
 #: base/idletimedetector.cpp:64
 #, kde-format
@@ -58,7 +61,7 @@ msgstr "Vrátit měření času"
 #: base/idletimedetector.cpp:67
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr ""
+msgstr "Pracovní plocha je neaktivní již %1. Co chcete udělat?"
 
 #: base/mainwindow.cpp:37
 #, kde-format
@@ -93,6 +96,8 @@ msgstr ""
 msgid ""
 "Your virtual desktop number is too high, desktop tracking will not work."
 msgstr ""
+"Počet vašich virtuálních ploch je příliš vysoký, sledování ploch nebude "
+"fungovat."
 
 #: base/taskview.cpp:273
 #, kde-format
@@ -136,7 +141,7 @@ msgstr "Upravit úlohu"
 #: base/taskview.cpp:444 base/taskview.cpp:485 base/taskview.cpp:507
 #, kde-format
 msgid "No task selected."
-msgstr "Žádný úloha není vybrána"
+msgstr "Žádný úloha není vybrána."
 
 #: base/taskview.cpp:490
 #, kde-format
@@ -162,13 +167,13 @@ msgstr "Chyba při načítání \"%1\": nelze nalézt rodiče (uid=%2)"
 #, kde-format
 msgctxt "%1=lock file path"
 msgid "Could not write lock file \"%1\". Disk full?"
-msgstr ""
+msgstr "Nelze zapsat uzamykací soubor \"%1\". Je disk plný?"
 
 #: base/timetrackerstorage.cpp:236
 #, kde-format
 msgctxt "%1=destination file path/URL"
 msgid "Failed to save iCalendar file as \"%1\"."
-msgstr ""
+msgstr "Nepodařilo se uložit soubor iCalendar pod názvem \"%1\"."
 
 #: base/timetrackerwidget.cpp:138
 #, kde-format
@@ -202,7 +207,7 @@ msgstr "Upravit historii..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Edits history of all tasks of the current document"
-msgstr ""
+msgstr "Zobrazuje historii úprav všech úloh v aktuálním dokumentu"
 
 #: base/timetrackerwidget.cpp:152
 #, kde-format
@@ -211,6 +216,8 @@ msgid ""
 "A window will be opened where you can change start and stop times of tasks "
 "or add a comment to them."
 msgstr ""
+"Otevře se okno, ve kterém můžete změnit časy zahájení a ukončení úloh nebo k "
+"nim přidat poznámku."
 
 #: base/timetrackerwidget.cpp:162
 #, kde-format
@@ -243,7 +250,7 @@ msgstr "&Spustit"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Starts timing for selected task"
-msgstr ""
+msgstr "Spustí měření času pro vybranou úlohu"
 
 #: base/timetrackerwidget.cpp:175
 #, kde-format
@@ -271,13 +278,13 @@ msgstr "Zas&tavit"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Stops timing of the selected task"
-msgstr ""
+msgstr "Zastaví měření času u vybrané úlohy"
 
 #: base/timetrackerwidget.cpp:191
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Stops timing of the selected task"
-msgstr ""
+msgstr "Zastaví měření času u vybrané úlohy"
 
 #: base/timetrackerwidget.cpp:198
 #, kde-format
@@ -328,6 +335,7 @@ msgid ""
 "Auto-creates and updates tasks when the focus of the current window has "
 "changed"
 msgstr ""
+"Automaticky vytváří a aktualizuje úlohy, když dojde ke změně aktivního okna"
 
 #: base/timetrackerwidget.cpp:222
 #, kde-format
@@ -337,6 +345,9 @@ msgid ""
 "enabled, a new task will be created with the title of the window as its name "
 "and will be started. If there already exists such an task it will be started."
 msgstr ""
+"Pokud se při povolené akci poprvé změní aktivní okno, vytvoří se nová úloha "
+"s názvem odpovídajícím názvu tohoto okna a spustí se. Pokud taková úloha již "
+"existuje, spustí se."
 
 #: base/timetrackerwidget.cpp:233
 #, kde-format
@@ -493,6 +504,8 @@ msgid ""
 "There is no history yet. Start and stop a task and you will have an entry in "
 "your history."
 msgstr ""
+"Zatím zde není žádná historie. Spusťte a ukončete úlohu a v historii se vám "
+"zobrazí záznam."
 
 #: base/timetrackerwidget.cpp:579
 #, kde-format
@@ -500,6 +513,7 @@ msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
 msgstr ""
+"Opravdu chcete u všech úloh vynulovat čas? Tím se vymaže celá historie."
 
 #: base/timetrackerwidget.cpp:581
 #, kde-format
@@ -561,12 +575,15 @@ msgid ""
 "with creating your first task - enter it into the field where you see "
 "\"Search or add task\"."
 msgstr ""
+"Toto je ktimetracker, program pro KDE, který vám pomůže sledovat váš čas. "
+"Nejlepší je začít vytvořením první úlohy – zadejte ji do pole s nápisem "
+"\"Hledat nebo přidat úlohu\"."
 
 #: base/timetrackerwidget.cpp:1015
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
-msgstr ""
+msgstr "Úlohu jste již vytvořili. Nyní můžete spustit a zastavit měření času."
 
 #: base/tray.cpp:79
 #, kde-format
@@ -625,7 +642,7 @@ msgstr[2] " minut"
 #: dialogs/edittimedialog.cpp:74
 #, kde-format
 msgid "Change Time By:"
-msgstr ""
+msgstr "Změnit čas podle:"
 
 #: dialogs/edittimedialog.cpp:78
 #, kde-format
@@ -641,7 +658,7 @@ msgstr "Upravit historii..."
 #: dialogs/edittimedialog.cpp:84
 #, kde-format
 msgid "To change this task's time, you have to edit its event history"
-msgstr ""
+msgstr "Chcete-li změnit čas této úlohy, musíte upravit její historii událostí"
 
 #: dialogs/exportdialog.cpp:79
 #, kde-format
@@ -729,6 +746,8 @@ msgid ""
 "An inclusive date range for reporting on time card history.  Not enabled "
 "when reporting on totals."
 msgstr ""
+"Inkluzivní časové rozmezí pro vyhodnocování historie docházkových karet.  "
+"Při vyhodnocování souhrnných údajů není tato funkce aktivována."
 
 #. i18n: ectx: property (title), widget (QGroupBox, grpDateRange)
 #: dialogs/exportdialog.ui:128
@@ -858,17 +877,17 @@ msgstr "Komentář"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You can change this task's comment, start time and end time."
-msgstr ""
+msgstr "Můžete změnit komentář, čas zahájení a čas ukončení této úlohy."
 
 #: dialogs/historydialog.cpp:179 dialogs/historydialog.cpp:199
 #, kde-format
 msgid "This is not a valid Date/Time."
-msgstr ""
+msgstr "Toto není platné datum/čas."
 
 #: dialogs/historydialog.cpp:255
 #, kde-format
 msgid "Please select a task to delete."
-msgstr ""
+msgstr "Vyberte prosím úlohu, kterou chcete smazat."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, HistoryDialog)
 #: dialogs/historydialog.ui:21
@@ -883,6 +902,8 @@ msgid ""
 "<p>Enter the name of the task here. You can choose it freely.</p>\n"
 "<p><i>Example:</i> phone with mother</p>"
 msgstr ""
+"<p>Zde zadejte název úlohy. Můžete si jej zvolit libovolně.</p>\n"
+"<p><i>Příklad:</i> zavolat matce</p>"
 
 #: dialogs/taskpropertiesdialog.cpp:59
 #, kde-format
@@ -1037,7 +1058,7 @@ msgstr "Mathias Soeken"
 #, kde-format
 msgctxt "@info:credit"
 msgid "Developer (in 2007)"
-msgstr ""
+msgstr "Vývojář (v roce 2007)"
 
 #: main.cpp:106
 #, kde-format
@@ -1073,7 +1094,7 @@ msgstr "David Faure"
 #, kde-format
 msgctxt "@info:shell"
 msgid "Path or URL to iCalendar file to open."
-msgstr ""
+msgstr "Cesta nebo URL souboru iCalendar, který se má otevřít."
 
 #: model/tasksmodel.cpp:19
 #, kde-format
@@ -1121,7 +1142,7 @@ msgstr "Procent dokončeno"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The task name is what you call the task, it can be chosen freely."
-msgstr ""
+msgstr "Název úlohy je to, jak úlohu nazýváte; lze jej zvolit libovolně."
 
 #: model/tasksmodel.cpp:179 model/tasksmodel.cpp:272
 #, kde-format
@@ -1129,6 +1150,8 @@ msgctxt "@info:whatsthis"
 msgid ""
 "The session time is the time since you last chose \"Start New Session\"."
 msgstr ""
+"Doba trvání sezení je doba, která uplynula od okamžiku, kdy jste naposledy "
+"zvolili možnost \"Začít nové sezení\"."
 
 #: model/tasksmodel.cpp:276
 #, kde-format
@@ -1136,18 +1159,20 @@ msgctxt "@info:whatsthis"
 msgid ""
 "The total session time is the session time of this task and all its subtasks."
 msgstr ""
+"Celková doba trvání sezení je součtem doby trvání této úlohy a všech jejích "
+"podúloh."
 
 #: model/tasksmodel.cpp:280
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The total time is the time of this task and all its subtasks."
-msgstr ""
+msgstr "Celková doba je součtem doby trvání této úlohy a všech jejích podúloh."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_enabled)
 #: settings/cfgbehavior.ui:21
 #, kde-format
 msgid "Detect desktop as idle after:"
-msgstr ""
+msgstr "Rozpoznat nečinnost plochy po:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_autoSavePeriod)
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_period)
@@ -1160,7 +1185,7 @@ msgstr " min"
 #: settings/cfgbehavior.ui:41
 #, kde-format
 msgid "Minimum desktop active time:"
-msgstr ""
+msgstr "Minimální doba aktivity na ploše:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_minActiveTime)
 #: settings/cfgbehavior.ui:48
@@ -1181,18 +1206,20 @@ msgid ""
 "Unitasking - allow only one task to be timed at a time. Does not stop any "
 "timer."
 msgstr ""
+"Unitasking – umožňuje měřit čas pouze u jedné úlohy najednou. Nezastaví "
+"žádný časoměr."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_uniTasking)
 #: settings/cfgbehavior.ui:71
 #, kde-format
 msgid "Allow only one timer at a time"
-msgstr ""
+msgstr "Povolit pouze jeden časovač najednou"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_trayIcon)
 #: settings/cfgbehavior.ui:78
 #, kde-format
 msgid "Place an icon to the system tray"
-msgstr ""
+msgstr "Umístit ikonu do systémového panelu"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: settings/cfgdisplay.ui:34
@@ -1215,6 +1242,9 @@ msgid ""
 "precious. It will disable the search bar and every click will pop up a "
 "context menu."
 msgstr ""
+"Tuto možnost zvolte, pokud máte dotykový displej a každý centimetr obrazovky "
+"je pro vás drahocenný. Tím se deaktivuje vyhledávací lišta a při každém "
+"kliknutí se zobrazí kontextová nabídka."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_configPDA)
 #: settings/cfgdisplay.ui:50
@@ -1305,6 +1335,10 @@ msgid ""
 "filter. Then, only tasks that match your input are shown. As soon as you "
 "press Enter, your input is used as name to create a new task."
 msgstr ""
+"Jedná se o kombinované pole. Dokud nestisknete klávesu Enter, funguje jako "
+"filtr. Zobrazí se tedy pouze úlohy, které odpovídají vašemu zadání. Jakmile "
+"stisknete klávesu Enter, vaše zadání se použije jako název pro vytvoření "
+"nové úlohy."
 
 #: widgets/taskswidget.cpp:128
 #, kde-format
