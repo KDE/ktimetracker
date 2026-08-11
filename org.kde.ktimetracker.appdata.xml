@@ -69,6 +69,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <summary xml:lang="ar">متعقب وقت شخصي</summary>
   <summary xml:lang="ca">Seguidor personal del temps</summary>
   <summary xml:lang="ca-valencia">Seguidor personal del temps</summary>
+  <summary xml:lang="cs">Osobní sledovač času</summary>
   <summary xml:lang="de">Persönliche Zeiterfassung</summary>
   <summary xml:lang="en-GB">Personal Time Tracker</summary>
   <summary xml:lang="eo">Persona Tempsekvilo</summary>
@@ -108,6 +109,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="ar">يساعدك تطبيق متعقب الوقت على تتبع وقتك الشخصي الذي تقضيه في أداء المهام والمشاريع المختلفة.</p>
     <p xml:lang="ca">El KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
     <p xml:lang="ca-valencia">KTimeTracker ajuda a fer un seguiment del vostre temps personal dedicat a diverses tasques i projectes.</p>
+    <p xml:lang="cs">KTimeTracker vám pomáhá sledovat čas, který věnujete různým úlohám a projektům.</p>
     <p xml:lang="de">KTimeTracker misst die Zeit, die Sie für verschiedene Aufgaben und Projekte benötigen.</p>
     <p xml:lang="en-GB">KTimeTracker helps you track your personal time spent on various tasks and projects.</p>
     <p xml:lang="eo">KTimeTracker helpas vin spuri vian personan tempon elspezitan je variaj taskoj kaj projektoj.</p>
@@ -144,6 +146,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="ar">إنه مفيد لتتبع ساعات العمل القابلة للفوترة ويمكنه الإبلاغ عن الساعات المسجلة حسب المهمة واليوم.</p>
     <p xml:lang="ca">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
     <p xml:lang="ca-valencia">És útil per al seguiment de les hores facturables i pot informar de les hores registrades per tasca i dia.</p>
+    <p xml:lang="cs">Je užitečný pro sledování fakturovatelných hodin a umožňuje vygenerovat přehled zaznamenaných hodin podle úloh a dnů.</p>
     <p xml:lang="de">Das Programm ist nützlich, wenn z. B. die für verschiedene Kunden aufgewendeten Stunden verrechnet werden müssen.</p>
     <p xml:lang="en-GB">It is useful for tracking billable hours and can report the hours logged by task and day.</p>
     <p xml:lang="eo">Ĝi estas utila por spuri faktureblajn horojn kaj povas raporti la horojn registritajn laŭ tasko kaj tago.</p>
@@ -180,6 +183,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <p xml:lang="ar">باستخدام متعقب الوقت يمكنك تنظيم مشروع مجزأ كمهام فرعية مع إمكانية التداخل غير المحدودة. اختصارات لوحة المفاتيح والفأرة القياسية بسيطة وتجعل الأداة مريحة للغاية وبديهية الاستخدام.</p>
     <p xml:lang="ca">Amb el KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina sigui molt còmoda i intuïtiva.</p>
     <p xml:lang="ca-valencia">Amb KTimeTracker, podreu organitzar un projecte desglossat com a subtasques amb nidificació il·limitada. Les dreceres de teclat i ratolí estàndard són senzilles i fan que l'eina siga molt còmoda i intuïtiva.</p>
+    <p xml:lang="cs">Pomocí aplikace KTimeTracker můžete rozdělit projekt na dílčí úlohy s neomezeným počtem úrovní vnoření. Standardní klávesové zkratky a zkratky s myší jsou jednoduché a díky nim je ovládání tohoto nástroje opravdu pohodlné a intuitivní.</p>
     <p xml:lang="de">Mit KTimeTracker können Sie ein Projekt als Teilaufgaben mit unbegrenzter Verschachtelung organisieren. Die standardmäßigen Tastenkombinationen für Tastatur und Maus sind einfach und komfortabel und ermöglichen eine komfortable und intuitive Bedienung.</p>
     <p xml:lang="en-GB">With KTimeTracker, you can organize a broken-down project as subtasks with unlimited nesting. The standard keyboard and mouse shortcuts are simple and make the tool really comfortable and intuitive to use.</p>
     <p xml:lang="eo">Kun KTimeTracker, vi povas organizi dispecigitan projekton kiel subtaskojn kun senlima ingado. La normaj klavaraj kaj musaj ŝparvojoj estas simplaj kaj igas la ilon vere komforta kaj intuicia uzi.</p>
