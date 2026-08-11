@@ -1,38 +1,38 @@
 {
-  "app-id": "org.kde.ktimetracker",
-  "runtime": "org.kde.Platform",
-  "runtime-version": "6.11",
-  "sdk": "org.kde.Sdk",
-  "command": "ktimetracker",
-  "rename-icon": "ktimetracker",
-  "finish-args": [
-    "--share=ipc",
-    "--device=dri",
-    "--socket=wayland",
-    "--socket=fallback-x11",
-    "--talk-name=org.kde.StatusNotifierWatcher"
-  ],
-  "cleanup": [
-    "*.a",
-    "*.la",
-    "/include",
-    "/lib/cmake",
-    "/lib/pkgconfig",
-    "/lib/*/cmake",
-    "/lib/*/pkgconfig",
-    "/share/cmake",
-    "/share/pkgconfig"
-  ],
-  "modules": [
-    {
-      "name": "ktimetracker",
-      "buildsystem": "cmake-ninja",
-      "sources": [
+    "app-id": "org.kde.ktimetracker",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "6.11",
+    "sdk": "org.kde.Sdk",
+    "command": "ktimetracker",
+    "rename-icon": "ktimetracker",
+    "finish-args": [
+        "--share=ipc",
+        "--device=dri",
+        "--socket=wayland",
+        "--socket=fallback-x11",
+        "--talk-name=org.kde.StatusNotifierWatcher"
+    ],
+    "cleanup": [
+        "*.a",
+        "*.la",
+        "/include",
+        "/lib/cmake",
+        "/lib/pkgconfig",
+        "/lib/*/cmake",
+        "/lib/*/pkgconfig",
+        "/share/cmake",
+        "/share/pkgconfig"
+    ],
+    "modules": [
         {
-          "type": "dir",
-          "path": "."
+            "name": "ktimetracker",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
