@@ -60,7 +60,7 @@ msgstr "إعادة توقيت"
 #: base/idletimedetector.cpp:67
 #, kde-format
 msgid "Desktop has been idle since %1. What do you want to do?"
-msgstr "لقد كان سطح المكتب خاملاً منذ %1. ماذا تريد أن تفعل؟"
+msgstr "لقد كان سطح المكتب خاملًا منذ %1. ماذا تريد أن تفعل؟"
 
 #: base/mainwindow.cpp:37
 #, kde-format
@@ -506,7 +506,7 @@ msgstr "لا يوجد سجل حتى الآن. ابدأ مهمة وأوقفها �
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
 "the entire history."
-msgstr "هل تريد حقاً تصفير الوقت لجميع المهام؟ سيؤدي ذلك إلى حذف السجل بأكمله."
+msgstr "هل تريد حقًا تصفير الوقت لجميع المهام؟ سيؤدي ذلك إلى حذف السجل بأكمله."
 
 #: base/timetrackerwidget.cpp:581
 #, kde-format
