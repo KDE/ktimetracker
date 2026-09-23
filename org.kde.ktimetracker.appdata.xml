@@ -61,7 +61,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <name xml:lang="sl">KTimeTracker</name>
   <name xml:lang="sv">Ktimerracker</name>
   <name xml:lang="tr">K Zamanölçer</name>
-  <name xml:lang="ug">KTimeTracker</name>
   <name xml:lang="uk">KTimeTracker</name>
   <name xml:lang="zh-CN">KTimeTracker</name>
   <name xml:lang="zh-TW">KTimeTracker</name>
@@ -255,7 +254,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <caption xml:lang="sl">KTimeTracker</caption>
       <caption xml:lang="sv">Ktimerracker</caption>
       <caption xml:lang="tr">K Zamanölçer</caption>
-      <caption xml:lang="ug">KTimeTracker</caption>
       <caption xml:lang="uk">KTimeTracker</caption>
       <caption xml:lang="zh-CN">KTimeTracker</caption>
       <caption xml:lang="zh-TW">KTimeTracker</caption>
