@@ -1,0 +1,1217 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY Planner "<application
+>Planner</application
+>">
+  <!ENTITY Planner.web "https://wiki.gnome.org/Apps/Planner">
+  <!ENTITY % Arabic "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE">
+]>
+<!--
+SPDX-FileCopyrightText: 2000-2004 Jonathan Singer
+SPDX-FileCopyrightText: 2004-2005 Mark Bucciarelli <mark@hubcapconsulting.com>
+SPDX-FileCopyrightText: 2019 Alexander Potashev <aspotashev@gmail.com>
+SPDX-FileCopyrightText: 2019 Pino Toscano <pino@kde.org>
+SPDX-License-Identifier: GFDL-1.2-only
+-->
+<book id="ktimetracker" lang="&language;">
+
+<bookinfo id="ktimetrackerinfo">
+  <title
+>دليل متعقب الوقت</title>
+
+  <authorgroup>
+    <author
+><firstname
+>Jonathan</firstname
+> <surname
+>Singer</surname
+> <affiliation
+><address
+>&Jonathan.Singer.mail;</address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Mark</firstname
+> <surname
+>Bucciarelli</surname
+> <affiliation
+><address
+><email
+>mark@hubcapconsulting.com</email
+></address
+></affiliation>
+    </author>
+
+    <author
+><firstname
+>Sirtaj</firstname
+> <othername
+>Singh</othername
+> <surname
+>Kang</surname
+> <affiliation
+><address
+>&Sirtaj.Singh.Kang.mail;</address
+></affiliation>
+    </author>
+
+    <othercredit role="reviewer"
+><firstname
+>Lauri</firstname
+> <surname
+>Watts</surname
+> <contrib
+>مُراجِع</contrib>
+      <affiliation
+><address
+>&Lauri.Watts.mail;</address
+></affiliation>
+    </othercredit>
+
+    <othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+  </authorgroup>
+
+  <copyright>
+    <year
+>2000-2004</year>
+    <holder
+>&Jonathan.Singer;</holder>
+  </copyright>
+
+  <copyright>
+    <year
+>2004-2005</year>
+    <holder
+>Mark Bucciarelli</holder>
+  </copyright>
+
+  <legalnotice
+>&FDLNotice;</legalnotice>
+
+  <date
+>2019-11-19</date>
+  <releaseinfo
+>5.0</releaseinfo>
+
+  <abstract
+><para
+>يساعدك تطبيق متعقب الوقت على تتبع وقتك الشخصي الذي تقضيه في أداء المهام والمشاريع المختلفة.</para
+></abstract>
+
+  <keywordset>
+    <keyword
+>كيدي</keyword>
+    <keyword
+>متعقب الوقت</keyword>
+    <keyword
+>وقت</keyword>
+    <keyword
+>متتبّع</keyword>
+    <keyword
+>مشروع</keyword>
+  </keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<para
+>يتتبع متعقب الوقت الوقت المستغرق في مهام متنوعة. يفيد في تتبع الساعات القابلة للفوترة ويمكنه الإبلاغ عن الساعات المسجلة حسب المهمة واليوم.</para>
+
+<para
+>يمكن تصدير تاريخ الوقت هذا إلى ملف نصي مفصول بفواصل لاستيراده في أدوات الفوترة و/أو إدارة المشاريع الأخرى.</para>
+
+<para
+>يكتشف متعقب الوقت خمول لوحة المفاتيح والفأرة، ويمكنه ربط مهام مختلفة بأسطح مكتب مختلفة، وهما أداتان تساعدان في إبقاء المؤقت يعمل على المهمة الصحيحة.</para>
+
+<para
+>كتب &Sirtaj.Singh.Kang; متعقب الوقت في الأصل. صفحته الرئيسة هي <ulink url="https://userbase.kde.org/KTimeTracker"
+>https://userbase.kde.org/KTimeTracker</ulink
+>.</para>
+
+</chapter>
+
+
+<chapter id="using-ktimetracker">
+<title
+>استخدام متعقب الوقت</title>
+
+<sect1 id="starting">
+<title
+>بدء متعقب الوقت</title>
+
+<para
+>اكتب <command
+>ktimetracker</command
+> في سطر الأوامر أو اختر <guimenuitem
+>متعقب الوقت الشخصي</guimenuitem
+> من مجموعة <menuchoice
+> <guimenu
+>التطبيقات</guimenu
+><guisubmenu
+>الأدوات المساعدة</guisubmenu
+> </menuchoice
+> في <guimenu
+>مطلق تطبيقات بلازما</guimenu
+>. تتوفر خيارات أوامر &Qt; و &kf5-full; العامة، انظر صفحات الدليل qt5options و kf5options. </para>
+
+<para
+>يوفر متعقب الوقت خيار أمر إضافيًا يتيح لك إدخال اسم ملف iCalendar المستخدم لتخزين تاريخ عملك. يمكنك إدخال ملف iCalendar بعيد باستخدام &HTTP; أو &FTP; كجزء من اسم الملف؛ على سبيل المثال: https://www.mysite.com/mydata/mylabor.ics.</para>
+
+</sect1>
+
+<sect1 id="general-use">
+<title
+>المهام</title>
+
+<informalexample>
+<para
+><emphasis
+>المشكلة:</emphasis
+> أنت مستشار برمجيات مستقل ولديك العديد من العملاء. لدى بعض العملاء مشاريع متعددة. خلال اليوم، تنتقل بين مشاريع مختلفة. تحتاج إلى تتبع وقتك لإنشاء فواتير شهرية.</para>
+<para
+><emphasis
+>الحل:</emphasis
+> أنشئ مهمة واحدة في المستوى الأعلى لكل عميل ومهمة فرعية لكل مشروع عميل. للمشاريع التي تتطلب تتبعًا أكثر تفصيلًا، أنشئ قائمة بالمهام الفرعية للمشروع. تتبع الوقت بنقر مزدوج على المهمة التي تعمل عليها حاليًا.</para>
+</informalexample>
+
+<para
+>يوفر متعقب الوقت مرونة كبيرة في تتبع وقتك، مما يسمح بمهام وعمق مهام غير محدود. يمكن تسجيل الوقت في أي مهمة، ويمكن أن تكون أكثر من مهمة نشطة في أي وقت.</para>
+<para
+>يتيح لك متعقب الوقت تحرير تاريخ المهمة ووضع تعليق لكل حدث أوقفته.</para>
+<para
+>لإنشاء مهمة في المستوى الأعلى، اختر <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مهمة</guimenu
+> <guimenuitem
+>مهمة جديدة...</guimenuitem
+> </menuchoice
+>. لإنشاء مهمة فرعية، حدد المهمة الأب واختر <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مهمة</guimenu
+> <guimenuitem
+>مهمة فرعية جديدة...</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>عند الخروج من متعقب الوقت، تُحفظ قائمة المهام في ملف على قرصك. وعند فتحه في المرة التالية، يُعاد تحميل قائمة المهام من نفس الملف.</para>
+
+<para
+>يمكن لمتعقب الوقت استيراد وتصدير المهام لتقليل عملك. انظر <xref linkend="interfaces"/>.</para>
+
+</sect1>
+
+<sect1 id="timers"
+><title
+>المؤقّتات</title>
+
+<informalexample>
+<para
+><emphasis
+>المشكلة:</emphasis
+> لتبقى ميسورًا ماليًا، يجب أن تفوتر ما متوسطه 5 ساعات يوميًا. للبقاء على المسار الصحيح، تراقب مجاميعك اليومية والأسبوعية.</para>
+<para
+><emphasis
+>الحل:</emphasis
+> صفّر مؤقت الجلسة في بداية كل يوم عمل وصفّر جميع المؤقتات في بداية كل أسبوع.</para
+> </informalexample>
+
+<para
+>يسهل متعقب الوقت تتبع الوقت. لبدء تسجيل الوقت لمهمة ما، انقر نقرًا مزدوجًا عليها. لإيقاف تسجيل الوقت، انقر نقرًا مزدوجًا عليها مرة أخرى. تعرض المهام النشطة ساعة صغيرة في عمود <guilabel
+>وقت الجلسة</guilabel
+>.</para>
+
+<para
+>دليل مرئي آخر لنشاط التسجيل هو أيقونة متعقب الوقت في صينية النظام. عندما تكون المهمة نشطة، يتحرك عقرب الثواني في الأيقونة. إذا وضعت مؤشر الفأرة فوق هذه الأيقونة، فسيُعرض اسم المهمة النشطة في تلميح. إذا كانت هناك أكثر من مهمة نشطة، فستُفصل أسماء المهام في التلميح بفواصل.</para>
+
+<para
+>يحتفظ متعقب الوقت بمؤقتين لكل مهمة: أحدهما لوقت الجلسة والآخر للوقت الكلي. في الضبط المبدئي، يعرض متعقب الوقت عمودين لكل مؤقت، مما ينتج عنه إجمالي 4 أعمدة لكل مهمة:</para>
+
+<variablelist>
+<varlistentry
+> <term
+><guilabel
+>وقت الجلسة</guilabel
+></term>
+<listitem
+><para
+>الوقت المستغرق في المهمة منذ بدء الجلسة.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>الوقت</guilabel
+></term
+> <listitem
+><para
+>الوقت المستغرق في المهمة منذ تصفير جميع الأوقات.</para
+></listitem>
+</varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>إجمالي وقت الجلسة</guilabel
+></term>
+<listitem
+><para
+>الوقت المستغرق في المهمة وجميع مهامها الفرعية منذ بدء الجلسة.</para
+></listitem
+> </varlistentry
+> 
+
+<varlistentry
+> <term
+><guilabel
+>الوقت الكلي</guilabel
+></term>
+<listitem
+><para
+>الوقت المستغرق في المهمة وجميع مهامها الفرعية منذ تصفير جميع الأوقات.</para
+></listitem
+> </varlistentry
+> 
+</variablelist>
+
+<para
+>لبدء جلسة جديدة، اختر <menuchoice
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>ابدأ جلسة جديدة</guimenuitem
+> </menuchoice
+> </para>
+
+<para
+>لتصفير جميع الأوقات، اختر <menuchoice
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>صفّر جميع الأوقات</guimenuitem
+> </menuchoice
+> </para>
+
+<sect2
+><title
+>تتبع سطح المكتب</title>
+
+<informalexample>
+<para
+><emphasis
+>المشكلة:</emphasis
+> لديك مشروعان رئيسان تنتقل بينهما كل يوم. للمساعدة في تنظيم عملك، تحتفظ بملفات المشروع 1 على سطح المكتب 1 وملفات المشروع 2 على سطح المكتب 2.</para>
+
+<para
+><emphasis
+>الحل:</emphasis
+> اربط مهمة المشروع 1 بسطح المكتب 1 ومهمة المشروع 2 بسطح المكتب 2. عندما تنتقل من سطح المكتب 2 إلى سطح المكتب 1 النشط، يوقف متعقب الوقت مهمة المشروع 2 آليًا ويبدأ مهمة المشروع 1.</para>
+</informalexample>
+
+<para
+>لربط مهمة بسطح مكتب واحد أو أكثر، اختر <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مهمة</guimenu
+> <guimenuitem
+>خصائص</guimenuitem
+> </menuchoice
+>. فعّل <guilabel
+>تتبع آلي</guilabel
+> واختر سطح المكتب أو أسطح المكتب لربطها بهذه المهمة. عندما يصبح أي من أسطح المكتب المختارة نشطًا، سيبدأ متعقب الوقت آليًا في تسجيل الوقت لتلك المهمة بعد تأخير قصير.</para>
+
+</sect2>
+
+<sect2
+><title
+>كشف الخمول</title>
+
+<informalexample
+> <para
+><emphasis
+>المشكلة:</emphasis
+> غادرت العمل مبكرًا يوم الجمعة لقضاء حاجة ونسيت إيقاف المؤقت. عند عودتك يوم الاثنين، لا يزال المؤقت يعمل.</para>
+<para
+><emphasis
+>الحل:</emphasis
+> فعّل كشف الخمول في صفحة <guilabel
+>السلوك</guilabel
+> في مربع حوار الإعدادات.</para>
+</informalexample>
+
+<para
+>يمكن ضبط متعقب الوقت ليكتشف خمول الفأرة ولوحة المفاتيح. إذا استمر خمول الفأرة ولوحة المفاتيح لفترة أطول من عدد الدقائق المحدد، يعرض متعقب الوقت مربع الحوار التالي:</para>
+
+<screenshot>
+ <screeninfo
+>كشف خمول متعقب الوقت</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="idle-detect.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>مربع حوار كشف خمول متعقب الوقت</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry
+> <term
+><guibutton
+>تابع التوقيت</guibutton
+></term>
+<listitem
+><para
+>طبّق وقت الخمول على جميع المؤقتات النشطة وأبقِها تعمل.</para
+><para
+>كنت تعمل على المهام أثناء خمول حاسوبك وما زلت.</para
+></listitem
+></varlistentry>
+
+<varlistentry
+><term
+><guibutton
+>إعادة توقيت</guibutton
+></term>
+<listitem
+><para
+>اطرح مقدار وقت الخمول من جميع المؤقتات النشطة وأوقفها.</para
+><para
+>لم تكن تعمل على المهام أثناء خمول حاسوبك وما زلت لا تفعل.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="interfaces">
+<title
+>أنظمة أخرى</title>
+<sect2 id="korganizer"
+><title
+>منظمك</title>
+
+<para
+>يستخدم متعقب الوقت، مثل «منظمك» و iCal من Apple، تنسيق iCalendar القياسي <ulink url="https://tools.ietf.org/html/rfc2445"
+>iCalendar</ulink
+> لبياناته. يمكن لمتعقب الوقت قراءة وكتابة قوائم المهام المنشأة بهذين التطبيقين.</para>
+<para
+>يمكنك حتى العمل بشكل متزامن على ملف واحد باستخدام «منظمك» ومتعقب الوقت. إذا غيّر أحد البرامج الملف، فستُنشر التحديثات إلى التطبيق الآخر آليًا. </para>
+
+</sect2>
+
+<sect2 id="planner"
+><title
+>المخطط</title>
+
+<para
+>كحالة استخدام نموذجية، قد ترغب في تخطيط مشروع باستخدام أداة إدارة المشاريع <ulink url="&Planner.web;"
+>المخطط</ulink
+> واستيراد مهامه إلى متعقب الوقت عبر <menuchoice
+><guimenu
+>ملف</guimenu
+> <guisubmenu
+>استيراد</guisubmenu
+><guimenuitem
+>استورد المهام من المخطط...</guimenuitem
+> </menuchoice
+>، لتكون بتنسيق iCalendar القياسي. بعد فعل ذلك، ستتمكن من جدولة المهام في «منظمك»، وحساب وقتك لها في متعقب الوقت. هذه إحدى الطرق لضمان بقاء مشروعك في وقته المحدد وضمن الميزانية.</para>
+
+</sect2>
+
+<sect2 id="dbus"
+><title
+>دي-باص</title>
+
+<para
+>يدعم متعقب الوقت طرقًا عديدة يمكن استخدامها مع دي-باص. </para>
+<para
+>توجد طريقتان لاستخدام واجهة دي-باص: واجهة كيو تي الرسومية <application
+>qdbusviewer</application
+> وسطر الأوامر <application
+>qdbus</application
+>. </para>
+
+<example
+><title
+>سكربت باش يطبع إصدارة متعقب الوقت</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker version 2
+>/dev/null || echo "ktimetracker not running"
+</programlisting>
+</example>
+
+<para
+>تُستخدم واجهة دي-باص الحالية لمتعقب الوقت بشكل أساسي للاختبار الآلي، لذا فهي محدودة جدًا. لتعريف الواجهة الكامل، انظر <xref linkend="dbusappendix"/>.</para>
+
+<para
+>لمشاهدة واجهة دي-باص الكاملة لإصدارة متعقب الوقت المثبتة على نظامك، شغّل سكربت باش التالي:</para>
+
+<example
+><title
+>سرد واجهة دي-باص لمتعقب الوقت في الطرفية</title>
+<programlisting
+>qdbus org.kde.ktimetracker /KTimeTracker 2
+>/dev/null || echo "ktimetracker not running"
+</programlisting>
+</example>
+</sect2>
+
+<sect2 id="csv-export"
+><title
+>تصدير المجاميع إلى CSV</title>
+
+<para
+>يمكن لمتعقب الوقت تصدير المجاميع والتاريخ إلى تنسيق ملف مفصول بفواصل. لتصدير المجاميع، اختر <menuchoice
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>تصدير...</guimenuitem
+> </menuchoice
+> وسيعرض متعقب الوقت مربع حوار التصدير. </para>
+
+<para
+>اختر الخيار <guibutton
+>الأوقات كـ CSV</guibutton
+> في مجموعة <guilabel
+>نوع التقرير</guilabel
+>. سيظهر مربع الحوار كما يلي: </para>
+
+<screenshot>
+<screeninfo
+>تصدير الأوقات كـ CSV</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="export-times-csv.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>تصدير الأوقات كـ CSV</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>عدّل القيم المبدئية لمربع الحوار إذا لزم الأمر. يمكنك معاينة مخرجات CSV على الجانب الأيمن من مربع الحوار. انقر فوق <guibutton
+>حفظ باسم...</guibutton
+> وسيصدر متعقب الوقت المجاميع لجميع المهام إلى الملف الذي تدخله في مربع حوار الملفات.</para>
+
+<para
+>استخدم زر <guibutton
+>انسخ إلى الحافظة</guibutton
+> لتصدير الأوقات إلى الحافظة.</para>
+
+<para
+>إليك مثالًا آخر لتنسيق المخرجات:</para>
+
+<literallayout
+><computeroutput>
+"kde",,,,,0.00,0.00,6.88,9.83
+,"ktimetracker",,,,6.88,8.70,6.88,9.83
+,,"3.2 feature plan",,,0.00,0.00,0.00,0.00
+,,"bugs",,,0.00,1.13,0.00,1.13
+,,"checkin changes - translation strings",,,0.00,0.00,0.00,0.00
+,,"time card report",,,0.00,0.00,0.00,0.00
+,"kopete",,,,0.00,0.00,0.00,0.00
+,"promo",,,,0.00,0.00,0.00,0.00
+,"web stuff",,,,0.00,0.00,0.00,0.00
+</computeroutput
+>
+</literallayout>
+
+<para
+>تُخرَج مهام المستوى الأعلى في العمود الأول، والمهام الفرعية في الثاني، وهكذا. تُخرَج بيانات الوقت بعد أقصى عمق للمهمة (5 في هذا المثال). عمود الوقت الأول هو <guilabel
+>وقت الجلسة</guilabel
+>، والثاني هو <guilabel
+>الوقت</guilabel
+>، والثالث هو <guilabel
+>إجمالي وقت الجلسة</guilabel
+>، والرابع هو <guilabel
+>الوقت الكلي</guilabel
+>. </para>
+
+
+</sect2>
+
+<sect2 id="csv-export-history"
+><title
+>تصدير التاريخ إلى CSV</title>
+
+<para
+>لتصدير تاريخ المهام، اختر <menuchoice
+> <guimenu
+>ملف</guimenu
+> <guisubmenu
+>تصدير</guisubmenu
+> <guimenuitem
+>تصدير...</guimenuitem
+> </menuchoice
+> وسيعرض متعقب الوقت نفس مربع حوار التصدير الموضح أعلاه. اختر الخيار <guibutton
+>التاريخ كـ CSV</guibutton
+> في مجموعة <guilabel
+>نوع التقرير</guilabel
+>. </para>
+
+<para
+>اختر نطاقًا زمنيًا تريد أن يغطيه تاريخ المهام. عدّل القيم المبدئية لمربع الحوار إذا لزم الأمر. يمكنك معاينة مخرجات CSV على الجانب الأيمن من مربع الحوار. انقر فوق <guibutton
+>حفظ باسم...</guibutton
+> وسيصدر متعقب الوقت المجاميع لجميع المهام إلى الملف الذي تدخله في مربع حوار الملفات.</para>
+
+<para
+>استخدم زر <guibutton
+>انسخ إلى الحافظة</guibutton
+> لتصدير الأوقات إلى الحافظة.</para>
+
+<para
+>إليك مثالًا لتنسيق المخرجات:</para>
+
+<literallayout
+><computeroutput>
+تاريخ المهمة
+من الثلاثاء 06 يوليو 2004 إلى الثلاثاء 13 يوليو 2004
+طُبع في: 2004-07-13 18:10
+2004-07-06,2004-07-07,2004-07-08,2004-07-09,2004-07-10,2004-07-11,2004-07-12,2004-07-13,
+,,,,,,,,0.00,"kde"
+,,1.77,3.23,1.73,,1.37,0.82,8.95,,"ktimetracker"
+,,,,,,,,0.00,,,"3.2 feature plan"
+,1.13,,,,,,,1.13,,,"bugs"
+,,,,,,,,0.00,,,"checkin changes - translation strings"
+,,,,,,,,0.00,,,"time card report"
+,,,,,,,,0.00,,"kopete"
+,,,,,,,,0.00,,"promo"
+,,,,,,,,0.00,,"web stuff"
+</computeroutput
+>
+</literallayout>
+
+<para
+>تحدد الأسطر الثلاثة الأولى وقت إنشاء التقرير والنطاق الزمني. الصف الرابع عبارة عن قائمة مفصولة بفواصل للتواريخ في النطاق الزمني، بتنسيق ISO 8601 (YYYY-MM-DD). تدرج جميع الصفوف اللاحقة الوقت المسجل لكل مهمة. العمود الرقمي الأخير هو إجمالي الصف عبر جميع الأيام. يطبع اسم المهمة بعد عمود الإجمالي، ويُزاح للإشارة إلى علاقة المهمة بالمهمة الفرعية. تظهر أسماء مهام المستوى الأعلى في العمود الأول بعد الإجمالي.</para>
+
+</sect2>
+</sect1>
+
+</chapter>
+
+<chapter id="interface">
+<title
+>واجهة متعقب الوقت</title>
+
+<para
+>تحتوي نافذة متعقب الوقت الرئيسة على المكونات التالية: شريط القوائم، شريط الأدوات، شريط البحث، نافذة المهام/الوقت، وشريط الحالة.</para>
+
+<para
+>شريط البحث هو حقل مدمج. طالما لم تضغط على &Enter;، فإنه يعمل كمرشح، حيث تُعرض المهام التي تطابق مدخلاتك فقط. بمجرد ضغط &Enter;، تُستخدم مدخلاتك كاسم لإنشاء مهمة جديدة. </para>
+
+<para
+>اختر <guilabel
+>ضبط لـ PDA</guilabel
+> في صفحة <guilabel
+>المظهر</guilabel
+> في مربع حوار الإعدادات إذا كان لديك شاشة تعمل باللمس وكانت مساحة الشاشة ثمينة. سيعطل هذا شريط البحث وسيؤدي كل نقر إلى إظهار قائمة سياقية.</para>
+
+<screenshot>
+<screeninfo
+>شاشة متعقب الوقت</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="ktimetracker.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>شاشة متعقب الوقت</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<sect1 id="main-window">
+<title
+>نافذة المهمة/الوقت</title>
+
+<para
+>تُعرض المهام المتنوعة في هذه النافذة، إلى جانب الوقت المتراكم لكل منها في الجلسة الحالية وفي الإجمالي. المهام التي يتم توقيتها تظهر بجانبها أيقونة ساعة صغيرة بجوار وقت الجلسة.</para>
+
+<para
+>يمكن إنشاء مهام فرعية لكل مهمة. يؤدي النقر فوق علامتي الجمع والناقص أمام المهمة الرئيسة إلى تبديل عرض المهام الفرعية المرتبطة بها. يتضمن إجمالي الوقت المستحق لمهمة ما أوقات مهامها الفرعية، بالإضافة إلى وقتها المتراكم.</para>
+
+</sect1>
+
+<sect1 id="tool-bar-status-bar">
+<title
+>شريط الأدوات وشريط الحالة</title>
+<para
+>يحتوي شريط الأدوات على أيقونات للأوامر التالية:</para>
+
+<note
+><para
+>تعمل جميعها بشكل مطابق لأمر القائمة.</para
+></note>
+
+<itemizedlist>
+<listitem
+><para
+><guiicon
+>مهمة جديدة</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>مهمة فرعية جديدة</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>ابدأ</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>أوقف</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>احذف</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>حرّر</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>افتح</guiicon
+></para
+></listitem>
+<listitem
+><para
+><guiicon
+>احفظ</guiicon
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>يبلغ شريط الحالة عن اسم الملف الذي حُفظت فيه البيانات.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title
+>الحقوق والترخيص</title>
+
+<para
+>متعقب الوقت </para>
+
+<para
+>حقوق نشر البرنامج:</para>
+
+<itemizedlist>
+
+<listitem
+><para
+>1997-2000 &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail; </para
+></listitem>
+
+<listitem
+><para
+>2001-2002 Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2003-2004 Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2004-2011 Thorsten St&auml;rk <email
+>dev@staerk.de</email
+> </para
+></listitem>
+
+<listitem
+><para
+>2019 Alexander Potashev <email
+>aspotashev@gmail.com</email
+> </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>المساهمون (أبحديًا)</para>
+<itemizedlist>
+<listitem
+><para
+>Alexander Potashev <email
+>aspotashev@gmail.com</email
+></para
+></listitem>
+<listitem
+><para
+>Allen Winter <email
+>winter@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>&David.Faure; &David.Faure.mail;</para
+></listitem>
+<listitem
+><para
+>&Espen.Sand; <email
+>espen@kde.org</email
+></para
+></listitem>
+<listitem
+><para
+>Gioele Barabucci <email
+>gioele@gioelebarabucci.com</email
+></para
+></listitem>
+<listitem
+><para
+>Jan Schaumann <email
+>jschauma@netmeister.org</email
+></para
+></listitem>
+<listitem
+><para
+>&Jesper.Pedersen; <email
+>blackie@ifad.dk</email
+></para
+></listitem>
+<listitem
+><para
+>Kalle Dalheimer &Matthias.Kalle.Dalheimer.mail;</para
+></listitem>
+<listitem
+><para
+>Klar&auml;lvdalens Datakonsult AB</para
+></listitem>
+<listitem
+><para
+>Mark Bucciarelli <email
+>mark@hubcapconsulting.com</email
+></para
+></listitem>
+<listitem
+><para
+>Thorsten St&auml;rk <email
+>dev@staerk.de</email
+></para
+></listitem>
+<listitem
+><para
+>Tomas Pospisek <email
+>tpo_deb@sourcepole.ch</email
+></para
+></listitem>
+<listitem
+><para
+>Willi Richert <email
+>w.richert@cox.net</email
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>استُلهم متعقب الوقت من أداة Harald Tveit Alvestrand المفيدة جدًا المسماة <application
+>titrax</application
+>، والتي كان عيبها الوحيد هو اعتمادها على مجموعة أدوات Xt.</para>
+
+<para
+>حقوق نشر التوثيق 2000-2004 &Jonathan.Singer; &Jonathan.Singer.mail; و &Sirtaj.Singh.Kang; &Sirtaj.Singh.Kang.mail;.</para>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<glossary id="glossary">
+<title
+>المُسرَد</title>
+
+<glossdiv>
+<title
+>أ</title
+> 
+<glossentry id="gloss-active-task">
+<glossterm
+>المهمة النشطة</glossterm>
+<glossdef
+><para
+>مهمة تحتوي على مؤقت يعمل.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>د</title
+> 
+<glossentry id="gloss-dbus">
+<glossterm
+>دي-باص</glossterm>
+<glossdef
+><para
+>ميفاق تواصل بين العمليات. اختصار لـ Desktop Bus.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-desktop">
+<glossterm
+>سطح المكتب</glossterm>
+<glossdef
+><para
+>تحتوي أنظمة جنو/لينكس و FreeBSD والأنظمة الأخرى التي تشغل خادم X.Org على أسطح مكتب متعددة. عادةً ما يكون لديك 4 أسطح مكتب مختلفة مثبتة مبدئيًا. يمكن لكل سطح مكتب عرض مجموعته الخاصة من البرامج والملفات. عند بدء تشغيل كيدي بلازما لأول مرة، يكون سطح المكتب الذي تراه هو سطح المكتب 1. إذا ضغطت <keycombo action="simul"
+>&Ctrl;<keycap
+>F2</keycap
+></keycombo
+>، فسترى سطح المكتب 2. الضغط على <keycombo action="simul"
+>&Ctrl;<keycap
+>F1</keycap
+></keycombo
+> سيعيدك إلى سطح المكتب 1. </para
+></glossdef
+> </glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>ت</title
+> 
+<glossentry id="gloss-history">
+<glossterm
+>التاريخ</glossterm>
+<glossdef
+><para
+>إذا ضُبط متعقب الوقت لتسجيل التاريخ، فسيسجل كل حدث بدء/إيقاف للمؤقت. لا يُمسح هذا التاريخ عند تصفير الأوقات ويبقى في الملف حتى تُحذف المهمة.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>ج</title
+> 
+<glossentry id="gloss-session"
+> <glossterm
+>جلسة</glossterm>
+<glossdef
+><para
+>نقطة بداية يحددها المستخدم لمؤقتات الجلسة. تبدأ جلسة جديدة عند اختيار <menuchoice
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>ابدأ جلسة جديدة</guimenuitem
+> </menuchoice
+>. لا تُحفظ بيانات الجلسة عند إنشاء جلسة جديدة. </para
+></glossdef
+> </glossentry>
+
+<glossentry id="gloss-system-time"
+> <glossterm
+><guilabel
+>وقت الجلسة</guilabel
+></glossterm
+> <glossdef
+><para
+>الوقت المستغرق في المهمة منذ بدء الجلسة.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-system-tray"
+> <glossterm
+>صينية النظام</glossterm>
+<glossdef
+><para
+>توجد صينية النظام في الشريط الذي يظهر (مبدئيًا في كيدي بلازما) أسفل الشاشة. في صينية النظام هذه <inlinemediaobject
+> <imageobject
+> <imagedata fileref="systray.png" format="PNG"/></imageobject
+> </inlinemediaobject
+> توجد أيقونة متعقب الوقت في أقصى اليمين.</para
+></glossdef>
+</glossentry>
+</glossdiv>
+
+<glossdiv
+> 
+<title
+>م</title
+> 
+<glossentry id="gloss-top-level-task">
+<glossterm
+>مهمة المستوى الأعلى</glossterm>
+<glossdef
+><para
+>مهمة ليس لها مهام أب.</para
+></glossdef>
+</glossentry>
+
+<glossentry id="gloss-total-session-time"
+> <glossterm
+><guilabel
+>إجمالي وقت الجلسة</guilabel
+></glossterm
+> <glossdef
+><para
+>الوقت المستغرق في المهمة وجميع مهامها الفرعية منذ بدء الجلسة.</para
+></glossdef
+> </glossentry>
+<glossentry
+> <glossterm
+><guilabel
+>الوقت</guilabel
+></glossterm>
+<glossdef
+><para
+>الوقت المستغرق في المهمة منذ تصفير جميع الأوقات.</para
+></glossdef
+> </glossentry
+> 
+
+<glossentry id="gloss-total-time"
+> <glossterm
+><guilabel
+>الوقت الكلي</guilabel
+></glossterm>
+<glossdef
+><para
+>الوقت المستغرق في المهمة وجميع مهامها الفرعية منذ تصفير جميع الأوقات.</para
+></glossdef
+> </glossentry
+> 
+</glossdiv>
+
+</glossary>
+
+<appendix id="dbusappendix"
+><title
+>واجهة دي-باص</title>
+
+<refentry id="dbus-version">
+<refmeta>
+<refentrytitle
+>الإصدارة</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>الإصدارة</refname>
+<refpurpose
+>أرجِع إصدارة متعقب الوقت.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString version()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>الوصف</title>
+<para
+><function
+>version()</function
+> هو استدعاء دي-باص يرجع رقم إصدارة متعقب الوقت؛ على سبيل المثال 4.3.1. يرجع رقم الإصدارة كسلسلة نصية بتنسيق جنو النموذجي major.minor.bugfix.</para>
+</refsect1>
+</refentry>
+
+<refentry id="dbus-quit">
+<refmeta>
+<refentrytitle
+>أنهِ</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>أنهِ</refname>
+<refpurpose
+>أنهِ متعقب الوقت.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString quit()
+</synopsis>
+</refsynopsisdiv>
+<refsect1>
+<title
+>الوصف</title>
+<para
+><function
+>quit()</function
+> هو استدعاء دي-باص يوفر طريقة لبرنامج خارجي لإغلاق متعقب الوقت بشكل سليم. </para>
+</refsect1>
+</refentry>
+<!--
+<refentry id="dbus-hastodo">
+<refmeta>
+<refentrytitle
+>hastodo</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>hastodo</refname>
+<refpurpose
+>Check if top-level to-do exists.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>
+QString hastodo(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>Parameters</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>taskname</parameter
+></term>
+<listitem>
+	<para
+>The name of the to-do to look for.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+<refsect1>
+<title
+>Description</title>
+<para
+><function
+>hastodo(QString taskname)</function
+> is a &DBus; call that
+	looks for a of the given name.  If found, it returns the
+	iCalendar UID that identifies that to-do.  If not found, it returns an empty
+	string.
+</para>
+<para
+>The iCalendar file that &ktimetracker; currently has opened is the file that is
+searched.  All to-do trees are searched, not just top-level to-do's.  If more
+than one to-do has a matching name, the first one found is returned.</para>
+</refsect1>
+</refentry>
+-->
+<refentry id="dbus-addtodo">
+<refmeta>
+<refentrytitle
+>أضف مهمة</refentrytitle>
+</refmeta>
+<refnamediv>
+<refname
+>أضف مهمة</refname>
+<refpurpose
+>أضف مهمة جديدة.</refpurpose>
+</refnamediv>
+<refsynopsisdiv>
+<synopsis
+>QString addTask(QString taskname)
+</synopsis>
+<refsect2>
+<title
+>المعاملات</title>
+<variablelist>
+<varlistentry>
+<term
+><parameter
+>اسم المهمة</parameter
+></term>
+<listitem>
+<para
+>اسم المهمة الجديدة.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>الوصف</title>
+<para
+><function
+>addTask(QString taskname)</function
+> هو استدعاء دي-باص يضيف مهمة جديدة في المستوى الأعلى إلى التخزين الحالي. يُرجَع المعرف الفريد (UID) للمهمة الجديدة. </para>
+</refsect1>
+</refentry>
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+// kate: tab-indents off; indent-width 2; replace-tabs on;
+-->
