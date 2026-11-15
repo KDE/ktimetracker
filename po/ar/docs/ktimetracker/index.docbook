@@ -1059,7 +1059,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 </refmeta>
 <refnamediv>
 <refname
->الإصدارة</refname>
+>version</refname>
 <refpurpose
 >أرجِع إصدارة متعقب الوقت.</refpurpose>
 </refnamediv>
@@ -1085,7 +1085,7 @@ SPDX-License-Identifier: GFDL-1.2-only
 </refmeta>
 <refnamediv>
 <refname
->أنهِ</refname>
+>quit</refname>
 <refpurpose
 >أنهِ متعقب الوقت.</refpurpose>
 </refnamediv>
@@ -1162,7 +1162,7 @@ than one to-do has a matching name, the first one found is returned.</para>
 </refmeta>
 <refnamediv>
 <refname
->أضف مهمة</refname>
+>addTask</refname>
 <refpurpose
 >أضف مهمة جديدة.</refpurpose>
 </refnamediv>
