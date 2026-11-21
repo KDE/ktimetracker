@@ -33,6 +33,11 @@ TrayIcon::TrayIcon(MainWindow *parent)
 
     setObjectName(QStringLiteral("Ktimetracker Tray"));
 
+    // Keep the icon in the panel. A status notifier item is Passive until told otherwise, and a
+    // tray may hide Passive items: Plasma shows them only in the pop-up of hidden icons, while
+    // this icon is what brings the closed window back.
+    setStatus(KStatusNotifierItem::Active);
+
     m_animation = new QMovie(QStringLiteral(":/pics/active-icon.gif"), QByteArray("GIF"), this);
     connect(m_animation, &QMovie::frameChanged, this, &TrayIcon::setActiveIcon);
     m_animation->jumpToFrame(0);

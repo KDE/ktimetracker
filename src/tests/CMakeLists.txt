@@ -20,3 +20,7 @@ ecm_add_test(exportcsvtest.cpp LINK_LIBRARIES helpers)
 # ecm_add_test(plannerparsertest.cpp LINK_LIBRARIES helpers)
 ecm_add_test(tasktest.cpp LINK_LIBRARIES helpers)
 ecm_add_test(storagetest.cpp LINK_LIBRARIES helpers)
+
+# The main window needs its GUI description, which the application reads out of
+# the Qt resource file, and ktt-base, which is where MainWindow lives.
+ecm_add_test(mainwindowtest.cpp ${CMAKE_CURRENT_SOURCE_DIR}/../ktimetracker.qrc TEST_NAME mainwindowtest LINK_LIBRARIES helpers ktt-base)

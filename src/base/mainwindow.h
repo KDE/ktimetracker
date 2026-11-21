@@ -30,6 +30,7 @@ public Q_SLOTS:
     void quit();
 
 protected Q_SLOTS:
+    void updateTrayIcon();
     void taskViewCustomContextMenuRequested(const QPoint &);
     void updateWindowCaptionTasks(const QList<Task *> &activeTasks);
     void updateWindowCaptionFile(const QUrl &url);

@@ -197,6 +197,11 @@ Q_SIGNALS:
     void updateButtons();
     void statusBarTextChangeRequested(const QString &text);
     void contextMenuRequested(const QPoint &pos);
+
+    // The settings dialog was closed with changes, which the main window answers by
+    // adding or removing the tray icon
+    void settingsChanged();
+
     void timersActive();
     void timersInactive();
 

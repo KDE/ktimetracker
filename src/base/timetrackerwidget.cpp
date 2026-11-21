@@ -462,6 +462,8 @@ void TimeTrackerWidget::loadSettings()
 {
     KTimeTrackerSettings::self()->load();
 
+    Q_EMIT settingsChanged();
+
     showSearchBar(!KTimeTrackerSettings::configPDA() && KTimeTrackerSettings::showSearchBar());
     currentTaskView()->reconfigureModel();
     currentTaskView()->tasksWidget()->reconfigure();
