@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-11-22 01:06+0000\n"
 "PO-Revision-Date: 2012-01-28 16:12-0800\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
@@ -72,12 +72,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "Ktimetracker を設定..."
 
-#: base/mainwindow.cpp:134 base/tray.cpp:74
+#: base/mainwindow.cpp:176 base/tray.cpp:79
 #, kde-format
 msgid "No active tasks"
 msgstr "アクティブなタスクはありません"
 
-#: base/mainwindow.cpp:144 base/tray.cpp:94
+#: base/mainwindow.cpp:186 base/tray.cpp:99
 #, fuzzy, kde-format
 #| msgid ", "
 msgctxt "separator between task names"
@@ -577,14 +577,14 @@ msgctxt "@title:tab"
 msgid "Storage"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:492
+#: base/timetrackerwidget.cpp:494
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "新しいタスク"
 
-#: base/timetrackerwidget.cpp:569
+#: base/timetrackerwidget.cpp:571
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -593,7 +593,7 @@ msgid ""
 msgstr ""
 "まだ履歴はありません。タスクの時間計測を開始/停止すると、履歴が作成されます。"
 
-#: base/timetrackerwidget.cpp:579
+#: base/timetrackerwidget.cpp:581
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -602,61 +602,61 @@ msgstr ""
 "本当にすべてのタスクの時間を 0 にリセットしますか？履歴のすべてが削除されま"
 "す。"
 
-#: base/timetrackerwidget.cpp:581
+#: base/timetrackerwidget.cpp:583
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "確認が必要です"
 
-#: base/timetrackerwidget.cpp:582
+#: base/timetrackerwidget.cpp:584
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "すべての時間をリセット"
 
-#: base/timetrackerwidget.cpp:770
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "保存に失敗しました。おそらくファイルをロックできなかったためです。"
 
-#: base/timetrackerwidget.cpp:772
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "カレンダーリソースを変更できませんでした。"
 
-#: base/timetrackerwidget.cpp:774
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "メモリ不足--オブジェクトを作成できませんでした。"
 
-#: base/timetrackerwidget.cpp:776
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "UID not found."
 msgstr "UID が見つかりません。"
 
-#: base/timetrackerwidget.cpp:778
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "無効な時間--フォーマットは YYYY-MM-DDTHH:MM:SS です。"
 
-#: base/timetrackerwidget.cpp:780
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "無効な時間--フォーマットは YYYY-MM-DDTHH:MM:SS です。"
 
-#: base/timetrackerwidget.cpp:782
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "無効なタスクの継続時間--0 より大きくしてください。"
 
-#: base/timetrackerwidget.cpp:784
+#: base/timetrackerwidget.cpp:786
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "無効なエラー番号: %1"
 
-#: base/timetrackerwidget.cpp:1008
+#: base/timetrackerwidget.cpp:1010
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -672,14 +672,14 @@ msgstr ""
 "索/追加」というメッセージが表示されているフィールドにタスクの名前を入力してタ"
 "スクを作成してください。"
 
-#: base/timetrackerwidget.cpp:1015
+#: base/timetrackerwidget.cpp:1017
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr "既にタスクが作成されているので、時間の計測を開始/停止できます。"
 
-#: base/tray.cpp:79
+#: base/tray.cpp:84
 #, fuzzy, kde-format
 #| msgid ", ..."
 msgctxt "ellipsis to truncate long list of tasks"

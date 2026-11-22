@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-11-22 01:06+0000\n"
 "PO-Revision-Date: 2021-09-24 14:37+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -79,12 +79,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "KTimeTracker instellen..."
 
-#: base/mainwindow.cpp:134 base/tray.cpp:74
+#: base/mainwindow.cpp:176 base/tray.cpp:79
 #, kde-format
 msgid "No active tasks"
 msgstr "Geen actieve taken"
 
-#: base/mainwindow.cpp:144 base/tray.cpp:94
+#: base/mainwindow.cpp:186 base/tray.cpp:99
 #, kde-format
 msgctxt "separator between task names"
 msgid ", "
@@ -514,13 +514,13 @@ msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Opslag"
 
-#: base/timetrackerwidget.cpp:492
+#: base/timetrackerwidget.cpp:494
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Nieuwe taak"
 
-#: base/timetrackerwidget.cpp:569
+#: base/timetrackerwidget.cpp:571
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -530,7 +530,7 @@ msgstr ""
 "Er is nog geen geschiedenis beschikbaar. Start en stop een taak om iets in "
 "uw geschiedenis te plaatsen."
 
-#: base/timetrackerwidget.cpp:579
+#: base/timetrackerwidget.cpp:581
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -539,61 +539,61 @@ msgstr ""
 "Wilt u de tijd voor alle taken terugzetten naar 0? Dit verwijdert de gehele "
 "geschiedenis."
 
-#: base/timetrackerwidget.cpp:581
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Bevestiging vereist"
 
-#: base/timetrackerwidget.cpp:582
+#: base/timetrackerwidget.cpp:584
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Alle tijden terugzetten"
 
-#: base/timetrackerwidget.cpp:770
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 "Opslaan mislukt, waarschijnlijk omdat het bestand niet vergrendeld kon "
 "worden."
 
-#: base/timetrackerwidget.cpp:772
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Kon de agendagegevensbron niet wijzigen."
 
-#: base/timetrackerwidget.cpp:774
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Onvoldoende geheugen -- kon geen object meer aanmaken."
 
-#: base/timetrackerwidget.cpp:776
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "UID not found."
 msgstr "UID niet gevonden."
 
-#: base/timetrackerwidget.cpp:778
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Ongeldige datum -- formaat is JJJJ-MM-DD."
 
-#: base/timetrackerwidget.cpp:780
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Ongeldige tijd -- formaat is JJJJ-MM-DDTUU:MM:SS."
 
-#: base/timetrackerwidget.cpp:782
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Ongeldige taakduur -- dient groter te zijn dan nul."
 
-#: base/timetrackerwidget.cpp:784
+#: base/timetrackerwidget.cpp:786
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Ongeldig foutnummer: %1"
 
-#: base/timetrackerwidget.cpp:1008
+#: base/timetrackerwidget.cpp:1010
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -605,7 +605,7 @@ msgstr ""
 "Begin met het aanmaken van uw eerste taak - voer de naam ervan in in het "
 "veld genaamd \"Taak toevoegen of opzoeken\"."
 
-#: base/timetrackerwidget.cpp:1015
+#: base/timetrackerwidget.cpp:1017
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
@@ -613,7 +613,7 @@ msgstr ""
 "U hebt al een taak aangemaakt. U kunt het registeren van de werktijd ervan "
 "nu starten of stoppen."
 
-#: base/tray.cpp:79
+#: base/tray.cpp:84
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."

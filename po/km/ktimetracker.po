@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ktimetracker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-11-22 01:06+0000\n"
 "PO-Revision-Date: 2012-06-15 10:36+0700\n"
 "Last-Translator: Sophea <sophea@khmeros.info>\n"
 "Language-Team: Khmer <>\n"
@@ -72,12 +72,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "កំណត់​រចនាសម្ព័ន្ធ KTimeTracker..."
 
-#: base/mainwindow.cpp:134 base/tray.cpp:74
+#: base/mainwindow.cpp:176 base/tray.cpp:79
 #, kde-format
 msgid "No active tasks"
 msgstr "គ្មាន​ភារកិច្ច​សកម្ម​ទេ"
 
-#: base/mainwindow.cpp:144 base/tray.cpp:94
+#: base/mainwindow.cpp:186 base/tray.cpp:99
 #, fuzzy, kde-format
 #| msgid ", "
 msgctxt "separator between task names"
@@ -574,14 +574,14 @@ msgctxt "@title:tab"
 msgid "Storage"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:492
+#: base/timetrackerwidget.cpp:494
 #, fuzzy, kde-format
 #| msgid "New Task"
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "ភារកិច្ច​ថ្មី"
 
-#: base/timetrackerwidget.cpp:569
+#: base/timetrackerwidget.cpp:571
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -590,7 +590,7 @@ msgid ""
 msgstr ""
 "មិន​ទាន់​មាន​ប្រវត្តិ​នៅ​ឡើយទេ ។ ចាប់ផ្ដើម និង​បញ្ឈប់​ភារកិច្ច និង​អ្នក​នឹង​មាន​ធាតុ​មួយ​នៅ​ក្នុង​ប្រវត្តិ​របស់​អ្នក ។"
 
-#: base/timetrackerwidget.cpp:579
+#: base/timetrackerwidget.cpp:581
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -598,61 +598,61 @@ msgid ""
 msgstr ""
 "អ្នក​ពិត​ជា​ចង់​កំណត់​ពេលវេលា​ឡើងវិញ​ទៅ​សូន្យ​សម្រាប់​គ្រប់​ភារកិច្ច​ទាំងអស់​មែន​ឬ ? វា​​នឹង​លុប​​ប្រវត្តិ​ទាំងមូល​ ។"
 
-#: base/timetrackerwidget.cpp:581
+#: base/timetrackerwidget.cpp:583
 #, fuzzy, kde-format
 #| msgid "Confirmation Required"
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "ទាមទារ​ការ​អះអាង"
 
-#: base/timetrackerwidget.cpp:582
+#: base/timetrackerwidget.cpp:584
 #, fuzzy, kde-format
 #| msgid "Reset All Times"
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "កំណត់​ពេល​វេលាទាំងអស់​ឡើងវិញ"
 
-#: base/timetrackerwidget.cpp:770
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "ការ​រក្សាទុក​បាន​បរាជ័យ ទំនង​មកពី​​មិន​អាច​ចាក់​សោឯកសារ ។"
 
-#: base/timetrackerwidget.cpp:772
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "មិន​អាច​កែប្រែ​ធនធាន​ប្រតិទិន​បានទេ ។"
 
-#: base/timetrackerwidget.cpp:774
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "អស់​សតិ​ក្នុងការ​បង្កើត​វត្ថុ ។"
 
-#: base/timetrackerwidget.cpp:776
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "UID not found."
 msgstr "រក​មិន​ឃើញ​លេខ​សម្គាល់​អ្នក​ប្រើ​ទេ ។"
 
-#: base/timetrackerwidget.cpp:778
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "កាល​បរិច្ឆេទ​មិនត្រឹមត្រូវ ទ្រង់ទ្រាយ​របស់វា​គឺ YYYY-MM-DD ។"
 
-#: base/timetrackerwidget.cpp:780
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "ពេល​វេលា​មិនត្រឹមត្រូវ ទ្រង់ទ្រាយ​របស់វា​គឺ YYYY-MM-DDTHH:MM:SS ។"
 
-#: base/timetrackerwidget.cpp:782
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "ថិរវេលា​ភារកិច្ច​មិនត្រឹមត្រូវ វា​ត្រូវ​តែ​មាន​តម្លៃ​ធំជា​សូន្យ ។"
 
-#: base/timetrackerwidget.cpp:784
+#: base/timetrackerwidget.cpp:786
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "លេខ​កំហុស​មិន​ត្រឹមត្រូវ ៖ %1"
 
-#: base/timetrackerwidget.cpp:1008
+#: base/timetrackerwidget.cpp:1010
 #, fuzzy, kde-format
 #| msgid ""
 #| "This is ktimetracker, KDE's program to help you track your time. Best, "
@@ -667,14 +667,14 @@ msgstr ""
 "នេះគឺ​ជា ktimetracker កម្មវិធី​របស់ KDE ជួយ​អ្នក​ឲ្យ​តាមដាន​ពេលវេលា​របស់​អ្នក ។ យក​ល្អ​ចាប់ផ្ដើម​ដោយ​"
 "បង្កើត​ភារកិច្ច​ដំបូង​របស់​អ្នក ដោយ​បញ្ចូល​វា​ទៅ​ក្នុង​វាល​ដែល​អ្នក​ឃើញ\"ស្វែងរក ​ឬ​បន្ថែម​ភារកិច្ច\" ។"
 
-#: base/timetrackerwidget.cpp:1015
+#: base/timetrackerwidget.cpp:1017
 #, fuzzy, kde-format
 #| msgid "You have already created a task. You can now start and stop timing"
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr "អ្នក​បានបង្កើត​ភារកិច្ច​នេះ​រួចហើយ ។ ឥឡូវ​អ្នក​អាច​ចាប់ផ្ដើម និង​បញ្ឈប់​ពេលវេលា"
 
-#: base/tray.cpp:79
+#: base/tray.cpp:84
 #, fuzzy, kde-format
 #| msgid ", ..."
 msgctxt "ellipsis to truncate long list of tasks"

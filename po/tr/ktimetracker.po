@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdepim-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-11-22 01:06+0000\n"
 "PO-Revision-Date: 2026-11-16 18:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -76,12 +76,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "K Zamanölçer’i Yapılandır…"
 
-#: base/mainwindow.cpp:134 base/tray.cpp:74
+#: base/mainwindow.cpp:176 base/tray.cpp:79
 #, kde-format
 msgid "No active tasks"
 msgstr "Etkin görev yok"
 
-#: base/mainwindow.cpp:144 base/tray.cpp:94
+#: base/mainwindow.cpp:186 base/tray.cpp:99
 #, kde-format
 msgctxt "separator between task names"
 msgid ", "
@@ -505,13 +505,13 @@ msgctxt "@title:tab"
 msgid "Storage"
 msgstr "Depolama"
 
-#: base/timetrackerwidget.cpp:492
+#: base/timetrackerwidget.cpp:494
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Yeni Görev"
 
-#: base/timetrackerwidget.cpp:569
+#: base/timetrackerwidget.cpp:571
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -521,7 +521,7 @@ msgstr ""
 "Henüz bir geçmiş yok. Bir görev başlatıp durdurun ve geçmişinizde onunla "
 "ilgili bir girdi belirir."
 
-#: base/timetrackerwidget.cpp:579
+#: base/timetrackerwidget.cpp:581
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -530,59 +530,59 @@ msgstr ""
 "Tüm görevlerin zamanını sıfırlamak istediğinizden emin misiniz? Bu, tüm "
 "geçmişi siler."
 
-#: base/timetrackerwidget.cpp:581
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Onaylama Gerekli"
 
-#: base/timetrackerwidget.cpp:582
+#: base/timetrackerwidget.cpp:584
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Tüm Ölçerleri Sıfırla"
 
-#: base/timetrackerwidget.cpp:770
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr "Dosya büyük olasılıkla kilitlenemediği için kaydetme başarısız oldu."
 
-#: base/timetrackerwidget.cpp:772
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Takvim kaynağı değiştirilemedi."
 
-#: base/timetrackerwidget.cpp:774
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Bellek yetersiz — nesne oluşturulamadı."
 
-#: base/timetrackerwidget.cpp:776
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "UID not found."
 msgstr "Kullanıcı kimliği bulunamadı."
 
-#: base/timetrackerwidget.cpp:778
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Geçersiz tarih biçimi YYYY‒MM‒DD."
 
-#: base/timetrackerwidget.cpp:780
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Geçersiz zaman biçimi YYYY‒MM‒DDTHH:MM:SS."
 
-#: base/timetrackerwidget.cpp:782
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Geçersiz görev süresi — sıfırdan büyük olmalıdır."
 
-#: base/timetrackerwidget.cpp:784
+#: base/timetrackerwidget.cpp:786
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Geçersiz hata numarası: %1"
 
-#: base/timetrackerwidget.cpp:1008
+#: base/timetrackerwidget.cpp:1010
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -594,7 +594,7 @@ msgstr ""
 "Başlamak için ilk görevinizi oluşturun; onu “Ara veya görev ekle” bölümüne "
 "girin."
 
-#: base/timetrackerwidget.cpp:1015
+#: base/timetrackerwidget.cpp:1017
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
@@ -602,7 +602,7 @@ msgstr ""
 "Hâlihazırda bir görev oluşturdunuz. Şimdi zamanlayıcıyı başlatıp "
 "durdurabilirsiniz."
 
-#: base/tray.cpp:79
+#: base/tray.cpp:84
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."

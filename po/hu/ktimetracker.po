@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-11-22 01:06+0000\n"
 "PO-Revision-Date: 2021-11-19 14:13+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -71,12 +71,12 @@ msgctxt "@action:inmenu"
 msgid "Configure KTimeTracker..."
 msgstr "Beállítóablak: KTimeTracker..."
 
-#: base/mainwindow.cpp:134 base/tray.cpp:74
+#: base/mainwindow.cpp:176 base/tray.cpp:79
 #, kde-format
 msgid "No active tasks"
 msgstr "Nincs aktív feladat"
 
-#: base/mainwindow.cpp:144 base/tray.cpp:94
+#: base/mainwindow.cpp:186 base/tray.cpp:99
 #, fuzzy, kde-format
 #| msgid ", "
 msgctxt "separator between task names"
@@ -531,13 +531,13 @@ msgctxt "@title:tab"
 msgid "Storage"
 msgstr ""
 
-#: base/timetrackerwidget.cpp:492
+#: base/timetrackerwidget.cpp:494
 #, kde-format
 msgctxt "@title:window"
 msgid "New Task"
 msgstr "Új feladat"
 
-#: base/timetrackerwidget.cpp:569
+#: base/timetrackerwidget.cpp:571
 #, kde-format
 msgctxt "@info in message box"
 msgid ""
@@ -547,7 +547,7 @@ msgstr ""
 "Nincs előzmény. Indítsa el és állítsa le a feladatot, hogy létrejöjjön az "
 "előzmény."
 
-#: base/timetrackerwidget.cpp:579
+#: base/timetrackerwidget.cpp:581
 #, kde-format
 msgid ""
 "Do you really want to reset the time to zero for all tasks? This will delete "
@@ -556,60 +556,60 @@ msgstr ""
 "Valóban vissza szeretné állítani az órát 0-ra az összes feladathoz? Ez "
 "minden előzményt törölni fog."
 
-#: base/timetrackerwidget.cpp:581
+#: base/timetrackerwidget.cpp:583
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation Required"
 msgstr "Megerősítés szükséges"
 
-#: base/timetrackerwidget.cpp:582
+#: base/timetrackerwidget.cpp:584
 #, kde-format
 msgctxt "@action:button"
 msgid "Reset All Times"
 msgstr "Az összes időérték nullázása"
 
-#: base/timetrackerwidget.cpp:770
+#: base/timetrackerwidget.cpp:772
 #, kde-format
 msgid "Save failed, most likely because the file could not be locked."
 msgstr ""
 "A mentés nem sikerült, valószínűleg azért, mert nem lehetett zárolni a fájlt."
 
-#: base/timetrackerwidget.cpp:772
+#: base/timetrackerwidget.cpp:774
 #, kde-format
 msgid "Could not modify calendar resource."
 msgstr "Nem sikerült módosítani a naptár-erőforrást."
 
-#: base/timetrackerwidget.cpp:774
+#: base/timetrackerwidget.cpp:776
 #, kde-format
 msgid "Out of memory--could not create object."
 msgstr "Elfogyott a memória, ezért nem sikerült létrehozni egy objektumot."
 
-#: base/timetrackerwidget.cpp:776
+#: base/timetrackerwidget.cpp:778
 #, kde-format
 msgid "UID not found."
 msgstr "Nem található a UID."
 
-#: base/timetrackerwidget.cpp:778
+#: base/timetrackerwidget.cpp:780
 #, kde-format
 msgid "Invalidate date--format is YYYY-MM-DD."
 msgstr "Érvénytelen dátumformátum: ÉÉÉÉ-HH-NN."
 
-#: base/timetrackerwidget.cpp:780
+#: base/timetrackerwidget.cpp:782
 #, kde-format
 msgid "Invalid time--format is YYYY-MM-DDTHH:MM:SS."
 msgstr "Érvénytelen időformátum: ÉÉÉÉ-HH-NNDÓÓ:PP:MM."
 
-#: base/timetrackerwidget.cpp:782
+#: base/timetrackerwidget.cpp:784
 #, kde-format
 msgid "Invalid task duration--must be greater than zero."
 msgstr "Érvénytelen a feladat időtartama: nagyobbnak kell lennie nullánál."
 
-#: base/timetrackerwidget.cpp:784
+#: base/timetrackerwidget.cpp:786
 #, kde-format
 msgid "Invalid error number: %1"
 msgstr "Érvénytelen hibaszám: %1"
 
-#: base/timetrackerwidget.cpp:1008
+#: base/timetrackerwidget.cpp:1010
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -621,13 +621,13 @@ msgstr ""
 "nyilvántartásában segíthet. Új feladat kezdéséhez írja be a kívánt szöveget "
 "az „Új feladat/keresés” mezőbe."
 
-#: base/timetrackerwidget.cpp:1015
+#: base/timetrackerwidget.cpp:1017
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "You have already created a task. You can now start and stop timing."
 msgstr "Már létezik feladat, elindíthatja és leállíthatja az időmérést."
 
-#: base/tray.cpp:79
+#: base/tray.cpp:84
 #, kde-format
 msgctxt "ellipsis to truncate long list of tasks"
 msgid ", ..."
